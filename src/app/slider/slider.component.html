@@ -1,0 +1,26 @@
+<div  style="background:#a7a495; color:#fff; position:relative;">
+    <owl-carousel  #owlElement [options]="{items: 1, dots: true, navigation: true, loop:true, autoplay:false}" [items]="slides"
+        [carouselClasses]="['owl-theme', 'row', 'sliding']">
+        
+
+        
+        <div class="sliderContainer container item" *ngFor="let data of slides; let i = index;">
+            <div class="container" style="margin: 0px auto; background-image: linear-gradient(to right, transparent 30%, #a7a495 58%), linear-gradient(to left, transparent 80%, #a7a495 95%);">
+
+                <img [src]="data.image" class="slider_img">
+                <span class="sliderBox">
+                        <h3 class="font-size-l">{{data.title}}</h3>
+                        <p class="font-size-s">{{data.description}}</p>
+                    </span>
+            </div>
+        </div>
+
+        
+
+    </owl-carousel>
+    <div class="container" style="position:relative;">
+        <a class="btn-left" (click)="pre()"><i class="fa fa-chevron-circle-left"></i></a>
+        <a class="btn-right" (click)="next()"><i class="fa fa-chevron-circle-right"></i></a>
+    </div>
+    
+</div>

@@ -1,0 +1,147 @@
+
+            .read-more-state {
+                display: none;
+            }
+
+           .topicContainer{
+               max-height: none;
+               background-image: url("/assets/images/bg-topic.jpg");
+               background-size: cover;
+           }
+
+           .topicBox {
+                padding: 10px 40px;
+                text-align: center;
+            }
+
+           .topicBox a {
+                text-decoration: none;
+                display: block;
+                height: 180px;
+                padding: 0px 20px;
+                overflow: hidden;
+            }
+
+            @keyframes bounce1 {
+                0%, 20%, 60%, 100% {
+                    -webkit-transform: translateY(0);
+                    transform: translateY(0);
+	            }
+
+                40% {
+                    -webkit-transform: translateY(-10px);
+                    transform: translateY(-10px);
+                }
+
+                80% {
+                    -webkit-transform: translateY(-10px);
+                    transform: translateY(-10px);
+                }
+            }
+
+            .topicBox a:hover .topicBox-icon{
+                -webkit-animation: bounce1 1s;
+                animation: bounce1 1s;
+                color: #333;
+            }
+
+            .topicBox a:hover .topicBox-title h2{
+                color: #1ebebc;
+            }
+
+            .topicBox-title h2{
+                font-weight: 600;
+                color: #333333;
+                font-size: 25px;
+            }
+
+            .topicBox-icon {
+                font-size: 35px;
+                top: 18px;
+                position: relative;
+                color: #1ebebc;
+            }
+
+            .topicBox-description {
+                color: #666666;
+                height: 60px;
+                overflow: hidden;
+            }
+
+            .font-size-1{
+                text-align: center;
+                font-family: Roboto;
+                color: rgb(0, 189, 187);
+                font-size: 24px;
+                font-weight: 500;
+                padding-bottom: 15px;
+            }
+
+            .topicBox a:hover {
+                text-decoration: none;
+                background: #f3f3f3;
+                border-bottom: 1px #1ebebc solid;
+            }
+
+            .topicBox a {
+                text-decoration: none;
+                display: block;
+                height: 180px;
+                padding: 0px 20px;
+                overflow: hidden;
+            }
+
+                .font-size-s{
+                    color:black;
+                }
+          
+                a {
+                    color: #337ab7;
+                    text-decoration: none;
+                }
+                a:hover, a:focus {
+                    color: #1ebebc;
+                    text-decoration: underline;
+                }
+
+                .topicBox-title h2{
+                    font-weight: 600;
+                    color: #333333;
+                    font-size: 25px;
+                }
+
+
+                .btn{
+                    display: block;
+                    margin: 10px auto;
+                    width: 150px;
+                }
+
+                .read-more-target {
+                    opacity: 0;
+                    max-height: 0;
+                    font-size: 0;
+                    transition: .25s ease;
+                }
+
+                .read-more-state:checked ~ .read-more-wrap .read-more-target {
+                    opacity: 1;
+                    font-size: inherit;
+                    max-height: 999em;
+                }
+
+                .read-more-container{
+                    height: 50px;
+                    background: #fff;
+                    position: relative;
+                    text-align: center;
+                }
+
+                .read-more-trigger {
+                    z-index:9999;
+                    cursor: pointer;
+                    display: inline-block;
+                    padding: 0 .5em;
+                    line-height: 2;
+                    border: 1px solid #ddd;
+                }

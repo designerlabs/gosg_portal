@@ -1,0 +1,75 @@
+.col-md-12 {
+    color: #000;
+}
+
+input, .form-group {
+    color: #000;
+}
+
+.col-md-12 {
+  color: #000;
+}
+
+em{
+      float:right; color: #000; padding-left:10px;
+  }
+/* .error input { background-color: #E3C3C5; }
+.error ::-webkit-input-placeholder { color: #999; }
+.error ::-moz-placeholder { color: #999; }
+.error :-moz-placeholder { color: #999; } 
+.error :-ms-input-placeholder { color: #999; }  */
+
+.formbg{    
+background: #eeeeee;
+color: #333;
+padding: 13px 10px;
+margin-bottom: 5%;
+}
+.formbg label{  
+  color : #333;
+}
+.form-control{
+  border: 1px solid #ccc;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+margin: 0; 
+}
+
+formGroup {
+  color: rgb(170, 1, 1)
+
+}
+
+input[type="text"]:disabled {
+  /* background: #d1d1d1; */
+  /* color: rgb(170, 1, 1) */
+}
+
+.example-full-width {
+width: 100%;
+}
+
+button:disabled{
+  background: #a3a3a3
+}
+.staticLabel{
+  text-transform: capitalize;
+}
+ul{
+  list-style:none;
+}
+.edbtn {
+text-align: center;
+vertical-align: middle;
+margin-top: -40px;
+float: right;
+}
+.d-inline-block {
+  display: inline-block!important;
+}
+
+.mat-form-field {
+  color: rgb(255, 0, 0);
+}

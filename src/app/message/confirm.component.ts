@@ -1,0 +1,33 @@
+import { Component, OnInit } from '@angular/core';
+import { FeedbackComponent } from '../feedback/feedback.component';
+
+@Component({
+  selector: 'gosg-confirm',
+  templateUrl: './confirm.component.html',
+  styleUrls: ['./confirm.component.css']
+})
+export class ConfirmComponent implements OnInit {
+  private ErrorMsg: string;
+  public ErrorMessageIsVisible;
+
+  constructor() { }
+
+  ngOnInit() {
+    this.ErrorMessageIsVisible = false;
+    // this.show = this.showMsg.ErrorMessageIsVisible;
+  }
+
+  showErrorMessage()
+  {
+    this.ErrorMessageIsVisible = true;
+    console.log(this.ErrorMessageIsVisible);
+      // this.ErrorMsg = msg;
+      // this.ErrorMessageIsVisible = true;
+  }
+
+  hideErrorMsg()
+  {
+      this.ErrorMessageIsVisible = false;
+      console.log(this.ErrorMessageIsVisible);
+  }
+}

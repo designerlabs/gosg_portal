@@ -1,0 +1,38 @@
+ <div class="container">
+<div class="row poll container" id="div_poll">
+    <div class="col-md-12">
+        <div id="polls_result_on_submit" style="padding-bottom: 30px;">
+        </div>
+        <div class="text-center" id="polls_result">
+            <h2 class="font-size-l warna_title_color" style="font-family: Roboto; color: rgb(0, 189, 187);" [style.color]="getTheme()"><b>{{pollDataTitle}}</b>
+                <span class="customUnderLine warna_border_color" style="border-color: rgb(0, 189, 187);"  [style.border-color]="getTheme()"></span>
+            </h2>
+            <h4 class="font-size-m warna_font" style="margin-top: 2%; text-align: center; font-family: Roboto; color: rgb(51, 51, 51);">{{pollDataQuestion}}</h4>
+            <div class="row padding">
+                <div class="col-md-4 polls_padding"  *ngFor="let item of pollDataAnswer">
+                    <div class="custom-radio poll_radio_btn warna_border_color" style="border-color: rgb(0, 189, 187);" [style.border-color]="getTheme()">
+                        <input type="radio" name="undian" id="radio1" onclick="">
+                        <label class="font-size-s warna_font" for="radio1" onclick="document.getElementById('radio1').onclick();" style="cursor: pointer; font-family: Roboto; color: rgb(51, 51, 51);"><span></span>{{item.answer}}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row padding">
+                <h4 class="font-size-m warna_font" style="margin-top: 2%; text-align: center; font-family: Roboto; color: rgb(51, 51, 51);">{{pollDataComment}}</h4>
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <label for="comment" class="sr-only">Comment</label>
+                    <textarea class="col-md-12" style="height:50px;" id="comment"></textarea>
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+            <input type="hidden" name="csrfmiddlewaretoken" value="OHddydhq179vB8WObdhVsshzzi7mkJUOHTfRPKGPvEjgAb0mk0N3HVk1r0jlLO8f">
+            <div class="row padding">
+                <div id="polls_message" class="col-md-4 col-md-offset-4" style="padding-bottom: 0px; margin-top: -20px; color:red; font-weight: bold;"></div>
+                <div class="col-md-4 col-md-offset-4">
+                    <button id="submit" type="submit" class="btn btn-secondary btn-md font-size-s warna_bg" style="padding: 10px 20px; font-family: Roboto; background-color: rgb(0, 189, 187);"  [style.background-color]="getTheme()"> {{'home.send' | translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,35 @@
+<div class="container">
+  <h1 class="font-size-l" style="margin-top:15px; color: #000"> {{'home.breadcrumb.mailbox' | translate}} </h1>
+  <div class="col-md-3">
+    
+  </div>
+  <div class="example-container mat-elevation-z8 col-md-9">
+    <mat-table #table [dataSource]="dataSource">
+
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="position">
+        <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+      </ng-container>
+
+      <!-- subject Column -->
+      <ng-container matColumnDef="subject">
+        <mat-header-cell *matHeaderCellDef> Subject </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.subject}} </mat-cell>
+      </ng-container>
+
+
+      <!-- Action Column -->
+      <ng-container matColumnDef="action">
+        <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.action}} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+</div>

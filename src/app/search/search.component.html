@@ -1,0 +1,33 @@
+<div style="background:#666666">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5 text-center">
+                <h3 class="font-size-l search_header">
+                    {{ 'home.search.label' | translate }}
+                </h3>
+            </div>
+            <div class="col-md-7 text-center">
+                <div class="input-group" style="margin: 13px 0px;">
+                    <input class="form-control" type="text" [(ngModel)]="keyword1" (keyup.enter)="mainSearch(keyword1)" 
+                           ngui-auto-complete
+                           [source]="autoCompleteArr"
+                           placeholder="Taipkan kata kunci carian di sini">
+                    <span class="input-group-btn">
+                        <button class="btn btn-secondary" [style.background]="getTheme()" type="button"
+                                (click)="mainSearch(keyword1)">
+                            <i class="fa fa-search"></i> <span class="hidden-xs">FIND</span>
+                        </button>
+                    </span>
+                </div>
+                <!--<div id="button_keyword_div" class="input-group" style="cursor:pointer;">
+
+                    <span class="twitter-typeahead" style="position: relative; display: inline-block;"><span class="keyword1"><label class="sr-only" for="keyword1">Keyword1</label><input type="text" style="font-size: 16px; font-weight: 100; position: absolute; top: 0px; left: 0px; border-color: transparent; box-shadow: none; opacity: 1; background: none 0% 0% / auto repeat scroll padding-box border-box rgb(192, 190, 191);" class="form-control typeahead tt-hint" onkeypress="handleSearch(event, $('#keyword').val())" readonly="" autocomplete="off" spellcheck="false" tabindex="-1" dir="ltr" id="keyword1"></span><span class="keyword2"><label class="sr-only" for="keyword">Keyword</label><input type="text" style="font-size: 16px; font-weight: 100; position: relative; vertical-align: top; background-color: transparent;" class="form-control typeahead tt-input" placeholder="Type a search keywords here" id="keyword" onkeypress="handleSearch(event, $('#keyword').val())" autocomplete="off" spellcheck="false" dir="auto"></span><pre aria-hidden="true" style="position: absolute; visibility: hidden; white-space: pre; font-family: Roboto; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 100; word-spacing: 0px; letter-spacing: 0px; text-indent: 0px; text-rendering: auto; text-transform: none;"></pre><div class="tt-menu" style="position: absolute; top: 100%; left: 0px; z-index: 100; display: none;"><div class="tt-dataset tt-dataset-arrAuto"></div></div></span>
+
+                    <span class="input-group-addon warna_bg" onclick="search($('#keyword').val())" style="background-color: rgb(0, 189, 187);"><i class="fa fa-search"></i> <span class="hidden-xs">
+                    FIND
+                    </span> </span>
+                </div>-->
+            </div>
+        </div>
+    </div>
+</div>

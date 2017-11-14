@@ -1,0 +1,127 @@
+<div class="container-fluid" style="background: #a7a495;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 style="margin-top: 10px;" class="font-size-l">{{'feedback.title' | translate}}</h1>
+                <hr class="hr-custom2">
+                <ul class="list-inline" style="clear:both;">
+                    <li>
+                        <a class="font-size-s" href="/portal/">
+                            {{'home.menu.home' | translate }}
+                        </a>
+                    </li>
+                    <li>/</li>
+                    <li>
+                        {{'home.breadcrumb.feedback' | translate}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container" breadcrumbtitle="World" style="color:#1ebebc">
+    <div class="row ">
+        <div class="col-md-12 formbg">
+            <div class="form-group">
+                <div class="col-md-12">
+                    <h4 class="font-size-l title_feedback">{{'home.breadcrumb.feedback' | translate}}</h4>
+                    <p class="font-size-s" style="font-family: Roboto; color:black;">{{'feedback.desc' | translate}}</p>
+                </div>
+            </div>
+
+            <form [formGroup]="feedbackFormgrp" #fbForm="ngForm" id="feedback-form" role="form" novalidate="novalidate">
+                <div class="col-md-12">
+                    <div class="col-sm-6">
+                        <mat-form-field class="example-full-width" style="width:100%">
+                            <mat-select tabindex="1" formControlName="feedbacktype" placeholder="{{'feedback.label.type' | translate}}" name="feedbacktype" id="feedbacktype"
+                                required>
+                                <mat-option *ngFor="let data of typeFb" [value]="data.feedbackTypeId">
+                                    {{data.feedbackTypeDescription}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="!validateCtrlChk(feedbacktype) && feedbackFormgrp.controls.feedbacktype.errors.required">{{'feedback.err.drop' | translate }}
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group col-sm-6 ">
+                        <mat-form-field class="example-full-width" style="width:100%">
+                            <mat-select tabindex="2" formControlName="feedbacksubject" placeholder="{{'feedback.label.subjek' | translate}}" name="feedbacksubject"
+                                id="feedbacksubject" required>
+                                <mat-option *ngFor="let data of subjectFb" [value]="data.feedbackSubjectId">
+                                    {{data.feedbackSubjectDescription}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="!validateCtrlChk(feedbacksubject) && feedbackFormgrp.controls.feedbacksubject.errors.required">{{'feedback.err.drop' | translate }}
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group col-sm-6">
+                        <mat-form-field class="example-full-width" style="width:100%" *ngIf="!isAdmin">
+                            <input matInput #namep formControlName="nama_penuh" id="nama_penuh" tabindex="3" class="ValonlyCharwithSpecial " placeholder="{{'feedback.label.nameplh' | translate }}"
+                                required>
+                            <mat-error *ngIf="!validateCtrlChk(nama_penuh) && feedbackFormgrp.controls.nama_penuh.errors.required">{{'register.err.name' | translate }}
+                            </mat-error>
+                            <mat-error *ngIf="!validateCtrlChk(nama_penuh) && feedbackFormgrp.controls.nama_penuh.errors.pattern">{{'register.pattern.name' | translate }}
+                            </mat-error>
+                        </mat-form-field>
+                        <div *ngIf="isAdmin" class="">
+                                <label class="font-size-s" for="fullname">{{'feedback.label.nameplh' | translate }}</label>
+                                <p class=" font-size-l" for="fullname">{{fullName}}</p>                             
+                        </div>
+                        <!-- <mat-form-field class="example-full-width" style="width:100%" *ngIf="isAdmin">
+                            <input matInput placeholder="{{'feedback.label.nameplh' | translate }}"
+                                [value]="fullName" formControlName="nama_penuh" readonly >
+                        </mat-form-field> -->
+                      
+
+
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <mat-form-field class="example-full-width" style="width:100%" *ngIf="!isAdmin">
+                            <input matInput formControlName="email" tabindex="4" placeholder="{{'register.label.email' | translate }}" required>
+                            <mat-error *ngIf="!validateCtrlChk(email) && feedbackFormgrp.controls.email.errors.required">
+                                {{'register.err.email' | translate }}
+                            </mat-error>
+                            <mat-error *ngIf="!validateCtrlChk(email) &&  (feedbackFormgrp.controls.email.errors.required? !feedbackFormgrp.controls.email.errors.email : feedbackFormgrp.controls.email.errors.email)">
+                                {{'register.pattern.email' | translate }}
+                            </mat-error>
+                        </mat-form-field>
+                        <div *ngIf="isAdmin" class="">
+                                <label class="font-size-s" for="fullname">{{'register.label.email' | translate }}</label>
+                                <p class=" font-size-l" for="fullname">{{emaiL}}</p>                             
+                        </div>
+                        <!-- <mat-form-field class="example-full-width" style="width:100%" *ngIf="isAdmin">
+                            <input matInput formControlName="email" placeholder="{{'register.label.email' | translate }}" [value]="emaiL" readonly>
+                        </mat-form-field> -->
+
+                    </div>
+                </div>
+                <div ng-app class="form-group col-md-12" style="padding: 0px 30px;">
+                    <mat-form-field class="example-full-width" style="width:100%">
+                        <textarea matInput tabindex="5" matTextareaAutosize #fbmsg formControlName="feedback_message" maxLength="10000" placeholder="{{'feedback.label.content' | translate }}"
+                            required></textarea>
+                        <mat-hint align="end">{{fbmsg.value?.length || 0}}/10000</mat-hint>
+                        <mat-error *ngIf="!validateCtrlChk(feedback_message) && feedbackFormgrp.controls.feedback_message.errors.required">{{'feedback.err.drop' | translate }}</mat-error>
+                    </mat-form-field>
+
+                </div>
+                <div class="form-group col-md-12">
+                    <div class="row" style="margin:20px;">
+                        <div class="col-md-12" style="text-align: right;">
+                            <button tabindex="6" mat-raised-button color="warn" type="button" id="btnreset" class="form-control btn btn-md btn-warning font-size-s"
+                                style="width: 115px; font-family: Roboto;" (click)="showResetMsg()">
+                                <i class="fa fa-refresh"></i> {{'feedback.label.reset' | translate }}</button>
+                            <button tabindex="7" mat-raised-button type="button" color="primary" id="btnsubmit" class="form-control btn btn-md btn-success font-size-s"
+                                (click)="submitForm(feedbackFormgrp.value)" style="width: 100px; font-family: Roboto; margin-left: 5px;"
+                                [disabled]="feedbackFormgrp.invalid">
+                                <i class="fa fa-check"></i> {{'feedback.label.submit' | translate }}</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<gosg-confirm></gosg-confirm>

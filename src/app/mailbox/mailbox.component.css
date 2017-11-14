@@ -1,0 +1,23 @@
+.example-container {
+    display: flex;
+    flex-direction: column;
+    max-height: 500px;
+    min-width: 300px;
+  }
+  
+  .mat-table {
+    overflow: auto;
+    max-height: 500px;
+  }
+
+  .mat-column-subject{
+      max-width:70%;
+  }
+
+  .mat-column-position{
+      max-width:10%;
+  }
+
+  .mat-column-action{
+    max-width:20%;
+}

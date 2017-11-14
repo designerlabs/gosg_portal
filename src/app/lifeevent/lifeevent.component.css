@@ -1,0 +1,113 @@
+.font-size-1{
+                text-align: center;
+                font-family: Roboto;
+                color: rgb(0, 189, 187);
+                font-size: 24px;
+                font-weight: 500;
+                padding-bottom: 15px;
+            }
+
+            .customUnderLine{
+                margin-top: 35px;
+                margin-bottom: 0%;
+                border: 0;
+                border-top: 2px solid #1ebebc;
+                width: 15%;
+                right: 42%;
+                position: absolute;
+            }
+
+            .font-size-s{
+                color:black;
+            }
+
+            .lifeEventBox {
+                position: relative;
+                padding: 10px 40px;
+                text-align: center;
+            }
+
+            .lefteventlist{
+                text-align: left !important;
+                line-height: 25px;
+                padding-left: 15px;
+                font-size:14px;
+                font-weight:400;
+            }
+
+
+            .lifeEventBg {
+                display: block;
+                height: auto;
+                border-color: rgb(0, 189, 187);
+                background: #f1f1f1;
+                border-top: 3px solid rgb(0, 189, 187);
+            }
+
+            .overlay {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                width: 75%;
+                margin: 0 auto;
+                background-color: rgba(0,0,0, 0.7);
+                overflow: hidden;
+                height: 0;
+                transition: .5s ease;
+            }
+
+            .lifeEventBox:hover .overlay {
+                height: 95%;
+            }
+
+            .text {
+                white-space: nowrap;
+                color: white;
+                font-size: 20px;
+                position: absolute;
+                overflow: hidden;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                -ms-transform: translate(-50%, -50%);
+            }
+
+            .lifeEventBox a {
+                text-decoration: none;
+                display: block;
+                height: 170px;
+                overflow: hidden;
+                color: #333;
+            }
+
+            .lifeEventBox-title{
+                color:rgb(0, 189, 187);
+                text-transform: uppercase;
+            }
+
+            .text button{
+                display:block; margin: 0 auto;
+            }
+
+            .text a{
+                width: 100%;
+                height: 40px;
+                padding:10px;
+                color:#fff;
+                text-transform: uppercase;
+                background: #fff;
+                border: 1px solid #000;
+                margin-bottom: 4px;
+                background-color: rgb(0, 189, 187)
+            }
+
+            .text a:hover{
+                background:#888 !important;
+                color:#fff !important;
+                border: 1px solid #888 !important;
+            }
+
+            .warna_border_color{
+                border: 0px solid #000 !important;
+            }

@@ -1,0 +1,50 @@
+import { Component, OnInit, Input } from '@angular/core';
+import * as $ from 'jquery';
+
+@Component({
+    selector: 'gosg-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+    clientHeight: number;
+    title = 'app';
+    showLoader: boolean;
+    breadcrumb: any;
+    txtColor = '#333';
+    childData: string;
+    translatedText: string;
+    supportedLanguages: any[];
+    @Input() langChange: string;
+    zIndex = '10000';
+    bHeight = '70px';
+    bTop = '35px';
+
+    constructor() {
+        this.clientHeight = window.innerHeight - 200;
+    }
+    getExpand(data) {
+        if (data) {
+            this.zIndex = '10000';
+            this.bHeight = '70px';
+            this.bTop = '35px';
+
+        } else {
+            this.zIndex = '10000';
+            this.bHeight = '105px';
+            this.bTop = '85px';
+        }
+    }
+
+    getTheme() {
+        return localStorage.getItem('themeColor');
+    }
+    OnInit() {
+        console.log('App.comp');
+    }
+
+}
+
+
+
+

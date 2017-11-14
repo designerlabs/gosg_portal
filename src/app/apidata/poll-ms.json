@@ -1,0 +1,25 @@
+[
+    {
+        "count": 1,
+        "next": null,
+        "previous": null,
+        "title": "KONGSIKAN PANDANGAN ANDA BERSAMA KAMI",
+        "idpolls_question": 2,
+        "question": "Adakah laman ini membantu anda?",
+        "comment":"Cadangan Penambahbaikan Anda",
+        "answer": [
+            {
+                 "answer": "Ya",
+                 "result": "140/485"
+            },
+            {
+                "answer": "Kadang - Kadang Membantu",
+                "result": "276/485"
+            },
+            {
+                 "answer": "Tidak Membantu",
+                 "result": "69/485"
+            }
+        ]
+    }
+]

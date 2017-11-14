@@ -1,0 +1,139 @@
+@import "~ng2f-bootstrap/dist/bootstrap.min.css";
+@import "~font-awesome/css/font-awesome.css";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+.owl-theme .owl-dots{
+    bottom: 0px;
+    position: absolute !important;
+    width: 100%;
+}
+
+em{
+  float:right; color: #E05C65; padding-left:10px;
+}
+/* .error input{ background-color: #E3C3C5; }
+.error select { background: #E3C3C5 !important; }
+.error textarea { background: #E3C3C5 !important; }
+.error ::-webkit-input-placeholder { color: #999; }
+.error ::-moz-placeholder { color: #999; }
+.error :-moz-placeholder { color: #999; } 
+.error :-ms-input-placeholder { color: #999; }  */
+
+
+
+.mat-fab.mat-accent, .mat-mini-fab.mat-accent, .mat-raised-button.mat-accent {
+  background-color: #5bc0de;
+}
+
+
+.mat-fab.mat-warn, .mat-mini-fab.mat-warn, .mat-raised-button.mat-warn {
+  background-color: #f0ad4e;
+}
+
+
+.mat-fab.mat-primary, .mat-mini-fab.mat-primary, .mat-raised-button.mat-primary {
+  background-color: #5cb85c;
+}
+
+
+.owl-stage-outer{
+        height: 300px;
+}
+
+.list-inline a{
+    color: #fff;
+}
+
+/* below style added by sri */
+.font-size-l, .font-size-m, .font-size-s, .font-size-xl, .font-size-xxl {
+  font-weight: 500; }
+
+.font-size-s {
+  font-size: 14px; }
+
+.font-size-m {
+  font-size: 18px; }
+
+.font-size-l {
+  font-size: 24px; }
+
+.font-size-xl {
+  font-size: 38px; }
+
+.font-size-xxl {
+  font-size: 52px; }
+
+.themeColor {
+  background: #00bdbb; }
+
+.search_header {
+  font-weight: 100;
+  margin: 0px;
+  padding: 18px 0px; }
+
+#themeContainer {
+  bottom: 5px; }
+
+body {
+  background-color: #fff;
+}
+
+html, body{
+  height: 100%;
+}
+
+.container.search {
+  color: #333; }
+
+.panel-body {
+  color: #fff; }
+
+.ngui-auto-complete > ul li {
+  padding: 2px 18px !important;
+  border-bottom: none !important;
+  text-align: left;
+  color: #333;
+  font-size: 20px; }
+
+    app-footer{
+        background: #666666;
+        display: block;
+    }
+        .primary {
+            background-color: #1ebebc;
+            color: #fff;
+        }
+        .icon-social {
+            position: inherit;
+            display: inline-block;
+            z-index: 1;
+            background-color: #ffffff;
+            font-size: 1em;
+            color: #1ebebc;
+            width: 29px;
+            height: 28px;
+
+            text-align: center;
+            margin: 0;
+            border-radius: 50%;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            -o-border-radius: 50%;
+            transition: all 0.4s ease-in-out;
+            -moz-transition: all 0.4s ease-in-out;
+            -webkit-transition: all 0.4s ease-in-out;
+            -o-transition: all 0.4s ease-in-out;
+        }
+        
+        .social_icon_bg {
+            font-size: 20px;
+            color: white;
+            cursor: pointer;
+        }
+        .copyright {
+            background-color: #333;
+            color: #fff;
+        }
+        .padding-m{
+            padding: 10px;
+        }

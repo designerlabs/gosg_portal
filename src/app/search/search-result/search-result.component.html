@@ -1,0 +1,205 @@
+<div class="container search">
+    <div class="row">
+        <div class="col-md-3">
+            <h3>Advance Search</h3>
+        </div>
+        <div class="col-md-9 hidden-xs">
+          <h3>Search Result</h3>
+            <span class="btn btn-default pull-right font-size-s" *ngIf="">English</span>
+            <span class="btn btn-default pull-right font-size-s" *ngIf="">Bahasa Malaysia</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div *ngIf="local">
+                <div class="panel-group" id="internal">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h4 class="panel-title">
+                          <a data-toggle="collapse" data-parent="#internal" href="#keywordSetting">Keyword Setting</a>
+                        </h4>
+                      </div>
+                      <div id="keywordSetting" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <div class="radio" *ngFor="let k of keywordType">
+                                <label><input type="radio" name="setkeyword"> {{k.nameMs}}</label>
+                                <div class="form-group" >
+                                    <input class="form-control" type="text" placeholder="Selain perkataan">
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h4 class="panel-title">
+                          <a data-toggle="collapse" data-parent="#internal" href="#specification">Specification</a>
+                        </h4>
+                      </div>
+                      <div id="specification" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div class="checkbox" *ngFor="let i of internalSpec">
+                              <label><input type="checkbox">{{i.nameMs}}</label>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h4 class="panel-title">
+                          <a data-toggle="collapse" data-parent="#internal" href="#filter">Filter</a>
+                        </h4>
+                      </div>
+                      <div id="filter" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div class="panel-group" id="filterItem">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#filterItem" href="#filterByDate">Tarikh</a></h4>
+                                    </div>
+                                    <div id="filterByDate" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#filterItem" href="#filterByAuthor">Author</a></h4>
+                                    </div>
+                                    <div id="filterByAuthor" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#filterItem" href="#filterByTopic">Topic</a></h4>
+                                    </div>
+                                    <div id="filterByTopic" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#filterItem" href="#filterBySubTopic">Sub Topic</a></h4>
+                                    </div>
+                                    <div id="filterBySubTopic" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                </div> 
+            </div>
+            <div *ngIf="os">
+            </div>
+            <div *ngIf="global">
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="input-group form-group">
+                <input class="form-control" type=text />
+                <span class="input-group-addon warna_bg">
+                    <i class="fa fa-search"></i> 
+                    <span class="hidden-xs font-size-s"></span> 
+                </span>
+            </div>
+            <ul class="nav nav-tabs themeColor">
+                  <li class="active"><a class="font-size-s" data-toggle="tab" href="#local">Internal</a></li>
+                  <li><a class="font-size-s" data-toggle="tab" href="#os">Online Services</a></li>
+                  <li><a class="font-size-s" data-toggle="tab" href="#global">Global</a></li>
+            </ul>
+            <div class="tab-content">
+              <div id="local" class="tab-pane fade in active">
+                  <int-search></int-search>                            
+              </div>
+              <div id="os" class="tab-pane fade">
+                  Online Service Result
+              </div>
+              <div id="global" class="tab-pane fade">
+                  Global Result
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!--
+<div class="container">
+        
+		<div class="row">
+            
+            
+            <div class="col-md-3" id="filterExt">
+                <div class="searchFeature">
+                    <h5 class="font-size-m warna_title_color">
+                          Search Specification
+                          </h5>
+                    <div class="radio">
+                        <label><input type="radio" name="extSpec" id="extGov">gov.my</label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="extSpec" id="extEdu">edu.my</label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="extSpec" id="extOrg">org.my</label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="extSpec" id="extMy">.my</label>
+                    </div>
+                </div>
+            </div>
+        
+		</div>
+	</div>
+-->
+
+<!--
+<div id="emptyKey" class="modalCust">
+    <div class="modalCust-content">
+        <div class="modalCust-header text-center padding-l warna_bg">
+            <span class="close" onclick="closeModal('emptyKey')">&times;</span>
+            <i class="fa fa-warning"></i>
+        </div>
+        <div class="modalCust-body text-center">
+            <h4 class="padding-m">
+              
+            </h4>
+        </div>
+    </div>
+</div>
+<div id="userErrMsg" class="modalCust">
+    <div class="modalCust-content">
+        <div class="modalCust-header text-center padding-l warna_bg">
+            <span class="close" onclick="closeModal('userErrMsg')">&times;</span>
+            <i class="fa fa-warning"></i>
+        </div>
+        <div class="modalCust-body text-center">
+            <h4 class="padding-m">
+              
+            </h4>
+        </div>
+        <div class="modalCust-footer text-center padding-bottom-l">
+            <button class="btn btn-primary backToHome warna_bg">
+              
+            </button>
+            <button class="btn btn-primary reloadPage warna_bg">
+              
+            </button>
+        </div>
+    </div>
+</div>
+-->
+
+   
+  

@@ -1,0 +1,17 @@
+
+<div *ngIf="ErrorMessageIsVisible ==  false" class="modal fade hide in danger confirmbox formMsgPopout" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header headerIcon" style="background-color: rgb(0, 189, 187);">
+                <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                <h4 class="modal-title"><i class="fa fa-warning"></i></h4>
+            </div>
+            <div class="modal-body">
+                <p>{{'feedback.msg' | translate }}</p>
+                <button type="button" class="btn btn-popout btn-md btn-outline" (click)="hideErrorMsg()">Ya</button>
+                <button type="button" class="btn btn-popout btn-md btn-outline" (click)="hideErrorMsg()">Tidak</button>
+            </div>  
+        </div>
+    </div>
+</div>

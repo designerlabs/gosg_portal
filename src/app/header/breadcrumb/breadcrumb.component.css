@@ -1,0 +1,10 @@
+.xtra-space {
+    min-height:100px;
+    display:block;
+    position:relative;
+    background:#a7a495;
+}
+
+.xtra-space .breadCrumb {
+    padding-top:80px;
+}

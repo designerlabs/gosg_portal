@@ -1,0 +1,45 @@
+[
+    {
+        "count": 1,
+        "next": null,
+        "previous": null,
+        "results": [
+            {
+                "title": "Perumahan",
+                "description": "<p><span><img src=\"https://www.malaysia.gov.my/public/cms/media/uploads/7_perumahan.jpg\" alt=\"\" width=\"100%\" /></span></p><p>Maklumat dan perkhidmatan berkaitan dengan perumahan</p>",
+                "content": [
+                    {
+                        "label": "Rumah Anda",
+                        "description": "<p>Semua maklumat berkaitan pengurusan perumahan</p>",
+                        "id": 120164,
+                        "json_url": "https://www.malaysia.gov.my/public/cms/service/article_sub_topic/ms/?topic_id=10&sub_topic_id=126&format=json"
+                    },
+                    {
+                        "label": "Pembelian Rumah",
+                        "description": "<p>Maklumat mengenai pembelian rumah</p>",
+                        "id": 120160,
+                        "json_url": "https://www.malaysia.gov.my/public/cms/service/article_sub_topic/ms/?topic_id=10&sub_topic_id=122&format=json"
+                    }
+                ],
+                "menu_left": [
+                    {
+                        "label": "Rumah Anda",
+                        "id": 120164,
+                        "json_url": "https://www.malaysia.gov.my/public/cms/service/article_sub_topic/ms/?topic_id=10&sub_topic_id=126&format=json"
+                    },
+                    {
+                        "label": "Pembelian Rumah",
+                        "id": 120160,
+                        "json_url": "https://www.malaysia.gov.my/public/cms/service/article_sub_topic/ms/?topic_id=10&sub_topic_id=122&format=json"
+                    }
+                ],
+                "menu_right": [],
+                "html_head_title": "Perumahan | Housing | MyGOV - Portal Rasmi Kerajaan Malaysia",
+                "html_head_meta_keyword": "perumahan, housing",
+                "html_head_meta_description": "Maklumat dan perkhidmatan berkaitan dengan perumahan"
+            }
+        ]
+    }
+
+]
+

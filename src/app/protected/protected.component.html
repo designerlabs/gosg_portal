@@ -1,0 +1,25 @@
+<div [ngStyle]="{'min-height': clientHeight + 'px', 'margin-bottom': '-200px'}">
+  <div *ngIf="isProfile" (mouseleave)="isProfile = false">
+    <ul class="showProfile font-size-s" [style.background]="getTheme()" style="color: #FFF">
+      <li>
+        {{getUserName}}
+      </li>
+      <li>
+       <a href="" [routerLink]="['portal-protected/profile']">Profile</a> 
+      </li>
+      <li>
+        <a href="" [routerLink]="['portal-protected/mailbox']">Inbox</a>
+      </li>
+      <li>
+        <a (click)="logout()">Logout</a>
+      </li>
+    </ul>
+  </div>
+  <app-topnav [state]='getUserName' class="top-nav-style" (showProfile)="showProfile($event)" (topNavClick)="getExpand($event)"
+    [style.background]="getTheme()" [style.z-index]="this.zIndex" [style.height]="this.bHeight"></app-topnav>
+  <app-nav class="nav-bar-style" [style.top]="this.bTop"></app-nav>
+  <app-breadcrumb></app-breadcrumb>
+  <router-outlet [state]='getUserName'></router-outlet>
+  <div style="height: 200px"></div>
+</div>
+<app-footer></app-footer>

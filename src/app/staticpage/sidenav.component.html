@@ -1,0 +1,43 @@
+<div class="col-md-12">
+    <br>
+    <h4 class="sideBarMenu--title padding-bottom-s warna_font font-size-m" style="font-family: Roboto; color: rgb(51, 51, 51);"><a class="headerLink warna_font font-size-m" href="https://www.malaysia.gov.my/public/cms/topic/17/" style="font-family: Roboto; color: rgb(51, 51, 51);">
+      Mengenai Kami
+       <i class="fa fa-link"></i>
+      </a>
+    </h4>
+    <ul class="menu_left_article" style="list-style:none;">
+        <li>
+            <div class="col-xs-12 col-md-12 col-sm-12 padding-bottom-l">
+                <div class="">
+                    <a routerLinkActive="topactive" class="warna_font sideBarMenu--link font-size-s" style="font-weight: 600; font-family: Roboto; color: rgb(51, 51, 51);"
+                        [routerLink]="['/portal/aboutus']">
+                       {{ 'home.menu.aboutus' | translate }}
+                    </a>
+                </div>
+            </div>
+        </li>
+        <br>
+        <li>
+            <div class="col-xs-12 col-md-12 col-sm-12 padding-bottom-l">
+                <div class="">
+                    <a routerLinkActive="topactive" class="warna_font sideBarMenu--link font-size-s" style="font-weight: 600; font-family: Roboto; color: rgb(51, 51, 51);"
+                         [routerLink]="['/portal/dataprotection']">
+                        Akta Perlindungan Data Peribadi
+                    </a>
+                </div>
+            </div>
+        </li>
+        <br>
+        <li>
+            <div class="col-xs-12 col-md-12 col-sm-12 padding-bottom-l">
+                <div class="side_active">
+                    <a routerLinkActive="topactive" class="warna_font sideBarMenu--link font-size-s" style="font-weight: 600; font-family: Roboto; color: rgb(51, 51, 51);"
+                     [routerLink]="['/portal/manual']">
+                        <!--span style="color: rgb(0, 189, 187);"-->
+                        {{ 'home.menu.manual' | translate }}
+                    </a>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

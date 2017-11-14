@@ -1,0 +1,150 @@
+{
+  "home": {
+    "logo": "logo_en",
+    "menu": {
+      "home": "Home",
+      "register": "Register",
+      "setting": "Settings",
+      "contact": "Contact",
+      "faq": "FAQ",
+      "manual": "User Manual",
+      "aboutus": "About Us",
+      "onlineservice": "Digital Services"
+    },
+    "search": {
+      "label": "How Can We Help You?"
+    },
+    "breadcrumb": {
+      "register": "Register",
+      "feedback": "Complaints and Queries",
+      "profile": "My Profile",
+      "mailbox": "Mail Box"
+    },
+    "expandButton": {
+      "less": "Show Less",
+      "more": "Show More"
+    },
+    "check": "Review",
+    "readmore": "Read More",
+    "applicationNum": "Application Number",
+    "send": "SUBMIT",
+    "highlights": "Highligths",
+    "currentHighlights": "Highligths",
+    "calendarTitle": "Activities for this month"
+  },
+  "register": {
+    "label": {
+      "citistatus": "Citizenship Status",
+      "ic": "Identification card number",
+      "icplh": "IE:888888888888",
+      "name": "User name (same as in the identity card)",
+      "nameplh": "User name",
+      "email": "Email",
+      "emailplh": "IE: aaaa@bbb.com",
+      "tel": "Telephone",
+      "telplh": "IE:018xxxxxxx / +60-x-xxxx-xxxx",
+      "codeplh": "Verification code",
+      "btnsubmit": "Submit",
+      "btnreset": "Reset",
+      "citi": "Citizen",
+      "nonciti": "Non Citizen",
+      "country": "Country",
+      "passport": "Passport Number",
+      "fullname": "Full Name"
+    },
+    "err": {
+      "ic": "IC Number is required",
+      "name": "User name is required",
+      "email": "Email is required. IE: aaaa@bbb.com",
+      "tel": "Telephone No. is required. IE: 018xxxxxxx / +60-x-xxxx-xxxx",
+      "country": "Country is required",
+      "passport": "Passport number is required. IE: AA12345678",
+      "fullname": "Full name is required",
+      "vercode": "Verification code is required"
+    },
+    "pattern":{
+      "ic":"IC Number takes 12 digit only",
+      "email":"Please enter a valid email",
+      "tel":"Telephone No must be valid",
+      "telr":"Telephone No must be valid",
+      "telb":"Telephone No must be valid",
+      "passport":"Passport number must be valid. IE: AA12345678",
+      "fullname":"Full name must be valid",
+      "name":"User name must be valid",
+      "captcha":"Verification code must be valid"
+    }
+  },
+  "profile":{
+    "label":{
+      "name":"Name",
+      "nationality":"Nationality",
+      "icnumber":"IC Number",
+      "dateofbirth":"Date Of Birth",
+      "gender":"Gender",
+      "email":"Email",
+      "tel": "Telephone",
+      "race":"Race",
+      "religion":"Religion",
+      "regisdate":"Registration Date",
+      "peraddr":"Permanent Address",
+      "corrsaddr":"Corresponding Address",
+      "copyperaddr":"Copy Permanent Address",
+      "country":"Country",
+      "state":"State",
+      "city":"City",
+      "postcode":"Postcode",
+      "mailaddr":"Mailing Address",
+      "homeph":"Home Phone",
+      "mobile":"Mobile Phone"
+    },
+    "err": {
+      "ic": "IC Number is required",
+      "name": "User name is required",
+      "email": "Email is required. IE: aaaa@bbb.com",
+      "tel": "Telephone No. is required. IE: 018xxxxxxx / +60-x-xxxx-xxxx",
+      "country": "Country is required",
+      "passport": "Passport number is required. IE: AA12345678",
+      "fullname": "Full name is required",
+      "postcode": "Postcode is required",
+      "vercode": "Verification code is required"
+    },
+    "pattern":{
+      "ic":"IC Number takes 12 digit only",
+      "email":"Please enter a valid email",
+      "tel":"Telephone No must be valid",
+      "passport":"Passport number must be valid. IE: AA12345678",
+      "fullname":"Full name must be valid",
+      "name":"User name must be valid",
+      "postcode": "Postcode must be valid",
+      "captcha":"Verification code must be valid"
+    }
+  },
+  "dashboard": {},
+  "errorlabel": {},
+  "feedback": {
+    "msg":"Reset this form?",  
+    "title": "COMPLAINTS AND QUERIES",
+    "desc": "Please limit your response to 10000 characters and include your email address and we will respond to you within three (3) working days. We can respond in two languages, English and Bahasa Melayu.",
+    "label": {
+      "type": "Type of feedback",
+      "subjek": "Subject",
+      "name": "Name",
+      "nameplh": "User Name",
+      "emel": "Email",
+      "content": "Content",
+      "reset": "Reset",
+      "submit": "Send",
+      "words": " characters left.",
+      "choose": "--Please Select--"
+    },
+    "reset":"Reset this form?",      
+    "msgsubmit": "Thank you. Your complaints/queries has been successfully sent. Responds will be received in 3 working days",
+    "err":{
+      "drop": "This field is required",
+      "submit": "Sorry, server down.",        
+      "type":"Sorry, type of feedback is unavailable.",
+      "subject":"Sorry, subjects is unavailable."
+      
+    }
+  }
+}

@@ -1,0 +1,33 @@
+[{
+    "title": "INFORMATION ACCORDING TO LIFE EVENTS",
+    "description": "Access to information and government services based on life events",
+    "action": [{
+        "button1": "CITIZEN",
+        "button2": "NON CITIZEN"
+    }],
+    "content": [{
+            "name": "WORK",
+            "text": "<ul class=\"lefteventlist\"><li>Looking for Job</li><li>Working Permit</li><li>Work in Malaysia</li></ul>",
+            "json_url_citizen": "https://www.malaysia.gov.my/public/cms/service/article_sub_topic/en/?format=json&sub_topic_id=315&topic_id=44",
+            "json_url_non_citizen": "https://www.malaysia.gov.my/public/cms/service/article_sub_topic/en/?format=json&sub_topic_id=301&topic_id=45"
+        },
+        {
+            "name": "VISIT",
+            "text": "<ul class=\"lefteventlist\"><li>Apply for Visa</li><li>Culture</li><li>Environment</li></ul>",
+            "json_url_citizen": "https://www.malaysia.gov.my/public/cms/service/article_sub_topic/en/?format=json&sub_topic_id=318&topic_id=44",
+            "json_url_non_citizen": "https://www.malaysia.gov.my/public/cms/service/article_sub_topic/en/?format=json&sub_topic_id=328&topic_id=45"
+        },
+        {
+            "name": "STUDY1",
+            "text": "<ul class=\"lefteventlist\"><li>Higher Education</li><li>Apply for Scholarship</li><li>Work and Study</li></ul>",
+            "json_url_citizen": "https://www.malaysia.gov.my/public/cms/service/article_sub_topic/en/?format=json&sub_topic_id=317&topic_id=44",
+            "json_url_non_citizen": "https://www.malaysia.gov.my/public/cms/service/article_sub_topic/en/?format=json&sub_topic_id=327&topic_id=45"
+        },
+        {
+            "name": "INVEST",
+            "text": "<ul class=\"lefteventlist\"><li>Investment Opportunity</li><li>Starting a Business</li><li>Entrepreneurship</li></ul>",
+            "json_url_citizen": "https://www.malaysia.gov.my/public/cms/service/article_sub_topic/en/?format=json&sub_topic_id=320&topic_id=44",
+            "json_url_non_citizen": "https://www.malaysia.gov.my/public/cms/service/article_sub_topic/en/?format=json&sub_topic_id=330&topic_id=45"
+        }
+    ]
+}]

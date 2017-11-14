@@ -1,0 +1,97 @@
+/* You can add global styles to this file, and also import other style files */
+/* app css stylesheet */
+/*@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700');*/
+
+
+@font-face {
+ font-family: 'Roboto';
+ src: url('../assets/fonts/Roboto/Roboto-Light.ttf');
+}
+
+
+body{
+  font-family: 'Roboto', sans-serif !important;
+}
+
+.hoverwell:hover {
+  background-color: #485563;
+  cursor: pointer;
+}
+
+.pointable {
+  cursor: pointer;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.toast-success {
+  background-color: #51a351;
+}
+.toast-error {
+  background-color: #bd362f;
+}
+.toast-info {
+  background-color: #2f96b4;
+}
+.toast-warning {
+  background-color: #f89406;
+}
+
+/* slider css */
+
+.bx-wrapper {
+    -moz-box-shadow: 0 0 0px #ccc;
+    -webkit-box-shadow: 0 0 0px #ccc;
+    box-shadow: 0 0 0px #ccc;
+    border: 0px solid #fff;
+    background: #a7a495;
+    margin-bottom:0px;
+}
+
+.bx-wrapper .bx-pager, .bx-wrapper .bx-controls-auto {
+    bottom: 8px;
+}
+
+h1, h2, h3{
+  font-weight: 200;
+}
+
+@media screen and (max-width:760px) and (min-width:320px){
+
+  .bx-wrapper .bx-controls-direction a {
+      top: 95% !important;
+    }
+}
+
+.top-nav-style{
+    width: 100% !important;
+    height:70px;
+    background: #1ebebc;
+    position: fixed  !important;
+    z-index: 10000;
+    -webkit-transition-property: height; /* Safari */
+    -webkit-transition-duration: 1s; /* Safari */
+    transition-property: height;
+    transition-duration: 1s;
+}
+footer{
+    background:#666666;
+}
+.nav-bar-style{
+    z-index: 10000;
+    position: fixed;
+    width: 100%;
+    top: 30px;
+    -webkit-transition-property: top; /* Safari */
+    -webkit-transition-duration: 1s; /* Safari */
+    transition-property: top;
+    transition-duration: 1s;
+}
+
+@media only screen and (max-width: 500px) {
+    .nav-bar-style{
+        top: 41px !important;
+    }
+}
