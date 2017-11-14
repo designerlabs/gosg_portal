@@ -89,7 +89,7 @@
 
               <mat-form-field  class="example-full-width font-size-s">
                 <mat-select formControlName="country" placeholder="{{'register.label.country' | translate }}" tabindex="1" required>
-                  <mat-option *ngFor="let country of countries.countryList" [value]="country.countryCode">
+                  <mat-option *ngFor="let country of countries" [value]="country.countryCode">
                     {{ country.countryName }}
                   </mat-option>
                 </mat-select>

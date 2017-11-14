@@ -59,19 +59,19 @@ export class FeedbackComponent implements OnInit {
           translate.get('HOME').subscribe((res: any) => {
               this.lang = 'en';
               this.languageId = 1;
-              this.portalService.feedbacktype(1).subscribe(data => {
-                this.typeFb  = data;
-              },
-              Error => {
-                this.toastr.error(this.translate.instant('feedback.err.type'), '');     
-              });
+              // this.portalService.feedbacktype(1).subscribe(data => {
+              //   this.typeFb  = data;
+              // },
+              // Error => {
+              //   this.toastr.error(this.translate.instant('feedback.err.type'), '');     
+              // });
 
-              this.portalService.feedbacksubject(1).subscribe(data => {
-                this.subjectFb  = data;          
-              },
-              Error => {      
-                this.toastr.error(this.translate.instant('feedback.err.subject'), '');
-              });
+              // this.portalService.feedbacksubject(1).subscribe(data => {
+              //   this.subjectFb  = data;          
+              // },
+              // Error => {      
+              //   this.toastr.error(this.translate.instant('feedback.err.subject'), '');
+              // });
               
           });
           this.getSubType();  
@@ -80,19 +80,19 @@ export class FeedbackComponent implements OnInit {
           translate.get('HOME').subscribe((res: any) => {
               this.lang = 'ms';
               this.languageId = 2;
-              this.portalService.feedbacktype(2).subscribe(data => {
-                this.typeFb  = data;
-              },
-              Error => {
-                this.toastr.error(this.translate.instant('feedback.err.type'), '');            
-              });
+              // this.portalService.feedbacktype(2).subscribe(data => {
+              //   this.typeFb  = data;
+              // },
+              // Error => {
+              //   this.toastr.error(this.translate.instant('feedback.err.type'), '');            
+              // });
 
-              this.portalService.feedbacksubject(2).subscribe(data => {
-                this.subjectFb  = data;          
-              },
-              Error => {
-                this.toastr.error(this.translate.instant('feedback.err.subject'), '');        
-              });
+              // this.portalService.feedbacksubject(2).subscribe(data => {
+              //   this.subjectFb  = data;          
+              // },
+              // Error => {
+              //   this.toastr.error(this.translate.instant('feedback.err.subject'), '');        
+              // });
           });
           this.getSubType();
   
@@ -146,8 +146,6 @@ export class FeedbackComponent implements OnInit {
         this.fullName = localStorage.getItem('name');
         this.emaiL = localStorage.getItem('email');
         this.icNo = localStorage.getItem('icNo');
-
-
       }
       else{
         this.isAdmin = false;
@@ -159,6 +157,18 @@ export class FeedbackComponent implements OnInit {
       this.feedbacksubject.reset();
       this.feedbacktype.reset();
       this.resetForm();
+      this.portalService.feedbacktype(this.languageId).subscribe(data => {
+        this.typeFb  = data;
+      },
+       Error => {
+        this.toastr.error(this.translate.instant('feedback.err.type'), '');            
+      });
+      this.portalService.feedbacksubject(this.languageId).subscribe(data => {
+        this.subjectFb  = data;          
+      },
+       Error => {
+        this.toastr.error(this.translate.instant('feedback.err.subject'), '');        
+      });
     }
    
     openSnackBar(message: string, action: string) {
