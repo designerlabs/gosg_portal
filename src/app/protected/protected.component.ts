@@ -61,8 +61,6 @@ export class ProtectedComponent implements OnInit {
     console.log(this.isProfile);
   }
 
-  
-
 //   setDatafromChild(data){
 //       this.getUserName = data;
 //     debugger;

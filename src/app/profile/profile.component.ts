@@ -190,7 +190,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         if(this.isLocal == true) {
           this.birthdate = this.idno.split("-");
           this.birthdate = this.birthdate[0];
+          let toArray =  this.birthdate.Tos.split(",");
           console.log("isLocal");
+          console.log(toArray);
         } else {
           console.log("isNotLocal");
         }
@@ -244,6 +246,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     }
   }
 
+
+
   isChecked(e) {
 
     if(e.target.checked)
@@ -260,6 +264,10 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     let getUsrID = localStorage.getItem('usrID');
 
     let body = {
+      "date_joined": null,
+      "fullname": null,
+      "ic_number": null,
+      "email": null,
       "dob": null,
       "gender": null,
       "race": null,
@@ -287,7 +295,12 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       "user_id": null
     };
   
-    body.user_id = getUsrID;
+    body.date_joined = this.regdate;
+    body.fullname = this.fullname;
+    body.email = this.regemail;
+    body.ic_number = this.idno;
+    body.dob = this.dob;
+    body.ic_number = this.idno;
     body.corresponding_address1 = formValues.corrsAddress1;
     body.corresponding_address2 = formValues.corrsAddress2;
     body.corresponding_address3 = formValues.corrsAddress3;
@@ -301,7 +314,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     body.permanent_country = formValues.perCountry;
   
     // console.log(JSON.stringify(body));
+    console.log(body);
 
+    /*
     this.protectedService.updateProfile(body)
     .subscribe(
       data => {
@@ -314,6 +329,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
           //this.alertService.error(error);
           //this.loading = false;
       });
+    */
   }
 
   edit(){
