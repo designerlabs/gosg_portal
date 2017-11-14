@@ -173,10 +173,11 @@
             <div class="form-group">
               <div class="row" style="margin:20px;">
                 <div class="col-md-12 font-size-s" style="text-align: center;">
+                  <button  type="button" mat-raised-button color="warn" id="btnreset" (click)="resetForm()" style="width: 100px; font-family: Roboto; margin-left: 5px;">
+                    <i class="fa fa-refresh"></i>  {{'register.label.btnreset' | translate }}</button>
                   <button mat-raised-button color="primary" (click)="citizenReg(citizenFormGrp.value);false" id="hantar" style="width: 100px; font-family: Roboto;" [disabled]="citizenFormGrp.invalid || !verifyCaptcha()" >
                       <i class="fa fa-check"></i>  {{'register.label.btnsubmit' | translate }}</button>
-                  <button  type="button" mat-raised-button color="warn" id="btnreset" (click)="resetForm()" style="width: 100px; font-family: Roboto; margin-left: 5px;">
-                      <i class="fa fa-refresh"></i>  {{'register.label.btnreset' | translate }}</button>
+                  
                 </div>
               </div>
             </div>

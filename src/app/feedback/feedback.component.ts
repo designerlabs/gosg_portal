@@ -74,7 +74,7 @@ export class FeedbackComponent implements OnInit {
               // });
               
           });
-          this.getSubType();  
+    
         }
         if (myLang == 'ms') {
           translate.get('HOME').subscribe((res: any) => {
@@ -94,12 +94,12 @@ export class FeedbackComponent implements OnInit {
               //   this.toastr.error(this.translate.instant('feedback.err.subject'), '');        
               // });
           });
-          this.getSubType();
+     
   
         }
         // this.resetForm();
         // console.log(this.fullName);
-        
+        this.getSubType();
       });
     }
     lang = this.lang;
@@ -161,6 +161,7 @@ export class FeedbackComponent implements OnInit {
         this.typeFb  = data;
       },
        Error => {
+
         this.toastr.error(this.translate.instant('feedback.err.type'), '');            
       });
       this.portalService.feedbacksubject(this.languageId).subscribe(data => {

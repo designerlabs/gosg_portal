@@ -49,7 +49,6 @@ export function HttpLoaderFactory(http: Http) {
         deps: [Http]
       }
     }),
-
     AppConfigModule,
     ReactiveFormsModule,
     RouterModule.forRoot(protectedRoutes),
