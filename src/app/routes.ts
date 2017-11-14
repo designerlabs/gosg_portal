@@ -27,8 +27,6 @@ import { ManualComponent } from './staticpage/manual.component';
 // import { SearchResultComponent } from './search/searchResult/searchResult.component'
 import { DataprotectionComponent} from './staticpage/dataprotection.component';
 import { LoginComponent } from "./login/login.component";
-// import { NavRouterActivator } from './header/nav/nav-router-activator.service'
-import{ ConfirmComponent } from './message/confirm.component';
 
 
 export const appRoutes: Routes = [
@@ -46,7 +44,6 @@ export const appRoutes: Routes = [
     {path: 'portal/dataprotection', component: DataprotectionComponent},
     {path: 'portal/contact', component: ContactComponent},
     {path: 'portal/feedback', component: FeedbackComponent},
-    {path: '', component: ConfirmComponent},
     {path: '', redirectTo: 'portal', pathMatch: 'full'},
     {path: '**', component: ErrorComponent}
 

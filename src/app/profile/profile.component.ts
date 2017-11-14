@@ -57,6 +57,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   public corrsAddress3: FormControl
   public corrsCountry: FormControl
   public corrsState: FormControl
+  public checkboxValue: FormControl
   public corrsCity: FormControl
   public corrsPostcode: FormControl
   public corrsTelephone: FormControl
@@ -118,6 +119,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.corrsAddress3 = new FormControl()
     this.corrsCountry = new FormControl()
     this.corrsState = new FormControl()
+    this.checkboxValue = new FormControl()
     this.corrsCity = new FormControl()
     this.corrsPostcode = new FormControl('', [Validators.required, Validators.pattern(this.validateService.getPattern(5,5).numberOnly)])
     this.corrsTelephone = new FormControl('', [Validators.pattern(this.validateService.getPattern(10,14).numberOnly)])
@@ -141,6 +143,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       corrsAddress3: this.corrsAddress3,
       corrsCountry: this.corrsCountry,
       corrsState: this.corrsState,
+      checkboxValue:this.checkboxValue,
       corrsCity: this.corrsCity,
       corrsPostcode: this.corrsPostcode,
       corrsTelephone: this.corrsTelephone,
@@ -241,7 +244,16 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     }
   }
 
-  copyPermAddress() {
+  isChecked(e) {
+
+    if(e.target.checked)
+    {
+      console.log('true')
+    }
+    else
+    {
+      console.log('false')
+    }
   }
   
   updateProfile(formValues) {
