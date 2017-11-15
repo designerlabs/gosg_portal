@@ -95,7 +95,7 @@ import { ScrollDispatchModule } from "@angular/cdk/scrolling";
 import { CdkStepperModule } from "@angular/cdk/stepper";
 import { CdkTableModule } from "@angular/cdk/table";
 import { DialogsModule } from '../dialogs/dialogs.module';
-// import { SharedPipe } from '../common/shared.pipe';
+import { SharedPipe } from '../common/shared.pipe';
 export function HttpLoaderFactory(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -151,7 +151,7 @@ export function HttpLoaderFactory(http: Http) {
     HomeComponent,
     FeedbackComponent,
     ConfirmComponent,
-    // SharedPipe
+    SharedPipe
     // ConfirmDialogComponent
   ],
 
@@ -229,7 +229,8 @@ export function HttpLoaderFactory(http: Http) {
      MatTabsModule,
      MatToolbarModule,
      MatTooltipModule,
-     MatNativeDateModule
+     MatNativeDateModule,
+     SharedPipe
     
   ],
 
