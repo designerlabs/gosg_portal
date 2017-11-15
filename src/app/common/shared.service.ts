@@ -21,6 +21,7 @@ export class SharedService {
       return this.http.get(this.countryUrl)
         .map((response: Response) => response.json())
         .catch(this.handleError);
+        
 
     }
 

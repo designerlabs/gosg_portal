@@ -12,11 +12,11 @@
                     </li>
                     <!--<li><a [routerLink]="['public/new']" routerLinkActive="active">Create Event</a></li>-->
                     <li *ngFor="let menu of menus" [routerLinkActive]="['active']"  [routerLinkActiveOptions]="{exact:true}">
-                        <a class="drop">{{menu.title}}
+                        <a class="drop"  (mouseover)="changeStyle($event)" (mouseout)="changeStyle($event)" href="#">{{menu.title}}
                             <span class="caret"></span>
                         </a>
-
-                        <div class="dropdown_5columns"><!-- Begin 5 columns container -->  
+                       
+                        <div class="dropdown_5columns" [ngClass]="color"><!-- Begin 5 columns container -->  
                             <div class="col_6">
                                 <ul>  
                                     <li class="col-md-4" *ngFor="let data of menu.data">
