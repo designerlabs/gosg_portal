@@ -1,5 +1,5 @@
 
-<div class="container-fluid" style="background: #a7a495;">
+<div class="container-fluid animated slideInDown" style="background: #a7a495;">
     <div class="container" *ngFor="let article of articleService.articles">
      <div class="row" *ngFor="let data of article.results">
         <div class="col-md-12">
@@ -13,7 +13,7 @@
                 </li>
                 <li>/</li>
                 <li>
-                     {{data.title}}
+                    {{'home.breadcrumb.register' | translate}}
                 </li>
             </ul>
         </div>

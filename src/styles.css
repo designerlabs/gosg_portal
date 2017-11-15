@@ -138,3 +138,12 @@ html, body{
         .padding-m{
             padding: 10px;
         }
+        .hr-custom2 {
+          margin-top: -5px;
+          margin-bottom: 0px;
+          border: 0;
+          border-top: 3px solid #918c79;
+          width: 8%;
+          float: left;
+        }
+        

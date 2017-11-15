@@ -1,14 +1,9 @@
-.col-md-12 {
-    color: #000;
-}
+
 
 input, .form-group {
     color: #000;
 }
 
-.col-md-12 {
-  color: #000;
-}
 
 em{
       float:right; color: #000; padding-left:10px;
@@ -28,9 +23,7 @@ margin-bottom: 5%;
 .formbg label{  
   color : #333;
 }
-.form-control{
-  border: 1px solid #ccc;
-}
+
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
   -webkit-appearance: none; 
@@ -60,12 +53,13 @@ button:disabled{
 ul{
   list-style:none;
 }
+
 .edbtn {
-text-align: center;
-vertical-align: middle;
-margin-top: -40px;
-float: right;
+  text-align: center;
+  vertical-align: middle;
+  float: right;
 }
+
 .d-inline-block {
   display: inline-block!important;
 }
@@ -73,3 +67,16 @@ float: right;
 .mat-form-field {
   color: rgb(255, 0, 0);
 }
+
+.list-inline{
+	margin-top: 25px;
+}
+
+.list-inline li a:hover{
+	text-decoration:none;
+	color:#333;
+}
+/* 
+.editBtn{
+  bottom:20px;
+} */

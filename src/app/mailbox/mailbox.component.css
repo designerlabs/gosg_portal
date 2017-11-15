@@ -21,3 +21,12 @@
   .mat-column-action{
     max-width:20%;
 }
+
+.list-inline{
+	margin-top: 25px;
+}
+
+.list-inline li a:hover{
+	text-decoration:none;
+	color:#333;
+}
