@@ -16,69 +16,54 @@
         <div class="form-group col-md-4">
           <label class="font-size-s" for="fullname">{{'profile.label.name' | translate}}</label>
           <div class="staticLabel font-size-l" for="fullname">{{ fullname }}</div>
-          <!-- <input formControlName="fullname" id="fullname" type="text" class="form-control"/>    -->
         </div>
         <div class="form-group col-md-4">
           <label class="font-size-s" for="nationality">{{'profile.label.nationality' | translate}}</label>
           <div class="staticLabel font-size-l" for="nationality">{{countryName?.country.countryName}}</div>
-          <!-- <input formControlName="nationality" id="nationality" type="text" class="form-control" /> -->
         </div>
         <div class="form-group col-md-4">
           <label class="font-size-s" for="icnumber">{{'profile.label.icnumber' | translate}}</label>
           <br />
-          <label class="staticLabel font-size-l" for="icnumber">{{ idno }}</label>
-          <!-- <input formControlName="icnumber" id="icnumber" type="text" class="form-control" /> -->
+          <div class="staticLabel font-size-l" for="icnumber">{{ idno }}</div>
         </div>
       </div>
       <div class="row">
-        <div class="form-group col-md-4" *ngIf="isMalaysian(countryCode)">
+        <div class="form-group col-md-4">
           <label class="font-size-s" for="dob">{{'profile.label.dateofbirth' | translate}}</label>
-          <div class="staticLabel font-size-l" for="dob">{{ birthdate | date:'dd-MM-yyyy' }} </div>
-        </div>
-        <div *ngIf="!isMalaysian(countryCode)" class="form-group col-md-4" [ngClass]="{'error' : !validateCtrlChk(dob)}">
-          <label class="font-size-s" for="dob">{{'profile.label.dateofbirth' | translate}}
-            <span style="color:red"> *</span>
-          </label>
-
-          <div ng-hide="isMalaysian(countryCode)">
-            <mat-form-field class="example-full-width font-size-s" style="margin-top: -50px">
-              <input formControlName="dob" matInput #dob id="dob" type="date" />
-              <my-date-picker name="dob" [options]="myDatePickerOptions"></my-date-picker>
+            <mat-form-field class="example-full-width font-size-l" style="margin-top: -25px" >
+              <input matInput formControlName="dob" #dob id="dob" [matDatepicker]="dob" placeholder="{{ today  | date: 'dd-mm-YYYY' }}" />
+              <mat-datepicker-toggle matSuffix [for]="dob"></mat-datepicker-toggle>
+              <mat-datepicker [disabled]="initial" #dob></mat-datepicker>
             </mat-form-field>
-          </div>
-          <!-- <em *ngIf="!validateCtrlChk(dob) && profileForm.controls.dob.errors.required">Required</em> -->
         </div>
         <div class="form-group col-md-4">
           <label class="font-size-s" for="email">{{'profile.label.email' | translate}}</label>
-          <br />
-          <label class="font-size-l" for="email">{{ regemail }}</label>
-          <!-- <input formControlName="email" id="email" type="text" class="form-control" /> -->
+          <div>
+            <label class="font-size-l" for="email">{{ regemail }}</label>
+          </div>
         </div>
         <div class="form-group col-md-4">
           <label class="font-size-s" for="regdate">{{'profile.label.regisdate' | translate}}</label>
           <br />
           <label class="staticLabel font-size-l" for="regdate">{{ regdate | date:'dd-MM-yyyy' }}</label>
-          <!--<input formControlName="regdate" id="regdate" type="date" class="form-control" />-->
-          <!-- <my-date-picker name="regdate" [options]="myDatePickerOptions"
-              formControlName="regdate"></my-date-picker> -->
         </div>
       </div>
       <div class="row">
-        <div class="form-group col-md-4" [ngClass]="{'error' : !validateCtrlChk(gender)}">
+        <div class="form-group col-md-4">
           <mat-form-field class="example-full-width font-size-s">
-            <mat-select tabindex="1" formControlName="gender" id="gender" name="gender" placeholder="{{'profile.label.gender' | translate}}">
-              <mat-option *ngFor="let gender of genderData" [value]="gender.value">{{gender.name}}</mat-option>
+            <mat-select tabindex="1" formControlName="gender" id="gender" name="gender" placeholder="{{'profile.label.gender' | translate}}" required>
+                <mat-option [value]="1">Male</mat-option>
+                <mat-option [value]="2">Female</mat-option>
             </mat-select>
           </mat-form-field>
-          <em *ngIf="!validateCtrlChk(gender) && profileForm.controls.gender.errors.required">Required</em>
         </div>
-        <div class="form-group col-md-4" [ngClass]="{'error' : !validateCtrlChk(race)}">
+        <div class="form-group col-md-4">
           <mat-form-field class="example-full-width font-size-s">
             <mat-select formControlName="race" id="race" name="race" placeholder="{{'profile.label.race' | translate}}">
             </mat-select>
           </mat-form-field>
         </div>
-        <div class="form-group col-md-4" [ngClass]="{'error' : !validateCtrlChk(religion)}">
+        <div class="form-group col-md-4">
           <mat-form-field class="example-full-width font-size-s">
             <mat-select formControlName="religion" id="religion" name="religion" placeholder="{{'profile.label.religion' | translate}}">
             </mat-select>
@@ -91,15 +76,15 @@
         </div>
         <div class="form-group col-lg-12">
           <mat-form-field class="example-full-width font-size-s">
-            <input matInput #perAddress1 formControlName="perAddress1" id="perAddress1" required type="text" maxlength="30" placeholder="Permanent Address 1"
+            <input matInput formControlName="perAddress1" id="perAddress1" required type="text" maxlength="30" placeholder="Permanent Address 1"
             />
           </mat-form-field>
           <mat-form-field class="example-full-width font-size-s">
-            <input matInput #perAddress2 formControlName="perAddress2" id="perAddress2" type="text" maxlength="30" placeholder="Permanent Address 2"
+            <input matInput formControlName="perAddress2" id="perAddress2" type="text" maxlength="30" placeholder="Permanent Address 2"
             />
           </mat-form-field>
           <mat-form-field class="example-full-width font-size-s">
-            <input matInput #perAddress3 formControlName="perAddress3" id="perAddress3" type="text" maxlength="30" placeholder="Permanent Address 3"
+            <input matInput formControlName="perAddress3" id="perAddress3" type="text" maxlength="30" placeholder="Permanent Address 3"
             />
           </mat-form-field>
         </div>
@@ -113,7 +98,7 @@
             </mat-select>
           </mat-form-field>
         </div>
-        <div class="form-group col-md-4" [ngClass]="{'error' : !validateCtrlChk(perState)}">
+        <div class="form-group col-md-4">
           <mat-form-field class="example-full-width font-size-s">
             <mat-select formControlName="perState" id="perState" name="perState" placeholder="{{'profile.label.state' | translate}} *">
               <mat-option [value]="1">State 1</mat-option>
@@ -122,18 +107,17 @@
           </mat-form-field>
           <em *ngIf="!validateCtrlChk(perState) && profileForm.controls.perState.errors.required">Required</em>
         </div>
-        <div class="form-group col-md-4" [ngClass]="{'error' : !validateCtrlChk(perCity)}">
+        <div class="form-group col-md-4">
           <mat-form-field class="example-full-width font-size-s">
             <mat-select formControlName="perCity" id="perCity" name="perCity" placeholder="{{'profile.label.city' | translate}} *">
               <mat-option [value]="1">City 1</mat-option>
               <mat-option [value]="2">City 2</mat-option>
             </mat-select>
           </mat-form-field>
-          <!-- <em *ngIf="!validateCtrlChk(perCity) && profileForm.controls.perCity.errors.required">Required</em> -->
         </div>
       </div>
       <div class="row">
-        <div class="form-group col-md-4" [ngClass]="{'error' : !validateCtrlChk(perPostcode)}">
+        <div class="form-group col-md-4">
           <mat-form-field class="example-full-width font-size-s" placeholder="{{'profile.label.postcode' | translate}}">
             <input matInput (keyup)="!validateCtrlChk(perPostcode)" #perPost formControlName="perPostcode" id="perPostcode" type="text"
               placeholder="Postcode" maxlength="5" />
@@ -141,7 +125,7 @@
           <em *ngIf="!validateCtrlChk(perPostcode) && profileForm.controls.perPostcode.errors.required">Required</em>
           <em *ngIf="!validateCtrlChk(perPostcode) && profileForm.controls.perPostcode.errors.pattern">{{'profile.pattern.postcode' | translate }}</em>
         </div>
-        <div class="form-group col-md-4" [ngClass]="{'error' : !validateCtrlChk(perTelephone)}">
+        <div class="form-group col-md-4">
           <mat-form-field class="example-full-width font-size-s">
             <input matInput (keyup)="!validateCtrlChk(perTelephone)" #perhomephone formControlName="perTelephone" id="perTelephone" type="text"
               placeholder="{{'profile.label.homeph' | translate}}" maxlength="14" />
@@ -155,65 +139,65 @@
         <div class="form-group col-lg-12" style="padding-top:15px;">
           <label class="font-size-s" for="corrsAddress1">{{'profile.label.corrsaddr' | translate }}&nbsp;&nbsp;&nbsp;&nbsp;</label>
           <input formControlName="checkboxValue" type="checkbox" (change)="isChecked($event)">
-          <!-- <mat-checkbox id="PermAddCopy" name="PermAddCopy" class="form-group font-size-xs" [value]="isChecked($event)">{{'profile.label.copyperaddr' | translate }}</mat-checkbox> -->
         </div>
         <div class="form-group col-md-12">
           <mat-form-field class="example-full-width font-size-s">
-            <input matInput formControlName="corrsAddress1" id="corrsAddress1" type="text" maxlength="30" placeholder="{{'profile.label.corrsaddr' | translate}} 1"
+            <input (keyup)="isChanged()" matInput formControlName="corrsAddress1" id="corrsAddress1" type="text" maxlength="30" placeholder="{{'profile.label.corrsaddr' | translate}} 1"
             />
           </mat-form-field>
           <mat-form-field class="example-full-width font-size-s">
-            <input matInput formControlName="corrsAddress2" id="corrsAddress2" type="text" maxlength="30" placeholder="{{'profile.label.corrsaddr' | translate}} 2"
+            <input (keyup)="isChanged()" matInput formControlName="corrsAddress2" id="corrsAddress2" type="text" maxlength="30" placeholder="{{'profile.label.corrsaddr' | translate}} 2"
             />
           </mat-form-field>
           <mat-form-field class="example-full-width font-size-s">
-            <input matInput formControlName="corrsAddress3" id="corrsAddress3" type="text" maxlength="30" placeholder="{{'profile.label.corrsaddr' | translate}} 3"
+            <input (keyup)="isChanged()" matInput formControlName="corrsAddress3" id="corrsAddress3" type="text" maxlength="30" placeholder="{{'profile.label.corrsaddr' | translate}} 3"
             />
           </mat-form-field>
         </div>
       </div>
       <div class="row">
-        <div class="form-group col-md-4" [ngClass]="{'error' : !validateCtrlChk(corrsCountry)}">
+        <div class="form-group col-md-4">
           <mat-form-field class="example-full-width font-size-s">
-            <mat-select formControlName="corrsCountry" id="corrsCountry" name="corrsCountry" placeholder="{{'profile.label.country' | translate}}">
+            <mat-select (change)="isChanged()" formControlName="corrsCountry" id="corrsCountry" name="corrsCountry" placeholder="{{'profile.label.country' | translate}}">
+                <mat-option *ngFor="let country of countries" [value]="country.countryCode">{{country.countryName}}</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
-        <div class="form-group col-md-4" [ngClass]="{'error' : !validateCtrlChk(corrsState)}">
+        <div class="form-group col-md-4">
           <mat-form-field class="example-full-width font-size-s">
-            <mat-select formControlName="corrsState" id="corrsState" name="corrsState" placeholder="{{'profile.label.state' | translate}}">
+            <mat-select (change)="isChanged()" formControlName="corrsState" id="corrsState" name="corrsState" placeholder="{{'profile.label.state' | translate}}">
+              <mat-option [value]="1">State 1</mat-option>
+              <mat-option [value]="2">State 2</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
-        <div class="form-group col-md-4" [ngClass]="{'error' : !validateCtrlChk(corrsCity)}">
+        <div class="form-group col-md-4">
           <mat-form-field class="example-full-width font-size-s">
-            <mat-select formControlName="corrsCity" id="corrsCity" name="corrsCity" placeholder="{{'profile.label.city' | translate}}">
+            <mat-select (change)="isChanged()" formControlName="corrsCity" id="corrsCity" name="corrsCity" placeholder="{{'profile.label.city' | translate}}">
+              <mat-option [value]="1">City 1</mat-option>
+              <mat-option [value]="2">City 2</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
       </div>
       <div class="row">
-        <div class="form-group col-md-4" [ngClass]="{'error' : !validateCtrlChk(corrsPostcode)}">
+        <div class="form-group col-md-4">
           <mat-form-field class="example-full-width font-size-s">
-            <input matInput (keyup)="!validateCtrlChk(corrsPostcode)" #corsPost formControlName="corrsPostcode" id="corrsPostcode" type="text"
+            <input matInput (keyup)="isChanged()" #corsPost formControlName="corrsPostcode" id="corrsPostcode" type="text"
               placeholder="{{'profile.label.postcode' | translate}}" maxlength="5" />
           </mat-form-field>
-          <em *ngIf="!validateCtrlChk(corrsPostcode) && profileForm.controls.corrsPostcode.errors.required">Required</em>
-          <em *ngIf="!validateCtrlChk(corrsPostcode) && profileForm.controls.corrsPostcode.errors.pattern">{{'profile.pattern.postcode' | translate }}</em>
         </div>
-        <div class="form-group col-md-4" [ngClass]="{'error' : !validateCtrlChk(corrsTelephone)}">
+        <div class="form-group col-md-4">
           <mat-form-field class="example-full-width font-size-s">
-            <input matInput (keyup)="!validateCtrlChk(corrsTelephone)" #corshomephone formControlName="corrsTelephone" id="corrsTelephone"
+            <input matInput (keyup)="isChanged()" #corshomephone formControlName="corrsTelephone" id="corrsTelephone"
               type="text" placeholder="{{'profile.label.homeph' | translate}}" maxlength="14" />
           </mat-form-field>
-          <em *ngIf="!validateCtrlChk(corrsTelephone) && profileForm.controls.tel.errors.pattern">{{'profile.pattern.telr' | translate }}</em>
         </div>
-        <div class="form-group col-md-4" [ngClass]="{'error' : !validateCtrlChk(corrsMobile)}">
+        <div class="form-group col-md-4">
           <mat-form-field class="example-full-width font-size-s">
-            <input matInput (keyup)="!validateCtrlChk(corrsMobile)" #corsmobile formControlName="corrsMobile" id="corrsMobile" type="text"
+            <input matInput (keyup)="isChanged()" #corsmobile formControlName="corrsMobile" id="corrsMobile" type="text"
               placeholder="{{'profile.label.mobile' | translate}}" maxlength="14" value="{{ mobileNo }}" />
           </mat-form-field>
-          <em *ngIf="!validateCtrlChk(corrsMobile) && profileForm.controls.corrsMobile.errors.pattern">{{'profile.pattern.telb' | translate }}</em>
         </div>
       </div>
       <div class="form-group" style="float: right;">

@@ -187,15 +187,13 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         //this.nationality = this.getCountryByCode(this.countryCode);
 
         this.isLocal = this.isMalaysian(this.countryCode);
-        if(this.isLocal == true) {
-          this.birthdate = this.idno.split("-");
-          this.birthdate = this.birthdate[0];
-          let toArray =  this.birthdate.Tos.split(",");
-          console.log("isLocal");
-          console.log(toArray);
-        } else {
-          console.log("isNotLocal");
-        }
+        // if(this.isLocal == true) {
+        //   this.birthdate = this.idno.split("-");
+        //   this.birthdate = this.birthdate[0];
+        //   console.log("isLocal");
+        // } else {
+        //   console.log("isNotLocal");
+        // }
       },
       error => {
         console.log(error)
@@ -246,16 +244,35 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     }
   }
 
-
+  isChanged() {
+    if(this.profileForm.get('checkboxValue').value == true)
+      this.profileForm.get('checkboxValue').setValue(false);
+  }
 
   isChecked(e) {
 
     if(e.target.checked)
     {
+      this.profileForm.get('corrsAddress1').setValue(this.perAddress1.value);
+      this.profileForm.get('corrsAddress2').setValue(this.perAddress2.value);
+      this.profileForm.get('corrsAddress3').setValue(this.perAddress3.value);
+      this.profileForm.get('corrsCity').setValue(this.perCity.value);
+      this.profileForm.get('corrsState').setValue(this.perState.value);
+      this.profileForm.get('corrsCountry').setValue(this.perCountry.value);
+      this.profileForm.get('corrsPostcode').setValue(this.perPostcode.value);
+      this.profileForm.get('corrsTelephone').setValue(this.perTelephone.value);
       console.log('true')
     }
     else
     {
+      this.profileForm.get('corrsAddress1').setValue("");
+      this.profileForm.get('corrsAddress2').setValue("");
+      this.profileForm.get('corrsAddress3').setValue("");
+      this.profileForm.get('corrsCity').setValue(0);
+      this.profileForm.get('corrsState').setValue(0);
+      this.profileForm.get('corrsCountry').setValue(0);
+      this.profileForm.get('corrsPostcode').setValue("");
+      this.profileForm.get('corrsTelephone').setValue("");
       console.log('false')
     }
   }
