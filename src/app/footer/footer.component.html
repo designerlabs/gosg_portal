@@ -4,7 +4,7 @@
          <div class="col-sm-12" style="padding-bottom:10px;padding-top: 10px;text-align: center;" id="social-icons">
             <div class="footersocial">
                <span *ngFor="let social_data of data.footer">
-                  <a href="{{ social_data.link }}" target="_blank">
+                  <a [routerLink]="[social_data.link]" href="" target="_blank">
                      <span class="social_icon_bg" title="{{social_data.title}}" data-toggle="tooltip" data-original-title="Tooltip on top">
                         <span class="icon-social" [style.color]="getTheme()">
                            <i ngClass= "fa {{social_data.icon}}" style="padding:5px 2px 0px 0px"></i>
@@ -41,7 +41,7 @@
                   <div class="sub-add" >
                      <ul style="columns: 2; list-style-type: none; padding-left: 3px;">
                         <li *ngFor="let eachitm of otherlink.footer" class="eachloop2" style="margin-bottom: 7px;">
-                           <a href="{{ eachitm.link }}" class="font-size-s" [innerHtml]="eachitm.title"></a>
+                           <a [routerLink]="[eachitm.link]" href="" class="font-size-s" [innerHtml]="eachitm.title"></a>
                         </li>
                      </ul>
                   </div> 
@@ -51,7 +51,7 @@
             <div class="sub-add" *ngIf="showextlinks && otherlink.sub_title=='extlinks'">
                 <div *ngFor="let eachitm of otherlink.footer" class="each loop2">
                     <div class="address footer" style="margin-top: 0%;">
-                     <a href="{{ eachitm.link }}" target="_blank" class="font-size-s col-xs-3 info-box"
+                     <a [routerLink]="[eachitm.link]" href="" target="_blank" class="font-size-s col-xs-3 info-box"
                         data-toggle="tooltip" title="eachitm.name">
                         <img src="{{ eachitm.icon }}" alt="eachitm.name" 
                         style="max-width:100%;">
@@ -100,9 +100,9 @@
             </div>     
             <div *ngIf="data.title=='bottomlinks'" class="col-md-12 text-right hidden-xs loop1.1">
                <ul class="list-inline hidden-xs font-size-s" style="font-family: Roboto;">
-                  <li  *ngFor="let btmlink of data.items">
-                     <a href="{{ btmlink.link }}">
-                        {{btmlink.name}} |
+                  <li  *ngFor="let btmlink of data.items; let last = last">
+                     <a [routerLink]="[btmlink.link]" href="">
+                        {{btmlink.name}} <span *ngIf="!last">|</span>
                      </a>
                   </li>
                </ul>

@@ -60,6 +60,12 @@ export class NavComponent implements OnInit, AfterViewInit {
             .subscribe(resMenuData => this.menus = resMenuData);
   }
 
+  color:string = 'red';
+  
+  changeStyle($event){
+    this.color = $event.type == 'mouseover' ? 'animated fadeIn' : '';
+  }
+
   handleClickMe(e){
         this.menuClick.emit(e);
         this.menuId = e;
