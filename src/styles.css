@@ -97,6 +97,7 @@ html, body{
 
     app-footer{
         background: #666666;
+        z-index: 9999999;
         display: block;
     }
         .primary {
