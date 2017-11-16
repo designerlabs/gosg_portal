@@ -2,7 +2,8 @@ import { NgModule, InjectionToken } from '@angular/core';
 
 export let APP_CONFIG = new InjectionToken<AppConfig>('app.config');
 
-let baseURL = 'http://10.1.17.12:3000/';
+// let baseURL = 'http://10.1.17.12:3000/';
+let baseURL = 'http://10.1.70.148:8080/gosg-service-common/';
 // let commonURL = 'http://10.1.43.15:8080/';
 
 // common service
@@ -52,7 +53,7 @@ export const APP_DI_CONFIG: AppConfig = {
     portalURL: portalBaseURL,
     protectedURL:protectedBaseURL,
     urlArticle: './app/apidata/topic',
-    urlCountry: baseURL+'countries',
+    urlCountry: baseURL+'country',
     // urlCountry: baseLocalURL+'countries.json',
     // urlCountry: '/app/apidata/countries',
     urlLifeevent: './app/apidata/lifeevent',
