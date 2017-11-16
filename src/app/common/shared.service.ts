@@ -17,14 +17,12 @@ export class SharedService {
     private genderUrl: string = this.config.urlGender;
 
      getCountryData(): Observable<any[]> {
-         console.log(this.countryUrl);
+        //  console.log(this.countryUrl);
       return this.http.get(this.countryUrl)
         .map((response: Response) => response.json())
         .catch(this.handleError);
-        
 
     }
-
 
     getCountrybyCode(code): Observable<any[]> {
         return this.http.get(this.countryUrl+'/code/'+code)

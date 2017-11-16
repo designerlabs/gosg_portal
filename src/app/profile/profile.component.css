@@ -45,12 +45,6 @@ ul{
   list-style:none;
 }
 
-.edbtn {
-  text-align: center;
-  vertical-align: middle;
-  float: right;
-}
-
 .d-inline-block {
   display: inline-block!important;
 }
@@ -67,7 +61,7 @@ ul{
 	text-decoration:none;
 	color:#333;
 }
-/* 
+
 .editBtn{
   bottom:20px;
-} */
+}

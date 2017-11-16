@@ -2,20 +2,19 @@ import { NgModule, InjectionToken } from '@angular/core';
 
 export let APP_CONFIG = new InjectionToken<AppConfig>('app.config');
 
-// let baseURL = 'http://10.1.17.12:3000/';
-let baseURL = 'http://10.1.70.148:8080/gosg-service-common/';
+let baseURL = 'http://10.1.17.12:3000/';
+// let baseURL = 'http://10.1.70.148:8080/gosg-service-common/';
 // let commonURL = 'http://10.1.43.15:8080/';
 
 // common service
 let portalBaseURL = 'http://localhost:8020/portal/';
 let protectedBaseURL = 'http://localhost:8021/portal-protected/';
-let commonURL = 'http://10.1.104.233:8081/';
+let commonURL = 'http://10.1.70.148:8080/gosg-service-common/';
 
 // backend service
 // let commonURL = 'http://10.1.70.148:8080/gosg-service-common/';
 let baseLocalURL = './app/apidata/';
 let searchServiceURL = 'https://www.malaysia.gov.my/public/';
-
 
 export class AppConfig {
     apiEndpoint: string;
@@ -53,7 +52,7 @@ export const APP_DI_CONFIG: AppConfig = {
     portalURL: portalBaseURL,
     protectedURL:protectedBaseURL,
     urlArticle: './app/apidata/topic',
-    urlCountry: baseURL+'country',
+    urlCountry: commonURL+'country',
     // urlCountry: baseLocalURL+'countries.json',
     // urlCountry: '/app/apidata/countries',
     urlLifeevent: './app/apidata/lifeevent',
@@ -65,8 +64,8 @@ export const APP_DI_CONFIG: AppConfig = {
     urlPoll: './app/apidata/poll',
     urlAnnouncement: './app/apidata/announcement',
     urlCalendar: './app/apidata/calendar',    
-    urlFeedbackType: commonURL+'/feedback/type/lang/',
-    urlFeedbackSubject: commonURL+'/feedback/subject/lang/',
+    urlFeedbackType: commonURL+'feedback/type/lang/',
+    urlFeedbackSubject: commonURL+'feedback/subject/lang/',
     urlFeedback: commonURL+'feedback',
     urlProfile: baseURL+'profile',
     urlIntSearch: searchServiceURL + 'query/0/internal',
