@@ -7,13 +7,6 @@ em{
 	.error :-moz-placeholder { color: #999; } 
 	.error :-ms-input-placeholder { color: #999; }  */
 
-.formbg{    
-	background: #eeeeee;
-	color: #333;
-	padding: 13px 10px;
-	margin-top: 5%;
-	margin-bottom: 5%;
-}
 .example-form {
 	min-width: 150px;
 	max-width: 500px;
@@ -23,9 +16,7 @@ em{
   .example-full-width {
 	width: 100%;
   }
-.formbg label{
-	color : #333;
-}
+
 .CaptchaWrap {
 	position: relative;
 }

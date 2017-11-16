@@ -14,15 +14,6 @@ em{
 .error :-moz-placeholder { color: #999; } 
 .error :-ms-input-placeholder { color: #999; }  */
 
-.formbg{    
-background: #eeeeee;
-color: #333;
-padding: 13px 10px;
-margin-bottom: 5%;
-}
-.formbg label{  
-  color : #333;
-}
 
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 

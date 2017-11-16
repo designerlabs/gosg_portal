@@ -1,5 +1,5 @@
 
-import { Component, OnInit,ElementRef, Input, ViewChild, Injectable, Inject, ViewContainerRef  } from '@angular/core';
+import { Component, OnInit,ElementRef, Input, ViewChild, Inject, ViewContainerRef  } from '@angular/core';
 import { FormControl, FormGroup, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import {TranslateService, LangChangeEvent } from '@ngx-translate/core';
@@ -19,7 +19,6 @@ import { ValidateService } from '../common/validate.service';
   styleUrls: ['./feedback.component.css']
 })
 
-@Injectable()
 export class FeedbackComponent implements OnInit {
   submitMsg: any;
   
@@ -59,20 +58,6 @@ export class FeedbackComponent implements OnInit {
           translate.get('HOME').subscribe((res: any) => {
               this.lang = 'en';
               this.languageId = 1;
-              // this.portalService.feedbacktype(1).subscribe(data => {
-              //   this.typeFb  = data;
-              // },
-              // Error => {
-              //   this.toastr.error(this.translate.instant('feedback.err.type'), '');     
-              // });
-
-              // this.portalService.feedbacksubject(1).subscribe(data => {
-              //   this.subjectFb  = data;          
-              // },
-              // Error => {      
-              //   this.toastr.error(this.translate.instant('feedback.err.subject'), '');
-              // });
-              
           });
     
         }
@@ -80,26 +65,10 @@ export class FeedbackComponent implements OnInit {
           translate.get('HOME').subscribe((res: any) => {
               this.lang = 'ms';
               this.languageId = 2;
-              // this.portalService.feedbacktype(2).subscribe(data => {
-              //   this.typeFb  = data;
-              // },
-              // Error => {
-              //   this.toastr.error(this.translate.instant('feedback.err.type'), '');            
-              // });
-
-              // this.portalService.feedbacksubject(2).subscribe(data => {
-              //   this.subjectFb  = data;          
-              // },
-              // Error => {
-              //   this.toastr.error(this.translate.instant('feedback.err.subject'), '');        
-              // });
           });
-     
-  
         }
-        // this.resetForm();
-        // console.log(this.fullName);
         this.getSubType();
+        this.getTypenSubject();
       });
     }
     lang = this.lang;
@@ -107,6 +76,7 @@ export class FeedbackComponent implements OnInit {
     
     ngOnInit() {
       this.checkLog();
+      this.getTypenSubject();
       this.feedback_message = new FormControl('', [Validators.required]),
       this.feedbacktype = new FormControl('', [Validators.required]),
       this.feedbacksubject = new FormControl('', [Validators.required]),
@@ -157,6 +127,10 @@ export class FeedbackComponent implements OnInit {
       this.feedbacksubject.reset();
       this.feedbacktype.reset();
       this.resetForm();
+      
+    }
+
+    getTypenSubject(){
       this.portalService.feedbacktype(this.languageId).subscribe(data => {
         this.typeFb  = data;
       },
@@ -238,10 +212,6 @@ export class FeedbackComponent implements OnInit {
       );
 
     }
-  }
-
-  onChange(newValue){
-    // console.log(newValue);
   }
 
   showResetMsg(){

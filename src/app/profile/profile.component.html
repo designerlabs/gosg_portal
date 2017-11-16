@@ -21,10 +21,10 @@
 </div>
 <div class="container">
   
-  <div class="col-md-3">
-      
+  <div class="col-md-3 padding-left-0">
+      <gosg-sidenav-dashboard></gosg-sidenav-dashboard>
   </div>
-  <div class="col-md-9">
+  <div class="col-md-9 formbg">
       <span class="pull-right">
           <button type="button" class="editBtn" mat-fab color="warn" (click)="edit()"><i class="fa fa-edit font-size-l"></i></button>
         </span>
@@ -220,12 +220,11 @@
               </div>
             </div>
             <div class="form-group" style="float: right;">
-              <button type="submit" class="btn btn-primary">Save</button>
-              <!-- <button [disabled]="profileForm.invalid || initial" type="submit" class="btn btn-primary">Save</button> -->
+              <button [disabled]="profileForm.invalid || initial" type="submit" class="btn btn-primary">Save</button>
               <button (click)="cancel()" type="button" class="btn btn-default">Cancel</button>
             </div>
           </div>
-          <!--[disabled]="profileForm.invalid"-->
+        
         </form>
   </div>
   
