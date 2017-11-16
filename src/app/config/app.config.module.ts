@@ -8,13 +8,12 @@ let baseURL = 'http://10.1.17.12:3000/';
 // common service
 let portalBaseURL = 'http://localhost:8020/portal/';
 let protectedBaseURL = 'http://localhost:8021/portal-protected/';
-let commonURL = 'http://10.1.104.233:8081/';
+let commonURL = 'http://10.1.70.148:8080/';
 
 // backend service
 // let commonURL = 'http://10.1.70.148:8080/gosg-service-common/';
 let baseLocalURL = './app/apidata/';
 let searchServiceURL = 'https://www.malaysia.gov.my/public/';
-
 
 export class AppConfig {
     apiEndpoint: string;
@@ -52,7 +51,7 @@ export const APP_DI_CONFIG: AppConfig = {
     portalURL: portalBaseURL,
     protectedURL:protectedBaseURL,
     urlArticle: './app/apidata/topic',
-    urlCountry: baseURL+'countries',
+    urlCountry: commonURL+'gosg-service-common/countryEntities',
     // urlCountry: baseLocalURL+'countries.json',
     // urlCountry: '/app/apidata/countries',
     urlLifeevent: './app/apidata/lifeevent',
