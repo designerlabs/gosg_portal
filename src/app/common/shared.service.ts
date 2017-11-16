@@ -15,6 +15,7 @@ export class SharedService {
 
   private countryUrl: string = this.config.urlCountry;
     private genderUrl: string = this.config.urlGender;
+    private religionUrl: string = this.config.urlReligion;
 
      getCountryData(): Observable<any[]> {
         //  console.log(this.countryUrl);
@@ -30,6 +31,14 @@ export class SharedService {
             .catch(this.handleError);
   
       }
+
+    
+    getReligion(): Observable<any[]> {
+      return this.http.get(this.religionUrl)
+        .map((response: Response) => response.json())
+        .catch(this.handleError);
+
+    }
 
     getGender(): Observable<any[]> {
         return this.http.get(this.genderUrl + '.json')

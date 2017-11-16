@@ -23,6 +23,7 @@ export class AppConfig {
     urlFooter: string;
     urlArticle: string;
     urlCountry: string;
+    urlReligion: string;
     urlLifeevent: string;
     urlSubtopic: string;
     urlTopics: string;
@@ -51,8 +52,9 @@ export const APP_DI_CONFIG: AppConfig = {
     urlFooter: './app/apidata/footer',
     portalURL: portalBaseURL,
     protectedURL:protectedBaseURL,
-    urlArticle: './app/apidata/topic',
+    urlArticle: './app/apida1ta/topic',
     urlCountry: commonURL+'country',
+    urlReligion: commonURL+'religion',
     // urlCountry: baseLocalURL+'countries.json',
     // urlCountry: '/app/apidata/countries',
     urlLifeevent: './app/apidata/lifeevent',
