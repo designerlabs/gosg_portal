@@ -21,6 +21,7 @@ import { SharedModule } from './shared/shared.module';
 import { ProtectedComponent } from "./protected/protected.component";
 import { TextMaskModule, conformToMask } from 'angular2-text-mask';
 import { MailboxComponent } from './mailbox/mailbox.component';
+import { SidenavDashboardComponent } from './sidenav-dashboard/sidenav-dashboard.component';
 
 
 
@@ -34,7 +35,8 @@ export function HttpLoaderFactory(http: Http) {
     ProfileComponent,
     ProtectedComponent,
     DashboardComponent,
-    MailboxComponent
+    MailboxComponent,
+    SidenavDashboardComponent
   ],
   imports: [
     SharedModule,
