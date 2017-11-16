@@ -25,46 +25,47 @@
       <gosg-sidenav-dashboard></gosg-sidenav-dashboard>
   </div>
   <div class="col-md-9 formbg">
-      <span class="pull-right">
-          <button type="button" class="editBtn" mat-fab color="warn" (click)="edit()"><i class="fa fa-edit font-size-l"></i></button>
-        </span>
+      <span class="pull-right editBtn">
+        <button type="button" mat-fab color="warn" (click)="edit()"><i class="fa fa-edit font-size-l"></i></button>
+      </span>
       <form [formGroup]="profileForm" autocomplete="off" (ngSubmit)="updateProfile(profileForm.value)" role="form" novalidate>
           <div class="col-md-12">
+            <!-- <input type="text" [textMask]="{mask: maskForeigner}"> -->
             <input type="hidden" value="" class="rand_no" name="rand_no" id="rand_no">
             <div class="row">
               <div class="form-group col-md-4">
                 <label class="font-size-s" for="fullname">{{'profile.label.name' | translate}}</label>
-                <div class="staticLabel font-size-l" for="fullname">{{ fullname }}</div>
+                <div class="staticLabel font-size-m boldText" for="fullname">{{ fullname }}</div>
               </div>
               <div class="form-group col-md-4">
                 <label class="font-size-s" for="nationality">{{'profile.label.nationality' | translate}}</label>
-                <div class="staticLabel font-size-l" for="nationality">{{countryName?.country.countryName}}</div>
+                <div class="staticLabel font-size-m boldText" for="nationality">{{countryName?.country.countryName}}</div>
               </div>
               <div class="form-group col-md-4">
                 <label class="font-size-s" for="icnumber">{{'profile.label.icnumber' | translate}}</label>
-                <br />
-                <div class="staticLabel font-size-l" for="icnumber">{{ idno }}</div>
+                <div class="staticLabel font-size-m boldText" for="icnumber">{{ idno }}</div>
               </div>
             </div>
             <div class="row">
               <div class="form-group col-md-4">
                 <label class="font-size-s" for="dob">{{'profile.label.dateofbirth' | translate}}</label>
                   <mat-form-field class="example-full-width font-size-l" style="margin-top: -25px" >
-                    <input matInput formControlName="dob" #dob id="dob" [matDatepicker]="dob" placeholder="{{ today  | date: 'dd-mm-YYYY' }}" />
+                    <input matInput formControlName="dob" #dob id="dob" [matDatepicker]="dob" placeholder="{{ today  | date: 'dd-mm-YYYY' }}" (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)" />
                     <mat-datepicker-toggle matSuffix [for]="dob"></mat-datepicker-toggle>
                     <mat-datepicker [disabled]="initial" #dob></mat-datepicker>
                   </mat-form-field>
               </div>
+              {{events[0] | date}}
               <div class="form-group col-md-4">
                 <label class="font-size-s" for="email">{{'profile.label.email' | translate}}</label>
                 <div>
-                  <label class="font-size-l" for="email">{{ regemail }}</label>
+                  <div class="font-size-m boldText" for="email">{{ regemail }}</div>
                 </div>
               </div>
               <div class="form-group col-md-4">
                 <label class="font-size-s" for="regdate">{{'profile.label.regisdate' | translate}}</label>
                 <br />
-                <label class="staticLabel font-size-l" for="regdate">{{ regdate | date:'dd-MM-yyyy' }}</label>
+                <div class="font-size-m boldText" for="regdate">{{ regdate | date:'dd-MM-yyyy' }}</div>
               </div>
             </div>
             <div class="row">
@@ -112,17 +113,18 @@
             <div class="row">
               <div class="form-group col-md-4">
                 <mat-form-field class="example-full-width font-size-s">
-                  <mat-select formControlName="perCountry" id="perCountry" name="perCountry" placeholder="{{'profile.label.country' | translate}} * ">
-                    <mat-option *ngFor="let country of countries" [value]="country.countryCode">{{country.countryName}}</mat-option>
+                  <mat-select formControlName="perCountry" id="perCountry" name="perCountry" placeholder="{{'profile.label.country' | translate}} ">
+                    <mat-option *ngFor="let country of countries?.countryList" [value]="country.countryCode">{{country.countryName}}</mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>
               <div class="form-group col-md-4">
                 <mat-form-field class="example-full-width font-size-s">
-                  <mat-select formControlName="perState" id="perState" name="perState" placeholder="{{'profile.label.state' | translate}} *">
+                  <mat-select *ngIf="isLocal" formControlName="perState" id="perState" name="perState" placeholder="{{'profile.label.state' | translate}}">
                     <mat-option [value]="1">State 1</mat-option>
                     <mat-option [value]="2">State 2</mat-option>
                   </mat-select>
+                  <input *ngIf="!isLocal" matInput formControlName="perState" type="text" placeholder="{{'profile.label.state' | translate}}" />
                 </mat-form-field>
                 <em *ngIf="!validateCtrlChk(perState) && profileForm.controls.perState.errors.required">Required</em>
               </div>
@@ -138,16 +140,16 @@
             <div class="row">
               <div class="form-group col-md-4">
                 <mat-form-field class="example-full-width font-size-s" placeholder="{{'profile.label.postcode' | translate}}">
-                  <input matInput (keyup)="!validateCtrlChk(perPostcode)" #perPost formControlName="perPostcode" id="perPostcode" type="text"
-                    placeholder="Postcode" maxlength="5" />
+                  <input matInput [textMask]="{mask: maskPostcode}" #perPost formControlName="perPostcode" id="perPostcode" type="text"
+                    placeholder="Postcode" />
                 </mat-form-field>
                 <em *ngIf="!validateCtrlChk(perPostcode) && profileForm.controls.perPostcode.errors.required">Required</em>
                 <em *ngIf="!validateCtrlChk(perPostcode) && profileForm.controls.perPostcode.errors.pattern">{{'profile.pattern.postcode' | translate }}</em>
               </div>
               <div class="form-group col-md-4">
                 <mat-form-field class="example-full-width font-size-s">
-                  <input matInput (keyup)="!validateCtrlChk(perTelephone)" #perhomephone formControlName="perTelephone" id="perTelephone" type="text"
-                    placeholder="{{'profile.label.homeph' | translate}}" maxlength="14" />
+                  <input matInput formControlName="perTelephone" [textMask]="{mask: maskForeigner}" id="perTelephone" type="text"
+                    placeholder="{{'profile.label.homeph' | translate}}" />
                 </mat-form-field>
                 <em *ngIf="!validateCtrlChk(perTelephone) && profileForm.controls.perTelephone.errors.pattern">{{'profile.pattern.tel' | translate }}</em>
               </div>
@@ -157,7 +159,7 @@
             <div class="row">
               <div class="form-group col-lg-12" style="padding-top:15px;">
                 <label class="font-size-s" for="corrsAddress1">{{'profile.label.corrsaddr' | translate }}&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                <input formControlName="checkboxValue" type="checkbox" (change)="isChecked($event)">
+                <mat-checkbox formControlName="checkboxValue" (change)="isChecked($event)"></mat-checkbox>
               </div>
               <div class="form-group col-md-12">
                 <mat-form-field class="example-full-width font-size-s">
@@ -178,7 +180,7 @@
               <div class="form-group col-md-4">
                 <mat-form-field class="example-full-width font-size-s">
                   <mat-select (change)="isChanged()" formControlName="corrsCountry" id="corrsCountry" name="corrsCountry" placeholder="{{'profile.label.country' | translate}}">
-                      <mat-option *ngFor="let country of countries" [value]="country.countryCode">{{country.countryName}}</mat-option>
+                      <mat-option *ngFor="let country of countries?.countryList" [value]="country.countryCode">{{country.countryName}}</mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>
@@ -202,26 +204,32 @@
             <div class="row">
               <div class="form-group col-md-4">
                 <mat-form-field class="example-full-width font-size-s">
-                  <input matInput (keyup)="isChanged()" #corsPost formControlName="corrsPostcode" id="corrsPostcode" type="text"
-                    placeholder="{{'profile.label.postcode' | translate}}" maxlength="5" />
+                  <input matInput (keyup)="isChanged()" #corsPost formControlName="corrsPostcode" [textMask]="{mask: maskPostcode}" id="corrsPostcode" type="text"
+                    placeholder="{{'profile.label.postcode' | translate}}" />
                 </mat-form-field>
               </div>
               <div class="form-group col-md-4">
                 <mat-form-field class="example-full-width font-size-s">
-                  <input matInput (keyup)="isChanged()" #corshomephone formControlName="corrsTelephone" id="corrsTelephone"
-                    type="text" placeholder="{{'profile.label.homeph' | translate}}" maxlength="14" />
+                  <input matInput (keyup)="isChanged()" #corshomephone formControlName="corrsTelephone" [textMask]="{mask: maskForeigner}" id="corrsTelephone"
+                    type="text" placeholder="{{'profile.label.homeph' | translate}}" />
                 </mat-form-field>
               </div>
               <div class="form-group col-md-4">
                 <mat-form-field class="example-full-width font-size-s">
-                  <input matInput (keyup)="isChanged()" #corsmobile formControlName="corrsMobile" id="corrsMobile" type="text"
-                    placeholder="{{'profile.label.mobile' | translate}}" maxlength="14" value="{{ mobileNo }}" />
+                  <input matInput (keyup)="isChanged()" #corsmobile formControlName="corrsMobile" [textMask]="{mask: maskForeigner}" id="corrsMobile" type="text"
+                    placeholder="{{'profile.label.mobile' | translate}}" value="{{ mobileNo }}" />
                 </mat-form-field>
               </div>
             </div>
             <div class="form-group" style="float: right;">
-              <button [disabled]="profileForm.invalid || initial" type="submit" class="btn btn-primary">Save</button>
-              <button (click)="cancel()" type="button" class="btn btn-default">Cancel</button>
+
+                <button mat-raised-button color="warn" type="button" id="btnreset" class="form-control btn btn-md btn-warning font-size-s"
+                style="width: 115px; font-family: Roboto;" (click)="showResetMsg()">
+                <i class="fa fa-refresh"></i> {{'feedback.label.reset' | translate }}</button>
+                <button mat-raised-button type="button" color="primary" id="btnsubmit" class="form-control btn btn-md btn-success font-size-s"
+                (click)="updateProfile(profileForm.value)" style="width: 100px; font-family: Roboto; margin-left: 5px;"
+                [disabled]="profileForm.invalid  || initial">
+                <i class="fa fa-check"></i> {{'feedback.label.submit' | translate }}</button>
             </div>
           </div>
         

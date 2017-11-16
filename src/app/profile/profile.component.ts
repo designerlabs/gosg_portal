@@ -8,6 +8,9 @@ import { ProtectedService } from '../-services/protected.service';
 import { TextMaskModule } from 'angular2-text-mask';
 import { DialogsService } from '../dialogs/dialogs.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {MatDatepickerInputEvent} from '@angular/material/datepicker';
+import { debounce } from 'rxjs/operators/debounce';
+import { debug } from 'util';
 // import { ControlBase } from '../common/controlbase'
 
 @Component({
@@ -16,6 +19,8 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit, AfterViewInit {
+  maskForeigner: any;
+  maskPostcode: any;
   
   @ViewChild('perhomephone') homephone: ElementRef 
   @ViewChild('perPost') perPost: ElementRef
@@ -24,7 +29,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   @ViewChild('corsmobile') corsmobile : ElementRef
 
   
-  
+  events: string[] = [];
+  dt:number;
   proFields: any[]
   genderData: any[]
   profileForm: FormGroup
@@ -77,7 +83,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   //       dateFormat: 'dd/mm/yyyy',
   // };
 
-  constructor(private router: Router, private validateService:ValidateService, private protectedService:ProtectedService, private sharedService:SharedService, private translate: TranslateService, private elementRef: ElementRef,private activatedRoute: ActivatedRoute) {
+  constructor(private router: Router, textMask:TextMaskModule, private validateService:ValidateService, private protectedService:ProtectedService, private sharedService:SharedService, private translate: TranslateService, private elementRef: ElementRef,private activatedRoute: ActivatedRoute) {
     translate.onLangChange.subscribe((event: LangChangeEvent) => {
       
                   const myLang = translate.currentLang;
@@ -99,9 +105,11 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
 
+    this.maskForeigner = this.validateService.getMask().telephonef;
+    this.maskPostcode = this.validateService.getMask().postcode;
     this.getUserProfile()
     this.getCountry();
-    // this.getCountryByCode();
+    this.getCountryByCode();
     this.dob = new FormControl('',[Validators.required])
     this.gender = new FormControl()
     this.race = new FormControl()
@@ -112,8 +120,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.perCountry = new FormControl('',[Validators.required])
     this.perState = new FormControl()
     this.perCity = new FormControl()
-    this.perPostcode = new FormControl('', [Validators.required, Validators.pattern(this.validateService.getPattern(5,5).numberOnly)])
-    this.perTelephone = new FormControl('', [Validators.pattern(this.validateService.getPattern(10,14).numberOnly)])
+    this.perPostcode = new FormControl('', [Validators.required])
+    this.perTelephone = new FormControl()
     this.corrsAddress1 = new FormControl()
     this.corrsAddress2 = new FormControl()
     this.corrsAddress3 = new FormControl()
@@ -121,9 +129,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.corrsState = new FormControl()
     this.checkboxValue = new FormControl()
     this.corrsCity = new FormControl()
-    this.corrsPostcode = new FormControl('', [Validators.required, Validators.pattern(this.validateService.getPattern(5,5).numberOnly)])
-    this.corrsTelephone = new FormControl('', [Validators.pattern(this.validateService.getPattern(10,14).numberOnly)])
-    this.corrsMobile = new FormControl('', [Validators.pattern(this.validateService.getPattern(10,14).numberOnly)])
+    this.corrsPostcode = new FormControl()
+    this.corrsTelephone = new FormControl()
+    this.corrsMobile = new FormControl()
 
     this.profileForm = new FormGroup({
       dob: this.dob,
@@ -172,7 +180,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         this.profileForm.get('perAddress3').setValue(data[0].permanent_address3);
         this.profileForm.get('perCity').setValue(data[0].permanent_city);
         this.profileForm.get('perState').setValue(data[0].permanent_state);
-        this.profileForm.get('perCountry').setValue(data[0].perCountry);
+        this.profileForm.get('perCountry').setValue(data[0].permanent_country);
         this.profileForm.get('perPostcode').setValue(data[0].permanent_postcode);
         this.profileForm.get('perTelephone').setValue(data[0].corresponding_home_phone);
         this.profileForm.get('corrsAddress1').setValue(data[0].corresponding_address1);
@@ -202,6 +210,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    
+    this.maskForeigner = this.validateService.getMask().telephonef;
+    this.maskPostcode = this.validateService.getMask().postcode;
     // this.profileService.toFormGroup(this.ctrlbase)
   }
 
@@ -222,7 +233,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   getCountry(){
         return this.sharedService.getCountryData()
          .subscribe(resCountryData => {
+         
             this.countries = resCountryData;
+
           });
   }
   
@@ -251,7 +264,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
   isChecked(e) {
 
-    if(e.target.checked)
+    if(e.checked)
     {
       this.profileForm.get('corrsAddress1').setValue(this.perAddress1.value);
       this.profileForm.get('corrsAddress2').setValue(this.perAddress2.value);
@@ -277,7 +290,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     }
   }
   
-  updateProfile(formValues) {
+  updateProfile(formValues:any) {
     let getUsrID = localStorage.getItem('usrID');
 
     let body = {
@@ -316,19 +329,20 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     body.fullname = this.fullname;
     body.email = this.regemail;
     body.ic_number = this.idno;
-    body.dob = this.dob;
+    body.dob = this.dt;
     body.ic_number = this.idno;
     body.corresponding_address1 = formValues.corrsAddress1;
     body.corresponding_address2 = formValues.corrsAddress2;
     body.corresponding_address3 = formValues.corrsAddress3;
     body.corresponding_postcode = formValues.corrsPostcode;
-    body.corresponding_home_phone = formValues.perTelephone;
+    body.corresponding_home_phone = formValues.corrsTelephone;
     body.mobile_phone = formValues.corrsMobile;
     body.permanent_address1 = formValues.perAddress1;
     body.permanent_address2 = formValues.perAddress2;
     body.permanent_address3 = formValues.perAddress3;
     body.permanent_postcode = formValues.perPostcode;
     body.permanent_country = formValues.perCountry;
+    body.permanent_home_phone = formValues.perTelephone;
   
     // console.log(JSON.stringify(body));
     console.log(body);
@@ -348,6 +362,12 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       });
     */
   }
+  
+  addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
+    this.events = [];
+    this.events.push(`${event.value}`);
+    this.dt = new Date(this.events[0]).getTime();
+  }
 
   edit(){
     // debugger
@@ -355,10 +375,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.profileForm.enable()
   }
 
-  cancel() {
-    console.log('hi')
-    // this.router.navigate(['public'])
-  }
 
   toFormGroup(data: any) {
     let group: any = {}

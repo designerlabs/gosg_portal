@@ -19,8 +19,6 @@ export class PortalService {
   private fbsubjectUrl: string = this.config.urlFeedbackSubject;
   private usertypeUrl:string = this.config.urlUserType;
   
-  
-
   create(user) {
     return this.http.post(this.registerUrl, user)
       .map((response: Response) => response.json())
