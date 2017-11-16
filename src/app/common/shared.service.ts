@@ -18,8 +18,8 @@ export class SharedService {
 
      getCountryData(): Observable<any[]> {
         //  console.log(this.countryUrl);
-      return this.http.get(this.countryUrl+'?size=244')
-        .map((response: Response) => response.json())
+      return this.http.get(this.countryUrl)
+        .map((response: Response) =>  response.json())
         .catch(this.handleError);
 
     }

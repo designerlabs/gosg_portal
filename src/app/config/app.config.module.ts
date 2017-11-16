@@ -51,7 +51,7 @@ export const APP_DI_CONFIG: AppConfig = {
     portalURL: portalBaseURL,
     protectedURL:protectedBaseURL,
     urlArticle: './app/apidata/topic',
-    urlCountry: commonURL+'gosg-service-common/countryEntities',
+    urlCountry: commonURL+'gosg-service-common/country',
     // urlCountry: baseLocalURL+'countries.json',
     // urlCountry: '/app/apidata/countries',
     urlLifeevent: './app/apidata/lifeevent',
