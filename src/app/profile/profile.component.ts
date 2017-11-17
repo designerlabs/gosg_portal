@@ -162,7 +162,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
     // this.getGenderVal()
     this.profileForm.disable();
-    // this.sameAsPermAdd = this.profileForm.get('PermAddCopy').value;
   }
   
   getUserProfile(){
