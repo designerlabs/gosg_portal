@@ -19,6 +19,7 @@ import { debug } from 'util';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit, AfterViewInit {
+  maskDateFormat: any;
   maskForeigner: any;
   maskPostcode: any;
   
@@ -44,9 +45,10 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   nationality:any;
   birthdate:any;
   isLocal: boolean;
-  sameAsPermAdd: boolean;
   getRaceData: any;
-
+  getReligionData:any;
+  
+  date = new Date();
   public dob: FormControl
   public gender: FormControl
   public race: FormControl
@@ -101,14 +103,18 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                       });
                   }
                   this.getRace();
+                  this.getReligion();
               });
               
   }
 
   ngOnInit() {
+    this.date = new Date();
     this.getRace();
+    this.getReligion();
     this.maskForeigner = this.validateService.getMask().telephonef;
     this.maskPostcode = this.validateService.getMask().postcode;
+    this.maskDateFormat = this.validateService.getMask().dateFormat;
     this.getUserProfile()
     this.getCountry();
     this.getCountryByCode();
@@ -213,6 +219,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     
     this.maskForeigner = this.validateService.getMask().telephonef;
     this.maskPostcode = this.validateService.getMask().postcode;
+    this.maskDateFormat = this.validateService.getMask().dateFormat;
     // this.profileService.toFormGroup(this.ctrlbase)
   }
 
@@ -239,8 +246,15 @@ export class ProfileComponent implements OnInit, AfterViewInit {
           });
   }
 
+  getReligion(){
+    return this.sharedService.getReligion(localStorage.getItem('langID'))
+    .subscribe(religionData => {
+      this.getReligionData = religionData
+    })
+  }
+
   getRace(){
-    return this.sharedService.getRace(2)
+    return this.sharedService.getRace(localStorage.getItem('langID'))
       .subscribe(raceData => {
         this.getRaceData = raceData
       })
@@ -374,12 +388,14 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.events = [];
     this.events.push(`${event.value}`);
     this.dt = new Date(this.events[0]).getTime();
+    console.log(this.dt)
   }
 
   edit(){
     // debugger
     this.initial = false
     this.profileForm.enable()
+    this.dob.disable();
   }
 
 
