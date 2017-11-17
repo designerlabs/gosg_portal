@@ -166,7 +166,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     // debugger;
     this.protectedService.getProfile(getUsrID).subscribe(
       data => {
-        console.log(data);
         this.fullname = data[0].fullname;
         this.countryCode = data[0].permanent_country;
         this.idno = data[0].ic_number;

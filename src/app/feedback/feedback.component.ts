@@ -34,7 +34,7 @@ export class FeedbackComponent implements OnInit {
   fullName:string;
   emaiL:string;
   icNo:string;
-  languageId:number;
+  languageId = this.languageId;
   resultdata :any=[];
   typeFb: any[];
   subjectFb = [];
@@ -72,9 +72,11 @@ export class FeedbackComponent implements OnInit {
       });
     }
     lang = this.lang;
+    
     resetMsg = this.resetMsg;
     
     ngOnInit() {
+      this.languageId = 2;
       this.checkLog();
       this.getTypenSubject();
       this.feedback_message = new FormControl('', [Validators.required]),
