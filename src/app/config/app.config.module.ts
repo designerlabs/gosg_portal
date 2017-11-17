@@ -41,6 +41,7 @@ export class AppConfig {
     protectedURL:string;
     urlIntSearch:string;
     urlUserType:string;
+    urlRace:string;
 }
 
 export const APP_DI_CONFIG: AppConfig = {
@@ -54,7 +55,7 @@ export const APP_DI_CONFIG: AppConfig = {
     protectedURL:protectedBaseURL,
     urlArticle: './app/apida1ta/topic',
     urlCountry: commonURL+'country',
-    urlReligion: commonURL+'religion',
+    urlReligion: commonURL+'religion/lang/',
     // urlCountry: baseLocalURL+'countries.json',
     // urlCountry: '/app/apidata/countries',
     urlLifeevent: './app/apidata/lifeevent',
@@ -63,6 +64,7 @@ export const APP_DI_CONFIG: AppConfig = {
     urlTopics: './app/apidata/articlemenu',
     // urlTopics: 'https://gosgstg.malaysia.gov.my/public/cms/service/article_menu/',
     urlHighlights: './app/apidata/highlightbox',
+    urlRace: commonURL+'race/lang/',
     urlPoll: './app/apidata/poll',
     urlAnnouncement: './app/apidata/announcement',
     urlCalendar: './app/apidata/calendar',    

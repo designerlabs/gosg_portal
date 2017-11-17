@@ -45,6 +45,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   birthdate:any;
   isLocal: boolean;
   sameAsPermAdd: boolean;
+  getRaceData: any;
 
   public dob: FormControl
   public gender: FormControl
@@ -99,12 +100,13 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                           this.lang = 'ms';
                       });
                   }
+                  this.getRace();
               });
               
   }
 
   ngOnInit() {
-
+    this.getRace();
     this.maskForeigner = this.validateService.getMask().telephonef;
     this.maskPostcode = this.validateService.getMask().postcode;
     this.getUserProfile()
@@ -236,6 +238,13 @@ export class ProfileComponent implements OnInit, AfterViewInit {
             this.countries = resCountryData;
 
           });
+  }
+
+  getRace(){
+    return this.sharedService.getRace(2)
+      .subscribe(raceData => {
+        this.getRaceData = raceData
+      })
   }
   
 

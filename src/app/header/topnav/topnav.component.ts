@@ -19,6 +19,8 @@ export class TopnavComponent implements OnInit, AfterViewInit {
   minusBtn = false;
   plusBtn = false;
   admin: boolean;
+  langId = this.langId;
+
   ngAfterViewInit() {
     $(function () {
       if (localStorage.getItem('themeColor') == '' || localStorage.getItem('themeColor') == null || localStorage.getItem('themeColor') == '#00bdbb') {
@@ -57,16 +59,25 @@ export class TopnavComponent implements OnInit, AfterViewInit {
 
   constructor(private translate: TranslateService, private topnavservice: TopnavService) {
     translate.addLangs(['en', 'ms']);
-    translate.setDefaultLang('ms');
-    translate.use('ms');
+
+    if(localStorage.getItem('langID') == "2"){
+      translate.setDefaultLang('ms');
+      translate.use('ms');
+    }else{
+      translate.setDefaultLang('en');
+      translate.use('en');
+    }
+    
 
 
     if (translate.getDefaultLang() == 'ms') {
       this.currlang = 'English';
       this.currlangMOB = 'EN';
+      this.langId = 2;
     } else {
       this.currlang = 'Bahasa Malaysia';
       this.currlangMOB = 'BM';
+      this.langId = 1;
     }
   }
 
@@ -74,11 +85,21 @@ export class TopnavComponent implements OnInit, AfterViewInit {
 
   currlang: string = this.currlang;
   currlangMOB: string = this.currlangMOB;
+  
 
   ngOnInit() {
+    this.getLangID();
     console.log('topnav.comp.ts');
     this.colors = this.topnavservice.getColors();
     this.getUserProfile();
+  }
+
+
+
+  getLangID(){
+    if(!localStorage.getItem('langID')){
+      localStorage.setItem('langID', this.langId);
+    }
   }
 
   getUserProfile(){
@@ -98,13 +119,16 @@ export class TopnavComponent implements OnInit, AfterViewInit {
       this.currlang = 'English';
       this.currlangMOB = 'EN';
       this.translate.use('ms');
+      this.langId = 2;
     }
     else {
       this.currlang = 'Bahasa Malaysia';
       this.currlangMOB = 'BM';
+      this.langId = 1;
       this.translate.use('en');
     }
-
+    localStorage.setItem('langID', this.langId);
+ 
   }
 
 
