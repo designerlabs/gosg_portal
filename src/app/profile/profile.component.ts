@@ -44,7 +44,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   nationality:any;
   birthdate:any;
   isLocal: boolean;
-  sameAsPermAdd: boolean;
 
   public dob: FormControl
   public gender: FormControl
@@ -160,7 +159,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
     // this.getGenderVal()
     this.profileForm.disable();
-    // this.sameAsPermAdd = this.profileForm.get('PermAddCopy').value;
   }
   
   getUserProfile(){
