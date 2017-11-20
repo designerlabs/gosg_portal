@@ -27,21 +27,21 @@ import { MailboxComponent } from "./mailbox/mailbox.component";
 export const protectedRoutes: Routes = [
 
     {path: '404', component: ErrorComponent },
-    {path: 'portal-protected/dashboard', component: DashboardComponent},
-    {path: 'portal-protected/profile', component: ProfileComponent},
-    {path: 'portal', component: HomeComponent},
-    {path: 'portal/search/searchResult', component: SearchResultComponent},
-    {path: 'portal/topic/:id', component: ArticleComponent, canActivate: [NavRouterActivator]  },
-    {path: 'portal/subtopic/:id1/:id2', component: SubarticleComponent },
+    {path: 'dashboard', component: DashboardComponent},
+    {path: 'profile', component: ProfileComponent},
+    {path: 'index', component: HomeComponent},
+    {path: 'search/searchResult', component: SearchResultComponent},
+    {path: 'topic/:id', component: ArticleComponent, canActivate: [NavRouterActivator]  },
+    {path: 'subtopic/:id1/:id2', component: SubarticleComponent },
 
-    {path: 'portal/faq', component: FaqComponent},
-    {path: 'portal/aboutus', component: AboutusComponent},
-    {path: 'portal/manual', component: ManualComponent},
-    {path: 'portal/dataprotection', component: DataprotectionComponent},
-    {path: 'portal/contact', component: ContactComponent},
-    {path: 'portal-protected/mailbox', component: MailboxComponent},
-    {path: 'portal/feedback', component: FeedbackComponent},
-    {path: '', redirectTo: 'portal-protected/dashboard', pathMatch: 'full'},
+    {path: 'faq', component: FaqComponent},
+    {path: 'aboutus', component: AboutusComponent},
+    {path: 'manual', component: ManualComponent},
+    {path: 'dataprotection', component: DataprotectionComponent},
+    {path: 'contact', component: ContactComponent},
+    {path: 'mailbox', component: MailboxComponent},
+    {path: 'feedback', component: FeedbackComponent},
+    {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
     {path: '**', component: ErrorComponent}
     //{path: 'user', loadChildren: 'app/user/user.module#UserModule'}
 ];

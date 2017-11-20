@@ -10,7 +10,7 @@ import { HttpClient } from "@angular/common/http";
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 import { HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
-import { PortalService } from "../-services/portal.service";
+import { PortalService } from "../services/portal.service";
 import { TextMaskModule } from 'angular2-text-mask';
 import { DialogsService } from '../dialogs/dialogs.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
@@ -407,7 +407,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
             );
               //  this.alertService.success('Registration successful', true);
               this.openDialog();
-              //this.router.navigate(['/portal/login']);
+    
             },
             error => {
                 alert('error');

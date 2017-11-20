@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Inject, AfterContentChecked, AfterContentInit, AfterViewChecked } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
-import { ProtectedService } from '../-services/protected.service';
+import { ProtectedService } from '../services/protected.service';
 import { Observable } from "rxjs/Observable";
 @Component({
   selector: 'gosg-protected',
@@ -104,7 +104,7 @@ export class ProtectedComponent implements OnInit {
       this.getProfileData(getUsrID);
     }else{
       console.log('no userid 2' + this.userId)
-      // location.href = 'http://localhost:8020/portal/login';
+
     }
 
   }

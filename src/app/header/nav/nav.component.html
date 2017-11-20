@@ -8,7 +8,7 @@
                 <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav font-size-s" id="main-menu">
                     <li [routerLinkActive]="['active']"  [routerLinkActiveOptions]="{exact:true}">
-                    <a [routerLink]="['/portal']"><i class="fa fa-home"></i> {{ 'home.menu.home' | translate }}</a>
+                    <a [routerLink]="['/index']"><i class="fa fa-home"></i> {{ 'home.menu.home' | translate }}</a>
                     </li>
                     <!--<li><a [routerLink]="['public/new']" routerLinkActive="active">Create Event</a></li>-->
                     <li *ngFor="let menu of menus" [routerLinkActive]="['active']"  [routerLinkActiveOptions]="{exact:true}">
@@ -20,7 +20,7 @@
                             <div class="col_6">
                                 <ul>  
                                     <li class="col-md-4" *ngFor="let data of menu.data">
-                                        <a  class="font-size-s" href="" (click)="handleClickMe(data.topic_id)" [routerLink]="[getUrl()+'/topic', data.topic_id]" ><i class="fa fa-arrow-circle-right"></i> {{data.name}}</a>
+                                        <a  class="font-size-s" href="" (click)="handleClickMe(data.topic_id)" [routerLink]="['topic', data.topic_id]" ><i class="fa fa-arrow-circle-right"></i> {{data.name}}</a>
                                     </li>
                                 </ul>  
                             </div>  

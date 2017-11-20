@@ -35,15 +35,15 @@ export class SharedService {
 
     
     getReligion(langId): Observable<any[]> {
-      return this.http.get(this.religionUrl)
-        .map((response: Response) => response.json())
+      return this.http.get(this.religionUrl+langId)
+        .map((response: Response) => response.json().religionList)
         .catch(this.handleError);
 
     }
 
     getRace(langId): Observable<any[]> {
       return this.http.get(this.raceUrl+langId)
-        .map((response: Response) => response.json())
+        .map((response: Response) => response.json().raceList)
         .catch(this.handleError);
 
     }

@@ -6,7 +6,7 @@
         <hr class="hr-custom2">
         <ul class="list-inline" style="clear:both;">
           <li>
-            <a class="font-size-s" href="/portal/">
+            <a class="font-size-s" href="/index/">
                       {{'home.menu.home' | translate }}
                   </a>
           </li>
@@ -30,7 +30,6 @@
       </span>
       <form [formGroup]="profileForm" autocomplete="off" (ngSubmit)="updateProfile(profileForm.value)" role="form" novalidate>
           <div class="col-md-12">
-            <!-- <input type="text" [textMask]="{mask: maskForeigner}"> -->
             <input type="hidden" value="" class="rand_no" name="rand_no" id="rand_no">
             <div class="row">
               <div class="form-group col-md-4">
@@ -49,11 +48,13 @@
             <div class="row">
               <div class="form-group col-md-4">
                 <label class="font-size-s" for="dob">{{'profile.label.dateofbirth' | translate}}</label>
-                  <mat-form-field class="example-full-width font-size-l" style="margin-top: -25px" >
-                    <input matInput formControlName="dob" #dob id="dob" [matDatepicker]="dob" placeholder="{{ today  | date: 'dd-mm-YYYY' }}" (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)" />
+                  <mat-form-field class="example-full-width font-size-m" style="margin-top: -25px">
+                    <div style="color:#333;" class="font-size-m boldText">{{dt | date:'dd/MM/yyyy' }}</div>
+                    <input style="display:none" matInput formControlName="dob" #dob [matDatepicker]="dob" (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)" />
                     <mat-datepicker-toggle matSuffix [for]="dob"></mat-datepicker-toggle>
                     <mat-datepicker [disabled]="initial" #dob></mat-datepicker>
                   </mat-form-field>
+                  
               </div>
               <div class="form-group col-md-4">
                 <label class="font-size-s" for="email">{{'profile.label.email' | translate}}</label>
@@ -64,7 +65,7 @@
               <div class="form-group col-md-4">
                 <label class="font-size-s" for="regdate">{{'profile.label.regisdate' | translate}}</label>
                 <br />
-                <div class="font-size-m boldText" for="regdate">{{ regdate | date:'dd-MM-yyyy' }}</div>
+                <div class="font-size-m boldText" for="regdate">{{ regdate | date:'dd/MM/yyyy' }}</div>
               </div>
             </div>
             <div class="row">
@@ -83,6 +84,9 @@
                 </mat-form-field>
               </div>
               <div class="form-group col-md-4">
+                <div *ngFor="let religion of getReligionData">
+                  <!-- {{religion | json}} -->
+                </div>
                 <mat-form-field class="example-full-width font-size-s">
                   <mat-select formControlName="religion" id="religion" name="religion" placeholder="{{'profile.label.religion' | translate}}">
                   </mat-select>
