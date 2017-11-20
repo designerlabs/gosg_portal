@@ -44,9 +44,11 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   countryName:any[];
   nationality:any;
   birthdate:any;
-  isLocal: boolean;
+  isLocal: boolean = true;
+  isCorrsLocal: boolean = true;
   getRaceData: any;
   getReligionData:any;
+  isActive: boolean = false;
   
   date = new Date();
   public dob: FormControl
@@ -204,7 +206,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         // if(this.isLocal == true) {
         //   this.birthdate = this.idno.split("-");
         //   this.birthdate = this.birthdate[0];
-        //   console.log("isLocal");
+          console.log("isLocal");
+          console.log(this.isLocal);
         // } else {
         //   console.log("isNotLocal");
         // }
@@ -271,9 +274,14 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   } 
 
   isMalaysian(cc) {
+    console.log(cc);
     if(cc == "MY") {
+      this.isLocal = true;
+      console.log(this.isLocal);
       return true;
-    } else {
+    } else if(cc != "MY") {
+      this.isLocal = false;
+      console.log(this.isLocal);
       return false;
     }
   }
@@ -281,6 +289,16 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   isChanged() {
     if(this.profileForm.get('checkboxValue').value == true)
       this.profileForm.get('checkboxValue').setValue(false);
+  }
+
+  isCorrsChanged(cc) {
+    if(cc == "MY" && this.perCountry.value == "MY") {
+      this.isCorrsLocal = true;
+      return true;
+    } else if(cc != "MY" && this.perCountry.value != "MY") {
+      this.isCorrsLocal = false;
+      return false;
+    }
   }
 
   isChecked(e) {
@@ -295,19 +313,51 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       this.profileForm.get('corrsCountry').setValue(this.perCountry.value);
       this.profileForm.get('corrsPostcode').setValue(this.perPostcode.value);
       this.profileForm.get('corrsTelephone').setValue(this.perTelephone.value);
-      console.log('true')
+      // console.log('true')
     }
     else
     {
       this.profileForm.get('corrsAddress1').setValue("");
       this.profileForm.get('corrsAddress2').setValue("");
       this.profileForm.get('corrsAddress3').setValue("");
-      this.profileForm.get('corrsCity').setValue(0);
-      this.profileForm.get('corrsState').setValue(0);
+      if(this.countryCode != null)
+        this.profileForm.get('corrsCountry').setValue(this.countryCode);
+      else
       this.profileForm.get('corrsCountry').setValue(0);
+
+      if(this.isLocal == true) {
+        this.profileForm.get('corrsCity').setValue(0);
+        this.profileForm.get('corrsState').setValue(0);
+      } else {
+        this.profileForm.get('corrsCity').setValue("");
+        this.profileForm.get('corrsState').setValue("");
+      }
       this.profileForm.get('corrsPostcode').setValue("");
       this.profileForm.get('corrsTelephone').setValue("");
-      console.log('false')
+      // console.log('false')
+    }
+  }
+  
+  addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
+    this.events = [];
+    this.events.push(`${event.value}`);
+    this.dt = new Date(this.events[0]).getTime();
+    console.log(this.dt)
+  }
+
+  edit(){
+    console.log(this.isActive)
+    // debugger
+    this.isActive = !this.isActive;
+
+    if(this.isActive != false) {
+      this.initial = false
+      this.profileForm.enable()
+      this.dob.enable();
+    } else {
+      this.initial = true
+      this.profileForm.disable()
+      this.dob.disable();
     }
   }
   
@@ -383,21 +433,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       });
     */
   }
-  
-  addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
-    this.events = [];
-    this.events.push(`${event.value}`);
-    this.dt = new Date(this.events[0]).getTime();
-    console.log(this.dt)
-  }
-
-  edit(){
-    // debugger
-    this.initial = false
-    this.profileForm.enable()
-    this.dob.disable();
-  }
-
 
   toFormGroup(data: any) {
     let group: any = {}
