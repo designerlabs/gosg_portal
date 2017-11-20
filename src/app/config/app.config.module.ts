@@ -53,7 +53,7 @@ export const APP_DI_CONFIG: AppConfig = {
     urlFooter: './app/apidata/footer',
     portalURL: portalBaseURL,
     protectedURL:protectedBaseURL,
-    urlArticle: './app/apida1ta/topic',
+    urlArticle: './app/apidata/topic',
     urlCountry: commonURL+'country',
     urlReligion: commonURL+'religion/lang/',
     // urlCountry: baseLocalURL+'countries.json',

@@ -16,7 +16,7 @@ import { protectedRoutes } from './protected-routes';
 import { OwlModule } from 'ng2-owl-carousel';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProfileComponent } from './profile/profile.component';
-import { ProtectedService } from "./-services/protected.service";
+import { ProtectedService } from "./services/protected.service";
 import { SharedModule } from './shared/shared.module';
 import { ProtectedComponent } from "./protected/protected.component";
 import { TextMaskModule, conformToMask } from 'angular2-text-mask';

@@ -9,7 +9,7 @@ import { DialogsService } from '../dialogs/dialogs.service';
 import {MatSnackBar, MatSnackBarConfig} from '@angular/material';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import { PortalService } from '../-services/portal.service';
+import { PortalService } from '../services/portal.service';
 import { ToastrService } from 'ngx-toastr';
 import { ValidateService } from '../common/validate.service';
 

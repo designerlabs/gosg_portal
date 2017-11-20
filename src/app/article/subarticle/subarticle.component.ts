@@ -42,8 +42,8 @@ export class SubarticleComponent implements OnInit {
 
             translate.get('HOME').subscribe((res: any) => {
                 this.lang = 'en';
-                this.topicID = parseInt(this.router.url.split('/')[3]);
-                this.subID = parseInt(this.router.url.split('/')[4]);
+                this.topicID = parseInt(this.router.url.split('/')[2]);
+                this.subID = parseInt(this.router.url.split('/')[3]);
                 this.navService.triggerSubArticle(this.topicID, this.subID, this.lang);
             });
 
@@ -52,8 +52,8 @@ export class SubarticleComponent implements OnInit {
 
             translate.get('HOME').subscribe((res: any) => {
                 this.lang = 'ms';
-                this.topicID = parseInt(this.router.url.split('/')[3]);
-                this.subID = parseInt(this.router.url.split('/')[4]);
+                this.topicID = parseInt(this.router.url.split('/')[2]);
+                this.subID = parseInt(this.router.url.split('/')[3]);
                 this.navService.triggerSubArticle(this.topicID, this.subID, this.lang);
             });
         }
@@ -64,8 +64,8 @@ export class SubarticleComponent implements OnInit {
 
   ngOnInit() {
     this.articleData = this.articleService.getArticle();
-    this.topicID = parseInt(this.router.url.split('/')[3]);
-    this.subID = parseInt(this.router.url.split('/')[4]);
+    this.topicID = parseInt(this.router.url.split('/')[2]);
+    this.subID = parseInt(this.router.url.split('/')[3]);
   //  console.log("from article "+ this.topicID)
     this.navService.triggerSubArticle(this.topicID, this.subID, this.lang);
     // this.triggerArticle(this.lang,this.topicID)
@@ -78,10 +78,10 @@ export class SubarticleComponent implements OnInit {
     clickSideMenu(e){
         const _getSubLabel = e.json_url.split('&');
         let _getSubID = _getSubLabel[1].split('=');
-        const _getTopicID = parseInt(this.router.url.split('/')[3]);
+        const _getTopicID = parseInt(this.router.url.split('/')[2]);
         _getSubID = parseInt(_getSubID[1]);
         this.navService.triggerSubArticle(_getTopicID, _getSubID, this.lang);
-        this.router.navigate(['/portal/subtopic', _getTopicID, _getSubID]);
+        this.router.navigate(['/subtopic', _getTopicID, _getSubID]);
         event.preventDefault();
     }
 

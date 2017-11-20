@@ -42,13 +42,13 @@ import { PollComponent } from "../poll/poll.component";
 import { BreadcrumbComponent } from "../header/breadcrumb/breadcrumb.component";
 
 import { DialogsService } from '../dialogs/dialogs.service';
-import { PortalService } from '../-services/portal.service';
+import { PortalService } from '../services/portal.service';
 import { AuthService } from "../auth/auth.service";
 import { ArticleService } from "../article/article.service";
 import { NavRouterActivator } from "../header/nav/nav-router-activator.service";
 import { NavService } from "../header/nav/nav.service";
 import { HomeComponent } from "../home/home.component";
-import { TransService } from '../-services/trans.service';
+import { TransService } from '../services/trans.service';
 import { FeedbackComponent } from '../feedback/feedback.component';
 import { ConfirmComponent } from '../message/confirm.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
