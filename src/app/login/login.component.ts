@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from "@angular/http";
-import { PortalService } from "../-services/portal.service";
+import { PortalService } from "../services/portal.service";
 @Component({
   selector: 'gosg-login',
   templateUrl: './login.component.html',

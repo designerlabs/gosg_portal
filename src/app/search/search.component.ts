@@ -16,7 +16,7 @@ export class SearchComponent implements OnInit {
     }
 
     mainSearch(key) {
-        this.router.navigate(['portal/search/searchResult']);
+        this.router.navigate(['search/searchResult']);
         this.internal(key); 
     }
     

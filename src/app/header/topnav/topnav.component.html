@@ -8,18 +8,18 @@
         </li>
         <li>|</li>
         <li>
-            <a routerLinkActive="topactive" [routerLink]="['portal/contact']">{{ 'home.menu.contact' | translate }}</a> </li>
+            <a routerLinkActive="topactive" [routerLink]="['contact']">{{ 'home.menu.contact' | translate }}</a> </li>
         <li>|</li>
         <li>
-          <a routerLinkActive="topactive" [routerLink]="['portal/faq']">{{ 'home.menu.faq' | translate }}</a>
+          <a routerLinkActive="topactive" [routerLink]="['faq']">{{ 'home.menu.faq' | translate }}</a>
         </li>
         <li>|</li>
         <li>
-          <a routerLinkActive="topactive" [routerLink]="['portal/manual']">{{ 'home.menu.manual' | translate }}</a>
+          <a routerLinkActive="topactive" [routerLink]="['manual']">{{ 'home.menu.manual' | translate }}</a>
         </li>
         <li>|</li>
         <li>
-          <a routerLinkActive="topactive" [routerLink]="['portal/aboutus']">{{ 'home.menu.aboutus' | translate }}</a>
+          <a routerLinkActive="topactive" [routerLink]="['aboutus']">{{ 'home.menu.aboutus' | translate }}</a>
         </li>
       </ul>
     </div>
@@ -36,7 +36,7 @@
             </li>
             <li>
               <a class="hidden-xs visible-sm  visible-md visible-lg" (mouseenter)="showProfileMenu()">{{state}}</a>     
-              <a class="visible-xs hidden-sm hidden-md hidden-lg" [routerLink]="['portal/register']"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>     
+              <a class="visible-xs hidden-sm hidden-md hidden-lg" [routerLink]="['register']"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>     
             </li>
         </ul>
         
@@ -47,12 +47,12 @@
             </li>
             <li>|</li>
             <li>
-              <a class="hidden-xs visible-sm  visible-md visible-lg" [routerLink]="['portal/register']">{{ 'home.menu.register' | translate }}</a>     
-              <a class="visible-xs hidden-sm hidden-md hidden-lg" [routerLink]="['portal/register']"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>     
+              <a class="hidden-xs visible-sm  visible-md visible-lg" [routerLink]="['register']">{{ 'home.menu.register' | translate }}</a>     
+              <a class="visible-xs hidden-sm hidden-md hidden-lg" [routerLink]="['register']"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>     
             </li>
             <li>|</li>
             <li>
-                <a class="hidden-xs visible-sm  visible-md visible-lg"  [routerLink]="['portal/login']">Login</a>
+                <a class="hidden-xs visible-sm  visible-md visible-lg"  [routerLink]="['login']">Login</a>
                 <!-- <a class="visible-xs hidden-sm hidden-md hidden-lg" *ngIf="!auth.isAuthenticated()" [routerLink]="['portal/login']"><i class="fa fa-sign-in" aria-hidden="true"></i></a>
                 <a *ngIf="auth.isAuthenticated()" [routerLink]="['user/profile']">Welcome {{auth.currentUser.firstName}}</a> -->
             </li>

@@ -4,7 +4,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { SharedService } from '../common/shared.service';
 import { ValidateService } from '../common/validate.service';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
-import { ProtectedService } from '../-services/protected.service';
+import { ProtectedService } from '../services/protected.service';
 import { TextMaskModule } from 'angular2-text-mask';
 import { DialogsService } from '../dialogs/dialogs.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';

@@ -31,20 +31,20 @@ import { LoginComponent } from "./login/login.component";
 
 export const appRoutes: Routes = [
     {path: '404', component: ErrorComponent },
-    {path: 'portal', component: HomeComponent},
-    {path: 'portal/search/searchResult', component: SearchResultComponent},
-    {path: 'portal/topic/:id', component: ArticleComponent, canActivate: [NavRouterActivator]  },
-    {path: 'portal/subtopic/:id1/:id2', component: SubarticleComponent },
-    {path: 'portal/login', component: LoginComponent},
-    {path: 'portal/register', component: RegisterComponent },
+    {path: 'index', component: HomeComponent},
+    {path: 'search/searchResult', component: SearchResultComponent},
+    {path: 'topic/:id', component: ArticleComponent, canActivate: [NavRouterActivator]  },
+    {path: 'subtopic/:id1/:id2', component: SubarticleComponent },
+    {path: 'login', component: LoginComponent},
+    {path: 'register', component: RegisterComponent },
     
-    {path: 'portal/faq', component: FaqComponent},
-    {path: 'portal/aboutus', component: AboutusComponent},
-    {path: 'portal/manual', component: ManualComponent},
-    {path: 'portal/dataprotection', component: DataprotectionComponent},
-    {path: 'portal/contact', component: ContactComponent},
-    {path: 'portal/feedback', component: FeedbackComponent},
-    {path: '', redirectTo: 'portal', pathMatch: 'full'},
+    {path: 'faq', component: FaqComponent},
+    {path: 'aboutus', component: AboutusComponent},
+    {path: 'manual', component: ManualComponent},
+    {path: 'dataprotection', component: DataprotectionComponent},
+    {path: 'contact', component: ContactComponent},
+    {path: 'feedback', component: FeedbackComponent},
+    {path: '', redirectTo: 'index', pathMatch: 'full'},
     {path: '**', component: ErrorComponent}
 
     // {path: this.tempurl+'/fe', component: EventsListComponent, resolve:{events: EventListResolver}},

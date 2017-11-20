@@ -34,7 +34,7 @@ export class ArticleComponent implements OnInit {
 
             translate.get('HOME').subscribe((res: any) => {
                 this.lang = 'en';
-                this.topicID = parseInt(this.router.url.split('/')[3]);
+                this.topicID = parseInt(this.router.url.split('/')[2]);
                 this.navService.triggerArticle(this.lang, this.topicID);
             });
 
@@ -43,7 +43,7 @@ export class ArticleComponent implements OnInit {
 
             translate.get('HOME').subscribe((res: any) => {
                 this.lang = 'ms';
-                this.topicID = parseInt(this.router.url.split('/')[3]);
+                this.topicID = parseInt(this.router.url.split('/')[2]);
                 this.navService.triggerArticle(this.lang, this.topicID);
             });
         }
@@ -57,7 +57,7 @@ export class ArticleComponent implements OnInit {
   ngOnInit() {
         this.articleData = this.articleService.getArticle();
 
-        this.topicID = parseInt(this.router.url.split('/')[3]);
+        this.topicID = parseInt(this.router.url.split('/')[2]);
         this.navService.triggerArticle(this.lang, this.topicID);
   }
 
@@ -68,10 +68,10 @@ export class ArticleComponent implements OnInit {
     clickSideMenu(e){
         const _getSubLabel = e.json_url.split('&');
         let _getSubID = _getSubLabel[1].split('=');
-        const _getTopicID = parseInt(this.router.url.split('/')[3]);
+        const _getTopicID = parseInt(this.router.url.split('/')[2]);
         _getSubID = parseInt(_getSubID[1]);
         this.navService.getSubArticleUrl(_getTopicID, _getSubID, this.lang);
-        this.router.navigate(['/portal/subtopic', _getTopicID, _getSubID]);
+        this.router.navigate(['/subtopic', _getTopicID, _getSubID]);
         event.preventDefault();
     }
 
