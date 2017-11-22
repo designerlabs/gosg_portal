@@ -1,5 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
-import { Observable, Subject } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
+import { Subject} from 'rxjs/Subject';
 import { Http, Response} from '@angular/http';
 import { IMenu, IUrl } from './nav.model';
 import { APP_CONFIG, AppConfig } from '../../config/app.config.module';

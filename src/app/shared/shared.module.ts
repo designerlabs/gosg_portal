@@ -83,7 +83,9 @@ import {
       MatTabsModule,
       MatToolbarModule,
       MatTooltipModule,
-      MatNativeDateModule
+      MatNativeDateModule,
+      MatSortModule,
+      MatPaginatorModule,
     }from '@angular/material';
 // import { ConfirmDialogComponent } from '../dialogs/confirm-dialog/confirm-dialog.component';
 import { A11yModule } from "@angular/cdk/a11y";
@@ -230,6 +232,8 @@ export function HttpLoaderFactory(http: Http) {
      MatToolbarModule,
      MatTooltipModule,
      MatNativeDateModule,
+     MatSortModule,
+     MatPaginatorModule,
      SharedPipe
     
   ],

@@ -176,6 +176,15 @@ html, body{
           
         }
         
+        .table_row{
+          border-bottom-width: 1px;
+          border-bottom-style: solid;
+          align-items: center;
+          min-height: 48px;
+          padding: 0 24px;
+          border-bottom-color: rgba(0,0,0,.12);
+        }
+
         .formbg label{
           color : rgb(0, 0, 0);
           font-size: 13px;

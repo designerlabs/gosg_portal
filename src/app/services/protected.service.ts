@@ -12,7 +12,10 @@ export class ProtectedService {
   constructor(private http: Http, @Inject(APP_CONFIG) private config: AppConfig) { }
 
   private profileUrl: string = this.config.urlProfile;
-  
+  private mailUrl: string = this.config.urlMail;
+  // private serviceUrl = 'https://jsonplaceholder.typicode.com/users';
+  private serviceUrl = this.mailUrl+"pages/930701055000?page=1&size=10";
+
 
   createProfile(user) {
     return this.http
@@ -30,6 +33,26 @@ export class ProtectedService {
   updateProfile(user) {
     return this.http
     .put(this.profileUrl+"/"+user.user_id, user).map((response: Response) => response.json())
+    .catch(this.handleError);
+  }
+
+  getMails(){
+    return this.http
+    .get(this.serviceUrl)
+    .map((response: Response) => response.json().messageList)
+    .catch(this.handleError);
+  }
+
+  deleteMail(msgId){
+    return this.http
+    .delete(this.mailUrl+"delete/"+msgId).map((response: Response) => response.json())
+    .catch(this.handleError);
+  }
+
+
+  getMail(msgId){
+    return this.http
+    .get(this.mailUrl+"id/"+msgId).map((response: Response) => response.json())
     .catch(this.handleError);
   }
 

@@ -42,6 +42,7 @@ export class AppConfig {
     urlIntSearch:string;
     urlUserType:string;
     urlRace:string;
+    urlMail:string;
 }
 
 export const APP_DI_CONFIG: AppConfig = {
@@ -56,6 +57,7 @@ export const APP_DI_CONFIG: AppConfig = {
     urlArticle: './app/apidata/topic',
     urlCountry: commonURL+'country',
     urlReligion: commonURL+'religion/lang/',
+    urlMail: commonURL+'inbox/',
     // urlCountry: baseLocalURL+'countries.json',
     // urlCountry: '/app/apidata/countries',
     urlLifeevent: './app/apidata/lifeevent',
