@@ -251,6 +251,13 @@ export class ProfileComponent implements OnInit, AfterViewInit {
           this.countryName = resCountryData;
         })
   }
+  
+  getCitiesByState(sc){
+      return this.sharedService.getCitiesbyState(sc)
+        .subscribe(resCityData => {
+          this.getCityData = resCityData;
+        })
+  }
 
   getCountry(){
         return this.sharedService.getCountryData()
