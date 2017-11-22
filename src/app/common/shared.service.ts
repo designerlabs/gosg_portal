@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { Http, Response } from '@angular/http';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
+import {TranslateService, LangChangeEvent } from '@ngx-translate/core';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -11,8 +12,9 @@ import 'rxjs/add/operator/catch';
 
 export class SharedService {
 
-  constructor(private http: Http, @Inject(APP_CONFIG) private config: AppConfig) { }
-
+  constructor(private http: Http, @Inject(APP_CONFIG) private config: AppConfig,  private translate: TranslateService) { }
+  lang = this.lang;
+  languageId = this.languageId;
   private countryUrl: string = this.config.urlCountry;
   private stateUrl: string = this.config.urlState;
   private cityUrl: string = this.config.urlCity;
@@ -74,6 +76,25 @@ export class SharedService {
 
   getTheme() {
     return localStorage.getItem('themeColor');
+  }
+
+  loadTranslate(){
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      const myLang = this.translate.currentLang;
+      if (myLang == 'en') {
+        this.translate.get('HOME').subscribe((res: any) => {
+            this.lang = 'en';
+            this.languageId = 1;
+        });
+  
+      }
+      if (myLang == 'ms') {
+        this.translate.get('HOME').subscribe((res: any) => {
+            this.lang = 'ms';
+            this.languageId = 2;
+        });
+      }
+    });
   }
 
 

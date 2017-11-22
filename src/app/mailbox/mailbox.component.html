@@ -28,25 +28,34 @@
           
         <table class="mat-table" style="width:100%">
           <tr class="mat-header-row" style="height:45px">
-            <td class="mat-header-cell"></td>
-            <td class="mat-header-cell">Subject</td>
-            <td class="mat-header-cell">From</td>
-            <td class="mat-header-cell">Date</td>
-            <td class="mat-header-cell text-center">Action</td>
+            <td width="5%" class="mat-header-cell text-center"></td>
+            <td width="30%" class="mat-header-cell">From</td>
+            <td class="mat-header-cell">{{'home.breadcrumb.mailbox' | translate}}</td>
+            <td width="10%" class="mat-header-cell">Date</td>
+            <td width="10%" class="mat-header-cell text-center">Action</td>
           </tr>
-          <tr class="mat-row table_row" *ngFor="let data of mailData" style="height:45px">
-            <td class="mat-cell"><mat-checkbox></mat-checkbox></td>
-            <td class="mat-cell">{{data.subject}}</td>
+          <tr (click)="readMail($event, data.messageId)" class="mat-row table_row" *ngFor="let data of mailData" style="height:45px; cursor:pointer;">
+            <td class="mat-cell text-center"><mat-checkbox></mat-checkbox></td>
             <td class="mat-cell">{{data.fromUser.email}}</td>
+            <td class="mat-cell">{{data.subject}}</td>
             <td class="mat-cell">{{data.submissionDate | date}}</td>
-            <td class="mat-cell text-center"> <span (click)="deleteMail(data.messageId)"><i class="fa fa-trash font-size-m text-danger"></i></span></td>
+            <td class="mat-cell text-center"> <button class="btn btn-danger" (click)="deleteMail($event, data.messageId)"><i class="fa fa-trash font-size-m"></i></button></td>
           </tr>
         </table>
 
 
-            <mat-paginator [length]="mailData?.length"
-              [pageSize]="10"
-              [pageSizeOptions]="[5, 10, 25, 100]">
+        
+
+            <mat-paginator [length]="mailData?.length">
             </mat-paginator>
+            <mat-form-field style="width:50px;">
+                <mat-select class="font-size-s"  (change)="pageChange($event)">
+                  <mat-option value="5">5</mat-option>
+                  <mat-option value="10">10</mat-option>
+                  <mat-option value="25">25</mat-option>
+                  <mat-option value="50">50</mat-option>
+                </mat-select>
+              </mat-form-field>
+              
         </div>
   </div>

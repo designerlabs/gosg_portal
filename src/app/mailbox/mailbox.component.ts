@@ -3,9 +3,11 @@ import {Http} from '@angular/http';
 import { ProtectedService } from '../services/protected.service';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
-import {DataSource} from '@angular/cdk/collections';
 import {MatPaginator, MatSort} from '@angular/material';
+import {TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
+import { ToastrService } from 'ngx-toastr';
+import { SharedService } from '../common/shared.service';
 
 @Component({
   selector: 'gosg-mailbox',
@@ -13,14 +15,24 @@ import { BehaviorSubject } from "rxjs/BehaviorSubject";
   styleUrls: ['./mailbox.component.css']
 })
 export class MailboxComponent implements OnInit {
-  dataSource = new UserDataSource(this.protectedService);
   mailData: any;
   rerender = false;
-  displayedColumns = ['name', 'email', 'phone', 'company', 'action'];
-  
-  constructor(private protectedService: ProtectedService, private cdRef:ChangeDetectorRef) { }
+  languageId = this.languageId;
+  constructor(
+    private protectedService: ProtectedService,
+    private cdRef:ChangeDetectorRef,
+    private toastr: ToastrService,
+    private sharedService: SharedService,
+    private translate:TranslateService
+    ) {
+      sharedService.loadTranslate();
+      
+     }
+
+     lang = this.lang;
   
   ngOnInit() {
+    this.languageId = 2;
     this.getMail();
   }
 
@@ -29,38 +41,33 @@ export class MailboxComponent implements OnInit {
     this.protectedService.getMails().
     subscribe(data => {
       this.mailData  = data;
-    });
-  }
-  doRerender() {
-    this.rerender = true;
-    this.cdRef.detectChanges();
-    this.dataSource.connect();
-    this.rerender = false;
+    },
+    Error => {
+
+     this.toastr.error(this.translate.instant('feedback.err.type'), '');            
+   });
   }
 
-  deleteMail(msgId){
+  readMail(event, msgId){
+    event.stopPropagation();
+    alert(msgId);
+  }
+
+  pageChange(event){
+    debugger;
+  }
+
+  deleteMail(event, msgId){
+    event.stopPropagation();
     this.protectedService.deleteMail(msgId).
     subscribe(
       success => {
         this.getMail();
-      }
-    )
-  }
-}
+        this.toastr.error(this.translate.instant('feedback.err.type'), '');     
+      },
+      Error => {
 
-
-export class UserDataSource extends DataSource<any> {
-  private dataChange: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
-  
-  constructor(private protectedService: ProtectedService) {
-    super();
-  }
-  connect(): Observable<any[]> {
-    return this.protectedService.getMails();
-  }
-  disconnect() {}
-
-  refresh(): void {
-    this.dataChange.next([]);
+       this.toastr.error(this.translate.instant('feedback.err.type'), '');            
+     });
   }
 }
