@@ -23,6 +23,9 @@ export class AppConfig {
     urlFooter: string;
     urlArticle: string;
     urlCountry: string;
+    urlState:string;
+    urlCity:string;
+    urlRace:string;
     urlReligion: string;
     urlLifeevent: string;
     urlSubtopic: string;
@@ -41,7 +44,6 @@ export class AppConfig {
     protectedURL:string;
     urlIntSearch:string;
     urlUserType:string;
-    urlRace:string;
 }
 
 export const APP_DI_CONFIG: AppConfig = {
@@ -55,7 +57,9 @@ export const APP_DI_CONFIG: AppConfig = {
     protectedURL:protectedBaseURL,
     urlArticle: './app/apidata/topic',
     urlCountry: commonURL+'country',
+    urlState: commonURL+'state',
     urlReligion: commonURL+'religion/lang/',
+    urlCity: commonURL+'city/state/',
     // urlCountry: baseLocalURL+'countries.json',
     // urlCountry: '/app/apidata/countries',
     urlLifeevent: './app/apidata/lifeevent',
