@@ -14,6 +14,8 @@ export class SharedService {
   constructor(private http: Http, @Inject(APP_CONFIG) private config: AppConfig) { }
 
   private countryUrl: string = this.config.urlCountry;
+  private stateUrl: string = this.config.urlState;
+  private cityUrl: string = this.config.urlCity;
   private genderUrl: string = this.config.urlGender;
   private religionUrl: string = this.config.urlReligion;
   private raceUrl: string = this.config.urlRace;
@@ -26,10 +28,10 @@ export class SharedService {
 
   }
 
-  getData(): Observable<any[]> {
+  getStateData(): Observable<any[]> {
     //  console.log(this.countryUrl);
-    return this.http.get(this.countryUrl)
-      .map((response: Response) => response.json())
+    return this.http.get(this.stateUrl)
+      .map((response: Response) => response.json().stateList)
       .catch(this.handleError);
 
   }
@@ -37,6 +39,13 @@ export class SharedService {
   getCountrybyCode(code): Observable<any[]> {
     return this.http.get(this.countryUrl + '/code/' + code)
       .map((response: Response) => response.json())
+      .catch(this.handleError);
+
+  }
+
+  getCitiesbyState(code): Observable<any[]> {
+    return this.http.get(this.cityUrl + code)
+      .map((response: Response) => response.json().cityList)
       .catch(this.handleError);
 
   }

@@ -23,6 +23,8 @@ export class AppConfig {
     urlFooter: string;
     urlArticle: string;
     urlCountry: string;
+    urlState:string;
+    urlRace:string;
     urlReligion: string;
     urlLifeevent: string;
     urlSubtopic: string;
@@ -41,7 +43,6 @@ export class AppConfig {
     protectedURL:string;
     urlIntSearch:string;
     urlUserType:string;
-    urlRace:string;
     urlMail:string;
 }
 
@@ -49,32 +50,30 @@ export const APP_DI_CONFIG: AppConfig = {
     apiEndpoint: '',
     urlMenu: './app/apidata/menudata',
     urlSlider: baseURL+'slider',
-    urlRegister: baseURL+'register',
-    urlUserType:baseURL+'user-type/',
     urlFooter: './app/apidata/footer',
-    portalURL: portalBaseURL,
-    protectedURL:protectedBaseURL,
     urlArticle: './app/apidata/topic',
     urlCountry: commonURL+'country',
+    urlState: commonURL+'state',
+    urlRace: commonURL+'race/lang/',
     urlReligion: commonURL+'religion/lang/',
-    urlMail: commonURL+'inbox/',
-    // urlCountry: baseLocalURL+'countries.json',
-    // urlCountry: '/app/apidata/countries',
     urlLifeevent: './app/apidata/lifeevent',
     urlSubtopic: './app/apidata/subtopic',
-    urlGender: './app/apidata/gender',
     urlTopics: './app/apidata/articlemenu',
-    // urlTopics: 'https://gosgstg.malaysia.gov.my/public/cms/service/article_menu/',
     urlHighlights: './app/apidata/highlightbox',
-    urlRace: commonURL+'race/lang/',
+    urlGender: './app/apidata/gender',
     urlPoll: './app/apidata/poll',
     urlAnnouncement: './app/apidata/announcement',
-    urlCalendar: './app/apidata/calendar',    
+    urlCalendar: './app/apidata/calendar',
+    urlRegister: baseURL+'register',    
     urlFeedbackType: commonURL+'feedback/type/lang/',
     urlFeedbackSubject: commonURL+'feedback/subject/lang/',
     urlFeedback: commonURL+'feedback',
     urlProfile: baseURL+'profile',
+    portalURL: portalBaseURL,
+    protectedURL:protectedBaseURL,
     urlIntSearch: searchServiceURL + 'query/0/internal',
+    urlUserType:baseURL+'user-type/',
+    urlMail: commonURL+'inbox/',
 };
 
 @NgModule({

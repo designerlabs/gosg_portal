@@ -73,6 +73,11 @@
     }
   },
   "profile":{
+    "msg":{
+      "updateSuccess": "Kemaskini berjaya.",
+      "editbtnE" : "Kemaskini diaktifkan.",
+      "editbtnD" : "Kemaskini tidak aktif."
+    },
     "label":{
       "name":"Nama",
       "nationality":"Warganegara",
@@ -96,6 +101,7 @@
       "mobile":"No Telefon Bimbit"
     },
     "err": {
+      "updateSuccess": "Kemaskini gagal!",
       "ic": "Nombor Kad Pengenalan wajib diisi",
       "name": "Nama penuh wajib diisi",
       "email": "Emel wajib diisi. Contoh: aaaa@bbb.com",

@@ -26,7 +26,7 @@
   </div>
   <div class="col-md-9 formbg">
       <span class="pull-right editBtn">
-        <button type="button" mat-fab color="warn" (click)="edit()"><i class="fa fa-edit font-size-l"></i></button>
+        <button type="button" mat-fab color="warn" (click)="edit()" [ngClass]="{ 'editBtn-active': isActive, 'editBtn': !isActive  }"><i class="fa fa-edit font-size-l"></i></button>
       </span>
       <p>Status(isActive): {{isActive}}</p>
       <p>Status(isLocal): {{isLocal}}</p>
@@ -73,7 +73,7 @@
             <div class="row">
               <div class="form-group col-md-4">
                 <mat-form-field class="example-full-width font-size-s">
-                  <mat-select tabindex="1" formControlName="gender" id="gender" name="gender" placeholder="{{'profile.label.gender' | translate}}" required>
+                  <mat-select tabindex="1" formControlName="gender" placeholder="{{'profile.label.gender' | translate}}" required>
                       <mat-option [value]="1">Male</mat-option>
                       <mat-option [value]="2">Female</mat-option>
                   </mat-select>
@@ -81,14 +81,14 @@
               </div>
               <div class="form-group col-md-4">
                 <mat-form-field class="example-full-width font-size-s">
-                  <mat-select formContolName="race" id="race" name="race" placeholder="{{'profile.label.race' | translate}}">
+                  <mat-select formControlName="race" placeholder="{{'profile.label.race' | translate}}">
                       <mat-option *ngFor="let race of getRaceData" [value]="race.raceCode">{{race.race}}</mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>
               <div class="form-group col-md-4">
                 <mat-form-field class="example-full-width font-size-s">
-                  <mat-select formControlName="religion" id="religion" name="religion" placeholder="{{'profile.label.religion' | translate}}">
+                  <mat-select formControlName="religion" placeholder="{{'profile.label.religion' | translate}}">
                       <mat-option *ngFor="let religion of getReligionData" [value]="religion.languageCode">{{religion.religion}}</mat-option>
                   </mat-select>
                 </mat-form-field>
@@ -100,11 +100,11 @@
               </div>
               <div class="form-group col-lg-12">
                 <mat-form-field class="example-full-width font-size-s">
-                  <input matInput formControlName="perAddress1" id="perAddress1" required type="text" maxlength="30" placeholder="Permanent Address 1"
+                  <input matInput formControlName="perAddress1" required type="text" maxlength="30" placeholder="Permanent Address 1"
                   />
                 </mat-form-field>
                 <mat-form-field class="example-full-width font-size-s">
-                  <input matInput formControlName="perAddress2" id="perAddress2" type="text" maxlength="30" placeholder="Permanent Address 2"
+                  <input matInput formControlName="perAddress2" type="text" maxlength="30" placeholder="Permanent Address 2"
                   />
                 </mat-form-field>
                 <mat-form-field class="example-full-width font-size-s">
@@ -117,16 +117,15 @@
             <div class="row">
               <div class="form-group col-md-4">
                 <mat-form-field class="example-full-width font-size-s">
-                  <mat-select formControlName="perCountry" (change)="isMalaysian($event.value)" id="perCountry" name="perCountry" placeholder="{{'profile.label.country' | translate}} ">
+                  <mat-select formControlName="perCountry" (change)="isMalaysian($event.value)" placeholder="{{'profile.label.country' | translate}} ">
                     <mat-option *ngFor="let country of countries?.countryList" [value]="country.countryCode">{{country.countryName}}</mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>
               <div class="form-group col-md-4">
                 <mat-form-field class="example-full-width font-size-s">
-                  <mat-select *ngIf="isLocal" formControlName="perState" id="perState" name="perState" placeholder="{{'profile.label.state' | translate}}">
-                    <mat-option [value]="1">State 1</mat-option>
-                    <mat-option [value]="2">State 2</mat-option>
+                  <mat-select *ngIf="isLocal" formControlName="perState" placeholder="{{'profile.label.state' | translate}}">
+                    <mat-option *ngFor="let state of getStateData" [value]="state.stateId">{{ state.stateName }}</mat-option>
                   </mat-select>
                   <input *ngIf="!isLocal" matInput formControlName="perState" type="text" placeholder="{{'profile.label.state' | translate}}" />
                 </mat-form-field>
@@ -190,8 +189,7 @@
               <div class="form-group col-md-4">
                 <mat-form-field class="example-full-width font-size-s">
                   <mat-select *ngIf="isCorrsLocal" (change)="isChanged()" formControlName="corrsState" id="corrsState" name="corrsState" placeholder="{{'profile.label.state' | translate}}">
-                    <mat-option [value]="1">State 1</mat-option>
-                    <mat-option [value]="2">State 2</mat-option>
+                    <mat-option *ngFor="let state of getStateData" [value]="state.stateId">{{ state.stateName }}</mat-option>
                   </mat-select>
                   <input *ngIf="!isCorrsLocal" (change)="isChanged()" matInput formControlName="corrsState" type="text" placeholder="{{'profile.label.state' | translate}}" />
                 </mat-form-field>

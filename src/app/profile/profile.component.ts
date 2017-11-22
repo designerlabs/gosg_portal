@@ -11,6 +11,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 import { debounce } from 'rxjs/operators/debounce';
 import { debug } from 'util';
+import { ToastrService } from "ngx-toastr";
 // import { ControlBase } from '../common/controlbase'
 
 @Component({
@@ -47,6 +48,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   isLocal: boolean = true;
   isCorrsLocal: boolean = true;
   getRaceData: any;
+  getStateData: any;
+  getCityData: any;
   getReligionData:any;
   isActive: boolean = false;
   
@@ -88,7 +91,16 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   //       dateFormat: 'dd/mm/yyyy',
   // };
 
-  constructor(private router: Router, textMask:TextMaskModule, private validateService:ValidateService, private protectedService:ProtectedService, private sharedService:SharedService, private translate: TranslateService, private elementRef: ElementRef,private activatedRoute: ActivatedRoute) {
+  constructor(
+    private router: Router, 
+    textMask:TextMaskModule, 
+    private validateService:ValidateService, 
+    private protectedService:ProtectedService, 
+    private sharedService:SharedService, 
+    private translate: TranslateService, 
+    private elementRef: ElementRef, 
+    private activatedRoute: ActivatedRoute, 
+    private toastr: ToastrService) {
     translate.onLangChange.subscribe((event: LangChangeEvent) => {
       
                   const myLang = translate.currentLang;
@@ -248,6 +260,15 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
           });
   }
+  
+  getState(){
+    return this.sharedService.getStateData()
+     .subscribe(resStateData => {
+     
+        this.getStateData = resStateData;
+
+      });
+  }
 
   getReligion(){
     return this.sharedService.getReligion(localStorage.getItem('langID'))
@@ -276,6 +297,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   isMalaysian(cc) {
     console.log(cc);
     if(cc == "MY") {
+      this.getState();
       this.isLocal = true;
       console.log(this.isLocal);
       return true;
@@ -323,11 +345,11 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       if(this.countryCode != null)
         this.profileForm.get('corrsCountry').setValue(this.countryCode);
       else
-      this.profileForm.get('corrsCountry').setValue(0);
+      this.profileForm.get('corrsCountry').setValue("");
 
       if(this.isLocal == true) {
-        this.profileForm.get('corrsCity').setValue(0);
-        this.profileForm.get('corrsState').setValue(0);
+        this.profileForm.get('corrsCity').setValue("");
+        this.profileForm.get('corrsState').setValue("");
       } else {
         this.profileForm.get('corrsCity').setValue("");
         this.profileForm.get('corrsState').setValue("");
@@ -346,15 +368,17 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   }
 
   edit(){
-    console.log(this.isActive)
+    // console.log(this.isActive)
     // debugger
     this.isActive = !this.isActive;
-
+    
     if(this.isActive != false) {
+      this.toastr.info(this.translate.instant('profile.msg.editbtnE'), '');
       this.initial = false
       this.profileForm.enable()
       this.dob.enable();
     } else {
+      this.toastr.info(this.translate.instant('profile.msg.editbtnD'), '');
       this.initial = true
       this.profileForm.disable()
       this.dob.disable();
@@ -422,14 +446,10 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.protectedService.updateProfile(body)
     .subscribe(
       data => {
-        alert("Success");
-        //  this.alertService.success('Registration successful', true);
-          // this.router.navigate(['/portal/login']);
+        this.toastr.success(this.translate.instant('profile.msg.updateSuccess'), '');
       },
       error => {
-          alert('error');
-          //this.alertService.error(error);
-          //this.loading = false;
+        this.toastr.error(this.translate.instant('profile.err.updatefail'), '');
       });
     */
   }

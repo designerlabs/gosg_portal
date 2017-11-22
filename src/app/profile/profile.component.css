@@ -65,9 +65,13 @@ ul{
 .editBtn{
   position: absolute;
   right: 0px;
-  top:-35px;
+  top:-20px;
 }
 
-.isActive {
-  background-color: yellow
+.editBtn-active {
+  position: absolute;
+  background-color: yellow;
+  color: #000;
+  right: 0px;
+  top:-20px;
 }

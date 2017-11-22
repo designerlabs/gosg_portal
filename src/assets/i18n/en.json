@@ -75,6 +75,11 @@
     }
   },
   "profile":{
+    "msg":{
+      "updateSuccess": "Profile updated.",
+      "editbtnE" : "Edit activated.",
+      "editbtnD" : "Edit deactivated."
+    },
     "label":{
       "name":"Name",
       "nationality":"Nationality",
@@ -98,6 +103,7 @@
       "mobile":"Mobile Phone"
     },
     "err": {
+      "updateFail": "Profile update failed!",
       "ic": "IC Number is required",
       "name": "User name is required",
       "email": "Email is required. IE: aaaa@bbb.com",
