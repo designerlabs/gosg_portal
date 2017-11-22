@@ -25,6 +25,7 @@ export class AppConfig {
     urlCountry: string;
     urlState:string;
     urlRace:string;
+    urlCity:string;
     urlReligion: string;
     urlLifeevent: string;
     urlSubtopic: string;
@@ -55,6 +56,7 @@ export const APP_DI_CONFIG: AppConfig = {
     urlCountry: commonURL+'country',
     urlState: commonURL+'state',
     urlRace: commonURL+'race/lang/',
+    urlCity:'',
     urlReligion: commonURL+'religion/lang/',
     urlLifeevent: './app/apidata/lifeevent',
     urlSubtopic: './app/apidata/subtopic',

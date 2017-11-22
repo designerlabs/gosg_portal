@@ -3,6 +3,9 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 import { ProtectedService } from '../services/protected.service';
 import { Observable } from "rxjs/Observable";
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/skip';
+
 @Component({
   selector: 'gosg-protected',
   templateUrl: './protected.component.html',
