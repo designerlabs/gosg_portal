@@ -98,12 +98,18 @@
       "postcode":"Poskod",
       "mailaddr":"Alamat Surat Menyurat",
       "homeph":"No Telefon Rumah",
-      "mobile":"No Telefon Bimbit"
+      "mobile":"No Telefon Bimbit",
+      "submit":"Kemaskini"
     },
     "err": {
       "updateSuccess": "Kemaskini gagal!",
       "ic": "Nombor Kad Pengenalan wajib diisi",
       "name": "Nama penuh wajib diisi",
+      "dob": "Tarikh Lahir wajib diisi",
+      "gender": "Jantina wajib dipilih",
+      "perAddress1": "Alamat Tetap 1 wajib diisi",
+      "state": "Negeri wajib dipilih",
+      "city": "Bandar wajib dipilih",
       "email": "Emel wajib diisi. Contoh: aaaa@bbb.com",
       "tel": "No. Telefon wajib diisi. Contoh: 018xxxxxxx / +60-x-xxxx-xxxx ",
       "country": "Negara wajib diisi",
@@ -114,6 +120,7 @@
     },
      "pattern":{
       "ic":"Nombor Kad Pengenalan memerlukan 12 digit",
+      "dob":"Tarikh mestilah sah. Contoh: XX-XX-XXXX",
       "email":"Sila Masukkan emel yang sah",
       "tel":"No. Telefon mestilah sah",
       "telr":"No. Telefon mestilah sah",
