@@ -49,9 +49,12 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   isCorrsLocal: boolean = true;
   getRaceData: any;
   getStateData: any;
-  getCityData: any;
+  getPerCityData: any;
+  getCorrsCityData: any;
   getReligionData:any;
   isActive: boolean = false;
+  perAddStateId: number;
+  corrsAddStateId: number;
   
   date = new Date();
   public dob: FormControl
@@ -252,10 +255,15 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         })
   }
   
-  getCitiesByState(sc){
-      return this.sharedService.getCitiesbyState(sc)
+  getCitiesByState(e){
+      this.isStateChanged();
+      return this.sharedService.getCitiesbyState(e.value)
         .subscribe(resCityData => {
-          this.getCityData = resCityData;
+          if(e.source.ngControl.name == "perState") {
+            this.getPerCityData = resCityData;
+          } else {
+            this.getCorrsCityData = resCityData;
+          }
         })
   }
 
@@ -319,6 +327,13 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     if(this.profileForm.get('checkboxValue').value == true)
       this.profileForm.get('checkboxValue').setValue(false);
   }
+
+  isStateChanged() {
+    if(this.profileForm.get('checkboxValue').value == true)
+    this.profileForm.get('checkboxValue').setValue(false);
+  }
+
+  
 
   isCorrsChanged(cc) {
     if(cc == "MY" && this.perCountry.value == "MY") {

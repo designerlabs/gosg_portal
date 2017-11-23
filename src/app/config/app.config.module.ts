@@ -56,7 +56,7 @@ export const APP_DI_CONFIG: AppConfig = {
     urlCountry: commonURL+'country',
     urlState: commonURL+'state',
     urlRace: commonURL+'race/lang/',
-    urlCity:'',
+    urlCity: commonURL+'city/state/',
     urlReligion: commonURL+'religion/lang/',
     urlLifeevent: './app/apidata/lifeevent',
     urlSubtopic: './app/apidata/subtopic',

@@ -65,6 +65,7 @@
     "pattern":{
       "ic":"IC Number takes 12 digit only",
       "email":"Please enter a valid email",
+      "dob":"Please enter a valid date format. IE: XX-XX-XXXX",
       "tel":"Telephone No must be valid",
       "telr":"Telephone No must be valid",
       "telb":"Telephone No must be valid",
@@ -100,11 +101,18 @@
       "postcode":"Postcode",
       "mailaddr":"Mailing Address",
       "homeph":"Home Phone",
-      "mobile":"Mobile Phone"
+      "mobile":"Mobile Phone",
+      "submit":"Update"
     },
     "err": {
       "updateFail": "Profile update failed!",
       "ic": "IC Number is required",
+      "dob": "Date of Birth is required",
+      "gender": "Gender is required",
+      "race": "Race is required",
+      "perAddress1": "Permanent Address 1 is required",
+      "state": "State is required",
+      "city": "City is required",
       "name": "User name is required",
       "email": "Email is required. IE: aaaa@bbb.com",
       "tel": "Telephone No. is required. IE: 018xxxxxxx / +60-x-xxxx-xxxx",
