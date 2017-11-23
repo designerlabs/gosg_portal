@@ -22,7 +22,7 @@ define(["require", "exports"], function (require, exports) {
             var ctx = c.getContext("2d");
             var x = c.width / 2;
             var img = new Image();
-            img.src = "../assets/images/captcha-pattern.jpg";
+            img.src = "assets/images/captcha-pattern.jpg";
             img.onload = function () {
                 $("#WrongCaptchaError").css('display', 'none');
                 var pattern = ctx.createPattern(img, "repeat");
