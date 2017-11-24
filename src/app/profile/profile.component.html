@@ -52,8 +52,8 @@
                 <label class="font-size-s" for="dob">{{'profile.label.dateofbirth' | translate}}</label>
                   <mat-form-field class="example-full-width font-size-m" style="margin-top: -25px">
                     <div style="color:#333;" class="font-size-m boldText">{{dt | date:'dd/MM/yyyy' }}</div>
-                    <input style="display:none" matInput formControlName="dob" #dob [matDatepicker]="dob" (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)" />
-                    <mat-datepicker-toggle matSuffix [for]="dob"></mat-datepicker-toggle>
+                    <input style="display:none" matInput formControlName="dob" #dob [matDatepicker]="dob" (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)" [max]="maxDate" />
+                    <mat-datepicker-toggle matSuffix [for]="dob" style="color:#333;"></mat-datepicker-toggle>
                     <mat-datepicker [disabled]="initial" #dob></mat-datepicker>
                   </mat-form-field>
                   
@@ -123,7 +123,7 @@
             <div class="row">
               <div class="form-group col-md-4">
                 <mat-form-field class="example-full-width font-size-s">
-                  <mat-select formControlName="perCountry" (change)="isMalaysian($event.value)" placeholder="{{'profile.label.country' | translate}} " required>
+                  <mat-select formControlName="perCountry" (change)="isMalaysian($event.value,$event)" placeholder="{{'profile.label.country' | translate}} " required>
                     <mat-option *ngFor="let country of countries?.countryList" [value]="country.countryCode">{{country.countryName}}</mat-option>
                   </mat-select>
                   <mat-error *ngIf="!validateCtrlChk(perCountry) && profileForm.controls.perCountry.errors.required">
@@ -145,7 +145,7 @@
               </div>
               <div class="form-group col-md-4">
                 <mat-form-field class="example-full-width font-size-s">
-                  <mat-select *ngIf="isLocal" formControlName="perCity" id="perCity" name="perCity" placeholder="{{'profile.label.city' | translate}}" required>
+                  <mat-select *ngIf="isLocal" formControlName="perCity" placeholder="{{'profile.label.city' | translate}}" required>
                     <mat-option *ngFor="let city of getPerCityData" [value]="city.cityId">{{ city.cityName }}</mat-option>
                   </mat-select>
                   <input *ngIf="!isLocal" matInput formControlName="perCity" type="text" placeholder="{{'profile.label.city' | translate}}" />
@@ -201,7 +201,7 @@
             <div class="row">
               <div class="form-group col-md-4">
                 <mat-form-field class="example-full-width font-size-s">
-                  <mat-select (change)="isCorrsChanged($event.value)" formControlName="corrsCountry" id="corrsCountry" name="corrsCountry" placeholder="{{'profile.label.country' | translate}}">
+                  <mat-select (change)="isMalaysian($event.value,$event)" formControlName="corrsCountry" id="corrsCountry" name="corrsCountry" placeholder="{{'profile.label.country' | translate}}">
                       <mat-option *ngFor="let country of countries?.countryList" [value]="country.countryCode">{{country.countryName}}</mat-option>
                   </mat-select>
                 </mat-form-field>
