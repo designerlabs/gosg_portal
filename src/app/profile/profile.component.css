@@ -4,7 +4,6 @@ input, .form-group {
     color: #000;
 }
 
-
 em{
       float:right; color: #000; padding-left:10px;
   }
@@ -15,20 +14,24 @@ em{
 .error :-ms-input-placeholder { color: #999; }  */
 
 
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
+input[type=number]::-webkit-inner-spin-button:disabled, 
+input[type=number]::-webkit-outer-spin-button:disabled { 
   -webkit-appearance: none; 
 margin: 0; 
+}
+
+input[type=text]::-webkit-input-placeholder,
+input[type=text]::-moz-placeholder {
+  color: rgba(0,0,0,.42);
+}
+
+.mat-select.mat-select-disabled, .mat-select-arrow  {
+  color: rgba(0,0,0,.42);
 }
 
 formGroup {
   color: rgb(170, 1, 1)
 
-}
-
-input[type="text"]:disabled {
-  /* background: #d1d1d1; */
-  /* color: rgb(170, 1, 1) */
 }
 
 .example-full-width {
@@ -68,10 +71,18 @@ ul{
   top:-20px;
 }
 
-.editBtn-active {
+.editBtn:hover, .editBtn-active:hover {
   position: absolute;
   background-color: yellow;
   color: #000;
+  right: 0px;
+  top:-20px;
+}
+
+.editBtn-active {
+  position: absolute;
+  background-color: rgb(109, 185, 38);
+  color: #FFF;
   right: 0px;
   top:-20px;
 }
