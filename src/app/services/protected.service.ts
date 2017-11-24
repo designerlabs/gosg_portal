@@ -14,7 +14,7 @@ export class ProtectedService {
   private profileUrl: string = this.config.urlProfile;
   private mailUrl: string = this.config.urlMail;
   // private serviceUrl = 'https://jsonplaceholder.typicode.com/users';
-  private serviceUrl = this.mailUrl+"pages/930701055000?page=1&size=10";
+  private inboxUrl = this.mailUrl+"pages/";
 
 
   createProfile(user) {
@@ -36,16 +36,22 @@ export class ProtectedService {
     .catch(this.handleError);
   }
 
-  getMails(){
+  getMails(icno, pages, size){
     return this.http
-    .get(this.serviceUrl)
-    .map((response: Response) => response.json().messageList)
+    .get(`${this.inboxUrl}${icno}?page=${pages}&size=${size}`)
+    .map((response: Response) => response.json())
     .catch(this.handleError);
   }
 
   deleteMail(msgId){
     return this.http
     .delete(this.mailUrl+"delete/"+msgId).map((response: Response) => response.json())
+    .catch(this.handleError);
+  }
+  
+  deleteMails(msgId){
+    return this.http
+    .delete(this.mailUrl+"delete/selected?id="+msgId).map((response: Response) => response.json())
     .catch(this.handleError);
   }
 

@@ -16,6 +16,11 @@ import { SharedService } from '../common/shared.service';
 })
 export class MailboxComponent implements OnInit {
   mailData: any;
+  mailContent: any;
+  mailboxId=[];
+  mailPageSize = 10;
+  mailPageCount = 1;
+  noPrevData = true;
   rerender = false;
   languageId = this.languageId;
   constructor(
@@ -33,12 +38,23 @@ export class MailboxComponent implements OnInit {
   
   ngOnInit() {
     this.languageId = 2;
-    this.getMail();
+    this.getMails(this.mailPageCount, this.mailPageSize);
   }
 
 
-  getMail(){
-    this.protectedService.getMails().
+  getMail(event, msgId){
+    event.target.parentElement.parentElement.parentElement.removeAttribute('style')
+    this.protectedService.getMail(msgId).
+    subscribe(data => {
+      this.mailContent  = data;
+    },
+    Error => {
+     this.toastr.error(this.translate.instant('feedback.err.type'), '');            
+   });
+  }
+
+  getMails(page, size){
+    this.protectedService.getMails('930701055000', page, size).
     subscribe(data => {
       this.mailData  = data;
     },
@@ -50,19 +66,56 @@ export class MailboxComponent implements OnInit {
 
   readMail(event, msgId){
     event.stopPropagation();
-    alert(msgId);
   }
 
+
   pageChange(event){
-    debugger;
+    this.getMails(this.mailPageCount, event.value);
+    this.mailPageSize = event.value;
   }
+
+  isChecked(event) {
+    if(event.checked){
+      this.mailboxId.push(event.source.value);
+    }else{
+      var index = this.mailboxId.indexOf(event.source.value);
+      this.mailboxId.splice(index, 1);
+    }
+    return false;
+  }
+
+  paginatorL(page){
+    this.getMails(page-1, this.mailPageSize);
+    this.noPrevData = page <= 2 ? true : false;
+  }
+
+  paginatorR(page){
+    this.noPrevData = page >= 1 ? false : true;
+    this.getMails(page+1, this.mailPageSize);
+  }
+
 
   deleteMail(event, msgId){
     event.stopPropagation();
     this.protectedService.deleteMail(msgId).
     subscribe(
       success => {
-        this.getMail();
+        this.getMails(this.mailPageCount, this.mailPageSize);
+        this.toastr.error(this.translate.instant('feedback.err.type'), '');     
+      },
+      Error => {
+
+       this.toastr.error(this.translate.instant('feedback.err.type'), '');            
+     });
+  }
+
+  deleteMails(){
+    
+    this.protectedService.deleteMails(this.mailboxId).
+    subscribe(
+      success => {
+        this.getMails(this.mailPageCount, this.mailPageSize);
+        this.mailboxId = [];
         this.toastr.error(this.translate.instant('feedback.err.type'), '');     
       },
       Error => {

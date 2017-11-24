@@ -25,37 +25,56 @@
           <gosg-sidenav-dashboard></gosg-sidenav-dashboard>
       </div>
       <div class="col-md-9 mat-elevation-z8" style="margin-top:15px;">
-          
+        <div class="deleteAllBtn"><button [disabled]="!mailboxId.length > 0" mat-raised-button color="warn" (click)="deleteMails()"><i class="fa fa-trash"></i> Delete</button></div>
+        <div class="row"></div>
+        <div class="row mailContainer" *ngIf="mailContent?.message?.fromUser.email">
+              <p class="font-size-s">
+                From: {{mailContent?.message?.fromUser.email}} 
+              </p>
+              <p class="font-size-s">
+                Date: {{mailContent?.message?.submissionDate | date}}
+              </p>
+              <p class="font-size-s">
+                Subject: {{mailContent?.message?.subject}} 
+              </p>
+              <div class="font-size-m">
+                {{mailContent?.message?.content}}
+              </div>
+        </div>
         <table class="mat-table" style="width:100%">
           <tr class="mat-header-row" style="height:45px">
             <td width="5%" class="mat-header-cell text-center"></td>
             <td width="30%" class="mat-header-cell">From</td>
             <td class="mat-header-cell">{{'home.breadcrumb.mailbox' | translate}}</td>
             <td width="10%" class="mat-header-cell">Date</td>
-            <td width="10%" class="mat-header-cell text-center">Action</td>
+            <td width="15%" class="mat-header-cell text-center">Action</td>
           </tr>
-          <tr (click)="readMail($event, data.messageId)" class="mat-row table_row" *ngFor="let data of mailData" style="height:45px; cursor:pointer;">
-            <td class="mat-cell text-center"><mat-checkbox></mat-checkbox></td>
+          <tr class="mat-row table_row table_row_height" *ngFor="let data of mailData?.messageList" [style.font-weight]="data.read ? '' : 'bold'">
+            <td class="mat-cell text-center"><mat-checkbox [value]="data.messageId"  (change)="isChecked($event);"></mat-checkbox></td>
             <td class="mat-cell">{{data.fromUser.email}}</td>
             <td class="mat-cell">{{data.subject}}</td>
             <td class="mat-cell">{{data.submissionDate | date}}</td>
-            <td class="mat-cell text-center"> <button class="btn btn-danger" (click)="deleteMail($event, data.messageId)"><i class="fa fa-trash font-size-m"></i></button></td>
+            <td class="mat-cell text-center"> 
+              <button (click)="getMail($event, data.messageId)" class="btn btn-sm btn-warning"><i class="fa fa-eye font-size-s"></i></button>
+              <button class="btn btn-sm btn-danger" (click)="deleteMail($event, data.messageId)"><i class="fa fa-trash font-size-s"></i></button>
+            </td>
           </tr>
         </table>
 
-
-        
-
-            <mat-paginator [length]="mailData?.length">
-            </mat-paginator>
+            <!-- <mat-paginator [length]="mailData?.length">
+            </mat-paginator> -->
             <mat-form-field style="width:50px;">
-                <mat-select class="font-size-s"  (change)="pageChange($event)">
+                <mat-select class="font-size-s" value="10" (change)="pageChange($event)">
                   <mat-option value="5">5</mat-option>
                   <mat-option value="10">10</mat-option>
                   <mat-option value="25">25</mat-option>
                   <mat-option value="50">50</mat-option>
                 </mat-select>
               </mat-form-field>
+              <div>
+                <button class="btn btn-sm btn-success" [disabled]="noPrevData" (click)="paginatorL(mailData?.pageNumber)">left</button>
+                <button class="btn btn-sm btn-success"  (click)="paginatorR(mailData?.pageNumber)">right</button>
+              </div>
               
         </div>
   </div>
