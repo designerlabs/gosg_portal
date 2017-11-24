@@ -71,10 +71,12 @@
                   <mat-option value="50">50</mat-option>
                 </mat-select>
               </mat-form-field>
-              <div>
-                <button class="btn btn-sm btn-success" [disabled]="noPrevData" (click)="paginatorL(mailData?.pageNumber)">left</button>
-                <button class="btn btn-sm btn-success"  (click)="paginatorR(mailData?.pageNumber)">right</button>
+              <div style="float:right; margin-top: 10px;">
+                  <span style="color:#000; padding-right:20px;">Pages <strong>{{mailData?.pageNumber}}</strong> of <strong>{{mailData?.totalPages}}</strong> in <strong>{{mailData?.totalElements}}</strong> mails</span>
+                  <button mat-mini-fab color="basic" [disabled]="noPrevData" (click)="paginatorL(mailData?.pageNumber)"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
+                  <button mat-mini-fab color="basic" [disabled]="noNextData"  (click)="paginatorR(mailData?.pageNumber, mailData?.totalPages)"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
               </div>
+              
               
         </div>
   </div>

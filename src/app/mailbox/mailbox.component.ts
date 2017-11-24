@@ -21,6 +21,7 @@ export class MailboxComponent implements OnInit {
   mailPageSize = 10;
   mailPageCount = 1;
   noPrevData = true;
+  noNextData = false;
   rerender = false;
   languageId = this.languageId;
   constructor(
@@ -87,10 +88,13 @@ export class MailboxComponent implements OnInit {
   paginatorL(page){
     this.getMails(page-1, this.mailPageSize);
     this.noPrevData = page <= 2 ? true : false;
+    this.noNextData = false;
   }
 
-  paginatorR(page){
+  paginatorR(page, totalPages){
     this.noPrevData = page >= 1 ? false : true;
+    let pageInc = page+1;
+    this.noNextData = pageInc === totalPages;
     this.getMails(page+1, this.mailPageSize);
   }
 
