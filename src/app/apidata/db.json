@@ -53,6 +53,88 @@
       ]
     }
   ],
+  "admin_left_menu":[
+    
+    {
+      "menuId": 1,
+      "id": 1,
+      "title": "Article",
+      "body": [
+        { "id":1,
+          "value":"Article1"
+        },
+        { "id":2,
+          "value":"Article2"
+        },
+        { "id":3,
+          "value":"Article3"
+        }
+
+      ]
+    },
+    {
+      "menuId": 2,
+      "id": 2,
+      "title": "Feedback",
+      "body": [
+        { "id":1,
+          "value":"Feedback1"
+        },
+        { "id":2,
+          "value":"Feedback2"
+        },
+        { "id":3,
+          "value":"Feedback3"
+        }
+
+      ]
+    }
+  ],
+  "admin_main_content":[
+    {
+      "contentId": 1,
+      "id": 1,
+      "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+      "body": "Article content"
+    },
+    {
+      "contentId": 1,
+      "id": 2,
+      "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+      "body": "Article content"
+    },
+    {
+      "contentId": 1,
+      "id": 3,
+      "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+      "body": "Article content"
+    },
+    {
+      "contentId": 2,
+      "id": 4,
+      "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+      "body": "Feedback content"
+    },
+    {
+      "contentId": 2,
+      "id": 5,
+      "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+      "body": "Feedback content"
+    },
+    
+    {
+      "contentId": 1,
+      "id": 6,
+      "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+      "body": "Article content"
+    },
+    {
+      "contentId": 2,
+      "id": 7,
+      "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+      "body": "Feedback content"
+    }
+  ],
   "slider-en": [
     {
       "title": "BUSINESS IN ENGLISH",
@@ -324,6 +406,22 @@
       "email": "testing@testing.com",
       "verificationCode": "RJxjdp",
       "id": 22
+    },
+    {
+      "country": "MY",
+      "identificationCardNo": "342342-34-2342",
+      "phoneNo": "234-2342 3423",
+      "citizenshipStatus": 1,
+      "email": "asdf@sdf.com",
+      "id": 23
+    },
+    {
+      "country": "MY",
+      "identificationCardNo": "111111-11-1111",
+      "phoneNo": "111-1111 1111",
+      "citizenshipStatus": 1,
+      "email": "test@test.com",
+      "id": 24
     }
   ],
   "profile": [
@@ -945,6 +1043,66 @@
       "citizenType": null,
       "user_id": "22",
       "id": 22
+    },
+    {
+      "date_joined": 1511432399831,
+      "ic_number": "342342-34-2342",
+      "dob": null,
+      "gender": null,
+      "email": "asdf@sdf.com",
+      "race": null,
+      "religion": null,
+      "corresponding_address1": null,
+      "corresponding_address2": null,
+      "corresponding_address3": null,
+      "corresponding_postcode": null,
+      "corresponding_city": null,
+      "corresponding_state": null,
+      "corresponding_country": "MY",
+      "corresponding_home_phone": null,
+      "permanent_address1": null,
+      "permanent_address2": null,
+      "permanent_address3": null,
+      "permanent_postcode": null,
+      "permanent_city": null,
+      "permanent_state": null,
+      "permanent_country": "MY",
+      "permanent_home_phone": null,
+      "dateTime": null,
+      "lang": null,
+      "citizenType": null,
+      "user_id": 23,
+      "id": 23
+    },
+    {
+      "date_joined": 1511432555045,
+      "ic_number": "111111-11-1111",
+      "dob": null,
+      "gender": null,
+      "email": "test@test.com",
+      "race": null,
+      "religion": null,
+      "corresponding_address1": null,
+      "corresponding_address2": null,
+      "corresponding_address3": null,
+      "corresponding_postcode": null,
+      "corresponding_city": null,
+      "corresponding_state": null,
+      "corresponding_country": "MY",
+      "corresponding_home_phone": null,
+      "permanent_address1": null,
+      "permanent_address2": null,
+      "permanent_address3": null,
+      "permanent_postcode": null,
+      "permanent_city": null,
+      "permanent_state": null,
+      "permanent_country": "MY",
+      "permanent_home_phone": null,
+      "dateTime": null,
+      "lang": null,
+      "citizenType": null,
+      "user_id": 24,
+      "id": 24
     }
   ],
   "feedback": [

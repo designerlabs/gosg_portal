@@ -10,6 +10,7 @@ let baseURL = 'http://10.1.17.12:3000/';
 let portalBaseURL = 'http://localhost:8020/portal/';
 let protectedBaseURL = 'http://localhost:8021/portal-protected/';
 let commonURL = 'http://10.1.70.148:8080/gosg-service-common/';
+let publicURL = 'http://10.1.70.148:8080/gosg-service-public/';
 
 // backend service
 // let commonURL = 'http://10.1.70.148:8080/gosg-service-common/';
@@ -66,7 +67,7 @@ export const APP_DI_CONFIG: AppConfig = {
     urlPoll: './app/apidata/poll',
     urlAnnouncement: './app/apidata/announcement',
     urlCalendar: './app/apidata/calendar',
-    urlRegister: baseURL+'register',    
+    urlRegister: publicURL+'register',    
     urlFeedbackType: commonURL+'feedback/type/lang/',
     urlFeedbackSubject: commonURL+'feedback/subject/lang/',
     urlFeedback: commonURL+'feedback',

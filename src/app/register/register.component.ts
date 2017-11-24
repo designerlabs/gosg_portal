@@ -323,14 +323,11 @@ export class RegisterComponent implements OnInit, AfterViewInit {
        
         let body = {
             "country":null,
-            "fullName":null,
             "identificationCardNo":null,
-            "telephoneNo":null,
+            "phoneNo":null,
             "citizenshipStatus": null,
-            "email":null,
-            "verificationCode":null
+            "email":null
         };
-
 
         let profileBody = {
             "date_joined": null,
@@ -364,23 +361,21 @@ export class RegisterComponent implements OnInit, AfterViewInit {
             "user_id": null
         };
 
-         body.verificationCode = formValues.captcha;
+        
         if(formValues.country){
             body.country = formValues.country;
-            body.fullName = formValues.nama_penuhf;
             body.citizenshipStatus = 2;
             body.identificationCardNo = formValues.passport;
             body.email = formValues.emelf;
-            body.telephoneNo = formValues.telefon;
+            body.phoneNo = formValues.telefon;
            
 
         }else{
             body.country = "MY";
-            body.fullName = formValues.nama_penuh;
             body.citizenshipStatus = 1;
             body.identificationCardNo = formValues.kad_pengenalan;
             body.email = formValues.emel;
-            body.telephoneNo = formValues.telefon;
+            body.phoneNo = formValues.telefon;
         };
 
         this.portalservice.create(body)
