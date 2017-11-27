@@ -137,7 +137,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.maskDateFormat = this.validateService.getMask().dateFormat;
     this.getUserProfile()
     this.getCountry();
-    this.getCountryByCode();
     this.dob = new FormControl()
     this.gender = new FormControl()
     this.race = new FormControl()
@@ -199,6 +198,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         this.fullname = data[0].fullname;
         this.countryCode = data[0].permanent_country;
         console.log(this.countryCode);
+        this.getCountryByCode(this.countryCode);
         this.idno = data[0].ic_number;
         this.maxDate = this.getMinDobDate(this.idno);
         this.regemail = data[0].email;
@@ -315,8 +315,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       })
   }
 
-  getCountryByCode(){
-      return this.sharedService.getCountrybyCode('MY')
+  getCountryByCode(cntyCode){
+      return this.sharedService.getCountrybyCode(cntyCode)
         .subscribe(resCountryData => {
           this.countryName = resCountryData;
         })
@@ -394,6 +394,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       this.profileForm.get('corrsAddress2').setValue(this.perAddress2.value);
       this.profileForm.get('corrsAddress3').setValue(this.perAddress3.value);
       this.profileForm.get('corrsCountry').setValue(this.perCountry.value);
+      // this.profileForm.get('corrsState').
       this.profileForm.get('corrsState').setValue(this.perState.value);
       this.profileForm.get('corrsCity').setValue(this.perCity.value);
       this.profileForm.get('corrsPostcode').setValue(this.perPostcode.value);
