@@ -71,14 +71,6 @@ ul{
   top:-20px;
 }
 
-.editBtn:hover, .editBtn-active:hover {
-  position: absolute;
-  background-color: yellow;
-  color: #000;
-  right: 0px;
-  top:-20px;
-}
-
 .editBtn-active {
   position: absolute;
   background-color: rgb(109, 185, 38);

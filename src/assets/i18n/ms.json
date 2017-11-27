@@ -82,6 +82,7 @@
       "name":"Nama",
       "nationality":"Warganegara",
       "icnumber":"No Kad Pengenalan",
+      "passport":"Nombor Pasport",
       "dateofbirth":"Tarikh Lahir",
       "gender":"Jantina",
       "email":"Emel",

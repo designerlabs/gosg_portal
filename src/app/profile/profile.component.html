@@ -43,7 +43,8 @@
                 <div class="staticLabel font-size-m boldText" for="nationality">{{countryName?.country.countryName}}</div>
               </div>
               <div class="form-group col-md-4">
-                <label class="font-size-s" for="icnumber">{{'profile.label.icnumber' | translate}}</label>
+                <label *ngIf="isMalaysianChk(countryCode)" class="font-size-s" for="icnumber">{{'profile.label.icnumber' | translate}}</label>
+                <label *ngIf="!isMalaysianChk(countryCode)" class="font-size-s" for="icnumber">{{'profile.label.passport' | translate}}</label>
                 <div class="staticLabel font-size-m boldText" for="icnumber">{{ idno }}</div>
               </div>
             </div>

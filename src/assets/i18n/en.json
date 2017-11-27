@@ -85,6 +85,7 @@
       "name":"Name",
       "nationality":"Nationality",
       "icnumber":"IC Number",
+      "passport":"Passport Number",
       "dateofbirth":"Date Of Birth",
       "gender":"Gender",
       "email":"Email",

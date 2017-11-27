@@ -196,10 +196,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     // debugger;
     this.protectedService.getProfile(getUsrID).subscribe(
       data => {
-        console.log(data);
+        // console.log(data);
         this.fullname = data[0].fullname;
         this.countryCode = data[0].permanent_country;
-        console.log(this.countryCode);
         this.getCountryByCode(this.countryCode);
         this.idno = data[0].ic_number;
         this.maxDate = this.getMinDobDate(this.idno);
@@ -308,14 +307,20 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       century = "19";
     else
       century = "20";
-
+      
+    if(month > 12 || day > 31) {
+      month = 11;
+      day = 31
+      res = new Date(year, month, day);
+    } else {
+      res = new Date(year, month-1, day);
+    }
+      
     year = century+year;
     display = month+"/"+day+"/"+year;
+    console.log(display);
     this.profileForm.get('dob').setValue(new Date(year,month-1,day));
     this.dt= new Date(display).getTime();
-
-
-    res = new Date(year, month-1, day);
 
     return res;
   }
@@ -359,8 +364,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     
 }
 
-
-
   getCity(e){
     debugger;
     this.selectedCity = e.value;
@@ -369,18 +372,14 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   getCountry(){
         return this.sharedService.getCountryData()
          .subscribe(resCountryData => {
-         
             this.countries = resCountryData;
-
           });
   }
   
   getState(){
     return this.sharedService.getStateData()
      .subscribe(resStateData => {
-     
         this.getStateData = resStateData;
-
       });
   }
 
@@ -398,7 +397,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       })
   }
   
-
   validateFirstName(obj) {
     return obj.valid || obj.untouched
   }
@@ -415,7 +413,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
   isStateChanged() {
     this.isChanged();
-
   }
 
   isChecked(e) {
