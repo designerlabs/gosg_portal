@@ -21,6 +21,8 @@ import { ToastrService } from "ngx-toastr";
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit, AfterViewInit {
+  selectedCity: any;
+  selectedState: any;
   maskDateFormat: any;
   maskForeigner: any;
   maskPostcode: any;
@@ -324,6 +326,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   
   getCitiesByState(e){
       this.isStateChanged();
+      this.selectedState = e.value;
       return this.sharedService.getCitiesbyState(e.value)
         .subscribe(resCityData => {
           if(e.source.ngControl.name == "perState") {
@@ -332,6 +335,23 @@ export class ProfileComponent implements OnInit, AfterViewInit {
             this.getCorrsCityData = resCityData;
           }
         })
+  }
+
+
+  
+  getCitiesByStateC(e){
+    
+    return this.sharedService.getCitiesbyState(e)
+      .subscribe(resCityData => {
+        this.getCorrsCityData = resCityData;
+      })
+}
+
+
+
+  getCity(e){
+    debugger;
+    this.selectedCity = e.value;
   }
 
   getCountry(){
@@ -394,13 +414,13 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       this.profileForm.get('corrsAddress2').setValue(this.perAddress2.value);
       this.profileForm.get('corrsAddress3').setValue(this.perAddress3.value);
       this.profileForm.get('corrsCountry').setValue(this.perCountry.value);
-      // this.profileForm.get('corrsState').
+      
       this.profileForm.get('corrsState').setValue(this.perState.value);
+      
+      this.getCitiesByStateC(this.selectedState);
       this.profileForm.get('corrsCity').setValue(this.perCity.value);
       this.profileForm.get('corrsPostcode').setValue(this.perPostcode.value);
       this.profileForm.get('corrsTelephone').setValue(this.perTelephone.value);
-      console.log(this.perCity.value);
-      console.log(this.corrsCity.value);
     }
     else
     {
