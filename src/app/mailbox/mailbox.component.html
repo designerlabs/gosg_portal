@@ -25,7 +25,7 @@
           <gosg-sidenav-dashboard></gosg-sidenav-dashboard>
       </div>
       <div class="col-md-9 mat-elevation-z8" style="margin-top:15px;">
-        <div class="deleteAllBtn"><button [disabled]="!mailboxId.length > 0" mat-raised-button color="warn" (click)="deleteMails()"><i class="fa fa-trash"></i> Delete</button></div>
+        <div class="deleteAllBtn"><button [disabled]="!mailboxId.length > 0" mat-raised-button color="warn" (click)="showMailsDelMsg()"><i class="fa fa-trash"></i> Delete</button></div>
         <div class="row"></div>
         <div class="row mailContainer" *ngIf="mailContent?.message?.fromUser.email">
               <p class="font-size-s">
@@ -56,7 +56,7 @@
             <td class="mat-cell">{{data.submissionDate | date}}</td>
             <td class="mat-cell text-center"> 
               <button (click)="getMail($event, data.messageId)" class="btn btn-sm btn-warning"><i class="fa fa-eye font-size-s"></i></button>
-              <button class="btn btn-sm btn-danger" (click)="deleteMail($event, data.messageId)"><i class="fa fa-trash font-size-s"></i></button>
+              <button class="btn btn-sm btn-danger" (click)="showMailDelMsg($event, data.messageId)"><i class="fa fa-trash font-size-s"></i></button>
             </td>
           </tr>
         </table>

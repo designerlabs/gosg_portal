@@ -8,6 +8,7 @@ import {TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { ToastrService } from 'ngx-toastr';
 import { SharedService } from '../common/shared.service';
+import { DialogsService } from '../dialogs/dialogs.service';
 
 @Component({
   selector: 'gosg-mailbox',
@@ -26,6 +27,7 @@ export class MailboxComponent implements OnInit {
   languageId = this.languageId;
   constructor(
     private protectedService: ProtectedService,
+    private dialogsService: DialogsService,
     private cdRef:ChangeDetectorRef,
     private toastr: ToastrService,
     private sharedService: SharedService,
@@ -99,8 +101,8 @@ export class MailboxComponent implements OnInit {
   }
 
 
-  deleteMail(event, msgId){
-    event.stopPropagation();
+  deleteMail(msgId){
+    
     this.protectedService.deleteMail(msgId).
     subscribe(
       success => {
@@ -112,6 +114,34 @@ export class MailboxComponent implements OnInit {
        this.toastr.error(this.translate.instant('feedback.err.type'), '');            
      });
   }
+
+  showMailDelMsg(event, msgId){
+    event.stopPropagation();
+    this.dialogsService
+    .confirm('', this.translate.instant('feedback.reset'))
+    .subscribe(
+      data => {
+        if(data){
+          this.deleteMail(msgId);
+        }
+      });
+  }
+
+
+
+  showMailsDelMsg(){
+    event.stopPropagation();
+    this.dialogsService
+    .confirm('', this.translate.instant('feedback.reset'))
+    .subscribe(
+      data => {
+        if(data){
+          this.deleteMails();
+        }
+      });
+  }
+
+
 
   deleteMails(){
     
