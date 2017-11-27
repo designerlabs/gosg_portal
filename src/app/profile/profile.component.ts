@@ -225,7 +225,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         // this.corrsMobile = data[0].mobile_phone;
         //this.nationality = this.getCountryByCode(this.countryCode);
 
-        this.isLocal = this.isMalaysian(this.countryCode,null);
+        // this.isLocal = this.isMalaysian(this.countryCode,null);
           // console.log("isLocal");
           // console.log(this.isLocal);
       },
@@ -246,7 +246,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   isMalaysian(val,e) {
     let ans;
     console.log(val);
-    
+    this.countryCode = val;
     if(val == "MY") {
       // is local user
       this.getState();
@@ -282,6 +282,16 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
     }
       return ans;
+  }
+
+  isMalaysianChk(val) {
+
+    if(val == "MY") {
+      this.isCorrsLocal = true;
+    } else {
+        this.isCorrsLocal = false;
+
+    }
   }
 
   getMinDobDate(ic){
@@ -340,11 +350,13 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
   
   getCitiesByStateC(e){
-    
-    return this.sharedService.getCitiesbyState(e)
+    if(e){
+      return this.sharedService.getCitiesbyState(e)
       .subscribe(resCityData => {
         this.getCorrsCityData = resCityData;
       })
+    }
+    
 }
 
 
@@ -418,9 +430,11 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       this.profileForm.get('corrsState').setValue(this.perState.value);
       
       this.getCitiesByStateC(this.selectedState);
+     
       this.profileForm.get('corrsCity').setValue(this.perCity.value);
       this.profileForm.get('corrsPostcode').setValue(this.perPostcode.value);
       this.profileForm.get('corrsTelephone').setValue(this.perTelephone.value);
+      this.isMalaysianChk(this.countryCode);
     }
     else
     {
