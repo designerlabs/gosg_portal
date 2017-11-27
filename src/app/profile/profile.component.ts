@@ -224,7 +224,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         // this.corrsMobile = data[0].mobile_phone;
         //this.nationality = this.getCountryByCode(this.countryCode);
 
-        // this.isLocal = this.isMalaysian(this.countryCode,null);
+        this.isLocal = this.isMalaysian(this.countryCode,null);
           // console.log("isLocal");
           // console.log(this.isLocal);
       },
@@ -365,7 +365,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 }
 
   getCity(e){
-    debugger;
     this.selectedCity = e.value;
   }
 
