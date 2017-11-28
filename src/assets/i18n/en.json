@@ -134,8 +134,13 @@
       "captcha":"Verification code must be valid"
     }
   },
-  "dashboard": {},
-  "errorlabel": {},
+  "dashboard": {
+
+  },
+
+  "errorlabel": {
+
+  },
   "feedback": {
     "msg":"Reset this form?",  
     "title": "COMPLAINTS AND QUERIES",
@@ -160,6 +165,44 @@
       "type":"Sorry, type of feedback is unavailable.",
       "subject":"Sorry, subjects is unavailable."
       
+    }
+  },
+  "mailbox":{
+    "header":{
+      "from":"From",
+      "subject":"Subject",
+      "date":"Date",
+      "action":"Action"
+    },
+    
+    "pagination":{
+      "pages":"Pages",
+      "of":"of",
+      "in":"in",
+      "mails":"mails"
+    },
+    "err":{
+      "deleteconfirm":"Are you sure to delete this mail?",
+      "deleteconfirm_multi":"Are you sure to delete the selected mails?",
+      "failtoload":"Sorry, Mail is not loading properly, Try again!",
+      "failtodelete":"Sorry, Mail is not deleted properly, Try again!",
+      "failtoview":"Sorry, Mail is not viewed properly, Try again!"
+    },
+    "success":{
+      "deletesuccess":"Mail has been deleted successfully!",
+      "deletesuccess_multi":"Selected mails has been deleted successfully!"
+    }
+  },
+  "common":{
+    "buttons":{
+      "delete":"Delete",
+      "update":"Update",
+      "submit":"Submit",
+      "reset":"Reset",
+      "yes":"Yes",
+      "no":"No",
+      "ok":"Ok",
+      "cancel":"Cancel"
     }
   }
 }

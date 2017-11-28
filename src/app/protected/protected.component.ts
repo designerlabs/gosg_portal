@@ -52,7 +52,7 @@ export class ProtectedComponent implements OnInit {
 
   logout(){
     localStorage.removeItem('usrID');
-    location.href='http://localhost:8020/portal/login';
+    location.href='http://localhost:8020/login';
   }
 
   showProfile(data){
@@ -79,11 +79,11 @@ export class ProtectedComponent implements OnInit {
         localStorage.setItem('email',data[0].email);
         localStorage.setItem('usrID', data[0].id);
         }else{
-          location.href = 'http://localhost:8020/portal/login';
+          location.href = 'http://localhost:8020/login';
         }
       },
       error => {
-        location.href = 'http://localhost:8020/portal/login';
+        location.href = 'http://localhost:8020/login';
       });
   }
 

@@ -326,8 +326,11 @@ export class RegisterComponent implements OnInit, AfterViewInit {
             "identificationCardNo":null,
             "phoneNo":null,
             "citizenshipStatus": null,
-            "email":null
+            "email":null,
+            "fullName": null,
         };
+
+        
 
         let profileBody = {
             "date_joined": null,
@@ -368,6 +371,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
             body.identificationCardNo = formValues.passport;
             body.email = formValues.emelf;
             body.phoneNo = formValues.telefon;
+            body.fullName = formValues.nama_penuhf;
            
 
         }else{
@@ -376,6 +380,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
             body.identificationCardNo = formValues.kad_pengenalan;
             body.email = formValues.emel;
             body.phoneNo = formValues.telefon;
+            body.fullName = formValues.nama_penuh;
         };
 
         this.portalservice.create(body)

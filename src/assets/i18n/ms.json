@@ -141,30 +141,70 @@
   "errorlabel":{
     
   },
-    "feedback":{
-      "title":"ADUAN DAN PERTANYAAN",
-      "desc":"Sila hadkan maklum balas anda kepada 10000 aksara dan sertakan bersama alamat emel dan kami akan memberikan maklum balas kepada anda dalam tempoh Tiga (3) hari bekerja. Maklum balas kami terdapat dalam dua bahasa iaitu Bahasa Inggeris dan Bahasa Melayu.",
-      "label":{
-        "type":"Jenis maklum balas",
-        "subjek":"Subjek",
-        "name": "Nama",
-        "nameplh": "Nama Pengguna",
-        "emel":"Emel",
-        "content":"Kandungan Pertanyaan",
-        "reset":"Set Semula",
-        "submit":"Hantar",
-        "words":" aksara yang tinggal.",
-        "choose":"--Sila Pilih--"
+  "feedback":{
+    "title":"ADUAN DAN PERTANYAAN",
+    "desc":"Sila hadkan maklum balas anda kepada 10000 aksara dan sertakan bersama alamat emel dan kami akan memberikan maklum balas kepada anda dalam tempoh Tiga (3) hari bekerja. Maklum balas kami terdapat dalam dua bahasa iaitu Bahasa Inggeris dan Bahasa Melayu.",
+    "label":{
+      "type":"Jenis maklum balas",
+      "subjek":"Subjek",
+      "name": "Nama",
+      "nameplh": "Nama Pengguna",
+      "emel":"Emel",
+      "content":"Kandungan Pertanyaan",
+      "reset":"Set Semula",
+      "submit":"Hantar",
+      "words":" aksara yang tinggal.",
+      "choose":"--Sila Pilih--"
 
-      },
-      "reset":"Set semula borang ini?",
-      "msgsubmit": "Terima kasih. Aduan dan Pertanyaan anda telah dihantar. Maklum balas akan di terima dalam 3 hari masa bekerja.",
-      "err":{
-        "drop": "Ruang ini wajib diisi.",
-        "submit": "Harap maaf. Pelayan tergendala.",
-        "type":"Harap maaf, jenis maklum balas tidak dapat dipaparkan.",
-        "subject":"Harap maaf, pilihan subjek tidak dapat dipaparkan."
-      }
+    },
+    "reset":"Set semula borang ini?",
+    "msgsubmit": "Terima kasih. Aduan dan Pertanyaan anda telah dihantar. Maklum balas akan di terima dalam 3 hari masa bekerja.",
+    "err":{
+      "drop": "Ruang ini wajib diisi.",
+      "submit": "Harap maaf. Pelayan tergendala.",
+      "type":"Harap maaf, jenis maklum balas tidak dapat dipaparkan.",
+      "subject":"Harap maaf, pilihan subjek tidak dapat dipaparkan."
+    }
 
+  },
+  "mailbox":{
+    "header":{
+      "from":"",
+      "subject":"",
+      "date":"",
+      "action":""
+    },
+    
+    "pagination":{
+      "pages":"",
+      "of":"",
+      "in":"",
+      "mails":""
+    },
+
+    "err":{
+      "deleteconfirm":"Are you sure to delete this mail?",
+      "deleteconfirm_multi":"Are you sure to delete the selected mails?",
+      "failtoload":"Sorry, Mail is not loading properly, Try again!",
+      "failtodelete":"Sorry, Mail is not deleted properly, Try again!",
+      "failtoview":"Sorry, Mail is not viewed properly, Try again!"
+    },
+    "success":{
+      "deletesuccess":"Mail has been deleted successfully!",
+      "deletesuccess_multi":"Selected mails has been deleted successfully!"
+    }
+  },
+ 
+  "common":{
+    "buttons":{
+      "delete":"Padam",
+      "update":"Kemaskini",
+      "submit":"",
+      "reset":"",
+      "yes":"",
+      "no":"",
+      "ok":"",
+      "cancel":""
+    }
   }
 }

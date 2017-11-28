@@ -24,6 +24,7 @@ export class MailboxComponent implements OnInit {
   noPrevData = true;
   noNextData = false;
   rerender = false;
+  isMailContainerShow = 'block';
   languageId = this.languageId;
   constructor(
     private protectedService: ProtectedService,
@@ -49,10 +50,11 @@ export class MailboxComponent implements OnInit {
     event.target.parentElement.parentElement.parentElement.removeAttribute('style')
     this.protectedService.getMail(msgId).
     subscribe(data => {
+      this.isMailContainerShow = 'block'
       this.mailContent  = data;
     },
     Error => {
-     this.toastr.error(this.translate.instant('feedback.err.type'), '');            
+     this.toastr.error(this.translate.instant('mailbox.err.failtoload'), '');            
    });
   }
 
@@ -63,7 +65,7 @@ export class MailboxComponent implements OnInit {
     },
     Error => {
 
-     this.toastr.error(this.translate.instant('feedback.err.type'), '');            
+     this.toastr.error(this.translate.instant('mailbox.err.failtoload'), '');            
    });
   }
 
@@ -107,21 +109,22 @@ export class MailboxComponent implements OnInit {
     subscribe(
       success => {
         this.getMails(this.mailPageCount, this.mailPageSize);
-        this.toastr.error(this.translate.instant('feedback.err.type'), '');     
+        this.toastr.error(this.translate.instant('mailbox.success.deletesuccess'), '');     
       },
       Error => {
 
-       this.toastr.error(this.translate.instant('feedback.err.type'), '');            
+       this.toastr.error(this.translate.instant('mailbox.err.failtodelete'), '');            
      });
   }
 
   showMailDelMsg(event, msgId){
     event.stopPropagation();
     this.dialogsService
-    .confirm('', this.translate.instant('feedback.reset'))
+    .confirm('', this.translate.instant('mailbox.err.deleteconfirm'))
     .subscribe(
       data => {
         if(data){
+          this.isMailContainerShow = 'none';
           this.deleteMail(msgId);
         }
       });
@@ -132,14 +135,16 @@ export class MailboxComponent implements OnInit {
   showMailsDelMsg(){
     event.stopPropagation();
     this.dialogsService
-    .confirm('', this.translate.instant('feedback.reset'))
+    .confirm('', this.translate.instant('mailbox.err.deleteconfirm_multi'))
     .subscribe(
       data => {
         if(data){
+          this.isMailContainerShow = 'none';
           this.deleteMails();
         }
       });
   }
+
 
 
 
@@ -150,11 +155,11 @@ export class MailboxComponent implements OnInit {
       success => {
         this.getMails(this.mailPageCount, this.mailPageSize);
         this.mailboxId = [];
-        this.toastr.error(this.translate.instant('feedback.err.type'), '');     
+        this.toastr.error(this.translate.instant('mailbox.success.deletesuccess_multi'), '');     
       },
       Error => {
 
-       this.toastr.error(this.translate.instant('feedback.err.type'), '');            
+       this.toastr.error(this.translate.instant('mailbox.err.failtodelete'), '');            
      });
   }
 }

@@ -53,23 +53,24 @@
       ]
     }
   ],
-  "admin_left_menu":[
-    
+  "admin_left_menu": [
     {
       "menuId": 1,
       "id": 1,
       "title": "Article",
       "body": [
-        { "id":1,
-          "value":"Article1"
+        {
+          "id": 1,
+          "value": "Article1"
         },
-        { "id":2,
-          "value":"Article2"
+        {
+          "id": 2,
+          "value": "Article2"
         },
-        { "id":3,
-          "value":"Article3"
+        {
+          "id": 3,
+          "value": "Article3"
         }
-
       ]
     },
     {
@@ -77,20 +78,22 @@
       "id": 2,
       "title": "Feedback",
       "body": [
-        { "id":1,
-          "value":"Feedback1"
+        {
+          "id": 1,
+          "value": "Feedback1"
         },
-        { "id":2,
-          "value":"Feedback2"
+        {
+          "id": 2,
+          "value": "Feedback2"
         },
-        { "id":3,
-          "value":"Feedback3"
+        {
+          "id": 3,
+          "value": "Feedback3"
         }
-
       ]
     }
   ],
-  "admin_main_content":[
+  "admin_main_content": [
     {
       "contentId": 1,
       "id": 1,
@@ -121,7 +124,6 @@
       "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
       "body": "Feedback content"
     },
-    
     {
       "contentId": 1,
       "id": 6,
@@ -422,6 +424,16 @@
       "citizenshipStatus": 1,
       "email": "test@test.com",
       "id": 24
+    },
+    {
+      "country": "MY",
+      "fullName": "anas ibrahim",
+      "identificationCardNo": "344324-23-4324",
+      "telephoneNo": "888-8888 8888",
+      "citizenshipStatus": 1,
+      "email": "anas123@yopmail.com",
+      "verificationCode": "wg2veI",
+      "id": 25
     }
   ],
   "profile": [
@@ -1103,6 +1115,38 @@
       "citizenType": null,
       "user_id": 24,
       "id": 24
+    },
+    {
+      "date_joined": 1511859944100,
+      "fullname": "anas ibrahim",
+      "ic_number": "344324-23-4324",
+      "dob": null,
+      "gender": null,
+      "email": "anas123@yopmail.com",
+      "race": null,
+      "religion": null,
+      "corresponding_address1": null,
+      "corresponding_address2": null,
+      "corresponding_address3": null,
+      "corresponding_postcode": null,
+      "corresponding_city": null,
+      "corresponding_state": null,
+      "corresponding_country": "MY",
+      "corresponding_home_phone": null,
+      "mobile_phone": "888-8888 8888",
+      "permanent_address1": null,
+      "permanent_address2": null,
+      "permanent_address3": null,
+      "permanent_postcode": null,
+      "permanent_city": null,
+      "permanent_state": null,
+      "permanent_country": "MY",
+      "permanent_home_phone": null,
+      "dateTime": null,
+      "lang": null,
+      "citizenType": null,
+      "user_id": 25,
+      "id": 25
     }
   ],
   "feedback": [
