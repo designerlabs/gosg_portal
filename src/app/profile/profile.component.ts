@@ -47,7 +47,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   countryName:any[];
   nationality:any;
   birthdate:any;
-  isLocal: boolean = true;
+  isLocal: boolean;
   isCorrsLocal: boolean = true;
   getRaceData: any;
   getStateData: any;
@@ -187,6 +187,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       corrsMobile: this.corrsMobile,
     });
 
+    this.isLocal = this.isMalaysian(this.countryCode);
     // this.getGenderVal()
     this.profileForm.disable();
   }
@@ -196,12 +197,17 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     // debugger;
     this.protectedService.getProfile(getUsrID).subscribe(
       data => {
-        // console.log(data);
+        console.log(data);
         this.fullname = data[0].fullname;
         this.countryCode = data[0].permanent_country;
         this.getCountryByCode(this.countryCode);
+
+        this.isLocal = this.isMalaysian(this.countryCode);
+
         this.idno = data[0].ic_number;
-        this.maxDate = this.getMinDobDate(this.idno);
+        if(this.isLocal == true) 
+          this.maxDate = this.getMinDobDate(this.idno);
+
         this.regemail = data[0].email;
         this.regdate = data[0].date_joined;
         this.mobileNo = data[0].mobile_phone;
@@ -223,8 +229,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         this.profileForm.get('corrsMobile').setValue(data[0].mobile_phone);
         // this.corrsMobile = data[0].mobile_phone;
         //this.nationality = this.getCountryByCode(this.countryCode);
-
-        this.isLocal = this.isMalaysian(this.countryCode,null);
           // console.log("isLocal");
           // console.log(this.isLocal);
       },
@@ -242,43 +246,14 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     // this.profileService.toFormGroup(this.ctrlbase)
   } 
   
-  isMalaysian(val,e) {
+  isMalaysian(val) {
     let ans;
-    console.log(val);
-    this.countryCode = val;
+    // console.log(val);
+    // this.countryCode = val;
     if(val == "MY") {
-      // is local user
-      this.getState();
-
-      if(e !== null) {
-        let type = e.source.ngControl.name;
-        console.log(type);
-
-          if(type == "perCountry") {
-            this.isLocal = true;
-          } else if(type == "corrsCountry") {
-              this.isCorrsLocal = true;
-          }
-          this.isChanged();
-        }
-
-        ans = true;
-
+      ans = true;
     } else {
-      // is foreigner
-      
-      if(e !== null) {
-        let type = e.source.ngControl.name;
-        if(type == "perCountry") {
-          this.isLocal = false;
-        } else if(type == "corrsCountry") {
-            this.isCorrsLocal = false;
-        }
-        this.isChanged();
-      }
-      
       ans = false;
-
     }
       return ans;
   }
@@ -307,20 +282,16 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       century = "19";
     else
       century = "20";
-      
-    if(month > 12 || day > 31) {
-      month = 11;
-      day = 31
-      res = new Date(year, month, day);
-    } else {
-      res = new Date(year, month-1, day);
-    }
-      
+   
+    res = new Date(year, month-1, day);
+
     year = century+year;
     display = month+"/"+day+"/"+year;
     console.log(display);
-    this.profileForm.get('dob').setValue(new Date(year,month-1,day));
-    this.dt= new Date(display).getTime();
+    if(this.isLocal == true) {
+      this.profileForm.get('dob').setValue(new Date(year,month-1,day));
+      this.dt= new Date(display).getTime();
+    }
 
     return res;
   }
@@ -329,14 +300,20 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.sharedService.getGender()
       .subscribe(resGenderData => {
         this.genderData = resGenderData
-      })
+      },
+      Error => {
+       this.toastr.error(this.translate.instant('Server is down!'), '');            
+     });
   }
 
   getCountryByCode(cntyCode){
       return this.sharedService.getCountrybyCode(cntyCode)
         .subscribe(resCountryData => {
           this.countryName = resCountryData;
-        })
+        },
+        Error => {
+         this.toastr.error(this.translate.instant('Server is down!'), '');            
+       });
   }
   
   getCitiesByState(e){
@@ -349,20 +326,23 @@ export class ProfileComponent implements OnInit, AfterViewInit {
           } else {
             this.getCorrsCityData = resCityData;
           }
-        })
+        },
+        Error => {
+         this.toastr.error(this.translate.instant('Server is down!'), '');            
+       });
   }
 
-
-  
   getCitiesByStateC(e){
     if(e){
       return this.sharedService.getCitiesbyState(e)
       .subscribe(resCityData => {
         this.getCorrsCityData = resCityData;
-      })
+      },
+      Error => {
+       this.toastr.error(this.translate.instant('Server is down!'), '');            
+     });
     }
-    
-}
+  }
 
   getCity(e){
     this.selectedCity = e.value;
@@ -372,28 +352,40 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         return this.sharedService.getCountryData()
          .subscribe(resCountryData => {
             this.countries = resCountryData;
-          });
+          },
+          Error => {
+           this.toastr.error(this.translate.instant('Server is down!'), '');            
+         });;
   }
   
   getState(){
     return this.sharedService.getStateData()
      .subscribe(resStateData => {
         this.getStateData = resStateData;
-      });
+      },
+      Error => {
+       this.toastr.error(this.translate.instant('Server is down!'), '');            
+     });;
   }
 
   getReligion(){
     return this.sharedService.getReligion(localStorage.getItem('langID'))
     .subscribe(religionData => {
       this.getReligionData = religionData
-    })
+    },
+    Error => {
+     this.toastr.error(this.translate.instant('Server is down!'), '');            
+   });
   }
 
   getRace(){
     return this.sharedService.getRace(localStorage.getItem('langID'))
       .subscribe(raceData => {
         this.getRaceData = raceData
-      })
+      },
+      Error => {
+       this.toastr.error(this.translate.instant('Server is down!'), '');            
+     });
   }
   
   validateFirstName(obj) {
@@ -449,6 +441,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.events = [];
     this.events.push(`${event.value}`);
     this.dt = new Date(this.events[0]).getTime();
+    console.log(this.dt)
   }
 
   edit(){

@@ -25,7 +25,7 @@ input[type=text]::-moz-placeholder {
   color: rgba(0,0,0,.42);
 }
 
-.mat-select.mat-select-disabled, .mat-select-arrow  {
+.mat-select, .mat-select-disabled, .mat-select-arrow  {
   color: rgba(0,0,0,.42);
 }
 
