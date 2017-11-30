@@ -48,7 +48,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   nationality:any;
   birthdate:any;
   isLocal: boolean;
-  isCorrsLocal: boolean = true;
+  isCorrsLocal: boolean;
   getRaceData: any;
   getStateData: any;
   getPerCityData: any;
@@ -137,6 +137,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.maskForeigner = this.validateService.getMask().telephonef;
     this.maskPostcode = this.validateService.getMask().postcode;
     this.maskDateFormat = this.validateService.getMask().dateFormat;
+    
     this.getUserProfile()
     this.getCountry();
     this.dob = new FormControl()
@@ -187,9 +188,12 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       corrsMobile: this.corrsMobile,
     });
 
-    this.isLocal = this.isMalaysian(this.countryCode);
     // this.getGenderVal()
     this.profileForm.disable();
+    console.log("isLocal");
+    console.log(this.isLocal);
+    console.log("isCorrsLocal");
+    console.log(this.isCorrsLocal);
   }
   
   getUserProfile(){
@@ -201,8 +205,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         this.fullname = data[0].fullname;
         this.countryCode = data[0].permanent_country;
         this.getCountryByCode(this.countryCode);
-
-        this.isLocal = this.isMalaysian(this.countryCode);
+          
+      this.isMalaysian(this.countryCode);
+      this.isMalaysianChk(this.countryCode);
 
         this.idno = data[0].ic_number;
         if(this.isLocal == true) 
@@ -248,7 +253,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   
   isMalaysian(val) {
     // let ans;
-    console.log(val);
+    // console.log(val);
     // this.countryCode = val;
     if(val == "MY") {
       this.getState();
@@ -258,7 +263,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       this.isLocal = false;
       // ans = false;
     }
-      return this.isLocal;
   }
 
   isMalaysianChk(val) {
@@ -417,7 +421,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       this.profileForm.get('corrsAddress2').setValue(this.perAddress2.value);
       this.profileForm.get('corrsAddress3').setValue(this.perAddress3.value);
       this.profileForm.get('corrsCountry').setValue(this.perCountry.value);
-      
       this.profileForm.get('corrsState').setValue(this.perState.value);
       
       this.getCitiesByStateC(this.selectedState);

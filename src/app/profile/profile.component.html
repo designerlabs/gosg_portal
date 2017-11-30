@@ -29,7 +29,8 @@
         <button type="button" mat-fab color="warn" (click)="edit()" [ngClass]="{ 'editBtn-active': isActive, 'editBtn': !isActive  }">&nbsp;<i class="fa fa-edit font-size-l"></i></button>
       </span>
       <!-- <p>Status(isActive): {{isActive}}</p> -->
-      <!-- <p>Status(isLocal): {{isLocal}}</p> -->
+      <!-- <p>Status(isLocal): {{isLocal}}</p>
+      <p>Status(isCorrsLocal): {{isCorrsLocal}}</p> -->
       <form [formGroup]="profileForm" autocomplete="off" (ngSubmit)="updateProfile(profileForm.value)" role="form" novalidate>
           <div class="col-md-12">
             <input type="hidden" value="" class="rand_no" name="rand_no" id="rand_no">
@@ -186,15 +187,15 @@
               </div>
               <div class="form-group col-md-12">
                 <mat-form-field class="example-full-width font-size-s">
-                  <input (keyup)="isChanged()" matInput formControlName="corrsAddress1" id="corrsAddress1" type="text" maxlength="30" placeholder="{{'profile.label.corrsaddr' | translate}} 1"
+                  <input (keyup)="isChanged()" matInput formControlName="corrsAddress1" type="text" maxlength="30" placeholder="{{'profile.label.corrsaddr' | translate}} 1"
                   />
                 </mat-form-field>
                 <mat-form-field class="example-full-width font-size-s">
-                  <input (keyup)="isChanged()" matInput formControlName="corrsAddress2" id="corrsAddress2" type="text" maxlength="30" placeholder="{{'profile.label.corrsaddr' | translate}} 2"
+                  <input (keyup)="isChanged()" matInput formControlName="corrsAddress2" type="text" maxlength="30" placeholder="{{'profile.label.corrsaddr' | translate}} 2"
                   />
                 </mat-form-field>
                 <mat-form-field class="example-full-width font-size-s">
-                  <input (keyup)="isChanged()" matInput formControlName="corrsAddress3" id="corrsAddress3" type="text" maxlength="30" placeholder="{{'profile.label.corrsaddr' | translate}} 3"
+                  <input (keyup)="isChanged()" matInput formControlName="corrsAddress3" type="text" maxlength="30" placeholder="{{'profile.label.corrsaddr' | translate}} 3"
                   />
                 </mat-form-field>
               </div>
@@ -202,7 +203,7 @@
             <div class="row">
               <div class="form-group col-md-4">
                 <mat-form-field class="example-full-width font-size-s">
-                  <mat-select (change)="isMalaysian($event.value,$event)" formControlName="corrsCountry" id="corrsCountry" name="corrsCountry" placeholder="{{'profile.label.country' | translate}}">
+                  <mat-select (change)="isMalaysianChk($event.value)" formControlName="corrsCountry" placeholder="{{'profile.label.country' | translate}}">
                       <mat-option *ngFor="let country of countries?.countryList" [value]="country.countryCode">{{country.countryName}}</mat-option>
                   </mat-select>
                 </mat-form-field>

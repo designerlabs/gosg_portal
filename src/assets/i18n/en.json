@@ -18,6 +18,7 @@
       "register": "Register",
       "feedback": "Complaints and Queries",
       "profile": "My Profile",
+      "appmgmt": "Application Management",
       "mailbox": "Mail Box"
     },
     "expandButton": {
@@ -203,6 +204,9 @@
       "no":"No",
       "ok":"Ok",
       "cancel":"Cancel"
+    },
+    "err":{
+      "servicedown": "Server is down"
     }
   }
 }

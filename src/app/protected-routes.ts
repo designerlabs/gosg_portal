@@ -19,7 +19,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProfileComponent } from './profile/profile.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { MailboxComponent } from "./mailbox/mailbox.component";
-
+import { AppManagementComponent } from './app-management/app-management.component';
+// 
 // import { NavRouterActivator } from './header/nav/nav-router-activator.service'
 
 // import { appRoutes } from './routes';
@@ -29,6 +30,7 @@ export const protectedRoutes: Routes = [
     {path: '404', component: ErrorComponent },
     {path: 'dashboard', component: DashboardComponent},
     {path: 'profile', component: ProfileComponent},
+    {path: 'appsmgmt', component: AppManagementComponent},
     {path: 'index', component: HomeComponent},
     {path: 'search/searchResult', component: SearchResultComponent},
     {path: 'topic/:id', component: ArticleComponent, canActivate: [NavRouterActivator]  },

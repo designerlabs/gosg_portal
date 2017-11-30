@@ -22,6 +22,7 @@ import { ProtectedComponent } from "./protected/protected.component";
 import { TextMaskModule, conformToMask } from 'angular2-text-mask';
 import { MailboxComponent } from './mailbox/mailbox.component';
 import { SidenavDashboardComponent } from './sidenav-dashboard/sidenav-dashboard.component';
+import { AppManagementComponent } from './app-management/app-management.component';
 
 
 
@@ -31,7 +32,7 @@ export function HttpLoaderFactory(http: Http) {
 
 @NgModule({
   declarations: [
-    // AppComponent,
+    AppManagementComponent,
     ProfileComponent,
     ProtectedComponent,
     DashboardComponent,

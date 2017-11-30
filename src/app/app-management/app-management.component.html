@@ -1,0 +1,82 @@
+<div class="container-fluid animated slideInDown" style="background: #a7a495;">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 style="margin-top: 10px;" class="font-size-l">{{'home.breadcrumb.appmgmt' | translate}}</h1>
+        <hr class="hr-custom2">
+        <ul class="list-inline" style="clear:both;">
+          <li>
+            <a class="font-size-s" href="/index/">
+                      {{'home.menu.home' | translate }}
+                  </a>
+          </li>
+          <li>/</li>
+          <li>
+            {{'home.breadcrumb.appmgmt' | translate}}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="col-md-3 padding-left-0">
+      <gosg-sidenav-dashboard></gosg-sidenav-dashboard>
+  </div>
+  <div class="col-md-9 mat-elevation-z8" style="margin-top:15px;">
+    <div class="deleteAllBtn"><button [disabled]="!mailboxId.length > 0" mat-raised-button color="warn" (click)="showMailsDelMsg()"><i class="fa fa-trash"></i> {{'common.buttons.delete' | translate}}</button></div>
+    <div class="row"></div>
+    <div class="row mailContainer" *ngIf="mailContent?.message?.fromUser.email" [style.display]="isMailContainerShow">
+          <p class="font-size-s">
+            <!-- From: {{mailContent?.message?.fromUser.email}}  --> sghsehserherh
+          </p>
+          <p class="font-size-s">
+            <!-- Date: {{mailContent?.message?.submissionDate | date}} --> n nbvnvnvbnvbnbvn
+          </p>
+          <p class="font-size-s">
+            <!-- Subject: {{mailContent?.message?.subject}}  -->645y56ju 56u 56 6565  
+          </p>
+          <div class="font-size-m">
+            <!-- {{mailContent?.message?.content}} -->cccccccccccccccccccccc
+          </div>
+    </div>
+    <table class="mat-table" style="width:100%">
+      <tr class="mat-header-row" style="height:45px">
+        <td width="5%" class="mat-header-cell text-center"></td>
+        <td width="30%" class="mat-header-cell"></td>
+        <td class="mat-header-cell"></td>
+        <td width="10%" class="mat-header-cell"></td>
+        <td width="15%" class="mat-header-cell text-center"></td>
+      </tr>
+      <tr class="mat-row table_row table_row_height" *ngFor="let data of mailData?.messageList" [style.font-weight]="data.read ? '' : 'bold'">
+        <td class="mat-cell text-center"><mat-checkbox [value]="data.messageId">1</mat-checkbox></td>
+        <td class="mat-cell">2</td>
+        <td class="mat-cell">3</td>
+        <td class="mat-cell">4</td>
+        <td class="mat-cell text-center"> 
+          <button  class="btn btn-sm btn-warning"><i class="fa fa-eye font-size-s"></i></button>
+          <button class="btn btn-sm btn-danger" ><i class="fa fa-trash font-size-s"></i></button>
+        </td>
+      </tr>
+    </table>
+
+        <!-- <mat-paginator [length]="mailData?.length">
+        </mat-paginator> -->
+        <mat-form-field style="width:50px;">
+            <mat-select class="font-size-s" value="10" (change)="pageChange($event)">
+              <mat-option value="5">5</mat-option>
+              <mat-option value="10">10</mat-option>
+              <mat-option value="25">25</mat-option>
+              <mat-option value="50">50</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div style="float:right; margin-top: 10px;">
+              <span style="color:#000; padding-right:20px;">Pages <strong>a</strong> of <strong>b</strong> in <strong>c</strong> mails</span>
+              <button mat-mini-fab color="basic" [disabled]="noPrevData" (click)="paginatorL(mailData?.pageNumber)"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
+              <button mat-mini-fab color="basic" [disabled]="noNextData"  (click)="paginatorR(mailData?.pageNumber, mailData?.totalPages)"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
+          </div>
+          
+          
+    </div>
+</div>

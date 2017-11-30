@@ -18,6 +18,7 @@
       "register":"Pendaftaran",
       "feedback":"Aduan dan Pertanyaan",
       "profile": "Profil Saya",
+      "appmgmt": "Pengurusan Permohonan",
       "mailbox": "Peti Pesanan"
     },
     "expandButton": {
@@ -205,6 +206,9 @@
       "no":"",
       "ok":"",
       "cancel":""
+    },
+    "err":{
+      "servicedown": "Pelayan tidak aktif "
     }
   }
 }
