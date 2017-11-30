@@ -247,15 +247,18 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   } 
   
   isMalaysian(val) {
-    let ans;
-    // console.log(val);
+    // let ans;
+    console.log(val);
     // this.countryCode = val;
     if(val == "MY") {
-      ans = true;
+      this.getState();
+      this.isLocal = true;
+      // ans = true;
     } else {
-      ans = false;
+      this.isLocal = false;
+      // ans = false;
     }
-      return ans;
+      return this.isLocal;
   }
 
   isMalaysianChk(val) {

@@ -85,7 +85,7 @@
               </div>
               <div class="form-group col-md-4">
                 <mat-form-field class="example-full-width font-size-s">
-                  <mat-select *ngIf="!this.isOtherRace" (change)="otherRaceChk($event.value)" formControlName="race" placeholder="{{'profile.label.race' | translate}}">
+                  <mat-select *ngIf="!this.isOtherRace" formControlName="race" placeholder="{{'profile.label.race' | translate}}">
                       <mat-option *ngFor="let race of getRaceData" [value]="race.raceId">{{race.race}}</mat-option>
                   </mat-select>
                 </mat-form-field>
@@ -124,7 +124,7 @@
             <div class="row">
               <div class="form-group col-md-4">
                 <mat-form-field class="example-full-width font-size-s">
-                  <mat-select formControlName="perCountry" (change)="isMalaysian($event.value,$event)" placeholder="{{'profile.label.country' | translate}} " required>
+                  <mat-select formControlName="perCountry" (change)="isMalaysian($event.value)" placeholder="{{'profile.label.country' | translate}} " required>
                     <mat-option *ngFor="let country of countries?.countryList" [value]="country.countryCode">{{country.countryName}}</mat-option>
                   </mat-select>
                   <mat-error *ngIf="!validateCtrlChk(perCountry) && profileForm.controls.perCountry.errors.required">
