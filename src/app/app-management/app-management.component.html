@@ -25,7 +25,7 @@
       <gosg-sidenav-dashboard></gosg-sidenav-dashboard>
   </div>
   <div class="col-md-9 mat-elevation-z8" style="margin-top:15px;">
-    <div class="deleteAllBtn"><button [disabled]="!mailboxId.length > 0" mat-raised-button color="warn" (click)="showMailsDelMsg()"><i class="fa fa-trash"></i> {{'common.buttons.delete' | translate}}</button></div>
+    <!-- <div class="deleteAllBtn"><button [disabled]="!mailboxId.length > 0" mat-raised-button color="warn" (click)="showMailsDelMsg()"><i class="fa fa-trash"></i> {{'common.buttons.delete' | translate}}</button></div> -->
     <div class="row"></div>
     <div class="row mailContainer" *ngIf="mailContent?.message?.fromUser.email" [style.display]="isMailContainerShow">
           <p class="font-size-s">
@@ -43,22 +43,27 @@
     </div>
     <table class="mat-table" style="width:100%">
       <tr class="mat-header-row" style="height:45px">
-        <td width="5%" class="mat-header-cell text-center"></td>
-        <td width="30%" class="mat-header-cell"></td>
-        <td class="mat-header-cell"></td>
-        <td width="10%" class="mat-header-cell"></td>
-        <td width="15%" class="mat-header-cell text-center"></td>
+        <td width="5%" class="mat-header-cell text-center">Bil</td>
+        <td width="30%" class="mat-header-cell">No. Permohonan</td>
+        <td class="mat-header-cell">Nama Permohonan</td>
+        <td width="10%" class="mat-header-cell">Agensi</td>
+        <td width="15%" class="mat-header-cell text-center">Tarikh Hantar</td>
+        <td width="15%" class="mat-header-cell text-center">Status</td>
+        <td width="15%" class="mat-header-cell text-center">Tindakan</td>
       </tr>
-      <tr class="mat-row table_row table_row_height" *ngFor="let data of mailData?.messageList" [style.font-weight]="data.read ? '' : 'bold'">
-        <td class="mat-cell text-center"><mat-checkbox [value]="data.messageId">1</mat-checkbox></td>
-        <td class="mat-cell">2</td>
-        <td class="mat-cell">3</td>
-        <td class="mat-cell">4</td>
+      <tbody style="color:#000"><tr role="row" class="odd"><td class="sorting_1">1</td><td>173434</td><td>PERMOHONAN BARU LESEN PENIAGA/TAKSIDERMI</td><td>PERHILITAN</td><td>07-11-2017 15:06:52 PM</td><td>DALAM PROSES</td><td><button class="btn btn-info viewPerhilitan" data_transid="173434">PAPAR  </button></td></tr><tr role="row" class="even"><td class="sorting_1">2</td><td>173442</td><td>PERMOHONAN BARU LESEN PENIAGA/TAKSIDERMI</td><td>PERHILITAN</td><td>07-11-2017 15:18:54 PM</td><td>DALAM PROSES</td><td><button class="btn btn-info viewPerhilitan" data_transid="173442">PAPAR  </button></td></tr><tr role="row" class="odd"><td class="sorting_1">3</td><td>2</td><td>PERMOHONAN BARU LESEN PENIAGA/TAKSIDERMI</td><td>PERHILITAN</td><td>28-11-2017 17:41:47 PM</td><td> DRAF </td><td><button class="btn btn-info derafPerhilitan" data_transid="2">KEMASKINI </button></td></tr><tr role="row" class="even"><td class="sorting_1">4</td><td>8</td><td>PERMOHONAN BARU LESEN PENIAGA/TAKSIDERMI</td><td>PERHILITAN</td><td>09-11-2017 16:39:22 PM</td><td> DRAF </td><td><button class="btn btn-info derafPerhilitan" data_transid="8">KEMASKINI </button></td></tr><tr role="row" class="odd"><td class="sorting_1">5</td><td>9</td><td>PERMOHONAN BARU LESEN PENIAGA/TAKSIDERMI</td><td>PERHILITAN</td><td>09-11-2017 17:02:34 PM</td><td> DRAF </td><td><button class="btn btn-info derafPerhilitan" data_transid="9">KEMASKINI </button></td></tr><tr role="row" class="even"><td class="sorting_1">6</td><td>10</td><td>PERMOHONAN BARU LESEN PENIAGA/TAKSIDERMI</td><td>PERHILITAN</td><td>09-11-2017 17:25:58 PM</td><td> DRAF </td><td><button class="btn btn-info derafPerhilitan" data_transid="10">KEMASKINI </button></td></tr><tr role="row" class="odd"><td class="sorting_1">7</td><td>11</td><td>PERMOHONAN BARU LESEN PENIAGA/TAKSIDERMI</td><td>PERHILITAN</td><td>28-11-2017 17:35:35 PM</td><td> DRAF </td><td><button class="btn btn-info derafPerhilitan" data_transid="11">KEMASKINI </button></td></tr><tr role="row" class="even"><td class="sorting_1">8</td><td>13</td><td>PERMOHONAN BARU LESEN PENIAGA/TAKSIDERMI</td><td>PERHILITAN</td><td>14-11-2017 14:59:04 PM</td><td> DRAF </td><td><button class="btn btn-info derafPerhilitan" data_transid="13">KEMASKINI </button></td></tr><tr role="row" class="odd"><td class="sorting_1">9</td><td>18</td><td>PERMOHONAN BARU LESEN PENIAGA/TAKSIDERMI</td><td>PERHILITAN</td><td>28-11-2017 14:24:17 PM</td><td> DRAF </td><td><button class="btn btn-info derafPerhilitan" data_transid="18">KEMASKINI </button></td></tr><tr role="row" class="even"><td class="sorting_1">10</td><td>14</td><td>PEMBAHARUAN LESEN PENIAGA/TAKSIDERMI</td><td>PERHILITAN</td><td>28-11-2017 17:44:52 PM</td><td> DRAF </td><td><button class="btn btn-info derafPerhilitanRenew" data_transid="14">KEMASKINI </button></td></tr></tbody>
+      <!-- <tr class="mat-row table_row table_row_height" *ngFor="let data of mailData?.messageList" [style.font-weight]="data.read ? '' : 'bold'">
+        <td class="mat-cell text-center"><mat-checkbox [value]="data.messageId"></mat-checkbox></td>
+        <td class="mat-cell"></td>
+        <td class="mat-cell"></td>
+        <td class="mat-cell"></td>
+        <td class="mat-cell"></td>
+        <td class="mat-cell"></td>
         <td class="mat-cell text-center"> 
           <button  class="btn btn-sm btn-warning"><i class="fa fa-eye font-size-s"></i></button>
           <button class="btn btn-sm btn-danger" ><i class="fa fa-trash font-size-s"></i></button>
         </td>
-      </tr>
+      </tr> -->
     </table>
 
         <!-- <mat-paginator [length]="mailData?.length">
