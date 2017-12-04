@@ -1,8 +1,8 @@
 
-
 input, .form-group {
     color: #000;
 }
+
 
 em{
       float:right; color: #000; padding-left:10px;
@@ -20,19 +20,10 @@ input[type=number]::-webkit-outer-spin-button:disabled {
 margin: 0; 
 }
 
-input[type=text]::-webkit-input-placeholder,
+/* input[type=text]::-webkit-input-placeholder,
 input[type=text]::-moz-placeholder {
   color: rgba(0,0,0,.42);
-}
-
-.mat-select, .mat-select-disabled, .mat-select-arrow  {
-  color: rgba(0,0,0,.42);
-}
-
-formGroup {
-  color: rgb(170, 1, 1)
-
-}
+} */
 
 .example-full-width {
 width: 100%;
@@ -77,4 +68,8 @@ ul{
   color: #FFF;
   right: 0px;
   top:-20px;
+}
+
+.formGroup {
+  color: red
 }
