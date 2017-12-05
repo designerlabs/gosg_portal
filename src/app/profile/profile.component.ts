@@ -214,12 +214,23 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         this.regemail = data[0].email;
         this.regdate = data[0].date_joined;
         this.mobileNo = data[0].mobile_phone;
+        this.profileForm.get('gender').setValue(data[0].gender);
+        this.profileForm.get('race').setValue(data[0].race);
+        this.profileForm.get('religion').setValue(data[0].religion);
         this.profileForm.get('perAddress1').setValue(data[0].permanent_address1);
         this.profileForm.get('perAddress2').setValue(data[0].permanent_address2);
         this.profileForm.get('perAddress3').setValue(data[0].permanent_address3);
         this.profileForm.get('perCountry').setValue(data[0].permanent_country);
-        this.profileForm.get('perState').setValue(data[0].permanent_state);
-        this.profileForm.get('perCity').setValue(data[0].permanent_city);
+
+
+        if(data[0].permanent_state !== null) {
+          this.getCitiesByStateC(data[0].permanent_state);
+          this.profileForm.get('perState').setValue(data[0].permanent_state);
+          this.profileForm.get('perCity').setValue(data[0].permanent_city); 
+        }
+
+
+        
         this.profileForm.get('perPostcode').setValue(data[0].permanent_postcode);
         this.profileForm.get('perTelephone').setValue(data[0].corresponding_home_phone);
         this.profileForm.get('corrsAddress1').setValue(data[0].corresponding_address1);
@@ -313,7 +324,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   }
 
   getGenderVal() {
-    this.sharedService.getGender()
+    let langID = localStorage.getItem('langID');
+    this.sharedService.getGender(langID)
       .subscribe(resGenderData => {
         this.genderData = resGenderData
       },
@@ -381,7 +393,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       },
       Error => {
        this.toastr.error(this.translate.instant('Server is down!'), '');            
-     });;
+     });
   }
 
   getReligion(){
@@ -539,22 +551,22 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     body.corresponding_home_phone = formValues.corrsTelephone;
     body.mobile_phone = formValues.corrsMobile;
     body.dateTime = new Date().getTime();
-    body.user_id = localStorage.getItem("usrID");
+    body.user_id = localStorage.getItem('usrID');
     body.lang = localStorage.getItem("langID");
   
     // console.log(JSON.stringify(body));
-    console.log(body);
+    // console.log(body);
+    // window.rel
 
-    /*
     this.protectedService.updateProfile(body)
     .subscribe(
       data => {
         this.toastr.success(this.translate.instant('profile.msg.updateSuccess'), '');
+        this.profileForm.disable();
       },
       error => {
         this.toastr.error(this.translate.instant('profile.err.updatefail'), '');
       });
-    */
   }
 
   toFormGroup(data: any) {

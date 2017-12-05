@@ -63,7 +63,7 @@ export const APP_DI_CONFIG: AppConfig = {
     urlSubtopic: './app/apidata/subtopic',
     urlTopics: './app/apidata/articlemenu',
     urlHighlights: './app/apidata/highlightbox',
-    urlGender: commonURL+'/gender/type/',
+    urlGender: commonURL+'/gender/type/lang/',
     urlPoll: './app/apidata/poll',
     urlAnnouncement: './app/apidata/announcement',
     urlCalendar: './app/apidata/calendar',

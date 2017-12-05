@@ -67,8 +67,8 @@ export class SharedService {
 
   }
 
-  getGender(): Observable<any[]> {
-    return this.http.get(this.genderUrl)
+  getGender(langId): Observable<any[]> {
+    return this.http.get(this.genderUrl + langId)
       .map((response: Response) => response.json().genderList)
       .catch(this.handleError);
   }
