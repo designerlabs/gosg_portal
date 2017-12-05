@@ -63,6 +63,7 @@ export function HttpLoaderFactory(http: Http) {
   schemas:[
     CUSTOM_ELEMENTS_SCHEMA
   ],
+  
   providers: [ ProtectedService],
   bootstrap: [ProtectedComponent]
 })

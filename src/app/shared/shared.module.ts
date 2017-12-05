@@ -53,6 +53,8 @@ import { FeedbackComponent } from '../feedback/feedback.component';
 import { ConfirmComponent } from '../message/confirm.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { BsModalService } from 'ngx-bootstrap/modal';
 import {
       MatButtonModule,
       MatInputModule,
@@ -87,7 +89,7 @@ import {
       MatSortModule,
       MatPaginatorModule,
     }from '@angular/material';
-// import { ConfirmDialogComponent } from '../dialogs/confirm-dialog/confirm-dialog.component';
+
 import { A11yModule } from "@angular/cdk/a11y";
 import { BidiModule } from "@angular/cdk/bidi";
 import { OverlayModule } from "@angular/cdk/overlay";
@@ -96,7 +98,8 @@ import { PortalModule } from "@angular/cdk/portal";
 import { ScrollDispatchModule } from "@angular/cdk/scrolling";
 import { CdkStepperModule } from "@angular/cdk/stepper";
 import { CdkTableModule } from "@angular/cdk/table";
-import { DialogsModule } from '../dialogs/dialogs.module';
+// import { DialogsModule } from '../dialogs/dialogs.module';
+import { ConfirmDialogComponent } from '../dialogs/confirm-dialog/confirm-dialog.component';
 import { SharedPipe } from '../common/shared.pipe';
 export function HttpLoaderFactory(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -123,7 +126,8 @@ export function HttpLoaderFactory(http: Http) {
     ReactiveFormsModule,
     NguiAutoCompleteModule,
     MatDialogModule,
-    DialogsModule
+    // DialogsModule,
+    ModalModule.forRoot()
     
   ],
 
@@ -153,8 +157,8 @@ export function HttpLoaderFactory(http: Http) {
     HomeComponent,
     FeedbackComponent,
     ConfirmComponent,
-    SharedPipe
-    // ConfirmDialogComponent
+    SharedPipe,
+    ConfirmDialogComponent
   ],
 
   exports: [
@@ -184,14 +188,14 @@ export function HttpLoaderFactory(http: Http) {
     FeedbackComponent,
     ConfirmComponent,
     BrowserAnimationsModule,
-    // ConfirmDialogComponent,
+    ConfirmDialogComponent,
     MatButtonModule,
     MatInputModule, 
     MatFormFieldModule,
     MatSelectModule,
     MatCheckboxModule,
     MatDialogModule,
-    DialogsModule,
+    // DialogsModule,
 
      // CDK
      A11yModule,
@@ -238,6 +242,6 @@ export function HttpLoaderFactory(http: Http) {
     
   ],
 
-  providers: [SliderService, TopnavService, SharedService, ValidateService, BreadcrumbService, PortalService, AuthService, ArticleService, NavRouterActivator, NavService, TransService, DialogsService, SearchService]
+  providers: [SliderService, BsModalService, TopnavService, SharedService, ValidateService, BreadcrumbService, PortalService, AuthService, ArticleService, NavRouterActivator, NavService, TransService, DialogsService, SearchService]
 })
 export class SharedModule { }

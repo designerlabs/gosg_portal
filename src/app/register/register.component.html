@@ -196,3 +196,9 @@
       </div>
     </div>
   </div>
+
+<button type="button" class="btn btn-primary" (click)="infoModal.show()">Static modal</button>
+ 
+
+<pre>{{message}}</pre>
+<app-confirm-dialog  #infoModal [title]="'common modal'" [content]="'register.label.btnsubmit'" [state]="'bg_success_header'" [isRegister]="'index'"></app-confirm-dialog>
