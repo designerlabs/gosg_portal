@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+// import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { DialogsService } from './dialogs.service';
 import { MatButtonModule, MatDialogModule } from '@angular/material';
 @NgModule({
@@ -9,9 +9,9 @@ import { MatButtonModule, MatDialogModule } from '@angular/material';
     MatDialogModule,
     MatButtonModule,
   ],
-  declarations: [ConfirmDialogComponent],
-  exports: [ConfirmDialogComponent],
-  entryComponents: [ConfirmDialogComponent],
+  declarations: [],
+  // exports: [ConfirmDialogComponent],
+  // entryComponents: [ConfirmDialogComponent],
   providers: [DialogsService]
 })
 export class DialogsModule { }

@@ -11,7 +11,7 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { DatepickerModule } from 'ngx-bootstrap/datepicker';
 import {HttpClientModule} from '@angular/common/http';
 import { AppConfigModule } from './config/app.config.module';
-
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { AppComponent } from './app.component';
 import { appRoutes } from './routes';
@@ -51,6 +51,7 @@ imports: [
     NguiAutoCompleteModule,
     ButtonsModule.forRoot(),
     AccordionModule.forRoot(),
+    ModalModule.forRoot(),
     OwlModule,
     // MatButtonModule,
     // MatCheckboxModule,

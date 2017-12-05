@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnInit, Output, EventEmitter, ViewChild, ElementRef, InjectionToken, AfterViewInit } from '@angular/core';
+import { Component, Inject, Input, TemplateRef,  OnInit, Output, EventEmitter, ViewChild, ElementRef, InjectionToken, AfterViewInit } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormBuilder  } from '@angular/forms';
 import { BreadcrumbService } from '../header/breadcrumb/breadcrumb.service';
 import { SharedService } from '../common/shared.service';
@@ -16,7 +16,8 @@ import { DialogsService } from '../dialogs/dialogs.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { trigger, state, style, transition, animate, keyframes} from '@angular/animations';
 import { ToastrService } from "ngx-toastr";
-
+import { ModalDirective, BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 declare var System: any;
 
 @Component({
@@ -37,7 +38,12 @@ declare var System: any;
 })
 
 export class RegisterComponent implements OnInit, AfterViewInit {
-    
+    content: any;
+    message: string;
+
+    @ViewChild(ModalDirective) modal: ModalDirective;
+    @ViewChild('staticModal') public staticModal:ModalDirective;
+    @ViewChild('infoModal') public infoModal:ModalDirective;
     getUserData: any;
     maskICNo: any;
     state:string = 'small';
@@ -45,7 +51,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     
     nonCiti: boolean;
     citi: boolean;
-    
+    modalRef: BsModalRef;
     maskCitizen: any;
     maskForeigner: any;
     handleErrorObservable(arg0: any): any {
@@ -54,6 +60,8 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     extractData(arg0: any): any {
         throw new Error("Method not implemented.");
     }
+
+      
     breadcrumb: any;
     isValid: any;
     topicID: number;
@@ -119,7 +127,8 @@ export class RegisterComponent implements OnInit, AfterViewInit {
                 private portalservice: PortalService,
                 textMask:TextMaskModule,
                 private dialogsService: DialogsService,
-                private toastr: ToastrService
+                private toastr: ToastrService,
+                private modalService: BsModalService
             ) {
                 this.lang = translate.currentLang;
                 this.languageId = 2;
@@ -153,6 +162,16 @@ export class RegisterComponent implements OnInit, AfterViewInit {
                 });
             }
 
+             
+              confirm(): void {
+                this.message = 'Confirmed!';
+                this.modal.hide();
+              }
+             
+              decline(): void {
+                this.message = 'Declined!';
+                this.modal.hide();
+              }
 
     getUserType(){
         this.portalservice.getUserType(this.languageId)
@@ -164,6 +183,11 @@ export class RegisterComponent implements OnInit, AfterViewInit {
                 }
             );
     }
+
+    openModal(template: TemplateRef<any>, content) {
+        this.modalRef = this.modalService.show(template);
+        this.content = content;
+      }
     
     
     private registerUrl: string = this.config.urlRegister;
@@ -208,7 +232,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     openDialog() {
         this.dialogsService
             .confirm('Success!', 'Registeration successful!')
-            .subscribe(res => this.getResult = res);;
+            .subscribe(res => this.getResult = res);
         }
 
     animateMe(){
@@ -406,7 +430,9 @@ export class RegisterComponent implements OnInit, AfterViewInit {
                 }
             );
               //  this.alertService.success('Registration successful', true);
-              this.openDialog();
+              //this.openDialog();
+            //   this.staticModal.show();
+            this.infoModal.show();
     
             },
             error => {

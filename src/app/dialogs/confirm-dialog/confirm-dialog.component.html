@@ -1,7 +1,30 @@
-<p>{{ title }}</p>
-<p>{{ message }}</p>
-
-<button type="button" mat-raised-button 
-    (click)="dialogRef.close(true)">OK</button>
-<button type="button" mat-button 
-    (click)="dialogRef.close()">Cancel</button>
+<div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static', keyboard: false}"
+tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-sm">
+<div class="modal-content">
+ <div [class]="state" class="modal-header">
+   <h4 class="modal-title pull-left">{{title}}</h4>
+   <button type="button" class="close pull-right" aria-label="Close" (click)="staticModal.hide()">
+     <span aria-hidden="true">&times;</span>
+   </button>
+ </div>
+ <div class="modal-body">
+     {{content | translate}}
+   This is static modal, backdrop click will not close it.
+   Click <b>&times;</b> to close modal.
+   <div class="modal-body text-center">
+     <p>Do you want to confirm?</p>
+     <button  *ngIf="isRegister" type="button" class="btn btn-default" (click)="confirm(isRegister)"><i class="fa fa-home"></i> Home</button>
+     <button *ngIf="link" type="button" class="btn btn-default" (click)="confirm(link)" >Yes</button>
+     
+     <button type="button" class="btn btn-primary" (click)="decline()" >No</button>
+     <div class="modal-footer">
+        <div class="pull-left">
+          <button class="btn btn-default" (click)="hide()"> Cancel </button>
+        </div>
+      </div>
+   </div>
+ </div>
+</div>
+</div>
+</div>
