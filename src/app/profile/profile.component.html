@@ -31,6 +31,7 @@
       <!-- <p>Status(isActive): {{isActive}}</p> -->
       <!-- <p>Status(isLocal): {{isLocal}}</p>
       <p>Status(isCorrsLocal): {{isCorrsLocal}}</p> -->
+      
       <form [formGroup]="profileForm" autocomplete="off" (ngSubmit)="updateProfile(profileForm.value)" role="form" novalidate>
           <div class="col-md-12">
             <input type="hidden" value="" class="rand_no" name="rand_no" id="rand_no">
@@ -44,8 +45,8 @@
                 <div class="staticLabel font-size-m boldText" for="nationality">{{countryName?.country.countryName}}</div>
               </div>
               <div class="form-group col-md-4">
-                <label *ngIf="isMalaysianChk(countryCode)" class="font-size-s" for="icnumber">{{'profile.label.icnumber' | translate}}</label>
-                <label *ngIf="!isMalaysianChk(countryCode)" class="font-size-s" for="icnumber">{{'profile.label.passport' | translate}}</label>
+                <label *ngIf="isRegLocal" class="font-size-s" for="icnumber">{{'profile.label.icnumber' | translate}}</label>
+                <label *ngIf="!isRegLocal" class="font-size-s" for="icnumber">{{'profile.label.passport' | translate}}</label>
                 <div class="staticLabel font-size-m boldText" for="icnumber">{{ idno }}</div>
               </div>
             </div>
@@ -83,6 +84,7 @@
                       {{'profile.err.gender' | translate }}
                   </mat-error>
                 </mat-form-field>
+                <!-- {{ genderData }} -->
               </div>
               <div class="form-group col-md-4">
                 <mat-form-field class="example-full-width font-size-s">
@@ -138,7 +140,7 @@
                   <mat-select *ngIf="isLocal" (change)="getCitiesByState($event)" formControlName="perState" placeholder="{{'profile.label.state' | translate}}" required>
                     <mat-option *ngFor="let state of getStateData" [value]="state.stateId">{{ state.stateName }}</mat-option>
                   </mat-select>
-                  <input *ngIf="!isLocal" matInput formControlName="perState" type="text" placeholder="{{'profile.label.state' | translate}}" />
+                  <input *ngIf="!isLocal" (keyup)="isChanged()" matInput formControlName="perState" type="text" placeholder="{{'profile.label.state' | translate}}" />
                   <mat-error *ngIf="!validateCtrlChk(perState) && profileForm.controls.perState.errors.required">
                       {{'profile.err.state' | translate }}
                   </mat-error>
@@ -147,10 +149,10 @@
               </div>
               <div class="form-group col-md-4">
                 <mat-form-field class="example-full-width font-size-s">
-                  <mat-select *ngIf="isLocal" formControlName="perCity" placeholder="{{'profile.label.city' | translate}}" required>
+                  <mat-select *ngIf="isLocal" (change)="isChanged()" formControlName="perCity" placeholder="{{'profile.label.city' | translate}}" required>
                     <mat-option *ngFor="let city of getPerCityData" [value]="city.cityId">{{ city.cityName }}</mat-option>
                   </mat-select>
-                  <input *ngIf="!isLocal" matInput formControlName="perCity" type="text" placeholder="{{'profile.label.city' | translate}}" />
+                  <input *ngIf="!isLocal" (keyup)="isChanged()" matInput formControlName="perCity" type="text" placeholder="{{'profile.label.city' | translate}}" />
                   <mat-error *ngIf="!validateCtrlChk(perCity) && profileForm.controls.perCity.errors.required">
                       {{'profile.err.city' | translate }}
                   </mat-error>
@@ -160,7 +162,7 @@
             <div class="row">
               <div class="form-group col-md-4">
                 <mat-form-field class="example-full-width font-size-s" placeholder="{{'profile.label.postcode' | translate}}">
-                  <input matInput [textMask]="{mask: maskPostcode}" #perPost formControlName="perPostcode" id="perPostcode" type="text"
+                  <input matInput [textMask]="{mask: maskPostcode}" (keyup)="isChanged()" #perPost formControlName="perPostcode" id="perPostcode" type="text"
                     placeholder="Postcode" required />
                   <mat-error *ngIf="!validateCtrlChk(perPostcode) && profileForm.controls.perPostcode.errors.required">
                       {{'profile.err.postcode' | translate }}
@@ -172,7 +174,7 @@
               </div>
               <div class="form-group col-md-4">
                 <mat-form-field class="example-full-width font-size-s">
-                  <input matInput formControlName="perTelephone" [textMask]="{mask: maskForeigner}" id="perTelephone" type="text"
+                  <input matInput formControlName="perTelephone" (keyup)="isChanged()" [textMask]="{mask: maskForeigner}" id="perTelephone" type="text"
                     placeholder="{{'profile.label.homeph' | translate}}" />
                 </mat-form-field>
                 <!-- <em *ngIf="!validateCtrlChk(perTelephone) && profileForm.controls.perTelephone.errors.pattern">{{'profile.pattern.tel' | translate }}</em> -->
@@ -228,19 +230,19 @@
             <div class="row">
               <div class="form-group col-md-4">
                 <mat-form-field class="example-full-width font-size-s">
-                  <input matInput (keyup)="isChanged()" #corsPost formControlName="corrsPostcode" [textMask]="{mask: maskPostcode}" id="corrsPostcode" type="text"
+                  <input matInput (keyup)="isChanged()" #corsPost formControlName="corrsPostcode" [textMask]="{mask: maskPostcode}" type="text"
                     placeholder="{{'profile.label.postcode' | translate}}" />
                 </mat-form-field>
               </div>
               <div class="form-group col-md-4">
                 <mat-form-field class="example-full-width font-size-s">
-                  <input matInput (keyup)="isChanged()" #corshomephone formControlName="corrsTelephone" [textMask]="{mask: maskForeigner}" id="corrsTelephone"
+                  <input matInput (keyup)="isChanged()" #corshomephone formControlName="corrsTelephone" [textMask]="{mask: maskForeigner}"
                     type="text" placeholder="{{'profile.label.homeph' | translate}}" />
                 </mat-form-field>
               </div>
               <div class="form-group col-md-4">
                 <mat-form-field class="example-full-width font-size-s">
-                  <input matInput (keyup)="isChanged()" #corsmobile formControlName="corrsMobile" [textMask]="{mask: maskForeigner}" id="corrsMobile" type="text"
+                  <input matInput (keyup)="isChanged()" #corsmobile formControlName="corrsMobile" [textMask]="{mask: maskForeigner}" type="text"
                     placeholder="{{'profile.label.mobile' | translate}}" value="{{ mobileNo }}" />
                 </mat-form-field>
               </div>

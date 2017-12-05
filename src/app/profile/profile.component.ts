@@ -47,6 +47,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   countryName:any[];
   nationality:any;
   birthdate:any;
+  isRegLocal: boolean;
   isLocal: boolean;
   isCorrsLocal: boolean;
   getRaceData: any;
@@ -133,6 +134,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.date = new Date();
     this.getRace();
+    this.getGenderVal();
     this.getReligion();
     this.maskForeigner = this.validateService.getMask().telephonef;
     this.maskPostcode = this.validateService.getMask().postcode;
@@ -188,12 +190,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       corrsMobile: this.corrsMobile,
     });
 
-    // this.getGenderVal()
     this.profileForm.disable();
-    console.log("isLocal");
-    console.log(this.isLocal);
-    console.log("isCorrsLocal");
-    console.log(this.isCorrsLocal);
   }
   
   getUserProfile(){
@@ -205,7 +202,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         this.fullname = data[0].fullname;
         this.countryCode = data[0].permanent_country;
         this.getCountryByCode(this.countryCode);
-          
+      
+      this.isUserRegLocal(this.countryCode);
       this.isMalaysian(this.countryCode);
       this.isMalaysianChk(this.countryCode);
 
@@ -248,31 +246,42 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.maskForeigner = this.validateService.getMask().telephonef;
     this.maskPostcode = this.validateService.getMask().postcode;
     this.maskDateFormat = this.validateService.getMask().dateFormat;
-    // this.profileService.toFormGroup(this.ctrlbase)
   } 
+
+  isUserRegLocal(regCountry) {
+
+    if(regCountry == "MY") 
+      this.isRegLocal = true;
+    else
+      this.isRegLocal = false;
+  }
   
   isMalaysian(val) {
-    // let ans;
-    // console.log(val);
-    // this.countryCode = val;
+
+    this.isChanged();
     if(val == "MY") {
       this.getState();
       this.isLocal = true;
-      // ans = true;
     } else {
       this.isLocal = false;
-      // ans = false;
+      this.profileForm.get('perState').setValue("");
+      this.profileForm.get('perCity').setValue("");
     }
+    // this.toastr.info(this.translate.instant('this.isLocal: '+this.isLocal), ''); 
   }
 
   isMalaysianChk(val) {
 
+    this.isChanged();
     if(val == "MY") {
       this.isCorrsLocal = true;
     } else {
         this.isCorrsLocal = false;
+        this.profileForm.get('corrsState').setValue("");
+        this.profileForm.get('corrsCity').setValue("");
 
     }
+    // this.toastr.info(this.translate.instant('this.isCorrsLocal: '+this.isCorrsLocal), ''); 
   }
 
   getMinDobDate(ic){
@@ -294,7 +303,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
     year = century+year;
     display = month+"/"+day+"/"+year;
-    console.log(display);
+    // console.log(display);
     if(this.isLocal == true) {
       this.profileForm.get('dob').setValue(new Date(year,month-1,day));
       this.dt= new Date(display).getTime();
@@ -362,7 +371,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
           },
           Error => {
            this.toastr.error(this.translate.instant('Server is down!'), '');            
-         });;
+         });
   }
   
   getState(){
@@ -417,6 +426,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
     if(e.checked)
     {
+      this.isCorrsLocal = this.isLocal;
       this.profileForm.get('corrsAddress1').setValue(this.perAddress1.value);
       this.profileForm.get('corrsAddress2').setValue(this.perAddress2.value);
       this.profileForm.get('corrsAddress3').setValue(this.perAddress3.value);
@@ -428,7 +438,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       this.profileForm.get('corrsCity').setValue(this.perCity.value);
       this.profileForm.get('corrsPostcode').setValue(this.perPostcode.value);
       this.profileForm.get('corrsTelephone').setValue(this.perTelephone.value);
-      this.isMalaysianChk(this.countryCode);
+      // this.isMalaysianChk(this.countryCode);
     }
     else
     {
@@ -447,7 +457,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.events = [];
     this.events.push(`${event.value}`);
     this.dt = new Date(this.events[0]).getTime();
-    console.log(this.dt)
+    // console.log(this.dt)
   }
 
   edit(){
