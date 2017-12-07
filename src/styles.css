@@ -219,15 +219,17 @@ html, body{
           margin-top: 10%;
         }
 
+        .bg_header{
+          height: 55px;
+          border: none;
+          border-radius: 0;
+          padding: 6px;
+          width: 100%;
+        }
 
         .bg_success_header{
           color: #155724;
           background-color: #d4edda;
-          border: none;
-          border-radius: 0;
-          padding: 15px;
-          display: inline-block;
-          width: 100%;
         }
 
         .bg_success_header .close, .bg_error_header .close, .bg_info_header .close, bg_warning_header .close {
@@ -238,27 +240,25 @@ html, body{
         .bg_error_header{
           color: #721c24;
           background-color: #f8d7da;
-          border: none;
-          border-radius: 0;
-          padding: 15px;
-          display: inline-block;
-          width: 100%;
         }
+
         .bg_info_header{
           color: #0c5460;
           background-color: #d1ecf1;
-          border: none;
-          border-radius: 0;
-          padding: 15px;
-          display: inline-block;
-          width: 100%;
         }
-        .bg_warning_header{
-          color: #856404;
-          background-color: #fff3cd;
-          border: none;
-          border-radius: 0;
-          padding: 15px;
-          display: inline-block;
-          width: 100%;
+
+        .bg_warn_header{
+          color: #721c24;
+          background-color: #f8d7da;
         }
+
+        .modal-body{
+          background: #fff;
+          color: #000;
+          text-align: center;
+          font-size: 17px;
+        }
+
+      .navbar {
+          box-shadow: #757575 0px 10px 40px -5px;
+      }

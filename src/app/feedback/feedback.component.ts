@@ -236,4 +236,9 @@ export class FeedbackComponent implements OnInit {
     this.sendMsg = true;
   } 
 
+  resetMethod(event) {
+    this.resetForm();
+  }
+
+
 }

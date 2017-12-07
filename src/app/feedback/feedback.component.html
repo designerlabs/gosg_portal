@@ -111,7 +111,7 @@
                     <div class="row" style="margin:20px;">
                         <div class="col-md-12" style="text-align: right;">
                             <button tabindex="6" mat-raised-button color="warn" type="button" id="btnreset" class="form-control btn btn-md btn-warning font-size-s"
-                                style="width: 115px; font-family: Roboto;" (click)="showResetMsg()">
+                                style="width: 115px; font-family: Roboto;" (click)="resetModal.show()">
                                 <i class="fa fa-refresh"></i> {{'feedback.label.reset' | translate }}</button>
                             <button tabindex="7" mat-raised-button type="button" color="primary" id="btnsubmit" class="form-control btn btn-md btn-success font-size-s"
                                 (click)="submitForm(feedbackFormgrp.value)" style="width: 100px; font-family: Roboto; margin-left: 5px;"
@@ -124,4 +124,12 @@
         </div>
     </div>
 </div>
+<app-confirm-dialog  #resetModal 
+[title]="'common.icon.warn'" 
+[content]="'common.msg.reset'"
+[state]="'common.state.warn'"
+[isReset]="'true'"
+(resetMethod)="resetMethod($event)">
+</app-confirm-dialog>
+
 <gosg-confirm></gosg-confirm>

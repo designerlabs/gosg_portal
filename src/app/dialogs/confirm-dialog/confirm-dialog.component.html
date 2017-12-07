@@ -1,28 +1,22 @@
 <div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static', keyboard: false}"
 tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-<div class="modal-dialog modal-sm">
+<div class="modal-dialog modal-md">
 <div class="modal-content">
- <div [class]="state" class="modal-header">
-   <h4 class="modal-title pull-left">{{title}}</h4>
-   <button type="button" class="close pull-right" aria-label="Close" (click)="staticModal.hide()">
-     <span aria-hidden="true">&times;</span>
-   </button>
+ <div class="{{state | translate}}">
+   <h2 class="modal-title text-center"><i class='{{title | translate}}'></i></h2>
  </div>
  <div class="modal-body">
-     {{content | translate}}
-   This is static modal, backdrop click will not close it.
-   Click <b>&times;</b> to close modal.
+     <span *ngIf="isRegister">
+            {{content | translate}} <div style="font-weight:bold;">{{email}}</div> {{content2 | translate}}
+     </span>
+     <span *ngIf="!isRegister">{{content | translate}} </span>
    <div class="modal-body text-center">
-     <p>Do you want to confirm?</p>
-     <button  *ngIf="isRegister" type="button" class="btn btn-default" (click)="confirm(isRegister)"><i class="fa fa-home"></i> Home</button>
+     <button  *ngIf="isRegister" type="button" class="btn btn-success" (click)="confirm(isRegister)"><i class="fa fa-home"></i> Home</button>
      <button *ngIf="link" type="button" class="btn btn-default" (click)="confirm(link)" >Yes</button>
      
-     <button type="button" class="btn btn-primary" (click)="decline()" >No</button>
-     <div class="modal-footer">
-        <div class="pull-left">
-          <button class="btn btn-default" (click)="hide()"> Cancel </button>
-        </div>
-      </div>
+     <button *ngIf="isReset" type="button" class="btn btn-success" (click)="onSubmit($event)"><i class="fa fa-check"></i> Yes</button>
+     <button *ngIf="isReset" type="button" class="btn btn-danger" (click)="hide()"><i class="fa fa-times"></i> No</button>
+
    </div>
  </div>
 </div>
