@@ -1,4 +1,4 @@
-.example-container {
+ .example-container {
     display: flex;
     flex-direction: column;
     max-height: 500px;
@@ -10,7 +10,17 @@
     max-height: 500px;
   }
 
+  .mat-row:nth-child(even) {
+    background: #f0f0f0;
+  }
+
+  .mat-header-cell {
+    font-weight: bold;
+    padding: 5px;
+  }
+
   .mat-cell {
+      padding: 5px;
       vertical-align: top;
   }
 
@@ -26,14 +36,14 @@
     max-width:20%;
 }
 
-.list-inline{
+/* .list-inline{
 	margin-top: 25px;
 }
 
 .list-inline li a:hover{
 	text-decoration:none;
 	color:#333;
-}
+} */
 
 .table_row:hover{
     background:#ddd;
@@ -49,26 +59,9 @@ mat-table{
     height:45px;
 }
 
-.deleteAllBtn{
+.moreSearchOptBtn{
     float: right;
     position: relative;
     clear: both;
     margin-top: 15px;
-}
-
-.mailContainer{
-    color: #000;
-    height: 250px;
-    overflow-y: scroll;
-    margin: 15px 0px;
-    border: 1px solid #ddd;
-    padding: 10px;
-}
-
-.mailContainer p{
-    margin:0px;
-}
-
-.mailContainer div{
-    margin-top:10px;
-}
+} 

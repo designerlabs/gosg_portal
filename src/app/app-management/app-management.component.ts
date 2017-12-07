@@ -9,7 +9,6 @@ import { ProtectedService } from '../services/protected.service';
   selector: 'gosg-app-management',
   templateUrl: './app-management.component.html',
   styleUrls: ['./app-management.component.css'],
-  encapsulation: ViewEncapsulation.None
 })
 export class AppManagementComponent implements OnInit {
   mailData: any;
@@ -22,6 +21,7 @@ export class AppManagementComponent implements OnInit {
   rerender = false;
   isMailContainerShow = 'block';
   languageId = this.languageId;
+  collapse:string = "closed";
 
   constructor(
     private protectedService: ProtectedService,
@@ -63,5 +63,10 @@ export class AppManagementComponent implements OnInit {
     let pageInc = page+1;
     this.noNextData = pageInc === totalPages;
     // this.getMails(page+1, this.mailPageSize);
+  }
+
+  toggleCollapse() {
+    // this.show = !this.show
+      this.collapse = this.collapse == "open" ? 'closed' : 'open';
   }
 }

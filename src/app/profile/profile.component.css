@@ -85,7 +85,8 @@ ul{
 .formbg label{
   color : rgb(0, 0, 0);
   /* rgb(179, 179, 179); */
-  font-size: 18px;
+  font-size: 13px;
+  font-weight: bold;
 }
 
 .mat-select-disabled, .mat-select-required {

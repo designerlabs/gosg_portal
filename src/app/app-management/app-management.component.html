@@ -26,10 +26,59 @@
     <gosg-sidenav-dashboard></gosg-sidenav-dashboard>
   </div>
   <div class="col-md-9 mat-elevation-z8" style="margin-top:15px;">
-    <div class="deleteAllBtn">
-      <button mat-raised-button color="warn">
-        <i class="fa fa-eye"></i>More Search Option</button>
+    <div class="moreSearchOptBtn">
+      <button mat-raised-button color="warn" (click)="toggleCollapse()">
+        More Search Option</button>
     </div>
+    <div class="collapse show"  [@collapse]="collapse">
+      <div class="col-sm-12 padding-top-m padding-bottom-s">
+          <div class="col-sm-4"><label for="noapplic" class="font-size-s" style="font-family: Roboto;"><span data-translate="common.noApplication">Application Number</span></label>
+              <input type="text" class="form-control plcr filter" name="noapplic" id="noapplic" data-translate="common.noApplication" data-colm="1" placeholder="Application Number">
+          </div>
+          <div class="col-sm-4"><label for="serAgen" class="font-size-s" style="font-family: Roboto;"><span data-translate="common.agency">Agency</span>
+          </label>
+              <select id="serAgen" name="serAgen" class="form-control filter" data-colm="3">
+                  <option value="" data-translate="common.selagency">Select Agency</option>
+                  <option value="kpdnkk">KPDNKK</option>
+                  <option value="perikanan">JABATAN PERIKANAN MALAYSIA</option>
+                  <option value="perhilitan">PERHILITAN</option>
+              </select>
+          </div>
+
+          <div class="col-sm-4"><label for="datestart" class="font-size-s" style="font-family: Roboto;"><span data-translate="common.startdate">Start Date - End Date</span>
+          </label>
+              <input type="text" id="serDateRange" class="form-control filter" data-colm="4" placeholder="dd/mm/yyyy - dd/mm/yyyy">
+              <input type="text" id="serStartDt" class="hidden" data-colm="4"><input type="text" id="serEndDt" class="hidden" data-colm="4">
+          </div>
+      </div>
+      <div class="col-sm-12 padding-top-m padding-bottom-xl">
+          <div class="col-sm-4"><label for="selAppStatus" data-translate="common.appStatus" class="font-size-s" style="font-family: Roboto;">Application Status</label>
+              <select id="selAppStatus" name="selAppStatus" class="form-control filter" data-colm="5">
+                  <option value="" data-translate="common.selectAppStus">Select Status</option>
+                  <option value="pass" data-translate="common.pass" class="appStatus-perhilitan-perikanan">Passed</option>
+                  <option value="notpass" data-translate="common.notpass" class="appStatus-perhilitan-perikanan">Not Passed</option>
+                  <option value="failed" data-translate="common.failed" class="appStatus-kiv">Failed</option>
+                  <option value="cancel" data-translate="common.cancel" class="appStatus-kpdnkk">Cancel</option>
+                  <option value="process" data-translate="common.process" class="appStatus-perhilitan-perikanan">In Process</option>
+                  <option value="pendingreview" data-translate="common.pendingreview" class="appStatus-kpdnkk">Pending to Review</option>
+                  <option value="pendingapproval" data-translate="common.pendingapproval" class="appStatus-kpdnkk">Pending to approval</option>
+                  <option value="finished" data-translate="common.finished" class="appStatus-kpdnkk-perhilitan">Completed</option>
+                  <option value="rdyprt" data-translate="common.rdyprt" class="appStatus-kpdnkk">Ready to Print</option>
+                  <option value="draft" data-translate="common.draft">Draft</option>
+                  <option value="condpass" data-translate="common.condpass" class="appStatus-kiv">Passed with Condition</option>
+                  <option value="grafix" data-translate="common.grafix" class="appStatus-kiv">Permanently Passed</option>
+                  <option value="return" data-translate="common.return" class="appStatus-kiv">Return</option>
+                  <option value="otherslain" data-translate="common.otherslain" class="appStatus-kiv">Other</option>
+              </select>
+          </div>
+
+          <div class="col-sm-4" style="top: 24px;">
+              <button class="btn btn-primary btn-md searchApp"><i class="fa fa-search"></i><span data-translate="common.search"> Search</span>
+              </button>
+              <button class="btn btn-warning btn-md resetsearchApp" style="text-transform: uppercase;"><i class="fa fa-refresh"></i><span data-translate="common.reset"> Reset</span></button>
+          </div>
+      </div>
+  </div>
     <!-- <div class="row"></div> -->
     <table class="mat-table" style="width:100%">
       <tr class="mat-header-row" style="height:45px">
@@ -41,7 +90,7 @@
         <th width="15%" class="mat-header-cell text-center">Status</th>
         <th width="15%" class="mat-header-cell text-center">Tindakan</th>
       </tr>
-      <tr role="row" class="odd">
+      <tr role="row" class="mat-row">
         <td class="mat-cell">1</td>
         <td class="mat-cell">173434</td>
         <td class="mat-cell">PERMOHONAN BARU LESEN PENIAGA/TAKSIDERMI</td>
@@ -54,7 +103,7 @@
           </button>
         </td>
       </tr>
-      <tr role="row" class="even">
+      <tr role="row" class="mat-row">
         <td class="mat-cell">2</td>
         <td class="mat-cell">173442</td>
         <td class="mat-cell">PERMOHONAN BARU LESEN PENIAGA/TAKSIDERMI</td>
@@ -67,7 +116,7 @@
           </button>
         </td>
       </tr>
-      <tr role="row" class="odd">
+      <tr role="row" class="mat-row">
         <td class="mat-cell">3</td>
         <td class="mat-cell">2</td>
         <td class="mat-cell">PERMOHONAN BARU LESEN PENIAGA/TAKSIDERMI</td>
@@ -80,7 +129,7 @@
           </button>
         </td>
       </tr>
-      <tr role="row" class="even">
+      <tr role="row" class="mat-row">
         <td class="mat-cell">4</td>
         <td class="mat-cell">8</td>
         <td class="mat-cell">PERMOHONAN BARU LESEN PENIAGA/TAKSIDERMI</td>
@@ -93,7 +142,7 @@
           </button>
         </td>
       </tr>
-      <tr role="row" class="odd">
+      <tr role="row" class="mat-row">
         <td class="mat-cell">5</td>
         <td class="mat-cell">9</td>
         <td class="mat-cell">PERMOHONAN BARU LESEN PENIAGA/TAKSIDERMI</td>
@@ -106,7 +155,7 @@
           </button>
         </td>
       </tr>
-      <tr role="row" class="even">
+      <tr role="row" class="mat-row">
         <td class="mat-cell">6</td>
         <td class="mat-cell">10</td>
         <td class="mat-cell">PERMOHONAN BARU LESEN PENIAGA/TAKSIDERMI</td>
@@ -119,7 +168,7 @@
           </button>
         </td>
       </tr>
-      <tr role="row" class="odd">
+      <tr role="row" class="mat-row">
         <td class="mat-cell">7</td>
         <td class="mat-cell">11</td>
         <td class="mat-cell">PERMOHONAN BARU LESEN PENIAGA/TAKSIDERMI</td>
@@ -132,7 +181,7 @@
           </button>
         </td>
       </tr>
-      <tr role="row" class="even">
+      <tr role="row" class="mat-row">
         <td class="mat-cell">8</td>
         <td class="mat-cell">13</td>
         <td class="mat-cell">PERMOHONAN BARU LESEN PENIAGA/TAKSIDERMI</td>
@@ -145,7 +194,7 @@
           </button>
         </td>
       </tr>
-      <tr role="row" class="odd">
+      <tr role="row" class="mat-row">
         <td class="mat-cell">9</td>
         <td class="mat-cell">18</td>
         <td class="mat-cell">PERMOHONAN BARU LESEN PENIAGA/TAKSIDERMI</td>
@@ -158,7 +207,7 @@
           </button>
         </td>
       </tr>
-      <tr role="row" class="even">
+      <tr role="row" class="mat-row">
         <td class="mat-cell">10</td>
         <td class="mat-cell">14</td>
         <td class="mat-cell">PEMBAHARUAN LESEN PENIAGA/TAKSIDERMI</td>

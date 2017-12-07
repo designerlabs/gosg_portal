@@ -224,7 +224,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
 
         if(data[0].permanent_state !== null) {
-          this.getCitiesByStateC(data[0].permanent_state);
+          if(data[0].permanent_country == "MY")
+            this.getCitiesByStateC(data[0].permanent_state);
+            
           this.profileForm.get('perState').setValue(data[0].permanent_state);
           this.profileForm.get('perCity').setValue(data[0].permanent_city); 
         }

@@ -76,6 +76,7 @@
   "profile":{
     "msg":{
       "updateSuccess": "Kemaskini berjaya.",
+      "updateFail": "Kemaskini gagal.",
       "editbtnE" : "Kemaskini diaktifkan.",
       "editbtnD" : "Kemaskini tidak aktif."
     },
