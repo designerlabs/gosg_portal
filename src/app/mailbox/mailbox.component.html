@@ -25,7 +25,7 @@
           <gosg-sidenav-dashboard></gosg-sidenav-dashboard>
       </div>
       <div class="col-md-9 mat-elevation-z8" style="margin-top:15px;">
-        <div class="deleteAllBtn"><button [disabled]="!mailboxId.length > 0" mat-raised-button color="warn" (click)="showMailsDelMsg()"><i class="fa fa-trash"></i> {{'common.buttons.delete' | translate}}</button></div>
+        <div class="deleteAllBtn"><button [disabled]="!mailboxId.length > 0" mat-raised-button color="warn" (click)="deleteAllModal.show()"><i class="fa fa-trash"></i> {{'common.buttons.delete' | translate}}</button></div>
         <div class="row"></div>
         <div class="row mailContainer" *ngIf="mailContent?.message?.fromUser.email" [style.display]="isMailContainerShow">
               <p class="font-size-s">
@@ -56,8 +56,16 @@
             <td class="mat-cell">{{data.submissionDate | date}}</td>
             <td class="mat-cell text-center"> 
               <button (click)="getMail($event, data.messageId)" class="btn btn-sm btn-warning"><i class="fa fa-eye font-size-s"></i></button>
-              <button class="btn btn-sm btn-danger" (click)="showMailDelMsg($event, data.messageId)"><i class="fa fa-trash font-size-s"></i></button>
+              <button class="btn btn-sm btn-danger" (click)="deleteModal.show()"><i class="fa fa-trash font-size-s"></i></button>
             </td>
+            <app-confirm-dialog  #deleteModal 
+            [title]="'common.icon.warn'" 
+            [content]="'common.msg.delete'"
+            [state]="'common.state.warn'"
+            [isReset]="'true'"
+            (resetMethod)="resetMethod($event, data.messageId)">
+            </app-confirm-dialog>
+
           </tr>
         </table>
 
@@ -80,3 +88,12 @@
               
         </div>
   </div>
+
+
+  <app-confirm-dialog  #deleteAllModal 
+  [title]="'common.icon.warn'" 
+  [content]="'common.msg.delete'"
+  [state]="'common.state.warn'"
+  [isReset]="'true'"
+  (resetMethod)="resetAllMethod()">
+  </app-confirm-dialog>

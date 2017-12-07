@@ -33,9 +33,7 @@ export class ConfirmDialogComponent {
 
     }
 
-    show(data?){
-      console.log(data)
-      this.mailId = data;
+    show(){
       this.staticModal.show();
     }
 

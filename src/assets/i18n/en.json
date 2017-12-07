@@ -222,7 +222,8 @@
       "info":"fa fa-info-circle"
     },
     "msg":{
-      "reset":"Reset this form?"   
+      "reset":"Reset this form?",
+      "delete":"Are you sure to delete the record?"   
     },
     "state":{
       "success":"bg_header bg_success_header",
