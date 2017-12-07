@@ -181,7 +181,7 @@
               <div class="form-group">
                 <div class="row" style="margin:20px;">
                   <div class="col-md-12 font-size-s" style="text-align: center;">
-                    <button type="button" mat-raised-button color="warn" id="btnreset" (click)="resetForm()" style="width: 100px; font-family: Roboto; margin-left: 5px;">
+                    <button type="button" mat-raised-button color="warn" id="btnreset" (click)="resetModal.show()" style="width: 100px; font-family: Roboto; margin-left: 5px;">
                     <i class="fa fa-refresh"></i>  {{'register.label.btnreset' | translate }}</button>
                     <button mat-raised-button color="primary" (click)="citizenReg(citizenFormGrp.value);false" id="hantar" style="width: 100px; font-family: Roboto;"
                       [disabled]="citizenFormGrp.invalid || !verifyCaptcha()">
@@ -197,8 +197,19 @@
     </div>
   </div>
 
-<button type="button" class="btn btn-primary" (click)="infoModal.show()">Static modal</button>
- 
+<app-confirm-dialog  #resetModal 
+  [title]="'common.icon.warn'" 
+  [content]="'common.msg.reset'"
+  [state]="'common.state.warn'" 
+  [isReset]="'true'"
+  (resetMethod)="resetMethod($event)">
+</app-confirm-dialog>
 
-<pre>{{message}}</pre>
-<app-confirm-dialog  #infoModal [title]="'common modal'" [content]="'register.label.btnsubmit'" [state]="'bg_success_header'" [isRegister]="'index'"></app-confirm-dialog>
+<app-confirm-dialog  #infoModal 
+  [title]="'common.icon.success'" 
+  [content]="'register.popupmsg.success_content1'"
+  [email] = "getEmail"
+  [content2] = "'register.popupmsg.success_content2'" 
+  [state]="'common.state.success'" 
+  [isRegister]="'index'">
+</app-confirm-dialog>

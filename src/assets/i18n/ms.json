@@ -63,14 +63,21 @@
       "fullname": "Nama penuh wajib diisi",
       "vercode": "Kod Verifikasi wajib diisi"
     },
-     "pattern":{
+    "pattern":{
       "ic":"Nombor Kad Pengenalan memerlukan 12 digit",
       "email":"Sila Masukkan emel yang sah. Contoh: aaaa@bbb.com",
+      "dob":"Please enter a valid date format. IE: XX-XX-XXXX",
       "tel":"No. Telefon mestilah sah. Contoh: 018xxxxxxx / +60-x-xxxx-xxxx",
+      "telr":"Telephone No must be valid",
+      "telb":"Telephone No must be valid",
       "passport":"Nombor Pasport mestilah sah. Contoh: AA12345678",
       "fullname":"Nama penuh mestilah sah",
       "name":"Nama penuh mestilah sah",
       "captcha":"Kod Verifikasi mestilah sah"
+    },
+    "popupmsg":{
+      "success_content1":"Thank you for your registration. Check your ",
+      "success_content2":"for your account activation"
     }
   },
   "profile":{
@@ -109,6 +116,7 @@
       "name": "Nama penuh wajib diisi",
       "dob": "Tarikh Lahir wajib diisi",
       "gender": "Jantina wajib dipilih",
+      "race": "Race wajib dipilih",
       "perAddress1": "Alamat Tetap 1 wajib diisi",
       "state": "Negeri wajib dipilih",
       "city": "Bandar wajib dipilih",
@@ -156,7 +164,6 @@
       "submit":"Hantar",
       "words":" aksara yang tinggal.",
       "choose":"--Sila Pilih--"
-
     },
     "reset":"Set semula borang ini?",
     "msgsubmit": "Terima kasih. Aduan dan Pertanyaan anda telah dihantar. Maklum balas akan di terima dalam 3 hari masa bekerja.",
@@ -182,7 +189,6 @@
       "in":"",
       "mails":""
     },
-
     "err":{
       "deleteconfirm":"Are you sure to delete this mail?",
       "deleteconfirm_multi":"Are you sure to delete the selected mails?",
@@ -195,7 +201,6 @@
       "deletesuccess_multi":"Selected mails has been deleted successfully!"
     }
   },
- 
   "common":{
     "buttons":{
       "delete":"Padam",
@@ -209,6 +214,21 @@
     },
     "err":{
       "servicedown": "Pelayan tidak aktif "
+    },
+    "icon":{
+      "success":"fa fa-check",
+      "error":"fa fa-frown-o",
+      "warn":"fa fa-exclamation-triangle",
+      "info":"fa fa-info-circle"
+    },
+    "msg":{
+      "reset":"Set semula borang ini?"   
+    },
+    "state":{
+      "success":"bg_header bg_success_header",
+      "error":"bg_header bg_error_header",
+      "warn":"bg_header bg_warn_header",
+      "info":"bg_header bg_info_header"
     }
   }
 }

@@ -38,6 +38,7 @@ declare var System: any;
 })
 
 export class RegisterComponent implements OnInit, AfterViewInit {
+    getEmail: any;
     content: any;
     message: string;
 
@@ -431,9 +432,8 @@ export class RegisterComponent implements OnInit, AfterViewInit {
             );
               //  this.alertService.success('Registration successful', true);
               //this.openDialog();
-            //   this.staticModal.show();
-            this.infoModal.show();
-    
+                this.getEmail = data.email;
+                this.infoModal.show();
             },
             error => {
                 alert('error');
@@ -463,6 +463,9 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         return this.validateService.validateCtrl(ctrl);
     }
 
+    resetMethod(event) {
+        this.resetForm();
+      }
 
     verifyCaptcha() {
         const real = document.getElementById('rCaptcha').getAttribute('data-val');

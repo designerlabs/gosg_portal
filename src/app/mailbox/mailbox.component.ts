@@ -119,30 +119,34 @@ export class MailboxComponent implements OnInit {
 
   showMailDelMsg(event, msgId){
     event.stopPropagation();
-    this.dialogsService
-    .confirm('', this.translate.instant('mailbox.err.deleteconfirm'))
-    .subscribe(
-      data => {
-        if(data){
-          this.isMailContainerShow = 'none';
-          this.deleteMail(msgId);
-        }
-      });
+    this.isMailContainerShow = 'none';
+    this.deleteMail(msgId);
+    // this.dialogsService
+    // .confirm('', this.translate.instant('mailbox.err.deleteconfirm'))
+    // .subscribe(
+    //   data => {
+    //     if(data){
+    //       this.isMailContainerShow = 'none';
+    //       this.deleteMail(msgId);
+    //     }
+    //   });
   }
 
 
 
   showMailsDelMsg(){
     event.stopPropagation();
-    this.dialogsService
-    .confirm('', this.translate.instant('mailbox.err.deleteconfirm_multi'))
-    .subscribe(
-      data => {
-        if(data){
-          this.isMailContainerShow = 'none';
-          this.deleteMails();
-        }
-      });
+    this.isMailContainerShow = 'none';
+    this.deleteMails();
+    // this.dialogsService
+    // .confirm('', this.translate.instant('mailbox.err.deleteconfirm_multi'))
+    // .subscribe(
+    //   data => {
+    //     if(data){
+    //       this.isMailContainerShow = 'none';
+    //       this.deleteMails();
+    //     }
+    //   });
   }
 
 
