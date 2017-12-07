@@ -7,8 +7,8 @@
         <ul class="list-inline" style="clear:both;">
           <li>
             <a class="font-size-s" href="/index/">
-                      {{'home.menu.home' | translate }}
-                  </a>
+              {{'home.menu.home' | translate }}
+            </a>
           </li>
           <li>/</li>
           <li>
@@ -21,37 +21,156 @@
 </div>
 
 <div class="container">
+  <br />
   <div class="col-md-3 padding-left-0">
-      <gosg-sidenav-dashboard></gosg-sidenav-dashboard>
+    <gosg-sidenav-dashboard></gosg-sidenav-dashboard>
   </div>
   <div class="col-md-9 mat-elevation-z8" style="margin-top:15px;">
-    <!-- <div class="deleteAllBtn"><button [disabled]="!mailboxId.length > 0" mat-raised-button color="warn" (click)="showMailsDelMsg()"><i class="fa fa-trash"></i> {{'common.buttons.delete' | translate}}</button></div> -->
-    <div class="row"></div>
-    <div class="row mailContainer" *ngIf="mailContent?.message?.fromUser.email" [style.display]="isMailContainerShow">
-          <p class="font-size-s">
-            <!-- From: {{mailContent?.message?.fromUser.email}}  --> sghsehserherh
-          </p>
-          <p class="font-size-s">
-            <!-- Date: {{mailContent?.message?.submissionDate | date}} --> n nbvnvnvbnvbnbvn
-          </p>
-          <p class="font-size-s">
-            <!-- Subject: {{mailContent?.message?.subject}}  -->645y56ju 56u 56 6565  
-          </p>
-          <div class="font-size-m">
-            <!-- {{mailContent?.message?.content}} -->cccccccccccccccccccccc
-          </div>
+    <div class="deleteAllBtn">
+      <button mat-raised-button color="warn">
+        <i class="fa fa-eye"></i>More Search Option</button>
     </div>
+    <!-- <div class="row"></div> -->
     <table class="mat-table" style="width:100%">
       <tr class="mat-header-row" style="height:45px">
-        <td width="5%" class="mat-header-cell text-center">Bil</td>
-        <td width="30%" class="mat-header-cell">No. Permohonan</td>
-        <td class="mat-header-cell">Nama Permohonan</td>
-        <td width="10%" class="mat-header-cell">Agensi</td>
-        <td width="15%" class="mat-header-cell text-center">Tarikh Hantar</td>
-        <td width="15%" class="mat-header-cell text-center">Status</td>
-        <td width="15%" class="mat-header-cell text-center">Tindakan</td>
+        <th width="5%" class="mat-header-cell">Bil</th>
+        <th width="15%" class="mat-header-cell">No. Permohonan</th>
+        <th class="mat-header-cell">Nama Permohonan</th>
+        <th width="10%" class="mat-header-cell">Agensi</th>
+        <th width="15%" class="mat-header-cell text-center">Tarikh Hantar</th>
+        <th width="15%" class="mat-header-cell text-center">Status</th>
+        <th width="15%" class="mat-header-cell text-center">Tindakan</th>
       </tr>
-      <tbody style="color:#000"><tr role="row" class="odd"><td class="sorting_1">1</td><td>173434</td><td>PERMOHONAN BARU LESEN PENIAGA/TAKSIDERMI</td><td>PERHILITAN</td><td>07-11-2017 15:06:52 PM</td><td>DALAM PROSES</td><td><button class="btn btn-info viewPerhilitan" data_transid="173434">PAPAR  </button></td></tr><tr role="row" class="even"><td class="sorting_1">2</td><td>173442</td><td>PERMOHONAN BARU LESEN PENIAGA/TAKSIDERMI</td><td>PERHILITAN</td><td>07-11-2017 15:18:54 PM</td><td>DALAM PROSES</td><td><button class="btn btn-info viewPerhilitan" data_transid="173442">PAPAR  </button></td></tr><tr role="row" class="odd"><td class="sorting_1">3</td><td>2</td><td>PERMOHONAN BARU LESEN PENIAGA/TAKSIDERMI</td><td>PERHILITAN</td><td>28-11-2017 17:41:47 PM</td><td> DRAF </td><td><button class="btn btn-info derafPerhilitan" data_transid="2">KEMASKINI </button></td></tr><tr role="row" class="even"><td class="sorting_1">4</td><td>8</td><td>PERMOHONAN BARU LESEN PENIAGA/TAKSIDERMI</td><td>PERHILITAN</td><td>09-11-2017 16:39:22 PM</td><td> DRAF </td><td><button class="btn btn-info derafPerhilitan" data_transid="8">KEMASKINI </button></td></tr><tr role="row" class="odd"><td class="sorting_1">5</td><td>9</td><td>PERMOHONAN BARU LESEN PENIAGA/TAKSIDERMI</td><td>PERHILITAN</td><td>09-11-2017 17:02:34 PM</td><td> DRAF </td><td><button class="btn btn-info derafPerhilitan" data_transid="9">KEMASKINI </button></td></tr><tr role="row" class="even"><td class="sorting_1">6</td><td>10</td><td>PERMOHONAN BARU LESEN PENIAGA/TAKSIDERMI</td><td>PERHILITAN</td><td>09-11-2017 17:25:58 PM</td><td> DRAF </td><td><button class="btn btn-info derafPerhilitan" data_transid="10">KEMASKINI </button></td></tr><tr role="row" class="odd"><td class="sorting_1">7</td><td>11</td><td>PERMOHONAN BARU LESEN PENIAGA/TAKSIDERMI</td><td>PERHILITAN</td><td>28-11-2017 17:35:35 PM</td><td> DRAF </td><td><button class="btn btn-info derafPerhilitan" data_transid="11">KEMASKINI </button></td></tr><tr role="row" class="even"><td class="sorting_1">8</td><td>13</td><td>PERMOHONAN BARU LESEN PENIAGA/TAKSIDERMI</td><td>PERHILITAN</td><td>14-11-2017 14:59:04 PM</td><td> DRAF </td><td><button class="btn btn-info derafPerhilitan" data_transid="13">KEMASKINI </button></td></tr><tr role="row" class="odd"><td class="sorting_1">9</td><td>18</td><td>PERMOHONAN BARU LESEN PENIAGA/TAKSIDERMI</td><td>PERHILITAN</td><td>28-11-2017 14:24:17 PM</td><td> DRAF </td><td><button class="btn btn-info derafPerhilitan" data_transid="18">KEMASKINI </button></td></tr><tr role="row" class="even"><td class="sorting_1">10</td><td>14</td><td>PEMBAHARUAN LESEN PENIAGA/TAKSIDERMI</td><td>PERHILITAN</td><td>28-11-2017 17:44:52 PM</td><td> DRAF </td><td><button class="btn btn-info derafPerhilitanRenew" data_transid="14">KEMASKINI </button></td></tr></tbody>
+      <tr role="row" class="odd">
+        <td class="mat-cell">1</td>
+        <td class="mat-cell">173434</td>
+        <td class="mat-cell">PERMOHONAN BARU LESEN PENIAGA/TAKSIDERMI</td>
+        <td class="mat-cell">PERHILITAN</td>
+        <td class="mat-cell text-center">07-11-2017 15:06:52 PM</td>
+        <td class="mat-cell text-center">DALAM PROSES</td>
+        <td class="mat-cell text-center">
+          <button class="btn btn-sm btn-warning" data_transid="173434">
+            <i class="fa fa-eye font-size-s"></i>
+          </button>
+        </td>
+      </tr>
+      <tr role="row" class="even">
+        <td class="mat-cell">2</td>
+        <td class="mat-cell">173442</td>
+        <td class="mat-cell">PERMOHONAN BARU LESEN PENIAGA/TAKSIDERMI</td>
+        <td class="mat-cell">PERHILITAN</td>
+        <td class="mat-cell text-center">07-11-2017 15:18:54 PM</td>
+        <td class="mat-cell text-center">DALAM PROSES</td>
+        <td class="mat-cell text-center">
+          <button class="btn btn-sm btn-warning" data_transid="173442">
+            <i class="fa fa-eye font-size-s"></i>
+          </button>
+        </td>
+      </tr>
+      <tr role="row" class="odd">
+        <td class="mat-cell">3</td>
+        <td class="mat-cell">2</td>
+        <td class="mat-cell">PERMOHONAN BARU LESEN PENIAGA/TAKSIDERMI</td>
+        <td class="mat-cell">PERHILITAN</td>
+        <td class="mat-cell text-center">28-11-2017 17:41:47 PM</td>
+        <td class="mat-cell text-center"> DRAF </td>
+        <td class="mat-cell text-center">
+          <button class="btn btn-sm btn-info" data_transid="2">
+            <i class="fa fa-edit font-size-s"></i>
+          </button>
+        </td>
+      </tr>
+      <tr role="row" class="even">
+        <td class="mat-cell">4</td>
+        <td class="mat-cell">8</td>
+        <td class="mat-cell">PERMOHONAN BARU LESEN PENIAGA/TAKSIDERMI</td>
+        <td class="mat-cell">PERHILITAN</td>
+        <td class="mat-cell text-center">09-11-2017 16:39:22 PM</td>
+        <td class="mat-cell text-center"> DRAF </td>
+        <td class="mat-cell text-center">
+          <button class="btn btn-sm btn-info" data_transid="8">
+            <i class="fa fa-edit font-size-s"></i>
+          </button>
+        </td>
+      </tr>
+      <tr role="row" class="odd">
+        <td class="mat-cell">5</td>
+        <td class="mat-cell">9</td>
+        <td class="mat-cell">PERMOHONAN BARU LESEN PENIAGA/TAKSIDERMI</td>
+        <td class="mat-cell">PERHILITAN</td>
+        <td class="mat-cell text-center">09-11-2017 17:02:34 PM</td>
+        <td class="mat-cell text-center"> DRAF </td>
+        <td class="mat-cell text-center">
+          <button class="btn btn-sm btn-info" data_transid="9">
+            <i class="fa fa-edit font-size-s"></i>
+          </button>
+        </td>
+      </tr>
+      <tr role="row" class="even">
+        <td class="mat-cell">6</td>
+        <td class="mat-cell">10</td>
+        <td class="mat-cell">PERMOHONAN BARU LESEN PENIAGA/TAKSIDERMI</td>
+        <td class="mat-cell">PERHILITAN</td>
+        <td class="mat-cell text-center">09-11-2017 17:25:58 PM</td>
+        <td class="mat-cell text-center"> DRAF </td>
+        <td class="mat-cell text-center">
+          <button class="btn btn-sm btn-info" data_transid="10">
+            <i class="fa fa-edit font-size-s"></i>
+          </button>
+        </td>
+      </tr>
+      <tr role="row" class="odd">
+        <td class="mat-cell">7</td>
+        <td class="mat-cell">11</td>
+        <td class="mat-cell">PERMOHONAN BARU LESEN PENIAGA/TAKSIDERMI</td>
+        <td class="mat-cell">PERHILITAN</td>
+        <td class="mat-cell text-center">28-11-2017 17:35:35 PM</td>
+        <td class="mat-cell text-center"> DRAF </td>
+        <td class="mat-cell text-center">
+          <button class="btn btn-sm btn-info" data_transid="11">
+            <i class="fa fa-edit font-size-s"></i>
+          </button>
+        </td>
+      </tr>
+      <tr role="row" class="even">
+        <td class="mat-cell">8</td>
+        <td class="mat-cell">13</td>
+        <td class="mat-cell">PERMOHONAN BARU LESEN PENIAGA/TAKSIDERMI</td>
+        <td class="mat-cell">PERHILITAN</td>
+        <td class="mat-cell text-center">14-11-2017 14:59:04 PM</td>
+        <td class="mat-cell text-center"> DRAF </td>
+        <td class="mat-cell text-center">
+          <button class="btn btn-sm btn-info" data_transid="13">
+            <i class="fa fa-edit font-size-s"></i>
+          </button>
+        </td>
+      </tr>
+      <tr role="row" class="odd">
+        <td class="mat-cell">9</td>
+        <td class="mat-cell">18</td>
+        <td class="mat-cell">PERMOHONAN BARU LESEN PENIAGA/TAKSIDERMI</td>
+        <td class="mat-cell">PERHILITAN</td>
+        <td class="mat-cell text-center">28-11-2017 14:24:17 PM</td>
+        <td class="mat-cell text-center"> DRAF </td>
+        <td class="mat-cell text-center">
+          <button class="btn btn-sm btn-info" data_transid="18">
+            <i class="fa fa-edit font-size-s"></i>
+          </button>
+        </td>
+      </tr>
+      <tr role="row" class="even">
+        <td class="mat-cell">10</td>
+        <td class="mat-cell">14</td>
+        <td class="mat-cell">PEMBAHARUAN LESEN PENIAGA/TAKSIDERMI</td>
+        <td class="mat-cell">PERHILITAN</td>
+        <td class="mat-cell text-center">28-11-2017 17:44:52 PM</td>
+        <td class="mat-cell text-center"> DRAF </td>
+        <td class="mat-cell text-center">
+          <button class="btn btn-sm btn-warning" data_transid="14">
+            <i class="fa fa-edit font-size-s"></i>
+          </button>
+        </td>
+      </tr>
       <!-- <tr class="mat-row table_row table_row_height" *ngFor="let data of mailData?.messageList" [style.font-weight]="data.read ? '' : 'bold'">
         <td class="mat-cell text-center"><mat-checkbox [value]="data.messageId"></mat-checkbox></td>
         <td class="mat-cell"></td>
@@ -66,22 +185,29 @@
       </tr> -->
     </table>
 
-        <!-- <mat-paginator [length]="mailData?.length">
+    <!-- <mat-paginator [length]="mailData?.length">
         </mat-paginator> -->
-        <mat-form-field style="width:50px;">
-            <mat-select class="font-size-s" value="10" (change)="pageChange($event)">
-              <mat-option value="5">5</mat-option>
-              <mat-option value="10">10</mat-option>
-              <mat-option value="25">25</mat-option>
-              <mat-option value="50">50</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <div style="float:right; margin-top: 10px;">
-              <span style="color:#000; padding-right:20px;">Pages <strong>a</strong> of <strong>b</strong> in <strong>c</strong> mails</span>
-              <button mat-mini-fab color="basic" [disabled]="noPrevData" (click)="paginatorL(mailData?.pageNumber)"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
-              <button mat-mini-fab color="basic" [disabled]="noNextData"  (click)="paginatorR(mailData?.pageNumber, mailData?.totalPages)"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
-          </div>
-          
-          
+    <mat-form-field style="width:50px;">
+      <mat-select class="font-size-s" value="10" (change)="pageChange($event)">
+        <mat-option value="5">5</mat-option>
+        <mat-option value="10">10</mat-option>
+        <mat-option value="25">25</mat-option>
+        <mat-option value="50">50</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div style="float:right; margin-top: 10px;">
+      <span style="color:#000; padding-right:20px;">Pages
+        <strong>1</strong> of
+        <strong>10</strong> in
+        <strong>500</strong> applications</span>
+      <button mat-mini-fab color="basic" [disabled]="noPrevData" (click)="paginatorL(mailData?.pageNumber)">
+        <i class="fa fa-angle-left" aria-hidden="true"></i>
+      </button>
+      <button mat-mini-fab color="basic" [disabled]="noNextData" (click)="paginatorR(mailData?.pageNumber, mailData?.totalPages)">
+        <i class="fa fa-angle-right" aria-hidden="true"></i>
+      </button>
     </div>
+    <br />
+  </div>
+  <br />
 </div>

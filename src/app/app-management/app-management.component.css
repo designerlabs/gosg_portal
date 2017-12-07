@@ -1,0 +1,74 @@
+.example-container {
+    display: flex;
+    flex-direction: column;
+    max-height: 500px;
+    min-width: 300px;
+  }
+  
+  .mat-table {
+    overflow: auto;
+    max-height: 500px;
+  }
+
+  .mat-cell {
+      vertical-align: top;
+  }
+
+  .mat-column-subject{
+      max-width:70%;
+  }
+
+  .mat-column-position{
+      max-width:10%;
+  }
+
+  .mat-column-action{
+    max-width:20%;
+}
+
+.list-inline{
+	margin-top: 25px;
+}
+
+.list-inline li a:hover{
+	text-decoration:none;
+	color:#333;
+}
+
+.table_row:hover{
+    background:#ddd;
+}
+
+mat-table{
+    height: 100%;
+    min-height: 100%;
+    max-height: 100% !important;
+}
+
+.table_row_height{
+    height:45px;
+}
+
+.deleteAllBtn{
+    float: right;
+    position: relative;
+    clear: both;
+    margin-top: 15px;
+}
+
+.mailContainer{
+    color: #000;
+    height: 250px;
+    overflow-y: scroll;
+    margin: 15px 0px;
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+.mailContainer p{
+    margin:0px;
+}
+
+.mailContainer div{
+    margin-top:10px;
+}
