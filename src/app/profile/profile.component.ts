@@ -226,7 +226,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         if(data[0].permanent_state !== null) {
           if(data[0].permanent_country == "MY")
             this.getCitiesByStateC(data[0].permanent_state);
-            
+
           this.profileForm.get('perState').setValue(data[0].permanent_state);
           this.profileForm.get('perCity').setValue(data[0].permanent_city); 
         }
@@ -567,7 +567,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         this.profileForm.disable();
       },
       error => {
-        this.toastr.error(this.translate.instant('profile.err.updatefail'), '');
+        this.toastr.error(this.translate.instant('profile.err.updateFail'), '');
       });
   }
 
