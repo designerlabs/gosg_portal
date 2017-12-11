@@ -18,7 +18,6 @@ import * as $ from 'jquery';
 export class NavComponent implements OnInit, AfterViewInit {
 
   @Output() menuClick = new EventEmitter();
-  @Input() state:string;
   imgSrc: string;
   menus: IMenu[];
   articles: any[];
