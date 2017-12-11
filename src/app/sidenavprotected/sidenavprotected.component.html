@@ -2,8 +2,24 @@
 
     <a href="javascript:void(0)" class="closebtn" (click)="closeNav()"><i class="fa fa-times"></i></a>
     <ul>
+
+      <li>
+          <a routerLinkActive="topactive"  href="" [routerLink]="['/dashboard']"><i class="fa fa-dashboard"></i> Dashboard</a>
+        </li>
         <li>
-          <a routerLinkActive="topactive" (click)="showConfBar()">{{ 'home.menu.setting' | translate }} <i class="fa fa-caret-down"></i></a>
+            <a routerLinkActive="topactive" href="" [routerLink]="['/profile']"><i class="fa fa-user"></i> Profile</a>
+        </li>
+        <li>
+            <a routerLinkActive="topactive" href="" [routerLink]="['/mailbox']"><i class="fa fa-envelope"></i> Inbox</a>
+        </li>
+        <li>
+            <a routerLinkActive="topactive" href="" [routerLink]="['/appsmgmt']"><i class="fa fa-file"></i> Application Management</a>
+        </li>
+        <li>
+            <a routerLinkActive="topactive" href=""><i class="fa fa-building"></i> Company Profile</a>
+        </li>
+        <li>
+          <a class="menu_title">{{ 'home.menu.setting' | translate }}</a>
         </li>
         <li>
           <a routerLinkActive="topactive" [routerLink]="['contact']">{{ 'home.menu.contact' | translate }}</a> </li>

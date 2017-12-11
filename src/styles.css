@@ -275,13 +275,13 @@ html, body{
   background-color: #041716;
   overflow-x: hidden;
   transition: 0.5s;
-  padding-top: 60px;
+  padding-top: 40px;
 }
 
 .sidenav a {
-  padding: 8px 8px 8px 32px;
+  padding: 8px 8px 8px 10px;
   text-decoration: none;
-  font-size: 25px;
+  font-size: 16px;
   text-align: left;
   color: #818181;
   display: block;
@@ -295,8 +295,8 @@ html, body{
 .sidenav .closebtn {
   position: absolute;
   top: 0;
-  right: 25px;
-  font-size: 36px;
+  right: 0px;
+  font-size: 30px;
   margin-left: 50px;
 }
 
@@ -329,7 +329,12 @@ html, body{
    height: 100%;
 }
 
-
+.sidenav ul li .menu_title{
+  font-size: 20px;
+  text-decoration: overline;
+  font-weight: bold;
+  color: #e7436d;
+}
 @media screen and (max-height: 450px) {
 .sidenav {padding-top: 15px;}
 .sidenav a {font-size: 18px;}
