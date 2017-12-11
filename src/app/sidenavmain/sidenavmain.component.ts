@@ -20,4 +20,6 @@ export class SidenavmainComponent implements OnInit {
     document.getElementById("mySidenav").style.width = "0";
   }
 
+
+
 }

@@ -307,6 +307,28 @@ html, body{
   transition: transform 0.5s ease 0s;
 }
 
+.sidenav ul{
+  list-style: none;
+  padding: 0px;
+}
+
+.sidenav ul li a.topactive{
+  color: #fff;
+  font-weight: bold;
+}
+
+
+.sidenav ul li .sub-menu{
+  opacity: 0;
+  overflow: hidden;
+  height: 0;
+}
+
+.sidenav ul li .open + ul.sub-menu {
+   opacity: 1;
+   height: 100%;
+}
+
 
 @media screen and (max-height: 450px) {
 .sidenav {padding-top: 15px;}

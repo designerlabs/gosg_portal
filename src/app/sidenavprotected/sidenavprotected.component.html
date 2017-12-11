@@ -1,8 +1,20 @@
 <div id="mySidenavProtected" class="sidenav">
 
     <a href="javascript:void(0)" class="closebtn" (click)="closeNav()"><i class="fa fa-times"></i></a>
-    <a href="#">About</a>
-      <a href="#">Services</a>
-    <a href="#">Clients</a>
-    <a href="#">Contact</a>
+    <ul>
+        <li>
+          <a routerLinkActive="topactive" (click)="showConfBar()">{{ 'home.menu.setting' | translate }} <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li>
+          <a routerLinkActive="topactive" [routerLink]="['contact']">{{ 'home.menu.contact' | translate }}</a> </li>
+        <li>
+          <a routerLinkActive="topactive" [routerLink]="['faq']">{{ 'home.menu.faq' | translate }}</a>
+        </li>
+        <li>
+          <a routerLinkActive="topactive" [routerLink]="['manual']">{{ 'home.menu.manual' | translate }}</a>
+        </li>
+        <li>
+          <a routerLinkActive="topactive" [routerLink]="['aboutus']">{{ 'home.menu.aboutus' | translate }}</a>
+        </li>
+    </ul>
   </div>
