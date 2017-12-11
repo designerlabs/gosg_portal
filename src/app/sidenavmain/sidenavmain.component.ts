@@ -2,8 +2,7 @@ import { Component, OnInit,  TemplateRef, ViewChild, Input, Output, EventEmitter
 
 @Component({
   selector: 'gosg-sidenavmain',
-  templateUrl: './sidenavmain.component.html',
-  styleUrls: ['./sidenavmain.component.css']
+  templateUrl: './sidenavmain.component.html'
 })
 export class SidenavmainComponent implements OnInit {
   @Output()

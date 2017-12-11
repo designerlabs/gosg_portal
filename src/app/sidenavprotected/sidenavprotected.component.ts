@@ -2,8 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'gosg-sidenavprotected',
-  templateUrl: './sidenavprotected.component.html',
-  styleUrls: ['./sidenavprotected.component.css']
+  templateUrl: './sidenavprotected.component.html'
 })
 export class SidenavprotectedComponent implements OnInit {
 
@@ -15,11 +14,11 @@ export class SidenavprotectedComponent implements OnInit {
   }
 
   openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
+    document.getElementById("mySidenavProtected").style.width = "250px";
   }
 
   closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("mySidenavProtected").style.width = "0";
   }
 
 

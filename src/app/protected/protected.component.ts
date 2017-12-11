@@ -57,7 +57,7 @@ export class ProtectedComponent implements OnInit {
 
   showProfile(data){
     console.log(this.isProfile);
-    document.getElementById("mySidenav").style.width = "250px";
+    document.getElementById("mySidenavProtected").style.width = "250px";
     this.isProfile = data;
     console.log(this.isProfile);
   }
