@@ -5,6 +5,7 @@ import { ProtectedService } from '../services/protected.service';
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/skip';
+import { PortalService } from '../services/portal.service';
 
 @Component({
   selector: 'gosg-protected',
@@ -27,12 +28,13 @@ export class ProtectedComponent implements OnInit {
   bHeight = '70px';
   bTop = '35px';
   userId: string;
+  userNationality: string;
   isProfile = false;
   isProfileHide = false;
   query;
   pageSize;
   entryService;
-  constructor(private activatedRoute:ActivatedRoute, @Inject(APP_CONFIG) private config: AppConfig, private protectedService:ProtectedService, router:Router) {
+  constructor(private activatedRoute:ActivatedRoute, @Inject(APP_CONFIG) private config: AppConfig, private protectedService:ProtectedService, router:Router, private portalService:PortalService) {
       
       this.clientHeight = window.innerHeight - 200;
   }
@@ -55,6 +57,25 @@ export class ProtectedComponent implements OnInit {
     location.href='http://localhost:8020/login';
   }
 
+  getUserRegData(name){
+    this.portalService.login(name).subscribe(
+      data => {
+        console.log(data);
+        if(data.length != 0){
+          localStorage.setItem('userNationality', data[0].country);
+        }else{
+          alert('username not found');
+        }
+          
+      },
+      error => {
+        alert('error');
+          //this.alertService.error(error);
+          //this.loading = false;
+      });
+
+  }
+
   showProfile(data){
     console.log(this.isProfile);
     document.getElementById("mySidenavProtected").style.width = "250px";
@@ -72,6 +93,7 @@ export class ProtectedComponent implements OnInit {
         localStorage.setItem('name',data[0].fullname);
         localStorage.setItem('email',data[0].email);
         localStorage.setItem('usrID', data[0].id);
+        this.getUserRegData(data[0].fullname);
         }else{
           location.href = 'http://localhost:8020/login';
         }
@@ -88,7 +110,9 @@ export class ProtectedComponent implements OnInit {
   ngOnInit() {
     let getUsrID = localStorage.getItem('usrID');
     let getUserID = localStorage.getItem('userId');
+    let getUserCountry = localStorage.getItem('userNationality');
     console.log(this.userId);
+    console.log(getUserCountry)
     this.activatedRoute.queryParamMap.skip(1).subscribe((queryParams: Params) => {
       this.userId = queryParams.get('id');
       if(this.userId){
