@@ -7,6 +7,7 @@ import * as $ from 'jquery';
     styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+    isSideNav = false;
     clientHeight: number;
     title = 'app';
     showLoader: boolean;
@@ -35,6 +36,13 @@ export class AppComponent {
             this.bTop = '85px';
         }
     }
+
+    showsidenav(data){
+        console.log(this.isSideNav);
+        document.getElementById("mySidenav").style.width = "250px";
+        this.isSideNav = data;
+        console.log(this.isSideNav);
+      }
 
     getTheme() {
         return localStorage.getItem('themeColor');

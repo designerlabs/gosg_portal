@@ -51,11 +51,15 @@ export class TopnavComponent implements OnInit, AfterViewInit {
 
   @Input() edited = true;
   @Input() profileShow = true;
+  @Input() sidenavShow = true;
+
   @Input() state:string;
 
   @Output() topNavClick = new EventEmitter();
 
   @Output() showProfile = new EventEmitter();
+
+  @Output() showsidenav = new EventEmitter();
 
   constructor(private translate: TranslateService, private topnavservice: TopnavService) {
     translate.addLangs(['en', 'ms']);
@@ -141,6 +145,10 @@ export class TopnavComponent implements OnInit, AfterViewInit {
   showProfileMenu(){
     //this.profileShow = !(this.profileShow);
     this.showProfile.emit(this.profileShow);
+  }
+
+  showSidenavMenu(){
+    this.showsidenav.emit(this.sidenavShow);
   }
 
   langEventChange(data) {

@@ -78,17 +78,11 @@ export class ProtectedComponent implements OnInit {
 
   showProfile(data){
     console.log(this.isProfile);
-
-      this.isProfile = data;
-  
-    
+    document.getElementById("mySidenavProtected").style.width = "250px";
+    this.isProfile = data;
     console.log(this.isProfile);
   }
 
-//   setDatafromChild(data){
-//       this.getUserName = data;
-//     debugger;
-// }
 
   getProfileData(data){
     this.protectedService.getProfile(data).subscribe(
