@@ -1,5 +1,5 @@
 <div [ngStyle]="{'min-height': clientHeight + 'px', 'margin-bottom': '-200px'}">
-  <div *ngIf="isProfile" (mouseleave)="isProfile = false">
+  <!-- <div *ngIf="isProfile" (mouseleave)="isProfile = false">
     <ul class="showProfile font-size-s" [style.background]="getTheme()" style="color: #FFF">
       <li>
         {{getUserName}}
@@ -14,7 +14,9 @@
         <a (click)="logout()">Logout</a>
       </li>
     </ul>
-  </div>
+
+  </div> -->
+
   <app-topnav [state]='getUserName' class="top-nav-style" (showProfile)="showProfile($event)" (topNavClick)="getExpand($event)"
     [style.background]="getTheme()" [style.z-index]="this.zIndex" [style.height]="this.bHeight"></app-topnav>
   <app-nav class="nav-bar-style" [style.top]="this.bTop"></app-nav>
@@ -22,4 +24,5 @@
   <router-outlet [state]='getUserName'></router-outlet>
   <div style="height: 200px"></div>
 </div>
+<!-- <gosg-sidenavmain></gosg-sidenavmain> -->
 <app-footer></app-footer>
