@@ -20,6 +20,18 @@
         <li>
             <a routerLinkActive="topactive" href=""><i class="fa fa-building"></i> Company Profile</a>
         </li>
+        
+        <li>
+          <a routerLinkActive="topactive" [routerLink]="['contact']">{{ 'home.menu.contact' | translate }}</a> </li>
+        <li>
+          <a routerLinkActive="topactive" [routerLink]="['faq']">{{ 'home.menu.faq' | translate }}</a>
+        </li>
+        <li>
+          <a routerLinkActive="topactive" [routerLink]="['manual']">{{ 'home.menu.manual' | translate }}</a>
+        </li>
+        <li>
+          <a routerLinkActive="topactive" [routerLink]="['aboutus']">{{ 'home.menu.aboutus' | translate }}</a>
+        </li>
         <li>
             <mat-expansion-panel>
                 <mat-expansion-panel-header>
@@ -28,7 +40,7 @@
                   </mat-panel-title>
                 </mat-expansion-panel-header>
                 
-                <div class="menu_botm" id="confBar">
+                <div class="menu_botm" id="confBar1">
                     <div  id="themeContainer1">
 
                       <div  class="settingLbl">
@@ -62,17 +74,6 @@
                   </div>
              
               </mat-expansion-panel>
-        </li>
-        <li>
-          <a routerLinkActive="topactive" [routerLink]="['contact']">{{ 'home.menu.contact' | translate }}</a> </li>
-        <li>
-          <a routerLinkActive="topactive" [routerLink]="['faq']">{{ 'home.menu.faq' | translate }}</a>
-        </li>
-        <li>
-          <a routerLinkActive="topactive" [routerLink]="['manual']">{{ 'home.menu.manual' | translate }}</a>
-        </li>
-        <li>
-          <a routerLinkActive="topactive" [routerLink]="['aboutus']">{{ 'home.menu.aboutus' | translate }}</a>
         </li>
         
     </ul>

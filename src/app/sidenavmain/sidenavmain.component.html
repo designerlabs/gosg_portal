@@ -1,9 +1,7 @@
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" (click)="closeNav()"><i class="fa fa-times"></i></a>
     <ul>
-        <li>
-          <a routerLinkActive="topactive" (click)="showConfBar()">{{ 'home.menu.setting' | translate }} <i class="fa fa-caret-down"></i></a>
-        </li>
+        
         <li>
           <a routerLinkActive="topactive" [routerLink]="['contact']">{{ 'home.menu.contact' | translate }}</a> </li>
         <li>
@@ -14,6 +12,49 @@
         </li>
         <li>
           <a routerLinkActive="topactive" [routerLink]="['aboutus']">{{ 'home.menu.aboutus' | translate }}</a>
+        </li>
+        <li>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                      {{ 'home.menu.setting' | translate }}
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                
+                <div class="menu_botm" id="confBar1">
+                    <div  id="themeContainer">
+
+                      <div  class="settingLbl">
+                          Theme Color:
+                      </div>
+                      <div class="settingBtm">
+                          <input #colorPanel *ngFor="let color of colors; let i = index; let firstItem = first" (click)="setClickedColor(i, firstItem)"  [class.colorPaletteActive]="i == selectedRow ? true: false" type="button" name="bgColor" [(ngModel)]="bgColor" [ngStyle]="{'background': color.bgColor, 'border': '1px solid', 'border-color': color.bgColor}"  class="bgColorBtn bgColor" value="{{color.bgColor}}">
+                          <span><div (click)="resetBgColor()" class="btn btn-xs btn-default"><i class="fa fa-refresh"></i></div></span>
+                      </div>
+                      <div  class="settingLbl">
+                          Font Size :
+                      </div>
+                      <div class="settingBtm">
+                          <button  [disabled]="minusBtn" class="btn btn-default fontminus" (click)="fontminus()" style="border:1px solid white;padding: 3px; height: 25px; width: 28px; font-size:14px;"><i class="fa fa-minus"></i>A</button>
+                          <button  [disabled]="plusBtn" class="fontplus btn btn-default"  (click)="fontplus()" style="border:1px solid white;padding: 3px; height: 25px; width: 28px; font-size:14px;"><i class="fa fa-plus"></i>A</button>
+                          <span><div class="fontreset btn btn-xs btn-default" (click)="fontreset()"><i class="fa fa-refresh"></i></div></span>
+                      </div>
+                      <div class="settingLbl">
+                          Font Type :
+                      </div>
+                      <div class="settingBtm">
+                          <select #fontTy (change)="onChange($event, fontTy.value)" id="fontOptSideMenu1" class="form-control fontOption">
+                              <option class="fontOpt1" value="Roboto">Roboto</option>
+                              <option class="fontOpt2" value="Arial">Arial</option>
+                              <option class="fontOpt3" value="Times New Roman">Times New Roman</option>
+                          </select>
+                          <span style="clear:both;"><div (click)="resetFontStyle()" id="resetFontStyle" class="btn btn-xs btn-default" style="padding:10px;"><i class="fa fa-refresh"></i></div></span>
+                      </div>
+                    
+                    </div>
+                  </div>
+             
+              </mat-expansion-panel>
         </li>
     </ul>
   </div>

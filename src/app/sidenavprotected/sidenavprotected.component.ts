@@ -44,11 +44,39 @@ export class SidenavprotectedComponent implements OnInit {
     this.firstItem = firstItem;
   }
 
+  ngAfterViewInit() {
+    $(function () {
+      if (localStorage.getItem('themeColor') == '' || localStorage.getItem('themeColor') == null || localStorage.getItem('themeColor') == '#00bdbb') {
+        $('#confBar1 li > input.bgColorBtn:nth(0)').addClass('colorPaletteActive');
+        localStorage.setItem('themeColor', '#00bdbb');
+      } else {
+        $('#confBar1 li > input.bgColorBtn:nth(0)').removeClass('colorPaletteActive');
+      }
+
+      if (localStorage.getItem('themeIndex') == '' || localStorage.getItem('themeIndex') == null || localStorage.getItem('themeIndex') == '0') {
+        $('#confBar1 li > input.bgColorBtn').removeClass('colorPaletteActive');
+        $('#confBar1 li > input.bgColorBtn:nth(0)').addClass('colorPaletteActive');
+      } else {
+        $('#confBar1 li > input.bgColorBtn').removeClass('colorPaletteActive');
+        $('#confBar1 li > input.bgColorBtn:nth(' + localStorage.getItem('themeIndex') + ')').addClass('colorPaletteActive');
+      }
+    });
+
+    if (localStorage.getItem('customFontType')) {
+      $('body, .font-size-s, .font-size-m, .font-size-l, .font-size-xl, .font-size-xxl').css('font-family', localStorage.getItem('customFontType'));
+      $('#fontOptSideMenu1 option[value="' + localStorage.getItem('customFontType') + '"]').attr('selected', 'selected');
+    } else {
+      $('body, .font-size-s, .font-size-m, .font-size-l, .font-size-xl, .font-size-xxl').css('font-family', 'Roboto');
+      $('#fontOptSideMenu1 option[value="Roboto"]').attr('selected', 'selected');
+    }
+
+  }
+
   resetBgColor() {
     localStorage.setItem('themeColor', '#00bdbb');
     localStorage.setItem('themeIndex', '0');
-    $('#confBar li > input.bgColorBtn').removeClass('colorPaletteActive');
-    $('#confBar li > input.bgColorBtn:nth(0)').addClass('colorPaletteActive');
+    $('#confBar1 li > input.bgColorBtn').removeClass('colorPaletteActive');
+    $('#confBar1 li > input.bgColorBtn:nth(0)').addClass('colorPaletteActive');
   }
 
   fontminus() {

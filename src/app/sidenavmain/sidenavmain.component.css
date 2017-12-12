@@ -1,40 +1,49 @@
 
-.sidenav {
-    height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 100001;
-    top: 0;
-    right: 0;
-    background-color: #041716;
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 60px;
+.mat-expansion-panel-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 10px !important;
+  }
+  .mat-expansion-panel {
+    background:none;
+  }
+  
+  .mat-expansion-panel-header {
+    font-size: 16px;
+  }
+  
+  .mat-expansion-panel-header-title {
+    color: rgb(129, 129, 129);
+  }
+
+  #themeContainer1 {
+    bottom: 5px; }
+
+  
+  .mat-expansion-panel:not([class*=mat-elevation-z]) {
+    box-shadow:none !important;
+  }
+
+  .bgColor {
+    width: 20px;
+    height: 20px;
+    margin: 0px 8px 0 0;
+    padding: 0px;
+    top: 6px;
+    position: relative;
 }
 
-.sidenav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    text-align: left;
-    color: #818181;
-    display: block;
-    transition: 0.3s;
+.fontOption{
+    width: 80%;
+    float: left;
 }
 
-.sidenav a:hover {
-    color: #f1f1f1;
+.settingLbl{
+    color:rgb(129, 129, 129);
+    padding: 0px 0px 10px 0px;
 }
 
-.sidenav .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
-}
-
-@media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
+.settingBtm{
+    padding: 0px 0 15px 0;
 }

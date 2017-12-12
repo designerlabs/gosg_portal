@@ -290,6 +290,7 @@ html, body{
 
 .sidenav a:hover {
   color: #f1f1f1;
+  border-left: 2px solid;
 }
 
 .sidenav .closebtn {
@@ -315,6 +316,7 @@ html, body{
 .sidenav ul li a.topactive{
   color: #fff;
   font-weight: bold;
+  border-left: 2px solid;
 }
 
 
@@ -335,7 +337,7 @@ html, body{
 }
 
 .mat-expansion-panel-body {
-  margin: 0 10px 16px !important; 
+  margin: 0 10px 0px !important; 
   overflow: auto;
 }
 

@@ -55,6 +55,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsModalService } from 'ngx-bootstrap/modal';
+
+import { SidenavmainComponent } from "../sidenavmain/sidenavmain.component";
 import {
       MatButtonModule,
       MatInputModule,
@@ -101,7 +103,6 @@ import { CdkTableModule } from "@angular/cdk/table";
 // import { DialogsModule } from '../dialogs/dialogs.module';
 import { ConfirmDialogComponent } from '../dialogs/confirm-dialog/confirm-dialog.component';
 import { SharedPipe } from '../common/shared.pipe';
-import { SidenavmainComponent } from '../sidenavmain/sidenavmain.component';
 export function HttpLoaderFactory(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -122,6 +123,7 @@ export function HttpLoaderFactory(http: Http) {
     MatMenuModule,
     MatInputModule, 
     MatSelectModule,
+    MatExpansionModule,
     TranslateModule,
     RouterModule,
     ReactiveFormsModule,
