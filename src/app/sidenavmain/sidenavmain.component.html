@@ -3,21 +3,21 @@
     <ul>
         
         <li>
-          <a routerLinkActive="topactive" [routerLink]="['contact']">{{ 'home.menu.contact' | translate }}</a> </li>
+          <a routerLinkActive="topactive" [routerLink]="['contact']"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ 'home.menu.contact' | translate }}</a> </li>
         <li>
-          <a routerLinkActive="topactive" [routerLink]="['faq']">{{ 'home.menu.faq' | translate }}</a>
+          <a routerLinkActive="topactive" [routerLink]="['faq']"><i class="fa fa-question-circle" aria-hidden="true"></i> {{ 'home.menu.faq' | translate }}</a>
         </li>
         <li>
-          <a routerLinkActive="topactive" [routerLink]="['manual']">{{ 'home.menu.manual' | translate }}</a>
+          <a routerLinkActive="topactive" [routerLink]="['manual']"><i class="fa fa-book" aria-hidden="true"></i> {{ 'home.menu.manual' | translate }}</a>
         </li>
         <li>
-          <a routerLinkActive="topactive" [routerLink]="['aboutus']">{{ 'home.menu.aboutus' | translate }}</a>
+          <a routerLinkActive="topactive" [routerLink]="['aboutus']"><i class="fa fa-globe" aria-hidden="true"></i> {{ 'home.menu.aboutus' | translate }}</a>
         </li>
         <li>
             <mat-expansion-panel>
                 <mat-expansion-panel-header>
                   <mat-panel-title>
-                      {{ 'home.menu.setting' | translate }}
+                      <i class="fa fa-cog" aria-hidden="true"></i>&nbsp;{{ 'home.menu.setting' | translate }}
                   </mat-panel-title>
                 </mat-expansion-panel-header>
                 
@@ -43,7 +43,7 @@
                           Font Type :
                       </div>
                       <div class="settingBtm">
-                          <select #fontTy (change)="onChange($event, fontTy.value)" id="fontOptSideMenu1" class="form-control fontOption">
+                          <select #fontTy (change)="onChange($event, fontTy.value)" id="fontOptSideMenu2" class="form-control fontOption">
                               <option class="fontOpt1" value="Roboto">Roboto</option>
                               <option class="fontOpt2" value="Arial">Arial</option>
                               <option class="fontOpt3" value="Times New Roman">Times New Roman</option>

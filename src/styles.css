@@ -301,6 +301,10 @@ html, body{
   margin-left: 50px;
 }
 
+.sidenav .closebtn:hover{
+  border:none;
+}
+
 .fa.fa-refresh:hover, .fa.fa-times:hover {  
   transform: rotate(180deg);
 }

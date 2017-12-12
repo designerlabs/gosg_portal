@@ -63,10 +63,10 @@ export class SidenavmainComponent implements OnInit {
 
     if (localStorage.getItem('customFontType')) {
       $('body, .font-size-s, .font-size-m, .font-size-l, .font-size-xl, .font-size-xxl').css('font-family', localStorage.getItem('customFontType'));
-      $('#fontOptSideMenu1 option[value="' + localStorage.getItem('customFontType') + '"]').attr('selected', 'selected');
+      $('#fontOptSideMenu2 option[value="' + localStorage.getItem('customFontType') + '"]').attr('selected', 'selected');
     } else {
       $('body, .font-size-s, .font-size-m, .font-size-l, .font-size-xl, .font-size-xxl').css('font-family', 'Roboto');
-      $('#fontOptSideMenu1 option[value="Roboto"]').attr('selected', 'selected');
+      $('#fontOptSideMenu2 option[value="Roboto"]').attr('selected', 'selected');
     }
 
   }
@@ -122,7 +122,7 @@ export class SidenavmainComponent implements OnInit {
   }
 
   resetFontStyle() {
-    $('#fontOptSideMenu1').val('Roboto');
+    $('#fontOptSideMenu2').val('Roboto');
     $('body, .font-size-s, .font-size-m, .font-size-l, .font-size-xl, .font-size-xxl').css('font-family', 'Roboto');
     //$('#fontOpt option[value="Roboto"]').attr("selected", "selected");
     localStorage.setItem('customFontType', 'Roboto');
