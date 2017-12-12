@@ -329,12 +329,17 @@ html, body{
    height: 100%;
 }
 
-.sidenav ul li .menu_title{
-  font-size: 20px;
-  text-decoration: overline;
-  font-weight: bold;
-  color: #e7436d;
+
+.mat-expansion-indicator::after, .mat-expansion-panel-header-description {
+  color: rgb(129, 129, 129) !important;
 }
+
+.mat-expansion-panel-body {
+  margin: 0 10px 16px !important; 
+  overflow: auto;
+}
+
+
 @media screen and (max-height: 450px) {
 .sidenav {padding-top: 15px;}
 .sidenav a {font-size: 18px;}

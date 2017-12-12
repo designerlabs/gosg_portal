@@ -36,14 +36,11 @@
             </li>
             <li>
               <a class="hidden-xs visible-sm  visible-md visible-lg">{{state}}</a>     
-              <a class="visible-xs hidden-sm hidden-md hidden-lg" [routerLink]="['register']"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>     
+              <!-- <a class="visible-xs hidden-sm hidden-md hidden-lg" [routerLink]="['register']"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>      -->
             </li>
             <li>
-                |
-              </li>
-              <li>
-                <button (click)="showProfileMenu()" class="btn btn-sm btn-default"><i class="fa fa-cog font-size-m"></i></button>
-              </li>
+              <button (click)="showProfileMenu()" class="btn btn-sm btn-default"><i style="font-size:16px;" class="fa fa-user-circle" aria-hidden="true"></i></button>
+            </li>
         </ul>
         
         <ul class="list-inline font-size-s" *ngIf="!state">
@@ -66,7 +63,7 @@
               |
             </li>
             <li>
-              <button (click)="showSidenavMenu()" class="btn btn-sm btn-default"><i class="font-size-m fa fa-cog"></i></button>
+              <button (click)="showSidenavMenu()" class="btn btn-sm btn-default"><i style="font-size:16px;" class="fa fa-cog" aria-hidden="true"></i></button>
             </li>
         </ul>
     </div>
