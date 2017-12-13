@@ -12,6 +12,7 @@ import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 import { debounce } from 'rxjs/operators/debounce';
 import { debug } from 'util';
 import { ToastrService } from "ngx-toastr";
+import { forEach } from '@angular/router/src/utils/collection';
 // import { SlicePipe } from '@angular/common/src/pipes';
 // import { ControlBase } from '../common/controlbase'
  
@@ -227,6 +228,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         this.regdate = data[0].date_joined;
         this.mobileNo = data[0].mobile_phone;
         this.profileForm.get('gender').setValue(data[0].gender);
+        // this.profileForm.get('dob').setValue(data[0].dob);
         this.profileForm.get('race').setValue(data[0].race);
         this.profileForm.get('religion').setValue(data[0].religion);
         this.profileForm.get('perAddress1').setValue(data[0].permanent_address1);
@@ -275,10 +277,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
           this.profileForm.get('corrsPostcode').setValue(data[0].permanent_postcode);
           this.profileForm.get('corrsMobile').setValue(data[0].mobile_phone);
         }
-        // this.corrsMobile = data[0].mobile_phone;
-        //this.nationality = this.getCountryByCode(this.countryCode);
-          // console.log("isLocal");
-          // console.log(this.isLocal);
+        this.checkReqValues();
       },
       error => {
         console.log(error)
@@ -313,12 +312,15 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     if(val == "MY") {
       this.getState();
       this.isLocal = true;
+      this.profileForm.get('perState').setValue("");
+      this.profileForm.get('perCity').setValue("");
     } else {
       this.isLocal = false;
-      this.profileForm.get('perState').setValue(" ");
-      this.profileForm.get('perCity').setValue(" ");
+      this.profileForm.get('perState').setValue("");
+      this.profileForm.get('perCity').setValue("");
     }
-    // this.toastr.info(this.translate.instant('this.isLocal: '+this.isLocal), ''); 
+    this.checkReqValues();
+    // this.toastr.info(this.translate.instant('this.isLocal: '+this.isLocal), '');
   }
 
   isMalaysianChk(val) {
@@ -330,10 +332,11 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       this.isCorrsLocal = true;
     } else {
         this.isCorrsLocal = false;
-        this.profileForm.get('corrsState').setValue(" ");
-        this.profileForm.get('corrsCity').setValue(" ");
+        this.profileForm.get('corrsState').setValue("");
+        this.profileForm.get('corrsCity').setValue("");
 
     }
+    this.checkReqValues();
     // this.toastr.info(this.translate.instant('this.isCorrsLocal: '+this.isCorrsLocal), ''); 
   }
 
@@ -374,6 +377,16 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       Error => {
        this.toastr.error(this.translate.instant('Server is down!'), '');            
      });
+  }
+  
+  getCountry(){
+        return this.sharedService.getCountryData()
+          .subscribe(resCountryData => {
+            this.countries = resCountryData;
+          },
+          Error => {
+            this.toastr.error(this.translate.instant('Server is down!'), '');            
+          });
   }
 
   getCountryByCode(cntyCode){
@@ -429,16 +442,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   getCity(e){
     this.selectedCity = e.value;
   }
-
-  getCountry(){
-        return this.sharedService.getCountryData()
-         .subscribe(resCountryData => {
-            this.countries = resCountryData;
-          },
-          Error => {
-           this.toastr.error(this.translate.instant('Server is down!'), '');            
-         });
-  }
   
   getState(){
     return this.sharedService.getStateData()
@@ -482,10 +485,12 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   isChanged() {
     if(this.profileForm.get('checkboxValue').value == true)
       this.profileForm.get('checkboxValue').setValue(false);
+      this.checkReqValues();
   }
 
   isStateChanged() {
     this.isChanged();
+    this.checkReqValues();
   }
 
   isChecked(e) {
@@ -518,7 +523,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       this.profileForm.get('corrsPostcode').setValue("");
       this.profileForm.get('corrsTelephone').setValue("");
     }
-    console.log(e.checked)
+    console.log(e.checked);
+    this.checkReqValues();
   }
   
   addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
@@ -536,15 +542,36 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     
     if(this.isActive != false) {
       this.toastr.info(this.translate.instant('profile.msg.editbtnE'), '');
-      this.initial = false
+      // this.initial = false
       this.profileForm.enable()
       this.dob.enable();
+      this.checkReqValues();
     } else {
       this.toastr.info(this.translate.instant('profile.msg.editbtnD'), '');
       this.initial = true
       this.profileForm.disable()
       this.dob.disable();
     }
+  }
+
+  checkReqValues() {
+    let gdr = this.profileForm.get('gender').value;
+    let pAdd1 = this.profileForm.get('perAddress1').value;
+    let pCountry = this.profileForm.get('perCountry').value;
+    let pPCode = this.profileForm.get('perPostcode').value;
+    let pState = this.profileForm.get('perState').value;
+    let pCity = this.profileForm.get('perCity').value;
+    let reqVal:any = [ gdr, pAdd1, pCountry, pState, pCity, pPCode ];
+    
+    if(gdr != null && pAdd1 != null && pCountry != null && pCity != null && pState != 0 && pPCode != null) {
+      if(this.isActive)
+      this.initial = false;
+    } else {
+      this.initial = true;
+    }
+    if(this.isActive)
+      console.log(reqVal);
+      
   }
   
   updateProfile(formValues:any) {

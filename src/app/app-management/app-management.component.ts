@@ -21,7 +21,8 @@ export class AppManagementComponent implements OnInit {
   rerender = false;
   isMailContainerShow = 'block';
   languageId = this.languageId;
-  collapse:string = "closed";
+  collapse:boolean = true;
+  barClass: string = "container-fluid";
 
   constructor(
     private protectedService: ProtectedService,
@@ -67,6 +68,12 @@ export class AppManagementComponent implements OnInit {
 
   toggleCollapse() {
     // this.show = !this.show
-      this.collapse = this.collapse == "open" ? 'closed' : 'open';
+      if(this.collapse == true) {
+        this.collapse = false;
+        this.barClass = "slideInDown";
+      } else if(this.collapse == false) {
+        this.collapse = true;
+        this.barClass = "slideOutUp";
+      }
   }
 }
