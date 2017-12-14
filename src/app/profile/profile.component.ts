@@ -12,6 +12,7 @@ import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 import { debounce } from 'rxjs/operators/debounce';
 import { debug } from 'util';
 import { ToastrService } from "ngx-toastr";
+import { forEach } from '@angular/router/src/utils/collection';
 // import { SlicePipe } from '@angular/common/src/pipes';
 // import { ControlBase } from '../common/controlbase'
  
@@ -59,6 +60,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   perAddStateId: number;
   corrsAddStateId: number;
   maxDate: any;
+  dateFormatExample: string;
   
   date = new Date();
   public dob: FormControl
@@ -183,7 +185,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       corrsAddress3: this.corrsAddress3,
       corrsCountry: this.corrsCountry,
       corrsState: this.corrsState,
-      checkboxValue:this.checkboxValue,
+      checkboxValue: this.checkboxValue,
       corrsCity: this.corrsCity,
       corrsPostcode: this.corrsPostcode,
       corrsTelephone: this.corrsTelephone,
@@ -195,58 +197,87 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   
   getUserProfile(){
     let getUsrID = localStorage.getItem('usrID');
+    let getUsrNationality = localStorage.getItem('userNationality');
+    // console.log(getUsrNationality);
     // debugger;
     this.protectedService.getProfile(getUsrID).subscribe(
       data => {
         console.log(data);
+
         this.fullname = data[0].fullname;
         this.countryCode = data[0].permanent_country;
-        this.getCountryByCode(this.countryCode);
-      
-      this.isUserRegLocal(this.countryCode);
-      this.isMalaysian(this.countryCode);
-      this.isMalaysianChk(this.countryCode);
-
+        
+        if(this.countryCode == "MY") {
+          if(this.profileForm.get('perState').value === null)
+          this.profileForm.get('perState').setValue(0);
+        } else {
+          this.profileForm.get('perState').setValue("");
+        }
+        this.getCountryByCode(getUsrNationality);
+        this.isUserRegLocal(getUsrNationality);
+        this.isMalaysian(this.countryCode);
+        
         this.idno = data[0].ic_number;
-        if(this.isLocal == true) 
+        if(this.isRegLocal == true) 
           this.maxDate = this.getMinDobDate(this.idno);
+        
+        // console.log(data[0].same_address);
 
+        this.isMalaysianChk(data[0].corresponding_country);
         this.regemail = data[0].email;
         this.regdate = data[0].date_joined;
         this.mobileNo = data[0].mobile_phone;
         this.profileForm.get('gender').setValue(data[0].gender);
+        // this.profileForm.get('dob').setValue(data[0].dob);
         this.profileForm.get('race').setValue(data[0].race);
         this.profileForm.get('religion').setValue(data[0].religion);
         this.profileForm.get('perAddress1').setValue(data[0].permanent_address1);
         this.profileForm.get('perAddress2').setValue(data[0].permanent_address2);
         this.profileForm.get('perAddress3').setValue(data[0].permanent_address3);
         this.profileForm.get('perCountry').setValue(data[0].permanent_country);
-
+        this.profileForm.get('perPostcode').setValue(data[0].permanent_postcode);
+        this.profileForm.get('perTelephone').setValue(data[0].permanent_home_phone);
 
         if(data[0].permanent_state !== null) {
           if(data[0].permanent_country == "MY")
-            this.getCitiesByStateC(data[0].permanent_state);
+            this.getCitiesByStateP(data[0].permanent_state);
 
           this.profileForm.get('perState').setValue(data[0].permanent_state);
           this.profileForm.get('perCity').setValue(data[0].permanent_city); 
         }
-
-
         
-        this.profileForm.get('perPostcode').setValue(data[0].permanent_postcode);
-        this.profileForm.get('perTelephone').setValue(data[0].corresponding_home_phone);
-        this.profileForm.get('corrsAddress1').setValue(data[0].corresponding_address1);
-        this.profileForm.get('corrsAddress2').setValue(data[0].corresponding_address2);
-        this.profileForm.get('corrsAddress3').setValue(data[0].corresponding_address3);
-        this.profileForm.get('corrsCountry').setValue(data[0].corresponding_country);
-        this.profileForm.get('corrsCity').setValue(data[0].corresponding_city);
-        this.profileForm.get('corrsState').setValue(data[0].corresponding_state);
-        this.profileForm.get('corrsPostcode').setValue(data[0].corresponding_postcode);
-        this.profileForm.get('corrsMobile').setValue(data[0].mobile_phone);
-        // this.corrsMobile = data[0].mobile_phone;
-        //this.nationality = this.getCountryByCode(this.countryCode);
-          // console.log("isLocal");
-          // console.log(this.isLocal);
+        if(data[0].same_address != true) {
+          this.profileForm.get('corrsAddress1').setValue(data[0].corresponding_address1);
+          this.profileForm.get('corrsAddress2').setValue(data[0].corresponding_address2);
+          this.profileForm.get('corrsAddress3').setValue(data[0].corresponding_address3);
+          this.profileForm.get('corrsCountry').setValue(data[0].corresponding_country);
+          this.profileForm.get('corrsCity').setValue(data[0].corresponding_city);
+
+          if(this.isCorrsLocal)
+            this.getCitiesByStateC(data[0].corresponding_state);
+
+          this.profileForm.get('corrsState').setValue(data[0].corresponding_state);
+          this.profileForm.get('corrsPostcode').setValue(data[0].corresponding_postcode);
+          this.profileForm.get('corrsMobile').setValue(data[0].mobile_phone);
+          this.profileForm.get('corrsTelephone').setValue(data[0].corresponding_home_phone
+          );
+        } else {
+          this.profileForm.get('checkboxValue').setValue(data[0].same_address);
+          this.profileForm.get('corrsTelephone').setValue(data[0].permanent_home_phone);
+          this.profileForm.get('corrsAddress1').setValue(data[0].permanent_address1);
+          this.profileForm.get('corrsAddress2').setValue(data[0].permanent_address2);
+          this.profileForm.get('corrsAddress3').setValue(data[0].permanent_address3);
+          this.profileForm.get('corrsCountry').setValue(data[0].permanent_country);
+          this.profileForm.get('corrsState').setValue(data[0].permanent_state);
+          
+          if(this.isCorrsLocal)
+            this.getCitiesByStateC(data[0].permanent_state);
+
+          this.profileForm.get('corrsCity').setValue(data[0].permanent_city);
+          this.profileForm.get('corrsPostcode').setValue(data[0].permanent_postcode);
+          this.profileForm.get('corrsMobile').setValue(data[0].mobile_phone);
+        }
+        this.checkReqValues();
       },
       error => {
         console.log(error)
@@ -259,34 +290,45 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.maskForeigner = this.validateService.getMask().telephonef;
     this.maskPostcode = this.validateService.getMask().postcode;
     this.maskDateFormat = this.validateService.getMask().dateFormat;
+    
   } 
 
   isUserRegLocal(regCountry) {
+    // console.log(regCountry);
 
-    if(regCountry == "MY") 
+    if(regCountry == "MY") {
       this.isRegLocal = true;
-    else
+      this.dateFormatExample = " ";
+    } else {
       this.isRegLocal = false;
+      this.dateFormatExample = "dd/mm/yyyy";
+    }
   }
   
   isMalaysian(val) {
+    // console.log(val);
 
     this.isChanged();
     if(val == "MY") {
       this.getState();
       this.isLocal = true;
+      this.profileForm.get('perState').setValue("");
+      this.profileForm.get('perCity').setValue("");
     } else {
       this.isLocal = false;
       this.profileForm.get('perState').setValue("");
       this.profileForm.get('perCity').setValue("");
     }
-    // this.toastr.info(this.translate.instant('this.isLocal: '+this.isLocal), ''); 
+    this.checkReqValues();
+    // this.toastr.info(this.translate.instant('this.isLocal: '+this.isLocal), '');
   }
 
   isMalaysianChk(val) {
+    // console.log(val);
 
     this.isChanged();
     if(val == "MY") {
+      this.getState();
       this.isCorrsLocal = true;
     } else {
         this.isCorrsLocal = false;
@@ -294,6 +336,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         this.profileForm.get('corrsCity').setValue("");
 
     }
+    this.checkReqValues();
     // this.toastr.info(this.translate.instant('this.isCorrsLocal: '+this.isCorrsLocal), ''); 
   }
 
@@ -317,7 +360,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     year = century+year;
     display = month+"/"+day+"/"+year;
     // console.log(display);
-    if(this.isLocal == true) {
+    if(this.isRegLocal == true) {
       this.profileForm.get('dob').setValue(new Date(year,month-1,day));
       this.dt= new Date(display).getTime();
     }
@@ -334,6 +377,16 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       Error => {
        this.toastr.error(this.translate.instant('Server is down!'), '');            
      });
+  }
+  
+  getCountry(){
+        return this.sharedService.getCountryData()
+          .subscribe(resCountryData => {
+            this.countries = resCountryData;
+          },
+          Error => {
+            this.toastr.error(this.translate.instant('Server is down!'), '');            
+          });
   }
 
   getCountryByCode(cntyCode){
@@ -362,6 +415,18 @@ export class ProfileComponent implements OnInit, AfterViewInit {
        });
   }
 
+  getCitiesByStateP(e){
+    if(e){
+      return this.sharedService.getCitiesbyState(e)
+      .subscribe(resCityData => {
+        this.getPerCityData = resCityData;
+      },
+      Error => {
+       this.toastr.error(this.translate.instant('Server is down!'), '');            
+     });
+    }
+  }
+
   getCitiesByStateC(e){
     if(e){
       return this.sharedService.getCitiesbyState(e)
@@ -376,16 +441,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
   getCity(e){
     this.selectedCity = e.value;
-  }
-
-  getCountry(){
-        return this.sharedService.getCountryData()
-         .subscribe(resCountryData => {
-            this.countries = resCountryData;
-          },
-          Error => {
-           this.toastr.error(this.translate.instant('Server is down!'), '');            
-         });
   }
   
   getState(){
@@ -430,10 +485,12 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   isChanged() {
     if(this.profileForm.get('checkboxValue').value == true)
       this.profileForm.get('checkboxValue').setValue(false);
+      this.checkReqValues();
   }
 
   isStateChanged() {
     this.isChanged();
+    this.checkReqValues();
   }
 
   isChecked(e) {
@@ -446,8 +503,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       this.profileForm.get('corrsAddress3').setValue(this.perAddress3.value);
       this.profileForm.get('corrsCountry').setValue(this.perCountry.value);
       this.profileForm.get('corrsState').setValue(this.perState.value);
-      
-      this.getCitiesByStateC(this.selectedState);
+
+      if(this.isLocal)
+        this.getCitiesByStateC(this.perState.value);
      
       this.profileForm.get('corrsCity').setValue(this.perCity.value);
       this.profileForm.get('corrsPostcode').setValue(this.perPostcode.value);
@@ -465,12 +523,15 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       this.profileForm.get('corrsPostcode').setValue("");
       this.profileForm.get('corrsTelephone').setValue("");
     }
+    console.log(e.checked);
+    this.checkReqValues();
   }
   
   addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
     this.events = [];
     this.events.push(`${event.value}`);
     this.dt = new Date(this.events[0]).getTime();
+    this.dateFormatExample = "";
     // console.log(this.dt)
   }
 
@@ -481,15 +542,36 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     
     if(this.isActive != false) {
       this.toastr.info(this.translate.instant('profile.msg.editbtnE'), '');
-      this.initial = false
+      // this.initial = false
       this.profileForm.enable()
       this.dob.enable();
+      this.checkReqValues();
     } else {
       this.toastr.info(this.translate.instant('profile.msg.editbtnD'), '');
       this.initial = true
       this.profileForm.disable()
       this.dob.disable();
     }
+  }
+
+  checkReqValues() {
+    let gdr = this.profileForm.get('gender').value;
+    let pAdd1 = this.profileForm.get('perAddress1').value;
+    let pCountry = this.profileForm.get('perCountry').value;
+    let pPCode = this.profileForm.get('perPostcode').value;
+    let pState = this.profileForm.get('perState').value;
+    let pCity = this.profileForm.get('perCity').value;
+    let reqVal:any = [ gdr, pAdd1, pCountry, pState, pCity, pPCode ];
+    
+    if(gdr != null && pAdd1 != null && pCountry != null && pCity != null && pState != 0 && pPCode != null) {
+      if(this.isActive)
+      this.initial = false;
+    } else {
+      this.initial = true;
+    }
+    if(this.isActive)
+      console.log(reqVal);
+      
   }
   
   updateProfile(formValues:any) {
@@ -504,6 +586,15 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       "gender": null,
       "race": null,
       "religion": null,
+      "permanent_address1":null,
+      "permanent_address2":null,
+      "permanent_address3":null,
+      "permanent_postcode":null,
+      "permanent_city":null,
+      "permanent_state":null,
+      "permanent_country":null,
+      "permanent_home_phone":null,
+      "same_address":null,
       "corresponding_address1": null,
       "corresponding_address2": null,
       "corresponding_address3": null,
@@ -513,25 +604,18 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       "corresponding_city":null,
       "corresponding_home_phone":null,
       "mobile_phone":null,
-      "permanent_address1":null,
-      "permanent_address2":null,
-      "permanent_address3":null,
-      "permanent_postcode":null,
-      "permanent_city":null,
-      "permanent_state":null,
-      "permanent_country":null,
-      "permanent_home_phone":null,
       "dateTime": null,
       "lang": null,
       "citizenType":null,
       "user_id": null
     };
+    
   
     body.date_joined = this.regdate;
     body.fullname = this.fullname;
     body.ic_number = this.idno;
     body.email = this.regemail;
-    body.dob = this.dt;
+    body.dob = new Date(formValues.dob).getTime();
     body.race = formValues.race;
     body.gender = formValues.gender;
     body.religion = formValues.religion;
@@ -543,6 +627,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     body.permanent_state = formValues.perState;
     body.permanent_city = formValues.perCity;
     body.permanent_home_phone = formValues.perTelephone;
+    body.same_address = formValues.checkboxValue;
     body.corresponding_address1 = formValues.corrsAddress1;
     body.corresponding_address2 = formValues.corrsAddress2;
     body.corresponding_address3 = formValues.corrsAddress3;
@@ -555,14 +640,14 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     body.dateTime = new Date().getTime();
     body.user_id = localStorage.getItem('usrID');
     body.lang = localStorage.getItem("langID");
-  
-    // console.log(JSON.stringify(body));
-    // console.log(body);
-    // window.rel
 
     this.protectedService.updateProfile(body)
     .subscribe(
       data => {
+        console.log(body);
+        this.isActive = false;
+        this.initial = true;
+        this.profileForm.invalid;
         this.toastr.success(this.translate.instant('profile.msg.updateSuccess'), '');
         this.profileForm.disable();
       },

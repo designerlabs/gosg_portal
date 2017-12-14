@@ -1,0 +1,49 @@
+
+.mat-expansion-panel-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 10px !important;
+  }
+  .mat-expansion-panel {
+    background:none;
+  }
+  
+  .mat-expansion-panel-header {
+    font-size: 16px;
+  }
+  
+  .mat-expansion-panel-header-title {
+    color: rgb(129, 129, 129);
+  }
+
+  #themeContainer1 {
+    bottom: 5px; }
+
+  
+  .mat-expansion-panel:not([class*=mat-elevation-z]) {
+    box-shadow:none !important;
+  }
+
+  .bgColor {
+    width: 20px;
+    height: 20px;
+    margin: 0px 8px 0 0;
+    padding: 0px;
+    top: 6px;
+    position: relative;
+}
+
+.fontOption{
+    width: 80%;
+    float: left;
+}
+
+.settingLbl{
+    color:rgb(129, 129, 129);
+    padding: 0px 0px 10px 0px;
+}
+
+.settingBtm{
+    padding: 0px 0 15px 0;
+}

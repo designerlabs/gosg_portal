@@ -63,7 +63,7 @@ imports: [
   declarations: [
     AppComponent,
     RegisterComponent,
-    LoginComponent 
+    LoginComponent
     
   ],
  

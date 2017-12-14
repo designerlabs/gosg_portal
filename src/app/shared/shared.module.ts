@@ -55,6 +55,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsModalService } from 'ngx-bootstrap/modal';
+
+import { SidenavmainComponent } from "../sidenavmain/sidenavmain.component";
 import {
       MatButtonModule,
       MatInputModule,
@@ -121,6 +123,7 @@ export function HttpLoaderFactory(http: Http) {
     MatMenuModule,
     MatInputModule, 
     MatSelectModule,
+    MatExpansionModule,
     TranslateModule,
     RouterModule,
     ReactiveFormsModule,
@@ -158,7 +161,8 @@ export function HttpLoaderFactory(http: Http) {
     FeedbackComponent,
     ConfirmComponent,
     SharedPipe,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    SidenavmainComponent
   ],
 
   exports: [

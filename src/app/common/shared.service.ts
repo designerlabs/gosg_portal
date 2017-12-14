@@ -25,7 +25,7 @@ export class SharedService {
   getCountryData(): Observable<any[]> {
     //  console.log(this.countryUrl);
     return this.http.get(this.countryUrl)
-      .map((response: Response) => response.json())
+      .map((response: Response) => response.json().countryList)
       .catch(this.handleError);
 
   }
