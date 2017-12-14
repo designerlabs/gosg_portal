@@ -232,5 +232,31 @@
       "warn":"bg_header bg_warn_header",
       "info":"bg_header bg_info_header"
     }
+  },
+  "appmngt":{
+    "setSearch":{
+      "appNumber": "Nombor Permohonan",
+      "agency": "Agensi",
+      "chooseAgency": "Pilih Agensi",
+      "startDate": "Tarikh Mula",
+      "endDate": "Tarikh Akhir",
+      "appStatus": "Status Permohonan",
+      "search": "Carian",
+      "chooseStatus": "Pilih Status"
+    },
+    "tableHeader":{
+      "num": "Bil.",
+      "appNo": "No. Permohonan",
+      "appName": "Nama Permohonan",
+      "submit" : "Tarikh Hantar",
+      "status": "Status",
+      "action": "Tindakan"
+    },
+    "tablebottom":{
+      "page": "Mukasurat",
+      "of": "daripada",
+      "in": "dalam",
+      "app": "permohonan"
+    }
   }
 }

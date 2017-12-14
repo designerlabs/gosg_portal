@@ -46,6 +46,8 @@ export class AppConfig {
     urlIntSearch:string;
     urlUserType:string;
     urlMail:string;
+    urlAppAgency:string;
+    
 }
 
 export const APP_DI_CONFIG: AppConfig = {
@@ -77,6 +79,8 @@ export const APP_DI_CONFIG: AppConfig = {
     urlIntSearch: searchServiceURL + 'query/0/internal',
     urlUserType:baseURL+'user-type/',
     urlMail: commonURL+'inbox/',
+    urlAppAgency: './app/apidata/appAgency',
+
 };
 
 @NgModule({

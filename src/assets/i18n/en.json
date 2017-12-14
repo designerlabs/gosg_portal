@@ -232,5 +232,29 @@
       "warn":"bg_header bg_warn_header",
       "info":"bg_header bg_info_header"
     }
+  },
+  "appmngt":{
+    "setSearch":{
+      "appNumber": "Application Number",
+      "agency": "Agency",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "appStatus": "Application Status",
+      "search": "Search"
+    },
+    "tableHeader":{
+      "num": "No.",
+      "appNo": "Application No.",
+      "appName": "Application Name",
+      "submit" : "Submit Date",
+      "status": "Status",
+      "action": "Action"
+    },
+    "tablebottom":{
+      "page": "Page",
+      "of": "of",
+      "in": "in",
+      "app": "applications"
+    }
   }
 }

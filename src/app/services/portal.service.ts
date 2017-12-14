@@ -41,6 +41,28 @@ export class PortalService {
   private profileUrl: string = this.config.urlProfile;
   private fbsubjectUrl: string = this.config.urlFeedbackSubject;
   private usertypeUrl:string = this.config.urlUserType;
+  private AgencyAppUrl: string = this.config.urlAppAgency;
+  private statusAppUrl: string = this.config.urlAppAgency;
+  private dataAppUrl: string = this.config.urlAppAgency;
+  
+  getAgencyApp(){
+    return this.http.get(this.AgencyAppUrl + '.json')
+        .map(res => res.json());
+  }
+
+  getStatusApp(){
+    return this.http.get(this.statusAppUrl + '.json')
+       .map(res => res.json());
+  }
+
+  getDataApp(){
+    return this.http.get(this.dataAppUrl + '.json')
+       .map(res => res.json());
+  }
+
+  // searchApp(){
+  //   return this.http.post()
+  // }
   
   create(user) {
     return this.http.post(this.registerUrl, user)
@@ -54,7 +76,6 @@ export class PortalService {
       .map((response: Response) => response.json())
       .catch(this.handleError);
   } 
-
   
   feedback(data){
     let headers = new Headers({ 'Content-Type': 'application/json', 'Accept':'application/json' });
