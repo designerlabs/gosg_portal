@@ -55,7 +55,6 @@ export class ProtectedService {
     .catch(this.handleError);
   }
 
-
   getMail(msgId){
     return this.http
     .get(this.mailUrl+"id/"+msgId).map((response: Response) => response.json())

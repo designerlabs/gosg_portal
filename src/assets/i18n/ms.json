@@ -235,6 +235,7 @@
   },
   "appmngt":{
     "setSearch":{
+      "moreOpt": "Carian Terperinci",
       "appNumber": "Nombor Permohonan",
       "agency": "Agensi",
       "chooseAgency": "Pilih Agensi",

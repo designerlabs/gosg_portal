@@ -235,6 +235,7 @@
   },
   "appmngt":{
     "setSearch":{
+      "moreOpt": "More Search Options",
       "appNumber": "Application Number",
       "agency": "Agency",
       "startDate": "Start Date",
