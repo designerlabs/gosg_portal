@@ -316,6 +316,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   
   isMalaysian(val) {
     this.selectedCountry = val;
+    // this.profileForm.get('perCountry').setValue(this.selectedCountry);
     
     this.isChanged();
     if(val == "MY") {
@@ -575,8 +576,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     let pState = this.profileForm.get('perState').value;
     let pCity = this.profileForm.get('perCity').value;
     let reqVal:any = [ gdr, pAdd1, pCountry, pState, pCity, pPCode ];
-    
+
     if(gdr != null && pAdd1 != null && pCountry != null && pCity != null && pState != 0 && pPCode != null) {
+      
       if(this.isActive)
       this.initial = false;
     } else {
@@ -663,21 +665,21 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     console.log(this.profileForm.get('perCountry').value);
     console.log(this.profileForm.get('perState').value);
     console.log(this.profileForm.get('perCity').value);
-    // this.checkReqValues();
+    this.checkReqValues();
 
-    // this.protectedService.updateProfile(body)
-    // .subscribe(
-    //   data => {
-    //     console.log(body);
-    //     this.isActive = false;
-    //     this.initial = true;
-    //     this.profileForm.invalid;
-    //     this.toastr.success(this.translate.instant('profile.msg.updateSuccess'), '');
-    //     this.profileForm.disable();
-    //   },
-    //   error => {
-    //     this.toastr.error(this.translate.instant('profile.err.updateFail'), '');
-    //   });
+    this.protectedService.updateProfile(body)
+    .subscribe(
+      data => {
+        console.log(body);
+        this.isActive = false;
+        this.initial = true;
+        // this.profileForm.invalid;
+        this.toastr.success(this.translate.instant('profile.msg.updateSuccess'), '');
+        this.profileForm.disable();
+      },
+      error => {
+        this.toastr.error(this.translate.instant('profile.err.updateFail'), '');
+      });
   }
 
   toFormGroup(data: any) {

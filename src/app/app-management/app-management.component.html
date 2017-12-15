@@ -28,9 +28,9 @@
   <div class="col-md-9 mat-elevation-z8" style="margin-top:15px;">
     <div class="moreSearchOptBtn">
         <!-- (click)="changeShowStatus()" [ngClass]="{ 'editBtn-active': showHide, 'editBtn': !showHide  }" -->
-      <button type="button" mat-fab color="warn" class="ng-tns-c8-5 ng-trigger ng-trigger-indicatorRotate" style="transform: rotate(0deg);">&nbsp;
-        <i class="fa fa-search font-size-l"></i>
-      </button>
+        <!-- <i class="fa fa-search font-size-l"></i> -->
+      <!-- <button type="button" mat-fab color="warn" class="ng-tns-c8-5 ng-trigger ng-trigger-indicatorRotate" style="transform: rotate(0deg);">&nbsp;
+      </button> -->
     </div>
     <form [formGroup]="searchForm" (ngSubmit)="searchapp(searchForm.value)" #adSearchForm="ngForm" id="adSearch-form" role="form"
       novalidate="novalidate">
@@ -45,12 +45,6 @@
                   </mat-panel-title>
                 </div>
                 <div class="col-md-4">
-                    <br />
-                  <mat-panel-description>
-                    {{ 'appmngt.setSearch.moreOpt' | translate }}
-                  </mat-panel-description>
-                </div>
-                <div class="col-md-4">
                     <!-- <br /> -->
                     <div style="height: 13px">&nbsp;</div>
                   <button mat-raised-button type="button" color="primary" id="searchbtn" class="form-control btn btn-md btn-success font-size-s"
@@ -59,6 +53,12 @@
                   <button tabindex="" mat-raised-button color="warn" type="button" id="btnreset" class="form-control btn btn-md btn-warning font-size-s"
                     style="width: auto; height: 35px; font-family: Roboto;" (click)="resetModal.show()">
                     <i class="fa fa-refresh"></i> {{'feedback.label.reset' | translate }}</button>
+                </div>
+                <div class="col-md-4">
+                    <br />
+                  <mat-panel-description>
+                    {{ 'appmngt.setSearch.moreOpt' | translate }}
+                  </mat-panel-description>
                 </div>
               </mat-expansion-panel-header>
             <!-- </div> -->
