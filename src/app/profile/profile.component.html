@@ -143,7 +143,7 @@
                   </mat-select>
                 </mat-form-field>
                 <mat-form-field *ngIf="!isLocal" class="example-full-width font-size-s">
-                  <input (keyup)="isChanged()" matInput formControlName="perState" type="text" placeholder="{{'profile.label.state' | translate}}" required="true ? isLocal : false" />
+                  <input (keyup)="isChanged()" matInput formControlName="perState" type="text" placeholder="{{'profile.label.state' | translate}}" required="false ? isLocal : true" />
                   <mat-error *ngIf="!validateCtrlChk(perState) && profileForm.controls.perState.errors.required">
                       {{'profile.err.state' | translate }}
                   </mat-error>
@@ -156,7 +156,7 @@
                   </mat-select>
                 </mat-form-field>
                 <mat-form-field *ngIf="!isLocal" class="example-full-width font-size-s">
-                  <input (keyup)="isChanged()" matInput formControlName="perCity" type="text" placeholder="{{'profile.label.city' | translate}}" required="true ? isLocal : false"  />
+                  <input (keyup)="isChanged()" matInput formControlName="perCity" type="text" placeholder="{{'profile.label.city' | translate}}" required="false ? isLocal : true"  />
                   <mat-error *ngIf="!validateCtrlChk(perCity) && profileForm.controls.perCity.errors.required">
                       {{'profile.err.city' | translate }}
                   </mat-error>
