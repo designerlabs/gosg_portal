@@ -25,236 +25,89 @@
   <div class="col-md-3 padding-left-0">
     <gosg-sidenav-dashboard></gosg-sidenav-dashboard>
   </div>
-  <div class="col-md-9 mat-elevation-z8" style="position: relative">
-      <p style="color: #000">Status(collapse): {{collapse}}</p>
-    
-    <div style="" class="container-fluid animated {{ barClass }}">
-      <div class="col-sm-12 padding-top-m padding-bottom-s">
-        <div class="col-sm-4">
-          <label for="noapplic" class="font-size-s" style="font-family: Roboto;">
-            <span data-translate="common.noApplication">Application Number</span>
-          </label>
-          <input type="text" class="form-control plcr filter" name="noapplic" id="noapplic" data-translate="common.noApplication" data-colm="1"
-            placeholder="Application Number">
-        </div>
-        <div class="col-sm-4">
-          <label for="serAgen" class="font-size-s" style="font-family: Roboto;">
-            <span data-translate="common.agency">Agency</span>
-          </label>
-          <select id="serAgen" name="serAgen" class="form-control filter" data-colm="3">
-            <option value="" data-translate="common.selagency">Select Agency</option>
-            <option value="kpdnkk">KPDNKK</option>
-            <option value="perikanan">JABATAN PERIKANAN MALAYSIA</option>
-            <option value="perhilitan">PERHILITAN</option>
-          </select>
-        </div>
-
-        <div class="col-sm-4">
-          <label for="datestart" class="font-size-s" style="font-family: Roboto;">
-            <span data-translate="common.startdate">Start Date - End Date</span>
-          </label>
-          <input type="text" id="serDateRange" class="form-control filter" data-colm="4" placeholder="dd/mm/yyyy - dd/mm/yyyy">
-          <input type="text" id="serStartDt" class="hidden" data-colm="4">
-          <input type="text" id="serEndDt" class="hidden" data-colm="4">
-        </div>
-      </div>
-      <div class="col-sm-12 padding-top-m padding-bottom-xl">
-        <div class="col-sm-4">
-          <label for="selAppStatus" data-translate="common.appStatus" class="font-size-s" style="font-family: Roboto;">Application Status</label>
-          <select id="selAppStatus" name="selAppStatus" class="form-control filter" data-colm="5">
-            <option value="" data-translate="common.selectAppStus">Select Status</option>
-            <option value="pass" data-translate="common.pass" class="appStatus-perhilitan-perikanan">Passed</option>
-            <option value="notpass" data-translate="common.notpass" class="appStatus-perhilitan-perikanan">Not Passed</option>
-            <option value="failed" data-translate="common.failed" class="appStatus-kiv">Failed</option>
-            <option value="cancel" data-translate="common.cancel" class="appStatus-kpdnkk">Cancel</option>
-            <option value="process" data-translate="common.process" class="appStatus-perhilitan-perikanan">In Process</option>
-            <option value="pendingreview" data-translate="common.pendingreview" class="appStatus-kpdnkk">Pending to Review</option>
-            <option value="pendingapproval" data-translate="common.pendingapproval" class="appStatus-kpdnkk">Pending to approval</option>
-            <option value="finished" data-translate="common.finished" class="appStatus-kpdnkk-perhilitan">Completed</option>
-            <option value="rdyprt" data-translate="common.rdyprt" class="appStatus-kpdnkk">Ready to Print</option>
-            <option value="draft" data-translate="common.draft">Draft</option>
-            <option value="condpass" data-translate="common.condpass" class="appStatus-kiv">Passed with Condition</option>
-            <option value="grafix" data-translate="common.grafix" class="appStatus-kiv">Permanently Passed</option>
-            <option value="return" data-translate="common.return" class="appStatus-kiv">Return</option>
-            <option value="otherslain" data-translate="common.otherslain" class="appStatus-kiv">Other</option>
-          </select>
-        </div>
-
-        <div class="col-sm-4" style="top: 24px;">
-          <button class="btn btn-primary btn-md searchApp">
-            <i class="fa fa-search"></i>
-            <span data-translate="common.search"> Search</span>
-          </button>
-          <button class="btn btn-warning btn-md resetsearchApp" style="text-transform: uppercase;">
-            <i class="fa fa-refresh"></i>
-            <span data-translate="common.reset"> Reset</span>
-          </button>
-        </div>
-      </div>
-    </div>
-
+  <div class="col-md-9 mat-elevation-z8" style="margin-top:15px;">
     <div class="moreSearchOptBtn">
-      <button mat-raised-button color="warn" (click)="toggleCollapse()">
-        More Search Option</button>
+        <button type="button" mat-fab color="warn" (click)="changeShowStatus()" [ngClass]="{ 'editBtn-active': showHide, 'editBtn': !showHide  }">&nbsp;<i class="fa fa-search font-size-l"></i></button>
     </div>
-
+    
+        <form [formGroup]="searchForm" (ngSubmit)="searchapp(searchForm.value)" #adSearchForm="ngForm" id="adSearch-form" role="form" novalidate="novalidate">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-4">
+                <mat-form-field>
+                    <input matInput formControlName="appNumber" placeholder="{{'appmngt.setSearch.appNumber' | translate}}" name="appNum" id="appNum">
+                </mat-form-field>
+              </div>
+              <div *ngIf="showHide">  
+                <div class="col-md-4">
+                  <mat-form-field>
+                    <mat-select formControlName="agency" placeholder="{{'appmngt.setSearch.agency' | translate}}" name="agency" id="agency">
+                      <mat-option *ngFor="let data of dataAgency" [value]="data.agencyId">{{data.agency}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field> 
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field>
+                    <mat-select formControlName="appStatus" placeholder="{{'appmngt.setSearch.appStatus' | translate}}" name="appStatus" id="appStatus">
+                      <mat-option *ngFor="let data of data" [value]="data.statusId">{{data.status}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div> 
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-4" *ngIf=showHide>
+                <mat-form-field>
+                  <input matInput [matDatepicker]="startData" formControlName="startData" placeholder="{{'appmngt.setSearch.startDate' | translate}}" name="startDate" id="startDate">
+                  <mat-datepicker-toggle matSuffix [for]="startData" style="color:#333;"></mat-datepicker-toggle>
+                  <mat-datepicker #startData startView="year" [startAt]="startDate"></mat-datepicker>
+                </mat-form-field>
+             
+              </div> 
+              <div class="col-md-4" *ngIf=showHide>
+                <mat-form-field >
+                  <input matInput [matDatepicker]="endData" formControlName="endData" placeholder="{{'appmngt.setSearch.endDate' | translate}}" name="endDate" id="endDate">
+                  <mat-datepicker-toggle matSuffix [for]="endData" style="color:#333;"></mat-datepicker-toggle>
+                  <mat-datepicker #endData startView="year" [startAt]="startDate"></mat-datepicker>
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <button mat-raised-button type="button" color="primary" id="searchbtn" class="form-control btn btn-md btn-success font-size-s" (click)="searchapp(searchForm.value)" style="width: 100px; font-family: Roboto;"><i class="fa fa-search"></i> {{'appmngt.setSearch.search' | translate}}</button>
+                <button tabindex="" mat-raised-button color="warn" type="button" id="btnreset" class="form-control btn btn-md btn-warning font-size-s"
+                style="width: 115px; font-family: Roboto;" (click)="resetModal.show()">
+                <i class="fa fa-refresh"></i> {{'feedback.label.reset' | translate }}</button>
+              </div>
+            </div>
+          </div>
+        </form>
     <!-- <div class="row"></div> -->
     <table class="mat-table" style="width:100%; z-index: 9999;">
       <tr class="mat-header-row" style="height:45px">
-        <th width="5%" class="mat-header-cell">Bil</th>
-        <th width="15%" class="mat-header-cell">No. Permohonan</th>
-        <th class="mat-header-cell">Nama Permohonan</th>
-        <th width="10%" class="mat-header-cell">Agensi</th>
-        <th width="15%" class="mat-header-cell text-center">Tarikh Hantar</th>
-        <th width="15%" class="mat-header-cell text-center">Status</th>
-        <th width="15%" class="mat-header-cell text-center">Tindakan</th>
+        <th width="5%" class="mat-header-cell">{{'appmngt.tableHeader.num' | translate}}</th>
+        <th width="15%" class="mat-header-cell">{{'appmngt.tableHeader.appNo' | translate}}</th>
+        <th class="mat-header-cell">{{'appmngt.tableHeader.appName' | translate}}</th>
+        <th width="10%" class="mat-header-cell">{{'appmngt.setSearch.agency' | translate}}</th>
+        <th width="15%" class="mat-header-cell text-center">{{'appmngt.tableHeader.submit' | translate}}</th>
+        <th width="15%" class="mat-header-cell text-center">{{'appmngt.tableHeader.status' | translate}}</th>
+        <th width="15%" class="mat-header-cell text-center">{{'appmngt.tableHeader.action' | translate}}</th>
       </tr>
-      <tr role="row" class="mat-row">
-        <td class="mat-cell">1</td>
-        <td class="mat-cell">173434</td>
-        <td class="mat-cell">PERMOHONAN BARU LESEN PENIAGA/TAKSIDERMI</td>
-        <td class="mat-cell">PERHILITAN</td>
-        <td class="mat-cell text-center">07-11-2017 15:06:52 PM</td>
-        <td class="mat-cell text-center">DALAM PROSES</td>
-        <td class="mat-cell text-center">
-          <button class="btn btn-sm btn-warning" data_transid="173434">
-            <i class="fa fa-eye font-size-s"></i>
-          </button>
-        </td>
-      </tr>
-      <tr role="row" class="mat-row">
-        <td class="mat-cell">2</td>
-        <td class="mat-cell">173442</td>
-        <td class="mat-cell">PERMOHONAN BARU LESEN PENIAGA/TAKSIDERMI</td>
-        <td class="mat-cell">PERHILITAN</td>
-        <td class="mat-cell text-center">07-11-2017 15:18:54 PM</td>
-        <td class="mat-cell text-center">DALAM PROSES</td>
-        <td class="mat-cell text-center">
-          <button class="btn btn-sm btn-warning" data_transid="173442">
-            <i class="fa fa-eye font-size-s"></i>
-          </button>
-        </td>
-      </tr>
-      <tr role="row" class="mat-row">
-        <td class="mat-cell">3</td>
-        <td class="mat-cell">2</td>
-        <td class="mat-cell">PERMOHONAN BARU LESEN PENIAGA/TAKSIDERMI</td>
-        <td class="mat-cell">PERHILITAN</td>
-        <td class="mat-cell text-center">28-11-2017 17:41:47 PM</td>
-        <td class="mat-cell text-center"> DRAF </td>
-        <td class="mat-cell text-center">
-          <button class="btn btn-sm btn-info" data_transid="2">
-            <i class="fa fa-edit font-size-s"></i>
-          </button>
-        </td>
-      </tr>
-      <tr role="row" class="mat-row">
-        <td class="mat-cell">4</td>
-        <td class="mat-cell">8</td>
-        <td class="mat-cell">PERMOHONAN BARU LESEN PENIAGA/TAKSIDERMI</td>
-        <td class="mat-cell">PERHILITAN</td>
-        <td class="mat-cell text-center">09-11-2017 16:39:22 PM</td>
-        <td class="mat-cell text-center"> DRAF </td>
-        <td class="mat-cell text-center">
-          <button class="btn btn-sm btn-info" data_transid="8">
-            <i class="fa fa-edit font-size-s"></i>
-          </button>
-        </td>
-      </tr>
-      <tr role="row" class="mat-row">
-        <td class="mat-cell">5</td>
-        <td class="mat-cell">9</td>
-        <td class="mat-cell">PERMOHONAN BARU LESEN PENIAGA/TAKSIDERMI</td>
-        <td class="mat-cell">PERHILITAN</td>
-        <td class="mat-cell text-center">09-11-2017 17:02:34 PM</td>
-        <td class="mat-cell text-center"> DRAF </td>
-        <td class="mat-cell text-center">
-          <button class="btn btn-sm btn-info" data_transid="9">
-            <i class="fa fa-edit font-size-s"></i>
-          </button>
-        </td>
-      </tr>
-      <tr role="row" class="mat-row">
-        <td class="mat-cell">6</td>
-        <td class="mat-cell">10</td>
-        <td class="mat-cell">PERMOHONAN BARU LESEN PENIAGA/TAKSIDERMI</td>
-        <td class="mat-cell">PERHILITAN</td>
-        <td class="mat-cell text-center">09-11-2017 17:25:58 PM</td>
-        <td class="mat-cell text-center"> DRAF </td>
-        <td class="mat-cell text-center">
-          <button class="btn btn-sm btn-info" data_transid="10">
-            <i class="fa fa-edit font-size-s"></i>
-          </button>
-        </td>
-      </tr>
-      <tr role="row" class="mat-row">
-        <td class="mat-cell">7</td>
-        <td class="mat-cell">11</td>
-        <td class="mat-cell">PERMOHONAN BARU LESEN PENIAGA/TAKSIDERMI</td>
-        <td class="mat-cell">PERHILITAN</td>
-        <td class="mat-cell text-center">28-11-2017 17:35:35 PM</td>
-        <td class="mat-cell text-center"> DRAF </td>
-        <td class="mat-cell text-center">
-          <button class="btn btn-sm btn-info" data_transid="11">
-            <i class="fa fa-edit font-size-s"></i>
-          </button>
-        </td>
-      </tr>
-      <tr role="row" class="mat-row">
-        <td class="mat-cell">8</td>
-        <td class="mat-cell">13</td>
-        <td class="mat-cell">PERMOHONAN BARU LESEN PENIAGA/TAKSIDERMI</td>
-        <td class="mat-cell">PERHILITAN</td>
-        <td class="mat-cell text-center">14-11-2017 14:59:04 PM</td>
-        <td class="mat-cell text-center"> DRAF </td>
-        <td class="mat-cell text-center">
-          <button class="btn btn-sm btn-info" data_transid="13">
-            <i class="fa fa-edit font-size-s"></i>
-          </button>
-        </td>
-      </tr>
-      <tr role="row" class="mat-row">
-        <td class="mat-cell">9</td>
-        <td class="mat-cell">18</td>
-        <td class="mat-cell">PERMOHONAN BARU LESEN PENIAGA/TAKSIDERMI</td>
-        <td class="mat-cell">PERHILITAN</td>
-        <td class="mat-cell text-center">28-11-2017 14:24:17 PM</td>
-        <td class="mat-cell text-center"> DRAF </td>
-        <td class="mat-cell text-center">
-          <button class="btn btn-sm btn-info" data_transid="18">
-            <i class="fa fa-edit font-size-s"></i>
-          </button>
-        </td>
-      </tr>
-      <tr role="row" class="mat-row">
-        <td class="mat-cell">10</td>
-        <td class="mat-cell">14</td>
-        <td class="mat-cell">PEMBAHARUAN LESEN PENIAGA/TAKSIDERMI</td>
-        <td class="mat-cell">PERHILITAN</td>
-        <td class="mat-cell text-center">28-11-2017 17:44:52 PM</td>
-        <td class="mat-cell text-center"> DRAF </td>
-        <td class="mat-cell text-center">
-          <button class="btn btn-sm btn-warning" data_transid="14">
-            <i class="fa fa-edit font-size-s"></i>
-          </button>
-        </td>
-      </tr>
-      <!-- <tr class="mat-row table_row table_row_height" *ngFor="let data of mailData?.messageList" [style.font-weight]="data.read ? '' : 'bold'">
-        <td class="mat-cell text-center"><mat-checkbox [value]="data.messageId"></mat-checkbox></td>
-        <td class="mat-cell"></td>
-        <td class="mat-cell"></td>
-        <td class="mat-cell"></td>
-        <td class="mat-cell"></td>
-        <td class="mat-cell"></td>
+      <tr class="mat-row" *ngFor="let data of dataApp" role="row">
+        <td class="mat-cell text-center">{{data.dataId}}</td>
+        <td class="mat-cell">{{data.no_app}}</td>
+        <td class="mat-cell">{{data.name_app}}</td>
+        <td class="mat-cell">{{data.agency}}</td>
+        <td class="mat-cell text-center">{{data.submit}}</td>
+        <td class="mat-cell text-center">{{data.status}}</td>
         <td class="mat-cell text-center"> 
-          <button  class="btn btn-sm btn-warning"><i class="fa fa-eye font-size-s"></i></button>
-          <button class="btn btn-sm btn-danger" ><i class="fa fa-trash font-size-s"></i></button>
+          <button class="btn btn-sm btn-warning"><i class="fa fa-eye font-size-s"></i></button>
         </td>
-      </tr> -->
+      </tr>
     </table>
 
-    <!-- <mat-paginator [length]="mailData?.length">
-        </mat-paginator> -->
     <mat-form-field style="width:50px;">
       <mat-select class="font-size-s" value="10" (change)="pageChange($event)">
         <mat-option value="5">5</mat-option>
@@ -264,10 +117,10 @@
       </mat-select>
     </mat-form-field>
     <div style="float:right; margin-top: 10px;">
-      <span style="color:#000; padding-right:20px;">Pages
-        <strong>1</strong> of
-        <strong>10</strong> in
-        <strong>500</strong> applications</span>
+      <span style="color:#000; padding-right:20px;">{{'appmngt.tablebottom.page' | translate}}
+        <strong>1</strong> {{'appmngt.tablebottom.of' | translate}}
+        <strong>10</strong> {{'appmngt.tablebottom.in' | translate}}
+        <strong>500</strong> {{'appmngt.tablebottom.app' | translate}}</span>
       <button mat-mini-fab color="basic" [disabled]="noPrevData" (click)="paginatorL(mailData?.pageNumber)">
         <i class="fa fa-angle-left" aria-hidden="true"></i>
       </button>
@@ -279,4 +132,11 @@
   </div>
   <br />
 </div>
-<br />
+
+<app-confirm-dialog  #resetModal 
+[title]="'common.icon.warn'" 
+[content]="'common.msg.reset'"
+[state]="'common.state.warn'"
+[isReset]="'true'"
+(resetMethod)="resetMethod($event)">
+</app-confirm-dialog>

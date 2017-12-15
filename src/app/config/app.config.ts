@@ -30,4 +30,5 @@ export const AppConfig: IAppConfig = {
     urlGender: './app/apidata/gender',
     urlAnnouncement: './app/apidata/announcement',
     urlFeedbackType: './app/apidata/feedbacktype'
+
 };

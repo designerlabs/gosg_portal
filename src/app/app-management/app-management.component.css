@@ -63,4 +63,30 @@ mat-table{
     float: right;
     position: relative;
     clear: both;
+    margin-top: 15px;
 } 
+
+/* Toggle search */
+.adSearch{
+    position: absolute;
+    right: 0px;
+    top:-20px;
+}
+
+.editBtn{
+    position: absolute;
+    right: -15px;
+    top:-60px;
+}
+  
+.editBtn-active {
+    position: absolute;
+    background-color: rgb(109, 185, 38);
+    color: #FFF;
+    right: -15px;
+    top:-60px;
+}
+
+input{
+    color:#333;
+}
