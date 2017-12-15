@@ -247,6 +247,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
           this.profileForm.get('perState').setValue(data[0].permanent_state);
           this.selectedState = this.profileForm.get('perState').value;
+
           this.profileForm.get('perCity').setValue(data[0].permanent_city); 
           this.selectedCity = this.profileForm.get('perCity').value;
           
@@ -321,10 +322,12 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       this.getState();
       this.isLocal = true;
       this.profileForm.get('perState').setValue("");
+   
       this.profileForm.get('perCity').setValue("");
     } else {
       this.isLocal = false;
       this.profileForm.get('perState').setValue("");
+      
       this.profileForm.get('perCity').setValue("");
     }
     // this.toastr.info(this.translate.instant('this.isLocal: '+this.isLocal), '');
@@ -510,7 +513,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       this.profileForm.get('corrsAddress3').setValue(this.perAddress3.value);
       this.profileForm.get('corrsCountry').setValue(this.perCountry.value);
       this.profileForm.get('corrsState').setValue(this.perState.value);
-
+      
       if(this.isLocal)
         this.getCitiesByStateC(this.perState.value);
      
