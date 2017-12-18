@@ -18,6 +18,7 @@
       "register":"Pendaftaran",
       "feedback":"Aduan dan Pertanyaan",
       "profile": "Profil Saya",
+      "dashboard": "Dashboard",
       "appmgmt": "Pengurusan Permohonan",
       "mailbox": "Peti Pesanan"
     },
@@ -236,6 +237,7 @@
   },
   "appmngt":{
     "setSearch":{
+      "moreOpt": "Carian Terperinci",
       "appNumber": "Nombor Permohonan",
       "agency": "Agensi",
       "chooseAgency": "Pilih Agensi",

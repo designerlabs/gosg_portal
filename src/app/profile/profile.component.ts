@@ -22,6 +22,7 @@ import { forEach } from '@angular/router/src/utils/collection';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit, AfterViewInit {
+  selectedCountry: any;
   selectedCity: any;
   selectedState: any;
   maskDateFormat: any;
@@ -207,23 +208,24 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         this.fullname = data[0].fullname;
         this.countryCode = data[0].permanent_country;
         
-        if(this.countryCode == "MY") {
-          if(this.profileForm.get('perState').value === null)
-          this.profileForm.get('perState').setValue(0);
-        } else {
-          this.profileForm.get('perState').setValue("");
-        }
+        // if(this.countryCode == "MY") {
+        //   if(this.profileForm.get('perState').value === null)
+        //   this.profileForm.get('perState').setValue(0);
+        // } else {
+        //   this.profileForm.get('perState').setValue("");
+        // }
+        console.log("onInit top")
+        console.log(this.selectedCountry + " | " + this.selectedState  + " | " + this.selectedCity)
+
+        // this.isMalaysian(this.countryCode);
+        this.isMalaysianChk(data[0].corresponding_country);
         this.getCountryByCode(getUsrNationality);
         this.isUserRegLocal(getUsrNationality);
-        this.isMalaysian(this.countryCode);
         
         this.idno = data[0].ic_number;
         if(this.isRegLocal == true) 
           this.maxDate = this.getMinDobDate(this.idno);
         
-        // console.log(data[0].same_address);
-
-        this.isMalaysianChk(data[0].corresponding_country);
         this.regemail = data[0].email;
         this.regdate = data[0].date_joined;
         this.mobileNo = data[0].mobile_phone;
@@ -234,6 +236,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         this.profileForm.get('perAddress1').setValue(data[0].permanent_address1);
         this.profileForm.get('perAddress2').setValue(data[0].permanent_address2);
         this.profileForm.get('perAddress3').setValue(data[0].permanent_address3);
+        this.selectedCountry = data[0].permanent_country;
         this.profileForm.get('perCountry').setValue(data[0].permanent_country);
         this.profileForm.get('perPostcode').setValue(data[0].permanent_postcode);
         this.profileForm.get('perTelephone').setValue(data[0].permanent_home_phone);
@@ -243,7 +246,11 @@ export class ProfileComponent implements OnInit, AfterViewInit {
             this.getCitiesByStateP(data[0].permanent_state);
 
           this.profileForm.get('perState').setValue(data[0].permanent_state);
+          this.selectedState = this.profileForm.get('perState').value;
+
           this.profileForm.get('perCity').setValue(data[0].permanent_city); 
+          this.selectedCity = this.profileForm.get('perCity').value;
+          
         }
         
         if(data[0].same_address != true) {
@@ -277,7 +284,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
           this.profileForm.get('corrsPostcode').setValue(data[0].permanent_postcode);
           this.profileForm.get('corrsMobile').setValue(data[0].mobile_phone);
         }
-        this.checkReqValues();
+        console.log("onInit bottom")
+        console.log(this.selectedCountry + " | " + this.selectedState  + " | " + this.selectedCity)
+
       },
       error => {
         console.log(error)
@@ -306,20 +315,22 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   }
   
   isMalaysian(val) {
-    // console.log(val);
-
+    this.selectedCountry = val;
+    // this.profileForm.get('perCountry').setValue(this.selectedCountry);
+    
     this.isChanged();
     if(val == "MY") {
       this.getState();
       this.isLocal = true;
       this.profileForm.get('perState').setValue("");
+   
       this.profileForm.get('perCity').setValue("");
     } else {
       this.isLocal = false;
       this.profileForm.get('perState').setValue("");
+      
       this.profileForm.get('perCity').setValue("");
     }
-    this.checkReqValues();
     // this.toastr.info(this.translate.instant('this.isLocal: '+this.isLocal), '');
   }
 
@@ -503,7 +514,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       this.profileForm.get('corrsAddress3').setValue(this.perAddress3.value);
       this.profileForm.get('corrsCountry').setValue(this.perCountry.value);
       this.profileForm.get('corrsState').setValue(this.perState.value);
-
+      
       if(this.isLocal)
         this.getCitiesByStateC(this.perState.value);
      
@@ -536,18 +547,21 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   }
 
   edit(){
-    // console.log(this.isActive)
     // debugger
     this.isActive = !this.isActive;
     
     if(this.isActive != false) {
+      console.log("edit enabled")
+      console.log(this.selectedCountry + " | " + this.selectedState  + " | " + this.selectedCity)
+
       this.toastr.info(this.translate.instant('profile.msg.editbtnE'), '');
       // this.initial = false
       this.profileForm.enable()
       this.dob.enable();
       this.checkReqValues();
     } else {
-      this.toastr.info(this.translate.instant('profile.msg.editbtnD'), '');
+      console.log(this.profileForm.value);
+      // this.toastr.info(this.translate.instant('profile.msg.editbtnD'), '');
       this.initial = true
       this.profileForm.disable()
       this.dob.disable();
@@ -562,16 +576,18 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     let pState = this.profileForm.get('perState').value;
     let pCity = this.profileForm.get('perCity').value;
     let reqVal:any = [ gdr, pAdd1, pCountry, pState, pCity, pPCode ];
-    
+
     if(gdr != null && pAdd1 != null && pCountry != null && pCity != null && pState != 0 && pPCode != null) {
+      
       if(this.isActive)
       this.initial = false;
     } else {
       this.initial = true;
     }
+
     if(this.isActive)
       console.log(reqVal);
-      
+
   }
   
   updateProfile(formValues:any) {
@@ -640,6 +656,16 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     body.dateTime = new Date().getTime();
     body.user_id = localStorage.getItem('usrID');
     body.lang = localStorage.getItem("langID");
+
+    console.log("onSubmit");
+    console.log(this.selectedCountry + " | " + this.selectedState  + " | " + this.selectedCity)
+    console.log(formValues.perCountry + " | " + formValues.perState  + " | " + formValues.perCity)
+    
+    console.log("form Values")
+    console.log(this.profileForm.get('perCountry').value);
+    console.log(this.profileForm.get('perState').value);
+    console.log(this.profileForm.get('perCity').value);
+    this.checkReqValues();
 
     this.protectedService.updateProfile(body)
     .subscribe(
