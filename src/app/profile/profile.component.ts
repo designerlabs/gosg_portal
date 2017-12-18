@@ -316,6 +316,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   
   isMalaysian(val) {
     this.selectedCountry = val;
+    // this.profileForm.get('perCountry').setValue(this.selectedCountry);
     
     this.isChanged();
     if(val == "MY") {
@@ -575,8 +576,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     let pState = this.profileForm.get('perState').value;
     let pCity = this.profileForm.get('perCity').value;
     let reqVal:any = [ gdr, pAdd1, pCountry, pState, pCity, pPCode ];
-    
+
     if(gdr != null && pAdd1 != null && pCountry != null && pCity != null && pState != 0 && pPCode != null) {
+      
       if(this.isActive)
       this.initial = false;
     } else {
