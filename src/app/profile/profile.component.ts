@@ -217,7 +217,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         console.log("onInit top")
         console.log(this.selectedCountry + " | " + this.selectedState  + " | " + this.selectedCity)
 
-        this.isMalaysian(this.countryCode);
+        // this.isMalaysian(this.countryCode);
         this.isMalaysianChk(data[0].corresponding_country);
         this.getCountryByCode(getUsrNationality);
         this.isUserRegLocal(getUsrNationality);
@@ -663,21 +663,21 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     console.log(this.profileForm.get('perCountry').value);
     console.log(this.profileForm.get('perState').value);
     console.log(this.profileForm.get('perCity').value);
-    // this.checkReqValues();
+    this.checkReqValues();
 
-    // this.protectedService.updateProfile(body)
-    // .subscribe(
-    //   data => {
-    //     console.log(body);
-    //     this.isActive = false;
-    //     this.initial = true;
-    //     this.profileForm.invalid;
-    //     this.toastr.success(this.translate.instant('profile.msg.updateSuccess'), '');
-    //     this.profileForm.disable();
-    //   },
-    //   error => {
-    //     this.toastr.error(this.translate.instant('profile.err.updateFail'), '');
-    //   });
+    this.protectedService.updateProfile(body)
+    .subscribe(
+      data => {
+        console.log(body);
+        this.isActive = false;
+        this.initial = true;
+        this.profileForm.invalid;
+        this.toastr.success(this.translate.instant('profile.msg.updateSuccess'), '');
+        this.profileForm.disable();
+      },
+      error => {
+        this.toastr.error(this.translate.instant('profile.err.updateFail'), '');
+      });
   }
 
   toFormGroup(data: any) {

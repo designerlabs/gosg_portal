@@ -144,9 +144,9 @@
                 </mat-form-field>
                 <mat-form-field *ngIf="!isLocal" class="example-full-width font-size-s">
                   <input (keyup)="isChanged()" matInput formControlName="perState" type="text" placeholder="{{'profile.label.state' | translate}}" required="false ? isLocal : true" />
-                  <mat-error *ngIf="!validateCtrlChk(perState) && profileForm.controls.perState.errors.required">
+                  <!-- <mat-error *ngIf="!validateCtrlChk(perState) && profileForm.controls.perState.errors.required">
                       {{'profile.err.state' | translate }}
-                  </mat-error>
+                  </mat-error> -->
                 </mat-form-field>
               </div>
               <div class="form-group col-md-4">
