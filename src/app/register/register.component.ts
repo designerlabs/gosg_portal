@@ -347,12 +347,16 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     citizenReg(formValues:any) {
        
         let body = {
-            "country":null,
-            "identificationCardNo":null,
+            "country":{  
+                "countryId":null
+             },
+            "identificationNo":null,
             "phoneNo":null,
-            "citizenshipStatus": null,
             "email":null,
             "fullName": null,
+            "userType":{  
+                "userTypeId":null
+             }
         };
 
         
@@ -391,18 +395,18 @@ export class RegisterComponent implements OnInit, AfterViewInit {
 
         
         if(formValues.country){
-            body.country = formValues.country;
-            body.citizenshipStatus = 2;
-            body.identificationCardNo = formValues.passport;
+            body.country.countryId = formValues.country;
+            body.userType.userTypeId = 2;
+            body.identificationNo = formValues.passport;
             body.email = formValues.emelf;
             body.phoneNo = formValues.telefon;
             body.fullName = formValues.nama_penuhf;
            
 
         }else{
-            body.country = "MY";
-            body.citizenshipStatus = 1;
-            body.identificationCardNo = formValues.kad_pengenalan;
+            body.country.countryId = 152;
+            body.userType.userTypeId = 1;
+            body.identificationNo = formValues.kad_pengenalan;
             body.email = formValues.emel;
             body.phoneNo = formValues.telefon;
             body.fullName = formValues.nama_penuh;
