@@ -42,7 +42,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   profileForm: FormGroup
   temp: any
   resProfileFieldsData: any[]
-  initial = true
+  initial = true;
   countries:any[]
   fullname:string;
   countryCode:string;
@@ -207,17 +207,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
         this.fullname = data[0].fullname;
         this.countryCode = data[0].permanent_country;
-        
-        // if(this.countryCode == "MY") {
-        //   if(this.profileForm.get('perState').value === null)
-        //   this.profileForm.get('perState').setValue(0);
-        // } else {
-        //   this.profileForm.get('perState').setValue("");
-        // }
-        console.log("onInit top")
-        console.log(this.selectedCountry + " | " + this.selectedState  + " | " + this.selectedCity)
 
-        // this.isMalaysian(this.countryCode);
+        this.isMalaysian(this.countryCode);
         this.isMalaysianChk(data[0].corresponding_country);
         this.getCountryByCode(getUsrNationality);
         this.isUserRegLocal(getUsrNationality);
@@ -284,8 +275,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
           this.profileForm.get('corrsPostcode').setValue(data[0].permanent_postcode);
           this.profileForm.get('corrsMobile').setValue(data[0].mobile_phone);
         }
-        console.log("onInit bottom")
-        console.log(this.selectedCountry + " | " + this.selectedState  + " | " + this.selectedCity)
 
       },
       error => {
@@ -299,7 +288,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.maskForeigner = this.validateService.getMask().telephonef;
     this.maskPostcode = this.validateService.getMask().postcode;
     this.maskDateFormat = this.validateService.getMask().dateFormat;
-    
   } 
 
   isUserRegLocal(regCountry) {
@@ -577,11 +565,13 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     let pCity = this.profileForm.get('perCity').value;
     let reqVal:any = [ gdr, pAdd1, pCountry, pState, pCity, pPCode ];
 
-    if(gdr != null && pAdd1 != null && pCountry != null && pCity != null && pState != 0 && pPCode != null) {
+    // if(gdr != null && pAdd1 != null && pCountry != null && pCity != null && pState != 0 && pPCode != null) {
+    if(pCountry !== null) {
       
       if(this.isActive)
       this.initial = false;
     } else {
+      this.toastr.error(this.translate.instant('Country error!'), '');
       this.initial = true;
     }
 
@@ -657,16 +647,10 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     body.user_id = localStorage.getItem('usrID');
     body.lang = localStorage.getItem("langID");
 
-    // console.log("onSubmit");
-    // console.log(this.selectedCountry + " | " + this.selectedState  + " | " + this.selectedCity)
-    // console.log(formValues.perCountry + " | " + formValues.perState  + " | " + formValues.perCity)
-    
-    // console.log("form Values")
-    // console.log(this.profileForm.get('perCountry').value);
-    // console.log(this.profileForm.get('perState').value);
-    // console.log(this.profileForm.get('perCity').value);
     this.checkReqValues();
 
+    console.log(this.initial);
+    console.log(this.profileForm.invalid)
     this.protectedService.updateProfile(body)
     .subscribe(
       data => {
@@ -675,12 +659,12 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         console.log(this.profileForm.value);
         this.isActive = false;
         this.initial = true;
-        // this.profileForm.invalid;
-        // this.toastr.success(this.translate.instant('profile.msg.updateSuccess'), '');
+        this.profileForm.invalid;
+        this.toastr.success(this.translate.instant('profile.msg.updateSuccess'), '');
         this.profileForm.disable();
       },
       error => {
-        // this.toastr.error(this.translate.instant('profile.err.updateFail'), '');
+        this.toastr.error(this.translate.instant('profile.err.updateFail'), '');
       });
   }
 
