@@ -138,13 +138,14 @@
               </div>
               <div class="form-group col-md-4">
                 <mat-form-field *ngIf="isLocal" class="example-full-width font-size-s">
-                  <mat-select (change)="getCitiesByState($event)" formControlName="perState" placeholder="{{'profile.label.state' | translate}}" required="true ? isLocal : false">
+                  <mat-select (change)="getCitiesByState($event)" formControlName="perState" placeholder="{{'profile.label.state' | translate}}" >
+                      <!-- required="true ? isLocal : false" -->
                     <mat-option *ngFor="let state of getStateData" [value]="state?.stateId">{{ state?.stateName }}</mat-option>
                   </mat-select>
                 </mat-form-field>
                 <mat-form-field *ngIf="!isLocal" class="example-full-width font-size-s">
-                  <input (keyup)="isChanged()" matInput formControlName="perState" type="text" placeholder="{{'profile.label.state' | translate}}" required="false ? isLocal : true" />
-                  <!-- <mat-error *ngIf="!validateCtrlChk(perState) && profileForm.controls.perState.errors.required">
+                  <input (keyup)="isChanged()" matInput formControlName="perState" type="text" placeholder="{{'profile.label.state' | translate}}" />
+                  <mat-error *ngIf="!validateCtrlChk(perState) && profileForm.controls.perState.errors.required">
                       {{'profile.err.state' | translate }}
                   </mat-error> -->
                 </mat-form-field>
@@ -156,7 +157,7 @@
                   </mat-select>
                 </mat-form-field>
                 <mat-form-field *ngIf="!isLocal" class="example-full-width font-size-s">
-                  <input (keyup)="isChanged()" matInput formControlName="perCity" type="text" placeholder="{{'profile.label.city' | translate}}" required="false ? isLocal : true"  />
+                  <input (keyup)="isChanged()" matInput formControlName="perCity" type="text" placeholder="{{'profile.label.city' | translate}}"  />
                   <mat-error *ngIf="!validateCtrlChk(perCity) && profileForm.controls.perCity.errors.required">
                       {{'profile.err.city' | translate }}
                   </mat-error>

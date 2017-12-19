@@ -11,11 +11,11 @@ tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="tru
      </span>
      <span *ngIf="!isRegister">{{content | translate}} </span>
    <div class="modal-body text-center">
-     <button  *ngIf="isRegister" type="button" class="btn btn-success" (click)="confirm(isRegister)"><i class="fa fa-home"></i> Home</button>
-     <button *ngIf="link" type="button" class="btn btn-default" (click)="confirm(link)" >Yes</button>
+     <button  *ngIf="isRegister" type="button" class="btn btn-success" (click)="confirm(isRegister)"><i class="fa fa-home"></i> {{'common.buttons.home' | translate}}</button>
+     <button *ngIf="link" type="button" class="btn btn-default" (click)="confirm(link)" >{{'common.buttons.yes' | translate}}</button>
      
-     <button *ngIf="isReset" type="button" class="btn btn-success" (click)="onSubmit($event)"><i class="fa fa-check"></i> Yes</button>
-     <button *ngIf="isReset" type="button" class="btn btn-danger" (click)="hide()"><i class="fa fa-times"></i> No</button>
+     <button *ngIf="isReset" type="button" class="btn btn-success" (click)="onSubmit($event)"><i class="fa fa-check"></i> {{'common.buttons.yes' | translate}}</button>
+     <button *ngIf="isReset" type="button" class="btn btn-danger" (click)="hide()"><i class="fa fa-times"></i> {{'common.buttons.no' | translate}}</button>
 
    </div>
  </div>
