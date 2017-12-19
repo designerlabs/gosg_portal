@@ -207,12 +207,13 @@
     "buttons":{
       "delete":"Padam",
       "update":"Kemaskini",
-      "submit":"",
-      "reset":"",
-      "yes":"",
-      "no":"",
-      "ok":"",
-      "cancel":""
+      "submit":"Hantar",
+      "reset":"Set Semula",
+      "yes":"Ya",
+      "no":"Tidak",
+      "ok":"OK",
+      "cancel":"Batal",
+      "home":"Laman Utama"
     },
     "err":{
       "servicedown": "Pelayan tidak aktif "
@@ -225,7 +226,7 @@
     },
     "msg":{
       "reset":"Set semula borang ini?",
-      "delete":"Are you sure to delete the record?"
+      "delete":"Padam mesej ini?"
     },
     "state":{
       "success":"bg_header bg_success_header",

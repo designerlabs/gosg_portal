@@ -217,7 +217,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         console.log("onInit top")
         console.log(this.selectedCountry + " | " + this.selectedState  + " | " + this.selectedCity)
 
-        this.isMalaysian(this.countryCode);
+        // this.isMalaysian(this.countryCode);
         this.isMalaysianChk(data[0].corresponding_country);
         this.getCountryByCode(getUsrNationality);
         this.isUserRegLocal(getUsrNationality);

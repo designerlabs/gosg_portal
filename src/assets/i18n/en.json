@@ -212,7 +212,8 @@
       "yes":"Yes",
       "no":"No",
       "ok":"Ok",
-      "cancel":"Cancel"
+      "cancel":"Cancel",
+      "home":"Home"
     },
     "err":{
       "servicedown": "Server is down"
