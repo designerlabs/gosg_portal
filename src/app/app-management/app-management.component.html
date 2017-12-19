@@ -45,16 +45,8 @@
                   </mat-panel-title>
                 </div>
                 <div class="col-md-4">
-                    <!-- <br /> -->
-                    <div style="height: 13px">&nbsp;</div>
-                  <button mat-raised-button type="button" color="primary" id="searchbtn" class="form-control btn btn-md btn-success font-size-s"
-                    (click)="searchapp(searchForm.value)" style="width: auto; height: 35px; font-family: Roboto;">
-                    <i class="fa fa-search"></i> {{'appmngt.setSearch.search' | translate}}</button>
-                  <button tabindex="" mat-raised-button color="warn" type="button" id="btnreset" class="form-control btn btn-md btn-warning font-size-s"
-                    style="width: auto; height: 35px; font-family: Roboto;" (click)="resetModal.show()">
-                    <i class="fa fa-refresh"></i> {{'feedback.label.reset' | translate }}</button>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4" style="text-align: right">
                     <br />
                   <mat-panel-description>
                     {{ 'appmngt.setSearch.moreOpt' | translate }}
@@ -99,6 +91,16 @@
                 <mat-datepicker-toggle matSuffix [for]="endData" style="color:#333;"></mat-datepicker-toggle>
                 <mat-datepicker #endData startView="year" [startAt]="startDate"></mat-datepicker>
               </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                <!-- <br /> -->
+                <div style="height: 13px">&nbsp;</div>
+              <button mat-raised-button type="button" color="primary" id="searchbtn" class="form-control btn btn-md btn-success font-size-s"
+                (click)="searchapp(searchForm.value)" style="width: auto; height: 35px; font-family: Roboto;">
+                <i class="fa fa-search"></i> {{'appmngt.setSearch.search' | translate}}</button>
+              <button tabindex="" mat-raised-button color="warn" type="button" id="btnreset" class="form-control btn btn-md btn-warning font-size-s"
+                style="width: auto; height: 35px; font-family: Roboto;" (click)="resetModal.show()">
+                <i class="fa fa-refresh"></i> {{'feedback.label.reset' | translate }}</button>
             </div>
           </div>
         </div>

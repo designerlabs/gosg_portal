@@ -585,8 +585,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       this.initial = true;
     }
 
-    if(this.isActive)
-      console.log(reqVal);
+    // if(this.isActive)
+    //   console.log(reqVal);
 
   }
   
@@ -657,28 +657,30 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     body.user_id = localStorage.getItem('usrID');
     body.lang = localStorage.getItem("langID");
 
-    console.log("onSubmit");
-    console.log(this.selectedCountry + " | " + this.selectedState  + " | " + this.selectedCity)
-    console.log(formValues.perCountry + " | " + formValues.perState  + " | " + formValues.perCity)
+    // console.log("onSubmit");
+    // console.log(this.selectedCountry + " | " + this.selectedState  + " | " + this.selectedCity)
+    // console.log(formValues.perCountry + " | " + formValues.perState  + " | " + formValues.perCity)
     
-    console.log("form Values")
-    console.log(this.profileForm.get('perCountry').value);
-    console.log(this.profileForm.get('perState').value);
-    console.log(this.profileForm.get('perCity').value);
+    // console.log("form Values")
+    // console.log(this.profileForm.get('perCountry').value);
+    // console.log(this.profileForm.get('perState').value);
+    // console.log(this.profileForm.get('perCity').value);
     this.checkReqValues();
 
     this.protectedService.updateProfile(body)
     .subscribe(
       data => {
         console.log(body);
+        console.log(formValues);
+        console.log(this.profileForm.value);
         this.isActive = false;
         this.initial = true;
         // this.profileForm.invalid;
-        this.toastr.success(this.translate.instant('profile.msg.updateSuccess'), '');
+        // this.toastr.success(this.translate.instant('profile.msg.updateSuccess'), '');
         this.profileForm.disable();
       },
       error => {
-        this.toastr.error(this.translate.instant('profile.err.updateFail'), '');
+        // this.toastr.error(this.translate.instant('profile.err.updateFail'), '');
       });
   }
 
