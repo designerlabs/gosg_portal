@@ -31,8 +31,8 @@
       </span>
       <!-- <p>Status(isActive): {{isActive}}</p> -->
       <!-- <p>Status(isRegLocal): {{isRegLocal}}</p> -->
-      <p>Status(isLocal): {{isLocal}}</p>
-      <p>Status(isCorrsLocal): {{isCorrsLocal}}</p>
+      <!-- <p>Status(isLocal): {{isLocal}}</p>
+      <p>Status(isCorrsLocal): {{isCorrsLocal}}</p> -->
       
       <form [formGroup]="profileForm" autocomplete="off" (ngSubmit)="updateProfile(profileForm.value)" role="form" novalidate>
           <div class="col-md-12">
@@ -130,35 +130,41 @@
                   <mat-select formControlName="perCountry" (change)="isMalaysian($event.value)" placeholder="{{'profile.label.country' | translate}}" required>
                     <mat-option *ngFor="let country of countries" [value]="country?.countryCode">{{country?.countryName}}</mat-option>
                   </mat-select>
-                  <!-- <mat-error *ngIf="!validateCtrlChk(perCountry) && profileForm.controls.perCountry.errors.required">
+                  <mat-error *ngIf="!validateCtrlChk(perCountry) && profileForm.controls.perCountry.errors.required">
                       {{'profile.err.country' | translate }}
-                  </mat-error> -->
+                  </mat-error>
                 </mat-form-field>
               </div>
               <div class="form-group col-md-4">
                 <mat-form-field *ngIf="isLocal" class="example-full-width font-size-s">
-                  <mat-select (change)="getCitiesByState($event)" formControlName="perState" placeholder="{{'profile.label.state' | translate}}" >
+                  <mat-select *ngIf="isLocal" (change)="getCitiesByState($event)" formControlName="perStateLocal" placeholder="{{'profile.label.state' | translate}}"  required="true ? isLocal : false">
                     <mat-option *ngFor="let state of getStateData" [value]="state?.stateId">{{ state?.stateName }}</mat-option>
                   </mat-select>
+                  <!-- <mat-error *ngIf="!validateCtrlChk(perStateLocal) && profileForm.controls.perStateLocal.errors.required">
+                    {{'profile.err.state' | translate }}
+                </mat-error> -->
                 </mat-form-field>
                 <mat-form-field *ngIf="!isLocal" class="example-full-width font-size-s">
-                  <input (keyup)="isChanged()" matInput formControlName="perState" type="text" placeholder="{{'profile.label.state' | translate}}" />
-                  <!-- <mat-error *ngIf="!validateCtrlChk(perState) && profileForm.controls.perState.errors.required">
+                  <input *ngIf="!isLocal" (keyup)="isChanged()" matInput formControlName="perStateNotLocal" type="text" placeholder="{{'profile.label.state' | translate}}" required="true ? !isLocal : false" />
+                  <!-- <mat-error *ngIf="!isLocal" *ngIf="!validateCtrlChk(perStateNotLocal) && profileForm.controls.perStateNotLocal.errors.required">
                       {{'profile.err.state' | translate }}
                   </mat-error> -->
                 </mat-form-field>
               </div>
               <div class="form-group col-md-4">
                 <mat-form-field *ngIf="isLocal" class="example-full-width font-size-s">
-                  <mat-select (change)="isChanged()" formControlName="perCity" placeholder="{{'profile.label.city' | translate}}" required="true ? isLocal : false" >
+                  <mat-select (change)="isChanged()" formControlName="perCityLocal" placeholder="{{'profile.label.city' | translate}}" required="true ? isLocal : false" >
                     <mat-option *ngFor="let city of getPerCityData" [value]="city?.cityId">{{ city?.cityName }}</mat-option>
                   </mat-select>
+                  <mat-error *ngIf="!validateCtrlChk(perCityLocal) && profileForm.controls.perCityLocal.errors.required">
+                    {{'profile.err.city' | translate }}
+                </mat-error>
                 </mat-form-field>
                 <mat-form-field *ngIf="!isLocal" class="example-full-width font-size-s">
-                  <input (keyup)="isChanged()" matInput formControlName="perCity" type="text" placeholder="{{'profile.label.city' | translate}}"  />
-                  <!-- <mat-error *ngIf="!validateCtrlChk(perCity) && profileForm.controls.perCity.errors.required">
+                  <input (keyup)="isChanged()" matInput formControlName="perCityNotLocal" type="text" placeholder="{{'profile.label.city' | translate}}"  required="true ? !isLocal : false" />
+                  <mat-error *ngIf="!validateCtrlChk(perCityNotLocal) && profileForm.controls.perCityNotLocal.errors.required">
                       {{'profile.err.city' | translate }}
-                  </mat-error> -->
+                  </mat-error>
                 </mat-form-field>
               </div>
             </div>
@@ -259,7 +265,7 @@
                 style="width: 115px; font-family: Roboto;" (click)="showResetMsg()">
                 <i class="fa fa-refresh"></i> {{'feedback.label.reset' | translate }}</button> -->
                 <button mat-raised-button type="button" color="primary" id="btnsubmit" class="form-control btn btn-md btn-success font-size-s"
-                (click)="updateProfile(profileForm.value)" style="width: 100px; font-family: Roboto; margin-left: 5px;" [disabled]="profileForm.invalid || initial">
+                (click)="updateProfile(profileForm.value);false" style="width: 100px; font-family: Roboto; margin-left: 5px;" [disabled]="profileForm.invalid || initial">
                 <i class="fa fa-check"></i> {{'profile.label.submit' | translate }}</button>
             </div>
           </div>
