@@ -20,6 +20,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { MailboxComponent } from "./mailbox/mailbox.component";
 import { AppManagementComponent } from './app-management/app-management.component';
+import { FirsttimeloginComponent } from './firsttimelogin/firsttimelogin.component';
 // 
 // import { NavRouterActivator } from './header/nav/nav-router-activator.service'
 
@@ -32,6 +33,7 @@ export const protectedRoutes: Routes = [
     {path: 'profile', component: ProfileComponent},
     {path: 'appsmgmt', component: AppManagementComponent},
     {path: 'index', component: HomeComponent},
+    {path: 'firsttime', component: FirsttimeloginComponent},
     {path: 'search/searchResult', component: SearchResultComponent},
     {path: 'topic/:id', component: ArticleComponent, canActivate: [NavRouterActivator]  },
     {path: 'subtopic/:id1/:id2', component: SubarticleComponent },
