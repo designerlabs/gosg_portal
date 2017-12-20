@@ -10,7 +10,7 @@ let registrationUrl = 'http://10.1.70.148:8082/registration/';
 // common service
 let portalBaseURL = 'http://localhost:8020/portal/';
 let protectedBaseURL = 'http://localhost:8021/portal-protected/';
-let commonURL = 'http://10.1.70.148:8080/gosg-service-common/';
+let commonURL = 'http://10.1.70.148:8081/service/';
 let publicURL = 'http://10.1.70.148:8080/gosg-service-public/';
 
 // backend service

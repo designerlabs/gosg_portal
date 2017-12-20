@@ -13,12 +13,14 @@ import { PortalService } from '../services/portal.service';
   styleUrls: ['./protected.component.css']
 })
 export class ProtectedComponent implements OnInit {
+  isFirst: boolean;
   uid: any;
   clientHeight: number;
   title = 'app';
   showLoader: boolean;
   breadcrumb: any;
   txtColor = '#333';
+  isFirstLogin: boolean;
   childData: string;
   getUserName:string;
   translatedText: string;
@@ -93,7 +95,7 @@ export class ProtectedComponent implements OnInit {
         localStorage.setItem('name',data[0].fullname);
         localStorage.setItem('email',data[0].email);
         localStorage.setItem('usrID', data[0].id);
-        this.getUserRegData(data[0].fullname);
+        //this.getUserRegData(data[0].fullname);
         }else{
           location.href = 'http://localhost:8020/login';
         }
@@ -107,7 +109,18 @@ export class ProtectedComponent implements OnInit {
       return localStorage.getItem('themeColor');
   }
 
+  checkFirstTime(){
+    if(location.href.search('firsttime') > 0){
+      this.isFirstLogin = true;
+    }else{
+      this.isFirstLogin = false;
+    }
+  }
+ 
+
   ngOnInit() {
+    
+    this.checkFirstTime();
     let getUsrID = localStorage.getItem('usrID');
     let getUserID = localStorage.getItem('userId');
     let getUserCountry = localStorage.getItem('userNationality');

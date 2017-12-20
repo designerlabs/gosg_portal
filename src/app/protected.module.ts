@@ -24,6 +24,7 @@ import { MailboxComponent } from './mailbox/mailbox.component';
 import { SidenavDashboardComponent } from './sidenav-dashboard/sidenav-dashboard.component';
 import { AppManagementComponent } from './app-management/app-management.component';
 import { SidenavprotectedComponent } from './sidenavprotected/sidenavprotected.component';
+import { FirsttimeloginComponent } from './firsttimelogin/firsttimelogin.component';
 
 
 
@@ -39,7 +40,8 @@ export function HttpLoaderFactory(http: Http) {
     DashboardComponent,
     MailboxComponent,
     SidenavDashboardComponent,
-    SidenavprotectedComponent
+    SidenavprotectedComponent,
+    FirsttimeloginComponent
   ],
   imports: [
     SharedModule,
