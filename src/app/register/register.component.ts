@@ -356,7 +356,8 @@ export class RegisterComponent implements OnInit, AfterViewInit {
             "fullName": null,
             "userType":{  
                 "userTypeId":null
-             }
+             },
+             "languageId":null
         };
 
         
@@ -401,6 +402,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
             body.email = formValues.emelf;
             body.phoneNo = formValues.telefon;
             body.fullName = formValues.nama_penuhf;
+            body.languageId =this.languageId;
            
 
         }else{
@@ -408,6 +410,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
             body.userType.userTypeId = 1;
             body.identificationNo = formValues.kad_pengenalan;
             body.email = formValues.emel;
+            body.languageId =this.languageId;
             body.phoneNo = formValues.telefon;
             body.fullName = formValues.nama_penuh;
         };
