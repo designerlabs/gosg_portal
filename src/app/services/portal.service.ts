@@ -65,7 +65,7 @@ export class PortalService {
   // }
   
   create(user) {
-    return this.http.post(this.registerUrl, user)
+    return this.http.post(this.registerUrl+"?languageId="+this.langId, user)
       .map((response: Response) => response.json())
       .catch(this.handleError);
       

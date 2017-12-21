@@ -94,16 +94,15 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     private telefonf: FormControl;
     public captcha: FormControl;
     public flagGetCaptcha;
-    citizenValue = true;
+    citizenValue:any;
     changeCitizen = true;
     country_my = '';
     resetCap = false;
     public supportedLangs: any[];
-
+    UAPLang;
     lang = this.lang;
     languageId = this.languageId;
     fnCaptch: any;
- 
  
   
     ngAfterViewInit(){
@@ -178,7 +177,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         this.portalservice.getUserType(this.languageId)
             .subscribe(
                 userData => {
-                    this.getUserData = userData.value
+                    this.getUserData = userData.userTypeList
                 },Error => {
                     this.toastr.error(this.translate.instant('feedback.err.subject'), '');
                 }
@@ -192,6 +191,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     
     
     private registerUrl: string = this.config.urlRegister;
+    private uapstagingUrl: string = this.config.urlUapStaging;
     
     ngOnInit() {
         this.getUserType();
@@ -267,16 +267,16 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         this.fnCaptch.getCaptcha();
         this.changeCitizen = this.citizenValue;
         this.ReCreateCaptchas();
-        if (this.isCitizen()) {
-            this.citi = true;
-            this.nonCiti = false;
-            this.RemoveNonCitizenCtrl();
-            this.addCitizenCtrl();
-        } else {
+        if ((this.citizenValue == 2) || (this.citizenValue  ==6)) {
             this.citi = false;
             this.nonCiti = true;
             this.RemoveCitizenCtrl();
             this.addNonCitizenCtrl();
+        } else {
+            this.citi = true;
+            this.nonCiti = false;
+            this.RemoveNonCitizenCtrl();
+            this.addCitizenCtrl();
         }
     }
     addCitizenCtrl() {
@@ -425,19 +425,25 @@ export class RegisterComponent implements OnInit, AfterViewInit {
 
             profileBody.date_joined =  Date.now();
             
-            this.portalservice.createProfile(profileBody)
-            .subscribe(
-                data => {
-                    console.log(data);
-                },
-                error => {
-                    console.log('error');            
-                }
-            );
+            // this.portalservice.createProfile(profileBody)
+            // .subscribe(
+            //     data => {
+            //         console.log(data);
+            //     },
+            //     error => {
+            //         console.log('error');            
+            //     }
+            // );
               //  this.alertService.success('Registration successful', true);
               //this.openDialog();
                 this.getEmail = data.email;
-                this.infoModal.show();
+                // this.infoModal.show();
+                if(this.lang == 'ms'){
+                    this.UAPLang = 'my';
+                }else{
+                    this.UAPLang = 'en';
+                }
+                window.location.href = this.uapstagingUrl+this.UAPLang+"&tag="+data.user.tag;
             },
             error => {
                 alert('error');
@@ -452,7 +458,12 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     }
 
     isCitizen() {
-        return this.citizenValue;
+        if((this.citizenValue == 2 )|| (this.citizenValue == 6)){
+            return false;
+        }else{
+            return true;
+        }
+        
     }
 
     getCountry() {
