@@ -425,15 +425,15 @@ export class RegisterComponent implements OnInit, AfterViewInit {
 
             profileBody.date_joined =  Date.now();
             
-            this.portalservice.createProfile(profileBody)
-            .subscribe(
-                data => {
-                    console.log(data);
-                },
-                error => {
-                    console.log('error');            
-                }
-            );
+            // this.portalservice.createProfile(profileBody)
+            // .subscribe(
+            //     data => {
+            //         console.log(data);
+            //     },
+            //     error => {
+            //         console.log('error');            
+            //     }
+            // );
               //  this.alertService.success('Registration successful', true);
               //this.openDialog();
                 this.getEmail = data.email;
