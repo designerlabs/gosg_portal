@@ -444,7 +444,6 @@ export class RegisterComponent implements OnInit, AfterViewInit {
                 }else{
                     this.UAPLang = 'en';
                 }
-                debugger;
                 window.location.href = this.uapstagingUrl+this.UAPLang+"&tag="+data.user.tag;
             },
             error => {
