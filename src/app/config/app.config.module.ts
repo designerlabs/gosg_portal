@@ -3,18 +3,15 @@ import { NgModule, InjectionToken } from '@angular/core';
 export let APP_CONFIG = new InjectionToken<AppConfig>('app.config');
 
 let baseURL = 'http://10.1.17.12:3000/';
-let registrationUrl = 'http://10.1.70.148:8082/registration/';
-
-// let commonURL = 'http://10.1.43.15:8080/';
+let uapURL = 'https://10.1.71.176/';
+let registrationUrl = uapURL+'registration/';
 
 // common service
 let portalBaseURL = 'http://localhost:8020/portal/';
 let protectedBaseURL = 'http://localhost:8021/portal-protected/';
-let commonURL = 'http://10.1.70.148:8081/service/';
-let publicURL = 'http://10.1.70.148:8080/gosg-service-public/';
+let commonURL = uapURL+'service/';
 
 // backend service
-// let commonURL = 'http://10.1.70.148:8080/gosg-service-common/';
 let baseLocalURL = './app/apidata/';
 let searchServiceURL = 'https://www.malaysia.gov.my/public/';
 
@@ -79,7 +76,7 @@ export const APP_DI_CONFIG: AppConfig = {
     portalURL: portalBaseURL,
     protectedURL:protectedBaseURL,
     urlIntSearch: searchServiceURL + 'query/0/internal',
-    urlUserType:baseURL+'user-type/',
+    urlUserType:uapURL+'service/user/type/lang/',
     urlMail: commonURL+'inbox/',
     urlAppAgency: './app/apidata/appAgency',
     urlUapStaging: 'https://uapstaging.malaysia.gov.my/uap/validatesigncryption.jsp?language='

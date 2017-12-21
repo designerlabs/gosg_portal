@@ -94,7 +94,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     private telefonf: FormControl;
     public captcha: FormControl;
     public flagGetCaptcha;
-    citizenValue = true;
+    citizenValue:any;
     changeCitizen = true;
     country_my = '';
     resetCap = false;
@@ -103,7 +103,6 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     lang = this.lang;
     languageId = this.languageId;
     fnCaptch: any;
- 
  
   
     ngAfterViewInit(){
@@ -178,7 +177,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         this.portalservice.getUserType(this.languageId)
             .subscribe(
                 userData => {
-                    this.getUserData = userData.value
+                    this.getUserData = userData.userTypeList
                 },Error => {
                     this.toastr.error(this.translate.instant('feedback.err.subject'), '');
                 }
@@ -268,16 +267,16 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         this.fnCaptch.getCaptcha();
         this.changeCitizen = this.citizenValue;
         this.ReCreateCaptchas();
-        if (this.isCitizen()) {
-            this.citi = true;
-            this.nonCiti = false;
-            this.RemoveNonCitizenCtrl();
-            this.addCitizenCtrl();
-        } else {
+        if ((this.citizenValue == 2) || (this.citizenValue  ==6)) {
             this.citi = false;
             this.nonCiti = true;
             this.RemoveCitizenCtrl();
             this.addNonCitizenCtrl();
+        } else {
+            this.citi = true;
+            this.nonCiti = false;
+            this.RemoveNonCitizenCtrl();
+            this.addCitizenCtrl();
         }
     }
     addCitizenCtrl() {
@@ -459,7 +458,12 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     }
 
     isCitizen() {
-        return this.citizenValue;
+        if((this.citizenValue == 2 )|| (this.citizenValue == 6)){
+            return false;
+        }else{
+            return true;
+        }
+        
     }
 
     getCountry() {
