@@ -71,7 +71,7 @@ export const APP_DI_CONFIG: AppConfig = {
     urlPoll: './app/apidata/poll',
     urlAnnouncement: './app/apidata/announcement',
     urlCalendar: './app/apidata/calendar',
-    urlRegister: baseURL+'register',    
+    urlRegister: registrationUrl+'register',    
     urlFeedbackType: commonURL+'feedback/type/lang/',
     urlFeedbackSubject: commonURL+'feedback/subject/lang/',
     urlFeedback: commonURL+'feedback',
