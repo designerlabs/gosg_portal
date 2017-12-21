@@ -48,6 +48,7 @@ export class AppConfig {
     urlUserType:string;
     urlMail:string;
     urlAppAgency:string;
+    urlUapStaging:string;
     
 }
 
@@ -81,6 +82,7 @@ export const APP_DI_CONFIG: AppConfig = {
     urlUserType:baseURL+'user-type/',
     urlMail: commonURL+'inbox/',
     urlAppAgency: './app/apidata/appAgency',
+    urlUapStaging: 'https://uapstaging.malaysia.gov.my/uap/validatesigncryption.jsp?language='
 
 };
 

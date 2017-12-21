@@ -99,7 +99,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     country_my = '';
     resetCap = false;
     public supportedLangs: any[];
-
+    UAPLang;
     lang = this.lang;
     languageId = this.languageId;
     fnCaptch: any;
@@ -192,6 +192,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     
     
     private registerUrl: string = this.config.urlRegister;
+    private uapstagingUrl: string = this.config.urlUapStaging;
     
     ngOnInit() {
         this.getUserType();
@@ -437,7 +438,14 @@ export class RegisterComponent implements OnInit, AfterViewInit {
               //  this.alertService.success('Registration successful', true);
               //this.openDialog();
                 this.getEmail = data.email;
-                this.infoModal.show();
+                // this.infoModal.show();
+                if(this.lang == 'ms'){
+                    this.UAPLang = 'my';
+                }else{
+                    this.UAPLang = 'en';
+                }
+                debugger;
+                window.location.href = this.uapstagingUrl+this.UAPLang+"&tag="+data.user.tag;
             },
             error => {
                 alert('error');
