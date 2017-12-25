@@ -10,6 +10,8 @@ import {Router, ActivatedRoute, Params} from '@angular/router';
   encapsulation: ViewEncapsulation.None
 })
 export class FirsttimeloginComponent implements OnInit {
+  varArray: string[];
+  queryString: string;
   getUserData: any;
   userId:string;
   rndNo:any;
@@ -17,7 +19,13 @@ export class FirsttimeloginComponent implements OnInit {
   constructor(
     private protectedservice: ProtectedService,
     private activatedRoute: ActivatedRoute
-  ) { }
+  ) { 
+
+    this.activatedRoute.params.subscribe(params => {
+      let randNo = params['rnd'];
+      console.log(randNo); // Print the parameter to the console. 
+  });
+  }
  @Input() loginfirst:boolean;
 
   ngOnInit() {
@@ -27,10 +35,10 @@ export class FirsttimeloginComponent implements OnInit {
   getConfirmation(){
 
 
-    let queryString = window.location.search;
-    let varArray = queryString.split("?");
-    for (let i=0;i<varArray.length;i++) {
-      this.rndNo = varArray[i].split("=");
+    this.queryString = window.location.search;
+    this.varArray = this.queryString.split("?");
+    for (let i=0;i<this.varArray.length;i++) {
+      this.rndNo = this.varArray[i].split("=");
         //parameter-value pair
     }
     
