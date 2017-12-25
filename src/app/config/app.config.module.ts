@@ -8,7 +8,7 @@ let registrationUrl = uapURL+'registration/';
 
 // common service
 let portalBaseURL = 'http://localhost:8020/portal/';
-let protectedBaseURL = 'http://localhost:8021/portal-protected/';
+let protectedBaseURL = uapURL+'/service-protected/';
 let commonURL = uapURL+'service/';
 
 // backend service
@@ -46,6 +46,7 @@ export class AppConfig {
     urlMail:string;
     urlAppAgency:string;
     urlUapStaging:string;
+    urlComplete: string;
     
 }
 
@@ -78,6 +79,7 @@ export const APP_DI_CONFIG: AppConfig = {
     urlIntSearch: searchServiceURL + 'query/0/internal',
     urlUserType:uapURL+'service/user/type/lang/',
     urlMail: commonURL+'inbox/',
+    urlComplete: protectedBaseURL+'user/complete/registration',
     urlAppAgency: './app/apidata/appAgency',
     urlUapStaging: 'https://uapstaging.malaysia.gov.my/uap/validatesigncryption.jsp?language='
 
