@@ -27,8 +27,8 @@ export class FirsttimeloginComponent implements OnInit {
   getConfirmation(){
 
 
-    this.rndNo = this.activatedRoute.snapshot.queryParams["rnd"];
-
+    //this.rndNo = this.activatedRoute.snapshot.queryParams["rnd"];
+    this.rndNo = location.search.split('rnd=')[1]
     this.protectedservice.completeTran(this.rndNo)
         .subscribe(
             userData => {
