@@ -1,0 +1,501 @@
+[
+    {
+        "title": "sociallink",
+        "position": "0",
+        "footer": [
+            {
+                "id": "3",
+                "title": "Facebook Official Portal of MyGovernment",
+                "link": "https://www.facebook.com/MyGovernment",
+                "icon": "fa-facebook",
+                "sort": "1",
+                "date_insert": "2017-05-09 11:18:59.447444+00:00",
+                "date_modified": "2017-05-09 11:19:30.914074+00:00"
+            },
+            {
+                "id": "4",
+                "title": "Twitter Official Portal of MyGovernment",
+                "link": "https://twitter.com/myGovPortal",
+                "icon": "fa-twitter",
+                "sort": "2",
+                "date_insert": "2017-05-09 11:18:59.447444+00:00",
+                "date_modified": "2017-05-09 11:19:30.914074+00:00"
+            },
+            {
+                "id": "5",
+                "title": "Mobile Web",
+                "link": "/public/cms/article/page/374",
+                "icon": "fa-qrcode",
+                "sort": "3",
+                "date_insert": "2017-05-09 11:18:59.447444+00:00",
+                "date_modified": "2017-05-09 11:19:30.914074+00:00"
+            },
+            {
+                "id": "1",
+                "title": "RSS Feeds",
+                "link": "/public/cms/rss",
+                "icon": "fa-rss",
+                "sort": "5",
+                "date_insert": "2017-05-09 11:18:59.447444+00:00",
+                "date_modified": "2017-05-09 11:19:30.914074+00:00"
+            },
+            {
+                "id": "2",
+                "title": "Government Mobile Application Gallery (GAMMA)",
+                "link": "/public/cms/article/page/7/782",
+                "icon": "fa-mobile",
+                "sort": "4",
+                "date_insert": "2017-05-09 11:18:59.447444+00:00",
+                "date_modified": "2017-05-19 04:06:15.299470+00:00"
+            }
+        ]
+    },
+    {
+        "title": "otherlink",
+        "items": [
+            {
+                "title": "CONTACT US",
+                "sub_title": "contact",
+                "footer": [
+                    {
+                        "id": "1",
+                        "title": "THE MALAYSIAN ADMINISTRATIVE MODERNISATION AND MANAGEMENT PLANNING UNIT",
+                        "icon": "",
+                        "date_insert": "2017-05-09 11:22:44.025156+00:00",
+                        "date_modified": "2017-07-11 10:42:38.738253+00:00",
+                        "sort": ""
+                    },
+                    {
+                        "id": "2",
+                        "title": "<p>Level 6, Block B2<br />Prime Minister's Department Complex<br />Federal Government Administrative Centre<br />62502 Putrajaya, Malaysia</p>",
+                        "icon": "glyphicon glyphicon-home",
+                        "date_insert": "2017-05-09 11:22:44.025156+00:00",
+                        "date_modified": "2017-07-11 10:42:38.738253+00:00",
+                        "sort": ""
+                    },
+                    {
+                        "id": "3",
+                        "title": "<p><a title=\"2.937855, 101.65420\" href=\"https://www.google.com/maps/place/2%C2%B056'16.3%22N+101%C2%B039'15.1%22E/@2.937855,101.6542,17z/data=!3m1!4b1!4m5!3m4!1s0x0:0x0!8m2!3d2.937855!4d101.6542\" target=\"_blank\">2.937855, 101.65420</a></p>",
+                        "icon": "glyphicon glyphicon-map-marker",
+                        "date_insert": "2017-05-09 11:22:44.025156+00:00",
+                        "date_modified": "2017-07-11 10:42:38.738253+00:00",
+                        "sort": ""
+                    },
+                    {
+                        "id": "4",
+                        "title": "<p>603 8000 8000</p>",
+                        "icon": "glyphicon glyphicon-phone-alt",
+                        "date_insert": "2017-05-09 11:22:44.025156+00:00",
+                        "date_modified": "2017-07-11 10:42:38.738253+00:00",
+                        "sort": ""
+                    },
+                    {
+                        "id": "5",
+                        "title": "<p>603 8888 3721</p>",
+                        "icon": "glyphicon glyphicon-print",
+                        "date_insert": "2017-05-09 11:22:44.025156+00:00",
+                        "date_modified": "2017-07-11 10:42:38.738253+00:00",
+                        "sort": ""
+                    },
+                    {
+                        "id": "6",
+                        "title": "<p>admin[at]portal[dot]gov[dot]my</p>",
+                        "icon": "glyphicon glyphicon-envelope",
+                        "date_insert": "2017-05-09 11:22:44.025156+00:00",
+                        "date_modified": "2017-07-11 10:42:38.738253+00:00",
+                        "sort": ""
+                    }
+                ]
+            },
+            {
+                "title": "ACCESS PAGE",
+                "sub_title": "access",
+                "footer": [
+                    {
+                        "id": "13",
+                        "title": "Subscription",
+                        "name": "Subscription",
+                        "link": "/public/cms/subscription",
+                        "position": "2",
+                        "date_insert": "2017-05-09 11:21:36.525489+00:00",
+                        "date_modified": "2017-05-09 11:21:36.577275+00:00",
+                        "sort": "1000"
+                    },
+                    {
+                        "id": "12",
+                        "title": "Online Services",
+                        "name": "Online Services",
+                        "link": "/public/cms/onlineservices",
+                        "position": "2",
+                        "date_insert": "2017-05-09 11:21:36.525489+00:00",
+                        "date_modified": "2017-05-09 11:21:36.577275+00:00",
+                        "sort": "1000"
+                    },
+                    {
+                        "id": "10",
+                        "title": "Personal Data Protection Act",
+                        "name": "Personal Data Protection Act",
+                        "link": "/public/cms/article/page/349",
+                        "position": "2",
+                        "date_insert": "2017-05-09 11:21:36.525489+00:00",
+                        "date_modified": "2017-05-09 11:21:36.577275+00:00",
+                        "sort": "1000"
+                    },
+                    {
+                        "id": "11",
+                        "title": "Freedom of Information",
+                        "name": "Freedom of Information",
+                        "link": "/public/cms/article/page/725",
+                        "position": "2",
+                        "date_insert": "2017-05-09 11:21:36.525489+00:00",
+                        "date_modified": "2017-05-09 11:21:36.577275+00:00",
+                        "sort": "1000"
+                    },
+                    {
+                        "id": "8",
+                        "title": "My Calendar",
+                        "name": "My Calendar",
+                        "link": "/public/cms/calendar",
+                        "position": "1",
+                        "date_insert": "2017-05-09 11:21:36.525489+00:00",
+                        "date_modified": "2017-05-09 11:21:36.577275+00:00",
+                        "sort": "1000"
+                    },
+                    {
+                        "id": "7",
+                        "title": "E-Participation",
+                        "name": "E-Participation",
+                        "link": "/public/cms/epenyertaan",
+                        "position": "1",
+                        "date_insert": "2017-05-09 11:21:36.525489+00:00",
+                        "date_modified": "2017-05-09 11:21:36.577275+00:00",
+                        "sort": "1000"
+                    },
+                    {
+                        "id": "5",
+                        "title": "Agencies Directory",
+                        "name": "Agencies Directory",
+                        "link": "/public/cms/direktori",
+                        "position": "1",
+                        "date_insert": "2017-05-09 11:21:36.525489+00:00",
+                        "date_modified": "2017-05-09 11:21:36.577275+00:00",
+                        "sort": "1000"
+                    },
+                    {
+                        "id": "4",
+                        "title": "Chief Information Officer(CIO)",
+                        "name": "Chief Information Officer(CIO)",
+                        "link": "/public/cms/article/page/726",
+                        "position": "1",
+                        "date_insert": "2017-05-09 11:21:36.525489+00:00",
+                        "date_modified": "2017-05-09 11:21:36.577275+00:00",
+                        "sort": "1000"
+                    },
+                    {
+                        "id": "3",
+                        "title": "Complaints and Queries",
+                        "name": "Complaints and Queries",
+                        "link": "/feedback",
+                        "position": "1",
+                        "date_insert": "2017-05-09 11:21:36.525489+00:00",
+                        "date_modified": "2017-05-09 11:21:36.577275+00:00",
+                        "sort": "1000"
+                    },
+                    {
+                        "id": "2",
+                        "title": "Archives",
+                        "name": "Archives",
+                        "link": "/public/cms/archive",
+                        "position": "1",
+                        "date_insert": "2017-05-09 11:21:36.525489+00:00",
+                        "date_modified": "2017-05-09 11:21:36.577275+00:00",
+                        "sort": "1000"
+                    },
+                    {
+                        "id": "1",
+                        "title": "Publication",
+                        "name": "Publication",
+                        "link": "/public/cms/publication",
+                        "position": "1",
+                        "date_insert": "2017-05-09 11:21:36.525489+00:00",
+                        "date_modified": "2017-05-09 11:21:36.577275+00:00",
+                        "sort": "1000"
+                    },
+                    {
+                        "id": "16",
+                        "title": "Online Statistic",
+                        "name": "Online Statistic",
+                        "link": "/public/dservice/?cc=business/dservis/statistic",
+                        "position": "1",
+                        "date_insert": "2017-05-09 11:21:36.525489+00:00",
+                        "date_modified": "2017-05-09 11:21:36.577275+00:00",
+                        "sort": "1000"
+                    },
+                    {
+                        "id": "15",
+                        "title": "Site Map",
+                        "name": "Site Map",
+                        "link": "/public/cms/sitemap",
+                        "position": "2",
+                        "date_insert": "2017-05-09 11:21:36.525489+00:00",
+                        "date_modified": "2017-05-09 11:21:36.577275+00:00",
+                        "sort": "1000"
+                    },
+                    {
+                        "id": "14",
+                        "title": "RSS Feeds",
+                        "name": "RSS Feeds",
+                        "link": "/public/cms/rss",
+                        "position": "2",
+                        "date_insert": "2017-05-09 11:21:36.525489+00:00",
+                        "date_modified": "2017-05-09 11:21:36.577275+00:00",
+                        "sort": "1000"
+                    },
+                    {
+                        "id": "17",
+                        "title": "Gallery",
+                        "name": "Gallery",
+                        "link": "/public/cms/photologue/gallery",
+                        "position": "2",
+                        "date_insert": "2017-05-11 04:50:40.832232+00:00",
+                        "date_modified": "2017-05-11 04:51:09.322215+00:00",
+                        "sort": "1000"
+                    }
+                ]
+            },
+            {
+                "title": "NUMBER OF VISITOR",
+                "sub_title": "visitor",
+                "footer": [
+                    {
+                        "id": "1",
+                        "today": "Today",
+                        "todayval": "643",
+                        "month": "This month",
+                        "monthval": "15,489",
+                        "total": "Total Visitors",
+                        "totalval": "77,539",
+                        "date_insert": "2017-05-09 11:21:36.634158+00:00",
+                        "date_modified": "2017-05-09 11:21:36.666533+00:00"
+                    }
+                ]
+            },
+            {
+                "title": "EXTERNAL LINKS",
+                "sub_title": "extlinks",
+                "footer": [
+                    {
+                        "id": "1",
+                        "name": "PUBLIC COMPLAINTS BUREAU",
+                        "link": "http://www.pcb.gov.my/en",
+                        "sort": "1000",
+                        "src": "",
+                        "icon": "https://www.malaysia.gov.my/public/static/media/Logo_BPA.png",
+                        "date_insert": "2017-05-09 11:23:22.310612+00:00",
+                        "date_modified": "2017-05-09 11:23:22.347312+00:00"
+                    },
+                    {
+                        "id": "10",
+                        "name": "MYBAYAR",
+                        "link": "https://mybayar.gov.my/ms/registration/frmlogins.aspx",
+                        "sort": "1000",
+                        "src": "",
+                        "icon": "https://www.malaysia.gov.my/public/static/media/Logo_mybayar.png",
+                        "date_insert": "2017-05-09 11:23:22.310612+00:00",
+                        "date_modified": "2017-05-09 11:23:22.347312+00:00"
+                    },
+                    {
+                        "id": "9",
+                        "name": "JOBS MALAYSIA",
+                        "link": "http://www.jobsmalaysia.gov.my/jcs/index.faces",
+                        "sort": "1000",
+                        "src": "",
+                        "icon": "https://www.malaysia.gov.my/public/static/media/Logo_jobsmalaysia.png",
+                        "date_insert": "2017-05-09 11:23:22.310612+00:00",
+                        "date_modified": "2017-05-09 11:23:22.347312+00:00"
+                    },
+                    {
+                        "id": "8",
+                        "name": "PUBLIC INFO BANJIR",
+                        "link": "http://publicinfobanjir.water.gov.my",
+                        "sort": "1000",
+                        "src": "",
+                        "icon": "https://www.malaysia.gov.my/public/static/media/Logo_Infobanjir.png",
+                        "date_insert": "2017-05-09 11:23:22.310612+00:00",
+                        "date_modified": "2017-05-09 11:23:22.347312+00:00"
+                    },
+                    {
+                        "id": "7",
+                        "name": "MALAYSIA'S E-GOVERNMENT SERVICES",
+                        "link": "https://www.myeg.com.my",
+                        "sort": "1000",
+                        "src": "",
+                        "icon": "https://www.malaysia.gov.my/public/static/media/MyEG_logo.png",
+                        "date_insert": "2017-05-09 11:23:22.310612+00:00",
+                        "date_modified": "2017-05-09 11:23:22.347312+00:00"
+                    },
+                    {
+                        "id": "5",
+                        "name": "PUBLIC SERVICES COMMISSION OF MALAYSIA",
+                        "link": "http://www.spa.gov.my",
+                        "sort": "1000",
+                        "src": "",
+                        "icon": "https://www.malaysia.gov.my/public/static/media/Logo_SPA_ghPgwg8.png",
+                        "date_insert": "2017-05-09 11:23:22.310612+00:00",
+                        "date_modified": "2017-05-09 11:23:22.347312+00:00"
+                    },
+                    {
+                        "id": "6",
+                        "name": "UNIVERSITY CENTER UNIT",
+                        "link": "http://upu.mohe.gov.my/web",
+                        "sort": "1000",
+                        "src": "",
+                        "icon": "https://www.malaysia.gov.my/public/static/media/Logo_UPU.png",
+                        "date_insert": "2017-05-09 11:23:22.310612+00:00",
+                        "date_modified": "2017-05-09 11:23:22.347312+00:00"
+                    },
+                    {
+                        "id": "2",
+                        "name": "ROYAL MALAYSIA POLICE",
+                        "link": "http://www.rmp.gov.my",
+                        "sort": "1000",
+                        "src": "",
+                        "icon": "https://www.malaysia.gov.my/public/static/media/Logo_polis.png",
+                        "date_insert": "2017-05-09 11:23:22.310612+00:00",
+                        "date_modified": "2017-05-09 11:23:22.347312+00:00"
+                    },
+                    {
+                        "id": "15",
+                        "name": "MINISTRY OF WOMEN, FAMILY AND COMMUNITY DEVELOPMENT",
+                        "link": "http://www.kpwkm.gov.my",
+                        "sort": "1",
+                        "src": "",
+                        "icon": "https://www.malaysia.gov.my/public/static/media/KPWKM.png",
+                        "date_insert": "2017-05-09 11:23:22.310612+00:00",
+                        "date_modified": "2017-05-09 11:23:22.347312+00:00"
+                    },
+                    {
+                        "id": "14",
+                        "name": "MINISTRY OF HUMAN RESOURCES",
+                        "link": "http://www.mohr.gov.my/index.php/en",
+                        "sort": "2",
+                        "src": "",
+                        "icon": "https://www.malaysia.gov.my/public/static/media/Kementerian-Sumber-Manusia.png",
+                        "date_insert": "2017-05-09 11:23:22.310612+00:00",
+                        "date_modified": "2017-05-09 11:23:22.347312+00:00"
+                    },
+                    {
+                        "id": "13",
+                        "name": "MINISTRY OF EDUCATION MALAYSIA",
+                        "link": "http://www.moe.gov.my/index.php/en",
+                        "sort": "3",
+                        "src": "",
+                        "icon": "https://www.malaysia.gov.my/public/static/media/Kementerian-Pendidikan.png",
+                        "date_insert": "2017-05-09 11:23:22.310612+00:00",
+                        "date_modified": "2017-05-09 11:23:22.347312+00:00"
+                    },
+                    {
+                        "id": "12",
+                        "name": "MINISTRY OF FINANCE MALAYSIA",
+                        "link": "http://www.treasury.gov.my/index.php/en",
+                        "sort": "4",
+                        "src": "",
+                        "icon": "https://www.malaysia.gov.my/public/static/media/Kementerian-Kewangan.png",
+                        "date_insert": "2017-05-09 11:23:22.310612+00:00",
+                        "date_modified": "2017-05-09 11:23:22.347312+00:00"
+                    },
+                    {
+                        "id": "11",
+                        "name": "MINISTRY OF HEALTH MALAYSIA",
+                        "link": "http://www.moh.gov.my/english.php",
+                        "sort": "5",
+                        "src": "",
+                        "icon": "https://www.malaysia.gov.my/public/static/media/Kementerian-kesihatan.png",
+                        "date_insert": "2017-05-09 11:23:22.310612+00:00",
+                        "date_modified": "2017-05-09 11:23:22.347312+00:00"
+                    },
+                    {
+                        "id": "3",
+                        "name": "MINISTRY OF NATURAL RESOURCES AND ENVIRONMENT",
+                        "link": "http://www.nre.gov.my/en-my/Pages/default.aspx",
+                        "sort": "6",
+                        "src": "",
+                        "icon": "https://www.malaysia.gov.my/public/static/media/NRE-logo.png",
+                        "date_insert": "2017-05-09 11:23:22.310612+00:00",
+                        "date_modified": "2017-05-09 11:23:22.347312+00:00"
+                    },
+                    {
+                        "id": "16",
+                        "name": "MINISTRY OF HIGHER EDUCATION",
+                        "link": "https://www.mohe.gov.my",
+                        "sort": "7",
+                        "src": "",
+                        "icon": "https://www.malaysia.gov.my/public/static/media/Kementerian-pengajian-tinggi.png",
+                        "date_insert": "2017-05-09 11:23:22.310612+00:00",
+                        "date_modified": "2017-06-15 08:21:45.832257+00:00"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "title": "bottom",
+        "items": [
+            {
+                "id": "1",
+                "copyright": "2017 MAMPU All Rights Reserved",
+                "update_date": "2017-05-01",
+                "note": "Best viewed using Google Chrome Version 57.0, Mozilla Firefox version 52.0",
+                "date_insert": "2017-05-09 11:21:36.346270+00:00",
+                "date_modified": "2017-05-09 11:21:36.388489+00:00"
+            }
+        ]
+    },
+    {
+        "title": "bottomlinks",
+        "items": [
+            {
+                "id": "6",
+                "name": "Client Charter",
+                "link": "/public/cms/article/page/221",
+                "date_insert": "2017-05-09 11:21:36.413126+00:00",
+                "date_modified": "2017-05-09 11:21:36.504912+00:00"
+            },
+            {
+                "id": "5",
+                "name": "Security Policy",
+                "link": "/public/cms/article/page/203",
+                "date_insert": "2017-05-09 11:21:36.413126+00:00",
+                "date_modified": "2017-05-09 11:21:36.504912+00:00"
+            },
+            {
+                "id": "4",
+                "name": "Privacy Policy",
+                "link": "/public/cms/article/page/220",
+                "date_insert": "2017-05-09 11:21:36.413126+00:00",
+                "date_modified": "2017-05-09 11:21:36.504912+00:00"
+            },
+            {
+                "id": "3",
+                "name": "Copyright Notice",
+                "link": "/public/cms/article/page/219",
+                "date_insert": "2017-05-09 11:21:36.413126+00:00",
+                "date_modified": "2017-05-09 11:21:36.504912+00:00"
+            },
+            {
+                "id": "2",
+                "name": "Disclaimer",
+                "link": "/public/cms/article/page/289",
+                "date_insert": "2017-05-09 11:21:36.413126+00:00",
+                "date_modified": "2017-05-09 11:21:36.504912+00:00"
+            },
+            {
+                "id": "1",
+                "name": "Help",
+                "link": "/public/cms/article/page/217",
+                "date_insert": "2017-05-09 11:21:36.413126+00:00",
+                "date_modified": "2017-05-09 11:21:36.504912+00:00"
+            }
+        ]
+    }
+]

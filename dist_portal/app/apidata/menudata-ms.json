@@ -1,0 +1,167 @@
+[
+    {
+        "title": "Topik",
+        "data": [
+            {
+                "name": "Business",
+                "topic_id": "2",
+                "json_url": "https://gosgstg.malaysia.gov.my/public/cms/service/article_topic/en/?topic_id=2&format=json",
+                "url": "https://gosgstg.malaysia.gov.my/public/cms/topic/2/"
+            },
+            {
+                "name": "IT & Communication",
+                "topic_id": "64",
+                "json_url": "https://gosgstg.malaysia.gov.my/public/cms/service/article_topic/en/?topic_id=64&format=json",
+                "url": "https://gosgstg.malaysia.gov.my/public/cms/topic/64/"
+            },
+            {
+                "name": "Welfare",
+                "topic_id": "32",
+                "json_url": "https://gosgstg.malaysia.gov.my/public/cms/service/article_topic/en/?topic_id=32&format=json",
+                "url": "https://gosgstg.malaysia.gov.my/public/cms/topic/32/"
+            },
+            {
+                "name": "Immigration and Visa",
+                "topic_id": "7",
+                "json_url": "https://gosgstg.malaysia.gov.my/public/cms/service/article_topic/en/?topic_id=7&format=json",
+                "url": "https://gosgstg.malaysia.gov.my/public/cms/topic/7/"
+            },
+            {
+                "name": "Tourism",
+                "topic_id": "11",
+                "json_url": "https://gosgstg.malaysia.gov.my/public/cms/service/article_topic/en/?topic_id=11&format=json",
+                "url": "https://gosgstg.malaysia.gov.my/public/cms/topic/11/"
+            },
+            {
+                "name": "Education",
+                "topic_id": "9",
+                "json_url": "https://gosgstg.malaysia.gov.my/public/cms/service/article_topic/en/?topic_id=9&format=json",
+                "url": "https://gosgstg.malaysia.gov.my/public/cms/topic/9/"
+            },
+            {
+                "name": "Health",
+                "topic_id": "6",
+                "json_url": "https://gosgstg.malaysia.gov.my/public/cms/service/article_topic/en/?topic_id=6&format=json",
+                "url": "https://gosgstg.malaysia.gov.my/public/cms/topic/6/"
+            },
+            {
+                "name": "Citizen Safety & Protection",
+                "topic_id": "55",
+                "json_url": "https://gosgstg.malaysia.gov.my/public/cms/service/article_topic/en/?topic_id=55&format=json",
+                "url": "https://gosgstg.malaysia.gov.my/public/cms/topic/55/"
+            },
+            {
+                "name": "Transportation",
+                "topic_id": "54",
+                "json_url": "https://gosgstg.malaysia.gov.my/public/cms/service/article_topic/en/?topic_id=54&format=json",
+                "url": "https://gosgstg.malaysia.gov.my/public/cms/topic/54/"
+            },
+            {
+                "name": "Finance & Taxation",
+                "topic_id": "58",
+                "json_url": "https://gosgstg.malaysia.gov.my/public/cms/service/article_topic/en/?topic_id=58&format=json",
+                "url": "https://gosgstg.malaysia.gov.my/public/cms/topic/58/"
+            },
+            {
+                "name": "Family & Community",
+                "topic_id": "60",
+                "json_url": "https://gosgstg.malaysia.gov.my/public/cms/service/article_topic/en/?topic_id=60&format=json",
+                "url": "https://gosgstg.malaysia.gov.my/public/cms/topic/60/"
+            },
+            {
+                "name": "Culture, Leisure & Sports",
+                "topic_id": "61",
+                "json_url": "https://gosgstg.malaysia.gov.my/public/cms/service/article_topic/en/?topic_id=61&format=json",
+                "url": "https://gosgstg.malaysia.gov.my/public/cms/topic/61/"
+            },
+            {
+                "name": "Agriculture",
+                "topic_id": "66",
+                "json_url": "https://gosgstg.malaysia.gov.my/public/cms/service/article_topic/en/?topic_id=66&format=json",
+                "url": "https://gosgstg.malaysia.gov.my/public/cms/topic/66/"
+            },
+            {
+                "name": "Career",
+                "topic_id": "53",
+                "json_url": "https://gosgstg.malaysia.gov.my/public/cms/service/article_topic/en/?topic_id=53&format=json",
+                "url": "https://gosgstg.malaysia.gov.my/public/cms/topic/53/"
+            },
+            {
+                "name": "Housing",
+                "topic_id": "10",
+                "json_url": "https://gosgstg.malaysia.gov.my/public/cms/service/article_topic/en/?topic_id=10&format=json",
+                "url": "https://gosgstg.malaysia.gov.my/public/cms/topic/10/"
+            }
+        ]
+    },
+    {
+        "title": "MyInfo",
+        "data": [
+            {
+                "name": "Yang di-Pertuan Agong",
+                "topic_id": "28",
+                "json_url": "https://gosgstg.malaysia.gov.my/public/cms/service/article_topic/en/?topic_id=28&format=json",
+                "url": "https://gosgstg.malaysia.gov.my/public/cms/topic/28/"
+            },
+            {
+                "name": "Prime Minister of Malaysia",
+                "topic_id": "29",
+                "json_url": "https://gosgstg.malaysia.gov.my/public/cms/service/article_topic/en/?topic_id=29&format=json",
+                "url": "https://gosgstg.malaysia.gov.my/public/cms/topic/29/"
+            },
+            {
+                "name": "Government of Malaysia",
+                "topic_id": "33",
+                "json_url": "https://gosgstg.malaysia.gov.my/public/cms/service/article_topic/en/?topic_id=33&format=json",
+                "url": "https://gosgstg.malaysia.gov.my/public/cms/topic/33/"
+            },
+            {
+                "name": "Malaysian Cabinet",
+                "topic_id": "24",
+                "json_url": "https://gosgstg.malaysia.gov.my/public/cms/service/article_topic/en/?topic_id=24&format=json",
+                "url": "https://gosgstg.malaysia.gov.my/public/cms/topic/24/"
+            },
+            {
+                "name": "Malaysia Information",
+                "topic_id": "47",
+                "json_url": "https://gosgstg.malaysia.gov.my/public/cms/service/article_topic/en/?topic_id=47&format=json",
+                "url": "https://gosgstg.malaysia.gov.my/public/cms/topic/47/"
+            }
+        ]
+    },
+    {
+        "title": "MyInitiative",
+        "data": [
+            {
+                "name": "Whole of Government",
+                "topic_id": "68",
+                "json_url": "https://gosgstg.malaysia.gov.my/public/cms/service/article_topic/en/?topic_id=68&format=json",
+                "url": "https://gosgstg.malaysia.gov.my/public/cms/topic/68/"
+            },
+            {
+                "name": "Open Government Data",
+                "topic_id": "36",
+                "json_url": "https://gosgstg.malaysia.gov.my/public/cms/service/article_topic/en/?topic_id=36&format=json",
+                "url": "https://gosgstg.malaysia.gov.my/public/cms/topic/36/"
+            },
+            {
+                "name": "e-Participation",
+                "topic_id": "71",
+                "json_url": "https://gosgstg.malaysia.gov.my/public/cms/service/article_topic/en/?topic_id=71&format=json",
+                "url": "https://gosgstg.malaysia.gov.my/public/cms/topic/71/"
+            },
+            {
+                "name": "Multi-channel Services Delivery  & Expanding Usage",
+                "topic_id": "69",
+                "json_url": "https://gosgstg.malaysia.gov.my/public/cms/service/article_topic/en/?topic_id=69&format=json",
+                "url": "https://gosgstg.malaysia.gov.my/public/cms/topic/69/"
+            },
+            {
+                "name": "Bridging the Digital Divide & Vulnerable Groups",
+                "topic_id": "70",
+                "json_url": "https://gosgstg.malaysia.gov.my/public/cms/service/article_topic/en/?topic_id=70&format=json",
+                "url": "https://gosgstg.malaysia.gov.my/public/cms/topic/70/"
+            }
+        ]
+    }
+]

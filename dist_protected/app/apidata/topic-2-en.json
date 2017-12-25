@@ -1,0 +1,78 @@
+[
+    {
+        "count": 1,
+        "next": null,
+        "previous": null,
+        "results": [
+            {
+                "title": "Business",
+                "description": "<p><img src=\"https://www.malaysia.gov.my/public/cms/media/uploads/1_perniagaan.jpg\" alt=\"\" width=\"100%\" /></p><p>Simple access to information and services for business.</p>",
+                "content": [
+                    {
+                        "label": "Planning Your Business",
+                        "description": "<p>Thinking of starting a business? Get a head start and find the information you need.</p>",
+                        "id": 17,
+                        "json_url": "https://www.malaysia.gov.my/public/cms/service/article_sub_topic/en/?topic_id=2&sub_topic_id=15&format=json"
+                    },
+                    {
+                        "label": "Starting Business",
+                        "description": "<p>Get information on starting business for Sole Trader, Limited Companies and Partnership</p>",
+                        "id": 16,
+                        "json_url": "https://www.malaysia.gov.my/public/cms/service/article_sub_topic/en/?topic_id=2&sub_topic_id=14&format=json"
+                    },
+                    {
+                        "label": "Managing Your Business",
+                        "description": "<p>Running a business is a big job. We can help you with tips and programs.</p>",
+                        "id": 120317,
+                        "json_url": "https://www.malaysia.gov.my/public/cms/service/article_sub_topic/en/?topic_id=2&sub_topic_id=240&format=json"
+                    },
+                    {
+                        "label": "Growing Your Business",
+                        "description": "<p>A successful business often grows on its own over time</p>",
+                        "id": 12,
+                        "json_url": "https://www.malaysia.gov.my/public/cms/service/article_sub_topic/en/?topic_id=2&sub_topic_id=12&format=json"
+                    },
+                    {
+                        "label": "Exiting Business",
+                        "description": "<p>Whether you leave your business for professional or personal reasons, make sure you plan ahead</p><p>&nbsp;</p>",
+                        "id": 11,
+                        "json_url": "https://www.malaysia.gov.my/public/cms/service/article_sub_topic/en/?topic_id=2&sub_topic_id=11&format=json"
+                    }
+                ],
+                "menu_left": [
+                    {
+                        "label": "Planning Your Business",
+                        "id": 17,
+                        "json_url": "https://www.malaysia.gov.my/public/cms/service/article_sub_topic/en/?topic_id=2&sub_topic_id=15&format=json"
+                    },
+                    {
+                        "label": "Starting Business",
+                        "id": 16,
+                        "json_url": "https://www.malaysia.gov.my/public/cms/service/article_sub_topic/en/?topic_id=2&sub_topic_id=14&format=json"
+                    },
+                    {
+                        "label": "Managing Your Business",
+                        "id": 120317,
+                        "json_url": "https://www.malaysia.gov.my/public/cms/service/article_sub_topic/en/?topic_id=2&sub_topic_id=240&format=json"
+                    },
+                    {
+                        "label": "Growing Your Business",
+                        "id": 12,
+                        "json_url": "https://www.malaysia.gov.my/public/cms/service/article_sub_topic/en/?topic_id=2&sub_topic_id=12&format=json"
+                    },
+                    {
+                        "label": "Exiting Business",
+                        "id": 11,
+                        "json_url": "https://www.malaysia.gov.my/public/cms/service/article_sub_topic/en/?topic_id=2&sub_topic_id=11&format=json"
+                    }
+                ],
+                "menu_right": [],
+                "html_head_title": "Business | Perniagaan | MyGOV - Portal Rasmi Kerajaan Malaysia",
+                "html_head_meta_keyword": "perniagaan, business",
+                "html_head_meta_description": "Simple access to information and services for business."
+            }
+        ]
+    }
+
+]
+

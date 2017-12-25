@@ -1,0 +1,79 @@
+ [{
+"count": "8",
+"next": null,
+"previous": null,
+"results": [
+    {
+    "id": "3",
+    "title": "BUSINESS IN ENGLISH",
+    "description": "Every business, especially a new one, should have a clear and succinct expression of its purpose",
+    "image": "https://gosgstg.malaysia.gov.my/public/static/media/PERNIAGAAN-684-x-280-.jpg",
+    "url": "topic/2",
+    "active_flag": "True",
+    "sort": "1"
+    },
+    {
+    "id": "5",
+    "title": "WELFARE",
+    "description": "The seeds of kindness you plant today will give others a big smile",
+    "image": "https://gosgstg.malaysia.gov.my/public/static/media/KEBAJIKAN-684-x-280-.jpg",
+    "url": "https:gosgstg.malaysia.gov.my/public/cms/topic/32",
+    "active_flag": "True",
+    "sort": "2"
+    },
+    {
+    "id": "13",
+    "title": "MalaysiaBiz",
+    "description": "Getting business registration and licensing information is now as easy as 1 2 3",
+    "image": "https://gosgstg.malaysia.gov.my/public/static/media/malaysiaBIZ-684-x-280-.jpg",
+    "url": "http:malaysiabiz.mampu.gov.my",
+    "active_flag": "True",
+    "sort": "1000"
+    },
+    {
+    "id": "12",
+    "title": "EFP Kiosk Service",
+    "description": "Kiosk is able to offer a more interactive and responsive to users",
+    "image": "https://gosgstg.malaysia.gov.my/public/static/media/KWSP-684-x-280-.jpg",
+    "url": "https:gosgstg.malaysia.gov.my/public/cms/article/page/783",
+    "active_flag": "True",
+    "sort": "1000"
+    },
+    {
+    "id": "11",
+    "title": "data.gov.my",
+    "description": "Data For Citizens Wellbeing",
+    "image": "https://gosgstg.malaysia.gov.my/public/static/media/DATA.GOV-684-x-280-_QtOC3iI.jpg",
+    "url": "https:gosgstg.malaysia.gov.my/public/cms/topic/36",
+    "active_flag": "True",
+    "sort": "5"
+    },
+    {
+    "id": "10",
+    "title": "Mobility, Smart Life",
+    "description": "Government-based mobile service innovation",
+    "image": "https://gosgstg.malaysia.gov.my/public/static/media/GAMMA-684-x-280-.jpg",
+    "url": "https:gosgstg.malaysia.gov.my/public/cms/topic/38",
+    "active_flag": "True",
+    "sort": "5"
+    },
+    {
+    "id": "7",
+    "title": "HEALTH",
+    "description": "Health is a state of complete physical, mental and social well-being and not merely the absence of disease",
+    "image": "https://gosgstg.malaysia.gov.my/public/static/media/KESIHATAN-684-x-280-.jpg",
+    "url": "https:gosgstg.malaysia.gov.my/public/cms/topic/6",
+    "active_flag": "True",
+    "sort": "4"
+    },
+    {
+    "id": "6",
+    "title": "EDUCATION",
+    "description": "Investment for your family and nationâ€™s future",
+    "image": "https://gosgstg.malaysia.gov.my/public/static/media/PENDIDIKAN-684-x-280-.jpg",
+    "url": "https:gosgstg.malaysia.gov.my/public/cms/topic/9",
+    "active_flag": "True",
+    "sort": "3"
+    }
+]
+}]

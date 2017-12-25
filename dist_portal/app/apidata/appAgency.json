@@ -1,0 +1,60 @@
+
+{
+"type": "RESPONSE",
+"statusCode": "S001",
+"statusDesc": "Race All",
+"agencyList": [
+{
+"agencyId": 1,
+"agency": "KPDNKK"
+},
+{
+"agencyId": 2,
+"agency": "PERHILITAN"
+},
+{
+"agencyId": 3,
+"agency": "PERIKANAN"
+}
+],
+"status": [
+    {
+    "statusId": 1,
+    "status": "Lulus"
+    },
+    {
+    "statusId": 2,
+    "status": "Tidak Lulus"
+    },
+    {
+    "statusId": 3,
+    "status": "Gagal"
+    }
+],
+"dataTable": [
+    {
+    "dataId": 1,
+    "no_app": "173434",
+    "name_app":"PERMOHONAN BARU LESEN PENIAGA/TAKSIDERMI",
+    "agency": "PERHILITAN",
+    "submit": "07-11-2017 15:06:52 PM",
+    "status": "DALAM PROSES"
+    },
+    {
+    "dataId": 2,
+    "no_app": "173634",
+    "name_app":"PERMOHONAN BARU LESEN PENIAGA/TAKSIDERMI",
+    "agency": "PERHILITAN",
+    "submit": "07-11-2017 15:06:52 PM",
+    "status": "SEDIA DICETAK"
+    },
+    {
+    "dataId": 3,
+    "no_app": "173734",
+    "name_app":"PERMOHONAN BARU LESEN PENIAGA/TAKSIDERMI",
+    "agency": "PERHILITAN",
+    "submit": "07-11-2017 15:06:52 PM",
+    "status": "DRAF"
+    }
+]
+}

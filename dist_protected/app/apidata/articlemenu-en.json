@@ -1,0 +1,185 @@
+[
+    {
+        "title": "Topic",
+        "data": [
+            {
+                "name": "Business",
+                "topic_id": 2,
+                "json_url": "https://www.malaysia.gov.my/public/cms/service/article_topic/en/?topic_id=2",
+                "icon": "briefcase",
+                "description": "Simple access to information and services for business.",
+                "url": "https://www.malaysia.gov.my/public/cms/topic/2/"
+            },
+            {
+                "name": "Housing",
+                "topic_id": 10,
+                "json_url": "https://www.malaysia.gov.my/public/cms/service/article_topic/en/?topic_id=10",
+                "icon": "building",
+                "description": "Information and services related to housing",
+                "url": "https://www.malaysia.gov.my/public/cms/topic/10/"
+            },
+            {
+                "name": "Welfare",
+                "topic_id": 32,
+                "json_url": "https://www.malaysia.gov.my/public/cms/service/article_topic/en/?topic_id=32",
+                "icon": "handshake-o",
+                "description": "Includes OKU and BR1M",
+                "url": "https://www.malaysia.gov.my/public/cms/topic/32/"
+            },
+            {
+                "name": "Education",
+                "topic_id": 9,
+                "json_url": "https://www.malaysia.gov.my/public/cms/service/article_topic/en/?topic_id=9",
+                "icon": "graduation-cap",
+                "description": "Education system in Malaysia is composed of Several stages, Pre-school, Primary Education, Secondary Education, Post-Secondary Education and Higher Education.",
+                "url": "https://www.malaysia.gov.my/public/cms/topic/9/"
+            },
+            {
+                "name": "Finance & Taxation",
+                "topic_id": 58,
+                "json_url": "https://www.malaysia.gov.my/public/cms/service/article_topic/en/?topic_id=58",
+                "icon": "money",
+                "description": "All about finances and taxes",
+                "url": "https://www.malaysia.gov.my/public/cms/topic/58/"
+            },
+            {
+                "name": "Family & Community",
+                "topic_id": 60,
+                "json_url": "https://www.malaysia.gov.my/public/cms/service/article_topic/en/?topic_id=60",
+                "icon": "users",
+                "description": "Family & Community",
+                "url": "https://www.malaysia.gov.my/public/cms/topic/60/"
+            },
+            {
+                "name": "Career",
+                "topic_id": 53,
+                "json_url": "https://www.malaysia.gov.my/public/cms/service/article_topic/en/?topic_id=53",
+                "icon": "industry",
+                "description": "Information and services related to Career such as Starting Your Career, Workplace Issues and others",
+                "url": "https://www.malaysia.gov.my/public/cms/topic/53/"
+            },
+            {
+                "name": "Immigration and Visa",
+                "topic_id": 7,
+                "json_url": "https://www.malaysia.gov.my/public/cms/service/article_topic/en/?topic_id=7",
+                "icon": "bank",
+                "description": "Information and services related to Entry & Exit Requirements such as Enforcement, Entry Requirements and others.",
+                "url": "https://www.malaysia.gov.my/public/cms/topic/7/"
+            },
+            {
+                "name": "Health",
+                "topic_id": 6,
+                "json_url": "https://www.malaysia.gov.my/public/cms/service/article_topic/en/?topic_id=6",
+                "icon": "heartbeat",
+                "description": "Easy access to heathcare information and services",
+                "url": "https://www.malaysia.gov.my/public/cms/topic/6/"
+            },
+            {
+                "name": "Tourism & Culture",
+                "topic_id": 11,
+                "json_url": "https://www.malaysia.gov.my/public/cms/service/article_topic/en/?topic_id=11",
+                "icon": "plane",
+                "description": "Information on Tourism, Travel and Passport, Culture",
+                "url": "https://www.malaysia.gov.my/public/cms/topic/11/"
+            }
+        ]
+    },
+    {
+        "title": "MyInfo",
+        "data": [
+            {
+                "name": "Yang di-Pertuan Agong",
+                "topic_id": 28,
+                "json_url": "https://www.malaysia.gov.my/public/cms/service/article_topic/en/?topic_id=28",
+                "icon": "fa",
+                "description": "Yang di-Pertuan Agong",
+                "url": "https://www.malaysia.gov.my/public/cms/topic/28/"
+            },
+            {
+                "name": "Prime Minister of Malaysia",
+                "topic_id": 29,
+                "json_url": "https://www.malaysia.gov.my/public/cms/service/article_topic/en/?topic_id=29",
+                "icon": "fa",
+                "description": "-",
+                "url": "https://www.malaysia.gov.my/public/cms/topic/29/"
+            },
+            {
+                "name": "Government of Malaysia",
+                "topic_id": 33,
+                "json_url": "https://www.malaysia.gov.my/public/cms/service/article_topic/en/?topic_id=33",
+                "icon": "None",
+                "description": "None",
+                "url": "https://www.malaysia.gov.my/public/cms/topic/33/"
+            },
+            {
+                "name": "Malaysian Cabinet",
+                "topic_id": 24,
+                "json_url": "https://www.malaysia.gov.my/public/cms/service/article_topic/en/?topic_id=24",
+                "icon": "icon",
+                "description": "-",
+                "url": "https://www.malaysia.gov.my/public/cms/topic/24/"
+            },
+            {
+                "name": "Malaysia Information",
+                "topic_id": 47,
+                "json_url": "https://www.malaysia.gov.my/public/cms/service/article_topic/en/?topic_id=47",
+                "icon": "None",
+                "description": "None",
+                "url": "https://www.malaysia.gov.my/public/cms/topic/47/"
+            }
+        ]
+    },
+    {
+        "title": "MyInitiative",
+        "data": [
+            {
+                "name": "Whole of Government",
+                "topic_id": 68,
+                "json_url": "https://www.malaysia.gov.my/public/cms/service/article_topic/en/?topic_id=68",
+                "icon": "fa",
+                "description": "Government agencies working together across borders to share the organization's portfolio of actions to resolve specific issues. The Malaysian government has developed a range of policies, standards and guidelines in reference to government agencies in implementing the Whole of Government.",
+                "url": "https://www.malaysia.gov.my/public/cms/topic/68/"
+            },
+            {
+                "name": "Open Government Data",
+                "topic_id": 36,
+                "json_url": "https://www.malaysia.gov.my/public/cms/service/article_topic/en/?topic_id=36",
+                "icon": "fa",
+                "description": "Helps Increase Involvement In Making decision effectiveness, resource saving and Opens Opportunities For Innovation",
+                "url": "https://www.malaysia.gov.my/public/cms/topic/36/"
+            },
+            {
+                "name": "e-Participation",
+                "topic_id": 71,
+                "json_url": "https://www.malaysia.gov.my/public/cms/service/article_topic/en/?topic_id=71",
+                "icon": "da",
+                "description": "The process involves citizens through ICT in policy-making, decision-making and service design.",
+                "url": "https://www.malaysia.gov.my/public/cms/topic/71/"
+            },
+            {
+                "name": "Multi-channel Services Delivery  & Expanding Usage",
+                "topic_id": 69,
+                "json_url": "https://www.malaysia.gov.my/public/cms/service/article_topic/en/?topic_id=69",
+                "icon": "fa",
+                "description": "Utilizing digital technology to provide advanced electronic service and car service for the benefit of the people.",
+                "url": "https://www.malaysia.gov.my/public/cms/topic/69/"
+            },
+            {
+                "name": "Bridging the Digital Divide & Vulnerable Groups",
+                "topic_id": 70,
+                "json_url": "https://www.malaysia.gov.my/public/cms/service/article_topic/en/?topic_id=70",
+                "icon": "fa",
+                "description": "Integrated approach to reducing the digital gap and the trend of online services to vulnerable groups (vulnerable groups).",
+                "url": "https://www.malaysia.gov.my/public/cms/topic/70/"
+            },
+            {
+                "name": "National Competitiveness",
+                "topic_id": 75,
+                "json_url": "https://www.malaysia.gov.my/public/cms/service/article_topic/en/?topic_id=75",
+                "icon": "None",
+                "description": "National Competitiveness",
+                "url": "https://www.malaysia.gov.my/public/cms/topic/75/"
+            }
+        ]
+    }
+]
