@@ -15,37 +15,30 @@ export class FirsttimeloginComponent implements OnInit {
   getUserData: any;
   userId:string;
   rndNo:any;
+  id:any;
+  private sub: any;
 
   constructor(
     private protectedservice: ProtectedService,
     private activatedRoute: ActivatedRoute
-  ) { 
-
-    this.activatedRoute.params.subscribe(params => {
-      let randNo = params['rnd'];
-      console.log(randNo); // Print the parameter to the console. 
-  });
-  }
+  ) { }
  @Input() loginfirst:boolean;
 
   ngOnInit() {
+    this.rndNo =  location.search.split('rnd=')[1];
+
+   console.log(this.rndNo);
+  
   }
 
 
   getConfirmation(){
 
-
-    this.queryString = window.location.search;
-    this.varArray = this.queryString.split("?");
-    for (let i=0;i<this.varArray.length;i++) {
-      this.rndNo = this.varArray[i].split("=");
-        //parameter-value pair
-    }
-    
+    console.log(this.rndNo);
 
     //this.rndNo = this.activatedRoute.snapshot.queryParams["rnd"];
     //this.rndNo = location.search.split('rnd=')[1]
-    this.protectedservice.completeTran(this.rndNo[1])
+    this.protectedservice.completeTran(this.rndNo)
         .subscribe(
             userData => {
                 this.getUserData = userData.userTypeList;
