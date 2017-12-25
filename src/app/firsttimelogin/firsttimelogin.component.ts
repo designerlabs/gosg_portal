@@ -28,7 +28,7 @@ export class FirsttimeloginComponent implements OnInit {
 
 
     let queryString = window.location.search;
-    let varArray = queryString.split("&");
+    let varArray = queryString.split("?");
     for (let i=0;i<varArray.length;i++) {
       this.rndNo = varArray[i].split("=");
         //parameter-value pair
