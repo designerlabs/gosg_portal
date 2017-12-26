@@ -1,0 +1,25 @@
+[
+    {
+        "count": 1,
+        "next": null,
+        "previous": null,
+        "title": "SHARE YOUR THOUGHT WITH US",
+        "idpolls_question": 2,
+        "question": "Is the new portal helpful for you?",
+        "comment":"Your recommendation for improvement",
+        "answer": [
+            {
+                 "answer": "Yes",
+                 "result": "140/485"
+            },
+            {
+                "answer": "Sometimes",
+                "result": "276/485"
+            },
+            {
+                 "answer": "No",
+                 "result": "69/485"
+            }
+        ]
+    }
+]

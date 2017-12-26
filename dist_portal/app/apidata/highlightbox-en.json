@@ -1,0 +1,38 @@
+[{
+        "url_image": "https://www.malaysia.gov.my/public/static/images/bg-popular-article.jpg",
+        "label": "Hot Topic",
+        "content": [{
+                "article_label": "Application for Year 1 2018/2019",
+                "article_id": 396,
+                 "topic_label": "Primary Education",
+                "topic_id": 9,
+                "sub_topic_id": 118
+            },
+            {
+                "article_label": "Eligibility requirements for BR1M",
+                "article_id": 280,
+                 "topic_label": "BR1M",
+                "topic_id": 32,
+                "sub_topic_id": 164
+            },
+            {
+                "article_label": "Managing Stress at Work",
+                "article_id": 436,
+                "topic_label": "Workplace Issues",
+                "topic_id": 53,
+                "sub_topic_id": 260
+            }
+        ]
+    },
+    {
+        "url_image": "https://www.malaysia.gov.my/public/static/images/e-penyertaan.jpg",
+        "label": "E-PARTICIPATION",
+        "content": "e - Participation is a medium that is provided to engage citizens in policy - making,decision - making and design services through the use of information and communication technologies.",
+        "button": "CLICK HERE"
+    },
+    {
+        "url_image": "https://www.malaysia.gov.my/public/static/images/status-permohonan.jpg",
+        "label": "CHECK APPLICATION STATUS",
+        "content": "Please insert application number to review status: Application Number REVIEW "
+    }
+]

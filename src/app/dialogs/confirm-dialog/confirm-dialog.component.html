@@ -7,7 +7,7 @@ tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="tru
  </div>
  <div class="modal-body">
      <span *ngIf="isRegister">
-            <div style="font-weight:bold;">{{email}}</div> {{content | translate}}
+            <div style="font-weight:bold;"> {{content | translate}}</div>
      </span>
      <span *ngIf="!isRegister">{{content | translate}} </span>
    <div class="modal-body text-center">

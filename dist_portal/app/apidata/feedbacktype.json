@@ -1,0 +1,18 @@
+[
+	{
+		"feedbackId": 1,
+		"feedbackType": "Aduan"
+	},
+	{
+		"feedbackId": 2,
+        "feedbackType": "Pertanyaan"
+    },
+	{
+		"feedbackId": 3,
+        "feedbackType": "Cadangan"
+    },
+	{
+		"feedbackId": 2,
+        "feedbackType": "Lain-lain"
+    }
+]

@@ -1,0 +1,45 @@
+[
+	{
+		"url_image": "https://gosgstg.malaysia.gov.my/public/static/images/bg-popular-article.jpg",
+		"label": "Hot Topic",
+		"content": [
+			{
+				"article_label": "Community Development Program",
+				"article_id": 247
+			},
+			{
+				"topic_label": "Community & Social",
+				"topic_id": 32,
+				"sub_topic_id": 187
+			},
+			{
+				"article_label": "Eligibility requirements for BR1M",
+				"article_id": 280
+			},
+			{
+				"topic_label": "BR1M",
+				"topic_id": 32,
+				"sub_topic_id": 164
+			},
+			{
+				"article_label": "Managing Stress at Work",
+				"article_id": 436
+			},
+			{
+				"topic_label": "Workplace Issues",
+				"topic_id": 53,
+				"sub_topic_id": 260
+			}
+		]
+	},
+	{
+		"url_image": "https://www.malaysia.gov.my/public/static/images/e-penyertaan.jpg",
+		"label": "E-PARTICIPATION",
+		"content": "<div class=\"lifeEventBox-description font-size-s\" style=\"font-family: Roboto;\">e-Participation is a medium that is provided to engage citizens in policy-making, decision-making and design services through the use of information and communication technologies.<div class=\"form-group clkherebtn\" style=\"margin-top: 10px;\"><a class=\"btn btn-secondary btn-block font-size-s warna_bg\" style=\"font-family: Roboto; background-color: #00bdbb;\" href=\"epenyertaan/\"> CLICK HERE </a></div></div>"
+	},
+	{
+		"url_image": "https://www.malaysia.gov.my/public/static/images/status-permohonan.jpg",
+		"label": "CHECK APPLICATION STATUS",
+		"content": "<div class=\"lifeEventBox-description\"><p class=\"font-size-s\" style=\"font-family: Roboto;\">Please insert <strong>application number</strong> to review status :</p><form class=\"search-permohonan\"><div class=\"form-group\"><label class=\"sr-only\" for=\"noPermohonanCarian\">Application Number</label> <input id=\"noPermohonanCarian\" class=\"form-control\" type=\"text\" /></div><div class=\"form-group\"><button class=\"btn btn-secondary btn-block font-size-s warna_bg\" style=\"font-family: Roboto; background-color: #00bdbb;\"> REVIEW </button></div></form><div class=\"errMessage font-size-s\" style=\"display: none; padding: 2px; font-family: Roboto;\">&nbsp;</div></div>"
+	}
+]

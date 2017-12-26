@@ -1,0 +1,78 @@
+[
+    {
+        "count": 1,
+        "next": null,
+        "previous": null,
+        "results": [
+            {
+                "title": "Perniagaan",
+                "description": "<p><img src=\"https://www.malaysia.gov.my/public/cms/media/uploads/1_perniagaan.jpg\" alt=\"\" width=\"100%\" /></p><p>Akses mudah kepada maklumat dan perkhidmatan untuk perniagaan</p>",
+                "content": [
+                    {
+                        "label": "Merancang Perniagaan",
+                        "description": "<p>Merancang memulakan perniagaan? Mulakan dengan mendapatkan maklumat yang anda perlu.</p>",
+                        "id": 17,
+                        "json_url": "https://www.malaysia.gov.my/public/cms/service/article_sub_topic/ms/?topic_id=2&sub_topic_id=15&format=json"
+                    },
+                    {
+                        "label": "Memulakan Perniagaan",
+                        "description": "<p>Dapatkan maklumat yang diperlukan untuk memulakan Perniagaan Keempunyaan Tunggal, Syarikat Sendirian Berhad dan Perkongsian</p>",
+                        "id": 16,
+                        "json_url": "https://www.malaysia.gov.my/public/cms/service/article_sub_topic/ms/?topic_id=2&sub_topic_id=14&format=json"
+                    },
+                    {
+                        "label": "Mengendalikan Perniagaan",
+                        "description": "<p>Perniagaan adalah kerja mustahak. Kami sedia membantu dengan panduan dan rancangan</p>",
+                        "id": 120317,
+                        "json_url": "https://www.malaysia.gov.my/public/cms/service/article_sub_topic/ms/?topic_id=2&sub_topic_id=240&format=json"
+                    },
+                    {
+                        "label": "Mengembangkan Perniagaan",
+                        "description": "<p>Perniagaan yang berjaya selalunya berkembang dimasa depan</p>",
+                        "id": 12,
+                        "json_url": "https://www.malaysia.gov.my/public/cms/service/article_sub_topic/ms/?topic_id=2&sub_topic_id=12&format=json"
+                    },
+                    {
+                        "label": "Menamatkan Perniagaan",
+                        "description": "<p>Pastikan anda merancang awal bila bercadang menamatkan perniagaan sama ada untuk sebab profesional atau sendirian</p>",
+                        "id": 11,
+                        "json_url": "https://www.malaysia.gov.my/public/cms/service/article_sub_topic/ms/?topic_id=2&sub_topic_id=11&format=json"
+                    }
+                ],
+                "menu_left": [
+                    {
+                        "label": "Merancang Perniagaan",
+                        "id": 17,
+                        "json_url": "https://www.malaysia.gov.my/public/cms/service/article_sub_topic/ms/?topic_id=2&sub_topic_id=15&format=json"
+                    },
+                    {
+                        "label": "Memulakan Perniagaan",
+                        "id": 16,
+                        "json_url": "https://www.malaysia.gov.my/public/cms/service/article_sub_topic/ms/?topic_id=2&sub_topic_id=14&format=json"
+                    },
+                    {
+                        "label": "Mengendalikan Perniagaan",
+                        "id": 120317,
+                        "json_url": "https://www.malaysia.gov.my/public/cms/service/article_sub_topic/ms/?topic_id=2&sub_topic_id=240&format=json"
+                    },
+                    {
+                        "label": "Mengembangkan Perniagaan",
+                        "id": 12,
+                        "json_url": "https://www.malaysia.gov.my/public/cms/service/article_sub_topic/ms/?topic_id=2&sub_topic_id=12&format=json"
+                    },
+                    {
+                        "label": "Menamatkan Perniagaan",
+                        "id": 11,
+                        "json_url": "https://www.malaysia.gov.my/public/cms/service/article_sub_topic/ms/?topic_id=2&sub_topic_id=11&format=json"
+                    }
+                ],
+                "menu_right": [],
+                "html_head_title": "Perniagaan | Business | MyGOV - Portal Rasmi Kerajaan Malaysia",
+                "html_head_meta_keyword": "perniagaan, business",
+                "html_head_meta_description": "Akses mudah kepada maklumat dan perkhidmatan untuk perniagaan"
+            }
+        ]
+    }
+
+]
+

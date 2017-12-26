@@ -436,14 +436,14 @@ export class RegisterComponent implements OnInit, AfterViewInit {
             // );
               //  this.alertService.success('Registration successful', true);
               //this.openDialog();
-                this.getEmail = data.email;
+                //this.getEmail = data.email;
                 // this.infoModal.show();
                 if(this.lang == 'ms'){
                     this.UAPLang = 'my';
                 }else{
                     this.UAPLang = 'en';
                 }
-
+                debugger;
                 if(data.user.tag){
                     window.location.href = this.uapstagingUrl+this.UAPLang+"&tag="+data.user.tag;
                 }else{
