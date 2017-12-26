@@ -8,7 +8,7 @@ let registrationUrl = uapURL+'registration/';
 
 // common service
 let portalBaseURL = 'http://localhost:8020/portal/';
-let protectedBaseURL = uapURL+'/service-protected/';
+let protectedBaseURL = uapURL+'service-protected/';
 let commonURL = uapURL+'service/';
 
 // backend service
