@@ -5,11 +5,34 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
+import { TranslateService, LangChangeEvent } from "@ngx-translate/core";
 
 @Injectable()
 export class ProtectedService {
+  lang = this.lang;
+  langId = this.langId;
+  constructor(private http: Http, @Inject(APP_CONFIG) private config: AppConfig, private translate: TranslateService) {
 
-  constructor(private http: Http, @Inject(APP_CONFIG) private config: AppConfig) { }
+    translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      
+                  const myLang = translate.currentLang;
+      
+                  if (myLang == 'en') {
+                      translate.get('HOME').subscribe((res: any) => {
+                          this.lang = 'en';
+                          this.langId = 1;
+                      });
+      
+                  }
+                  if (myLang == 'ms') {
+                      translate.get('HOME').subscribe((res: any) => {
+                          this.lang = 'ms';
+                          this.langId = 2;
+                      });
+                  }
+            
+              });
+   }
 
   private profileUrl: string = this.config.urlProfile;
   private mailUrl: string = this.config.urlMail;
@@ -35,7 +58,7 @@ export class ProtectedService {
 
   getUser(){
     return this.http
-    .get(this.getUserUrl).map((response: Response) => response.json())
+    .get(this.getUserUrl+"?langId="+localStorage.getItem('langID')).map((response: Response) => response.json())
     .catch(this.handleError);
   } 
 

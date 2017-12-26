@@ -66,11 +66,10 @@ export class PortalService {
   // }
   
   create(user) {
-    
     if(!this.langId){
       this.langId = 1;
     }
-    return this.http.post(this.registerUrl+"?languageId="+this.langId, user)
+    return this.http.post(this.registerUrl+"?languageId="+localStorage.getItem('langID'), user)
       .map((response: Response) => response.json())
       .catch(this.handleError);
       
