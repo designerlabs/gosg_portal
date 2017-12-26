@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Input, Inject } from '@angular/core';
 import { ProtectedService } from "../services/protected.service";
 import { Http, Headers, RequestOptions } from '@angular/http';
 import {Router, ActivatedRoute, Params} from '@angular/router';
-
+import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 @Component({
   selector: 'gosg-firsttimelogin',
   templateUrl: './firsttimelogin.component.html',
@@ -21,7 +21,8 @@ export class FirsttimeloginComponent implements OnInit {
   constructor(
     private protectedservice: ProtectedService,
     private activatedRoute: ActivatedRoute,
-    private router:Router
+    private router:Router,
+    @Inject(APP_CONFIG) private config: AppConfig
   ) { }
  @Input() loginfirst:boolean;
 
@@ -37,12 +38,19 @@ export class FirsttimeloginComponent implements OnInit {
     console.log(rnd);
   }
 
+  
+
   getConfirmation(){
-    this.protectedservice.completeTran(this.rndNo)
+
+    let body = {
+      "REMOTE_USER": this.rndNo
+    };
+
+    this.protectedservice.completeTran(this.rndNo, body)
         .subscribe(
             userData => {
               this.getUserData = userData.userTypeList;
-              this.router.navigate(['/dashboard']);
+              window.location.href = this.config.urlDashboard;
             },Error => {
               //this.toastr.error(this.translate.instant('feedback.err.subject'), '');
             }

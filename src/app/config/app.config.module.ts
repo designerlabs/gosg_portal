@@ -48,6 +48,7 @@ export class AppConfig {
     urlUapStaging:string;
     urlComplete: string;
     urlGetUser: string;
+    urlDashboard: string;
     
 }
 
@@ -76,6 +77,7 @@ export const APP_DI_CONFIG: AppConfig = {
     urlFeedback: commonURL+'feedback',
     urlProfile: baseURL+'profile',
     portalURL: portalBaseURL,
+    urlDashboard: uapURL + 'portal-protected/dashboard/',
     protectedURL:protectedBaseURL,
     urlIntSearch: searchServiceURL + 'query/0/internal',
     urlUserType:uapURL+'service/user/type/lang/',
