@@ -31,6 +31,13 @@ export class ProtectedService {
 
   } 
 
+
+  getUser(){
+    return this.http
+    .get('./service-protected/user/detail').map((response: Response) => response.json())
+    .catch(this.handleError);
+  } 
+
   updateProfile(user) {
     return this.http
     .put(this.profileUrl+"/"+user.user_id, user).map((response: Response) => response.json())

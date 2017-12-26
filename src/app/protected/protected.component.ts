@@ -56,7 +56,7 @@ export class ProtectedComponent implements OnInit {
 
   logout(){
     localStorage.removeItem('usrID');
-    location.href='http://localhost:8020/login';
+    location.href='./uapsso/Logout';
   }
 
   getUserRegData(name){
@@ -85,7 +85,16 @@ export class ProtectedComponent implements OnInit {
     console.log(this.isProfile);
   }
 
-
+  getUserData(){
+    this.protectedService.getUser().subscribe(
+      data => {
+        debugger;
+      },
+    error => {
+      debugger;
+    }
+    )
+  }
   getProfileData(data){
     this.protectedService.getProfile(data).subscribe(
       data =>{
@@ -97,11 +106,11 @@ export class ProtectedComponent implements OnInit {
         localStorage.setItem('usrID', data[0].id);
         //this.getUserRegData(data[0].fullname);
         }else{
-          location.href = 'http://localhost:8020/login';
+          location.href = './portal/index';
         }
       },
       error => {
-        location.href = 'http://localhost:8020/login';
+        location.href = './portal/index';
       });
   }
 
