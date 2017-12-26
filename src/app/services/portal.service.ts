@@ -12,6 +12,7 @@ import { TranslateService, LangChangeEvent } from "@ngx-translate/core";
 export class PortalService {
   lang = this.lang;
   langId = this.langId;
+
   constructor(private http: Http, @Inject(APP_CONFIG) private config: AppConfig,  private translate: TranslateService,) {
 
     translate.onLangChange.subscribe((event: LangChangeEvent) => {
@@ -65,6 +66,10 @@ export class PortalService {
   // }
   
   create(user) {
+    
+    if(!this.langId){
+      this.langId = 1;
+    }
     return this.http.post(this.registerUrl+"?languageId="+this.langId, user)
       .map((response: Response) => response.json())
       .catch(this.handleError);

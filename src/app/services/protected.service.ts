@@ -13,6 +13,7 @@ export class ProtectedService {
 
   private profileUrl: string = this.config.urlProfile;
   private mailUrl: string = this.config.urlMail;
+  private completeUrl: string = this.config.urlComplete;
   // private serviceUrl = 'https://jsonplaceholder.typicode.com/users';
   private inboxUrl = this.mailUrl+"pages/";
 
@@ -52,6 +53,12 @@ export class ProtectedService {
   deleteMails(msgId){
     return this.http
     .delete(this.mailUrl+"delete/selected?id="+msgId).map((response: Response) => response.json())
+    .catch(this.handleError);
+  }
+
+  completeTran(rnd){
+    return this.http
+    .get(this.completeUrl+"?randomNo="+rnd).map((response: Response) => response.json())
     .catch(this.handleError);
   }
 
