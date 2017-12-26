@@ -1,5 +1,6 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Inject } from '@angular/core';
 import { TopnavService } from '../header/topnav/topnav.service';
+import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 import * as $ from 'jquery';
 
 let num = 0;
@@ -23,7 +24,7 @@ export class SidenavprotectedComponent implements OnInit {
 
   @Output()
   openSlide:EventEmitter<string> = new EventEmitter();
-  constructor( private topnavservice: TopnavService) { }
+  constructor( private topnavservice: TopnavService, @Inject(APP_CONFIG) private config: AppConfig) { }
 
   ngOnInit() {
     this.colors = this.topnavservice.getColors();
@@ -42,6 +43,10 @@ export class SidenavprotectedComponent implements OnInit {
     localStorage.setItem('themeIndex', index);
     this.selectedRow = index;
     this.firstItem = firstItem;
+  }
+
+  logout(){
+    location.href=this.config.urlUAP+'uapsso/Logout';
   }
 
   ngAfterViewInit() {

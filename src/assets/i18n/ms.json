@@ -9,7 +9,8 @@
       "faq": "Soalan Lazim",
       "manual": "Manual",
       "aboutus": "Mengenai Kami",
-      "onlineservice": "Perkhidmatan Digital"
+      "onlineservice": "Perkhidmatan Digital",
+      "logout":"Log keluar"
     },
     "search": {
       "label": "Bagaimana Kami Boleh Membantu Anda?"

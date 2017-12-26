@@ -9,7 +9,8 @@
       "faq": "FAQ",
       "manual": "User Manual",
       "aboutus": "About Us",
-      "onlineservice": "Digital Services"
+      "onlineservice": "Digital Services",
+      "logout":"Logout"
     },
     "search": {
       "label": "How Can We Help You?"
