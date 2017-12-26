@@ -135,6 +135,7 @@ export class ProtectedComponent implements OnInit {
     let getUserCountry = localStorage.getItem('userNationality');
     console.log(this.userId);
     console.log(getUserCountry)
+    this.getUserData();
     this.activatedRoute.queryParamMap.skip(1).subscribe((queryParams: Params) => {
       this.userId = queryParams.get('id');
       if(this.userId){
