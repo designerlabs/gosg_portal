@@ -206,8 +206,8 @@
 </app-confirm-dialog>
 
 <app-confirm-dialog  #infoModal 
-  [title]="'common.icon.success'" 
+  [title]="'common.icon.warn'" 
   [content]="'register.popupmsg.isexist'"
-  [state]="'common.state.warn'"
-  (resetMethod)="resetMethod($event)">
+  [state]="'common.state.warn'" 
+  [isRegister]="'register'">
 </app-confirm-dialog>
