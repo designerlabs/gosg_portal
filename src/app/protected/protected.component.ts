@@ -91,7 +91,8 @@ export class ProtectedComponent implements OnInit {
         debugger;
       },
     error => {
-        location.href = this.config.urlUAP+'portal/index';
+        debugger;
+        //location.href = this.config.urlUAP+'portal/index';
       }
     )
   }
@@ -106,11 +107,13 @@ export class ProtectedComponent implements OnInit {
         localStorage.setItem('usrID', data[0].id);
         //this.getUserRegData(data[0].fullname);
         }else{
-          location.href = this.config.urlUAP+'portal/index';
+          debugger;
+          //location.href = this.config.urlUAP+'portal/index';
         }
       },
       error => {
-        location.href = this.config.urlUAP+'portal/index';
+        debugger;
+        //location.href = this.config.urlUAP+'portal/index';
       });
   }
 
