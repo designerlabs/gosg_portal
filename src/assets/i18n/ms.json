@@ -79,8 +79,10 @@
     },
     "popupmsg":{
       "success_content1":"Thank you for your registration. Check your ",
-      "success_content2":"for your account activation"
+      "success_content2":"for your account activation",
+      "isexist":"Email Pengguna Sudah Wujud"
     }
+    
   },
   "profile":{
     "msg":{

@@ -443,7 +443,13 @@ export class RegisterComponent implements OnInit, AfterViewInit {
                 }else{
                     this.UAPLang = 'en';
                 }
-                window.location.href = this.uapstagingUrl+this.UAPLang+"&tag="+data.user.tag;
+
+                if(data.user.tag){
+                    window.location.href = this.uapstagingUrl+this.UAPLang+"&tag="+data.user.tag;
+                }else{
+                    this.infoModal.show();
+                }
+                
             },
             error => {
                 alert('error');
