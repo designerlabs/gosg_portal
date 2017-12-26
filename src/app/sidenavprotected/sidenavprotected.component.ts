@@ -45,7 +45,8 @@ export class SidenavprotectedComponent implements OnInit {
     this.firstItem = firstItem;
   }
 
-  logout(){
+  logout(e){
+    e.preventDefault();
     location.href=this.config.urlUAP+'uapsso/Logout';
   }
 
