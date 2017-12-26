@@ -49,6 +49,7 @@ export class AppConfig {
     urlComplete: string;
     urlGetUser: string;
     urlDashboard: string;
+    urlUAP: string;
     
 }
 
@@ -82,6 +83,7 @@ export const APP_DI_CONFIG: AppConfig = {
     urlIntSearch: searchServiceURL + 'query/0/internal',
     urlUserType:uapURL+'service/user/type/lang/',
     urlMail: commonURL+'inbox/',
+    urlUAP: uapURL,
     urlComplete: protectedBaseURL+'user/complete/registration',
     urlGetUser: protectedBaseURL+'user/detail',
     urlAppAgency: './app/apidata/appAgency',

@@ -56,7 +56,7 @@ export class ProtectedComponent implements OnInit {
 
   logout(){
     localStorage.removeItem('usrID');
-    location.href='./uapsso/Logout';
+    location.href=this.config.urlUAP+'uapsso/Logout';
   }
 
   getUserRegData(name){
@@ -91,8 +91,8 @@ export class ProtectedComponent implements OnInit {
         debugger;
       },
     error => {
-      debugger;
-    }
+        location.href = this.config.urlUAP+'portal/index';
+      }
     )
   }
   getProfileData(data){
@@ -106,11 +106,11 @@ export class ProtectedComponent implements OnInit {
         localStorage.setItem('usrID', data[0].id);
         //this.getUserRegData(data[0].fullname);
         }else{
-          location.href = './portal/index';
+          location.href = this.config.urlUAP+'portal/index';
         }
       },
       error => {
-        location.href = './portal/index';
+        location.href = this.config.urlUAP+'portal/index';
       });
   }
 
