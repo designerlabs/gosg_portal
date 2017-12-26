@@ -33,7 +33,7 @@
           <a routerLinkActive="topactive" [routerLink]="['aboutus']"><i class="fa fa-globe" aria-hidden="true"></i> {{ 'home.menu.aboutus' | translate }}</a>
         </li>
         <li>
-            <a href="" (click)="logout()"><i class="fa fa-sign-out" aria-hidden="true"></i> {{ 'home.menu.logout' | translate }}</a>
+            <a [routerLink]="" (click)="logout()"><i class="fa fa-sign-out" aria-hidden="true"></i> {{ 'home.menu.logout' | translate }}</a>
         </li>
         <li>
             <mat-expansion-panel>
