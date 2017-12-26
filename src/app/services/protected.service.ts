@@ -14,6 +14,7 @@ export class ProtectedService {
   private profileUrl: string = this.config.urlProfile;
   private mailUrl: string = this.config.urlMail;
   private completeUrl: string = this.config.urlComplete;
+  private getUserUrl: string = this.config.urlGetUser;
   // private serviceUrl = 'https://jsonplaceholder.typicode.com/users';
   private inboxUrl = this.mailUrl+"pages/";
 
@@ -34,7 +35,7 @@ export class ProtectedService {
 
   getUser(){
     return this.http
-    .get('./service-protected/user/detail').map((response: Response) => response.json())
+    .get(this.getUserUrl).map((response: Response) => response.json())
     .catch(this.handleError);
   } 
 
