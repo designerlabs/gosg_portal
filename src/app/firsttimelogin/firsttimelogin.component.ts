@@ -20,15 +20,14 @@ export class FirsttimeloginComponent implements OnInit {
 
   constructor(
     private protectedservice: ProtectedService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router:Router
   ) { }
  @Input() loginfirst:boolean;
 
   ngOnInit() {
     this.rndNo =  location.search.split('rnd=')[1];
-
-   console.log(this.rndNo);
-  
+    console.log(this.rndNo);
   }
 
   getRnd(){
@@ -39,18 +38,12 @@ export class FirsttimeloginComponent implements OnInit {
   }
 
   getConfirmation(){
-
-    console.log(this.rndNo);
-
-    //this.rndNo = this.activatedRoute.snapshot.queryParams["rnd"];
-    //this.rndNo = location.search.split('rnd=')[1]
     this.protectedservice.completeTran(this.rndNo)
         .subscribe(
             userData => {
-                this.getUserData = userData.userTypeList;
-                debugger;
+              this.getUserData = userData.userTypeList;
+              this.router.navigate(['/dashboard']);
             },Error => {
-              debugger;  
               //this.toastr.error(this.translate.instant('feedback.err.subject'), '');
             }
         );
