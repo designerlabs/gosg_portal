@@ -88,7 +88,7 @@ export class ProtectedComponent implements OnInit {
   getUserData(){
     this.protectedService.getUser().subscribe(
       data => {
-        debugger;
+        this.getUserName = data.user.fullName
       },
     error => {
         debugger;
