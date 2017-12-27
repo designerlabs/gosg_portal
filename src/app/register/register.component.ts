@@ -453,7 +453,6 @@ export class RegisterComponent implements OnInit, AfterViewInit {
                 
             },
             error => {
-                alert('error');
                 this.toastr.error(this.translate.instant('common.err.servicedown'), '');
                 //this.alertService.error(error);
                 //this.loading = false;
