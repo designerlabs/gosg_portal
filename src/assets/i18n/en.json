@@ -218,7 +218,7 @@
       "home":"Home"
     },
     "err":{
-      "servicedown": "Server is down"
+      "servicedown": "Sorry, Server is down"
     },
     "icon":{
       "success":"fa fa-check",

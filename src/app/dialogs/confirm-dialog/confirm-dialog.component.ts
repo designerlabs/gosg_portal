@@ -22,6 +22,7 @@ export class ConfirmDialogComponent {
     @Input() state?:string;
     @Input() email?:string;
     @Input() isRegister?:string;
+    @Input() isErrMsg?:string;
     @Input() isReset?:string;
     @Input() mailId?:string;
     @Output()
