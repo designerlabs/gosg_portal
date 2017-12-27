@@ -38,6 +38,7 @@ declare var System: any;
 })
 
 export class RegisterComponent implements OnInit, AfterViewInit {
+    msg: string;
     getEmail: any;
     content: any;
     message: string;
@@ -446,6 +447,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
                 if(!!data.user){
                     window.location.href = this.uapstagingUrl+this.UAPLang+"&tag="+data.user.tag;
                 }else{
+                    this.msg = "super";
                     this.infoModal.show();
                 }
                 
