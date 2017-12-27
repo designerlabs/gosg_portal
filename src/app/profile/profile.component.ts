@@ -384,7 +384,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         this.genderData = resGenderData
       },
       Error => {
-       this.toastr.error(this.translate.instant('Server is down!'), '');            
+       this.toastr.error(this.translate.instant('common.err.servicedown'), '');            
      });
   }
   
@@ -394,7 +394,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
             this.countries = resCountryData;
           },
           Error => {
-            this.toastr.error(this.translate.instant('Server is down!'), '');            
+            this.toastr.error(this.translate.instant('common.err.servicedown'), '');            
           });
   }
 
@@ -404,7 +404,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
           this.countryName = resCountryData;
         },
         Error => {
-         this.toastr.error(this.translate.instant('Server is down!'), '');            
+         this.toastr.error(this.translate.instant('common.err.servicedown'), '');            
        });
   }
   
@@ -420,7 +420,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
           }
         },
         Error => {
-         this.toastr.error(this.translate.instant('Server is down!'), '');            
+         this.toastr.error(this.translate.instant('common.err.servicedown'), '');            
        });
   }
 
@@ -431,7 +431,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         this.getPerCityData = resCityData;
       },
       Error => {
-       this.toastr.error(this.translate.instant('Server is down!'), '');            
+       this.toastr.error(this.translate.instant('common.err.servicedown'), '');            
      });
     }
   }
@@ -443,7 +443,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         this.getCorrsCityData = resCityData;
       },
       Error => {
-       this.toastr.error(this.translate.instant('Server is down!'), '');            
+       this.toastr.error(this.translate.instant('common.err.servicedown'), '');            
      });
     }
   }
@@ -458,7 +458,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         this.getStateData = resStateData;
       },
       Error => {
-       this.toastr.error(this.translate.instant('Server is down!'), '');            
+       this.toastr.error(this.translate.instant('common.err.servicedown'), '');            
      });
   }
 
@@ -468,7 +468,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       this.getReligionData = religionData
     },
     Error => {
-     this.toastr.error(this.translate.instant('Server is down!'), '');            
+     this.toastr.error(this.translate.instant('common.err.servicedown'), '');            
    });
   }
 
@@ -478,7 +478,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         this.getRaceData = raceData
       },
       Error => {
-       this.toastr.error(this.translate.instant('Server is down!'), '');            
+       this.toastr.error(this.translate.instant('common.err.servicedown'), '');            
      });
   }
   

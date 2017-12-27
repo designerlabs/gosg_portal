@@ -180,7 +180,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
                 userData => {
                     this.getUserData = userData.userTypeList
                 },Error => {
-                    this.toastr.error(this.translate.instant('feedback.err.subject'), '');
+                    this.toastr.error(this.translate.instant('common.err.servicedown'), '');
                 }
             );
     }
@@ -454,6 +454,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
             },
             error => {
                 alert('error');
+                this.toastr.error(this.translate.instant('common.err.servicedown'), '');
                 //this.alertService.error(error);
                 //this.loading = false;
             });

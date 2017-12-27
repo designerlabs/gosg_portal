@@ -13,7 +13,7 @@ tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="tru
     <span *ngIf="isErrMsg">
       <div style="font-weight:bold;"> {{content | translate}}</div>
     </span>
-    <span *ngIf="!isRegister">{{content | translate}} </span>
+    <span *ngIf="!isErrMsg">{{content | translate}} </span>
     <div class="modal-body text-center">
      <button  *ngIf="isRegister" type="button" class="btn btn-success" (click)="hide()"><i class="fa fa-check"></i> {{'common.buttons.ok' | translate}}</button>
      <button  *ngIf="isErrMsg" type="button" class="btn btn-success" (click)="hide()"><i class="fa fa-check"></i> {{'common.buttons.ok' | translate}}</button>
