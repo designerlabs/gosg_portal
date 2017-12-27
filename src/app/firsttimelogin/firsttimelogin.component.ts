@@ -46,7 +46,7 @@ export class FirsttimeloginComponent implements OnInit {
       "REMOTE_USER": this.rndNo
     };
 
-    this.protectedservice.completeTran(this.rndNo, body)
+    this.protectedservice.completeTran(this.rndNo)
         .subscribe(
             userData => {
               this.getUserData = userData.userTypeList;

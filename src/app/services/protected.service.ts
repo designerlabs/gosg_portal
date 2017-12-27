@@ -87,9 +87,9 @@ export class ProtectedService {
     .catch(this.handleError);
   }
 
-  completeTran(rnd, header){
+  completeTran(rnd){
     return this.http
-    .put(this.completeUrl+"?randomNo="+rnd+"&langId="+localStorage.getItem('langID'), header).map((response: Response) => response.json())
+    .put(this.completeUrl+"?randomNo="+rnd+"&langId="+localStorage.getItem('langID'),'').map((response: Response) => response.json())
     .catch(this.handleError);
   }
 
