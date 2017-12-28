@@ -6,4 +6,4 @@ cache:
 
 test_gosg:
   script:
-    - npm install
+    - ng -v
