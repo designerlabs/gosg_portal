@@ -4,6 +4,6 @@ cache:
   paths:
     - node_modules/
 
-test_gosg:
+test_gosg_v1:
   script:
     - ng -v
