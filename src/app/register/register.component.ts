@@ -402,7 +402,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         
         if(formValues.country){
             body.country.countryId = formValues.country;
-            body.userType.userTypeId = formValues.userTypeId;
+            body.userType.userTypeId = this.citizenValue;
             body.identificationNo = formValues.passport;
             body.email = formValues.emelf;
             body.phoneNo = formValues.telefon;
@@ -411,7 +411,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
 
         }else{
             body.country.countryId = 152;
-            body.userType.userTypeId = formValues.userTypeId;
+            body.userType.userTypeId = this.citizenValue;
             body.identificationNo = formValues.kad_pengenalan;
             body.email = formValues.emel;
             body.phoneNo = formValues.telefon;
@@ -450,6 +450,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
                     this.UAPLang = 'en';
                 }
                 if(!!data.user){
+                    debugger;
                     window.location.href = this.uapstagingUrl+this.UAPLang+"&tag="+data.user.tag;
                 }else{
                     this.errMsg = data.statusDesc;
