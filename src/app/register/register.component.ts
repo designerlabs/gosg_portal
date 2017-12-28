@@ -131,6 +131,13 @@ export class RegisterComponent implements OnInit, AfterViewInit {
                 private toastr: ToastrService,
                 private modalService: BsModalService
             ) {
+
+                this.router.events
+                .subscribe((event) => {
+                    if (event instanceof NavigationEvent) {
+                    localStorage.setItem('previousUrl', event.uri);
+                  }
+                });
                 this.lang = translate.currentLang;
                 this.languageId = 2;
                 this.registration_Form = fb.group({
