@@ -31,15 +31,6 @@ export class FirsttimeloginComponent implements OnInit {
     console.log(this.rndNo);
   }
 
-  getRnd(){
-    let url_string = location.href;
-    let url = new URL(url_string);
-    let rnd = url.searchParams.get("rnd");
-    console.log(rnd);
-  }
-
-  
-
   getConfirmation(){
 
     let body = {
@@ -50,7 +41,6 @@ export class FirsttimeloginComponent implements OnInit {
         .subscribe(
             userData => {
               this.getUserData = userData.userTypeList;
-              debugger;
               window.location.href = this.config.urlDashboard;
             },Error => {
               //this.toastr.error(this.translate.instant('feedback.err.subject'), '');

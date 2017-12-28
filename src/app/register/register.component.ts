@@ -38,6 +38,7 @@ declare var System: any;
 })
 
 export class RegisterComponent implements OnInit, AfterViewInit {
+    refUrl: string;
     errMsg: string;
     getEmail: any;
     content: any;
@@ -131,13 +132,6 @@ export class RegisterComponent implements OnInit, AfterViewInit {
                 private toastr: ToastrService,
                 private modalService: BsModalService
             ) {
-
-                this.router.events
-                .subscribe((event) => {
-                    if (event instanceof NavigationEvent) {
-                    localStorage.setItem('previousUrl', event.uri);
-                  }
-                });
                 this.lang = translate.currentLang;
                 this.languageId = 2;
                 this.registration_Form = fb.group({
@@ -202,6 +196,10 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     private uapstagingUrl: string = this.config.urlUapStaging;
     
     ngOnInit() {
+
+        this.refUrl =  location.search.split('refUrl=')[1];
+        console.log(this.refUrl);
+
         this.getUserType();
         this.maskCitizen = this.validateService.getMask().telephone;
         this.maskForeigner = this.validateService.getMask().telephonef;
@@ -369,42 +367,42 @@ export class RegisterComponent implements OnInit, AfterViewInit {
 
         
 
-        let profileBody = {
-            "date_joined": null,
-            "fullname": null,
-            "ic_number": null,
-            "dob": null,
-            "gender": null,
-            "email": null,
-            "race": null,
-            "religion": null,
-            "corresponding_address1": null,
-            "corresponding_address2": null,
-            "corresponding_address3": null,
-            "corresponding_postcode":null,
-            "corresponding_city":null,
-            "corresponding_state":null,
-            "corresponding_country":null,
-            "corresponding_home_phone":null,
-            "mobile_phone":null,
-            "permanent_address1":null,
-            "permanent_address2":null,
-            "permanent_address3":null,
-            "permanent_postcode":null,
-            "permanent_city":null,
-            "permanent_state":null,
-            "permanent_country":null,
-            "permanent_home_phone":null,
-            "dateTime": null,
-            "lang": null,
-            "citizenType":null,
-            "user_id": null
-        };
+        // let profileBody = {
+        //     "date_joined": null,
+        //     "fullname": null,
+        //     "ic_number": null,
+        //     "dob": null,
+        //     "gender": null,
+        //     "email": null,
+        //     "race": null,
+        //     "religion": null,
+        //     "corresponding_address1": null,
+        //     "corresponding_address2": null,
+        //     "corresponding_address3": null,
+        //     "corresponding_postcode":null,
+        //     "corresponding_city":null,
+        //     "corresponding_state":null,
+        //     "corresponding_country":null,
+        //     "corresponding_home_phone":null,
+        //     "mobile_phone":null,
+        //     "permanent_address1":null,
+        //     "permanent_address2":null,
+        //     "permanent_address3":null,
+        //     "permanent_postcode":null,
+        //     "permanent_city":null,
+        //     "permanent_state":null,
+        //     "permanent_country":null,
+        //     "permanent_home_phone":null,
+        //     "dateTime": null,
+        //     "lang": null,
+        //     "citizenType":null,
+        //     "user_id": null
+        // };
 
         
         if(formValues.country){
             body.country.countryId = formValues.country;
-            body.userType.userTypeId = 2;
+            body.userType.userTypeId = formValues.userTypeId;
             body.identificationNo = formValues.passport;
             body.email = formValues.emelf;
             body.phoneNo = formValues.telefon;
@@ -413,7 +411,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
 
         }else{
             body.country.countryId = 152;
-            body.userType.userTypeId = 1;
+            body.userType.userTypeId = formValues.userTypeId;
             body.identificationNo = formValues.kad_pengenalan;
             body.email = formValues.emel;
             body.phoneNo = formValues.telefon;
@@ -423,15 +421,15 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         this.portalservice.create(body)
         .subscribe(
             data => {
-            profileBody.user_id = data.id;
-            profileBody.ic_number = data.identificationCardNo;
-            profileBody.fullname = data.fullName;
-            profileBody.email = data.email;
-            profileBody.mobile_phone = data.telephoneNo;
-            profileBody.corresponding_country = data.country;
-            profileBody.permanent_country = data.country;
+            // profileBody.user_id = data.id;
+            // profileBody.ic_number = data.identificationCardNo;
+            // profileBody.fullname = data.fullName;
+            // profileBody.email = data.email;
+            // profileBody.mobile_phone = data.telephoneNo;
+            // profileBody.corresponding_country = data.country;
+            // profileBody.permanent_country = data.country;
 
-            profileBody.date_joined =  Date.now();
+            // profileBody.date_joined =  Date.now();
             
             // this.portalservice.createProfile(profileBody)
             // .subscribe(
