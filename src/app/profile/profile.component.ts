@@ -145,7 +145,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.maskPostcode = this.validateService.getMask().postcode;
     this.maskDateFormat = this.validateService.getMask().dateFormat;
     
-    this.getUserProfile()
+    this.getUserData()
     this.getCountry();
     this.dob = new FormControl()
     this.gender = new FormControl()
@@ -201,6 +201,25 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
     this.profileForm.disable();
   }
+
+  getUserData(){
+    this.protectedService.getUser().subscribe(
+      data => {
+        if(data.user){
+          this.fullname = data.user.fullName;
+          debugger;
+        }else{
+          
+        }
+        
+      },
+    error => {
+        debugger;
+        //location.href = this.config.urlUAP+'portal/index';
+      }
+    )
+  }
+
   
   getUserProfile(){
     let getUsrID = localStorage.getItem('usrID');
