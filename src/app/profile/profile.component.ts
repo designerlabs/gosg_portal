@@ -22,6 +22,7 @@ import { forEach } from '@angular/router/src/utils/collection';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit, AfterViewInit {
+  userTypeId: any;
   selectedCountry: any;
   selectedCity: any;
   selectedState: any;
@@ -207,7 +208,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       data => {
         if(data.user){
           this.fullname = data.user.fullName;
-          debugger;
+          this.userTypeId = data.user.userType.userTypeId;
         }else{
           
         }
