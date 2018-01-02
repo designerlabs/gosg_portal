@@ -405,7 +405,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
             body.userType.userTypeId = this.citizenValue;
             body.identificationNo = formValues.passport;
             body.email = formValues.emelf;
-            body.phoneNo = formValues.telefon;
+            body.phoneNo = formValues.telefonf;
             body.fullName = formValues.nama_penuhf;
            
 
