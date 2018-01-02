@@ -75,6 +75,15 @@ export class PortalService {
       
   }
 
+  createForAgency(user, url) {
+    if(!this.langId){
+      this.langId = 1;
+    }
+    return this.http.post(this.registerUrl+"/agency?forwardUrl="+url+"&languageId="+localStorage.getItem('langID'), user)
+      .map((response: Response) => response.json())
+      .catch(this.handleError);
+  }
+
   login(name){
     return this.http.get(this.registerUrl+"/?fullName="+name)
       .map((response: Response) => response.json())

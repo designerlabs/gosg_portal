@@ -418,50 +418,54 @@ export class RegisterComponent implements OnInit, AfterViewInit {
             body.fullName = formValues.nama_penuh;
         };
 
-        this.portalservice.create(body)
-        .subscribe(
-            data => {
-            // profileBody.user_id = data.id;
-            // profileBody.ic_number = data.identificationCardNo;
-            // profileBody.fullname = data.fullName;
-            // profileBody.email = data.email;
-            // profileBody.mobile_phone = data.telephoneNo;
-            // profileBody.corresponding_country = data.country;
-            // profileBody.permanent_country = data.country;
 
-            // profileBody.date_joined =  Date.now();
+        if(this.refUrl){
+            this.portalservice.createForAgency(body,this.refUrl)
+            .subscribe(
+                data => {
+                    if(this.lang == 'ms'){
+                        this.UAPLang = 'my';
+                    }else{
+                        this.UAPLang = 'en';
+                    }
+                    if(!!data.user){
+                        window.location.href = this.uapstagingUrl+this.UAPLang+"&tag="+data.user.tag;
+                    }else{
+                        this.errMsg = data.statusDesc;
+                        this.infoModal.show();
+                    }
+                    
+                },
+                error => {
+                    this.toastr.error(this.translate.instant('common.err.servicedown'), '');
+                });
+        }else{
             
-            // this.portalservice.createProfile(profileBody)
-            // .subscribe(
-            //     data => {
-            //         console.log(data);
-            //     },
-            //     error => {
-            //         console.log('error');            
-            //     }
-            // );
-              //  this.alertService.success('Registration successful', true);
-              //this.openDialog();
-                //this.getEmail = data.email;
-                // this.infoModal.show();
-                if(this.lang == 'ms'){
-                    this.UAPLang = 'my';
-                }else{
-                    this.UAPLang = 'en';
-                }
-                if(!!data.user){
-                    window.location.href = this.uapstagingUrl+this.UAPLang+"&tag="+data.user.tag;
-                }else{
-                    this.errMsg = data.statusDesc;
-                    this.infoModal.show();
-                }
-                
-            },
-            error => {
-                this.toastr.error(this.translate.instant('common.err.servicedown'), '');
-                //this.alertService.error(error);
-                //this.loading = false;
-            });
+            this.portalservice.create(body)
+            .subscribe(
+                data => {
+                    if(this.lang == 'ms'){
+                        this.UAPLang = 'my';
+                    }else{
+                        this.UAPLang = 'en';
+                    }
+                    if(!!data.user){
+                        window.location.href = this.uapstagingUrl+this.UAPLang+"&tag="+data.user.tag;
+                    }else{
+                        this.errMsg = data.statusDesc;
+                        this.infoModal.show();
+                    }
+                    
+                },
+                error => {
+                    this.toastr.error(this.translate.instant('common.err.servicedown'), '');
+                    //this.alertService.error(error);
+                    //this.loading = false;
+                });
+
+        }
+
+        
     
     }
 
