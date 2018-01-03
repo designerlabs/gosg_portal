@@ -420,7 +420,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
 
 
         if(this.refUrl){
-            this.portalservice.createForAgency(body,this.refUrl)
+            this.portalservice.createForAgency(body,unescape(this.refUrl))
             .subscribe(
                 data => {
                     if(this.lang == 'ms'){
