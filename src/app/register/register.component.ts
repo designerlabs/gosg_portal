@@ -19,7 +19,7 @@ import { ToastrService } from "ngx-toastr";
 import { ModalDirective, BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 declare var System: any;
-
+declare function unescape(s:string): string;
 @Component({
     selector: 'app-register',
     templateUrl: './register.component.html',
@@ -198,7 +198,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     ngOnInit() {
 
         this.refUrl =  location.search.split('refUrl=')[1];
-        console.log(this.refUrl);
+        console.log(unescape(this.refUrl));
 
         this.getUserType();
         this.maskCitizen = this.validateService.getMask().telephone;
@@ -440,7 +440,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
                     this.toastr.error(this.translate.instant('common.err.servicedown'), '');
                 });
         }else{
-            
+
             this.portalservice.create(body)
             .subscribe(
                 data => {

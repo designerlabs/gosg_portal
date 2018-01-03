@@ -47,8 +47,8 @@
                 <div class="staticLabel font-size-m boldText" for="nationality">{{countryName?.country.countryName}}</div>
               </div>
               <div class="form-group col-md-4">
-                <label *ngIf="!userTypeId == 6 || !userTypeId == 2" class="font-size-s" for="icnumber">{{'profile.label.icnumber' | translate}}</label>
-                <label *ngIf="userTypeId == 6 || userTypeId == 2" class="font-size-s" for="icnumber">{{'profile.label.passport' | translate}}</label>
+                <label *ngIf="userTypeId == 1 || !userTypeId == 5" class="font-size-s" for="icnumber">{{'profile.label.icnumber' | translate}}</label>
+                <label *ngIf="userTypeId == 2 || userTypeId == 6" class="font-size-s" for="icnumber">{{'profile.label.passport' | translate}}</label>
                 <div class="staticLabel font-size-m boldText" for="icnumber">{{ idno }}</div>
               </div>
             </div>
