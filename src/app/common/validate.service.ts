@@ -18,7 +18,7 @@ export class ValidateService {
 
 	getPattern(min?, max?){
 		return {
-			'name':'^[a-zA-Z@&*()-+/\' ]{'+min+','+max+'}$',
+			'name':'^[a-zA-Z@.&*()-+/\' ]{'+min+','+max+'}$',
 			'passport':'^[a-zA-Z0-9]{'+min+','+max+'}$',
 			'numberOnly': '^[0-9]{'+min+','+max+'}$',
 			'alphaOnly':'^[a-zA-Z]{'+min+','+max+'}$',
