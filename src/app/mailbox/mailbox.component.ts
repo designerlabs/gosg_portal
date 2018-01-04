@@ -83,7 +83,7 @@ export class MailboxComponent implements OnInit {
     if(event.checked){
       this.mailboxId.push(event.source.value);
     }else{
-      var index = this.mailboxId.indexOf(event.source.value);
+      let index = this.mailboxId.indexOf(event.source.value);
       this.mailboxId.splice(index, 1);
     }
     return false;
