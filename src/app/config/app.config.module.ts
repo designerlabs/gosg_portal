@@ -82,7 +82,7 @@ export const APP_DI_CONFIG: AppConfig = {
     protectedURL:protectedBaseURL,
     urlIntSearch: searchServiceURL + 'query/0/internal',
     urlUserType:uapURL+'service/user/type/lang/',
-    urlMail: commonURL+'inbox/',
+    urlMail: protectedBaseURL+'inbox/',
     urlUAP: uapURL,
     urlComplete: protectedBaseURL+'user/complete/registration',
     urlGetUser: protectedBaseURL+'user/detail',

@@ -71,6 +71,7 @@ export class PortalService {
     }
     return this.http.post(this.registerUrl+"?languageId="+localStorage.getItem('langID'), user)
       .map((response: Response) => response.json())
+      .retry(5)
       .catch(this.handleError);
       
   }
@@ -81,12 +82,14 @@ export class PortalService {
     }
     return this.http.post(this.registerUrl+"/agency?forwardUrl="+url+"&languageId="+localStorage.getItem('langID'), user)
       .map((response: Response) => response.json())
+      .retry(5)
       .catch(this.handleError);
   }
 
   login(name){
     return this.http.get(this.registerUrl+"/?fullName="+name)
       .map((response: Response) => response.json())
+      .retry(5)
       .catch(this.handleError);
   } 
   
@@ -95,18 +98,21 @@ export class PortalService {
     let options = new RequestOptions({ headers: headers });
     return this.http.post(this.feedbackUrl, data, options)
       .map((response:Response) => response.json())
+      .retry(5)
       .catch(this.handleError);
   }
 
   feedbacksubject(data){
     return this.http.get(this.fbsubjectUrl + data)
       .map((response: Response) => response.json().feedbackSubjectList)
+      .retry(5)
       .catch(this.handleError);
   }
 
   feedbacktype(data){
     return this.http.get(this.feedbacktypeUrl + data)
       .map((response: Response ) => response.json().feedbackTypeList)
+      .retry(5)
       .catch(this.handleError);
   }
 
@@ -114,12 +120,14 @@ export class PortalService {
   createProfile(user) {
     return this.http.post(this.profileUrl, user)
       .map((response: Response) => response.json())
+      .retry(5)
       .catch(this.handleError);
   }
 
   getUserType(data){
     return this.http.get(this.usertypeUrl + data)
     .map((response: Response) => response.json())
+    .retry(5)
     .catch(this.handleError);
   }
 

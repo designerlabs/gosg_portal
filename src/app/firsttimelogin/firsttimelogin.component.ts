@@ -41,6 +41,7 @@ export class FirsttimeloginComponent implements OnInit {
         .subscribe(
             userData => {
               this.getUserData = userData.userTypeList;
+              debugger;
               window.location.href = this.config.urlDashboard;
             },Error => {
               //this.toastr.error(this.translate.instant('feedback.err.subject'), '');

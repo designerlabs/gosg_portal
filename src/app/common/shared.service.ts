@@ -26,6 +26,7 @@ export class SharedService {
     //  console.log(this.countryUrl);
     return this.http.get(this.countryUrl)
       .map((response: Response) => response.json().countryList)
+      .retry(5)
       .catch(this.handleError);
 
   }
@@ -34,6 +35,7 @@ export class SharedService {
     //  console.log(this.countryUrl);
     return this.http.get(this.stateUrl)
       .map((response: Response) => response.json().stateList)
+      .retry(5)
       .catch(this.handleError);
 
   }
@@ -41,6 +43,7 @@ export class SharedService {
   getCountrybyCode(code): Observable<any[]> {
     return this.http.get(this.countryUrl + '/code/' + code)
       .map((response: Response) => response.json())
+      .retry(5)
       .catch(this.handleError);
 
   }
@@ -48,6 +51,7 @@ export class SharedService {
   getCitiesbyState(code): Observable<any[]> {
     return this.http.get(this.cityUrl + code)
       .map((response: Response) => response.json().cityList)
+      .retry(5)
       .catch(this.handleError);
 
   }
@@ -56,6 +60,7 @@ export class SharedService {
   getReligion(langId): Observable<any[]> {
     return this.http.get(this.religionUrl + langId)
       .map((response: Response) => response.json().religionList)
+      .retry(5)
       .catch(this.handleError);
 
   }
@@ -63,6 +68,7 @@ export class SharedService {
   getRace(langId): Observable<any[]> {
     return this.http.get(this.raceUrl + langId)
       .map((response: Response) => response.json().raceList)
+      .retry(5)
       .catch(this.handleError);
 
   }
@@ -70,6 +76,7 @@ export class SharedService {
   getGender(langId): Observable<any[]> {
     return this.http.get(this.genderUrl + langId)
       .map((response: Response) => response.json().genderList)
+      .retry(5)
       .catch(this.handleError);
   }
 
