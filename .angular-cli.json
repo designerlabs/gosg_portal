@@ -7,7 +7,7 @@
     { 
       "name":"gosg-portal",
       "root": "src",
-      "outDir": "dist_portal",
+      "outDir": "portal",
       "assets": [
         "assets",
         "favicon-16x16.png",
@@ -39,7 +39,7 @@
     { 
       "name":"gosg-protected",
       "root": "src",
-      "outDir": "dist_protected",
+      "outDir": "portal-protected",
       "assets": [
         "assets",
         "favicon-16x16.png",
