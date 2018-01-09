@@ -232,6 +232,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         console.log(data);
 
         this.fullname = data[0].fullname;
+        this.nationality = data[0].country.countryName;
         this.countryCode = data[0].permanent_country;
 
         this.isMalaysian(this.countryCode);
@@ -239,7 +240,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         this.getCountryByCode(getUsrNationality);
         this.isUserRegLocal(getUsrNationality);
         
-        this.idno = data[0].ic_number;
+        this.idno = data[0].pid;
         if(this.isRegLocal == true) 
           this.maxDate = this.getMinDobDate(this.idno);
         
