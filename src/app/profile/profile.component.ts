@@ -230,7 +230,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.protectedService.getProfile(getUsrID).subscribe(
       data => {
         console.log(data);
-
+        debugger;
         this.fullname = data[0].fullname;
         this.nationality = data[0].country.countryName;
         this.countryCode = data[0].permanent_country;

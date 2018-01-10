@@ -34,10 +34,11 @@ export class ProtectedService {
               });
    }
 
-  private profileUrl: string = this.config.urlProfile;
+  private profileUrl: string = this.config.urlGetProfile;
   private mailUrl: string = this.config.urlMail;
   private completeUrl: string = this.config.urlComplete;
   private getUserUrl: string = this.config.urlGetUser;
+
   // private serviceUrl = 'https://jsonplaceholder.typicode.com/users';
   private inboxUrl = this.mailUrl+"pages/";
 
@@ -50,7 +51,7 @@ export class ProtectedService {
   
   getProfile(userId){
     return this.http
-    .get(this.profileUrl+"/?user_id="+userId).map((response: Response) => response.json())
+    .get(this.profileUrl+"/"+userId+"?langId="+localStorage.getItem('langID')).map((response: Response) => response.json())
     .catch(this.handleError);
 
   } 
