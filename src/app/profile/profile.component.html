@@ -59,7 +59,7 @@
                     <div style="color:#333;" class="font-size-m boldText">{{dt | date:'dd/MM/yyyy' }}</div>
                     <input placeholder="{{ dateFormatExample }}" style="display: block" matInput formControlName="dob" #dob [matDatepicker]="dob" (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)" [max]="maxDate"  />
                     <mat-datepicker-toggle matSuffix [for]="dob" style="color:#333;"></mat-datepicker-toggle>
-                    <mat-datepicker [disabled]="initial" #dob></mat-datepicker>
+                    <mat-datepicker #dob></mat-datepicker>
                   </mat-form-field>
                   
               </div>
