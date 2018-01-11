@@ -32,7 +32,7 @@ export class NavRouterActivator implements CanActivate {
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean{
 
 
-       const eventExists =  !!this.navService.triggerArticle(this.lang, +route.params['id']);
+       const eventExists =  !!this.navService.triggerArticle('', this.lang, +route.params['id']);
 
        if (!eventExists)
             this.router.navigate(['/404']);

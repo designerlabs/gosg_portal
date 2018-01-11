@@ -46,8 +46,9 @@ export class ArticleComponent implements OnInit {
 
             translate.get('HOME').subscribe((res: any) => {
                 this.lang = 'ms';
+                this.moduleName = this.router.url.split('/')[1];
                 this.topicID = parseInt(this.router.url.split('/')[2]);
-                this.navService.triggerArticle(this.lang, this.topicID);
+                this.navService.triggerArticle(this.moduleName, this.lang, this.topicID);
             });
         }
     });
@@ -59,9 +60,9 @@ export class ArticleComponent implements OnInit {
 
   ngOnInit() {
         this.articleData = this.articleService.getArticle();
-
+        this.moduleName = this.router.url.split('/')[1];
         this.topicID = parseInt(this.router.url.split('/')[2]);
-        this.navService.triggerArticle(this.lang, this.topicID);
+        this.navService.triggerArticle(this.moduleName, this.lang, this.topicID);
   }
 
    getTheme(){
@@ -82,10 +83,10 @@ export class ArticleComponent implements OnInit {
 
 
 
-    triggerArticle(lang, topicID){
+    triggerArticle(moduleName, lang, topicID){
         this.route.paramMap
         .switchMap((params: ParamMap) =>
-        this.navService.getArticleData(lang, topicID))
+        this.navService.getArticleData(moduleName, lang, topicID))
         .subscribe(resSliderData => {
             this.articles = resSliderData;
             this.breadcrumb = this.breadcrumbService.getBreadcrumb();
