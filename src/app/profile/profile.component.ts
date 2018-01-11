@@ -231,9 +231,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
               this.regdate = data.user.registrationDate;
               this.mobileNo = data.user.mobilePhoneNo;
               debugger;
-              this.profileForm.get('gender').setValue(data.user.gender.gender);
+              this.profileForm.get('gender').setValue(data.user.gender.genderId);
               // this.profileForm.get('dob').setValue(data[0].dob);
-              this.profileForm.get('race').setValue(data[0].race);
+              this.profileForm.get('race').setValue(data.user.race.raceId);
               this.profileForm.get('religion').setValue(data[0].religion);
               this.profileForm.get('perAddress1').setValue(data[0].permanent_address1);
               this.profileForm.get('perAddress2').setValue(data[0].permanent_address2);
