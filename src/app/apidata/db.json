@@ -3136,7 +3136,31 @@
     }
   ],
   "Menu": [],
-  "poll": [],
+  "poll": [
+    {
+      "questionId": 1,
+      "questionTitle": "Is the new portal helpful for you?",
+      "lang": 1,
+      "answer": [
+        {
+          "id": 1,
+          "answer": "Yes",
+          "result": "140/485"
+        },
+        {
+          "id": 2,
+          "answer": "Sometimes",
+          "result": "276/485"
+        },
+        {
+          "id": 3,
+          "answer": "No",
+          "result": "69/485"
+        }
+      ],
+      "id": 1
+    }
+  ],
   "pollResult": [
     {
       "questionId": 1,
