@@ -147,7 +147,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.maskDateFormat = this.validateService.getMask().dateFormat;
     
     this.getUserData();
-    this.getUserProfile();
+    // this.getUserProfile();
     this.getCountry();
     this.dob = new FormControl()
     this.gender = new FormControl()
@@ -210,6 +210,92 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         if(data.user){
           // this.fullname = data.user.fullName;
           this.userTypeId = data.user.userType.userTypeId;
+
+          this.protectedService.getProfile( this.userTypeId).subscribe(
+            data => {
+              console.log(data);
+              debugger;
+              this.fullname = data[0].fullname;
+              this.nationality = data[0].country.countryName;
+              this.countryCode = data[0].permanent_country;
+      
+              this.isMalaysian(this.countryCode);
+              this.isMalaysianChk(data[0].corresponding_country);
+              // this.getCountryByCode(getUsrNationality);
+              // this.isUserRegLocal(getUsrNationality);
+              
+              this.idno = data[0].pid;
+              if(this.isRegLocal == true) 
+                this.maxDate = this.getMinDobDate(this.idno);
+              
+              this.regemail = data[0].email;
+              this.regdate = data[0].date_joined;
+              this.mobileNo = data[0].mobile_phone;
+              this.profileForm.get('gender').setValue(data[0].gender);
+              // this.profileForm.get('dob').setValue(data[0].dob);
+              this.profileForm.get('race').setValue(data[0].race);
+              this.profileForm.get('religion').setValue(data[0].religion);
+              this.profileForm.get('perAddress1').setValue(data[0].permanent_address1);
+              this.profileForm.get('perAddress2').setValue(data[0].permanent_address2);
+              this.profileForm.get('perAddress3').setValue(data[0].permanent_address3);
+              this.selectedCountry = data[0].permanent_country;
+              this.profileForm.get('perCountry').setValue(this.selectedCountry);
+              this.profileForm.get('perPostcode').setValue(data[0].permanent_postcode);
+              this.profileForm.get('perTelephone').setValue(data[0].permanent_home_phone);
+      
+              if(data[0].permanent_state != null) {
+                if(data[0].permanent_country == "MY") {
+                  this.getCitiesByStateP(data[0].permanent_state);
+      
+                  this.profileForm.get('perStateLocal').setValue(data[0].permanent_state);
+                  this.selectedState = this.profileForm.get('perStateLocal').value;
+                  this.profileForm.get('perCityLocal').setValue(data[0].permanent_city); 
+                  this.selectedCity = this.profileForm.get('perCityLocal').value;
+                } else {
+                  this.profileForm.get('perStateNotLocal').setValue(data[0].permanent_state);
+                  this.selectedState = this.profileForm.get('perStateNotLocal').value;
+                  this.profileForm.get('perCityNotLocal').setValue(data[0].permanent_city); 
+                  this.selectedCity = this.profileForm.get('perCityNotLocal').value;
+                }
+              }
+              
+              if(data[0].same_address != true) {
+                this.profileForm.get('corrsAddress1').setValue(data[0].corresponding_address1);
+                this.profileForm.get('corrsAddress2').setValue(data[0].corresponding_address2);
+                this.profileForm.get('corrsAddress3').setValue(data[0].corresponding_address3);
+                this.profileForm.get('corrsCountry').setValue(data[0].corresponding_country);
+                this.profileForm.get('corrsCity').setValue(data[0].corresponding_city);
+      
+                if(this.isCorrsLocal)
+                  this.getCitiesByStateC(data[0].corresponding_state);
+      
+                this.profileForm.get('corrsState').setValue(data[0].corresponding_state);
+                this.profileForm.get('corrsPostcode').setValue(data[0].corresponding_postcode);
+                this.profileForm.get('corrsMobile').setValue(data[0].mobile_phone);
+                this.profileForm.get('corrsTelephone').setValue(data[0].corresponding_home_phone
+                );
+              } else {
+                this.profileForm.get('checkboxValue').setValue(data[0].same_address);
+                this.profileForm.get('corrsTelephone').setValue(data[0].permanent_home_phone);
+                this.profileForm.get('corrsAddress1').setValue(data[0].permanent_address1);
+                this.profileForm.get('corrsAddress2').setValue(data[0].permanent_address2);
+                this.profileForm.get('corrsAddress3').setValue(data[0].permanent_address3);
+                this.profileForm.get('corrsCountry').setValue(data[0].permanent_country);
+                this.profileForm.get('corrsState').setValue(data[0].permanent_state);
+                
+                if(this.isCorrsLocal)
+                  this.getCitiesByStateC(data[0].permanent_state);
+      
+                this.profileForm.get('corrsCity').setValue(data[0].permanent_city);
+                this.profileForm.get('corrsPostcode').setValue(data[0].permanent_postcode);
+                this.profileForm.get('corrsMobile').setValue(data[0].mobile_phone);
+              }
+      
+            },
+            error => {
+              console.log(error)
+            }
+          )
         }else{
           
         }
@@ -224,6 +310,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
   
   getUserProfile(){
+    debugger;
     let getUsrID = localStorage.getItem('usrID');
     let getUsrNationality = localStorage.getItem('userNationality');
     // console.log(getUsrNationality);
