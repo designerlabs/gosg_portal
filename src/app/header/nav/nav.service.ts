@@ -43,6 +43,24 @@ export class NavService {
     getArticleData(moduleName, lang: string, ID: number): Observable<boolean[]> {
 
     if (!isNaN(ID)){
+      if(moduleName == 'announcement'){
+        return this.http.get('http://10.1.17.12:3000/'+moduleName)
+            .take(1)
+            .map((response: Response) => response.json())
+
+            // .catch((error:any) =>
+            // Observable.throw(error.json().error || 'Server error')
+            // );
+            .catch(
+      (err: Response, caught: Observable<any[]>) => {
+          if (err !== undefined) {
+            this.router.navigate(['/404']);
+            return Observable.throw('The Web server (running the Web site) is currently unable to handle the HTTP request due to a temporary overloading or maintenance of the server.');
+          }
+          return Observable.throw(caught); // <-----
+        }
+      );
+      }
       debugger;
       return this.http.get(this.articleUrl + '-' + ID + '-' + lang + '.json')
             .take(1)

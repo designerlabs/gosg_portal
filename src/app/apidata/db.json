@@ -3264,6 +3264,81 @@
     },
     {
       "id": 4
+    },
+    {
+      "id": 5,
+      "count": 5,
+      "next": null,
+      "previous": null,
+      "results": [
+        {
+          "title": "Sorotan Terkini",
+          "description": "",
+          "content": [
+            {
+              "label": "Tender",
+              "description": "<p>Paparan Tender Kerajaan.</p>",
+              "id": 21,
+              "json_url": "https://www.malaysia.gov.my/public/cms/service/article_sub_topic/en/?topic_id=2&sub_topic_id=15&format=json"
+            },
+            {
+              "label": "Promosi",
+              "description": "<p>Memaparkan promosi terkini agensi-agensi kerajaan.</p>",
+              "id": 22,
+              "json_url": "https://www.malaysia.gov.my/public/cms/service/article_sub_topic/en/?topic_id=2&sub_topic_id=14&format=json"
+            },
+            {
+              "label": "Pengumuman",
+              "description": "<p>Memaparkan pengumuman penting agensi-agensi kerajaan yang terkini</p>",
+              "id": 23,
+              "json_url": "https://www.malaysia.gov.my/public/cms/service/article_sub_topic/en/?topic_id=2&sub_topic_id=12&format=json."
+            },
+            {
+              "label": "Berita",
+              "description": "<p>Memaparkan berita terkini agensi-agensi kerajaan.</p>",
+              "id": 24,
+              "json_url": "https://www.malaysia.gov.my/public/cms/service/article_sub_topic/en/?topic_id=2&sub_topic_id=12&format=json"
+            },
+            {
+              "label": "Kerjaya",
+              "description": "<p>Memaparkan senarai jawatan kosong terkini agensi-agensi kerajaan.</p>",
+              "id": 25,
+              "json_url": "https://www.malaysia.gov.my/public/cms/service/article_sub_topic/en/?topic_id=2&sub_topic_id=11&format=json"
+            }
+          ],
+          "menu_left": [
+            {
+              "label": "Tender",
+              "id": 21,
+              "json_url": "https://www.malaysia.gov.my/public/cms/service/article_sub_topic/en/?topic_id=2&sub_topic_id=15&format=json"
+            },
+            {
+              "label": "Promosi",
+              "id": 22,
+              "json_url": "https://www.malaysia.gov.my/public/cms/service/article_sub_topic/en/?topic_id=2&sub_topic_id=14&format=json"
+            },
+            {
+              "label": "Pengumuman",
+              "id": 23,
+              "json_url": "https://www.malaysia.gov.my/public/cms/service/article_sub_topic/en/?topic_id=2&sub_topic_id=240&format=json"
+            },
+            {
+              "label": "Berita",
+              "id": 24,
+              "json_url": "https://www.malaysia.gov.my/public/cms/service/article_sub_topic/en/?topic_id=2&sub_topic_id=12&format=json"
+            },
+            {
+              "label": "Kerjaya",
+              "id": 25,
+              "json_url": "https://www.malaysia.gov.my/public/cms/service/article_sub_topic/en/?topic_id=2&sub_topic_id=11&format=json"
+            }
+          ],
+          "menu_right": [],
+          "html_head_title": "Business | Perniagaan | MyGOV - Portal Rasmi Kerajaan Malaysia",
+          "html_head_meta_keyword": "perniagaan, business",
+          "html_head_meta_description": "Simple access to information and services for business."
+        }
+      ]
     }
   ]
 }
