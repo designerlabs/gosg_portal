@@ -120,6 +120,7 @@ export function HttpLoaderFactory(http: Http) {
     MatButtonModule,
     MatCheckboxModule,
     MatFormFieldModule,
+    MatProgressBarModule,
     MatMenuModule,
     MatInputModule, 
     MatSelectModule,

@@ -9,14 +9,17 @@
         "comment":"Your recommendation for improvement",
         "answer": [
             {
+                 "id" : 1,
                  "answer": "Yes",
                  "result": "140/485"
             },
             {
+                "id" : 2,
                 "answer": "Sometimes",
                 "result": "276/485"
             },
             {
+                 "id" : 3,
                  "answer": "No",
                  "result": "69/485"
             }
