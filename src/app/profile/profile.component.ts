@@ -209,10 +209,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       data => {
         if(data.user){
           // this.fullname = data.user.fullName;
-          debugger;
           this.userTypeId = data.user.userType.userTypeId;
 
-          this.protectedService.getProfile( this.userTypeId).subscribe(
+          this.protectedService.getProfile(data.user.pid).subscribe(
             data => {
               console.log(data);
               debugger;
