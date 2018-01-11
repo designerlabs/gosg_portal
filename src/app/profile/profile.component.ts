@@ -214,24 +214,24 @@ export class ProfileComponent implements OnInit, AfterViewInit {
           this.protectedService.getProfile(data.user.pid).subscribe(
             data => {
               console.log(data);
-              debugger;
-              this.fullname = data[0].fullname;
-              this.nationality = data[0].country.countryName;
-              this.countryCode = data[0].permanent_country;
+              this.fullname = data.user.fullName;
+              this.nationality = data.user.country.countryName;
+              this.countryCode = data.user.country.countryCode;
       
               this.isMalaysian(this.countryCode);
-              this.isMalaysianChk(data[0].corresponding_country);
+              this.isMalaysianChk(this.countryCode);
               // this.getCountryByCode(getUsrNationality);
               // this.isUserRegLocal(getUsrNationality);
               
-              this.idno = data[0].pid;
+              this.idno = data.user.pid;
               if(this.isRegLocal == true) 
                 this.maxDate = this.getMinDobDate(this.idno);
               
-              this.regemail = data[0].email;
-              this.regdate = data[0].date_joined;
-              this.mobileNo = data[0].mobile_phone;
-              this.profileForm.get('gender').setValue(data[0].gender);
+              this.regemail = data.user.email;
+              this.regdate = data.user.registrationDate;
+              this.mobileNo = data.user.mobilePhoneNo;
+              debugger;
+              this.profileForm.get('gender').setValue(data.user.gender.gender);
               // this.profileForm.get('dob').setValue(data[0].dob);
               this.profileForm.get('race').setValue(data[0].race);
               this.profileForm.get('religion').setValue(data[0].religion);
