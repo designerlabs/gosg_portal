@@ -69,7 +69,7 @@ export class NavComponent implements OnInit, AfterViewInit {
   handleClickMe(e){
         this.menuClick.emit(e);
         this.menuId = e;
-        this.navService.triggerArticle(this.lang, e);
+        this.navService.triggerArticle('',this.lang, e);
     }
 
   ngAfterViewInit() {
