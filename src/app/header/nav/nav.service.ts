@@ -44,7 +44,7 @@ export class NavService {
 
     if (!isNaN(ID)){
       if(moduleName == 'announcement'){
-        return this.http.get('http://10.1.17.12:3000/'+moduleName+'/'+ID)
+        return this.http.get('http://10.1.17.12:3000/'+moduleName)
             .take(1)
             .map((response: Response) => response.json())
 
