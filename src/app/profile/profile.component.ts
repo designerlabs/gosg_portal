@@ -241,7 +241,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
               this.profileForm.get('perAddress2').setValue(data.user.address.permanentAddress2);
               this.profileForm.get('perAddress3').setValue(data.user.address.permanentAddress3);
               this.selectedCountry = data.user.address.permanentAddressCountry.countryCode;
-              this.profileForm.get('perCountry').setValue(data.user.address.permanentAddressCountry.countryId);
+              this.profileForm.get('perCountry').setValue(data.user.address.permanentAddressCountry.countryCode);
               this.profileForm.get('perPostcode').setValue(data.user.address.permanentAddressPostcode);
               this.profileForm.get('perTelephone').setValue(data.user.address.homePhoneNo);
       
