@@ -215,6 +215,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
             data => {
               console.log(data);
               this.fullname = data.user.fullName;
+              debugger;
               this.nationality = data.user.country.countryName;
               this.countryCode = data.user.country.countryCode;
       
@@ -230,24 +231,24 @@ export class ProfileComponent implements OnInit, AfterViewInit {
               this.regemail = data.user.email;
               this.regdate = data.user.registrationDate;
               this.mobileNo = data.user.mobilePhoneNo;
-              debugger;
-              this.profileForm.get('gender').setValue(data.user.gender.genderId);
+             
+              this.profileForm.get('gender').setValue(data.user.gender.genderCode);
               // this.profileForm.get('dob').setValue(data[0].dob);
-              this.profileForm.get('race').setValue(data.user.race.raceId);
-              this.profileForm.get('religion').setValue(data[0].religion);
-              this.profileForm.get('perAddress1').setValue(data[0].permanent_address1);
-              this.profileForm.get('perAddress2').setValue(data[0].permanent_address2);
-              this.profileForm.get('perAddress3').setValue(data[0].permanent_address3);
-              this.selectedCountry = data[0].permanent_country;
-              this.profileForm.get('perCountry').setValue(this.selectedCountry);
-              this.profileForm.get('perPostcode').setValue(data[0].permanent_postcode);
-              this.profileForm.get('perTelephone').setValue(data[0].permanent_home_phone);
+              this.profileForm.get('race').setValue(data.user.race.raceCode);
+              this.profileForm.get('religion').setValue(data.user.religion.religionCode);
+              this.profileForm.get('perAddress1').setValue(data.user.address.permanentAddress1);
+              this.profileForm.get('perAddress2').setValue(data.user.address.permanentAddress2);
+              this.profileForm.get('perAddress3').setValue(data.user.address.permanentAddress3);
+              this.selectedCountry = data.user.country.countryCode;
+              this.profileForm.get('perCountry').setValue(data.user.address.country.countryId);
+              this.profileForm.get('perPostcode').setValue(data.user.address.postcode);
+              this.profileForm.get('perTelephone').setValue(data.user.address.homePhoneNo);
       
-              if(data[0].permanent_state != null) {
-                if(data[0].permanent_country == "MY") {
-                  this.getCitiesByStateP(data[0].permanent_state);
+              if(data.user.address.state != null) {
+                if(data.user.address.country.countryCode == "MY") {
+                  this.getCitiesByStateP(data.user.address.state.stateId);
       
-                  this.profileForm.get('perStateLocal').setValue(data[0].permanent_state);
+                  this.profileForm.get('perStateLocal').setValue(data.user.address.state);
                   this.selectedState = this.profileForm.get('perStateLocal').value;
                   this.profileForm.get('perCityLocal').setValue(data[0].permanent_city); 
                   this.selectedCity = this.profileForm.get('perCityLocal').value;
