@@ -261,7 +261,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                 }
               }
               
-              // if(data[0].same_address != true) {
+              // if(data.user.same_address != true) {
               //   this.profileForm.get('corrsAddress1').setValue(data[0].corresponding_address1);
               //   this.profileForm.get('corrsAddress2').setValue(data[0].corresponding_address2);
               //   this.profileForm.get('corrsAddress3').setValue(data[0].corresponding_address3);
