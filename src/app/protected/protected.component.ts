@@ -97,6 +97,7 @@ export class ProtectedComponent implements OnInit {
       },
     error => {
         debugger;
+        location.href = this.config.urlUAP +'uapsso/Logout';
         //location.href = this.config.urlUAP+'portal/index';
       }
     )
@@ -113,6 +114,7 @@ export class ProtectedComponent implements OnInit {
         //this.getUserRegData(data[0].fullname);
         }else{
           debugger;
+
           //location.href = this.config.urlUAP+'portal/index';
         }
       },
