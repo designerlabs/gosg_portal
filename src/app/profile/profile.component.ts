@@ -247,7 +247,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       
               if(data.user.address.permanentAddressState != null) {
                 if(data.user.address.permanentAddressCountry.countryCode == "MY") {
-                  this.getCitiesByStateP(data.user.address.permanentAddressState.stateId);
+                  this.getCitiesByStateP(data.user.address.permanentAddressCity.cityId);
       
                   this.profileForm.get('perStateLocal').setValue(data.user.address.permanentAddressState.stateId);
                   this.selectedState = this.profileForm.get('perStateLocal').value;
