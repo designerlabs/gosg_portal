@@ -804,7 +804,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     body.corresponding_home_phone = formValues.corrsTelephone;
     body.mobile_phone = formValues.corrsMobile;
     body.dateTime = new Date().getTime();
-    body.user_id = localStorage.getItem('usrID');
+    body.user_id = this.idno;
     body.lang = localStorage.getItem("langID");
 
     this.checkReqValues();
