@@ -22,6 +22,7 @@ export class PollComponent implements OnInit {
     filter= false;
     private pollUrl: string = this.config.urlPoll;
     showResult = false;
+    latestResult = false;
     value = 50;
 
     // tslint:disable-next-line:max-line-length
@@ -78,6 +79,14 @@ export class PollComponent implements OnInit {
         // debugger;
         this.getAnsData(this.lang);
         this.toastr.success('Recommendation is : ' + this.pollComment + ', Answer is ' + this.pollAnswer.answer);
+        this.showResult = true;
+    }
+    closeResult() {
+        this.latestResult = true;
+        this.showResult = false;
+    }
+    ShowLatest() {
+        this.latestResult = false;
         this.showResult = true;
     }
 

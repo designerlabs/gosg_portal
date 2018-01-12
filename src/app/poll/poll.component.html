@@ -1,10 +1,10 @@
  <div class="container">
-<div class="row poll container" id="div_poll">
+<div class="row poll" id="div_poll">
     <div class="col-md-12">
         <!-- <div id="polls_result_on_submit" style="padding-bottom: 30px;">
         </div> -->
         <!-- Poll Questions and Answers with submit button -->
-        <div class="text-center" id="polls_result_on_submit" *ngIf="!showResult">
+        <div class="text-center" id="polls_result_on_submit" *ngIf="!showResult && !latestResult">
             <h2 class="font-size-l warna_title_color" style="font-family: Roboto; color: rgb(0, 189, 187);" [style.color]="getTheme()"><b>{{'poll.title' | translate}}</b>
                 <span class="customUnderLine warna_border_color" style="border-color: rgb(0, 189, 187);"  [style.border-color]="getTheme()"></span>
             </h2>
@@ -30,24 +30,43 @@
             <div class="row padding">
                 <div id="polls_message" class="col-md-4 col-md-offset-4" style="padding-bottom: 0px; margin-top: -20px; color:red; font-weight: bold;"></div>
                 <div class="col-md-4 col-md-offset-4">
-                    <button id="submit" type="submit" (click)='submitPoll($event)' class="btn btn-secondary btn-md font-size-s warna_bg" style="padding: 10px 20px; font-family: Roboto; background-color: rgb(0, 189, 187);"  [style.background-color]="getTheme()"> {{'home.send' | translate}}</button>
+                    <button mat-raised-button id="submit" (click)='submitPoll($event)' class="font-size-s warna_bg" style="font-family: Roboto; background-color: rgb(0, 189, 187);"  [style.background-color]="getTheme()">{{'home.send' | translate}}</button>
                 </div>
             </div>
         </div>
         <!-- Poll results with %  -->
-        <div class="text-center" id="polls_result" *ngIf="showResult">
+        <div class="text-center" id="polls_result" *ngIf="showResult && !latestResult">
                 <h2 class="font-size-l warna_title_color" style="font-family: Roboto; color: rgb(0, 189, 187);" [style.color]="getTheme()"><b>{{'poll.resultTitle' | translate}}</b>
                     <span class="customUnderLine warna_border_color" style="border-color: rgb(0, 189, 187);"  [style.border-color]="getTheme()"></span>
                 </h2>
+                <span></span>
                 <h4 class="font-size-m warna_font" style="margin-top: 2%; text-align: center; font-family: Roboto; color: rgb(51, 51, 51);">{{pollDataQuestion}}</h4>
-                <section class="example-section" style="padding-left: 200px;width: 75%;">
-                    <div *ngFor="let pollAnswer of pollAnswers">
+                <div style="position:  absolute;top: 27px;right: 5px;" (click)="closeResult()">
+                        <button mat-button color="warn" title="close"><i class="fa fa-close">  Close</i></button>
+                </div>
+                
+                <section class="example-section" style="padding-left: 200px;width: 75%;padding-bottom: 20px;
+                ">
+                    <!-- <div *ngFor="let pollAnswer of pollAnswers">
                             <h4 class="font-size-m warna_font" style="margin-top: 2%; text-align: center; font-family: Roboto; color: rgb(51, 51, 51);">{{pollAnswer.answer}}</h4>
                             <mat-progress-bar class="example-margin" value="10"></mat-progress-bar>
-                    </div>
-                    
+                    </div> -->
+                    <span style="text-align: left; font-family: Roboto; color: rgb(51, 51, 51); display: inherit">Your answer is:</span>
+                    <span class="font-size-m warna_font" style="text-align: left; font-family: Roboto; color: rgb(51, 51, 51); display: inherit">Yes</span>
+                    <mat-progress-bar class="example-margin" value="50"></mat-progress-bar> <span style="text-align: right; font-family: Roboto; color: rgb(51, 51, 51); display: inherit">(2/4) 50%</span>
+                    <span class="font-size-m warna_font" style="text-align: left; font-family: Roboto; color: rgb(51, 51, 51);display: inherit">Sometimes</span>
+                    <mat-progress-bar class="example-margin" value="25"></mat-progress-bar><span style="text-align: right; font-family: Roboto; color: rgb(51, 51, 51); display: inherit">(1/4) 25%</span>
+                    <span class="font-size-m warna_font" style="text-align: left; font-family: Roboto; color: rgb(51, 51, 51);display: inherit">No</span>
+                    <mat-progress-bar class="example-margin" value="25"></mat-progress-bar><span style="text-align: right; font-family: Roboto; color: rgb(51, 51, 51); display: inherit">(1/4) 25%</span>
                   </section>
 
+        </div>
+        <div *ngIf="latestResult && !showResult" style="text-align: center; padding: 15px 0px 15px 0px;">
+                <h2 class="font-size-l" style="font-family: Roboto; color: rgb(51, 51, 51);">WOULD YOU LIKE TO KNOW THE RESULTS OF THE LATEST SURVEY ON THE NEW MYGOV WEB SITE?</h2>
+                <button mat-raised-button (click)="ShowLatest()" style="font-family: Roboto;" [style.background-color]="getTheme()">
+                    <div class="font-size-l" style="background-color: rgb(0, 189, 187);">Yes</div>
+                    <div class="font-size-s">DISPLAY THE LATEST RESULTS</div>
+                </button>
         </div>
     </div>
 </div>
