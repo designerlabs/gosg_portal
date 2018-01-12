@@ -250,6 +250,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       
                   this.profileForm.get('perStateLocal').setValue(data.user.address.state);
                   this.selectedState = this.profileForm.get('perStateLocal').value;
+                  debugger;
                   this.profileForm.get('perCityLocal').setValue(data[0].permanent_city); 
                   this.selectedCity = this.profileForm.get('perCityLocal').value;
                 } else {
