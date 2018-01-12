@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, AfterViewInit, ViewChild, ElementRef } from '@angular/core'
+import { Component, OnInit, Inject, Input, AfterViewInit, ViewChild, ElementRef } from '@angular/core'
 import { FormControl, FormGroup, Validators, FormBuilder  } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { SharedService } from '../common/shared.service';
@@ -15,7 +15,7 @@ import { ToastrService } from "ngx-toastr";
 import { forEach } from '@angular/router/src/utils/collection';
 // import { SlicePipe } from '@angular/common/src/pipes';
 // import { ControlBase } from '../common/controlbase'
- 
+import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 @Component({
   templateUrl: './profile.component.html',
   selector: 'myprofile',
@@ -114,6 +114,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     private elementRef: ElementRef, 
     private activatedRoute: ActivatedRoute, 
     private toastr: ToastrService,
+    @Inject(APP_CONFIG) private config: AppConfig, 
     // private slice: SlicePipe
     ) {
     translate.onLangChange.subscribe((event: LangChangeEvent) => {
@@ -305,6 +306,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       },
     error => {
         debugger;
+        location.href = this.config.urlUAP +'uapsso/Logout';
         //location.href = this.config.urlUAP+'portal/index';
       }
     )
