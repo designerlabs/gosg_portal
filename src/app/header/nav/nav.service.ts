@@ -43,6 +43,7 @@ export class NavService {
     getArticleData(moduleName, lang: string, ID: number): Observable<boolean[]> {
 
     if (!isNaN(ID)){
+      
       return this.http.get(this.articleUrl + '-' + ID + '-' + lang + '.json')
             .take(1)
             .map((response: Response) => response.json())
