@@ -23,7 +23,6 @@ import { SharedModule } from './shared/shared.module';
 import { TextMaskModule, conformToMask } from 'angular2-text-mask';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { ConfirmComponent } from './message/confirm.component';
-import { AnnouncementSubComponent } from './announcement-sub/announcement-sub.component';
 
 // import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule } from "@angular/material";
 
@@ -64,8 +63,7 @@ imports: [
   declarations: [
     AppComponent,
     RegisterComponent,
-    LoginComponent,
-    AnnouncementSubComponent
+    LoginComponent
     
   ],
  

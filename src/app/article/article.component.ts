@@ -63,7 +63,7 @@ export class ArticleComponent implements OnInit {
         this.moduleName = this.router.url.split('/')[1];
         this.topicID = parseInt(this.router.url.split('/')[2]);
         this.navService.triggerArticle(this.moduleName, this.lang, this.topicID);
-  }
+      }
 
    getTheme(){
         return localStorage.getItem('themeColor');
