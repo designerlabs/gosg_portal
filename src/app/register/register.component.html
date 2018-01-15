@@ -51,6 +51,8 @@
                   </mat-error>
                 </mat-form-field>
 
+
+
                 <!-- hintLabel="{{'register.label.name' | translate }}" -->
                 <mat-form-field class="example-full-width font-size-s">
                   <input matInput #name formControlName="nama_penuh" tabindex="2" minlength="2" maxlength="60" placeholder="{{'register.label.nameplh' | translate }}"
@@ -87,6 +89,33 @@
                   </mat-error>
                 </mat-form-field>
               </div>
+
+              <!-- *************************** TR and PR FIELDS ******************** [@myAwesomeAnimation]='state'-->
+              <div *ngIf="isPRTR()" class="animated fadeIn">
+                <mat-form-field class="example-full-width font-size-s">
+                  <mat-select formControlName="country_pr" placeholder="{{'register.label.country' | translate }}" tabindex="1" required>
+                    <mat-option *ngFor="let country of countries" [value]="country.countryId">
+                      {{ country.countryName }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="!validateCtrlChk(country) && citizenFormGrp.controls.country.errors.required">
+                    {{'register.err.country' | translate }}
+                  </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width font-size-s">
+                  <input matInput #psport formControlName="passport_pr" tabindex="2" minlength="6" maxlength="10" placeholder="{{'register.label.passport' | translate }}"
+                    required>
+                  <mat-error *ngIf="!validateCtrlChk(passport) && citizenFormGrp.controls.passport.errors.required">
+                    {{'register.err.passport' | translate }}
+                  </mat-error>
+                  <mat-error *ngIf="!validateCtrlChk(passport) && citizenFormGrp.controls.passport.errors.pattern">
+                    {{'register.pattern.passport' | translate }}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+             
 
               <!-- *************************** NON CITIZEN FIELDS ******************** [@myAwesomeAnimation]='state'-->
               <div *ngIf="!isCitizen()" class="form-group animated fadeIn" [ngClass]="{'error' : !validateCtrlChk(country)}">

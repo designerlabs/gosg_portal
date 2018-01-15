@@ -3165,18 +3165,26 @@
     {
       "questionId": 1,
       "questionTitle": "Test",
-      "answer1": {
-        "desc": "yes",
-        "result": "1/4"
-      },
-      "answer2": {
-        "desc": "no",
-        "result": "2/4"
-      },
-      "answer3": {
-        "desc": "maybe",
-        "result": "1/4"
-      },
+      "answer": [
+        {
+          "id": 1,
+          "answer": "Yes",
+          "result": "2/4",
+          "selans": "true"
+        },
+        {
+          "id": 2,
+          "answer": "Sometimes",
+          "result": "1/4",
+          "selans": "false"
+        },
+        {
+          "id": 3,
+          "answer": "No",
+          "result": "1/4",
+          "selans": "false"
+        }
+      ],
       "id": 1
     }
   ],
