@@ -5,7 +5,7 @@ export let APP_CONFIG = new InjectionToken<AppConfig>('app.config');
 let baseURL = 'http://10.1.17.12:3000/';
 let uapURL = 'https://10.1.71.176/';
 let registrationUrl = uapURL+'registration/';
-let announcementUrl = '10.1.70.148:8081/service/';
+let announcementUrl = 'http://10.1.70.148:8081/service/';
 
 // common service
 let portalBaseURL = 'http://localhost:8020/portal/';

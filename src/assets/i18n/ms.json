@@ -271,6 +271,7 @@
     "recommend" : "Cadangan Penambahbaikan Anda"
   },
   "announcement":{
-    "title":"AAA"
+    "title":"Sorotan Terkini",
+    "description":"Semua Sorotan Terkini"
   }
 }

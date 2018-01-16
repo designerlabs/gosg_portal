@@ -5,6 +5,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { BreadcrumbService } from '../header/breadcrumb/breadcrumb.service';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
+import { SharedService } from '../common/shared.service';
 
 @Component({
   selector: 'gosg-announcement',
@@ -12,7 +13,6 @@ import { APP_CONFIG, AppConfig } from '../config/app.config.module';
   styleUrls: ['./announcement.component.css']
 })
 export class AnnouncementComponent implements OnInit {
-  //lang: string;
 
   moduleName: string;
     
@@ -22,13 +22,14 @@ export class AnnouncementComponent implements OnInit {
   breadcrumb: any;
   isValid: any;
   announcementID = null;
-  announces: any[];
+  announces: any;
   announceData: any;
   
   @Output() langChange = new EventEmitter();
   constructor(public articleService: ArticleService,  private route: ActivatedRoute, 
     private navService: NavService, private translate: TranslateService, private router: Router, 
-    private breadcrumbService: BreadcrumbService, @Inject(APP_CONFIG) private config: AppConfig) {
+    private breadcrumbService: BreadcrumbService, @Inject(APP_CONFIG) private config: AppConfig,
+    private sharedService: SharedService) {
     this.lang = translate.currentLang;
 
         translate.onLangChange.subscribe((event: LangChangeEvent) => {
@@ -41,7 +42,8 @@ export class AnnouncementComponent implements OnInit {
                 this.lang = 'en';
                 this.moduleName = this.router.url.split('/')[1];
                 this.announcementID = parseInt(this.router.url.split('/')[2]);
-               this.navService.triggerAnnouncement(this.moduleName,this.lang, this.announcementID);
+                this.navService.triggerAnnouncement(this.moduleName,this.lang, this.announcementID);
+                this.triggerAnnouncementAll(this.moduleName,this.lang);
             });
 
         }
@@ -52,6 +54,7 @@ export class AnnouncementComponent implements OnInit {
                 this.moduleName = this.router.url.split('/')[1];
                 this.announcementID = parseInt(this.router.url.split('/')[2]);
                 this.navService.triggerAnnouncement(this.moduleName, this.lang, this.announcementID);
+                this.triggerAnnouncementAll(this.moduleName,this.lang);
             });
         }
     });
@@ -61,15 +64,12 @@ export class AnnouncementComponent implements OnInit {
   lang = this.lang;
 
   ngOnInit() {
-    debugger;
     this.announceData = this.getAnnounce();
     //this.articleData = this.articleService.getArticle();
     this.moduleName = this.router.url.split('/')[1];
-    this.announcementID = parseInt(this.router.url.split('/')[2]);
-
- 
-    this.navService.triggerAnnouncementAll(this.moduleName, this.lang);
-    console.log(this.announcementID);
+    this.announcementID = parseInt(this.router.url.split('/')[2]); 
+    this.triggerAnnouncementAll(this.moduleName, this.lang);
+    // console.log(this.announcementID);
   }
 
   getTheme(){
@@ -101,6 +101,8 @@ export class AnnouncementComponent implements OnInit {
     .switchMap((params: ParamMap) =>
     this.navService.getAnnouncementDataAll(moduleName, lang))
     .subscribe(resSliderData => {
+        console.log(resSliderData);
+       
         this.announces = resSliderData;
         this.breadcrumb = this.breadcrumbService.getBreadcrumb();
         this.isValid = this.breadcrumbService.isValid = true;

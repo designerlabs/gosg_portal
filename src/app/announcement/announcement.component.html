@@ -1,9 +1,11 @@
-<p>TEST</p>
+<!-- <p>TEST</p>
+{{ announces}} -->
 <div class="container-fluid animated slideInDown" style="background: #a7a495;">
-  <div class="container" *ngFor="let announce of navService.announces">
-   <div class="row" *ngFor="let data of announce.results">
+  <div class="container" >
+   <div class="row" >
       <div class="col-md-12">
-          <h1 style="margin-top: 10px;" class="font-size-l">{{data.title}}</h1>
+          
+          <h1 style="margin-top: 10px;" class="font-size-l"> {{'announcement.title' | translate}}</h1>
           <hr class="hr-custom2">
           <ul class="list-inline" style="clear:both;">
               <li>
@@ -13,50 +15,29 @@
               </li>
               <li>/</li>
               <li>
-                  {{'home.breadcrumb.register' | translate}}
+                  {{'announcement.title' | translate}}
               </li>
           </ul>
       </div>
   </div>
   </div>
 </div>
+<!-- *ngFor="let announce of announces" -->
+<div style="margin-top:10px;" class="container" >
 
-<div style="margin-top:10px;" class="container" *ngFor="let announce of navService.announces">
-
-  <div class="row" *ngFor="let data of announce.results">
+  <div class="row" >
       <div class="col-sm-3">
           <div class="row">
-              <div class="col-md-12 sideBarMenu">
-                  <h4 class="sideBarMenu--title padding-bottom-l font-size-m warna_font">
+              <div class="col-md-12 sideBarMenu" *ngFor="let data of announces">
+                  <h4 class="sideBarMenu--title padding-bottom-l font-size-m warna_font" >
                       {{data.title}}
 
                   </h4>
-                  <ul class="list-unstyled">
-                      <li class="liList" *ngFor="let content of data.menu_left">
-                          <div class="col-xs-12 col-md-12 col-sm-12">
-                              <a class="warna_font sideBarMenu--link font-size-s" [routerLinkActive]="['active']"  [style.font-weight]="content.active ? 'bold' : 'normal'"  [style.color]="content.active ? getTheme() : '#333'"  href="" (click)="clickSideMenu(content)">
-                              {{content.label}}
-                        
-                              </a>
-                          </div>
-                          <ul style="list-style: none; padding-left: 15px;">
-                              <li *ngFor="let subcontent of content.sub_menu_left">
-                                   <a class="warna_font sideBarMenu--link font-size-s" style="color:#333"  href="" (click)="clickSideMenu(content)">
-                                      {{subcontent.label}}
-                                      
-                                  </a>
-                              </li>
-                          </ul>
-                          <!--<div class="col-xs-2">(6)</div>-->
-                         
-                      </li>
-
-                  </ul>
               </div>
           </div>
       </div>
 
-      <div class="col-sm-6">
+      <!-- <div class="col-sm-6">
 
           <div class="row">
               <div class="col-md-12 warna_font">
@@ -99,7 +80,7 @@
 
               </div>
           </div>
-      </div>
+      </div> -->
 
 
 

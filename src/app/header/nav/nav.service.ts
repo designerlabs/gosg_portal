@@ -89,28 +89,22 @@ export class NavService {
     }
   }
 
-
   getAnnouncementDataAll(moduleName, lang: string): Observable<boolean[]> {
-  
       return this.http.get(this.urlAnnouncement)
-            .take(1)
-            .map((response: Response) => response.json());
-
-            
-
-            // .catch((error:any) =>
-            // Observable.throw(error.json().error || 'Server error')
-            // );
-      //       .catch(
-      // (err: Response, caught: Observable<any[]>) => {
-      //     if (err !== undefined) {
-      //       this.router.navigate(['/404']);
-      //       return Observable.throw('The Web server (running the Web site) is currently unable to handle the HTTP request due to a temporary overloading or maintenance of the server.');
-      //     }
-      //     return Observable.throw(caught); // <-----
-      //   }
-      // );
-    
+          .take(1)
+          .map((response: Response) => response.json().results)
+          // .catch((error:any) =>
+          // Observable.throw(error.json().error || 'Server error')
+          // );
+          .catch(
+      (err: Response, caught: Observable<any[]>) => {
+          if (err !== undefined) {
+            this.router.navigate(['/404']);
+            return Observable.throw('The Web server (running the Web site) is currently unable to handle the HTTP request due to a temporary overloading or maintenance of the server.');
+          }
+          return Observable.throw(caught); // <-----
+        }
+      );   
   }
 
 
@@ -183,17 +177,5 @@ export class NavService {
         });
     }
   }
-
-  triggerAnnouncementAll(moduleName,lang){
-
-    this.getAnnouncementDataAll(moduleName,lang)
-    .subscribe(resAnnounceData => {
-      this.resultAnnouncement = resAnnounceData;
-      //console.log(this.resultAnnouncement)
-
-    });
-  }
-
-
 
 }

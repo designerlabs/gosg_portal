@@ -268,6 +268,7 @@
     "recommend" : "Your recommendation for improvement"
   },
   "announcement":{
-    "title":"BBB"
+    "title":"Highlight",
+    "description":"All Highlight"
   }
 }
