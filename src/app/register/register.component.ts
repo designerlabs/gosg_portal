@@ -375,22 +375,13 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     resetForm() {
         if (this.isCitizen()) {
             this.resetCitizenCtrl();
-        }else if(this.isPRTR()){
             this.resetPRTRCtrl();
         } else {
             this.resetNonCitizenCtrl();
+           
         }
         this.captcha.reset();
     }
-
-    dummyCitizen(values: any): void{
-        if (this.registration_Form.valid) {
-            console.log(values);
-        }
-    }
-
-    
-
     
     citizenReg(formValues:any) {
        
@@ -404,7 +395,8 @@ export class RegisterComponent implements OnInit, AfterViewInit {
             "fullName": null,
             "userType":{  
                 "userTypeId":null
-             }
+             },
+             "passportNo":null
         };
 
         
@@ -440,17 +432,24 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         //     "citizenType":null,
         //     "user_id": null
         // };
+        debugger;
+        if((formValues.kad_pengenalan ) && (formValues.passport_pr)){
+            body.country.countryId = formValues.country_pr;
+            body.userType.userTypeId = this.citizenValue;
+            body.identificationNo = formValues.kad_pengenalan;
+            body.email = formValues.emel;
+            body.phoneNo = formValues.telefon;
+            body.fullName = formValues.nama_penuh;
+            body.passportNo = formValues.passport_pr;
 
-        
-        if(formValues.country){
+        } else if(formValues.country){
             body.country.countryId = formValues.country;
             body.userType.userTypeId = this.citizenValue;
             body.identificationNo = formValues.passport;
             body.email = formValues.emelf;
             body.phoneNo = formValues.telefonf;
             body.fullName = formValues.nama_penuhf;
-           
-
+       
         }else{
             body.country.countryId = 152;
             body.userType.userTypeId = this.citizenValue;
@@ -526,7 +525,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
 
 
     isPRTR() {
-        if((this.citizenValue == 3 )|| (this.citizenValue == 4)){
+        if((this.citizenValue == 3 )|| (this.citizenValue == 4)||(this.citizenValue == 7 )|| (this.citizenValue == 8)){
             return true;
         }else{
             return false;
