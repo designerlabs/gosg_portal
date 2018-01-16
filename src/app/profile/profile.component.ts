@@ -22,6 +22,7 @@ import { APP_CONFIG, AppConfig } from '../config/app.config.module';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit, AfterViewInit {
+  countryId: any;
   userTypeId: any;
   selectedCountry: any;
   selectedCity: any;
@@ -94,6 +95,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   public regData: any[]
   countryList:string;
   idno:string;
+  userId:any;
   mobileNo: any;
   regemail:string;
   regdate:string;
@@ -217,16 +219,15 @@ export class ProfileComponent implements OnInit, AfterViewInit {
             data => {
               console.log(data);
               this.fullname = data.user.fullName;
-              debugger;
               this.nationality = data.user.country.countryName;
               this.countryCode = data.user.country.countryCode;
               this.passport = data.user.passportNo;
-      
+              this.countryId = data.user.country.countryId;
               this.isMalaysian(this.countryCode);
               this.isMalaysianChk(this.countryCode);
               // this.getCountryByCode(getUsrNationality);
               // this.isUserRegLocal(getUsrNationality);
-              
+              this.userId = data.user.userId;
               this.idno = data.user.pid;
               if(this.isRegLocal == true) 
                 this.maxDate = this.getMinDobDate(this.idno);
@@ -236,7 +237,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
               this.mobileNo = data.user.mobilePhoneNo;
               
               if(data.user.gender)
-                  this.profileForm.get('gender').setValue(data.user.gender.genderCode);
+                  this.profileForm.get('gender').setValue(data.user.gender.genderId);
               
                   if(data.user.race)
                   this.profileForm.get('race').setValue(data.user.race.raceCode);
@@ -747,6 +748,68 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   updateProfile(formValues:any) {
     let getUsrID = localStorage.getItem('usrID');
 
+let bodyUpdate = 
+
+    {
+      "userId": null,
+      "pid": null,
+      "userType": {
+          "userTypeId": null
+      },
+      "fullName": null,
+      "firstName": null,
+      "lastName": null,
+      "dateOfBirth": null,
+      "country": {
+          "countryId": null
+      },
+      "gender": {
+          "genderId": null
+      },
+      "race": {
+          "raceId": null
+      },
+      "religion": {
+          "religionId":null
+      },
+      "email": null,
+      "mobilePhoneNo": null,
+      "registrationDate": null,
+      "address": {
+          "addressId": null,
+          "permanentAddress1":null,
+          "permanentAddress2":null,
+          "permanentAddress3":null,
+          "correspondingAddress1":null,
+          "correspondingAddress2": null,
+          "correspondingAddress3": null,
+          "permanentAddressCountry": {
+              "countryId":null
+          },
+          "permanentAddressState": {
+              "stateId": null    
+          },
+          "permanentAddressCity": {
+              "cityId": null
+          },
+          "correspondingAddressCountry": {
+              "countryId": null
+          },
+          "correspondingAddressState": {
+              "stateId": null
+          },
+          "correspondingAddressCity": {
+              "cityId": null
+          },
+          "permanentAddressPostcode": null,
+          "correspondingAddressPostcode": null,
+          "permanentAddressHomePhoneNo": null,
+          "correspondingAddressHomePhoneNo": null,
+          "sameAddressFlag": null
+      }
+  };
+
+
     let body = {
       "date_joined": null,
       "fullname": null,
@@ -780,7 +843,45 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       "user_id": null
     };
     
-  
+    bodyUpdate.userId = this.userId;
+    bodyUpdate.pid = this.idno;
+    bodyUpdate.userType.userTypeId = this.userTypeId;
+    bodyUpdate.fullName = this.fullname;
+    bodyUpdate.dateOfBirth = new Date(formValues.dob).getTime();
+    bodyUpdate.country.countryId = this.countryId;
+    bodyUpdate.gender.genderId = formValues.gender;
+    bodyUpdate.race.raceId = formValues.race;
+    bodyUpdate.religion.religionId = formValues.religion;
+    bodyUpdate.email = this.regemail;
+    bodyUpdate.mobilePhoneNo = formValues.corrsMobile;
+    bodyUpdate.registrationDate = this.regdate;
+    bodyUpdate.address.addressId = 1;
+    bodyUpdate.address.permanentAddress1 = formValues.perAddress1;
+    bodyUpdate.address.permanentAddress2 = formValues.perAddress2;
+    bodyUpdate.address.permanentAddress3 = formValues.perAddress3;
+    bodyUpdate.address.correspondingAddress1 = formValues.corresponding_address1;
+    bodyUpdate.address.correspondingAddress2 = formValues.corresponding_address2;
+    bodyUpdate.address.correspondingAddress3 = formValues.corresponding_address3;
+    bodyUpdate.address.permanentAddressCountry.countryId = formValues.perCountry;
+    
+    if(this.isLocal) {
+      bodyUpdate.address.permanentAddressState.stateId = formValues.perStateLocal;
+      bodyUpdate.address.permanentAddressCity.cityId = formValues.perCityLocal;
+    } else {
+      bodyUpdate.address.permanentAddressState.stateId = formValues.perStateNotLocal;
+      bodyUpdate.address.permanentAddressCity.cityId =  formValues.perCityNotLocal;
+    }
+
+    bodyUpdate.address.correspondingAddressCountry.countryId = formValues.corrsCountry;
+    bodyUpdate.address.correspondingAddressState.stateId = formValues.corrsState;
+    bodyUpdate.address.correspondingAddressCity.cityId = formValues.corrsCity;
+    bodyUpdate.address.permanentAddressPostcode = formValues.perPostcode;
+    bodyUpdate.address.correspondingAddressPostcode = formValues.corrsPostcode;
+    bodyUpdate.address.permanentAddressHomePhoneNo = formValues.perTelephone;
+    bodyUpdate.address.correspondingAddressHomePhoneNo = formValues.corrsTelephone;
+    bodyUpdate.address.sameAddressFlag = formValues.checkboxValue;
+
+
     body.date_joined = this.regdate;
     body.fullname = this.fullname;
     body.ic_number = this.idno;
@@ -824,7 +925,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         console.log(body);
         console.log(formValues);
         console.log(this.profileForm.value);
-    this.protectedService.updateProfile(body)
+    this.protectedService.updateProfile(bodyUpdate)
     .subscribe(
       data => {
         this.isActive = false;

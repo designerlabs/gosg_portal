@@ -100,7 +100,7 @@
               <div class="form-group col-md-4">
                 <mat-form-field class="example-full-width font-size-s">
                   <mat-select *ngIf="!this.isOtherRace" formControlName="race" placeholder="{{'profile.label.race' | translate}}" required>
-                      <mat-option *ngFor="let race of getRaceData" [value]="race?.raceCode">{{race?.race}}</mat-option>
+                      <mat-option *ngFor="let race of getRaceData" [value]="race?.raceId">{{race?.race}}</mat-option>
                   </mat-select>
                   <mat-error *ngIf="!validateCtrlChk(gender) && profileForm.controls.gender.errors.required">
                       {{'profile.err.race' | translate }}
@@ -110,7 +110,7 @@
               <div class="form-group col-md-4">
                 <mat-form-field class="example-full-width font-size-s">
                   <mat-select formControlName="religion" placeholder="{{'profile.label.religion' | translate}}">
-                      <mat-option *ngFor="let religion of getReligionData" [value]="religion?.religionCode">{{religion?.religion}}</mat-option>
+                      <mat-option *ngFor="let religion of getReligionData" [value]="religion?.religionId">{{religion?.religion}}</mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>
