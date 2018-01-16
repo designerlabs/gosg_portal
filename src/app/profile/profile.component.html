@@ -145,7 +145,7 @@
               <div class="form-group col-md-4">
                 <mat-form-field class="example-full-width font-size-s">
                   <mat-select formControlName="perCountry" (change)="isMalaysian($event.value)" placeholder="{{'profile.label.country' | translate}}">
-                    <mat-option *ngFor="let country of countries" [value]="country?.countryCode">{{country?.countryName}}</mat-option>
+                    <mat-option *ngFor="let country of countries" [value]="country?.countryId">{{country?.countryName}}</mat-option>
                   </mat-select>
                   <mat-error *ngIf="!validateCtrlChk(perCountry) && profileForm.controls.perCountry.errors.required">
                       {{'profile.err.country' | translate }}
@@ -237,7 +237,7 @@
               <div class="form-group col-md-4">
                 <mat-form-field class="example-full-width font-size-s">
                   <mat-select (change)="isMalaysianChk($event.value)" formControlName="corrsCountry" placeholder="{{'profile.label.country' | translate}}">
-                      <mat-option *ngFor="let country of countries" [value]="country.countryCode">{{country.countryName}}</mat-option>
+                      <mat-option *ngFor="let country of countries" [value]="country.countryId">{{country.countryName}}</mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>
