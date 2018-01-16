@@ -90,7 +90,7 @@
               <div class="form-group col-md-4">
                 <mat-form-field class="example-full-width font-size-s">
                   <mat-select tabindex="1" formControlName="gender" placeholder="{{'profile.label.gender' | translate}}" required>
-                      <mat-option *ngFor="let gender of genderData" [value]="gender?.genderCode">{{ gender?.gender | translate }}</mat-option>
+                      <mat-option *ngFor="let gender of genderData" [value]="gender?.genderId">{{ gender?.gender | translate }}</mat-option>
                   </mat-select>
                   <mat-error *ngIf="!validateCtrlChk(gender) && profileForm.controls.gender.errors.required">
                       {{'profile.err.gender' | translate }}
