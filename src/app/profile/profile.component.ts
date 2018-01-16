@@ -244,29 +244,32 @@ export class ProfileComponent implements OnInit, AfterViewInit {
               if(data.user.religion)
                   this.profileForm.get('religion').setValue(data.user.religion.religionCode);
 
-              this.profileForm.get('perAddress1').setValue(data.user.address.permanentAddress1);
-              this.profileForm.get('perAddress2').setValue(data.user.address.permanentAddress2);
-              this.profileForm.get('perAddress3').setValue(data.user.address.permanentAddress3);
-              this.selectedCountry = data.user.address.permanentAddressCountry.countryCode;
-              this.profileForm.get('perCountry').setValue(data.user.address.permanentAddressCountry.countryCode);
-              this.profileForm.get('perPostcode').setValue(data.user.address.permanentAddressPostcode);
-              this.profileForm.get('perTelephone').setValue(data.user.address.homePhoneNo);
+              if(data.user.address){
+                this.profileForm.get('perAddress1').setValue(data.user.address.permanentAddress1);
+                this.profileForm.get('perAddress2').setValue(data.user.address.permanentAddress2);
+                this.profileForm.get('perAddress3').setValue(data.user.address.permanentAddress3);
+                this.selectedCountry = data.user.address.permanentAddressCountry.countryCode;
+                this.profileForm.get('perCountry').setValue(data.user.address.permanentAddressCountry.countryCode);
+                this.profileForm.get('perPostcode').setValue(data.user.address.permanentAddressPostcode);
+                this.profileForm.get('perTelephone').setValue(data.user.address.homePhoneNo);
       
-              if(data.user.address.permanentAddressState != null) {
-                if(data.user.address.permanentAddressCountry.countryCode == "MY") {
-                  this.getCitiesByStateP(data.user.address.permanentAddressCity.cityId);
-      
-                  this.profileForm.get('perStateLocal').setValue(data.user.address.permanentAddressState.stateId);
-                  this.selectedState = this.profileForm.get('perStateLocal').value;
-                  this.profileForm.get('perCityLocal').setValue(data.user.address.permanentAddressCity.cityId); 
-                  this.selectedCity = this.profileForm.get('perCityLocal').value;
-                } else {
-                  this.profileForm.get('perStateNotLocal').setValue(data.user.address.permanentAddressState.stateId);
-                  this.selectedState = this.profileForm.get('perStateNotLocal').value;
-                  this.profileForm.get('perCityNotLocal').setValue(data.user.address.permanentAddressCity.cityId); 
-                  this.selectedCity = this.profileForm.get('perCityNotLocal').value;
+                if(data.user.address.permanentAddressState != null) {
+                  if(data.user.address.permanentAddressCountry.countryCode == "MY") {
+                    this.getCitiesByStateP(data.user.address.permanentAddressCity.cityId);
+        
+                    this.profileForm.get('perStateLocal').setValue(data.user.address.permanentAddressState.stateId);
+                    this.selectedState = this.profileForm.get('perStateLocal').value;
+                    this.profileForm.get('perCityLocal').setValue(data.user.address.permanentAddressCity.cityId); 
+                    this.selectedCity = this.profileForm.get('perCityLocal').value;
+                  } else {
+                    this.profileForm.get('perStateNotLocal').setValue(data.user.address.permanentAddressState.stateId);
+                    this.selectedState = this.profileForm.get('perStateNotLocal').value;
+                    this.profileForm.get('perCityNotLocal').setValue(data.user.address.permanentAddressCity.cityId); 
+                    this.selectedCity = this.profileForm.get('perCityNotLocal').value;
+                  }
                 }
               }
+              
               
               // if(data.user.same_address != true) {
               //   this.profileForm.get('corrsAddress1').setValue(data[0].corresponding_address1);
