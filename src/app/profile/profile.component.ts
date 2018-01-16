@@ -49,6 +49,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   countryCode:string;
   countryName:any[];
   nationality:any;
+  passport:any;
   birthdate:any;
   isRegLocal: boolean;
   isLocal: boolean;
@@ -219,6 +220,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
               debugger;
               this.nationality = data.user.country.countryName;
               this.countryCode = data.user.country.countryCode;
+              this.passport = data.user.passportNo;
       
               this.isMalaysian(this.countryCode);
               this.isMalaysianChk(this.countryCode);
