@@ -218,8 +218,8 @@ export class RegisterComponent implements OnInit, AfterViewInit {
             this.telefon = new FormControl('', [Validators.required]),
             this.country = new FormControl('', [Validators.required]),
             this.passport = new FormControl('', [Validators.required, Validators.pattern(this.validateService.getPattern(6,10).passport)]), //A1234567 or AB123456
-            this.country_pr = new FormControl('', [Validators.required]),
-            this.passport_pr = new FormControl('', [Validators.required, Validators.pattern(this.validateService.getPattern(6,10).passport)]), //A1234567 or AB123456
+            this.country_pr = new FormControl(''),
+            this.passport_pr = new FormControl('', [Validators.pattern(this.validateService.getPattern(6,10).passport)]), //A1234567 or AB123456
             this.nama_penuhf = new FormControl('', [Validators.required, Validators.pattern(this.validateService.getPattern(2,60).name)]), 
             this.emelf = new FormControl('', [Validators.required, Validators.pattern(this.validateService.getPattern().email)]),
             this.telefonf = new FormControl('', [Validators.required]),
@@ -281,12 +281,14 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         this.changeCitizen = this.citizenValue;
         this.ReCreateCaptchas();
         if ((this.citizenValue == 2) || (this.citizenValue  ==6)) {
+            debugger;
             this.citi = false;
             this.permanentResident = false;
             this.nonCiti = true;
             this.RemoveCitizenCtrl();
             this.addNonCitizenCtrl();
         } else {
+            debugger;
             this.citi = true;
             this.permanentResident = false;
             this.nonCiti = false;
