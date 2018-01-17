@@ -269,6 +269,7 @@
   },
   "announcement":{
     "title":"Highlight",
-    "description":"All Highlight"
+    "description":"All Highlight",
+    "message":"No latest information."
   }
 }

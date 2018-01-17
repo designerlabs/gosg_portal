@@ -20,6 +20,7 @@ import { LifeeventComponent } from "../lifeevent/lifeevent.component";
 import { AboutusComponent } from "../staticpage/aboutus.component";
 import { AnnouncementboxComponent } from "../announcementbox/announcementbox.component";
 import { AnnouncementComponent } from "../announcement/announcement.component";
+
 import { FaqComponent } from "../staticpage/faq.component";
 import { ManualComponent } from "../staticpage/manual.component";
 import { SidenavComponent } from "../staticpage/sidenav.component";
