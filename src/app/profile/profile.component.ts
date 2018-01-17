@@ -517,9 +517,18 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     return res;
   }
 
+  getRace(){
+    return this.sharedService.getRace(localStorage.getItem('langID'))
+      .subscribe(raceData => {
+        this.getRaceData = raceData
+      },
+      Error => {
+       this.toastr.error(this.translate.instant('common.err.servicedown'), '');            
+     });
+  }
+
   getGenderVal() {
-    let langID = localStorage.getItem('langID');
-    this.sharedService.getGender(localStorage.getItem('langID'))
+    return this.sharedService.getGender(localStorage.getItem('langID'))
       .subscribe(resGenderData => {
         this.genderData = resGenderData
       },
@@ -616,15 +625,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
    });
   }
 
-  getRace(){
-    return this.sharedService.getRace(localStorage.getItem('langID'))
-      .subscribe(raceData => {
-        this.getRaceData = raceData
-      },
-      Error => {
-       this.toastr.error(this.translate.instant('common.err.servicedown'), '');            
-     });
-  }
+
   
   validateFirstName(obj) {
     return obj.valid || obj.untouched
