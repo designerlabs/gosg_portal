@@ -780,20 +780,20 @@ let bodyUpdate =
         "userTypeId": null
       },
       "fullName": null,
-      "firstName": null,
-      "lastName": null,
+      "firstName": "",
+      "lastName": "",
       "dateOfBirth": null,
       "country": {
           "countryId": null
       },
       "gender": {
-          "genderCode": null
+          "genderCode": ""
       },
       "race": {
-          "raceCode": null
+          "raceCode": ""
       },
       "religion": {
-          "religionCode":null
+          "religionCode":""
       },
       "email": null,
       "mobilePhoneNo": null,
