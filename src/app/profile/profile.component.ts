@@ -270,10 +270,10 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       
                 if(data.user.address.permanentAddressState != null) {
                   if(data.user.address.permanentAddressCountry.countryId == 152) {
-                    this.getState();
+                    this.getState(data.user.address.permanentAddressState.stateId);
                     this.getCitiesByStateP(data.user.address.permanentAddressCity.cityId);
                     debugger;
-                    this.profileForm.get('perStateLocal').setValue(data.user.address.permanentAddressState.stateId);
+                    // this.profileForm.get('perStateLocal').setValue(data.user.address.permanentAddressState.stateId);
                     this.selectedState = this.profileForm.get('perStateLocal').value;
                     this.profileForm.get('perCityLocal').setValue(data.user.address.permanentAddressCity.cityId); 
                     this.selectedCity = this.profileForm.get('perCityLocal').value;
@@ -587,10 +587,14 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.selectedCity = e.value;
   }
   
-  getState(){
+  getState(id?){
     return this.sharedService.getStateData()
      .subscribe(resStateData => {
         this.getStateData = resStateData;
+        if(id){
+          debugger;
+          this.profileForm.get('perStateLocal').setValue(id);
+        }
       },
       Error => {
        this.toastr.error(this.translate.instant('common.err.servicedown'), '');            
