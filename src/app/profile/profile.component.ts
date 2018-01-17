@@ -241,8 +241,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                 this.addressId = data.user.address.addressId;
               }
               
-              this.isMalaysian(this.countryCode);
-              this.isMalaysianChk(this.countryCode);
+              this.isMalaysian(this.countryId);
+              this.isMalaysianChk(this.countryId);
               // this.getCountryByCode(getUsrNationality);
               // this.isUserRegLocal(getUsrNationality);
               this.userId = data.user.userId;
@@ -267,7 +267,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                 this.profileForm.get('perAddress1').setValue(data.user.address.permanentAddress1);
                 this.profileForm.get('perAddress2').setValue(data.user.address.permanentAddress2);
                 this.profileForm.get('perAddress3').setValue(data.user.address.permanentAddress3);
-                this.selectedCountry = data.user.address.permanentAddressCountry.countryCode;
+                this.selectedCountry = data.user.address.permanentAddressCountry.countryId;
                 this.profileForm.get('perCountry').setValue(data.user.address.permanentAddressCountry.countryId);
                 this.profileForm.get('perPostcode').setValue(data.user.address.permanentAddressPostcode);
                 this.profileForm.get('perTelephone').setValue(data.user.address.homePhoneNo);
@@ -356,7 +356,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         this.nationality = data[0].country.countryName;
         this.countryCode = data[0].permanent_country;
 
-        this.isMalaysian(this.countryCode);
+        this.isMalaysian(this.countryId);
         this.isMalaysianChk(data[0].corresponding_country);
         this.getCountryByCode(getUsrNationality);
         this.isUserRegLocal(getUsrNationality);
