@@ -92,7 +92,7 @@ export class NavService {
 
     getAnnouncementDataAll(moduleName, lang: number, id1?: number, id2?: number): Observable<boolean[]> {
       let url = this.urlAnnouncement;
-      let lg = "/?langId="+  lang;
+      let lg = "?langId="+  lang;
 
       if(id1 && !id2){
         url = url+"/id/" +id1;
