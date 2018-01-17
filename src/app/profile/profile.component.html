@@ -102,7 +102,7 @@
                   <mat-select *ngIf="!this.isOtherRace" formControlName="race" placeholder="{{'profile.label.race' | translate}}" required>
                       <mat-option *ngFor="let race of getRaceData" [value]="race?.raceId">{{race?.race}}</mat-option>
                   </mat-select>
-                  <mat-error *ngIf="!validateCtrlChk(gender) && profileForm.controls.gender.errors.required">
+                  <mat-error *ngIf="!validateCtrlChk(race) && profileForm.controls.gender.errors.required">
                       {{'profile.err.race' | translate }}
                   </mat-error>
                 </mat-form-field>
@@ -126,9 +126,9 @@
                 <mat-form-field class="example-full-width font-size-s">
                   <input matInput formControlName="perAddress1" type="text" maxlength="30" placeholder="{{ 'profile.label.peraddr' | translate }} 1"
                   />
-                  <mat-error *ngIf="!validateCtrlChk(perAddress1) && profileForm.controls.perAddress1.errors.required">
+                  <!-- <mat-error *ngIf="!validateCtrlChk(perAddress1) && profileForm.controls.perAddress1.errors.required">
                       {{'profile.err.perAddress1' | translate }}
-                  </mat-error>
+                  </mat-error> -->
                 </mat-form-field>
                 <mat-form-field class="example-full-width font-size-s">
                   <input matInput formControlName="perAddress2" type="text" maxlength="30" placeholder="{{ 'profile.label.peraddr' | translate }} 2"
@@ -147,9 +147,9 @@
                   <mat-select formControlName="perCountry" (change)="isMalaysian($event.value)" placeholder="{{'profile.label.country' | translate}}">
                     <mat-option *ngFor="let country of countries" [value]="country?.countryId">{{country?.countryName}}</mat-option>
                   </mat-select>
-                  <mat-error *ngIf="!validateCtrlChk(perCountry) && profileForm.controls.perCountry.errors.required">
+                  <!-- <mat-error *ngIf="!validateCtrlChk(perCountry) && profileForm.controls.perCountry.errors.required">
                       {{'profile.err.country' | translate }}
-                  </mat-error>
+                  </mat-error> -->
                 </mat-form-field>
               </div>
               <div class="form-group col-md-4">
@@ -177,17 +177,21 @@
                   <mat-select (change)="isChanged()" formControlName="perCityLocal" placeholder="{{'profile.label.city' | translate}}"  >
                     <mat-option *ngFor="let city of getPerCityData" [value]="city?.cityId">{{ city?.cityName }}</mat-option>
                   </mat-select>
+                  <!-- required="true ? isLocal : false" 
                   <mat-error *ngIf="!validateCtrlChk(perCityLocal) && profileForm.controls.perCityLocal.errors.required">
                     {{'profile.err.city' | translate }}
-                    <!-- required="true ? isLocal : false" -->
+                    
                 </mat-error>
+                -->
                 </mat-form-field>
                 <mat-form-field *ngIf="!isLocal" class="example-full-width font-size-s">
                   <input (keyup)="isChanged()" matInput formControlName="perCityNotLocal" type="text" placeholder="{{'profile.label.city' | translate}}"   />
+                   <!-- required="true ? !isLocal : false"
                   <mat-error *ngIf="!validateCtrlChk(perCityNotLocal) && profileForm.controls.perCityNotLocal.errors.required">
                       {{'profile.err.city' | translate }}
-                      <!-- required="true ? !isLocal : false" -->
+                     
                   </mat-error>
+                   -->
                 </mat-form-field>
               </div>
             </div>
@@ -196,9 +200,9 @@
                 <mat-form-field class="example-full-width font-size-s" placeholder="{{'profile.label.postcode' | translate}}">
                   <input matInput [textMask]="{mask: maskPostcode}" (keyup)="isChanged()" #perPost formControlName="perPostcode" id="perPostcode" type="text"
                     placeholder="Postcode" />
-                  <mat-error *ngIf="!validateCtrlChk(perPostcode) && profileForm.controls.perPostcode.errors.required">
+                  <!-- <mat-error *ngIf="!validateCtrlChk(perPostcode) && profileForm.controls.perPostcode.errors.required">
                       {{'profile.err.postcode' | translate }}
-                  </mat-error>
+                  </mat-error> -->
                   <mat-error *ngIf="!validateCtrlChk(perPostcode) && profileForm.controls.perPostcode.errors.pattern">
                     {{'profile.pattern.postcode' | translate }}
                   </mat-error>
