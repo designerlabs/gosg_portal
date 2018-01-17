@@ -270,6 +270,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       
                 if(data.user.address.permanentAddressState != null) {
                   if(data.user.address.permanentAddressCountry.countryId == 152) {
+                    this.isLocal = true;
                     this.getState(data.user.address.permanentAddressState.stateId);
                     this.getCitiesByStateP(data.user.address.permanentAddressCity.cityId);
                     debugger;
@@ -278,6 +279,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                     this.profileForm.get('perCityLocal').setValue(data.user.address.permanentAddressCity.cityId); 
                     this.selectedCity = this.profileForm.get('perCityLocal').value;
                   } else {
+                    this.isLocal = false;
                     this.profileForm.get('perStateNotLocal').setValue(data.user.address.permanentAddressState.stateId);
                     this.selectedState = this.profileForm.get('perStateNotLocal').value;
                     this.profileForm.get('perCityNotLocal').setValue(data.user.address.permanentAddressCity.cityId); 
@@ -472,12 +474,14 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
     this.isChanged();
     if(val == 152) {
+      this.isLocal = true;
       this.getState();
       this.isCorrsLocal = true;
     } else {
-        this.isCorrsLocal = false;
-        this.profileForm.get('corrsState').setValue("");
-        this.profileForm.get('corrsCity').setValue("");
+      this.isLocal = false;
+      this.isCorrsLocal = false;
+      this.profileForm.get('corrsState').setValue("");
+      this.profileForm.get('corrsCity').setValue("");
 
     }
     this.checkReqValues();
