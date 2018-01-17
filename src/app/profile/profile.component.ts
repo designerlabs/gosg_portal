@@ -459,6 +459,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     // console.log(val);
 
     this.isChanged();
+    debugger;
     if(val == 152) {
       this.getState();
       this.isCorrsLocal = true;
