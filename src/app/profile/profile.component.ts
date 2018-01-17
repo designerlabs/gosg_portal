@@ -821,22 +821,22 @@ let bodyUpdate =
           "correspondingAddress2": "",
           "correspondingAddress3": "",
           "permanentAddressCountry": {
-              "countryId":null
+              "countryId":""
           },
           "permanentAddressState": {
-              "stateId": null    
+              "stateId": ""    
           },
           "permanentAddressCity": {
-              "cityId": null
+              "cityId": ""
           },
           "correspondingAddressCountry": {
-              "countryId": null
+              "countryId": ""
           },
           "correspondingAddressState": {
-              "stateId": null
+              "stateId": ""
           },
           "correspondingAddressCity": {
-              "cityId": null
+              "cityId": ""
           },
           "permanentAddressPostcode": "",
           "correspondingAddressPostcode": "",
