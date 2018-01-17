@@ -270,20 +270,21 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       
                 if(data.user.address.permanentAddressState != null) {
                   if(data.user.address.permanentAddressCountry.countryId == 152) {
-                    this.isLocal = true;
-                    this.getState(data.user.address.permanentAddressState.stateId);
-                    this.getCitiesByStateP(data.user.address.permanentAddressCity.cityId);
                     debugger;
-                    // this.profileForm.get('perStateLocal').setValue(data.user.address.permanentAddressState.stateId);
-                    this.selectedState = this.profileForm.get('perStateLocal').value;
-                    this.profileForm.get('perCityLocal').setValue(data.user.address.permanentAddressCity.cityId); 
-                    this.selectedCity = this.profileForm.get('perCityLocal').value;
+                    // this.isLocal = true;
+                    // this.getState(data.user.address.permanentAddressState.stateId);
+                    // this.getCitiesByStateP(data.user.address.permanentAddressCity.cityId);
+                    // debugger;
+                    // // this.profileForm.get('perStateLocal').setValue(data.user.address.permanentAddressState.stateId);
+                    // this.selectedState = this.profileForm.get('perStateLocal').value;
+                    // this.profileForm.get('perCityLocal').setValue(data.user.address.permanentAddressCity.cityId); 
+                    // this.selectedCity = this.profileForm.get('perCityLocal').value;
                   } else {
-                    this.isLocal = false;
-                    this.profileForm.get('perStateNotLocal').setValue(data.user.address.permanentAddressState.stateId);
-                    this.selectedState = this.profileForm.get('perStateNotLocal').value;
-                    this.profileForm.get('perCityNotLocal').setValue(data.user.address.permanentAddressCity.cityId); 
-                    this.selectedCity = this.profileForm.get('perCityNotLocal').value;
+                    // this.isLocal = false;
+                    // this.profileForm.get('perStateNotLocal').setValue(data.user.address.permanentAddressState.stateId);
+                    // this.selectedState = this.profileForm.get('perStateNotLocal').value;
+                    // this.profileForm.get('perCityNotLocal').setValue(data.user.address.permanentAddressCity.cityId); 
+                    // this.selectedCity = this.profileForm.get('perCityNotLocal').value;
                   }
                 }
               }
