@@ -519,7 +519,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
   getGenderVal() {
     let langID = localStorage.getItem('langID');
-    this.sharedService.getGender(langID)
+    this.sharedService.getGender(localStorage.getItem('langID'))
       .subscribe(resGenderData => {
         this.genderData = resGenderData
       },
