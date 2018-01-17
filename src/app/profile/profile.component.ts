@@ -270,7 +270,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                 if(data.user.address.permanentAddressState != null) {
                   if(data.user.address.permanentAddressCountry.countryCode == "MY") {
                     this.getCitiesByStateP(data.user.address.permanentAddressCity.cityId);
-        
+                    debugger;
                     this.profileForm.get('perStateLocal').setValue(data.user.address.permanentAddressState.stateId);
                     this.selectedState = this.profileForm.get('perStateLocal').value;
                     this.profileForm.get('perCityLocal').setValue(data.user.address.permanentAddressCity.cityId); 
@@ -328,7 +328,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         
       },
     error => {
-        debugger;
         location.href = this.config.urlUAP +'uapsso/Logout';
         //location.href = this.config.urlUAP+'portal/index';
       }
@@ -337,7 +336,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
   
   getUserProfile(){
-    debugger;
     let getUsrID = localStorage.getItem('usrID');
     let getUsrNationality = localStorage.getItem('userNationality');
     // console.log(getUsrNationality);
@@ -345,7 +343,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.protectedService.getProfile(getUsrID).subscribe(
       data => {
         console.log(data);
-        debugger;
         this.fullname = data[0].fullname;
         this.nationality = data[0].country.countryName;
         this.countryCode = data[0].permanent_country;
