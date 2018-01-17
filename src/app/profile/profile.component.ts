@@ -251,13 +251,13 @@ export class ProfileComponent implements OnInit, AfterViewInit {
               this.mobileNo = data.user.mobilePhoneNo;
               
               if(data.user.gender)
-                  this.profileForm.get('gender').setValue(data.user.gender.genderId);
+                  this.profileForm.get('gender').setValue(data.user.gender.genderCode);
               
               if(data.user.race)
-                  this.profileForm.get('race').setValue(data.user.race.raceId);
+                  this.profileForm.get('race').setValue(data.user.race.raceCode);
 
               if(data.user.religion)
-                  this.profileForm.get('religion').setValue(data.user.religion.religionId);
+                  this.profileForm.get('religion').setValue(data.user.religion.religionCode);
 
               if(data.user.address){
                 this.profileForm.get('perAddress1').setValue(data.user.address.permanentAddress1);
@@ -785,13 +785,13 @@ let bodyUpdate =
           "countryId": null
       },
       "gender": {
-          "genderId": null
+          "genderCode": null
       },
       "race": {
-          "raceId": null
+          "raceCode": null
       },
       "religion": {
-          "religionId":null
+          "religionCode":null
       },
       "email": null,
       "mobilePhoneNo": null,
@@ -849,9 +849,9 @@ let bodyUpdate =
     bodyUpdate.fullName = this.fullname;
     bodyUpdate.dateOfBirth = new Date(formValues.dob).getTime();
     bodyUpdate.country.countryId = this.countryId;
-    bodyUpdate.gender.genderId = formValues.gender;
-    bodyUpdate.race.raceId = formValues.race;
-    bodyUpdate.religion.religionId = formValues.religion;
+    bodyUpdate.gender.genderCode = formValues.gender;
+    bodyUpdate.race.raceCode = formValues.race;
+    bodyUpdate.religion.religionCode = formValues.religion;
     bodyUpdate.isStaff = this.isStaff;
     bodyUpdate.isMyIdentityValid = this.isMyIdentityValid;
     bodyUpdate.isMyIdentityVerified = this.isMyIdentityVerfied;
