@@ -277,6 +277,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                     debugger;
                     // this.isLocal = true;
                     this.getState(data.user.address.permanentAddressState.stateId);
+                    debugger;
                     this.getCitiesByStateP(data.user.address.permanentAddressCity.cityId);
                     // debugger;
                     this.profileForm.get('perStateLocal').setValue(data.user.address.permanentAddressState.stateId);
