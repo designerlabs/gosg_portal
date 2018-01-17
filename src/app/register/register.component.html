@@ -93,7 +93,7 @@
               <!-- *************************** TR and PR FIELDS ******************** [@myAwesomeAnimation]='state'-->
               <div *ngIf="isPRTR()" class="form-group animated fadeIn">
                 <mat-form-field class="example-full-width font-size-s">
-                  <mat-select formControlName="country_pr" placeholder="{{'register.label.country' | translate }}" tabindex="5" required>
+                  <mat-select formControlName="country_pr" placeholder="{{'register.label.country' | translate }}" tabindex="5" required="true ? citi : false">
                     <mat-option *ngFor="let country of countries" [value]="country.countryId">
                       {{ country.countryName }}
                     </mat-option>
@@ -104,8 +104,7 @@
                 </mat-form-field>
 
                 <mat-form-field class="example-full-width font-size-s">
-                  <input matInput #psport formControlName="passport_pr" tabindex="6" minlength="6" maxlength="10" placeholder="{{'register.label.passport' | translate }}"
-                    required>
+                  <input matInput #psport formControlName="passport_pr" tabindex="6" minlength="6" maxlength="10" placeholder="{{'register.label.passport' | translate }}" required="true ? citi : false">
                   <mat-error *ngIf="!validateCtrlChk(passport) && citizenFormGrp.controls.passport.errors.required">
                     {{'register.err.passport' | translate }}
                   </mat-error>
