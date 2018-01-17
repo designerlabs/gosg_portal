@@ -272,6 +272,7 @@
   },
   "announcement":{
     "title":"Sorotan Terkini",
-    "description":"Semua Sorotan Terkini"
+    "description":"Semua Sorotan Terkini",
+    "message":"Tiada maklumat terkini."
   }
 }

@@ -33,7 +33,8 @@ export class AppConfig {
     urlHighlights: string;
     urlGender: string;
     urlPoll: string;
-    urlAnnouncement: string;
+    urlAnnouncement: string;       
+    urlAnnouncementSub: string;
     urlCalendar: string;
     urlRegister: string;
     urlFeedbackType: string;
@@ -51,8 +52,7 @@ export class AppConfig {
     urlGetUser: string;
     urlDashboard: string;
     urlUAP: string;
-    urlGetProfile: string;   
-    urlAnnouncementSub: string;
+    urlGetProfile: string;
 }
 
 export const APP_DI_CONFIG: AppConfig = {
@@ -72,7 +72,9 @@ export const APP_DI_CONFIG: AppConfig = {
     urlHighlights: './app/apidata/highlightbox',
     urlGender: commonURL+'gender/lang/',
     urlPoll: './app/apidata/poll',
-    urlAnnouncement: './app/apidata/announcement',
+    //urlAnnouncement: './app/apidata/announcement',
+    // urlAnnouncement : announcementUrl + 'announcement/category/list',
+    urlAnnouncement : announcementUrl + 'announcement/date/publish',    
     urlAnnouncementSub: announcementUrl + 'announcement/category',
     urlCalendar: './app/apidata/calendar',
     urlRegister: registrationUrl+'register',    
