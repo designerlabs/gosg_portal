@@ -237,7 +237,10 @@ export class ProfileComponent implements OnInit, AfterViewInit {
               this.isMyIdentityValid = data.user.isMyIdentityValid;
               this.agencyForwardUrl = data.user.agencyForwardUrl;
               this.roles = data.user.roles;
-              this.addressId = data.user.address.addressId;
+              if(data.user.address){
+                this.addressId = data.user.address.addressId;
+              }
+              
               this.isMalaysian(this.countryCode);
               this.isMalaysianChk(this.countryCode);
               // this.getCountryByCode(getUsrNationality);
