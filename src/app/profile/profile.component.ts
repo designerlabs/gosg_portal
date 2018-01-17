@@ -814,12 +814,12 @@ let bodyUpdate =
       
       "address": {
           "addressId": null,
-          "permanentAddress1":null,
-          "permanentAddress2":null,
-          "permanentAddress3":null,
-          "correspondingAddress1":null,
-          "correspondingAddress2": null,
-          "correspondingAddress3": null,
+          "permanentAddress1":"",
+          "permanentAddress2":"",
+          "permanentAddress3":"",
+          "correspondingAddress1":"",
+          "correspondingAddress2": "",
+          "correspondingAddress3": "",
           "permanentAddressCountry": {
               "countryId":null
           },
@@ -838,10 +838,10 @@ let bodyUpdate =
           "correspondingAddressCity": {
               "cityId": null
           },
-          "permanentAddressPostcode": null,
-          "correspondingAddressPostcode": null,
-          "permanentAddressHomePhoneNo": null,
-          "correspondingAddressHomePhoneNo": null,
+          "permanentAddressPostcode": "",
+          "correspondingAddressPostcode": "",
+          "permanentAddressHomePhoneNo": "",
+          "correspondingAddressHomePhoneNo": "",
           "sameAddressFlag": null
       }
   };
