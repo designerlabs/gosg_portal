@@ -268,7 +268,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                 this.profileForm.get('perTelephone').setValue(data.user.address.homePhoneNo);
       
                 if(data.user.address.permanentAddressState != null) {
-                  if(data.user.address.permanentAddressCountry.countryCode == 152) {
+                  if(data.user.address.permanentAddressCountry.countryId == 152) {
                     this.getCitiesByStateP(data.user.address.permanentAddressCity.cityId);
                     debugger;
                     this.profileForm.get('perStateLocal').setValue(data.user.address.permanentAddressState.stateId);
