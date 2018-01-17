@@ -22,6 +22,7 @@ import { APP_CONFIG, AppConfig } from '../config/app.config.module';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit, AfterViewInit {
+  addressId: any;
   roles: any;
   agencyForwardUrl: any;
   isMyIdentityValid: any;
@@ -235,7 +236,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
               this.isMyIdentityValid = data.user.isMyIdentityValid;
               this.agencyForwardUrl = data.user.agencyForwardUrl;
               this.roles = data.user.roles;
-
+              this.addressId = data.user.address.addressId;
               this.isMalaysian(this.countryCode);
               this.isMalaysianChk(this.countryCode);
               // this.getCountryByCode(getUsrNationality);
@@ -849,7 +850,7 @@ let bodyUpdate =
     bodyUpdate.email = this.regemail;
     bodyUpdate.mobilePhoneNo = formValues.corrsMobile;
     bodyUpdate.registrationDate = this.regdate;
-    bodyUpdate.address.addressId = 1;
+    bodyUpdate.address.addressId = this.addressId;
     bodyUpdate.address.permanentAddress1 = formValues.perAddress1;
     bodyUpdate.address.permanentAddress2 = formValues.perAddress2;
     bodyUpdate.address.permanentAddress3 = formValues.perAddress3;
