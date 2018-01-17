@@ -457,7 +457,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   isMalaysian(val) {
     this.selectedCountry = val;
     // this.profileForm.get('perCountry').setValue(this.selectedCountry);
-    
+    debugger;
     this.isChanged();
     if(val == 152) {
       this.isLocal = true;
@@ -641,9 +641,11 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   }
   
   isChanged() {
-    if(this.profileForm.get('checkboxValue').value == true)
+    if(this.profileForm.get('checkboxValue').value == true) {
       this.profileForm.get('checkboxValue').setValue(false);
       this.checkReqValues();
+    }
+      
   }
 
   isStateChanged() {
