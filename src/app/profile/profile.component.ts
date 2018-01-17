@@ -254,10 +254,10 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                   this.profileForm.get('gender').setValue(data.user.gender.genderId);
               
               if(data.user.race)
-                  this.profileForm.get('race').setValue(data.user.race.raceCode);
+                  this.profileForm.get('race').setValue(data.user.race.raceId);
 
               if(data.user.religion)
-                  this.profileForm.get('religion').setValue(data.user.religion.religionCode);
+                  this.profileForm.get('religion').setValue(data.user.religion.religionId);
 
               if(data.user.address){
                 this.profileForm.get('perAddress1').setValue(data.user.address.permanentAddress1);
