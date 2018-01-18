@@ -133,10 +133,16 @@ export class PollComponent implements OnInit {
     }
 
     calVal(val) {
-        // debugger;
-        const numer = val.split('/')[0];
-        const denomi = val.split('/')[1];
-        this.pollPercent  = (numer / denomi) * 100;
+        // tslint:disable-next-line:radix
+        const numerator = parseInt(val.split('/')[0]);
+        // tslint:disable-next-line:radix
+        const denomi = parseInt(val.split('/')[1]);
+        // tslint:disable-next-line:radix
+        if (numerator && denomi) {
+            this.pollPercent  = (numerator / denomi) * 100;
+        }else {
+            this.pollPercent  = 0;
+        }
         this.progressbarVal = Math.round(this.pollPercent);
         // console.log(this.progressbarVal);
         return this.progressbarVal;
