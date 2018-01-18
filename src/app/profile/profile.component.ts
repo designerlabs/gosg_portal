@@ -92,7 +92,10 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   public corrsAddress2: FormControl
   public corrsAddress3: FormControl
   public corrsCountry: FormControl
-  public corrsState: FormControl
+  public corrsStateLocal: FormControl
+  public corrsStateNotLocal: FormControl
+  public corrsCityLocal: FormControl
+  public corrsCityNotLocal: FormControl
   public checkboxValue: FormControl
   public corrsCity: FormControl
   public corrsPostcode: FormControl
@@ -179,7 +182,10 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.corrsAddress2 = new FormControl()
     this.corrsAddress3 = new FormControl()
     this.corrsCountry = new FormControl()
-    this.corrsState = new FormControl()
+    this.corrsStateLocal = new FormControl()
+    this.corrsStateNotLocal = new FormControl()
+    this.corrsCityLocal = new FormControl()
+    this.corrsCityNotLocal = new FormControl()
     this.checkboxValue = new FormControl()
     this.corrsCity = new FormControl()
     this.corrsPostcode = new FormControl()
@@ -205,7 +211,10 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       corrsAddress2: this.corrsAddress2,
       corrsAddress3: this.corrsAddress3,
       corrsCountry: this.corrsCountry,
-      corrsState: this.corrsState,
+      corrsStateLocal: this.corrsStateLocal,
+      corrsStateNotLocal: this.corrsStateNotLocal,
+      corrsCityLocal: this.corrsCityLocal,
+      corrsCityNotLocal: this.corrsCityNotLocal,
       checkboxValue: this.checkboxValue,
       corrsCity: this.corrsCity,
       corrsPostcode: this.corrsPostcode,
@@ -255,8 +264,50 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                     if(data.user.address.permanentAddressCity){
                       this.profileForm.get('perCityLocal').setValue(data.user.address.permanentAddressCity.cityId);
                     }
+                    if(data.user.address.permanentAddressPostcode){
+                      this.profileForm.get('perPostcode').setValue(data.user.address.permanentAddressPostcode);
+                    }
                   }else{
                     this.isLocal = false;
+                    if(data.user.optionalPermanentAddressState){
+                      this.profileForm.get('perStateNotLocal').setValue(data.user.optionalPermanentAddressState);
+                    }
+                    if(data.user.optionalPermanentAddressCity){
+                      this.profileForm.get('perCityNotLocal').setValue(data.user.optionalPermanentAddressCity); 
+                    }
+
+                    if(data.user.optionalPermanentAddressPostcode){
+                      this.profileForm.get('perPostcode').setValue(data.user.optionalPermanentAddressPostcode); 
+                    }
+                    
+                  }
+
+                  if(data.user.address.correspondingAddressCountry.countryId == 152) {
+                    this.isCorrsLocal = true;
+                    this.getState();
+                    if(data.user.address.correspondingAddressState){
+                      this.profileForm.get('corrsStateLocal').setValue(data.user.address.correspondingAddressState.stateId);
+                    }
+                    this.getCitiesByStateP(data.user.address.correspondingAddressState.stateId);
+                    if(data.user.address.correspondingAddressCity){
+                      this.profileForm.get('corrsCityLocal').setValue(data.user.address.correspondingAddressCity.cityId);
+                    }
+                    if(data.user.address.correspondingAddressPostcode){
+                      this.profileForm.get('corrsPostcode').setValue(data.user.address.correspondingAddressPostcode);
+                    }
+                  }else{
+                    this.isCorrsLocal = false;
+                    if(data.user.optionalCorrespondingAddressState){
+                      this.profileForm.get('corrsStateNotLocal').setValue(data.user.optionalCorrespondingAddressState);
+                    }
+                    if(data.user.optionalCorrespondingAddressCity){
+                      this.profileForm.get('corrsCityNotLocal').setValue(data.user.optionalCorrespondingAddressCity); 
+                    }
+
+                    if(data.user.optionalCorrespondingAddressPostcode){
+                      this.profileForm.get('corrsPostcode').setValue(data.user.optionalCorrespondingAddressPostcode); 
+                    }
+                    
                   }
                 }
               }
@@ -474,9 +525,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     } else {
       this.isLocal = false;
       this.isCorrsLocal = false;
-      this.profileForm.get('corrsState').setValue("");
-      this.profileForm.get('corrsCity').setValue("");
-
     }
     this.checkReqValues();
     // this.toastr.info(this.translate.instant('this.isCorrsLocal: '+this.isCorrsLocal), ''); 
@@ -651,7 +699,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       this.profileForm.get('corrsAddress2').setValue(this.perAddress2.value);
       this.profileForm.get('corrsAddress3').setValue(this.perAddress3.value);
       this.profileForm.get('corrsCountry').setValue(this.perCountry.value);
-      this.profileForm.get('corrsState').setValue(this.perStateLocal.value);
+      this.profileForm.get('corrsStateLocal').setValue(this.corrsStateLocal.value);
       
       if(this.isLocal)
         this.getCitiesByStateC(this.perStateLocal.value);
@@ -875,9 +923,15 @@ let bodyUpdate =
       bodyUpdate.address.permanentAddressCity.cityId =  formValues.perCityNotLocal;
     }
 
+    if(this.isCorrsLocal) {
+      bodyUpdate.address.correspondingAddressState.stateId = formValues.corrsStateLocal;
+      bodyUpdate.address.correspondingAddressCity.cityId = formValues.corrsCityLocal;
+    } else {
+      bodyUpdate.address.correspondingAddressState.stateId = formValues.corrsStateNotLocal;
+      bodyUpdate.address.correspondingAddressCity.cityId = formValues.corrsCityNotLocal;
+    }
+
     bodyUpdate.address.correspondingAddressCountry.countryId = formValues.corrsCountry;
-    bodyUpdate.address.correspondingAddressState.stateId = formValues.corrsState;
-    bodyUpdate.address.correspondingAddressCity.cityId = formValues.corrsCity;
     bodyUpdate.address.permanentAddressPostcode = formValues.perPostcode;
     bodyUpdate.address.correspondingAddressPostcode = formValues.corrsPostcode;
     bodyUpdate.address.permanentAddressHomePhoneNo = formValues.perTelephone;
