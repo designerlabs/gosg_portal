@@ -278,7 +278,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                     this.getState();
                     this.profileForm.get('perStateLocal').setValue(data.user.address.permanentAddressState.stateId);
                     this.selectedState = this.profileForm.get('perStateLocal').value;
-                    this.getCitiesByStateP(data.user.address.permanentAddressCity.cityId);
+                    this.getCitiesByStateP(data.user.address.permanentAddressState.stateId);
                     this.profileForm.get('perCityLocal').setValue(data.user.address.permanentAddressCity.cityId); 
                     this.selectedCity = this.profileForm.get('perCityLocal').value;
                   } else {
@@ -820,29 +820,31 @@ let bodyUpdate =
           "correspondingAddress1":"",
           "correspondingAddress2": "",
           "correspondingAddress3": "",
+          "optionalCity":"",
+          "optionalState":"",
           "permanentAddressCountry": {
-              "countryId":""
+              "countryId":null
           },
           "permanentAddressState": {
-              "stateId": ""    
+              "stateId": null    
           },
           "permanentAddressCity": {
-              "cityId": ""
+              "cityId": null
           },
           "correspondingAddressCountry": {
-              "countryId": ""
+              "countryId": null
           },
           "correspondingAddressState": {
-              "stateId": ""
+              "stateId": null
           },
           "correspondingAddressCity": {
-              "cityId": ""
+              "cityId": null
           },
           "permanentAddressPostcode": "",
           "correspondingAddressPostcode": "",
           "permanentAddressHomePhoneNo": "",
           "correspondingAddressHomePhoneNo": "",
-          "sameAddressFlag": null
+          "sameAddressFlag": false
       }
   };
 
