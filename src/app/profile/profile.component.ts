@@ -269,15 +269,15 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                     }
                   }else{
                     this.isLocal = false;
-                    if(data.user.optionalPermanentAddressState){
-                      this.profileForm.get('perStateNotLocal').setValue(data.user.optionalPermanentAddressState);
+                    if(data.user.address.optionalPermanentAddressState){
+                      this.profileForm.get('perStateNotLocal').setValue(data.user.address.optionalPermanentAddressState);
                     }
-                    if(data.user.optionalPermanentAddressCity){
-                      this.profileForm.get('perCityNotLocal').setValue(data.user.optionalPermanentAddressCity); 
+                    if(data.user.address.optionalPermanentAddressCity){
+                      this.profileForm.get('perCityNotLocal').setValue(data.user.address.optionalPermanentAddressCity); 
                     }
 
-                    if(data.user.optionalPermanentAddressPostcode){
-                      this.profileForm.get('perPostcode').setValue(data.user.optionalPermanentAddressPostcode); 
+                    if(data.user.address.optionalPermanentAddressPostcode){
+                      this.profileForm.get('perPostcode').setValue(data.user.address.optionalPermanentAddressPostcode); 
                     }
                     
                   }
@@ -297,15 +297,15 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                     }
                   }else{
                     this.isCorrsLocal = false;
-                    if(data.user.optionalCorrespondingAddressState){
-                      this.profileForm.get('corrsStateNotLocal').setValue(data.user.optionalCorrespondingAddressState);
+                    if(data.user.address.optionalCorrespondingAddressState){
+                      this.profileForm.get('corrsStateNotLocal').setValue(data.user.address.optionalCorrespondingAddressState);
                     }
-                    if(data.user.optionalCorrespondingAddressCity){
-                      this.profileForm.get('corrsCityNotLocal').setValue(data.user.optionalCorrespondingAddressCity); 
+                    if(data.user.address.optionalCorrespondingAddressCity){
+                      this.profileForm.get('corrsCityNotLocal').setValue(data.user.address.optionalCorrespondingAddressCity); 
                     }
 
-                    if(data.user.optionalCorrespondingAddressPostcode){
-                      this.profileForm.get('corrsPostcode').setValue(data.user.optionalCorrespondingAddressPostcode); 
+                    if(data.user.address.optionalCorrespondingAddressPostcode){
+                      this.profileForm.get('corrsPostcode').setValue(data.user.address.optionalCorrespondingAddressPostcode); 
                     }
                     
                   }
@@ -859,8 +859,13 @@ let bodyUpdate =
           "correspondingAddress1":"",
           "correspondingAddress2": "",
           "correspondingAddress3": "",
-          "optionalCity":"",
-          "optionalState":"",
+          "optionalCorrespondingAddressCity":"",
+          "optionalCorrespondingAddressPostcode":"",
+          "optionalCorrespondingAddressState":"",
+          "optionalPermanentAddressCity":"",
+          "optionalPermanentAddressPostcode":"",
+          "optionalPermanentAddressState":"",
+          
           "permanentAddressCountry": {
               "countryId":null
           },
