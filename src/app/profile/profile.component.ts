@@ -236,11 +236,13 @@ export class ProfileComponent implements OnInit, AfterViewInit {
             data => {
 
               if(data.user){
+                this.userId = data.user.userId;
                 this.fullname = data.user.fullName;
                 this.accountStatus = data.user.accountStatus.accountStatusId;
                 this.nationality = data.user.country.countryName;
                 this.countryId = data.user.country.countryId;
                 this.passport = data.user.passportNo;
+                this.mobileNo = data.user.mobilePhoneNo;
                 this.idno = data.user.pid;
                 this.regemail = data.user.email;
                 this.regdate = data.user.registrationDate;
@@ -251,6 +253,18 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                 this.roles = data.user.roles;
 
 
+                if(data.user.gender){
+                  this.profileForm.get('gender').setValue(data.user.gender.genderCode);
+                }
+
+                if(data.user.race){
+                  this.profileForm.get('race').setValue(data.user.race.raceCode);
+                }
+              
+                if(data.user.religion){
+                  this.profileForm.get('religion').setValue(data.user.religion.religionCode);
+                }
+                
                 if(data.user.address){
                   this.addressId = data.user.address.addressId;
                   this.profileForm.get('perCountry').setValue(data.user.address.permanentAddressCountry.countryId);
@@ -320,24 +334,12 @@ export class ProfileComponent implements OnInit, AfterViewInit {
               // this.isMalaysianChk(this.countryId);
               // // this.getCountryByCode(getUsrNationality);
               // // this.isUserRegLocal(getUsrNationality);
-              // this.userId = data.user.userId;
+          
               // this.idno = data.user.pid;
               // if(this.isRegLocal == true) 
               //   this.maxDate = this.getMinDobDate(this.idno);
               
-              // this.regemail = data.user.email;
-              // this.regdate = data.user.registrationDate;
-              // this.mobileNo = data.user.mobilePhoneNo;
-              
-              // if(data.user.gender)
-              //     this.profileForm.get('gender').setValue(data.user.gender.genderCode);
-              
-              // if(data.user.race)
-              //     this.profileForm.get('race').setValue(data.user.race.raceCode);
-
-              // if(data.user.religion)
-              //     this.profileForm.get('religion').setValue(data.user.religion.religionCode);
-
+             
               // if(data.user.address){
               //   this.profileForm.get('perAddress1').setValue(data.user.address.permanentAddress1);
               //   this.profileForm.get('perAddress2').setValue(data.user.address.permanentAddress2);
