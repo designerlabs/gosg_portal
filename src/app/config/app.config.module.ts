@@ -16,7 +16,7 @@ let commonURL = uapURL+'service/';
 // backend service
 let baseLocalURL = './app/apidata/';
 let searchServiceURL = 'https://www.malaysia.gov.my/public/';
-let pollUrl = "http://10.1.70.148:8081/service/polls";
+let pollUrl = commonURL + "polls";
 
 export class AppConfig {
     apiEndpoint: string;
