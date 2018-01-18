@@ -51,7 +51,7 @@
                 <section class="example-section" style="padding-left: 200px;width: 75%;padding-bottom: 20px;
                 ">
                     <div *ngFor="let pollAnswer of pollDataAnswer">
-                        <div *ngIf="pollAnswer.answer">
+                        <div *ngIf="pollAnswer.answer.length>0">
                                 <div *ngIf="pollAnswer.selans" style="text-align: left; font-family: Roboto; color: rgb(51, 51, 51);">
                                     Your answer is: </div>
                                 <span class="font-size-m warna_font" style="text-align: left; font-family: Roboto; color: rgb(51, 51, 51); display: inherit">{{pollAnswer.answer}}</span>
