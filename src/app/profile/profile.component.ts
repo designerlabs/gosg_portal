@@ -267,6 +267,12 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                 
                 if(data.user.address){
                   this.addressId = data.user.address.addressId;
+                  this.profileForm.get('perAddress1').setValue(data.user.address.permanentAddress1);
+                  this.profileForm.get('perAddress2').setValue(data.user.address.permanentAddress2);
+                  this.profileForm.get('perAddress3').setValue(data.user.address.permanentAddress3);
+                  this.profileForm.get('perPostcode').setValue(data.user.address.permanentAddressPostcode);
+                  this.profileForm.get('perTelephone').setValue(data.user.address.permanentAddressHomePhoneNo);
+
                   this.profileForm.get('perCountry').setValue(data.user.address.permanentAddressCountry.countryId);
                   if(data.user.address.permanentAddressCountry.countryId == 152) {
                     this.isLocal = true;
@@ -295,6 +301,14 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                     }
                     
                   }
+
+                  this.profileForm.get('corrsAddress1').setValue(data.user.address.correspondingAddress1);
+                  this.profileForm.get('corrsAddress2').setValue(data.user.address.correspondingAddress2);
+                  this.profileForm.get('corrsAddress3').setValue(data.user.address.correspondingAddress3);
+                  this.profileForm.get('corrsPostcode').setValue(data.user.address.correspondingAddressPostcode);
+                  this.profileForm.get('corrsTelephone').setValue(data.user.address.correspondingAddressHomePhoneNo);
+                  this.profileForm.get('corrsMobile').setValue(data.user.mobilePhoneNo);
+                  
                   this.profileForm.get('corrsCountry').setValue(data.user.address.correspondingAddressCountry.countryId);
                   if(data.user.address.correspondingAddressCountry.countryId == 152) {
                     this.isCorrsLocal = true;
@@ -707,14 +721,16 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       this.profileForm.get('corrsAddress2').setValue(this.perAddress2.value);
       this.profileForm.get('corrsAddress3').setValue(this.perAddress3.value);
       this.profileForm.get('corrsCountry').setValue(this.perCountry.value);
-      this.profileForm.get('corrsStateLocal').setValue(this.corrsStateLocal.value);
-      
+      this.profileForm.get('corrsStateLocal').setValue(this.perStateLocal.value);
+      this.profileForm.get('corrsCityLocal').setValue(this.perCityLocal.value);
+      this.profileForm.get('corrsPostcode').setValue(this.perPostcode.value);
+      this.profileForm.get('corrsTelephone').setValue(this.perTelephone.value);
+
       if(this.isLocal)
         this.getCitiesByStateC(this.perStateLocal.value);
      
-      this.profileForm.get('corrsCity').setValue(this.perCityLocal.value);
-      this.profileForm.get('corrsPostcode').setValue(this.perPostcode.value);
-      this.profileForm.get('corrsTelephone').setValue(this.perTelephone.value);
+
+
       // this.isMalaysianChk(this.countryCode);
     }
     else
@@ -723,8 +739,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       this.profileForm.get('corrsAddress2').setValue("");
       this.profileForm.get('corrsAddress3').setValue("");
       this.profileForm.get('corrsCountry').setValue("");
-      this.profileForm.get('corrsState').setValue("");
-      this.profileForm.get('corrsCity').setValue("");
+      this.profileForm.get('corrsStateLocal').setValue("");
+      this.profileForm.get('corrsCityLocal').setValue("");
       this.profileForm.get('corrsPostcode').setValue("");
       this.profileForm.get('corrsTelephone').setValue("");
     }
