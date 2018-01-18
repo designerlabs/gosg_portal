@@ -62,9 +62,9 @@ export class PollComponent implements OnInit {
          return this.http.get(this.config.urlPoll + '/question/lang/' + languageId + '/?active=true')
            .map(res => res.json())
           .subscribe(eventData => {
-                this.pollDataQuestion = eventData[0].questionTitle;
-                this.pollDataAnswer = eventData[0].answer;
-                this.pollDataQuestionID = eventData[0].questionId;
+                this.pollDataQuestion = eventData.questionTitle;
+                this.pollDataAnswer = eventData.answer;
+                this.pollDataQuestionID = eventData.questionId;
                 // tslint:disable-next-line:radix
                 this.showResult = (parseInt(localStorage.getItem('polldone')) === this.pollDataQuestionID);
                 // this.pollDataComment = eventData[0].comment;
@@ -133,6 +133,7 @@ export class PollComponent implements OnInit {
     }
 
     calVal(val) {
+        // debugger;
         const numer = val.split('/')[0];
         const denomi = val.split('/')[1];
         this.pollPercent  = (numer / denomi) * 100;
