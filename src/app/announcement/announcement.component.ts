@@ -25,7 +25,6 @@ export class AnnouncementComponent implements OnInit {
     announcementID2 = null;
     announces: any;
     announceRes: any;
-    announcementList: any;
     announceData: any;
   
     @Output() langChange = new EventEmitter();
@@ -82,10 +81,6 @@ export class AnnouncementComponent implements OnInit {
         const _getModule = this.router.url.split('/')[1];
         const _getAnnounceID = parseInt(this.router.url.split('/')[2]); 
         const _getAnnounceID2 = parseInt(this.router.url.split('/')[3]);   
-
-        // this.announcementID = parseInt(this.router.url.split('/')[2]); 
-        // this.announcementID2 = parseInt(this.router.url.split('/')[3]);
-        // _getSubID = parseInt(_getSubID[1]);
         
         if (isNaN(_getAnnounceID)){  
             this.triggerAnnouncementAll(_getModule,  this.lang, _getAnnounceID, _getAnnounceID2);          
@@ -103,25 +98,16 @@ export class AnnouncementComponent implements OnInit {
        
         const _getModule = this.router.url.split('/')[1];
         const _getAnnounceID = parseInt(this.router.url.split('/')[2]); 
-        const _getAnnounceID2 = parseInt(this.router.url.split('/')[3]);   
-        debugger;
-        console.log(e.active);
+        const _getAnnounceID2 = parseInt(this.router.url.split('/')[3]); 
         if (isNaN(_getAnnounceID) && isNaN(_getAnnounceID2)){  
             this.triggerAnnouncementAll(_getModule,  this.lang, _getAnnounceID, _getAnnounceID2);   
             this.router.navigate([_getModule, e.id]);       
         }
 
-        // else if(!isNaN(_getAnnounceID) && e.active == undefined){
-        //     this.triggerAnnouncementAll(_getModule,  this.lang, e.id, _getAnnounceID2);   
-        //     this.router.navigate([_getModule, e.id]);         
-        // }
-
         else{
             this.triggerAnnouncementAll(_getModule,  this.lang, _getAnnounceID, e.id);   
             this.router.navigate([_getModule,  _getAnnounceID, e.id]);
         }
-        debugger;
-        // this.router.navigate([_getModule, e.id]);
         event.preventDefault();
     }
   
