@@ -31,8 +31,8 @@
     "readmore": "Read More",
     "applicationNum": "Application Number",
     "send": "SUBMIT",
-    "highlights": "Highligths",
-    "currentHighlights": "Highligths",
+    "highlights": "Highlights",
+    "currentHighlights": "Highlights",
     "calendarTitle": "Activities for this month"
   },
   "register": {
@@ -40,8 +40,8 @@
       "citistatus": "Citizenship Status",
       "ic": "Identification card number",
       "icplh": "IE:888888888888",
-      "name": "User name (same as in the identity card)",
-      "nameplh": "User name",
+      "name": "Full Name (same as in the identity card)",
+      "nameplh": "Full name",
       "email": "Email",
       "emailplh": "IE: aaaa@bbb.com",
       "tel": "Telephone",
@@ -53,11 +53,11 @@
       "nonciti": "Non Citizen",
       "country": "Country",
       "passport": "Passport Number",
-      "fullname": "Full Name"
+      "fullname": "Full name"
     },
     "err": {
       "ic": "IC Number is required",
-      "name": "User name is required",
+      "name": "Full name is required",
       "email": "Email is required. IE: aaaa@bbb.com",
       "tel": "Telephone No. is required. IE: 018xxxxxxx / +60-x-xxxx-xxxx",
       "country": "Country is required",
@@ -74,7 +74,7 @@
       "telb":"Telephone No must be valid",
       "passport":"Passport number must be valid. IE: AA12345678",
       "fullname":"Full name must be valid",
-      "name":"User name must be valid",
+      "name":"Full name must be valid",
       "captcha":"Verification code must be valid"
     },
     "popupmsg":{
@@ -117,7 +117,7 @@
     "err": {
       "updateFail": "Profile update failed!",
       "ic": "IC Number is required",
-      "name": "User name is required",
+      "name": "Full name is required",
       "dob": "Date of Birth is required",
       "gender": "Gender is required",
       "race": "Race is required",
@@ -141,7 +141,7 @@
       "telb":"No. Telefon mestilah sah",
       "passport":"Passport number must be valid. IE: AA12345678",
       "fullname":"Full name must be valid",
-      "name":"User name must be valid",
+      "name":"Full name must be valid",
       "postcode": "Postcode must be valid",
       "captcha":"Verification code must be valid"
     }
@@ -161,7 +161,7 @@
       "type": "Type of feedback",
       "subjek": "Subject",
       "name": "Name",
-      "nameplh": "User Name",
+      "nameplh": "Full name",
       "emel": "Email",
       "content": "Content",
       "reset": "Reset",
@@ -266,5 +266,10 @@
     "title" : "SHARE YOUR THOUGHT WITH US",
     "resultTitle" : "POLLS RESULT",
     "recommend" : "Your recommendation for improvement"
+  },
+  "announcement":{
+    "title":"Highlights",
+    "description":"All Highlight",
+    "message":"No latest information."
   }
 }

@@ -54,6 +54,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     
     nonCiti: boolean;
     citi: boolean;
+    permanentResident: boolean;
     modalRef: BsModalRef;
     maskCitizen: any;
     maskForeigner: any;
@@ -91,6 +92,8 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     private telefon: FormControl;
     private country: FormControl;
     private passport: FormControl;
+    private country_pr: FormControl;
+    private passport_pr: FormControl;
     private nama_penuhf: FormControl;
     private emelf: FormControl;
     private telefonf: FormControl;
@@ -215,6 +218,8 @@ export class RegisterComponent implements OnInit, AfterViewInit {
             this.telefon = new FormControl('', [Validators.required]),
             this.country = new FormControl('', [Validators.required]),
             this.passport = new FormControl('', [Validators.required, Validators.pattern(this.validateService.getPattern(6,10).passport)]), //A1234567 or AB123456
+            this.country_pr = new FormControl(''),
+            this.passport_pr = new FormControl('', [Validators.pattern(this.validateService.getPattern(6,10).passport)]), //A1234567 or AB123456
             this.nama_penuhf = new FormControl('', [Validators.required, Validators.pattern(this.validateService.getPattern(2,60).name)]), 
             this.emelf = new FormControl('', [Validators.required, Validators.pattern(this.validateService.getPattern().email)]),
             this.telefonf = new FormControl('', [Validators.required]),
@@ -226,6 +231,8 @@ export class RegisterComponent implements OnInit, AfterViewInit {
                 telefon: this.telefon,
                 country: this.country,
                 passport: this.passport,
+                country_pr: this.country_pr,
+                passport_pr: this.passport_pr,
                 nama_penuhf: this.nama_penuhf,
                 emelf: this.emelf,
                 telefonf: this.telefonf,
@@ -274,12 +281,16 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         this.changeCitizen = this.citizenValue;
         this.ReCreateCaptchas();
         if ((this.citizenValue == 2) || (this.citizenValue  ==6)) {
+            debugger;
             this.citi = false;
+            this.permanentResident = false;
             this.nonCiti = true;
             this.RemoveCitizenCtrl();
             this.addNonCitizenCtrl();
         } else {
+            debugger;
             this.citi = true;
+            this.permanentResident = false;
             this.nonCiti = false;
             this.RemoveNonCitizenCtrl();
             this.addCitizenCtrl();
@@ -306,6 +317,37 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         this.emel.reset();
         this.telefon.reset();
     }
+
+
+    addPRTRCtrl() {
+        this.citizenFormGrp.addControl('kad_pengenalan', this.kad_pengenalan);
+        this.citizenFormGrp.addControl('nama_penuh', this.nama_penuh);
+        this.citizenFormGrp.addControl('emel', this.emel);
+        this.citizenFormGrp.addControl('telefon', this.telefon);
+        this.citizenFormGrp.addControl('country_pr', this.country_pr);
+        this.citizenFormGrp.addControl('passport_pr', this.passport_pr);
+        this.resetPRTRCtrl();
+    }
+
+    RemovePRTRCtrl() {
+        this.citizenFormGrp.removeControl('kad_pengenalan');
+        this.citizenFormGrp.removeControl('nama_penuh');
+        this.citizenFormGrp.removeControl('emel');
+        this.citizenFormGrp.removeControl('telefon');
+        this.citizenFormGrp.removeControl('country_pr');
+        this.citizenFormGrp.removeControl('passport_pr');
+    }
+
+    resetPRTRCtrl() {
+        this.kad_pengenalan.reset();
+        this.nama_penuh.reset();
+        this.emel.reset();
+        this.telefon.reset();
+        this.country_pr.reset();
+        this.passport_pr.reset();
+    }
+
+    
 
     addNonCitizenCtrl() {
         this.citizenFormGrp.addControl('country', this.country);
@@ -335,20 +377,13 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     resetForm() {
         if (this.isCitizen()) {
             this.resetCitizenCtrl();
+            this.resetPRTRCtrl();
         } else {
             this.resetNonCitizenCtrl();
+           
         }
         this.captcha.reset();
     }
-
-    dummyCitizen(values: any): void{
-        if (this.registration_Form.valid) {
-            console.log(values);
-        }
-    }
-
-    
-
     
     citizenReg(formValues:any) {
        
@@ -362,7 +397,8 @@ export class RegisterComponent implements OnInit, AfterViewInit {
             "fullName": null,
             "userType":{  
                 "userTypeId":null
-             }
+             },
+             "passportNo":null
         };
 
         
@@ -398,17 +434,24 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         //     "citizenType":null,
         //     "user_id": null
         // };
+        debugger;
+        if((formValues.kad_pengenalan ) && (formValues.passport_pr)){
+            body.country.countryId = formValues.country_pr;
+            body.userType.userTypeId = this.citizenValue;
+            body.identificationNo = formValues.kad_pengenalan;
+            body.email = formValues.emel;
+            body.phoneNo = formValues.telefon;
+            body.fullName = formValues.nama_penuh;
+            body.passportNo = formValues.passport_pr;
 
-        
-        if(formValues.country){
+        } else if(formValues.country){
             body.country.countryId = formValues.country;
             body.userType.userTypeId = this.citizenValue;
             body.identificationNo = formValues.passport;
             body.email = formValues.emelf;
             body.phoneNo = formValues.telefonf;
             body.fullName = formValues.nama_penuhf;
-           
-
+       
         }else{
             body.country.countryId = 152;
             body.userType.userTypeId = this.citizenValue;
@@ -478,6 +521,16 @@ export class RegisterComponent implements OnInit, AfterViewInit {
             return false;
         }else{
             return true;
+        }
+        
+    }
+
+
+    isPRTR() {
+        if((this.citizenValue == 3 )|| (this.citizenValue == 4)||(this.citizenValue == 7 )|| (this.citizenValue == 8)){
+            return true;
+        }else{
+            return false;
         }
         
     }

@@ -4,7 +4,9 @@ export let APP_CONFIG = new InjectionToken<AppConfig>('app.config');
 
 let baseURL = 'http://10.1.17.12:3000/';
 let uapURL = 'https://10.1.71.176/';
+//let uapURL = 'https://10.1.71.176/';
 let registrationUrl = uapURL+'registration/';
+
 
 // common service
 let portalBaseURL = 'http://localhost:8020/portal/';
@@ -33,7 +35,8 @@ export class AppConfig {
     urlHighlights: string;
     urlGender: string;
     urlPoll: string;
-    urlAnnouncement: string;
+    urlAnnouncement: string;       
+    urlAnnouncementSub: string;
     urlCalendar: string;
     urlRegister: string;
     urlFeedbackType: string;
@@ -71,7 +74,10 @@ export const APP_DI_CONFIG: AppConfig = {
     urlHighlights: './app/apidata/highlightbox',
     urlGender: commonURL+'gender/lang/',
     // urlPoll: './app/apidata/poll',
-    urlAnnouncement: './app/apidata/announcement',
+    //urlAnnouncement: './app/apidata/announcement',
+    // urlAnnouncement : announcementUrl + 'announcement/category/list',
+    urlAnnouncement : commonURL + 'announcement/date/publish',    
+    urlAnnouncementSub: commonURL + 'announcement/category',
     urlCalendar: './app/apidata/calendar',
     urlRegister: registrationUrl+'register',    
     urlFeedbackType: commonURL+'feedback/type/lang/',

@@ -27,6 +27,7 @@ import { ManualComponent } from './staticpage/manual.component';
 // import { SearchResultComponent } from './search/searchResult/searchResult.component'
 import { DataprotectionComponent} from './staticpage/dataprotection.component';
 import { LoginComponent } from "./login/login.component";
+import { AnnouncementComponent } from './announcement/announcement.component';
 
 
 export const appRoutes: Routes = [
@@ -34,7 +35,9 @@ export const appRoutes: Routes = [
     {path: 'index', component: HomeComponent},
     {path: 'search/searchResult', component: SearchResultComponent},
     {path: 'topic/:id', component: ArticleComponent, canActivate: [NavRouterActivator]  },
-    {path: 'announcement/:id', component: ArticleComponent },
+    {path: 'announcement', component: AnnouncementComponent },
+    {path: 'announcement/:id', component: AnnouncementComponent},
+    {path: 'announcement/:id/:id', component: AnnouncementComponent},
     {path: 'subtopic/:id1/:id2', component: SubarticleComponent },
     {path: 'login', component: LoginComponent},
     {path: 'register', component: RegisterComponent },

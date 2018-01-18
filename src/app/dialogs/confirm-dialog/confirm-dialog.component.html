@@ -11,7 +11,7 @@ tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="tru
     </span>
 
     <span *ngIf="isErrMsg">
-      <div style="font-weight:bold;"> {{content | translate}}</div>
+      <div style="font-weight:bold;" [innerHTML]="content"></div>
     </span>
     <span *ngIf="!isErrMsg">{{content | translate}} </span>
     <div class="modal-body text-center">

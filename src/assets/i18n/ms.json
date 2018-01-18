@@ -40,8 +40,8 @@
       "citistatus": "Status Kewarganegaraan",
       "ic": "Nombor Kad Pengenalan",
       "icplh": "Contoh:888888888888",
-      "name": "Nama Pengguna (sama seperti di dalam kad pengenalan) ",
-      "nameplh": "Nama Pengguna",
+      "name": "Nama penuh (sama seperti di dalam kad pengenalan) ",
+      "nameplh": "Nama penuh",
       "email": "Emel",
       "emailplh": "Contoh: aaaa@bbb.com",
       "tel": "Telefon",
@@ -80,7 +80,7 @@
     "popupmsg":{
       "success_content1":"Thank you for your registration. Check your ",
       "success_content2":"for your account activation",
-      "isexist":"Email Pengguna Sudah Wujud"
+      "isexist":"Email penuh Sudah Wujud"
     }
     
   },
@@ -162,7 +162,7 @@
       "type":"Jenis maklum balas",
       "subjek":"Subjek",
       "name": "Nama",
-      "nameplh": "Nama Pengguna",
+      "nameplh": "Nama penuh",
       "emel":"Emel",
       "content":"Kandungan Pertanyaan",
       "reset":"Set Semula",
@@ -269,5 +269,10 @@
     "title" : "KONGSIKAN PANDANGAN ANDA BERSAMA KAMI",
     "resultTitle" : "KEPUTUSAN",
     "recommend" : "Cadangan Penambahbaikan Anda"
+  },
+  "announcement":{
+    "title":"Sorotan Terkini",
+    "description":"Semua Sorotan Terkini",
+    "message":"Tiada maklumat terkini."
   }
 }
