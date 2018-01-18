@@ -157,7 +157,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.getRace();
     this.getGenderVal();
     this.getReligion();
-    this.isSameAddress();
     this.maskForeigner = this.validateService.getMask().telephonef;
     this.maskPostcode = this.validateService.getMask().postcode;
     this.maskDateFormat = this.validateService.getMask().dateFormat;
@@ -954,7 +953,7 @@ let bodyUpdate =
     bodyUpdate.address.sameAddressFlag = formValues.checkboxValue;
 
 
-
+    this.isSameAddress();
     this.checkReqValues();
 
     console.log(this.initial);
