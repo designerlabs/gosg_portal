@@ -133,7 +133,8 @@ export class PollComponent implements OnInit {
     }
 
     calVal(val) {
-        // tslint:disable-next-line:radix
+        if(val) {
+            // tslint:disable-next-line:radix
         const numerator = parseInt(val.split('/')[0]);
         // tslint:disable-next-line:radix
         const denomi = parseInt(val.split('/')[1]);
@@ -146,5 +147,6 @@ export class PollComponent implements OnInit {
         this.progressbarVal = Math.round(this.pollPercent);
         // console.log(this.progressbarVal);
         return this.progressbarVal;
+        }
     }
 }
