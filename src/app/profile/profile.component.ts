@@ -233,6 +233,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                 this.countryId = data.user.country.countryId;
                 this.passport = data.user.passportNo;
                 this.idno = data.user.pid;
+                this.regemail = data.user.email;
+                this.regdate = data.user.registrationDate;
                 this.isStaff = data.user.isStaff;
                 this.isMyIdentityVerfied = data.user.isMyIdentityVerified;
                 this.isMyIdentityValid = data.user.isMyIdentityValid;
