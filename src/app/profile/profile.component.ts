@@ -157,6 +157,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.getRace();
     this.getGenderVal();
     this.getReligion();
+    this.isSameAddress();
     this.maskForeigner = this.validateService.getMask().telephonef;
     this.maskPostcode = this.validateService.getMask().postcode;
     this.maskDateFormat = this.validateService.getMask().dateFormat;
@@ -338,7 +339,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
               // this.idno = data.user.pid;
               // if(this.isRegLocal == true) 
               //   this.maxDate = this.getMinDobDate(this.idno);
-              
              
               // if(data.user.address){
               //   this.profileForm.get('perAddress1').setValue(data.user.address.permanentAddress1);
@@ -692,6 +692,13 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.checkReqValues();
   }
 
+  isSameAddress(){
+    if(this.profileForm.get('checkboxValue').value == null) {
+      this.profileForm.get('checkboxValue').setValue(false);
+      debugger;
+    }
+  }
+
   isChecked(e) {
 
     if(e.checked)
@@ -725,6 +732,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     console.log(e.checked);
     this.checkReqValues();
   }
+  
   
   addLocalCtrl() {
     this.profileForm.addControl('perStateLocal', this.perStateLocal);
