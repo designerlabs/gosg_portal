@@ -283,7 +283,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                   }
 
                   if(data.user.address.correspondingAddressCountry.countryId == 152) {
-                    this.isLocal = true;
+                    this.isCorrsLocal = true;
                     this.getState();
                     if(data.user.address.correspondingAddressState){
                       this.profileForm.get('corrsStateLocal').setValue(data.user.address.correspondingAddressState.stateId);
@@ -296,7 +296,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                       this.profileForm.get('corrsPostcode').setValue(data.user.address.correspondingAddressPostcode);
                     }
                   }else{
-                    this.isLocal = false;
+                    this.isCorrsLocal = false;
                     if(data.user.optionalCorrespondingAddressState){
                       this.profileForm.get('corrsStateNotLocal').setValue(data.user.optionalCorrespondingAddressState);
                     }
@@ -918,11 +918,15 @@ let bodyUpdate =
     if(this.isLocal) {
       bodyUpdate.address.permanentAddressState.stateId = formValues.perStateLocal;
       bodyUpdate.address.permanentAddressCity.cityId = formValues.perCityLocal;
-      bodyUpdate.address.correspondingAddressState.stateId = formValues.corrsStateLocal;
-      bodyUpdate.address.correspondingAddressCity.cityId = formValues.corrsCityLocal;
     } else {
       bodyUpdate.address.permanentAddressState.stateId = formValues.perStateNotLocal;
       bodyUpdate.address.permanentAddressCity.cityId =  formValues.perCityNotLocal;
+    }
+
+    if(this.isCorrsLocal) {
+      bodyUpdate.address.correspondingAddressState.stateId = formValues.corrsStateLocal;
+      bodyUpdate.address.correspondingAddressCity.cityId = formValues.corrsCityLocal;
+    } else {
       bodyUpdate.address.correspondingAddressState.stateId = formValues.corrsStateNotLocal;
       bodyUpdate.address.correspondingAddressCity.cityId = formValues.corrsCityNotLocal;
     }
