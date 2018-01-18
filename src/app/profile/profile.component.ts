@@ -822,8 +822,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   updateProfile(formValues:any) {
     let getUsrID = localStorage.getItem('usrID');
 
-    if(formValues.checkboxValue){
-      debugger;
+    if(formValues.checkboxValue == null){
+      formValues.checkboxValue = false;
     }
 let bodyUpdate = 
 
