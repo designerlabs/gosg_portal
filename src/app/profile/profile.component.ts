@@ -225,105 +225,93 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
           this.protectedService.getProfile(data.user.pid).subscribe(
             data => {
-              console.log(data);
-              this.fullname = data.user.fullName;
-              this.accountStatus = data.user.accountStatus.accountStatusId
-              this.nationality = data.user.country.countryName;
-              this.countryCode = data.user.country.countryCode;
-              this.passport = data.user.passportNo;
-              this.countryId = data.user.country.countryId;
-              this.isStaff = data.user.isStaff;
-              this.isMyIdentityVerfied = data.user.isMyIdentityVerified;
-              this.isMyIdentityValid = data.user.isMyIdentityValid;
-              this.agencyForwardUrl = data.user.agencyForwardUrl;
-              this.roles = data.user.roles;
-              if(data.user.address){
-                this.addressId = data.user.address.addressId;
-              }
-              
-              this.isMalaysian(this.countryId);
-              this.isMalaysianChk(this.countryId);
-              // this.getCountryByCode(getUsrNationality);
-              // this.isUserRegLocal(getUsrNationality);
-              this.userId = data.user.userId;
-              this.idno = data.user.pid;
-              if(this.isRegLocal == true) 
-                this.maxDate = this.getMinDobDate(this.idno);
-              
-              this.regemail = data.user.email;
-              this.regdate = data.user.registrationDate;
-              this.mobileNo = data.user.mobilePhoneNo;
-              
-              if(data.user.gender)
-                  this.profileForm.get('gender').setValue(data.user.gender.genderCode);
-              
-              if(data.user.race)
-                  this.profileForm.get('race').setValue(data.user.race.raceCode);
 
-              if(data.user.religion)
-                  this.profileForm.get('religion').setValue(data.user.religion.religionCode);
+              if(data.user){
+                this.fullname = data.user.fullName;
+                this.accountStatus = data.user.accountStatus.accountStatusId;
+                this.nationality = data.user.country.countryName;
+                this.countryId = data.user.country.countryId;
+                this.passport = data.user.passportNo;
+              
+                this.isStaff = data.user.isStaff;
+                this.isMyIdentityVerfied = data.user.isMyIdentityVerified;
+                this.isMyIdentityValid = data.user.isMyIdentityValid;
+                this.agencyForwardUrl = data.user.agencyForwardUrl;
+                this.roles = data.user.roles;
 
-              if(data.user.address){
-                this.profileForm.get('perAddress1').setValue(data.user.address.permanentAddress1);
-                this.profileForm.get('perAddress2').setValue(data.user.address.permanentAddress2);
-                this.profileForm.get('perAddress3').setValue(data.user.address.permanentAddress3);
-                this.selectedCountry = data.user.address.permanentAddressCountry.countryId;
-                this.profileForm.get('perCountry').setValue(data.user.address.permanentAddressCountry.countryId);
-                this.profileForm.get('perPostcode').setValue(data.user.address.permanentAddressPostcode);
-                this.profileForm.get('perTelephone').setValue(data.user.address.homePhoneNo);
-      
-                if(data.user.address.permanentAddressState != null) {
+
+                if(data.user.address){
+                  this.addressId = data.user.address.addressId;
                   if(data.user.address.permanentAddressCountry.countryId == 152) {
                     this.isLocal = true;
                     this.getState();
-                    this.profileForm.get('perStateLocal').setValue(data.user.address.permanentAddressState.stateId);
-                    this.selectedState = this.profileForm.get('perStateLocal').value;
+                    if(data.user.address.permanentAddressState){
+                      this.profileForm.get('perStateLocal').setValue(data.user.address.permanentAddressState.stateId);
+                    }
                     this.getCitiesByStateP(data.user.address.permanentAddressState.stateId);
-                    this.profileForm.get('perCityLocal').setValue(data.user.address.permanentAddressCity.cityId); 
-                    this.selectedCity = this.profileForm.get('perCityLocal').value;
-                  } else {
+                    if(data.user.address.permanentAddressCity){
+                      this.profileForm.get('perCityLocal').setValue(data.user.address.permanentAddressCity.cityId);
+                    }
+                  }else{
                     this.isLocal = false;
-                    this.profileForm.get('perStateNotLocal').setValue(data.user.address.permanentAddressState.stateId);
-                    this.selectedState = this.profileForm.get('perStateNotLocal').value;
-                    this.profileForm.get('perCityNotLocal').setValue(data.user.address.permanentAddressCity.cityId); 
-                    this.selectedCity = this.profileForm.get('perCityNotLocal').value;
                   }
                 }
               }
               
-              
-              // if(data.user.same_address != true) {
-              //   this.profileForm.get('corrsAddress1').setValue(data[0].corresponding_address1);
-              //   this.profileForm.get('corrsAddress2').setValue(data[0].corresponding_address2);
-              //   this.profileForm.get('corrsAddress3').setValue(data[0].corresponding_address3);
-              //   this.profileForm.get('corrsCountry').setValue(data[0].corresponding_country);
-              //   this.profileForm.get('corrsCity').setValue(data[0].corresponding_city);
-      
-              //   if(this.isCorrsLocal)
-              //     this.getCitiesByStateC(data[0].corresponding_state);
-      
-              //   this.profileForm.get('corrsState').setValue(data[0].corresponding_state);
-              //   this.profileForm.get('corrsPostcode').setValue(data[0].corresponding_postcode);
-              //   this.profileForm.get('corrsMobile').setValue(data[0].mobile_phone);
-              //   this.profileForm.get('corrsTelephone').setValue(data[0].corresponding_home_phone
-              //   );
-              // } else {
-              //   this.profileForm.get('checkboxValue').setValue(data[0].same_address);
-              //   this.profileForm.get('corrsTelephone').setValue(data[0].permanent_home_phone);
-              //   this.profileForm.get('corrsAddress1').setValue(data[0].permanent_address1);
-              //   this.profileForm.get('corrsAddress2').setValue(data[0].permanent_address2);
-              //   this.profileForm.get('corrsAddress3').setValue(data[0].permanent_address3);
-              //   this.profileForm.get('corrsCountry').setValue(data[0].permanent_country);
-              //   this.profileForm.get('corrsState').setValue(data[0].permanent_state);
-                
-              //   if(this.isCorrsLocal)
-              //     this.getCitiesByStateC(data[0].permanent_state);
-      
-              //   this.profileForm.get('corrsCity').setValue(data[0].permanent_city);
-              //   this.profileForm.get('corrsPostcode').setValue(data[0].permanent_postcode);
-              //   this.profileForm.get('corrsMobile').setValue(data[0].mobile_phone);
+              // if(data.user.address){
+              //   this.addressId = data.user.address.addressId;
               // }
+              
+              // this.isMalaysian(this.countryId);
+              // this.isMalaysianChk(this.countryId);
+              // // this.getCountryByCode(getUsrNationality);
+              // // this.isUserRegLocal(getUsrNationality);
+              // this.userId = data.user.userId;
+              // this.idno = data.user.pid;
+              // if(this.isRegLocal == true) 
+              //   this.maxDate = this.getMinDobDate(this.idno);
+              
+              // this.regemail = data.user.email;
+              // this.regdate = data.user.registrationDate;
+              // this.mobileNo = data.user.mobilePhoneNo;
+              
+              // if(data.user.gender)
+              //     this.profileForm.get('gender').setValue(data.user.gender.genderCode);
+              
+              // if(data.user.race)
+              //     this.profileForm.get('race').setValue(data.user.race.raceCode);
+
+              // if(data.user.religion)
+              //     this.profileForm.get('religion').setValue(data.user.religion.religionCode);
+
+              // if(data.user.address){
+              //   this.profileForm.get('perAddress1').setValue(data.user.address.permanentAddress1);
+              //   this.profileForm.get('perAddress2').setValue(data.user.address.permanentAddress2);
+              //   this.profileForm.get('perAddress3').setValue(data.user.address.permanentAddress3);
+              //   this.selectedCountry = data.user.address.permanentAddressCountry.countryId;
+              //   this.profileForm.get('perCountry').setValue(data.user.address.permanentAddressCountry.countryId);
+              //   this.profileForm.get('perPostcode').setValue(data.user.address.permanentAddressPostcode);
+              //   this.profileForm.get('perTelephone').setValue(data.user.address.homePhoneNo);
       
+              //   if(data.user.address.permanentAddressState != null) {
+              //     if(data.user.address.permanentAddressCountry.countryId == 152) {
+              //       this.isLocal = true;
+              //       this.getState();
+              //       this.profileForm.get('perStateLocal').setValue(data.user.address.permanentAddressState.stateId);
+              //       this.selectedState = this.profileForm.get('perStateLocal').value;
+              //       this.getCitiesByStateP(data.user.address.permanentAddressState.stateId);
+              //       this.profileForm.get('perCityLocal').setValue(data.user.address.permanentAddressCity.cityId); 
+              //       this.selectedCity = this.profileForm.get('perCityLocal').value;
+              //     } else {
+              //       this.isLocal = false;
+              //       this.profileForm.get('perStateNotLocal').setValue(data.user.address.permanentAddressState.stateId);
+              //       this.selectedState = this.profileForm.get('perStateNotLocal').value;
+              //       this.profileForm.get('perCityNotLocal').setValue(data.user.address.permanentAddressCity.cityId); 
+              //       this.selectedCity = this.profileForm.get('perCityNotLocal').value;
+              //     }
+              //   }
+              // }
+            
             },
             error => {
               console.log(error)
