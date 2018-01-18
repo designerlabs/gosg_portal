@@ -22,6 +22,8 @@ import { MailboxComponent } from "./mailbox/mailbox.component";
 import { AppManagementComponent } from './app-management/app-management.component';
 import { FirsttimeloginComponent } from './firsttimelogin/firsttimelogin.component';
 import { AnnouncementComponent } from './announcement/announcement.component';
+import { AnnouncementlistComponent } from './announcementlist/announcementlist.component';
+import { AnnouncementdetailsComponent } from './announcementdetails/announcementdetails.component';
 // 
 // import { NavRouterActivator } from './header/nav/nav-router-activator.service'
 
@@ -39,8 +41,8 @@ export const protectedRoutes: Routes = [
     {path: 'topic/:id', component: ArticleComponent, canActivate: [NavRouterActivator]  },
     {path: 'subtopic/:id1/:id2', component: SubarticleComponent },
     {path: 'announcement', component: AnnouncementComponent },
-    {path: 'announcement/:id', component: AnnouncementComponent},
-    {path: 'announcement/:id/:id', component: AnnouncementComponent},
+    {path: 'announcement/:id', component: AnnouncementlistComponent},
+    {path: 'announcement/:id/:id', component: AnnouncementdetailsComponent},
 
     {path: 'faq', component: FaqComponent},
     {path: 'aboutus', component: AboutusComponent},

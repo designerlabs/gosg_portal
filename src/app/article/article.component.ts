@@ -59,7 +59,7 @@ export class ArticleComponent implements OnInit {
   lang = this.lang;
 
   ngOnInit() {
-        this.articleData = this.articleService.getArticle();
+        //this.articleData = this.articleService.getArticle();
         this.moduleName = this.router.url.split('/')[1];
         this.topicID = parseInt(this.router.url.split('/')[2]);
         this.navService.triggerArticle(this.moduleName, this.lang, this.topicID);
