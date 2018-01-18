@@ -281,14 +281,14 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                     }
                     
                   }
-
+                  this.profileForm.get('corrsCountry').setValue(data.user.address.correspondingAddressCountry.countryId);
                   if(data.user.address.correspondingAddressCountry.countryId == 152) {
                     this.isCorrsLocal = true;
                     this.getState();
                     if(data.user.address.correspondingAddressState){
                       this.profileForm.get('corrsStateLocal').setValue(data.user.address.correspondingAddressState.stateId);
                     }
-                    this.getCitiesByStateP(data.user.address.correspondingAddressState.stateId);
+                    this.getCitiesByStateC(data.user.address.correspondingAddressState.stateId);
                     if(data.user.address.correspondingAddressCity){
                       this.profileForm.get('corrsCityLocal').setValue(data.user.address.correspondingAddressCity.cityId);
                     }
