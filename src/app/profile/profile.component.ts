@@ -487,7 +487,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       this.profileForm.get('corrsCity').setValue("");
 
     }
-    this.checkReqValues();
+    // this.checkReqValues();
     // this.toastr.info(this.translate.instant('this.isCorrsLocal: '+this.isCorrsLocal), ''); 
   }
 
@@ -641,14 +641,14 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   isChanged() {
     if(this.profileForm.get('checkboxValue').value == true) {
       this.profileForm.get('checkboxValue').setValue(false);
-      this.checkReqValues();
+      // this.checkReqValues();
     }
       
   }
 
   isStateChanged() {
     this.isChanged();
-    this.checkReqValues();
+    // this.checkReqValues();
   }
 
   isChecked(e) {
@@ -682,7 +682,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       this.profileForm.get('corrsTelephone').setValue("");
     }
     console.log(e.checked);
-    this.checkReqValues();
+    // this.checkReqValues();
   }
   
   addLocalCtrl() {
@@ -728,7 +728,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       // this.initial = false
       this.profileForm.enable()
       this.dob.enable();
-      this.checkReqValues();
+      // this.checkReqValues();
     } else {
       console.log(this.profileForm.value);
       // this.toastr.info(this.translate.instant('profile.msg.editbtnD'), '');
@@ -893,7 +893,7 @@ let bodyUpdate =
 
 
 
-    this.checkReqValues();
+    // this.checkReqValues();
 
     console.log(this.initial);
     console.log(this.profileForm.invalid)
