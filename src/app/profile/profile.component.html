@@ -240,29 +240,29 @@
             <div class="row">
               <div class="form-group col-md-4">
                 <mat-form-field class="example-full-width font-size-s">
-                  <mat-select (change)="isMalaysianChk($event.value)" formControlName="corrsCountry" placeholder="{{'profile.label.country' | translate}}">
+                  <mat-select (change)="isMalaysian($event.value)" formControlName="corrsCountry" placeholder="{{'profile.label.country' | translate}}">
                       <mat-option *ngFor="let country of countries" [value]="country.countryId">{{country.countryName}}</mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>
               <div class="form-group col-md-4">
                 <mat-form-field *ngIf="isCorrsLocal" class="example-full-width font-size-s">
-                  <mat-select (change)="getCitiesByState($event)" formControlName="corrsState" placeholder="{{'profile.label.state' | translate}}">
+                  <mat-select (change)="getCitiesByState($event)" formControlName="corrsStateLocal" placeholder="{{'profile.label.state' | translate}}">
                     <mat-option *ngFor="let state of getStateData" [value]="state?.stateId">{{ state?.stateName }}</mat-option>
                   </mat-select>
                 </mat-form-field>
                 <mat-form-field *ngIf="!isCorrsLocal" class="example-full-width font-size-s">
-                  <input (change)="isChanged()" matInput formControlName="corrsState" type="text" placeholder="{{'profile.label.state' | translate}}" />
+                  <input (change)="isChanged()" matInput formControlName="corrsStateNotLocal" type="text" placeholder="{{'profile.label.state' | translate}}" />
                 </mat-form-field>
               </div>
               <div class="form-group col-md-4">
                 <mat-form-field *ngIf="isCorrsLocal" class="example-full-width font-size-s">
-                  <mat-select (change)="isChanged()" formControlName="corrsCity" placeholder="{{'profile.label.city' | translate}}">
+                  <mat-select (change)="isChanged()" formControlName="corrsCityLocal" placeholder="{{'profile.label.city' | translate}}">
                       <mat-option *ngFor="let city of getCorrsCityData" [value]="city?.cityId">{{ city?.cityName }}</mat-option>
                   </mat-select>
                 </mat-form-field>
                 <mat-form-field *ngIf="!isCorrsLocal" class="example-full-width font-size-s">
-                  <input (change)="isChanged()" matInput formControlName="corrsCity" type="text" placeholder="{{'profile.label.city' | translate}}" />
+                  <input (change)="isChanged()" matInput formControlName="corrsCityNotLocal" type="text" placeholder="{{'profile.label.city' | translate}}" />
                 </mat-form-field>
               </div>
             </div>
