@@ -31,8 +31,8 @@
     "readmore": "Read More",
     "applicationNum": "Application Number",
     "send": "SUBMIT",
-    "highlights": "Highligths",
-    "currentHighlights": "Highligths",
+    "highlights": "Highlights",
+    "currentHighlights": "Highlights",
     "calendarTitle": "Activities for this month"
   },
   "register": {
@@ -268,7 +268,7 @@
     "recommend" : "Your recommendation for improvement"
   },
   "announcement":{
-    "title":"Highlight",
+    "title":"Highlights",
     "description":"All Highlight",
     "message":"No latest information."
   }
