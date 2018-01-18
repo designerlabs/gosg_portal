@@ -3,7 +3,9 @@ import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { Http } from '@angular/http';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 import { ToastrService } from 'ngx-toastr';
+import { SharedService } from '../common/shared.service';
 import { debounce } from 'rxjs/operators/debounce';
+import { PortalService } from '../services/portal.service';
 
 @Component({
   selector: 'app-poll',
@@ -14,6 +16,7 @@ export class PollComponent implements OnInit {
 
  pollDataTitle: string;
     pollDataQuestion: string;
+    pollDataQuestionID;
     pollDataAnswer: any;
     pollDataComment: string;
     pollComment = '';
@@ -24,45 +27,57 @@ export class PollComponent implements OnInit {
     showResult = false;
     latestResult = false;
     value = 50;
-
+    ipData: any;
+    dumy = '#0000';
+    resultData: any;
+    languageId = this.languageId;
+    pollPercent;
+    progressbarVal;
+    // calcValue = 90;
     // tslint:disable-next-line:max-line-length
-    constructor(private translate: TranslateService, private http: Http, @Inject(APP_CONFIG) private config: AppConfig, private toastr: ToastrService) {
+    constructor(private translate: TranslateService, private http: Http, @Inject(APP_CONFIG) private config: AppConfig, private toastr: ToastrService, private sharedService: SharedService, private portalservice: PortalService) {
         this.lang = translate.currentLang;
+        this.languageId = 2;
         translate.onLangChange.subscribe((event: LangChangeEvent) => {
             const myLang = translate.currentLang;
             if (myLang === 'en') {
                this.lang = 'en';
-               this.getData(this.lang);
+               this.languageId = 1;
+               this.getData('1');
             }
             if (myLang === 'ms') {
               this.lang = 'ms';
-              this.getData(this.lang);
+              this.languageId = 2;
+              this.getData('2');
             }
         });
     }
 
     ngOnInit() {
-        this.getData(this.lang);
+        this.getData(this.languageId);
+        this.getUserIpAddr();
     }
 
-
-   getData(lang: string) {
-         return this.http.get('http://10.1.17.12:3000/poll')
+   getData(languageId) {
+         return this.http.get(this.config.urlPoll + '/question/lang/' + languageId + '/?active=true')
            .map(res => res.json())
           .subscribe(eventData => {
-                this.pollDataQuestion = eventData[0].questionTitle;
-                this.pollDataAnswer = eventData[0].answer;
+                this.pollDataQuestion = eventData.questionTitle;
+                this.pollDataAnswer = eventData.answer;
+                this.pollDataQuestionID = eventData.questionId;
+                // tslint:disable-next-line:radix
+                this.showResult = (parseInt(localStorage.getItem('polldone')) === this.pollDataQuestionID);
                 // this.pollDataComment = eventData[0].comment;
             });
     }
 
-    getAnsData(lang: string) {
-        return this.http.get('http://10.1.17.12:3000/pollresult')
-          .map(res => res.json())
-         .subscribe(eventData => {
-               this.pollAnswer = eventData[0].answer;
-               // this.pollDataComment = eventData[0].comment;
-           });
+    getAnsData() {
+        // return this.http.get('http://10.1.17.12:3000/pollresult')
+        //   .map(res => res.json())
+        //  .subscribe(eventData => {
+        //        this.pollAnswer = eventData[0].answer;
+        //        // this.pollDataComment = eventData[0].comment;
+        //    });
    }
 
     getTheme() {
@@ -77,9 +92,27 @@ export class PollComponent implements OnInit {
 
     submitPoll(event) {
         // debugger;
-        this.getAnsData(this.lang);
+        // this.getAnsData(this.lang);
+        const data = {
+            'pollsComment': this.pollComment,
+            'pollsAnswerId' : this.pollAnswer.id,
+            'pollsQuestionId': this.pollDataQuestionID
+            };
+        this.portalservice.submitPoll(data)
+        .subscribe(
+            resData => {
+                this.resultData = resData;
+                this.pollDataAnswer = resData.answer;
+                this.pollDataQuestion = resData.questionTitle;
+                this.pollDataQuestionID = resData.questionId;
+                console.log(this.resultData);
+            }, Error => {
+                this.toastr.error(this.translate.instant('common.err.servicedown'), '');
+            }
+        );
         this.toastr.success('Recommendation is : ' + this.pollComment + ', Answer is ' + this.pollAnswer.answer);
         this.showResult = true;
+        localStorage.setItem('polldone', this.pollDataQuestionID);
     }
     closeResult() {
         this.latestResult = true;
@@ -89,5 +122,31 @@ export class PollComponent implements OnInit {
         this.latestResult = false;
         this.showResult = true;
     }
+    getUserIpAddr() {
+        this.sharedService.getIpCliente()
+        .subscribe(resData => {
+          this.ipData = resData.text();
+        },
+        Error => {
+         this.toastr.error(this.translate.instant('common.err.servicedown'), '');
+       });
+    }
 
+    calVal(val) {
+        if(val) {
+            // tslint:disable-next-line:radix
+        const numerator = parseInt(val.split('/')[0]);
+        // tslint:disable-next-line:radix
+        const denomi = parseInt(val.split('/')[1]);
+        // tslint:disable-next-line:radix
+        if (numerator && denomi) {
+            this.pollPercent  = (numerator / denomi) * 100;
+        }else {
+            this.pollPercent  = 0;
+        }
+        this.progressbarVal = Math.round(this.pollPercent);
+        // console.log(this.progressbarVal);
+        return this.progressbarVal;
+        }
+    }
 }

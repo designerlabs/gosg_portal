@@ -46,6 +46,7 @@ export class PortalService {
   private AgencyAppUrl: string = this.config.urlAppAgency;
   private statusAppUrl: string = this.config.urlAppAgency;
   private dataAppUrl: string = this.config.urlAppAgency;
+  private pollUrl: string = this.config.urlPoll;
   
   getAgencyApp(){
     return this.http.get(this.AgencyAppUrl + '.json')
@@ -146,6 +147,13 @@ export class PortalService {
       let headers = new Headers({ 'Authorization': 'Bearer ' + currentUser.token });
       return new RequestOptions({ headers: headers });
     }
+  }
+
+  submitPoll(data) {
+    return this.http.post(this.pollUrl, data)
+    .map((response: Response) => response.json())
+    .retry(5)
+    .catch(this.handleError);
   }
 
 }
