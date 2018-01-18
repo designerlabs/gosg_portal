@@ -59,7 +59,7 @@ export class PollComponent implements OnInit {
     }
 
    getData(languageId) {
-         return this.http.get('http://10.1.70.148:8081/service/polls/question/lang/' + languageId)
+         return this.http.get(this.config.urlPoll + '/question/lang/' + languageId)
            .map(res => res.json())
           .subscribe(eventData => {
                 this.pollDataQuestion = eventData[0].questionTitle;
