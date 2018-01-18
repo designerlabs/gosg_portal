@@ -14,6 +14,7 @@ let commonURL = uapURL+'service/';
 // backend service
 let baseLocalURL = './app/apidata/';
 let searchServiceURL = 'https://www.malaysia.gov.my/public/';
+let pollUrl = "http://10.1.70.148:8081/service/polls";
 
 export class AppConfig {
     apiEndpoint: string;
@@ -69,7 +70,7 @@ export const APP_DI_CONFIG: AppConfig = {
     urlTopics: './app/apidata/articlemenu',
     urlHighlights: './app/apidata/highlightbox',
     urlGender: commonURL+'gender/lang/',
-    urlPoll: './app/apidata/poll',
+    // urlPoll: './app/apidata/poll',
     urlAnnouncement: './app/apidata/announcement',
     urlCalendar: './app/apidata/calendar',
     urlRegister: registrationUrl+'register',    
@@ -88,7 +89,8 @@ export const APP_DI_CONFIG: AppConfig = {
     urlGetUser: protectedBaseURL+'user/detail',
     urlGetProfile: protectedBaseURL+'user/profile',
     urlAppAgency: './app/apidata/appAgency',
-    urlUapStaging: 'https://uapstaging.malaysia.gov.my/uap/validatesigncryption.jsp?language='
+    urlUapStaging: 'https://uapstaging.malaysia.gov.my/uap/validatesigncryption.jsp?language=',
+    urlPoll: pollUrl
 
 };
 

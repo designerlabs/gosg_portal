@@ -95,7 +95,6 @@ export class SharedService {
             this.lang = 'en';
             this.languageId = 1;
         });
-  
       }
       if (myLang == 'ms') {
         this.translate.get('HOME').subscribe((res: any) => {
@@ -114,5 +113,10 @@ export class SharedService {
 
   }
 
+  getIpCliente(): Observable<any> {
+    return this.http.get('http://api.ipify.org')
+    .map((response: Response) => response)
+    .catch(this.handleError);
+}
 
 }
