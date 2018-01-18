@@ -1,0 +1,111 @@
+<div class="container-fluid animated slideInDown" style="background: #a7a495;">
+    <div class="container" >
+     <div class="row" >
+        <div class="col-md-12">
+            
+            <h1 style="margin-top: 10px;" class="font-size-l"> {{'announcement.title' | translate}}</h1>
+            <hr class="hr-custom2">
+            <ul class="list-inline" style="clear:both;">
+                <li>
+                    <a class="font-size-s" href="/index/">
+                        {{'home.menu.home' | translate }}
+                    </a>
+                </li>
+                <li>/</li>
+                <li>
+                    {{'announcement.title' | translate}}
+                </li>
+            </ul>
+        </div>
+    </div>
+    </div>
+  </div>
+  
+  <div style="margin-top:10px;" class="container" *ngFor="let announce of announces">
+  
+      <div class="row" *ngFor="let data of announce.results">
+          <div class="col-sm-3">
+              <div class="row">
+                  <div class="col-md-12 sideBarMenu">
+                      <h4 class="sideBarMenu--title padding-bottom-l font-size-m warna_font">
+                              {{'announcement.title' | translate}}
+  
+                      </h4>
+                      <ul class="list-unstyled">
+                          <li class="liList" *ngFor="let content of data.menu_left">
+                              <div class="col-xs-12 col-md-12 col-sm-12">
+                                  <a class="warna_font sideBarMenu--link font-size-s" [routerLinkActive]="['active']"  
+                                  [style.font-weight]="content.active ? 'bold' : 'normal'"  [style.color]="content.active ? getTheme() : '#333'" 
+                                   href="" (click)="clickSideMenu(content)">
+                                  {{content.label}}
+                              
+                                  </a>
+                              </div>
+                              
+                          </li>
+  
+                      </ul>
+                  </div>
+              </div>
+          </div>
+  
+          <div class="col-sm-6">
+  
+              <div class="row">
+                  <div class="col-md-12 warna_font">
+                      <!-- <div  *ngIf="checkImgData(data.description)" style="position:absolute; width:auto;">
+                          <h2 class="topic_bg_title font-size-l">
+                              <span style="padding-left:10px;">
+                                  {{data.title}}
+                              </span>
+                          </h2>
+                      </div> -->
+  
+                      <!-- *ngIf="!checkImgData(data.description)" -->
+  
+                      <div style="position:relative;">
+                          <h2 class="titleWObg font-size-l" *ngIf="!data.title">
+                                  {{'announcement.title' | translate}}
+                          </h2>
+                      </div>
+  
+                      <div  style="position:relative;">
+                          <h2 class="titleWObg font-size-l" *ngIf="data.title">
+                              {{data.title}}
+                          </h2>
+                      </div>
+  
+                      <span class="font-size-s defaultColor" *ngIf="!data.description">
+                          {{'announcement.description' | translate}}
+                      </span>
+  
+                      <span class="font-size-s defaultColor" *ngIf="data.description" [innerHTML]="data.description">
+                      </span>
+  
+                      <div class="row padding-top-xl"> 
+                          <div *ngIf="data.content && data.content.length == 0">
+                              <div style="width:100%; margin-right:10px; height:auto; color:black; padding:15px;"><br>
+                                 {{'announcement.message' | translate}}
+                              </div>
+                          </div>
+                          <div class="col-sm-6" *ngFor="let leftContent of data.content">
+                              <div *ngIf="leftContent">
+                                  <div style="width:100%; margin-right:10px; height:auto;"><br>
+                                      <a class="intro-box warna_border_color" [style.border-color]="getTheme()" href="" (click)="clickContent(leftContent)">
+                                          <h4 class="font-size-m warna_font">
+                                              {{leftContent.label}}
+                                          </h4>
+                                          <span class="warna_font article-size font-size-s" [innerHTML]="leftContent.description"></span>
+                                          <div class="font-size-s" style="text-align: right;"><i class="fa fa-caret-right"></i> {{'home.readmore' | translate }}</div>
+                                      </a>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+  
+                  </div>
+              </div>
+          </div>   
+  
+      </div>    
+  </div>
