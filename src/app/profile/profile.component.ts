@@ -232,7 +232,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                 this.nationality = data.user.country.countryName;
                 this.countryId = data.user.country.countryId;
                 this.passport = data.user.passportNo;
-              
+                this.idno = data.user.pid;
                 this.isStaff = data.user.isStaff;
                 this.isMyIdentityVerfied = data.user.isMyIdentityVerified;
                 this.isMyIdentityValid = data.user.isMyIdentityValid;
@@ -242,6 +242,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
                 if(data.user.address){
                   this.addressId = data.user.address.addressId;
+                  this.profileForm.get('perCountry').setValue(data.user.address.permanentAddressCountry.countryId);
                   if(data.user.address.permanentAddressCountry.countryId == 152) {
                     this.isLocal = true;
                     this.getState();
