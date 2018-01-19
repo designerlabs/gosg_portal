@@ -107,6 +107,7 @@ export class TopnavComponent implements OnInit, AfterViewInit {
   }
 
   getUserProfile(){
+    console.log(this.state);
     let getUsrID = localStorage.getItem('usrID');
     if(getUsrID){
       this.admin = true;

@@ -292,10 +292,14 @@
                 style="width: 115px; font-family: Roboto;" (click)="showResetMsg()">
                 <i class="fa fa-refresh"></i> {{'feedback.label.reset' | translate }}</button> -->
                 <button mat-raised-button type="button" color="primary" id="btnsubmit" class="form-control btn btn-md btn-success font-size-s"
-                (click)="updateProfile(profileForm.value);false" style="width: 100px; font-family: Roboto; margin-left: 5px;" [disabled]="gender.valid && race.valid || inital">
+                (click)="updateProfile(profileForm.value);false" style="width: 100px; font-family: Roboto; margin-left: 5px;" [disabled]="gender.invalid || race.invalid">
                 <i class="fa fa-check"></i> {{'profile.label.submit' | translate }}</button>
             </div>
-         
+
+           <h1>
+             {{gender.invalid || race.invalid}}
+            </h1>           
+          
           </div>
         
         </form>
