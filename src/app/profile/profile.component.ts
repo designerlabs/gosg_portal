@@ -111,6 +111,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   regemail:string;
   regdate:string;
   lang = this.lang;
+  languageId = this.languageId;
 
   // private myDatePickerOptions: IMyDpOptions = {
   //       // other options...
@@ -131,6 +132,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     @Inject(APP_CONFIG) private config: AppConfig, 
     // private slice: SlicePipe
     ) {
+      this.lang = translate.currentLang;
+      this.languageId = 2;
     translate.onLangChange.subscribe((event: LangChangeEvent) => {
       
                   const myLang = translate.currentLang;
@@ -138,26 +141,28 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                   if (myLang == 'en') {
                       translate.get('HOME').subscribe((res: any) => {
                           this.lang = 'en';
+                          this.languageId = 1;
                       });
       
                   }
                   if (myLang == 'ms') {
                       translate.get('HOME').subscribe((res: any) => {
                           this.lang = 'ms';
+                          this.languageId = 2;
                       });
                   }
-                  this.getRace();
-                  this.getReligion();
-                  this.getGenderVal();
+                  this.getRace(this.languageId);
+                  this.getReligion(this.languageId );
+                  this.getGenderVal(this.languageId);
               });
               
   }
 
   ngOnInit() {
     this.date = new Date();
-    this.getRace();
-    this.getGenderVal();
-    this.getReligion();
+    this.getRace(this.languageId );
+    this.getGenderVal(this.languageId );
+    this.getReligion(this.languageId );
     this.maskForeigner = this.validateService.getMask().telephonef;
     this.maskPostcode = this.validateService.getMask().postcode;
     this.maskDateFormat = this.validateService.getMask().dateFormat;
@@ -596,8 +601,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     return res;
   }
 
-  getRace(){
-    return this.sharedService.getRace(localStorage.getItem('langID'))
+  getRace(lang){
+    return this.sharedService.getRace(lang)
       .subscribe(raceData => {
         this.getRaceData = raceData
       },
@@ -606,8 +611,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
      });
   }
 
-  getGenderVal() {
-    return this.sharedService.getGender(localStorage.getItem('langID'))
+  getGenderVal(lang) {
+    return this.sharedService.getGender(lang)
       .subscribe(resGenderData => {
         this.genderData = resGenderData
       },
@@ -693,8 +698,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
      });
   }
 
-  getReligion(){
-    return this.sharedService.getReligion(localStorage.getItem('langID'))
+  getReligion(lang){
+    return this.sharedService.getReligion(lang)
     .subscribe(religionData => {
       this.getReligionData = religionData
     },
