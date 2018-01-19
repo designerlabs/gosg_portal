@@ -809,8 +809,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.profileForm.removeControl('corrsStateNotLocal');
     this.profileForm.removeControl('corrsCityNotLocal');
     
-    this.profileForm.addControl('corrsStateLocal', this.perStateLocal);
-    this.profileForm.addControl('corrsCityLocal', this.perCityLocal);
+    this.profileForm.addControl('corrsStateLocal', this.corrsStateLocal);
+    this.profileForm.addControl('corrsCityLocal', this.corrsCityLocal);
 
     if(this.isActive && this.isCorrsLocal) {
       this.profileForm.get('corrsStateLocal').enable();
@@ -824,8 +824,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       this.profileForm.removeControl('corrsStateLocal');
       this.profileForm.removeControl('corrsCityLocal');
 
-      this.profileForm.addControl('corrsStateNotLocal',this.perStateNotLocal);
-      this.profileForm.addControl('corrsCityNotLocal', this.perCityNotLocal);
+      this.profileForm.addControl('corrsStateNotLocal',this.corrsStateNotLocal);
+      this.profileForm.addControl('corrsCityNotLocal', this.corrsCityNotLocal);
       if(this.isActive && !this.isCorrsLocal) {
         this.profileForm.get('corrsStateNotLocal').enable();
         this.profileForm.get('corrsCityNotLocal').enable();
