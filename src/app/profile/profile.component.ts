@@ -533,6 +533,25 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     }
   }
 
+  isMalaysianCorrs(val) {
+    this.selectedCountry = val;
+    // this.profileForm.get('perCountry').setValue(this.selectedCountry);
+    this.isChanged();
+    if(val == 152) {
+      this.isCorrsLocal = true;
+      this.addLocalCtrl();
+      // this.profileForm.get('perStateLocal').setValue("");
+      // this.profileForm.get('perCityLocal').setValue("");
+      // this.toastr.info(this.translate.instant('this.isLocal: '+this.isLocal), '');
+      this.getState();
+    } else {
+      this.isCorrsLocal = false;
+      this.RemoveLocalCtrl();
+      // this.profileForm.get('perStateNotLocal').setValue("");
+      // this.profileForm.get('perCityNotLocal').setValue("");
+    }
+  }
+
   isMalaysianChk(val) {
     // console.log(val);
 

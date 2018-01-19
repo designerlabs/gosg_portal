@@ -90,6 +90,8 @@ export class ProtectedComponent implements OnInit {
       data => {
         if(data.user){
           this.getUserName = data.user.fullName;
+          localStorage.setItem('fullname',data.user.fullName);
+          localStorage.setItem('email',data.user.email);
         }else{
           
         }
