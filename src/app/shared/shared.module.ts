@@ -105,6 +105,8 @@ import { CdkTableModule } from "@angular/cdk/table";
 // import { DialogsModule } from '../dialogs/dialogs.module';
 import { ConfirmDialogComponent } from '../dialogs/confirm-dialog/confirm-dialog.component';
 import { SharedPipe } from '../common/shared.pipe';
+import { AnnouncementdetailsComponent } from '../announcementdetails/announcementdetails.component';
+import { AnnouncementlistComponent } from '../announcementlist/announcementlist.component';
 export function HttpLoaderFactory(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -147,6 +149,8 @@ export function HttpLoaderFactory(http: Http) {
     AboutusComponent,
     AnnouncementboxComponent,
     AnnouncementComponent,
+    AnnouncementlistComponent,
+    AnnouncementdetailsComponent,
     FaqComponent,
     NavComponent,
     ManualComponent,
@@ -178,6 +182,8 @@ export function HttpLoaderFactory(http: Http) {
     TopnavComponent,
     AboutusComponent,
     AnnouncementComponent,
+    AnnouncementlistComponent,
+    AnnouncementdetailsComponent,
     AnnouncementboxComponent,
     FaqComponent,
     NavComponent,

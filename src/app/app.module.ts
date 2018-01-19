@@ -64,7 +64,7 @@ imports: [
     AppComponent,
     RegisterComponent,
     LoginComponent
-    
+  
   ],
  
   schemas:[

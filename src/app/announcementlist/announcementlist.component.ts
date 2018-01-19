@@ -5,15 +5,16 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { BreadcrumbService } from '../header/breadcrumb/breadcrumb.service';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
+import { SharedService } from '../common/shared.service';
 
 @Component({
-  selector: 'gosg-announcement',
-  templateUrl: './announcement.component.html',
-  styleUrls: ['./announcement.component.css']
+  selector: 'gosg-announcementlist',
+  templateUrl: './announcementlist.component.html',
+  styleUrls: ['./announcementlist.component.css']
 })
-export class AnnouncementComponent implements OnInit {
+export class AnnouncementlistComponent implements OnInit {
 
-    moduleName: string;
+  moduleName: string;
         
     @ViewChild('textarea') textarea: ElementRef;
     @Output() menuClick = new EventEmitter();
@@ -29,7 +30,8 @@ export class AnnouncementComponent implements OnInit {
     @Output() langChange = new EventEmitter();
     constructor(public articleService: ArticleService,  private route: ActivatedRoute, 
         private navService: NavService, private translate: TranslateService, private router: Router, 
-        private breadcrumbService: BreadcrumbService, @Inject(APP_CONFIG) private config: AppConfig) {
+        private breadcrumbService: BreadcrumbService, @Inject(APP_CONFIG) private config: AppConfig,
+        private sharedService: SharedService) {
         this.lang = translate.currentLang;
 
             translate.onLangChange.subscribe((event: LangChangeEvent) => {
@@ -41,6 +43,7 @@ export class AnnouncementComponent implements OnInit {
                 translate.get('HOME').subscribe((res: any) => {
                     this.lang = '1';
                     this.moduleName = this.router.url.split('/')[1];
+                    this.announcementID = this.router.url.split('/')[2];
                  
                 });
 
@@ -50,12 +53,13 @@ export class AnnouncementComponent implements OnInit {
                 translate.get('HOME').subscribe((res: any) => {
                     this.lang = '2';
                     this.moduleName = this.router.url.split('/')[1];
+                    this.announcementID = this.router.url.split('/')[2];
                     
                 });
             }
 
-            this.triggerAnnouncement(this.moduleName,this.lang);
-            console.log("language: "+this.lang);
+            this.triggerAnnouncementList(this.moduleName,this.lang,this.announcementID);
+            console.log("langMY")
         });
 
     }
@@ -63,8 +67,12 @@ export class AnnouncementComponent implements OnInit {
     lang = this.lang;
 
     ngOnInit() {
+        
         this.moduleName = this.router.url.split('/')[1];
-        this.triggerAnnouncement(this.moduleName, this.lang);
+        this.announcementID = this.router.url.split('/')[2]; 
+        console.log("1st COde: "+this.announcementID);
+
+        this.triggerAnnouncementList(this.moduleName, this.lang, this.announcementID);
         console.log("onInit");
     }
 
@@ -76,58 +84,54 @@ export class AnnouncementComponent implements OnInit {
        
         const _getModule = this.router.url.split('/')[1];
  
-        console.log(e);
-        console.log(this.router.url);
-
         this.router.navigate([_getModule, e.code]); 
-        this.triggerAnnouncement(_getModule,  this.lang);     
-       
+        this.triggerAnnouncementList(_getModule,  this.lang, e.code);          
         console.log("sideMenu")
         event.preventDefault();
     }
 
     clickContent(e){
        
-        const _getModule = this.router.url.split('/')[1];
-        const _getAnnounceID = this.router.url.split('/')[2]; 
-        const _getAnnounceID2 = this.router.url.split('/')[3]; 
-        debugger;
-       
-        this.router.navigate([_getModule, e.code]);   
-       // this.triggerAnnouncement(_getModule,  this.lang);   
-        
-        console.log("content");
-        event.preventDefault(); 
-    }
+      const _getModule = this.router.url.split('/')[1];
+      const _getAnnounceID = this.router.url.split('/')[2]; 
+      const _getAnnounceID2 = this.router.url.split('/')[3]; 
+     
+          this.router.navigate([_getModule, _getAnnounceID, e.code]);   
+          
+          console.log("2");
+          event.preventDefault();
+     
+      
+  }
   
-    triggerAnnouncement(moduleName, lang){
+  triggerAnnouncementList(moduleName, lang, id1){
     
-        if(lang == "ms"){
-            this.lang = 2;
-        }
-
-        if(lang == "en"){
-            this.lang = 1;
-        }
-
-        this.route.paramMap
-        .switchMap((params: ParamMap) =>
-        
-        this.navService.getAnnouncement(moduleName, this.lang))
-       
-        .subscribe(resAllAnnounce => { 
-            // this.announceRes = resAllAnnounce;
-            //convert object to array
-            // const temp1 = this.announceRes[0];            
-            // const temp = Object.keys(temp1).map(key => temp1[key]);
-            // this.announces = temp;
-            
-            this.announces = resAllAnnounce;
-            this.breadcrumb = this.breadcrumbService.getBreadcrumb();
-            this.isValid = this.breadcrumbService.isValid = true;
-            this.breadcrumb = this.breadcrumb.name = '';
-        });
+    if(lang == "ms"){
+        this.lang = 2;
     }
+
+    if(lang == "en"){
+        this.lang = 1;
+    }
+
+    this.route.paramMap
+    .switchMap((params: ParamMap) =>
+    
+    this.navService.getAnnouncementList(moduleName, this.lang, id1))
+   
+    .subscribe(resAllAnnounce => { 
+        // this.announceRes = resAllAnnounce;
+        //convert object to array
+        // const temp1 = this.announceRes[0];            
+        // const temp = Object.keys(temp1).map(key => temp1[key]);
+        // this.announces = temp;
+        
+        this.announces = resAllAnnounce;
+        this.breadcrumb = this.breadcrumbService.getBreadcrumb();
+        this.isValid = this.breadcrumbService.isValid = true;
+        this.breadcrumb = this.breadcrumb.name = '';
+    });
+}
 
     checkImgData(e){
 

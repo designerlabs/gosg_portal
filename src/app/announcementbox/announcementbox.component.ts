@@ -44,10 +44,15 @@ export class AnnouncementboxComponent implements OnInit {
 
     private announcementUrl: string = this.config.urlAnnouncement;
     getData(lang: string){
-        //return this.http.get(this.announcementUrl + '/?langId=' + lang)
-        return this.http.get(this.announcementUrl)
-           .map(res => res.json())
-          .subscribe(data => {
+        let langID = 0;
+        if(lang == "ms"){
+            langID = 2;
+        }else{
+            langID = 1;
+        }
+        return this.http.get(this.announcementUrl + '?langId=' + langID)
+            .map(res => res.json())
+            .subscribe(data => {
               console.log(data);
                 this.announcementData = data.announcementList;
                 console.log(this.announcementData);
@@ -80,7 +85,7 @@ export class AnnouncementboxComponent implements OnInit {
 
         this.route.paramMap
         .switchMap((params: ParamMap) =>
-        this.navService.getAnnouncementDataAll(moduleName, lang, id1, id2))
+        this.navService.getAnnouncementDetails(moduleName, lang, id1, id2))
        
         .subscribe(resAllAnnounce => { 
             this.announceRes = resAllAnnounce;

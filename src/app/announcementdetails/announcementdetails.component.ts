@@ -5,15 +5,16 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { BreadcrumbService } from '../header/breadcrumb/breadcrumb.service';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
+import { SharedService } from '../common/shared.service';
 
 @Component({
-  selector: 'gosg-announcement',
-  templateUrl: './announcement.component.html',
-  styleUrls: ['./announcement.component.css']
+  selector: 'gosg-announcementdetails',
+  templateUrl: './announcementdetails.component.html',
+  styleUrls: ['./announcementdetails.component.css']
 })
-export class AnnouncementComponent implements OnInit {
+export class AnnouncementdetailsComponent implements OnInit {
 
-    moduleName: string;
+  moduleName: string;
         
     @ViewChild('textarea') textarea: ElementRef;
     @Output() menuClick = new EventEmitter();
@@ -29,7 +30,8 @@ export class AnnouncementComponent implements OnInit {
     @Output() langChange = new EventEmitter();
     constructor(public articleService: ArticleService,  private route: ActivatedRoute, 
         private navService: NavService, private translate: TranslateService, private router: Router, 
-        private breadcrumbService: BreadcrumbService, @Inject(APP_CONFIG) private config: AppConfig) {
+        private breadcrumbService: BreadcrumbService, @Inject(APP_CONFIG) private config: AppConfig,
+        private sharedService: SharedService) {
         this.lang = translate.currentLang;
 
             translate.onLangChange.subscribe((event: LangChangeEvent) => {
@@ -41,6 +43,8 @@ export class AnnouncementComponent implements OnInit {
                 translate.get('HOME').subscribe((res: any) => {
                     this.lang = '1';
                     this.moduleName = this.router.url.split('/')[1];
+                    this.announcementID = this.router.url.split('/')[2];
+                    this.announcementID2 = this.router.url.split('/')[3];
                  
                 });
 
@@ -50,12 +54,14 @@ export class AnnouncementComponent implements OnInit {
                 translate.get('HOME').subscribe((res: any) => {
                     this.lang = '2';
                     this.moduleName = this.router.url.split('/')[1];
+                    this.announcementID = this.router.url.split('/')[2];
+                    this.announcementID2 = this.router.url.split('/')[3];
                     
                 });
             }
 
-            this.triggerAnnouncement(this.moduleName,this.lang);
-            console.log("language: "+this.lang);
+            this.triggerAnnouncementAll(this.moduleName,this.lang,this.announcementID,this.announcementID2);
+                    console.log("langMY")
         });
 
     }
@@ -64,7 +70,9 @@ export class AnnouncementComponent implements OnInit {
 
     ngOnInit() {
         this.moduleName = this.router.url.split('/')[1];
-        this.triggerAnnouncement(this.moduleName, this.lang);
+        this.announcementID = this.router.url.split('/')[2]; 
+        this.announcementID2 = this.router.url.split('/')[3];
+        this.triggerAnnouncementAll(this.moduleName, this.lang, this.announcementID, this.announcementID2);
         console.log("onInit");
     }
 
@@ -77,11 +85,11 @@ export class AnnouncementComponent implements OnInit {
         const _getModule = this.router.url.split('/')[1];
  
         console.log(e);
+
         console.log(this.router.url);
 
         this.router.navigate([_getModule, e.code]); 
-        this.triggerAnnouncement(_getModule,  this.lang);     
-       
+        this.triggerAnnouncementAll(_getModule,  this.lang, e.code, null);          
         console.log("sideMenu")
         event.preventDefault();
     }
@@ -91,16 +99,25 @@ export class AnnouncementComponent implements OnInit {
         const _getModule = this.router.url.split('/')[1];
         const _getAnnounceID = this.router.url.split('/')[2]; 
         const _getAnnounceID2 = this.router.url.split('/')[3]; 
-        debugger;
-       
-        this.router.navigate([_getModule, e.code]);   
-       // this.triggerAnnouncement(_getModule,  this.lang);   
+        if (!_getAnnounceID && !_getAnnounceID2){  
+            this.router.navigate([_getModule, e.code]);   
+            this.triggerAnnouncementAll(_getModule,  this.lang, _getAnnounceID, _getAnnounceID2);   
+            
+            console.log("2");
+            event.preventDefault();
+        }
+
+        else{
+            this.router.navigate([_getModule,  _getAnnounceID,  e.code]); 
+            this.triggerAnnouncementAll(_getModule,  this.lang, _getAnnounceID,  e.code);   
+            
+            console.log("3");
+            event.preventDefault();   
+        }
         
-        console.log("content");
-        event.preventDefault(); 
     }
   
-    triggerAnnouncement(moduleName, lang){
+    triggerAnnouncementAll(moduleName, lang, id1, id2){
     
         if(lang == "ms"){
             this.lang = 2;
@@ -113,7 +130,7 @@ export class AnnouncementComponent implements OnInit {
         this.route.paramMap
         .switchMap((params: ParamMap) =>
         
-        this.navService.getAnnouncement(moduleName, this.lang))
+        this.navService.getAnnouncementDetails(moduleName, this.lang, id1, id2))
        
         .subscribe(resAllAnnounce => { 
             // this.announceRes = resAllAnnounce;

@@ -28,6 +28,8 @@ import { ManualComponent } from './staticpage/manual.component';
 import { DataprotectionComponent} from './staticpage/dataprotection.component';
 import { LoginComponent } from "./login/login.component";
 import { AnnouncementComponent } from './announcement/announcement.component';
+import { AnnouncementlistComponent } from './announcementlist/announcementlist.component';
+import { AnnouncementdetailsComponent } from './announcementdetails/announcementdetails.component';
 
 
 export const appRoutes: Routes = [
@@ -36,8 +38,8 @@ export const appRoutes: Routes = [
     {path: 'search/searchResult', component: SearchResultComponent},
     {path: 'topic/:id', component: ArticleComponent, canActivate: [NavRouterActivator]  },
     {path: 'announcement', component: AnnouncementComponent },
-    {path: 'announcement/:id', component: AnnouncementComponent},
-    {path: 'announcement/:id/:id', component: AnnouncementComponent},
+    {path: 'announcement/:id', component: AnnouncementlistComponent},
+    {path: 'announcement/:id/:id', component: AnnouncementdetailsComponent},
     {path: 'subtopic/:id1/:id2', component: SubarticleComponent },
     {path: 'login', component: LoginComponent},
     {path: 'register', component: RegisterComponent },
