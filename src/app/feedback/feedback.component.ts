@@ -10,7 +10,6 @@ import {MatSnackBar, MatSnackBarConfig} from '@angular/material';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { PortalService } from '../services/portal.service';
-import { ProtectedService } from '../services/protected.service';
 import { ToastrService } from 'ngx-toastr';
 import { ValidateService } from '../common/validate.service';
 
@@ -46,7 +45,6 @@ export class FeedbackComponent implements OnInit {
     vcr: ViewContainerRef,
     private translate: TranslateService,
     private router: Router,
-    private protectedService:ProtectedService, 
     private http: Http,
     @Inject(APP_CONFIG) private config: AppConfig,
     private portalService:PortalService,
@@ -100,20 +98,18 @@ export class FeedbackComponent implements OnInit {
     
 
     getUserData(){
-      this.protectedService.getUser().subscribe(
-        data => {
-          if(data.user){
-            this.feedbackFormgrp.get('nama_penuh').setValue(data.user.fullName);
-            this.feedbackFormgrp.get('nama_penuh').disable();
-            this.feedbackFormgrp.get('email').setValue(data.user.email);
-            this.feedbackFormgrp.get('email').disable();
-          }
-          else{
-            this.feedbackFormgrp.get('nama_penuh').enable();
-            this.feedbackFormgrp.get('email').enable();
-          }
-          
-        })
+
+          // if(data.user){
+          //   this.feedbackFormgrp.get('nama_penuh').setValue(data.user.fullName);
+          //   this.feedbackFormgrp.get('nama_penuh').disable();
+          //   this.feedbackFormgrp.get('email').setValue(data.user.email);
+          //   this.feedbackFormgrp.get('email').disable();
+          // }
+          // else{
+          //   this.feedbackFormgrp.get('nama_penuh').enable();
+          //   this.feedbackFormgrp.get('email').enable();
+          // }
+
     };
 
     validateCtrlChk(ctrl: FormControl) {
