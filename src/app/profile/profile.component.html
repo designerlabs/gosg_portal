@@ -297,7 +297,7 @@
             </div>
 
            <h1>
-             {{(gender.invalid || race.invalid) || profileForm.invalid}}
+             {{profileForm.invalid || (gender.invalid || race.invalid)}}
             </h1>           
           
           </div>
