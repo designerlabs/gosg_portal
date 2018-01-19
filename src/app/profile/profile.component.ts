@@ -1001,9 +1001,10 @@ let bodyUpdate =
         this.isActive = false;
         this.initial = true;
         this.profileForm.invalid;
-        // this.toastr.success(this.translate.instant('profile.msg.updateSuccess'), '');
+        this.toastr.success(this.translate.instant('profile.msg.updateSuccess'), '');
         this.profileForm.disable();
       },
+    
       error => {
         this.toastr.error(this.translate.instant('profile.err.updateFail'), '');
       });
