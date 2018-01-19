@@ -60,7 +60,7 @@
                 <label class="font-size-m" for="dob">{{'profile.label.dateofbirth' | translate}}</label>
                   <mat-form-field class="example-full-width font-size-m" style="margin-top: -25px">
                     <div style="color:#333;" class="font-size-m boldText">{{dt | date:'dd/MM/yyyy' }}</div>
-                    <input placeholder="{{ dateFormatExample }}" style="display: block" matInput formControlName="dob" #dob [matDatepicker]="dob" (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)" [max]="maxDate"  />
+                    <input placeholder="{{ dateFormatExample }}" style="display: none" matInput formControlName="dob" #dob [matDatepicker]="dob" (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)" [max]="maxDate"  />
                     <mat-datepicker-toggle matSuffix [for]="dob" style="color:#333;"></mat-datepicker-toggle>
                     <mat-datepicker #dob></mat-datepicker>
                   </mat-form-field>
@@ -92,7 +92,7 @@
                   <mat-select tabindex="1" formControlName="gender" placeholder="{{'profile.label.gender' | translate}}" required>
                       <mat-option *ngFor="let gender of genderData" [value]="gender?.genderCode">{{ gender?.gender | translate }}</mat-option>
                   </mat-select>
-                  <mat-error *ngIf="!validateCtrlChk(gender) && profileForm.controls.gender.errors.required">
+                  <mat-error *ngIf="!validateCtrlChk(gender) && profileForm.controls.gender.errors?.required">
                       {{'profile.err.gender' | translate }}
                   </mat-error>
                 </mat-form-field>
@@ -102,7 +102,7 @@
                   <mat-select *ngIf="!this.isOtherRace" formControlName="race" placeholder="{{'profile.label.race' | translate}}" required>
                       <mat-option *ngFor="let race of getRaceData" [value]="race?.raceCode">{{race?.race}}</mat-option>
                   </mat-select>
-                  <mat-error *ngIf="!validateCtrlChk(race) && profileForm.controls.gender.errors.required">
+                  <mat-error *ngIf="!validateCtrlChk(race) && profileForm.controls.race.errors?.required">
                       {{'profile.err.race' | translate }}
                   </mat-error>
                 </mat-form-field>
@@ -203,7 +203,7 @@
                   <!-- <mat-error *ngIf="!validateCtrlChk(perPostcode) && profileForm.controls.perPostcode.errors.required">
                       {{'profile.err.postcode' | translate }}
                   </mat-error> -->
-                  <mat-error *ngIf="!validateCtrlChk(perPostcode) && profileForm.controls.perPostcode.errors.pattern">
+                  <mat-error *ngIf="!validateCtrlChk(perPostcode) && profileForm.controls.perPostcode.errors?.pattern">
                     {{'profile.pattern.postcode' | translate }}
                   </mat-error>
                 </mat-form-field>
@@ -240,7 +240,7 @@
             <div class="row">
               <div class="form-group col-md-4">
                 <mat-form-field class="example-full-width font-size-s">
-                  <mat-select (change)="isMalaysian($event.value)" formControlName="corrsCountry" placeholder="{{'profile.label.country' | translate}}">
+                  <mat-select (change)="isMalaysianCorrs($event.value)" formControlName="corrsCountry" placeholder="{{'profile.label.country' | translate}}">
                       <mat-option *ngFor="let country of countries" [value]="country.countryId">{{country.countryName}}</mat-option>
                   </mat-select>
                 </mat-form-field>

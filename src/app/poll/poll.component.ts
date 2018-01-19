@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { SharedService } from '../common/shared.service';
 import { debounce } from 'rxjs/operators/debounce';
 import { PortalService } from '../services/portal.service';
+import { SharedPipe } from '../common/shared.pipe';
 
 @Component({
   selector: 'app-poll',
@@ -24,7 +25,8 @@ export class PollComponent implements OnInit {
     lang = 'en';
     filter= false;
     private pollUrl: string = this.config.urlPoll;
-    showResult = false;
+    // showResult = false;
+    showResult;
     latestResult = false;
     value = 50;
     ipData: any;
@@ -33,6 +35,7 @@ export class PollComponent implements OnInit {
     languageId = this.languageId;
     pollPercent;
     progressbarVal;
+    pollReference;
     // calcValue = 90;
     // tslint:disable-next-line:max-line-length
     constructor(private translate: TranslateService, private http: Http, @Inject(APP_CONFIG) private config: AppConfig, private toastr: ToastrService, private sharedService: SharedService, private portalservice: PortalService) {
@@ -49,13 +52,14 @@ export class PollComponent implements OnInit {
               this.lang = 'ms';
               this.languageId = 2;
               this.getData('2');
+              console.log('from malay');
             }
         });
     }
 
     ngOnInit() {
         this.getData(this.languageId);
-        this.getUserIpAddr();
+        // this.getUserIpAddr();
     }
 
    getData(languageId) {
@@ -63,10 +67,15 @@ export class PollComponent implements OnInit {
            .map(res => res.json())
           .subscribe(eventData => {
                 this.pollDataQuestion = eventData.questionTitle;
-                this.pollDataAnswer = eventData.answer;
+                this.pollDataAnswer = eventData.answer.filter((element, index) => {
+                    return (element.answer.length > 0);
+                 });
                 this.pollDataQuestionID = eventData.questionId;
+                this.pollReference = eventData.pollReference;
                 // tslint:disable-next-line:radix
-                this.showResult = (parseInt(localStorage.getItem('polldone')) === this.pollDataQuestionID);
+                if (!this.latestResult) { // Check Latest Result Message while change lang
+                    this.showResult = ((localStorage.getItem('polldone') === this.pollReference));
+                }
                 // this.pollDataComment = eventData[0].comment;
             });
     }
@@ -91,12 +100,12 @@ export class PollComponent implements OnInit {
     }
 
     submitPoll(event) {
-        // debugger;
         // this.getAnsData(this.lang);
         const data = {
             'pollsComment': this.pollComment,
             'pollsAnswerId' : this.pollAnswer.id,
             'pollsQuestionId': this.pollDataQuestionID
+            // 'pollReference' : this.pollReference
             };
         this.portalservice.submitPoll(data)
         .subscribe(
@@ -105,6 +114,7 @@ export class PollComponent implements OnInit {
                 this.pollDataAnswer = resData.answer;
                 this.pollDataQuestion = resData.questionTitle;
                 this.pollDataQuestionID = resData.questionId;
+                this.pollReference = resData.pollReference;
                 console.log(this.resultData);
             }, Error => {
                 this.toastr.error(this.translate.instant('common.err.servicedown'), '');
@@ -112,7 +122,7 @@ export class PollComponent implements OnInit {
         );
         this.toastr.success('Recommendation is : ' + this.pollComment + ', Answer is ' + this.pollAnswer.answer);
         this.showResult = true;
-        localStorage.setItem('polldone', this.pollDataQuestionID);
+        localStorage.setItem('polldone', this.pollReference);
     }
     closeResult() {
         this.latestResult = true;
@@ -122,18 +132,18 @@ export class PollComponent implements OnInit {
         this.latestResult = false;
         this.showResult = true;
     }
-    getUserIpAddr() {
-        this.sharedService.getIpCliente()
-        .subscribe(resData => {
-          this.ipData = resData.text();
-        },
-        Error => {
-         this.toastr.error(this.translate.instant('common.err.servicedown'), '');
-       });
-    }
+    // getUserIpAddr() {
+    //     this.sharedService.getIpCliente()
+    //     .subscribe(resData => {
+    //       this.ipData = resData.text();
+    //     },
+    //     Error => {
+    //      this.toastr.error(this.translate.instant('common.err.servicedown'), '');
+    //    });
+    // }
 
     calVal(val) {
-        if(val) {
+        if (val) {
             // tslint:disable-next-line:radix
         const numerator = parseInt(val.split('/')[0]);
         // tslint:disable-next-line:radix

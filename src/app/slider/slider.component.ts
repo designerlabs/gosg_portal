@@ -66,7 +66,8 @@ export class SliderComponent implements OnInit {
 
     private sliderUrl: string = this.config.urlSlider;
     getSlide(lang: string) {
-      return this.http.get(this.sliderUrl + '-' + lang)
+      return this.http.get('./app/apidata/sliderdata-'+lang+'.json')
+      // return this.http.get(this.sliderUrl + '-' + lang)
            .map(res => res.json())
           .subscribe(resSliderData => {
                 this.slides = resSliderData;
