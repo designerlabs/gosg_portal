@@ -113,10 +113,10 @@ export class SharedService {
 
   }
 
-  getIpCliente(): Observable<any> {
-    return this.http.get('http://api.ipify.org')
-    .map((response: Response) => response)
-    .catch(this.handleError);
-}
+//   getIpCliente(): Observable<any> {
+//     return this.http.get('http://api.ipify.org')
+//     .map((response: Response) => response)
+//     .catch(this.handleError);
+// }
 
 }
