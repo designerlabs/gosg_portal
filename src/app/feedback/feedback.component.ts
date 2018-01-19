@@ -103,15 +103,19 @@ export class FeedbackComponent implements OnInit {
       this.protectedService.getUser().subscribe(
         data => {
           if(data.user){
-            debugger;
+            this.feedbackFormgrp.get('nama_penuh').setValue(data.user.fullName);
+            this.feedbackFormgrp.get('nama_penuh').disable();
+            this.feedbackFormgrp.get('email').setValue(data.user.email);
+            this.feedbackFormgrp.get('email').disable();
           }
           else{
-            debugger;
+            this.feedbackFormgrp.get('nama_penuh').enable();
+            this.feedbackFormgrp.get('email').enable();
           }
           
         })
     };
-    
+
     validateCtrlChk(ctrl: FormControl) {
       // return ctrl.valid || ctrl.untouched
       return this.validateService.validateCtrl(ctrl);
