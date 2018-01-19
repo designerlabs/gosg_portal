@@ -252,7 +252,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                 this.isMyIdentityValid = data.user.isMyIdentityValid;
                 this.agencyForwardUrl = data.user.agencyForwardUrl;
                 this.roles = data.user.roles;
-                this.isSameAddressValue = data.sameAddressFlag;
+                
 
                 if(data.user.gender){
                   this.profileForm.get('gender').setValue(data.user.gender.genderCode);
@@ -267,6 +267,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                 }
                 
                 if(data.user.address){
+                  this.isSameAddressValue = data.user.address.sameAddressFlag;
                   this.isSameAddressChk();
                   this.addressId = data.user.address.addressId;
                   this.profileForm.get('perAddress1').setValue(data.user.address.permanentAddress1);
