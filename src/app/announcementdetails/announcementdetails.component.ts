@@ -70,9 +70,9 @@ export class AnnouncementdetailsComponent implements OnInit {
 
     ngOnInit() {
         this.moduleName = this.router.url.split('/')[1];
-        this.announcementID = parseInt(this.router.url.split('/')[2]); 
-        this.announcementID2 = parseInt(this.router.url.split('/')[3]);
-        //this.triggerAnnouncementAll(this.moduleName, this.lang, this.announcementID, this.announcementID2);
+        this.announcementID = this.router.url.split('/')[2]; 
+        this.announcementID2 = this.router.url.split('/')[3];
+        this.triggerAnnouncementAll(this.moduleName, this.lang, this.announcementID, this.announcementID2);
         console.log("onInit");
     }
 
