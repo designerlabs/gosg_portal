@@ -22,6 +22,7 @@ import { APP_CONFIG, AppConfig } from '../config/app.config.module';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit, AfterViewInit {
+  initialBtn: boolean;
   isSameAddressValue: any;
   addressId: any;
   roles: any;
@@ -160,7 +161,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.date = new Date();
-    this.initial = true;
+    this.initialBtn = true;
     this.getRace(this.languageId );
     this.getGenderVal(this.languageId );
     this.getReligion(this.languageId );
@@ -855,14 +856,14 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       console.log(this.selectedCountry + " | " + this.selectedState  + " | " + this.selectedCity)
 
       this.toastr.info(this.translate.instant('profile.msg.editbtnE'), '');
-      this.initial = false
+      this.initialBtn = false
       this.profileForm.enable()
       this.dob.enable();
       this.checkReqValues();
     } else {
       console.log(this.profileForm.value);
       // this.toastr.info(this.translate.instant('profile.msg.editbtnD'), '');
-      this.initial = true
+      this.initialBtn = true
       this.profileForm.disable()
       this.dob.disable();
     }
