@@ -58,8 +58,8 @@ export class AnnouncementlistComponent implements OnInit {
                 });
             }
 
-            this.triggerAnnouncementAll(this.moduleName,this.lang,this.announcementID, null);
-                    console.log("langMY")
+            this.triggerAnnouncementList(this.moduleName,this.lang,this.announcementID);
+            console.log("langMY")
         });
 
     }
@@ -67,9 +67,12 @@ export class AnnouncementlistComponent implements OnInit {
     lang = this.lang;
 
     ngOnInit() {
+        
         this.moduleName = this.router.url.split('/')[1];
-        this.announcementID = parseInt(this.router.url.split('/')[2]); 
-        this.triggerAnnouncementAll(this.moduleName, this.lang, this.announcementID, null);
+        this.announcementID = this.router.url.split('/')[2]; 
+        console.log("1st COde: "+this.announcementID);
+
+        this.triggerAnnouncementList(this.moduleName, this.lang, this.announcementID);
         console.log("onInit");
     }
 
@@ -82,7 +85,7 @@ export class AnnouncementlistComponent implements OnInit {
         const _getModule = this.router.url.split('/')[1];
  
         this.router.navigate([_getModule, e.code]); 
-        this.triggerAnnouncementAll(_getModule,  this.lang, e.code,null);          
+        this.triggerAnnouncementList(_getModule,  this.lang, e.code);          
         console.log("sideMenu")
         event.preventDefault();
     }
@@ -92,25 +95,16 @@ export class AnnouncementlistComponent implements OnInit {
       const _getModule = this.router.url.split('/')[1];
       const _getAnnounceID = this.router.url.split('/')[2]; 
       const _getAnnounceID2 = this.router.url.split('/')[3]; 
-      if (!_getAnnounceID && !_getAnnounceID2){  
-          this.router.navigate([_getModule, e.code]);   
-          this.triggerAnnouncementAll(_getModule,  this.lang, _getAnnounceID, _getAnnounceID2);   
+     
+          this.router.navigate([_getModule, _getAnnounceID, e.code]);   
           
           console.log("2");
           event.preventDefault();
-      }
-
-      else{
-          this.router.navigate([_getModule,  _getAnnounceID,  e.code]); 
-          this.triggerAnnouncementAll(_getModule,  this.lang, _getAnnounceID,  e.code);   
-          
-          console.log("3");
-          event.preventDefault();   
-      }
+     
       
   }
   
-  triggerAnnouncementAll(moduleName, lang, id1, id2){
+  triggerAnnouncementList(moduleName, lang, id1){
     
     if(lang == "ms"){
         this.lang = 2;
@@ -123,7 +117,7 @@ export class AnnouncementlistComponent implements OnInit {
     this.route.paramMap
     .switchMap((params: ParamMap) =>
     
-    this.navService.getAnnouncementDetails(moduleName, this.lang, id1, id2))
+    this.navService.getAnnouncementList(moduleName, this.lang, id1))
    
     .subscribe(resAllAnnounce => { 
         // this.announceRes = resAllAnnounce;
