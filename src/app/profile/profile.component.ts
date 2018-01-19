@@ -517,7 +517,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   isMalaysian(val) {
     this.selectedCountry = val;
     // this.profileForm.get('perCountry').setValue(this.selectedCountry);
-    debugger;
     this.isChanged();
     if(val == 152) {
       this.isLocal = true;
@@ -667,7 +666,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
      .subscribe(resStateData => {
         this.getStateData = resStateData;
         if(id){
-          debugger;
           this.profileForm.get('perStateLocal').setValue(id);
         }
       },
@@ -764,6 +762,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   addLocalCtrl() {
     this.profileForm.addControl('perStateLocal', this.perStateLocal);
     this.profileForm.addControl('perCityLocal', this.perCityLocal);
+    this.profileForm.get('perStateNotLocal').setValue("");
+    this.profileForm.get('perCityNotLocal').setValue("");
     if(this.isActive && this.isLocal) {
       this.profileForm.get('perStateLocal').enable();
       this.profileForm.get('perCityLocal').enable();
@@ -776,8 +776,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   RemoveLocalCtrl() {
       this.profileForm.removeControl('perStateLocal');
       this.profileForm.removeControl('perCityLocal');
-      this.profileForm.get('perStateLocal').setValue(null);
-      this.profileForm.get('perCityLocal').setValue(null);
+      this.profileForm.get('perStateLocal').setValue("");
+      this.profileForm.get('perCityLocal').setValue("");
       this.profileForm.addControl('perStateNotLocal',this.perStateNotLocal);
       this.profileForm.addControl('perCityNotLocal', this.perCityNotLocal);
       if(this.isActive && !this.isLocal) {

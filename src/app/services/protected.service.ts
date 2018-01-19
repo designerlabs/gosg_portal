@@ -64,7 +64,6 @@ export class ProtectedService {
   } 
 
   updateProfile(user) {
-    debugger;
     return this.http
     .put(this.profileUrl+"/update/"+user.pid+"?langId="+localStorage.getItem('langID'), user).map((response: Response) => response.json())
     .catch(this.handleError);
