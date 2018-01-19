@@ -295,6 +295,11 @@
                 (click)="updateProfile(profileForm.value);false" style="width: 100px; font-family: Roboto; margin-left: 5px;" [disabled]="profileForm.invalid || initial">
                 <i class="fa fa-check"></i> {{'profile.label.submit' | translate }}</button>
             </div>
+
+           <h1>
+             {{gender.valid && race.valid}}
+            </h1>           
+          
           </div>
         
         </form>
