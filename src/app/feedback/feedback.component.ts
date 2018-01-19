@@ -10,6 +10,7 @@ import {MatSnackBar, MatSnackBarConfig} from '@angular/material';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { PortalService } from '../services/portal.service';
+import { ProtectedService } from '../services/protected.service';
 import { ToastrService } from 'ngx-toastr';
 import { ValidateService } from '../common/validate.service';
 
@@ -45,6 +46,7 @@ export class FeedbackComponent implements OnInit {
     vcr: ViewContainerRef,
     private translate: TranslateService,
     private router: Router,
+    private protectedService:ProtectedService, 
     private http: Http,
     @Inject(APP_CONFIG) private config: AppConfig,
     private portalService:PortalService,
@@ -78,6 +80,7 @@ export class FeedbackComponent implements OnInit {
     ngOnInit() {
       this.languageId = 2;
       this.checkLog();
+      this.getUserData();
       this.getTypenSubject();
       this.feedback_message = new FormControl('', [Validators.required]),
       this.feedbacktype = new FormControl('', [Validators.required]),
@@ -94,6 +97,20 @@ export class FeedbackComponent implements OnInit {
       // this.resetForm()
       
     }
+    
+
+    getUserData(){
+      this.protectedService.getUser().subscribe(
+        data => {
+          if(data.user){
+            debugger;
+          }
+          else{
+            debugger;
+          }
+          
+        })
+    };
     
     validateCtrlChk(ctrl: FormControl) {
       // return ctrl.valid || ctrl.untouched
