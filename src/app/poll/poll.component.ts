@@ -24,7 +24,8 @@ export class PollComponent implements OnInit {
     lang = 'en';
     filter= false;
     private pollUrl: string = this.config.urlPoll;
-    showResult = false;
+    // showResult = false;
+    showResult;
     latestResult = false;
     value = 50;
     ipData: any;
@@ -55,7 +56,7 @@ export class PollComponent implements OnInit {
 
     ngOnInit() {
         this.getData(this.languageId);
-        this.getUserIpAddr();
+        // this.getUserIpAddr();
     }
 
    getData(languageId) {
@@ -122,18 +123,18 @@ export class PollComponent implements OnInit {
         this.latestResult = false;
         this.showResult = true;
     }
-    getUserIpAddr() {
-        this.sharedService.getIpCliente()
-        .subscribe(resData => {
-          this.ipData = resData.text();
-        },
-        Error => {
-         this.toastr.error(this.translate.instant('common.err.servicedown'), '');
-       });
-    }
+    // getUserIpAddr() {
+    //     this.sharedService.getIpCliente()
+    //     .subscribe(resData => {
+    //       this.ipData = resData.text();
+    //     },
+    //     Error => {
+    //      this.toastr.error(this.translate.instant('common.err.servicedown'), '');
+    //    });
+    // }
 
     calVal(val) {
-        if(val) {
+        if (val) {
             // tslint:disable-next-line:radix
         const numerator = parseInt(val.split('/')[0]);
         // tslint:disable-next-line:radix
