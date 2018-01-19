@@ -1,11 +1,9 @@
 import { Component,  Injectable, Inject,Output, Input, EventEmitter, OnInit, AfterViewChecked, AfterViewInit,  ViewChild, ElementRef } from '@angular/core';
-import { ArticleService } from '../article/article.service';
 import { NavService } from '../header/nav/nav.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { BreadcrumbService } from '../header/breadcrumb/breadcrumb.service';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
-import { SharedService } from '../common/shared.service';
 
 @Component({
   selector: 'gosg-announcementlist',
@@ -23,15 +21,15 @@ export class AnnouncementlistComponent implements OnInit {
     isValid: any;
     announcementID = null;
     announcementID2 = null;
-    announces: any;
+    announces: any[];
     announceRes: any;
+
     announceData: any;
   
     @Output() langChange = new EventEmitter();
-    constructor(public articleService: ArticleService,  private route: ActivatedRoute, 
+    constructor(private route: ActivatedRoute, 
         private navService: NavService, private translate: TranslateService, private router: Router, 
-        private breadcrumbService: BreadcrumbService, @Inject(APP_CONFIG) private config: AppConfig,
-        private sharedService: SharedService) {
+        private breadcrumbService: BreadcrumbService, @Inject(APP_CONFIG) private config: AppConfig) {
         this.lang = translate.currentLang;
 
             translate.onLangChange.subscribe((event: LangChangeEvent) => {
@@ -58,7 +56,7 @@ export class AnnouncementlistComponent implements OnInit {
                 });
             }
 
-            this.triggerAnnouncementList(this.moduleName,this.lang,this.announcementID);
+            this.triggerAnnouncementList(this.lang,this.announcementID);
             console.log("langMY")
         });
 
@@ -70,10 +68,10 @@ export class AnnouncementlistComponent implements OnInit {
         
         this.moduleName = this.router.url.split('/')[1];
         this.announcementID = this.router.url.split('/')[2]; 
-        console.log("1st COde: "+this.announcementID);
-
-        this.triggerAnnouncementList(this.moduleName, this.lang, this.announcementID);
+     
+        this.triggerAnnouncementList(this.lang, this.announcementID);
         console.log("onInit");
+        console.log("###############################################");
     }
 
     getTheme(){
@@ -83,28 +81,30 @@ export class AnnouncementlistComponent implements OnInit {
     clickSideMenu(e){
        
         const _getModule = this.router.url.split('/')[1];
- 
-        this.router.navigate([_getModule, e.code]); 
-        this.triggerAnnouncementList(_getModule,  this.lang, e.code);          
-        console.log("sideMenu")
+        
+        // this.router.navigate(['announcement', e.code]); 
+        this.triggerAnnouncementList(this.lang, e.code);
+        this.router.navigate(['/announcement', e.code]);
+        //this.navService.getAnnouncementList(this.moduleName, this.lang, this.announcementID);
+        
+
+        console.log("sideMenu List"+['announcement', e.code]);
         event.preventDefault();
     }
 
     clickContent(e){
        
-      const _getModule = this.router.url.split('/')[1];
-      const _getAnnounceID = this.router.url.split('/')[2]; 
-      const _getAnnounceID2 = this.router.url.split('/')[3]; 
+        const _getModule = this.router.url.split('/')[1];
+        const _getAnnounceID = this.router.url.split('/')[2]; 
+        const _getAnnounceID2 = this.router.url.split('/')[3]; 
      
-          this.router.navigate([_getModule, _getAnnounceID, e.code]);   
-          
-          console.log("2");
-          event.preventDefault();
-     
-      
+        this.router.navigate(['announcement', _getAnnounceID, e.code]);   
+        
+        console.log("2");
+        event.preventDefault();   
   }
   
-  triggerAnnouncementList(moduleName, lang, id1){
+  triggerAnnouncementList(lang, id1){
     
     if(lang == "ms"){
         this.lang = 2;
@@ -114,10 +114,11 @@ export class AnnouncementlistComponent implements OnInit {
         this.lang = 1;
     }
 
-    this.route.paramMap
+    if(id1){
+        this.route.paramMap
     .switchMap((params: ParamMap) =>
     
-    this.navService.getAnnouncementList(moduleName, this.lang, id1))
+    this.navService.getAnnouncementList('announcement', this.lang, id1))
    
     .subscribe(resAllAnnounce => { 
         // this.announceRes = resAllAnnounce;
@@ -125,12 +126,13 @@ export class AnnouncementlistComponent implements OnInit {
         // const temp1 = this.announceRes[0];            
         // const temp = Object.keys(temp1).map(key => temp1[key]);
         // this.announces = temp;
-        
         this.announces = resAllAnnounce;
+     
         this.breadcrumb = this.breadcrumbService.getBreadcrumb();
         this.isValid = this.breadcrumbService.isValid = true;
         this.breadcrumb = this.breadcrumb.name = '';
     });
+    }
 }
 
     checkImgData(e){

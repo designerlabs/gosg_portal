@@ -5,7 +5,6 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { BreadcrumbService } from '../header/breadcrumb/breadcrumb.service';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
-import { SharedService } from '../common/shared.service';
 
 @Component({
   selector: 'gosg-announcementdetails',
@@ -30,8 +29,7 @@ export class AnnouncementdetailsComponent implements OnInit {
     @Output() langChange = new EventEmitter();
     constructor(public articleService: ArticleService,  private route: ActivatedRoute, 
         private navService: NavService, private translate: TranslateService, private router: Router, 
-        private breadcrumbService: BreadcrumbService, @Inject(APP_CONFIG) private config: AppConfig,
-        private sharedService: SharedService) {
+        private breadcrumbService: BreadcrumbService, @Inject(APP_CONFIG) private config: AppConfig) {
         this.lang = translate.currentLang;
 
             translate.onLangChange.subscribe((event: LangChangeEvent) => {
@@ -60,7 +58,7 @@ export class AnnouncementdetailsComponent implements OnInit {
                 });
             }
 
-            this.triggerAnnouncementAll(this.moduleName,this.lang,this.announcementID,this.announcementID2);
+            this.triggerAnnouncementDetails(this.moduleName,this.lang,this.announcementID,this.announcementID2);
                     console.log("langMY")
         });
 
@@ -72,7 +70,7 @@ export class AnnouncementdetailsComponent implements OnInit {
         this.moduleName = this.router.url.split('/')[1];
         this.announcementID = this.router.url.split('/')[2]; 
         this.announcementID2 = this.router.url.split('/')[3];
-        this.triggerAnnouncementAll(this.moduleName, this.lang, this.announcementID, this.announcementID2);
+        this.triggerAnnouncementDetails(this.moduleName, this.lang, this.announcementID, this.announcementID2);
         console.log("onInit");
     }
 
@@ -85,39 +83,20 @@ export class AnnouncementdetailsComponent implements OnInit {
         const _getModule = this.router.url.split('/')[1];
  
         console.log(e);
-
         console.log(this.router.url);
 
-        this.router.navigate([_getModule, e.code]); 
-        this.triggerAnnouncementAll(_getModule,  this.lang, e.code, null);          
+        this.router.navigate([_getModule, e.code]);          
         console.log("sideMenu")
         event.preventDefault();
     }
 
-    clickContent(e){
-       
+    clickContent(e){       
         const _getModule = this.router.url.split('/')[1];
         const _getAnnounceID = this.router.url.split('/')[2]; 
-        const _getAnnounceID2 = this.router.url.split('/')[3]; 
-        if (!_getAnnounceID && !_getAnnounceID2){  
-            this.router.navigate([_getModule, e.code]);   
-            this.triggerAnnouncementAll(_getModule,  this.lang, _getAnnounceID, _getAnnounceID2);   
-            
-            console.log("2");
-            event.preventDefault();
-        }
-
-        else{
-            this.router.navigate([_getModule,  _getAnnounceID,  e.code]); 
-            this.triggerAnnouncementAll(_getModule,  this.lang, _getAnnounceID,  e.code);   
-            
-            console.log("3");
-            event.preventDefault();   
-        }
-        
+        const _getAnnounceID2 = this.router.url.split('/')[3];         
     }
   
-    triggerAnnouncementAll(moduleName, lang, id1, id2){
+    triggerAnnouncementDetails(moduleName, lang, id1, id2){
     
         if(lang == "ms"){
             this.lang = 2;
@@ -132,13 +111,7 @@ export class AnnouncementdetailsComponent implements OnInit {
         
         this.navService.getAnnouncementDetails(moduleName, this.lang, id1, id2))
        
-        .subscribe(resAllAnnounce => { 
-            // this.announceRes = resAllAnnounce;
-            //convert object to array
-            // const temp1 = this.announceRes[0];            
-            // const temp = Object.keys(temp1).map(key => temp1[key]);
-            // this.announces = temp;
-            
+        .subscribe(resAllAnnounce => {             
             this.announces = resAllAnnounce;
             this.breadcrumb = this.breadcrumbService.getBreadcrumb();
             this.isValid = this.breadcrumbService.isValid = true;
