@@ -161,7 +161,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.date = new Date();
-    this.initialBtn = false;
+    this.initialBtn = true;
     this.getRace(this.languageId );
     this.getGenderVal(this.languageId );
     this.getReligion(this.languageId );
