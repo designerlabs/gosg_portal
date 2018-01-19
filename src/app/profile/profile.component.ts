@@ -774,8 +774,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   RemoveLocalCtrl() {
       this.profileForm.removeControl('perStateLocal');
       this.profileForm.removeControl('perCityLocal');
-      this.profileForm.addControl('perStateNotLocal',this.perStateLocal);
-      this.profileForm.addControl('perCityNotLocal', this.perCityLocal);
+      this.profileForm.addControl('perStateNotLocal',this.perStateNotLocal);
+      this.profileForm.addControl('perCityNotLocal', this.perCityNotLocal);
       if(this.isActive && !this.isLocal) {
         this.profileForm.get('perStateNotLocal').enable();
         this.profileForm.get('perCityNotLocal').enable();
