@@ -98,7 +98,6 @@ export class ProtectedComponent implements OnInit {
         
       },
     error => {
-        debugger;
         //location.href = this.config.urlUAP +'uapsso/Logout';
         //location.href = this.config.urlUAP+'portal/index';
       }

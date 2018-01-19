@@ -98,18 +98,19 @@ export class FeedbackComponent implements OnInit {
     
 
     getUserData(){
+          if(localStorage.getItem('fullname')){
+            this.feedbackFormgrp.get('nama_penuh').setValue(localStorage.getItem('fullname'));
+            this.feedbackFormgrp.get('nama_penuh').disable();
+          }else{
+            this.feedbackFormgrp.get('nama_penuh').enable();
+          }
 
-          // if(data.user){
-          //   this.feedbackFormgrp.get('nama_penuh').setValue(data.user.fullName);
-          //   this.feedbackFormgrp.get('nama_penuh').disable();
-          //   this.feedbackFormgrp.get('email').setValue(data.user.email);
-          //   this.feedbackFormgrp.get('email').disable();
-          // }
-          // else{
-          //   this.feedbackFormgrp.get('nama_penuh').enable();
-          //   this.feedbackFormgrp.get('email').enable();
-          // }
-
+          if(localStorage.getItem('email')){
+            this.feedbackFormgrp.get('email').setValue(localStorage.getItem('email'));
+            this.feedbackFormgrp.get('email').disable();
+          }else{
+            this.feedbackFormgrp.get('email').enable();
+          }
     };
 
     validateCtrlChk(ctrl: FormControl) {
