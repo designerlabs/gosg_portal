@@ -21,10 +21,10 @@
     </div>
   </div>
   
-  <div style="margin-top:10px;" class="container" *ngFor="let announce of announces">
+  <div style="margin-top:10px;" class="container" *ngFor="let announce of announceService.announces">
   
       <div class="row" *ngFor="let data of announce.results">
-         <pre> {{announce.results | json}}</pre>
+         <!-- <pre> {{announce.results | json}}</pre> -->
           <div class="col-sm-3">
               <div class="row">
                   <div class="col-md-12 sideBarMenu">

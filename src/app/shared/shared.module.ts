@@ -49,6 +49,8 @@ import { AuthService } from "../auth/auth.service";
 import { ArticleService } from "../article/article.service";
 import { NavRouterActivator } from "../header/nav/nav-router-activator.service";
 import { NavService } from "../header/nav/nav.service";
+import { AnnouncementlistService } from "../announcementlist/announcementlist.service";
+
 import { HomeComponent } from "../home/home.component";
 import { TransService } from '../services/trans.service';
 import { FeedbackComponent } from '../feedback/feedback.component';
@@ -257,6 +259,6 @@ export function HttpLoaderFactory(http: Http) {
     
   ],
 
-  providers: [SliderService, BsModalService, TopnavService, SharedService, ValidateService, BreadcrumbService, PortalService, AuthService, ArticleService, NavRouterActivator, NavService, TransService, DialogsService, SearchService]
+  providers: [SliderService, BsModalService, TopnavService, SharedService, ValidateService, BreadcrumbService, PortalService, AuthService, ArticleService, NavRouterActivator, NavService, AnnouncementlistService, TransService, DialogsService, SearchService]
 })
 export class SharedModule { }

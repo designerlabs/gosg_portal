@@ -36,24 +36,25 @@ export class AnnouncementComponent implements OnInit {
 
             const myLang = translate.currentLang;
 
-            if (myLang == 'en') {
+            if (myLang === 'en') {
 
                 translate.get('HOME').subscribe((res: any) => {
                     this.lang = '1';
-                    this.moduleName = this.router.url.split('/')[1];                 
+                    this.moduleName = this.router.url.split('/')[1];
                 });
-
+                this.triggerAnnouncement(this.moduleName, this.lang);
             }
-            if (myLang == 'ms') {
+            if (myLang === 'ms') {
 
                 translate.get('HOME').subscribe((res: any) => {
                     this.lang = '2';
-                    this.moduleName = this.router.url.split('/')[1];                    
+                    this.moduleName = this.router.url.split('/')[1];
                 });
+                this.triggerAnnouncement(this.moduleName, this.lang);
             }
 
-            this.triggerAnnouncement(this.moduleName,this.lang);
-            console.log("language: "+this.lang);
+            //
+            console.log('language: '+ this.lang);
         });
 
     }
@@ -63,51 +64,47 @@ export class AnnouncementComponent implements OnInit {
     ngOnInit() {
         this.moduleName = this.router.url.split('/')[1];
         this.triggerAnnouncement(this.moduleName, this.lang);
-        console.log("onInit Announcement");
+        console.log('onInit Announcement');
     }
 
     getTheme(){
         return localStorage.getItem('themeColor');
     }
 
-    clickSideMenu(e){
-       
+    clickSideMenu(e) {
         const _getModule = this.router.url.split('/')[1];
-        this.router.navigate([_getModule, e.code]);         
-
+        this.router.navigate([_getModule, e.code]);
         console.log(e);
-        console.log("sideMenu Announcement")
+        console.log('sideMenu Announcement');
         event.preventDefault();
     }
 
-    clickContent(e){    
+    clickContent(e) {
 
         const _getModule = this.router.url.split('/')[1];
-        this.router.navigate([_getModule, e.code]);   
-        
-        console.log("content Announcement");
-        event.preventDefault(); 
+        this.router.navigate([_getModule, e.code]);
+        console.log('content Announcement');
+        event.preventDefault();
     }
-  
+
     triggerAnnouncement(moduleName, lang){
-    
-        if(lang == "ms"){
+        if (lang === 'ms') {
             this.lang = 2;
         }
 
-        if(lang == "en"){
+        if (lang === 'en') {
             this.lang = 1;
         }
 
         this.route.paramMap
         .switchMap((params: ParamMap) =>
-        
+
         this.navService.getAnnouncement(moduleName, this.lang))
-       
-        .subscribe(resAllAnnounce => { 
+
+        .subscribe(resAllAnnounce => {
             // this.announceRes = resAllAnnounce;
-            //convert object to array
-            // const temp1 = this.announceRes[0];            
+            // convert object to array
+            // const temp1 = this.announceRes[0];
             // const temp = Object.keys(temp1).map(key => temp1[key]);
             // this.announces = temp;
             console.log(resAllAnnounce);
@@ -118,12 +115,12 @@ export class AnnouncementComponent implements OnInit {
         });
     }
 
-    checkImgData(e){
+    checkImgData(e) {
 
         const chkData = e.search('<img');
-        if (chkData != -1){
+        if (chkData !== -1) {
             return true;
-        }else{
+        }else {
             return false;
         }
     }
