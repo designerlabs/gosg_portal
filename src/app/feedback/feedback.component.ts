@@ -78,6 +78,7 @@ export class FeedbackComponent implements OnInit {
     ngOnInit() {
       this.languageId = 2;
       this.checkLog();
+      this.getUserData();
       this.getTypenSubject();
       this.feedback_message = new FormControl('', [Validators.required]),
       this.feedbacktype = new FormControl('', [Validators.required]),
@@ -95,6 +96,22 @@ export class FeedbackComponent implements OnInit {
       
     }
     
+
+    getUserData(){
+
+          // if(data.user){
+          //   this.feedbackFormgrp.get('nama_penuh').setValue(data.user.fullName);
+          //   this.feedbackFormgrp.get('nama_penuh').disable();
+          //   this.feedbackFormgrp.get('email').setValue(data.user.email);
+          //   this.feedbackFormgrp.get('email').disable();
+          // }
+          // else{
+          //   this.feedbackFormgrp.get('nama_penuh').enable();
+          //   this.feedbackFormgrp.get('email').enable();
+          // }
+
+    };
+
     validateCtrlChk(ctrl: FormControl) {
       // return ctrl.valid || ctrl.untouched
       return this.validateService.validateCtrl(ctrl);

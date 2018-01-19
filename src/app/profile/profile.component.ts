@@ -315,12 +315,14 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                   this.profileForm.get('corrsCountry').setValue(data.user.address.correspondingAddressCountry.countryId);
                   if(data.user.address.correspondingAddressCountry.countryId == 152) {
                     this.isCorrsLocal = true;
-                    this.getState();
+                    
                     if(data.user.address.correspondingAddressState){
+                      this.getState();
                       this.profileForm.get('corrsStateLocal').setValue(data.user.address.correspondingAddressState.stateId);
                     }
-                    this.getCitiesByStateC(data.user.address.correspondingAddressState.stateId);
+                    
                     if(data.user.address.correspondingAddressCity){
+                      this.getCitiesByStateC(data.user.address.correspondingAddressState.stateId);
                       this.profileForm.get('corrsCityLocal').setValue(data.user.address.correspondingAddressCity.cityId);
                     }
                     if(data.user.address.correspondingAddressPostcode){
@@ -515,7 +517,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   isMalaysian(val) {
     this.selectedCountry = val;
     // this.profileForm.get('perCountry').setValue(this.selectedCountry);
-    debugger;
     this.isChanged();
     if(val == 152) {
       this.isLocal = true;
@@ -665,7 +666,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
      .subscribe(resStateData => {
         this.getStateData = resStateData;
         if(id){
-          debugger;
           this.profileForm.get('perStateLocal').setValue(id);
         }
       },
@@ -710,14 +710,15 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
   isSameAddressChk(){
     if(this.isSameAddressValue){
-      debugger;
+      this.profileForm.get('checkboxValue').setValue(true)
+    }else{
+      this.profileForm.get('checkboxValue').setValue(false);
     }
   }
 
   isSameAddress(){
     if(this.profileForm.get('checkboxValue').value == null) {
       this.profileForm.get('checkboxValue').setValue(false);
-      debugger;
     }
   }
 
@@ -761,6 +762,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   addLocalCtrl() {
     this.profileForm.addControl('perStateLocal', this.perStateLocal);
     this.profileForm.addControl('perCityLocal', this.perCityLocal);
+
     if(this.isActive && this.isLocal) {
       this.profileForm.get('perStateLocal').enable();
       this.profileForm.get('perCityLocal').enable();
@@ -773,8 +775,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   RemoveLocalCtrl() {
       this.profileForm.removeControl('perStateLocal');
       this.profileForm.removeControl('perCityLocal');
-      this.profileForm.addControl('perStateNotLocal',this.perStateLocal);
-      this.profileForm.addControl('perCityNotLocal', this.perCityLocal);
+
+      this.profileForm.addControl('perStateNotLocal',this.perStateNotLocal);
+      this.profileForm.addControl('perCityNotLocal', this.perCityNotLocal);
       if(this.isActive && !this.isLocal) {
         this.profileForm.get('perStateNotLocal').enable();
         this.profileForm.get('perCityNotLocal').enable();
@@ -960,22 +963,26 @@ let bodyUpdate =
     if(this.isLocal) {
       bodyUpdate.address.permanentAddressState.stateId = formValues.perStateLocal;
       bodyUpdate.address.permanentAddressCity.cityId = formValues.perCityLocal;
+      bodyUpdate.address.permanentAddressPostcode = formValues.perPostcode;
     } else {
-      bodyUpdate.address.permanentAddressState.stateId = formValues.perStateNotLocal;
-      bodyUpdate.address.permanentAddressCity.cityId =  formValues.perCityNotLocal;
+      bodyUpdate.address.optionalPermanentAddressState = formValues.perStateNotLocal;
+      bodyUpdate.address.optionalPermanentAddressCity =  formValues.perCityNotLocal;
+      bodyUpdate.address.optionalPermanentAddressPostcode = formValues.perPostcode;
     }
 
     if(this.isCorrsLocal) {
       bodyUpdate.address.correspondingAddressState.stateId = formValues.corrsStateLocal;
       bodyUpdate.address.correspondingAddressCity.cityId = formValues.corrsCityLocal;
+      bodyUpdate.address.correspondingAddressPostcode = formValues.corrsPostcode;
     } else {
-      bodyUpdate.address.correspondingAddressState.stateId = formValues.corrsStateNotLocal;
-      bodyUpdate.address.correspondingAddressCity.cityId = formValues.corrsCityNotLocal;
+      bodyUpdate.address.optionalCorrespondingAddressState = formValues.corrsStateNotLocal;
+      bodyUpdate.address.optionalCorrespondingAddressCity = formValues.corrsCityNotLocal;
+      bodyUpdate.address.optionalCorrespondingAddressPostcode = formValues.corrsPostcode;
     }
 
     bodyUpdate.address.correspondingAddressCountry.countryId = formValues.corrsCountry;
-    bodyUpdate.address.permanentAddressPostcode = formValues.perPostcode;
-    bodyUpdate.address.correspondingAddressPostcode = formValues.corrsPostcode;
+    
+    
     bodyUpdate.address.permanentAddressHomePhoneNo = formValues.perTelephone;
     bodyUpdate.address.correspondingAddressHomePhoneNo = formValues.corrsTelephone;
     bodyUpdate.address.sameAddressFlag = formValues.checkboxValue;
@@ -994,9 +1001,10 @@ let bodyUpdate =
         this.isActive = false;
         this.initial = true;
         this.profileForm.invalid;
-        // this.toastr.success(this.translate.instant('profile.msg.updateSuccess'), '');
+        this.toastr.success(this.translate.instant('profile.msg.updateSuccess'), '');
         this.profileForm.disable();
       },
+    
       error => {
         this.toastr.error(this.translate.instant('profile.err.updateFail'), '');
       });
