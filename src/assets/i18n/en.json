@@ -266,7 +266,9 @@
     "title" : "SHARE YOUR THOUGHT WITH US",
     "resultTitle" : "POLLS RESULT",
     "recommend" : "Your recommendation for improvement",
-    "youranswer" : "Your answer is"
+    "youranswer" : "Your answer is",
+    "seeAnswer" : "WOULD YOU LIKE TO KNOW THE RESULTS OF THE LATEST SURVEY ON THE NEW MYGOV WEB SITE?",
+    "displayAnswer" : " YES, DISPLAY THE LATEST RESULTS "
   },
   "announcement":{
     "title":"Highlights",

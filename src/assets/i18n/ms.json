@@ -269,7 +269,9 @@
     "title" : "KONGSIKAN PANDANGAN ANDA BERSAMA KAMI",
     "resultTitle" : "KEPUTUSAN",
     "recommend" : "Cadangan Penambahbaikan Anda",
-    "youranswer" : "Jawapan anda adalah"
+    "youranswer" : "Jawapan anda adalah",
+    "seeAnswer" : "INGIN MENGETAHUI KEPUTUSAN TERKINI SURVEY MENGENAI LAMAN WEB MYGOV YANG BARU?",
+    "displayAnswer" : " YA, PAPARKAN KEPUTUSAN TERKINI "
   },
   "announcement":{
     "title":"Sorotan Terkini",

@@ -64,11 +64,12 @@
                   </section>
 
         </div>
+        <!-- Latest Result Message area -->
         <div *ngIf="latestResult && !showResult" style="text-align: center; padding: 15px 0px 15px 0px;">
                 <h2 class="font-size-l" style="font-family: Roboto; color: rgb(51, 51, 51);">
-                    WOULD YOU LIKE TO KNOW THE RESULTS OF THE LATEST SURVEY ON THE NEW MYGOV WEB SITE?</h2>
+                        {{'poll.seeAnswer' | translate}}</h2>
                 <h2 class="font-size-l" style="font-family: Roboto; color: rgb(0, 189, 187);"
-                 [style.color]="getTheme()"> <span style="cursor: pointer;" (click)="ShowLatest()"> YES, DISPLAY THE LATEST RESULTS </span></h2>
+                 [style.color]="getTheme()"> <span style="cursor: pointer;" (click)="ShowLatest()"> {{'poll.displayAnswer' | translate}} </span></h2>
         </div>
     </div>
 </div>

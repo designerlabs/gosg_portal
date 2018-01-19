@@ -73,7 +73,9 @@ export class PollComponent implements OnInit {
                 this.pollDataQuestionID = eventData.questionId;
                 this.pollReference = eventData.pollReference;
                 // tslint:disable-next-line:radix
-                this.showResult = ((localStorage.getItem('polldone') === this.pollReference));
+                if (!this.latestResult) { // Check Latest Result Message while change lang
+                    this.showResult = ((localStorage.getItem('polldone') === this.pollReference));
+                }
                 // this.pollDataComment = eventData[0].comment;
             });
     }
