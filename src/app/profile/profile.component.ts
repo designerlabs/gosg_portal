@@ -774,6 +774,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   RemoveLocalCtrl() {
       this.profileForm.removeControl('perStateLocal');
       this.profileForm.removeControl('perCityLocal');
+      this.profileForm.get('perStateLocal').setValue(null);
+      this.profileForm.get('perCityLocal').setValue(null);
       this.profileForm.addControl('perStateNotLocal',this.perStateNotLocal);
       this.profileForm.addControl('perCityNotLocal', this.perCityNotLocal);
       if(this.isActive && !this.isLocal) {
@@ -961,22 +963,26 @@ let bodyUpdate =
     if(this.isLocal) {
       bodyUpdate.address.permanentAddressState.stateId = formValues.perStateLocal;
       bodyUpdate.address.permanentAddressCity.cityId = formValues.perCityLocal;
+      bodyUpdate.address.permanentAddressPostcode = formValues.perPostcode;
     } else {
-      bodyUpdate.address.permanentAddressState.stateId = formValues.perStateNotLocal;
-      bodyUpdate.address.permanentAddressCity.cityId =  formValues.perCityNotLocal;
+      bodyUpdate.address.optionalPermanentAddressState = formValues.perStateNotLocal;
+      bodyUpdate.address.optionalPermanentAddressCity =  formValues.perCityNotLocal;
+      bodyUpdate.address.optionalPermanentAddressPostcode = formValues.perPostcode;
     }
 
     if(this.isCorrsLocal) {
       bodyUpdate.address.correspondingAddressState.stateId = formValues.corrsStateLocal;
       bodyUpdate.address.correspondingAddressCity.cityId = formValues.corrsCityLocal;
+      bodyUpdate.address.correspondingAddressPostcode = formValues.corrsPostcode;
     } else {
-      bodyUpdate.address.correspondingAddressState.stateId = formValues.corrsStateNotLocal;
-      bodyUpdate.address.correspondingAddressCity.cityId = formValues.corrsCityNotLocal;
+      bodyUpdate.address.optionalCorrespondingAddressState = formValues.corrsStateNotLocal;
+      bodyUpdate.address.optionalCorrespondingAddressCity = formValues.corrsCityNotLocal;
+      bodyUpdate.address.optionalCorrespondingAddressPostcode = formValues.corrsPostcode;
     }
 
     bodyUpdate.address.correspondingAddressCountry.countryId = formValues.corrsCountry;
-    bodyUpdate.address.permanentAddressPostcode = formValues.perPostcode;
-    bodyUpdate.address.correspondingAddressPostcode = formValues.corrsPostcode;
+    
+    
     bodyUpdate.address.permanentAddressHomePhoneNo = formValues.perTelephone;
     bodyUpdate.address.correspondingAddressHomePhoneNo = formValues.corrsTelephone;
     bodyUpdate.address.sameAddressFlag = formValues.checkboxValue;
