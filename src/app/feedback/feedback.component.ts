@@ -23,6 +23,11 @@ export class FeedbackComponent implements OnInit {
   submitMsg: any;
   
   @Input() state:string;
+
+  @Input() getEmail;
+  @Input() getFullname;
+
+
   public feedbackFormgrp: FormGroup;
   feedback_message: FormControl;
   feedbacktype: FormControl;
