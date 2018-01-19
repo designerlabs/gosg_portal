@@ -265,7 +265,8 @@
   "poll": {
     "title" : "SHARE YOUR THOUGHT WITH US",
     "resultTitle" : "POLLS RESULT",
-    "recommend" : "Your recommendation for improvement"
+    "recommend" : "Your recommendation for improvement",
+    "youranswer" : "Your answer is"
   },
   "announcement":{
     "title":"Highlights",
