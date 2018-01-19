@@ -710,14 +710,15 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
   isSameAddressChk(){
     if(this.isSameAddressValue){
-      debugger;
+      this.profileForm.get('checkboxValue').setValue(true)
+    }else{
+      this.profileForm.get('checkboxValue').setValue(false);
     }
   }
 
   isSameAddress(){
     if(this.profileForm.get('checkboxValue').value == null) {
       this.profileForm.get('checkboxValue').setValue(false);
-      debugger;
     }
   }
 
