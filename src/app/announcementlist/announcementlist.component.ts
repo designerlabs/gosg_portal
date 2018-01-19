@@ -92,7 +92,9 @@ export class AnnouncementlistComponent implements OnInit {
         const _getModule = this.router.url.split('/')[1];
         const _getAnnounceID = this.router.url.split('/')[2];
         const _getAnnounceID2 = this.router.url.split('/')[3];
-        this.router.navigate(['announcement', _getAnnounceID, e.runningNo]);
+        if (e.runningNo) {
+            this.router.navigate(['announcement', _getAnnounceID, e.runningNo]);
+        }
         console.log('2');
         event.preventDefault();
   }
