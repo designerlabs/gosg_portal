@@ -93,12 +93,12 @@ export class AnnouncementlistComponent implements OnInit {
     }
 
     clickContent(e){
-       
+        
         const _getModule = this.router.url.split('/')[1];
         const _getAnnounceID = this.router.url.split('/')[2]; 
         const _getAnnounceID2 = this.router.url.split('/')[3]; 
      
-        this.router.navigate(['announcement', _getAnnounceID, e.code]);   
+        this.router.navigate(['announcement', _getAnnounceID, e.runningNo]);   
         
         console.log("2");
         event.preventDefault();   
@@ -118,6 +118,7 @@ export class AnnouncementlistComponent implements OnInit {
         this.route.paramMap
     .switchMap((params: ParamMap) =>
     
+
     this.navService.getAnnouncementList('announcement', this.lang, id1))
    
     .subscribe(resAllAnnounce => { 

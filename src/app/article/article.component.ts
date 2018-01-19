@@ -72,6 +72,8 @@ export class ArticleComponent implements OnInit {
     clickSideMenu(e){
         const _getSubLabel = e.json_url.split('&');
         let _getSubID = _getSubLabel[1].split('=');
+        console.log(_getSubLabel);
+        console.log(_getSubID);
         const _getTopicID = parseInt(this.router.url.split('/')[2]);
         _getSubID = parseInt(_getSubID[1]);
         this.navService.getSubArticleUrl(_getTopicID, _getSubID, this.lang);
