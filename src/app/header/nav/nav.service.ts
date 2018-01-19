@@ -164,6 +164,7 @@ export class NavService {
   }
 
   triggerAnnouncementList(lang, id1) {
+    debugger;
         if (lang === 'ms') {
             lang = 2;
         }
