@@ -78,7 +78,7 @@ export class FeedbackComponent implements OnInit {
     ngOnInit() {
       this.languageId = 2;
       this.checkLog();
-      this.getUserData();
+      // this.getUserData();
       this.getTypenSubject();
       this.feedback_message = new FormControl('', [Validators.required]),
       this.feedbacktype = new FormControl('', [Validators.required]),
