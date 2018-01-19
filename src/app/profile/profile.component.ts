@@ -865,7 +865,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       // this.toastr.info(this.translate.instant('profile.msg.editbtnD'), '');
       this.initialBtn = true
       
-      if(this.profileForm.get('gender').value && this.profileForm.get('race').value){
+      if((this.profileForm.get('gender').value) && (this.profileForm.get('race').value)){
         this.initialBtn = false;
       }
       //this.profileForm.get('race').setValue("");
