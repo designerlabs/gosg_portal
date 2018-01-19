@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { SharedService } from '../common/shared.service';
 import { debounce } from 'rxjs/operators/debounce';
 import { PortalService } from '../services/portal.service';
+import { SharedPipe } from '../common/shared.pipe';
 
 @Component({
   selector: 'app-poll',
@@ -50,6 +51,7 @@ export class PollComponent implements OnInit {
               this.lang = 'ms';
               this.languageId = 2;
               this.getData('2');
+              console.log('from malay');
             }
         });
     }
@@ -63,8 +65,11 @@ export class PollComponent implements OnInit {
          return this.http.get(this.config.urlPoll + '/question/lang/' + languageId + '/?active=true')
            .map(res => res.json())
           .subscribe(eventData => {
+              debugger;
                 this.pollDataQuestion = eventData.questionTitle;
-                this.pollDataAnswer = eventData.answer;
+                this.pollDataAnswer = eventData.answer.filter((element, index) => {
+                    return (element.answer.length > 0);
+                 });
                 this.pollDataQuestionID = eventData.questionId;
                 // tslint:disable-next-line:radix
                 this.showResult = (parseInt(localStorage.getItem('polldone')) === this.pollDataQuestionID);

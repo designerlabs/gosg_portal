@@ -1,7 +1,7 @@
  <div class="container">
 <div class="row poll" id="div_poll" style="background: #eee; margin-top: 20px; width: 100%">
     <h2 hidden>User IP is {{ ipData }}</h2>
-   
+    
     <div class="col-md-12">
         <!-- <div id="polls_result_on_submit" style="padding-bottom: 30px;">
         </div> -->
@@ -12,16 +12,15 @@
                 <span class="customUnderLine warna_border_color" style="border-color: rgb(0, 189, 187);"  [style.border-color]="getTheme()"></span>
             </h2>
             <h4 class="font-size-m warna_font" style="margin-top: 2%; text-align: center; font-family: Roboto; color: rgb(51, 51, 51);">{{pollDataQuestion}}</h4>
-            <div class="row padding" >
-                <div  *ngFor="let item of pollDataAnswer"  >
-                    <div class="col-md-4 polls_padding" *ngIf="item.answer">
-                        <div class="custom-radio poll_radio_btn warna_border_color" style="border-color: rgb(0, 189, 187);" [style.border-color]="getTheme()">
-                                <input type="radio" name="undian" id='{{item.id}}' [checked]="idx === 0" [value]="item.id" (change)="onSelectionChange(item)">
-                                <label class="font-size-s warna_font" for="{{item.id}}" style="cursor: pointer; font-family: Roboto; color: rgb(51, 51, 51);" >{{item.answer}}</label>
-                            </div>
-                    </div>                    
+                <div *ngFor="let item of pollDataAnswer" style="display: inline-block;
+                padding: 10px;">
+                        <div class="polls_padding" *ngIf="item.answer">                            
+                            <div class="custom-radio poll_radio_btn warna_border_color" style="border-color: rgb(0, 189, 187);" [style.border-color]="getTheme()">
+                                    <input type="radio" name="undian" id='{{item.id}}' [checked]="idx === 0" [value]="item.id" (change)="onSelectionChange(item)">
+                                    <label class="font-size-s warna_font" for="{{item.id}}" style="cursor: pointer; font-family: Roboto; color: rgb(51, 51, 51);" >{{item.answer}}</label>
+                                </div>
+                        </div>         
                 </div>
-            </div>
             <div class="row padding">
                 <h4 class="font-size-m warna_font" style="margin-top: 2%; text-align: center; font-family: Roboto; color: rgb(51, 51, 51);">{{'poll.recommend' | translate}}</h4>
                 <div class="col-md-3"></div>
@@ -55,7 +54,7 @@
                     <div *ngFor="let pollAnswer of pollDataAnswer">
                         <div *ngIf="pollAnswer.answer.length>0">
                                 <div *ngIf="pollAnswer.selans" style="text-align: left; font-family: Roboto; color: rgb(51, 51, 51);">
-                                    Your answer is: </div>
+                                        {{'poll.youranswer' | translate}}: </div>
                                 <span class="font-size-m warna_font" style="text-align: left; font-family: Roboto; color: rgb(51, 51, 51); display: inherit">{{pollAnswer.answer}}</span>
                                 <mat-progress-bar class="example-margin" [value]="calVal(pollAnswer.result)" style="height: 17px; background: #0000" ></mat-progress-bar> 
                                 <span style="text-align: right; font-family: Roboto; color: rgb(51, 51, 51); display: inherit">
