@@ -23,7 +23,7 @@ export class NavService {
   topicStatus: any;
   dataT: any;
 
-  announces: any;
+  announces: any[];
 
   constructor(private http: Http, @Inject(APP_CONFIG) private config: AppConfig, private route: ActivatedRoute, private router: Router, private breadcrumbService: BreadcrumbService, private articleService: ArticleService) {
     this.topicStatus = true;
@@ -66,6 +66,7 @@ export class NavService {
   }
 
   getSubArticleUrl(topicID, subID: number, lang) {
+   // alert("Test");
 
     let urlA = this.subUrl + '-' + subID + '-' + lang + '.json';
     console.log(urlA);
@@ -90,7 +91,7 @@ export class NavService {
   }
 
   triggerSubArticle(topicID, subID, lang) {
-
+   // alert("Trigger sub acrticle");
     if (!isNaN(subID)) {
       return this.route.paramMap
         .switchMap((params: ParamMap) =>
@@ -124,9 +125,10 @@ export class NavService {
   }
 
   getAnnouncement(moduleName, lang: number):Observable<boolean[]> {
-    console.log("GET DATA FROM announcment");
+
+    console.log("ANNOUNCEMENT: ");
     console.log(this.urlAnnouncement+"?langId="+lang);
-    debugger;
+
     return this.http.get(this.urlAnnouncement+"?langId="+lang)
     .take(1)
     .map((response: Response) => response.json())
@@ -140,26 +142,30 @@ export class NavService {
     });
   }
 
-  getAnnouncementList(moduleName, lang: number, id1?: string):Observable<boolean[]> {
-
-    console.log("GET DATA LIST: ");
+  getAnnouncementList(moduleName, lang: number, id1?: string) {
     
-    console.log(this.urlAnnouncement+"/id/"+id1+"?langId="+lang);
-    debugger;
-    return this.http.get(this.urlAnnouncement+"/id/"+id1+"?langId="+lang)
-    .take(1)
-    .map((response: Response) => response.json())
-    .catch(
-    (err: Response, caught: Observable<any[]>) => {
-      if (err !== undefined) {
-        this.router.navigate(['/404']);
-        return Observable.throw('The Web server (running the Web site) is currently unable to handle the HTTP request due to a temporary overloading or maintenance of the server.');
-      }
-      return Observable.throw(caught);
-    });
+    if(id1){
+      return this.http.get(this.urlAnnouncement+"/id/"+id1+"?langId="+lang)
+      .take(1)
+      .map((response: Response) => response.json())
+      .catch(
+      (err: Response, caught: Observable<any[]>) => {
+        if (err !== undefined) {
+          this.router.navigate(['/404']);
+          return Observable.throw('The Web server (running the Web site) is currently unable to handle the HTTP request due to a temporary overloading or maintenance of the server.');
+        }
+        return Observable.throw(caught);
+      });
+    }
+    //console.log(this.urlAnnouncement+"/id/"+id1+"?langId="+lang);
+   
   }
 
   getAnnouncementDetails(moduleName, lang: number, id1?: string, id2?: string):Observable<boolean[]> {
+
+    console.log("DETAILS: ");    
+    console.log(this.urlAnnouncement+"/id/"+id1+"?langId="+lang);
+
     return this.http.get(this.urlAnnouncement+"/id/"+id1+"/"+id2+"?langId="+lang)
     .take(1)
     .map((response: Response) => response.json())

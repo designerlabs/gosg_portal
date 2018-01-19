@@ -24,6 +24,7 @@
   <div style="margin-top:10px;" class="container" *ngFor="let announce of announces">
   
       <div class="row" *ngFor="let data of announce.results">
+         <pre> {{announce.results | json}}</pre>
           <div class="col-sm-3">
               <div class="row">
                   <div class="col-md-12 sideBarMenu">
@@ -37,7 +38,7 @@
                                   <a class="warna_font sideBarMenu--link font-size-s" [routerLinkActive]="['active']"  
                                   [style.font-weight]="content.active ? 'bold' : 'normal'"  [style.color]="content.active ? getTheme() : '#333'" 
                                    href="" (click)="clickSideMenu(content)">
-                                  {{content.label}}
+                                  {{content.label}} {{content.code}}
                               
                                   </a>
                               </div>

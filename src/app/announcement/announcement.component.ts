@@ -22,7 +22,7 @@ export class AnnouncementComponent implements OnInit {
     isValid: any;
     announcementID = null;
     announcementID2 = null;
-    announces: any;
+    announces: any[];
     announceRes: any;
     announceData: any;
   
@@ -40,8 +40,7 @@ export class AnnouncementComponent implements OnInit {
 
                 translate.get('HOME').subscribe((res: any) => {
                     this.lang = '1';
-                    this.moduleName = this.router.url.split('/')[1];
-                 
+                    this.moduleName = this.router.url.split('/')[1];                 
                 });
 
             }
@@ -49,8 +48,7 @@ export class AnnouncementComponent implements OnInit {
 
                 translate.get('HOME').subscribe((res: any) => {
                     this.lang = '2';
-                    this.moduleName = this.router.url.split('/')[1];
-                    
+                    this.moduleName = this.router.url.split('/')[1];                    
                 });
             }
 
@@ -65,7 +63,7 @@ export class AnnouncementComponent implements OnInit {
     ngOnInit() {
         this.moduleName = this.router.url.split('/')[1];
         this.triggerAnnouncement(this.moduleName, this.lang);
-        console.log("onInit");
+        console.log("onInit Announcement");
     }
 
     getTheme(){
@@ -75,28 +73,19 @@ export class AnnouncementComponent implements OnInit {
     clickSideMenu(e){
        
         const _getModule = this.router.url.split('/')[1];
- 
-        console.log(e);
-        console.log(this.router.url);
+        this.router.navigate([_getModule, e.code]);         
 
-        this.router.navigate([_getModule, e.code]); 
-        this.triggerAnnouncement(_getModule,  this.lang);     
-       
-        console.log("sideMenu")
+        console.log(e);
+        console.log("sideMenu Announcement")
         event.preventDefault();
     }
 
-    clickContent(e){
-       
+    clickContent(e){    
+
         const _getModule = this.router.url.split('/')[1];
-        const _getAnnounceID = this.router.url.split('/')[2]; 
-        const _getAnnounceID2 = this.router.url.split('/')[3]; 
-        debugger;
-       
         this.router.navigate([_getModule, e.code]);   
-       // this.triggerAnnouncement(_getModule,  this.lang);   
         
-        console.log("content");
+        console.log("content Announcement");
         event.preventDefault(); 
     }
   
@@ -121,7 +110,7 @@ export class AnnouncementComponent implements OnInit {
             // const temp1 = this.announceRes[0];            
             // const temp = Object.keys(temp1).map(key => temp1[key]);
             // this.announces = temp;
-            
+            console.log(resAllAnnounce);
             this.announces = resAllAnnounce;
             this.breadcrumb = this.breadcrumbService.getBreadcrumb();
             this.isValid = this.breadcrumbService.isValid = true;
