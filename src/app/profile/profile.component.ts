@@ -160,6 +160,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.date = new Date();
+    this.initial = true;
     this.getRace(this.languageId );
     this.getGenderVal(this.languageId );
     this.getReligion(this.languageId );
@@ -854,7 +855,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       console.log(this.selectedCountry + " | " + this.selectedState  + " | " + this.selectedCity)
 
       this.toastr.info(this.translate.instant('profile.msg.editbtnE'), '');
-      // this.initial = false
+      this.initial = false
       this.profileForm.enable()
       this.dob.enable();
       this.checkReqValues();

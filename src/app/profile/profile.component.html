@@ -291,13 +291,13 @@
                 <!-- <button mat-raised-button color="warn" type="button" id="btnreset" class="form-control btn btn-md btn-warning font-size-s"
                 style="width: 115px; font-family: Roboto;" (click)="showResetMsg()">
                 <i class="fa fa-refresh"></i> {{'feedback.label.reset' | translate }}</button> -->
-                <button mat-raised-button type="button" color="primary" id="btnsubmit" class="form-control btn btn-md btn-success font-size-s"
-                (click)="updateProfile(profileForm.value);false" style="width: 100px; font-family: Roboto; margin-left: 5px;" [disabled]="(gender.invalid || race.invalid) || profileForm.invalid">
+                <button mat-raised-button type="button" color="primary" #updateBtn id="btnsubmit" class="form-control btn btn-md btn-success font-size-s"
+                (click)="updateProfile(profileForm.value);false" style="width: 100px; font-family: Roboto; margin-left: 5px;" [disabled]="(gender.invalid || race.invalid) || initial">
                 <i class="fa fa-check"></i> {{'profile.label.submit' | translate }}</button>
             </div>
 
            <h1>
-             {{profileForm.invalid || (gender.invalid || race.invalid)}}
+             {{initial || (gender.invalid || race.invalid)}}
             </h1>           
           
           </div>
