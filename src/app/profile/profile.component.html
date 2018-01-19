@@ -240,7 +240,7 @@
             <div class="row">
               <div class="form-group col-md-4">
                 <mat-form-field class="example-full-width font-size-s">
-                  <mat-select (change)="isMalaysian($event.value)" formControlName="corrsCountry" placeholder="{{'profile.label.country' | translate}}">
+                  <mat-select (change)="isMalaysianCorrs($event.value)" formControlName="corrsCountry" placeholder="{{'profile.label.country' | translate}}">
                       <mat-option *ngFor="let country of countries" [value]="country.countryId">{{country.countryName}}</mat-option>
                   </mat-select>
                 </mat-form-field>

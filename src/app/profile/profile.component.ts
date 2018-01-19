@@ -533,6 +533,25 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     }
   }
 
+  isMalaysianCorrs(val) {
+    this.selectedCountry = val;
+    // this.profileForm.get('perCountry').setValue(this.selectedCountry);
+    this.isChanged();
+    if(val == 152) {
+      this.isCorrsLocal = true;
+      this.addLocalCtrlCorrs();
+      // this.profileForm.get('perStateLocal').setValue("");
+      // this.profileForm.get('perCityLocal').setValue("");
+      // this.toastr.info(this.translate.instant('this.isLocal: '+this.isLocal), '');
+      this.getState();
+    } else {
+      this.isCorrsLocal = false;
+      this.RemoveLocalCtrlCorrs();
+      // this.profileForm.get('perStateNotLocal').setValue("");
+      // this.profileForm.get('perCityNotLocal').setValue("");
+    }
+  }
+
   isMalaysianChk(val) {
     // console.log(val);
 
@@ -760,6 +779,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   
   
   addLocalCtrl() {
+    this.profileForm.removeControl('perStateNotLocal');
+    this.profileForm.removeControl('perCityNotLocal');
+
     this.profileForm.addControl('perStateLocal', this.perStateLocal);
     this.profileForm.addControl('perCityLocal', this.perCityLocal);
 
@@ -767,8 +789,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       this.profileForm.get('perStateLocal').enable();
       this.profileForm.get('perCityLocal').enable();
     }
-    this.profileForm.removeControl('perStateNotLocal');
-    this.profileForm.removeControl('perCityNotLocal');
+   
     // this.resetCitizenCtrl();
   }
 
@@ -781,6 +802,33 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       if(this.isActive && !this.isLocal) {
         this.profileForm.get('perStateNotLocal').enable();
         this.profileForm.get('perCityNotLocal').enable();
+      }
+  }
+
+  addLocalCtrlCorrs() {
+    this.profileForm.removeControl('corrsStateNotLocal');
+    this.profileForm.removeControl('corrsCityNotLocal');
+    
+    this.profileForm.addControl('corrsStateLocal', this.corrsStateLocal);
+    this.profileForm.addControl('corrsCityLocal', this.corrsCityLocal);
+
+    if(this.isActive && this.isCorrsLocal) {
+      this.profileForm.get('corrsStateLocal').enable();
+      this.profileForm.get('corrsCityLocal').enable();
+    }
+   
+    // this.resetCitizenCtrl();
+  }
+
+  RemoveLocalCtrlCorrs() {
+      this.profileForm.removeControl('corrsStateLocal');
+      this.profileForm.removeControl('corrsCityLocal');
+
+      this.profileForm.addControl('corrsStateNotLocal',this.corrsStateNotLocal);
+      this.profileForm.addControl('corrsCityNotLocal', this.corrsCityNotLocal);
+      if(this.isActive && !this.isCorrsLocal) {
+        this.profileForm.get('corrsStateNotLocal').enable();
+        this.profileForm.get('corrsCityNotLocal').enable();
       }
   }
   
