@@ -283,7 +283,10 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                   this.profileForm.get('perPostcode').setValue(data.user.address.permanentAddressPostcode);
                   this.profileForm.get('perTelephone').setValue(data.user.address.permanentAddressHomePhoneNo);
 
-                  this.profileForm.get('perCountry').setValue(data.user.address.permanentAddressCountry.countryId);
+                  if(data.user.address.permanentAddressCountry){
+                    this.profileForm.get('perCountry').setValue(data.user.address.permanentAddressCountry.countryId);
+                  }
+                  
                   if(data.user.address.permanentAddressCountry.countryId == 152) {
                     this.isLocal = true;
                     this.getState();
@@ -319,7 +322,10 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                   this.profileForm.get('corrsTelephone').setValue(data.user.address.correspondingAddressHomePhoneNo);
                   this.profileForm.get('corrsMobile').setValue(data.user.mobilePhoneNo);
                   
-                  this.profileForm.get('corrsCountry').setValue(data.user.address.correspondingAddressCountry.countryId);
+                  if(data.user.address.correspondingAddressCountry){
+                    this.profileForm.get('corrsCountry').setValue(data.user.address.correspondingAddressCountry.countryId);
+                  }
+                  
                   if(data.user.address.correspondingAddressCountry.countryId == 152) {
                     this.isCorrsLocal = true;
                     
