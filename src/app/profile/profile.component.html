@@ -295,9 +295,6 @@
                 (click)="updateProfile(profileForm.value);false" style="width: 100px; font-family: Roboto; margin-left: 5px;" [disabled]="((gender.invalid || race.invalid) || initialBtn)">
                 <i class="fa fa-check"></i> {{'profile.label.submit' | translate }}</button>
             </div>
-            <h1>((gender.invalid || race.invalid) || initialBtn) || ((gender.valid && race.valid) && !initialBtn) {{((gender.invalid || race.invalid) || initialBtn) || ((gender.valid && race.valid) && !initialBtn)}}</h1>
-            <h1>((gender.invalid || race.invalid) || initialBtn) {{((gender.invalid || race.invalid) || initialBtn) }}</h1>
-            <h1>((gender.valid && race.valid) && !initialBtn) {{((gender.valid && race.valid) && !initialBtn) }}</h1>
           </div>
         
         </form>
