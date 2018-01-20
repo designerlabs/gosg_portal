@@ -281,14 +281,12 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         this.changeCitizen = this.citizenValue;
         this.ReCreateCaptchas();
         if ((this.citizenValue == 2) || (this.citizenValue  ==6)) {
-            debugger;
             this.citi = false;
             this.permanentResident = false;
             this.nonCiti = true;
             this.RemoveCitizenCtrl();
             this.addNonCitizenCtrl();
         } else {
-            debugger;
             this.citi = true;
             this.permanentResident = false;
             this.nonCiti = false;
@@ -434,7 +432,6 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         //     "citizenType":null,
         //     "user_id": null
         // };
-        debugger;
         if((formValues.kad_pengenalan ) && (formValues.passport_pr)){
             body.country.countryId = formValues.country_pr;
             body.userType.userTypeId = this.citizenValue;
