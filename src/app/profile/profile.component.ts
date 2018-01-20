@@ -285,35 +285,36 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
                   if(data.user.address.permanentAddressCountry){
                     this.profileForm.get('perCountry').setValue(data.user.address.permanentAddressCountry.countryId);
+                    if(data.user.address.permanentAddressCountry.countryId == 152) {
+                      this.isLocal = true;
+                      this.getState();
+                      if(data.user.address.permanentAddressState){
+                        this.profileForm.get('perStateLocal').setValue(data.user.address.permanentAddressState.stateId);
+                      }
+                      this.getCitiesByStateP(data.user.address.permanentAddressState.stateId);
+                      if(data.user.address.permanentAddressCity){
+                        this.profileForm.get('perCityLocal').setValue(data.user.address.permanentAddressCity.cityId);
+                      }
+                      if(data.user.address.permanentAddressPostcode){
+                        this.profileForm.get('perPostcode').setValue(data.user.address.permanentAddressPostcode);
+                      }
+                    }else{
+                      this.isLocal = false;
+                      if(data.user.address.optionalPermanentAddressState){
+                        this.profileForm.get('perStateNotLocal').setValue(data.user.address.optionalPermanentAddressState);
+                      }
+                      if(data.user.address.optionalPermanentAddressCity){
+                        this.profileForm.get('perCityNotLocal').setValue(data.user.address.optionalPermanentAddressCity); 
+                      }
+  
+                      if(data.user.address.optionalPermanentAddressPostcode){
+                        this.profileForm.get('perPostcode').setValue(data.user.address.optionalPermanentAddressPostcode); 
+                      }
+                      
+                    }
                   }
                   
-                  if(data.user.address.permanentAddressCountry.countryId == 152) {
-                    this.isLocal = true;
-                    this.getState();
-                    if(data.user.address.permanentAddressState){
-                      this.profileForm.get('perStateLocal').setValue(data.user.address.permanentAddressState.stateId);
-                    }
-                    this.getCitiesByStateP(data.user.address.permanentAddressState.stateId);
-                    if(data.user.address.permanentAddressCity){
-                      this.profileForm.get('perCityLocal').setValue(data.user.address.permanentAddressCity.cityId);
-                    }
-                    if(data.user.address.permanentAddressPostcode){
-                      this.profileForm.get('perPostcode').setValue(data.user.address.permanentAddressPostcode);
-                    }
-                  }else{
-                    this.isLocal = false;
-                    if(data.user.address.optionalPermanentAddressState){
-                      this.profileForm.get('perStateNotLocal').setValue(data.user.address.optionalPermanentAddressState);
-                    }
-                    if(data.user.address.optionalPermanentAddressCity){
-                      this.profileForm.get('perCityNotLocal').setValue(data.user.address.optionalPermanentAddressCity); 
-                    }
-
-                    if(data.user.address.optionalPermanentAddressPostcode){
-                      this.profileForm.get('perPostcode').setValue(data.user.address.optionalPermanentAddressPostcode); 
-                    }
-                    
-                  }
+                  
 
                   this.profileForm.get('corrsAddress1').setValue(data.user.address.correspondingAddress1);
                   this.profileForm.get('corrsAddress2').setValue(data.user.address.correspondingAddress2);
@@ -324,37 +325,38 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                   
                   if(data.user.address.correspondingAddressCountry){
                     this.profileForm.get('corrsCountry').setValue(data.user.address.correspondingAddressCountry.countryId);
+                    if(data.user.address.correspondingAddressCountry.countryId == 152) {
+                      this.isCorrsLocal = true;
+                      
+                      if(data.user.address.correspondingAddressState){
+                        this.getState();
+                        this.profileForm.get('corrsStateLocal').setValue(data.user.address.correspondingAddressState.stateId);
+                      }
+                      
+                      if(data.user.address.correspondingAddressCity){
+                        this.getCitiesByStateC(data.user.address.correspondingAddressState.stateId);
+                        this.profileForm.get('corrsCityLocal').setValue(data.user.address.correspondingAddressCity.cityId);
+                      }
+                      if(data.user.address.correspondingAddressPostcode){
+                        this.profileForm.get('corrsPostcode').setValue(data.user.address.correspondingAddressPostcode);
+                      }
+                    }else{
+                      this.isCorrsLocal = false;
+                      if(data.user.address.optionalCorrespondingAddressState){
+                        this.profileForm.get('corrsStateNotLocal').setValue(data.user.address.optionalCorrespondingAddressState);
+                      }
+                      if(data.user.address.optionalCorrespondingAddressCity){
+                        this.profileForm.get('corrsCityNotLocal').setValue(data.user.address.optionalCorrespondingAddressCity); 
+                      }
+  
+                      if(data.user.address.optionalCorrespondingAddressPostcode){
+                        this.profileForm.get('corrsPostcode').setValue(data.user.address.optionalCorrespondingAddressPostcode); 
+                      }
+                      
+                    }
                   }
                   
-                  if(data.user.address.correspondingAddressCountry.countryId == 152) {
-                    this.isCorrsLocal = true;
-                    
-                    if(data.user.address.correspondingAddressState){
-                      this.getState();
-                      this.profileForm.get('corrsStateLocal').setValue(data.user.address.correspondingAddressState.stateId);
-                    }
-                    
-                    if(data.user.address.correspondingAddressCity){
-                      this.getCitiesByStateC(data.user.address.correspondingAddressState.stateId);
-                      this.profileForm.get('corrsCityLocal').setValue(data.user.address.correspondingAddressCity.cityId);
-                    }
-                    if(data.user.address.correspondingAddressPostcode){
-                      this.profileForm.get('corrsPostcode').setValue(data.user.address.correspondingAddressPostcode);
-                    }
-                  }else{
-                    this.isCorrsLocal = false;
-                    if(data.user.address.optionalCorrespondingAddressState){
-                      this.profileForm.get('corrsStateNotLocal').setValue(data.user.address.optionalCorrespondingAddressState);
-                    }
-                    if(data.user.address.optionalCorrespondingAddressCity){
-                      this.profileForm.get('corrsCityNotLocal').setValue(data.user.address.optionalCorrespondingAddressCity); 
-                    }
-
-                    if(data.user.address.optionalCorrespondingAddressPostcode){
-                      this.profileForm.get('corrsPostcode').setValue(data.user.address.optionalCorrespondingAddressPostcode); 
-                    }
-                    
-                  }
+                
                 }
               }
               
