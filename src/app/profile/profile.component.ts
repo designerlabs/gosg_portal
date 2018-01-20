@@ -873,11 +873,12 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       // this.toastr.info(this.translate.instant('profile.msg.editbtnD'), '');
       
       debugger;
-      if((!!this.profileForm.get('gender').value.length && !!this.profileForm.get('race').value.length)){
-        this.initialBtn = false;
-      }else{
-        this.initialBtn = true
-      }
+      this.initialBtn = true
+      // if((!!this.profileForm.get('gender').value.length && !!this.profileForm.get('race').value.length)){
+      //   this.initialBtn = false;
+      // }else{
+      //   this.initialBtn = true
+      // }
       //this.profileForm.get('race').setValue("");
       
       this.profileForm.disable()
