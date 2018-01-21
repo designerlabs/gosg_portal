@@ -250,7 +250,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                 this.nationality = data.user.country.countryName;
                 this.countryId = data.user.country.countryId;
                 this.passport = data.user.passportNo;
-                this.mobileNo = data.user.mobilePhoneNo;
                 this.idno = data.user.pid;
                 this.regemail = data.user.email;
                 this.regdate = data.user.registrationDate;
@@ -259,7 +258,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                 this.isMyIdentityValid = data.user.isMyIdentityValid;
                 this.agencyForwardUrl = data.user.agencyForwardUrl;
                 this.roles = data.user.roles;
-                
+                this.profileForm.get('corrsMobile').setValue(data.user.mobilePhoneNo);
 
                 if(data.user.gender){
                   this.profileForm.get('gender').setValue(data.user.gender.genderCode);
@@ -321,7 +320,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                   this.profileForm.get('corrsAddress3').setValue(data.user.address.correspondingAddress3);
                   this.profileForm.get('corrsPostcode').setValue(data.user.address.correspondingAddressPostcode);
                   this.profileForm.get('corrsTelephone').setValue(data.user.address.correspondingAddressHomePhoneNo);
-                  this.profileForm.get('corrsMobile').setValue(data.user.mobilePhoneNo);
                   
                   if(data.user.address.correspondingAddressCountry){
                     this.profileForm.get('corrsCountry').setValue(data.user.address.correspondingAddressCountry.countryId);
@@ -956,13 +954,13 @@ let bodyUpdate =
       "accountStatus":{
         "accountStatusId":null
       },
-     
+      "identificationNo":null,
       "isStaff": null,
       "isMyIdentityVerified": null,
       "isMyIdentityValid": null,
       "agencyForwardUrl": null,
       "roles":null,
-      
+      "passportNo":null,
       "address": {
           "addressId": null,
           "permanentAddress1":"",
