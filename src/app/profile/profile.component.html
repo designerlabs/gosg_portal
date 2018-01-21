@@ -60,9 +60,9 @@
                 <label class="font-size-m" for="dob">{{'profile.label.dateofbirth' | translate}}</label>
                   <mat-form-field class="example-full-width font-size-m" style="margin-top: -25px">
                     <div style="color:#333;" class="font-size-m boldText">{{dt | date:'dd/MM/yyyy' }}</div>
-                    <input placeholder="{{ dateFormatExample }}" style="display: none" matInput formControlName="dob" #dob [matDatepicker]="dob" (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)" [max]="maxDate"  />
+                    <input placeholder="{{ dateFormatExample }}" matInput formControlName="dob" #dob [matDatepicker]="dob" (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)" [max]="maxDate" disabled  />
                     <mat-datepicker-toggle matSuffix [for]="dob" style="color:#333;"></mat-datepicker-toggle>
-                    <mat-datepicker #dob></mat-datepicker>
+                    <mat-datepicker #dob disabled="initialBtn"></mat-datepicker>
                   </mat-form-field>
               </div>
 
@@ -90,7 +90,7 @@
               <div class="form-group col-md-4">
                 <mat-form-field class="example-full-width font-size-s">
                   <mat-select tabindex="1" formControlName="gender" placeholder="{{'profile.label.gender' | translate}}" required>
-                      <mat-option *ngFor="let gender of genderData" [value]="gender?.genderCode">{{ gender?.gender | translate }}</mat-option>
+                      <mat-option *ngFor="let gender of genderData" [value]="gender?.genderCode">{{ gender?.gender }}</mat-option>
                   </mat-select>
                   <mat-error *ngIf="!validateCtrlChk(gender) && profileForm.controls.gender.errors?.required">
                       {{'profile.err.gender' | translate }}
@@ -99,7 +99,7 @@
               </div>
               <div class="form-group col-md-4">
                 <mat-form-field class="example-full-width font-size-s">
-                  <mat-select *ngIf="!this.isOtherRace" formControlName="race" placeholder="{{'profile.label.race' | translate}}" required>
+                  <mat-select tabindex="2" formControlName="race" placeholder="{{'profile.label.race' | translate}}" required>
                       <mat-option *ngFor="let race of getRaceData" [value]="race?.raceCode">{{race?.race}}</mat-option>
                   </mat-select>
                   <mat-error *ngIf="!validateCtrlChk(race) && profileForm.controls.race.errors?.required">

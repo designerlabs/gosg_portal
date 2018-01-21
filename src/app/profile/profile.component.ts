@@ -268,6 +268,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                   this.profileForm.get('race').setValue(data.user.race.raceCode);
                 }
               
+                if(data.user.dateOfBirth){
+                  this.profileForm.get('dob').setValue(data.user.dateOfBirth);
+                }
                 if(data.user.religion){
                   this.profileForm.get('religion').setValue(data.user.religion.religionCode);
                 }
@@ -864,13 +867,12 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       this.toastr.info(this.translate.instant('profile.msg.editbtnE'), '');
       this.initialBtn = false
       this.profileForm.enable()
-      this.dob.enable();
+      // this.dob.enable();
       this.checkReqValues();
     } else {
       console.log(this.profileForm.value);
       // this.toastr.info(this.translate.instant('profile.msg.editbtnD'), '');
-      
-      debugger;
+
       this.initialBtn = true
       // if((!!this.profileForm.get('gender').value.length && !!this.profileForm.get('race').value.length)){
       //   this.initialBtn = false;
@@ -880,7 +882,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       //this.profileForm.get('race').setValue("");
       
       this.profileForm.disable()
-      this.dob.disable();
+      // this.dob.disable();
     }
   }
 
