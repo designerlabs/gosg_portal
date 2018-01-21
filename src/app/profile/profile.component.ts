@@ -163,7 +163,13 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.initialBtn = true;
     // this.maxDate = Date.now();
-    this.maxDate = new Date(2018, 0, 1);
+    var today = new Date();
+    today.setDate(30);
+    var tomorrow = new Date();
+    tomorrow.setDate(today.getDate()+1);
+    console.log(tomorrow.getDate()); 
+
+    this.maxDate = tomorrow.getDate();
     this.getRace(this.languageId );
     this.getGenderVal(this.languageId );
     this.getReligion(this.languageId );
