@@ -819,7 +819,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       this.profileForm.get('perPostcode').setValue("");
       this.profileForm.removeControl('perStateLocal');
       this.profileForm.removeControl('perCityLocal');
-      this.profileForm.removeControl('perPostcode');
+      // this.profileForm.removeControl('perPostcode');
     }
     
     this.profileForm.addControl('perStateLocal', this.perStateLocal);
@@ -841,7 +841,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
       this.profileForm.removeControl('perStateNotLocal');
       this.profileForm.removeControl('perCityNotLocal');
-      this.profileForm.removeControl('perPostcode');
+      // this.profileForm.removeControl('perPostcode');
     }
 
 
@@ -862,7 +862,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   
       this.profileForm.removeControl('corrsStateLocal');
       this.profileForm.removeControl('corrsCityLocal');
-      this.profileForm.removeControl('corrsPostcode');
+      // this.profileForm.removeControl('corrsPostcode');
     }
     
    
