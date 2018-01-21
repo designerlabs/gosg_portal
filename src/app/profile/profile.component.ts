@@ -833,26 +833,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     // this.resetCitizenCtrl();
   }
 
-  RemoveLocalCtrl() {
-    if(!this.isLocal){
-      this.profileForm.get('perStateNotLocal').setValue("");
-      this.profileForm.get('perCityNotLocal').setValue("");
-      this.profileForm.get('perPostcode').setValue("");
-
-      this.profileForm.removeControl('perStateNotLocal');
-      this.profileForm.removeControl('perCityNotLocal');
-      // this.profileForm.removeControl('perPostcode');
-    }
-
-
-      this.profileForm.addControl('perStateNotLocal',this.perStateNotLocal);
-      this.profileForm.addControl('perCityNotLocal', this.perCityNotLocal);
-
-      if(this.isActive && !this.isLocal) {
-        this.profileForm.get('perStateNotLocal').enable();
-        this.profileForm.get('perCityNotLocal').enable();
-      }
-  }
 
   addLocalCtrlCorrs() {
     if(this.isCorrsLocal){
@@ -877,6 +857,30 @@ export class ProfileComponent implements OnInit, AfterViewInit {
    
     // this.resetCitizenCtrl();
   }
+  
+
+  RemoveLocalCtrl() {
+    if(!this.isLocal){
+      this.profileForm.get('perStateNotLocal').setValue("");
+      this.profileForm.get('perCityNotLocal').setValue("");
+      this.profileForm.get('perPostcode').setValue("");
+
+      this.profileForm.removeControl('perStateNotLocal');
+      this.profileForm.removeControl('perCityNotLocal');
+      // this.profileForm.removeControl('perPostcode');
+    }
+
+
+      this.profileForm.addControl('perStateNotLocal',this.perStateNotLocal);
+      this.profileForm.addControl('perCityNotLocal', this.perCityNotLocal);
+
+      if(this.isActive && !this.isLocal) {
+        this.profileForm.get('perStateNotLocal').enable();
+        this.profileForm.get('perCityNotLocal').enable();
+      }
+  }
+
+
 
   RemoveLocalCtrlCorrs() {
 
@@ -887,7 +891,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   
       this.profileForm.removeControl('corrsStateNotLocal');
       this.profileForm.removeControl('corrsCityNotLocal');
-      this.profileForm.removeControl('corrsPostcode');
+      // this.profileForm.removeControl('corrsPostcode');
     }
     
 
