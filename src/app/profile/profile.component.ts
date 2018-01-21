@@ -164,11 +164,11 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.initialBtn = true;
    
     let today = new Date();
-    let tomorrow = today.getDate()+1;
+    let todayDt = today.getDate();
     let year = today.getFullYear();
     let month = today.getMonth();
 
-    this.maxDate = new Date(year, month, tomorrow);
+    this.maxDate = new Date(year, month, todayDt);
     this.getRace(this.languageId );
     this.getGenderVal(this.languageId );
     this.getReligion(this.languageId );
