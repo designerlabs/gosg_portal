@@ -60,9 +60,9 @@
                 <label class="font-size-m" for="dob">{{'profile.label.dateofbirth' | translate}}</label>
                   <mat-form-field class="example-full-width font-size-m" style="margin-top: -25px">
                     <div style="color:#333;" class="font-size-m boldText">{{dt | date:'dd/MM/yyyy' }}</div>
-                    <input placeholder="{{ dateFormatExample }}" matInput formControlName="dob" #dob [matDatepicker]="dob" (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)" [max]="maxDate" disabled="initialBtn"  />
+                    <input placeholder="{{ dateFormatExample }}" matInput formControlName="dob" #dob [matDatepicker]="dob" (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)" [max]="maxDate" disabled  />
                     <mat-datepicker-toggle matSuffix [for]="dob" style="color:#333;"></mat-datepicker-toggle>
-                    <mat-datepicker #dob disabled></mat-datepicker>
+                    <mat-datepicker #dob [disabled]="initialBtn"></mat-datepicker>
                   </mat-form-field>
               </div>
 
