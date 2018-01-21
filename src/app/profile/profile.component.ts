@@ -75,7 +75,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   maxDate: any;
   dateFormatExample: string;
   
-  date = new Date();
+  date = new FormControl(new Date());
+  serializedDate;
   public dob: FormControl
   public gender: FormControl
   public race: FormControl
@@ -160,7 +161,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.date = new Date();
     this.initialBtn = true;
     this.getRace(this.languageId );
     this.getGenderVal(this.languageId );
@@ -270,6 +270,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
               
                 if(data.user.dateOfBirth){
                   debugger;
+                  this.serializedDate = new FormControl((new Date(data.user.dateOfBirth)).toISOString());
                   //let dobVal = new FormControl((new Date(data.user.dateOfBirth)).toISOString());
                   //this.profileForm.get('dob').setValue(dobVal);
                 }

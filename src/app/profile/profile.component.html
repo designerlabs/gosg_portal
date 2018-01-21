@@ -59,11 +59,18 @@
               <div class="form-group col-md-4">
                 <label class="font-size-m" for="dob">{{'profile.label.dateofbirth' | translate}}</label>
                   <mat-form-field class="example-full-width font-size-m" style="margin-top: -25px">
-                    <div style="color:#333;" class="font-size-m boldText">{{dt | date:'dd/MM/yyyy' }}</div>
+                    <!-- <div style="color:#333;" class="font-size-m boldText">{{dt | date:'dd/MM/yyyy' }}</div> -->
                     <input placeholder="{{ dateFormatExample }}" matInput formControlName="dob" #dob [matDatepicker]="dob" (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)" [max]="maxDate" disabled  />
                     <mat-datepicker-toggle matSuffix [for]="dob" style="color:#333;"></mat-datepicker-toggle>
                     <mat-datepicker #dob [disabled]="initialBtn"></mat-datepicker>
                   </mat-form-field>
+
+                  <mat-form-field>
+                      <input matInput [matDatepicker]="picker2" placeholder="Angular forms (w/ deserialization)"
+                             [formControl]="serializedDate">
+                      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                      <mat-datepicker #picker2></mat-datepicker>
+                    </mat-form-field>
               </div>
 
           
