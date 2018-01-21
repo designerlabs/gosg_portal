@@ -270,7 +270,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
               
                 if(data.user.dateOfBirth){
                   debugger;
-                  this.serializedDate = new FormControl((new Date(data.user.dateOfBirth)).toISOString());
+                  //this.serializedDate = new FormControl((new Date(data.user.dateOfBirth)).toISOString());
+                  this.serializedDate = new FormControl((new Date(1515081600000)).toISOString());
                   //let dobVal = new FormControl((new Date(data.user.dateOfBirth)).toISOString());
                   //this.profileForm.get('dob').setValue(dobVal);
                 }
