@@ -813,14 +813,16 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   
   
   addLocalCtrl() {
-    this.profileForm.get('perStateNotLocal').setValue("");
-    this.profileForm.get('perCityNotLocal').setValue("");
-    this.profileForm.get('perPostcode').setValue("");
+    
+    if(!this.isLocal){
+      this.profileForm.get('perStateNotLocal').setValue("");
+      this.profileForm.get('perCityNotLocal').setValue("");
+      this.profileForm.get('perPostcode').setValue("");
 
-    this.profileForm.removeControl('perStateNotLocal');
-    this.profileForm.removeControl('perCityNotLocal');
-    this.profileForm.removeControl('perPostcode');
-
+      this.profileForm.removeControl('perStateNotLocal');
+      this.profileForm.removeControl('perCityNotLocal');
+      this.profileForm.removeControl('perPostcode');
+    }
     this.profileForm.addControl('perStateLocal', this.perStateLocal);
     this.profileForm.addControl('perCityLocal', this.perCityLocal);
 
@@ -834,14 +836,14 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
   RemoveLocalCtrl() {
 
-    this.profileForm.get('perStateLocal').setValue("");
-    this.profileForm.get('perCityLocal').setValue("");
-    this.profileForm.get('perPostcode').setValue("");
-
+    if(this.isLocal){
+      this.profileForm.get('perStateLocal').setValue("");
+      this.profileForm.get('perCityLocal').setValue("");
+      this.profileForm.get('perPostcode').setValue("");
       this.profileForm.removeControl('perStateLocal');
       this.profileForm.removeControl('perCityLocal');
       this.profileForm.removeControl('perPostcode');
-      
+    }
 
       this.profileForm.addControl('perStateNotLocal',this.perStateNotLocal);
       this.profileForm.addControl('perCityNotLocal', this.perCityNotLocal);
@@ -853,13 +855,17 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   }
 
   addLocalCtrlCorrs() {
-    this.profileForm.get('corrsStateNotLocal').setValue("");
-    this.profileForm.get('corrsCityNotLocal').setValue("");
-    this.profileForm.get('corrsPostcode').setValue("");
 
-    this.profileForm.removeControl('corrsStateNotLocal');
-    this.profileForm.removeControl('corrsCityNotLocal');
-    this.profileForm.removeControl('corrsPostcode');
+    if(!this.isCorrsLocal){
+      this.profileForm.get('corrsStateNotLocal').setValue("");
+      this.profileForm.get('corrsCityNotLocal').setValue("");
+      this.profileForm.get('corrsPostcode').setValue("");
+  
+      this.profileForm.removeControl('corrsStateNotLocal');
+      this.profileForm.removeControl('corrsCityNotLocal');
+      this.profileForm.removeControl('corrsPostcode');
+    }
+   
 
     this.profileForm.addControl('corrsStateLocal', this.corrsStateLocal);
     this.profileForm.addControl('corrsCityLocal', this.corrsCityLocal);
@@ -874,13 +880,16 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
   RemoveLocalCtrlCorrs() {
 
-    this.profileForm.get('corrsStateLocal').setValue("");
-    this.profileForm.get('corrsCityLocal').setValue("");
-    this.profileForm.get('corrsPostcode').setValue("");
-
+    if(this.isCorrsLocal){
+      this.profileForm.get('corrsStateLocal').setValue("");
+      this.profileForm.get('corrsCityLocal').setValue("");
+      this.profileForm.get('corrsPostcode').setValue("");
+  
       this.profileForm.removeControl('corrsStateLocal');
       this.profileForm.removeControl('corrsCityLocal');
       this.profileForm.removeControl('corrsPostcode');
+    }
+    
 
       this.profileForm.addControl('corrsStateNotLocal',this.corrsStateNotLocal);
       this.profileForm.addControl('corrsCityNotLocal', this.corrsCityNotLocal);
