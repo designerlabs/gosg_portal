@@ -547,6 +547,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     if(val == 152) {
       this.isLocal = true;
       this.addLocalCtrl();
+      this.profileForm.get('perStateNotLocal').setValue("");
+      this.profileForm.get('perCityNotLocal').setValue("");
+      this.profileForm.get('perPostcode').setValue("");
       // this.profileForm.get('perStateLocal').setValue("");
       // this.profileForm.get('perCityLocal').setValue("");
       // this.toastr.info(this.translate.instant('this.isLocal: '+this.isLocal), '');
@@ -554,6 +557,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     } else {
       this.isLocal = false;
       this.RemoveLocalCtrl();
+      this.profileForm.get('perStateLocal').setValue("");
+      this.profileForm.get('perCityLocal').setValue("");
+      this.profileForm.get('perPostcode').setValue("");
       // this.profileForm.get('perStateNotLocal').setValue("");
       // this.profileForm.get('perCityNotLocal').setValue("");
     }
@@ -566,6 +572,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     if(val == 152) {
       this.isCorrsLocal = true;
       this.addLocalCtrlCorrs();
+      this.profileForm.get('corrsStateNotLocal').setValue("");
+      this.profileForm.get('corrsCityNotLocal').setValue("");
+      this.profileForm.get('corrsPostcode').setValue("");
       // this.profileForm.get('perStateLocal').setValue("");
       // this.profileForm.get('perCityLocal').setValue("");
       // this.toastr.info(this.translate.instant('this.isLocal: '+this.isLocal), '');
@@ -573,6 +582,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     } else {
       this.isCorrsLocal = false;
       this.RemoveLocalCtrlCorrs();
+      this.profileForm.get('corrsStateLocal').setValue("");
+      this.profileForm.get('corrsCityLocal').setValue("");
+      this.profileForm.get('corrsPostcode').setValue("");
       // this.profileForm.get('perStateNotLocal').setValue("");
       // this.profileForm.get('perCityNotLocal').setValue("");
     }
@@ -776,8 +788,19 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       this.profileForm.get('corrsAddress2').setValue(this.perAddress2.value);
       this.profileForm.get('corrsAddress3').setValue(this.perAddress3.value);
       this.profileForm.get('corrsCountry').setValue(this.perCountry.value);
-      this.profileForm.get('corrsStateLocal').setValue(this.perStateLocal.value);
-      this.profileForm.get('corrsCityLocal').setValue(this.perCityLocal.value);
+
+      if(this.perStateLocal.value){
+        this.profileForm.get('corrsStateLocal').setValue(this.perStateLocal.value);
+      }else if(this.perStateNotLocal.value){
+        this.profileForm.get('corrsStateNotLocal').setValue(this.perStateNotLocal.value);
+      }
+
+      if(this.perCityLocal.value){
+        this.profileForm.get('corrsCityLocal').setValue(this.perCityLocal.value);
+      }else if(this.perStateNotLocal.value){
+        this.profileForm.get('corrsCityNotLocal').setValue(this.perCityNotLocal.value);
+      }
+      
       this.profileForm.get('corrsPostcode').setValue(this.perPostcode.value);
       this.profileForm.get('corrsTelephone').setValue(this.perTelephone.value);
 
@@ -798,6 +821,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       this.profileForm.get('corrsCityLocal').setValue("");
       this.profileForm.get('corrsPostcode').setValue("");
       this.profileForm.get('corrsTelephone').setValue("");
+      this.profileForm.get('corrsCityNotLocal').setValue("");
+      this.profileForm.get('corrsStateNotLocal').setValue("");
+      this.isCorrsLocal = false;
     }
     console.log(e.checked);
     this.checkReqValues();
