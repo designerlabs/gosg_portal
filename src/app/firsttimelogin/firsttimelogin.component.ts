@@ -27,12 +27,11 @@ export class FirsttimeloginComponent implements OnInit {
  @Input() loginfirst:boolean;
 
   ngOnInit() {
-    setTimeout(function() {
-      this.getConfirmation();
-    }, 5000);
+   
 
     this.rndNo =  location.search.split('rnd=')[1];
     console.log(this.rndNo);
+    this.triggerFunc();
   }
 
   getConfirmation(){
@@ -61,7 +60,12 @@ export class FirsttimeloginComponent implements OnInit {
         );
 }
 
-
+triggerFunc(){
+  setTimeout(function() {
+    this.getConfirmation();
+  }, 5000);
+  
+}
 
   userIsLogged(){
    return true; 
