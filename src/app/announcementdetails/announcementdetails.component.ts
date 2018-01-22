@@ -1,4 +1,5 @@
-import { Component,  Injectable, Inject,Output, Input, EventEmitter, OnInit, AfterViewChecked, AfterViewInit,  ViewChild, ElementRef } from '@angular/core';
+// tslint:disable-next-line:max-line-length
+import { Component,  Injectable, Inject, Output, Input, EventEmitter, OnInit, AfterViewChecked, AfterViewInit,  ViewChild, ElementRef } from '@angular/core';
 import { ArticleService } from '../article/article.service';
 import { NavService } from '../header/nav/nav.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
@@ -14,7 +15,7 @@ import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 export class AnnouncementdetailsComponent implements OnInit {
 
   moduleName: string;
-        
+
     @ViewChild('textarea') textarea: ElementRef;
     @Output() menuClick = new EventEmitter();
 
@@ -47,7 +48,6 @@ export class AnnouncementdetailsComponent implements OnInit {
                         this.triggerAnnouncementDetails(this.moduleName,this.lang,this.announcementID,this.announcementID2);
                     }
                 });
-
             }
             if (myLang === 'ms') {
 
@@ -61,7 +61,6 @@ export class AnnouncementdetailsComponent implements OnInit {
                     }
                 });
             }
-            console.log("langMY");
         });
 
     }
@@ -69,12 +68,10 @@ export class AnnouncementdetailsComponent implements OnInit {
     lang = this.lang;
 
     ngOnInit() {
-        debugger;
         this.moduleName = this.router.url.split('/')[1];
         this.announcementID = this.router.url.split('/')[2]; 
         this.announcementID2 = this.router.url.split('/')[3];
         this.triggerAnnouncementDetails(this.moduleName, this.lang, this.announcementID, this.announcementID2);
-        console.log("onInit");
     }
 
     getTheme(){
@@ -86,7 +83,7 @@ export class AnnouncementdetailsComponent implements OnInit {
         console.log(e);
         console.log(this.router.url);
         this.router.navigate([_getModule, e.code]);
-        console.log("sideMenu");
+        console.log('sideMenu');
         event.preventDefault();
     }
 
@@ -96,19 +93,19 @@ export class AnnouncementdetailsComponent implements OnInit {
         const _getAnnounceID2 = this.router.url.split('/')[3];
         event.preventDefault();
     }
-  
+
     triggerAnnouncementDetails(moduleName, lang, id1, id2) {
-    
-        if(lang == "ms"){
+
+        if (lang === 'ms') {
             this.lang = 2;
         }
 
-        if(lang == "en"){
+        if (lang === 'en') {
             this.lang = 1;
         }
 
         this.route.paramMap
-        .switchMap((params: ParamMap) =>        
+        .switchMap((params: ParamMap) =>
         this.navService.getAnnouncementDetails(moduleName, this.lang, id1, id2))
         .subscribe(resAllAnnounce => {
             this.announces = resAllAnnounce;
@@ -118,12 +115,12 @@ export class AnnouncementdetailsComponent implements OnInit {
         });
     }
 
-    checkImgData(e){
+    checkImgData(e) {
 
         const chkData = e.search('<img');
-        if (chkData != -1){
+        if (chkData != -1) {
             return true;
-        }else{
+        }else {
             return false;
         }
     }

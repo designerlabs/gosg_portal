@@ -14,7 +14,6 @@ import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 export class AnnouncementComponent implements OnInit {
 
     moduleName: string;
-        
     @ViewChild('textarea') textarea: ElementRef;
     @Output() menuClick = new EventEmitter();
 
@@ -25,7 +24,7 @@ export class AnnouncementComponent implements OnInit {
     announces: any[];
     announceRes: any;
     announceData: any;
-  
+
     @Output() langChange = new EventEmitter();
     constructor(public articleService: ArticleService,  private route: ActivatedRoute, 
         private navService: NavService, private translate: TranslateService, private router: Router, 
@@ -87,7 +86,7 @@ export class AnnouncementComponent implements OnInit {
         event.preventDefault();
     }
 
-    triggerAnnouncement(moduleName, lang){
+    triggerAnnouncement(moduleName, lang) {
         if (lang === 'ms') {
             this.lang = 2;
         }
