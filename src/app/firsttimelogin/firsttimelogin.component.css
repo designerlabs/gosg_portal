@@ -1,0 +1,20 @@
+.bar {
+    border: 1px solid #e6436e;
+    height: 2px;
+    width: 20%;
+    
+    .in {
+      animation: fill 5s linear 1;
+      height: 100%;
+      background-color: #e6436e;
+    }
+  }
+  
+  @keyframes fill {
+    0% {
+      width: 0%;
+    }
+    100% {
+      width: 100%;
+    }
+  }

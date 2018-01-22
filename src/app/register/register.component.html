@@ -67,7 +67,7 @@
                 </mat-form-field>
 
                 <!-- hintLabel="{{'register.label.emailplh' | translate }}" -->
-                <mat-form-field class="example-full-width font-size-s">
+                <mat-form-field class="example-full-width font-size-s" [disabled]="true">
                   <input matInput formControlName="emel" tabindex="3" placeholder="{{'register.label.email' | translate }}" required>
                   <mat-error *ngIf="!validateCtrlChk(emel) && citizenFormGrp.controls.emel.errors.required">
                     {{'register.err.email' | translate }}
@@ -212,9 +212,8 @@
                     <button type="button" mat-raised-button color="warn" id="btnreset" (click)="resetModal.show()" style="width: 100px; font-family: Roboto; margin-left: 5px;">
                     <i class="fa fa-refresh"></i>  {{'register.label.btnreset' | translate }}</button>
                     <button mat-raised-button color="primary" (click)="citizenReg(citizenFormGrp.value);false" id="hantar" style="width: 100px; font-family: Roboto;"
-                      [disabled]="citizenFormGrp.invalid || !verifyCaptcha()">
+                      [disabled]="(citizenFormGrp.invalid || !usrType.value) || !verifyCaptcha()">
                       <i class="fa fa-check"></i>  {{'register.label.btnsubmit' | translate }}</button>
-
                   </div>
                 </div>
               </div>
