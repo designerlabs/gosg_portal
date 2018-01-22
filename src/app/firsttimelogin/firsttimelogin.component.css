@@ -7,10 +7,39 @@
   
   }
   
- .bar .in {
+ .bar > .in {
+    -webkit-animation: fill 5s linear 1;
+    -moz-animation: fill 5s linear 1;
+    -o-animation: fill 5s linear 1;
     animation: fill 5s linear 1;
     height: 100%;
     background-color: #e6436e;
+  }
+
+  @-webkit-keyframes fill {
+    0% {
+      width: 0%;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+  @-moz-keyframes fill {
+    0% {
+      width: 0%;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+
+  @-o-keyframes fill {
+    0% {
+      width: 0%;
+    }
+    100% {
+      width: 100%;
+    }
   }
 
   @keyframes fill {

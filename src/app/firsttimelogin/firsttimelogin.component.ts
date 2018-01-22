@@ -62,7 +62,28 @@ export class FirsttimeloginComponent implements OnInit {
 
 triggerFunc(){
   setTimeout(function() {
-    this.getConfirmation();
+    let body = {
+      "REMOTE_USER": this.rndNo
+    };
+
+    this.protectedservice.completeTran(this.rndNo)
+        .subscribe(
+            userData => {
+              if(userData.statusCode === 'S001'){
+                if(userData.statusDesc === 'Success'){
+                  window.location.href = this.config.urlDashboard;
+                }else{
+                  window.location.href = userData.statusDesc;
+                }
+              }else{
+                alert(userData.statusDesc);
+              }
+              this.getUserData = userData.userTypeList;
+              
+            },Error => {
+              //this.toastr.error(this.translate.instant('feedback.err.subject'), '');
+            }
+        );
   }, 5000);
   
 }
