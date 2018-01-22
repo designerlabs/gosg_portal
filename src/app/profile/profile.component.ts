@@ -146,7 +146,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.maskPostcode = this.validateService.getMask().postcode;
     this.maskDateFormat = this.validateService.getMask().dateFormat;
     
-    this.getUserData()
+    this.getUserData();
+    this.getUserProfile();
     this.getCountry();
     this.dob = new FormControl()
     this.gender = new FormControl()
@@ -207,7 +208,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.protectedService.getUser().subscribe(
       data => {
         if(data.user){
-          this.fullname = data.user.fullName;
+          // this.fullname = data.user.fullName;
           this.userTypeId = data.user.userType.userTypeId;
         }else{
           

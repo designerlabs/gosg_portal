@@ -40,9 +40,10 @@ export class NavService {
     }
 
 
-    getArticleData(lang: string, ID: number): Observable<boolean[]> {
+    getArticleData(moduleName, lang: string, ID: number): Observable<boolean[]> {
 
     if (!isNaN(ID)){
+      debugger;
       return this.http.get(this.articleUrl + '-' + ID + '-' + lang + '.json')
             .take(1)
             .map((response: Response) => response.json())
@@ -100,12 +101,12 @@ export class NavService {
     }
    }
 
-   triggerArticle(lang, topicID){
+   triggerArticle(moduleName,lang, topicID){
 
     if (!isNaN(topicID)){
         return this.route.paramMap
         .switchMap((params: ParamMap) =>
-        this.getArticleData(lang, topicID))
+        this.getArticleData(moduleName,lang, topicID))
         .subscribe(resSliderData => {
             this.articleService.articles = resSliderData;
             this.articles = resSliderData;

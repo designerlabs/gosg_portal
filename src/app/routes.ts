@@ -34,6 +34,7 @@ export const appRoutes: Routes = [
     {path: 'index', component: HomeComponent},
     {path: 'search/searchResult', component: SearchResultComponent},
     {path: 'topic/:id', component: ArticleComponent, canActivate: [NavRouterActivator]  },
+    {path: 'announcement/:id', component: ArticleComponent, canActivate: [NavRouterActivator]  },
     {path: 'subtopic/:id1/:id2', component: SubarticleComponent },
     {path: 'login', component: LoginComponent},
     {path: 'register', component: RegisterComponent },
