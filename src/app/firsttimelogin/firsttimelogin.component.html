@@ -22,8 +22,9 @@
         <button class="btn btn-md btn-success" (click)="getConfirmation()">
           Click here
         </button>
-        <div class="bar">
-          <div class="in"></div>
+        
+        <div class="row">
+          <progress value="0" max="10" [(ngModel)]="progressBar" id="progressBar"></progress>
         </div>
       </div>
   </div>

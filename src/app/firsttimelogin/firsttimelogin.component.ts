@@ -16,6 +16,7 @@ export class FirsttimeloginComponent implements OnInit {
   getUserData: any;
   userId:string;
   rndNo:any;
+  progressBar:any;
   id:any;
   private sub: any;
 
@@ -35,11 +36,15 @@ export class FirsttimeloginComponent implements OnInit {
       this.getConfirmation();
     }, 5000);
 
+    let timeleft = 10;
+    let downloadTimer = setInterval(function(){
+      this.progressBar = 10 - --timeleft;
+      if(timeleft <= 0)
+        clearInterval(downloadTimer);
+    },1000);
+
     
-    if (this.interval) {
-      clearInterval(this.interval);
-      console.log('cleared interval');
-    }
+    
   }
 
   getConfirmation(){
@@ -59,6 +64,8 @@ export class FirsttimeloginComponent implements OnInit {
                 }
               }else{
                 console.log(userData.statusDesc);
+                clearInterval(this.interval);
+                console.log('cleared interval');
               }
               this.getUserData = userData.userTypeList;
               
