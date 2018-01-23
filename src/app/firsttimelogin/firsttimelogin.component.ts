@@ -30,7 +30,10 @@ export class FirsttimeloginComponent implements OnInit {
   ngOnInit() {
     this.rndNo =  location.search.split('rnd=')[1];
     console.log(this.rndNo);
-    this.getConfirmation();
+    setInterval(() => {
+      this.getConfirmation();
+      }, 5000);
+    
   }
 
   getConfirmation(){
