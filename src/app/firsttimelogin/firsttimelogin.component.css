@@ -1,9 +1,9 @@
 .bar {
-    border: 1px solid #e6436e;
-    height: 10px;
-    width: 99px;
+    border: 1px solid #5cb85c;
+    height: 8px;
+    width: 100%;
     position: relative;
-    margin: 0 auto;
+    margin: 14px auto;
   }
   .bar .in {
     -webkit-animation: fill 5s linear 1;
@@ -11,7 +11,11 @@
     -o-animation: fill 5s linear 1;
     animation: fill 5s linear 1;
     height: 100%;
-    background-color: #e6436e;
+    background-color: #5cb85c;
+  }
+
+  hr{
+      margin-bottom:5px;
   }
   
   @keyframes fill {
