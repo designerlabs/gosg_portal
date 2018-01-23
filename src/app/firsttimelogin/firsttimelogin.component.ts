@@ -24,11 +24,13 @@ export class FirsttimeloginComponent implements OnInit {
     private router:Router,
     @Inject(APP_CONFIG) private config: AppConfig
   ) { }
+
  @Input() loginfirst:boolean;
 
   ngOnInit() {
     this.rndNo =  location.search.split('rnd=')[1];
     console.log(this.rndNo);
+    this.getConfirmation();
   }
 
   getConfirmation(){
@@ -56,6 +58,7 @@ export class FirsttimeloginComponent implements OnInit {
             }
         );
 }
+
 
   userIsLogged(){
    return true; 

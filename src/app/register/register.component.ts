@@ -202,7 +202,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
 
         this.refUrl =  location.search.split('refUrl=')[1];
         console.log(unescape(this.refUrl));
-
+        
         this.getUserType();
         this.maskCitizen = this.validateService.getMask().telephone;
         this.maskForeigner = this.validateService.getMask().telephonef;
@@ -294,6 +294,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
             this.addCitizenCtrl();
         }
     }
+
     addCitizenCtrl() {
         this.citizenFormGrp.addControl('kad_pengenalan', this.kad_pengenalan);
         this.citizenFormGrp.addControl('nama_penuh', this.nama_penuh);
@@ -315,6 +316,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         this.emel.reset();
         this.telefon.reset();
     }
+    
 
 
     addPRTRCtrl() {
