@@ -23,6 +23,8 @@ export class ProtectedComponent implements OnInit {
   isFirstLogin: boolean;
   childData: string;
   getUserName:string;
+  getEmail:string;
+  getFullname:string;
   translatedText: string;
   supportedLanguages: any[];
   @Input() langChange: string;
@@ -90,6 +92,8 @@ export class ProtectedComponent implements OnInit {
       data => {
         if(data.user){
           this.getUserName = data.user.fullName;
+          this.getEmail = data.user.email;
+          this.getFullname = data.user.fullName;
           localStorage.setItem('fullname',data.user.fullName);
           localStorage.setItem('email',data.user.email);
         }else{
@@ -108,6 +112,8 @@ export class ProtectedComponent implements OnInit {
       data =>{
         if(data.length !=0){
         this.getUserName = data[0].fullname;
+        this.getEmail = data[0].email;
+        this.getFullname = data[0].fullName;
         localStorage.setItem('icNo',data[0].ic_number);
         localStorage.setItem('name',data[0].fullname);
         localStorage.setItem('email',data[0].email);

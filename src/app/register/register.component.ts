@@ -202,7 +202,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
 
         this.refUrl =  location.search.split('refUrl=')[1];
         console.log(unescape(this.refUrl));
-
+        
         this.getUserType();
         this.maskCitizen = this.validateService.getMask().telephone;
         this.maskForeigner = this.validateService.getMask().telephonef;
@@ -281,14 +281,12 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         this.changeCitizen = this.citizenValue;
         this.ReCreateCaptchas();
         if ((this.citizenValue == 2) || (this.citizenValue  ==6)) {
-            debugger;
             this.citi = false;
             this.permanentResident = false;
             this.nonCiti = true;
             this.RemoveCitizenCtrl();
             this.addNonCitizenCtrl();
         } else {
-            debugger;
             this.citi = true;
             this.permanentResident = false;
             this.nonCiti = false;
@@ -296,6 +294,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
             this.addCitizenCtrl();
         }
     }
+
     addCitizenCtrl() {
         this.citizenFormGrp.addControl('kad_pengenalan', this.kad_pengenalan);
         this.citizenFormGrp.addControl('nama_penuh', this.nama_penuh);
@@ -317,6 +316,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         this.emel.reset();
         this.telefon.reset();
     }
+    
 
 
     addPRTRCtrl() {
@@ -434,7 +434,6 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         //     "citizenType":null,
         //     "user_id": null
         // };
-        debugger;
         if((formValues.kad_pengenalan ) && (formValues.passport_pr)){
             body.country.countryId = formValues.country_pr;
             body.userType.userTypeId = this.citizenValue;

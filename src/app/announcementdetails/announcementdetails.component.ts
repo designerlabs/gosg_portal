@@ -1,4 +1,5 @@
-import { Component,  Injectable, Inject,Output, Input, EventEmitter, OnInit, AfterViewChecked, AfterViewInit,  ViewChild, ElementRef } from '@angular/core';
+// tslint:disable-next-line:max-line-length
+import { Component,  Injectable, Inject, Output, Input, EventEmitter, OnInit, AfterViewChecked, AfterViewInit,  ViewChild, ElementRef } from '@angular/core';
 import { ArticleService } from '../article/article.service';
 import { NavService } from '../header/nav/nav.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
@@ -14,7 +15,7 @@ import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 export class AnnouncementdetailsComponent implements OnInit {
 
   moduleName: string;
-        
+
     @ViewChild('textarea') textarea: ElementRef;
     @Output() menuClick = new EventEmitter();
 
@@ -36,30 +37,30 @@ export class AnnouncementdetailsComponent implements OnInit {
 
             const myLang = translate.currentLang;
 
-            if (myLang == 'en') {
+            if (myLang === 'en') {
 
                 translate.get('HOME').subscribe((res: any) => {
                     this.lang = '1';
                     this.moduleName = this.router.url.split('/')[1];
                     this.announcementID = this.router.url.split('/')[2];
                     this.announcementID2 = this.router.url.split('/')[3];
-                 
+                    if ( this.moduleName && this.announcementID && this.announcementID2){
+                        this.triggerAnnouncementDetails(this.moduleName,this.lang,this.announcementID,this.announcementID2);
+                    }
                 });
-
             }
-            if (myLang == 'ms') {
+            if (myLang === 'ms') {
 
                 translate.get('HOME').subscribe((res: any) => {
                     this.lang = '2';
                     this.moduleName = this.router.url.split('/')[1];
                     this.announcementID = this.router.url.split('/')[2];
                     this.announcementID2 = this.router.url.split('/')[3];
-                    
+                    if ( this.moduleName && this.announcementID && this.announcementID2){
+                        this.triggerAnnouncementDetails(this.moduleName,this.lang,this.announcementID,this.announcementID2);
+                    }
                 });
             }
-
-            this.triggerAnnouncementDetails(this.moduleName,this.lang,this.announcementID,this.announcementID2);
-                    console.log("langMY")
         });
 
     }
@@ -71,47 +72,42 @@ export class AnnouncementdetailsComponent implements OnInit {
         this.announcementID = this.router.url.split('/')[2]; 
         this.announcementID2 = this.router.url.split('/')[3];
         this.triggerAnnouncementDetails(this.moduleName, this.lang, this.announcementID, this.announcementID2);
-        console.log("onInit");
     }
 
     getTheme(){
         return localStorage.getItem('themeColor');
     }
 
-    clickSideMenu(e){
-       
+    clickSideMenu(e) {
         const _getModule = this.router.url.split('/')[1];
- 
         console.log(e);
         console.log(this.router.url);
-
-        this.router.navigate([_getModule, e.code]);          
-        console.log("sideMenu")
+        this.router.navigate([_getModule, e.code]);
+        console.log('sideMenu');
         event.preventDefault();
     }
 
-    clickContent(e){       
+    clickContent(e) {
         const _getModule = this.router.url.split('/')[1];
-        const _getAnnounceID = this.router.url.split('/')[2]; 
-        const _getAnnounceID2 = this.router.url.split('/')[3];         
+        const _getAnnounceID = this.router.url.split('/')[2];
+        const _getAnnounceID2 = this.router.url.split('/')[3];
+        event.preventDefault();
     }
-  
-    triggerAnnouncementDetails(moduleName, lang, id1, id2){
-    
-        if(lang == "ms"){
+
+    triggerAnnouncementDetails(moduleName, lang, id1, id2) {
+
+        if (lang === 'ms') {
             this.lang = 2;
         }
 
-        if(lang == "en"){
+        if (lang === 'en') {
             this.lang = 1;
         }
 
         this.route.paramMap
         .switchMap((params: ParamMap) =>
-        
         this.navService.getAnnouncementDetails(moduleName, this.lang, id1, id2))
-       
-        .subscribe(resAllAnnounce => {             
+        .subscribe(resAllAnnounce => {
             this.announces = resAllAnnounce;
             this.breadcrumb = this.breadcrumbService.getBreadcrumb();
             this.isValid = this.breadcrumbService.isValid = true;
@@ -119,12 +115,12 @@ export class AnnouncementdetailsComponent implements OnInit {
         });
     }
 
-    checkImgData(e){
+    checkImgData(e) {
 
         const chkData = e.search('<img');
-        if (chkData != -1){
+        if (chkData != -1) {
             return true;
-        }else{
+        }else {
             return false;
         }
     }
