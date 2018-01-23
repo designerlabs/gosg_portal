@@ -78,7 +78,7 @@ export class AnnouncementlistComponent implements OnInit {
 
     clickSideMenu(e) {
         // tslint:disable-next-line:no-debugger
-        debugger;
+      
         const _getModule = this.router.url.split('/')[1];
         // this.router.navigate(['announcement', e.code]);
         // this.triggerAnnouncementList(this.lang, e.code);

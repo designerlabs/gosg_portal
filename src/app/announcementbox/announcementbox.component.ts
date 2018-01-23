@@ -40,6 +40,7 @@ export class AnnouncementboxComponent implements OnInit {
     }
 
     ngOnInit(){
+       
     }
 
     private announcementUrl: string = this.config.urlAnnouncement;
