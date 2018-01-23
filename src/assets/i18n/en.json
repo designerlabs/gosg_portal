@@ -261,5 +261,10 @@
       "in": "in",
       "app": "applications"
     }
+  },
+  "poll": {
+    "title" : "SHARE YOUR THOUGHT WITH US",
+    "resultTitle" : "POLLS RESULT",
+    "recommend" : "Your recommendation for improvement"
   }
 }
