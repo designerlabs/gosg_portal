@@ -10,7 +10,7 @@ import { APP_CONFIG, AppConfig } from '../config/app.config.module';
   encapsulation: ViewEncapsulation.None
 })
 export class FirsttimeloginComponent implements OnInit {
-  interval: NodeJS.Timer;
+  interval: any;
   varArray: string[];
   queryString: string;
   getUserData: any;
