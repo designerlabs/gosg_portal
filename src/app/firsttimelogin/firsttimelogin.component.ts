@@ -52,7 +52,7 @@ export class FirsttimeloginComponent implements OnInit {
                   window.location.href = userData.statusDesc;
                 }
               }else{
-                alert(userData.statusDesc);
+                console.log(userData.statusDesc);
               }
               this.getUserData = userData.userTypeList;
               
