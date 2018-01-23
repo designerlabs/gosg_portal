@@ -249,14 +249,14 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                 if(data.user.address.permanentAddressCountry.countryCode == "MY") {
                   this.getCitiesByStateP(data.user.address.permanentAddressState.stateId);
       
-                  this.profileForm.get('perStateLocal').setValue(data.user.address.permanentAddressState);
+                  this.profileForm.get('perStateLocal').setValue(data.user.address.permanentAddressState.stateId);
                   this.selectedState = this.profileForm.get('perStateLocal').value;
-                  this.profileForm.get('perCityLocal').setValue(data.user.address.permanentAddressCity); 
+                  this.profileForm.get('perCityLocal').setValue(data.user.address.permanentAddressCity.cityId); 
                   this.selectedCity = this.profileForm.get('perCityLocal').value;
                 } else {
-                  this.profileForm.get('perStateNotLocal').setValue(data.user.address.permanentAddressState);
+                  this.profileForm.get('perStateNotLocal').setValue(data.user.address.permanentAddressState.stateId);
                   this.selectedState = this.profileForm.get('perStateNotLocal').value;
-                  this.profileForm.get('perCityNotLocal').setValue(data.user.address.permanentAddressCity); 
+                  this.profileForm.get('perCityNotLocal').setValue(data.user.address.permanentAddressCity.cityId); 
                   this.selectedCity = this.profileForm.get('perCityNotLocal').value;
                 }
               }
