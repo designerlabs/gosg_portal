@@ -37,11 +37,11 @@ export class FirsttimeloginComponent implements OnInit {
     }, 5000);
 
     let timeleft = 10;
-    let downloadTimer = setInterval(function(){
-      this.progressBar = 10 - --timeleft;
-      if(timeleft <= 0)
-        clearInterval(downloadTimer);
-    },1000);
+    // let downloadTimer = setInterval(function(){
+    //   this.progressBar = 10 - timeleft;
+    //   if(timeleft <= 0)
+    //     clearInterval(downloadTimer);
+    // },1000);
 
     
     
