@@ -10,6 +10,7 @@ import { APP_CONFIG, AppConfig } from '../config/app.config.module';
   encapsulation: ViewEncapsulation.None
 })
 export class FirsttimeloginComponent implements OnInit {
+  interval: NodeJS.Timer;
   varArray: string[];
   queryString: string;
   getUserData: any;
@@ -30,10 +31,15 @@ export class FirsttimeloginComponent implements OnInit {
   ngOnInit() {
     this.rndNo =  location.search.split('rnd=')[1];
     console.log(this.rndNo);
-    setInterval(() => {
+    this.interval = setInterval(() => {
       this.getConfirmation();
-      }, 5000);
+    }, 5000);
+
     
+    if (this.interval) {
+      clearInterval(this.interval);
+      console.log('cleared interval');
+    }
   }
 
   getConfirmation(){
@@ -61,7 +67,6 @@ export class FirsttimeloginComponent implements OnInit {
             }
         );
 }
-
 
   userIsLogged(){
    return true; 
