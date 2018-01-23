@@ -8,12 +8,13 @@ import {ActivatedRoute, Router} from '@angular/router';
 @Injectable()
 export class AnnouncementlistService {
   @Output() menuClick = new EventEmitter();
-  announces: any[];
+  announces: any[]; // announcement component
+  announceDetails: any[]; // announcement details component
 
   constructor(private http: Http, @Inject(APP_CONFIG) private config: AppConfig,
   route: ActivatedRoute, private router: Router) { }
 
-  getAnnounces(){
+  getAnnounces() {
       return this.anounce;
   }
 

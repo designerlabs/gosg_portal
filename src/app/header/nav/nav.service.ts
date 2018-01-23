@@ -110,7 +110,6 @@ export class NavService {
   }
 
   triggerArticle(moduleName, lang, topicID) {
-
     if (!isNaN(topicID)) {
       return this.route.paramMap
         .switchMap((params: ParamMap) =>
@@ -144,7 +143,7 @@ export class NavService {
     });
   }
 
-  getAnnouncementList(moduleName, lang: number, id1?: string) {
+  getAnnouncementList(moduleName, lang: number, id1?: string): Observable<boolean[]> {
     if (id1) {
       return this.http.get(this.urlAnnouncement + '/id/' + id1 + '?langId=' + lang)
       .take(1)
@@ -159,7 +158,6 @@ export class NavService {
         return Observable.throw(caught);
       });
     }
-    //console.log(this.urlAnnouncement+"/id/"+id1+"?langId="+lang);
   }
 
   triggerAnnouncementList(lang, id1) {
@@ -170,7 +168,7 @@ export class NavService {
             lang = 1;
         }
         if (id1) {
-            this.route.paramMap
+          return this.route.paramMap
         .switchMap((params: ParamMap) =>
         this.getAnnouncementList('announcement', lang, id1))
         .subscribe(resAllAnnounce => {
@@ -187,11 +185,25 @@ export class NavService {
         }
     }
 
-  getAnnouncementDetails(moduleName, lang: number, id1?: string, id2?: string):Observable<boolean[]> {
+    triggerAnnouncementDetails(moduleName, lang, id1, id2) {
+        if (lang === 'ms') {
+            lang = 2;
+        }
+        if (lang === 'en') {
+            lang = 1;
+        }
+        return this.route.paramMap
+        .switchMap((params: ParamMap) =>
+        this.getAnnouncementDetails(moduleName, lang, id1, id2))
+        .subscribe(resAllAnnounce => {
+            this.announceService.announceDetails = resAllAnnounce;
+            this.breadcrumb = this.breadcrumbService.getBreadcrumb();
+            this.isValid = this.breadcrumbService.isValid = true;
+            this.breadcrumb = this.breadcrumb.name = '';
+        });
+    }
 
-    console.log('DETAILS: ');
-    console.log(this.urlAnnouncement + '/id/' + id1 + '?langId=' + lang);
-
+  getAnnouncementDetails(moduleName, lang: number, id1?: string, id2?: string): Observable<boolean[]> {
     return this.http.get(this.urlAnnouncement + '/id/' + id1 + '/' + id2 + '?langId=' + lang)
     .take(1)
     .map((response: Response) => response.json())

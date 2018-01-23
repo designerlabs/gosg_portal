@@ -109,6 +109,8 @@ import { ConfirmDialogComponent } from '../dialogs/confirm-dialog/confirm-dialog
 import { SharedPipe } from '../common/shared.pipe';
 import { AnnouncementdetailsComponent } from '../announcementdetails/announcementdetails.component';
 import { AnnouncementlistComponent } from '../announcementlist/announcementlist.component';
+// import { Nav } from '../header/nav/nav.router.guard.service';
+import { NavRouterGuardService } from '../header/nav/nav-router-guard.service';
 export function HttpLoaderFactory(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -259,6 +261,6 @@ export function HttpLoaderFactory(http: Http) {
     
   ],
 
-  providers: [SliderService, BsModalService, TopnavService, SharedService, ValidateService, BreadcrumbService, PortalService, AuthService, ArticleService, NavRouterActivator, NavService, AnnouncementlistService, TransService, DialogsService, SearchService]
+  providers: [SliderService, BsModalService, TopnavService, SharedService, ValidateService, BreadcrumbService, PortalService, AuthService, ArticleService, NavRouterActivator, NavService, AnnouncementlistService, TransService, DialogsService, SearchService, NavRouterGuardService]
 })
 export class SharedModule { }

@@ -21,7 +21,7 @@
     </div>
   </div>
   
-  <div style="margin-top:10px;" class="container" *ngFor="let announce of announces">
+  <div style="margin-top:10px;" class="container" *ngFor="let announce of announceService.announceDetails">
   
       <div class="row" *ngFor="let data of announce.results">
           <div class="col-sm-3">

@@ -39,7 +39,7 @@ export const appRoutes: Routes = [
     {path: 'topic/:id', component: ArticleComponent, canActivate: [NavRouterActivator]  },
     {path: 'announcement', component: AnnouncementComponent },
     {path: 'announcement/:id', component: AnnouncementlistComponent, canActivate: [NavRouterActivator]},
-    {path: 'announcement/:id/:id', component: AnnouncementdetailsComponent, canActivate: [NavRouterActivator]},
+    {path: 'announcement/:id1/:id2', component: AnnouncementdetailsComponent, canActivate: [NavRouterActivator]},
     {path: 'subtopic/:id1/:id2', component: SubarticleComponent },
     {path: 'login', component: LoginComponent},
     {path: 'register', component: RegisterComponent },

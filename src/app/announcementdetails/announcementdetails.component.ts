@@ -6,6 +6,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { BreadcrumbService } from '../header/breadcrumb/breadcrumb.service';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
+import { AnnouncementlistService } from '../announcementlist/announcementlist.service';
 
 @Component({
   selector: 'gosg-announcementdetails',
@@ -26,55 +27,51 @@ export class AnnouncementdetailsComponent implements OnInit {
     announces: any;
     announceRes: any;
     announceData: any;
-  
+
     @Output() langChange = new EventEmitter();
     constructor(public articleService: ArticleService,  private route: ActivatedRoute, 
         private navService: NavService, private translate: TranslateService, private router: Router, 
-        private breadcrumbService: BreadcrumbService, @Inject(APP_CONFIG) private config: AppConfig) {
+        // tslint:disable-next-line:max-line-length
+        private breadcrumbService: BreadcrumbService, @Inject(APP_CONFIG) private config: AppConfig, private announceService: AnnouncementlistService) {
         this.lang = translate.currentLang;
 
             translate.onLangChange.subscribe((event: LangChangeEvent) => {
-
             const myLang = translate.currentLang;
-
             if (myLang === 'en') {
-
                 translate.get('HOME').subscribe((res: any) => {
                     this.lang = '1';
                     this.moduleName = this.router.url.split('/')[1];
                     this.announcementID = this.router.url.split('/')[2];
                     this.announcementID2 = this.router.url.split('/')[3];
                     if ( this.moduleName && this.announcementID && this.announcementID2){
-                        this.triggerAnnouncementDetails(this.moduleName,this.lang,this.announcementID,this.announcementID2);
+                        this.navService.triggerAnnouncementDetails(this.moduleName,this.lang,this.announcementID,this.announcementID2);
                     }
                 });
             }
             if (myLang === 'ms') {
-
                 translate.get('HOME').subscribe((res: any) => {
                     this.lang = '2';
                     this.moduleName = this.router.url.split('/')[1];
                     this.announcementID = this.router.url.split('/')[2];
                     this.announcementID2 = this.router.url.split('/')[3];
                     if ( this.moduleName && this.announcementID && this.announcementID2){
-                        this.triggerAnnouncementDetails(this.moduleName,this.lang,this.announcementID,this.announcementID2);
+                        this.navService.triggerAnnouncementDetails(this.moduleName,this.lang,this.announcementID,this.announcementID2);
                     }
                 });
             }
         });
-
     }
 
     lang = this.lang;
 
     ngOnInit() {
         this.moduleName = this.router.url.split('/')[1];
-        this.announcementID = this.router.url.split('/')[2]; 
+        this.announcementID = this.router.url.split('/')[2];
         this.announcementID2 = this.router.url.split('/')[3];
-        this.triggerAnnouncementDetails(this.moduleName, this.lang, this.announcementID, this.announcementID2);
+        this.navService.triggerAnnouncementDetails(this.moduleName, this.lang, this.announcementID, this.announcementID2);
     }
 
-    getTheme(){
+    getTheme() {
         return localStorage.getItem('themeColor');
     }
 
@@ -94,31 +91,9 @@ export class AnnouncementdetailsComponent implements OnInit {
         event.preventDefault();
     }
 
-    triggerAnnouncementDetails(moduleName, lang, id1, id2) {
-
-        if (lang === 'ms') {
-            this.lang = 2;
-        }
-
-        if (lang === 'en') {
-            this.lang = 1;
-        }
-
-        this.route.paramMap
-        .switchMap((params: ParamMap) =>
-        this.navService.getAnnouncementDetails(moduleName, this.lang, id1, id2))
-        .subscribe(resAllAnnounce => {
-            this.announces = resAllAnnounce;
-            this.breadcrumb = this.breadcrumbService.getBreadcrumb();
-            this.isValid = this.breadcrumbService.isValid = true;
-            this.breadcrumb = this.breadcrumb.name = '';
-        });
-    }
-
     checkImgData(e) {
-
         const chkData = e.search('<img');
-        if (chkData != -1) {
+        if (chkData !== -1) {
             return true;
         }else {
             return false;
