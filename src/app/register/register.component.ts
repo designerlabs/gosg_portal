@@ -538,13 +538,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         }
         
     }
-    countryChange(e) {
-        // debugger;
-    }
 
-    countryChangeNonCiti(e) {
-        // debugger;
-    }
 
     isPRTR() {
         if((this.citizenValue == 3 )|| (this.citizenValue == 4)||(this.citizenValue == 7 )|| (this.citizenValue == 8)){
