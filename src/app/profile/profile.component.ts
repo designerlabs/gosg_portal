@@ -176,7 +176,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.getRace(this.languageId );
     this.getGenderVal(this.languageId );
     this.getReligion(this.languageId );
-    this.maskForeigner = this.validateService.getMask().telephonef;
+    this.maskForeigner = this.validateService.getMask().telephone;
     this.maskPostcode = this.validateService.getMask().postcode;
     this.maskDateFormat = this.validateService.getMask().dateFormat;
     
@@ -428,7 +428,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     
-    this.maskForeigner = this.validateService.getMask().telephonef;
+    this.maskForeigner = this.validateService.getMask().telephone;
     this.maskPostcode = this.validateService.getMask().postcode;
     this.maskDateFormat = this.validateService.getMask().dateFormat;
   } 
@@ -649,8 +649,11 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       return this.sharedService.getPostCodeData(id.value)
       .subscribe(resPostData => {
          this.getPostData = resPostData;
+        let getCode = this.getCorrsCityData.filter((ele, inx) => {return (
+          ele.cityId == id.value
+        )});
          if(id){
-           this.profileForm.get('corrsPostcode').setValue(id.value);
+           this.profileForm.get('corrsPostcode').setValue(getCode[0].cityCode);
            this.corrsCityLocal.get('corrsPostcode');
          }
        },
