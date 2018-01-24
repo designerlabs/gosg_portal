@@ -345,7 +345,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                       }
 
                  
-                      
+                      this.isChangedPer(this.postCodeObj1);
                       if(data.user.address.permanentAddressPostcode){
                         this.profileForm.get('perPostcode').setValue(data.user.address.permanentAddressPostcode);
                       }
@@ -399,6 +399,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                         this.postCodeObj2 = {value: data.user.address.correspondingAddressCity.cityId};
                       }
                       
+                      this.isChanged(this.postCodeObj2);
                       if(data.user.address.correspondingAddressPostcode){
                         this.profileForm.get('corrsPostcode').setValue(data.user.address.correspondingAddressPostcode);
                       }
@@ -749,7 +750,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         this.profileForm.get('corrsCityNotLocal').setValue(this.perCityNotLocal.value);
       }
       
-      this.profileForm.get('corrsPostcode').setValue(this.perPostcode.value);
+      this.profileForm.get('corrsPostcode').setValue(this.corrsPostcode.value);
       this.profileForm.get('corrsTelephone').setValue(this.perTelephone.value);
       // this.profileForm.get('percodeTele').setValue(this.percodeTele.value);
 
