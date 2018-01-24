@@ -207,8 +207,8 @@ submitForm(formValues:any){
     "feedbackActionBy":null
   };
 
-  body.feedbackName = this.fullname;
-  body.feedbackEmail = this.regemail;
+  body.feedbackName = formValues.nama_penuh;
+  body.feedbackEmail = formValues.email;
   body.feedbackType = { "feedbackTypeId": formValues.feedbacktype };
   body.feedbackSubject = { "feedbackSubjectId": formValues.feedbacksubject };
   body.feedbackMessage = formValues.feedback_message;
@@ -217,9 +217,9 @@ submitForm(formValues:any){
   let datasend = JSON.stringify(body); 
 
 if(this.isAdmin){
-  body.feedbackName = this.fullname;
+  body.feedbackName = this.fullName;
   body.feedbackActionBy = {"id": this.icNo }
-  body.feedbackEmail = this.regemail;
+  body.feedbackEmail = this.emaiL;
   datasend =JSON.stringify(body); 
 
   this.protectedService.feedback(datasend).subscribe(
