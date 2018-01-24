@@ -2,8 +2,8 @@ import { Component, Inject } from '@angular/core';
 import { Routes } from '@angular/router';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
-import { HomeComponent } from './home/home.component'
-// import { HomeProtectedComponent } from './home/home-protected.component';
+// import { HomeComponent } from './home/home.component'
+import { HomeProtectedComponent } from './home/home-protected.component';
 import { SearchResultComponent } from './search/search-result/search-result.component';
 import { ArticleComponent } from './article/article.component';
 import { SubarticleComponent } from './article/subarticle/subarticle.component';
@@ -36,7 +36,7 @@ export const protectedRoutes: Routes = [
     {path: 'dashboard', component: DashboardComponent},
     {path: 'profile', component: ProfileComponent},
     {path: 'appsmgmt', component: AppManagementComponent},
-    {path: 'index', component: HomeComponent},
+    {path: 'index', component: HomeProtectedComponent},
     {path: 'firsttime', component: FirsttimeloginComponent},
     {path: 'search/searchResult', component: SearchResultComponent},
     {path: 'topic/:id', component: ArticleComponent, canActivate: [NavRouterActivator]  },
