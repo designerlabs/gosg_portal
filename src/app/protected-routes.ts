@@ -17,7 +17,7 @@ import { DataprotectionComponent} from './staticpage/dataprotection.component';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProfileComponent } from './profile/profile.component';
-import { FeedbackProtectedComponent } from './feedback/feedback-protected.component';
+import { FeedbackComponent } from './feedback/feedback.component';
 import { MailboxComponent } from "./mailbox/mailbox.component";
 import { AppManagementComponent } from './app-management/app-management.component';
 import { FirsttimeloginComponent } from './firsttimelogin/firsttimelogin.component';
@@ -50,7 +50,7 @@ export const protectedRoutes: Routes = [
     {path: 'dataprotection', component: DataprotectionComponent},
     {path: 'contact', component: ContactComponent},
     {path: 'mailbox', component: MailboxComponent},
-    {path: 'feedback', component: FeedbackProtectedComponent},
+    {path: 'feedback', component: FeedbackComponent},
     {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
     {path: '**', component: ErrorComponent}
     //{path: 'user', loadChildren: 'app/user/user.module#UserModule'}
