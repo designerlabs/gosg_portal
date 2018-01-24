@@ -116,6 +116,8 @@ export class FeedbackProtectedComponent implements OnInit {
                 this.regemail = data.user.email;
                 this.feedbackFormgrp.get('nama_penuh').setValue(this.fullname);
                 this.feedbackFormgrp.get('email').setValue(this.regemail);
+                this.feedbackFormgrp.get('nama_penuh').disable();
+                this.feedbackFormgrp.get('email').disable();
               }
             },
             error => {
