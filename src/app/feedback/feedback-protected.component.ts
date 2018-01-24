@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewEncapsulation, ElementRef, Input, ViewChild, Inject, ViewContainerRef  } from '@angular/core';
+import { Component, OnInit, ElementRef, Input, ViewChild, Inject, ViewContainerRef  } from '@angular/core';
 import { FormControl, FormGroup, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import {TranslateService, LangChangeEvent } from '@ngx-translate/core';
@@ -15,13 +15,13 @@ import { ValidateService } from '../common/validate.service';
 @Component({
   selector: 'gosg-feedback-protected',
   templateUrl: './feedback-protected.component.html',
-  styleUrls: ['./feedback-protected.component.css'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./feedback-protected.component.css']
+ 
 })
 export class FeedbackProtectedComponent implements OnInit {
   submitMsg: any;
   
-  // @Input() state:string;
+  @Input() state:string;
 
   public feedbackFormgrp: FormGroup;
   feedback_message: FormControl;
