@@ -22,6 +22,9 @@ import { APP_CONFIG, AppConfig } from '../config/app.config.module';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit, AfterViewInit {
+  postCodeObj1: { value: any; };
+  postCodeObj2: { value: any; };
+  postCodeObj: { value: any; };
   getPostData: any;
   initialBtn: boolean;
   isSameAddressValue: any;
@@ -337,8 +340,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                       this.getCitiesByStateP(data.user.address.permanentAddressState.stateId);
                       if(data.user.address.permanentAddressCity){
                         this.profileForm.get('perCityLocal').setValue(data.user.address.permanentAddressCity.cityId);
-                        let postCodeObj = {value: data.user.address.permanentAddressCity.cityId};
-                        this.isChangedPer(postCodeObj);
+                        this.postCodeObj1 = {value: data.user.address.permanentAddressCity.cityId};
                       }
 
                  
@@ -393,8 +395,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                       if(data.user.address.correspondingAddressCity){
                         this.getCitiesByStateC(data.user.address.correspondingAddressState.stateId);
                         this.profileForm.get('corrsCityLocal').setValue(data.user.address.correspondingAddressCity.cityId);
-                        let postCodeObj = {value: data.user.address.correspondingAddressCity.cityId};
-                        this.isChanged(postCodeObj);
+                        this.postCodeObj2 = {value: data.user.address.correspondingAddressCity.cityId};
                       }
                       
                       if(data.user.address.correspondingAddressPostcode){
@@ -601,6 +602,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       return this.sharedService.getCitiesbyState(e)
       .subscribe(resCityData => {
         this.getPerCityData = resCityData;
+        this.isChangedPer(this.postCodeObj1);
       },
       Error => {
        this.toastr.error(this.translate.instant('common.err.servicedown'), '');            
@@ -613,6 +615,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       return this.sharedService.getCitiesbyState(e)
       .subscribe(resCityData => {
         this.getCorrsCityData = resCityData;
+        this.isChanged(this.postCodeObj2);
       },
       Error => {
        this.toastr.error(this.translate.instant('common.err.servicedown'), '');            
