@@ -619,11 +619,11 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     }
 
     if(id){
-      return this.sharedService.getPostCodeData(id)
+      return this.sharedService.getPostCodeData(id.value)
       .subscribe(resPostData => {
          this.getPostData = resPostData;
          if(id){
-           this.profileForm.get('corrsPostcode').setValue(id);
+           this.profileForm.get('corrsPostcode').setValue(id.value);
          }
        },
        Error => {
