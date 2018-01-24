@@ -675,7 +675,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       .subscribe(resPostData => {
          this.getPostData = resPostData;
          if(id){
-           this.profileForm.get('corrsPostcode').setValue(id);
+           this.profileForm.get('corrsPostcode').setValue(id.value);
          }
        },
        Error => {
@@ -698,7 +698,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         .subscribe(resPostData => {
            this.getPostData = resPostData;
            if(id){
-             this.profileForm.get('perPostcode').setValue(id);
+             this.profileForm.get('perPostcode').setValue(id.value);
            }
          },
          Error => {
