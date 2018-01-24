@@ -22,6 +22,7 @@ import { APP_CONFIG, AppConfig } from '../config/app.config.module';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit, AfterViewInit {
+  getCorrsData: any[];
   postCodeObj1: { value: any; };
   postCodeObj2: { value: any; };
   postCodeObj: { value: any; };
@@ -673,7 +674,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       });
       return this.sharedService.getPostCodeData(getCode[0].cityCode)
       .subscribe(resPostData => {
-         this.getPostData = resPostData;
+         this.getCorrsData = resPostData;
          if(id){
            this.profileForm.get('corrsPostcode').setValue(id.value);
          }
