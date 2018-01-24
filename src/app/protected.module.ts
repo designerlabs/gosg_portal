@@ -25,7 +25,7 @@ import { SidenavDashboardComponent } from './sidenav-dashboard/sidenav-dashboard
 import { AppManagementComponent } from './app-management/app-management.component';
 import { SidenavprotectedComponent } from './sidenavprotected/sidenavprotected.component';
 import { FirsttimeloginComponent } from './firsttimelogin/firsttimelogin.component';
-// import { FeedbackProtectedComponent } from './feedback/feedback-protected.component';
+import { FeedbackProtectedComponent } from './feedback/feedback-protected.component';
 // import { FeedbackComponent } from './feedback/feedback.component';
 import { PollProtectedComponent } from './poll/poll-protected.component';
 import { HomeProtectedComponent } from './home/home-protected.component';
@@ -46,7 +46,7 @@ export function HttpLoaderFactory(http: Http) {
     SidenavDashboardComponent,
     SidenavprotectedComponent,
     FirsttimeloginComponent,
-    // FeedbackComponent,
+    FeedbackProtectedComponent,
     PollProtectedComponent,
     HomeProtectedComponent
   ],
