@@ -259,27 +259,27 @@ else{
 }
 
 showResetMsg(){
-this.dialogsService
-.confirm('', this.translate.instant('feedback.reset'))
-.subscribe(
-  data => {
-    if(data){
-      this.resetForm();
-    }
-  });
+  this.dialogsService
+  .confirm('', this.translate.instant('feedback.reset'))
+  .subscribe(
+    data => {
+      if(data){
+        this.resetForm();
+      }
+    });
 }
 
 resetForm(){
-// this.nama_penuh.reset();
-this.feedback_message.reset();
-// this.email.reset();
-this.feedbacksubject.reset();
-this.feedbacktype.reset();
-this.sendMsg = true;
+  // this.nama_penuh.reset();
+  this.feedback_message.reset();
+  // this.email.reset();
+  this.feedbacksubject.reset();
+  this.feedbacktype.reset();
+  this.sendMsg = true;
 } 
 
 resetMethod(event) {
-this.resetForm();
+  this.resetForm();
 }
 
 
