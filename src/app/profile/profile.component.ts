@@ -660,10 +660,13 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       return this.sharedService.getPostCodeData(id.value)
       .subscribe(resPostData => {
          this.getPostData = resPostData;
-        let getCode = this.getCorrsCityData.filter((ele, inx) => {return (
-          ele.cityId == id.value
-        )});
+
+    
+
          if(id){
+          let getCode = this.getCorrsCityData.filter(function(ele){
+            return ele.cityId == id.value;
+          });
            this.profileForm.get('corrsPostcode').setValue(getCode[0].cityCode);
            this.corrsCityLocal.get('corrsPostcode');
          }
@@ -672,9 +675,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         this.toastr.error(this.translate.instant('common.err.servicedown'), '');            
       });
     }
-    
-      
-  }
+    }
 
   isStateChanged() {
     this.isChanged();
