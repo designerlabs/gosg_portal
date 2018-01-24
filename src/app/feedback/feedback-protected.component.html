@@ -58,43 +58,15 @@
                 </div>
                 <div class="col-md-12">
                     <div class="form-group col-sm-6">
-                        <mat-form-field class="example-full-width" style="width:100%" *ngIf="!isAdmin">
-                            <input matInput #namep formControlName="nama_penuh" id="nama_penuh" tabindex="3" class="ValonlyCharwithSpecial " placeholder="{{'feedback.label.nameplh' | translate }}">
-                            <!-- <mat-error *ngIf="!validateCtrlChk(nama_penuh) && feedbackFormgrp.controls.nama_penuh.errors?.required">{{'register.err.name' | translate }}
-                            </mat-error>
-                            <mat-error *ngIf="!validateCtrlChk(nama_penuh) && feedbackFormgrp.controls.nama_penuh.errors?.pattern">{{'register.pattern.name' | translate }}
-                            </mat-error> -->
+                        <mat-form-field class="example-full-width" style="width:100%">
+                            <input matInput #namep formControlName="nama_penuh" id="nama_penuh" tabindex="3" class="ValonlyCharwithSpecial " placeholder="{{'feedback.label.nameplh' | translate }}" readonly>
                         </mat-form-field>
-                        <div *ngIf="isAdmin" class="">
-                                <label class="font-size-s" for="fullname">{{'feedback.label.nameplh' | translate }}</label>
-                                <p class=" font-size-l" for="fullname">{{fullName}}</p>                             
-                        </div>
-                        <!-- <mat-form-field class="example-full-width" style="width:100%" *ngIf="isAdmin">
-                            <input matInput placeholder="{{'feedback.label.nameplh' | translate }}"
-                                [value]="fullName" formControlName="nama_penuh" readonly >
-                        </mat-form-field> -->
-                      
-
-
+               
                     </div>
                     <div class="form-group col-sm-6">
-                        <mat-form-field class="example-full-width" style="width:100%" *ngIf="!isAdmin">
-                            <input matInput formControlName="email" tabindex="4" placeholder="{{'register.label.email' | translate }}">
-                            <!-- <mat-error *ngIf="!validateCtrlChk(email) && feedbackFormgrp.controls.email.errors?.required">
-                                {{'register.err.email' | translate }}
-                            </mat-error>
-                            <mat-error *ngIf="!validateCtrlChk(email) &&  (feedbackFormgrp.controls.email.errors?.required? !feedbackFormgrp.controls.email.errors?.email : feedbackFormgrp.controls.email.errors?.email)">
-                                {{'register.pattern.email' | translate }}
-                            </mat-error> -->
+                        <mat-form-field class="example-full-width" style="width:100%" >
+                            <input matInput formControlName="email" tabindex="4" placeholder="{{'register.label.email' | translate }}" readonly>
                         </mat-form-field>
-                        <div *ngIf="isAdmin" class="">
-                                <label class="font-size-s" for="fullname">{{'register.label.email' | translate }}</label>
-                                <p class=" font-size-l" for="fullname">{{emaiL}}</p>                             
-                        </div>
-                        <!-- <mat-form-field class="example-full-width" style="width:100%" *ngIf="isAdmin">
-                            <input matInput formControlName="email" placeholder="{{'register.label.email' | translate }}" [value]="emaiL" readonly>
-                        </mat-form-field> -->
-
                     </div>
                 </div>
                 <div ng-app class="form-group col-md-12" style="padding: 0px 30px;">
