@@ -270,9 +270,9 @@ this.dialogsService
 }
 
 resetForm(){
-this.nama_penuh.reset();
+// this.nama_penuh.reset();
 this.feedback_message.reset();
-this.email.reset();
+// this.email.reset();
 this.feedbacksubject.reset();
 this.feedbacktype.reset();
 this.sendMsg = true;
