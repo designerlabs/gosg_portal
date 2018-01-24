@@ -20,6 +20,10 @@ import { ValidateService } from '../common/validate.service';
 })
 
 export class FeedbackProtectedComponent implements OnInit {
+  regemail: any;
+  fullname: any;
+  userId: any;
+  userTypeId: any;
   submitMsg: any;
   
   @Input() state:string;
@@ -80,7 +84,7 @@ export class FeedbackProtectedComponent implements OnInit {
   ngOnInit() {
     this.languageId = 2;
     //this.checkLog();
-    // this.getUserData();
+    this.getUserData();
     this.getTypenSubject();
     this.feedback_message = new FormControl('', [Validators.required]),
     this.feedbacktype = new FormControl('', [Validators.required]),
@@ -97,20 +101,40 @@ export class FeedbackProtectedComponent implements OnInit {
   }
 
   getUserData(){
-    if(localStorage.getItem('fullname')){
-      this.feedbackFormgrp.get('nama_penuh').setValue(localStorage.getItem('fullname'));
-      this.feedbackFormgrp.get('nama_penuh').disable();
-    }else{
-      this.feedbackFormgrp.get('nama_penuh').enable();
-    }
+    this.protectedService.getUser().subscribe(
+      data => {
+        if(data.user){
+          // this.fullname = data.user.fullName;
+          this.userTypeId = data.user.userType.userTypeId;
 
-    if(localStorage.getItem('email')){
-      this.feedbackFormgrp.get('email').setValue(localStorage.getItem('email'));
-      this.feedbackFormgrp.get('email').disable();
-    }else{
-      this.feedbackFormgrp.get('email').enable();
-    }
-};
+          this.protectedService.getProfile(data.user.pid).subscribe(
+            data => {
+
+              if(data.user){
+                this.userId = data.user.userId;
+                this.fullname = data.user.fullName;
+                this.regemail = data.user.email;
+                this.feedbackFormgrp.get('nama_penuh').setValue(this.fullname);
+                this.feedbackFormgrp.get('email').setValue(this.regemail);
+              }
+            },
+            error => {
+              console.log(error)
+            }
+          )
+        }else{
+          
+        }
+        
+      },
+    error => {
+        location.href = this.config.urlUAP +'uapsso/Logout';
+        //location.href = this.config.urlUAP+'portal/index';
+      }
+    )
+  }
+
+
 
 
 validateCtrlChk(ctrl: FormControl) {
