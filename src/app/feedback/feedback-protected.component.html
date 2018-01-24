@@ -60,11 +60,11 @@
                     <div class="form-group col-sm-6">
                         <mat-form-field class="example-full-width" style="width:100%" *ngIf="!isAdmin">
                             <input matInput #namep formControlName="nama_penuh" id="nama_penuh" tabindex="3" class="ValonlyCharwithSpecial " placeholder="{{'feedback.label.nameplh' | translate }}"
-                                required>
-                            <mat-error *ngIf="!validateCtrlChk(nama_penuh) && feedbackFormgrp.controls.nama_penuh.errors?.required">{{'register.err.name' | translate }}
+                                disabled>
+                            <!-- <mat-error *ngIf="!validateCtrlChk(nama_penuh) && feedbackFormgrp.controls.nama_penuh.errors?.required">{{'register.err.name' | translate }}
                             </mat-error>
                             <mat-error *ngIf="!validateCtrlChk(nama_penuh) && feedbackFormgrp.controls.nama_penuh.errors?.pattern">{{'register.pattern.name' | translate }}
-                            </mat-error>
+                            </mat-error> -->
                         </mat-form-field>
                         <div *ngIf="isAdmin" class="">
                                 <label class="font-size-s" for="fullname">{{'feedback.label.nameplh' | translate }}</label>
@@ -80,13 +80,13 @@
                     </div>
                     <div class="form-group col-sm-6">
                         <mat-form-field class="example-full-width" style="width:100%" *ngIf="!isAdmin">
-                            <input matInput formControlName="email" tabindex="4" placeholder="{{'register.label.email' | translate }}" required>
-                            <mat-error *ngIf="!validateCtrlChk(email) && feedbackFormgrp.controls.email.errors?.required">
+                            <input matInput formControlName="email" tabindex="4" placeholder="{{'register.label.email' | translate }}" disabled>
+                            <!-- <mat-error *ngIf="!validateCtrlChk(email) && feedbackFormgrp.controls.email.errors?.required">
                                 {{'register.err.email' | translate }}
                             </mat-error>
                             <mat-error *ngIf="!validateCtrlChk(email) &&  (feedbackFormgrp.controls.email.errors?.required? !feedbackFormgrp.controls.email.errors?.email : feedbackFormgrp.controls.email.errors?.email)">
                                 {{'register.pattern.email' | translate }}
-                            </mat-error>
+                            </mat-error> -->
                         </mat-form-field>
                         <div *ngIf="isAdmin" class="">
                                 <label class="font-size-s" for="fullname">{{'register.label.email' | translate }}</label>

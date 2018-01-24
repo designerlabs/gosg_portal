@@ -116,8 +116,6 @@ export class FeedbackProtectedComponent implements OnInit {
                 this.regemail = data.user.email;
                 this.feedbackFormgrp.get('nama_penuh').setValue(this.fullname);
                 this.feedbackFormgrp.get('email').setValue(this.regemail);
-                this.feedbackFormgrp.get('nama_penuh').disable();
-                this.feedbackFormgrp.get('email').disable();
               }
             },
             error => {
@@ -146,8 +144,8 @@ validateCtrlChk(ctrl: FormControl) {
 
 formCtrl(){
   if(this.isAdmin == false){
-    this.nama_penuh = new FormControl('', [Validators.required, Validators.pattern(this.validateService.getPattern(2,60).name)]),            
-    this.email = new FormControl('', [Validators.required, Validators.email])
+    this.nama_penuh = new FormControl('', [Validators.pattern(this.validateService.getPattern(2,60).name)]),            
+    this.email = new FormControl('', [Validators.email])
   }
   if(this.isAdmin == true){
     this.nama_penuh = new FormControl(),                  
@@ -209,8 +207,8 @@ submitForm(formValues:any){
     "feedbackActionBy":null
   };
 
-  body.feedbackName = formValues.nama_penuh;
-  body.feedbackEmail = formValues.email;
+  body.feedbackName = this.fullname;
+  body.feedbackEmail = this.regemail;
   body.feedbackType = { "feedbackTypeId": formValues.feedbacktype };
   body.feedbackSubject = { "feedbackSubjectId": formValues.feedbacksubject };
   body.feedbackMessage = formValues.feedback_message;
@@ -219,9 +217,9 @@ submitForm(formValues:any){
   let datasend = JSON.stringify(body); 
 
 if(this.isAdmin){
-  body.feedbackName = this.fullName;
+  body.feedbackName = this.fullname;
   body.feedbackActionBy = {"id": this.icNo }
-  body.feedbackEmail = this.emaiL;
+  body.feedbackEmail = this.regemail;
   datasend =JSON.stringify(body); 
 
   this.protectedService.feedback(datasend).subscribe(
