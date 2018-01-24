@@ -23,10 +23,6 @@ export class FeedbackProtectedComponent implements OnInit {
   
   // @Input() state:string;
 
-  @Input() getEmail;
-  @Input() getFullname;
-
-
   public feedbackFormgrp: FormGroup;
   feedback_message: FormControl;
   feedbacktype: FormControl;
