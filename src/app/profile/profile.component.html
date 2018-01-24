@@ -175,7 +175,7 @@
               <div class="form-group col-md-4">
                 <mat-form-field *ngIf="isLocal" class="example-full-width font-size-s">
                   <mat-select (change)="isChanged($event)" formControlName="perCityLocal" placeholder="{{'profile.label.city' | translate}}"  >
-                    <mat-option *ngFor="let city of getPerCityData" [value]="city?.cityCode">{{ city?.cityName }}</mat-option>
+                    <mat-option *ngFor="let city of getPerCityData" [data-cityCode]="city?.cityCode" [value]="city?.cityId">{{ city?.cityName }}</mat-option>
                   </mat-select>
                   <!-- required="true ? isLocal : false" 
                   <mat-error *ngIf="!validateCtrlChk(perCityLocal) && profileForm.controls.perCityLocal.errors.required">
@@ -266,7 +266,7 @@
               <div class="form-group col-md-4">
                 <mat-form-field *ngIf="isCorrsLocal" class="example-full-width font-size-s">
                   <mat-select (change)="isChanged($event)" formControlName="corrsCityLocal" placeholder="{{'profile.label.city' | translate}}">
-                      <mat-option *ngFor="let city of getCorrsCityData" [value]="city?.cityCode">{{ city?.cityName }}</mat-option>
+                      <mat-option *ngFor="let city of getCorrsCityData" [data-cityCode]="city?.cityCode" [value]="city?.cityId">{{ city?.cityName }}</mat-option>
                   </mat-select>
                 </mat-form-field>
                 <mat-form-field *ngIf="!isCorrsLocal" class="example-full-width font-size-s">
