@@ -680,7 +680,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       }
   
       if(id){
-        let getCode = this.getCorrsCityData.filter(function(ele){
+        let getCode = this.getPerCityData.filter(function(ele){
           return ele.cityId == id.value;
         });
         return this.sharedService.getPostCodeData(getCode[0].cityCode)
