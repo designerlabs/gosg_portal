@@ -34,11 +34,14 @@ export class ProtectedService {
               });
    }
 
+   private feedbackUrl: string = this.config.urlFeedbackProtected;
+   private feedbacktypeUrl: string = this.config.urlFeedbackType;
+   private fbsubjectUrl: string = this.config.urlFeedbackSubject;
   private profileUrl: string = this.config.urlGetProfile;
   private mailUrl: string = this.config.urlMail;
   private completeUrl: string = this.config.urlComplete;
   private getUserUrl: string = this.config.urlGetUser;
-
+  private pollUrl: string = this.config.urlPollProtected;
   // private serviceUrl = 'https://jsonplaceholder.typicode.com/users';
   private inboxUrl = this.mailUrl+"pages/";
 
@@ -94,6 +97,30 @@ export class ProtectedService {
     .catch(this.handleError);
   }
 
+  feedback(data){
+    let headers = new Headers({ 'Content-Type': 'application/json', 'Accept':'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post(this.feedbackUrl, data, options)
+      .map((response:Response) => response.json())
+      .retry(5)
+      .catch(this.handleError);
+  }
+
+  feedbacksubject(data){
+    return this.http.get(this.fbsubjectUrl + data)
+      .map((response: Response) => response.json().feedbackSubjectList)
+      .retry(5)
+      .catch(this.handleError);
+  }
+
+  feedbacktype(data){
+    return this.http.get(this.feedbacktypeUrl + data)
+      .map((response: Response ) => response.json().feedbackTypeList)
+      .retry(5)
+      .catch(this.handleError);
+  }
+  
+
   getMail(msgId){
     return this.http
     .get(this.mailUrl+"id/"+msgId).map((response: Response) => response.json())
@@ -106,6 +133,13 @@ export class ProtectedService {
     console.error(msg);
     return Observable.throw(msg);
 
+  }
+
+  submitPoll(data) {
+    return this.http.post(this.pollUrl, data)
+    .map((response: Response) => response.json())
+    .retry(5)
+    .catch(this.handleError);
   }
 
 }

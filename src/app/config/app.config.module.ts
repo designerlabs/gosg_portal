@@ -55,6 +55,8 @@ export class AppConfig {
     urlDashboard: string;
     urlUAP: string;
     urlGetProfile: string;
+    urlPollProtected:string;
+    urlFeedbackProtected:string;
 }
 
 export const APP_DI_CONFIG: AppConfig = {
@@ -83,6 +85,7 @@ export const APP_DI_CONFIG: AppConfig = {
     urlFeedbackType: commonURL+'feedback/type/lang/',
     urlFeedbackSubject: commonURL+'feedback/subject/lang/',
     urlFeedback: commonURL+'feedback',
+    urlFeedbackProtected: protectedBaseURL+'feedback',
     urlProfile: baseURL+'profile',
     portalURL: portalBaseURL,
     urlDashboard: uapURL + 'portal-protected/dashboard/',
@@ -96,7 +99,8 @@ export const APP_DI_CONFIG: AppConfig = {
     urlGetProfile: protectedBaseURL+'user/profile',
     urlAppAgency: './app/apidata/appAgency',
     urlUapStaging: 'https://uapstaging.malaysia.gov.my/uap/validatesigncryption.jsp?language=',
-    urlPoll: pollUrl
+    urlPoll: commonURL + 'polls',
+    urlPollProtected: protectedBaseURL + 'polls'
 
 };
 
