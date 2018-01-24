@@ -337,13 +337,12 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                       this.getCitiesByStateP(data.user.address.permanentAddressState.stateId);
                       if(data.user.address.permanentAddressCity){
                         this.profileForm.get('perCityLocal').setValue(data.user.address.permanentAddressCity.cityId);
+                        let postCodeObj = {value: data.user.address.permanentAddressCity.cityId};
+                        this.isChangedPer(postCodeObj);
                       }
 
                  
-                      let postCodeObj = {value: data.user.address.permanentAddressCity.cityId};
-                        
                       
-                      this.isChangedPer(postCodeObj);
                       if(data.user.address.permanentAddressPostcode){
                         this.profileForm.get('perPostcode').setValue(data.user.address.permanentAddressPostcode);
                       }
@@ -394,10 +393,11 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                       if(data.user.address.correspondingAddressCity){
                         this.getCitiesByStateC(data.user.address.correspondingAddressState.stateId);
                         this.profileForm.get('corrsCityLocal').setValue(data.user.address.correspondingAddressCity.cityId);
-                      }
-                      let postCodeObj = {value: data.user.address.correspondingAddressCity.cityId};
-                      if(data.user.address.correspondingAddressPostcode){
+                        let postCodeObj = {value: data.user.address.correspondingAddressCity.cityId};
                         this.isChanged(postCodeObj);
+                      }
+                      
+                      if(data.user.address.correspondingAddressPostcode){
                         this.profileForm.get('corrsPostcode').setValue(data.user.address.correspondingAddressPostcode);
                       }
                     }else{
