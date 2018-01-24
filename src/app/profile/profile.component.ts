@@ -104,6 +104,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   public corrsCity: FormControl
   public corrsPostcode: FormControl
   public corrsTelephone: FormControl
+  public corrscodeTelefon: FormControl
   public corrsMobile: FormControl
   public mobilecodeTelefon: FormControl
   public uid: any
@@ -208,6 +209,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.corrsCity = new FormControl()
     this.corrsPostcode = new FormControl()
     this.corrsTelephone = new FormControl()
+    this.corrscodeTelefon = new FormControl()
     this.corrsMobile = new FormControl()
     this.mobilecodeTelefon = new FormControl()
 
@@ -239,6 +241,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       corrsCity: this.corrsCity,
       corrsPostcode: this.corrsPostcode,
       corrsTelephone: this.corrsTelephone,
+      corrscodeTelefon: this.corrscodeTelefon,
       corrsMobile: this.corrsMobile,
       mobilecodeTelefon: this.mobilecodeTelefon
     });
@@ -257,7 +260,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
           this.protectedService.getProfile(data.user.pid).subscribe(
             data => {
 
-              if(data.user){
+              if(data.user) {
                 this.userId = data.user.userId;
                 this.fullname = data.user.fullName;
                 this.accountStatus = data.user.accountStatus.accountStatusId;
@@ -272,8 +275,18 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                 this.isMyIdentityValid = data.user.isMyIdentityValid;
                 this.agencyForwardUrl = data.user.agencyForwardUrl;
                 this.roles = data.user.roles;
-                this.profileForm.get('corrsMobile').setValue(data.user.mobilePhoneNo);
+
                 // this.profileForm.get('mobilecodeTelefon').setValue(data.user);
+                // if mobile number have Country code
+
+                if ((data.user.mobilePhoneNo).split('*').length > 1) {
+                  this.profileForm.get('corrsMobile').setValue((data.user.mobilePhoneNo).split('*')[1]);
+                  const telecode = (data.user.mobilePhoneNo).split('*')[0];
+                  this.profileForm.get('mobilecodeTelefon').setValue(telecode);
+
+                }else {
+                  this.profileForm.get('corrsMobile').setValue((data.user.mobilePhoneNo));
+                }
 
                 if(data.user.gender){
                   this.profileForm.get('gender').setValue(data.user.gender.genderCode);
@@ -301,8 +314,15 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                   this.profileForm.get('perAddress2').setValue(data.user.address.permanentAddress2);
                   this.profileForm.get('perAddress3').setValue(data.user.address.permanentAddress3);
                   this.profileForm.get('perPostcode').setValue(data.user.address.permanentAddressPostcode);
-                  this.profileForm.get('perTelephone').setValue(data.user.address.permanentAddressHomePhoneNo);
-                  // this.profileForm.get('percodeTele').setValue(data.user.address.permanentAddressHomePhoneNo);
+                  // this.profileForm.get('perTelephone').setValue(data.user.address.permanentAddressHomePhoneNo);
+                  // if corressponding address have Country code
+                  if ((data.user.address.permanentAddressHomePhoneNo).split('*').length > 1) {
+                    this.profileForm.get('perTelephone').setValue((data.user.address.permanentAddressHomePhoneNo).split('*')[1]);
+                    const perTeleCode = (data.user.address.permanentAddressHomePhoneNo).split('*')[0];
+                    this.profileForm.get('percodeTele').setValue(perTeleCode);
+                  }else {
+                    this.profileForm.get('perTelephone').setValue(data.user.address.permanentAddressHomePhoneNo);
+                  }
 
                   if(data.user.address.permanentAddressCountry){
                     this.profileForm.get('perCountry').setValue(data.user.address.permanentAddressCountry.countryId);
@@ -341,8 +361,17 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                   this.profileForm.get('corrsAddress2').setValue(data.user.address.correspondingAddress2);
                   this.profileForm.get('corrsAddress3').setValue(data.user.address.correspondingAddress3);
                   this.profileForm.get('corrsPostcode').setValue(data.user.address.correspondingAddressPostcode);
-                  this.profileForm.get('corrsTelephone').setValue(data.user.address.correspondingAddressHomePhoneNo);
-                  
+                  // if corressponding address have Country code
+                  if ((data.user.address.correspondingAddressHomePhoneNo).split('*').length > 1) {
+                    this.profileForm.get('corrsTelephone').setValue((data.user.address.correspondingAddressHomePhoneNo).split('*')[1]);
+                    const corrsTeleCode = (data.user.address.correspondingAddressHomePhoneNo).split('*')[0];
+                    this.profileForm.get('corrscodeTelefon').setValue(corrsTeleCode);
+
+                  }else {
+                    this.profileForm.get('corrsTelephone').setValue(data.user.address.correspondingAddressHomePhoneNo);
+                  }
+
+
                   if(data.user.address.correspondingAddressCountry){
                     this.profileForm.get('corrsCountry').setValue(data.user.address.correspondingAddressCountry.countryId);
                     if(data.user.address.correspondingAddressCountry.countryId == 152) {

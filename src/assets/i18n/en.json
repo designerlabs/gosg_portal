@@ -114,6 +114,7 @@
       "mailaddr":"Mailing Address",
       "homeph":"Home Phone",
       "mobile":"Mobile Phone",
+      "codetel": "Country code",
       "submit":"Update"
     },
     "err": {
