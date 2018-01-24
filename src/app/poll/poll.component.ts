@@ -15,7 +15,7 @@ import { SharedPipe } from '../common/shared.pipe';
 })
 export class PollComponent implements OnInit {
 
- pollDataTitle: string;
+    pollDataTitle: string;
     pollDataQuestion: string;
     pollDataQuestionID;
     pollDataAnswer: any;

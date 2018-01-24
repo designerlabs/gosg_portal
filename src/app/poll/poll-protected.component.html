@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="row poll" id="div_poll" style="background: #eee; margin-top: 20px; width: 100%">
+      <h2 hidden>User IP is {{ ipData }}</h2>
+      
+      <div class="col-md-12">
+          <!-- <div id="polls_result_on_submit" style="padding-bottom: 30px;">
+          </div> -->
+          <!-- Poll Questions and Answers with submit button -->
+          <h2 hidden>{{(20/120)*100 | number:'2.0-0'}}% </h2>
+          <div class="text-center" id="polls_result_on_submit" *ngIf="!showResult && !latestResult">
+              <h2 class="font-size-l warna_title_color" style="font-family: Roboto; color: rgb(0, 189, 187);" [style.color]="getTheme()"><b>{{'poll.title' | translate}}</b>
+                  <span class="customUnderLine warna_border_color" style="border-color: rgb(0, 189, 187);"  [style.border-color]="getTheme()"></span>
+              </h2>
+              <h4 class="font-size-m warna_font" style="margin-top: 2%; text-align: center; font-family: Roboto; color: rgb(51, 51, 51);">{{pollDataQuestion}}</h4>
+                  <div *ngFor="let item of pollDataAnswer" style="display: inline-block;
+                  padding: 10px;">
+                          <div class="polls_padding" *ngIf="item.answer">                            
+                              <div class="custom-radio poll_radio_btn warna_border_color" style="border-color: rgb(0, 189, 187);" [style.border-color]="getTheme()">
+                                      <input type="radio" name="undian" id='{{item.id}}' [checked]="idx === 0" [value]="item.id" (change)="onSelectionChange(item)">
+                                      <label class="font-size-s warna_font" for="{{item.id}}" style="cursor: pointer; font-family: Roboto; color: rgb(51, 51, 51);" >{{item.answer}}</label>
+                                  </div>
+                          </div>         
+                  </div>
+              <div class="row padding">
+                  <h4 class="font-size-m warna_font" style="margin-top: 2%; text-align: center; font-family: Roboto; color: rgb(51, 51, 51);">{{'poll.recommend' | translate}}</h4>
+                  <div class="col-md-3"></div>
+                  <div class="col-md-6">
+                      <label for="comment" class="sr-only">Comment</label>
+                      <textarea class="col-md-12" style="height:50px; border-color: rgb(0, 189, 187);" [style.border-color]="getTheme()" [(ngModel)]="pollComment" id="comment"></textarea>
+                  </div>
+                  <div class="col-md-3"></div>
+              </div>            
+              <!-- <input type="hidden" name="csrfmiddlewaretoken" value="OHddydhq179vB8WObdhVsshzzi7mkJUOHTfRPKGPvEjgAb0mk0N3HVk1r0jlLO8f"> -->
+              <div class="row padding">
+                  <div id="polls_message" class="col-md-4 col-md-offset-4" style="padding-bottom: 0px; margin-top: -20px; color:red; font-weight: bold;"></div>
+                  <div class="col-md-4 col-md-offset-4">
+                      <button mat-raised-button id="submit" (click)='submitPoll($event)' class="font-size-s warna_bg" style="font-family: Roboto; background-color: rgb(0, 189, 187);"  [style.background-color]="getTheme()">{{'home.send' | translate}}</button>
+                  </div>
+              </div>
+          </div>
+          <!-- Poll results with %  -->
+          <div class="text-center" id="polls_result" *ngIf="showResult && !latestResult">
+                  <h2 class="font-size-l warna_title_color" style="font-family: Roboto; color: rgb(0, 189, 187);" [style.color]="getTheme()"><b>{{'poll.resultTitle' | translate}}</b>
+                      <span class="customUnderLine warna_border_color" style="border-color: rgb(0, 189, 187);"  [style.border-color]="getTheme()"></span>
+                  </h2>
+                  <span></span>
+                  <h4 class="font-size-m warna_font" style="margin-top: 2%; text-align: center; font-family: Roboto; color: rgb(51, 51, 51);" (dataID)="pollDataQuestionID">{{pollDataQuestion}}</h4>
+                  <div style="position:absolute; top: 27px; right: 25px;">
+                      <a (click)="closeResult()" style="cursor:pointer;"><i class="fa fa-times"></i></a>
+                  </div>
+                  
+                  <section class="example-section" style="padding-left: 200px;width: 75%;padding-bottom: 20px;
+                  ">
+                      <div *ngFor="let pollAnswer of pollDataAnswer">
+                          <div *ngIf="pollAnswer.answer.length>0">
+                                  <div *ngIf="pollAnswer.selans" style="text-align: left; font-family: Roboto; color: rgb(51, 51, 51);">
+                                          {{'poll.youranswer' | translate}}: </div>
+                                  <span class="font-size-m warna_font" style="text-align: left; font-family: Roboto; color: rgb(51, 51, 51); display: inherit">{{pollAnswer.answer}}</span>
+                                  <mat-progress-bar class="example-margin" [value]="calVal(pollAnswer.result)" style="height: 17px; background: #0000" ></mat-progress-bar> 
+                                  <span style="text-align: right; font-family: Roboto; color: rgb(51, 51, 51); display: inherit">
+                                      ({{pollAnswer.result}}) {{progressbarVal}}%</span>
+                          </div>
+                      </div>                  
+                    </section>
+  
+          </div>
+          <!-- Latest Result Message area -->
+          <div *ngIf="latestResult && !showResult" style="text-align: center; padding: 15px 0px 15px 0px;">
+                  <h2 class="font-size-l" style="font-family: Roboto; color: rgb(51, 51, 51);">
+                          {{'poll.seeAnswer' | translate}}</h2>
+                  <h2 class="font-size-l" style="font-family: Roboto; color: rgb(0, 189, 187);"
+                   [style.color]="getTheme()"> <span style="cursor: pointer;" (click)="ShowLatest()"> {{'poll.displayAnswer' | translate}} </span></h2>
+          </div>
+      </div>
+  </div>
+  </div>

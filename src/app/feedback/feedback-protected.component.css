@@ -1,0 +1,25 @@
+/*IN GREY BANNER*/
+.hr-custom2 {
+	margin-top: -5px;
+	margin-bottom: 0px;
+	border: 0;
+	border-top: 3px solid #918c79;
+	width: 8%;
+	float: left;
+}
+.list-inline{
+	margin-top: 25px;
+}
+
+/*form*/
+
+.title_feedback{
+	/* font-size: 12px; */
+	font-weight: 600;
+}
+
+button:disabled{
+	background: #a3a3a3
+}
+
+/* Toastr */

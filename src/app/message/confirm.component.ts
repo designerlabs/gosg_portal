@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FeedbackComponent } from '../feedback/feedback.component';
+// import { FeedbackProtectedComponent } from '../feedback/feedback-protected.component';
 
 @Component({
   selector: 'gosg-confirm',

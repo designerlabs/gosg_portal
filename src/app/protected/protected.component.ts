@@ -111,8 +111,6 @@ export class ProtectedComponent implements OnInit {
     this.protectedService.getProfile(data).subscribe(
       data =>{
         if(data.length !=0){
-        this.getUserName = data[0].fullname;
-        this.getEmail = data[0].email;
         this.getFullname = data[0].fullName;
         localStorage.setItem('icNo',data[0].ic_number);
         localStorage.setItem('name',data[0].fullname);

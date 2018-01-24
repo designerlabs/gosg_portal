@@ -54,6 +54,7 @@ export class TopnavComponent implements OnInit, AfterViewInit {
   @Input() sidenavShow = true;
 
   @Input() state:string;
+  debugger;
 
   @Output() topNavClick = new EventEmitter();
 
