@@ -640,7 +640,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   }
   
   isChanged(id?) {
-    debugger;
     if(this.profileForm.get('checkboxValue').value == true) {
       this.profileForm.get('checkboxValue').setValue(false);
       this.checkReqValues();
