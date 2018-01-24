@@ -22,7 +22,6 @@ export class ProtectedComponent implements OnInit {
   txtColor = '#333';
   isFirstLogin: boolean;
   childData: string;
-  getUserName:string;
   getEmail:string;
   getFullname:string;
   translatedText: string;
@@ -91,8 +90,6 @@ export class ProtectedComponent implements OnInit {
     this.protectedService.getUser().subscribe(
       data => {
         if(data.user){
-          this.getUserName = data.user.fullName;
-          this.getEmail = data.user.email;
           this.getFullname = data.user.fullName;
           localStorage.setItem('fullname',data.user.fullName);
           localStorage.setItem('email',data.user.email);
@@ -111,8 +108,6 @@ export class ProtectedComponent implements OnInit {
     this.protectedService.getProfile(data).subscribe(
       data =>{
         if(data.length !=0){
-        this.getUserName = data[0].fullname;
-        this.getEmail = data[0].email;
         this.getFullname = data[0].fullName;
         localStorage.setItem('icNo',data[0].ic_number);
         localStorage.setItem('name',data[0].fullname);
