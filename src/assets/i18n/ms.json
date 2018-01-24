@@ -115,7 +115,7 @@
       "mailaddr":"Alamat Surat Menyurat",
       "homeph":"No Telefon Rumah",
       "mobile":"No Telefon Bimbit",
-      "codetel": "Kod Negara",
+      "codetel": "Kod",
       "submit":"Kemaskini"
     },
     "err": {

@@ -208,15 +208,15 @@
                   </mat-error>
                 </mat-form-field>
               </div>
-              <div class="form-group col-md-4 input-group" >
-                  <mat-form-field class="font-size-s" style="width:20%">
+              <div class="form-group col-md-4 input-group" style="padding-left: 15px; padding-right: 15px;">
+                  <mat-form-field class="font-size-s" style="width:30%">
                       <mat-select formControlName="percodeTele" #percodetele placeholder="{{'profile.label.codetel' | translate}}">
                         <mat-option *ngFor="let country of countries" [value]="country.countryDialCode">
                           + {{ country.countryDialCode }} {{ country.countryCode }}
                         </mat-option>
                       </mat-select>                      
                     </mat-form-field>
-                <mat-form-field class="example-full-width font-size-s" style="width:80%">
+                <mat-form-field class="example-full-width font-size-s" style="width:70%">
                   <input matInput formControlName="perTelephone" (keyup)="isChanged()" [textMask]="{mask: maskForeigner}" id="perTelephone" type="text"
                     placeholder="{{'profile.label.homeph' | translate}}" />
                 </mat-form-field>
@@ -285,28 +285,28 @@
                   <input (keyup)="isChanged()" matInput formControlName="corrsPostcode" [textMask]="{mask: maskPostcode}" type="text" placeholder="{{'profile.label.postcode' | translate}}" />
                 </mat-form-field>
               </div>
-              <div class="form-group col-md-4 input-group">
-                <mat-form-field class="font-size-s" style="width:20%">
+              <div class="form-group col-md-4 input-group" style="padding-left: 15px; padding-right: 15px;">
+                <mat-form-field class="font-size-s" style="width:30%">
                     <mat-select formControlName="corrscodeTelefon" #corrscodetele placeholder="{{'profile.label.codetel' | translate}}" >
                       <mat-option *ngFor="let country of countries" [value]="country.countryDialCode">
                         + {{ country.countryDialCode }} {{ country.countryCode }}
                       </mat-option>
                     </mat-select>                     
                   </mat-form-field>
-                <mat-form-field class="example-full-width font-size-s" style="width:80%">
+                <mat-form-field class="example-full-width font-size-s" style="width:70%">
                   <input matInput (keyup)="isChanged()" #corshomephone formControlName="corrsTelephone" [textMask]="{mask: maskForeigner}"
                     type="text" placeholder="{{'profile.label.homeph' | translate}}" />
                 </mat-form-field>
               </div>
-              <div class="form-group input-group col-md-4">
-                  <mat-form-field class="font-size-s" style="width:20%">
+              <div class="form-group input-group col-md-4" style="padding-left: 15px; padding-right: 15px;">
+                  <mat-form-field class="font-size-s" style="width:30%">
                       <mat-select formControlName="mobilecodeTelefon" #mobilecodetele placeholder="{{'profile.label.codetel' | translate}}" >
                         <mat-option *ngFor="let country of countries" [value]="country.countryDialCode">
                           + {{ country.countryDialCode }} {{ country.countryCode }}
                         </mat-option>
                       </mat-select>                     
                     </mat-form-field>
-                <mat-form-field class="example-full-width font-size-s" style="width:80%">
+                <mat-form-field class="example-full-width font-size-s" style="width:70%">
                   <input matInput #corsmobile formControlName="corrsMobile" [textMask]="{mask: maskForeigner}" type="text"
                     placeholder="{{'profile.label.mobile' | translate}}" value="{{ mobileNo }}" />
                 </mat-form-field>
