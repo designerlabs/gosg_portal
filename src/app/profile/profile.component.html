@@ -196,6 +196,22 @@
               </div>
             </div>
             <div class="row">
+
+                <div class="form-group col-md-4">
+                    <mat-form-field *ngIf="isLocal" class="example-full-width font-size-s">
+                      <mat-select (change)="isChangedPer()" #corsPost formControlName="perPostcode" placeholder="{{'profile.label.postcode' | translate}}">
+                          <mat-option *ngFor="let postcode of getPostData" [value]="postcode?.postCode">{{ postcode?.postCode }}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <mat-form-field *ngIf="!isLocal" class="example-full-width font-size-s">
+                      <input (keyup)="isChanged()" matInput formControlName="perPostcode" [textMask]="{mask: maskPostcode}" type="text" placeholder="{{'profile.label.postcode' | translate}}" />
+                      <mat-error *ngIf="!validateCtrlChk(perPostcode) && profileForm.controls.perPostcode.errors?.pattern">
+                          {{'profile.pattern.postcode' | translate }}
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+
+
               <div class="form-group col-md-4">
                 <mat-form-field class="example-full-width font-size-s" placeholder="{{'profile.label.postcode' | translate}}">
                   <input matInput [textMask]="{mask: maskPostcode}" (keyup)="isChanged()" #perPost formControlName="perPostcode" id="perPostcode" type="text"

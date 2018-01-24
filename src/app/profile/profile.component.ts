@@ -657,18 +657,14 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     }
 
     if(id){
-      return this.sharedService.getPostCodeData(id.value)
+      let getCode = this.getCorrsCityData.filter(function(ele){
+        return ele.cityId == id.value;
+      });
+      return this.sharedService.getPostCodeData(getCode[0].cityCode)
       .subscribe(resPostData => {
          this.getPostData = resPostData;
-
-    
-
          if(id){
-          let getCode = this.getCorrsCityData.filter(function(ele){
-            return ele.cityId == id.value;
-          });
-           this.profileForm.get('corrsPostcode').setValue(getCode[0].cityCode);
-           this.corrsCityLocal.get('corrsPostcode');
+           this.profileForm.get('corrsPostcode').setValue(id.value);
          }
        },
        Error => {
@@ -676,6 +672,29 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       });
     }
     }
+
+    isChangedPer(id?) {
+      if(this.profileForm.get('checkboxValue').value == true) {
+        this.profileForm.get('checkboxValue').setValue(false);
+        this.checkReqValues();
+      }
+  
+      if(id){
+        let getCode = this.getCorrsCityData.filter(function(ele){
+          return ele.cityId == id.value;
+        });
+        return this.sharedService.getPostCodeData(getCode[0].cityCode)
+        .subscribe(resPostData => {
+           this.getPostData = resPostData;
+           if(id){
+             this.profileForm.get('perPostcode').setValue(id.value);
+           }
+         },
+         Error => {
+          this.toastr.error(this.translate.instant('common.err.servicedown'), '');            
+        });
+      }
+      }
 
   isStateChanged() {
     this.isChanged();
