@@ -17,12 +17,11 @@
       </ul>
 
     </div> -->
-
-    <app-topnav [state]='getUserName' class="top-nav-style" (showProfile)="showProfile($event)" (topNavClick)="getExpand($event)"
+    <app-topnav [state]='getUserName' [getMail]='getEmail' [getName]='getFullname' class="top-nav-style" (showProfile)="showProfile($event)" (topNavClick)="getExpand($event)"
       [style.background]="getTheme()" [style.z-index]="this.zIndex" [style.height]="this.bHeight"></app-topnav>
     <app-nav class="nav-bar-style" [style.top]="this.bTop"></app-nav>
     <app-breadcrumb></app-breadcrumb>
-    <router-outlet [state]='getUserName'></router-outlet>
+    <router-outlet [state]='getUserName' [getMail]='getEmail' [getName]='getFullname'></router-outlet>
     <div style="height: 200px"></div>
   </div>
   <!-- <gosg-sidenavmain></gosg-sidenavmain> -->
