@@ -200,7 +200,7 @@
                 <div class="form-group col-md-4">
                     <mat-form-field *ngIf="isLocal" class="example-full-width font-size-s">
                       <mat-select (change)="isChangedPer()" #corsPost formControlName="perPostcode" placeholder="{{'profile.label.postcode' | translate}}">
-                          <mat-option *ngFor="let postcode of getCorrsData" [value]="postcode?.postcodeId">{{ postcode?.postCode }}</mat-option>
+                          <mat-option *ngFor="let postcode of getPostData" [value]="postcode?.postcodeId">{{ postcode?.postCode }}</mat-option>
                       </mat-select>
                     </mat-form-field>
                     <mat-form-field *ngIf="!isLocal" class="example-full-width font-size-s">
@@ -281,7 +281,7 @@
               <div class="form-group col-md-4">
                 <mat-form-field *ngIf="isCorrsLocal" class="example-full-width font-size-s">
                   <mat-select (change)="isChanged()" #corsPost formControlName="corrsPostcode" placeholder="{{'profile.label.postcode' | translate}}">
-                      <mat-option *ngFor="let postcode of getPostData" [value]="postcode?.postcodeId">{{ postcode?.postCode }}</mat-option>
+                      <mat-option *ngFor="let postcode of getCorrsData" [value]="postcode?.postcodeId">{{ postcode?.postCode }}</mat-option>
                   </mat-select>
                 </mat-form-field>
                 <mat-form-field *ngIf="!isCorrsLocal" class="example-full-width font-size-s">

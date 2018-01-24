@@ -22,7 +22,7 @@ import { APP_CONFIG, AppConfig } from '../config/app.config.module';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit, AfterViewInit {
-  getCorrsData: any[];
+  getCorrsData: any;
   postCodeObj1: { value: any; };
   postCodeObj2: { value: any; };
   postCodeObj: { value: any; };
