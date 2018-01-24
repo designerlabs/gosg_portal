@@ -174,8 +174,8 @@
               </div>
               <div class="form-group col-md-4">
                 <mat-form-field *ngIf="isLocal" class="example-full-width font-size-s">
-                  <mat-select (change)="isChanged()" formControlName="perCityLocal" placeholder="{{'profile.label.city' | translate}}"  >
-                    <mat-option *ngFor="let city of getPerCityData" [value]="city?.cityId">{{ city?.cityName }}</mat-option>
+                  <mat-select (change)="isChanged($event)" formControlName="perCityLocal" placeholder="{{'profile.label.city' | translate}}"  >
+                    <mat-option *ngFor="let city of getPerCityData" [value]="city?.cityCode">{{ city?.cityName }}</mat-option>
                   </mat-select>
                   <!-- required="true ? isLocal : false" 
                   <mat-error *ngIf="!validateCtrlChk(perCityLocal) && profileForm.controls.perCityLocal.errors.required">
@@ -264,8 +264,8 @@
               </div>
               <div class="form-group col-md-4">
                 <mat-form-field *ngIf="isCorrsLocal" class="example-full-width font-size-s">
-                  <mat-select (change)="isChanged()" formControlName="corrsCityLocal" placeholder="{{'profile.label.city' | translate}}">
-                      <mat-option *ngFor="let city of getCorrsCityData" [value]="city?.cityId">{{ city?.cityName }}</mat-option>
+                  <mat-select (change)="isChanged($event)" formControlName="corrsCityLocal" placeholder="{{'profile.label.city' | translate}}">
+                      <mat-option *ngFor="let city of getCorrsCityData" [value]="city?.cityCode">{{ city?.cityName }}</mat-option>
                   </mat-select>
                 </mat-form-field>
                 <mat-form-field *ngIf="!isCorrsLocal" class="example-full-width font-size-s">
@@ -274,10 +274,15 @@
               </div>
             </div>
             <div class="row">
+
               <div class="form-group col-md-4">
-                <mat-form-field class="example-full-width font-size-s">
-                  <input matInput (keyup)="isChanged()" #corsPost formControlName="corrsPostcode" [textMask]="{mask: maskPostcode}" type="text"
-                    placeholder="{{'profile.label.postcode' | translate}}" />
+                <mat-form-field *ngIf="isCorrsLocal" class="example-full-width font-size-s">
+                  <mat-select (change)="isChanged()" #corsPost formControlName="corrsPostcode" placeholder="{{'profile.label.postcode' | translate}}">
+                      <mat-option *ngFor="let postcode of getPostData" [value]="postcode?.postCode">{{ postcode?.postCode }}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field *ngIf="!isCorrsLocal" class="example-full-width font-size-s">
+                  <input (keyup)="isChanged()" matInput formControlName="corrsPostcode" [textMask]="{mask: maskPostcode}" type="text" placeholder="{{'profile.label.postcode' | translate}}" />
                 </mat-form-field>
               </div>
               <div class="form-group col-md-4 input-group">

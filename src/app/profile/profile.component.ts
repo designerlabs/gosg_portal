@@ -22,6 +22,7 @@ import { APP_CONFIG, AppConfig } from '../config/app.config.module';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit, AfterViewInit {
+  getPostData: any;
   initialBtn: boolean;
   isSameAddressValue: any;
   addressId: any;
@@ -639,11 +640,26 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         return this.validateService.validateCtrl(ctrl);
   }
   
-  isChanged() {
+  isChanged(id?) {
+    debugger;
     if(this.profileForm.get('checkboxValue').value == true) {
       this.profileForm.get('checkboxValue').setValue(false);
       this.checkReqValues();
     }
+
+    if(id){
+      return this.sharedService.getPostCodeData(id.value)
+      .subscribe(resPostData => {
+         this.getPostData = resPostData;
+         if(id){
+           this.profileForm.get('corrsPostcode').setValue(id.value);
+         }
+       },
+       Error => {
+        this.toastr.error(this.translate.instant('common.err.servicedown'), '');            
+      });
+    }
+    
       
   }
 
