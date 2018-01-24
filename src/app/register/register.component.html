@@ -1,86 +1,99 @@
 <!--<h1>Register page !!!</h1>-->
-  <div class="container-fluid animated slideInDown" style="background: #a7a495;">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <h1 style="margin-top: 10px;" class="font-size-l">{{'home.breadcrumb.register' | translate}}</h1>
-          <hr class="hr-custom2">
-          <ul class="list-inline" style="clear:both;">
-            <li>
-              <a class="font-size-s" href="/index/">
-                        {{'home.menu.home' | translate }}
-                    </a>
-            </li>
-            <li>/</li>
-            <li>
-              {{'home.breadcrumb.register' | translate}}
-            </li>
-          </ul>
-        </div>
+<div class="container-fluid animated slideInDown" style="background: #a7a495;">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 style="margin-top: 10px;" class="font-size-l">{{'home.breadcrumb.register' | translate}}</h1>
+        <hr class="hr-custom2">
+        <ul class="list-inline" style="clear:both;">
+          <li>
+            <a class="font-size-s" href="/index/">
+              {{'home.menu.home' | translate }}
+            </a>
+          </li>
+          <li>/</li>
+          <li>
+            {{'home.breadcrumb.register' | translate}}
+          </li>
+        </ul>
       </div>
     </div>
   </div>
+</div>
 
 
-  <div class="container animated flipInX" style="color: #333;">
-    <div class="row padding-left-xl padding-right-xl">
-      <div class="col-md-6 col-md-offset-3 formbg">
-        <mat-form-field class="example-full-width font-size-s">
-          <mat-select placeholder="{{'register.label.citistatus' | translate}}" [(ngModel)]="citizenValue" #usrType (change)="chgeCitizen()"
-            name="cititype" id="cititype">
-            <mat-option *ngFor="let statusType of getUserData" [value]="statusType.userTypeId" [ariaLabel]="statusType.userTypeId">
-              {{ statusType.userType }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+<div class="container animated flipInX" style="color: #333;">
+  <div class="row padding-left-xl padding-right-xl">
+    <div class="col-md-6 col-md-offset-3 formbg">
+      <mat-form-field class="example-full-width font-size-s">
+        <mat-select placeholder="{{'register.label.citistatus' | translate}}" [(ngModel)]="citizenValue" #usrType (change)="chgeCitizen()"
+          name="cititype" id="cititype">
+          <mat-option *ngFor="let statusType of getUserData" [value]="statusType.userTypeId" [ariaLabel]="statusType.userTypeId">
+            {{ statusType.userType }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-        <div id="formRegBg" class="row">
-          <div class="col-lg-12">
-            <form [formGroup]="citizenFormGrp" id="citizen-form" role="form" novalidate="novalidate">
-              <!--(change)="animateMe()" *************************** CITIZEN FIELDS ******************** [@myAwesomeAnimation]='state' -->
-              <div *ngIf="isCitizen()" class="form-group animated fadeIn">
-                <!-- hintLabel="{{'register.label.icplh' | translate }}" -->
-                <mat-form-field class="example-full-width font-size-s">
-                  <input matInput #icnum formControlName="kad_pengenalan" tabindex="1" [textMask]="{mask: maskICNo}" placeholder="{{'register.label.ic' | translate }}"
-                    required>
-                  <mat-error *ngIf="!validateCtrlChk(kad_pengenalan) && citizenFormGrp.controls.kad_pengenalan.errors.required">
-                    {{'register.err.ic' | translate }}
-                  </mat-error>
-                  <mat-error *ngIf="!validateCtrlChk(kad_pengenalan) && citizenFormGrp.controls.kad_pengenalan.errors.pattern">
-                    {{'register.pattern.ic' | translate }}
-                  </mat-error>
+      <div id="formRegBg" class="row">
+        <div class="col-lg-12">
+          <form [formGroup]="citizenFormGrp" id="citizen-form" role="form" novalidate="novalidate">
+            <!--(change)="animateMe()" *************************** CITIZEN FIELDS ******************** [@myAwesomeAnimation]='state' -->
+            <div *ngIf="isCitizen()" class="form-group animated fadeIn">
+              <!-- hintLabel="{{'register.label.icplh' | translate }}" -->
+              <mat-form-field class="example-full-width font-size-s">
+                <input matInput #icnum formControlName="kad_pengenalan" tabindex="1" [textMask]="{mask: maskICNo}" placeholder="{{'register.label.ic' | translate }}"
+                  required>
+                <mat-error *ngIf="!validateCtrlChk(kad_pengenalan) && citizenFormGrp.controls.kad_pengenalan.errors.required">
+                  {{'register.err.ic' | translate }}
+                </mat-error>
+                <mat-error *ngIf="!validateCtrlChk(kad_pengenalan) && citizenFormGrp.controls.kad_pengenalan.errors.pattern">
+                  {{'register.pattern.ic' | translate }}
+                </mat-error>
+              </mat-form-field>
+
+
+
+              <!-- hintLabel="{{'register.label.name' | translate }}" -->
+              <mat-form-field class="example-full-width font-size-s">
+                <input matInput #name formControlName="nama_penuh" tabindex="2" minlength="2" maxlength="60" placeholder="{{'register.label.nameplh' | translate }}"
+                  required>
+                <mat-hint align="end">{{name.value?.length || 0}}/60</mat-hint>
+                <mat-error *ngIf="!validateCtrlChk(nama_penuh) && citizenFormGrp.controls.nama_penuh.errors.required">
+                  {{'register.err.name' | translate }}
+                </mat-error>
+                <mat-error *ngIf="!validateCtrlChk(nama_penuh) && citizenFormGrp.controls.nama_penuh.errors.pattern">
+                  {{'register.pattern.name' | translate }}
+                </mat-error>
+              </mat-form-field>
+
+              <!-- hintLabel="{{'register.label.emailplh' | translate }}" -->
+
+              <mat-form-field class="example-full-width font-size-s" [disabled]="true">
+                <input matInput formControlName="emel" tabindex="3" placeholder="{{'register.label.email' | translate }}" required>
+                <mat-error *ngIf="!validateCtrlChk(emel) && citizenFormGrp.controls.emel.errors.required">
+                  {{'register.err.email' | translate }}
+                </mat-error>
+                <mat-error *ngIf="!validateCtrlChk(emel) &&  citizenFormGrp.controls.emel.errors.pattern">
+                  {{'register.pattern.email' | translate }}
+                </mat-error>
+              </mat-form-field>
+
+              <!-- hintLabel="{{'register.label.telplh' | translate }}" -->
+              <!-- Country Code -->
+              <div class="example-full-width input-group">
+                <mat-form-field class="font-size-s" style="width:20%">
+                  <mat-select formControlName="codeTelefon" #codetele placeholder="{{'register.label.codetel' | translate }}" tabindex="5" required>
+                    <mat-option *ngFor="let country of countries" [value]="country.countryDialCode">
+                      <span class="col-md-6">+ {{ country.countryDialCode }}</span>
+                      <span class="col-md-6"> {{ country.countryCode }}</span>
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="!validateCtrlChk(codeTelefon) && citizenFormGrp.controls.codeTelefon.errors.required">
+                      {{'register.err.codetel' | translate }}  
+                    </mat-error>
                 </mat-form-field>
-
-
-
-                <!-- hintLabel="{{'register.label.name' | translate }}" -->
-                <mat-form-field class="example-full-width font-size-s">
-                  <input matInput #name formControlName="nama_penuh" tabindex="2" minlength="2" maxlength="60" placeholder="{{'register.label.nameplh' | translate }}"
-                    required>
-                  <mat-hint align="end">{{name.value?.length || 0}}/60</mat-hint>
-                  <mat-error *ngIf="!validateCtrlChk(nama_penuh) && citizenFormGrp.controls.nama_penuh.errors.required">
-                    {{'register.err.name' | translate }}
-                  </mat-error>
-                  <mat-error *ngIf="!validateCtrlChk(nama_penuh) && citizenFormGrp.controls.nama_penuh.errors.pattern">
-                    {{'register.pattern.name' | translate }}
-                  </mat-error>
-                </mat-form-field>
-
-                <!-- hintLabel="{{'register.label.emailplh' | translate }}" -->
-                <mat-form-field class="example-full-width font-size-s" [disabled]="true">
-                  <input matInput formControlName="emel" tabindex="3" placeholder="{{'register.label.email' | translate }}" required>
-                  <mat-error *ngIf="!validateCtrlChk(emel) && citizenFormGrp.controls.emel.errors.required">
-                    {{'register.err.email' | translate }}
-                  </mat-error>
-                  <mat-error *ngIf="!validateCtrlChk(emel) &&  citizenFormGrp.controls.emel.errors.pattern">
-                    {{'register.pattern.email' | translate }}
-                  </mat-error>
-                </mat-form-field>
-
-                <!-- hintLabel="{{'register.label.telplh' | translate }}" -->
-                <mat-form-field class="example-full-width font-size-s">
-                  <input matInput formControlName="telefon" tabindex="4" #tele [textMask]="{mask: maskCitizen}" placeholder="{{'register.label.tel' | translate }}"
-                    required>
+                <mat-form-field class="font-size-s" style="width:80%" >
+                  <input matInput formControlName="telefon" tabindex="4" #tele [textMask]="{mask: maskCitizen}" placeholder="{{'register.label.tel' | translate }}"  required>
                   <mat-error *ngIf="!validateCtrlChk(telefon) && citizenFormGrp.controls.telefon.errors.required">
                     {{'register.err.tel' | translate }}
                   </mat-error>
@@ -90,151 +103,163 @@
                 </mat-form-field>
               </div>
 
-              <!-- *************************** TR and PR FIELDS ******************** [@myAwesomeAnimation]='state'-->
-              <div *ngIf="isPRTR()" class="form-group animated fadeIn">
-                <mat-form-field class="example-full-width font-size-s">
-                  <mat-select formControlName="country_pr" placeholder="{{'register.label.country' | translate }}" tabindex="5" required="true ? citi : false">
-                    <mat-option *ngFor="let country of countries" [value]="country.countryId">
-                      {{ country.countryName }}
-                    </mat-option>
-                  </mat-select>
-                  <mat-error *ngIf="!validateCtrlChk(country) && citizenFormGrp.controls.country.errors.required">
-                    {{'register.err.country' | translate }}
-                  </mat-error>
-                </mat-form-field>
 
-                <mat-form-field class="example-full-width font-size-s">
-                  <input matInput #psport formControlName="passport_pr" tabindex="6" minlength="6" maxlength="10" placeholder="{{'register.label.passport' | translate }}" required="true ? citi : false">
-                  <mat-error *ngIf="!validateCtrlChk(passport) && citizenFormGrp.controls.passport.errors.required">
-                    {{'register.err.passport' | translate }}
-                  </mat-error>
-                  <mat-error *ngIf="!validateCtrlChk(passport) && citizenFormGrp.controls.passport.errors.pattern">
-                    {{'register.pattern.passport' | translate }}
-                  </mat-error>
-                </mat-form-field>
+            </div>
+
+            <!-- *************************** TR and PR FIELDS ******************** [@myAwesomeAnimation]='state'-->
+            <div *ngIf="isPRTR()" class="form-group animated fadeIn">
+              <mat-form-field class="example-full-width font-size-s">
+                <mat-select formControlName="country_pr" placeholder="{{'register.label.country' | translate }}" tabindex="5" required="true ? citi : false" (change)="countryChange($event)">
+                  <mat-option *ngFor="let country of countries" [value]="country.countryId">
+                    {{ country.countryName }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="!validateCtrlChk(country) && citizenFormGrp.controls.country.errors.required">
+                  {{'register.err.country' | translate }}
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width font-size-s">
+                <input matInput #psport formControlName="passport_pr" tabindex="6" minlength="6" maxlength="10" placeholder="{{'register.label.passport' | translate }}"
+                  required="true ? citi : false">
+                <mat-error *ngIf="!validateCtrlChk(passport) && citizenFormGrp.controls.passport.errors.required">
+                  {{'register.err.passport' | translate }}
+                </mat-error>
+                <mat-error *ngIf="!validateCtrlChk(passport) && citizenFormGrp.controls.passport.errors.pattern">
+                  {{'register.pattern.passport' | translate }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+
+
+            <!-- *************************** NON CITIZEN FIELDS ******************** [@myAwesomeAnimation]='state'-->
+            <div *ngIf="!isCitizen()" class="form-group animated fadeIn" [ngClass]="{'error' : !validateCtrlChk(country)}">
+
+              <mat-form-field class="example-full-width font-size-s">
+                <mat-select formControlName="country" placeholder="{{'register.label.country' | translate }}" tabindex="1" (change)="countryChangeNonCiti($event)" required>
+                  <mat-option *ngFor="let country of countries" [value]="country.countryId">
+                    {{ country.countryName }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="!validateCtrlChk(country) && citizenFormGrp.controls.country.errors.required">
+                  {{'register.err.country' | translate }}
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width font-size-s">
+                <input matInput #psport formControlName="passport" tabindex="2" minlength="6" maxlength="10" placeholder="{{'register.label.passport' | translate }}"
+                  required>
+                <mat-error *ngIf="!validateCtrlChk(passport) && citizenFormGrp.controls.passport.errors.required">
+                  {{'register.err.passport' | translate }}
+                </mat-error>
+                <mat-error *ngIf="!validateCtrlChk(passport) && citizenFormGrp.controls.passport.errors.pattern">
+                  {{'register.pattern.passport' | translate }}
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width font-size-s">
+                <input matInput #namefori formControlName="nama_penuhf" tabindex="3" minlength="2" maxlength="60" placeholder="{{'register.label.fullname' | translate }}"
+                  required>
+                <mat-hint align="end">{{namefori.value?.length || 0}}/60</mat-hint>
+                <mat-error *ngIf="!validateCtrlChk(nama_penuhf) && citizenFormGrp.controls.nama_penuhf.errors.required">
+                  {{'register.err.fullname' | translate }}
+                </mat-error>
+                <mat-error *ngIf="!validateCtrlChk(nama_penuhf) && citizenFormGrp.controls.nama_penuhf.errors.pattern">
+                  {{'register.pattern.fullname' | translate }}
+                </mat-error>
+              </mat-form-field>
+
+              <!-- hintLabel="{{'register.label.emailplh' | translate }}" -->
+              <mat-form-field class="example-full-width font-size-s">
+                <input matInput formControlName="emelf" tabindex="4" placeholder="{{'register.label.email' | translate }}" required>
+                <mat-error *ngIf="!validateCtrlChk(emelf) && citizenFormGrp.controls.emelf.errors.required">
+                  {{'register.err.email' | translate }}
+                </mat-error>
+                <mat-error *ngIf="!validateCtrlChk(emelf) &&  citizenFormGrp.controls.emelf.errors.pattern">
+                  {{'register.pattern.email' | translate }}
+                </mat-error>
+              </mat-form-field>
+
+              <!-- hintLabel="{{'register.label.telplh' | translate }}" -->
+              <div class="example-full-width input-group">
+                  <mat-form-field class="font-size-s" style="width:20%">
+                      <mat-select formControlName="codeTelefonf" #codetele placeholder="{{'register.label.codetel' | translate }}" tabindex="5" required>
+                        <mat-option *ngFor="let country of countries" [value]="country.countryDialCode">
+                          <span class="col-md-6">+ {{ country.countryDialCode }}</span>
+                          <span class="col-md-6"> {{ country.countryCode }}</span>
+                        </mat-option>
+                      </mat-select>
+                      <mat-error *ngIf="!validateCtrlChk(codeTelefonf) && citizenFormGrp.controls.codeTelefonf.errors.required">
+                          {{'register.err.codetel' | translate }}  
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="font-size-s" style="width:80%">
+                        <input matInput formControlName="telefonf" tabindex="5" #tele [textMask]="{mask: maskForeigner}" placeholder="{{'register.label.tel' | translate }}"
+                          required>
+                        <mat-error *ngIf="!validateCtrlChk(telefonf) && citizenFormGrp.controls.telefonf.errors.required">
+                          {{'register.err.tel' | translate }}
+                        </mat-error>
+                        <mat-error *ngIf="!validateCtrlChk(telefonf) && citizenFormGrp.controls.telefonf.pattern">
+                          {{'register.pattern.tel' | translate }}
+                        </mat-error>
+                      </mat-form-field>
               </div>
 
-             
+              
 
-              <!-- *************************** NON CITIZEN FIELDS ******************** [@myAwesomeAnimation]='state'-->
-              <div *ngIf="!isCitizen()" class="form-group animated fadeIn" [ngClass]="{'error' : !validateCtrlChk(country)}">
+            </div>
 
-                <mat-form-field class="example-full-width font-size-s">
-                  <mat-select formControlName="country" placeholder="{{'register.label.country' | translate }}" tabindex="1" required>
-                    <mat-option *ngFor="let country of countries" [value]="country.countryId">
-                      {{ country.countryName }}
-                    </mat-option>
-                  </mat-select>
-                  <mat-error *ngIf="!validateCtrlChk(country) && citizenFormGrp.controls.country.errors.required">
-                    {{'register.err.country' | translate }}
-                  </mat-error>
-                </mat-form-field>
-
-                <mat-form-field class="example-full-width font-size-s">
-                  <input matInput #psport formControlName="passport" tabindex="2" minlength="6" maxlength="10" placeholder="{{'register.label.passport' | translate }}"
-                    required>
-                  <mat-error *ngIf="!validateCtrlChk(passport) && citizenFormGrp.controls.passport.errors.required">
-                    {{'register.err.passport' | translate }}
-                  </mat-error>
-                  <mat-error *ngIf="!validateCtrlChk(passport) && citizenFormGrp.controls.passport.errors.pattern">
-                    {{'register.pattern.passport' | translate }}
-                  </mat-error>
-                </mat-form-field>
-
-                <mat-form-field class="example-full-width font-size-s">
-                  <input matInput #namefori formControlName="nama_penuhf" tabindex="3" minlength="2" maxlength="60" placeholder="{{'register.label.fullname' | translate }}"
-                    required>
-                  <mat-hint align="end">{{namefori.value?.length || 0}}/60</mat-hint>
-                  <mat-error *ngIf="!validateCtrlChk(nama_penuhf) && citizenFormGrp.controls.nama_penuhf.errors.required">
-                    {{'register.err.fullname' | translate }}
-                  </mat-error>
-                  <mat-error *ngIf="!validateCtrlChk(nama_penuhf) && citizenFormGrp.controls.nama_penuhf.errors.pattern">
-                    {{'register.pattern.fullname' | translate }}
-                  </mat-error>
-                </mat-form-field>
-
-                <!-- hintLabel="{{'register.label.emailplh' | translate }}" -->
-                <mat-form-field class="example-full-width font-size-s">
-                  <input matInput formControlName="emelf" tabindex="4" placeholder="{{'register.label.email' | translate }}" required>
-                  <mat-error *ngIf="!validateCtrlChk(emelf) && citizenFormGrp.controls.emelf.errors.required">
-                    {{'register.err.email' | translate }}
-                  </mat-error>
-                  <mat-error *ngIf="!validateCtrlChk(emelf) &&  citizenFormGrp.controls.emelf.errors.pattern">
-                    {{'register.pattern.email' | translate }}
-                  </mat-error>
-                </mat-form-field>
-
-                <!-- hintLabel="{{'register.label.telplh' | translate }}" -->
-                <mat-form-field class="example-full-width font-size-s">
-                  <input matInput formControlName="telefonf" tabindex="5" #tele [textMask]="{mask: maskForeigner}" placeholder="{{'register.label.tel' | translate }}"
-                    required>
-                  <mat-error *ngIf="!validateCtrlChk(telefonf) && citizenFormGrp.controls.telefonf.errors.required">
-                    {{'register.err.tel' | translate }}
-                  </mat-error>
-                  <mat-error *ngIf="!validateCtrlChk(telefonf) && citizenFormGrp.controls.telefonf.pattern">
-                    {{'register.pattern.tel' | translate }}
-                  </mat-error>
-                </mat-form-field>
-
-              </div>
-
-              <div class="row" style="margin:20px;"></div>
-              <div class="input-group" [ngClass]="{'error' : !validateCtrlChk(captcha)}">
-                <span class="CaptchaTxtField CaptchaImageCodes input-group-btn" style="padding-right: 5px; bottom: 10px;">
+            <div class="row" style="margin:20px;"></div>
+            <div class="input-group" [ngClass]="{'error' : !validateCtrlChk(captcha)}">
+              <span class="CaptchaTxtField CaptchaImageCodes input-group-btn" style="padding-right: 5px; bottom: 10px;">
                 <canvas id="CapCodes" class="capcode" width="120" height="40"></canvas>
               </span>
 
-                <mat-form-field class="example-full-width font-size-s">
-                  <input matInput formControlName="captcha" #capt tabindex="6" id="UserCaptchaCode" placeholder="{{'register.label.codeplh' | translate }}"
-                    required>
-                  <mat-error *ngIf="!validateCtrlChk(captcha) && citizenFormGrp.controls.captcha.errors.required">
-                    {{'register.err.vercode' | translate }}
-                  </mat-error>
-                  <mat-error *ngIf="!verifyCaptcha()">
-                    {{'register.pattern.captcha' | translate }}
-                  </mat-error>
-                </mat-form-field>
-                <!-- <input formControlName="captcha" #capt class="form-control" type="text" id="UserCaptchaCode" [ngClass]="{'error2' : citizenFormGrp.controls.captcha.valid? !verifyCaptcha() : ''}"
+              <mat-form-field class="example-full-width font-size-s">
+                <input matInput formControlName="captcha" #capt tabindex="6" id="UserCaptchaCode" placeholder="{{'register.label.codeplh' | translate }}"
+                  required>
+                <mat-error *ngIf="!validateCtrlChk(captcha) && citizenFormGrp.controls.captcha.errors.required">
+                  {{'register.err.vercode' | translate }}
+                </mat-error>
+                <mat-error *ngIf="!verifyCaptcha()">
+                  {{'register.pattern.captcha' | translate }}
+                </mat-error>
+              </mat-form-field>
+              <!-- <input formControlName="captcha" #capt class="form-control" type="text" id="UserCaptchaCode" [ngClass]="{'error2' : citizenFormGrp.controls.captcha.valid? !verifyCaptcha() : ''}"
                 style="padding:7px 20px;" placeholder="{{'register.label.codeplh' | translate }}" required> -->
 
 
-                <span class="input-group-btn">
+              <span class="input-group-btn">
                 <button type="button" mat-mini-fab color="warn" (click)="ReCreateCaptchas()">
-                  <i class="fa fa-refresh"></i></button>
+                  <i class="fa fa-refresh"></i>
+                </button>
               </span>
-              </div>
-              <!-- <em *ngIf="!validateCtrlChk(captcha) && citizenFormGrp.controls.captcha.errors.required">{{'register.err.vercode' | translate }}</em>
+            </div>
+            <!-- <em *ngIf="!validateCtrlChk(captcha) && citizenFormGrp.controls.captcha.errors.required">{{'register.err.vercode' | translate }}</em>
             <em *ngIf="!verifyCaptcha()">{{'register.pattern.captcha' | translate }}</em> -->
-              <input type="hidden" id="rCaptcha" data-val="">
-              <div class="form-group">
-                <div class="row" style="margin:20px;">
-                  <div class="col-md-12 font-size-s" style="text-align: center;">
-                    <button type="button" mat-raised-button color="warn" id="btnreset" (click)="resetModal.show()" style="width: 100px; font-family: Roboto; margin-left: 5px;">
-                    <i class="fa fa-refresh"></i>  {{'register.label.btnreset' | translate }}</button>
-                    <button mat-raised-button color="primary" (click)="citizenReg(citizenFormGrp.value);false" id="hantar" style="width: 100px; font-family: Roboto;"
-                      [disabled]="(citizenFormGrp.invalid || !usrType.value) || !verifyCaptcha()">
-                      <i class="fa fa-check"></i>  {{'register.label.btnsubmit' | translate }}</button>
-                  </div>
+            <input type="hidden" id="rCaptcha" data-val="">
+            <div class="form-group">
+              <div class="row" style="margin:20px;">
+                <div class="col-md-12 font-size-s" style="text-align: center;">
+                  <button type="button" mat-raised-button color="warn" id="btnreset" (click)="resetModal.show()" style="width: 100px; font-family: Roboto; margin-left: 5px;">
+                    <i class="fa fa-refresh"></i> {{'register.label.btnreset' | translate }}</button>
+                  <button mat-raised-button color="primary" (click)="citizenReg(citizenFormGrp.value);false" id="hantar" style="width: 100px; font-family: Roboto;"
+                    [disabled]="(citizenFormGrp.invalid || !usrType.value) || !verifyCaptcha()">
+                    <i class="fa fa-check"></i> {{'register.label.btnsubmit' | translate }}</button>
                 </div>
               </div>
-            </form>
-          </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
   </div>
+</div>
 
-<app-confirm-dialog  #resetModal 
-  [title]="'common.icon.warn'" 
-  [content]="'common.msg.reset'"
-  [state]="'common.state.warn'" 
-  [isReset]="'true'"
-  (resetMethod)="resetMethod($event)">
+<app-confirm-dialog #resetModal [title]="'common.icon.warn'" [content]="'common.msg.reset'" [state]="'common.state.warn'"
+  [isReset]="'true'" (resetMethod)="resetMethod($event)">
 </app-confirm-dialog>
 
-<app-confirm-dialog  #infoModal 
-  [title]="'common.icon.warn'" 
-  [content]="errMsg"
-  [state]="'common.state.warn'" 
-  [isErrMsg]="'register'">
+<app-confirm-dialog #infoModal [title]="'common.icon.warn'" [content]="errMsg" [state]="'common.state.warn'" [isErrMsg]="'register'">
 </app-confirm-dialog>

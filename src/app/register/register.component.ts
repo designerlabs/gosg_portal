@@ -90,6 +90,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     private nama_penuh: FormControl;
     private emel: FormControl;
     private telefon: FormControl;
+    private codeTelefon: FormControl;
     private country: FormControl;
     private passport: FormControl;
     private country_pr: FormControl;
@@ -97,6 +98,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     private nama_penuhf: FormControl;
     private emelf: FormControl;
     private telefonf: FormControl;
+    private codeTelefonf: FormControl;
     public captcha: FormControl;
     public flagGetCaptcha;
     citizenValue:any;
@@ -141,6 +143,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
                     "Name": this.nama_penuh,
                     "Email": this.emel,
                     "Phone": this.telefon,
+                    // "Code": this.codeTelefon,
                     "icNo": this.kad_pengenalan,
                     "captcha": this.captcha
                 });
@@ -198,8 +201,9 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     private registerUrl: string = this.config.urlRegister;
     private uapstagingUrl: string = this.config.urlUapStaging;
     
-    ngOnInit() {
+    ngOnInit() {    
 
+        // this.citizenFormGrp.get('telefon').disable();
         this.refUrl =  location.search.split('refUrl=')[1];
         console.log(unescape(this.refUrl));
         
@@ -216,6 +220,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         this.nama_penuh = new FormControl('', [Validators.required, Validators.pattern(this.validateService.getPattern(2,60).name)]),
             this.emel = new FormControl('', [Validators.required, Validators.pattern(this.validateService.getPattern().email)]),
             this.telefon = new FormControl('', [Validators.required]),
+            this.codeTelefon = new FormControl('', [Validators.required]),
             this.country = new FormControl('', [Validators.required]),
             this.passport = new FormControl('', [Validators.required, Validators.pattern(this.validateService.getPattern(6,10).passport)]), //A1234567 or AB123456
             this.country_pr = new FormControl(''),
@@ -223,12 +228,14 @@ export class RegisterComponent implements OnInit, AfterViewInit {
             this.nama_penuhf = new FormControl('', [Validators.required, Validators.pattern(this.validateService.getPattern(2,60).name)]), 
             this.emelf = new FormControl('', [Validators.required, Validators.pattern(this.validateService.getPattern().email)]),
             this.telefonf = new FormControl('', [Validators.required]),
+            this.codeTelefonf = new FormControl('', [Validators.required]),
             this.captcha = new FormControl('', [Validators.required]),
             this.citizenFormGrp = new FormGroup({
                 kad_pengenalan: this.kad_pengenalan,
                 nama_penuh: this.nama_penuh,
                 emel: this.emel,
                 telefon: this.telefon,
+                codeTelefon: this.codeTelefon,
                 country: this.country,
                 passport: this.passport,
                 country_pr: this.country_pr,
@@ -236,6 +243,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
                 nama_penuhf: this.nama_penuhf,
                 emelf: this.emelf,
                 telefonf: this.telefonf,
+                codeTelefonf: this.codeTelefonf,
                 captcha: this.captcha,
             });
         this.flagGetCaptcha = true;
@@ -300,6 +308,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         this.citizenFormGrp.addControl('nama_penuh', this.nama_penuh);
         this.citizenFormGrp.addControl('emel', this.emel);
         this.citizenFormGrp.addControl('telefon', this.telefon);
+        this.citizenFormGrp.addControl('codeTelefon', this.codeTelefon);
         this.resetCitizenCtrl();
     }
 
@@ -308,6 +317,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         this.citizenFormGrp.removeControl('nama_penuh');
         this.citizenFormGrp.removeControl('emel');
         this.citizenFormGrp.removeControl('telefon');
+        this.citizenFormGrp.removeControl('codeTelefon');
     }
 
     resetCitizenCtrl() {
@@ -315,6 +325,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         this.nama_penuh.reset();
         this.emel.reset();
         this.telefon.reset();
+        this.codeTelefon.reset();
     }
     
 
@@ -324,6 +335,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         this.citizenFormGrp.addControl('nama_penuh', this.nama_penuh);
         this.citizenFormGrp.addControl('emel', this.emel);
         this.citizenFormGrp.addControl('telefon', this.telefon);
+        this.citizenFormGrp.addControl('codeTelefon', this.codeTelefon);
         this.citizenFormGrp.addControl('country_pr', this.country_pr);
         this.citizenFormGrp.addControl('passport_pr', this.passport_pr);
         this.resetPRTRCtrl();
@@ -334,6 +346,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         this.citizenFormGrp.removeControl('nama_penuh');
         this.citizenFormGrp.removeControl('emel');
         this.citizenFormGrp.removeControl('telefon');
+        this.citizenFormGrp.removeControl('codeTelefon');
         this.citizenFormGrp.removeControl('country_pr');
         this.citizenFormGrp.removeControl('passport_pr');
     }
@@ -343,6 +356,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         this.nama_penuh.reset();
         this.emel.reset();
         this.telefon.reset();
+        this.codeTelefon.reset();
         this.country_pr.reset();
         this.passport_pr.reset();
     }
@@ -355,6 +369,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         this.citizenFormGrp.addControl('nama_penuhf', this.nama_penuhf);
         this.citizenFormGrp.addControl('emelf', this.emelf);
         this.citizenFormGrp.addControl('telefonf', this.telefonf);
+        this.citizenFormGrp.addControl('codeTelefonf', this.codeTelefonf);
         this.resetNonCitizenCtrl();
     }
 
@@ -364,6 +379,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         this.citizenFormGrp.removeControl('nama_penuhf');
         this.citizenFormGrp.removeControl('emelf');
         this.citizenFormGrp.removeControl('telefonf');
+        this.citizenFormGrp.removeControl('codeTelefonf');
     }
 
     resetNonCitizenCtrl() {
@@ -372,6 +388,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         this.nama_penuhf.reset();
         this.emelf.reset();
         this.telefonf.reset();
+        this.codeTelefonf.reset();
     }
 
     resetForm() {
@@ -386,7 +403,6 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     }
     
     citizenReg(formValues:any) {
-       
         let body = {
             "country":{  
                 "countryId":null
@@ -434,31 +450,30 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         //     "citizenType":null,
         //     "user_id": null
         // };
-        if((formValues.kad_pengenalan ) && (formValues.passport_pr)){
+        if ((formValues.kad_pengenalan ) && (formValues.passport_pr)) {
             body.country.countryId = formValues.country_pr;
             body.userType.userTypeId = this.citizenValue;
             body.identificationNo = formValues.kad_pengenalan;
             body.email = formValues.emel;
-            body.phoneNo = formValues.telefon;
+            body.phoneNo = formValues.codeTelefon + '_' + formValues.telefon;
             body.fullName = formValues.nama_penuh;
             body.passportNo = formValues.passport_pr;
 
-        } else if(formValues.country){
+        } else if (formValues.country) {
             body.country.countryId = formValues.country;
             body.userType.userTypeId = this.citizenValue;
             body.identificationNo = formValues.passport;
             body.email = formValues.emelf;
-            body.phoneNo = formValues.telefonf;
+            body.phoneNo = formValues.codeTelefonf + '_' + formValues.telefonf;
             body.fullName = formValues.nama_penuhf;
-       
-        }else{
+        }else {
             body.country.countryId = 152;
             body.userType.userTypeId = this.citizenValue;
             body.identificationNo = formValues.kad_pengenalan;
             body.email = formValues.emel;
-            body.phoneNo = formValues.telefon;
+            body.phoneNo = formValues.codeTelefon + '_' + formValues.telefon;
             body.fullName = formValues.nama_penuh;
-        };
+        }
 
 
         if(this.refUrl){
@@ -523,7 +538,13 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         }
         
     }
+    countryChange(e) {
+        // debugger;
+    }
 
+    countryChangeNonCiti(e) {
+        // debugger;
+    }
 
     isPRTR() {
         if((this.citizenValue == 3 )|| (this.citizenValue == 4)||(this.citizenValue == 7 )|| (this.citizenValue == 8)){
