@@ -662,6 +662,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
          this.getPostData = resPostData;
          if(id){
            this.profileForm.get('corrsPostcode').setValue(id.value);
+           this.corrsCityLocal.get('corrsPostcode');
          }
        },
        Error => {
