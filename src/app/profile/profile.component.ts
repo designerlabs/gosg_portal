@@ -280,11 +280,10 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                 // this.profileForm.get('mobilecodeTelefon').setValue(data.user);
                 // if mobile number have Country code
 
-                if ((data.user.mobilePhoneNo).split('*').length > 1) {
+                if (data.user.mobilePhoneNo && (data.user.mobilePhoneNo).split('*').length > 1) {
                   this.profileForm.get('corrsMobile').setValue((data.user.mobilePhoneNo).split('*')[1]);
                   const telecode = (data.user.mobilePhoneNo).split('*')[0];
                   this.profileForm.get('mobilecodeTelefon').setValue(telecode);
-
                 }else {
                   this.profileForm.get('corrsMobile').setValue((data.user.mobilePhoneNo));
                 }
@@ -317,7 +316,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                   this.profileForm.get('perPostcode').setValue(data.user.address.permanentAddressPostcode);
                   // this.profileForm.get('perTelephone').setValue(data.user.address.permanentAddressHomePhoneNo);
                   // if corressponding address have Country code
-                  if ((data.user.address.permanentAddressHomePhoneNo).split('*').length > 1) {
+                  if (data.user.address.permanentAddressHomePhoneNo && (data.user.address.permanentAddressHomePhoneNo).split('*').length > 1) {
                     this.profileForm.get('perTelephone').setValue((data.user.address.permanentAddressHomePhoneNo).split('*')[1]);
                     const perTeleCode = (data.user.address.permanentAddressHomePhoneNo).split('*')[0];
                     this.profileForm.get('percodeTele').setValue(perTeleCode);
@@ -363,7 +362,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                   this.profileForm.get('corrsAddress3').setValue(data.user.address.correspondingAddress3);
                   this.profileForm.get('corrsPostcode').setValue(data.user.address.correspondingAddressPostcode);
                   // if corressponding address have Country code
-                  if ((data.user.address.correspondingAddressHomePhoneNo).split('*').length > 1) {
+                  if (data.user.address.correspondingAddressHomePhoneNo && (data.user.address.correspondingAddressHomePhoneNo).split('*').length > 1) {
                     this.profileForm.get('corrsTelephone').setValue((data.user.address.correspondingAddressHomePhoneNo).split('*')[1]);
                     const corrsTeleCode = (data.user.address.correspondingAddressHomePhoneNo).split('*')[0];
                     this.profileForm.get('corrscodeTelefon').setValue(corrsTeleCode);
