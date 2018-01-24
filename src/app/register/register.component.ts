@@ -455,7 +455,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
             body.userType.userTypeId = this.citizenValue;
             body.identificationNo = formValues.kad_pengenalan;
             body.email = formValues.emel;
-            body.phoneNo = formValues.codeTelefon + '_' + formValues.telefon;
+            body.phoneNo = formValues.codeTelefon + '*' + formValues.telefon;
             body.fullName = formValues.nama_penuh;
             body.passportNo = formValues.passport_pr;
 
@@ -464,14 +464,14 @@ export class RegisterComponent implements OnInit, AfterViewInit {
             body.userType.userTypeId = this.citizenValue;
             body.identificationNo = formValues.passport;
             body.email = formValues.emelf;
-            body.phoneNo = formValues.codeTelefonf + '_' + formValues.telefonf;
+            body.phoneNo = formValues.codeTelefonf + '*' + formValues.telefonf;
             body.fullName = formValues.nama_penuhf;
         }else {
             body.country.countryId = 152;
             body.userType.userTypeId = this.citizenValue;
             body.identificationNo = formValues.kad_pengenalan;
             body.email = formValues.emel;
-            body.phoneNo = formValues.codeTelefon + '_' + formValues.telefon;
+            body.phoneNo = formValues.codeTelefon + '*' + formValues.telefon;
             body.fullName = formValues.nama_penuh;
         }
 
