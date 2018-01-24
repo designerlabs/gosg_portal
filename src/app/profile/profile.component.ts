@@ -281,7 +281,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                 // if mobile number have Country code
 
                 if (data.user.mobilePhoneNo && (data.user.mobilePhoneNo).split('*').length > 1) {
-                  this.profileForm.get('corrsMobile').setValue((data.user.mobilePhoneNo).split('*')[1]);
+                  const telenum = (data.user.mobilePhoneNo).split('*')[1];
+                  this.profileForm.get('corrsMobile').setValue(telenum.replace('+',''));
                   const telecode = (data.user.mobilePhoneNo).split('*')[0];
                   this.profileForm.get('mobilecodeTelefon').setValue(telecode);
                 }else {
@@ -317,7 +318,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                   // this.profileForm.get('perTelephone').setValue(data.user.address.permanentAddressHomePhoneNo);
                   // if corressponding address have Country code
                   if (data.user.address.permanentAddressHomePhoneNo && (data.user.address.permanentAddressHomePhoneNo).split('*').length > 1) {
-                    this.profileForm.get('perTelephone').setValue((data.user.address.permanentAddressHomePhoneNo).split('*')[1]);
+                    const perTelenum = (data.user.address.permanentAddressHomePhoneNo).split('*')[1];
+                    this.profileForm.get('perTelephone').setValue(perTelenum.replace('+',''));
                     const perTeleCode = (data.user.address.permanentAddressHomePhoneNo).split('*')[0];
                     this.profileForm.get('percodeTele').setValue(perTeleCode);
                   }else {
@@ -363,7 +365,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                   this.profileForm.get('corrsPostcode').setValue(data.user.address.correspondingAddressPostcode);
                   // if corressponding address have Country code
                   if (data.user.address.correspondingAddressHomePhoneNo && (data.user.address.correspondingAddressHomePhoneNo).split('*').length > 1) {
-                    this.profileForm.get('corrsTelephone').setValue((data.user.address.correspondingAddressHomePhoneNo).split('*')[1]);
+                    const corrTeleNum = (data.user.address.correspondingAddressHomePhoneNo).split('*')[1];
+                    this.profileForm.get('corrsTelephone').setValue(corrTeleNum.replace('+',''));
                     const corrsTeleCode = (data.user.address.correspondingAddressHomePhoneNo).split('*')[0];
                     this.profileForm.get('corrscodeTelefon').setValue(corrsTeleCode);
 
@@ -456,6 +459,10 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       this.isLocal = false;
       this.RemoveLocalCtrl();
     }
+    let flr = this.countries.filter((element, index) => {
+      return (element.countryId == val);
+   });
+   this.profileForm.get('percodeTele').setValue(flr[0].countryDialCode);
   }
 
   isMalaysianCorrs(val) {
@@ -475,6 +482,10 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       // this.profileForm.get('perStateNotLocal').setValue("");
       // this.profileForm.get('perCityNotLocal').setValue("");
     }
+    let flr = this.countries.filter((element, index) => {
+      return (element.countryId == val);
+   });
+   this.profileForm.get('corrscodeTelefon').setValue(flr[0].countryDialCode);
   }
 
   isMalaysianChk(val) {
@@ -1000,7 +1011,7 @@ let bodyUpdate =
     bodyUpdate.agencyForwardUrl = this.agencyForwardUrl;
     bodyUpdate.roles = this.roles;
     bodyUpdate.email = this.regemail;
-    bodyUpdate.mobilePhoneNo = formValues.corrsMobile;
+    bodyUpdate.mobilePhoneNo = formValues.mobilecodeTelefon + '*' + formValues.corrsMobile;
     bodyUpdate.registrationDate = this.regdate;
     bodyUpdate.address.addressId = this.addressId;
     bodyUpdate.address.permanentAddress1 = formValues.perAddress1;
@@ -1034,8 +1045,8 @@ let bodyUpdate =
     bodyUpdate.address.correspondingAddressCountry.countryId = formValues.corrsCountry;
     
     
-    bodyUpdate.address.permanentAddressHomePhoneNo = formValues.perTelephone;
-    bodyUpdate.address.correspondingAddressHomePhoneNo = formValues.corrsTelephone;
+    bodyUpdate.address.permanentAddressHomePhoneNo = formValues.percodeTele + '*' + formValues.perTelephone;
+    bodyUpdate.address.correspondingAddressHomePhoneNo = formValues.corrscodeTelefon + '*' + formValues.corrsTelephone;
     bodyUpdate.address.sameAddressFlag = formValues.checkboxValue;
 
 
