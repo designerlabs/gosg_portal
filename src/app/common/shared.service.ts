@@ -19,6 +19,7 @@ export class SharedService {
   languageId = this.languageId;
   private countryUrl: string = this.config.urlCountry;
   private stateUrl: string = this.config.urlState;
+  private postcodeUrl:string = this.config.urlPostcode;
   private cityUrl: string = this.config.urlCity;
   private genderUrl: string = this.config.urlGender;
   private religionUrl: string = this.config.urlReligion;
@@ -40,6 +41,14 @@ export class SharedService {
       .retry(5)
       .catch(this.handleError);
 
+  }
+
+  getPostCodeData(code): Observable<any[]> {
+    //  console.log(this.countryUrl);
+    return this.http.get(this.postcodeUrl+ code)
+      .map((response: Response) => response.json().postcodeList)
+      .retry(5)
+      .catch(this.handleError);
   }
 
   getCountrybyCode(code): Observable<any[]> {

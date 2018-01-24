@@ -26,6 +26,7 @@ export class AppConfig {
     urlArticle: string;
     urlCountry: string;
     urlState:string;
+    urlPostcode:string;
     urlRace:string;
     urlCity:string;
     urlReligion: string;
@@ -67,6 +68,7 @@ export const APP_DI_CONFIG: AppConfig = {
     urlArticle: './app/apidata/topic',
     urlCountry: commonURL+'country',
     urlState: commonURL+'state',
+    urlPostcode: commonURL+'postcode/city/',
     urlRace: commonURL+'race/lang/',
     urlCity: commonURL+'city/state/',
     urlReligion: commonURL+'religion/lang/',
@@ -75,9 +77,6 @@ export const APP_DI_CONFIG: AppConfig = {
     urlTopics: './app/apidata/articlemenu',
     urlHighlights: './app/apidata/highlightbox',
     urlGender: commonURL+'gender/lang/',
-    // urlPoll: './app/apidata/poll',
-    //urlAnnouncement: './app/apidata/announcement',
-    // urlAnnouncement : announcementUrl + 'announcement/category/list',
     urlAnnouncement : commonURL + 'announcement/date/publish',    
     urlAnnouncementSub: commonURL + 'announcement/category',
     urlCalendar: './app/apidata/calendar',
