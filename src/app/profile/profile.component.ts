@@ -92,6 +92,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   public perCityNotLocal: FormControl
   public perPostcode: FormControl
   public perTelephone: FormControl
+  public percodeTele: FormControl
   public corrsAddress1: FormControl
   public corrsAddress2: FormControl
   public corrsAddress3: FormControl
@@ -105,6 +106,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   public corrsPostcode: FormControl
   public corrsTelephone: FormControl
   public corrsMobile: FormControl
+  public mobilecodeTelefon: FormControl
   public uid: any
   public regData: any[]
   countryList:string;
@@ -194,6 +196,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.perCityNotLocal = new FormControl()
     this.perPostcode = new FormControl()
     this.perTelephone = new FormControl()
+    this.percodeTele = new FormControl()
     this.corrsAddress1 = new FormControl()
     this.corrsAddress2 = new FormControl()
     this.corrsAddress3 = new FormControl()
@@ -207,6 +210,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.corrsPostcode = new FormControl()
     this.corrsTelephone = new FormControl()
     this.corrsMobile = new FormControl()
+    this.mobilecodeTelefon = new FormControl()
 
     this.profileForm = new FormGroup({
       dob: this.dob,
@@ -223,6 +227,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       perCityNotLocal: this.perCityNotLocal,
       perPostcode: this.perPostcode,
       perTelephone: this.perTelephone,
+      percodeTele: this.percodeTele,
       corrsAddress1: this.corrsAddress1,
       corrsAddress2: this.corrsAddress2,
       corrsAddress3: this.corrsAddress3,
@@ -236,6 +241,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       corrsPostcode: this.corrsPostcode,
       corrsTelephone: this.corrsTelephone,
       corrsMobile: this.corrsMobile,
+      mobilecodeTelefon: this.mobilecodeTelefon
     });
 
     this.profileForm.disable();
@@ -245,6 +251,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.protectedService.getUser().subscribe(
       data => {
         if(data.user){
+          debugger;
           // this.fullname = data.user.fullName;
           this.userTypeId = data.user.userType.userTypeId;
 
@@ -267,6 +274,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                 this.agencyForwardUrl = data.user.agencyForwardUrl;
                 this.roles = data.user.roles;
                 this.profileForm.get('corrsMobile').setValue(data.user.mobilePhoneNo);
+                // this.profileForm.get('mobilecodeTelefon').setValue(data.user);
 
                 if(data.user.gender){
                   this.profileForm.get('gender').setValue(data.user.gender.genderCode);
@@ -295,6 +303,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                   this.profileForm.get('perAddress3').setValue(data.user.address.permanentAddress3);
                   this.profileForm.get('perPostcode').setValue(data.user.address.permanentAddressPostcode);
                   this.profileForm.get('perTelephone').setValue(data.user.address.permanentAddressHomePhoneNo);
+                  // this.profileForm.get('percodeTele').setValue(data.user.address.permanentAddressHomePhoneNo);
 
                   if(data.user.address.permanentAddressCountry){
                     this.profileForm.get('perCountry').setValue(data.user.address.permanentAddressCountry.countryId);
@@ -667,6 +676,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       
       this.profileForm.get('corrsPostcode').setValue(this.perPostcode.value);
       this.profileForm.get('corrsTelephone').setValue(this.perTelephone.value);
+      // this.profileForm.get('percodeTele').setValue(this.percodeTele.value);
 
       if(this.isLocal)
         this.getCitiesByStateC(this.perStateLocal.value);
