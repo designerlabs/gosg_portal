@@ -340,7 +340,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                       }
 
                  
-                      let postCodeObj = {id: {value: data.user.address.permanentAddressCity.cityId}};
+                      let postCodeObj = {value: data.user.address.permanentAddressCity.cityId};
                         
                       
                       this.isChangedPer(postCodeObj);
@@ -395,7 +395,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                         this.getCitiesByStateC(data.user.address.correspondingAddressState.stateId);
                         this.profileForm.get('corrsCityLocal').setValue(data.user.address.correspondingAddressCity.cityId);
                       }
-                      let postCodeObj = {id: {value: data.user.address.correspondingAddressCity.cityId}};
+                      let postCodeObj = {value: data.user.address.correspondingAddressCity.cityId};
                       if(data.user.address.correspondingAddressPostcode){
                         this.isChanged(postCodeObj);
                         this.profileForm.get('corrsPostcode').setValue(data.user.address.correspondingAddressPostcode);
