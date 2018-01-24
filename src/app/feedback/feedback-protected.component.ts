@@ -21,7 +21,7 @@ import { ValidateService } from '../common/validate.service';
 export class FeedbackProtectedComponent implements OnInit {
   submitMsg: any;
   
-  @Input() state:string;
+  // @Input() state:string;
 
   @Input() getEmail;
   @Input() getFullname;
