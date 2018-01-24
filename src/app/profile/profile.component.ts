@@ -118,7 +118,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   regdate:string;
   lang = this.lang;
   languageId = this.languageId;
-
   // private myDatePickerOptions: IMyDpOptions = {
   //       // other options...
   //       // Initialized to specific date (09/10/2018).
@@ -180,6 +179,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.maskPostcode = this.validateService.getMask().postcode;
     this.maskDateFormat = this.validateService.getMask().dateFormat;
     
+
     this.getUserData();
     // this.getUserProfile();
     this.getCountry();
@@ -338,7 +338,12 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                       if(data.user.address.permanentAddressCity){
                         this.profileForm.get('perCityLocal').setValue(data.user.address.permanentAddressCity.cityId);
                       }
-                      this.isChangedPer(data.user.address.permanentAddressCity.cityId);
+
+                 
+                      let postCodeObj = {id: {value: data.user.address.permanentAddressCity.cityId}};
+                        
+                      
+                      this.isChangedPer(postCodeObj);
                       if(data.user.address.permanentAddressPostcode){
                         this.profileForm.get('perPostcode').setValue(data.user.address.permanentAddressPostcode);
                       }
@@ -390,8 +395,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                         this.getCitiesByStateC(data.user.address.correspondingAddressState.stateId);
                         this.profileForm.get('corrsCityLocal').setValue(data.user.address.correspondingAddressCity.cityId);
                       }
+                      let postCodeObj = {id: {value: data.user.address.correspondingAddressCity.cityId}};
                       if(data.user.address.correspondingAddressPostcode){
-                        this.isChanged(data.user.address.correspondingAddressCity.cityId);
+                        this.isChanged(postCodeObj);
                         this.profileForm.get('corrsPostcode').setValue(data.user.address.correspondingAddressPostcode);
                       }
                     }else{
