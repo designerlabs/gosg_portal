@@ -609,7 +609,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       let getCode = this.getCorrsCityData.filter(function(ele){
         return ele.cityId == e.value;
       });
-      return this.sharedService.getPostCodeData(e)
+      return this.sharedService.getPostCodeData(getCode[0].cityCode)
       .subscribe(resCityData => {
         this.getCorrsPostData = resCityData;
         this.profileForm.get('corrsPostcode').setValue(this.postCodeObj2.value);
