@@ -336,18 +336,19 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                         this.profileForm.get('perStateLocal').setValue(data.user.address.permanentAddressState.stateId);
                       }
 
-                      if(data.user.address.permanentAddressPostcode){
-                        this.getPerPostCodeFlag = true;
-                        this.getperPostCode = data.user.address.permanentAddressPostcode.postcodeId;
-                        //this.profileForm.get('perPostcode').setValue(data.user.address.permanentAddressPostcode.postcodeId);    
-                      }
+                      
                       this.getCitiesByStateP(data.user.address.permanentAddressState.stateId);
                       if(data.user.address.permanentAddressCity){
                         this.profileForm.get('perCityLocal').setValue(data.user.address.permanentAddressCity.cityId);
                         
                       }
                        //this.getPostCodeByCityId(data.user.address.permanentAddressCity.cityId);                     
-
+                      this.getPostcodeByCityP(data.user.address.permanentAddressCity.cityId);
+                       if(data.user.address.permanentAddressPostcode){
+                        // this.getPerPostCodeFlag = true;
+                        // this.getperPostCode = data.user.address.permanentAddressPostcode.postcodeId;
+                        this.profileForm.get('perPostcode').setValue(data.user.address.permanentAddressPostcode.postcodeId);    
+                      }
                       
 
                     }else{
@@ -406,6 +407,11 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                         // this.postCodeObj2 = {value: data.user.address.correspondingAddressCity.cityId};
                       }
                       
+                      this.getPostcodeByCityC(data.user.address.correspondingAddressCity.cityId);
+                      if(data.user.address.correspondingAddressPostcode){
+                       this.profileForm.get('corrsPostcode').setValue(data.user.address.correspondingAddressPostcode.postcodeId);    
+                     }
+
                       
                     }else{
                       this.isCorrsLocal = false;
@@ -603,15 +609,26 @@ export class ProfileComponent implements OnInit, AfterViewInit {
        });
   }
 
+  getPostcodeByCity(e){
+    this.isStateChanged();
+ 
+    return this.sharedService.getPostCodeData(e.value)
+      .subscribe(resPostCodeData => {
+        this.getPerPostData = resPostCodeData;
+      },
+      Error => {
+       this.toastr.error(this.translate.instant('common.err.servicedown'), '');            
+     });
+}
 
 
-  getPostcodeByCityP(e){
-    debugger;
-    this.getPerPostCodeFlag = false;
-    if(e){
-      this.getPostCodeByCityId(e.value);
-    }
-  }
+  // getPostcodeByCityP(e){
+  //   debugger;
+  //   this.getPerPostCodeFlag = false;
+  //   if(e){
+  //     this.getPostCodeByCityId(e.value);
+  //   }
+  // }
 
   getPostCodeByCityId(valId){
 
@@ -632,10 +649,10 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
   getPostcodeByCityC(e){
     if(e){
-      let getCode = this.getCorrsCityData.filter(function(ele){
-        return ele.cityId == e.value;
-      });
-      return this.sharedService.getPostCodeData(getCode[0].cityCode)
+      // let getCode = this.getCorrsCityData.filter(function(ele){
+      //   return ele.cityId == e.value;
+      // });
+      return this.sharedService.getPostCodeData(e)
       .subscribe(resCityData => {
         this.getCorrsPostData = resCityData;
         // this.profileForm.get('corrsPostcode').setValue(this.postCodeObj2.value);
@@ -646,15 +663,32 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     }
   }
 
+  getPostcodeByCityP(e){
+    if(e){
+      // let getCode = this.getCorrsCityData.filter(function(ele){
+      //   return ele.cityId == e.value;
+      // });
+      return this.sharedService.getPostCodeData(e)
+      .subscribe(resCityData => {
+        this.getPerPostData = resCityData;
+        // this.profileForm.get('corrsPostcode').setValue(this.postCodeObj2.value);
+      },
+      Error => {
+       this.toastr.error(this.translate.instant('common.err.servicedown'), '');            
+     });
+    }
+  }
+
+
 
   getCitiesByStateP(e){
     if(e){
       return this.sharedService.getCitiesbyState(e)
       .subscribe(resCityData => {
         this.getPerCityData = resCityData;  
-        if (this.getPerPostCodeFlag){
-          this.getPostCodeByCityId(this.getPerCityId);
-        }
+        // if (this.getPerPostCodeFlag){
+        //   this.getPostCodeByCityId(this.getPerCityId);
+        // }
       },
       Error => {
      this.toastr.error(this.translate.instant('common.err.servicedown'), '');            

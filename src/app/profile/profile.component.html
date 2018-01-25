@@ -174,7 +174,7 @@
               </div>
               <div class="form-group col-md-4">
                 <mat-form-field *ngIf="isLocal" class="example-full-width font-size-s">
-                  <mat-select (change)="getPostcodeByCityP($event)" formControlName="perCityLocal" placeholder="{{'profile.label.city' | translate}}"  >
+                  <mat-select (change)="getPostcodeByCity($event)" formControlName="perCityLocal" placeholder="{{'profile.label.city' | translate}}"  >
                     <mat-option *ngFor="let city of getPerCityData" #perCityLocal [attr.cityCode] = "city?.cityCode" [value]="city?.cityId">{{ city?.cityName }}</mat-option>
                   </mat-select>
                   <!-- required="true ? isLocal : false" 
