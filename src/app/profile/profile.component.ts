@@ -264,7 +264,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.protectedService.getUser().subscribe(
       data => {
         if(data.user){
-          debugger;
           // this.fullname = data.user.fullName;
           this.userTypeId = data.user.userType.userTypeId;
 
@@ -874,6 +873,11 @@ getPostcodeByCityC(e){
     if(!this.isLocal){
       this.profileForm.get('perStateNotLocal').setValue("");
       this.profileForm.get('perCityNotLocal').setValue("");
+      this.profileForm.get('perPostcodeNotLocal').setValue("");
+
+
+      this.profileForm.get('perStateLocal').setValue("");
+      this.profileForm.get('perCityLocal').setValue("");
       this.profileForm.get('perPostcode').setValue("");
 
       this.profileForm.removeControl('perStateNotLocal');
@@ -923,7 +927,6 @@ getPostcodeByCityC(e){
   }
 
   edit(){
-    // debugger
     this.isActive = !this.isActive;
     
     if(this.isActive != false) {
