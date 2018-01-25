@@ -340,7 +340,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                         this.profileForm.get('perCityLocal').setValue(data.user.address.permanentAddressCity.cityId);
                         
                       }
-                       this.getPostCodeByCityId(data.user.address.permanentAddressCity.cityId);                     
+                       //this.getPostCodeByCityId(data.user.address.permanentAddressCity.cityId);                     
 
                       if(data.user.address.permanentAddressPostcode){
                         this.getPerPostCodeFlag = true;
@@ -617,7 +617,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     return this.sharedService.getPostCodeData(getCode[0].cityCode)
     .subscribe(resCityData => {
       this.getPerPostData = resCityData;
-      if (this.getPerPostCodeFlag){
+      if (this.getPerPostCodeFlag){ //load post code
       this.profileForm.get('perPostcode').setValue(this.perPostCode);  
       }
     },
