@@ -263,7 +263,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
           this.protectedService.getProfile(data.user.pid).subscribe(
             data => {
-
+alert('getUserData loaded');
               if(data.user) {
                 this.userId = data.user.userId;
                 this.fullname = data.user.fullName;
@@ -396,12 +396,13 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                         this.getState();
                         this.profileForm.get('corrsStateLocal').setValue(data.user.address.correspondingAddressState.stateId);
                       }
-                      
+
                       if(data.user.address.correspondingAddressCity){
                         this.getCitiesByStateC(data.user.address.correspondingAddressState.stateId);
                         this.profileForm.get('corrsCityLocal').setValue(data.user.address.correspondingAddressCity.cityId);
                         // this.postCodeObj2 = {value: data.user.address.correspondingAddressCity.cityId};
                       }
+                      
                       
                     }else{
                       this.isCorrsLocal = false;
@@ -603,7 +604,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
   getPostcodeByCityP(e){
     debugger;
-
+    this.getPerPostCodeFlag = false;
     if(e){
       this.getPostCodeByCityId(e.value);
     }
@@ -647,7 +648,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     if(e){
       return this.sharedService.getCitiesbyState(e)
       .subscribe(resCityData => {
-        this.getPerCityData = resCityData;    
+        this.getPerCityData = resCityData;  
+        alert('city loaded');  
       },
       Error => {
      this.toastr.error(this.translate.instant('common.err.servicedown'), '');            
@@ -665,6 +667,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       return this.sharedService.getCitiesbyState(e)
       .subscribe(resCityData => {
         this.getCorrsCityData = resCityData;
+        alert('post code loaded');
         // this.getPostcodeByCityC(this.postCodeObj2);
       },
       Error => {
@@ -677,6 +680,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   getState(id?){
     return this.sharedService.getStateData()
      .subscribe(resStateData => {
+       alert('State loaded');
         this.getStateData = resStateData;
         if(id){
           this.profileForm.get('perStateLocal').setValue(id);
