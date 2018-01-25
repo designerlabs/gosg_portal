@@ -1056,10 +1056,18 @@ let bodyUpdate =
     }
 
     bodyUpdate.address.correspondingAddressCountry.countryId = formValues.corrsCountry;
-    
-    
-    bodyUpdate.address.permanentAddressHomePhoneNo = formValues.percodeTele + '*' + formValues.perTelephone;
-    bodyUpdate.address.correspondingAddressHomePhoneNo = formValues.corrscodeTelefon + '*' + formValues.corrsTelephone;
+
+    if(formValues.percodeTele && formValues.perTelephone) {
+      bodyUpdate.address.permanentAddressHomePhoneNo = formValues.percodeTele + '*' + formValues.perTelephone;
+    } else {
+      bodyUpdate.address.permanentAddressHomePhoneNo = '';
+    }
+
+    if(formValues.corrscodeTelefon && formValues.corrsTelephone) {
+      bodyUpdate.address.correspondingAddressHomePhoneNo = formValues.corrscodeTelefon + '*' + formValues.corrsTelephone;
+    }else {
+      bodyUpdate.address.correspondingAddressHomePhoneNo = '';
+    }
     bodyUpdate.address.sameAddressFlag = formValues.checkboxValue;
 
 
