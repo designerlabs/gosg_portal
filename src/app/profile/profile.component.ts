@@ -25,8 +25,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   getPerPostData: any[];
   getCorrsPostData: any[];
   getCorrsData: any;
-  perPostCode:any;
-  corrsPostCode: any;
+  getperPostCode:any;
+  getcorrsPostCode: any;
   getPostData: any;
   initialBtn: boolean;
   isSameAddressValue: any;
@@ -337,7 +337,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
                       if(data.user.address.permanentAddressPostcode){
                         this.getPerPostCodeFlag = true;
-                        this.perPostCode = data.user.address.permanentAddressCity.cityId;
+                        this.getperPostCode = data.user.address.permanentAddressPostcode.postcodeId;
                         //this.profileForm.get('perPostcode').setValue(data.user.address.permanentAddressPostcode.postcodeId);    
                       }
                       this.getCitiesByStateP(data.user.address.permanentAddressState.stateId);
@@ -620,7 +620,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     .subscribe(resCityData => {
       this.getPerPostData = resCityData;
       if (this.getPerPostCodeFlag){ //load post code
-      this.profileForm.get('perPostcode').setValue(this.perPostCode);  
+      this.profileForm.get('perPostcode').setValue(this.getperPostCode);  
       }
     },
     Error => {
@@ -651,7 +651,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       .subscribe(resCityData => {
         this.getPerCityData = resCityData;  
         if (this.getPerPostCodeFlag){
-          this.getPostCodeByCityId(this.perPostCode);
+          this.getPostCodeByCityId(this.getperPostCode);
         }
       },
       Error => {
