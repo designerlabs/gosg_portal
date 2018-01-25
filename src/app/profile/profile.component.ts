@@ -336,8 +336,10 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                       this.getCitiesByStateP(data.user.address.permanentAddressState.stateId);
                       if(data.user.address.permanentAddressCity){
                         this.profileForm.get('perCityLocal').setValue(data.user.address.permanentAddressCity.cityId);
-                        this.postCodeObj1 = {value: data.user.address.permanentAddressCity.cityId};
+                        //this.postCodeObj1 = {value: data.user.address.permanentAddressCity.cityId};
                       }
+                      // this.getPostcodeByCityP(data.user.address.permanentAddressCity.cityId);
+                      
 
                     }else{
                       this.isLocal = false;
@@ -626,7 +628,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       return this.sharedService.getCitiesbyState(e)
       .subscribe(resCityData => {
         this.getPerCityData = resCityData;
-        this.getPostcodeByCityP(this.postCodeObj1);
+        
       },
       Error => {
        this.toastr.error(this.translate.instant('common.err.servicedown'), '');            
