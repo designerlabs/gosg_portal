@@ -98,6 +98,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   public perCityLocal: FormControl
   public perCityNotLocal: FormControl
   public perPostcode: FormControl
+  public perPostcodeNotLocal: FormControl
   public perTelephone: FormControl
   public percodeTele: FormControl
   public corrsAddress1: FormControl
@@ -111,6 +112,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   public checkboxValue: FormControl
   public corrsCity: FormControl
   public corrsPostcode: FormControl
+  public corrsPostcodeNotLocal: FormControl
   public corrsTelephone: FormControl
   public corrscodeTelefon: FormControl
   public corrsMobile: FormControl
@@ -199,6 +201,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.perCityLocal = new FormControl()
     this.perCityNotLocal = new FormControl()
     this.perPostcode = new FormControl()
+    this.perPostcodeNotLocal = new FormControl()
     this.perTelephone = new FormControl()
     this.percodeTele = new FormControl()
     this.corrsAddress1 = new FormControl()
@@ -212,6 +215,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.checkboxValue = new FormControl()
     this.corrsCity = new FormControl()
     this.corrsPostcode = new FormControl()
+    this.corrsPostcodeNotLocal = new FormControl()
     this.corrsTelephone = new FormControl()
     this.corrscodeTelefon = new FormControl()
     this.corrsMobile = new FormControl()
@@ -231,6 +235,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       perCityLocal: this.perCityLocal,
       perCityNotLocal: this.perCityNotLocal,
       perPostcode: this.perPostcode,
+      perPostcodeNotLocal: this.perPostcodeNotLocal,
       perTelephone: this.perTelephone,
       percodeTele: this.percodeTele,
       corrsAddress1: this.corrsAddress1,
@@ -244,6 +249,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       checkboxValue: this.checkboxValue,
       corrsCity: this.corrsCity,
       corrsPostcode: this.corrsPostcode,
+      corrsPostcodeNotLocal: this.corrsPostcodeNotLocal,
       corrsTelephone: this.corrsTelephone,
       corrscodeTelefon: this.corrscodeTelefon,
       corrsMobile: this.corrsMobile,
@@ -361,13 +367,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                       }
   
                       if(data.user.address.optionalPermanentAddressPostcode){
-                        this.profileForm.get('perPostcode').setValue(data.user.address.optionalPermanentAddressPostcode); 
+                        this.profileForm.get('perPostcodeNotLocal').setValue(data.user.address.optionalPermanentAddressPostcode); 
                       }
-
-                      if(data.user.address.permanentAddressPostcode){
-                        this.profileForm.get('perPostcode').setValue(data.user.address.permanentAddressPostcode);
-                      }
-
                       
                     }
                   }
@@ -423,7 +424,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                       }
   
                       if(data.user.address.optionalCorrespondingAddressPostcode){
-                        this.profileForm.get('corrsPostcode').setValue(data.user.address.optionalCorrespondingAddressPostcode); 
+                        this.profileForm.get('corrsPostcodeNotLocal').setValue(data.user.address.optionalCorrespondingAddressPostcode); 
                       }
                       
                     }
@@ -634,33 +635,7 @@ getPostcodeByCityCorrs(e){
    });
 }
 
-
-  // getPostcodeByCityP(e){
-  //   debugger;
-  //   this.getPerPostCodeFlag = false;
-  //   if(e){
-  //     this.getPostCodeByCityId(e.value);
-  //   }
-  // }
-
-  getPostCodeByCityId(valId){
-
-    let getCode = this.getPerCityData.filter(function(ele){
-      return ele.cityId == valId;
-    });
-    return this.sharedService.getPostCodeData(getCode[0].cityCode)
-    .subscribe(resCityData => {
-      this.getPerPostData = resCityData;
-      if (this.getPerPostCodeFlag){ //load post code
-      this.profileForm.get('perPostcode').setValue(this.getperPostCode);  
-      }
-    },
-    Error => {
-     this.toastr.error(this.translate.instant('common.err.servicedown'), '');            
-   });
-  }
-
-  getPostcodeByCityC(e){
+getPostcodeByCityC(e){
     if(e){
       // let getCode = this.getCorrsCityData.filter(function(ele){
       //   return ele.cityId == e.value;
@@ -804,8 +779,15 @@ getPostcodeByCityCorrs(e){
       }else if(this.perStateNotLocal.value){
         this.profileForm.get('corrsCityNotLocal').setValue(this.perCityNotLocal.value);
       }
+
+      if(this.perPostcode.value){
+        this.profileForm.get('corrsPostcode').setValue(this.perPostcode.value);
+      } else if(this.perPostcodeNotLocal.value){
+        this.profileForm.get('corrsPostcodeNotLocal').setValue(this.perPostcodeNotLocal.value);
+      }
+
       
-      this.profileForm.get('corrsPostcode').setValue(this.perPostcode.value);
+     
       this.profileForm.get('corrsTelephone').setValue(this.perTelephone.value);
       // this.profileForm.get('percodeTele').setValue(this.percodeTele.value);
 

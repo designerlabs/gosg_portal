@@ -204,7 +204,7 @@
                       </mat-select>
                     </mat-form-field>
                     <mat-form-field *ngIf="!isLocal" class="example-full-width font-size-s">
-                      <input (keyup)="isChanged()" matInput formControlName="perPostcode" [textMask]="{mask: maskPostcode}" type="text" placeholder="{{'profile.label.postcode' | translate}}" />
+                      <input (keyup)="isChanged()" matInput formControlName="perPostcodeNotLocal" [textMask]="{mask: maskPostcode}" type="text" placeholder="{{'profile.label.postcode' | translate}}" />
                       <mat-error *ngIf="!validateCtrlChk(perPostcode) && profileForm.controls.perPostcode.errors?.pattern">
                           {{'profile.pattern.postcode' | translate }}
                         </mat-error>
@@ -285,7 +285,7 @@
                   </mat-select>
                 </mat-form-field>
                 <mat-form-field *ngIf="!isCorrsLocal" class="example-full-width font-size-s">
-                  <input (keyup)="isChanged()" matInput formControlName="corrsPostcode" [textMask]="{mask: maskPostcode}" type="text" placeholder="{{'profile.label.postcode' | translate}}" />
+                  <input (keyup)="isChanged()" matInput formControlName="corrsPostcodeNotLocal" [textMask]="{mask: maskPostcode}" type="text" placeholder="{{'profile.label.postcode' | translate}}" />
                 </mat-form-field>
               </div>
               <div class="form-group col-md-4 input-group" style="padding-left: 15px; padding-right: 15px;">
