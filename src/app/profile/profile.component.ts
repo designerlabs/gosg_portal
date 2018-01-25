@@ -786,13 +786,19 @@ getPostcodeByCityC(e){
         this.profileForm.get('corrsPostcodeNotLocal').setValue(this.perPostcodeNotLocal.value);
       }
 
+      if(this.percodeTele.value){
+        this.profileForm.get('corrscodeTelefon').setValue(this.percodeTele.value);
+      }
       
      
       this.profileForm.get('corrsTelephone').setValue(this.perTelephone.value);
       // this.profileForm.get('percodeTele').setValue(this.percodeTele.value);
 
-      if(this.isLocal)
+      if(this.isLocal){
         this.getCitiesByStateC(this.perStateLocal.value);
+        this.getPostcodeByCityC(this.perCityLocal.value);
+      }
+        
      
 
 
@@ -950,16 +956,18 @@ getPostcodeByCityC(e){
     let gdr = this.profileForm.get('gender').value;
     let pAdd1 = this.profileForm.get('perAddress1').value;
     let pCountry = this.profileForm.get('perCountry').value;
-    let pPCode = this.profileForm.get('perPostcode').value;
+    let pPCode;
     let pState;
     let pCity;
 
     if(this.isLocal){
       pState = this.profileForm.get('perStateLocal').value;
       pCity = this.profileForm.get('perCityLocal').value;
+      pPCode = this.profileForm.get('perPostcode').value;
     } else {
       pState = this.profileForm.get('perStateNotLocal').value;
       pCity = this.profileForm.get('perCityNotLocal').value;
+      pPCode = this.profileForm.get('perPostcodeNotLocal').value;
     }
 
     let reqVal:any = [ gdr, pAdd1, pCountry, pState, pCity, pPCode ];
