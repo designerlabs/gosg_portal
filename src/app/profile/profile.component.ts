@@ -812,9 +812,11 @@ getPostcodeByCityC(e){
       this.profileForm.get('corrsStateLocal').setValue("");
       this.profileForm.get('corrsCityLocal').setValue("");
       this.profileForm.get('corrsPostcode').setValue("");
+      this.profileForm.get('corrsPostcodeNotLocal').setValue("");
       this.profileForm.get('corrsTelephone').setValue("");
       this.profileForm.get('corrsCityNotLocal').setValue("");
       this.profileForm.get('corrsStateNotLocal').setValue("");
+      this.profileForm.get('corrscodeTelefon').setValue("");
       this.isCorrsLocal = false;
     }
     console.log(e.checked);
@@ -1114,7 +1116,7 @@ let bodyUpdate =
     } else {
       bodyUpdate.address.optionalPermanentAddressState = formValues.perStateNotLocal;
       bodyUpdate.address.optionalPermanentAddressCity =  formValues.perCityNotLocal;
-      bodyUpdate.address.optionalPermanentAddressPostcode = formValues.perPostcode;
+      bodyUpdate.address.optionalPermanentAddressPostcode = formValues.perPostcodeNotLocal;
     }
 
     if(this.isCorrsLocal) {
@@ -1124,7 +1126,7 @@ let bodyUpdate =
     } else {
       bodyUpdate.address.optionalCorrespondingAddressState = formValues.corrsStateNotLocal;
       bodyUpdate.address.optionalCorrespondingAddressCity = formValues.corrsCityNotLocal;
-      bodyUpdate.address.optionalCorrespondingAddressPostcode = formValues.corrsPostcode;
+      bodyUpdate.address.optionalCorrespondingAddressPostcode = formValues.corrsPostcodeNotLocal;
     }
 
     bodyUpdate.address.correspondingAddressCountry.countryId = formValues.corrsCountry;
