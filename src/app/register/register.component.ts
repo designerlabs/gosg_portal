@@ -119,7 +119,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
             this.fnCaptch.getCaptcha();
         }
         this.maskCitizen = this.validateService.getMask().telephone;
-        this.maskForeigner = this.validateService.getMask().telephonef;
+        this.maskForeigner = this.validateService.getMask().telephone;
         this.maskICNo = this.validateService.getMask().icno;
     }
     constructor(fb: FormBuilder,
