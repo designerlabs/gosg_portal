@@ -339,11 +339,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                         this.postCodeObj1 = {value: data.user.address.permanentAddressCity.cityId};
                       }
 
-                     
-                      if(data.user.address.permanentAddressPostcode){
-                        this.getPostcodeByCityP(this.postCodeObj1);
-                        this.profileForm.get('perPostcode').setValue(data.user.address.permanentAddressPostcode);
-                      }
                     }else{
                       this.isLocal = false;
                       if(data.user.address.optionalPermanentAddressState){
@@ -394,11 +389,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                         this.postCodeObj2 = {value: data.user.address.correspondingAddressCity.cityId};
                       }
                       
-                      //this.isChanged(this.postCodeObj2);
-                      if(data.user.address.correspondingAddressPostcode){
-                        this.getPostcodeByCityC(this.postCodeObj2);
-                        this.profileForm.get('corrsPostcode').setValue(data.user.address.correspondingAddressPostcode);
-                      }
                     }else{
                       this.isCorrsLocal = false;
                       if(data.user.address.optionalCorrespondingAddressState){
@@ -605,6 +595,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       return this.sharedService.getPostCodeData(getCode[0].cityCode)
       .subscribe(resCityData => {
         this.getPerPostData = resCityData;
+        this.profileForm.get('perPostcode').setValue(this.postCodeObj1.value);
+       
       },
       Error => {
        this.toastr.error(this.translate.instant('common.err.servicedown'), '');            
@@ -620,6 +612,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       return this.sharedService.getPostCodeData(e)
       .subscribe(resCityData => {
         this.getCorrsPostData = resCityData;
+        this.profileForm.get('corrsPostcode').setValue(this.postCodeObj2.value);
       },
       Error => {
        this.toastr.error(this.translate.instant('common.err.servicedown'), '');            
@@ -633,6 +626,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       return this.sharedService.getCitiesbyState(e)
       .subscribe(resCityData => {
         this.getPerCityData = resCityData;
+        this.getPostcodeByCityP(this.postCodeObj1);
       },
       Error => {
        this.toastr.error(this.translate.instant('common.err.servicedown'), '');            
@@ -645,6 +639,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       return this.sharedService.getCitiesbyState(e)
       .subscribe(resCityData => {
         this.getCorrsCityData = resCityData;
+        this.getPostcodeByCityC(this.postCodeObj2);
       },
       Error => {
        this.toastr.error(this.translate.instant('common.err.servicedown'), '');            
