@@ -776,7 +776,7 @@ getPostcodeByCityC(e){
 
       if(this.perCityLocal.value){
         this.profileForm.get('corrsCityLocal').setValue(this.perCityLocal.value);
-      }else if(this.perStateNotLocal.value){
+      }else if(this.perCityNotLocal.value){
         this.profileForm.get('corrsCityNotLocal').setValue(this.perCityNotLocal.value);
       }
 
