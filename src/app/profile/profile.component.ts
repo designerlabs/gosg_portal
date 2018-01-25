@@ -335,6 +335,12 @@ alert('getUserData loaded');
                       if(data.user.address.permanentAddressState){
                         this.profileForm.get('perStateLocal').setValue(data.user.address.permanentAddressState.stateId);
                       }
+                      
+                      if(data.user.address.permanentAddressPostcode){
+                        this.getPerPostCodeFlag = true;
+                        this.perPostCode = data.user.address.permanentAddressCity.cityId;
+                        //this.profileForm.get('perPostcode').setValue(data.user.address.permanentAddressPostcode.postcodeId);    
+                      }
                       this.getCitiesByStateP(data.user.address.permanentAddressState.stateId);
                       if(data.user.address.permanentAddressCity){
                         this.profileForm.get('perCityLocal').setValue(data.user.address.permanentAddressCity.cityId);
@@ -342,11 +348,7 @@ alert('getUserData loaded');
                       }
                        //this.getPostCodeByCityId(data.user.address.permanentAddressCity.cityId);                     
 
-                      if(data.user.address.permanentAddressPostcode){
-                        this.getPerPostCodeFlag = true;
-                        this.perPostCode = data.user.address.permanentAddressCity.cityId;
-                        //this.profileForm.get('perPostcode').setValue(data.user.address.permanentAddressPostcode.postcodeId);    
-                      }
+                      
 
                     }else{
                       this.isLocal = false;
@@ -650,15 +652,13 @@ alert('getUserData loaded');
       .subscribe(resCityData => {
         this.getPerCityData = resCityData;  
         alert('city loaded');  
+        if (this.getPerPostCodeFlag){
+          this.getPostCodeByCityId(this.perPostCode);
+        }
       },
       Error => {
      this.toastr.error(this.translate.instant('common.err.servicedown'), '');            
-     }
-   ),() => {
-    if (this.getPerPostCodeFlag){
-          this.getPostCodeByCityId(this.perPostCode);
-        }
-   }
+     });
     }
   }
 
