@@ -22,10 +22,11 @@ import { APP_CONFIG, AppConfig } from '../config/app.config.module';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit, AfterViewInit {
+  getPerPostData: any[];
+  getCorrsPostData: any[];
   getCorrsData: any;
   postCodeObj1: { value: any; };
   postCodeObj2: { value: any; };
-  postCodeObj: { value: any; };
   getPostData: any;
   initialBtn: boolean;
   isSameAddressValue: any;
@@ -122,11 +123,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   regdate:string;
   lang = this.lang;
   languageId = this.languageId;
-  // private myDatePickerOptions: IMyDpOptions = {
-  //       // other options...
-  //       // Initialized to specific date (09/10/2018).
-  //       dateFormat: 'dd/mm/yyyy',
-  // };
+
 
   constructor(
     private router: Router, 
@@ -139,7 +136,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     private activatedRoute: ActivatedRoute, 
     private toastr: ToastrService,
     @Inject(APP_CONFIG) private config: AppConfig, 
-    // private slice: SlicePipe
+   
     ) {
       this.lang = translate.currentLang;
       this.languageId = 2;
@@ -281,9 +278,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                 this.agencyForwardUrl = data.user.agencyForwardUrl;
                 this.roles = data.user.roles;
 
-                // this.profileForm.get('mobilecodeTelefon').setValue(data.user);
-                // if mobile number have Country code
-
+    
                 if (data.user.mobilePhoneNo && (data.user.mobilePhoneNo).split('*').length > 1) {
                   const telenum = (data.user.mobilePhoneNo).split('*')[1];
                   this.profileForm.get('corrsMobile').setValue(telenum.replace('+',''));
@@ -318,7 +313,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                   this.profileForm.get('perAddress1').setValue(data.user.address.permanentAddress1);
                   this.profileForm.get('perAddress2').setValue(data.user.address.permanentAddress2);
                   this.profileForm.get('perAddress3').setValue(data.user.address.permanentAddress3);
-                  this.profileForm.get('perPostcode').setValue(data.user.address.permanentAddressPostcode);
+                  // this.profileForm.get('perPostcode').setValue(data.user.address.permanentAddressPostcode);
                   // this.profileForm.get('perTelephone').setValue(data.user.address.permanentAddressHomePhoneNo);
                   // if corressponding address have Country code
                   if (data.user.address.permanentAddressHomePhoneNo && (data.user.address.permanentAddressHomePhoneNo).split('*').length > 1) {
@@ -344,9 +339,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                         this.postCodeObj1 = {value: data.user.address.permanentAddressCity.cityId};
                       }
 
-                 
-                     // this.isChangedPer(this.postCodeObj1);
+                     
                       if(data.user.address.permanentAddressPostcode){
+                        this.getPostcodeByCityP(this.postCodeObj1);
                         this.profileForm.get('perPostcode').setValue(data.user.address.permanentAddressPostcode);
                       }
                     }else{
@@ -401,6 +396,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                       
                       //this.isChanged(this.postCodeObj2);
                       if(data.user.address.correspondingAddressPostcode){
+                        this.getPostcodeByCityC(this.postCodeObj2);
                         this.profileForm.get('corrsPostcode').setValue(data.user.address.correspondingAddressPostcode);
                       }
                     }else{
@@ -599,12 +595,44 @@ export class ProfileComponent implements OnInit, AfterViewInit {
        });
   }
 
+
+
+  getPostcodeByCityP(e){
+    if(e){
+      let getCode = this.getPerCityData.filter(function(ele){
+        return ele.cityId == e.value;
+      });
+      return this.sharedService.getPostCodeData(getCode[0].cityCode)
+      .subscribe(resCityData => {
+        this.getPerPostData = resCityData;
+      },
+      Error => {
+       this.toastr.error(this.translate.instant('common.err.servicedown'), '');            
+     });
+    }
+  }
+
+  getPostcodeByCityC(e){
+    if(e){
+      let getCode = this.getCorrsCityData.filter(function(ele){
+        return ele.cityId == e.value;
+      });
+      return this.sharedService.getPostCodeData(e)
+      .subscribe(resCityData => {
+        this.getCorrsPostData = resCityData;
+      },
+      Error => {
+       this.toastr.error(this.translate.instant('common.err.servicedown'), '');            
+     });
+    }
+  }
+
+
   getCitiesByStateP(e){
     if(e){
       return this.sharedService.getCitiesbyState(e)
       .subscribe(resCityData => {
         this.getPerCityData = resCityData;
-        this.isChangedPer(this.postCodeObj1);
       },
       Error => {
        this.toastr.error(this.translate.instant('common.err.servicedown'), '');            
@@ -617,7 +645,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       return this.sharedService.getCitiesbyState(e)
       .subscribe(resCityData => {
         this.getCorrsCityData = resCityData;
-        this.isChanged(this.postCodeObj2);
       },
       Error => {
        this.toastr.error(this.translate.instant('common.err.servicedown'), '');            
@@ -625,9 +652,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     }
   }
 
-  getCity(e){
-    this.selectedCity = e.value;
-  }
   
   getState(id?){
     return this.sharedService.getStateData()
@@ -663,51 +687,12 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         return this.validateService.validateCtrl(ctrl);
   }
   
-  isChanged(id?) {
+  isChanged() {
     if(this.profileForm.get('checkboxValue').value == true) {
       this.profileForm.get('checkboxValue').setValue(false);
       this.checkReqValues();
     }
-
-    if(id){
-      let getCode = this.getCorrsCityData.filter(function(ele){
-        return ele.cityId == id.value;
-      });
-      return this.sharedService.getPostCodeData(getCode[0].cityCode)
-      .subscribe(resPostData => {
-         this.getCorrsData = resPostData;
-         if(id){
-           this.profileForm.get('corrsPostcode').setValue(id.value);
-         }
-       },
-       Error => {
-        this.toastr.error(this.translate.instant('common.err.servicedown'), '');            
-      });
-    }
-    }
-
-    isChangedPer(id?) {
-      if(this.profileForm.get('checkboxValue').value == true) {
-        this.profileForm.get('checkboxValue').setValue(false);
-        this.checkReqValues();
-      }
-  
-      if(id){
-        let getCode = this.getPerCityData.filter(function(ele){
-          return ele.cityId == id.value;
-        });
-        return this.sharedService.getPostCodeData(getCode[0].cityCode)
-        .subscribe(resPostData => {
-           this.getPostData = resPostData;
-           if(id){
-             this.profileForm.get('perPostcode').setValue(id.value);
-           }
-         },
-         Error => {
-          this.toastr.error(this.translate.instant('common.err.servicedown'), '');            
-        });
-      }
-      }
+  }
 
   isStateChanged() {
     this.isChanged();
