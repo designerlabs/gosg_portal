@@ -622,6 +622,19 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 }
 
 
+getPostcodeByCityCorrs(e){
+  this.isStateChanged();
+
+  return this.sharedService.getPostCodeData(e.value)
+    .subscribe(resPostCodeData => {
+      this.getCorrsPostData = resPostCodeData;
+    },
+    Error => {
+     this.toastr.error(this.translate.instant('common.err.servicedown'), '');            
+   });
+}
+
+
   // getPostcodeByCityP(e){
   //   debugger;
   //   this.getPerPostCodeFlag = false;

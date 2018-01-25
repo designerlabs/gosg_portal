@@ -267,7 +267,7 @@
               </div>
               <div class="form-group col-md-4">
                 <mat-form-field *ngIf="isCorrsLocal" class="example-full-width font-size-s">
-                  <mat-select (change)="getPostcodeByCityC($event)" formControlName="corrsCityLocal" placeholder="{{'profile.label.city' | translate}}" #corrsCityLocal [attr.cityCode] = "city?.cityCode">
+                  <mat-select (change)="getPostcodeByCityCorrs($event)" formControlName="corrsCityLocal" placeholder="{{'profile.label.city' | translate}}" #corrsCityLocal [attr.cityCode] = "city?.cityCode">
                       <mat-option *ngFor="let city of getCorrsCityData" [value]="city?.cityId">{{ city?.cityName }}</mat-option>
                   </mat-select>
                 </mat-form-field>
