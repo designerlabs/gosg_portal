@@ -25,8 +25,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   getPerPostData: any[];
   getCorrsPostData: any[];
   getCorrsData: any;
-  postCodeObj1: { value: any; };
-  postCodeObj2: { value: any; };
+  perPostCode:any;
+  corrsPostCode: any;
   getPostData: any;
   initialBtn: boolean;
   isSameAddressValue: any;
@@ -45,7 +45,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   maskDateFormat: any;
   maskForeigner: any;
   maskPostcode: any;
-  
+ getPerPostCodeFlag = false;
+
   @ViewChild('perhomephone') homephone: ElementRef 
   @ViewChild('perPost') perPost: ElementRef
   @ViewChild('corsPost') corsPost: ElementRef
@@ -252,6 +253,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   }
 
   getUserData(){
+    this.getPerPostCodeFlag = false;
     this.protectedService.getUser().subscribe(
       data => {
         if(data.user){
@@ -336,12 +338,14 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                       this.getCitiesByStateP(data.user.address.permanentAddressState.stateId);
                       if(data.user.address.permanentAddressCity){
                         this.profileForm.get('perCityLocal').setValue(data.user.address.permanentAddressCity.cityId);
-                        //this.postCodeObj1 = {value: data.user.address.permanentAddressCity.cityId};
+                        
                       }
-                       this.getCityCodeByCityId(data.user.address.permanentAddressCity.cityId);                     
+                       this.getPostCodeByCityId(data.user.address.permanentAddressCity.cityId);                     
 
                       if(data.user.address.permanentAddressPostcode){
-                        this.profileForm.get('perPostcode').setValue(data.user.address.permanentAddressPostcode.postcodeId);    
+                        this.getPerPostCodeFlag = true;
+                        this.perPostCode = data.user.address.permanentAddressCity.cityId;
+                        //this.profileForm.get('perPostcode').setValue(data.user.address.permanentAddressPostcode.postcodeId);    
                       }
 
                     }else{
@@ -601,11 +605,11 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     debugger;
 
     if(e){
-      this.getCityCodeByCityId(e.value);
+      this.getPostCodeByCityId(e.value);
     }
   }
 
-  getCityCodeByCityId(valId){
+  getPostCodeByCityId(valId){
 
     let getCode = this.getPerCityData.filter(function(ele){
       return ele.cityId == valId;
@@ -613,6 +617,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     return this.sharedService.getPostCodeData(getCode[0].cityCode)
     .subscribe(resCityData => {
       this.getPerPostData = resCityData;
+      if (this.getPerPostCodeFlag){
+      this.profileForm.get('perPostcode').setValue(this.perPostCode);  
+      }
     },
     Error => {
      this.toastr.error(this.translate.instant('common.err.servicedown'), '');            
@@ -640,12 +647,16 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     if(e){
       return this.sharedService.getCitiesbyState(e)
       .subscribe(resCityData => {
-        this.getPerCityData = resCityData;
-        
+        this.getPerCityData = resCityData;    
       },
       Error => {
-       this.toastr.error(this.translate.instant('common.err.servicedown'), '');            
-     });
+     this.toastr.error(this.translate.instant('common.err.servicedown'), '');            
+     }
+   ),() => {
+    if (this.getPerPostCodeFlag){
+          this.getPostCodeByCityId(this.perPostCode);
+        }
+   }
     }
   }
 
