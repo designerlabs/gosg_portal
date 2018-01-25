@@ -281,7 +281,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     
                 if (data.user.mobilePhoneNo && (data.user.mobilePhoneNo).split('*').length > 1) {
                   const telenum = (data.user.mobilePhoneNo).split('*')[1];
-                  this.profileForm.get('corrsMobile').setValue(telenum.replace('+',''));
+                  this.profileForm.get('corrsMobile').setValue(telenum);
                   const telecode = (data.user.mobilePhoneNo).split('*')[0];
                   this.profileForm.get('mobilecodeTelefon').setValue(telecode);
                 }else {
@@ -318,7 +318,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                   // if corressponding address have Country code
                   if (data.user.address.permanentAddressHomePhoneNo && (data.user.address.permanentAddressHomePhoneNo).split('*').length > 1) {
                     const perTelenum = (data.user.address.permanentAddressHomePhoneNo).split('*')[1];
-                    this.profileForm.get('perTelephone').setValue(perTelenum.replace('+',''));
+                    this.profileForm.get('perTelephone').setValue(perTelenum);
                     const perTeleCode = (data.user.address.permanentAddressHomePhoneNo).split('*')[0];
                     this.profileForm.get('percodeTele').setValue(perTeleCode);
                   }else {
@@ -373,7 +373,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                   // if corressponding address have Country code
                   if (data.user.address.correspondingAddressHomePhoneNo && (data.user.address.correspondingAddressHomePhoneNo).split('*').length > 1) {
                     const corrTeleNum = (data.user.address.correspondingAddressHomePhoneNo).split('*')[1];
-                    this.profileForm.get('corrsTelephone').setValue(corrTeleNum.replace('+',''));
+                    this.profileForm.get('corrsTelephone').setValue(corrTeleNum);
                     const corrsTeleCode = (data.user.address.correspondingAddressHomePhoneNo).split('*')[0];
                     this.profileForm.get('corrscodeTelefon').setValue(corrsTeleCode);
 
