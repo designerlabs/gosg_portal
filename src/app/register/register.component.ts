@@ -555,6 +555,20 @@ export class RegisterComponent implements OnInit, AfterViewInit {
                 this.countries = resCountryData;
             });
     }
+    // PR and TR country change
+    countryChange(e) {
+        let flr = this.countries.filter((element, index) => {
+            return (element.countryId === e.value);
+         });
+         this.citizenFormGrp.get('codeTelefon').setValue(flr[0].countryDialCode);
+    }
+
+    countryChangeNonCiti(e) {
+        let flr = this.countries.filter((element, index) => {
+            return (element.countryId === e.value);
+         });
+         this.citizenFormGrp.get('codeTelefonf').setValue(flr[0].countryDialCode);
+    }
 
     validateCtrlChk(ctrl: FormControl) {
         // return ctrl.valid || ctrl.untouched
