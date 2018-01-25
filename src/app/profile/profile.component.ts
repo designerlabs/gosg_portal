@@ -263,7 +263,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
           this.protectedService.getProfile(data.user.pid).subscribe(
             data => {
-alert('getUserData loaded');
               if(data.user) {
                 this.userId = data.user.userId;
                 this.fullname = data.user.fullName;
@@ -335,7 +334,7 @@ alert('getUserData loaded');
                       if(data.user.address.permanentAddressState){
                         this.profileForm.get('perStateLocal').setValue(data.user.address.permanentAddressState.stateId);
                       }
-                      
+
                       if(data.user.address.permanentAddressPostcode){
                         this.getPerPostCodeFlag = true;
                         this.perPostCode = data.user.address.permanentAddressCity.cityId;
@@ -651,7 +650,6 @@ alert('getUserData loaded');
       return this.sharedService.getCitiesbyState(e)
       .subscribe(resCityData => {
         this.getPerCityData = resCityData;  
-        alert('city loaded');  
         if (this.getPerPostCodeFlag){
           this.getPostCodeByCityId(this.perPostCode);
         }
@@ -667,7 +665,6 @@ alert('getUserData loaded');
       return this.sharedService.getCitiesbyState(e)
       .subscribe(resCityData => {
         this.getCorrsCityData = resCityData;
-        alert('post code loaded');
         // this.getPostcodeByCityC(this.postCodeObj2);
       },
       Error => {
@@ -680,7 +677,6 @@ alert('getUserData loaded');
   getState(id?){
     return this.sharedService.getStateData()
      .subscribe(resStateData => {
-       alert('State loaded');
         this.getStateData = resStateData;
         if(id){
           this.profileForm.get('perStateLocal').setValue(id);
