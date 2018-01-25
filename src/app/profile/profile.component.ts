@@ -22,6 +22,7 @@ import { APP_CONFIG, AppConfig } from '../config/app.config.module';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit, AfterViewInit {
+  getPerCityId: any;
   getPerPostData: any[];
   getCorrsPostData: any[];
   getCorrsData: any;
@@ -401,6 +402,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                       if(data.user.address.correspondingAddressCity){
                         this.getCitiesByStateC(data.user.address.correspondingAddressState.stateId);
                         this.profileForm.get('corrsCityLocal').setValue(data.user.address.correspondingAddressCity.cityId);
+                        this.getPerCityId = data.user.address.correspondingAddressCity.cityId;
                         // this.postCodeObj2 = {value: data.user.address.correspondingAddressCity.cityId};
                       }
                       
@@ -651,7 +653,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       .subscribe(resCityData => {
         this.getPerCityData = resCityData;  
         if (this.getPerPostCodeFlag){
-          this.getPostCodeByCityId(this.getperPostCode);
+          this.getPostCodeByCityId(this.getPerCityId);
         }
       },
       Error => {
