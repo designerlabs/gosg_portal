@@ -601,7 +601,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     debugger;
 
     if(e){
-      getCityCodeByCityId(e.value);
+      this.getCityCodeByCityId(e.value);
     }
   }
 
