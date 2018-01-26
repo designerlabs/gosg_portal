@@ -47,7 +47,7 @@
                 <div class="staticLabel font-size-m boldText" for="nationality">{{nationality}}</div>
               </div>
               <div class="form-group col-md-4">
-                <label *ngIf="userTypeId == 1 || !userTypeId == 5" class="font-size-s" for="icnumber">{{'profile.label.icnumber' | translate}}</label>
+                <label *ngIf="userTypeId == 1 || userTypeId == 5 || userTypeId == 3 || userTypeId == 4 || userTypeId == 7 || userTypeId == 8" class="font-size-s" for="icnumber">{{'profile.label.icnumber' | translate}}</label>
                 <label *ngIf="userTypeId == 2 || userTypeId == 6" class="font-size-s" for="icnumber">{{'profile.label.passport' | translate}}</label>
                 <div class="staticLabel font-size-m boldText" for="icnumber">{{ idno }}</div>
               </div>
@@ -100,6 +100,9 @@
                   </mat-select>
                 </mat-form-field>
               </div>
+            </div>
+            <div class="row">
+              
             </div>
             <div class="row">
               <div class="form-group col-lg-12" style="padding-top:15px;">
