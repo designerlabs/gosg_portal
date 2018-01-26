@@ -54,6 +54,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     
     nonCiti: boolean;
     citi: boolean;
+    permanentResident: boolean;
     modalRef: BsModalRef;
     maskCitizen: any;
     maskForeigner: any;
@@ -91,6 +92,8 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     private telefon: FormControl;
     private country: FormControl;
     private passport: FormControl;
+    private country_pr: FormControl;
+    private passport_pr: FormControl;
     private nama_penuhf: FormControl;
     private emelf: FormControl;
     private telefonf: FormControl;
@@ -215,6 +218,8 @@ export class RegisterComponent implements OnInit, AfterViewInit {
             this.telefon = new FormControl('', [Validators.required]),
             this.country = new FormControl('', [Validators.required]),
             this.passport = new FormControl('', [Validators.required, Validators.pattern(this.validateService.getPattern(6,10).passport)]), //A1234567 or AB123456
+            this.country_pr = new FormControl('', [Validators.required]),
+            this.passport_pr = new FormControl('', [Validators.required, Validators.pattern(this.validateService.getPattern(6,10).passport)]), //A1234567 or AB123456
             this.nama_penuhf = new FormControl('', [Validators.required, Validators.pattern(this.validateService.getPattern(2,60).name)]), 
             this.emelf = new FormControl('', [Validators.required, Validators.pattern(this.validateService.getPattern().email)]),
             this.telefonf = new FormControl('', [Validators.required]),
@@ -226,6 +231,8 @@ export class RegisterComponent implements OnInit, AfterViewInit {
                 telefon: this.telefon,
                 country: this.country,
                 passport: this.passport,
+                country_pr: this.country_pr,
+                passport_pr: this.passport_pr,
                 nama_penuhf: this.nama_penuhf,
                 emelf: this.emelf,
                 telefonf: this.telefonf,
@@ -275,11 +282,13 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         this.ReCreateCaptchas();
         if ((this.citizenValue == 2) || (this.citizenValue  ==6)) {
             this.citi = false;
+            this.permanentResident = false;
             this.nonCiti = true;
             this.RemoveCitizenCtrl();
             this.addNonCitizenCtrl();
         } else {
             this.citi = true;
+            this.permanentResident = false;
             this.nonCiti = false;
             this.RemoveNonCitizenCtrl();
             this.addCitizenCtrl();
@@ -306,6 +315,37 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         this.emel.reset();
         this.telefon.reset();
     }
+
+
+    addPRTRCtrl() {
+        this.citizenFormGrp.addControl('kad_pengenalan', this.kad_pengenalan);
+        this.citizenFormGrp.addControl('nama_penuh', this.nama_penuh);
+        this.citizenFormGrp.addControl('emel', this.emel);
+        this.citizenFormGrp.addControl('telefon', this.telefon);
+        this.citizenFormGrp.addControl('country_pr', this.country_pr);
+        this.citizenFormGrp.addControl('passport_pr', this.passport_pr);
+        this.resetPRTRCtrl();
+    }
+
+    RemovePRTRCtrl() {
+        this.citizenFormGrp.removeControl('kad_pengenalan');
+        this.citizenFormGrp.removeControl('nama_penuh');
+        this.citizenFormGrp.removeControl('emel');
+        this.citizenFormGrp.removeControl('telefon');
+        this.citizenFormGrp.removeControl('country_pr');
+        this.citizenFormGrp.removeControl('passport_pr');
+    }
+
+    resetPRTRCtrl() {
+        this.kad_pengenalan.reset();
+        this.nama_penuh.reset();
+        this.emel.reset();
+        this.telefon.reset();
+        this.country_pr.reset();
+        this.passport_pr.reset();
+    }
+
+    
 
     addNonCitizenCtrl() {
         this.citizenFormGrp.addControl('country', this.country);
@@ -335,6 +375,8 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     resetForm() {
         if (this.isCitizen()) {
             this.resetCitizenCtrl();
+        }else if(this.isPRTR()){
+            this.resetPRTRCtrl();
         } else {
             this.resetNonCitizenCtrl();
         }
@@ -478,6 +520,16 @@ export class RegisterComponent implements OnInit, AfterViewInit {
             return false;
         }else{
             return true;
+        }
+        
+    }
+
+
+    isPRTR() {
+        if((this.citizenValue == 3 )|| (this.citizenValue == 4)){
+            return true;
+        }else{
+            return false;
         }
         
     }
