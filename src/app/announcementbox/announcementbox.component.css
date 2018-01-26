@@ -1,0 +1,96 @@
+.mainCard{
+    text-align: center;
+    margin-top: -28px;
+}
+
+.rwCalen {
+    padding-left: 5px;
+}
+
+.col-xs-3 {
+    width: 25%;
+    padding-left: 50px;
+    font-weight: 700;
+}
+
+h1{
+    font-weight:900;
+    font-size:45px;
+}
+
+h4{
+    font-weight:600;
+}
+
+.annoucement {
+    background-color: #666666;
+    color: #fff;
+    padding: 50px;
+    margin: auto;
+    text-align: center;
+}
+
+.calendar {
+    background-color: #1ebebc;
+    color: #fff;
+    padding: 10px 0px 0px!important;
+    margin: auto;
+    text-align: center;
+    min-height: 239px !important;
+}
+
+.tender {
+    background-color: #a6a394;
+    color: #fff;
+    padding: 50px;
+    margin: auto;
+    text-align: center;
+}
+
+/* hover effect */
+.card.effect__hover:hover .card__front {
+  -webkit-transform: rotateY(-180deg);
+          transform: rotateY(-180deg);
+}
+
+.card.effect__hover:hover .card__back {
+    border: #ff5078;
+  -webkit-transform: rotateY(0);
+          transform: rotateY(0);
+}
+.card_front{
+  position: absolute;
+}
+.card__back{
+  margin-top: -240px;
+}
+
+.card__front,
+.card__back {
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  -webkit-transition: -webkit-transform 1.0s;
+          transition: transform 1.0s;
+}
+
+.card__back {
+  -webkit-transform: rotateY(-180deg);
+          transform: rotateY(-180deg);
+}
+.card {
+  position: relative;
+}
+
+a.plain_tag{
+    text-decoration: none ;
+    color:#FFFFFF;
+    float: right;
+}
+
+div {
+    display: block;
+}
+
+img{
+    width:100px;
+}

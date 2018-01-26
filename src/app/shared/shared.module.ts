@@ -18,6 +18,7 @@ import { SearchIntComponent } from '../search/searchInt.component';
 
 import { LifeeventComponent } from "../lifeevent/lifeevent.component";
 import { AboutusComponent } from "../staticpage/aboutus.component";
+import { AnnouncementboxComponent } from "../announcementbox/announcementbox.component";
 import { AnnouncementComponent } from "../announcement/announcement.component";
 import { FaqComponent } from "../staticpage/faq.component";
 import { ManualComponent } from "../staticpage/manual.component";
@@ -143,6 +144,7 @@ export function HttpLoaderFactory(http: Http) {
     SliderComponent,
     TopnavComponent,
     AboutusComponent,
+    AnnouncementboxComponent,
     AnnouncementComponent,
     FaqComponent,
     NavComponent,
@@ -175,6 +177,7 @@ export function HttpLoaderFactory(http: Http) {
     TopnavComponent,
     AboutusComponent,
     AnnouncementComponent,
+    AnnouncementboxComponent,
     FaqComponent,
     NavComponent,
     ManualComponent,

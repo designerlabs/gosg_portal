@@ -23,6 +23,7 @@ export class NavService {
   topicStatus: any;
   dataT: any;
   test: any;
+  resultAnnouncement:any;
 
   constructor(private http: Http, @Inject(APP_CONFIG) private config: AppConfig, private route: ActivatedRoute, private router: Router, private breadcrumbService: BreadcrumbService, private articleService: ArticleService) {
     this.topicStatus = true;
@@ -30,7 +31,9 @@ export class NavService {
 
    private menuUrl: string = this.config.urlMenu;
    private articleUrl: string = this.config.urlArticle;
+   private urlAnnouncement: string = this.config.urlAnnouncementSub;
    private subUrl: string = this.config.urlSubtopic;
+
 
    getMenuData(lang: string): Observable<IMenu[]>{
         return this.http.get(this.menuUrl + '-' + lang + '.json')
@@ -62,6 +65,54 @@ export class NavService {
       );
     }
   }
+
+  getAnnouncementData(moduleName, lang: string, ID: number): Observable<boolean[]> {
+
+    if (!isNaN(ID)){
+   
+      return this.http.get(this.urlAnnouncement)
+            .take(1)
+            .map((response: Response) => response.json());
+
+            // .catch((error:any) =>
+            // Observable.throw(error.json().error || 'Server error')
+            // );
+      //       .catch(
+      // (err: Response, caught: Observable<any[]>) => {
+      //     if (err !== undefined) {
+      //       this.router.navigate(['/404']);
+      //       return Observable.throw('The Web server (running the Web site) is currently unable to handle the HTTP request due to a temporary overloading or maintenance of the server.');
+      //     }
+      //     return Observable.throw(caught); // <-----
+      //   }
+      // );
+    }
+  }
+
+
+  getAnnouncementDataAll(moduleName, lang: string): Observable<boolean[]> {
+  
+      return this.http.get(this.urlAnnouncement)
+            .take(1)
+            .map((response: Response) => response.json());
+
+            
+
+            // .catch((error:any) =>
+            // Observable.throw(error.json().error || 'Server error')
+            // );
+      //       .catch(
+      // (err: Response, caught: Observable<any[]>) => {
+      //     if (err !== undefined) {
+      //       this.router.navigate(['/404']);
+      //       return Observable.throw('The Web server (running the Web site) is currently unable to handle the HTTP request due to a temporary overloading or maintenance of the server.');
+      //     }
+      //     return Observable.throw(caught); // <-----
+      //   }
+      // );
+    
+  }
+
 
   getSubArticleUrl(topicID, subID: number, lang){
         if (!isNaN(subID)){
@@ -101,7 +152,7 @@ export class NavService {
     }
    }
 
-   triggerArticle(moduleName,lang, topicID){
+  triggerArticle(moduleName,lang, topicID){
 
     if (!isNaN(topicID)){
         return this.route.paramMap
@@ -117,6 +168,32 @@ export class NavService {
 
         });
     }
-   }
+  }
+
+  triggerAnnouncement(moduleName,lang, annoucementID){
+
+    if (!isNaN(annoucementID)){
+        return this.route.paramMap
+        .switchMap((params: ParamMap) =>
+        this.getAnnouncementData(moduleName,lang, annoucementID))
+        .subscribe(resAnnounceData => {
+            this.resultAnnouncement = resAnnounceData;
+            //console.log(this.resultAnnouncement)
+
+        });
+    }
+  }
+
+  triggerAnnouncementAll(moduleName,lang){
+
+    this.getAnnouncementDataAll(moduleName,lang)
+    .subscribe(resAnnounceData => {
+      this.resultAnnouncement = resAnnounceData;
+      //console.log(this.resultAnnouncement)
+
+    });
+  }
+
+
 
 }
