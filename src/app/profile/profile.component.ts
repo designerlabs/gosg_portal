@@ -440,7 +440,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     // this.profileForm.get('perCountry').setValue(this.selectedCountry);
     
     this.isChanged();
-    if(val == "MY") {
+    if(val == 152) {
       this.isLocal = true;
       this.addLocalCtrl();
       // this.profileForm.get('perStateLocal').setValue("");
@@ -459,7 +459,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     // console.log(val);
 
     this.isChanged();
-    debugger;
     if(val == 152) {
       this.getState();
       this.isCorrsLocal = true;
