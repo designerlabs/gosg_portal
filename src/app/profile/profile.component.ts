@@ -22,6 +22,7 @@ import { APP_CONFIG, AppConfig } from '../config/app.config.module';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit, AfterViewInit {
+  accountStatus: any;
   countryId: any;
   userTypeId: any;
   selectedCountry: any;
@@ -219,6 +220,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
             data => {
               console.log(data);
               this.fullname = data.user.fullName;
+              this.accountStatus = data.user.accountStatus.accountStatusId
               this.nationality = data.user.country.countryName;
               this.countryCode = data.user.country.countryCode;
               this.passport = data.user.passportNo;
@@ -751,6 +753,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 let bodyUpdate = 
 
     {
+      "accountStatus":{
+        "accountStatusId":null
+      },
       "userId": null,
       "pid": null,
       "userType": {
@@ -810,39 +815,7 @@ let bodyUpdate =
   };
 
 
-    let body = {
-      "date_joined": null,
-      "fullname": null,
-      "ic_number": null,
-      "email": null,
-      "dob": null,
-      "gender": null,
-      "race": null,
-      "religion": null,
-      "permanent_address1":null,
-      "permanent_address2":null,
-      "permanent_address3":null,
-      "permanent_postcode":null,
-      "permanent_city":null,
-      "permanent_state":null,
-      "permanent_country":null,
-      "permanent_home_phone":null,
-      "same_address":null,
-      "corresponding_address1": null,
-      "corresponding_address2": null,
-      "corresponding_address3": null,
-      "corresponding_postcode":null,
-      "corresponding_country":null,
-      "corresponding_state":null,
-      "corresponding_city":null,
-      "corresponding_home_phone":null,
-      "mobile_phone":null,
-      "dateTime": null,
-      "lang": null,
-      "citizenType":null,
-      "user_id": null
-    };
-    
+    bodyUpdate.accountStatus.accountStatusId = this.accountStatus; 
     bodyUpdate.userId = this.userId;
     bodyUpdate.pid = this.idno;
     bodyUpdate.userType.userTypeId = this.userTypeId;
@@ -882,47 +855,11 @@ let bodyUpdate =
     bodyUpdate.address.sameAddressFlag = formValues.checkboxValue;
 
 
-    body.date_joined = this.regdate;
-    body.fullname = this.fullname;
-    body.ic_number = this.idno;
-    body.email = this.regemail;
-    body.dob = new Date(formValues.dob).getTime();
-    body.race = formValues.race;
-    body.gender = formValues.gender;
-    body.religion = formValues.religion;
-    body.permanent_address1 = formValues.perAddress1;
-    body.permanent_address2 = formValues.perAddress2;
-    body.permanent_address3 = formValues.perAddress3;
-    body.permanent_postcode = formValues.perPostcode;
-    body.permanent_country = formValues.perCountry;
-
-    if(this.isLocal){
-    body.permanent_state = formValues.perStateLocal;
-    body.permanent_city = formValues.perCityLocal;
-    } else {
-      body.permanent_state = formValues.perStateNotLocal;
-      body.permanent_city = formValues.perCityNotLocal;
-    }
-    body.permanent_home_phone = formValues.perTelephone;
-    body.same_address = formValues.checkboxValue;
-    body.corresponding_address1 = formValues.corrsAddress1;
-    body.corresponding_address2 = formValues.corrsAddress2;
-    body.corresponding_address3 = formValues.corrsAddress3;
-    body.corresponding_country = formValues.corrsCountry;
-    body.corresponding_state = formValues.corrsState;
-    body.corresponding_city = formValues.corrsCity;
-    body.corresponding_postcode = formValues.corrsPostcode;
-    body.corresponding_home_phone = formValues.corrsTelephone;
-    body.mobile_phone = formValues.corrsMobile;
-    body.dateTime = new Date().getTime();
-    body.user_id = this.idno;
-    body.lang = localStorage.getItem("langID");
 
     this.checkReqValues();
 
     console.log(this.initial);
     console.log(this.profileForm.invalid)
-        console.log(body);
         console.log(formValues);
         console.log(this.profileForm.value);
     this.protectedService.updateProfile(bodyUpdate)
