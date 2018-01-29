@@ -22,6 +22,11 @@ import { APP_CONFIG, AppConfig } from '../config/app.config.module';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit, AfterViewInit {
+  roles: any;
+  agencyForwardUrl: any;
+  isMyIdentityValid: any;
+  isMyIdentityVerfied: any;
+  isStaff: any;
   accountStatus: any;
   countryId: any;
   userTypeId: any;
@@ -225,6 +230,12 @@ export class ProfileComponent implements OnInit, AfterViewInit {
               this.countryCode = data.user.country.countryCode;
               this.passport = data.user.passportNo;
               this.countryId = data.user.country.countryId;
+              this.isStaff = data.user.isStaff;
+              this.isMyIdentityVerfied = data.user.isMyIdentityVerified;
+              this.isMyIdentityValid = data.user.isMyIdentityValid;
+              this.agencyForwardUrl = data.user.agencyForwardUrl;
+              this.roles = data.user.roles;
+
               this.isMalaysian(this.countryCode);
               this.isMalaysianChk(this.countryCode);
               // this.getCountryByCode(getUsrNationality);
@@ -777,6 +788,11 @@ let bodyUpdate =
       "religion": {
           "religionId":null
       },
+      "isStaff": null,
+      "isMyIdentityVerified": null,
+      "isMyIdentityValid": null,
+      "agencyForwardUrl": null,
+      "roles":null,
       "email": null,
       "mobilePhoneNo": null,
       "registrationDate": null,
@@ -825,6 +841,11 @@ let bodyUpdate =
     bodyUpdate.gender.genderId = formValues.gender;
     bodyUpdate.race.raceId = formValues.race;
     bodyUpdate.religion.religionId = formValues.religion;
+    bodyUpdate.isStaff = this.isStaff;
+    bodyUpdate.isMyIdentityValid = this.isMyIdentityValid;
+    bodyUpdate.isMyIdentityVerified = this.isMyIdentityVerfied;
+    bodyUpdate.agencyForwardUrl = this.agencyForwardUrl;
+    bodyUpdate.roles = this.roles;
     bodyUpdate.email = this.regemail;
     bodyUpdate.mobilePhoneNo = formValues.corrsMobile;
     bodyUpdate.registrationDate = this.regdate;
