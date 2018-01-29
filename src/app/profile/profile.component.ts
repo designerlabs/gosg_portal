@@ -764,13 +764,10 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 let bodyUpdate = 
 
     {
-      "accountStatus":{
-        "accountStatusId":null
-      },
       "userId": null,
       "pid": null,
       "userType": {
-          "userTypeId": null
+        "userTypeId": null
       },
       "fullName": null,
       "firstName": null,
@@ -788,14 +785,20 @@ let bodyUpdate =
       "religion": {
           "religionId":null
       },
+      "email": null,
+      "mobilePhoneNo": null,
+      "registrationDate": null,
+
+      "accountStatus":{
+        "accountStatusId":null
+      },
+     
       "isStaff": null,
       "isMyIdentityVerified": null,
       "isMyIdentityValid": null,
       "agencyForwardUrl": null,
       "roles":null,
-      "email": null,
-      "mobilePhoneNo": null,
-      "registrationDate": null,
+      
       "address": {
           "addressId": null,
           "permanentAddress1":null,
