@@ -1,11 +1,10 @@
 import { NgModule, InjectionToken } from '@angular/core';
+import { environment } from '../../environments/environment';
 
 export let APP_CONFIG = new InjectionToken<AppConfig>('app.config');
 
-let baseURL = '/';
-//let baseURL = 'http://10.1.17.12:3000/';
-let uapURL = '/';
-//let uapURL = 'https://10.1.71.176/';
+let baseURL =  environment.mockApiURL;
+let uapURL = environment.uapURL;
 let registrationUrl = uapURL+'registration/';
 
 
