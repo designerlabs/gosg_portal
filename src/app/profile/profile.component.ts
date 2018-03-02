@@ -101,7 +101,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   public perCityLocal: FormControl
   public perCityNotLocal: FormControl
   public emailaddressUpdate: FormControl
-  public phonenumberUpdate: FormControl
+  public codeTelefonf: FormControl
+  public telefonf: FormControl
   public perPostcode: FormControl
   public perPostcodeNotLocal: FormControl
   public perTelephone: FormControl
@@ -205,7 +206,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.perStateNotLocal = new FormControl()
     this.perCityLocal = new FormControl()
     this.perCityNotLocal = new FormControl()
-    this.phonenumberUpdate = new FormControl()
+    this.codeTelefonf = new FormControl()
+    this.telefonf = new FormControl()
     this.emailaddressUpdate = new FormControl('', [Validators.required, Validators.email]);
     this.perPostcode = new FormControl()
     this.perPostcodeNotLocal = new FormControl()
@@ -235,7 +237,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     
 
     this.phoneForm = new FormGroup({
-      phonenumberUpdate: this.phonenumberUpdate,
+      codeTelefonf: this.codeTelefonf,
+      telefonf: this.telefonf,
     })
 
     this.profileForm = new FormGroup({
@@ -337,7 +340,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                   this.addressId = data.user.address.addressId;
                   this.profileForm.get('perAddress1').setValue(data.user.address.permanentAddress1);
                   this.emailForm.get('emailaddressUpdate').setValue(data.user.email);
-                  this.phoneForm.get('phonenumberUpdate').setValue(data.user.mobilePhoneNo);
+                  this.phoneForm.get('telefonf').setValue(data.user.mobilePhoneNo);
                   this.profileForm.get('perAddress2').setValue(data.user.address.permanentAddress2);
                   this.profileForm.get('perAddress3').setValue(data.user.address.permanentAddress3);
                   // this.profileForm.get('perPostcode').setValue(data.user.address.permanentAddressPostcode);

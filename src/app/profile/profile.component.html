@@ -353,12 +353,34 @@
           <mat-tab label="{{'profile.label.changePhone' | translate}}">
               <div style="padding-top:10px;"></div>
               <form [formGroup]="phoneForm" autocomplete="off" (ngSubmit)="updatePhone(phoneForm.value)" role="form" novalidate>
-                <mat-form-field class="font-size-s" style="width: 50%;">
-                    <input matInput formControlName="phonenumberUpdate"  [textMask]="{mask: maskForeigner}" type="text"  placeholder="{{'profile.label.homeph' | translate}}" required  />
-                </mat-form-field>
+
+                  <div class="example-full-width input-group">
+                      <mat-form-field class="font-size-s" style="width:20%">
+                          <mat-select formControlName="codeTelefonf" #codetele placeholder="{{'register.label.codetel' | translate }}" tabindex="5" required>
+                            <mat-option *ngFor="let country of countries" [value]="country.countryDialCode">
+                              <span class="col-md-6">+ {{ country.countryDialCode }}</span>
+                              <span class="col-md-6"> {{ country.countryCode }}</span>
+                            </mat-option>
+                          </mat-select>
+                          <mat-error *ngIf="!validateCtrlChk(codeTelefonf) && phoneForm.controls.codeTelefonf.errors.required">
+                              {{'register.err.codetel' | translate }}  
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="font-size-s" style="width:80%">
+                            <input matInput formControlName="telefonf" tabindex="5" #tele [textMask]="{mask: maskForeigner}" placeholder="{{'register.label.tel' | translate }}"
+                              required>
+                            <mat-error *ngIf="!validateCtrlChk(telefonf) && phoneForm.controls.telefonf.errors.required">
+                              {{'register.err.tel' | translate }}
+                            </mat-error>
+                            <mat-error *ngIf="!validateCtrlChk(telefonf) && phoneForm.controls.telefonf.pattern">
+                              {{'register.pattern.tel' | translate }}
+                            </mat-error>
+                          </mat-form-field>
+                  </div>
+               
                 <div class="form-group" style="float: right;">
                     <button mat-raised-button type="button" color="primary" class="form-control btn btn-md btn-success font-size-s"
-                    (click)="updateProfile(profileForm.value);false" style="width: 100px; font-family: Roboto; margin-left: 5px;" [disabled]="phonenumberUpdate.invalid">
+                    (click)="updateProfile(profileForm.value);false" style="width: 100px; font-family: Roboto; margin-left: 5px;" [disabled]="telefonf.invalid">
                     <i class="fa fa-check"></i> {{'profile.label.submit' | translate }}</button>
                 </div>
               </form>
