@@ -1,0 +1,41 @@
+<div class="container-fluid animated slideInDown" style="background: #a7a495;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 style="margin-top: 10px;" class="font-size-l">{{'calendar.title' | translate}}</h1>
+                <hr class="hr-custom2">
+                <ul class="list-inline" style="clear:both;">
+                    <li>
+                        <a class="font-size-s" href="/index/">
+                            {{'home.menu.calendar' | translate }}
+                        </a>
+                    </li>
+                    <!-- <li>/</li>
+                    <li>
+                        {{'home.breadcrumb.calendar' | translate}}
+                    </li> -->
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+  <div *ngIf="isOpen" class="overlay"></div>
+  <div class="col-md-12">&nbsp;</div>
+  <div class="col-md-12">
+  <div *ngIf="calendarOptions">
+      <ng-fullcalendar #ucCalendar [options]="calendarOptions" (eventClick)="eventClick($event.detail)" (eventDrop)="updateEvent($event.detail)"
+          (eventResize)="updateEvent($event.detail)" (clickButton)="clickButton($event.detail)"></ng-fullcalendar>
+    </div>
+    <div [ngClass]="{ 'details-show':isOpen,'details-hide':!isOpen }">
+      <div class="details-content">
+        <a class="boxclose" (click)="closePopup()"></a>
+        <h3>Event Details:</h3>
+        <p>Location: {{ displayEvent?.event?.desc }}</p>
+        <p>Start: {{ displayEvent?.event?.start }}</p>
+        <p>End: {{ displayEvent?.event?.end }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12">&nbsp;</div>
+</div>
