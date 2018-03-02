@@ -3702,5 +3702,207 @@
       "email":"asdf@sdfsdf",
       "icno":"1233344555566"
     }
+  ],
+  "adminUserEdit":[
+    {
+        "username": "SITTI NOORIJAH BINTI JAMALUDDIN",
+        "icNo": "800101126666",
+        "id": 14,
+        "active": true,
+        "data": [
+            {
+                "name": "modules",
+                "items": [
+                    {
+                        "moduleGroupId": 1,
+                        "moduleGroupName": "ADDRESS",
+                        "modules": [
+                            {
+                                "moduleId": 2,
+                                "moduleName": "Country",
+                                "permission": {
+                                    "isRead": false,
+                                    "isWrite": false,
+                                    "isUpdate": false,
+                                    "isDelete": false
+                                }
+                            },
+                            {
+                                "moduleId": 1,
+                                "moduleName": "State1",
+                                "permission": {
+                                    "isRead": false,
+                                    "isWrite": false,
+                                    "isUpdate": false,
+                                    "isDelete": false
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "moduleGroupId": 2,
+                        "moduleGroupName": "ADDRESS",
+                        "modules": [
+                            {
+                                "moduleId": 2,
+                                "moduleName": "Country",
+                                "permission": {
+                                    "isRead": false,
+                                    "isWrite": false,
+                                    "isUpdate": false,
+                                    "isDelete": false
+                                }
+                            },
+                            {
+                                "moduleId": 1,
+                                "moduleName": "State2",
+                                "permission": {
+                                    "isRead": false,
+                                    "isWrite": false,
+                                    "isUpdate": false,
+                                    "isDelete": false
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "moduleGroupId": 1,
+                        "moduleGroupName": "ADDRESS",
+                        "modules": [
+                            {
+                                "moduleId": 2,
+                                "moduleName": "Country",
+                                "permission": {
+                                    "isRead": true,
+                                    "isWrite": false,
+                                    "isUpdate": true,
+                                    "isDelete": false
+                                }
+                            },
+                            {
+                                "moduleId": 1,
+                                "moduleName": "State",
+                                "permission": {
+                                    "isRead": false,
+                                    "isWrite": true,
+                                    "isUpdate": true,
+                                    "isDelete": false
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "moduleGroupId": 1,
+                        "moduleGroupName": "ADDRESS",
+                        "modules": [
+                            {
+                                "moduleId": 2,
+                                "moduleName": "Country",
+                                "permission": {
+                                    "isRead": true,
+                                    "isWrite": true,
+                                    "isUpdate": true,
+                                    "isDelete": false
+                                }
+                            },
+                            {
+                                "moduleId": 1,
+                                "moduleName": "State",
+                                "permission": {
+                                    "isRead": true,
+                                    "isWrite": true,
+                                    "isUpdate": true,
+                                    "isDelete": false
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "selected modules",
+                "items": [
+                    {
+                        "moduleGroupId": 1,
+                        "moduleGroupName": "ADDRESS",
+                        "modules": [
+                            {
+                                "moduleId": 2,
+                                "moduleName": "Country",
+                                "permission": {
+                                    "isRead": true,
+                                    "isWrite": true,
+                                    "isUpdate": true,
+                                    "isDelete": false
+                                }
+                            },
+                            {
+                                "moduleId": 1,
+                                "moduleName": "State",
+                                "permission": {
+                                    "isRead": true,
+                                    "isWrite": true,
+                                    "isUpdate": true,
+                                    "isDelete": false
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "moduleGroupId": 1,
+                        "moduleGroupName": "ADDRESS",
+                        "modules": [
+                            {
+                                "moduleId": 2,
+                                "moduleName": "Country",
+                                "permission": {
+                                    "isRead": true,
+                                    "isWrite": true,
+                                    "isUpdate": true,
+                                    "isDelete": false
+                                }
+                            },
+                            {
+                                "moduleId": 1,
+                                "moduleName": "State",
+                                "permission": {
+                                    "isRead": false,
+                                    "isWrite": true,
+                                    "isUpdate": true,
+                                    "isDelete": false
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "moduleGroupId": 1,
+                        "moduleGroupName": "ADDRESS",
+                        "modules": [
+                            {
+                                "moduleId": 2,
+                                "moduleName": "Country",
+                                "permission": {
+                                    "isRead": false,
+                                    "isWrite": true,
+                                    "isUpdate": true,
+                                    "isDelete": false
+                                }
+                            },
+                            {
+                                "moduleId": 1,
+                                "moduleName": "State",
+                                "permission": {
+                                    "isRead": true,
+                                    "isWrite": true,
+                                    "isUpdate": true,
+                                    "isDelete": false
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
   ]
 }
