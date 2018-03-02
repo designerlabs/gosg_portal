@@ -309,8 +309,10 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     
                 if (data.user.mobilePhoneNo && (data.user.mobilePhoneNo).split('*').length > 1) {
                   const telenum = (data.user.mobilePhoneNo).split('*')[1];
+                  this.phoneForm.get('telefonf').setValue(telenum);
                   this.profileForm.get('corrsMobile').setValue(telenum);
                   const telecode = (data.user.mobilePhoneNo).split('*')[0];
+                  this.phoneForm.get('codeTelefonf').setValue(telecode);
                   this.profileForm.get('mobilecodeTelefon').setValue(telecode);
                 }else {
                   this.profileForm.get('corrsMobile').setValue((data.user.mobilePhoneNo));
@@ -340,7 +342,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                   this.addressId = data.user.address.addressId;
                   this.profileForm.get('perAddress1').setValue(data.user.address.permanentAddress1);
                   this.emailForm.get('emailaddressUpdate').setValue(data.user.email);
-                  this.phoneForm.get('telefonf').setValue(data.user.mobilePhoneNo);
                   this.profileForm.get('perAddress2').setValue(data.user.address.permanentAddress2);
                   this.profileForm.get('perAddress3').setValue(data.user.address.permanentAddress3);
                   // this.profileForm.get('perPostcode').setValue(data.user.address.permanentAddressPostcode);
