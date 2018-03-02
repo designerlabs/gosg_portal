@@ -350,3 +350,24 @@ html, body{
 .sidenav {padding-top: 15px;}
 .sidenav a {font-size: 18px;}
 }
+
+/* CALENDAR STYLES */
+tr:first-child>td>.fc-day-grid-event {
+  margin-top: 2px;
+  padding: 5px;
+}
+
+.fc .fc-row .fc-content-skeleton table, .fc .fc-row .fc-content-skeleton td, .fc .fc-row .fc-helper-skeleton td {
+  background: 0 0;
+  border-color: transparent;
+  cursor: pointer;
+}
+
+.fc-icon, .fc-toolbar .fc-center {
+    display: inline-block;
+    margin-left: -10%;
+}
+
+.fc-center h2 {
+  color: #666666;
+}

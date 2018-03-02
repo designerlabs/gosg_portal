@@ -3,6 +3,7 @@
     "logo": "logo_ms",
     "menu": {
       "home": "Laman Utama",
+      "calendar": "Kalendar",
       "register": "Daftar",
       "setting": "Tetapan",
       "contact": "Hubungi Kami",
@@ -16,6 +17,7 @@
       "label": "Bagaimana Kami Boleh Membantu Anda?"
     },
     "breadcrumb":{
+      "calendar": "Kalendar",
       "register":"Pendaftaran",
       "feedback":"Aduan dan Pertanyaan",
       "profile": "Profil Saya",
@@ -184,6 +186,31 @@
       "subject":"Harap maaf, pilihan subjek tidak dapat dipaparkan."
     }
 
+  },
+  "calendar": {
+    "title": "MY KALENDAR",
+    "desc": "Please limit your response to 10000 characters and include your email address and we will respond to you within three (3) working days. We can respond in two languages, English and Bahasa Melayu.",
+    "label": {
+      "type": "Type of feedback",
+      "subjek": "Subject",
+      "name": "Name",
+      "nameplh": "Full name",
+      "emel": "Email",
+      "content": "Content",
+      "reset": "Reset",
+      "submit": "Send",
+      "words": " characters left.",
+      "choose": "--Please Select--"
+    },
+    "reset":"Reset this form?",      
+    "msgsubmit": "Thank you. Your complaints/queries has been successfully sent. Responds will be received in 3 working days",
+    "err":{
+      "drop": "This field is required",
+      "submit": "Sorry, server down.",        
+      "type":"Sorry, type of feedback is unavailable.",
+      "subject":"Sorry, subjects is unavailable."
+      
+    }
   },
   "mailbox":{
     "header":{
