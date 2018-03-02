@@ -60,6 +60,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   proFields: any[]
   genderData: any[]
   profileForm: FormGroup
+  emailForm: FormGroup
+  phoneForm: FormGroup
   temp: any
   resProfileFieldsData: any[]
   initial = true;
@@ -98,6 +100,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   public perStateNotLocal: FormControl
   public perCityLocal: FormControl
   public perCityNotLocal: FormControl
+  public emailaddressUpdate: FormControl
+  public phonenumberUpdate: FormControl
   public perPostcode: FormControl
   public perPostcodeNotLocal: FormControl
   public perTelephone: FormControl
@@ -201,6 +205,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.perStateNotLocal = new FormControl()
     this.perCityLocal = new FormControl()
     this.perCityNotLocal = new FormControl()
+    this.phonenumberUpdate = new FormControl()
+    this.emailaddressUpdate = new FormControl('', [Validators.required, Validators.email]);
     this.perPostcode = new FormControl()
     this.perPostcodeNotLocal = new FormControl()
     this.perTelephone = new FormControl()
@@ -221,6 +227,16 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.corrscodeTelefon = new FormControl()
     this.corrsMobile = new FormControl()
     this.mobilecodeTelefon = new FormControl()
+
+    this.emailForm = new FormGroup({
+      emailaddressUpdate: this.emailaddressUpdate
+    })
+
+    
+
+    this.phoneForm = new FormGroup({
+      phonenumberUpdate: this.phonenumberUpdate,
+    })
 
     this.profileForm = new FormGroup({
       dob: this.dob,
@@ -320,6 +336,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                   this.isSameAddressChk();
                   this.addressId = data.user.address.addressId;
                   this.profileForm.get('perAddress1').setValue(data.user.address.permanentAddress1);
+                  this.emailForm.get('emailaddressUpdate').setValue(data.user.email);
+                  this.phoneForm.get('phonenumberUpdate').setValue(data.user.mobilePhoneNo);
                   this.profileForm.get('perAddress2').setValue(data.user.address.permanentAddress2);
                   this.profileForm.get('perAddress3').setValue(data.user.address.permanentAddress3);
                   // this.profileForm.get('perPostcode').setValue(data.user.address.permanentAddressPostcode);
