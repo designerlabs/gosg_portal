@@ -6,6 +6,7 @@ import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/skip';
 import { PortalService } from '../services/portal.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'gosg-protected',
@@ -88,24 +89,26 @@ export class ProtectedComponent implements OnInit {
   }
 
   getUserData(){
-    this.protectedService.getUser().subscribe(
-      data => {
-        if(data.user){
-          this.getUserName = data.user.fullName;
-          this.getEmail = data.user.email;
-          this.getFullname = data.user.fullName;
-          localStorage.setItem('fullname',data.user.fullName);
-          localStorage.setItem('email',data.user.email);
-        }else{
+
+    if(!environment.staging){
+      this.protectedService.getUser().subscribe(
+        data => {
+          if(data.user){
+            this.getUserName = data.user.fullName;
+            this.getEmail = data.user.email;
+            this.getFullname = data.user.fullName;
+            localStorage.setItem('fullname',data.user.fullName);
+            localStorage.setItem('email',data.user.email);
+          }else{
+            
+          }
           
-        }
-        
-      },
-    error => {
-        //location.href = this.config.urlUAP +'uapsso/Logout';
-        //location.href = this.config.urlUAP+'portal/index';
-      }
-    )
+        },
+        error => {
+          //location.href = this.config.urlUAP +'uapsso/Logout';
+          //location.href = this.config.urlUAP+'portal/index';
+        })
+    }
   }
   getProfileData(data){
     this.protectedService.getProfile(data).subscribe(

@@ -16,6 +16,7 @@ import { forEach } from '@angular/router/src/utils/collection';
 // import { SlicePipe } from '@angular/common/src/pipes';
 // import { ControlBase } from '../common/controlbase'
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
+import { environment } from '../../environments/environment';
 @Component({
   templateUrl: './profile.component.html',
   selector: 'myprofile',
@@ -260,6 +261,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   }
 
   getUserData(){
+    if(!environment.staging){
     this.getPerPostCodeFlag = false;
     this.protectedService.getUser().subscribe(
       data => {
@@ -447,6 +449,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         //location.href = this.config.urlUAP+'portal/index';
       }
     )
+  }
   }
 
 

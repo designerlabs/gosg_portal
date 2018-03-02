@@ -66,7 +66,7 @@ export const APP_DI_CONFIG: AppConfig = {
     urlSlider: baseURL+'slider',
     urlFooter: './app/apidata/footer',
     urlArticle: './app/apidata/topic',
-    urlCountry: commonURL+'country',
+    urlCountry: commonURL+'country/all',
     urlState: commonURL+'state',
     urlPostcode: commonURL+'postcode/city/',
     urlRace: commonURL+'race/lang/',

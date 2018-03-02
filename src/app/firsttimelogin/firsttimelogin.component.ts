@@ -3,6 +3,7 @@ import { ProtectedService } from "../services/protected.service";
 import { Http, Headers, RequestOptions } from '@angular/http';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
+import { environment } from '../../environments/environment';
 @Component({
   selector: 'gosg-firsttimelogin',
   templateUrl: './firsttimelogin.component.html',
@@ -30,11 +31,15 @@ export class FirsttimeloginComponent implements OnInit {
  @Input() loginfirst:boolean;
 
   ngOnInit() {
-    this.rndNo =  location.search.split('rnd=')[1];
-    console.log(this.rndNo);
-    this.interval = setInterval(() => {
-      this.getConfirmation();
-    }, 5000);
+   
+    if(!environment.staging){
+      this.rndNo =  location.search.split('rnd=')[1];
+      console.log(this.rndNo);
+      this.interval = setInterval(() => {
+        this.getConfirmation();
+      }, 5000);
+    }
+    
 
     let timeleft = 10;
     // let downloadTimer = setInterval(function(){

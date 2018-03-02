@@ -1,6 +1,8 @@
 export const environment = {
-    production: false,
-    uapURL: 'https://10.1.71.176/',
-    mockApiURL :'http://10.1.22.34:3000/'
+  production: false,
+  staging: true,
+  uapURL : 'http://10.1.70.148:8080/',
+  mockApiURL :'http://10.1.22.34:3000/',
+  baseURL: 'http://localhost/locale-api/'
   };
   

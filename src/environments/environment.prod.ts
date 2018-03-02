@@ -1,5 +1,7 @@
 export const environment = {
   production: true,
-  uapURL: '/',
-  mockApiURL :'/'
+  staging: false,
+  uapURL : '/',
+  mockApiURL :'/',
+  baseURL: '/'
 };
