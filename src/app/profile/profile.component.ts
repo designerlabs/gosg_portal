@@ -17,6 +17,7 @@ import { forEach } from '@angular/router/src/utils/collection';
 // import { ControlBase } from '../common/controlbase'
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 import { environment } from '../../environments/environment';
+import { debug } from 'util';
 @Component({
   templateUrl: './profile.component.html',
   selector: 'myprofile',
@@ -1191,6 +1192,40 @@ let bodyUpdate =
         this.toastr.error(this.translate.instant('profile.err.updateFail'), '');
       });
   }
+
+
+  updateProfileEmail(formValues:any){
+    this.protectedService.updateEmail(this.idno, formValues.emailaddressUpdate).subscribe(
+      data => {
+        this.isActive = false;
+        this.initial = true;
+        this.emailForm.invalid;
+        this.toastr.success(this.translate.instant('profile.msg.updateSuccess'), '');
+        this.emailForm.disable();
+        debugger;
+      },
+    
+      error => {
+        this.toastr.error(this.translate.instant('profile.err.updateFail'), '');
+      });
+  };
+
+
+  updateProfilePhone(formValues:any){
+    this.protectedService.updateEmail(this.idno, formValues.codeTelefonf + formValues.telefonf).subscribe(
+      data => {
+        this.isActive = false;
+        this.initial = true;
+        this.emailForm.invalid;
+        this.toastr.success(this.translate.instant('profile.msg.updateSuccess'), '');
+        this.emailForm.disable();
+        debugger;
+      },
+    
+      error => {
+        this.toastr.error(this.translate.instant('profile.err.updateFail'), '');
+      });
+  };
 
   toFormGroup(data: any) {
     let group: any = {}
