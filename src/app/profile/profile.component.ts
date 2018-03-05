@@ -25,6 +25,7 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit, AfterViewInit {
+  errMsg: any;
   getPerCityId: any;
   getPerPostData: any[];
   getCorrsPostData: any[];
@@ -1250,7 +1251,16 @@ let bodyUpdate =
       },
     
       error => {
+        debugger;
+        if(!!error.user){
+          window.location.href = this.uapstagingUrl+error.user.tag;
+        }else{
+            this.errMsg = error.statusDesc;
+            this.infoModal.show();
+        }
         this.toastr.error(this.translate.instant('profile.err.updateFail'), '');
+      }, () => {
+        debugger;
       });
   };
 
