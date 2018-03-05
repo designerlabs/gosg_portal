@@ -72,7 +72,6 @@ export class SliderComponent implements OnInit {
           .subscribe(resSliderData => {
                 this.slides = resSliderData;
             });
-
     }
 
   next() {

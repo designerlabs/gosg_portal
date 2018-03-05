@@ -39,6 +39,7 @@ export class AppConfig {
     urlAnnouncement: string;       
     urlAnnouncementSub: string;
     urlCalendar: string;
+    urlEvent: string;
     urlRegister: string;
     urlFeedbackType: string;
     urlFeedbackSubject: string;
@@ -80,6 +81,7 @@ export const APP_DI_CONFIG: AppConfig = {
     urlAnnouncement : commonURL + 'announcement/date/publish',    
     urlAnnouncementSub: commonURL + 'announcement/category',
     urlCalendar: './app/apidata/calendar',
+    urlEvent: './app/apidata/event',
     urlRegister: registrationUrl+'register',    
     urlFeedbackType: commonURL+'feedback/type/lang/',
     urlFeedbackSubject: commonURL+'feedback/subject/lang/',

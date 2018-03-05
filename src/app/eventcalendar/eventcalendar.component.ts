@@ -1,6 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { CalendarComponent } from 'ng-fullcalendar';
 import { Options } from 'fullcalendar';
+import { Http, Response } from '@angular/http';
+import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 
 @Component({
   selector: 'gosg-eventcalendar',
@@ -12,18 +14,23 @@ export class EventCalendarComponent implements OnInit {
   calendarOptions: Options;
   displayEvent: any;
   isOpen: boolean;
+  event: any[];
+  eventUrl: string = this.config.urlEvent;
 
   @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
 
-  constructor() { }
+  constructor(private http: Http, @Inject(APP_CONFIG) private config: AppConfig) { }
 
   ngOnInit() {
     const dateObj = new Date();
     const yearMonth = dateObj.getUTCFullYear() + '-' + (dateObj.getUTCMonth() + 1);
     this.isOpen = false;
 
-    console.log(dateObj)
-    console.log(yearMonth)
+    // console.log(dateObj)
+    // console.log(yearMonth)
+
+    this.getEvents();
+    console.log(this.event)
 
     this.calendarOptions = {
        editable: false,
@@ -34,52 +41,18 @@ export class EventCalendarComponent implements OnInit {
          right: null
         //  right: 'month,agendaWeek,agendaDay,listMonth'
        },
-       events: [{
-        "title": yearMonth+'-01\n '+"All Day Event",
-        "start": "2018-03-01",
-        "desc": "hahahahahahaha"
-      }, {
-        "title": "Long Event",
-        "start": "2018-03-07",
-        "end": "2018-03-10"
-      }, {
-        "id": "999",
-        "title": "Repeating Event",
-        "start": "2018-03-09T21:00:00+00:00"
-      }, {
-        "id": "999",
-        "title": "Repeating Event",
-        "start": "2018-03-16T21:00:00+00:00"
-      }, {
-        "title": "Conference",
-        "start": "2018-03-11",
-        "end": "2018-03-13"
-      }, {
-        "title": "Meeting",
-        "start": "2018-03-12T15:30:00+00:00",
-        "end": "2018-03-12T17:30:00+00:00"
-      }, {
-        "title": "Lunch",
-        "start": "2018-03-12T19:00:00+00:00"
-      }, {
-        "title": "Meeting",
-        "start": "2018-03-12T19:30:00+00:00"
-      }, {
-        "title": "Happy Hour",
-        "start": "2018-03-12T22:30:00+00:00"
-      }, {
-        "title": "Dinner",
-        "start": "2018-03-12T20:00:00+00:00"
-      }, {
-        "title": "Birthday Party",
-        "start": "2018-03-13T12:00:00+00:00"
-      }, {
-        "url": "http:\/\/google.com\/",
-        "title": "Click for Google",
-        "start": "2018-02-28"
-      }]
+       events: this.event
       
      };
+  }
+
+  getEvents() {
+    return this.http.get('./app/apidata/event.json')
+      .map(res => res.json())
+      .subscribe(resEventData => {
+        this.event = resEventData;
+        console.log(this.event)
+      });
   }
 
   closePopup() {
