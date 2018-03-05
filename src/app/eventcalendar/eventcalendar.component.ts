@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, Inject } from '@angular/core';
-import { CalendarComponent } from 'ng-fullcalendar';
-import { Options } from 'fullcalendar';
+// import { CalendarComponent } from 'ng-fullcalendar';
+// import { Options } from 'fullcalendar';
 import { Http, Response } from '@angular/http';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 
@@ -11,13 +11,13 @@ import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 })
 export class EventCalendarComponent implements OnInit {
 
-  calendarOptions: Options;
+  // calendarOptions: Options;
   displayEvent: any;
   isOpen: boolean;
   event: any[];
   eventUrl: string = this.config.urlEvent;
 
-  @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
+  // @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
 
   constructor(private http: Http, @Inject(APP_CONFIG) private config: AppConfig) { }
 
@@ -32,18 +32,18 @@ export class EventCalendarComponent implements OnInit {
     this.getEvents();
     console.log(this.event)
 
-    this.calendarOptions = {
-       editable: false,
-       eventLimit: false,
-       header: {
-         left: 'prev,next today',
-         center: 'title',
-         right: null
-        //  right: 'month,agendaWeek,agendaDay,listMonth'
-       },
-       events: this.event
+    // this.calendarOptions = {
+    //    editable: false,
+    //    eventLimit: false,
+    //    header: {
+    //      left: 'prev,next today',
+    //      center: 'title',
+    //      right: null
+    //     //  right: 'month,agendaWeek,agendaDay,listMonth'
+    //    },
+    //    events: this.event
       
-     };
+    //  };
   }
 
   getEvents() {

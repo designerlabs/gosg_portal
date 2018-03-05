@@ -30,13 +30,13 @@ import { LoginComponent } from "./login/login.component";
 import { AnnouncementComponent } from './announcement/announcement.component';
 import { AnnouncementlistComponent } from './announcementlist/announcementlist.component';
 import { AnnouncementdetailsComponent } from './announcementdetails/announcementdetails.component';
-import { EventCalendarComponent } from './eventcalendar/eventcalendar.component';
+// import { EventCalendarComponent } from './eventcalendar/eventcalendar.component';
 
 
 export const appRoutes: Routes = [
     {path: '404', component: ErrorComponent },
     {path: 'index', component: HomeComponent},
-    {path: 'calendar', component: EventCalendarComponent},
+    // {path: 'calendar', component: EventCalendarComponent},
     {path: 'search/searchResult', component: SearchResultComponent},
     {path: 'topic/:id', component: ArticleComponent, canActivate: [NavRouterActivator]  },
     {path: 'announcement', component: AnnouncementComponent },
