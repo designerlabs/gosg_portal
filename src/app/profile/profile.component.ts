@@ -1215,9 +1215,9 @@ let bodyUpdate =
       data => {
         this.isActive = false;
         this.initial = true;
-        this.emailForm.invalid;
+        this.phoneForm.invalid;
         this.toastr.success(this.translate.instant('profile.msg.updateSuccess'), '');
-        this.emailForm.disable();
+        this.phoneForm.disable();
         debugger;
       },
     
