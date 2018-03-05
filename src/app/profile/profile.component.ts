@@ -307,7 +307,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                 this.agencyForwardUrl = data.user.agencyForwardUrl;
                 this.roles = data.user.roles;
 
-    
+                this.emailForm.get('emailaddressUpdate').setValue(data.user.email);
                 if (data.user.mobilePhoneNo && (data.user.mobilePhoneNo).split('*').length > 1) {
                   const telenum = (data.user.mobilePhoneNo).split('*')[1];
                   this.phoneForm.get('telefonf').setValue(telenum);
@@ -342,7 +342,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                   this.isSameAddressChk();
                   this.addressId = data.user.address.addressId;
                   this.profileForm.get('perAddress1').setValue(data.user.address.permanentAddress1);
-                  this.emailForm.get('emailaddressUpdate').setValue(data.user.email);
                   this.profileForm.get('perAddress2').setValue(data.user.address.permanentAddress2);
                   this.profileForm.get('perAddress3').setValue(data.user.address.permanentAddress3);
                   // this.profileForm.get('perPostcode').setValue(data.user.address.permanentAddressPostcode);
