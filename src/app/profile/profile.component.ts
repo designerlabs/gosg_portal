@@ -18,6 +18,7 @@ import { forEach } from '@angular/router/src/utils/collection';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 import { environment } from '../../environments/environment';
 import { debug } from 'util';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 @Component({
   templateUrl: './profile.component.html',
   selector: 'myprofile',
@@ -55,6 +56,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   @ViewChild('corsPost') corsPost: ElementRef
   @ViewChild('corshomephone') corshomephone : ElementRef
   @ViewChild('corsmobile') corsmobile : ElementRef
+  @ViewChild(ModalDirective) modal: ModalDirective;
+  @ViewChild('staticModal') public staticModal:ModalDirective;
+  @ViewChild('infoModal') public infoModal:ModalDirective;
 
   events: string[] = [];
   dt:number;
@@ -134,7 +138,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   regdate:string;
   lang = this.lang;
   languageId = this.languageId;
-
+  private uapstagingUrl: string = this.config.urlUapStagingProfile;
 
   constructor(
     private router: Router, 
@@ -1206,9 +1210,14 @@ let bodyUpdate =
           this.isActive = false;
           this.initial = true;
           this.emailForm.invalid;
-          debugger;
           this.toastr.success(this.translate.instant('profile.msg.updateSuccess'), '');
           this.emailForm.disable();
+          if(!!data.user){
+            window.location.href = this.uapstagingUrl+data.user.tag;
+        }else{
+            this.errMsg = data.statusDesc;
+            this.infoModal.show();
+        }
         }).bind(this));
         
         
@@ -1223,12 +1232,21 @@ let bodyUpdate =
   updateProfilePhone(formValues:any){
     this.protectedService.updateEmail(this.idno, formValues.codeTelefonf + formValues.telefonf).subscribe(
       data => {
-        this.isActive = false;
-        this.initial = true;
-        this.phoneForm.invalid;
-        this.toastr.success(this.translate.instant('profile.msg.updateSuccess'), '');
-        this.phoneForm.disable();
-        debugger;
+
+        this.sharedService.errorHandling(data, (function(){
+          this.isActive = false;
+          this.initial = true;
+          this.phoneForm.invalid;
+          this.toastr.success(this.translate.instant('profile.msg.updateSuccess'), '');
+          this.phoneForm.disable();
+          if(!!data.user){
+            window.location.href = this.uapstagingUrl+data.user.tag;
+          }else{
+              this.errMsg = data.statusDesc;
+              this.infoModal.show();
+          }
+        }).bind(this));
+
       },
     
       error => {
