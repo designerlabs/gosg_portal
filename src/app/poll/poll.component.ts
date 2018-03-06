@@ -62,19 +62,17 @@ export class PollComponent implements OnInit {
         // this.getUserIpAddr();
     }
 
-   getData(languageId) {
+   getData(languageId) {       
          return this.http.get(this.config.urlPoll + '/question/lang/' + languageId + '/?active=true')
            .map(res => res.json())
           .subscribe(eventData => {
-                this.pollDataQuestion = eventData.questionTitle;
-                this.pollDataAnswer = eventData.answer.filter((element, index) => {
-                    return (element.answer.length > 0);
-                 });
-                this.pollDataQuestionID = eventData.questionId;
-                this.pollReference = eventData.pollReference;
+                this.pollDataQuestion = eventData[0].questionTitle;
+                this.pollDataAnswer = eventData[0].answer.filter(fData => fData.answer !== undefined);
+                this.pollDataQuestionID = eventData[0].questionId;
+                this.pollReference = eventData[0].pollReference;
                 // tslint:disable-next-line:radix
                 if (!this.latestResult) { // Check Latest Result Message while change lang
-                    this.showResult = ((localStorage.getItem('polldone') === this.pollReference));
+                    this.showResult = ((localStorage.getItem('polldone') === eventData[0].pollReference.toString()));
                 }
                 // this.pollDataComment = eventData[0].comment;
             });
