@@ -27,6 +27,7 @@ export class AppConfig {
     urlCountry: string;
     urlState:string;
     urlPostcode:string;
+    // urlStaurlPostcodete:string;
     urlRace:string;
     urlCity:string;
     urlReligion: string;
@@ -64,6 +65,8 @@ export class AppConfig {
     urlUapStagingProfile:string;
     urlColor:string;
     urlFont: string;
+    urlCompleteEmail:string;
+    urlCompletePhone:string;
 }
 
 export const APP_DI_CONFIG: AppConfig = {
@@ -71,6 +74,7 @@ export const APP_DI_CONFIG: AppConfig = {
     urlMenu: './app/apidata/menudata',
     urlSlider: baseURL+'slider',
     urlFooter: './app/apidata/footer',
+    // urlFooter: commonURL + 'footer',
     urlArticle: './app/apidata/topic',
     urlCountry: commonURL+'country/all',
     urlState: commonURL+'state',
@@ -103,6 +107,8 @@ export const APP_DI_CONFIG: AppConfig = {
     urlMail: protectedBaseURL+'inbox/',
     urlUAP: uapURL,
     urlComplete: protectedBaseURL+'user/complete/registration',
+    urlCompleteEmail: protectedBaseURL+'user/complete/email/updated',
+    urlCompletePhone: protectedBaseURL+'user/complete/phone/updated',
     urlGetUser: protectedBaseURL+'user/detail',
     urlGetProfile: protectedBaseURL+'user/profile',
     urlGetProfileEmail: protectedBaseURL+'user/profile/email',

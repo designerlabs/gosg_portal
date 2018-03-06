@@ -181,7 +181,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.initialBtn = true;
-   
+  //  this.profileUpdated();
     let today = new Date();
     let todayDt = today.getDate();
     let year = today.getFullYear();
@@ -1227,6 +1227,8 @@ let bodyUpdate =
         this.toastr.error(this.translate.instant('profile.err.updateFail'), '');
       });
   };
+
+
 
 
   updateProfilePhone(formValues:any){
