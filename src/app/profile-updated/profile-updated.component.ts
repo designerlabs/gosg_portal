@@ -12,7 +12,7 @@ import { environment } from '../../environments/environment';
 })
 export class ProfileUpdatedComponent implements OnInit {
 
-  interval: any;
+  intervalProfile: any;
   varArray: string[];
   queryString: string;
   getUserData: any;
@@ -61,7 +61,7 @@ export class ProfileUpdatedComponent implements OnInit {
           this.phoneDesc = true;
         }
 
-        this.interval = setInterval(() => {
+        this.intervalProfile = setInterval(() => {
           this.getConfirmation();
         }, 5000);
       }
@@ -75,11 +75,11 @@ export class ProfileUpdatedComponent implements OnInit {
         .subscribe(
             userData => {
               if(userData.statusCode === 'SUCCESS'){
-                clearInterval(this.interval);
+                clearInterval(this.intervalProfile);
                 this.router.navigate(['/profile']);
               }else{
                 console.log(userData.statusDesc);
-                clearInterval(this.interval);
+                clearInterval(this.intervalProfile);
                 console.log('cleared interval');
               }
             
@@ -94,10 +94,11 @@ export class ProfileUpdatedComponent implements OnInit {
         .subscribe(
             userData => {
               if(userData.statusCode === 'SUCCESS'){
+                clearInterval(this.intervalProfile);
                 this.router.navigate(['/profile']);
               }else{
                 console.log(userData.statusDesc);
-                clearInterval(this.interval);
+                clearInterval(this.intervalProfile);
                 console.log('cleared interval');
               }
             },Error => {
