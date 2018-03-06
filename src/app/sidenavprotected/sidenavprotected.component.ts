@@ -15,7 +15,7 @@ let num = 0;
 export class SidenavprotectedComponent implements OnInit {
   getThemeFonts: any;
   defaultFonts: any;
-  fontTy(arg0: any): any {
+  fontTy1(arg0: any): any {
     throw new Error("Method not implemented.");
   }
   getThemeColors: any;
@@ -53,8 +53,8 @@ export class SidenavprotectedComponent implements OnInit {
 
   setClickedColor(index, firstItem) {
     localStorage.setItem('themeColor', firstItem);
-    $('#confBar1 .settingBtm input').removeClass('colorPaletteActive');
-    $('#confBar1 .settingBtm input:nth('+index+')').addClass('colorPaletteActive');
+    $('#confBar2 .settingBtm input').removeClass('colorPaletteActive');
+    $('#confBar2 .settingBtm input:nth('+index+')').addClass('colorPaletteActive');
     localStorage.setItem('themeIndex', index);
     this.selectedRow = index;
     this.firstItem = firstItem;
@@ -73,12 +73,12 @@ export class SidenavprotectedComponent implements OnInit {
   loadCustomFontType(){
     if (localStorage.getItem('customFontType')) {
       $('body, .font-size-s, .font-size-m, .font-size-l, .font-size-xl, .font-size-xxl').css('font-family', localStorage.getItem('customFontType'));
-      $('#fontOptSideMenu2 option[value="' + localStorage.getItem('customFontType') + '"]').attr('selected', 'selected');
-      $('#fontOptSideMenu2').val(localStorage.getItem('customFontType'));
+      $('#fontOptSideMenu3 option[value="' + localStorage.getItem('customFontType') + '"]').attr('selected', 'selected');
+      $('#fontOptSideMenu3').val(localStorage.getItem('customFontType'));
     }
     if (localStorage.getItem('themeIndex')) {
-      $('#confBar1 .settingBtm input').removeClass('colorPaletteActive');
-      $('#confBar1 .settingBtm input:nth('+localStorage.getItem('themeIndex')+')').addClass('colorPaletteActive');
+      $('#confBar2 .settingBtm input').removeClass('colorPaletteActive');
+      $('#confBar2 .settingBtm input:nth('+localStorage.getItem('themeIndex')+')').addClass('colorPaletteActive');
       localStorage.setItem('themeIndex', localStorage.getItem('themeIndex'));
     }
   }
@@ -92,8 +92,8 @@ export class SidenavprotectedComponent implements OnInit {
           if(color.defaultColor == true){
             localStorage.setItem('themeColor', color.colorCode);
             localStorage.setItem('themeIndex', index);
-            $('#confBar1 .settingBtm input').removeClass('colorPaletteActive');
-            $('#confBar1 .settingBtm input:nth('+index+')').addClass('colorPaletteActive');
+            $('#confBar2 .settingBtm input').removeClass('colorPaletteActive');
+            $('#confBar2 .settingBtm input:nth('+index+')').addClass('colorPaletteActive');
           }
         })
       }, err => {
@@ -179,8 +179,8 @@ export class SidenavprotectedComponent implements OnInit {
             if (!localStorage.getItem('themeColor')) {
               localStorage.setItem('themeColor', color.colorCode);
               localStorage.setItem('themeIndex', index);
-              $('#confBar1 .settingBtm input').removeClass('colorPaletteActive');
-              $('#confBar1 .settingBtm input:nth('+index+')').addClass('colorPaletteActive');
+              $('#confBar2 .settingBtm input').removeClass('colorPaletteActive');
+              $('#confBar2 .settingBtm input:nth('+index+')').addClass('colorPaletteActive');
             }
           }
         })
@@ -206,7 +206,7 @@ export class SidenavprotectedComponent implements OnInit {
         data.filter(function(font){
           if(font.defaultFont == true){
             console.log(font.fontName);
-            $('#fontOptSideMenu2').val(font.fontName);
+            $('#fontOptSideMenu3').val(font.fontName);
               $('body, .font-size-s, .font-size-m, .font-size-l, .font-size-xl, .font-size-xxl').css('font-family', font.fontName);
               localStorage.setItem('customFontType', font.fontName);
 

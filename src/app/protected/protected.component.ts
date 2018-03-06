@@ -88,12 +88,12 @@ export class ProtectedComponent implements OnInit {
     this.isProfile = data;
     console.log(this.isProfile);
     if(localStorage.getItem('customFontType')){
-      $('#fontOptSideMenu2').val(localStorage.getItem('customFontType'));
+      $('#fontOptSideMenu3').val(localStorage.getItem('customFontType'));
   }
 
   if (localStorage.getItem('themeIndex')) {
-      $('#confBar1 .settingBtm input').removeClass('colorPaletteActive');
-      $('#confBar1 .settingBtm input:nth('+localStorage.getItem('themeIndex')+')').addClass('colorPaletteActive');
+      $('#confBar2 .settingBtm input').removeClass('colorPaletteActive');
+      $('#confBar2 .settingBtm input:nth('+localStorage.getItem('themeIndex')+')').addClass('colorPaletteActive');
       localStorage.setItem('themeIndex', localStorage.getItem('themeIndex'));
     }
   }

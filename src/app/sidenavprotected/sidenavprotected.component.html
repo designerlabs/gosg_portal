@@ -43,7 +43,7 @@
                   </mat-panel-title>
                 </mat-expansion-panel-header>
                 
-                <div class="menu_botm" id="confBar1">
+                <div class="menu_botm" id="confBar2">
                     <div  id="themeContainer1">
 
                       <div  class="settingLbl">
@@ -66,7 +66,7 @@
                       </div>
                       <div class="settingBtm">
 
-                            <select #fontTy (change)="onChange($event, fontTy.value)" id="fontOptSideMenu2" class="form-control fontOption">
+                            <select #fontTy1 (change)="onChange($event, fontTy.value)" id="fontOptSideMenu3" class="form-control fontOption">
                                 <option *ngFor="let font of getThemeFonts;" [value]="font.fontName"  [selected]="font.defaultFont" >
                                     {{font.fontName}}
                                 </option>
