@@ -184,8 +184,8 @@ export class FeedbackComponent implements OnInit {
         "feedbackType":null,
         "feedbackMessage": null,
         "feedbackSubject":null,
-        "language":null,
-        "feedbackActionBy":null
+        "language":null
+        //"feedbackActionBy":null
       };
 
       body.feedbackName = formValues.nama_penuh;
@@ -196,12 +196,17 @@ export class FeedbackComponent implements OnInit {
       body.language =  { "languageId": this.languageId};
       
       let datasend = JSON.stringify(body); 
+      //this.isAdmin = true;
+      alert(this.isAdmin);
     
     if(this.isAdmin){
-      body.feedbackName = this.fullName;
-      body.feedbackActionBy = {"id": this.icNo }
-      body.feedbackEmail = this.emaiL;
+      body.feedbackName = "NNN";
+      //body.feedbackActionBy = {"id": this.icNo }
+      body.feedbackEmail = "TEST@yopmail.com";
       datasend =JSON.stringify(body); 
+
+      console.log(JSON.stringify(body));
+
     
       this.portalService.feedback(datasend).subscribe(
         data => {
