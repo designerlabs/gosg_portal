@@ -42,6 +42,8 @@ export class ProtectedService {
   private profilePhoneUrl: string = this.config.urlGetProfilePhone;
   private mailUrl: string = this.config.urlMail;
   private completeUrl: string = this.config.urlComplete;
+  private completeUrlEmail: string = this.config.urlCompleteEmail;
+  private completeUrlPhone: string = this.config.urlCompletePhone;
   private getUserUrl: string = this.config.urlGetUser;
   private pollUrl: string = this.config.urlPollProtected;
   // private serviceUrl = 'https://jsonplaceholder.typicode.com/users';
@@ -108,6 +110,18 @@ export class ProtectedService {
   completeTran(rnd){
     return this.http
     .put(this.completeUrl+"?randomNo="+rnd+"&langId="+localStorage.getItem('langID'),'').map((response: Response) => response.json())
+    .catch(this.handleError);
+  }
+
+  completeProfileEmail(){ 
+    return this.http
+    .put(this.completeUrlEmail+"?langId="+localStorage.getItem('langID'),'').map((response: Response) => response.json())
+    .catch(this.handleError);
+  }
+
+  completeProfilePhone(){ 
+    return this.http
+    .put(this.completeUrlPhone+"?langId="+localStorage.getItem('langID'),'').map((response: Response) => response.json())
     .catch(this.handleError);
   }
 

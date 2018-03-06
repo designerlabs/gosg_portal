@@ -17,7 +17,7 @@ import { forEach } from '@angular/router/src/utils/collection';
 // import { ControlBase } from '../common/controlbase'
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 import { environment } from '../../environments/environment';
-// import { debug } from 'util';
+//import { debug } from 'util';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 @Component({
   templateUrl: './profile.component.html',
@@ -181,7 +181,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.initialBtn = true;
-   
+  //  this.profileUpdated();
     let today = new Date();
     let todayDt = today.getDate();
     let year = today.getFullYear();
@@ -1227,6 +1227,8 @@ let bodyUpdate =
         this.toastr.error(this.translate.instant('profile.err.updateFail'), '');
       });
   };
+
+
 
 
   updateProfilePhone(formValues:any){
