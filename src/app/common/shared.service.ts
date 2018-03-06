@@ -22,6 +22,8 @@ export class SharedService {
   private postcodeUrl:string = this.config.urlPostcode;
   private cityUrl: string = this.config.urlCity;
   private genderUrl: string = this.config.urlGender;
+  private colorUrl: string = this.config.urlColor;
+  private fontUrl: string = this.config.urlFont;
   private religionUrl: string = this.config.urlReligion;
   private raceUrl: string = this.config.urlRace;
 
@@ -33,6 +35,8 @@ export class SharedService {
       .catch(this.handleError);
 
   }
+
+
 
   getStateData(): Observable<any[]> {
     //  console.log(this.countryUrl);
@@ -99,6 +103,21 @@ export class SharedService {
       .map((response: Response) => response.json().genderList)
       .retry(5)
       .catch(this.handleError);
+  }
+
+  getThemeColor(){
+    return this.http.get(this.colorUrl)
+    .map((response: Response) => response.json().colorList)
+    .retry(5)
+    .catch(this.handleError);
+  }
+
+
+  getThemeFont(){
+    return this.http.get(this.fontUrl)
+    .map((response: Response) => response.json().fontList)
+    .retry(5)
+    .catch(this.handleError);
   }
 
 

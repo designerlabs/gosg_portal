@@ -42,6 +42,16 @@ export class AppComponent {
         document.getElementById("mySidenav").style.width = "250px";
         this.isSideNav = data;
         console.log(this.isSideNav);
+        if(localStorage.getItem('customFontType')){
+            $('#fontOptSideMenu2').val(localStorage.getItem('customFontType'));
+        }
+
+        if (localStorage.getItem('themeIndex')) {
+            $('#confBar1 .settingBtm input').removeClass('colorPaletteActive');
+            $('#confBar1 .settingBtm input:nth('+localStorage.getItem('themeIndex')+')').addClass('colorPaletteActive');
+            localStorage.setItem('themeIndex', localStorage.getItem('themeIndex'));
+          }
+        
       }
 
     getTheme() {

@@ -63,6 +63,8 @@ export class AppConfig {
     urlGetProfileEmail:string;
     urlGetProfilePhone:string;
     urlUapStagingProfile:string;
+    urlColor:string;
+    urlFont: string;
 }
 
 export const APP_DI_CONFIG: AppConfig = {
@@ -74,6 +76,8 @@ export const APP_DI_CONFIG: AppConfig = {
     urlArticle: './app/apidata/topic',
     urlCountry: commonURL+'country/all',
     urlState: commonURL+'state',
+    urlColor: commonURL+ 'color/active',
+    urlFont: commonURL+ 'font/active',
     urlPostcode: commonURL+'postcode/city/',
     urlRace: commonURL+'race/lang/',
     urlCity: commonURL+'city/state/',
