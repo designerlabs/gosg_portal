@@ -14,7 +14,7 @@ import { FaqComponent } from './staticpage/faq.component';
 import { AboutusComponent } from './staticpage/aboutus.component';
 import { ManualComponent } from './staticpage/manual.component';
 import { DataprotectionComponent} from './staticpage/dataprotection.component';
-
+import { ProfileUpdatedComponent } from './profile-updated/profile-updated.component';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -35,6 +35,7 @@ export const protectedRoutes: Routes = [
     {path: '404', component: ErrorComponent },
     {path: 'dashboard', component: DashboardComponent},
     {path: 'profile', component: ProfileComponent},
+    {path: 'profileupdate', component: ProfileUpdatedComponent},
     {path: 'appsmgmt', component: AppManagementComponent},
     {path: 'index', component: HomeProtectedComponent},
     {path: 'firsttime', component: FirsttimeloginComponent},

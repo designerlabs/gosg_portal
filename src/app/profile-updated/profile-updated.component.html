@@ -1,0 +1,18 @@
+<div class="container" style="margin-top: 5%; margin-bottom: 5%;">
+    <div class="text-center" style="color: #000;">
+        <h2 *ngIf="emailDesc">
+          Your Profile Email has been updated successfully!
+        </h2> 
+        <h2 *ngIf="phoneDesc">
+          Your Profile Phone number has been updated successfully!
+        </h2>
+        <div style="margin-top: 2%;">
+          <button class="btn btn-md btn-success" (click)="getConfirmation()">
+            Click here to go to Profile
+          </button>
+        </div>
+    </div>
+    <div *ngIf="emailDesc || phoneDesc" class="bar">
+      <div class="in"></div>
+    </div>
+  </div>

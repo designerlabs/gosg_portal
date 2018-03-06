@@ -64,6 +64,8 @@ export class AppConfig {
     urlUapStagingProfile:string;
     urlColor:string;
     urlFont: string;
+    urlCompleteEmail:string;
+    urlCompletePhone:string;
 }
 
 export const APP_DI_CONFIG: AppConfig = {
@@ -103,6 +105,8 @@ export const APP_DI_CONFIG: AppConfig = {
     urlMail: protectedBaseURL+'inbox/',
     urlUAP: uapURL,
     urlComplete: protectedBaseURL+'user/complete/registration',
+    urlCompleteEmail: protectedBaseURL+'user/complete/email/updated',
+    urlCompletePhone: protectedBaseURL+'user/complete/phone/updated',
     urlGetUser: protectedBaseURL+'user/detail',
     urlGetProfile: protectedBaseURL+'user/profile',
     urlGetProfileEmail: protectedBaseURL+'user/profile/email',

@@ -29,6 +29,7 @@ import { FeedbackProtectedComponent } from './feedback/feedback-protected.compon
 // import { FeedbackComponent } from './feedback/feedback.component';
 import { PollProtectedComponent } from './poll/poll-protected.component';
 import { HomeProtectedComponent } from './home/home-protected.component';
+import { ProfileUpdatedComponent } from './profile-updated/profile-updated.component';
 
 
 
@@ -48,7 +49,8 @@ export function HttpLoaderFactory(http: Http) {
     FirsttimeloginComponent,
     FeedbackProtectedComponent,
     PollProtectedComponent,
-    HomeProtectedComponent
+    HomeProtectedComponent,
+    ProfileUpdatedComponent
   ],
   imports: [
     SharedModule,
