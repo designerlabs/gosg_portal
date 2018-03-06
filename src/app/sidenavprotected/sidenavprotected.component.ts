@@ -15,6 +15,9 @@ let num = 0;
 export class SidenavprotectedComponent implements OnInit {
   getThemeFonts: any;
   defaultFonts: any;
+  fontTy(arg0: any): any {
+    throw new Error("Method not implemented.");
+  }
   getThemeColors: any;
   defaultColors: any;
   translatedText: string;
@@ -37,6 +40,7 @@ export class SidenavprotectedComponent implements OnInit {
     this.loadColor();
     this.loadDefaultFonts();
     this.loadDefaultColor();
+    this.loadCustomFontType();
   }
 
   openNav() {
