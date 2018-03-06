@@ -43,16 +43,16 @@
                   </mat-panel-title>
                 </mat-expansion-panel-header>
                 
-                <div class="menu_botm" id="confBar1">
+                <div class="menu_botm" id="confBar2">
                     <div  id="themeContainer1">
 
                       <div  class="settingLbl">
                           Theme Color:
                       </div>
                       <div class="settingBtm">
-                          <input #colorPanel *ngFor="let color of colors; let i = index; let firstItem = first" (click)="setClickedColor(i, firstItem)"  [class.colorPaletteActive]="i == selectedRow ? true: false" type="button" name="bgColor" [(ngModel)]="bgColor" [ngStyle]="{'background': color.bgColor, 'border': '1px solid', 'border-color': color.bgColor}"  class="bgColorBtn bgColor" value="{{color.bgColor}}">
-                          <span><div (click)="resetBgColor()" class="btn btn-xs btn-default"><i class="fa fa-refresh"></i></div></span>
-                      </div>
+                            <input #colorPanel *ngFor="let color of getThemeColors; let i = index; let firstItem = first" (click)="setClickedColor(i, color.colorCode)" data-selected-id="color.colorId"  [class.colorPaletteActive]="color.defaultColor" type="button" name="bgColor" [(ngModel)]="bgColor" [ngStyle]="{'background': color.colorCode, 'border': '1px solid', 'border-color': color.colorCode}"  class="bgColorBtn bgColor" value="{{color.colorCode}}">
+                            <span><div (click)="resetBgColor()" class="btn btn-xs btn-default"><i class="fa fa-refresh"></i></div></span>
+                        </div>
                       <div  class="settingLbl">
                           Font Size :
                       </div>
@@ -65,13 +65,15 @@
                           Font Type :
                       </div>
                       <div class="settingBtm">
-                          <select #fontTy (change)="onChange($event, fontTy.value)" id="fontOptSideMenu1" class="form-control fontOption">
-                              <option class="fontOpt1" value="Roboto">Roboto</option>
-                              <option class="fontOpt2" value="Arial">Arial</option>
-                              <option class="fontOpt3" value="Times New Roman">Times New Roman</option>
-                          </select>
-                          <span style="clear:both;"><div (click)="resetFontStyle()" id="resetFontStyle" class="btn btn-xs btn-default" style="padding:10px;"><i class="fa fa-refresh"></i></div></span>
-                      </div>
+
+                            <select #fontTy1 (change)="onChange($event, fontTy.value)" id="fontOptSideMenu3" class="form-control fontOption">
+                                <option *ngFor="let font of getThemeFonts;" [value]="font.fontName"  [selected]="font.defaultFont" >
+                                    {{font.fontName}}
+                                </option>
+                            </select>
+    
+                              <span style="clear:both;"><div (click)="resetFontStyle()" id="resetFontStyle" class="btn btn-xs btn-default" style="padding:10px;"><i class="fa fa-refresh"></i></div></span>
+                          </div>
                     
                     </div>
                   </div>
