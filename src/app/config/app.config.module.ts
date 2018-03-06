@@ -27,6 +27,7 @@ export class AppConfig {
     urlCountry: string;
     urlState:string;
     urlPostcode:string;
+    // urlStaurlPostcodete:string;
     urlRace:string;
     urlCity:string;
     urlReligion: string;
@@ -69,6 +70,7 @@ export const APP_DI_CONFIG: AppConfig = {
     urlMenu: './app/apidata/menudata',
     urlSlider: baseURL+'slider',
     urlFooter: './app/apidata/footer',
+    // urlFooter: commonURL + 'footer',
     urlArticle: './app/apidata/topic',
     urlCountry: commonURL+'country/all',
     urlState: commonURL+'state',
