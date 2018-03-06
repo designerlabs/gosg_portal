@@ -7,6 +7,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/skip';
 import { PortalService } from '../services/portal.service';
 import { environment } from '../../environments/environment';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'gosg-protected',
@@ -86,6 +87,15 @@ export class ProtectedComponent implements OnInit {
     document.getElementById("mySidenavProtected").style.width = "250px";
     this.isProfile = data;
     console.log(this.isProfile);
+    if(localStorage.getItem('customFontType')){
+      $('#fontOptSideMenu3').val(localStorage.getItem('customFontType'));
+  }
+
+  if (localStorage.getItem('themeIndex')) {
+      $('#confBar2 .settingBtm input').removeClass('colorPaletteActive');
+      $('#confBar2 .settingBtm input:nth('+localStorage.getItem('themeIndex')+')').addClass('colorPaletteActive');
+      localStorage.setItem('themeIndex', localStorage.getItem('themeIndex'));
+    }
   }
 
   getUserData(){

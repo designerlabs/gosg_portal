@@ -42,6 +42,7 @@ export class PollComponent implements OnInit {
         this.lang = translate.currentLang;
         this.languageId = 2;
         translate.onLangChange.subscribe((event: LangChangeEvent) => {
+          // this.sharedService.errorHandling(event, (function(){
             const myLang = translate.currentLang;
             if (myLang === 'en') {
                this.lang = 'en';
@@ -54,6 +55,7 @@ export class PollComponent implements OnInit {
               this.getData('2');
               console.log('from malay');
             }
+          // }).bind(this));
         });
     }
 
@@ -62,20 +64,27 @@ export class PollComponent implements OnInit {
         // this.getUserIpAddr();
     }
 
-   getData(languageId) {       
+   getData(languageId) {   
+     debugger;    
          return this.http.get(this.config.urlPoll + '/question/lang/' + languageId + '/?active=true')
            .map(res => res.json())
           .subscribe(eventData => {
-                this.pollDataQuestion = eventData[0].questionTitle;
-                this.pollDataAnswer = eventData[0].answer.filter(fData => fData.answer !== undefined);
-                this.pollDataQuestionID = eventData[0].questionId;
-                this.pollReference = eventData[0].pollReference;
+            this.sharedService.errorHandling(eventData, (function(){
+              let resData = eventData.pollQuestionListDto[0];
+                this.pollDataQuestion = resData.questionTitle;
+                this.pollDataAnswer = resData.answer.filter(fData => fData.answer !== undefined);
+                this.pollDataQuestionID = resData.questionId;
+                this.pollReference = resData.pollReference;
                 // tslint:disable-next-line:radix
                 if (!this.latestResult) { // Check Latest Result Message while change lang
-                    this.showResult = ((localStorage.getItem('polldone') === eventData[0].pollReference.toString()));
+                    this.showResult = ((localStorage.getItem('polldone') === resData.pollReference.toString()));
                 }
                 // this.pollDataComment = eventData[0].comment;
-            });
+              }).bind(this));
+            }, error => {
+              this.toastr.error(this.translate.instant('common.err.servicedown'), '');
+          }
+          );
     }
 
     getAnsData() {
@@ -99,6 +108,7 @@ export class PollComponent implements OnInit {
 
     submitPoll(event) {
         // this.getAnsData(this.lang);
+        debugger;
         const data = {
             'pollsComment': this.pollComment,
             'pollsAnswerId' : this.pollAnswer.id,
@@ -108,12 +118,14 @@ export class PollComponent implements OnInit {
         this.portalservice.submitPoll(data)
         .subscribe(
             resData => {
-                this.resultData = resData;
-                this.pollDataAnswer = resData.answer;
-                this.pollDataQuestion = resData.questionTitle;
-                this.pollDataQuestionID = resData.questionId;
-                this.pollReference = resData.pollReference;
-                console.log(this.resultData);
+                this.sharedService.errorHandling(resData, (function(){
+                  this.resultData = resData;
+                  this.pollDataAnswer = resData.answer;
+                  this.pollDataQuestion = resData.questionTitle;
+                  this.pollDataQuestionID = resData.questionId;
+                  this.pollReference = resData.pollReference;
+                  console.log(this.resultData);
+                }).bind(this));
             }, Error => {
                 this.toastr.error(this.translate.instant('common.err.servicedown'), '');
             }

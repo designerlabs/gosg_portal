@@ -47,3 +47,7 @@
 .settingBtm{
     padding: 0px 0 15px 0;
 }
+
+.colorPaletteActive{
+  border:1px solid #fff !important;
+}

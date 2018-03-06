@@ -54,16 +54,29 @@ export class SharedService {
       .retry(5)
       .catch(this.handleError);
   }
-
   
+  // errorHandling(err, callback){
+  //   let statusCode = err.statusCode.toLowerCase();
+  //   if(statusCode == 'error'){
+  //     this.toastr.error(err.statusDesc, 'Error');
+  //   }else{
+  //     callback()
+  //   }
+  // }
+
   errorHandling(err, callback){
-    let statusCode = err.statusCode.toLowerCase();
-    if(statusCode == 'error'){
-      this.toastr.error(err.statusDesc, 'Error');
-    }else{
-      callback()
+    if(err.statusCode){
+      let statusCode = err.statusCode.toLowerCase();
+      if(statusCode == 'error'){
+        this.toastr.error(err.statusDesc, 'Error');
+      }else{
+        callback()
+      }
+   }else{
+     callback()
     }
   }
+
 
   getCountrybyCode(code): Observable<any[]> {
     return this.http.get(this.countryUrl + '/code/' + code)
