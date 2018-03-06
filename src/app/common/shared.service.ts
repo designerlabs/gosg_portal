@@ -18,7 +18,7 @@ export class SharedService {
   lang = this.lang;
   languageId = this.languageId;
   private countryUrl: string = this.config.urlCountry;
-  private stateUrl: string = this.config.urlState;
+  private stateUrl: string = this.config.urlStaurlPostcodete;
   private postcodeUrl:string = this.config.urlPostcode;
   private cityUrl: string = this.config.urlCity;
   private genderUrl: string = this.config.urlGender;
