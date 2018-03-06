@@ -75,6 +75,7 @@ export class ProfileUpdatedComponent implements OnInit {
         .subscribe(
             userData => {
               if(userData.statusCode === 'SUCCESS'){
+                clearInterval(this.interval);
                 this.router.navigate(['/profile']);
               }else{
                 console.log(userData.statusDesc);
