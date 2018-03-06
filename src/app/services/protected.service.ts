@@ -38,6 +38,8 @@ export class ProtectedService {
    private feedbacktypeUrl: string = this.config.urlFeedbackType;
    private fbsubjectUrl: string = this.config.urlFeedbackSubject;
   private profileUrl: string = this.config.urlGetProfile;
+  private profileEmailUrl: string = this.config.urlGetProfileEmail;
+  private profilePhoneUrl: string = this.config.urlGetProfilePhone;
   private mailUrl: string = this.config.urlMail;
   private completeUrl: string = this.config.urlComplete;
   private getUserUrl: string = this.config.urlGetUser;
@@ -69,6 +71,18 @@ export class ProtectedService {
   updateProfile(user) {
     return this.http
     .put(this.profileUrl+"/update/"+user.pid+"?langId="+localStorage.getItem('langID'), user).map((response: Response) => response.json())
+    .catch(this.handleError);
+  }
+
+  updateEmail(pid, user) {
+    return this.http
+    .put(this.profileEmailUrl+"/update/"+pid+"?requestEmail="+user+"&langId="+localStorage.getItem('langID'), user).map((response: Response) => response.json())
+    .catch(this.handleError);
+  }
+
+  updatePhone(pid, user) {
+    return this.http
+    .put(this.profilePhoneUrl+"/update/"+pid+"?requestEmail="+user+"&langId="+localStorage.getItem('langID'), user).map((response: Response) => response.json())
     .catch(this.handleError);
   }
 

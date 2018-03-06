@@ -3,6 +3,7 @@
     "logo": "logo_en",
     "menu": {
       "home": "Home",
+      "calendar": "Calendar",
       "register": "Register",
       "setting": "Settings",
       "contact": "Contact",
@@ -16,6 +17,7 @@
       "label": "How Can We Help You?"
     },
     "breadcrumb": {
+      "calendar": "Calendar",
       "register": "Register",
       "feedback": "Complaints and Queries",
       "profile": "My Profile",
@@ -103,6 +105,9 @@
       "tel": "Telephone",
       "race":"Race",
       "religion":"Religion",
+      "personalDetails": "Personal Details",
+      "changePhone": "Change Mobile No.",
+      "changeEmail": "Change Email",
       "regisdate":"Registration Date",
       "peraddr":"Permanent Address",
       "corrsaddr":"Corresponding Address",
@@ -182,6 +187,31 @@
       
     }
   },
+  "calendar": {
+    "title": "MY CALENDAR",
+    "desc": "Please limit your response to 10000 characters and include your email address and we will respond to you within three (3) working days. We can respond in two languages, English and Bahasa Melayu.",
+    "label": {
+      "type": "Type of feedback",
+      "subjek": "Subject",
+      "name": "Name",
+      "nameplh": "Full name",
+      "emel": "Email",
+      "content": "Content",
+      "reset": "Reset",
+      "submit": "Send",
+      "words": " characters left.",
+      "choose": "--Please Select--"
+    },
+    "reset":"Reset this form?",      
+    "msgsubmit": "Thank you. Your complaints/queries has been successfully sent. Responds will be received in 3 working days",
+    "err":{
+      "drop": "This field is required",
+      "submit": "Sorry, server down.",        
+      "type":"Sorry, type of feedback is unavailable.",
+      "subject":"Sorry, subjects is unavailable."
+      
+    }
+  },
   "mailbox":{
     "header":{
       "from":"From",
@@ -221,7 +251,15 @@
       "home":"Home"
     },
     "err":{
-      "servicedown": "Sorry, Server is down"
+      "servicedown": "Sorry, Server is down",
+      "failtoload":"Sorry, Record is not loading properly, Try again!",
+      "failtodelete":"Sorry, Record is not deleted properly, Try again!",
+      "failtoview":"Sorry, Record is not viewed properly, Try again!"
+    },
+    "success":{
+      "added": "Successfully added!",
+      "deletesuccess":"Record has been deleted successfully!",
+      "deletesuccess_multi":"Selected Record has been deleted successfully!"
     },
     "icon":{
       "success":"fa fa-check",
@@ -231,7 +269,8 @@
     },
     "msg":{
       "reset":"Reset this form?",
-      "delete":"Are you sure to delete the record?"   
+      "delete":"Are you sure to delete the record?",
+      "success":"Successfully added!"  
     },
     "state":{
       "success":"bg_header bg_success_header",

@@ -1,10 +1,10 @@
 import { NgModule, InjectionToken } from '@angular/core';
+import { environment } from '../../environments/environment';
 
 export let APP_CONFIG = new InjectionToken<AppConfig>('app.config');
 
-let baseURL = 'http://10.1.17.12:3000/';
-let uapURL = 'https://10.1.71.176/';
-//let uapURL = 'https://10.1.71.176/';
+let baseURL =  environment.mockApiURL;
+let uapURL = environment.uapURL;
 let registrationUrl = uapURL+'registration/';
 
 
@@ -39,6 +39,7 @@ export class AppConfig {
     urlAnnouncement: string;       
     urlAnnouncementSub: string;
     urlCalendar: string;
+    urlEvent: string;
     urlRegister: string;
     urlFeedbackType: string;
     urlFeedbackSubject: string;
@@ -58,6 +59,9 @@ export class AppConfig {
     urlGetProfile: string;
     urlPollProtected:string;
     urlFeedbackProtected:string;
+    urlGetProfileEmail:string;
+    urlGetProfilePhone:string;
+    urlUapStagingProfile:string;
 }
 
 export const APP_DI_CONFIG: AppConfig = {
@@ -66,7 +70,7 @@ export const APP_DI_CONFIG: AppConfig = {
     urlSlider: baseURL+'slider',
     urlFooter: './app/apidata/footer',
     urlArticle: './app/apidata/topic',
-    urlCountry: commonURL+'country',
+    urlCountry: commonURL+'country/all',
     urlState: commonURL+'state',
     urlPostcode: commonURL+'postcode/city/',
     urlRace: commonURL+'race/lang/',
@@ -80,6 +84,7 @@ export const APP_DI_CONFIG: AppConfig = {
     urlAnnouncement : commonURL + 'announcement/date/publish',    
     urlAnnouncementSub: commonURL + 'announcement/category',
     urlCalendar: './app/apidata/calendar',
+    urlEvent: './app/apidata/event',
     urlRegister: registrationUrl+'register',    
     urlFeedbackType: commonURL+'feedback/type/lang/',
     urlFeedbackSubject: commonURL+'feedback/subject/lang/',
@@ -96,8 +101,11 @@ export const APP_DI_CONFIG: AppConfig = {
     urlComplete: protectedBaseURL+'user/complete/registration',
     urlGetUser: protectedBaseURL+'user/detail',
     urlGetProfile: protectedBaseURL+'user/profile',
+    urlGetProfileEmail: protectedBaseURL+'user/profile/email',
+    urlGetProfilePhone: protectedBaseURL+'user/profile/phone',
     urlAppAgency: './app/apidata/appAgency',
     urlUapStaging: 'https://uapstaging.malaysia.gov.my/uap/validatesigncryption.jsp?language=',
+    urlUapStagingProfile: 'https://uapstaging.malaysia.gov.my/myprofile/update/updatechannel.jsp?tag=',
     urlPoll: commonURL + 'polls',
     urlPollProtected: protectedBaseURL + 'polls'
 

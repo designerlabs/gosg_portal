@@ -16,6 +16,9 @@ import { forEach } from '@angular/router/src/utils/collection';
 // import { SlicePipe } from '@angular/common/src/pipes';
 // import { ControlBase } from '../common/controlbase'
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
+import { environment } from '../../environments/environment';
+import { debug } from 'util';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 @Component({
   templateUrl: './profile.component.html',
   selector: 'myprofile',
@@ -53,12 +56,17 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   @ViewChild('corsPost') corsPost: ElementRef
   @ViewChild('corshomephone') corshomephone : ElementRef
   @ViewChild('corsmobile') corsmobile : ElementRef
+  @ViewChild(ModalDirective) modal: ModalDirective;
+  @ViewChild('staticModal') public staticModal:ModalDirective;
+  @ViewChild('infoModal') public infoModal:ModalDirective;
 
   events: string[] = [];
   dt:number;
   proFields: any[]
   genderData: any[]
   profileForm: FormGroup
+  emailForm: FormGroup
+  phoneForm: FormGroup
   temp: any
   resProfileFieldsData: any[]
   initial = true;
@@ -97,6 +105,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   public perStateNotLocal: FormControl
   public perCityLocal: FormControl
   public perCityNotLocal: FormControl
+  public emailaddressUpdate: FormControl
+  public codeTelefonf: FormControl
+  public telefonf: FormControl
   public perPostcode: FormControl
   public perPostcodeNotLocal: FormControl
   public perTelephone: FormControl
@@ -127,7 +138,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   regdate:string;
   lang = this.lang;
   languageId = this.languageId;
-
+  private uapstagingUrl: string = this.config.urlUapStagingProfile;
 
   constructor(
     private router: Router, 
@@ -200,6 +211,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.perStateNotLocal = new FormControl()
     this.perCityLocal = new FormControl()
     this.perCityNotLocal = new FormControl()
+    this.codeTelefonf = new FormControl()
+    this.telefonf = new FormControl()
+    this.emailaddressUpdate = new FormControl('', [Validators.required, Validators.email]);
     this.perPostcode = new FormControl()
     this.perPostcodeNotLocal = new FormControl()
     this.perTelephone = new FormControl()
@@ -220,6 +234,17 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.corrscodeTelefon = new FormControl()
     this.corrsMobile = new FormControl()
     this.mobilecodeTelefon = new FormControl()
+
+    this.emailForm = new FormGroup({
+      emailaddressUpdate: this.emailaddressUpdate
+    })
+
+    
+
+    this.phoneForm = new FormGroup({
+      codeTelefonf: this.codeTelefonf,
+      telefonf: this.telefonf,
+    })
 
     this.profileForm = new FormGroup({
       dob: this.dob,
@@ -260,187 +285,194 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   }
 
   getUserData(){
+    if(!environment.staging){
     this.getPerPostCodeFlag = false;
     this.protectedService.getUser().subscribe(
       data => {
-        if(data.user){
-          debugger;
-          // this.fullname = data.user.fullName;
-          this.userTypeId = data.user.userType.userTypeId;
-
-          this.protectedService.getProfile(data.user.pid).subscribe(
-            data => {
-              if(data.user) {
-                this.userId = data.user.userId;
-                this.fullname = data.user.fullName;
-                this.accountStatus = data.user.accountStatus.accountStatusId;
-                this.nationality = data.user.country.countryName;
-                this.countryId = data.user.country.countryId;
-                this.passport = data.user.passportNo;
-                this.idno = data.user.pid;
-                this.regemail = data.user.email;
-                this.regdate = data.user.registrationDate;
-                this.isStaff = data.user.isStaff;
-                this.isMyIdentityVerfied = data.user.isMyIdentityVerified;
-                this.isMyIdentityValid = data.user.isMyIdentityValid;
-                this.agencyForwardUrl = data.user.agencyForwardUrl;
-                this.roles = data.user.roles;
-
+        this.sharedService.errorHandling(data, (function(){
+          if(data.user){
+            // this.fullname = data.user.fullName;
+            this.userTypeId = data.user.userType.userTypeId;
+  
+            this.protectedService.getProfile(data.user.pid).subscribe(
+              data => {
+                this.sharedService.errorHandling(data, (function(){
+                  if(data.user) {
+                    this.userId = data.user.userId;
+                    this.fullname = data.user.fullName;
+                    this.accountStatus = data.user.accountStatus.accountStatusId;
+                    this.nationality = data.user.country.countryName;
+                    this.countryId = data.user.country.countryId;
+                    this.passport = data.user.passportNo;
+                    this.idno = data.user.pid;
+                    this.regemail = data.user.email;
+                    this.regdate = data.user.registrationDate;
+                    this.isStaff = data.user.isStaff;
+                    this.isMyIdentityVerfied = data.user.isMyIdentityVerified;
+                    this.isMyIdentityValid = data.user.isMyIdentityValid;
+                    this.agencyForwardUrl = data.user.agencyForwardUrl;
+                    this.roles = data.user.roles;
     
-                if (data.user.mobilePhoneNo && (data.user.mobilePhoneNo).split('*').length > 1) {
-                  const telenum = (data.user.mobilePhoneNo).split('*')[1];
-                  this.profileForm.get('corrsMobile').setValue(telenum);
-                  const telecode = (data.user.mobilePhoneNo).split('*')[0];
-                  this.profileForm.get('mobilecodeTelefon').setValue(telecode);
-                }else {
-                  this.profileForm.get('corrsMobile').setValue((data.user.mobilePhoneNo));
-                }
-
-                if(data.user.gender){
-                  this.profileForm.get('gender').setValue(data.user.gender.genderCode);
-                }
-
-                if(data.user.race){
-                  this.profileForm.get('race').setValue(data.user.race.raceCode);
-                }
-              
-                if(data.user.dateOfBirth){
-                  //this.serializedDate = new FormControl((new Date(data.user.dateOfBirth)).toISOString());
-                  this.dt = data.user.dateOfBirth;
-                  //let dobVal = new FormControl((new Date(data.user.dateOfBirth)).toISOString());
-                  //this.profileForm.get('dob').setValue(dobVal);
-                }
-                if(data.user.religion){
-                  this.profileForm.get('religion').setValue(data.user.religion.religionCode);
-                }
-                
-                if(data.user.address){
-                  this.isSameAddressValue = data.user.address.sameAddressFlag;
-                  this.isSameAddressChk();
-                  this.addressId = data.user.address.addressId;
-                  this.profileForm.get('perAddress1').setValue(data.user.address.permanentAddress1);
-                  this.profileForm.get('perAddress2').setValue(data.user.address.permanentAddress2);
-                  this.profileForm.get('perAddress3').setValue(data.user.address.permanentAddress3);
-                  // this.profileForm.get('perPostcode').setValue(data.user.address.permanentAddressPostcode);
-                  // this.profileForm.get('perTelephone').setValue(data.user.address.permanentAddressHomePhoneNo);
-                  // if corressponding address have Country code
-                  if (data.user.address.permanentAddressHomePhoneNo && (data.user.address.permanentAddressHomePhoneNo).split('*').length > 1) {
-                    const perTelenum = (data.user.address.permanentAddressHomePhoneNo).split('*')[1];
-                    this.profileForm.get('perTelephone').setValue(perTelenum);
-                    const perTeleCode = (data.user.address.permanentAddressHomePhoneNo).split('*')[0];
-                    this.profileForm.get('percodeTele').setValue(perTeleCode);
-                  }else {
-                    this.profileForm.get('perTelephone').setValue(data.user.address.permanentAddressHomePhoneNo);
-                  }
-
-                  if(data.user.address.permanentAddressCountry){
-                    this.profileForm.get('perCountry').setValue(data.user.address.permanentAddressCountry.countryId);
-                    if(data.user.address.permanentAddressCountry.countryId == 152) {
-                      this.isLocal = true;
-                      this.getState();
-                      if(data.user.address.permanentAddressState){
-                        this.profileForm.get('perStateLocal').setValue(data.user.address.permanentAddressState.stateId);
+                    this.emailForm.get('emailaddressUpdate').setValue(data.user.email);
+                    if (data.user.mobilePhoneNo && (data.user.mobilePhoneNo).split('*').length > 1) {
+                      const telenum = (data.user.mobilePhoneNo).split('*')[1];
+                      this.phoneForm.get('telefonf').setValue(telenum);
+                      this.profileForm.get('corrsMobile').setValue(telenum);
+                      const telecode = (data.user.mobilePhoneNo).split('*')[0];
+                      this.phoneForm.get('codeTelefonf').setValue(telecode);
+                      this.profileForm.get('mobilecodeTelefon').setValue(telecode);
+                    }else {
+                      this.profileForm.get('corrsMobile').setValue((data.user.mobilePhoneNo));
+                    }
+    
+                    if(data.user.gender){
+                      this.profileForm.get('gender').setValue(data.user.gender.genderCode);
+                    }
+    
+                    if(data.user.race){
+                      this.profileForm.get('race').setValue(data.user.race.raceCode);
+                    }
+                  
+                    if(data.user.dateOfBirth){
+                      //this.serializedDate = new FormControl((new Date(data.user.dateOfBirth)).toISOString());
+                      this.dt = data.user.dateOfBirth;
+                      //let dobVal = new FormControl((new Date(data.user.dateOfBirth)).toISOString());
+                      //this.profileForm.get('dob').setValue(dobVal);
+                    }
+                    if(data.user.religion){
+                      this.profileForm.get('religion').setValue(data.user.religion.religionCode);
+                    }
+                    
+                    if(data.user.address){
+                      this.isSameAddressValue = data.user.address.sameAddressFlag;
+                      this.isSameAddressChk();
+                      this.addressId = data.user.address.addressId;
+                      this.profileForm.get('perAddress1').setValue(data.user.address.permanentAddress1);
+                      this.profileForm.get('perAddress2').setValue(data.user.address.permanentAddress2);
+                      this.profileForm.get('perAddress3').setValue(data.user.address.permanentAddress3);
+                      // this.profileForm.get('perPostcode').setValue(data.user.address.permanentAddressPostcode);
+                      // this.profileForm.get('perTelephone').setValue(data.user.address.permanentAddressHomePhoneNo);
+                      // if corressponding address have Country code
+                      if (data.user.address.permanentAddressHomePhoneNo && (data.user.address.permanentAddressHomePhoneNo).split('*').length > 1) {
+                        const perTelenum = (data.user.address.permanentAddressHomePhoneNo).split('*')[1];
+                        this.profileForm.get('perTelephone').setValue(perTelenum);
+                        const perTeleCode = (data.user.address.permanentAddressHomePhoneNo).split('*')[0];
+                        this.profileForm.get('percodeTele').setValue(perTeleCode);
+                      }else {
+                        this.profileForm.get('perTelephone').setValue(data.user.address.permanentAddressHomePhoneNo);
                       }
-
+    
+                      if(data.user.address.permanentAddressCountry){
+                        this.profileForm.get('perCountry').setValue(data.user.address.permanentAddressCountry.countryId);
+                        if(data.user.address.permanentAddressCountry.countryId == 152) {
+                          this.isLocal = true;
+                          this.getState();
+                          if(data.user.address.permanentAddressState){
+                            this.profileForm.get('perStateLocal').setValue(data.user.address.permanentAddressState.stateId);
+                          }
+    
+                          
+                          this.getCitiesByStateP(data.user.address.permanentAddressState.stateId);
+                          if(data.user.address.permanentAddressCity){
+                            this.profileForm.get('perCityLocal').setValue(data.user.address.permanentAddressCity.cityId);
+                            
+                          }
+                           //this.getPostCodeByCityId(data.user.address.permanentAddressCity.cityId);                     
+                          this.getPostcodeByCityP(data.user.address.permanentAddressCity.cityId);
+                           if(data.user.address.permanentAddressPostcode){
+                            // this.getPerPostCodeFlag = true;
+                            // this.getperPostCode = data.user.address.permanentAddressPostcode.postcodeId;
+                            this.profileForm.get('perPostcode').setValue(data.user.address.permanentAddressPostcode.postcodeId);    
+                          }
+                          
+    
+                        }else{
+                          this.isLocal = false;
+                          if(data.user.address.optionalPermanentAddressState){
+                            this.profileForm.get('perStateNotLocal').setValue(data.user.address.optionalPermanentAddressState);
+                          }
+                          if(data.user.address.optionalPermanentAddressCity){
+                            this.profileForm.get('perCityNotLocal').setValue(data.user.address.optionalPermanentAddressCity); 
+                          }
+      
+                          if(data.user.address.optionalPermanentAddressPostcode){
+                            this.profileForm.get('perPostcodeNotLocal').setValue(data.user.address.optionalPermanentAddressPostcode); 
+                          }
+                          
+                        }
+                      }
                       
-                      this.getCitiesByStateP(data.user.address.permanentAddressState.stateId);
-                      if(data.user.address.permanentAddressCity){
-                        this.profileForm.get('perCityLocal').setValue(data.user.address.permanentAddressCity.cityId);
-                        
+                      
+    
+                      this.profileForm.get('corrsAddress1').setValue(data.user.address.correspondingAddress1);
+                      this.profileForm.get('corrsAddress2').setValue(data.user.address.correspondingAddress2);
+                      this.profileForm.get('corrsAddress3').setValue(data.user.address.correspondingAddress3);
+                      this.profileForm.get('corrsPostcode').setValue(data.user.address.correspondingAddressPostcode);
+                      // if corressponding address have Country code
+                      if (data.user.address.correspondingAddressHomePhoneNo && (data.user.address.correspondingAddressHomePhoneNo).split('*').length > 1) {
+                        const corrTeleNum = (data.user.address.correspondingAddressHomePhoneNo).split('*')[1];
+                        this.profileForm.get('corrsTelephone').setValue(corrTeleNum);
+                        const corrsTeleCode = (data.user.address.correspondingAddressHomePhoneNo).split('*')[0];
+                        this.profileForm.get('corrscodeTelefon').setValue(corrsTeleCode);
+    
+                      }else {
+                        this.profileForm.get('corrsTelephone').setValue(data.user.address.correspondingAddressHomePhoneNo);
                       }
-                       //this.getPostCodeByCityId(data.user.address.permanentAddressCity.cityId);                     
-                      this.getPostcodeByCityP(data.user.address.permanentAddressCity.cityId);
-                       if(data.user.address.permanentAddressPostcode){
-                        // this.getPerPostCodeFlag = true;
-                        // this.getperPostCode = data.user.address.permanentAddressPostcode.postcodeId;
-                        this.profileForm.get('perPostcode').setValue(data.user.address.permanentAddressPostcode.postcodeId);    
+    
+    
+                      if(data.user.address.correspondingAddressCountry){
+                        this.profileForm.get('corrsCountry').setValue(data.user.address.correspondingAddressCountry.countryId);
+                        if(data.user.address.correspondingAddressCountry.countryId == 152) {
+                          this.isCorrsLocal = true;
+                          
+                          if(data.user.address.correspondingAddressState){
+                            this.getState();
+                            this.profileForm.get('corrsStateLocal').setValue(data.user.address.correspondingAddressState.stateId);
+                          }
+    
+                          if(data.user.address.correspondingAddressCity){
+                            this.getCitiesByStateC(data.user.address.correspondingAddressState.stateId);
+                            this.profileForm.get('corrsCityLocal').setValue(data.user.address.correspondingAddressCity.cityId);
+                            this.getPerCityId = data.user.address.correspondingAddressCity.cityId;
+                            // this.postCodeObj2 = {value: data.user.address.correspondingAddressCity.cityId};
+                          }
+                          
+                          this.getPostcodeByCityC(data.user.address.correspondingAddressCity.cityId);
+                          if(data.user.address.correspondingAddressPostcode){
+                           this.profileForm.get('corrsPostcode').setValue(data.user.address.correspondingAddressPostcode.postcodeId);    
+                         }
+    
+                          
+                        }else{
+                          this.isCorrsLocal = false;
+                          if(data.user.address.optionalCorrespondingAddressState){
+                            this.profileForm.get('corrsStateNotLocal').setValue(data.user.address.optionalCorrespondingAddressState);
+                          }
+                          if(data.user.address.optionalCorrespondingAddressCity){
+                            this.profileForm.get('corrsCityNotLocal').setValue(data.user.address.optionalCorrespondingAddressCity); 
+                          }
+      
+                          if(data.user.address.optionalCorrespondingAddressPostcode){
+                            this.profileForm.get('corrsPostcodeNotLocal').setValue(data.user.address.optionalCorrespondingAddressPostcode); 
+                          }
+                          
+                        }
                       }
                       
-
-                    }else{
-                      this.isLocal = false;
-                      if(data.user.address.optionalPermanentAddressState){
-                        this.profileForm.get('perStateNotLocal').setValue(data.user.address.optionalPermanentAddressState);
-                      }
-                      if(data.user.address.optionalPermanentAddressCity){
-                        this.profileForm.get('perCityNotLocal').setValue(data.user.address.optionalPermanentAddressCity); 
-                      }
-  
-                      if(data.user.address.optionalPermanentAddressPostcode){
-                        this.profileForm.get('perPostcodeNotLocal').setValue(data.user.address.optionalPermanentAddressPostcode); 
-                      }
-                      
+                    
                     }
                   }
-                  
-                  
-
-                  this.profileForm.get('corrsAddress1').setValue(data.user.address.correspondingAddress1);
-                  this.profileForm.get('corrsAddress2').setValue(data.user.address.correspondingAddress2);
-                  this.profileForm.get('corrsAddress3').setValue(data.user.address.correspondingAddress3);
-                  this.profileForm.get('corrsPostcode').setValue(data.user.address.correspondingAddressPostcode);
-                  // if corressponding address have Country code
-                  if (data.user.address.correspondingAddressHomePhoneNo && (data.user.address.correspondingAddressHomePhoneNo).split('*').length > 1) {
-                    const corrTeleNum = (data.user.address.correspondingAddressHomePhoneNo).split('*')[1];
-                    this.profileForm.get('corrsTelephone').setValue(corrTeleNum);
-                    const corrsTeleCode = (data.user.address.correspondingAddressHomePhoneNo).split('*')[0];
-                    this.profileForm.get('corrscodeTelefon').setValue(corrsTeleCode);
-
-                  }else {
-                    this.profileForm.get('corrsTelephone').setValue(data.user.address.correspondingAddressHomePhoneNo);
-                  }
-
-
-                  if(data.user.address.correspondingAddressCountry){
-                    this.profileForm.get('corrsCountry').setValue(data.user.address.correspondingAddressCountry.countryId);
-                    if(data.user.address.correspondingAddressCountry.countryId == 152) {
-                      this.isCorrsLocal = true;
-                      
-                      if(data.user.address.correspondingAddressState){
-                        this.getState();
-                        this.profileForm.get('corrsStateLocal').setValue(data.user.address.correspondingAddressState.stateId);
-                      }
-
-                      if(data.user.address.correspondingAddressCity){
-                        this.getCitiesByStateC(data.user.address.correspondingAddressState.stateId);
-                        this.profileForm.get('corrsCityLocal').setValue(data.user.address.correspondingAddressCity.cityId);
-                        this.getPerCityId = data.user.address.correspondingAddressCity.cityId;
-                        // this.postCodeObj2 = {value: data.user.address.correspondingAddressCity.cityId};
-                      }
-                      
-                      this.getPostcodeByCityC(data.user.address.correspondingAddressCity.cityId);
-                      if(data.user.address.correspondingAddressPostcode){
-                       this.profileForm.get('corrsPostcode').setValue(data.user.address.correspondingAddressPostcode.postcodeId);    
-                     }
-
-                      
-                    }else{
-                      this.isCorrsLocal = false;
-                      if(data.user.address.optionalCorrespondingAddressState){
-                        this.profileForm.get('corrsStateNotLocal').setValue(data.user.address.optionalCorrespondingAddressState);
-                      }
-                      if(data.user.address.optionalCorrespondingAddressCity){
-                        this.profileForm.get('corrsCityNotLocal').setValue(data.user.address.optionalCorrespondingAddressCity); 
-                      }
-  
-                      if(data.user.address.optionalCorrespondingAddressPostcode){
-                        this.profileForm.get('corrsPostcodeNotLocal').setValue(data.user.address.optionalCorrespondingAddressPostcode); 
-                      }
-                      
-                    }
-                  }
-                  
-                
-                }
+                }).bind(this));
+              },
+              error => {
+                console.log(error)
               }
-            },
-            error => {
-              console.log(error)
-            }
-          )
-        }else{
-          
-        }
+            )
+          }else{
+            
+          }
+        }).bind(this));
+        
         
       },
     error => {
@@ -448,6 +480,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         //location.href = this.config.urlUAP+'portal/index';
       }
     )
+  }
   }
 
 
@@ -876,6 +909,11 @@ getPostcodeByCityC(e){
     if(!this.isLocal){
       this.profileForm.get('perStateNotLocal').setValue("");
       this.profileForm.get('perCityNotLocal').setValue("");
+      this.profileForm.get('perPostcodeNotLocal').setValue("");
+
+
+      this.profileForm.get('perStateLocal').setValue("");
+      this.profileForm.get('perCityLocal').setValue("");
       this.profileForm.get('perPostcode').setValue("");
 
       this.profileForm.removeControl('perStateNotLocal');
@@ -925,7 +963,6 @@ getPostcodeByCityC(e){
   }
 
   edit(){
-    // debugger
     this.isActive = !this.isActive;
     
     if(this.isActive != false) {
@@ -1163,6 +1200,59 @@ let bodyUpdate =
         this.toastr.error(this.translate.instant('profile.err.updateFail'), '');
       });
   }
+
+
+  updateProfileEmail(formValues:any){
+    this.protectedService.updateEmail(this.idno, formValues.emailaddressUpdate).subscribe(
+      data => {
+        
+        this.sharedService.errorHandling(data, (function(){
+          this.isActive = false;
+          this.initial = true;
+          this.emailForm.invalid;
+          this.toastr.success(this.translate.instant('profile.msg.updateSuccess'), '');
+          this.emailForm.disable();
+          if(!!data.user){
+            window.location.href = this.uapstagingUrl+data.user.tag;
+        }else{
+            this.errMsg = data.statusDesc;
+            this.infoModal.show();
+        }
+        }).bind(this));
+        
+        
+      },
+    
+      error => {
+        this.toastr.error(this.translate.instant('profile.err.updateFail'), '');
+      });
+  };
+
+
+  updateProfilePhone(formValues:any){
+    this.protectedService.updateEmail(this.idno, formValues.codeTelefonf + formValues.telefonf).subscribe(
+      data => {
+
+        this.sharedService.errorHandling(data, (function(){
+          this.isActive = false;
+          this.initial = true;
+          this.phoneForm.invalid;
+          this.toastr.success(this.translate.instant('profile.msg.updateSuccess'), '');
+          this.phoneForm.disable();
+          if(!!data.user){
+            window.location.href = this.uapstagingUrl+data.user.tag;
+          }else{
+              this.errMsg = data.statusDesc;
+              this.infoModal.show();
+          }
+        }).bind(this));
+
+      },
+    
+      error => {
+        this.toastr.error(this.translate.instant('profile.err.updateFail'), '');
+      });
+  };
 
   toFormGroup(data: any) {
     let group: any = {}

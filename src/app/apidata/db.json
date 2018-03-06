@@ -3255,7 +3255,7 @@
       ]
     }
   ],
-  "announcement_category":[
+  "announcement_category": [
     {
       "id": 1,
       "count": 5,
@@ -3312,7 +3312,6 @@
               "label": "Kerjaya",
               "id": 5,
               "active": false
-              
             }
           ],
           "menu_right": [],
@@ -3323,7 +3322,7 @@
       ]
     }
   ],
-  "announcement_details":[
+  "announcement_details": [
     {
       "id": 1,
       "count": 5,
@@ -3358,7 +3357,6 @@
               "label": "Kerjaya",
               "id": 5,
               "active": false
-              
             }
           ],
           "menu_right": [],
@@ -3367,6 +3365,544 @@
           "html_head_meta_description": "Simple access to information and services for business."
         }
       ]
+    }
+  ],
+  "moduleList": [
+    {
+      "moduleGroupName":"",
+      "moduleGroupId":1,
+      "isActive":true,
+      "data":[
+        {
+      "name": "modules",
+      "items": [
+        {
+          "moduleName": "Polls",
+          "moduleId": 2,
+          "isActive": true
+        },
+        {
+          "moduleName": "Polls Result",
+          "moduleId": 3,
+          "isActive": true
+        },
+        {
+          "moduleName": "Announcement",
+          "moduleId": 4,
+          "isActive": true
+        },
+        {
+          "moduleName": "Country",
+          "moduleId": 5,
+          "isActive": true
+        },
+        {
+          "moduleName": "Slider",
+          "moduleId": 1,
+          "isActive": true
+        },
+        {
+          "moduleName": "City",
+          "moduleId": 6,
+          "isActive": true
+        },
+        {
+          "moduleName": "Media",
+          "moduleId": 7,
+          "isActive": true
+        },
+        {
+          "moduleName": "Gallery",
+          "moduleId": 8,
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "name": "selected modules",
+      "items": []
+    }
+      ]
+    }
+    
+    
+  ],
+  "groupList": [
+    {
+      "name": "modules",
+      "items": [
+        {
+          "moduleGroupName": "xyz",
+          "moduleGroupId":1,
+          "subModuleGroups": [
+            {
+              "subModuleGroupId": 1,
+              "moduleName": "slider",
+              "permission": {
+                "permissionId": 1,
+                "isRead": true,
+                "isWrite": true,
+                "isUpdate": false,
+                "isDelete": false
+              }
+            }
+          ],
+          "id": 1,
+          "isActive": true
+        },
+        {
+          "moduleGroupName": "abc",
+          "moduleGroupId":2,
+          "subModuleGroups": [
+            {
+              "subModuleGroupId": 1,
+              "moduleName": "slider1",
+              "permission": {
+                "permissionId": 1,
+                "isRead": true,
+                "isWrite": true,
+                "isUpdate": false,
+                "isDelete": false
+              }
+            },
+            {
+              "subModuleGroupId": 2,
+              "moduleName": "country",
+              "permission": {
+                "permissionId": 1,
+                "isRead": true,
+                "isWrite": true,
+                "isUpdate": false,
+                "isDelete": false
+              }
+            }
+          ],
+          "id": 2,
+          "isActive": true
+        },
+        {
+          "moduleGroupName": "123",
+          "moduleGroupId":3,
+          "subModuleGroups": [
+            { 
+              "subModuleGroupId": 1,
+              "moduleName": "city",
+              "permission": {
+                "permissionId": 1,
+                "isRead": true,
+                "isWrite": true,
+                "isUpdate": false,
+                "isDelete": false
+              }
+            },
+            { 
+              "subModuleGroupId": 2,
+              "moduleName": "state",
+              "permission": {
+                "permissionId": 1,
+                "isRead": true,
+                "isWrite": true,
+                "isUpdate": false,
+                "isDelete": false
+              }
+            }
+          ],
+          "id": 3,
+          "isActive": true
+        },
+        {
+          "moduleGroupName": "address module",
+          "moduleGroupId":4,
+          "subModuleGroups": [
+            { 
+              "subModuleGroupId": 1,
+              "moduleName": "city",
+              "permission": {
+                "permissionId": 1,
+                "isRead": true,
+                "isWrite": true,
+                "isUpdate": false,
+                "isDelete": false
+              }
+            },
+            { 
+              "subModuleGroupId": 2,
+              "moduleName": "state",
+              "permission": {
+                "permissionId": 1,
+                "isRead": true,
+                "isWrite": true,
+                "isUpdate": false,
+                "isDelete": false
+              }
+            }
+          ],
+          "id": 4,
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "name": "selected modules",
+      "items": []
+    }
+  ],
+  "groupListView": [
+    {
+          "moduleGroupName": "xyz",
+          "moduleGroupId":1,
+          "subModuleGroups": [
+            {
+              "subModuleGroupId": 1,
+              "moduleName": "slider"
+            }
+          ],
+          "id": 1,
+          "isActive": true
+        },
+        {
+          "moduleGroupName": "abc",
+          "moduleGroupId":2,
+          "subModuleGroups": [
+            {
+              "subModuleGroupId": 1,
+              "moduleName": "slider1"
+            },
+            {
+              "subModuleGroupId": 2,
+              "moduleName": "country"
+            }
+          ],
+          "id": 2,
+          "isActive": true
+        },
+        {
+          "moduleGroupName": "123",
+          "moduleGroupId":3,
+          "subModuleGroups": [
+            { 
+              "subModuleGroupId": 1,
+              "moduleName": "city"
+            },
+            { 
+              "subModuleGroupId": 2,
+              "moduleName": "state"
+            }
+          ],
+          "id": 3,
+          "isActive": true
+        },
+        {
+          "moduleGroupName": "address module",
+          "moduleGroupId":4,
+          "subModuleGroups": [
+            { 
+              "subModuleGroupId": 1,
+              "moduleName": "city"
+            },
+            { 
+              "subModuleGroupId": 2,
+              "moduleName": "state"
+            }
+          ],
+          "id": 4,
+          "isActive": true
+        }
+  ],
+  "userList": [
+    {
+      "username": "Nathan",
+      "id":1,
+      "active":true,
+      "items": [
+        {
+          "moduleGroupName": "xyz",
+          "moduleGroupId":1,
+          "id": 1,
+          "isActive": true
+        },
+        {
+          "moduleGroupName": "abc",
+          "moduleGroupId":2,
+          "id": 2,
+          "isActive": true
+        },
+        {
+          "moduleGroupName": "123",
+          "moduleGroupId":3,
+          "id": 3,
+          "isActive": true
+        },
+        {
+          "moduleGroupName": "address module",
+          "moduleGroupId":4,
+          "id": 4,
+          "isActive": true
+        },
+        {
+          "moduleGroupName": "address module",
+          "moduleGroupId":5,
+          "id": 5,
+          "isActive": true
+        },
+        {
+          "moduleGroupName": "address module",
+          "moduleGroupId":6,
+          "id": 6,
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "username": "Anas",
+      "id":2,
+      "active":true,
+      "items": [
+        {
+          "moduleGroupName": "xyz",
+          "moduleGroupId":1,
+          "id": 1,
+          "isActive": true
+        },
+        {
+          "moduleGroupName": "abc",
+          "moduleGroupId":2,
+          "id": 2,
+          "isActive": true
+        },
+        {
+          "moduleGroupName": "123",
+          "moduleGroupId":3,
+          "id": 3,
+          "isActive": true
+        },
+        {
+          "moduleGroupName": "address module",
+          "moduleGroupId":4,
+          "id": 4,
+          "isActive": true
+        }
+      ]
+    }
+  ],
+  "searchByEmailIC":[
+    {
+      "email":"aaa@aa.com",
+      "icno":"24234423423423423"
+    },
+    {
+      "email":"anas123@yopmail.com",
+      "icno":"1233445455566"
+    },
+    {
+      "email":"aaaaa@aasd.com",
+      "icno":"23434345566677"
+    },
+    {
+      "email":"asdf@sdfsdf",
+      "icno":"1233344555566"
+    }
+  ],
+  "adminUserEdit":[
+    {
+        "username": "SITTI NOORIJAH BINTI JAMALUDDIN",
+        "icNo": "800101126666",
+        "id": 14,
+        "active": true,
+        "data": [
+            {
+                "name": "modules",
+                "items": [
+                    {
+                        "moduleGroupId": 1,
+                        "moduleGroupName": "ADDRESS",
+                        "modules": [
+                            {
+                                "moduleId": 2,
+                                "moduleName": "Country",
+                                "permission": {
+                                    "isRead": false,
+                                    "isWrite": false,
+                                    "isUpdate": false,
+                                    "isDelete": false
+                                }
+                            },
+                            {
+                                "moduleId": 1,
+                                "moduleName": "State1",
+                                "permission": {
+                                    "isRead": false,
+                                    "isWrite": false,
+                                    "isUpdate": false,
+                                    "isDelete": false
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "moduleGroupId": 2,
+                        "moduleGroupName": "ADDRESS",
+                        "modules": [
+                            {
+                                "moduleId": 2,
+                                "moduleName": "Country",
+                                "permission": {
+                                    "isRead": false,
+                                    "isWrite": false,
+                                    "isUpdate": false,
+                                    "isDelete": false
+                                }
+                            },
+                            {
+                                "moduleId": 1,
+                                "moduleName": "State2",
+                                "permission": {
+                                    "isRead": false,
+                                    "isWrite": false,
+                                    "isUpdate": false,
+                                    "isDelete": false
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "moduleGroupId": 1,
+                        "moduleGroupName": "ADDRESS",
+                        "modules": [
+                            {
+                                "moduleId": 2,
+                                "moduleName": "Country",
+                                "permission": {
+                                    "isRead": true,
+                                    "isWrite": false,
+                                    "isUpdate": true,
+                                    "isDelete": false
+                                }
+                            },
+                            {
+                                "moduleId": 1,
+                                "moduleName": "State",
+                                "permission": {
+                                    "isRead": false,
+                                    "isWrite": true,
+                                    "isUpdate": true,
+                                    "isDelete": false
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "moduleGroupId": 1,
+                        "moduleGroupName": "ADDRESS",
+                        "modules": [
+                            {
+                                "moduleId": 2,
+                                "moduleName": "Country",
+                                "permission": {
+                                    "isRead": true,
+                                    "isWrite": true,
+                                    "isUpdate": true,
+                                    "isDelete": false
+                                }
+                            },
+                            {
+                                "moduleId": 1,
+                                "moduleName": "State",
+                                "permission": {
+                                    "isRead": true,
+                                    "isWrite": true,
+                                    "isUpdate": true,
+                                    "isDelete": false
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "selected modules",
+                "items": [
+                    {
+                        "moduleGroupId": 1,
+                        "moduleGroupName": "ADDRESS",
+                        "modules": [
+                            {
+                                "moduleId": 2,
+                                "moduleName": "Country",
+                                "permission": {
+                                    "isRead": true,
+                                    "isWrite": true,
+                                    "isUpdate": true,
+                                    "isDelete": false
+                                }
+                            },
+                            {
+                                "moduleId": 1,
+                                "moduleName": "State",
+                                "permission": {
+                                    "isRead": true,
+                                    "isWrite": true,
+                                    "isUpdate": true,
+                                    "isDelete": false
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "moduleGroupId": 1,
+                        "moduleGroupName": "ADDRESS",
+                        "modules": [
+                            {
+                                "moduleId": 2,
+                                "moduleName": "Country",
+                                "permission": {
+                                    "isRead": true,
+                                    "isWrite": true,
+                                    "isUpdate": true,
+                                    "isDelete": false
+                                }
+                            },
+                            {
+                                "moduleId": 1,
+                                "moduleName": "State",
+                                "permission": {
+                                    "isRead": false,
+                                    "isWrite": true,
+                                    "isUpdate": true,
+                                    "isDelete": false
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "moduleGroupId": 1,
+                        "moduleGroupName": "ADDRESS",
+                        "modules": [
+                            {
+                                "moduleId": 2,
+                                "moduleName": "Country",
+                                "permission": {
+                                    "isRead": false,
+                                    "isWrite": true,
+                                    "isUpdate": true,
+                                    "isDelete": false
+                                }
+                            },
+                            {
+                                "moduleId": 1,
+                                "moduleName": "State",
+                                "permission": {
+                                    "isRead": true,
+                                    "isWrite": true,
+                                    "isUpdate": true,
+                                    "isDelete": false
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
     }
   ]
 }

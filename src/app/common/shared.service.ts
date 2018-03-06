@@ -4,7 +4,7 @@ import { Subject } from 'rxjs/Subject';
 import { Http, Response } from '@angular/http';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 import {TranslateService, LangChangeEvent } from '@ngx-translate/core';
-
+import { ToastrService } from 'ngx-toastr';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/retry';
@@ -14,7 +14,7 @@ import 'rxjs/add/observable/throw';
 
 export class SharedService {
 
-  constructor(private http: Http, @Inject(APP_CONFIG) private config: AppConfig,  private translate: TranslateService) { }
+  constructor(private http: Http, @Inject(APP_CONFIG) private config: AppConfig,  private translate: TranslateService, private toastr: ToastrService) { }
   lang = this.lang;
   languageId = this.languageId;
   private countryUrl: string = this.config.urlCountry;
@@ -49,6 +49,16 @@ export class SharedService {
       .map((response: Response) => response.json().postcodeList)
       .retry(5)
       .catch(this.handleError);
+  }
+
+  
+  errorHandling(err, callback){
+    let statusCode = err.statusCode.toLowerCase();
+    if(statusCode == 'error'){
+      this.toastr.error(err.statusDesc, 'Error');
+    }else{
+      callback()
+    }
   }
 
   getCountrybyCode(code): Observable<any[]> {

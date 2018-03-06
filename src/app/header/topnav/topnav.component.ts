@@ -86,7 +86,7 @@ export class TopnavComponent implements OnInit, AfterViewInit {
     }
   }
 
-  isActive = true;
+  isActive;
 
   currlang: string = this.currlang;
   currlangMOB: string = this.currlangMOB;
@@ -97,6 +97,12 @@ export class TopnavComponent implements OnInit, AfterViewInit {
     console.log('topnav.comp.ts');
     this.colors = this.topnavservice.getColors();
     this.getUserProfile();
+
+    if(this.currlang == 'English'){
+      this.isActive = true;
+    }else{
+      this.isActive = false;
+    }
   }
 
 
