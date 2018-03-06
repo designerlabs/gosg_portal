@@ -205,7 +205,7 @@ export class FeedbackComponent implements OnInit {
     
       this.portalService.feedback(datasend).subscribe(
         data => {
-          if(data.statusCode == "S001"){
+          if(data.statusCode == "SUCCESS"){
             console.log();
             this.resetForm();        
             this.toastr.success(this.translate.instant('feedback.msgsubmit'), '');     
@@ -220,9 +220,11 @@ export class FeedbackComponent implements OnInit {
       );
     }
     else{
+
+      console.log(JSON.stringify(body));
       this.portalService.feedback(datasend).subscribe(
         data => {
-          if(data.statusCode == "S001"){
+          if(data.statusCode == "SUCCESS"){
             console.log();
             this.resetForm();        
             this.toastr.success(this.translate.instant('feedback.msgsubmit'), '');  
