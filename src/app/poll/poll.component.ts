@@ -64,8 +64,7 @@ export class PollComponent implements OnInit {
         // this.getUserIpAddr();
     }
 
-   getData(languageId) {   
-     debugger;    
+   getData(languageId) { 
          return this.http.get(this.config.urlPoll + '/question/lang/' + languageId + '/?active=true')
            .map(res => res.json())
           .subscribe(eventData => {
@@ -108,7 +107,7 @@ export class PollComponent implements OnInit {
 
     submitPoll(event) {
         // this.getAnsData(this.lang);
-        debugger;
+        // debugger;
         const data = {
             'pollsComment': this.pollComment,
             'pollsAnswerId' : this.pollAnswer.id,

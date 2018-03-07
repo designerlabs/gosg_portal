@@ -103,7 +103,7 @@ export class PollProtectedComponent implements OnInit {
 
   submitPoll(event) {
     // this.getAnsData(this.lang);
-    debugger;
+    // debugger;
     const data = {
         'pollsComment': this.pollComment,
         'pollsAnswerId' : this.pollAnswer.id,
