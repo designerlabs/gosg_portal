@@ -69,6 +69,8 @@ export class SharedService {
       let statusCode = err.statusCode.toLowerCase();
       if(statusCode == 'error'){
         this.toastr.error(err.statusDesc, 'Error');
+      }else if(statusCode == 'success'){
+        this.toastr.success(err.statusDesc, 'Success');
       }else{
         callback()
       }

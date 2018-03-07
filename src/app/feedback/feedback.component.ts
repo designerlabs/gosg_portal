@@ -12,6 +12,7 @@ import 'rxjs/add/operator/catch';
 import { PortalService } from '../services/portal.service';
 import { ToastrService } from 'ngx-toastr';
 import { ValidateService } from '../common/validate.service';
+import { SharedService} from '../common/shared.service';
 
 @Component({
   selector: 'gosg-feedback',
@@ -54,7 +55,8 @@ export class FeedbackComponent implements OnInit {
     @Inject(APP_CONFIG) private config: AppConfig,
     private portalService:PortalService,
     private validateService:ValidateService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private sharedService :SharedService
   ) {
 
       translate.onLangChange.subscribe((event: LangChangeEvent) => {
