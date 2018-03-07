@@ -158,19 +158,25 @@ export class FeedbackComponent implements OnInit {
     }
 
     getTypenSubject(){
-      this.portalService.feedbacktype(this.languageId).subscribe(data => {
-        this.typeFb  = data;
-      },
-       Error => {
-
-        this.toastr.error(this.translate.instant('feedback.err.type'), '');            
-      });
-      this.portalService.feedbacksubject(this.languageId).subscribe(data => {
-        this.subjectFb  = data;          
-      },
-       Error => {
-        this.toastr.error(this.translate.instant('feedback.err.subject'), '');        
-      });
+      this.portalService.feedbacktype(this.languageId)
+        .subscribe(data => {
+          this.sharedService.errorHandling(data, (function(){
+            this.typeFb  = data;
+          }).bind(this));  
+        },
+        error => {
+          this.toastr.error(JSON.parse(error._body).statusDesc, '');                 
+        });
+    
+      this.portalService.feedbacksubject(this.languageId)
+      .subscribe(data => {
+        this.sharedService.errorHandling(data, (function(){
+            this.subjectFb  = data;          
+          }).bind(this));  
+        },
+        error => {
+          this.toastr.error(JSON.parse(error._body).statusDesc, '');                 
+        });
     }
    
     openSnackBar(message: string, action: string) {
@@ -198,55 +204,46 @@ export class FeedbackComponent implements OnInit {
       body.language =  { "languageId": this.languageId};
       
       let datasend = JSON.stringify(body); 
-      //this.isAdmin = true;
-      alert(this.isAdmin);
-    
-    if(this.isAdmin){
-      body.feedbackName = "NNN";
-      //body.feedbackActionBy = {"id": this.icNo }
-      body.feedbackEmail = "TEST@yopmail.com";
-      datasend =JSON.stringify(body); 
+         
+      if(this.isAdmin){
+        body.feedbackName = "NNN";
+        //body.feedbackActionBy = {"id": this.icNo }
+        body.feedbackEmail = "TEST@yopmail.com";
+        datasend =JSON.stringify(body); 
 
-      console.log(JSON.stringify(body));
+        console.log(JSON.stringify(body));
+      
+        this.portalService.feedback(datasend).subscribe(
+          data => {
 
-    
-      this.portalService.feedback(datasend).subscribe(
-        data => {
-          if(data.statusCode == "SUCCESS"){
-            console.log();
-            this.resetForm();        
-            this.toastr.success(this.translate.instant('feedback.msgsubmit'), '');     
-          }
-          else{
-            this.toastr.error(this.translate.instant('feedback.err.submit'), '');     
-          }
+            this.sharedService.errorHandling(data, (function(){         
+              this.resetForm();        
+              this.toastr.success(this.translate.instant('feedback.msgsubmit'), '');     
+            }).bind(this));  
+          },
+          error => {
+            this.toastr.error(JSON.parse(error._body).statusDesc, ''); 
+                      
+          });
+      }
+      else{
+
+        console.log(JSON.stringify(body));
+
+        this.portalService.feedback(datasend).subscribe(
+          data => {
+
+            this.sharedService.errorHandling(data, (function(){
+              this.resetForm();        
+              this.toastr.success(this.translate.instant('feedback.msgsubmit'), '');            
+          }).bind(this));  
         },
-        Error => {
-          this.toastr.error(this.translate.instant('feedback.err.submit'), '');                    
-        }
-      );
+        error => {
+          this.toastr.error(JSON.parse(error._body).statusDesc, ''); 
+      
+        });
+      }
     }
-    else{
-
-      console.log(JSON.stringify(body));
-      this.portalService.feedback(datasend).subscribe(
-        data => {
-          if(data.statusCode == "SUCCESS"){
-            console.log();
-            this.resetForm();        
-            this.toastr.success(this.translate.instant('feedback.msgsubmit'), '');  
-          }
-          else{
-            this.toastr.error(this.translate.instant('feedback.err.submit'), '');                               
-          }
-        },
-        Error => {
-          this.toastr.error(this.translate.instant('feedback.err.submit'), '');            
-        }
-      );
-
-    }
-  }
 
   showResetMsg(){
     this.dialogsService

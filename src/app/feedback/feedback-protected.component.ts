@@ -12,6 +12,7 @@ import 'rxjs/add/operator/catch';
 import { ProtectedService } from '../services/protected.service';
 import { ToastrService } from 'ngx-toastr';
 import { ValidateService } from '../common/validate.service';
+import { SharedService} from '../common/shared.service';
 
 @Component({
   selector: 'gosg-feedback-protected',
@@ -56,7 +57,8 @@ export class FeedbackProtectedComponent implements OnInit {
     @Inject(APP_CONFIG) private config: AppConfig,
     private protectedService:ProtectedService,
     private validateService:ValidateService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private sharedService :SharedService
   ) {
     translate.onLangChange.subscribe((event: LangChangeEvent) => {
       const myLang = translate.currentLang;
@@ -109,33 +111,31 @@ export class FeedbackProtectedComponent implements OnInit {
 
           this.protectedService.getProfile(data.user.pid).subscribe(
             data => {
-
-              if(data.user){
-                this.userId = data.user.userId;
-                this.fullname = data.user.fullName;
-                this.regemail = data.user.email;
-                this.feedbackFormgrp.get('nama_penuh').setValue(this.fullname);
-                this.feedbackFormgrp.get('email').setValue(this.regemail);
-              }
+              this.sharedService.errorHandling(data, (function(){
+                if(data.user){
+                  this.userId = data.user.userId;
+                  this.fullname = data.user.fullName;
+                  this.regemail = data.user.email;
+                  this.feedbackFormgrp.get('nama_penuh').setValue(this.fullname);
+                  this.feedbackFormgrp.get('email').setValue(this.regemail);
+                }
+              }).bind(this)); 
             },
             error => {
-              console.log(error)
+              this.toastr.error(JSON.parse(error._body).statusDesc, '');   
             }
           )
-        }else{
-          
-        }
+        }else{}
         
       },
-    error => {
+
+
+      error => {
         location.href = this.config.urlUAP +'uapsso/Logout';
         //location.href = this.config.urlUAP+'portal/index';
       }
     )
   }
-
-
-
 
 validateCtrlChk(ctrl: FormControl) {
   // return ctrl.valid || ctrl.untouched
@@ -175,19 +175,25 @@ getSubType(){
 }
 
 getTypenSubject(){
-  this.protectedService.feedbacktype(this.languageId).subscribe(data => {
-    this.typeFb  = data;
-  },
-   Error => {
+  this.protectedService.feedbacktype(this.languageId)
+    .subscribe(data => {
+      this.sharedService.errorHandling(data, (function(){
+        this.typeFb  = data;
+      }).bind(this));  
+    },
+    error => {
+      this.toastr.error(JSON.parse(error._body).statusDesc, '');                 
+    });
 
-    this.toastr.error(this.translate.instant('feedback.err.type'), '');            
-  });
-  this.protectedService.feedbacksubject(this.languageId).subscribe(data => {
-    this.subjectFb  = data;          
-  },
-   Error => {
-    this.toastr.error(this.translate.instant('feedback.err.subject'), '');        
-  });
+  this.protectedService.feedbacksubject(this.languageId)
+  .subscribe(data => {
+    this.sharedService.errorHandling(data, (function(){
+        this.subjectFb  = data;          
+      }).bind(this));  
+    },
+    error => {
+      this.toastr.error(JSON.parse(error._body).statusDesc, '');                 
+    });
 }
 
 openSnackBar(message: string, action: string) {
@@ -216,46 +222,38 @@ submitForm(formValues:any){
   
   let datasend = JSON.stringify(body); 
 
-if(this.isAdmin){
-  body.feedbackName = this.fullName;
-  body.feedbackActionBy = {"id": this.icNo }
-  body.feedbackEmail = this.emaiL;
-  datasend =JSON.stringify(body); 
+  if(this.isAdmin){
+    body.feedbackName = this.fullName;
+    body.feedbackActionBy = {"id": this.icNo }
+    body.feedbackEmail = this.emaiL;
+    datasend =JSON.stringify(body); 
 
-  this.protectedService.feedback(datasend).subscribe(
-    data => {
-      if(data.statusCode == "S001"){
-        console.log();
-        this.resetForm();        
-        this.toastr.success(this.translate.instant('feedback.msgsubmit'), '');     
-      }
-      else{
-        this.toastr.error(this.translate.instant('feedback.err.submit'), '');     
-      }
-    },
-    Error => {
-      this.toastr.error(this.translate.instant('feedback.err.submit'), '');                    
-    }
-  );
-}
-else{
-  this.protectedService.feedback(datasend).subscribe(
-    data => {
-      if(data.statusCode == "S001"){
-        console.log();
-        this.resetForm();        
-        this.toastr.success(this.translate.instant('feedback.msgsubmit'), '');  
-      }
-      else{
-        this.toastr.error(this.translate.instant('feedback.err.submit'), '');                               
-      }
-    },
-    Error => {
-      this.toastr.error(this.translate.instant('feedback.err.submit'), '');            
-    }
-  );
+    this.protectedService.feedback(datasend).subscribe(
+      data => {
 
-}
+        this.sharedService.errorHandling(data, (function(){         
+          this.resetForm();        
+          this.toastr.success(this.translate.instant('feedback.msgsubmit'), '');     
+        }).bind(this));  
+      },
+      error => {
+        this.toastr.error(JSON.parse(error._body).statusDesc, ''); 
+                  
+      });
+  }
+  else{
+    this.protectedService.feedback(datasend).subscribe(
+      data => {
+
+        this.sharedService.errorHandling(data, (function(){
+          this.resetForm();        
+          this.toastr.success(this.translate.instant('feedback.msgsubmit'), '');            
+        }).bind(this));  
+      },
+      error => {
+        this.toastr.error(JSON.parse(error._body).statusDesc, ''); 
+      });
+  }
 }
 
 showResetMsg(){
