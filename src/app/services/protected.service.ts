@@ -9,6 +9,7 @@ import { TranslateService, LangChangeEvent } from "@ngx-translate/core";
 
 @Injectable()
 export class ProtectedService {
+  languageId: any;
   lang = this.lang;
   langId = this.langId;
   constructor(private http: Http, @Inject(APP_CONFIG) private config: AppConfig, private translate: TranslateService) {
@@ -32,6 +33,14 @@ export class ProtectedService {
                   }
             
               });
+
+              if(!this.languageId){
+                if(localStorage.getItem('langID')){
+                  this.languageId = localStorage.getItem('langID');
+                }else{
+                  this.languageId = 1;
+                }
+              }
    }
 
    private feedbackUrl: string = this.config.urlFeedbackProtected;
@@ -58,7 +67,7 @@ export class ProtectedService {
   
   getProfile(userId){
     return this.http
-    .get(this.profileUrl+"/"+userId+"?langId="+localStorage.getItem('langID')).map((response: Response) => response.json())
+    .get(this.profileUrl+"/"+userId+"?langId="+this.languageId).map((response: Response) => response.json())
     .catch(this.handleError);
 
   } 
