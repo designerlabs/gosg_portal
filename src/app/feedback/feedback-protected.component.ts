@@ -13,7 +13,7 @@ import { ProtectedService } from '../services/protected.service';
 import { ToastrService } from 'ngx-toastr';
 import { ValidateService } from '../common/validate.service';
 import { SharedService} from '../common/shared.service';
-
+import {environment} from '../../environments/environment';
 @Component({
   selector: 'gosg-feedback-protected',
   templateUrl: './feedback-protected.component.html',
@@ -103,38 +103,40 @@ export class FeedbackProtectedComponent implements OnInit {
   }
 
   getUserData(){
-    this.protectedService.getUser().subscribe(
-      data => {
-        if(data.user){
-          // this.fullname = data.user.fullName;
-          this.userTypeId = data.user.userType.userTypeId;
-
-          this.protectedService.getProfile(data.user.pid).subscribe(
-            data => {
-              this.sharedService.errorHandling(data, (function(){
-                if(data.user){
-                  this.userId = data.user.userId;
-                  this.fullname = data.user.fullName;
-                  this.regemail = data.user.email;
-                  this.feedbackFormgrp.get('nama_penuh').setValue(this.fullname);
-                  this.feedbackFormgrp.get('email').setValue(this.regemail);
-                }
-              }).bind(this)); 
-            },
-            error => {
-              this.toastr.error(JSON.parse(error._body).statusDesc, '');   
-            }
-          )
-        }else{}
-        
-      },
-
-
-      error => {
-        location.href = this.config.urlUAP +'uapsso/Logout';
-        //location.href = this.config.urlUAP+'portal/index';
-      }
-    )
+    if(!environment.staging){
+      this.protectedService.getUser().subscribe(
+        data => {
+          if(data.user){
+            // this.fullname = data.user.fullName;
+            this.userTypeId = data.user.userType.userTypeId;
+  
+            this.protectedService.getProfile(data.user.pid).subscribe(
+              data => {
+                this.sharedService.errorHandling(data, (function(){
+                  if(data.user){
+                    this.userId = data.user.userId;
+                    this.fullname = data.user.fullName;
+                    this.regemail = data.user.email;
+                    this.feedbackFormgrp.get('nama_penuh').setValue(this.fullname);
+                    this.feedbackFormgrp.get('email').setValue(this.regemail);
+                  }
+                }).bind(this)); 
+              },
+              error => {
+                this.toastr.error(JSON.parse(error._body).statusDesc, '');   
+              }
+            )
+          }else{}
+          
+        },
+  
+  
+        error => {
+          location.href = this.config.urlUAP +'uapsso/Logout';
+          //location.href = this.config.urlUAP+'portal/index';
+        }
+      )
+    }    
   }
 
 validateCtrlChk(ctrl: FormControl) {
