@@ -127,9 +127,9 @@ export class NavService {
 
   getAnnouncement(moduleName, lang: number): Observable<boolean[]> {
     console.log('ANNOUNCEMENT: ');
-    console.log(this.urlAnnouncement + '?langId=' + lang);
+    console.log(this.urlAnnouncement + '?language=' + lang);
 
-    return this.http.get(this.urlAnnouncement + '?langId=' + lang)
+    return this.http.get(this.urlAnnouncement + '?language=' + lang)
     .take(1)
     .map((response: Response) => response.json())
     .catch(
@@ -145,7 +145,7 @@ export class NavService {
 
   getAnnouncementList(moduleName, lang: number, id1?: string): Observable<boolean[]> {
     if (id1) {
-      return this.http.get(this.urlAnnouncement + '/id/' + id1 + '?langId=' + lang)
+      return this.http.get(this.urlAnnouncement + '/id/' + id1 + '?language=' + lang)
       .take(1)
       .map((response: Response) => response.json())
       .catch(
@@ -204,7 +204,7 @@ export class NavService {
     }
 
   getAnnouncementDetails(moduleName, lang: number, id1?: string, id2?: string): Observable<boolean[]> {
-    return this.http.get(this.urlAnnouncement + '/id/' + id1 + '/' + id2 + '?langId=' + lang)
+    return this.http.get(this.urlAnnouncement + '/id/' + id1 + '/' + id2 + '?language=' + lang)
     .take(1)
     .map((response: Response) => response.json())
     .catch(
