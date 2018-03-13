@@ -11,11 +11,11 @@
                     <input class="form-control" type="text" [(ngModel)]="keyword1" (keyup.enter)="mainSearch(keyword1)" 
                            ngui-auto-complete
                            [source]="autoCompleteArr"
-                           placeholder="Taipkan kata kunci carian di sini">
+                           placeholder="{{ 'home.search.instruction' | translate }}">
                     <span class="input-group-btn">
                         <button class="btn btn-secondary" [style.background]="getTheme()" type="button"
                                 (click)="mainSearch(keyword1)">
-                            <i class="fa fa-search"></i> <span class="hidden-xs">FIND</span>
+                            <i class="fa fa-search"></i> <span class="hidden-xs">{{ 'home.search.find' | translate }}</span>
                         </button>
                     </span>
                 </div>
