@@ -11,10 +11,16 @@
       "manual": "User Manual",
       "aboutus": "About Us",
       "onlineservice": "Digital Services",
-      "logout":"Logout"
+      "logout":"Logout",
+      "themecolor": "Theme Color",
+      "fontsize": "Font Size",
+      "fonttype": "Font Type",
+      "login": "Login"
     },
     "search": {
-      "label": "How Can We Help You?"
+      "label": "How Can We Help You?",
+      "find": "FIND",
+      "instruction": "Type search keywords here"
     },
     "breadcrumb": {
       "calendar": "Calendar",
@@ -156,7 +162,13 @@
   },
 
   "dashboard": {
-
+    "sidenav": {
+      "dashboard": "Dashboard",
+      "profile": "Profile",
+      "inbox": "Inbox",
+      "appmgmt": "Application Management",
+      "companyprofile": "Company Profile"
+    }
   },
 
   "errorlabel": {
@@ -219,13 +231,6 @@
       "date":"Date",
       "action":"Action"
     },
-    
-    "pagination":{
-      "pages":"Pages",
-      "of":"of",
-      "in":"in",
-      "mails":"mails"
-    },
     "err":{
       "deleteconfirm":"Are you sure to delete this mail?",
       "deleteconfirm_multi":"Are you sure to delete the selected mails?",
@@ -236,6 +241,10 @@
     "success":{
       "deletesuccess":"Mail has been deleted successfully!",
       "deletesuccess_multi":"Selected mails has been deleted successfully!"
+    },
+    
+    "pagination":{
+      "mails":"mails"
     }
   },
   "common":{
@@ -277,6 +286,12 @@
       "error":"bg_header bg_error_header",
       "warn":"bg_header bg_warn_header",
       "info":"bg_header bg_info_header"
+    },
+    
+    "pagination":{
+      "pages":"Pages",
+      "of":"of",
+      "in":"in"
     }
   },
   "appmngt":{
@@ -284,10 +299,12 @@
       "moreOpt": "More Search Options",
       "appNumber": "Application Number",
       "agency": "Agency",
+      "chooseAgency": "Choose Agency",
       "startDate": "Start Date",
       "endDate": "End Date",
       "appStatus": "Application Status",
-      "search": "Search"
+      "search": "Search",
+      "chooseStatus": "Choose Status"
     },
     "tableHeader":{
       "num": "No.",
@@ -310,11 +327,13 @@
     "recommend" : "Your recommendation for improvement",
     "youranswer" : "Your answer is",
     "seeAnswer" : "WOULD YOU LIKE TO KNOW THE RESULTS OF THE LATEST SURVEY ON THE NEW MYGOV WEB SITE?",
-    "displayAnswer" : " YES, DISPLAY THE LATEST RESULTS "
+    "displayAnswer" : " YES, DISPLAY THE LATEST RESULTS ",
+    "comment": "Comment"
   },
   "announcement":{
     "title":"Highlights",
     "description":"All Highlight",
-    "message":"No latest information."
+    "message":"No latest information.",
+    "tender": "Tender"
   }
 }

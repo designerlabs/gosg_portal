@@ -80,7 +80,7 @@
                 </mat-select>
               </mat-form-field>
               <div style="float:right; margin-top: 10px;">
-                  <span style="color:#000; padding-right:20px;">Pages <strong>{{mailData?.pageNumber}}</strong> of <strong>{{mailData?.totalPages}}</strong> in <strong>{{mailData?.totalElements}}</strong> mails</span>
+                  <span style="color:#000; padding-right:20px;">{{ 'common.pagination.pages' | translate }} <strong>{{mailData?.pageNumber}}</strong> {{ 'common.pagination.of' | translate }} <strong>{{mailData?.totalPages}}</strong> {{ 'common.pagination.in' | translate }} <strong>{{mailData?.totalElements}}</strong> {{ 'mailbox.pagination.mails' | translate }}</span>
                   <button mat-mini-fab color="basic" [disabled]="noPrevData" (click)="paginatorL(mailData?.pageNumber)"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
                   <button mat-mini-fab color="basic" [disabled]="noNextData"  (click)="paginatorR(mailData?.pageNumber, mailData?.totalPages)"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
               </div>

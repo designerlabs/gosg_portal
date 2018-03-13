@@ -19,13 +19,13 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2) inset;
     }
     
-    .details-show h3 {
+    .details-show h4 {
     margin-top: 0px;
     color: #000000;
     z-index: 9999;
     }
     
-    .details-show h3, .details-show p {
+    .details-show h4, .details-show p {
     color: #000000;
     z-index: 9999;
     }
@@ -47,19 +47,20 @@
     }
     
     a.boxclose{
-    float:right;
-    margin-top:-25px;
-    margin-right:-25px;
-    cursor:pointer;
+    float: right;
+    margin-top: -25px;
+    margin-right: -24px;
+    cursor: pointer;
     color: #fff;
     border: 2px solid rgb(255, 255, 255);
-    border-radius: 30px;
+    border-radius: 33px;
     background: rgb(190, 0, 0);
     font-size: 31px;
     font-weight: bold;
     display: inline-block;
     line-height: 0px;
-    padding: 11px 3px;       
+    padding: 18px 10px;     
+    text-decoration: none;
     }
     
     .boxclose:before {
@@ -68,4 +69,8 @@
 
     .fc-view-container {
     color: #666666;   
+    }
+    
+    label {
+     color: #8a8a8a   
     }
