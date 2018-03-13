@@ -352,7 +352,7 @@ html, body{
 }
 
 /* CALENDAR STYLES */
-tr:first-child>td>.fc-day-grid-event {
+.fc-day-grid-event {
   margin-top: 2px;
   padding: 5px;
 }
@@ -370,4 +370,9 @@ tr:first-child>td>.fc-day-grid-event {
 
 .fc-center h2 {
   color: #666666;
+}
+
+table a:not(.btn), .table a:not(.btn) {
+    color: #fff;
+    text-decoration: none;
 }
