@@ -74,6 +74,12 @@ export class FooterComponent implements OnInit {
   private footerUrl: string = this.config.urlFooter;
 
   ngOnInit() {
+    this.langID = 0;
+    if (this.lang === 'ms') {
+      this.langID = 2;
+    }else {
+      this.langID = 1;
+    }
     console.log('footer.comp.ts');
     this.getFooter(this.langID);
   }

@@ -28,7 +28,8 @@
         "../node_modules/ngx-toastr/toastr.css"
       ],
       "scripts": [
-        "../node_modules/jquery/dist/jquery.min.js"
+        "../node_modules/jquery/dist/jquery.min.js",
+        "../node_modules/owl.carousel/dist/owl.carousel.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {
@@ -61,7 +62,8 @@
         "../node_modules/ngx-toastr/toastr.css"
       ],
       "scripts": [
-        "../node_modules/jquery/dist/jquery.min.js"
+        "../node_modules/jquery/dist/jquery.min.js",
+        "../node_modules/owl.carousel/dist/owl.carousel.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {
