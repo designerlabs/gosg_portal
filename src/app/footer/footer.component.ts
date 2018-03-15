@@ -18,7 +18,7 @@ export class FooterComponent implements OnInit {
 
   footer= [];
   ftsociallink: any[];
-  langID;
+  langID = 1;
   dataSocialLnk= [];
   tltSocialLnk;
   dataContact= [];
@@ -95,8 +95,13 @@ export class FooterComponent implements OnInit {
         this.dataSocialLnk = this.tltSocialLnk.footerContents;
         this.tltBottom = this.footer.filter(fdata => fdata.titleCode === 5);
         this.dataBottom =  this.tltBottom[0].footerContents;
-        this.copyright = this.dataBottom[1];
-        this.dateOfUpdate = this.dataBottom[0];
+        if(this.dataBottom.length > 0){
+            this.copyright = this.dataBottom[1];
+            this.dateOfUpdate = this.dataBottom[0];
+        }else{
+            this.copyright = [];
+            this.dateOfUpdate = [];
+        }  
         this.tltBottomLnk = this.footer.filter(fdata => fdata.titleCode === 6)[0];
         this.dataBottomLnk = this.tltBottomLnk.footerContents;
         this.tltExtLnk = this.footer.filter(fdata => fdata.titleCode === 7)[0];        

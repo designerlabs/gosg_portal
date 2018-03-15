@@ -1,6 +1,6 @@
 <div class="animated fadeIn" *ngIf="footer.length>0">
   <!-- *ngFor="let data of footer" -->
-  <div class="primary col-md-12" [style.background]="getTheme()">
+  <div class="primary col-md-12" [style.background]="getTheme()" *ngIf="dataSocialLnk.length>0">
     <!-- *ngIf="data.titleCode ==4"  id="social-area"-->
     <div class="col-sm-12" style="padding-bottom:10px;padding-top: 10px; text-align: center;" id="social-icons">
       <div class="footersocial">
@@ -28,7 +28,7 @@
           <span [style.border-color]="getTheme()" class="footer-title-underline warna_border_color"></span>
         </h4>
         <!--CONTACT US-->
-        <div *ngIf="showcontact" class="address footer" style="margin-top: 0%; position:relative;">
+        <div *ngIf="showcontact && dataContact.length>0" class="address footer" style="margin-top: 0%; position:relative;">
           <div *ngFor="let eachitm of dataContact">
             <div *ngIf="eachitm.footerContentIcon" style="margin-left:30px;">
               <p class="font-size-s">
@@ -52,7 +52,7 @@
           <span [style.border-color]="getTheme()" class="footer-title-underline warna_border_color"></span>
         </h4>
         <!--CAPAIAN/ ACCESS PAGE-->
-        <div *ngIf="showaccess">
+        <div *ngIf="showaccess && dataAccessPage.length>0">
           <div class="address footer" style="margin-top: 0%;">
             <div class="sub-add">
               <ul class="hoverlnk" style="columns: 2; list-style-type: none; padding-left: 3px;">
@@ -74,7 +74,7 @@
           <span [style.border-color]="getTheme()" class="footer-title-underline warna_border_color"></span>
         </h4>
         <!--JUMLAH PELAWAT/ Visitor count-->
-        <div class="address footer" *ngIf="showvisitor" style="margin-top: 0%;">
+        <div class="address footer" *ngIf="showvisitor && dataNoOfVisitor.length>0" style="margin-top: 0%;">
           <div *ngFor="let eachitm of dataNoOfVisitor">
             <div class="col-xs-4" style="padding:0px 0px 0px 3px;">
               <div class="font-size-s">{{eachitm.footerContentName}}</div>
@@ -92,7 +92,7 @@
           <span [style.border-color]="getTheme()" class="footer-title-underline warna_border_color"></span>
         </h4>
         <!--Pautan luar/ External links-->
-        <div class="sub-add" *ngIf="showextlinks">
+        <div class="sub-add" *ngIf="showextlinks && dataExtLnk.length>0">
           <div *ngFor="let eachitm of dataExtLnk">
             <!-- <h1>{{eachitm.footerContentName}}</h1>  [routerLink]="[eachitm.footerContentUrl]" -->
             <div class="address footer hoverlnk" style="margin-top: 0%;">
@@ -108,7 +108,7 @@
 
   <div class="copyright">
     <div class="container">
-      <div class="padding-m">
+      <div class="padding-m" *ngIf="copyright.length>0">
           <div class="col-md-4">
             <p class="font-size-s" style="margin-top: 4%;">
               {{copyright.footerContentName}}
@@ -123,7 +123,7 @@
             </p>
           </div>
       </div>
-      <div class="col-md-12 text-right hidden-xs">
+      <div class="col-md-12 text-right hidden-xs" *ngIf="dataBottomLnk.length>0">
         <ul class="list-inline hidden-xs font-size-s">
           <li *ngFor="let btmlink of dataBottomLnk; let last = last">
             <a [routerLink]="[btmlink.footerContentUrl]" href="">
