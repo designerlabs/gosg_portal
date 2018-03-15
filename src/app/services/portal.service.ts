@@ -71,7 +71,7 @@ export class PortalService {
     if(!this.langId){
       this.langId = 1;
     }
-    return this.http.post(this.registerUrl+"?languageId="+localStorage.getItem('langID'), user)
+    return this.http.post(this.registerUrl+"?language="+localStorage.getItem('langID'), user)
       .map((response: Response) => response.json())
       .retry(5)
       .catch(this.handleError);
@@ -82,7 +82,7 @@ export class PortalService {
     if(!this.langId){
       this.langId = 1;
     }
-    return this.http.post(this.registerUrl+"/agency?forwardUrl="+url+"&languageId="+localStorage.getItem('langID'), user)
+    return this.http.post(this.registerUrl+"/agency?forwardUrl="+url+"&language="+localStorage.getItem('langID'), user)
       .map((response: Response) => response.json())
       .retry(5)
       .catch(this.handleError);
