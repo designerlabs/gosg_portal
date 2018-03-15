@@ -248,6 +248,12 @@
     }
   },
   "common":{
+    "copyrightnotice": "Copyright Notice",
+    "clientcharter": "Client Charter",
+    "help": "Help",
+    "privacypolicy": "Privacy Policy",
+    "securitypolicy": "Security Policy",
+    "disclaimer": "Disclaimer",
     "buttons":{
       "delete":"Delete",
       "update":"Update",

@@ -28,6 +28,8 @@ import { ClientCharterComponent } from './staticpage/bottommenu/clientcharter.co
 import { HelpComponent } from './staticpage/bottommenu/help.component';
 import { PrivacyPolicyComponent } from './staticpage/bottommenu/privacypolicy.component';
 import { SecurityPolicyComponent } from './staticpage/bottommenu/securitypolicy.component';
+import { CopyrightNoticeComponent } from './staticpage/bottommenu/copyrightnotice.component';
+import { DisclaimerComponent } from './staticpage/bottommenu/disclaimer.component';
 // import { SearchResultComponent } from './search/searchResult/searchResult.component'
 import { DataprotectionComponent} from './staticpage/dataprotection.component';
 import { LoginComponent } from "./login/login.component";
@@ -57,6 +59,8 @@ export const appRoutes: Routes = [
     {path: 'help', component: HelpComponent},
     {path: 'privacypolicy', component: PrivacyPolicyComponent},
     {path: 'securitypolicy', component: SecurityPolicyComponent},
+    {path: 'copyrightnotice', component: CopyrightNoticeComponent},
+    {path: 'disclaimer', component: DisclaimerComponent},
     {path: 'dataprotection', component: DataprotectionComponent},
     {path: 'contact', component: ContactComponent},
     {path: 'feedback', component: FeedbackComponent},

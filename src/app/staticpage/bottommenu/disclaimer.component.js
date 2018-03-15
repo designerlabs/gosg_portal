@@ -9,17 +9,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var ClientCharterComponent = (function () {
-    function ClientCharterComponent() {
+var DisclaimerComponent = (function () {
+    function DisclaimerComponent() {
     }
-    return ClientCharterComponent;
+    return DisclaimerComponent;
 }());
-ClientCharterComponent = __decorate([
+DisclaimerComponent = __decorate([
     core_1.Component({
-        templateUrl: './app/staticpage/bottommenu/clientcharter.component.html',
+        templateUrl: './app/staticpage/bottommenu/disclaimer.component.html',
         styles: ["\n      a {\n            color: #337ab7;\n            text-decoration: none;\n      }\n      a:hover, a:focus {\n        color: #1ebebc;\n        text-decoration: underline;\n      }\n\n    "]
     }),
     __metadata("design:paramtypes", [])
-], ClientCharterComponent);
-exports.ClientCharterComponent = ClientCharterComponent;
-//# sourceMappingURL=clientcharter.component.js.map
+], DisclaimerComponent);
+exports.DisclaimerComponent = DisclaimerComponent;
+//# sourceMappingURL=disclaimer.component.js.map

@@ -16,7 +16,7 @@ var PrivacyPolicyComponent = (function () {
 }());
 PrivacyPolicyComponent = __decorate([
     core_1.Component({
-        templateUrl: './app/staticpage/privacypolicy.component.html',
+        templateUrl: './app/staticpage/bottommenu/privacypolicy.component.html',
         styles: ["\n      a {\n            color: #337ab7;\n            text-decoration: none;\n      }\n      a:hover, a:focus {\n        color: #1ebebc;\n        text-decoration: underline;\n      }\n\n    "]
     }),
     __metadata("design:paramtypes", [])

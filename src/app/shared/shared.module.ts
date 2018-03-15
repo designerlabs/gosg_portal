@@ -28,6 +28,8 @@ import { ClientCharterComponent } from "../staticpage/bottommenu/clientcharter.c
 import { HelpComponent } from "../staticpage/bottommenu/help.component";
 import { PrivacyPolicyComponent } from "../staticpage/bottommenu/privacypolicy.component";
 import { SecurityPolicyComponent } from "../staticpage/bottommenu/securitypolicy.component";
+import { CopyrightNoticeComponent } from "../staticpage/bottommenu/copyrightnotice.component";
+import { DisclaimerComponent } from "../staticpage/bottommenu/disclaimer.component";
 import { SidenavBottomComponent } from "../staticpage/bottommenu/sidenavbottom.component";
 import { DataprotectionComponent } from '../staticpage/dataprotection.component';
 import { NavComponent } from "../header/nav/nav.component";
@@ -167,6 +169,8 @@ export function HttpLoaderFactory(http: Http) {
     HelpComponent,
     PrivacyPolicyComponent,
     SecurityPolicyComponent,
+    CopyrightNoticeComponent,
+    DisclaimerComponent,
     SidenavComponent,
     SidenavBottomComponent,
     DataprotectionComponent,
@@ -206,6 +210,8 @@ export function HttpLoaderFactory(http: Http) {
     HelpComponent,
     PrivacyPolicyComponent,
     SecurityPolicyComponent,
+    CopyrightNoticeComponent,
+    DisclaimerComponent,
     SidenavComponent,
     SidenavBottomComponent,
     DataprotectionComponent,

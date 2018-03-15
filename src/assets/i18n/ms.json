@@ -248,6 +248,12 @@
     }
   },
   "common":{
+    "copyrightnotice": "Notis Hakcipta",
+    "clientcharter": "Piagam Pelanggan",
+    "help": "Bantuan",
+    "privacypolicy": "Dasar Privasi",
+    "securitypolicy": "Dasar Keselamatan",
+    "disclaimer": "Penafian",
     "buttons":{
       "delete":"Padam",
       "update":"Kemaskini",
