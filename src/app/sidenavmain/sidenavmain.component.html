@@ -1,4 +1,4 @@
-<div id="mySidenav" class="sidenav">
+<div id="mySidenav" class="sidenav font-size-m">
     <a href="javascript:void(0)" class="closebtn" (click)="closeNav()"><i class="fa fa-times"></i></a>
     <ul>
         
@@ -16,7 +16,7 @@
         <li>
             <mat-expansion-panel>
                 <mat-expansion-panel-header>
-                  <mat-panel-title>
+                  <mat-panel-title class="font-size-m">
                       <i class="fa fa-cog" aria-hidden="true"></i>&nbsp;{{ 'home.menu.setting' | translate }}
                   </mat-panel-title>
                 </mat-expansion-panel-header>
@@ -24,14 +24,14 @@
                 <div class="menu_botm" id="confBar1">
                     <div  id="themeContainer">
 
-                      <div  class="settingLbl">
+                      <div  class="settingLbl font-size-m">
                           {{ 'home.menu.themecolor' | translate }}:
                       </div>
                       <div class="settingBtm">
                           <input #colorPanel *ngFor="let color of getThemeColors; let i = index; let firstItem = first" (click)="setClickedColor(i, color.colorCode)" data-selected-id="color.colorId"  [class.colorPaletteActive]="color.defaultColor" type="button" name="bgColor" [(ngModel)]="bgColor" [ngStyle]="{'background': color.colorCode, 'border': '1px solid', 'border-color': color.colorCode}"  class="bgColorBtn bgColor" value="{{color.colorCode}}">
                           <span><div (click)="resetBgColor()" class="btn btn-xs btn-default"><i class="fa fa-refresh"></i></div></span>
                       </div>
-                      <div  class="settingLbl">
+                      <div  class="settingLbl font-size-m">
                         {{ 'home.menu.fontsize' | translate }} :
                       </div>
                       <div class="settingBtm">
@@ -40,7 +40,7 @@
                           <button  [disabled]="plusBtn" class="fontplus btn btn-default"  (click)="fontplus()" style="border:1px solid white;padding: 3px; height: 25px; width: 28px; font-size:14px;"><i class="fa fa-plus"></i>A</button>
                           <span><div class="fontreset btn btn-xs btn-default" (click)="fontreset()"><i class="fa fa-refresh"></i></div></span>
                       </div>
-                      <div class="settingLbl">
+                      <div class="settingLbl font-size-m">
                         {{ 'home.menu.fonttype' | translate }} :
                       </div>
                       <div class="settingBtm">
