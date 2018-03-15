@@ -19,7 +19,7 @@
   <div class="container footer form-group">
     <!--  *ngIf="data.titleCode==1 || data.titleCode==2 || data.titleCode==3 || data.titleCode==7" -->
     <div class="footer-left">
-      <div class="col-md-4">
+      <div class="col-md-4" style="min-height:200px">
         <button [style.background-color]="getTheme()" class="btn btn-sm footer-toggle fa fa-angle-down pull-right visible-xs" (click)="showFooter('contact')">
           <span class="sr-only">{{tltContact.titleCode}}</span>
         </button>
@@ -43,7 +43,7 @@
         </div>
       </div>
 
-      <div class="col-md-4">
+      <div class="col-md-4" style="min-height:200px">
         <button [style.background-color]="getTheme()" class="btn btn-sm footer-toggle fa fa-angle-down pull-right visible-xs" (click)="showFooter('access')">
           <span class="sr-only">{{tltAccessPage.titleCode}}</span>
         </button>
@@ -65,7 +65,7 @@
         </div>
       </div>
 
-      <div class="col-md-4">
+      <div class="col-md-4" style="min-height:20px">
         <button [style.background-color]="getTheme()" class="btn btn-sm footer-toggle fa fa-angle-down pull-right visible-xs" (click)="showFooter('visitor')">
           <span class="sr-only">{{tltNoOfVisitor.titleCode}}</span>
         </button>
@@ -83,7 +83,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-4" style="min-height:200px">
         <button [style.background-color]="getTheme()" class="btn btn-sm footer-toggle fa fa-angle-down pull-right visible-xs" (click)="showFooter('extlinks')">
           <span class="sr-only">{{tltExtLnk.titleCode}}</span>
         </button>
@@ -108,7 +108,7 @@
 
   <div class="copyright">
     <div class="container">
-      <div class="padding-m" *ngIf="copyright.length>0 && dateOfUpdate.length>0">
+      <div class="padding-m" *ngIf="copyright.length>0">
           <div class="col-md-4">
             <p class="font-size-s" style="margin-top: 4%;">
               {{copyright.footerContentName}}
