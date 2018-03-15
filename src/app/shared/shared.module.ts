@@ -24,6 +24,11 @@ import { AnnouncementComponent } from "../announcement/announcement.component";
 import { FaqComponent } from "../staticpage/faq.component";
 import { ManualComponent } from "../staticpage/manual.component";
 import { SidenavComponent } from "../staticpage/sidenav.component";
+import { ClientCharterComponent } from "../staticpage/bottommenu/clientcharter.component";
+import { HelpComponent } from "../staticpage/bottommenu/help.component";
+import { PrivacyPolicyComponent } from "../staticpage/bottommenu/privacypolicy.component";
+import { SecurityPolicyComponent } from "../staticpage/bottommenu/securitypolicy.component";
+import { SidenavBottomComponent } from "../staticpage/bottommenu/sidenavbottom.component";
 import { DataprotectionComponent } from '../staticpage/dataprotection.component';
 import { NavComponent } from "../header/nav/nav.component";
 import { TopnavComponent } from "../header/topnav/topnav.component";
@@ -158,7 +163,12 @@ export function HttpLoaderFactory(http: Http) {
     FaqComponent,
     NavComponent,
     ManualComponent,
+    ClientCharterComponent,
+    HelpComponent,
+    PrivacyPolicyComponent,
+    SecurityPolicyComponent,
     SidenavComponent,
+    SidenavBottomComponent,
     DataprotectionComponent,
     SearchResultComponent,
     TopicFeatureComponent,
@@ -192,7 +202,12 @@ export function HttpLoaderFactory(http: Http) {
     FaqComponent,
     NavComponent,
     ManualComponent,
+    ClientCharterComponent,
+    HelpComponent,
+    PrivacyPolicyComponent,
+    SecurityPolicyComponent,
     SidenavComponent,
+    SidenavBottomComponent,
     DataprotectionComponent,
     SearchResultComponent,
     TopicFeatureComponent,

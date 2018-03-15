@@ -13,6 +13,10 @@ import { ContactComponent } from './staticpage/contact.component';
 import { FaqComponent } from './staticpage/faq.component';
 import { AboutusComponent } from './staticpage/aboutus.component';
 import { ManualComponent } from './staticpage/manual.component';
+import { ClientCharterComponent } from './staticpage/bottommenu/clientcharter.component';
+import { HelpComponent } from './staticpage/bottommenu/help.component';
+import { PrivacyPolicyComponent } from './staticpage/bottommenu/privacypolicy.component';
+import { SecurityPolicyComponent } from './staticpage/bottommenu/securitypolicy.component';
 import { DataprotectionComponent} from './staticpage/dataprotection.component';
 import { ProfileUpdatedComponent } from './profile-updated/profile-updated.component';
 
@@ -49,6 +53,10 @@ export const protectedRoutes: Routes = [
     {path: 'faq', component: FaqComponent},
     {path: 'aboutus', component: AboutusComponent},
     {path: 'manual', component: ManualComponent},
+    {path: 'clientcharter', component: ClientCharterComponent},
+    {path: 'help', component: HelpComponent},
+    {path: 'privacypolicy', component: PrivacyPolicyComponent},
+    {path: 'securitypolicy', component: SecurityPolicyComponent},
     {path: 'dataprotection', component: DataprotectionComponent},
     {path: 'contact', component: ContactComponent},
     {path: 'mailbox', component: MailboxComponent},

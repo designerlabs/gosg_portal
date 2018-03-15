@@ -24,6 +24,10 @@ import { AboutusComponent } from './staticpage/aboutus.component';
 import { RegisterComponent } from './register/register.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { ManualComponent } from './staticpage/manual.component';
+import { ClientCharterComponent } from './staticpage/bottommenu/clientcharter.component';
+import { HelpComponent } from './staticpage/bottommenu/help.component';
+import { PrivacyPolicyComponent } from './staticpage/bottommenu/privacypolicy.component';
+import { SecurityPolicyComponent } from './staticpage/bottommenu/securitypolicy.component';
 // import { SearchResultComponent } from './search/searchResult/searchResult.component'
 import { DataprotectionComponent} from './staticpage/dataprotection.component';
 import { LoginComponent } from "./login/login.component";
@@ -49,6 +53,10 @@ export const appRoutes: Routes = [
     {path: 'faq', component: FaqComponent},
     {path: 'aboutus', component: AboutusComponent},
     {path: 'manual', component: ManualComponent},
+    {path: 'clientcharter', component: ClientCharterComponent},
+    {path: 'help', component: HelpComponent},
+    {path: 'privacypolicy', component: PrivacyPolicyComponent},
+    {path: 'securitypolicy', component: SecurityPolicyComponent},
     {path: 'dataprotection', component: DataprotectionComponent},
     {path: 'contact', component: ContactComponent},
     {path: 'feedback', component: FeedbackComponent},
