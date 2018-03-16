@@ -378,7 +378,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                             
                           }
                            //this.getPostCodeByCityId(data.user.address.permanentAddressCity.cityId);                     
-                          this.getPostcodeByCityP(data.user.address.permanentAddressCity.cityId);
+                          this.getPostcodeByCityP(data.user.address.permanentAddressCity.cityCode);
                            if(data.user.address.permanentAddressPostcode){
                             // this.getPerPostCodeFlag = true;
                             // this.getperPostCode = data.user.address.permanentAddressPostcode.postcodeId;
@@ -437,7 +437,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                             // this.postCodeObj2 = {value: data.user.address.correspondingAddressCity.cityId};
                           }
                           
-                          this.getPostcodeByCityC(data.user.address.correspondingAddressCity.cityId);
+                          this.getPostcodeByCityC(data.user.address.correspondingAddressCity.cityCode);
                           if(data.user.address.correspondingAddressPostcode){
                            this.profileForm.get('corrsPostcode').setValue(data.user.address.correspondingAddressPostcode.postcodeId);    
                          }
@@ -645,7 +645,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
   getPostcodeByCity(e){
     this.isStateChanged();
- 
     return this.sharedService.getPostCodeData(e.value)
       .subscribe(resPostCodeData => {
         this.getPerPostData = resPostCodeData;
