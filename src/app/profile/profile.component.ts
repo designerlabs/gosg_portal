@@ -375,15 +375,16 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                           this.getCitiesByStateP(data.user.address.permanentAddressState.stateId);
                           if(data.user.address.permanentAddressCity){
                             this.profileForm.get('perCityLocal').setValue(data.user.address.permanentAddressCity.cityId);
-                            
-                          }
-                           //this.getPostCodeByCityId(data.user.address.permanentAddressCity.cityId);                     
-                          this.getPostcodeByCityP(data.user.address.permanentAddressCity.cityCode);
-                           if(data.user.address.permanentAddressPostcode){
+                              //this.getPostCodeByCityId(data.user.address.permanentAddressCity.cityId);                     
+                            this.getPostcodeByCityP(data.user.address.permanentAddressCity.cityCode);
+                            if(data.user.address.permanentAddressPostcode){
                             // this.getPerPostCodeFlag = true;
                             // this.getperPostCode = data.user.address.permanentAddressPostcode.postcodeId;
                             this.profileForm.get('perPostcode').setValue(data.user.address.permanentAddressPostcode.postcodeId);    
                           }
+                            
+                          }
+                         
                           
     
                         }else{
@@ -435,12 +436,13 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                             this.profileForm.get('corrsCityLocal').setValue(data.user.address.correspondingAddressCity.cityId);
                             this.getPerCityId = data.user.address.correspondingAddressCity.cityId;
                             // this.postCodeObj2 = {value: data.user.address.correspondingAddressCity.cityId};
+                            this.getPostcodeByCityC(data.user.address.correspondingAddressCity.cityCode);
+                            if(data.user.address.correspondingAddressPostcode){
+                              this.profileForm.get('corrsPostcode').setValue(data.user.address.correspondingAddressPostcode.postcodeId);    
+                            }
                           }
                           
-                          this.getPostcodeByCityC(data.user.address.correspondingAddressCity.cityCode);
-                          if(data.user.address.correspondingAddressPostcode){
-                           this.profileForm.get('corrsPostcode').setValue(data.user.address.correspondingAddressPostcode.postcodeId);    
-                         }
+                          
     
                           
                         }else{
