@@ -30,7 +30,7 @@ export class ProtectedComponent implements OnInit {
   translatedText: string;
   supportedLanguages: any[];
   @Input() langChange: string;
-  zIndex = '10000';
+  zIndex = '888';
   bHeight = '70px';
   bTop = '35px';
   userId: string;
@@ -46,12 +46,12 @@ export class ProtectedComponent implements OnInit {
   }
   getExpand(data) {
       if (data) {
-          this.zIndex = '10000';
+          this.zIndex = '888';
           this.bHeight = '70px';
           this.bTop = '35px';
 
       } else {
-          this.zIndex = '10000';
+          this.zIndex = '888';
           this.bHeight = '105px';
           this.bTop = '85px';
       }

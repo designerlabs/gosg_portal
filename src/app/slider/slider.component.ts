@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import * as $ from 'jquery';
 
 import {OwlCarousel} from 'ng2-owl-carousel';
-
+import {SharedService } from '../common/shared.service'
 import {TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { BreadcrumbService } from '../header/breadcrumb/breadcrumb.service';
 
@@ -31,7 +31,14 @@ export class SliderComponent implements OnInit {
 
   slides: any[];
 
-  constructor( private translate: TranslateService, private router: Router, private http: Http, @Inject(APP_CONFIG) private config: AppConfig, private breadcrumbService: BreadcrumbService ) {
+  constructor( 
+    private translate: TranslateService,
+    private router: Router,
+    private http: Http,
+    @Inject(APP_CONFIG) private config: AppConfig,
+    private breadcrumbService: BreadcrumbService,
+    private sharedservice:SharedService
+  ) {
     this.lang = translate.currentLang;
     translate.onLangChange.subscribe((event: LangChangeEvent) => {
 
@@ -66,11 +73,12 @@ export class SliderComponent implements OnInit {
 
     private sliderUrl: string = this.config.urlSlider;
     getSlide(lang: string) {
-      return this.http.get('./app/apidata/sliderdata-'+lang+'.json')
+      return this.http.get('http://10.1.70.148:8080/service/slider/?language=1')
       // return this.http.get(this.sliderUrl + '-' + lang)
            .map(res => res.json())
           .subscribe(resSliderData => {
-                this.slides = resSliderData;
+                this.slides = resSliderData.sliderList;
+                debugger;
             });
     }
 
