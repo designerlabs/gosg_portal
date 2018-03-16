@@ -378,8 +378,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                             
                           }
                            //this.getPostCodeByCityId(data.user.address.permanentAddressCity.cityId);                     
-                          this.getPostcodeByCityP(data.user.address.permanentAddressCity.cityCode);
+                          // this.getPostcodeByCityP(data.user.address.permanentAddressCity.cityCode);
                            if(data.user.address.permanentAddressPostcode){
+                            this.getPostcodeByCityP(data.user.address.permanentAddressCity.cityCode);
                             // this.getPerPostCodeFlag = true;
                             // this.getperPostCode = data.user.address.permanentAddressPostcode.postcodeId;
                             this.profileForm.get('perPostcode').setValue(data.user.address.permanentAddressPostcode.postcodeId);    
@@ -436,10 +437,10 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                             this.getPerCityId = data.user.address.correspondingAddressCity.cityId;
                             // this.postCodeObj2 = {value: data.user.address.correspondingAddressCity.cityId};
                           }
-                          debugger;
-                          this.getPostcodeByCityC(data.user.address.correspondingAddressCity.cityCode);
+                          
+                          
                           if(data.user.address.correspondingAddressPostcode){
-                            debugger;
+                           this.getPostcodeByCityC(data.user.address.correspondingAddressCity.cityCode);
                            this.profileForm.get('corrsPostcode').setValue(data.user.address.correspondingAddressPostcode.postcodeId);    
                          }
     
