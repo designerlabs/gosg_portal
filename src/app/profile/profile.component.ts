@@ -380,7 +380,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                            //this.getPostCodeByCityId(data.user.address.permanentAddressCity.cityId);                     
                           // this.getPostcodeByCityP(data.user.address.permanentAddressCity.cityCode);
                            if(data.user.address.permanentAddressPostcode){
-                            this.getPostcodeByCityP(data.user.address.permanentAddressCity.cityCode);
+                            this.getPostcodeByCityP(data.user.address.permanentAddressCity.cityId);
                             // this.getPerPostCodeFlag = true;
                             // this.getperPostCode = data.user.address.permanentAddressPostcode.postcodeId;
                             this.profileForm.get('perPostcode').setValue(data.user.address.permanentAddressPostcode.postcodeId);    
@@ -440,7 +440,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                           
                           
                           if(data.user.address.correspondingAddressPostcode){
-                           this.getPostcodeByCityC(data.user.address.correspondingAddressCity.cityCode);
+                           this.getPostcodeByCityC(data.user.address.correspondingAddressCity.cityId);
                            this.profileForm.get('corrsPostcode').setValue(data.user.address.correspondingAddressPostcode.postcodeId);    
                          }
     
