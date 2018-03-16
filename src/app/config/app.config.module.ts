@@ -78,7 +78,7 @@ export const APP_DI_CONFIG: AppConfig = {
     urlFooter: commonURL + 'footer',
     urlArticle: './app/apidata/topic',
     urlCountry: commonURL+'country/all',
-    urlState: commonURL+'state',
+    urlState: commonURL+'state/all',
     urlColor: commonURL+ 'color/active',
     urlFont: commonURL+ 'font/active',
     urlPostcode: commonURL+'postcode/city/',
