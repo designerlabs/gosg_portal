@@ -49,7 +49,7 @@ export class SharedService {
 
   getPostCodeData(code): Observable<any[]> {
     //  console.log(this.countryUrl);
-    return this.http.get(this.postcodeUrl+ code)
+    return this.http.get(this.postcodeUrl+'id/'+ code)
       .map((response: Response) => response.json().postcodeList)
       .retry(5)
       .catch(this.handleError);

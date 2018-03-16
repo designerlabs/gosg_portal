@@ -5,6 +5,7 @@ export let APP_CONFIG = new InjectionToken<AppConfig>('app.config');
 
 let baseURL =  environment.mockApiURL;
 let uapURL = environment.uapURL;
+let mediaURL = environment.mediaURL;
 let registrationUrl = uapURL+'registration/';
 
 
@@ -119,7 +120,7 @@ export const APP_DI_CONFIG: AppConfig = {
     urlUapStagingProfile: 'https://uapstaging.malaysia.gov.my/myprofile/update/updatechannel.jsp?tag=',
     urlPoll: commonURL + 'polls',
     urlPollProtected: protectedBaseURL + 'polls',
-    externalMediaURL: "http://10.1.71.168/media",
+    externalMediaURL: mediaURL+"media",
 
 };
 
