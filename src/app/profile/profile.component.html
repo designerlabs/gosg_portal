@@ -103,7 +103,7 @@
                     <div class="form-group col-md-4">
                       <mat-form-field class="example-full-width font-size-s">
                         <mat-select tabindex="2" formControlName="race" placeholder="{{'profile.label.race' | translate}}" required>
-                            <mat-option *ngFor="let race of getRaceData" [value]="race?.refCode">{{race?.race}}</mat-option>
+                            <mat-option *ngFor="let race of getRaceData" [value]="race?.raceCode">{{race?.race}}</mat-option>
                         </mat-select>
                         <mat-error *ngIf="!validateCtrlChk(race) && profileForm.controls.race.errors?.required">
                             {{'profile.err.race' | translate }}
