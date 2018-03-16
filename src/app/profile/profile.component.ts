@@ -670,6 +670,7 @@ getPostcodeByCityCorrs(e){
 }
 
 getPostcodeByCityC(e){
+  debugger;
     if(e){
       // let getCode = this.getCorrsCityData.filter(function(ele){
       //   return ele.cityId == e.value;
@@ -686,6 +687,7 @@ getPostcodeByCityC(e){
   }
 
   getPostcodeByCityP(e){
+    debugger;
     if(e){
       // let getCode = this.getCorrsCityData.filter(function(ele){
       //   return ele.cityId == e.value;
