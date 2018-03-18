@@ -1,10 +1,10 @@
 import { Component, OnInit, Injectable, Inject } from '@angular/core';
 import { Router } from '@angular/router';
-import {TranslateService, LangChangeEvent } from '@ngx-translate/core';
+import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 import { Observable } from 'rxjs/Observable';
-import { Subject} from 'rxjs/Subject';
-import { Http, Response} from '@angular/http';
+import { Subject } from 'rxjs/Subject';
+import { Http, Response } from '@angular/http';
 
 @Component({
   selector: 'app-footer',
@@ -16,32 +16,52 @@ import { Http, Response} from '@angular/http';
 })
 export class FooterComponent implements OnInit {
 
-  footer: any[];
+  footer= [];
   ftsociallink: any[];
+  langID;
+  dataSocialLnk= [];
+  tltSocialLnk;
+  dataContact= [];
+  tltContact;
+  dataAccessPage= [];
+  tltAccessPage;
+  dataNoOfVisitor= [];
+  tltNoOfVisitor;
+  dataExtLnk= [];
+  tltExtLnk;
+  dataBottom= [];
+  tltBottom;
+  dataBottomLnk= [];
+  tltBottomLnk;
+  copyright=[];
+  dateOfUpdate=[];
 
   constructor(private translate: TranslateService, private router: Router, private http: Http, @Inject(APP_CONFIG) private config: AppConfig) {
     this.lang = translate.currentLang;
+    
     translate.onLangChange.subscribe((event: LangChangeEvent) => {
 
-        const myLang = translate.currentLang;
+      const myLang = translate.currentLang;
 
-        if (myLang == 'en') {
+      if (myLang == 'en') {
 
-            translate.get('HOME').subscribe((res: any) => {
-                this.lang = 'en';
-                this.getFooter(this.lang);
-            });
-            // this.router.navigateByUrl('public')
-        }
-        if (myLang == 'ms') {
+        translate.get('HOME').subscribe((res: any) => {
+          this.lang = 'en';
+          this.langID = 1;
+          this.getFooter(this.langID);
+        });
+        // this.router.navigateByUrl('public')
+      }
+      if (myLang == 'ms') {
 
-            translate.get('HOME').subscribe((res: any) => {
-                this.lang = 'ms';
-                this.getFooter(this.lang);
-            });
-            // this.router.navigateByUrl('public')
-        }
-        
+        translate.get('HOME').subscribe((res: any) => {
+          this.lang = 'ms';
+          this.langID = 2;
+          this.getFooter(this.langID);
+        });
+        // this.router.navigateByUrl('public')
+      }
+
     });
   }
 
@@ -54,36 +74,59 @@ export class FooterComponent implements OnInit {
   private footerUrl: string = this.config.urlFooter;
 
   ngOnInit() {
-      console.log('footer.comp.ts');
+    console.log('footer.comp.ts');
+    this.getFooter(this.langID);
   }
 
-  getFooter(lang: string) {
-
-      return this.http.get(this.footerUrl + '-' + lang + '.json')
-        .map((response: Response) => response.json())
-        .subscribe(resSliderData => {
-                this.footer = resSliderData;
-            });
+  getFooter(lang) {
+// if(this.footer.length == 0){
+    return this.http.get(this.footerUrl + '?language=' + lang )
+    // return this.http.get(this.footerUrl + '-ms.json')
+      .map((response: Response) => response.json())
+      .subscribe(resSliderData => {
+        this.footer = resSliderData['footerResourceList'];        
+        this.tltContact = this.footer.filter(fdata => fdata.titleCode === 1)[0];
+        this.dataContact = this.tltContact.footerContents;
+        this.tltAccessPage = this.footer.filter(fdata => fdata.titleCode === 2)[0];
+        this.dataAccessPage = this.tltAccessPage.footerContents;
+        this.tltNoOfVisitor = this.footer.filter(fdata => fdata.titleCode === 3)[0];
+        this.dataNoOfVisitor = this.tltNoOfVisitor.footerContents;
+        this.tltSocialLnk = this.footer.filter(fdata => fdata.titleCode === 4)[0];
+        this.dataSocialLnk = this.tltSocialLnk.footerContents;
+        this.tltBottom = this.footer.filter(fdata => fdata.titleCode === 5);
+        this.dataBottom =  this.tltBottom[0].footerContents;
+        this.copyright = this.dataBottom[1];
+        this.dateOfUpdate = this.dataBottom[0];
+        this.tltBottomLnk = this.footer.filter(fdata => fdata.titleCode === 6)[0];
+        this.dataBottomLnk = this.tltBottomLnk.footerContents;
+        this.tltExtLnk = this.footer.filter(fdata => fdata.titleCode === 7)[0];        
+        this.dataExtLnk = this.tltExtLnk.footerContents;
+      });
+    // }
   }
 
-  getTheme(){
-        return localStorage.getItem('themeColor');
-    }
+  getTheme() {
+    return localStorage.getItem('themeColor');
+  }
 
-  showFooter(ele){
-        const temp = 'show' + ele;
-        this[temp] = !this[temp];
-    }
-    
-    onResize(event) {
-        // console.log(event.target.innerWidth);
-        // console.log(event.target.innerHeight);
+  changeStyle($event){
+    // this.color = $event.type == 'mouseover' ? 'yellow' : 'red';
+  }
 
-        if(event.target.innerWidth >= 767) {
-            this.showcontact = true;
-            this.showaccess = true;
-            this.showextlinks = true;
-            this.showvisitor = true;
-        }
+  showFooter(ele) {
+    const temp = 'show' + ele;
+    this[temp] = !this[temp];
+  }
+
+  onResize(event) {
+    // console.log(event.target.innerWidth);
+    // console.log(event.target.innerHeight);
+
+    if (event.target.innerWidth >= 767) {
+      this.showcontact = true;
+      this.showaccess = true;
+      this.showextlinks = true;
+      this.showvisitor = true;
     }
+  }
 }

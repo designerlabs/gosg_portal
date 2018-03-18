@@ -11,10 +11,16 @@
       "manual": "Manual",
       "aboutus": "Mengenai Kami",
       "onlineservice": "Perkhidmatan Digital",
-      "logout":"Log keluar"
+      "logout":"Log keluar",
+      "themecolor": "Warna Tema",
+      "fontsize": "Saiz Fon",
+      "fonttype": "Jenis Fon",
+      "login": "Log Masuk"
     },
     "search": {
-      "label": "Bagaimana Kami Boleh Membantu Anda?"
+      "label": "Bagaimana Kami Boleh Membantu Anda?",
+      "find": "CARI",
+      "instruction": "Taipkan kata kunci carian di sini"
     },
     "breadcrumb":{
       "calendar": "Kalendar",
@@ -156,7 +162,13 @@
   },
   
   "dashboard":{
-
+    "sidenav": {
+      "dashboard": "Dashboard",
+      "profile": "Profil",
+      "inbox": "Peti Masuk",
+      "appmgmt": "Pengurusan Aplikasi",
+      "companyprofile": "Profil Syarikat"
+    }
   },
   
   "errorlabel":{
@@ -214,17 +226,14 @@
   },
   "mailbox":{
     "header":{
-      "from":"",
-      "subject":"",
-      "date":"",
-      "action":""
+      "from":"Dari",
+      "subject":"Subjek",
+      "date":"Tarikh",
+      "action":"Tindakan"
     },
     
     "pagination":{
-      "pages":"",
-      "of":"",
-      "in":"",
-      "mails":""
+      "mails":"mel"
     },
     "err":{
       "deleteconfirm":"Are you sure to delete this mail?",
@@ -277,6 +286,12 @@
       "error":"bg_header bg_error_header",
       "warn":"bg_header bg_warn_header",
       "info":"bg_header bg_info_header"
+    },
+    
+    "pagination":{
+      "pages":"Halaman",
+      "of":"daripada",
+      "in":"dalam"
     }
   },
   "appmngt":{
@@ -312,11 +327,13 @@
     "recommend" : "Cadangan Penambahbaikan Anda",
     "youranswer" : "Jawapan anda adalah",
     "seeAnswer" : "INGIN MENGETAHUI KEPUTUSAN TERKINI SURVEY MENGENAI LAMAN WEB MYGOV YANG BARU?",
-    "displayAnswer" : " YA, PAPARKAN KEPUTUSAN TERKINI "
+    "displayAnswer" : " YA, PAPARKAN KEPUTUSAN TERKINI ",
+    "comment": "Komen"
   },
   "announcement":{
     "title":"Sorotan Terkini",
     "description":"Semua Sorotan Terkini",
-    "message":"Tiada maklumat terkini."
+    "message":"Tiada maklumat terkini.",
+    "tender": "Tender"
   }
 }

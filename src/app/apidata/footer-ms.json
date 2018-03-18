@@ -1,501 +1,518 @@
-[
-    {
-        "title": "sociallink",
-        "position": "0",
-        "footer": [
-            {
-                "id": "3",
-                "title": "Facebook Gerbang Rasmi Kerajaan Malaysia",
-                "link": "https://www.facebook.com/MyGovernment",
-                "icon": "fa-facebook",
-                "sort": "1",
-                "date_insert": "2017-05-09 11:18:59.447444+00:00",
-                "date_modified": "2017-05-09 11:19:30.914074+00:00"
-            },
-            {
-                "id": "4",
-                "title": "Twitter Gerbang Rasmi Kerajaan Malaysia",
-                "link": "https://twitter.com/myGovPortal",
-                "icon": "fa-twitter",
-                "sort": "2",
-                "date_insert": "2017-05-09 11:18:59.447444+00:00",
-                "date_modified": "2017-05-09 11:19:30.914074+00:00"
-            },
-            {
-                "id": "5",
-                "title": "Web Mudah Alih",
-                "link": "/public/cms/article/page/374",
-                "icon": "fa-qrcode",
-                "sort": "3",
-                "date_insert": "2017-05-09 11:18:59.447444+00:00",
-                "date_modified": "2017-05-09 11:19:30.914074+00:00"
-            },
-            {
-                "id": "1",
-                "title": "Suapan RSS",
-                "link": "/public/cms/rss",
-                "icon": "fa-rss",
-                "sort": "5",
-                "date_insert": "2017-05-09 11:18:59.447444+00:00",
-                "date_modified": "2017-05-09 11:19:30.914074+00:00"
-            },
-            {
-                "id": "2",
-                "title": "Galeri Aplikasi Mudah Alih Kerajaan Malaysia (GAMMA)",
-                "link": "/public/cms/article/page/7/782",
-                "icon": "fa-mobile",
-                "sort": "4",
-                "date_insert": "2017-05-09 11:18:59.447444+00:00",
-                "date_modified": "2017-05-19 04:06:15.299470+00:00"
-            }
-        ]
-    },
-    {
-        "title": "otherlink",
-        "items": [
-            {
-                "title": "HUBUNGI KAMI",
-                "sub_title": "contact",
-                "footer": [
-                    {
-                        "id": "1",
-                        "title": "UNIT PEMODENAN TADBIRAN DAN PERANCANGAN PENGURUSAN MALAYSIA",
-                        "icon": "",
-                        "date_insert": "2017-05-09 11:22:44.025156+00:00",
-                        "date_modified": "2017-07-11 10:42:38.738253+00:00",
-                        "sort": ""
-                    },
-                    {
-                        "id": "2",
-                        "title": "<p class=\"sub-add\">Aras 6, Blok B2 <br />Kompleks Jabatan Perdana Menteri <br />Pusat Pentadbiran Kerajaan Persekutuan <br />62502 Putrajaya Malaysia</p>",
-                        "icon": "glyphicon glyphicon-home",
-                        "date_insert": "2017-05-09 11:22:44.025156+00:00",
-                        "date_modified": "2017-07-11 10:42:38.738253+00:00",
-                        "sort": ""
-                    },
-                    {
-                        "id": "3",
-                        "title": "<p><a title=\"2.937855, 101.65420\" href=\"https://www.google.com/maps/place/2%C2%B056'16.3%22N+101%C2%B039'15.1%22E/@2.937855,101.6542,17z/data=!3m1!4b1!4m5!3m4!1s0x0:0x0!8m2!3d2.937855!4d101.6542\" target=\"_blank\">2.937855, 101.65420</a></p>",
-                        "icon": "glyphicon glyphicon-map-marker",
-                        "date_insert": "2017-05-09 11:22:44.025156+00:00",
-                        "date_modified": "2017-07-11 10:42:38.738253+00:00",
-                        "sort": ""
-                    },
-                    {
-                        "id": "4",
-                        "title": "<p>603 8000 8000</p>",
-                        "icon": "glyphicon glyphicon-phone-alt",
-                        "date_insert": "2017-05-09 11:22:44.025156+00:00",
-                        "date_modified": "2017-07-11 10:42:38.738253+00:00",
-                        "sort": ""
-                    },
-                    {
-                        "id": "5",
-                        "title": "<p>603 8888 3721</p>",
-                        "icon": "glyphicon glyphicon-print",
-                        "date_insert": "2017-05-09 11:22:44.025156+00:00",
-                        "date_modified": "2017-07-11 10:42:38.738253+00:00",
-                        "sort": ""
-                    },
-                    {
-                        "id": "6",
-                        "title": "<p>admin[at]portal[dot]gov[dot]my</p>",
-                        "icon": "glyphicon glyphicon-envelope",
-                        "date_insert": "2017-05-09 11:22:44.025156+00:00",
-                        "date_modified": "2017-07-11 10:42:38.738253+00:00",
-                        "sort": ""
-                    }
-                ]
-            },
-            {
-                "title": "CAPAIAN",
-                "sub_title": "access",
-                "footer": [
-                    {
-                        "id": "13",
-                        "title": "Langganan",
-                        "name": "Langganan",
-                        "link": "/public/cms/subscription",
-                        "position": "2",
-                        "date_insert": "2017-05-09 11:21:36.525489+00:00",
-                        "date_modified": "2017-05-09 11:21:36.577275+00:00",
-                        "sort": "1000"
-                    },
-                    {
-                        "id": "12",
-                        "title": "Perkhidmatan Dalam Talian",
-                        "name": "Perkhidmatan Dalam Talian",
-                        "link": "/public/cms/onlineservices",
-                        "position": "2",
-                        "date_insert": "2017-05-09 11:21:36.525489+00:00",
-                        "date_modified": "2017-05-09 11:21:36.577275+00:00",
-                        "sort": "1000"
-                    },
-                    {
-                        "id": "10",
-                        "title": "Perlindungan Data Peribadi",
-                        "name": "Perlindungan Data Peribadi",
-                        "link": "/public/cms/article/page/349",
-                        "position": "2",
-                        "date_insert": "2017-05-09 11:21:36.525489+00:00",
-                        "date_modified": "2017-05-09 11:21:36.577275+00:00",
-                        "sort": "1000"
-                    },
-                    {
-                        "id": "11",
-                        "title": "Enakmen Kebebasan Maklumat",
-                        "name": "Enakmen Kebebasan Maklumat",
-                        "link": "/public/cms/article/page/725",
-                        "position": "2",
-                        "date_insert": "2017-05-09 11:21:36.525489+00:00",
-                        "date_modified": "2017-05-09 11:21:36.577275+00:00",
-                        "sort": "1000"
-                    },
-                    {
-                        "id": "8",
-                        "title": "My Kalendar",
-                        "name": "My Kalendar",
-                        "link": "/calendar",
-                        "position": "1",
-                        "date_insert": "2017-05-09 11:21:36.525489+00:00",
-                        "date_modified": "2017-05-09 11:21:36.577275+00:00",
-                        "sort": "1000"
-                    },
-                    {
-                        "id": "7",
-                        "title": "E-Penyertaan",
-                        "name": "E-Penyertaan",
-                        "link": "/public/cms/epenyertaan",
-                        "position": "1",
-                        "date_insert": "2017-05-09 11:21:36.525489+00:00",
-                        "date_modified": "2017-05-09 11:21:36.577275+00:00",
-                        "sort": "1000"
-                    },
-                    {
-                        "id": "5",
-                        "title": "Direktori Agensi",
-                        "name": "Direktori Agensi",
-                        "link": "/public/cms/direktori",
-                        "position": "1",
-                        "date_insert": "2017-05-09 11:21:36.525489+00:00",
-                        "date_modified": "2017-05-09 11:21:36.577275+00:00",
-                        "sort": "1000"
-                    },
-                    {
-                        "id": "4",
-                        "title": "Ketua Pegawai Maklumat(CIO)",
-                        "name": "Ketua Pegawai Maklumat(CIO)",
-                        "link": "/public/cms/article/page/726",
-                        "position": "1",
-                        "date_insert": "2017-05-09 11:21:36.525489+00:00",
-                        "date_modified": "2017-05-09 11:21:36.577275+00:00",
-                        "sort": "1000"
-                    },
-                    {
-                        "id": "3",
-                        "title": "Aduan dan Pertanyaan",
-                        "name": "Aduan dan Pertanyaan",
-                        "link": "/feedback",
-                        "position": "1",
-                        "date_insert": "2017-05-09 11:21:36.525489+00:00",
-                        "date_modified": "2017-05-09 11:21:36.577275+00:00",
-                        "sort": "1000"
-                    },
-                    {
-                        "id": "2",
-                        "title": "Arkib",
-                        "name": "Arkib",
-                        "link": "/public/cms/archive",
-                        "position": "1",
-                        "date_insert": "2017-05-09 11:21:36.525489+00:00",
-                        "date_modified": "2017-05-09 11:21:36.577275+00:00",
-                        "sort": "1000"
-                    },
-                    {
-                        "id": "1",
-                        "title": "Penerbitan",
-                        "name": "Penerbitan",
-                        "link": "/public/cms/publication",
-                        "position": "1",
-                        "date_insert": "2017-05-09 11:21:36.525489+00:00",
-                        "date_modified": "2017-05-09 11:21:36.577275+00:00",
-                        "sort": "1000"
-                    },
-                    {
-                        "id": "16",
-                        "title": "Statistik Dalam Talian",
-                        "name": "Statistik Dalam Talian",
-                        "link": "/public/dservice/?cc=business/dservis/statistic",
-                        "position": "1",
-                        "date_insert": "2017-05-09 11:21:36.525489+00:00",
-                        "date_modified": "2017-05-09 11:21:36.577275+00:00",
-                        "sort": "1000"
-                    },
-                    {
-                        "id": "15",
-                        "title": "Peta Laman",
-                        "name": "Peta Laman",
-                        "link": "/public/cms/sitemap",
-                        "position": "2",
-                        "date_insert": "2017-05-09 11:21:36.525489+00:00",
-                        "date_modified": "2017-05-09 11:21:36.577275+00:00",
-                        "sort": "1000"
-                    },
-                    {
-                        "id": "14",
-                        "title": "Suapan RSS",
-                        "name": "Suapan RSS",
-                        "link": "/public/cms/rss",
-                        "position": "2",
-                        "date_insert": "2017-05-09 11:21:36.525489+00:00",
-                        "date_modified": "2017-05-09 11:21:36.577275+00:00",
-                        "sort": "1000"
-                    },
-                    {
-                        "id": "17",
-                        "title": "Galeri",
-                        "name": "Galeri",
-                        "link": "/public/cms/photologue/gallery",
-                        "position": "2",
-                        "date_insert": "2017-05-11 04:50:40.832232+00:00",
-                        "date_modified": "2017-05-11 04:51:09.322215+00:00",
-                        "sort": "1000"
-                    }
-                ]
-            },
-            {
-                "title": "JUMLAH PELAWAT",
-                "sub_title": "visitor",
-                "footer": [
-                    {
-                        "id": "1",
-                        "today": "Hari ini",
-                        "todayval": "907",
-                        "month": "Bulan ini",
-                        "monthval": "15,753",
-                        "total": "Jumlah Pelawat",
-                        "totalval": "77,803",
-                        "date_insert": "2017-05-09 11:21:36.634158+00:00",
-                        "date_modified": "2017-05-09 11:21:36.666533+00:00"
-                    }
-                ]
-            },
-            {
-                "title": "PAUTAN LUAR",
-                "sub_title": "extlinks",
-                "footer": [
-                    {
-                        "id": "1",
-                        "name": "BIRO PENGADUAN AWAM",
-                        "link": "http://www.pcb.gov.my/bm",
-                        "sort": "1000",
-                        "src": "",
-                        "icon": "https://www.malaysia.gov.my/public/static/media/Logo_BPA.png",
-                        "date_insert": "2017-05-09 11:23:22.310612+00:00",
-                        "date_modified": "2017-05-09 11:23:22.347312+00:00"
-                    },
-                    {
-                        "id": "10",
-                        "name": "MYBAYAR",
-                        "link": "https://mybayar.gov.my/ms/registration/frmlogins.aspx",
-                        "sort": "1000",
-                        "src": "",
-                        "icon": "https://www.malaysia.gov.my/public/static/media/Logo_mybayar.png",
-                        "date_insert": "2017-05-09 11:23:22.310612+00:00",
-                        "date_modified": "2017-05-09 11:23:22.347312+00:00"
-                    },
-                    {
-                        "id": "9",
-                        "name": "JOBS MALAYSIA",
-                        "link": "http://www.jobsmalaysia.gov.my/jcs/index.faces",
-                        "sort": "1000",
-                        "src": "",
-                        "icon": "https://www.malaysia.gov.my/public/static/media/Logo_jobsmalaysia.png",
-                        "date_insert": "2017-05-09 11:23:22.310612+00:00",
-                        "date_modified": "2017-05-09 11:23:22.347312+00:00"
-                    },
-                    {
-                        "id": "8",
-                        "name": "INFO BANJIR AWAM",
-                        "link": "http://publicinfobanjir.water.gov.my",
-                        "sort": "1000",
-                        "src": "",
-                        "icon": "https://www.malaysia.gov.my/public/static/media/Logo_Infobanjir.png",
-                        "date_insert": "2017-05-09 11:23:22.310612+00:00",
-                        "date_modified": "2017-05-09 11:23:22.347312+00:00"
-                    },
-                    {
-                        "id": "7",
-                        "name": "SERVIS E-KERAJAAN MALAYSIA",
-                        "link": "https://www.myeg.com.my",
-                        "sort": "1000",
-                        "src": "",
-                        "icon": "https://www.malaysia.gov.my/public/static/media/MyEG_logo.png",
-                        "date_insert": "2017-05-09 11:23:22.310612+00:00",
-                        "date_modified": "2017-05-09 11:23:22.347312+00:00"
-                    },
-                    {
-                        "id": "5",
-                        "name": "SURUHANJAYA PERKHIDMATAN AWAM",
-                        "link": "http://www.spa.gov.my",
-                        "sort": "1000",
-                        "src": "",
-                        "icon": "https://www.malaysia.gov.my/public/static/media/Logo_SPA_ghPgwg8.png",
-                        "date_insert": "2017-05-09 11:23:22.310612+00:00",
-                        "date_modified": "2017-05-09 11:23:22.347312+00:00"
-                    },
-                    {
-                        "id": "6",
-                        "name": "UNIT PUSAT UNIVESITI",
-                        "link": "http://upu.mohe.gov.my/web",
-                        "sort": "1000",
-                        "src": "",
-                        "icon": "https://www.malaysia.gov.my/public/static/media/Logo_UPU.png",
-                        "date_insert": "2017-05-09 11:23:22.310612+00:00",
-                        "date_modified": "2017-05-09 11:23:22.347312+00:00"
-                    },
-                    {
-                        "id": "2",
-                        "name": "POLIS DIRAJA MALAYSIA",
-                        "link": "http://www.rmp.gov.my",
-                        "sort": "1000",
-                        "src": "",
-                        "icon": "https://www.malaysia.gov.my/public/static/media/Logo_polis.png",
-                        "date_insert": "2017-05-09 11:23:22.310612+00:00",
-                        "date_modified": "2017-05-09 11:23:22.347312+00:00"
-                    },
-                    {
-                        "id": "15",
-                        "name": "KEMENTERIAN PEMBANGUNAN WANITA KELUARGA DAN MASYARAKAT",
-                        "link": "http://www.kpwkm.gov.my",
-                        "sort": "1",
-                        "src": "",
-                        "icon": "https://www.malaysia.gov.my/public/static/media/KPWKM.png",
-                        "date_insert": "2017-05-09 11:23:22.310612+00:00",
-                        "date_modified": "2017-05-09 11:23:22.347312+00:00"
-                    },
-                    {
-                        "id": "14",
-                        "name": "KEMENTERIAN SUMBER MANUSIA",
-                        "link": "http://www.mohr.gov.my/bm/index.php/en",
-                        "sort": "2",
-                        "src": "",
-                        "icon": "https://www.malaysia.gov.my/public/static/media/Kementerian-Sumber-Manusia.png",
-                        "date_insert": "2017-05-09 11:23:22.310612+00:00",
-                        "date_modified": "2017-05-09 11:23:22.347312+00:00"
-                    },
-                    {
-                        "id": "13",
-                        "name": "KEMENTERIAN PENDIDIKAN MALAYSIA",
-                        "link": "http://www.moe.gov.my/index.php/my",
-                        "sort": "3",
-                        "src": "",
-                        "icon": "https://www.malaysia.gov.my/public/static/media/Kementerian-Pendidikan.png",
-                        "date_insert": "2017-05-09 11:23:22.310612+00:00",
-                        "date_modified": "2017-05-09 11:23:22.347312+00:00"
-                    },
-                    {
-                        "id": "12",
-                        "name": "KEMENTERIAN KEWANGAN MALAYSIA",
-                        "link": "http://www.treasury.gov.my/index.php",
-                        "sort": "4",
-                        "src": "",
-                        "icon": "https://www.malaysia.gov.my/public/static/media/Kementerian-Kewangan.png",
-                        "date_insert": "2017-05-09 11:23:22.310612+00:00",
-                        "date_modified": "2017-05-09 11:23:22.347312+00:00"
-                    },
-                    {
-                        "id": "11",
-                        "name": "KEMENTERIAN KESIHATAN MALAYSIA",
-                        "link": "http://www.moh.gov.my",
-                        "sort": "5",
-                        "src": "",
-                        "icon": "https://www.malaysia.gov.my/public/static/media/Kementerian-kesihatan.png",
-                        "date_insert": "2017-05-09 11:23:22.310612+00:00",
-                        "date_modified": "2017-05-09 11:23:22.347312+00:00"
-                    },
-                    {
-                        "id": "3",
-                        "name": "KEMENTERIAN SUMBER ASLI DAN ALAM SEKITAR",
-                        "link": "http://www.nre.gov.my/ms-my/Pages/default.aspx",
-                        "sort": "6",
-                        "src": "",
-                        "icon": "https://www.malaysia.gov.my/public/static/media/NRE-logo.png",
-                        "date_insert": "2017-05-09 11:23:22.310612+00:00",
-                        "date_modified": "2017-05-09 11:23:22.347312+00:00"
-                    },
-                    {
-                        "id": "16",
-                        "name": "KEMENTERIAN PENDIDIKAN TINGGI",
-                        "link": "https://www.mohe.gov.my",
-                        "sort": "7",
-                        "src": "",
-                        "icon": "https://www.malaysia.gov.my/public/static/media/Kementerian-pengajian-tinggi.png",
-                        "date_insert": "2017-05-09 11:23:22.310612+00:00",
-                        "date_modified": "2017-06-15 08:21:45.832257+00:00"
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "title": "bottom",
-        "items": [
-            {
-                "id": "1",
-                "copyright": "2017 MAMPU Hak Cipta Terpelihara",
-                "update_date": "2017-05-01",
-                "note": "Paparan terbaik menggunakan pelayar Google Chrome Version 57.0, Mozilla Firefox Version 52.0",
-                "date_insert": "2017-05-09 11:21:36.346270+00:00",
-                "date_modified": "2017-05-09 11:21:36.388489+00:00"
-            }
-        ]
-    },
-    {
-        "title": "bottomlinks",
-        "items": [
-            {
-                "id": "6",
-                "name": "Piagam Pelanggan",
-                "link": "/public/cms/article/page/221",
-                "date_insert": "2017-05-09 11:21:36.413126+00:00",
-                "date_modified": "2017-05-09 11:21:36.504912+00:00"
-            },
-            {
-                "id": "5",
-                "name": "Dasar Keselamatan",
-                "link": "/public/cms/article/page/203",
-                "date_insert": "2017-05-09 11:21:36.413126+00:00",
-                "date_modified": "2017-05-09 11:21:36.504912+00:00"
-            },
-            {
-                "id": "4",
-                "name": "Dasar Privasi",
-                "link": "/public/cms/article/page/220",
-                "date_insert": "2017-05-09 11:21:36.413126+00:00",
-                "date_modified": "2017-05-09 11:21:36.504912+00:00"
-            },
-            {
-                "id": "3",
-                "name": "Notis Hakcipta",
-                "link": "/public/cms/article/page/219",
-                "date_insert": "2017-05-09 11:21:36.413126+00:00",
-                "date_modified": "2017-05-09 11:21:36.504912+00:00"
-            },
-            {
-                "id": "2",
-                "name": "Penafian",
-                "link": "/public/cms/article/page/289",
-                "date_insert": "2017-05-09 11:21:36.413126+00:00",
-                "date_modified": "2017-05-09 11:21:36.504912+00:00"
-            },
-            {
-                "id": "1",
-                "name": "Bantuan",
-                "link": "/public/cms/article/page/217",
-                "date_insert": "2017-05-09 11:21:36.413126+00:00",
-                "date_modified": "2017-05-09 11:21:36.504912+00:00"
-            }
-        ]
-    }
-]
+{
+    "type": "RESPONSE",
+    "statusCode": "SUCCESS",
+    "statusDesc": "findFooter",
+    "footerResourceList": [
+        {
+            "title": "CONTACT US",
+            "titleCode": 1,
+            "footerContents": [
+                {
+                    "footerContentId": 1,
+                    "footerContentName": "THE MALAYSIAN ADMINISTRATIVE MODERNISATION AND MANAGEMENT PLANNING UNIT",
+                    "footerContentDescription": "",
+                    "enabled": true,
+                    "footerContentIcon": "",
+                    "footerContentUrl": "",
+                    "footerContentCode": 1
+                },
+                {
+                    "footerContentId": 3,
+                    "footerContentName": "Level 6, Block B2 </br> Prime Minister's Department Complex </br> Federal Government Administrative Centre </br> 62502 Putrajaya, Malaysia",
+                    "footerContentDescription": "",
+                    "enabled": true,
+                    "footerContentIcon": "home",
+                    "footerContentUrl": "",
+                    "footerContentCode": 2
+                },
+                {
+                    "footerContentId": 11,
+                    "footerContentName": "603 8888 3721",
+                    "footerContentDescription": "",
+                    "enabled": true,
+                    "footerContentIcon": "fax",
+                    "footerContentUrl": "",
+                    "footerContentCode": 6
+                },
+                {
+                    "footerContentId": 7,
+                    "footerContentName": "603 8000 8000",
+                    "footerContentDescription": "",
+                    "enabled": true,
+                    "footerContentIcon": "phone",
+                    "footerContentUrl": "",
+                    "footerContentCode": 4
+                },
+                {
+                    "footerContentId": 9,
+                    "footerContentName": "admin[at]portal[dot]gov[dot]my",
+                    "footerContentDescription": "",
+                    "enabled": true,
+                    "footerContentIcon": "envelope-o",
+                    "footerContentUrl": "",
+                    "footerContentCode": 5
+                },
+                {
+                    "footerContentId": 5,
+                    "footerContentName": "2.937855, 101.65420",
+                    "footerContentDescription": "",
+                    "enabled": true,
+                    "footerContentIcon": "map-marker",
+                    "footerContentUrl": "",
+                    "footerContentCode": 3
+                }
+            ]
+        },
+        {
+            "title": "NUMBER OF VISITOR",
+            "titleCode": 3,
+            "footerContents": [
+                {
+                    "footerContentId": 31,
+                    "footerContentName": "Total Visitors",
+                    "footerContentDescription": "-",
+                    "enabled": true,
+                    "footerContentIcon": "",
+                    "footerContentUrl": "",
+                    "footerContentCode": 7,
+                    "footerSubContentValue": "1000000"
+                },
+                {
+                    "footerContentId": 35,
+                    "footerContentName": "This Month",
+                    "footerContentDescription": "-",
+                    "enabled": true,
+                    "footerContentIcon": "",
+                    "footerContentUrl": "",
+                    "footerContentCode": 8,
+                    "footerSubContentValue": "100000"
+                },
+                {
+                    "footerContentId": 37,
+                    "footerContentName": "Today",
+                    "footerContentDescription": "",
+                    "enabled": true,
+                    "footerContentIcon": "",
+                    "footerContentUrl": "",
+                    "footerContentCode": 9,
+                    "footerSubContentValue": "1000"
+                }
+            ]
+        },
+        {
+            "title": "BOTTOM",
+            "titleCode": 5,
+            "footerContents": [
+                {
+                    "footerContentId": 896,
+                    "footerContentName": "2017 MAMPU All Rights Reserved",
+                    "footerContentDescription": "2017 MAMPU All Rights Reserved",
+                    "enabled": true,
+                    "footerContentIcon": "",
+                    "footerContentCode": 112
+                },
+                {
+                    "footerContentId": 910,
+                    "footerContentName": "2017 MAMPU All Rights Reserved",
+                    "footerContentDescription": "Best viewed using Google Chrome Version 57.0, Mozilla Firefox version 52.0",
+                    "enabled": true,
+                    "footerContentIcon": "",
+                    "footerContentCode": 119
+                }
+            ]
+        },
+        {
+            "title": "BOTTOM LINK",
+            "titleCode": 6,
+            "footerContents": [
+                {
+                    "footerContentId": 900,
+                    "footerContentName": "Security Policy",
+                    "footerContentDescription": "Security Policy",
+                    "enabled": true,
+                    "footerContentIcon": "",
+                    "footerContentUrl": "http://www.mimos.my/",
+                    "footerContentCode": 114
+                },
+                {
+                    "footerContentId": 906,
+                    "footerContentName": "Disclaimer",
+                    "footerContentDescription": "Disclaimer",
+                    "enabled": true,
+                    "footerContentIcon": "",
+                    "footerContentUrl": "http://www.mimos.my/",
+                    "footerContentCode": 117
+                },
+                {
+                    "footerContentId": 902,
+                    "footerContentName": "Privacy Policy",
+                    "footerContentDescription": "Privacy Policy",
+                    "enabled": true,
+                    "footerContentIcon": "",
+                    "footerContentUrl": "http://www.mimos.my/",
+                    "footerContentCode": 115
+                },
+                {
+                    "footerContentId": 904,
+                    "footerContentName": "Copyright Notice",
+                    "footerContentDescription": "Copyright Notice",
+                    "enabled": true,
+                    "footerContentIcon": "",
+                    "footerContentUrl": "http://www.mimos.my/",
+                    "footerContentCode": 116
+                },
+                {
+                    "footerContentId": 908,
+                    "footerContentName": "Help",
+                    "footerContentDescription": "Help",
+                    "enabled": true,
+                    "footerContentIcon": "",
+                    "footerContentUrl": "http://www.mimos.my/",
+                    "footerContentCode": 118
+                },
+                {
+                    "footerContentId": 898,
+                    "footerContentName": "Client Charter",
+                    "footerContentDescription": "Client Charter",
+                    "enabled": false,
+                    "footerContentUrl": "http://www.mimos.my/",
+                    "footerContentCode": 113
+                }
+            ]
+        },
+        {
+            "title": "ACCESS PAGE",
+            "titleCode": 2,
+            "footerContents": [
+                {
+                    "footerContentId": 13,
+                    "footerContentName": "Personal Data Protection Act",
+                    "footerContentDescription": "",
+                    "enabled": true,
+                    "footerContentIcon": "",
+                    "footerContentUrl": "http://www.mimos.my/",
+                    "footerContentCode": 15
+                },
+                {
+                    "footerContentId": 836,
+                    "footerContentName": "Freedom of Information",
+                    "footerContentDescription": "Freedom of Information",
+                    "enabled": true,
+                    "footerContentIcon": "",
+                    "footerContentUrl": "http://www.mimos.my/",
+                    "footerContentCode": 83
+                },
+                {
+                    "footerContentId": 840,
+                    "footerContentName": "E-Participation",
+                    "footerContentDescription": "E-Participation",
+                    "enabled": true,
+                    "footerContentIcon": "",
+                    "footerContentUrl": "http://www.mimos.my/",
+                    "footerContentCode": 85
+                },
+                {
+                    "footerContentId": 848,
+                    "footerContentName": "Chief Information Officer(CIO)",
+                    "footerContentDescription": "Chief Information Officer(CIO)",
+                    "enabled": true,
+                    "footerContentIcon": "",
+                    "footerContentUrl": "http://www.mimos.my/",
+                    "footerContentCode": 89
+                },
+                {
+                    "footerContentId": 852,
+                    "footerContentName": "Archives",
+                    "footerContentDescription": "Archives",
+                    "enabled": true,
+                    "footerContentIcon": "",
+                    "footerContentUrl": "http://www.mimos.my/",
+                    "footerContentCode": 91
+                },
+                {
+                    "footerContentId": 854,
+                    "footerContentName": "Publication",
+                    "footerContentDescription": "Publication",
+                    "enabled": true,
+                    "footerContentIcon": "",
+                    "footerContentUrl": "http://www.mimos.my/",
+                    "footerContentCode": 92
+                },
+                {
+                    "footerContentId": 856,
+                    "footerContentName": "Online Statistic",
+                    "footerContentDescription": "Online Statistic",
+                    "enabled": true,
+                    "footerContentIcon": "",
+                    "footerContentUrl": "http://www.mimos.my/",
+                    "footerContentCode": 93
+                },
+                {
+                    "footerContentId": 858,
+                    "footerContentName": "Site Map",
+                    "footerContentDescription": "Site Map",
+                    "enabled": true,
+                    "footerContentIcon": "",
+                    "footerContentUrl": "http://www.mimos.my/",
+                    "footerContentCode": 94
+                },
+                {
+                    "footerContentId": 862,
+                    "footerContentName": "Gallery",
+                    "footerContentDescription": "Gallery",
+                    "enabled": true,
+                    "footerContentIcon": "",
+                    "footerContentUrl": "http://www.mimos.my/",
+                    "footerContentCode": 96
+                },
+                {
+                    "footerContentId": 832,
+                    "footerContentName": "Subscription",
+                    "footerContentDescription": "Subscription",
+                    "enabled": true,
+                    "footerContentIcon": "",
+                    "footerContentUrl": "http://www.mimos.my/",
+                    "footerContentCode": 81
+                },
+                {
+                    "footerContentId": 838,
+                    "footerContentName": "My Calendar",
+                    "footerContentDescription": "My Calendar",
+                    "enabled": true,
+                    "footerContentIcon": "",
+                    "footerContentUrl": "http://www.mimos.my/",
+                    "footerContentCode": 84
+                },
+                {
+                    "footerContentId": 846,
+                    "footerContentName": "Agencies Directory",
+                    "footerContentDescription": "Agencies Directory",
+                    "enabled": true,
+                    "footerContentIcon": "",
+                    "footerContentUrl": "http://www.mimos.my/",
+                    "footerContentCode": 88
+                },
+                {
+                    "footerContentId": 860,
+                    "footerContentName": "RSS Feeds",
+                    "footerContentDescription": "RSS Feeds",
+                    "enabled": true,
+                    "footerContentIcon": "",
+                    "footerContentUrl": "http://www.mimos.my/",
+                    "footerContentCode": 95
+                },
+                {
+                    "footerContentId": 834,
+                    "footerContentName": "Online Services",
+                    "footerContentDescription": "Online Services",
+                    "enabled": true,
+                    "footerContentIcon": "",
+                    "footerContentUrl": "http://www.mimos.my/",
+                    "footerContentCode": 82
+                },
+                {
+                    "footerContentId": 850,
+                    "footerContentName": "Complaints and Queries",
+                    "footerContentDescription": "Complaints and Queries",
+                    "enabled": true,
+                    "footerContentIcon": "",
+                    "footerContentUrl": "http://www.mimos.my/",
+                    "footerContentCode": 90
+                }
+            ]
+        },
+        {
+            "title": "EXTERNAL LINKS",
+            "titleCode": 7,
+            "footerContents": [
+                {
+                    "footerContentId": 894,
+                    "footerContentName": "STUDENT ADMISSION MANAGEMENT DIVISION",
+                    "footerContentDescription": "STUDENT ADMISSION MANAGEMENT DIVISION",
+                    "enabled": true,
+                    "footerContentIcon": "",
+                    "footerContentUrl": "http://upu.mohe.gov.my/web/",
+                    "footerContentCode": 111
+                },
+                {
+                    "footerContentId": 874,
+                    "footerContentName": "PUBLIC SERVICES COMMISSION OF MALAYSIA",
+                    "footerContentDescription": "PUBLIC SERVICES COMMISSION OF MALAYSIA",
+                    "enabled": true,
+                    "footerContentIcon": "",
+                    "footerContentUrl": "http://www.spa.gov.my",
+                    "footerContentCode": 101
+                },
+                {
+                    "footerContentId": 880,
+                    "footerContentName": "MINISTRY OF HUMAN RESOURCES",
+                    "footerContentDescription": "MINISTRY OF HUMAN RESOURCES",
+                    "footerContentImage": "Kementerian-Sumber-Manusia.png",
+                    "enabled": true,
+                    "footerContentIcon": "",
+                    "footerContentUrl": "http://www.mohr.gov.my/index.php/en",
+                    "footerContentCode": 104
+                },
+                {
+                    "footerContentId": 864,
+                    "footerContentName": "PUBLIC COMPLAINTS BUREAU",
+                    "footerContentDescription": "PUBLIC COMPLAINTS BUREAU",
+                    "enabled": true,
+                    "footerContentIcon": "",
+                    "footerContentUrl": "http://www.pcb.gov.my/en",
+                    "footerContentCode": 97
+                },
+                {
+                    "footerContentId": 868,
+                    "footerContentName": "JOBS MALAYSIA",
+                    "footerContentDescription": "JOBS MALAYSIA",
+                    "enabled": true,
+                    "footerContentIcon": "",
+                    "footerContentUrl": "http://www.jobsmalaysia.gov.my/jcs/index.faces",
+                    "footerContentCode": 99
+                },
+                {
+                    "footerContentId": 882,
+                    "footerContentName": "MINISTRY OF EDUCATION MALAYSIA",
+                    "footerContentDescription": "MINISTRY OF EDUCATION MALAYSIA",
+                    "enabled": true,
+                    "footerContentIcon": "",
+                    "footerContentUrl": "http://www.moe.gov.my/index.php/en",
+                    "footerContentCode": 105
+                },
+                {
+                    "footerContentId": 886,
+                    "footerContentName": "MINISTRY OF HEALTH MALAYSIA",
+                    "footerContentDescription": "MINISTRY OF HEALTH MALAYSIA",
+                    "enabled": true,
+                    "footerContentIcon": "",
+                    "footerContentUrl": "http://www.moh.gov.my/english.php",
+                    "footerContentCode": 107
+                },
+                {
+                    "footerContentId": 890,
+                    "footerContentName": "MINISTRY OF HIGHER EDUCATION",
+                    "footerContentDescription": "MINISTRY OF HIGHER EDUCATION",
+                    "enabled": true,
+                    "footerContentIcon": "",
+                    "footerContentUrl": "https://www.mohe.gov.my",
+                    "footerContentCode": 109
+                },
+                {
+                    "footerContentId": 866,
+                    "footerContentName": "MYBAYAR",
+                    "footerContentDescription": "MYBAYAR",
+                    "enabled": true,
+                    "footerContentIcon": "",
+                    "footerContentUrl": "https://mybayar.gov.my/ms/registration/frmlogins.aspx",
+                    "footerContentCode": 98
+                },
+                {
+                    "footerContentId": 870,
+                    "footerContentName": "PUBLIC INFO BANJIR",
+                    "enabled": true,
+                    "footerContentIcon": "",
+                    "footerContentUrl": "http://publicinfobanjir.water.gov.my",
+                    "footerContentCode": 100
+                },
+                {
+                    "footerContentId": 876,
+                    "footerContentName": "ROYAL MALAYSIA POLICE",
+                    "footerContentDescription": "ROYAL MALAYSIA POLICE",
+                    "enabled": true,
+                    "footerContentIcon": "",
+                    "footerContentUrl": "http://www.rmp.gov.my",
+                    "footerContentCode": 102
+                },
+                {
+                    "footerContentId": 884,
+                    "footerContentName": "MINISTRY OF FINANCE MALAYSIA",
+                    "footerContentDescription": "MINISTRY OF FINANCE MALAYSIA",
+                    "enabled": true,
+                    "footerContentIcon": "",
+                    "footerContentUrl": "http://www.treasury.gov.my/index.php/en",
+                    "footerContentCode": 106
+                },
+                {
+                    "footerContentId": 888,
+                    "footerContentName": "MINISTRY OF NATURAL RESOURCES AND ENVIRONMENT",
+                    "footerContentDescription": "MINISTRY OF NATURAL RESOURCES AND ENVIRONMENT",
+                    "enabled": true,
+                    "footerContentIcon": "",
+                    "footerContentUrl": "http://www.nre.gov.my/en-my/Pages/default.aspx",
+                    "footerContentCode": 108
+                },
+                {
+                    "footerContentId": 892,
+                    "footerContentName": "PARLIAMENT OF MALAYSIA",
+                    "footerContentDescription": "PARLIAMENT OF MALAYSIA",
+                    "enabled": true,
+                    "footerContentIcon": "",
+                    "footerContentUrl": "http://www.parlimen.gov.my/index.php/en",
+                    "footerContentCode": 110
+                },
+                {
+                    "footerContentId": 878,
+                    "footerContentName": "MINISTRY OF WOMEN, FAMILY AND COMMUNITY DEVELOPMENT",
+                    "footerContentDescription": "MINISTRY OF WOMEN, FAMILY AND COMMUNITY DEVELOPMENT",
+                    "footerContentImage": "KPWKM.png",
+                    "enabled": true,
+                    "footerContentIcon": "",
+                    "footerContentUrl": "http://www.kpwkm.gov.my",
+                    "footerContentCode": 103
+                }
+            ]
+        },
+        {
+            "title": "SOCIAL LINK",
+            "titleCode": 4,
+            "footerContents": [
+                {
+                    "footerContentId": 812,
+                    "footerContentName": "Facebook Official Portal of MyGovernment",
+                    "footerContentDescription": "Facebook Official Portal of MyGovernment",
+                    "enabled": true,
+                    "footerContentIcon": "facebook",
+                    "footerContentUrl": "https://www.facebook.com/MyGovernment",
+                    "footerContentCode": 74
+                },
+                {
+                    "footerContentId": 824,
+                    "footerContentName": "Twitter Official Portal of MyGovernment",
+                    "footerContentDescription": "Twitter Official Portal of MyGovernment1",
+                    "enabled": true,
+                    "footerContentIcon": "twitter",
+                    "footerContentUrl": "https://twitter.com/myGovPortal",
+                    "footerContentCode": 77
+                },
+                {
+                    "footerContentId": 830,
+                    "footerContentName": "Government Mobile Application Gallery (GAMMA)",
+                    "footerContentDescription": "Government Mobile Application Gallery (GAMMA)",
+                    "enabled": true,
+                    "footerContentIcon": "mobile",
+                    "footerContentUrl": "http://www.mimos.my/",
+                    "footerContentCode": 80
+                },
+                {
+                    "footerContentId": 826,
+                    "footerContentName": "Mobile Web",
+                    "footerContentDescription": "Mobile Web",
+                    "enabled": true,
+                    "footerContentIcon": "qrcode",
+                    "footerContentUrl": "http://www.mimos.my/",
+                    "footerContentCode": 78
+                },
+                {
+                    "footerContentId": 828,
+                    "footerContentName": "RSS Feeds",
+                    "footerContentDescription": "RSS Feeds",
+                    "enabled": true,
+                    "footerContentIcon": "rss",
+                    "footerContentUrl": "http://www.mimos.my/",
+                    "footerContentCode": 79
+                }
+            ]
+        }
+    ]
+}

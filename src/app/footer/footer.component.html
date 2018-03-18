@@ -1,112 +1,138 @@
-<div *ngFor="let data of footer" class="animated fadeIn">
-   <div class="primary col-md-12" *ngIf="data.title=='sociallink'" [style.background]="getTheme()">
-      <div class="" id="social-area">
-         <div class="col-sm-12" style="padding-bottom:10px;padding-top: 10px;text-align: center;" id="social-icons">
-            <div class="footersocial">
-               <span *ngFor="let social_data of data.footer">
-                  <a [routerLink]="[social_data.link]" href="" target="_blank">
-                     <span class="social_icon_bg" title="{{social_data.title}}" data-toggle="tooltip" data-original-title="Tooltip on top">
-                        <span class="icon-social" [style.color]="getTheme()">
-                           <i ngClass= "fa {{social_data.icon}}" style="padding:5px 2px 0px 0px"></i>
-                        </span>
-                     </span>
-                  </a>
-               </span>
-            </div>
-         </div>
+<div class="animated fadeIn" *ngIf="footer.length>0">
+  <!-- *ngFor="let data of footer" -->
+  <div class="primary col-md-12" [style.background]="getTheme()">
+    <!-- *ngIf="data.titleCode ==4"  id="social-area"-->
+    <div class="col-sm-12" style="padding-bottom:10px;padding-top: 10px; text-align: center;" id="social-icons">
+      <div class="footersocial">
+        <span *ngFor="let sdata of dataSocialLnk">
+          <a [href]="sdata.footerContentUrl" target="_blank" style="width:30px;">
+            <span class="social_icon_bg" title="{{sdata.footerContentName}}" data-toggle="tooltip" data-original-title="Tooltip on top">
+              <span class="icon-social" [style.color]="getTheme()">
+                <i ngClass="fa fa-{{sdata.footerContentIcon}}" style="padding:5px 2px 0px 0px"></i>
+              </span>
+            </span>
+          </a>
+        </span>
       </div>
-   </div>
-   <div class="container footer form-group" *ngIf="data.title=='otherlink'">  
-      <div class="footer-left">
-         <div *ngFor="let otherlink of data.items" class="col-md-4 loop1">
-            <button [style.background-color]="getTheme()" class="btn btn-sm footer-toggle fa fa-angle-down pull-right visible-xs" (click)="showFooter(otherlink.sub_title)">
-               <span class="sr-only">{{otherlink.sub_title}}</span>
-            </button>
-            <h4 [style.color]="getTheme()" class="footer-heading font-size-m warna_title_color" style="padding-left: 40px; font-family: Roboto; color: rgb(0, 189, 187);">
-                     {{otherlink.title}}
-               <span [style.border-color]="getTheme()" class="footer-title-underline warna_border_color" style="border-color: rgb(0, 189, 187);"></span>
-            </h4> 
-            <div *ngIf="showcontact && otherlink.sub_title=='contact'" class="address footer" style="margin-top: 0%; margin-left:30px; position:relative;">
-                <div *ngFor="let eachitm of otherlink.footer">
-                    <p class="font-size-s" *ngIf="eachitm.icon" style="font-family: Roboto;">
-                    <span  [style.background-color]="getTheme()" ngClass= "{{eachitm.icon}}" style="background-color: rgb(0, 189, 187);"></span>
-                    </p>
-                    <div [innerHtml]="eachitm.title" class="font-size-s addrloop2" >
-                    </div>
-                </div>
+    </div>
+  </div>
+  <div class="container footer form-group">
+    <!--  *ngIf="data.titleCode==1 || data.titleCode==2 || data.titleCode==3 || data.titleCode==7" -->
+    <div class="footer-left">
+      <div class="col-md-4">
+        <button [style.background-color]="getTheme()" class="btn btn-sm footer-toggle fa fa-angle-down pull-right visible-xs" (click)="showFooter('contact')">
+          <span class="sr-only">{{tltContact.titleCode}}</span>
+        </button>
+        <h4 [style.color]="getTheme()" class="footer-heading font-size-m warna_title_color" style="padding-left: 40px;">
+          {{tltContact.title}}
+          <span [style.border-color]="getTheme()" class="footer-title-underline warna_border_color"></span>
+        </h4>
+        <!--CONTACT US-->
+        <div *ngIf="showcontact" class="address footer" style="margin-top: 0%; position:relative;">
+          <div *ngFor="let eachitm of dataContact">
+            <div *ngIf="eachitm.footerContentIcon" style="margin-left:30px;">
+              <p class="font-size-s">
+                <span [style.background-color]="getTheme()" ngClass="fa fa-{{eachitm.footerContentIcon}}"></span>
+              </p>
+              <div *ngIf="eachitm.enabled" [innerHtml]="eachitm.footerContentName" class="font-size-s">
+              </div>
             </div>
-                  <!--CAPAIAN/ ACCESS PAGE-->
-            <div *ngIf="showaccess && otherlink.sub_title=='access'">
-               <div class="address footer" style="margin-top: 0%;">
-                  <div class="sub-add" >
-                     <ul style="columns: 2; list-style-type: none; padding-left: 3px;">
-                        <li *ngFor="let eachitm of otherlink.footer" class="eachloop2" style="margin-bottom: 7px;">
-                           <a [routerLink]="[eachitm.link]" href="" class="font-size-s" [innerHtml]="eachitm.title"></a>
-                        </li>
-                     </ul>
-                  </div> 
-               </div>
+            <div *ngIf="eachitm.enabled && !eachitm.footerContentIcon" [innerHtml]="eachitm.footerContentName" class="font-size-s">
             </div>
-                  <!--Pautan luar/ External links-->
-            <div class="sub-add" *ngIf="showextlinks && otherlink.sub_title=='extlinks'">
-                <div *ngFor="let eachitm of otherlink.footer" class="each loop2">
-                    <div class="address footer" style="margin-top: 0%;">
-                     <a [routerLink]="[eachitm.link]" href="" target="_blank" class="font-size-s col-xs-3 info-box"
-                        data-toggle="tooltip" title="eachitm.name">
-                        <img src="{{ eachitm.icon }}" alt="eachitm.name" 
-                        style="max-width:100%;">
-                     </a>
-                  </div>
-               </div>
-            </div> 
-                  <!--JUMLAH PELAWAT/ Visitor count-->
-            <div class="address footer" *ngIf="showvisitor && otherlink.sub_title=='visitor'" style="margin-top: 0%;">
-                <div *ngFor="let eachitm of otherlink.footer" class="each loop2">
-                  <div class="col-xs-4" *ngIf="eachitm.today" style="padding:0px 0px 0px 3px;">
-                     <div class="font-size-s">{{eachitm.today}}</div>
-                     <h4 class="font-size-m">{{eachitm.todayval}}</h4>
-                  </div>
-                  <div class="col-xs-4" *ngIf="eachitm.month" style="padding:0px 0px 0px 3px;">
-                     <div class="font-size-s">{{eachitm.month}}</div>
-                     <h4 class="font-size-m">{{eachitm.monthval}}</h4>
-                  </div>
-                  <div class="col-xs-4" *ngIf="eachitm.total" style="padding:0px 0px 0px 3px;">
-                     <div class="font-size-s">{{eachitm.total}}</div>
-                     <h4 class="font-size-m">{{eachitm.totalval}}</h4>
-                  </div>                        
-               </div>
-            </div>               
-         </div>
+          </div>
+        </div>
       </div>
-   </div>
-   <div class="copyright" *ngIf="data.title=='bottom' || data.title=='bottomlinks'">
-         <div class="container">      
-            <div class="padding-m" *ngIf="data.title=='bottom'">
-               <div *ngFor="let eachitm of data.items" class="each loop2">
-                  <div  class="col-md-4">
-                     <p class="font-size-s" style="margin-top: 4%; font-family: Roboto;">
-                        {{eachitm.copyright}}
-                     </p>
-                  </div>
-                  <div class="col-md-8 text-right hidden-xs">
-                     <p class="font-size-s" style="font-family: Roboto;">
-                           {{eachitm.update}} {{eachitm.update_date}}
-                     </p>
-                     <p class="font-size-s" style="margin-top: -10px; font-family: Roboto;">
-                        {{eachitm.note}}
-                     </p>                   
-                  </div>
-               </div>
-            </div>     
-            <div *ngIf="data.title=='bottomlinks'" class="col-md-12 text-right hidden-xs loop1.1">
-               <ul class="list-inline hidden-xs font-size-s" style="font-family: Roboto;">
-                  <li  *ngFor="let btmlink of data.items; let last = last">
-                     <a [routerLink]="[btmlink.link]" href="">
-                        {{btmlink.name}} <span *ngIf="!last">|</span>
-                     </a>
-                  </li>
-               </ul>
+
+      <div class="col-md-4">
+        <button [style.background-color]="getTheme()" class="btn btn-sm footer-toggle fa fa-angle-down pull-right visible-xs" (click)="showFooter('access')">
+          <span class="sr-only">{{tltAccessPage.titleCode}}</span>
+        </button>
+        <h4 [style.color]="getTheme()" class="footer-heading font-size-m warna_title_color" style="padding-left: 40px;">
+          {{tltAccessPage.title}}
+          <span [style.border-color]="getTheme()" class="footer-title-underline warna_border_color"></span>
+        </h4>
+        <!--CAPAIAN/ ACCESS PAGE-->
+        <div *ngIf="showaccess">
+          <div class="address footer" style="margin-top: 0%;">
+            <div class="sub-add">
+              <ul class="hoverlnk" style="columns: 2; list-style-type: none; padding-left: 3px;">
+                <li *ngFor="let eachitm of dataAccessPage"  style="margin-bottom: 7px;">
+                  <a *ngIf="eachitm.enabled" [routerLink]="[eachitm.footerContentUrl]" href="" class="font-size-s" [innerHtml]="eachitm.footerContentName"></a>
+                </li>
+              </ul>
             </div>
-         </div>
-   </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <button [style.background-color]="getTheme()" class="btn btn-sm footer-toggle fa fa-angle-down pull-right visible-xs" (click)="showFooter('visitor')">
+          <span class="sr-only">{{tltNoOfVisitor.titleCode}}</span>
+        </button>
+        <h4 [style.color]="getTheme()" class="footer-heading font-size-m warna_title_color" style="padding-left: 40px;">
+          {{tltNoOfVisitor.title}}
+          <span [style.border-color]="getTheme()" class="footer-title-underline warna_border_color"></span>
+        </h4>
+        <!--JUMLAH PELAWAT/ Visitor count-->
+        <div class="address footer" *ngIf="showvisitor" style="margin-top: 0%;">
+          <div *ngFor="let eachitm of dataNoOfVisitor">
+            <div class="col-xs-4" style="padding:0px 0px 0px 3px;">
+              <div class="font-size-s">{{eachitm.footerContentName}}</div>
+              <h4 class="font-size-m">{{eachitm.footerSubContentValue}}</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <button [style.background-color]="getTheme()" class="btn btn-sm footer-toggle fa fa-angle-down pull-right visible-xs" (click)="showFooter('extlinks')">
+          <span class="sr-only">{{tltExtLnk.titleCode}}</span>
+        </button>
+        <h4 [style.color]="getTheme()" class="footer-heading font-size-m warna_title_color" style="padding-left: 40px;">
+          {{tltExtLnk.title}}
+          <span [style.border-color]="getTheme()" class="footer-title-underline warna_border_color"></span>
+        </h4>
+        <!--Pautan luar/ External links-->
+        <div class="sub-add" *ngIf="showextlinks">
+          <div *ngFor="let eachitm of dataExtLnk">
+            <!-- <h1>{{eachitm.footerContentName}}</h1>  [routerLink]="[eachitm.footerContentUrl]" -->
+            <div class="address footer hoverlnk" style="margin-top: 0%;">
+              <a [href]="eachitm.footerContentUrl" (mouseover)="changeStyle($event)" target="_blank" class="font-size-s col-xs-3 info-box" data-toggle="tooltip" [title]="eachitm.footerContentName">
+                <img [src]="config.externalMediaURL + '/images/' + eachitm.footerContentImage" [alt]="eachitm.footerContentName" style="max-width:100%;">
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="copyright">
+    <div class="container">
+      <div class="padding-m">
+          <div class="col-md-4">
+            <p class="font-size-s" style="margin-top: 4%;">
+              {{copyright.footerContentName}}
+            </p>
+          </div>
+          <div class="col-md-8 text-right hidden-xs">
+            <p class="font-size-s">
+              {{dateOfUpdate.footerContentDescription}}
+            </p>
+            <p class="font-size-s" style="margin-top: -10px;">
+              {{copyright.footerContentDescription}}
+            </p>
+          </div>
+      </div>
+      <div class="col-md-12 text-right hidden-xs">
+        <ul class="list-inline hidden-xs font-size-s">
+          <li *ngFor="let btmlink of dataBottomLnk; let last = last">
+            <a [routerLink]="[btmlink.footerContentUrl]" href="">
+              {{btmlink.footerContentName}}
+              <span *ngIf="!last">|</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>

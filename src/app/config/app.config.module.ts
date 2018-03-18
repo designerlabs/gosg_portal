@@ -67,14 +67,15 @@ export class AppConfig {
     urlFont: string;
     urlCompleteEmail:string;
     urlCompletePhone:string;
+    externalMediaURL: string;
 }
 
 export const APP_DI_CONFIG: AppConfig = {
     apiEndpoint: '',
     urlMenu: './app/apidata/menudata',
     urlSlider: baseURL+'slider',
-    urlFooter: './app/apidata/footer',
-    // urlFooter: commonURL + 'footer',
+    // urlFooter: './app/apidata/footer',
+    urlFooter: commonURL + 'footer',
     urlArticle: './app/apidata/topic',
     urlCountry: commonURL+'country/all',
     urlState: commonURL+'state',
@@ -117,7 +118,8 @@ export const APP_DI_CONFIG: AppConfig = {
     urlUapStaging: 'https://uapstaging.malaysia.gov.my/uap/validatesigncryption.jsp?language=',
     urlUapStagingProfile: 'https://uapstaging.malaysia.gov.my/myprofile/update/updatechannel.jsp?tag=',
     urlPoll: commonURL + 'polls',
-    urlPollProtected: protectedBaseURL + 'polls'
+    urlPollProtected: protectedBaseURL + 'polls',
+    externalMediaURL: "http://10.1.71.168/media",
 
 };
 
