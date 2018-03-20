@@ -118,6 +118,7 @@ import { AnnouncementdetailsComponent } from '../announcementdetails/announcemen
 import { AnnouncementlistComponent } from '../announcementlist/announcementlist.component';
 // import { Nav } from '../header/nav/nav.router.guard.service';
 import { NavRouterGuardService } from '../header/nav/nav-router-guard.service';
+import { OnlineserviceComponent } from '../onlineservice/onlineservice.component';
 export function HttpLoaderFactory(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -188,7 +189,8 @@ export function HttpLoaderFactory(http: Http) {
     ConfirmComponent,
     SharedPipe,
     ConfirmDialogComponent,
-    SidenavmainComponent
+    SidenavmainComponent,
+    OnlineserviceComponent
   ],
 
   exports: [
