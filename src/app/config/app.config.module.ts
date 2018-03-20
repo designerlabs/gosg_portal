@@ -69,12 +69,16 @@ export class AppConfig {
     urlCompleteEmail:string;
     urlCompletePhone:string;
     externalMediaURL: string;
+    urlPortal:string;
+    urlProtected: string;
 }
 
 export const APP_DI_CONFIG: AppConfig = {
     apiEndpoint: '',
+    urlPortal: commonURL,
+    urlProtected: protectedBaseURL,
     urlMenu: './app/apidata/menudata',
-    urlSlider: baseURL+'slider',
+    urlSlider: commonURL+'slider',
     // urlFooter: './app/apidata/footer',
     urlFooter: commonURL + 'footer',
     urlArticle: './app/apidata/topic',

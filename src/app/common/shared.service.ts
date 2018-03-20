@@ -14,7 +14,36 @@ import 'rxjs/add/observable/throw';
 
 export class SharedService {
 
-  constructor(private http: Http, @Inject(APP_CONFIG) private config: AppConfig,  private translate: TranslateService, private toastr: ToastrService) { }
+  constructor(
+    private http: Http, 
+    @Inject(APP_CONFIG) private config: AppConfig,  
+    private translate: TranslateService, 
+    private toastr: ToastrService) {
+          /* LANGUAGE FUNC */
+    translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      translate.get('HOME').subscribe((res: any) => {
+        this.readPortal('language/all').subscribe((data:any) => {
+          let getLang = data.list;
+          let myLangData =  getLang.filter(function(val) {
+            if(val.languageCode == translate.currentLang){
+              this.lang = val.languageCode;
+              this.languageId = val.languageId;
+            }
+          }.bind(this));
+        })
+      });
+    });
+    if(!this.languageId){
+      if(localStorage.getItem('langID')){
+        this.languageId = localStorage.getItem('langID');
+      }else{
+        this.languageId = 1;
+      }
+      
+    }
+
+    /* LANGUAGE FUNC */
+     }
   lang = this.lang;
   languageId = this.languageId;
   private countryUrl: string = this.config.urlCountry;
@@ -55,14 +84,93 @@ export class SharedService {
       .catch(this.handleError);
   }
   
-  // errorHandling(err, callback){
-  //   let statusCode = err.statusCode.toLowerCase();
-  //   if(statusCode == 'error'){
-  //     this.toastr.error(err.statusDesc, 'Error');
-  //   }else{
-  //     callback()
-  //   }
-  // }
+ 
+   // NEW
+  
+   readPortal(moduleName, page?, size?, keyword?): Observable<any[]> {
+    let readUrl;
+    
+    if(!keyword && page) {
+      console.log(1);
+      readUrl = this.config.urlPortal + moduleName + '?page=' + page + '&size=' + size  + '&language='+this.languageId;
+    } else if(keyword) {
+      console.log(2);
+      readUrl = this.config.urlPortal + moduleName + '?keyword='+keyword+'&page=' + page + '&size=' + size  + '&language='+this.languageId;
+    } else {
+      console.log(3);
+      readUrl = this.config.urlPortal + moduleName + '?language='+this.languageId;
+    }
+    console.log(readUrl)
+
+    return this.http.get(readUrl)
+      .map((response: Response) => response.json())
+      .retry(5)
+      .catch(this.handleError);
+  }
+  
+  readProtected(moduleName, page?, size?, keyword?): Observable<any[]> {
+    let readUrl;
+    
+    if(!keyword && page) {
+      readUrl = this.config.urlProtected + moduleName + '?page=' + page + '&size=' + size  + '&language='+this.languageId;
+    } else if(keyword) {
+      readUrl = this.config.urlProtected + moduleName + '?keyword='+keyword+'&page=' + page + '&size=' + size  + '&language='+this.languageId;
+    } else {
+      readUrl = this.config.urlProtected + moduleName + '?language='+this.languageId;
+    }
+
+    console.log(readUrl)
+
+    return this.http.get(readUrl)
+      .map((response: Response) => response.json())
+      .retry(5)
+      .catch(this.handleError);
+  }
+  
+  readPortalById(moduleName, id): Observable<any[]> {
+    let readUrl = this.config.urlPortal + moduleName + id + '?language='+this.languageId;
+    console.log(readUrl)
+    return this.http.get(readUrl)
+      .map((response: Response) => response.json())
+      .retry(5)
+      .catch(this.handleError);
+  }
+  
+  readProtectedById(moduleName, id): Observable<any[]> {
+    let readUrl = this.config.urlProtected + moduleName + id + '?language='+this.languageId;
+    return this.http.get(readUrl)
+      .map((response: Response) => response.json())
+      .retry(5)
+      .catch(this.handleError);
+  }
+    
+  create(data, moduleName) {
+    let createUrl = this.config.urlProtected   + moduleName + '?language='+this.languageId;
+  
+    return this.http.post(createUrl, data)
+    .map((response: Response) => response.json())
+    .catch(this.handleError);
+  }
+
+  update(data,moduleName) {
+    let updateUrl = this.config.urlProtected  + moduleName +'?language='+this.languageId;
+
+    return this.http.put(updateUrl, data)
+    .map((response: Response) => response.json())
+    .catch(this.handleError);
+  }
+
+  delete(id,moduleName) {
+    let deleteUrl = this.config.urlProtected  + moduleName + id+ '?language='+this.languageId;
+    console.log(deleteUrl)
+
+    return this.http.delete(deleteUrl, null)
+    .map((response: Response) => response.json())
+    .catch(this.handleError);
+  }
+
+  // END NEW
+
 
   errorHandling(err, callback){
     if(err.statusCode){

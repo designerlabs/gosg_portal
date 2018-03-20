@@ -73,12 +73,9 @@ export class SliderComponent implements OnInit {
 
     private sliderUrl: string = this.config.urlSlider;
     getSlide(lang: string) {
-      return this.http.get('http://10.1.70.148:8080/service/slider/?language=1')
-      // return this.http.get(this.sliderUrl + '-' + lang)
-           .map(res => res.json())
+      this.sharedservice.readPortal('slider')
           .subscribe(resSliderData => {
-                this.slides = resSliderData.sliderList;
-                debugger;
+                this.slides = resSliderData['sliderList'];
             });
     }
 
