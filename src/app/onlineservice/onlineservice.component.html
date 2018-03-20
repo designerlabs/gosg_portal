@@ -1,3 +1,79 @@
-<p>
-  onlineservice works!
-</p>
+<div class="container-fluid animated slideInDown" style="background: #a7a495;">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 style="margin-top: 10px;" class="font-size-l">{{'home.breadcrumb.onlineservice' | translate}}</h1>
+        <hr class="hr-custom2">
+        <ul class="list-inline" style="clear:both;">
+          <li>
+            <a class="font-size-s" href="/index/">
+              {{'home.menu.home' | translate }}
+            </a>
+          </li>
+          <li>/</li>
+          <li>
+            {{'home.breadcrumb.onlineservice' | translate}}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container formbg">
+  <div class="col-md-12">&nbsp;</div>
+  <div class="row">
+    <div class="col-md-4">
+      <label for="selbyagency" class="font-size-l"> Application based on Agency </label>
+      <mat-select id="selbyagency" tabindex="1" placeholder="By Agency" (change)="selByAgency($event)" [(ngModel)]="valByAgency">
+        <mat-option value="0"> Select All </mat-option>
+        <mat-option *ngFor="let data of listAgency" [value]="data.list[0]?.agencyId">{{ data.list[0]?.agencyName }}</mat-option>
+      </mat-select>
+    </div>
+    <div class="col-md-4">
+      <label for="selbyalpha" class="font-size-l"> Agency based on A-Z </label>
+      <mat-select id="selbyalpha" tabindex="1" (change)="selByAlpha($event)" [(ngModel)]="valByAlpha">
+        <mat-option value="0"> Select All </mat-option>
+      </mat-select>
+    </div>
+  </div>
+
+  <div class="row">
+    <table style="width: 100%; margin-top: 25px; margin-left: 10px;">
+      <tr class="font-size-m" style="padding:0px 24px">
+        <td style="width:2%;">No</td>
+        <td style="width:80%;">Agency Application Name</td>        
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr *ngFor="let element of datatblAgency; let i = index;" class="font-size-m" style="padding:0px 24px">
+        <td style="width:3%;">{{(seqPageNum == 1) ? (i + 1) : ((seqPageNum * seqPageSize) - seqPageSize) + (i + 1) }}</td>
+        <td style="width:80%;"> 
+          <a class="appUrl" [href]="element.agencyApplicationUrl" target="_blank"> {{element.agencyApplicationName}} </a>
+        </td>
+      </tr>
+    </table>
+
+    <div *ngIf="showNoData" class="row text-align-Center padding-20"> No Data Found </div>
+  </div>
+  <div class="float-right paddingTop-15">
+    <mat-form-field class="table_footer_pagecount">
+      <mat-select class="font-size-s text-align-Center" [(ngModel)]="sharedService.defaultPageSize" (change)="pageChange($event, dataPage?.totalPages)">
+        <mat-option *ngFor="let pgcount of sharedService.pageSize" [value]="pgcount.size">{{pgcount.size}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <span class="float-right">
+      <span class="table_footer_pagination">{{ 'common.pagination.pages' | translate }}
+        <strong>{{dataPage?.pageNumber}}</strong> {{ 'common.pagination.of' | translate }}
+        <strong>{{dataPage?.totalPages}}</strong> {{ 'common.pagination.in' | translate }}
+        <strong>{{dataPage?.totalElements}}</strong> Application</span>
+      <button mat-mini-fab color="basic" [disabled]="noPrevData" (click)="paginatorL(dataPage?.pageNumber)">
+        <i [ngClass]="sharedService.icon.arrLeft" aria-hidden="true"></i>
+      </button>
+      <button mat-mini-fab color="basic" [disabled]="noNextData" (click)="paginatorR(dataPage?.pageNumber, dataPage?.totalPages)">
+        <i [ngClass]="sharedService.icon.arrRight" aria-hidden="true"></i>
+      </button>
+    </span>
+  </div>
+</div>

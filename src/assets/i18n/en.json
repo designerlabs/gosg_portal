@@ -29,7 +29,8 @@
       "profile": "My Profile",
       "dashboard": "Dashboard",
       "appmgmt": "Application Management",
-      "mailbox": "Mail Box"
+      "mailbox": "Mail Box",
+      "onlineservice": "Online Services"
     },
     "expandButton": {
       "less": "Show Less",

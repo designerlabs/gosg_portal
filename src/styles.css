@@ -376,3 +376,20 @@ table a:not(.btn), .table a:not(.btn) {
     color: #fff;
     text-decoration: none;
 }
+.paddingTop-15 {
+  padding-top: 15px;
+}
+.float-right{
+  float: right;
+}
+.padding-20 {
+  padding:  20px !important;
+}
+
+a.appUrl{
+  color: #000 !important;
+}
+a.appUrl:hover, a.appUrl:focus {
+  text-decoration: none;
+  color: #00bdbb;
+}
