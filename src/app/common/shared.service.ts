@@ -107,7 +107,6 @@ export class SharedService {
   
    readPortal(moduleName, page?, size?, keyword?): Observable<any[]> {
     let readUrl;
-    
     if(!keyword && page) {
       console.log(1);
       readUrl = this.config.urlPortal + moduleName + '?page=' + page + '&size=' + size  + '&language='+this.languageId;

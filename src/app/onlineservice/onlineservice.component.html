@@ -1,5 +1,6 @@
 <div class="container-fluid animated slideInDown" style="background: #a7a495;">
   <div class="container">
+    <!-- <ngx-loading [show]="loading" [config]="{ fullScreenBackdrop: true }"></ngx-loading> -->
     <div class="row">
       <div class="col-md-12">
         <h1 style="margin-top: 10px;" class="font-size-l">{{'home.breadcrumb.onlineservice' | translate}}</h1>
@@ -21,35 +22,50 @@
 </div>
 <div class="container formbg">
   <div class="col-md-12">&nbsp;</div>
-  <div class="row">
-    <div class="col-md-4">
-      <label for="selbyagency" class="font-size-l"> Application based on Agency </label>
-      <mat-select id="selbyagency" tabindex="1" placeholder="By Agency" (change)="selByAgency($event)" [(ngModel)]="valByAgency">
-        <mat-option value="0"> Select All </mat-option>
-        <mat-option *ngFor="let data of listAgency" [value]="data.list[0]?.agencyId">{{ data.list[0]?.agencyName }}</mat-option>
-      </mat-select>
-    </div>
-    <div class="col-md-4">
-      <label for="selbyalpha" class="font-size-l"> Agency based on A-Z </label>
-      <mat-select id="selbyalpha" tabindex="1" (change)="selByAlpha($event)" [(ngModel)]="valByAlpha">
-        <mat-option value="0"> Select All </mat-option>
-      </mat-select>
-    </div>
+  <div class="row">    
+    <div class="form-group col-md-4">
+        <mat-form-field class="example-full-width font-size-m" style="width: 100%;">
+          <mat-select id="selbyagency" tabindex="1" placeholder="Application based on Agency" (change)="selByAgency($event)" [(ngModel)]="valByAgency">
+            <mat-option value="0"> Select All </mat-option>
+            <mat-option *ngFor="let data of listAgency" [value]="data.list[0]?.agencyId">{{ data.list[0]?.agencyName }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    <div class="form-group col-md-4">
+      <mat-form-field class="example-full-width font-size-m" style="width: 100%;">
+         
+        <mat-select id="selbyalpha" tabindex="2" placeholder="Agency based on A-Z" (change)="selByAlpha($event)" [(ngModel)]="valByAlpha">
+          <mat-option value="0"> Select All </mat-option>
+          <mat-option *ngFor="let data of dataAlpha" [value]="data">{{ data }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>    
   </div>
-
+  <div class="row" style="padding-top:20px;">
+    <div class="col-md-2">     
+        <mat-checkbox class="example-margin" id="rdoOnline" (change)="chkDocument(1)" [(ngModel)]="chkOnline"><span class="font-size-m">Online Service</span></mat-checkbox>
+      </div>
+      <div class="col-md-2">        
+      <mat-checkbox class="example-margin font-size-m" id="rdoDown" (change)="chkDocument(2)" [(ngModel)]="chkDownload"><span class="font-size-m">Download</span></mat-checkbox>
+      </div>
+      <div class="col-md-2">
+          <button mat-raised-button color="warn" type="button" id="btnreset" class="btn btn-md btn-warning pull-right font-size-s" (click)="reset()">
+              <i [ngClass]="sharedService.icon.refresh"></i>&nbsp; Reset</button>
+      </div>
+  </div>
   <div class="row">
-    <table style="width: 100%; margin-top: 25px; margin-left: 10px;">
+    <table *ngIf="!showNoData" style="width: 100%; margin-top: 25px; margin-left: 10px;">
       <tr class="font-size-m" style="padding:0px 24px">
         <td style="width:2%;">No</td>
-        <td style="width:80%;">Agency Application Name</td>        
+        <td style="width:80%;">Agency Application Name</td>
       </tr>
       <tr>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
       </tr>
-      <tr *ngFor="let element of datatblAgency; let i = index;" class="font-size-m" style="padding:0px 24px">
-        <td style="width:3%;">{{(seqPageNum == 1) ? (i + 1) : ((seqPageNum * seqPageSize) - seqPageSize) + (i + 1) }}</td>
-        <td style="width:80%;"> 
+      <tr *ngFor="let element of datatblAgency; let i = index;" class="font-size-m" style="min-height: 50px !important;">
+        <td style="width:3%; text-align: center; padding: 12px 0px;">{{(seqPageNum == 1) ? (i + 1) : ((seqPageNum * seqPageSize) - seqPageSize) + (i + 1) }}</td>
+        <td style="width:80%;" class="hoverlnk">
           <a class="appUrl" [href]="element.agencyApplicationUrl" target="_blank"> {{element.agencyApplicationName}} </a>
         </td>
       </tr>
@@ -58,7 +74,7 @@
     <div *ngIf="showNoData" class="row text-align-Center padding-20"> No Data Found </div>
   </div>
   <div class="float-right paddingTop-15">
-    <mat-form-field class="table_footer_pagecount">
+    <mat-form-field class="table_footer_pagecount" style="display: inline-block; position: relative; text-align: left;">
       <mat-select class="font-size-s text-align-Center" [(ngModel)]="sharedService.defaultPageSize" (change)="pageChange($event, dataPage?.totalPages)">
         <mat-option *ngFor="let pgcount of sharedService.pageSize" [value]="pgcount.size">{{pgcount.size}}</mat-option>
       </mat-select>

@@ -30,7 +30,8 @@
       "dashboard": "Dashboard",
       "appmgmt": "Pengurusan Permohonan",
       "mailbox": "Peti Pesanan",
-      "onlineservice": "Perkhidmatan Dalam Talian"
+      "onlineservice": "Perkhidmatan Dalam Talian",
+      "subscription": "Langganan"
     },
     "expandButton": {
       "less": "Lihat Ringkasan",

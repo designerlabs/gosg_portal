@@ -72,6 +72,7 @@ export class AppConfig {
     externalMediaURL: string;
     urlPortal:string;
     urlProtected: string;
+    urlSubscription: string;
 }
 
 export const APP_DI_CONFIG: AppConfig = {
@@ -127,6 +128,7 @@ export const APP_DI_CONFIG: AppConfig = {
     urlPoll: commonURL + 'polls',
     urlPollProtected: protectedBaseURL + 'polls',
     externalMediaURL: mediaURL+"media",
+    urlSubscription: registrationUrl + 'subscription',
 
 };
 

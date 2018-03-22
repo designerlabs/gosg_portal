@@ -410,3 +410,10 @@ a.appUrl:hover, a.appUrl:focus {
   color: #333;
 } */
 
+.text-align-Center {
+  text-align: center !important;
+}
+    
+.padding-20 {
+  padding:  20px !important;
+}
