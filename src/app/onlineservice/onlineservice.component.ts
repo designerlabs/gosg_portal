@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { FormControl, FormGroup, Validators, FormBuilder  } from '@angular/forms';
 import { SharedService } from '../common/shared.service';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
@@ -7,6 +8,7 @@ import { MatPaginator, MatSort } from '@angular/material';
 import { MatTableModule } from '@angular/material/table';
 import { ToastrService } from "ngx-toastr";
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
+import {MatRadioModule} from '@angular/material/radio';
 
 @Component({
   selector: 'gosg-onlineservice',
@@ -25,12 +27,17 @@ export class OnlineserviceComponent implements OnInit {
   seqNo = 0;
   seqPageNum = 0;
   seqPageSize = 0;
-
+  showNoData = false;
   listAgency = [];
   datatblAgency = [];
-  dataPage = [];
+  dataAlpha = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+  dataPage = null;
   inxlan = 0;
   public loading = false;
+  chkOnline = false;
+  chkDownload = false;
+  valByAlpha = "0";
+  valByAgency= "0";
 
   constructor(
     private router: Router,
@@ -68,12 +75,9 @@ export class OnlineserviceComponent implements OnInit {
   ngOnInit() {
     this.getAgencyList();
     this.selAllAgency(this.pageCount,this.pageSize);
-  }
-
-  
+  }  
   
   getAgencyList(){
-    debugger;
     return this.sharedService.readPortal('agency')
       .subscribe(rData => {
         this.listAgency = rData['list'];
@@ -85,26 +89,109 @@ export class OnlineserviceComponent implements OnInit {
 
   selByAgency(eve){
     console.log(eve.value);
+    if(eve.value !=="0"){   
+      this.loading = true;
     return this.sharedService.readPortal('agency/application/agencyid/os/' + eve.value, this.pageCount, this.pageSize)
       .subscribe(rData => {
+        this.sharedService.errorHandling(rData, (function(){
         this.dataPage = rData;
-        this.datatblAgency = rData['agencyApplicationList'];
+        if(rData['agencyApplicationList'].length > 0){
+          this.seqPageNum = this.dataPage.pageNumber;
+          this.seqPageSize = this.dataPage.pageSize;
+          this.noNextData = this.dataPage.pageNumber === this.dataPage.totalPages;
+          this.datatblAgency = rData['agencyApplicationList'];
+          this.showNoData = false;
+        }else {
+          this.showNoData = true;
+          this.seqPageNum = this.dataPage.pageNumber;
+          this.seqPageSize = this.dataPage.pageSize;
+          this.noNextData = this.dataPage.pageNumber === this.dataPage.totalPages;
+        }
+      }).bind(this));     
+      this.loading = false;
       },
-      Error => {
+      error => {
+        this.loading = false;
+       this.toastr.error(this.translate.instant('common.err.servicedown'), '');            
+     });
+    }else {
+      this.selAllAgency(this.pageCount,this.pageSize);
+    }
+  }
+
+  selByAlpha(eve){
+    console.log(eve.value);
+    if(eve.value !=="0") {   
+      this.loading = true;
+    return this.sharedService.readPortal('agency/application/search/letter/' + eve.value, this.pageCount, this.pageSize)
+      .subscribe(rData => {
+        this.sharedService.errorHandling(rData, (function(){
+        this.dataPage = rData;
+        if(rData['agencyApplicationList'].length > 0){
+          this.seqPageNum = this.dataPage.pageNumber;
+          this.seqPageSize = this.dataPage.pageSize;
+          this.noNextData = this.dataPage.pageNumber === this.dataPage.totalPages;
+          this.datatblAgency = rData['agencyApplicationList'];
+          this.showNoData = false;
+        }else {
+          this.showNoData = true;
+          this.seqPageNum = this.dataPage.pageNumber;
+          this.seqPageSize = this.dataPage.pageSize;
+          this.noNextData = this.dataPage.pageNumber === this.dataPage.totalPages;
+        }
+      }).bind(this));     
+      this.loading = false;
+      },
+      error => {
+        this.loading = false;
+       this.toastr.error(this.translate.instant('common.err.servicedown'), '');            
+     });
+    }else {
+      this.selAllAgency(this.pageCount,this.pageSize);
+    }
+  }
+
+  selAllAgency(page, pagesize){
+    this.loading = true;
+    return this.sharedService.readPortal('agency/application/all/agencyapp/os', page, pagesize)
+      .subscribe(rData => {
+        this.sharedService.errorHandling(rData, (function(){
+        this.dataPage = rData;
+        if(rData['agencyApplicationList'].length > 0){
+          this.seqPageNum = this.dataPage.pageNumber;
+          this.seqPageSize = this.dataPage.pageSize;
+          this.noNextData = this.dataPage.pageNumber === this.dataPage.totalPages;
+          this.datatblAgency = rData['agencyApplicationList'];
+          this.showNoData = false;
+        }else {
+          this.showNoData = true;
+          this.seqPageNum = this.dataPage.pageNumber;
+          this.seqPageSize = this.dataPage.pageSize;
+          this.noNextData = this.dataPage.pageNumber === this.dataPage.totalPages;
+        }
+      }).bind(this));     
+      this.loading = false;
+      },
+      error => {
        this.toastr.error(this.translate.instant('common.err.servicedown'), '');            
      });
   }
 
-  selAllAgency(page, pagesize){
-    debugger;
-    return this.sharedService.readPortal('agency/application/all/agencyapp/os', this.pageCount, this.pageSize)
-      .subscribe(rData => {
-        this.dataPage = rData;
-        this.datatblAgency = rData['agencyApplicationList'];
-      },
-      Error => {
-       this.toastr.error(this.translate.instant('common.err.servicedown'), '');            
-     });
+  reset() {
+    this.chkDownload = false;
+    this.chkOnline = false;
+    this.valByAlpha = "0";
+    this.valByAgency= "0";
+    this.pageCount = 1;
+    this.pageSize = 10;
+    this.selAllAgency(this.pageCount,this.pageSize);
+  }
+  chkDocument(val){
+    if(val === 1){ // isDocument = false
+      this.chkDownload = false;
+    }else if(val === 2){ // isDocument = true
+      this.chkOnline = false;
+    }
   }
 
   paginatorL(page) {    

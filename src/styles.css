@@ -393,3 +393,10 @@ a.appUrl:hover, a.appUrl:focus {
   text-decoration: none;
   color: #00bdbb;
 }
+.text-align-Center {
+  text-align: center !important;
+}
+    
+.padding-20 {
+  padding:  20px !important;
+}
