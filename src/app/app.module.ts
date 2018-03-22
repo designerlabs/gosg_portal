@@ -24,7 +24,7 @@ import { TextMaskModule, conformToMask } from 'angular2-text-mask';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { ConfirmComponent } from './message/confirm.component';
 import { EventCalendarComponent } from './eventcalendar/eventcalendar.component';
-import { FullCalendarModule } from 'ng-fullcalendar';
+// import { FullCalendarModule } from 'ng-fullcalendar';
 import { DatePipe } from '@angular/common';
 
 // import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule } from "@angular/material";
@@ -38,7 +38,7 @@ imports: [
     SharedModule,
     BrowserModule,
     FormsModule,
-    FullCalendarModule,
+    // FullCalendarModule,
     TextMaskModule,
     HttpModule,
     HttpClientModule,
