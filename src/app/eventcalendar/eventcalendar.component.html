@@ -20,22 +20,25 @@
     </div>
 </div>
 <div class="container">
-  <div *ngIf="isOpen" class="overlay"></div>
+  <div class="overlay"></div>
   <div class="col-md-12">&nbsp;</div>
   <div class="col-md-12">
-  <div *ngIf="calendarOptions">
+      <div id="calendar"></div>
+    <!-- <div *ngIf="calendarOptions">
       <ng-fullcalendar #ucCalendar [options]="calendarOptions" (eventClick)="eventClick($event.detail)" (eventDrop)="updateEvent($event.detail)"
           (eventResize)="updateEvent($event.detail)" (clickButton)="clickButton($event.detail)"></ng-fullcalendar>
-    </div>
-    <div [ngClass]="{ 'details-show':isOpen,'details-hide':!isOpen }">
-      <div class="details-content">
+    </div> -->
+    <!-- <div [ngClass]="{ 'details-show':isOpen,'details-hide':!isOpen }"> -->
+    <div id="details">
+    <!-- <div class="details-show"> -->
+        <div class="details-content absolute-center">
         <a class="boxclose" (click)="closePopup()"></a>
-        <h4>Event Details:</h4>
-        <label>Event Name:</label> <p>{{ displayEvent?.event?.title }}</p>
-        <label>Location:</label> <p> {{ displayEvent?.event?.location }}</p>
-        <label>Start:</label> <p> {{ displayEvent?.event?.start | date:'dd/MM/yyyy' }} {{ displayEvent?.event?.sTime }}</p>
-        <label>End:</label> <p> {{ displayEvent?.event?.end | date:'dd/MM/yyyy' }} {{ displayEvent?.event?.eTime }}</p>
-        <label>Description:</label> <p>{{ displayEvent?.event?.desc }}</p>
+        <h4>Event Details</h4>
+        <label>Event Name</label> <p id="title"></p>
+        <label>Location</label> <p id="loc"></p>
+        <label>Start</label> <p id="start"></p>
+        <label>End</label> <p id="end"></p>
+        <label>Description</label> <p id="desc"></p>
       </div>
     </div>
   </div>
