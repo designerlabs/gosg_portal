@@ -66,6 +66,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsModalService } from 'ngx-bootstrap/modal';
+import { EventCalendarComponent } from '../eventcalendar/eventcalendar.component';
+// import { FullCalendarModule } from 'ng-fullcalendar';
+import { DatePipe } from '@angular/common';
 
 import { SidenavmainComponent } from "../sidenavmain/sidenavmain.component";
 import {
@@ -192,6 +195,7 @@ export function HttpLoaderFactory(http: Http) {
     ConfirmDialogComponent,
     SidenavmainComponent,
     OnlineserviceComponent,
+    EventCalendarComponent
     // SubscriptionComponent
   ],
 
@@ -282,10 +286,11 @@ export function HttpLoaderFactory(http: Http) {
      MatNativeDateModule,
      MatSortModule,
      MatPaginatorModule,
-     SharedPipe
+     SharedPipe,
+     EventCalendarComponent
     
   ],
 
-  providers: [SliderService, BsModalService, TopnavService, SharedService, ValidateService, BreadcrumbService, PortalService, AuthService, ArticleService, NavRouterActivator, NavService, AnnouncementlistService, TransService, DialogsService, SearchService, NavRouterGuardService]
+  providers: [SliderService, BsModalService, TopnavService, SharedService, DatePipe, ValidateService, BreadcrumbService, PortalService, AuthService, ArticleService, NavRouterActivator, NavService, AnnouncementlistService, TransService, DialogsService, SearchService, NavRouterGuardService]
 })
 export class SharedModule { }

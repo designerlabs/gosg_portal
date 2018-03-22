@@ -31,6 +31,7 @@ import { FirsttimeloginComponent } from './firsttimelogin/firsttimelogin.compone
 import { AnnouncementComponent } from './announcement/announcement.component';
 import { AnnouncementlistComponent } from './announcementlist/announcementlist.component';
 import { AnnouncementdetailsComponent } from './announcementdetails/announcementdetails.component';
+import { EventCalendarComponent } from './eventcalendar/eventcalendar.component';
 // 
 // import { NavRouterActivator } from './header/nav/nav-router-activator.service'
 
@@ -41,6 +42,7 @@ export const protectedRoutes: Routes = [
     {path: '404', component: ErrorComponent },
     {path: 'dashboard', component: DashboardComponent},
     {path: 'profile', component: ProfileComponent},
+    {path: 'calendar', component: EventCalendarComponent},
     {path: 'profileupdate', component: ProfileUpdatedComponent},
     {path: 'appsmgmt', component: AppManagementComponent},
     {path: 'index', component: HomeProtectedComponent},
