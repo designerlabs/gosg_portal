@@ -38,6 +38,7 @@ import { AnnouncementlistComponent } from './announcementlist/announcementlist.c
 import { AnnouncementdetailsComponent } from './announcementdetails/announcementdetails.component';
 import { EventCalendarComponent } from './eventcalendar/eventcalendar.component';
 import { OnlineserviceComponent } from './onlineservice/onlineservice.component';
+import { SubscriptionComponent } from './subscription/subscription.component';
 
 export const appRoutes: Routes = [
     {path: '404', component: ErrorComponent },
@@ -65,6 +66,7 @@ export const appRoutes: Routes = [
     {path: 'contact', component: ContactComponent},
     {path: 'feedback', component: FeedbackComponent},
     {path: 'onlineservice', component: OnlineserviceComponent},
+    {path: 'subscription', component: SubscriptionComponent},
     {path: '', redirectTo: 'index', pathMatch: 'full'},
     {path: '**', component: ErrorComponent}
 

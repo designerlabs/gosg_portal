@@ -30,7 +30,8 @@
       "dashboard": "Dashboard",
       "appmgmt": "Application Management",
       "mailbox": "Mail Box",
-      "onlineservice": "Online Services"
+      "onlineservice": "Online Services",
+      "subscription": "Subscription"
     },
     "expandButton": {
       "less": "Show Less",
