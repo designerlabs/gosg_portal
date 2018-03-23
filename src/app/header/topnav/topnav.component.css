@@ -42,7 +42,7 @@ a{
         .bgColor{
         width: 20px;
         height: 20px;
-        margin: 0px 5px;
+        margin: 0px 2px;
         padding: 0px;
         top:6px;
         position:relative
@@ -101,7 +101,7 @@ a{
   padding: 18px 0px; }
 
 #themeContainer {
-  bottom: 5px; }
+  bottom: 0px; }
 
 body {
   background-color: #fff; }
@@ -118,3 +118,21 @@ body {
   text-align: left;
   color: #333;
   font-size: 20px; }
+
+  .fontOption{
+    width: 80%;
+    float: left;
+}
+
+.settingLbl{
+    color:rgb(129, 129, 129);
+    padding: 0px 0px 10px 0px;
+}
+
+.settingBtm{
+    padding: 0px 0 15px 0;
+}
+
+.colorPaletteActive{
+  border:1px solid #fff !important;
+}
