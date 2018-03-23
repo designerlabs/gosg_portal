@@ -216,6 +216,20 @@
       "words": " characters left.",
       "choose": "--Please Select--"
     },
+    "view":{
+      "today": "Hari Ini",
+      "internaldata": "Data Dalaman",
+      "externaldata": "Data Luaran",
+      "note": "Nota"
+    },
+    "details":{
+      "header": "Maklumat Acara",
+      "name": "Nama",
+      "location": "Lokasi",
+      "start": "Mula",
+      "end": "Tamat",
+      "desc": "Keterangan"
+    },
     "reset":"Reset this form?",      
     "msgsubmit": "Thank you. Your complaints/queries has been successfully sent. Responds will be received in 3 working days",
     "err":{

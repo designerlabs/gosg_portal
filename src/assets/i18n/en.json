@@ -216,6 +216,20 @@
       "words": " characters left.",
       "choose": "--Please Select--"
     },
+    "view":{
+      "today": "Today",
+      "internaldata": "Internal Data",
+      "externaldata": "External Data",
+      "note": "Note"
+    },
+    "details":{
+      "header": "Event Details",
+      "name": "Name",
+      "location": "Location",
+      "start": "Start",
+      "end": "End",
+      "desc": "Description"
+    },
     "reset":"Reset this form?",      
     "msgsubmit": "Thank you. Your complaints/queries has been successfully sent. Responds will be received in 3 working days",
     "err":{
