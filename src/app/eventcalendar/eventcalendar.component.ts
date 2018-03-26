@@ -1,117 +1,146 @@
-import { Component, OnInit, ViewChild, Inject } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject, AfterViewInit, AfterContentChecked, AfterViewChecked, Input, ElementRef } from '@angular/core';
 // import { CalendarComponent } from 'ng-fullcalendar';
-// import { Options } from 'fullcalendar';
+import * as $ from 'jquery';
+import 'fullcalendar';
+// import {Options} from "fullcalendar";
 import { Http, Response } from '@angular/http';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
+import { PortalService } from '../services/portal.service';
+import { ToastrService } from 'ngx-toastr';
+import { SharedService } from '../common/shared.service';
+import { DatePipe } from '@angular/common';
+import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 
 @Component({
   selector: 'gosg-eventcalendar',
   templateUrl: './eventcalendar.component.html',
   styleUrls: ['./eventcalendar.component.css']
 })
-export class EventCalendarComponent implements OnInit {
-
-  // calendarOptions: Options;
-  displayEvent: any;
-  isOpen: boolean;
+export class EventCalendarComponent implements OnInit, AfterViewInit, AfterContentChecked, AfterViewChecked{
+  
+  options: Object;
   event: any = [];
-  eventItem: string;
-  eventUrl: string = this.config.urlEvent;
+  langId = localStorage.getItem('langID');
+  localeVal: string;
+  languageId = this.languageId;
 
-  // @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
+  constructor(
+    private http: Http, 
+    @Inject(APP_CONFIG) private config: AppConfig, 
+    private portalService:PortalService,
+    private toastr: ToastrService,
+    private element:ElementRef,
+    private datePipe:DatePipe,
+    private translate: TranslateService,
+    private sharedService :SharedService
+  ) {
 
-  constructor(private http: Http, @Inject(APP_CONFIG) private config: AppConfig) { }
+    translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      const myLang = translate.currentLang;
+      if (myLang == 'en') {
+        translate.get('HOME').subscribe((res: any) => {
+            this.lang = 'en';
+            this.languageId = 1;
+            this.localeVal = this.lang;
+        });
+  
+      }
+      if (myLang == 'ms') {
+        translate.get('HOME').subscribe((res: any) => {
+            this.lang = 'ms';
+            this.languageId = 2;
+            this.localeVal = 'ms-my';
+        });
+      }
+      // console.log(this.localeVal)
+      // console.log(this.options)
+
+      this.options = {
+        locale: this.localeVal?this.localeVal: this.lang,
+        editable: false,
+        eventLimit: false,
+        header: {
+          left: 'prev,next today',
+          center: 'title',
+          right: null
+          //  right: 'month,agendaWeek,agendaDay,listMonth'
+        },
+        events: this.event,
+        eventClick: function(events) {
+
+          if(events.ext == true)
+            $('#titleHeader').css({'background': '#0aaaaa','border-radius':'6px 6px 0px 0px', 'border-bottom':'1px #666 solid'});
+          else
+            $('#titleHeader').css({'background': '#3a87ad','border-radius':'6px 6px 0px 0px', 'border-bottom':'1px #333 solid'});
+          
+          $('#title').html(events.title);
+          $('#loc').html(events.location);
+          $('#start').html(datePipe.transform(events.start._d, 'dd/MM/yyyy h:mm aa'));
+          $('#end').html(datePipe.transform(events.end._d, 'dd/MM/yyyy h:mm aa'));
+          $('#desc').html(events.desc);
+          
+          $('#details').css('display','block');
+          $('.overlay').css('display','block');
+          
+          console.log(events)
+        },
+        eventMouseover: function(events) {
+          $('.fc-event').attr('title', events.title);
+        },
+        buttonText: {
+          today: this.translate.instant('calendar.view.today')
+        },
+        timeFormat: 'hh:mm a'
+        
+      };
+    
+      $('#calendar').fullCalendar('destroy');
+      $('#calendar').fullCalendar(this.options);
+
+      $('<div class="col-md-5 pull-right" style="border: 0px solid #000; text-align: right; margin-right: -6.5%; margin-top: -2%">'
+        +'<div class="col-md-2" style="text-align: right"><label>'+this.translate.instant('calendar.view.note')+'</label>:</div>'
+        +'<div class="col-md-5" style="text-align: center; background: #3a87ad; color: #fafafa; width: 150px; height: 20px">'+this.translate.instant('calendar.view.internaldata')+'</div>'
+        +'<div class="col-md-5" style="text-align: center; background: #0aaaaa; color: #fafafa; width: 150px; height: 20px">'+this.translate.instant('calendar.view.externaldata')+'</div>'
+        +'</div>').insertBefore($('.fc-view-container'));
+      // alert(this.localeVal)
+    });
+    
+  }
+  lang = this.lang;
 
   ngOnInit() {
-    // const dateObj = new Date();
-    // const yearMonth = dateObj.getUTCFullYear() + '-' + (dateObj.getUTCMonth() + 1);
-    this.isOpen = false;
 
-    // console.log(dateObj)
-    // console.log(yearMonth)
-
+    this.localeVal = 'en-us';
+    console.log(this.localeVal)
     this.getEvents();
-    console.log(this.event)
+  }
 
-    // this.calendarOptions = {
-    //    editable: false,
-    //    eventLimit: false,
-    //    header: {
-    //      left: 'prev,next today',
-    //      center: 'title',
-    //      right: null
-    //     //  right: 'month,agendaWeek,agendaDay,listMonth'
-    //    },
-    //    events: [{
-    //         title: 'All Day Event',
-    //         start: yearMonth + '-01'
-    //     },
-    //     {
-    //         title: 'Long Event',
-    //         start: yearMonth + '-07',
-    //         end: yearMonth + '-10'
-    //     },
-    //     {
-    //         id: 999,
-    //         title: 'Repeating Event',
-    //         start: yearMonth + '-09T16:00:00'
-    //     },
-    //     {
-    //         id: 999,
-    //         title: 'Repeating Event',
-    //         start: yearMonth + '-16T16:00:00'
-    //     },
-    //     {
-    //         title: 'Conference',
-    //         start: yearMonth + '-11',
-    //         end: yearMonth + '-13'
-    //     },
-    //     {
-    //         title: 'Meeting',
-    //         start: yearMonth + '-12T10:30:00',
-    //         end: yearMonth + '-12T12:30:00'
-    //     },
-    //     {
-    //         title: 'Lunch',
-    //         start: yearMonth + '-12T12:00:00'
-    //     },
-    //     {
-    //         title: 'Meeting',
-    //         start: yearMonth + '-12T14:30:00'
-    //     },
-    //     {
-    //         title: 'Happy Hour',
-    //         start: yearMonth + '-12T17:30:00'
-    //     },
-    //     {
-    //         title: 'Dinner',
-    //         start: yearMonth + '-12T20:00:00'
-    //     },
-    //     {
-    //         title: 'Birthday Party',
-    //         start: yearMonth + '-13T07:00:00'
-    //     },
-    //     {
-    //         title: 'Click for Google',
-    //         url: 'http://google.com/',
-    //         start: yearMonth + '-28'
-    //     }]
-      
-    //  };
+  ngAfterViewInit() {
+    setTimeout(()=>{
+
+      console.log(this.options)
+      // console.log("100ms after ngAfterViewInit ");
+      $('#calendar').fullCalendar('destroy');
+      $('#calendar').fullCalendar(this.options);
+
+      $('<div class="col-md-5 pull-right" style="border: 0px solid #000; text-align: right; margin-right: -6.5%; margin-top: -2%">'
+        +'<div class="col-md-2" style="text-align: right"><label>'+this.translate.instant('calendar.view.note')+'</label>:</div>'
+        +'<div class="col-md-5" style="text-align: center; background: #3a87ad; color: #fafafa; width: 150px; height: 20px">'+this.translate.instant('calendar.view.internaldata')+'</div>'
+        +'<div class="col-md-5" style="text-align: center; background: #0aaaaa; color: #fafafa; width: 150px; height: 20px">'+this.translate.instant('calendar.view.externaldata')+'</div>'
+        +'</div>').insertBefore($('.fc-view-container'));
+    }, 100);
+    
   }
 
   getEvents() {
     let sDate;
     let eDate;
 
-    return this.http.get('./app/apidata/event.json')
-      .map(res => res.json())
-      .subscribe(resEventData => {
+    this.portalService.getCalendarEvents().subscribe(data => {
+  
+      // this.sharedService.errorHandling(data, (function(){
         
-        console.log(resEventData.length)       
-        console.log(resEventData)       
-        
-        for(var item of resEventData) {
+        for(var item of data['list']) {
 
           let body = {
             'id': null,
@@ -122,78 +151,66 @@ export class EventCalendarComponent implements OnInit {
             'endTime': null,
             'desc': null,
             'location': null,
-            'color': null
+            'color': null,
+            'ext': null
           };
 
-          sDate = new Date(item.eventStartTime).toISOString()
-          eDate = new Date(item.eventEndTime).toISOString()
-          // console.log(sDate)
-          // console.log(eDate)
+          sDate = new Date(item.eventStart);
+          eDate = new Date(item.eventEnd);
 
-          body.id = item.eventID;
+          body.id = item.id;
           body.title = item.eventName;
           body.start = sDate;
           body.end = eDate;
-          body.startTime = item.startTime;
-          body.endTime = item.endTime;
+          // body.startTime = item.startTime;
+          // body.endTime = item.endTime;
+          body.ext = item.externalData;
           body.desc = item.eventDescription;
           body.location = item.eventLocation;
-          // body.color = '#7e9e00';
+          if(item.externalData == true)
+            body.color = '#0aaaaa';
+          // else
+          //   body.color = '#7e9e00';
 
           this.event.push(body)
         }
         
-        // this.event = resEventData;
-        // console.log(this.event)
-      });
+      // });
+    });
   }
 
   closePopup() {
-    this.isOpen = false;
+    $('#details').css('display','none');
+    $('.overlay').css('display','none');
   }
 
-  clickButton(model: any) {
-    this.isOpen = false;
-    this.displayEvent = model;
+  ngAfterContentChecked() {
+    
   }
 
-  eventClick(model: any) {
-    model = {
-      event: {
-        id: model.event.id,
-        start: model.event.start,
-        end: model.event.end,
-        title: model.event.title,
-        desc: model.event.desc,
-        location: model.event.location,
-        sTime: model.event.startTime,
-        eTime: model.event.endTime
-        // allDay: model.event.allDay,
-        // eventId: model.event.eventID,
-        // other params
-      },
-      duration: {}
-    }
-    this.displayEvent = model;
-    this.isOpen = true;
-    // console.log(this.displayEvent.event.desc);
+  ngAfterViewChecked() {
+    
   }
 
-  // updateEvent(model: any) {
-  //   model = {
-  //     event: {
-  //       id: model.event.id,
-  //       start: model.event.start,
-  //       end: model.event.end,
-  //       title: model.event.title
-  //       // other params
-  //     },
-  //     duration: {
-  //       _data: model.duration._data
-  //     }
-  //   }
-  //   this.displayEvent = model;
+  // transform(value: string) {
+  //   let datePipe = new DatePipe("en-US");
+  //    value = datePipe.transform(value, 'dd/MM/yyyy hh:mm a');
+  //    return value;
   // }
+
+  // updateEvent(event) {
+  //   return $(this.element.nativeElement).fullCalendar('updateEvent', event);
+  // }
+
+  // clientEvents(idOrFilter) {
+  //   return $(this.element.nativeElement).fullCalendar('clientEvents', idOrFilter);
+  // }
+
+  // change(changes: any) {
+  //   $('#calendar').fullCalendar('changeView',changes.options.currentValue.defaultView);
+  //   let locale = $('#calendar').fullCalendar('option', 'locale');
+  // }
+
 
 }
 

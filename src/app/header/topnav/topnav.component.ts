@@ -3,6 +3,7 @@ import * as moment from 'moment';
 import * as $ from 'jquery';
 import { TranslateService } from '@ngx-translate/core';
 import { TopnavService } from './topnav.service';
+import {SharedService } from '../../common/shared.service';
 let num = 0;
 @Component({
   selector: 'app-topnav',
@@ -20,33 +21,16 @@ export class TopnavComponent implements OnInit, AfterViewInit {
   plusBtn = false;
   admin: boolean;
   langId = this.langId;
+  defaultColors: any;
+  defaultFonts: any;
+  fontTy(arg0: any): any {
+    throw new Error("Method not implemented.");
+  }
+  getThemeColors: any;
+  getThemeFonts: any;
 
   ngAfterViewInit() {
-    $(function () {
-      if (localStorage.getItem('themeColor') == '' || localStorage.getItem('themeColor') == null || localStorage.getItem('themeColor') == '#00bdbb') {
-        $('#confBar li > input.bgColorBtn:nth(0)').addClass('colorPaletteActive');
-        localStorage.setItem('themeColor', '#00bdbb');
-      } else {
-        $('#confBar li > input.bgColorBtn:nth(0)').removeClass('colorPaletteActive');
-      }
-
-      if (localStorage.getItem('themeIndex') == '' || localStorage.getItem('themeIndex') == null || localStorage.getItem('themeIndex') == '0') {
-        $('#confBar li > input.bgColorBtn').removeClass('colorPaletteActive');
-        $('#confBar li > input.bgColorBtn:nth(0)').addClass('colorPaletteActive');
-      } else {
-        $('#confBar li > input.bgColorBtn').removeClass('colorPaletteActive');
-        $('#confBar li > input.bgColorBtn:nth(' + localStorage.getItem('themeIndex') + ')').addClass('colorPaletteActive');
-      }
-    });
-
-    if (localStorage.getItem('customFontType')) {
-      $('body, .font-size-s, .font-size-m, .font-size-l, .font-size-xl, .font-size-xxl').css('font-family', localStorage.getItem('customFontType'));
-      $('#fontOpt option[value="' + localStorage.getItem('customFontType') + '"]').attr('selected', 'selected');
-    } else {
-      $('body, .font-size-s, .font-size-m, .font-size-l, .font-size-xl, .font-size-xxl').css('font-family', 'Roboto');
-      $('#fontOpt option[value="Roboto"]').attr('selected', 'selected');
-    }
-
+      this.loadCustomFontType();
   }
 
   @Input() edited = true;
@@ -62,7 +46,7 @@ export class TopnavComponent implements OnInit, AfterViewInit {
 
   @Output() showsidenav = new EventEmitter();
 
-  constructor(private translate: TranslateService, private topnavservice: TopnavService) {
+  constructor(private translate: TranslateService, private topnavservice: TopnavService, private sharedservice: SharedService) {
     translate.addLangs(['en', 'ms']);
 
     if(localStorage.getItem('langID') == "2"){
@@ -93,9 +77,14 @@ export class TopnavComponent implements OnInit, AfterViewInit {
   
 
   ngOnInit() {
+    this.colors = this.topnavservice.getColors();
+    this.loadFont();
+    this.loadColor();
+    this.loadDefaultFonts();
+    this.loadDefaultColor();
     this.getLangID();
     console.log('topnav.comp.ts');
-    this.colors = this.topnavservice.getColors();
+
     this.getUserProfile();
 
     if(this.currlang == 'English'){
@@ -105,6 +94,15 @@ export class TopnavComponent implements OnInit, AfterViewInit {
     }
   }
 
+
+  loadFont(){
+    this.sharedservice.getThemeFont().subscribe(
+      data => {
+        this.getThemeFonts = data;
+      }, err => {
+        
+      })
+  }
 
 
   getLangID(){
@@ -123,6 +121,42 @@ export class TopnavComponent implements OnInit, AfterViewInit {
     }
   }
 
+  loadDefaultFonts(){
+    this.sharedservice.getThemeFont().subscribe(
+      data => {
+        this.defaultFonts = data;
+        data.filter(function(font){
+          if(font.defaultFont == true){
+            console.log(font.fontName);
+            if (!localStorage.getItem('customFontType')) {
+              $('body, .font-size-s, .font-size-m, .font-size-l, .font-size-xl, .font-size-xxl').css('font-family', font.fontName);
+            }
+          }
+        })
+      }, err => {
+        
+      })
+  }
+
+  loadDefaultColor(){
+    this.sharedservice.getThemeColor().subscribe(
+      data => {
+        this.defaultColors = data;
+        data.filter(function(color, index){
+          if(color.defaultColor == true){
+            console.log(color.colorCode);
+            if (!localStorage.getItem('themeColor')) {
+              localStorage.setItem('themeColor', color.colorCode);
+              localStorage.setItem('themeIndex', index);
+              $('#confBar .settingBtm input').removeClass('colorPaletteActive');
+              $('#confBar .settingBtm input:nth('+index+')').addClass('colorPaletteActive');
+            }
+          }
+        })
+      }, err => {
+        
+      })
+  }
 
 
   toggle() {
@@ -143,7 +177,17 @@ export class TopnavComponent implements OnInit, AfterViewInit {
  
   }
 
+  loadColor(){
+    this.sharedservice.getThemeColor().subscribe(
+      data => {
+        this.getThemeColors = data;
+      }, err => {
+        
+      })
+  }
 
+
+  
 
   showConfBar() {
     this.edited = !(this.edited);
@@ -164,17 +208,44 @@ export class TopnavComponent implements OnInit, AfterViewInit {
   }
 
   setClickedColor(index, firstItem) {
-    localStorage.setItem('themeColor', this.colors[index].bgColor);
+    localStorage.setItem('themeColor', firstItem);
+    $('#confBar .settingBtm input').removeClass('colorPaletteActive');
+    $('#confBar .settingBtm input:nth('+index+')').addClass('colorPaletteActive');
     localStorage.setItem('themeIndex', index);
     this.selectedRow = index;
     this.firstItem = firstItem;
   }
 
+  loadCustomFontType(){
+    if (localStorage.getItem('customFontType')) {
+      $('body, .font-size-s, .font-size-m, .font-size-l, .font-size-xl, .font-size-xxl').css('font-family', localStorage.getItem('customFontType'));
+      $('#fontOptSideMenu2 option[value="' + localStorage.getItem('customFontType') + '"]').attr('selected', 'selected');
+      $('#fontOptSideMenu2').val(localStorage.getItem('customFontType'));
+    }
+    if (localStorage.getItem('themeIndex')) {
+      $('#confBar .settingBtm input').removeClass('colorPaletteActive');
+      $('#confBar .settingBtm input:nth('+localStorage.getItem('themeIndex')+')').addClass('colorPaletteActive');
+      localStorage.setItem('themeIndex', localStorage.getItem('themeIndex'));
+    }
+  }
+
   resetBgColor() {
-    localStorage.setItem('themeColor', '#00bdbb');
-    localStorage.setItem('themeIndex', '0');
-    $('#confBar li > input.bgColorBtn').removeClass('colorPaletteActive');
-    $('#confBar li > input.bgColorBtn:nth(0)').addClass('colorPaletteActive');
+
+    this.sharedservice.getThemeColor().subscribe(
+      data => {
+        this.defaultColors = data;
+        data.filter(function(color, index){
+          if(color.defaultColor == true){
+            localStorage.setItem('themeColor', color.colorCode);
+            localStorage.setItem('themeIndex', index);
+            $('#confBar .settingBtm input').removeClass('colorPaletteActive');
+            $('#confBar .settingBtm input:nth('+index+')').addClass('colorPaletteActive');
+          }
+        })
+      }, err => {
+        
+      })
+
   }
 
   fontminus() {
@@ -220,10 +291,21 @@ export class TopnavComponent implements OnInit, AfterViewInit {
   }
 
   resetFontStyle() {
-    $('#fontOpt').val('Roboto');
-    $('body, .font-size-s, .font-size-m, .font-size-l, .font-size-xl, .font-size-xxl').css('font-family', 'Roboto');
-    //$('#fontOpt option[value="Roboto"]').attr("selected", "selected");
-    localStorage.setItem('customFontType', 'Roboto');
-  }
 
+    this.sharedservice.getThemeFont().subscribe(
+      data => {
+        this.defaultFonts = data;
+        data.filter(function(font){
+          if(font.defaultFont == true){
+            console.log(font.fontName);
+            $('#fontOptSideMenu2').val(font.fontName);
+              $('body, .font-size-s, .font-size-m, .font-size-l, .font-size-xl, .font-size-xxl').css('font-family', font.fontName);
+              localStorage.setItem('customFontType', font.fontName);
+
+          }
+        })
+      }, err => {
+        
+      })
+  }
 }

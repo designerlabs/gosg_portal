@@ -47,6 +47,7 @@ export class PortalService {
   private statusAppUrl: string = this.config.urlAppAgency;
   private dataAppUrl: string = this.config.urlAppAgency;
   private pollUrl: string = this.config.urlPoll;
+  private calendarUrl: string = this.config.urlEvents;
   
   getAgencyApp(){
     return this.http.get(this.AgencyAppUrl + '.json')
@@ -132,6 +133,28 @@ export class PortalService {
     .retry(5)
     .catch(this.handleError);
   }
+
+  // CALENDAR
+
+  getCalendarEvents(){
+
+    console.log(this.calendarUrl+ '?language='+localStorage.getItem('langID'))
+    return this.http.get(this.calendarUrl + '?language='+localStorage.getItem('langID'))
+    .map((response: Response) => response.json())
+    .retry(5)
+    .catch(this.handleError);
+  }
+
+  getCalendarEventsByID(id){
+
+    console.log(this.calendarUrl+ '/'+id+'?language='+localStorage.getItem('langID'))
+    return this.http.get(this.calendarUrl + '/'+id+'?language='+localStorage.getItem('langID'))
+    .map((response: Response) => response.json())
+    .retry(5)
+    .catch(this.handleError);
+  }
+
+  // END CALENDAR
 
   private handleError(error:Response){
     let msg = `Status code ${error.status} on url ${error.url}`;

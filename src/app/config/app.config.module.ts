@@ -21,6 +21,7 @@ let pollUrl = commonURL + "polls";
 
 export class AppConfig {
     apiEndpoint: string;
+    urlEvents: string;
     urlMenu: string;
     urlSlider: string;
     urlFooter: string;
@@ -80,6 +81,7 @@ export const APP_DI_CONFIG: AppConfig = {
     urlProtected: protectedBaseURL,
     urlMenu: './app/apidata/menudata',
     urlSlider: commonURL+'slider',
+    urlEvents: commonURL+'calendar',
     // urlFooter: './app/apidata/footer',
     urlFooter: commonURL + 'footer',
     urlArticle: './app/apidata/topic',
