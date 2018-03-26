@@ -122,7 +122,7 @@ import { AnnouncementlistComponent } from '../announcementlist/announcementlist.
 // import { Nav } from '../header/nav/nav.router.guard.service';
 import { NavRouterGuardService } from '../header/nav/nav-router-guard.service';
 import { OnlineserviceComponent } from '../onlineservice/onlineservice.component';
-// import { SubscriptionComponent } from '../subscription/subscription.component';
+import { SubscriptionComponent } from '../subscription/subscription.component';
 export function HttpLoaderFactory(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -195,8 +195,8 @@ export function HttpLoaderFactory(http: Http) {
     ConfirmDialogComponent,
     SidenavmainComponent,
     OnlineserviceComponent,
-    EventCalendarComponent
-    // SubscriptionComponent
+    EventCalendarComponent,
+    SubscriptionComponent
   ],
 
   exports: [

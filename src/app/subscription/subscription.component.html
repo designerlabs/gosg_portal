@@ -28,48 +28,48 @@
       </h2>
     </div>
     <div class="row">
-      <div class="col-md-6" style="padding-top:20px;">
+      <div class="col-md-4">
         <mat-form-field class="example-full-width font-size-m" style="margin-top: 20px; width:100%">
           <input matInput formControlName="txtEmail" #txtEmail type="text" maxlength="30" placeholder="Email" required />
-          <mat-error *ngIf="!validateCtrlChk(txtEmail) && subscriptionForm.controls.txtEmail.errors?.required">
+          <!-- <mat-error *ngIf="!validateCtrlChk(txtEmail) && subscriptionForm.controls.txtEmail.errors?.required">
             Email address is required
-          </mat-error>
+          </mat-error> -->
+          <mat-error *ngIf="!validateCtrlChk(txtEmail) && subscriptionForm.controls.txtEmail.errors?.required">
+              {{'register.err.email' | translate }}
+            </mat-error>
+            <mat-error *ngIf="!validateCtrlChk(txtEmail) && subscriptionForm.controls.txtEmail.errors?.pattern">
+              {{'register.pattern.email' | translate }}
+            </mat-error>
         </mat-form-field>
       </div>
-      <!-- <div class="col-md-4" style="padding-top:20px;">
-        <mat-checkbox class="example-margin" formControlName="chkAnnounce" (change)="chkDocument(1)" #chkAnnounce>
-          <span class="font-size-m">Announcement</span>
-        </mat-checkbox>
-        <mat-checkbox class="example-margin font-size-m" formControlName="chkEpart" (change)="chkDocument(2)" #chkEpart>
-          <span class="font-size-m">E-Participation</span>
-        </mat-checkbox>
-      </div>
-      <div class="col-md-4" style="padding-top:20px;">
-        <button mat-raised-button type="button" color="primary" class="form-control btn btn-md btn-success font-size-s" (click)="update(subscriptionForm.value);"
-          style="width: 100px; font-family: Roboto; margin-left: 5px;" [disabled]="subscriptionForm.controls.txtEmail.invalid">
-          <i class="fa fa-check"></i> Subscribe </button>
-      </div> -->
-    </div>
-    <div class="row" *ngIf="!showNoData">
-        <div class="col-md-4" style="padding-top:20px;">
-      <mat-form-field>
-          <mat-select placeholder="Select Category" [formControl]="selCategory" multiple>
+      <!-- </div>
+    <div class="row" *ngIf="!showNoData"> -->
+      <div class="col-md-4" *ngIf="!showNoData">
+        <mat-form-field class="example-full-width font-size-m" style="margin-top: 20px; width:100%">
+          <mat-select placeholder="Select Category" [formControl]="selCategory" multiple required>
             <mat-select-trigger>
-                {{selCategory.value ? selCategory.value[0] : ''}}
+              {{selCategory.value ? selCategory.value[0] : ''}}
               <span *ngIf="selCategory.value?.length > 1" class="example-additional-selection">
-                  (+{{selCategory.value.length - 1}} others)
+                (+{{selCategory.value.length - 1}} others)
               </span>
             </mat-select-trigger>
             <mat-option *ngFor="let data of dataSubs" [value]="data.categoryId">{{data.categoryName}}</mat-option>
           </mat-select>
+          <mat-error *ngIf="!validateCtrlChk(selCategory) && subscriptionForm.controls.selCategory.errors?.required">
+              Category is required
+          </mat-error>
         </mat-form-field>
-        </div>
-        <div class="col-md-4" style="padding-top:20px;">
-            <button mat-raised-button type="button" color="primary" class="form-control btn btn-md btn-success font-size-s" (click)="update(subscriptionForm.value);"
-              style="width: 100px; font-family: Roboto; margin-left: 5px;" [disabled]="subscriptionForm.controls.txtEmail.invalid">
-              <i class="fa fa-check"></i> Subscribe </button>
-          </div>
+      </div>
+      <div class="col-md-4" style="padding-top:40px;">
+        <button mat-raised-button type="button" color="primary" class="form-control btn btn-md btn-success font-size-s" (click)="update(subscriptionForm.value);"
+          style="width: 100px; font-family: Roboto; margin-left: 5px;" [disabled]="subscriptionForm.invalid">
+          <i class="fa fa-check"> </i> Subscribe   </button>
+      </div>
     </div>
     <div *ngIf="showNoData" class="row text-align-Center padding-20"> No Data Found </div>
   </form>
 </div>
+
+<app-confirm-dialog #resetModal [title]="'common.icon.success'" [content]="'subscription.successMsg'" [state]="'common.state.success'"
+  [isReset]="'true'" (resetMethod)="resetMethod($event)">
+</app-confirm-dialog>

@@ -357,5 +357,8 @@
     "description":"Semua Sorotan Terkini",
     "message":"Tiada maklumat terkini.",
     "tender": "Tender"
+  },
+  "subscription":{
+    "successMsg" :"Terima kasih. Emel anda telah berjaya disimpan. Emel pengaktifan langganan telah dihantar. Sila klik pada pautan untuk pengaktifan langganan."
   }
 }
