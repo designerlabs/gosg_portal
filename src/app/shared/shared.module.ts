@@ -69,7 +69,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { EventCalendarComponent } from '../eventcalendar/eventcalendar.component';
 // import { FullCalendarModule } from 'ng-fullcalendar';
 import { DatePipe } from '@angular/common';
-import { AgencydirectoryComponent } from '../agencydirectory/agencydirectory.component';
+// import { AgencydirectoryComponent } from '../agencydirectory/agencydirectory.component';
 
 import { SidenavmainComponent } from "../sidenavmain/sidenavmain.component";
 import {
@@ -197,7 +197,7 @@ export function HttpLoaderFactory(http: Http) {
     SidenavmainComponent,
     OnlineserviceComponent,
     EventCalendarComponent,
-    AgencydirectoryComponent,
+    // AgencydirectoryComponent,
     SubscriptionComponent
   ],
 
@@ -290,7 +290,7 @@ export function HttpLoaderFactory(http: Http) {
      MatPaginatorModule,
      SharedPipe,
      EventCalendarComponent,
-     AgencydirectoryComponent
+    //  AgencydirectoryComponent
     
   ],
 

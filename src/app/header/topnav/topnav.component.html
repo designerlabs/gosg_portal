@@ -68,10 +68,10 @@
     </div>
     <div class="col-xs-12 visible-xs"><i class="fa fa-bars" aria-hidden="true"></i></div>
     
-    <div class="row menu_botm container" id="confBar">
+    <div class="row menu_botm container menu_botm" id="confBar">
       <div class="col-sm-12" id="themeContainer">
         <ul class="list-inline hidden-xs font-size-s">
-          <li>
+          <li class="settingBtm">
               {{ 'home.menu.themecolor' | translate }}:
 
               <input #colorPanel *ngFor="let color of getThemeColors; let i = index; let firstItem = first" (click)="setClickedColor(i, color.colorCode)" data-selected-id="color.colorId"  [class.colorPaletteActive]="color.defaultColor" type="button" name="bgColor" [(ngModel)]="bgColor" [ngStyle]="{'background': color.colorCode, 'border': '1px solid', 'border-color': color.colorCode}"  class="bgColorBtn bgColor" value="{{color.colorCode}}">
@@ -83,13 +83,13 @@
           
           
           <li class="fontResize" style="margin-left: 5px">
-              {{ 'home.menu.fontsize' | translate }} :
-            </li>
+            {{ 'home.menu.fontsize' | translate }} :
+          </li>
           <li class="fontResize"><button  [disabled]="minusBtn" class="btn btn-default fontminus" (click)="fontminus()" style="border:1px solid white;padding: 3px; height: 25px; width: 28px; font-size:14px;"><i class="fa fa-minus"></i>A</button></li>
           <li class="fontResize"><button  [disabled]="plusBtn" class="fontplus btn btn-default"  (click)="fontplus()" style="border:1px solid white;padding: 3px; height: 25px; width: 28px; font-size:14px;"><i class="fa fa-plus"></i>A</button></li>
           <span><div class="fontreset btn btn-xs btn-default" (click)="fontreset()"><i class="fa fa-refresh"></i></div></span>
             <li style="margin-left: 5px">
-            Font Type :
+              Font Type :
             </li>
             <li>
                 <label class="sr-only" for="fontOpt">Font Type</label>

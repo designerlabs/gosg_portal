@@ -142,14 +142,14 @@ export class TopnavComponent implements OnInit, AfterViewInit {
     this.sharedservice.getThemeColor().subscribe(
       data => {
         this.defaultColors = data;
-        data.filter(function(color, index){
+        data.filter(function(color, index){ 
           if(color.defaultColor == true){
             console.log(color.colorCode);
             if (!localStorage.getItem('themeColor')) {
               localStorage.setItem('themeColor', color.colorCode);
               localStorage.setItem('themeIndex', index);
-              $('#confBar .settingBtm input').removeClass('colorPaletteActive');
-              $('#confBar .settingBtm input:nth('+index+')').addClass('colorPaletteActive');
+              $('#confBar #themeContainer ul li.settingBtm input').removeClass('colorPaletteActive');
+              $('#confBar #themeContainer ul li.settingBtm input:nth('+index+')').addClass('colorPaletteActive');
             }
           }
         })
@@ -209,8 +209,8 @@ export class TopnavComponent implements OnInit, AfterViewInit {
 
   setClickedColor(index, firstItem) {
     localStorage.setItem('themeColor', firstItem);
-    $('#confBar .settingBtm input').removeClass('colorPaletteActive');
-    $('#confBar .settingBtm input:nth('+index+')').addClass('colorPaletteActive');
+    $('#confBar #themeContainer ul li.settingBtm input').removeClass('colorPaletteActive');
+    $('#confBar #themeContainer ul li.settingBtm input:nth('+index+')').addClass('colorPaletteActive');
     localStorage.setItem('themeIndex', index);
     this.selectedRow = index;
     this.firstItem = firstItem;
@@ -223,8 +223,8 @@ export class TopnavComponent implements OnInit, AfterViewInit {
       $('#fontOptSideMenu2').val(localStorage.getItem('customFontType'));
     }
     if (localStorage.getItem('themeIndex')) {
-      $('#confBar .settingBtm input').removeClass('colorPaletteActive');
-      $('#confBar .settingBtm input:nth('+localStorage.getItem('themeIndex')+')').addClass('colorPaletteActive');
+      $('#confBar #themeContainer ul li.settingBtm input').removeClass('colorPaletteActive');
+      $('#confBar #themeContainer ul li.settingBtm input:nth('+localStorage.getItem('themeIndex')+')').addClass('colorPaletteActive');
       localStorage.setItem('themeIndex', localStorage.getItem('themeIndex'));
     }
   }
@@ -238,8 +238,8 @@ export class TopnavComponent implements OnInit, AfterViewInit {
           if(color.defaultColor == true){
             localStorage.setItem('themeColor', color.colorCode);
             localStorage.setItem('themeIndex', index);
-            $('#confBar .settingBtm input').removeClass('colorPaletteActive');
-            $('#confBar .settingBtm input:nth('+index+')').addClass('colorPaletteActive');
+            $('#confBar #themeContainer ul li.settingBtm input').removeClass('colorPaletteActive');
+            $('#confBar #themeContainer ul li.settingBtm input:nth('+index+')').addClass('colorPaletteActive');
           }
         })
       }, err => {
