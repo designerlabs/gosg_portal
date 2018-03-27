@@ -92,12 +92,17 @@ export class OnlineserviceComponent implements OnInit {
   }
 
   selByAgency(eve) {
-    this.valByAlpha = "0";
-    console.log(eve.value);
-    
+    this.valByAlpha = "0";    
     if (eve.value !== "0") {
-      this.loading = true;
-      let dataUrl='agency/application/search?agencyId=' + eve.value + '&page=' + this.pageCount + '&size=' + this.pageSize;
+      this.getDataSelByAgency(eve.value);
+    } else {
+      this.selAllAgency(this.pageCount, this.pageSize);
+    }
+  }
+
+  getDataSelByAgency(val){
+    this.loading = true;
+      let dataUrl='agency/application/search?agencyId=' + val + '&page=' + this.pageCount + '&size=' + this.pageSize;
       return this.http.get(this.config.urlPortal + dataUrl + '&language=' + this.languageId)
         .map(res => res.json())
         .subscribe(rData => {
@@ -122,9 +127,6 @@ export class OnlineserviceComponent implements OnInit {
             this.loading = false;
             this.toastr.error(this.translate.instant('common.err.servicedown'), '');
           });
-    } else {
-      this.selAllAgency(this.pageCount, this.pageSize);
-    }
   }
 
   selByAlpha(eve) {
@@ -163,11 +165,12 @@ export class OnlineserviceComponent implements OnInit {
               this.toastr.error(this.translate.instant('common.err.servicedown'), '');
             });
       } else {
-        this.selAllAgency(this.pageCount, this.pageSize);
-      }
-    
-   
-    
+        if(this.valByAgency !== "0"){
+          this.getDataSelByAgency(this.valByAgency);
+        }else{
+          this.selAllAgency(this.pageCount, this.pageSize);
+        }        
+      }  
   }
 
   selAllAgency(page, pagesize) {
