@@ -32,7 +32,8 @@
       "appmgmt": "Application Management",
       "mailbox": "Mail Box",
       "onlineservice": "Online Services",
-      "subscription": "Subscription"
+      "subscription": "Subscription",
+      "unsubscribe": "Unsubscribe"
     },
     "expandButton": {
       "less": "Show Less",
@@ -368,6 +369,5 @@
   "subscription":{
     "successMsg" :"Thank you. Your email has been successfully saved. An activation email has been sent. Please click on the link to activate the subscription.",
     "btnsubscribe" : "Subscribe"
-
   }
 }

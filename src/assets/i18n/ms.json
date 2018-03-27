@@ -32,7 +32,8 @@
       "appmgmt": "Pengurusan Permohonan",
       "mailbox": "Peti Pesanan",
       "onlineservice": "Perkhidmatan Dalam Talian",
-      "subscription": "Langganan"
+      "subscription": "Langganan",
+      "unsubscribe": "Hentikan langganan"
     },
     "expandButton": {
       "less": "Lihat Ringkasan",

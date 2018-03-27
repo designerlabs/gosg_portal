@@ -40,6 +40,7 @@ import { EventCalendarComponent } from './eventcalendar/eventcalendar.component'
 import { OnlineserviceComponent } from './onlineservice/onlineservice.component';
 import { AgencydirectoryComponent } from './agencydirectory/agencydirectory.component';
 import { SubscriptionComponent } from './subscription/subscription.component';
+import { UnsubscribeComponent } from './unsubscribe/unsubscribe.component';
 
 export const appRoutes: Routes = [
     {path: '404', component: ErrorComponent },
@@ -69,6 +70,7 @@ export const appRoutes: Routes = [
     {path: 'feedback', component: FeedbackComponent},
     {path: 'onlineservice', component: OnlineserviceComponent},
     {path: 'subscription', component: SubscriptionComponent},
+    {path: 'unsubscribe', component: UnsubscribeComponent},
     {path: '', redirectTo: 'index', pathMatch: 'full'},
     {path: '**', component: ErrorComponent}
 
