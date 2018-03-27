@@ -44,7 +44,7 @@
       </div>
       <!-- </div>
     <div class="row" *ngIf="!showNoData"> -->
-      <div class="col-md-4" *ngIf="!showNoData">
+      <div class="col-md-6" *ngIf="!showNoData">
         <mat-form-field class="example-full-width font-size-m" style="margin-top: 20px; width:100%">
           <mat-select placeholder="Select Category" [formControl]="selCategory" multiple (change)="chk($event)" required>
             <mat-select-trigger>
@@ -60,16 +60,12 @@
           </mat-error>
         </mat-form-field>
       </div>
-      <div class="col-md-4" style="padding-top:40px;">
+      <div class="col-md-2" style="padding-top:40px;">
         <button mat-raised-button type="button" color="primary" class="form-control btn btn-md btn-success font-size-s" (click)="update(subscriptionForm.value);"
           style="width: 100px; font-family: Roboto; margin-left: 5px;" [disabled]="subscriptionForm.invalid">
-          <i class="fa fa-check"> </i> Subscribe   </button>
+          <i class="fa fa-check"> </i> {{'subscription.btnsubscribe' | translate}}   </button>
       </div>
     </div>
     <div *ngIf="showNoData" class="row text-align-Center padding-20"> No Data Found </div>
   </form>
 </div>
-
-<app-confirm-dialog #resetModal [title]="'common.icon.success'" [content]="'subscription.successMsg'" [state]="'common.state.success'"
-  [isReset]="'true'" (resetMethod)="resetMethod($event)">
-</app-confirm-dialog>

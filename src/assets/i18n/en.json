@@ -359,6 +359,8 @@
     "tender": "Tender"
   },
   "subscription":{
-    "successMsg" :"Thank you. Your email has been successfully saved. An activation email has been sent. Please click on the link to activate the subscription."
+    "successMsg" :"Thank you. Your email has been successfully saved. An activation email has been sent. Please click on the link to activate the subscription.",
+    "btnsubscribe" : "Subscribe"
+
   }
 }

@@ -63,6 +63,7 @@ export class SubscriptionComponent implements OnInit {
         });
       }
       // this.getRace(this.languageId);
+      this.getAllCategory();
     });
 
   }
@@ -120,7 +121,7 @@ export class SubscriptionComponent implements OnInit {
     if(!this.languageId){
       this.languageId = 1;
     }
-    return this.http.post(this.config.urlSubscription + '?email=' + "?language=" +this.languageId, subsval)
+    return this.http.post(this.config.urlSubscription + '?email=' + emailval , subsval)
       .map((response: Response) => response.json())
       .retry(5)
       .catch(this.handleError);      

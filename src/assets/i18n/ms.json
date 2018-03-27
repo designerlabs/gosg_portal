@@ -359,6 +359,7 @@
     "tender": "Tender"
   },
   "subscription":{
-    "successMsg" :"Terima kasih. Emel anda telah berjaya disimpan. Emel pengaktifan langganan telah dihantar. Sila klik pada pautan untuk pengaktifan langganan."
+    "successMsg" :"Terima kasih. Emel anda telah berjaya disimpan. Emel pengaktifan langganan telah dihantar. Sila klik pada pautan untuk pengaktifan langganan.",
+    "btnsubscribe" : "Langgan"
   }
 }
