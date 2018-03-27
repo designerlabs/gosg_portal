@@ -1,0 +1,47 @@
+<div class="container-fluid animated slideInDown" style="background: #a7a495;">
+  <div class="container">
+      <div class="row">
+          <div class="col-md-12">
+              <h1 style="margin-top: 10px;" class="font-size-m">{{'agencydir.title' | translate}}</h1>
+              <hr class="hr-custom2">
+              <ul class="list-inline" style="clear:both;">
+                  <li>
+                      <a class="font-size-s" href="/index/">
+                          {{'home.menu.agencycdir' | translate }}
+                      </a>
+                  </li>
+                  <!-- <li>/</li>
+                  <li>
+                      {{'home.breadcrumb.calendar' | translate}}
+                  </li> -->
+              </ul>
+          </div>
+      </div>
+  </div>
+</div>
+<div class="container agcdir">
+  <div class="row">
+    <div class="col-md-12 padding-m">
+      <div class="col-md-6">
+
+        <mat-form-field class="example-full-width">
+          <input matInput (keyup)="applyFilter($event.target.value)" (keydown)="applyFilter($event.target.value)" [(ngModel)]="value" [ngModelOptions]="{standalone: true}" placeholder="{{ 'common.placeholder.keyword' | translate }}">
+          <button mat-button *ngIf="value" matSuffix mat-icon-button (click)="value='';resetSearch()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <div *ngIf="agencyList" style="position:absolute; left: 3%; top:70%; z-index: 9999;">
+          <ul class="list-group pmd-z-depth pmd-list pmd-card-list pmd-list">
+            <li class="list-group-item" *ngFor="let data of agencyList.list">
+              <a class="list-link" (click)="getValue(data?.agencyId, data?.agencyName, data?.agencyMinistry.ministryName, data?.agencyCode, 2)">{{data?.agencyName}}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-6">
+        leaflet
+      </div>
+    </div>
+  </div>
+</div>

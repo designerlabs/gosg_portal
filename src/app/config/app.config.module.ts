@@ -53,6 +53,7 @@ export class AppConfig {
     urlIntSearch:string;
     urlUserType:string;
     urlMail:string;
+    urlAgency:string;
     urlAppAgency:string;
     urlUapStaging:string;
     urlComplete: string;
@@ -123,6 +124,7 @@ export const APP_DI_CONFIG: AppConfig = {
     urlGetProfileEmail: protectedBaseURL+'user/profile/email',
     urlGetProfilePhone: protectedBaseURL+'user/profile/phone',
     urlAppAgency: './app/apidata/appAgency',
+    urlAgency: commonURL + 'agency/language/',
     urlUapStaging: 'https://uapstaging.malaysia.gov.my/uap/validatesigncryption.jsp?language=',
     urlUapStagingProfile: 'https://uapstaging.malaysia.gov.my/myprofile/update/updatechannel.jsp?tag=',
     urlPoll: commonURL + 'polls',
