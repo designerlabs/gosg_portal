@@ -38,11 +38,13 @@ import { AnnouncementlistComponent } from './announcementlist/announcementlist.c
 import { AnnouncementdetailsComponent } from './announcementdetails/announcementdetails.component';
 import { EventCalendarComponent } from './eventcalendar/eventcalendar.component';
 import { OnlineserviceComponent } from './onlineservice/onlineservice.component';
+import { AgencydirectoryComponent } from './agencydirectory/agencydirectory.component';
 // import { SubscriptionComponent } from './subscription/subscription.component';
 
 export const appRoutes: Routes = [
     {path: '404', component: ErrorComponent },
     {path: 'index', component: HomeComponent},
+    {path: 'agencydir', component: AgencydirectoryComponent},
     {path: 'calendar', component: EventCalendarComponent},
     {path: 'search/searchResult', component: SearchResultComponent},
     {path: 'topic/:id', component: ArticleComponent, canActivate: [NavRouterActivator]  },

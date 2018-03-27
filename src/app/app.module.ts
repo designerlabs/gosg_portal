@@ -36,7 +36,6 @@ imports: [
     SharedModule,
     BrowserModule,
     FormsModule,
-    // FullCalendarModule,
     TextMaskModule,
     HttpModule,
     HttpClientModule,
@@ -65,7 +64,7 @@ imports: [
   declarations: [
     AppComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
   
   
   ],
