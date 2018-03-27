@@ -46,9 +46,9 @@
     <div class="row" *ngIf="!showNoData"> -->
       <div class="col-md-4" *ngIf="!showNoData">
         <mat-form-field class="example-full-width font-size-m" style="margin-top: 20px; width:100%">
-          <mat-select placeholder="Select Category" [formControl]="selCategory" multiple required>
+          <mat-select placeholder="Select Category" [formControl]="selCategory" multiple (change)="chk($event)" required>
             <mat-select-trigger>
-              {{selCategory.value ? selCategory.value[0] : ''}}
+              {{selCategoryVal}}
               <span *ngIf="selCategory.value?.length > 1" class="example-additional-selection">
                 (+{{selCategory.value.length - 1}} others)
               </span>

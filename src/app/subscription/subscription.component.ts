@@ -27,6 +27,7 @@ export class SubscriptionComponent implements OnInit {
   public selCategory: FormControl;
   public loading = false;
   dataSubs = [];
+  selCategoryVal;
 
   lang = this.lang;
   languageId = this.languageId;
@@ -83,7 +84,6 @@ export class SubscriptionComponent implements OnInit {
       .map(res => res.json())
       .subscribe(rData => {
         this.sharedService.errorHandling(rData, (function () {
-          debugger;
           if (rData['subscriptionCategories'].length > 0) {
             this.showNoData = false;
             this.dataSubs = rData['subscriptionCategories'];
@@ -98,8 +98,8 @@ export class SubscriptionComponent implements OnInit {
         });
   }
 
-  chk() {
-    debugger;
+  chk(eve) {
+    this.selCategoryVal = eve.source.triggerValue.split(',')[0];
   }
 
   update(formval) {
@@ -107,8 +107,7 @@ export class SubscriptionComponent implements OnInit {
     this.createSubscriptions(formval.txtEmail, formval.selCategory)
     .subscribe(
       data => {
-          debugger;
-          this.resetModal.show();
+          this.toastr.success(this.translate.instant('subscription.successMsg'), '');
       },
       error => {
           this.toastr.error(this.translate.instant('common.err.servicedown'), '');
