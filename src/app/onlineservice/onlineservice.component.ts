@@ -82,7 +82,7 @@ export class OnlineserviceComponent implements OnInit {
   }
 
   getAgencyList() {
-    return this.sharedService.readPortal('agency')
+    return this.sharedService.readPortal('agency','1','999')
       .subscribe(rData => {
         this.listAgency = rData['list'];
       },
@@ -208,7 +208,10 @@ export class OnlineserviceComponent implements OnInit {
     this.pageSize = 10;
     this.selAllAgency(this.pageCount, this.pageSize);
   }
-  chkDocument(val) {
+  chkDocument(e, val) {
+    if(!e.checked){
+      this.selAllAgency(this.pageCount, this.pageSize);
+    };
     this.valByAlpha = "0";
     this.valByAgency = "0";
     let isDocument;

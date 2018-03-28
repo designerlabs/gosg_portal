@@ -6,3 +6,16 @@ a.appUrl:hover, a.appUrl:focus {
   text-decoration: none;
   color: #00bdbb !important;
 }
+
+
+.table-striped>tbody>tr:nth-of-type(odd) {
+  background-color: #e2e2e2 !important;
+}
+
+.onlineSignTag{
+  padding-left:20px;
+}
+
+.onlineSignTag i{
+  font-size:13px;
+}
