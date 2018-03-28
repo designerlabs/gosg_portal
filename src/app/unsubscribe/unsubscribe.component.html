@@ -20,21 +20,20 @@
       </div>
     </div>
   </div>
-  <div style="color: #000; text-align:center">
-      <div class="col-md-12" style="text-align:center">
+  <div class="container" style="color: #000; text-align:center">
+      <div class="col-md-12" style="text-align:center; margin-bottom: 30px;">
           <h2>
             <b>{{'home.breadcrumb.unsubscribe' | translate}}</b>
           </h2>
-        </div>
-      <p>
-        Do you wish to Unsubscribe?.
-      </p> 
-      <div  class="col-md-12" style="margin-top: 5%;text-align:center">
-        <button class="btn btn-md btn-success" (click)="unsubs()">
-          <i class="fa fa-check"> </i> {{'home.breadcrumb.unsubscribe' | translate}}
-        </button>
-        <button class="btn btn-md btn-danger" (click)="gotoHome()">
-            <i class="fa fa-times"> </i> {{'common.buttons.cancel' | translate}}
+          <p>
+            Do you wish to Unsubscribe?.
+          </p> 
+          <button class="btn btn-md btn-success" (click)="unsubs()">
+            <i class="fa fa-check"> </i> {{'home.breadcrumb.unsubscribe' | translate}}
           </button>
-      </div>
+          <button class="btn btn-md btn-danger" (click)="gotoHome()">
+              <i class="fa fa-times"> </i> {{'common.buttons.cancel' | translate}}
+            </button>
+            
+        </div>
   </div>
