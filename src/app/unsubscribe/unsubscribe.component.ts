@@ -52,18 +52,18 @@ export class UnsubscribeComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe(params => {
-      this.emailId = params['email'];
+      this.emailId = params['code'];
       console.log(this.emailId); // Print the parameter to the console. 
   });
   }
 
   unsubs(){
     
-    return this.http.delete(this.config.urlSubscription + '?email='+this.emailId).subscribe(
+    return this.http.get(this.config.urlPortal + 'subscription/unsub?code='+this.emailId).subscribe(
       data => {
         this.toastr.success('Unsubscribe done successfully.');
       }, error => {
-        this.toastr.error('Unsubscribe have some issue.');
+        this.toastr.error('Token is invalid');
       }
     )
     // http://10.1.70.148:8080//portal/unsubscribe?email=f41a5c939e5343b908d8fc447d0c2775effeb0879a982570f6e7dedb601745ef
