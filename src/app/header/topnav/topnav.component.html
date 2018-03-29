@@ -21,7 +21,6 @@
         <li>
           <a routerLinkActive="topactive" [routerLink]="['aboutus']">{{ 'home.menu.aboutus' | translate }}</a>
         </li>
-        <li>|</li>
       </ul>
 
       <ul class="list-inline font-size-s" *ngIf="state"  style="display:inline-block; float:right;">
@@ -89,16 +88,24 @@
           <li class="fontResize"><button  [disabled]="plusBtn" class="fontplus btn btn-default"  (click)="fontplus()" style="border:1px solid white;padding: 3px; height: 25px; width: 28px; font-size:14px;"><i class="fa fa-plus"></i>A</button></li>
           <span><div class="fontreset btn btn-xs btn-default" (click)="fontreset()"><i class="fa fa-refresh"></i></div></span>
             <li style="margin-left: 5px">
-              Font Type :
+                {{ 'home.menu.fonttype' | translate }} :
             </li>
             <li>
                 <label class="sr-only" for="fontOpt">Font Type</label>
+                <select #fontTy (change)="onChange($event, fontTy.value)" id="fontOptSideMenu2" class="form-control">
+                    <option *ngFor="let font of getThemeFonts;" [value]="font.fontName"  [selected]="font.defaultFont" >
+                        {{font.fontName}}
+                    </option>
+                </select>
+
+                  <!-- <span style="clear:both;"><div (click)="resetFontStyle()" id="resetFontStyle" class="btn btn-xs btn-default" style="padding:10px;"><i class="fa fa-refresh"></i></div></span>
+
                 <select #fontTy (change)="onChange($event, fontTy.value)" id="fontOpt" class="form-control">
                     <option class="fontOpt1" value="Roboto">Roboto</option>
                     <option class="fontOpt2" value="Arial">Arial</option>
                     <option class="fontOpt3" value="Times New Roman">Times New Roman</option>
                 </select>
-            </li>
+            </li> -->
             <li>
                 <span><div (click)="resetFontStyle()" id="resetFontStyle" class="btn btn-xs btn-default"><i class="fa fa-refresh"></i></div></span>
             </li>
