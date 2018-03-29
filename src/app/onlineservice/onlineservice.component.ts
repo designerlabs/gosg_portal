@@ -206,6 +206,7 @@ export class OnlineserviceComponent implements OnInit {
     this.valByAgency = "0";
     this.pageCount = 1;
     this.pageSize = 10;
+    this.sharedService.defaultPageSize = this.sharedService.pageSize[0].size;
     this.selAllAgency(this.pageCount, this.pageSize);
   }
   chkDocument(e, val) {
