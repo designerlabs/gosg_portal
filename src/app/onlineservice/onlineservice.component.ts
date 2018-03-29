@@ -80,6 +80,7 @@ export class OnlineserviceComponent implements OnInit {
   }
 
   ngOnInit() {
+    debugger;
     this.valByAlpha = "0";
     this.valByAgency = "0";
     this.getAgencyList();

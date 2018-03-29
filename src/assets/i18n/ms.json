@@ -374,6 +374,8 @@
   "onlineservices": {
     "btnonlineservice" : "Perkhidmatan Dalam Talian",
     "btndownload": "Borang Muat Turun",
-    "agencyappname": "Nama Permohonan Agensi"
+    "agencyappname": "Nama Permohonan Agensi",
+    "basedonagency": "Permohonan berdasarkan Agensi",
+    "basedonatoz" : "Agensi berdasarkan A-Z"
   }
 }

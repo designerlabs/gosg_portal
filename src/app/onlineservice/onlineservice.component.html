@@ -25,7 +25,7 @@
   <div class="row">    
     <div class="form-group col-md-4">
         <mat-form-field class="example-full-width font-size-m" style="width: 100%;">
-          <mat-select id="selbyagency" tabindex="1" placeholder="Application based on Agency" (change)="selByAgency($event)" [(ngModel)]="valByAgency">
+          <mat-select id="selbyagency" tabindex="1" placeholder="{{'onlineservices.basedonagency' | translate}}" (change)="selByAgency($event)" [(ngModel)]="valByAgency">
             <mat-option value="0"> {{'common.selectall' | translate}} </mat-option>
             <mat-option *ngFor="let data of listAgency" [value]="data.list[inxlan]?.agencyId">{{ data.list[inxlan]?.agencyName }}</mat-option>
           </mat-select>
@@ -34,7 +34,7 @@
     <div class="form-group col-md-4">
       <mat-form-field class="example-full-width font-size-m" style="width: 100%;">
          
-        <mat-select id="selbyalpha" tabindex="2" placeholder="Agency based on A-Z" (change)="selByAlpha($event)" [(ngModel)]="valByAlpha">
+        <mat-select id="selbyalpha" tabindex="2" placeholder="{{'onlineservices.basedonatoz' | translate}}" (change)="selByAlpha($event)" [(ngModel)]="valByAlpha">
           <mat-option value="0"> {{'common.selectall' | translate}} </mat-option>
           <mat-option *ngFor="let data of dataAlpha" [value]="data">{{ data }}</mat-option>
         </mat-select>
@@ -68,7 +68,7 @@
             <tr *ngFor="let element of datatblAgency; let i = index;" style="min-height: 50px !important;">
               <td class="font-size-m">{{(seqPageNum == 1) ? (i + 1) : ((seqPageNum * seqPageSize) - seqPageSize) + (i + 1) }}</td>
               <td>
-                <a class="appUrl hoverlnk font-size-m" [href]="element.agencyApplicationUrl" target="_blank"> {{  element.agencyApplicationName}} <span class="onlineSignTag"><i [ngClass]="(!element.agencyApplicationUrl || element.agencyApplicationUrl == '-') ? 'fa fa-unlink' : (element.isDocument) ? 'fa fa-download' : 'fa fa-link'"></i></span></a>
+                <a class="appUrl hoverlnk font-size-m" [href]="element.agencyApplicationUrl" target="_blank"> {{ element.agencyApplicationName}} <span class="onlineSignTag"><i [ngClass]="(!element.agencyApplicationUrl || element.agencyApplicationUrl == '-') ? 'fa fa-unlink' : (element.isDocument) ? 'fa fa-download' : 'fa fa-link'"></i></span></a>
               </td>
             </tr>
         </tbody>

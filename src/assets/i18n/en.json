@@ -374,6 +374,8 @@
    "onlineservices": {
      "btnonlineservice" : "Online Service",
      "btndownload": "Download",
-     "agencyappname": "Agency Application Name"
+     "agencyappname": "Agency Application Name",
+     "basedonagency": "Application based on Agency",
+     "basedonatoz" : "Agency based on A-Z"
   }
 }
