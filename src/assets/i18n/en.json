@@ -275,6 +275,7 @@
     "privacypolicy": "Privacy Policy",
     "securitypolicy": "Security Policy",
     "disclaimer": "Disclaimer",
+    "selectall" : "Select All",
     "placeholder": {
       "keyword":"Keyword"
     },
@@ -369,5 +370,10 @@
   "subscription":{
     "successMsg" :"Thank you. Your email has been successfully saved. An activation email has been sent. Please click on the link to activate the subscription.",
     "btnsubscribe" : "Subscribe"
+  },
+   "onlineservices": {
+     "btnonlineservice" : "Online Service",
+     "btndownload": "Download",
+     "agencyappname": "Agency Application Name"
   }
 }

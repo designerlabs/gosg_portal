@@ -26,8 +26,8 @@
     <div class="form-group col-md-4">
         <mat-form-field class="example-full-width font-size-m" style="width: 100%;">
           <mat-select id="selbyagency" tabindex="1" placeholder="Application based on Agency" (change)="selByAgency($event)" [(ngModel)]="valByAgency">
-            <mat-option value="0"> Select All </mat-option>
-            <mat-option *ngFor="let data of listAgency" [value]="data.list[0]?.agencyId">{{ data.list[0]?.agencyName }}</mat-option>
+            <mat-option value="0"> {{'common.selectall' | translate}} </mat-option>
+            <mat-option *ngFor="let data of listAgency" [value]="data.list[inxlan]?.agencyId">{{ data.list[inxlan]?.agencyName }}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
@@ -35,7 +35,7 @@
       <mat-form-field class="example-full-width font-size-m" style="width: 100%;">
          
         <mat-select id="selbyalpha" tabindex="2" placeholder="Agency based on A-Z" (change)="selByAlpha($event)" [(ngModel)]="valByAlpha">
-          <mat-option value="0"> Select All </mat-option>
+          <mat-option value="0"> {{'common.selectall' | translate}} </mat-option>
           <mat-option *ngFor="let data of dataAlpha" [value]="data">{{ data }}</mat-option>
         </mat-select>
       </mat-form-field>
@@ -43,15 +43,16 @@
   </div>
   <div class="row" style="padding:20px 0px 20px 0px;">
     <div class="col-md-12">
-      <div class="col-md-2">     
-          <mat-checkbox class="example-margin" id="rdoOnline" (change)="chkDocument($event, 1)" [(ngModel)]="chkOnline"><span class="font-size-m">Online Service</span></mat-checkbox>
+      <div class="col-md-4">     
+          <mat-checkbox class="example-margin" id="rdoOnline" (change)="chkDocument($event, 1)" [(ngModel)]="chkOnline" tabindex="3"><span class="font-size-m">
+            {{'onlineservices.btnonlineservice' | translate}}</span></mat-checkbox>
         </div>
-        <div class="col-md-2">        
-        <mat-checkbox class="example-margin font-size-m" id="rdoDown" (change)="chkDocument($event, 2)" [(ngModel)]="chkDownload"><span class="font-size-m">Download</span></mat-checkbox>
+        <div class="col-md-4">        
+        <mat-checkbox class="example-margin font-size-m" id="rdoDown" (change)="chkDocument($event, 2)" [(ngModel)]="chkDownload" tabindex="4"><span class="font-size-m">{{'onlineservices.btndownload' | translate}}</span></mat-checkbox>
         </div>
         <div class="col-md-2">
-            <button mat-raised-button color="warn" type="button" id="btnreset" class="btn btn-md btn-warning pull-right font-size-s" (click)="reset()">
-                <i [ngClass]="sharedService.icon.refresh"></i>&nbsp; Reset</button>
+            <button mat-raised-button color="warn" type="button" id="btnreset" class="btn btn-md btn-warning pull-right font-size-s" (click)="reset()" tabindex="5">
+                <i [ngClass]="sharedService.icon.refresh"></i>&nbsp; {{'common.buttons.reset' | translate}}</button>
         </div>
     </div>
   </div>
@@ -60,7 +61,7 @@
         <thead>
           <tr style="padding:0px 24px">
             <th style="width:2%; font-weight: 800;" class="font-size-m">No</th>
-            <th style="width:80%; font-weight: 800;" class="font-size-m" >Agency Application Name</th>
+            <th style="width:80%; font-weight: 800;" class="font-size-m" >{{'onlineservices.agencyappname' | translate}}</th>
           </tr>
         </thead>
         <tbody>

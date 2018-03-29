@@ -275,6 +275,7 @@
     "privacypolicy": "Dasar Privasi",
     "securitypolicy": "Dasar Keselamatan",
     "disclaimer": "Penafian",
+    "selectall" : "Pilih Semua",
     "placeholder": {
       "keyword":"Kata Kunci"
     },
@@ -369,5 +370,10 @@
   "subscription":{
     "successMsg" :"Terima kasih. Emel anda telah berjaya disimpan. Emel pengaktifan langganan telah dihantar. Sila klik pada pautan untuk pengaktifan langganan.",
     "btnsubscribe" : "Langgan"
+  },
+  "onlineservices": {
+    "btnonlineservice" : "Perkhidmatan Dalam Talian",
+    "btndownload": "Borang Muat Turun",
+    "agencyappname": "Nama Permohonan Agensi"
   }
 }

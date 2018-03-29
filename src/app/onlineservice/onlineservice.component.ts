@@ -72,11 +72,16 @@ export class OnlineserviceComponent implements OnInit {
           this.inxlan = 1;
         });
       }
-      this.getAgencyList();
+      
+      // this.getAgencyList();
+      this.reset();
+     
     });
   }
 
   ngOnInit() {
+    this.valByAlpha = "0";
+    this.valByAgency = "0";
     this.getAgencyList();
     this.selAllAgency(this.pageCount, this.pageSize);
   }
