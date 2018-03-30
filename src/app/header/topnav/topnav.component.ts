@@ -4,6 +4,7 @@ import * as $ from 'jquery';
 import { TranslateService } from '@ngx-translate/core';
 import { TopnavService } from './topnav.service';
 import {SharedService } from '../../common/shared.service';
+import { debug } from 'util';
 let num = 0;
 @Component({
   selector: 'app-topnav',
@@ -30,7 +31,7 @@ export class TopnavComponent implements OnInit, AfterViewInit {
   getThemeFonts: any;
 
   ngAfterViewInit() {
-      this.loadCustomFontType();
+      // this.loadCustomFontType();
   }
 
   @Input() edited = true;
@@ -77,12 +78,14 @@ export class TopnavComponent implements OnInit, AfterViewInit {
   
 
   ngOnInit() {
+
     this.colors = this.topnavservice.getColors();
     this.loadFont();
     this.loadColor();
     this.loadDefaultFonts();
     this.loadDefaultColor();
     this.getLangID();
+   
     console.log('topnav.comp.ts');
 
     this.getUserProfile();
@@ -103,7 +106,7 @@ export class TopnavComponent implements OnInit, AfterViewInit {
         
       })
   }
-
+  
 
   getLangID(){
     if(!localStorage.getItem('langID')){
@@ -192,6 +195,7 @@ export class TopnavComponent implements OnInit, AfterViewInit {
   showConfBar() {
     this.edited = !(this.edited);
     this.topNavClick.emit(this.edited);
+    this.loadCustomFontType();
   }
 
   showProfileMenu(){

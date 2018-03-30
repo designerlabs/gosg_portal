@@ -126,6 +126,7 @@ import { OnlineserviceComponent } from '../onlineservice/onlineservice.component
 import { SubscriptionComponent } from '../subscription/subscription.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 // import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import { UnsubscribeComponent } from '../unsubscribe/unsubscribe.component';
 export function HttpLoaderFactory(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -202,7 +203,8 @@ export function HttpLoaderFactory(http: Http) {
     OnlineserviceComponent,
     EventCalendarComponent,
     AgencydirectoryComponent,
-    SubscriptionComponent
+    SubscriptionComponent,
+    UnsubscribeComponent
   ],
 
   exports: [

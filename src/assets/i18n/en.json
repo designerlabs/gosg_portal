@@ -32,7 +32,8 @@
       "appmgmt": "Application Management",
       "mailbox": "Mail Box",
       "onlineservice": "Online Services",
-      "subscription": "Subscription"
+      "subscription": "Subscription",
+      "unsubscribe": "Unsubscribe"
     },
     "expandButton": {
       "less": "Show Less",
@@ -283,6 +284,7 @@
     "privacypolicy": "Privacy Policy",
     "securitypolicy": "Security Policy",
     "disclaimer": "Disclaimer",
+    "selectall" : "Select All",
     "placeholder": {
       "keyword":"Keyword"
     },
@@ -375,6 +377,14 @@
     "tender": "Tender"
   },
   "subscription":{
-    "successMsg" :"Thank you. Your email has been successfully saved. An activation email has been sent. Please click on the link to activate the subscription."
+    "successMsg" :"Thank you. Your email has been successfully saved. An activation email has been sent. Please click on the link to activate the subscription.",
+    "btnsubscribe" : "Subscribe"
+  },
+   "onlineservices": {
+     "btnonlineservice" : "Online Service",
+     "btndownload": "Download",
+     "agencyappname": "Agency Application Name",
+     "basedonagency": "Application based on Agency",
+     "basedonatoz" : "Agency based on A-Z"
   }
 }

@@ -20,6 +20,7 @@ import { ValidateService } from '../common/validate.service';
   styleUrls: ['./subscription.component.css']
 })
 export class SubscriptionComponent implements OnInit {
+  categoryIds: any;
   subscriptionForm: FormGroup;
   public txtEmail: FormControl;
   public chkAnnounce: FormControl;
@@ -63,6 +64,7 @@ export class SubscriptionComponent implements OnInit {
         });
       }
       // this.getRace(this.languageId);
+      this.getAllCategory();
     });
 
   }
@@ -80,8 +82,7 @@ export class SubscriptionComponent implements OnInit {
 
   getAllCategory() {
     this.loading = true;
-    return this.http.get(this.config.urlSubscription + '?language=' + this.languageId)
-      .map(res => res.json())
+    return this.sharedService.readPortal('/subscription/list')
       .subscribe(rData => {
         this.sharedService.errorHandling(rData, (function () {
           if (rData['subscriptionCategories'].length > 0) {
@@ -120,7 +121,13 @@ export class SubscriptionComponent implements OnInit {
     if(!this.languageId){
       this.languageId = 1;
     }
-    return this.http.post(this.config.urlSubscription + '?email=' + "?language=" +this.languageId, subsval)
+    this.categoryIds = '';
+    subsval.forEach((item, index) => {
+      this.categoryIds += '&categories='+item;
+      console.log(item); // 9, 2, 5
+      console.log(index); // 0, 1, 2
+  });
+    return this.http.get(this.config.urlPortal + 'subscription?email=' + emailval+this.categoryIds)
       .map((response: Response) => response.json())
       .retry(5)
       .catch(this.handleError);      

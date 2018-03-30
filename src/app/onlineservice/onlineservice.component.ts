@@ -72,17 +72,22 @@ export class OnlineserviceComponent implements OnInit {
           this.inxlan = 1;
         });
       }
-      this.getAgencyList();
+      
+      // this.getAgencyList();
+      this.reset();
+     
     });
   }
 
   ngOnInit() {
+    this.valByAlpha = "0";
+    this.valByAgency = "0";
     this.getAgencyList();
     this.selAllAgency(this.pageCount, this.pageSize);
   }
 
   getAgencyList() {
-    return this.sharedService.readPortal('agency')
+    return this.sharedService.readPortal('agency','1','999')
       .subscribe(rData => {
         this.listAgency = rData['list'];
       },
@@ -206,9 +211,13 @@ export class OnlineserviceComponent implements OnInit {
     this.valByAgency = "0";
     this.pageCount = 1;
     this.pageSize = 10;
+    this.sharedService.defaultPageSize = this.sharedService.pageSize[0].size;
     this.selAllAgency(this.pageCount, this.pageSize);
   }
-  chkDocument(val) {
+  chkDocument(e, val) {
+    if(!e.checked){
+      this.selAllAgency(this.pageCount, this.pageSize);
+    };
     this.valByAlpha = "0";
     this.valByAgency = "0";
     let isDocument;
