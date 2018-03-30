@@ -203,7 +203,16 @@
     }
   },
   "agencydir": {
-    "title":"Agencies Directory"
+    "title":"Agencies Directory",
+    "filterby": {
+      "all":"All",
+      "ministry":"Ministry/State",
+      "alphabet":"A-Z"
+    },
+    "label": {
+      "agencyName":"Agency Name",
+      "total":"Total Results"
+    }
   },
   "calendar": {
     "title": "MY CALENDAR",

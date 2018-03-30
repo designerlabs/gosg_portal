@@ -203,7 +203,16 @@
 
   },
   "agencydir": {
-    "title":"Direktori Agensi"
+    "title":"Direktori Agensi",
+    "filterby": {
+      "all":"Semua",
+      "ministry":"Kementerian/Negeri",
+      "alphabet":"A-Z"
+    },
+    "label": {
+      "agencyName":"Nama Agensi",
+      "total":"Jumlah Capaian"
+    }
   },
   "calendar": {
     "title": "MY KALENDAR",

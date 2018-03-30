@@ -124,6 +124,8 @@ import { AnnouncementlistComponent } from '../announcementlist/announcementlist.
 import { NavRouterGuardService } from '../header/nav/nav-router-guard.service';
 import { OnlineserviceComponent } from '../onlineservice/onlineservice.component';
 import { SubscriptionComponent } from '../subscription/subscription.component';
+import {NgxPaginationModule} from 'ngx-pagination';
+// import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 export function HttpLoaderFactory(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -152,7 +154,9 @@ export function HttpLoaderFactory(http: Http) {
     NguiAutoCompleteModule,
     MatDialogModule,
     // DialogsModule,
-    ModalModule.forRoot()
+	  NgxPaginationModule,
+    ModalModule.forRoot(),
+    // LeafletModule.forRoot()
     
   ],
 
@@ -246,6 +250,8 @@ export function HttpLoaderFactory(http: Http) {
     MatCheckboxModule,
     MatDialogModule,
     // DialogsModule,
+    NgxPaginationModule,
+    // LeafletModule,
 
      // CDK
      A11yModule,

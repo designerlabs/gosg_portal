@@ -26,7 +26,8 @@
         "../node_modules/owl.carousel/dist/assets/owl.theme.default.css",
         "../node_modules/animate.css/animate.min.css",
         "../node_modules/ngx-toastr/toastr.css",
-        "./assets/fullcalendar_style/fullcalendar.min.css"
+        "./assets/fullcalendar_style/fullcalendar.min.css",
+        "../node_modules/leaflet/dist/leaflet.css"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",
@@ -61,7 +62,8 @@
         "../node_modules/owl.carousel/dist/assets/owl.theme.default.css",
         "../node_modules/animate.css/animate.min.css",
         "../node_modules/ngx-toastr/toastr.css",
-        "./assets/fullcalendar_style/fullcalendar.min.css"
+        "./assets/fullcalendar_style/fullcalendar.min.css",
+        "../node_modules/leaflet/dist/leaflet.css"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",
