@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Inject } from '@angular/core';
+import { Component, OnInit, Input, Inject, AfterViewInit } from '@angular/core';
 import { SharedService } from '../../common/shared.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
@@ -148,6 +148,28 @@ export class SearchResultComponent implements OnInit {
         // debugger;
     this.searchByKeyword('malaysia');
     }
+    ngAfterViewInit(){
+        // debugger;
+        // this.highlight_words('Malaysia','#intSearch');
+    }
+
+    // highlight_words(word, element) {
+    //     if(word) {
+    //         let textNodes;
+    //         word = word.replace(/\W/g, '');
+    //         let str = word.split(" ");
+    //         $(str).each(function() {
+    //             let term = this;
+    //             let textNodes = $(element).contents().filter(function() { return this.nodeType === 3 });
+    //             textNodes.each(function() {
+    //                 let content = $(this).text();
+    //                 let regex = new RegExp(this.term, "gi");
+    //               content = content.replace(regex, '<span class="highlight">' + term + '</span>');
+    //               $(this).replaceWith(content);
+    //             }.bind(this));
+    //         });
+    //     }
+    // }
 
     searchByKeyword(valkeyword) {
         this.loading = true;

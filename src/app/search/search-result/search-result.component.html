@@ -136,7 +136,7 @@
             <div class="tab-content">
                 <div id="local" class="tab-pane fade in active">
                     <ul id="intSearch">
-                        <li *ngFor="let int of intData">
+                        <li *ngFor="let int of intData; let i = index;">
                                 <!-- <h4>
                                     <a class="titleSer warna_title_color font-size-m">{{int.article_name}}</a>
                                 </h4>
@@ -144,7 +144,7 @@
                                 <!-- <p style="padding-top:15px" class="font-size-s sertxt">{{int.article_text_clean.trim() | slice:0:200}}
                                                 <span *ngIf="int.article_text_clean.trim().length > 200">...</span>
                                         </p> -->
-                                <int-search [showdata]="int" ></int-search>
+                                <int-search [showdata]="int" [indx]="i"></int-search>
                         </li>
                     </ul>
                 </div>
