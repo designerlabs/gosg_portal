@@ -136,13 +136,17 @@ export class OnlineserviceComponent implements OnInit {
 
   selByAlpha(eve) {
     console.log(eve.value);
+    this.getDataSelByAlpha(eve.value);
+  }
+
+  getDataSelByAlpha(val){
     let dataUrl="";
-      if (eve.value !== "0") {
+      if (val !== "0") {
         this.loading = true;
         if(this.valByAgency !== "0"){
-          dataUrl='agency/application/search?letter=' + eve.value +'&agencyId=' + this.valByAgency + '&page=' + this.pageCount + '&size=' + this.pageSize;
+          dataUrl='agency/application/search?letter=' + val +'&agencyId=' + this.valByAgency + '&page=' + this.pageCount + '&size=' + this.pageSize;
         }else{
-          dataUrl = 'agency/application/search?letter=' + eve.value + '&page=' + this.pageCount + '&size=' + this.pageSize ;
+          dataUrl = 'agency/application/search?letter=' + val + '&page=' + this.pageCount + '&size=' + this.pageSize ;
         }
         // return this.sharedService.readPortal(dataUrl, this.pageCount, this.pageSize)
         return this.http.get( this.config.urlPortal + dataUrl + '&language=' + this.languageId)
@@ -255,21 +259,44 @@ export class OnlineserviceComponent implements OnInit {
   }
 
   paginatorL(page) {
-    this.selAllAgency(page - 1, this.pageSize);
     this.noPrevData = page <= 2 ? true : false;
     this.noNextData = false;
+    this.pageCount = page - 1;
+
+    if(this.valByAgency != "0" ){
+      this.getDataSelByAgency(this.valByAgency);
+    }else if(this.valByAlpha != "0"){
+      this.getDataSelByAlpha(this.valByAlpha);
+    }else{
+      this.selAllAgency(page - 1, this.pageSize);
+    }  
   }
 
   paginatorR(page, totalPages) {
     this.noPrevData = page >= 1 ? false : true;
     let pageInc: any;
     pageInc = page + 1;
-    this.selAllAgency(pageInc, this.pageSize);
+    this.pageCount = pageInc;
+
+    if(this.valByAgency != "0" ){
+      this.getDataSelByAgency(this.valByAgency);
+    }else if(this.valByAlpha != "0"){
+      this.getDataSelByAlpha(this.valByAlpha);
+    }else{
+      this.selAllAgency(pageInc, this.pageSize);
+    }   
   }
 
   pageChange(event, totalPages) {
     this.pageSize = event.value;
-    this.selAllAgency(this.pageCount, event.value);
+    this.pageCount = 1;
+    if(this.valByAgency != "0" ){
+      this.getDataSelByAgency(this.valByAgency);
+    }else if(this.valByAlpha != "0"){
+      this.getDataSelByAlpha(this.valByAlpha);
+    }else{
+      this.selAllAgency(this.pageCount, event.value);
+    }       
     this.noPrevData = true;
   }
 

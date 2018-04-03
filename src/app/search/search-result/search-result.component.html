@@ -3,101 +3,111 @@
         <div class="col-md-3">
             <h3>Advance Search</h3>
         </div>
-        <div class="col-md-9 hidden-xs">
+        <!-- <div class="col-md-9 hidden-xs">
           <h3>Search Result</h3>
             <span class="btn btn-default pull-right font-size-s" *ngIf="">English</span>
             <span class="btn btn-default pull-right font-size-s" *ngIf="">Bahasa Malaysia</span>
-        </div>
+        </div> -->
     </div>
     <div class="row">
         <div class="col-md-3">
             <div *ngIf="local">
                 <div class="panel-group" id="internal">
                     <div class="panel panel-default">
-                      <div class="panel-heading">
-                        <h4 class="panel-title">
-                          <a data-toggle="collapse" data-parent="#internal" href="#keywordSetting">Keyword Setting</a>
-                        </h4>
-                      </div>
-                      <div id="keywordSetting" class="panel-collapse collapse in">
-                        <div class="panel-body">
-                            <div class="radio" *ngFor="let k of keywordType">
-                                <label><input type="radio" name="setkeyword"> {{k.nameMs}}</label>
-                                <div class="form-group" >
-                                    <input class="form-control" type="text" placeholder="Selain perkataan">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#internal">Keyword Setting</a>
+                                <!--  href="#keywordSetting" -->
+                            </h4>
+                        </div>
+                        <div id="keywordSetting" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                <div class="radio" *ngFor="let k of keywordType">
+                                    <label>
+                                        <input type="radio" name="setkeyword"> {{k.nameMs}}</label>
+                                    <div class="form-group">
+                                        <input class="form-control" type="text" placeholder="Selain perkataan">
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                      </div>
                     </div>
                     <div class="panel panel-default">
-                      <div class="panel-heading">
-                        <h4 class="panel-title">
-                          <a data-toggle="collapse" data-parent="#internal" href="#specification">Specification</a>
-                        </h4>
-                      </div>
-                      <div id="specification" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <div class="checkbox" *ngFor="let i of internalSpec">
-                              <label><input type="checkbox">{{i.nameMs}}</label>
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#internal">Specification</a>
+                                <!--href="#specification" -->
+                            </h4>
+                        </div>
+                        <div id="specification" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <div class="checkbox" *ngFor="let i of internalSpec">
+                                    <label>
+                                        <input type="checkbox">{{i.nameMs}}</label>
+                                </div>
                             </div>
                         </div>
-                      </div>
                     </div>
                     <div class="panel panel-default">
-                      <div class="panel-heading">
-                        <h4 class="panel-title">
-                          <a data-toggle="collapse" data-parent="#internal" href="#filter">Filter</a>
-                        </h4>
-                      </div>
-                      <div id="filter" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <div class="panel-group" id="filterItem">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#filterItem" href="#filterByDate">Tarikh</a></h4>
-                                    </div>
-                                    <div id="filterByDate" class="panel-collapse collapse">
-                                        <div class="panel-body">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#internal">Filter</a>
+                                <!--  href="#filter" -->
+                            </h4>
+                        </div>
+                        <div id="filter" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <div class="panel-group" id="filterItem">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#filterItem">Tarikh</a>
+                                            </h4>
+                                            <!--href="#filterByDate" -->
+                                        </div>
+                                        <div id="filterByDate" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#filterItem" href="#filterByAuthor">Author</a></h4>
-                                    </div>
-                                    <div id="filterByAuthor" class="panel-collapse collapse">
-                                        <div class="panel-body">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#filterItem" href="#filterByAuthor">Author</a>
+                                            </h4>
+                                        </div>
+                                        <div id="filterByAuthor" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#filterItem" href="#filterByTopic">Topic</a></h4>
-                                    </div>
-                                    <div id="filterByTopic" class="panel-collapse collapse">
-                                        <div class="panel-body">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#filterItem" href="#filterByTopic">Topic</a>
+                                            </h4>
+                                        </div>
+                                        <div id="filterByTopic" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#filterItem" href="#filterBySubTopic">Sub Topic</a></h4>
-                                    </div>
-                                    <div id="filterBySubTopic" class="panel-collapse collapse">
-                                        <div class="panel-body">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#filterItem" href="#filterBySubTopic">Sub Topic</a>
+                                            </h4>
+                                        </div>
+                                        <div id="filterBySubTopic" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                      </div>
                     </div>
-                </div> 
+                </div>
             </div>
             <div *ngIf="os">
             </div>
@@ -108,25 +118,42 @@
             <div class="input-group form-group">
                 <input class="form-control" type=text />
                 <span class="input-group-addon warna_bg">
-                    <i class="fa fa-search"></i> 
-                    <span class="hidden-xs font-size-s"></span> 
+                    <i class="fa fa-search"></i>
+                    <span class="hidden-xs font-size-s"></span>
                 </span>
             </div>
             <ul class="nav nav-tabs themeColor">
-                  <li class="active"><a class="font-size-s" data-toggle="tab" href="#local">Internal</a></li>
-                  <li><a class="font-size-s" data-toggle="tab" href="#os">Online Services</a></li>
-                  <li><a class="font-size-s" data-toggle="tab" href="#global">Global</a></li>
+                <li class="active">
+                    <a class="font-size-s" data-toggle="tab" href="#local">Internal</a>
+                </li>
+                <li>
+                    <a class="font-size-s" data-toggle="tab" href="#os">Online Services</a>
+                </li>
+                <li>
+                    <a class="font-size-s" data-toggle="tab" href="#global">Global</a>
+                </li>
             </ul>
             <div class="tab-content">
-              <div id="local" class="tab-pane fade in active">
-                  <int-search></int-search>                            
-              </div>
-              <div id="os" class="tab-pane fade">
-                  Online Service Result
-              </div>
-              <div id="global" class="tab-pane fade">
-                  Global Result
-              </div>
+                <div id="local" class="tab-pane fade in active">
+                    <ul id="intSearch">
+                        <li *ngFor="let int of intData">
+                                <!-- <h4>
+                                    <a class="titleSer warna_title_color font-size-m">{{int.article_name}}</a>
+                                </h4>
+                                <span class="cat">{{int.category_name}}</span> -->
+                                <!-- <p style="padding-top:15px" class="font-size-s sertxt">{{int.article_text_clean.trim() | slice:0:200}}
+                                                <span *ngIf="int.article_text_clean.trim().length > 200">...</span>
+                                        </p> -->
+                                <int-search [showdata]="int" ></int-search>
+                        </li>
+                    </ul>
+                </div>
+                <div id="os" class="tab-pane fade">
+                    Online Service Result
+                </div>
+                <div id="global" class="tab-pane fade">
+                    Global Result
+                </div>
             </div>
         </div>
     </div>
@@ -200,6 +227,3 @@
     </div>
 </div>
 -->
-
-   
-  
