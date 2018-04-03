@@ -106,7 +106,7 @@ export class ProtectedService {
 
   deleteMail(msgId){
     return this.http
-    .delete(this.mailUrl+"delete/"+msgId).map((response: Response) => response.json())
+    .delete(this.mailUrl+msgId).map((response: Response) => response.json())
     .catch(this.handleError);
   }
   
@@ -160,7 +160,7 @@ export class ProtectedService {
 
   getMail(msgId){
     return this.http
-    .get(this.mailUrl+"id/"+msgId).map((response: Response) => response.json())
+    .get(this.mailUrl+msgId).map((response: Response) => response.json())
     .catch(this.handleError);
   }
 

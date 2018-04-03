@@ -49,13 +49,13 @@
             <td width="10%" class="mat-header-cell">{{'mailbox.header.date' | translate}}</td>
             <td width="15%" class="mat-header-cell text-center">{{'mailbox.header.action' | translate}}</td>
           </tr>
-          <tr class="mat-row table_row table_row_height" *ngFor="let data of mailData?.messageList" [style.font-weight]="data.read ? '' : 'bold'">
-            <td class="mat-cell text-center"><mat-checkbox [value]="data.messageId"  (change)="isChecked($event);"></mat-checkbox></td>
+          <tr class="mat-row table_row table_row_height" *ngFor="let data of mailData?.list" [style.font-weight]="data.read ? '' : 'bold'">
+            <td class="mat-cell text-center"><mat-checkbox [value]="data.inboxId"  (change)="isChecked($event);"></mat-checkbox></td>
             <td class="mat-cell">{{data.fromUser.email}}</td>
             <td class="mat-cell">{{data.subject}}</td>
             <td class="mat-cell">{{data.submissionDate | date}}</td>
             <td class="mat-cell text-center"> 
-              <button (click)="getMail($event, data.messageId)" class="btn btn-sm btn-warning"><i class="fa fa-eye font-size-s"></i></button>
+              <button (click)="getMail($event, data.inboxId)" class="btn btn-sm btn-warning"><i class="fa fa-eye font-size-s"></i></button>
               <button class="btn btn-sm btn-danger" (click)="deleteModal.show()"><i class="fa fa-trash font-size-s"></i></button>
             </td>
             <app-confirm-dialog  #deleteModal 
@@ -63,7 +63,7 @@
             [content]="'common.msg.delete'"
             [state]="'common.state.warn'"
             [isReset]="'true'"
-            (resetMethod)="resetMethod($event, data.messageId)">
+            (resetMethod)="resetMethod($event, data.inboxId)">
             </app-confirm-dialog>
 
           </tr>

@@ -62,6 +62,7 @@ export class MailboxComponent implements OnInit {
     this.protectedService.getMails(page, size).
     subscribe(data => {
       this.mailData  = data;
+      this.noNextData = data.pageNumber === data.totalPages;
     },
     Error => {
 
