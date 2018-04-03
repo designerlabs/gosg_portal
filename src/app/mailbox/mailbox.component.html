@@ -27,18 +27,17 @@
       <div class="col-md-9 mat-elevation-z8" style="margin-top:15px;">
         <div class="deleteAllBtn"><button [disabled]="!mailboxId.length > 0" mat-raised-button color="warn" (click)="deleteAllModal.show()"><i class="fa fa-trash"></i> {{'common.buttons.delete' | translate}}</button></div>
         <div class="row"></div>
-        <div class="row mailContainer" *ngIf="mailContent?.message?.fromUser.email" [style.display]="isMailContainerShow">
+        <div class="row mailContainer" *ngIf="mailContent?.object?.fromUser.email" [style.display]="isMailContainerShow">
               <p class="font-size-s">
-                From: {{mailContent?.message?.fromUser.email}} 
+                From: {{mailContent?.object?.fromUser.email}} 
               </p>
               <p class="font-size-s">
-                Date: {{mailContent?.message?.submissionDate | date}}
+                Date: {{mailContent?.object?.submissionDate | date}}
               </p>
               <p class="font-size-s">
-                Subject: {{mailContent?.message?.subject}} 
+                Subject: {{mailContent?.object?.subject}} 
               </p>
-              <div class="font-size-m">
-                {{mailContent?.message?.content}}
+              <div class="font-size-m" [innerHtml]="mailContent?.object?.content">
               </div>
         </div>
         <table class="mat-table" style="width:100%">
