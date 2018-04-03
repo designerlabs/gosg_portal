@@ -72,7 +72,7 @@ export class AppManagementComponent implements OnInit {
   }
 
   getMails(page, size){
-    this.protectedService.getMails('930701055000', page, size).
+    this.protectedService.getMails(page, size).
     subscribe(data => {
       this.mailData  = data;
     },
