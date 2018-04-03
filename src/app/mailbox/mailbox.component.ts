@@ -26,6 +26,7 @@ export class MailboxComponent implements OnInit {
   rerender = false;
   isMailContainerShow = 'block';
   languageId = this.languageId;
+  showNoData = false;
   constructor(
     private protectedService: ProtectedService,
     private dialogsService: DialogsService,
@@ -51,7 +52,13 @@ export class MailboxComponent implements OnInit {
     this.protectedService.getMail(msgId).
     subscribe(data => {
       this.isMailContainerShow = 'block'
-      this.mailContent  = data;
+      // if(data.object.length > 0){
+        this.mailContent  = data;
+        // this.showNoData = false;
+      // }else{
+        // this.showNoData = true;
+      // }
+      
     },
     Error => {
      this.toastr.error(this.translate.instant('mailbox.err.failtoload'), '');            
