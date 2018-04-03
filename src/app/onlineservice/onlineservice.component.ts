@@ -98,6 +98,8 @@ export class OnlineserviceComponent implements OnInit {
   }
 
   selByAgency(eve) {
+    this.pageCount = 1;
+    this.noPrevData = true;
     this.chkDownload = false;
     this.chkOnline = false;
     this.valByAlpha = "0";    
@@ -138,6 +140,8 @@ export class OnlineserviceComponent implements OnInit {
   }
 
   selByAlpha(eve) {
+    this.pageCount = 1;
+    this.noPrevData = true;
     this.chkDownload = false;
     this.chkOnline = false;
     console.log(eve.value);

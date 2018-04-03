@@ -12,7 +12,7 @@ declare var $ :any;
                   <a class="titleSer warna_title_color font-size-m">{{showdata.article_name}}</a>
                 </h4>
                 <span class="cat">{{showdata.category_name}}</span>
-                <p style="padding-top:15px" class="font-size-s sertxt" id="{{showdata.idarticle}}"> {{showdata.article_text_clean.trim() | slice:0:200}}
+                <p style="padding-top:15px" class="font-size-s sertxt" id="{{showdata.idarticle}}" [innerHtml]="dataHilight"> {{showdata.article_text_clean.trim() | slice:0:200}}
                 <span *ngIf="showdata.article_text_clean.trim().length > 200">...</span></p>`,
     styleUrls: ['./search-result/search-result.component.css'],
     // template: `<h4>Hello</h4>`
@@ -21,6 +21,7 @@ export class SearchIntComponent implements OnInit {
     // @Input() showdata = new EventEmitter();
     @Input() showdata = [];
     @Input() indx = 0;
+    dataHilight="";
     constructor(private router: Router, private searchService:SearchService) { }
     
     getTheme(){
