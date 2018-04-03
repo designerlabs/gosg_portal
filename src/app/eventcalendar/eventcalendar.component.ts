@@ -172,7 +172,7 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
       $('#calendar').fullCalendar('destroy');
       $('#calendar').fullCalendar(this.options);
 
-      $('<div class="col-md-5 pull-right" style="border: 0px solid #000; text-align: right; margin-right: -6.5%; margin-top: -2%">'
+      $('<div class="col-md-5 pull-right" style="border: 0px solid #000; text-align: right; position:absolute; top:0px; right:0px;">'
         +'<div class="col-md-2" style="text-align: right"><label>'+this.translate.instant('calendar.view.note')+'</label>:</div>'
         +'<div class="col-md-5" style="text-align: center; background: #3a87ad; color: #fafafa; width: 150px; height: 20px">'+this.translate.instant('calendar.view.internaldata')+'</div>'
         +'<div class="col-md-5" style="text-align: center; background: #0aaaaa; color: #fafafa; width: 150px; height: 20px">'+this.translate.instant('calendar.view.externaldata')+'</div>'
