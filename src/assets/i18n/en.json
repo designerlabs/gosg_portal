@@ -310,7 +310,8 @@
     "msg":{
       "reset":"Reset this form?",
       "delete":"Are you sure to delete the record?",
-      "success":"Successfully added!"  
+      "success":"Successfully added!",
+      "nodata": "No data found"  
     },
     "state":{
       "success":"bg_header bg_success_header",

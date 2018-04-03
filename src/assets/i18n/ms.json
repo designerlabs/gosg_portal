@@ -310,7 +310,8 @@
     "msg":{
       "reset":"Set semula borang ini?",
       "delete":"Padam mesej ini?",
-      "success":"Successfully added!" 
+      "success":"Successfully added!",
+      "nodata": "Tiada maklumat" 
     },
     "state":{
       "success":"bg_header bg_success_header",

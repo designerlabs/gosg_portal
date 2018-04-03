@@ -32,6 +32,7 @@ import { AnnouncementComponent } from './announcement/announcement.component';
 import { AnnouncementlistComponent } from './announcementlist/announcementlist.component';
 import { AnnouncementdetailsComponent } from './announcementdetails/announcementdetails.component';
 import { EventCalendarComponent } from './eventcalendar/eventcalendar.component';
+import { OnlineserviceComponent } from './onlineservice/onlineservice.component';
 // 
 // import { NavRouterActivator } from './header/nav/nav-router-activator.service'
 
@@ -67,6 +68,7 @@ export const protectedRoutes: Routes = [
     {path: 'contact', component: ContactComponent},
     {path: 'mailbox', component: MailboxComponent},
     {path: 'feedback', component: FeedbackProtectedComponent},
+    {path: 'onlineservice', component: OnlineserviceComponent},
     {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
     {path: '**', component: ErrorComponent}
     //{path: 'user', loadChildren: 'app/user/user.module#UserModule'}
