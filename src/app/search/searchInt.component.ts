@@ -12,16 +12,17 @@ declare var $ :any;
                   <a class="titleSer warna_title_color font-size-m">{{showdata.article_name}}</a>
                 </h4>
                 <span class="cat">{{showdata.category_name}}</span>
-                <p style="padding-top:15px" class="font-size-s sertxt" id="{{showdata.idarticle}}" [innerHtml]="dataHilight"> {{showdata.article_text_clean.trim() | slice:0:200}}
-                <span *ngIf="showdata.article_text_clean.trim().length > 200">...</span></p>`,
+                <p style="padding-top:15px" class="font-size-s sertxt" id="{{showdata.idarticle}}" [innerHtml]="dataHilight"> 
+                </p>`,
     styleUrls: ['./search-result/search-result.component.css'],
     // template: `<h4>Hello</h4>`
 })
 export class SearchIntComponent implements OnInit {
     // @Input() showdata = new EventEmitter();
-    @Input() showdata = [];
+    @Input() showdata : any;
     @Input() indx = 0;
-    dataHilight="";
+    dataHilight;
+    span = document.createElement("span");
     constructor(private router: Router, private searchService:SearchService) { }
     
     getTheme(){
@@ -46,34 +47,45 @@ export class SearchIntComponent implements OnInit {
     }
 
     addHighlight(){
-      let span = document.createElement("span");
-      let datapath = document.getElementsByClassName('sertxt');
-      let nameNode = document.createTextNode("some text here"); 
-      span.appendChild(nameNode);
+      let span1 = document.createElement("span");
+      
+      let maintxt = this.showdata.article_text_clean;
+      // this.dataHilight = maintxt.replace('Malaysia','<b>Malaysia</b>')
+      let nameNode = document.createTextNode(maintxt); 
+      span1.appendChild(nameNode);
       // $('#intSearch .sertxt')[this.indx].append(span);
-      // this.highlight_words('Malaysia','#intSearch');
+      let resStr = this.highlight_words("Malaysia", span1);
+      if(resStr.trim().length > 200){
+        this.dataHilight = resStr.slice(0,200) + '...';
+      }else{
+        this.dataHilight = resStr;
+      }
+      
       // document.getElementsByClassName('sertxt').appendChild(span); 
       // let element: HTMLElement = document.getElementsByClassName('sertxt');
       // $('#intSearch .sertxt').appendChild(span);
      
     }
-  //   highlight_words(word, element) {
-  //     if(word) {
-  //         var textNodes;
-  //         word = word.replace(/\W/g, '');
-  //         var str = word.split(" ");
-  //         $(str).each(function() {
-  //             var term = this;
-  //             var textNodes = $(element).contents().filter(function() { return this.nodeType === 3 });
-  //             textNodes.each(function() {
-  //               var content = $(this).text();
-  //               var regex = new RegExp(term, "gi");
-  //               content = content.replace(regex, '<span class="highlight">' + term + '</span>');
-  //               $(this).replaceWith(content);
-  //             });
-  //         });
-  //     }
-  // }
+    highlight_words(word, element) {
+      if(word) {
+          var textNodes;
+          var resData;
+          word = word.replace(/\W/g, '');
+          var str = word.split(" ");
+          $(str).each(function() {
+              var term = "Malaysia";
+              var textNodes = $(element).contents().filter(function() { return this.nodeType === 3 });
+              textNodes.each(function() {
+                var content = $(this).text();
+                var regex = new RegExp(term, "gi");
+                resData = content.replace(regex, '<span class="highlightWord">' + term + '</span>');
+                // $(this).replaceWith(content);
+                // this.dataHilight = content;                
+              });
+          });
+          return resData;
+      }
+  }
 
     
 }
