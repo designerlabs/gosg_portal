@@ -56,7 +56,7 @@ export class ProtectedService {
   private getUserUrl: string = this.config.urlGetUser;
   private pollUrl: string = this.config.urlPollProtected;
   // private serviceUrl = 'https://jsonplaceholder.typicode.com/users';
-  private inboxUrl = this.mailUrl+"pages/";
+  private inboxUrl = this.mailUrl;
 
 
   createProfile(user) {
@@ -97,9 +97,9 @@ export class ProtectedService {
     .catch(this.handleError);
   }
 
-  getMails(icno, pages, size){
+  getMails(pages, size){
     return this.http
-    .get(`${this.inboxUrl}${icno}?page=${pages}&size=${size}`)
+    .get(`${this.inboxUrl}?page=${pages}&size=${size}`)
     .map((response: Response) => response.json())
     .catch(this.handleError);
   }
