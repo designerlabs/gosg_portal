@@ -300,6 +300,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
             this.nonCiti = false;
             this.RemoveNonCitizenCtrl();
             this.addCitizenCtrl();
+            this.citizenFormGrp.get('codeTelefon').setValue('60');
         }
     }
 
