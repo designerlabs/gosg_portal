@@ -21,7 +21,8 @@
     "search": {
       "label": "How Can We Help You?",
       "find": "FIND",
-      "instruction": "Type search keywords here"
+      "instruction": "Type search keywords here",
+      "searchresult": "Search Results"      
     },
     "breadcrumb": {
       "calendar": "Calendar",
@@ -33,7 +34,8 @@
       "mailbox": "Mail Box",
       "onlineservice": "Online Services",
       "subscription": "Subscription",
-      "unsubscribe": "Unsubscribe"
+      "unsubscribe": "Unsubscribe",
+      "search": "Search"
     },
     "expandButton": {
       "less": "Show Less",

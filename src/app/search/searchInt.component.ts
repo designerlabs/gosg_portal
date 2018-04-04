@@ -55,8 +55,8 @@ export class SearchIntComponent implements OnInit {
       span1.appendChild(nameNode);
       // $('#intSearch .sertxt')[this.indx].append(span);
       let resStr = this.highlight_words("Malaysia", span1);
-      if(resStr.trim().length > 200){
-        this.dataHilight = resStr.slice(0,200) + '...';
+      if(resStr.trim().length > 300){
+        this.dataHilight = resStr.slice(0,300) + '...';
       }else{
         this.dataHilight = resStr;
       }

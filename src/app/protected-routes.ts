@@ -33,7 +33,8 @@ import { AnnouncementlistComponent } from './announcementlist/announcementlist.c
 import { AnnouncementdetailsComponent } from './announcementdetails/announcementdetails.component';
 import { EventCalendarComponent } from './eventcalendar/eventcalendar.component';
 import { OnlineserviceComponent } from './onlineservice/onlineservice.component';
-// 
+import { SubscriptionComponent } from './subscription/subscription.component';
+import { UnsubscribeComponent } from './unsubscribe/unsubscribe.component';
 // import { NavRouterActivator } from './header/nav/nav-router-activator.service'
 
 // import { appRoutes } from './routes';
@@ -69,6 +70,8 @@ export const protectedRoutes: Routes = [
     {path: 'mailbox', component: MailboxComponent},
     {path: 'feedback', component: FeedbackProtectedComponent},
     {path: 'onlineservice', component: OnlineserviceComponent},
+    {path: 'subscription', component: SubscriptionComponent},
+    {path: 'unsubscribe', component: UnsubscribeComponent},
     {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
     {path: '**', component: ErrorComponent}
     //{path: 'user', loadChildren: 'app/user/user.module#UserModule'}

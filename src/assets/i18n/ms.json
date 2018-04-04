@@ -21,7 +21,8 @@
     "search": {
       "label": "Bagaimana Kami Boleh Membantu Anda?",
       "find": "CARI",
-      "instruction": "Taipkan kata kunci carian di sini"
+      "instruction": "Taipkan kata kunci carian di sini",
+      "searchresult": "Keputusan Carian" 
     },
     "breadcrumb":{
       "calendar": "Kalendar",
@@ -33,7 +34,8 @@
       "mailbox": "Peti Pesanan",
       "onlineservice": "Perkhidmatan Dalam Talian",
       "subscription": "Langganan",
-      "unsubscribe": "Hentikan langganan"
+      "unsubscribe": "Hentikan langganan",
+      "search": "Search"
     },
     "expandButton": {
       "less": "Lihat Ringkasan",
