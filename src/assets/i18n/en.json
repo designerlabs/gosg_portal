@@ -21,7 +21,8 @@
     "search": {
       "label": "How Can We Help You?",
       "find": "FIND",
-      "instruction": "Type search keywords here"
+      "instruction": "Type search keywords here",
+      "searchresult": "Search Results"      
     },
     "breadcrumb": {
       "calendar": "Calendar",
@@ -33,7 +34,8 @@
       "mailbox": "Mail Box",
       "onlineservice": "Online Services",
       "subscription": "Subscription",
-      "unsubscribe": "Unsubscribe"
+      "unsubscribe": "Unsubscribe",
+      "search": "Search"
     },
     "expandButton": {
       "less": "Show Less",
@@ -319,7 +321,8 @@
     "msg":{
       "reset":"Reset this form?",
       "delete":"Are you sure to delete the record?",
-      "success":"Successfully added!"  
+      "success":"Successfully added!",
+      "nodata": "No data found"  
     },
     "state":{
       "success":"bg_header bg_success_header",
@@ -385,6 +388,6 @@
      "btndownload": "Download",
      "agencyappname": "Agency Application Name",
      "basedonagency": "Application based on Agency",
-     "basedonatoz" : "Agency based on A-Z"
+     "basedonatoz" : "Application based on A-Z"
   }
 }

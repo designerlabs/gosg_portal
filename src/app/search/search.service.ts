@@ -21,14 +21,17 @@ export class obj {
 
 }
 
+
+
 @Injectable()
 export class SearchService {
-
     private intSource = new BehaviorSubject<any>(obj);
     
     private internalUrl: string = this.config.urlIntSearch;
 
     constructor(private http: Http, @Inject(APP_CONFIG) private config: AppConfig) {   }
+
+    searchResData = [];
 
     getInternal(data){
         return this.http.post(this.internalUrl, data).map((response:Response) => response.json())
@@ -39,7 +42,8 @@ export class SearchService {
     }
 
     getIntData(){
-        return this.intSource.asObservable();
+        // return this.intSource.asObservable();
+        return this.searchResData;
     }
 
     

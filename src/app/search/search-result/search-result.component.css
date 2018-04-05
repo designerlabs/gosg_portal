@@ -1,0 +1,29 @@
+#intSearch {
+    list-style: none;
+    padding-left: 0;
+}
+
+a.titleSer {
+    color: #1ebebc !important;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.cat {
+    background-color: #666;
+    color: #fff;
+    padding: 5px;
+    font-size: 12px;
+    width: auto;
+}
+#intSearch li {
+    padding: 5px 0px;
+}
+#intSearch li p span.highlight {
+    font-weight: 700;
+    background-color: transparent;
+    color: #333;
+    font-size: 14px;
+    padding: 0;
+}
+

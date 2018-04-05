@@ -97,11 +97,11 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
       $('#calendar').fullCalendar('destroy');
       $('#calendar').fullCalendar(this.options);
 
-      $('<div class="col-md-5 pull-right" style="border: 0px solid #000; text-align: right; margin-right: -6.5%; margin-top: -2%">'
-        +'<div class="col-md-2" style="text-align: right"><label>'+this.translate.instant('calendar.view.note')+'</label>:</div>'
-        +'<div class="col-md-5" style="text-align: center; background: #3a87ad; color: #fafafa; width: 150px; height: 20px">'+this.translate.instant('calendar.view.internaldata')+'</div>'
-        +'<div class="col-md-5" style="text-align: center; background: #0aaaaa; color: #fafafa; width: 150px; height: 20px">'+this.translate.instant('calendar.view.externaldata')+'</div>'
-        +'</div>').insertBefore($('.fc-view-container'));
+      // $('<div class="col-md-5 pull-right" style="border: 0px solid #000; text-align: right; margin-right: -6.5%; margin-top: -2%">'
+        // +'<div class="col-md-2" style="text-align: right"><label>'+this.translate.instant('calendar.view.note')+'</label>:</div>'
+        // +'<div class="col-md-5" style="text-align: center; background: #3a87ad; color: #fafafa; width: 150px; height: 20px">'+this.translate.instant('calendar.view.internaldata')+'</div>'
+        // +'<div class="col-md-5" style="text-align: center; background: #0aaaaa; color: #fafafa; width: 150px; height: 20px">'+this.translate.instant('calendar.view.externaldata')+'</div>'
+        // +'</div>').insertBefore($('.fc-view-container'));
       // alert(this.localeVal)
     });
     
@@ -113,6 +113,55 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
     this.localeVal = 'en-us';
     console.log(this.localeVal)
     this.getEvents();
+
+    this.options = {
+      locale: this.localeVal?this.localeVal: this.lang,
+      editable: false,
+      eventLimit: false,
+      header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: null
+        //  right: 'month,agendaWeek,agendaDay,listMonth'
+      },
+      events: this.event,
+      eventClick: function(events) {
+
+        if(events.ext == true)
+          $('#titleHeader').css({'background': '#0aaaaa','border-radius':'6px 6px 0px 0px', 'border-bottom':'1px #666 solid'});
+        else
+          $('#titleHeader').css({'background': '#3a87ad','border-radius':'6px 6px 0px 0px', 'border-bottom':'1px #333 solid'});
+        
+        $('#title').html(events.title);
+        $('#loc').html(events.location);
+        $('#start').html(this.datePipe.transform(events.start._d, 'dd/MM/yyyy h:mm aa'));
+        $('#end').html(this.datePipe.transform(events.end._d, 'dd/MM/yyyy h:mm aa'));
+        $('#desc').html(events.desc);
+        
+        $('#details').css('display','block');
+        $('.overlay').css('display','block');
+        
+        console.log(events)
+      },
+      eventMouseover: function(events) {
+        $('.fc-event').attr('title', events.title);
+      },
+      buttonText: {
+        today: this.translate.instant('calendar.view.today')
+      },
+      timeFormat: 'hh:mm a'
+      
+    };
+  
+    $('#calendar').fullCalendar('destroy');
+    $('#calendar').fullCalendar(this.options);
+
+    // $('<div class="col-md-5 pull-right" style="border: 0px solid #000; text-align: right; margin-right: -6.5%; margin-top: -2%">'
+      // +'<div class="col-md-2" style="text-align: right"><label>'+this.translate.instant('calendar.view.note')+'</label>:</div>'
+      // +'<div class="col-md-5" style="text-align: center; background: #3a87ad; color: #fafafa; width: 150px; height: 20px">'+this.translate.instant('calendar.view.internaldata')+'</div>'
+      // +'<div class="col-md-5" style="text-align: center; background: #0aaaaa; color: #fafafa; width: 150px; height: 20px">'+this.translate.instant('calendar.view.externaldata')+'</div>'
+      // +'</div>').insertBefore($('.fc-view-container'));
+    // alert(this.localeVal)
   }
 
   ngAfterViewInit() {
@@ -123,11 +172,11 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
       $('#calendar').fullCalendar('destroy');
       $('#calendar').fullCalendar(this.options);
 
-      $('<div class="col-md-5 pull-right" style="border: 0px solid #000; text-align: right; margin-right: -6.5%; margin-top: -2%">'
+      $('<div class="col-md-5 pull-right" style="border: 0px solid #000; text-align: right; position:absolute; top:0px; right:0px;">'
         +'<div class="col-md-2" style="text-align: right"><label>'+this.translate.instant('calendar.view.note')+'</label>:</div>'
         +'<div class="col-md-5" style="text-align: center; background: #3a87ad; color: #fafafa; width: 150px; height: 20px">'+this.translate.instant('calendar.view.internaldata')+'</div>'
         +'<div class="col-md-5" style="text-align: center; background: #0aaaaa; color: #fafafa; width: 150px; height: 20px">'+this.translate.instant('calendar.view.externaldata')+'</div>'
-        +'</div>').insertBefore($('.fc-view-container'));
+        +'</div>').insertAfter($('.fc-view-container'));
     }, 100);
     
   }

@@ -417,3 +417,6 @@ a.appUrl:hover, a.appUrl:focus {
 .padding-20 {
   padding:  20px !important;
 }
+span.highlightWord {
+  font-weight: bold !important;
+}

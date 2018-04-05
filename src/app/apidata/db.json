@@ -143,6 +143,399 @@
       "body": "Feedback content"
     }
   ],
+
+  "content_json":[
+    {
+   "type":"RESPONSE",
+   "statusCode":"SUCCESS",
+   "list":[
+      {
+         "refCode":672,
+         "active":true,
+         "list":[
+            {
+               "categoryId":18000,
+               "categoryName":"my participate en (0)",
+               "categoryDescription":"ccccc",
+               "categoryCode":672,
+               "articleCount":0,
+               "parentId":665,
+               "isActiveFlag":true
+            },
+            {
+               "categoryId":18001,
+               "categoryName":"my participate bm (0)",
+               "categoryDescription":"xxxxxxx",
+               "categoryCode":672,
+               "articleCount":0,
+               "parentId":666,
+               "isActiveFlag":true
+            }
+         ]
+      },
+      {
+         "refCode":673,
+         "active":true,
+         "list":[
+            {
+               "categoryId":18002,
+               "categoryName":"my participate en (0)",
+               "categoryDescription":"ccccc",
+               "categoryCode":673,
+               "articleCount":0,
+               "parentId":665,
+               "isActiveFlag":true
+            },
+            {
+               "categoryId":18003,
+               "categoryName":"my participate bm (0)",
+               "categoryDescription":"xxxxxxx",
+               "categoryCode":673,
+               "articleCount":0,
+               "parentId":666,
+               "isActiveFlag":true
+            }
+         ]
+      },
+      {
+         "refCode":546,
+         "active":true,
+         "list":[
+            {
+               "categoryId":1924,
+               "categoryName":"Freedom of Information (0)",
+               "categoryDescription":"<p>Freedom of Information drafted with the aim of enhancing the disclosure of information in the public interest and to give</p>",
+               "categoryCode":546,
+               "articleCount":0,
+               "parentId":663,
+               "isActiveFlag":true
+            },
+            {
+               "categoryId":1923,
+               "categoryName":"Enakmen Kebebasan Maklumat (0)",
+               "categoryDescription":"<p><span>Enakmen Kebebasan Maklumat digubal dengan tujuan&nbsp;mempertingkatkan penzahiran maklumat bagi kepentingan awam dan untuk memberi</span></p>",
+               "categoryCode":546,
+               "articleCount":0,
+               "parentId":664,
+               "isActiveFlag":true
+            }
+         ]
+      },
+      {
+         "refCode":674,
+         "active":true,
+         "list":[
+            {
+               "categoryId":18004,
+               "categoryName":"e-Decision Making (0)",
+               "categoryDescription":"Listing all e-Participation activity result",
+               "categoryCode":674,
+               "articleCount":0,
+               "parentId":665,
+               "isActiveFlag":true
+            },
+            {
+               "categoryId":18005,
+               "categoryName":"e-Keputusan (0)",
+               "categoryDescription":"Paparan Keputusan aktiviti  e-Penyertaan",
+               "categoryCode":674,
+               "articleCount":0,
+               "parentId":666,
+               "isActiveFlag":true
+            }
+         ]
+      },
+      {
+         "refCode":675,
+         "active":true,
+         "list":[
+            {
+               "categoryId":18302,
+               "categoryName":"Kandungan (0)",
+               "categoryDescription":"Kandungan",
+               "categoryCode":675,
+               "articleCount":0,
+               "parentId":-1,
+               "isActiveFlag":true
+            },
+            {
+               "categoryId":18301,
+               "categoryName":"Content (0)",
+               "categoryDescription":"Content",
+               "categoryCode":675,
+               "articleCount":0,
+               "parentId":-2,
+               "isActiveFlag":true
+            }
+         ]
+      },
+      {
+         "refCode":676,
+         "active":true,
+         "list":[
+            {
+               "categoryId":18318,
+               "categoryName":"RSS (0)",
+               "categoryDescription":"Suapan RSS",
+               "categoryCode":676,
+               "articleCount":0,
+               "parentId":-1,
+               "isActiveFlag":true
+            },
+            {
+               "categoryId":18317,
+               "categoryName":"RSS (0)",
+               "categoryDescription":"RSS Feeder",
+               "categoryCode":676,
+               "articleCount":0,
+               "parentId":-2,
+               "isActiveFlag":true
+            }
+         ]
+      },
+      {
+         "refCode":677,
+         "active":true,
+         "list":[
+            {
+               "categoryId":18319,
+               "categoryName":"RSS Announcement  (0)",
+               "categoryDescription":"RSS Announcement ",
+               "categoryCode":677,
+               "articleCount":0,
+               "parentId":18317,
+               "isActiveFlag":true
+            },
+            {
+               "categoryId":18320,
+               "categoryName":"RSS Pengumuman (0)",
+               "categoryDescription":"RSS Announcement ",
+               "categoryCode":677,
+               "articleCount":0,
+               "parentId":18318,
+               "isActiveFlag":true
+            }
+         ]
+      },
+      {
+         "refCode":678,
+         "active":true,
+         "list":[
+            {
+               "categoryId":18321,
+               "categoryName":"RSS Highlight (1)",
+               "categoryDescription":"RSS Highlight",
+               "categoryCode":678,
+               "articleCount":1,
+               "parentId":18317,
+               "isActiveFlag":true
+            },
+            {
+               "categoryId":18322,
+               "categoryName":"RSS Sorotan (1)",
+               "categoryDescription":"RSS Sorotan",
+               "categoryCode":678,
+               "articleCount":1,
+               "parentId":18318,
+               "isActiveFlag":true
+            }
+         ]
+      },
+      {
+         "refCode":46,
+         "active":true,
+         "list":[
+            {
+               "categoryId":97,
+               "categoryName":"Pengumuman (1)",
+               "categoryDescription":"Memaparkan pengumuman penting agensi-agensi kerajaan yang terkini.",
+               "categoryCode":46,
+               "articleCount":1,
+               "parentId":-1,
+               "isActiveFlag":true
+            },
+            {
+               "categoryId":96,
+               "categoryName":"Announcement (5)",
+               "categoryDescription":"Displays latest important announcements of government agencies.",
+               "categoryCode":46,
+               "articleCount":5,
+               "parentId":-2,
+               "isActiveFlag":true
+            }
+         ]
+      },
+      {
+         "refCode":655,
+         "active":true,
+         "list":[
+            {
+               "categoryId":17999,
+               "categoryName":"MyInisiatif (0)",
+               "categoryDescription":"-",
+               "categoryCode":655,
+               "articleCount":0,
+               "parentId":-1,
+               "isActiveFlag":true
+            },
+            {
+               "categoryId":17998,
+               "categoryName":"MyIniative  (0)",
+               "categoryDescription":"-",
+               "categoryCode":655,
+               "articleCount":0,
+               "parentId":-2,
+               "isActiveFlag":true
+            }
+         ]
+      },
+      {
+         "refCode":656,
+         "active":true,
+         "list":[
+            {
+               "categoryId":661,
+               "categoryName":"Whole of Government (0)",
+               "categoryDescription":"-",
+               "categoryCode":656,
+               "articleCount":0,
+               "parentId":17998,
+               "isActiveFlag":true
+            },
+            {
+               "categoryId":662,
+               "categoryName":"'Whole of Government' (0)",
+               "categoryDescription":"-",
+               "categoryCode":656,
+               "articleCount":0,
+               "parentId":17999,
+               "isActiveFlag":true
+            }
+         ]
+      },
+      {
+         "refCode":657,
+         "active":true,
+         "list":[
+            {
+               "categoryId":663,
+               "categoryName":"Open Government Data (0)",
+               "categoryDescription":"To assist in increasing the effectiveness of engagement in making decisions, saving resources and providing opportunities for innovation.",
+               "categoryCode":657,
+               "articleCount":0,
+               "parentId":17998,
+               "isActiveFlag":true
+            },
+            {
+               "categoryId":664,
+               "categoryName":"Data Terbuka Kerajaan (0)",
+               "categoryDescription":"Menolong meningkatkan keberkesanan penglibatan dalam membuat keputusan, menjimatkan sumber dan membuka peluang untuk inovasi",
+               "categoryCode":657,
+               "articleCount":0,
+               "parentId":17999,
+               "isActiveFlag":true
+            }
+         ]
+      },
+      {
+         "refCode":50,
+         "active":true,
+         "list":[
+            {
+               "categoryId":98,
+               "categoryName":"Topik (0)",
+               "categoryDescription":"Topik",
+               "categoryCode":50,
+               "articleCount":0,
+               "parentId":-1,
+               "isActiveFlag":true
+            },
+            {
+               "categoryId":99,
+               "categoryName":"Topic (0)",
+               "categoryDescription":"Topic",
+               "categoryCode":50,
+               "articleCount":0,
+               "parentId":-2,
+               "isActiveFlag":true
+            }
+         ]
+      },
+      {
+         "refCode":658,
+         "active":true,
+         "list":[
+            {
+               "categoryId":665,
+               "categoryName":"e-Participation (0)",
+               "categoryDescription":"e-Participation is a medium that is provided to engage citizens in policy-making, decision-making and design services through the use of information and communication technologies. Citizen engagement ",
+               "categoryCode":658,
+               "articleCount":0,
+               "parentId":17998,
+               "isActiveFlag":true
+            },
+            {
+               "categoryId":666,
+               "categoryName":"e-Penyertaan (0)",
+               "categoryDescription":"e-Penyertaan merupakan medium yang disediakan bagi menarik penglibatan rakyat dalam membuat polisi, membuat keputusan dan mereka bentuk perkhidmatan melalui penggunaan teknologi maklumat dan komunikas",
+               "categoryCode":658,
+               "articleCount":0,
+               "parentId":17999,
+               "isActiveFlag":true
+            }
+         ]
+      },
+      {
+         "refCode":660,
+         "active":true,
+         "list":[
+            {
+               "categoryId":17961,
+               "categoryName":"Bolasepak Malaysia (0)",
+               "categoryDescription":"bbbbbbbbbbbbbbbbbbbb",
+               "categoryCode":660,
+               "articleCount":0,
+               "parentId":-1,
+               "isActiveFlag":true
+            },
+            {
+               "categoryId":17960,
+               "categoryName":"Malaysia Football (0)",
+               "categoryDescription":"aaaaaaaaaaaa",
+               "categoryCode":660,
+               "articleCount":0,
+               "parentId":-2,
+               "isActiveFlag":true
+            }
+         ]
+      },
+      {
+         "refCode":661,
+         "active":true,
+         "list":[
+            {
+               "categoryId":17977,
+               "categoryName":"e-Information (0)",
+               "categoryDescription":"Listing all e-Participation information",
+               "categoryCode":661,
+               "articleCount":0,
+               "parentId":665,
+               "isActiveFlag":true
+            },
+            {
+               "categoryId":17978,
+               "categoryName":"e-Informasi (0)",
+               "categoryDescription":"Paparan informasi e-Penyertaan",
+               "categoryCode":661,
+               "articleCount":0,
+               "parentId":666,
+               "isActiveFlag":true
+            }
+         ]
+      }
+   ]
+}
+  ],
   "slider-en": [
     {
       "title": "BUSINESS IN ENGLISH",
