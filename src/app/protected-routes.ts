@@ -35,6 +35,7 @@ import { EventCalendarComponent } from './eventcalendar/eventcalendar.component'
 import { OnlineserviceComponent } from './onlineservice/onlineservice.component';
 import { SubscriptionComponent } from './subscription/subscription.component';
 import { UnsubscribeComponent } from './unsubscribe/unsubscribe.component';
+import { AgencydirectoryComponent } from './agencydirectory/agencydirectory.component';
 // import { NavRouterActivator } from './header/nav/nav-router-activator.service'
 
 // import { appRoutes } from './routes';
@@ -43,6 +44,7 @@ export const protectedRoutes: Routes = [
 
     {path: '404', component: ErrorComponent },
     {path: 'dashboard', component: DashboardComponent},
+    {path: 'agencydir', component: AgencydirectoryComponent},
     {path: 'profile', component: ProfileComponent},
     {path: 'calendar', component: EventCalendarComponent},
     {path: 'profileupdate', component: ProfileUpdatedComponent},

@@ -28,7 +28,8 @@
           <div class="col-md-6">
             <mat-form-field class="example-full-width">
               <!-- (keydown)="applyFilter($event.target.value)" -->
-              <input matInput (keyup)="applySearchFilter($event.target.value)" [(ngModel)]="keyword" [ngModelOptions]="{standalone: true}" placeholder="{{ 'common.placeholder.keyword' | translate }}">
+              <input matInput (keyup)="applySearchFilter($event.target.value)" [(ngModel)]="keyword" [ngModelOptions]="{standalone: true}"
+                placeholder="{{ 'common.placeholder.keyword' | translate }}">
               <button mat-button *ngIf="keyword" matSuffix mat-icon-button (click)="keyword='';resetSearch()">
                 <mat-icon>x</mat-icon>
               </button>
@@ -38,7 +39,8 @@
         <div class="row">
           <div class="col-md-6">
             <mat-form-field class="example-full-width">
-              <mat-select placeholder="{{ 'agencydir.filterby.all' | translate }} {{ 'agencydir.filterby.ministry' | translate }}" [(ngModel)]="ministry" (change)="applyFilter('ministry',$event.value)">
+              <mat-select placeholder="{{ 'agencydir.filterby.all' | translate }} {{ 'agencydir.filterby.ministry' | translate }}" [(ngModel)]="ministry"
+                (change)="applyFilter('ministry',$event.value)">
                 <mat-option [value]="0">{{ 'agencydir.filterby.all' | translate }} {{ 'agencydir.filterby.ministry' | translate }}</mat-option>
                 <mat-option *ngFor="let ministry of ministryList" [value]="ministry.ministryId">{{ ministry.ministryId }} {{ ministry.ministryName }}</mat-option>
               </mat-select>
@@ -54,14 +56,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-6">
-        
-        <!-- <div style="height: 400px;"
-            leaflet 
-            [leafletOptions]="options"
-            [leafletLayersControl]="layersControl">
-        </div> -->
-      </div>
+      <div class="col-md-6">&nbsp;</div>
     </div>
   </div>
   <div class="row">
@@ -76,9 +71,9 @@
         </thead>
         <tbody>
           <tr *ngFor="let agc of recordTable | paginate: { id: 'listing_pagination',
-                                                               itemsPerPage: 10,
-                                                               currentPage: pageCount,
-                                                               totalItems: totalRec }">
+          itemsPerPage: 10,
+          currentPage: pageCount,
+          totalItems: totalRec }">
             <td>
               <a style="color: #1d1d1d" href="agencydir#">{{agc.agencyName}}</a>
             </td>
@@ -86,15 +81,21 @@
         </tbody>
       </table>
     </div>
+    <div class="col-md-6">
+
+      <div style="height: 400px;" leaflet [leafletOptions]="options" [leafletLayersControl]="layersControl" >
+      </div>
+    </div>
   </div>
 
   <div class="row">
+    <div class="col-md-12">&nbsp;</div>
     <div class="col-md-6">
-      {{ 'agencydir.label.total' | translate }}: {{ totalRec }} 
+      {{ 'agencydir.label.total' | translate }}: {{ totalRec }}
     </div>
     <div class="col-md-6">
       <pagination-controls id="listing_pagination" maxSize="5" directionLinks="true" (pageChange)="pageChange(pageCount = $event,totalRec)"></pagination-controls>
     </div>
-  <div class="col-md-12">&nbsp;</div>
+    <div class="col-md-12">&nbsp;</div>
 </div>
 </div>

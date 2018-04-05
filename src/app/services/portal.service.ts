@@ -208,7 +208,7 @@ export class PortalService {
       console.log('custom');
       readUrl = this.config.urlPortal + moduleName + '?'+custom+ '&language='+this.langId;
     } else {
-      // console.log(3);
+      console.log(3);
       readUrl = this.config.urlPortal + moduleName + '?language='+this.langId;
     }
     console.log(readUrl)

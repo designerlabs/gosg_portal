@@ -8,7 +8,7 @@ import { PortalService } from '../services/portal.service';
 import { HttpClient } from '@angular/common/http';
 import { MatInputModule, MatPaginatorModule, MatProgressSpinnerModule, 
   MatSortModule, MatTableModule, MatPaginator, MatSort } from '@angular/material';
-// import { tileLayer, latLng, circle, polygon } from 'leaflet';
+import { tileLayer, latLng, circle, polygon, marker, icon } from 'leaflet';
 
 @Component({
   selector: 'gosg-agencydirectory',
@@ -34,29 +34,39 @@ export class AgencydirectoryComponent implements OnInit {
   letters = this.genCharArray('a','z');
   ministry: any = '';
   letter: any = '';
+  allMarkers: any = [];
 
   showNoData = false
 
   step = 0;
 
-  // options = {
-  //   layers: [
-  //     tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18 })
-  //   ],
-  //   zoom: 5,
-  //   center: latLng(46.879966, -121.726909)
-  // };
+  options = {
+    layers: [
+      tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18 }),
+      marker([ 2.937882, 101.654215 ], {
+        icon: icon({
+           iconSize: [ 25, 41 ],
+           iconAnchor: [ 13, 41 ],
+           iconUrl: 'assets/marker-icon.png',
+           shadowUrl: 'assets/marker-shadow.png'
+        })
+     })
+    ],
+    zoom: 15,
+    center: latLng(2.938055, 101.654360)
+  };
+
+  layersControl = {
+    baseLayers: {
+      'Open Street Map': tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18 }),
+      'Open Cycle Map': tileLayer('http://{s}.tile.opencyclemap.org/{z}/{x}/{y}.png', { maxZoom: 18 })
+    },
+    overlays: {
+      'Big Circle': circle([ 46.95, -122 ], { radius: 5000 }),
+      'Big Square': polygon([[ 46.8, -121.55 ], [ 46.9, -121.55 ], [ 46.9, -121.7 ], [ 46.8, -121.7 ]])
+    }
+  }
   
-  // layersControl = {
-  //   baseLayers: {
-  //     'Open Street Map': tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18 }),
-  //     'Open Cycle Map': tileLayer('http://{s}.tile.opencyclemap.org/{z}/{x}/{y}.png', { maxZoom: 18 })
-  //   },
-  //   overlays: {
-  //     'Big Circle': circle([ 46.95, -122 ], { radius: 5000 }),
-  //     'Big Square': polygon([[ 46.8, -121.55 ], [ 46.9, -121.55 ], [ 46.9, -121.7 ], [ 46.8, -121.7 ]])
-  //   }
-  // }
 
   genCharArray(charA, charZ) {
     let a = [], i = charA.charCodeAt(0), j = charZ.charCodeAt(0);
@@ -153,6 +163,21 @@ export class AgencydirectoryComponent implements OnInit {
     lang = this.lang;
 
   ngOnInit() {
+    this.getAllMarkers()
+  }
+
+  getAllMarkers() {
+
+    this.portalservice.readPortal('agency/search').subscribe(
+      data => {
+        this.portalservice.errorHandling(data, (function(){
+          this.recordList = data;
+          console.log(this.recordList)
+        }).bind(this)); 
+        // this.loading = false;
+      }, err => {
+        // this.loading = false;
+      });
   }
 
   // get agencyType Data 
