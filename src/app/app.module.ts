@@ -23,6 +23,7 @@ import { SharedModule } from './shared/shared.module';
 import { TextMaskModule, conformToMask } from 'angular2-text-mask';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { ConfirmComponent } from './message/confirm.component';
+import { SearchResultComponent } from './search/search-result/search-result.component';
 
 
 // import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule } from "@angular/material";
@@ -65,6 +66,7 @@ imports: [
     AppComponent,
     RegisterComponent,
     LoginComponent,
+    SearchResultComponent
   
   
   ],

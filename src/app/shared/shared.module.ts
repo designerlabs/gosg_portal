@@ -38,7 +38,7 @@ import { TopnavComponent } from "../header/topnav/topnav.component";
 import { BreadcrumbService } from '../header/breadcrumb/breadcrumb.service';
 import { SharedService }from '../common/shared.service';
 import { ValidateService }from '../common/validate.service';
-import { SearchResultComponent } from '../search/search-result/search-result.component';
+
 import { SearchService } from '../search/search.service';
 
 import { TopicFeatureComponent } from '../topic-feature/topic-feature.component';
@@ -72,6 +72,7 @@ import { DatePipe } from '@angular/common';
 import { AgencydirectoryComponent } from '../agencydirectory/agencydirectory.component';
 
 import { SidenavmainComponent } from "../sidenavmain/sidenavmain.component";
+
 import {
       MatButtonModule,
       MatInputModule,
@@ -127,6 +128,7 @@ import { SubscriptionComponent } from '../subscription/subscription.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { UnsubscribeComponent } from '../unsubscribe/unsubscribe.component';
+// import { SearchResultComponent } from '../search/search-result/search-result.component';
 export function HttpLoaderFactory(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -185,7 +187,7 @@ export function HttpLoaderFactory(http: Http) {
     SidenavComponent,
     SidenavBottomComponent,
     DataprotectionComponent,
-    SearchResultComponent,
+   
     TopicFeatureComponent,
     FooterComponent,
     HighlightboxComponent,
@@ -205,6 +207,7 @@ export function HttpLoaderFactory(http: Http) {
     AgencydirectoryComponent,
     SubscriptionComponent,
     UnsubscribeComponent
+    // SearchResultComponent
   ],
 
   exports: [
@@ -231,7 +234,6 @@ export function HttpLoaderFactory(http: Http) {
     SidenavComponent,
     SidenavBottomComponent,
     DataprotectionComponent,
-    SearchResultComponent,
     TopicFeatureComponent,
     FooterComponent,
     HighlightboxComponent,
@@ -299,6 +301,7 @@ export function HttpLoaderFactory(http: Http) {
      SharedPipe,
      EventCalendarComponent,
      AgencydirectoryComponent
+    //  SearchResultComponent
     
   ],
 
