@@ -195,15 +195,18 @@ export class PortalService {
 
   // NEW
   
-  readPortal(moduleName, page?, size?, keyword?): Observable<any[]> {
+  readPortal(moduleName, page?, size?, keyword?, custom?): Observable<any[]> {
     let readUrl;
     
     if(!keyword && page) {
-      console.log(1);
+      // console.log(1);
       readUrl = this.config.urlPortal + moduleName + '?page=' + page + '&size=' + size  + '&language='+this.langId;
     } else if(keyword) {
-      console.log(2);
+      // console.log(2);
       readUrl = this.config.urlPortal + moduleName + '?keyword='+keyword+'&page=' + page + '&size=' + size  + '&language='+this.langId;
+    } else if(custom) {
+      console.log('custom');
+      readUrl = this.config.urlPortal + moduleName + '?'+custom+ '&language='+this.langId;
     } else {
       console.log(3);
       readUrl = this.config.urlPortal + moduleName + '?language='+this.langId;

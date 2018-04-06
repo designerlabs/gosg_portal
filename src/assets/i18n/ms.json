@@ -117,7 +117,7 @@
   },
   "profile":{
     "msg":{
-      "updateSuccess": "Kemaskini berjaya.",
+      "updateSuccess": "Profil telah berjaya di kemaskini.",
       "updateFail": "Kemaskini gagal.",
       "editbtnE" : "Kemaskini diaktifkan.",
       "editbtnD" : "Kemaskini tidak aktif."
@@ -222,7 +222,16 @@
 
   },
   "agencydir": {
-    "title":"Direktori Agensi"
+    "title":"Direktori Agensi",
+    "filterby": {
+      "all":"Semua",
+      "ministry":"Kementerian/Negeri",
+      "alphabet":"A-Z"
+    },
+    "label": {
+      "agencyName":"Nama Agensi",
+      "total":"Jumlah Capaian"
+    }
   },
   "calendar": {
     "title": "MY KALENDAR",

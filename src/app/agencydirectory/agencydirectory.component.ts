@@ -8,6 +8,7 @@ import { PortalService } from '../services/portal.service';
 import { HttpClient } from '@angular/common/http';
 import { MatInputModule, MatPaginatorModule, MatProgressSpinnerModule, 
   MatSortModule, MatTableModule, MatPaginator, MatSort } from '@angular/material';
+import { tileLayer, latLng, circle, polygon, marker, icon } from 'leaflet';
 
 @Component({
   selector: 'gosg-agencydirectory',
@@ -16,43 +17,64 @@ import { MatInputModule, MatPaginatorModule, MatProgressSpinnerModule,
 })
 export class AgencydirectoryComponent implements OnInit {
 
-  // course:Course;
-
-  // dataSource: LessonsDataSource;
-
-  
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  
   @ViewChild(MatSort) sort: MatSort;
-  
   @ViewChild('input') input: ElementRef;
   
-  searchAgencyResultEn: Object;
-  searchAgencyResultBm: Object;
-  displayedColumns= ["seqNo", "description", "duration"];
   pageSize = 10;
   pageCount = 1;
+  totalRec = 0;
   noPrevData = true;
   noNextData = false;
-  seqNo = 0;
-  seqPageNum = 0;
-  seqPageSize = 0 ;
-  agencyList: Object;
-  isActiveListEn: boolean;
-  isActiveListBm: boolean;
-  isActive: boolean;
-  ministryNameEn:any;
-  ministryNameBm:any;
+  recordList: Object;
+  ministryList: Object;
   langId = localStorage.getItem('langID');
   languageId = this.languageId;
   recordTable = null;
-  recordList = null;
+  letters = this.genCharArray('a','z');
+  ministry: any = '';
+  letter: any = '';
+  allMarkers: any = [];
 
   showNoData = false
 
-  // dataSource = new MatTableDataSource<object>(this.agencyList);
-
   step = 0;
+
+  options = {
+    layers: [
+      tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18 }),
+      marker([ 2.937882, 101.654215 ], {
+        icon: icon({
+           iconSize: [ 25, 41 ],
+           iconAnchor: [ 13, 41 ],
+           iconUrl: 'assets/marker-icon.png',
+           shadowUrl: 'assets/marker-shadow.png'
+        })
+     })
+    ],
+    zoom: 15,
+    center: latLng(2.938055, 101.654360)
+  };
+
+  layersControl = {
+    baseLayers: {
+      'Open Street Map': tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18 }),
+      'Open Cycle Map': tileLayer('http://{s}.tile.opencyclemap.org/{z}/{x}/{y}.png', { maxZoom: 18 })
+    },
+    overlays: {
+      'Big Circle': circle([ 46.95, -122 ], { radius: 5000 }),
+      'Big Square': polygon([[ 46.8, -121.55 ], [ 46.9, -121.55 ], [ 46.9, -121.7 ], [ 46.8, -121.7 ]])
+    }
+  }
+  
+
+  genCharArray(charA, charZ) {
+    let a = [], i = charA.charCodeAt(0), j = charZ.charCodeAt(0);
+    for (; i <= j; ++i) {
+        a.push(String.fromCharCode(i));
+    }
+    return a;
+  }
   
   setStep(index: number) {
     this.step = index;
@@ -66,19 +88,47 @@ export class AgencydirectoryComponent implements OnInit {
     this.step--;
   }
   
-  applyFilter(keyword) {   
+  applySearchFilter(keyword?) {
     
     if(keyword != "" && keyword != null && keyword.length != null && keyword.length >= 3) {
-        this.getSearchData(keyword,this.langId);
-      } else {
-        this.agencyList = null;
-        // this.getAgencyData(this.pageCount, this.pageSize);
-      }
+      this.getSearchData(this.pageCount, this.pageSize, keyword);
+    } else {
+      this.recordList = null;
+      this.getAgencyData(this.pageCount, this.pageSize);
+    }
+  }
+
+  applyFilter(type,filter?) {
+
+    console.log(filter)
+    
+      if(type == 'ministry') {
+        if(filter) {
+          this.ministry = filter;
+        } else {
+          this.ministry = '';
+          filter = '';
+        }
+      } else if(type == 'letter') {
+        if(filter) {
+          this.letter = filter;
+        } else {
+          this.letter = '';
+          filter = '';
+        }
+      } 
+      this.getSearchData(this.pageCount, this.pageSize, null, filter != 0?filter:'');
+
+    // else {
+    //   this.recordList = null;
+    //   this.getAgencyData(this.pageCount, this.pageSize);
+    // }
   }
   
   resetSearch() {
     this.step = 0;
-    this.agencyList = null;
+    this.recordList = null;
+    this.getAgencyData(this.pageCount, this.pageSize);
   }
 
   constructor(
@@ -96,6 +146,8 @@ export class AgencydirectoryComponent implements OnInit {
               this.lang = 'en';
               this.languageId = 1;
           });
+          this.getAgencyData(this.pageCount, this.pageSize);
+          this.getMinistry();
     
         }
         if (myLang == 'ms') {
@@ -104,36 +156,23 @@ export class AgencydirectoryComponent implements OnInit {
               this.languageId = 2;
           });
         }
+        this.getAgencyData(this.pageCount, this.pageSize);
+        this.getMinistry();
       });
     }
     lang = this.lang;
 
   ngOnInit() {
+    this.getAllMarkers()
   }
 
-  // get agencyType Data 
-  getAgencyData(count, size) {
-    // this.loading = true;
-    this.portalservice.readPortal('agency/type/code', count, size).subscribe(
-      // this.http.get(this.dataUrl).subscribe(
+  getAllMarkers() {
+
+    this.portalservice.readPortal('agency/search').subscribe(
       data => {
         this.portalservice.errorHandling(data, (function(){
-          this.agencyTypeList = data;
-
-          if(this.agencyTypeList.list.length > 0){
-            console.log(this.agencyTypeList)
-            this.dataSource.data = this.agencyTypeList.list;
-            this.seqPageNum = this.agencyTypeList.pageNumber;
-            this.seqPageSize = this.agencyTypeList.pageSize;
-            this.recordTable = this.agencyTypeList;
-            this.noNextData = this.agencyTypeList.pageNumber === this.agencyTypeList.totalPages;
-
-            this.showNoData = false;
-          } else {
-            this.dataSource.data = []; 
-            this.showNoData = true;
-          }
-          console.log(this.agencyTypeList)
+          this.recordList = data;
+          console.log(this.recordList)
         }).bind(this)); 
         // this.loading = false;
       }, err => {
@@ -141,53 +180,147 @@ export class AgencydirectoryComponent implements OnInit {
       });
   }
 
-  getSearchData(keyword, langId){
+  // get agencyType Data 
+  getAgencyData(count, size) {
+
+    console.log('get')
+    // this.loading = true;
+    this.portalservice.readPortal('agency/language/'+this.languageId, count, size).subscribe(
+      // this.http.get(this.dataUrl).subscribe(
+      data => {
+        this.portalservice.errorHandling(data, (function(){
+          this.recordList = data;
+          console.log(this.recordList)
+
+          if(this.recordList.agencyList.length > 0){
+            // this.dataSource.data = this.recordList.list;
+            this.seqPageNum = this.recordList.pageNumber;
+            this.seqPageSize = this.recordList.pageSize;
+            this.totalRec = this.recordList.totalElements;
+            this.recordTable = this.recordList.agencyList;
+            this.noNextData = this.recordList.pageNumber === this.recordList.totalPages;
+            // console.log(this.seqPageNum)
+            // console.log(this.seqPageSize)
+            console.log(this.recordTable)
+            // console.log(this.recordTable[0])
+
+            this.showNoData = false;
+          } else {
+            // this.dataSource.data = []; 
+            this.showNoData = true;
+          }
+        }).bind(this)); 
+        // this.loading = false;
+      }, err => {
+        // this.loading = false;
+      });
+  }
+
+  pageChange(event, totalPages) {
+    console.log(event)
+    this.getAgencyData(this.pageCount, event.value);
+    this.pageSize = event.value;
+    this.noPrevData = true;
+  }
+
+  getSearchData(count, size, keyword?, filter?){
+    let searchUrl;
+    let wPaging = '&page='+count+'&size='+size;
+    console.log('search')
 
     if(keyword != "" && keyword != null && keyword.length != null && keyword.length >= 3) {
-      console.log(keyword)
-      console.log(keyword.length)
-      this.isActive = true;
-      // this.loading = true;
-      this.portalservice.getAgenciesByKeyword(keyword).subscribe(
+
+      this.portalservice.readPortal('agency/language/'+this.languageId,count, size, keyword).subscribe(
         data => {
-
-        this.portalservice.errorHandling(data, (function(){
-
-          // console.log(data['list'].length)
-
-            this.agencyList = data;
-            console.log(this.agencyList)
-            this.step = 1;
-
-        }).bind(this));
-          // this.loading = false;
+          this.portalservice.errorHandling(data, (function(){
+            this.recordList = data;
+            console.log(this.recordList)
+  
+            if(this.recordList.agencyList.length > 0){
+              // this.dataSource.data = this.recordList.list;
+              this.seqPageNum = this.recordList.pageNumber;
+              this.seqPageSize = this.recordList.pageSize;
+              this.totalRec = this.recordList.totalElements;
+              this.recordTable = this.recordList.agencyList;
+              this.noNextData = this.recordList.pageNumber === this.recordList.totalPages;
+              // console.log(this.seqPageNum)
+              // console.log(this.seqPageSize)
+              console.log(this.recordTable)
+              // console.log(this.recordTable[0])
+  
+              this.showNoData = false;
+            } else {
+              // this.dataSource.data = []; 
+              this.showNoData = true;
+            }
+          }).bind(this)); 
       },
       error => {
         this.toastr.error(JSON.parse(error._body).statusDesc, '');  
         // this.loading = false;
         console.log(error);
       });
-    } else {
-      // this.isActiveListEn = false;
-      // this.isActiveListBm = false;
+      
+    } else if(this.letter || this.ministry || (this.letter && this.ministry)) {
+
+      let custom = 'letter='+this.letter+'&ministryId='+this.ministry+'&page=' + count + '&size=' + size;
+
+      searchUrl = 'agency/search';
+
+      console.log(custom);
+
+      this.portalservice.readPortal(searchUrl, null, null, null, custom).subscribe(
+        data => {
+          this.portalservice.errorHandling(data, (function(){
+            this.recordList = data;
+            console.log(this.recordList)
+  
+            if(this.recordList.agencyList.length > 0){
+              // this.dataSource.data = this.recordList.list;
+              this.seqPageNum = this.recordList.pageNumber;
+              this.seqPageSize = this.recordList.pageSize;
+              this.totalRec = this.recordList.totalElements;
+              this.recordTable = this.recordList.agencyList;
+              this.noNextData = this.recordList.pageNumber === this.recordList.totalPages;
+              // console.log(this.seqPageNum)
+              // console.log(this.seqPageSize)
+              console.log(this.recordTable)
+              // console.log(this.recordTable[0])
+  
+              this.showNoData = false;
+            } else {
+              // this.dataSource.data = []; 
+              this.showNoData = true;
+            }
+          }).bind(this)); 
+      },
+      error => {
+        this.toastr.error(JSON.parse(error._body).statusDesc, '');  
+        // this.loading = false;
+        console.log(error);
+      });
     }
+    console.log(searchUrl)
+    
   }
   
-  getValue(aId,aName,mName, refCode, langId){
+  // GET MINISTRY
+  getMinistry() {
 
-    if(langId == 1) {
-      this.isActiveListEn = false;
-      this.searchAgencyResultEn = [''];
-      this.ministryNameEn = mName;
+    this.portalservice.readPortal('ministry/language/'+this.languageId)
+    .subscribe(
+      data => {
+        this.portalservice.errorHandling(data, (function(){
+          this.ministryList = data['list'];
+          console.log(this.ministryList)
 
-    } else {
-      this.isActive = false;
-      this.isActiveListBm = false;
-      this.ministryNameBm = mName;
-
-    }
-
-    // console.log(mName)
+        }).bind(this)); 
+    },
+    error => {
+      this.toastr.error(JSON.parse(error._body).statusDesc, '');  
+      // this.loading = false;
+      console.log(error);
+    });
   }
 
 }

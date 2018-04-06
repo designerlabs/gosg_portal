@@ -11,7 +11,12 @@
       "assets": [
         "assets",
         "favicon-16x16.png",
-        "app/apidata"
+        "app/apidata",
+        {
+          "glob": "**/*",
+          "input": "../node_modules/leaflet/dist/images",
+          "output": "./assets/"
+        }
       ],
       "index": "index.html",
       "main": "main.portal.ts",
@@ -26,7 +31,8 @@
         "../node_modules/owl.carousel/dist/assets/owl.theme.default.css",
         "../node_modules/animate.css/animate.min.css",
         "../node_modules/ngx-toastr/toastr.css",
-        "./assets/fullcalendar_style/fullcalendar.min.css"
+        "./assets/fullcalendar_style/fullcalendar.min.css",
+        "../node_modules/leaflet/dist/leaflet.css"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",
@@ -46,7 +52,12 @@
       "assets": [
         "assets",
         "favicon-16x16.png",
-        "app/apidata"
+        "app/apidata",
+        {
+          "glob": "**/*",
+          "input": "../node_modules/leaflet/dist/images",
+          "output": "./assets/"
+        }
       ],
       "index": "index.html",
       "main": "main.protected.ts",
@@ -61,7 +72,8 @@
         "../node_modules/owl.carousel/dist/assets/owl.theme.default.css",
         "../node_modules/animate.css/animate.min.css",
         "../node_modules/ngx-toastr/toastr.css",
-        "./assets/fullcalendar_style/fullcalendar.min.css"
+        "./assets/fullcalendar_style/fullcalendar.min.css",
+        "../node_modules/leaflet/dist/leaflet.css"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",
