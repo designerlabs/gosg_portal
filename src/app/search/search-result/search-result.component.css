@@ -27,3 +27,25 @@ a.titleSer {
     padding: 0;
 }
 
+.example-h2 {
+    margin: 10px;
+  }
+  
+  .example-section {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    height: 60px;
+  }
+  
+  .example-margin {
+    margin: 0 10px;
+  }
+  .mat-radio-button ~ .mat-radio-button {
+	padding-right: 16px;
+	}
+    .side-menu-list {
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+}

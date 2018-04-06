@@ -18,170 +18,293 @@
         </ul>
       </div>
     </div>
-  </div>
+  </div> 
 </div>
+
 <div class="container search">
-  <div class="row" style="padding-top:10px;">
-    <!-- <div class="col-md-3">
-      <h3>Advance Search</h3>
-    </div> -->
-    <div class="col-md-3 advTitle warna_bg" style="color: rgb(255, 255, 255); background-color: rgb(0, 189, 187);">
-      <h3 class="font-size-l" style="font-weight: 700; font-family: Roboto;">
-        Advance Search
-      </h3>
-    </div>
-    <!-- <div class="col-md-9 hidden-xs">
+  <div class="row">
+    <div class="col-md-3" style="padding-top:10px;padding-left: 0px;padding-right: 0px;">
+      <!-- <div class="col-md-3">
+            <h3>Advance Search</h3>
+          </div> -->
+      <!-- <div class="advTitle warna_bg" [style.background-color]="sharedService.getTheme()" style="color: rgb(255, 255, 255);height: 69px;padding: 1px 0px 0px 40px;">
+        <h3 class="font-size-m">
+          <b>Advance Search</b>
+        </h3>
+      </div> -->
+      <!-- <div class="col-md-9 hidden-xs">
           <h3>Search Result</h3>
             <span class="btn btn-default pull-right font-size-s" *ngIf="">English</span>
             <span class="btn btn-default pull-right font-size-s" *ngIf="">Bahasa Malaysia</span>
         </div> -->
-  </div>
-  <div class="row">
-    <div class="col-md-3">
-      <div *ngIf="local">
-        <div class="panel-group" id="internal">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#internal">Keyword Setting</a>
-                <!--  href="#keywordSetting" -->
-              </h4>
-            </div>
-            <div id="keywordSetting" class="panel-collapse collapse in">
-              <div class="panel-body">
-                <div class="radio" *ngFor="let k of keywordType">
-                  <label>
-                    <input type="radio" name="setkeyword"> {{k.nameMs}}</label>
-                  <div class="form-group">
-                    <input class="form-control" type="text" placeholder="Selain perkataan">
+      <div style="background-color: #f5f5f5">
+        <div *ngIf="local">
+          <!--                
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#internal">Filter</a>
+                    </h4>
                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#internal">Specification</a>
-                <!--href="#specification" -->
-              </h4>
-            </div>
-            <div id="specification" class="panel-collapse collapse">
-              <div class="panel-body">
-                <div class="checkbox" *ngFor="let i of internalSpec">
-                  <label>
-                    <input type="checkbox">{{i.nameMs}}</label>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#internal">Filter</a>
-                <!--  href="#filter" -->
-              </h4>
-            </div>
-            <div id="filter" class="panel-collapse collapse">
-              <div class="panel-body">
-                <div class="panel-group" id="filterItem">
-                  <div class="panel panel-default">
-                    <div class="panel-heading">
-                      <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#filterItem">Tarikh</a>
-                      </h4>
-                      <!--href="#filterByDate" -->
-                    </div>
-                    <div id="filterByDate" class="panel-collapse collapse">
-                      <div class="panel-body">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="panel panel-default">
-                    <div class="panel-heading">
-                      <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#filterItem" href="#filterByAuthor">Author</a>
-                      </h4>
-                    </div>
-                    <div id="filterByAuthor" class="panel-collapse collapse">
-                      <div class="panel-body">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="panel panel-default">
-                    <div class="panel-heading">
-                      <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#filterItem" href="#filterByTopic">Topic</a>
-                      </h4>
-                    </div>
-                    <div id="filterByTopic" class="panel-collapse collapse">
-                      <div class="panel-body">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="panel panel-default">
-                    <div class="panel-heading">
-                      <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#filterItem" href="#filterBySubTopic">Sub Topic</a>
-                      </h4>
-                    </div>
-                    <div id="filterBySubTopic" class="panel-collapse collapse">
-                      <div class="panel-body">
+                  <div id="filter" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <div class="panel-group" id="filterItem">
+                        <div class="panel panel-default">
+                          <div class="panel-heading">
+                            <h4 class="panel-title">
+                              <a data-toggle="collapse" data-parent="#filterItem">Tarikh</a>
+                            </h4>
+                          </div>
+                          <div id="filterByDate" class="panel-collapse collapse">
+                            <div class="panel-body">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="panel panel-default">
+                          <div class="panel-heading">
+                            <h4 class="panel-title">
+                              <a data-toggle="collapse" data-parent="#filterItem" href="#filterByAuthor">Author</a>
+                            </h4>
+                          </div>
+                          <div id="filterByAuthor" class="panel-collapse collapse">
+                            <div class="panel-body">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="panel panel-default">
+                          <div class="panel-heading">
+                            <h4 class="panel-title">
+                              <a data-toggle="collapse" data-parent="#filterItem" href="#filterByTopic">Topic</a>
+                            </h4>
+                          </div>
+                          <div id="filterByTopic" class="panel-collapse collapse">
+                            <div class="panel-body">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="panel panel-default">
+                          <div class="panel-heading">
+                            <h4 class="panel-title">
+                              <a data-toggle="collapse" data-parent="#filterItem" href="#filterBySubTopic">Sub Topic</a>
+                            </h4>
+                          </div>
+                          <div id="filterBySubTopic" class="panel-collapse collapse">
+                            <div class="panel-body">
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div *ngIf="os">
-      </div>
-      <div *ngIf="global">
-      </div>
-    </div>
-    <div class="col-md-9">
-        <h3 class="pull-left font-size-l"><b>{{'home.search.searchresult' | translate}}</b></h3>
-      <div class="input-group form-group">
-        <input class="form-control" type=text />
-        <span class="input-group-addon warna_bg">
-          <i class="fa fa-search"></i>
-          <span class="hidden-xs font-size-s"></span>
-        </span>
-      </div>
-      <ul class="nav nav-tabs themeColor">
-        <li class="active">
-          <a class="font-size-s" data-toggle="tab" href="#local">Internal</a>
-        </li>
-        <li>
-          <a class="font-size-s" data-toggle="tab" href="#os">Online Services</a>
-        </li>
-        <li>
-          <a class="font-size-s" data-toggle="tab" href="#global">Global</a>
-        </li>
-      </ul>
-      <div class="tab-content">
-        <div id="local" class="tab-pane fade in active">
-          <ul id="intSearch">
-            <li *ngFor="let int of intData; let i = index;">
-              <!-- <h4>
-                                    <a class="titleSer warna_title_color font-size-m">{{int.article_name}}</a>
-                                </h4>
-                                <span class="cat">{{int.category_name}}</span> -->
-              <!-- <p style="padding-top:15px" class="font-size-s sertxt">{{int.article_text_clean.trim() | slice:0:200}}
-                                                <span *ngIf="int.article_text_clean.trim().length > 200">...</span>
-                                        </p> -->
-              <int-search [showdata]="int" [indx]="i"></int-search>
+              </div> -->
+          <ul class="side-menu-list">
+            <li style="padding: 10px;">
+              <header class="font-size-s;" style="cursor: pointer;" (click)="sKeyword = !sKeyword">
+                <span>
+                    {{'home.search.keywordset' | translate}}
+                  <i class="fa fa-angle-right pull-right" *ngIf="!sKeyword" style="font-size: 1.5em;"></i>
+                  <i class="fa fa-angle-down  pull-right" *ngIf="sKeyword" style="font-size: 1.5em;"></i>
+                </span>
+              </header>
+              <ul class="side-menu-list" *ngIf="sKeyword" style="margin-top: 10px; margin-bottom: 10px;">
+                <li>
+                  <mat-checkbox class="example-margin" (change)="chkKeyword($event,1)" [(ngModel)]="chkExword">
+                    <span class="font-size-s">
+                        {{'home.search.exword' | translate}}</span>
+                  </mat-checkbox>
+                </li>
+                <li>
+                  <mat-checkbox class="example-margin" (change)="chkKeyword($event,2)" [(ngModel)]="chkAlword">
+                    <span class="font-size-s">
+                        {{'home.search.alword' | translate}}</span>
+                  </mat-checkbox>
+                </li>
+                <li>
+                  <mat-checkbox class="example-margin" (change)="chkKeyword($event,3)" [(ngModel)]="chkAnyword">
+                    <span class="font-size-s">
+                        {{'home.search.anyword' | translate}}</span>
+                  </mat-checkbox>
+                </li>
+
+              </ul>
+            </li>
+            <li style="padding: 10px;">
+              <header (click)="sSpeci = !sSpeci" class="font-size-m;" class="font-size-s;" style="cursor: pointer;">
+                <span>{{'home.search.specification' | translate}}
+                  <i class="fa fa-angle-right pull-right" *ngIf="!sSpeci" style="font-size: 1.5em;"></i>
+                  <i class="fa fa-angle-down  pull-right" *ngIf="sSpeci" style="font-size: 1.5em;"></i>
+                </span>
+              </header>
+              <ul class="side-menu-list" *ngIf="sSpeci && local" style="margin-top: 10px;">
+                <li>
+                  <mat-checkbox class="example-margin" (change)="chkSpeci($event,11)" [(ngModel)]="chktopic">
+                    <span class="font-size-s">
+                        {{'home.search.spectopic' | translate}}</span>
+                  </mat-checkbox>
+                </li>
+                <li>
+                  <mat-checkbox class="example-margin" (change)="chkSpeci($event,12)" [(ngModel)]="chksubtopic">
+                    <span class="font-size-s">
+                        {{'home.search.specsubtopic' | translate}}</span>
+                  </mat-checkbox>
+                </li>
+                <li>
+                  <mat-checkbox class="example-margin" (change)="chkSpeci($event,13)" [(ngModel)]="chktitle">
+                    <span class="font-size-s">
+                        {{'home.search.spectitle' | translate}}</span>
+                  </mat-checkbox>
+                </li>
+                <li>
+                  <mat-checkbox class="example-margin" (change)="chkSpeci($event,14)" [(ngModel)]="chkdes">
+                    <span class="font-size-s">
+                        {{'home.search.specdes' | translate}}</span>
+                  </mat-checkbox>
+                </li>
+              </ul>
+              <ul class="side-menu-list" *ngIf="sSpeci && os" style="margin-top: 10px;">
+                  <li>
+                    <mat-checkbox class="example-margin" (change)="chkSpeci($event,15)" [(ngModel)]="chkosminis">
+                      <span class="font-size-s">
+                          {{'home.search.specminis' | translate}}</span>
+                    </mat-checkbox>
+                  </li>
+                  <li>
+                    <mat-checkbox class="example-margin" (change)="chkSpeci($event,16)" [(ngModel)]="chkosagency">
+                      <span class="font-size-s">
+                          {{'home.search.specagen' | translate}}</span>
+                    </mat-checkbox>
+                  </li>
+                  <li>
+                    <mat-checkbox class="example-margin" (change)="chkSpeci($event,17)" [(ngModel)]="chkostitle">
+                      <span class="font-size-s">
+                          {{'home.search.spectitle' | translate}}</span>
+                    </mat-checkbox>
+                  </li>
+                  <li>
+                    <mat-checkbox class="example-margin" (change)="chkSpeci($event,18)" [(ngModel)]="chkosdes">
+                      <span class="font-size-s">
+                          {{'home.search.specdes' | translate}}</span>
+                    </mat-checkbox>
+                  </li>
+                </ul>
+            </li>
+            <li style="padding: 10px;">
+              <header (click)="sFilter = !sFilter" class="font-size-s;" style="cursor: pointer;">
+                <span>{{'home.search.filter' | translate}}
+                  <i class="fa fa-angle-right pull-right" *ngIf="!sFilter" style="font-size: 1.5em;"></i>
+                  <i class="fa fa-angle-down  pull-right" *ngIf="sFilter" style="font-size: 1.5em;"></i>
+                </span>
+              </header>
+              <ul class="side-menu-list" *ngIf="sFilter" style="margin-top: 10px;">
+                <li *ngIf="monthPub?.length>0">
+                  <mat-form-field class="font-size-s" style="width:100%;">
+                    <mat-select placeholder="{{'home.search.filmonth' | translate}}" (change)="chkmonpub($event)" [(ngModel)]="valMonPub" multiple>
+                      <mat-select-trigger>
+                        {{selMonPubDisp}}
+                        <span *ngIf="valMonPub?.length > 1" class="example-additional-selection">
+                          (+{{valMonPub.length - 1}} others)
+                        </span>
+                      </mat-select-trigger>
+                      <mat-option *ngFor="let i of monthPub" [value]="i.name" style="width:90%">
+                        <span>{{i.name | date:'MMMM yyyy'}}</span>
+                        <span class="pull-right">({{i.val}})</span>
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </li>
+                <li *ngIf="author?.length>0">
+                  <mat-form-field class="font-size-s" style="width:100%;">
+                    <mat-select placeholder="{{'home.search.filauth' | translate}}" (change)="chkauth($event)" [(ngModel)]="valAuthor" multiple>
+                      <mat-select-trigger>
+                        {{selAuthDisp}}
+                        <span *ngIf="valAuthor?.length > 1" class="example-additional-selection">
+                          (+{{valAuthor.length - 1}} others)
+                        </span>
+                      </mat-select-trigger>
+                      <mat-option *ngFor="let i of author" [value]="i">
+                        {{i.name}}
+                        <span class="pull-right">({{i.val}})</span>
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </li>
+                <li *ngIf="topics?.length>0">
+                  <mat-form-field class="font-size-s" style="width:100%;">
+                    <mat-select placeholder="{{'home.search.filtop' | translate}}" (change)="chkfiltrtopic($event)" [(ngModel)]="valTopic" multiple>
+                      <mat-select-trigger>
+                        {{selTopicDisp}}
+                        <span *ngIf="valTopic?.length > 1" class="example-additional-selection">
+                          (+{{valTopic.length - 1}} others)
+                        </span>
+                      </mat-select-trigger>
+                      <mat-option *ngFor="let i of topics" [value]="i">
+                        {{i.name}}
+                        <span class="pull-right">({{i.val}})</span>
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </li>
+                <li *ngIf="subTopics?.length>0">
+                  <mat-form-field class="font-size-s" style="width:100%;">
+                    <mat-select placeholder="{{'home.search.filsubtopic' | translate}}" (change)="chksubtop($event)" [(ngModel)]="valSubTopic" multiple>
+                      <mat-select-trigger>
+                        {{selSubTopicDisp}}
+                        <span *ngIf="valSubTopic?.length > 1" class="example-additional-selection">
+                          (+{{valSubTopic.length - 1}} others)
+                        </span>
+                      </mat-select-trigger>
+                      <mat-option *ngFor="let i of subTopics" [value]="i">
+                        {{i.name}}
+                        <span class="pull-right">({{i.val}})</span>
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </li>
+              </ul>              
             </li>
           </ul>
         </div>
-        <div id="os" class="tab-pane fade">
-          Online Service Result
+        <div *ngIf="os">
         </div>
-        <div id="global" class="tab-pane fade">
-          Global Result
+        <div *ngIf="global">
         </div>
+      </div>
+    </div>
+    <div class="col-md-9">        
+      <div class="">
+        <h3 class="pull-left font-size-l">
+          <b>{{'home.search.searchresult' | translate}}</b>
+        </h3>
+        <div class="input-group form-group">
+          <input class="form-control" type=text />
+          <span class="input-group-addon warna_bg">
+            <i class="fa fa-search"></i>
+            <span class="hidden-xs font-size-s"></span>
+          </span>
+        </div>
+        <mat-tab-group>
+          <mat-tab label="Internal">
+            <div style="padding-top:10px;"></div>
+            <ul id="intSearch">
+              <li *ngFor="let int of intData; let i = index;">
+                <int-search [showdata]="int" [indx]="i"></int-search>
+              </li>
+            </ul>
+          </mat-tab>
+          <mat-tab label="Online Services">
+            <div style="padding-top:10px;"></div>
+           
+          </mat-tab>
+          <mat-tab label="Global">
+            <div style="padding-top:10px;"></div>
+           
+          </mat-tab>
+        </mat-tab-group>
+
+
+
+       
       </div>
     </div>
   </div>

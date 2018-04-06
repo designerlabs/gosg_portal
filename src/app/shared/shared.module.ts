@@ -104,7 +104,7 @@ import {
       MatTooltipModule,
       MatNativeDateModule,
       MatSortModule,
-      MatPaginatorModule,
+      MatPaginatorModule      
     }from '@angular/material';
 
 import { A11yModule } from "@angular/cdk/a11y";
