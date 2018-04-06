@@ -35,7 +35,7 @@
       <p>Status(isCorrsLocal): {{isCorrsLocal}}</p> -->
       
       <mat-tab-group>
-          <mat-tab label="{{'profile.label.personalDetails' | translate}}">
+          <mat-tab label="{{'profile.label.personalDetails' | translate}}" class="font-size-s">
             <div style="padding-top:10px;"></div>
             <form [formGroup]="profileForm" autocomplete="off" (ngSubmit)="updateProfile(profileForm.value)" role="form" novalidate>
                 <div class="col-md-12">
@@ -331,7 +331,7 @@
               
               </form>
           </mat-tab>
-          <mat-tab label="{{'profile.label.changeEmail' | translate}}">
+          <mat-tab label="{{'profile.label.changeEmail' | translate}}" class="font-size-s">
             <div style="padding-top:10px;"></div>
             <form [formGroup]="emailForm" autocomplete="off" (ngSubmit)="updateEmail(emailForm.value)" role="form" novalidate>
               <mat-form-field class="font-size-s" style="width: 50%;">
@@ -350,7 +350,7 @@
               </div>
             </form>
           </mat-tab>
-          <mat-tab label="{{'profile.label.changePhone' | translate}}">
+          <mat-tab label="{{'profile.label.changePhone' | translate}}" class="font-size-s">
               <div style="padding-top:10px;"></div>
               <form [formGroup]="phoneForm" autocomplete="off" (ngSubmit)="updatePhone(phoneForm.value)" role="form" novalidate>
 
