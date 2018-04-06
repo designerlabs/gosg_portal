@@ -1185,8 +1185,8 @@ let bodyUpdate =
 
     console.log(this.initial);
     console.log(this.profileForm.invalid)
-        console.log(formValues);
-        console.log(this.profileForm.value);
+    console.log(formValues);
+    console.log(this.profileForm.value);
     this.protectedService.updateProfile(bodyUpdate)
     .subscribe(
       data => {

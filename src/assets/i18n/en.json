@@ -101,7 +101,7 @@
   },
   "profile":{
     "msg":{
-      "updateSuccess": "Profile updated.",
+      "updateSuccess": "Profile has been updated successfully.",
       "updateFail": "Profile not updated.",
       "editbtnE" : "Edit activated.",
       "editbtnD" : "Edit deactivated."

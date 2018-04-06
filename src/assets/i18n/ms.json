@@ -101,7 +101,7 @@
   },
   "profile":{
     "msg":{
-      "updateSuccess": "Kemaskini berjaya.",
+      "updateSuccess": "Profil telah berjaya di kemaskini.",
       "updateFail": "Kemaskini gagal.",
       "editbtnE" : "Kemaskini diaktifkan.",
       "editbtnD" : "Kemaskini tidak aktif."
