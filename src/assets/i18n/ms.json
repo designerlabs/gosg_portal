@@ -4,6 +4,7 @@
     "menu": {
       "home": "Laman Utama",
       "calendar": "Kalendar",
+      "agencycdir": "Direktori Agensi",
       "register": "Daftar",
       "setting": "Tetapan",
       "contact": "Hubungi Kami",
@@ -201,6 +202,9 @@
     }
 
   },
+  "agencydir": {
+    "title":"Direktori Agensi"
+  },
   "calendar": {
     "title": "MY KALENDAR",
     "desc": "Please limit your response to 10000 characters and include your email address and we will respond to you within three (3) working days. We can respond in two languages, English and Bahasa Melayu.",
@@ -270,6 +274,9 @@
     "privacypolicy": "Dasar Privasi",
     "securitypolicy": "Dasar Keselamatan",
     "disclaimer": "Penafian",
+    "placeholder": {
+      "keyword":"Kata Kunci"
+    },
     "buttons":{
       "delete":"Padam",
       "update":"Kemaskini",
@@ -357,5 +364,8 @@
     "description":"Semua Sorotan Terkini",
     "message":"Tiada maklumat terkini.",
     "tender": "Tender"
+  },
+  "subscription":{
+    "successMsg" :"Terima kasih. Emel anda telah berjaya disimpan. Emel pengaktifan langganan telah dihantar. Sila klik pada pautan untuk pengaktifan langganan."
   }
 }
