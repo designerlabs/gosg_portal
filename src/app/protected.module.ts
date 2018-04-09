@@ -30,7 +30,7 @@ import { FeedbackProtectedComponent } from './feedback/feedback-protected.compon
 import { PollProtectedComponent } from './poll/poll-protected.component';
 import { HomeProtectedComponent } from './home/home-protected.component';
 import { ProfileUpdatedComponent } from './profile-updated/profile-updated.component';
-
+import { SearchResultComponent } from './search/search-result/search-result.component';
 
 
 export function HttpLoaderFactory(http: Http) {
@@ -50,7 +50,8 @@ export function HttpLoaderFactory(http: Http) {
     FeedbackProtectedComponent,
     PollProtectedComponent,
     HomeProtectedComponent,
-    ProfileUpdatedComponent
+    ProfileUpdatedComponent,
+    SearchResultComponent
   ],
   imports: [
     SharedModule,

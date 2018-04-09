@@ -2,13 +2,14 @@ import { Component, OnInit, Input, Inject, AfterViewInit } from '@angular/core';
 import { SharedService } from '../../common/shared.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+
 import { MatPaginator, MatSort } from '@angular/material';
 import { MatTableModule } from '@angular/material/table';
 import { ToastrService } from "ngx-toastr";
 import { APP_CONFIG, AppConfig } from '../../config/app.config.module';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Http, Response } from '@angular/http';
 import { SearchService } from '../../search/search.service';
 // import { SharedModule } from '../../shared/shared.module';

@@ -197,6 +197,7 @@ export class PortalService {
   
   readPortal(moduleName, page?, size?, keyword?, custom?): Observable<any[]> {
     let readUrl;
+    let reqLang = localStorage.getItem('langID');
     
     if(!keyword && page) {
       // console.log(1);
@@ -221,6 +222,7 @@ export class PortalService {
   
   readProtected(moduleName, page?, size?, keyword?): Observable<any[]> {
     let readUrl;
+    let reqLang = localStorage.getItem('langID');
     
     if(!keyword && page) {
       readUrl = this.config.urlProtected + moduleName + '?page=' + page + '&size=' + size  + '&language='+this.langId;

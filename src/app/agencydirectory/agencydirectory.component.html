@@ -42,7 +42,7 @@
               <mat-select placeholder="{{ 'agencydir.filterby.all' | translate }} {{ 'agencydir.filterby.ministry' | translate }}" [(ngModel)]="ministry"
                 (change)="applyFilter('ministry',$event.value)">
                 <mat-option [value]="0">{{ 'agencydir.filterby.all' | translate }} {{ 'agencydir.filterby.ministry' | translate }}</mat-option>
-                <mat-option *ngFor="let ministry of ministryList" [value]="ministry.ministryId">{{ ministry.ministryId }} {{ ministry.ministryName }}</mat-option>
+                <mat-option *ngFor="let ministry of ministryList" [value]="ministry.ministryCode" (click)="goToMarkerPoint(ministry.ministryLatitude,ministry.ministryLongitude, ministry.ministryName, ministry.ministryAddress, ministry.ministryEmail, ministry.ministryFax, ministry.ministryPhone)">{{ ministry.ministryName }}</mat-option>
               </mat-select>
             </mat-form-field>
           </div>
@@ -54,48 +54,41 @@
               </mat-select>
             </mat-form-field>
           </div>
+          <div class="col-md-6">
+            <table class="table">
+              <thead>
+                <tr>
+                  <td class="font-size-m">
+                    <label>{{ 'agencydir.label.agencyName' | translate }}</label>
+                  </td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let agc of recordTable | paginate: { id: 'listing_pagination',
+                itemsPerPage: 10,
+                currentPage: pageCount,
+                totalItems: totalRec }">
+                  <td>
+                    <a style="color: #1d1d1d" href="agencydir#" (click)="goToMarkerPoint(agc.agencyLatitude,agc.agencyLongitude, agc.agencyName, agc.agencyAddress, agc.agencyEmail, agc.agencyFax, agc.agencyPhoneNo)" title="agc.agencyLatitude">{{agc.agencyName}}</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
-      <div class="col-md-6">&nbsp;</div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-6">
-      <table class="table">
-        <thead>
-          <tr>
-            <td class="font-size-m">
-              <label>{{ 'agencydir.label.agencyName' | translate }}</label>
-            </td>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let agc of recordTable | paginate: { id: 'listing_pagination',
-          itemsPerPage: 10,
-          currentPage: pageCount,
-          totalItems: totalRec }">
-            <td>
-              <a style="color: #1d1d1d" href="agencydir#">{{agc.agencyName}}</a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="col-md-6">
-
-      <div style="height: 400px;" leaflet [leafletOptions]="options" [leafletLayersControl]="layersControl" >
+      <div class="col-md-6">
+        <div id="dirmap"></div>
+        <!-- <div style="height: 400px;" leaflet [leafletOptions]="options" [leafletLayers]="markers"></div> -->
       </div>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-md-12">&nbsp;</div>
-    <div class="col-md-6">
+    <div class="col-md-2">
       {{ 'agencydir.label.total' | translate }}: {{ totalRec }}
     </div>
-    <div class="col-md-6">
-      <pagination-controls id="listing_pagination" maxSize="5" directionLinks="true" (pageChange)="pageChange(pageCount = $event,totalRec)"></pagination-controls>
-    </div>
+    <div class="col-md-10"><pagination-controls id="listing_pagination" maxSize="5" directionLinks="true" (pageChange)="pageChange(pageCount = $event,totalRec)"></pagination-controls></div>
     <div class="col-md-12">&nbsp;</div>
 </div>
 </div>
