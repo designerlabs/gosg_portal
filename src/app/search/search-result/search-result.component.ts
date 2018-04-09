@@ -47,7 +47,7 @@ export class SearchResultComponent implements OnInit {
   selAuthDisp="";
   selTopicDisp="";
   selSubTopicDisp="";
-
+  ser_word = "";
   chkKeyValue = "1";
   chktopic = true;
   chksubtopic = true;
@@ -135,10 +135,10 @@ export class SearchResultComponent implements OnInit {
       "article_text_clean",
       "article_text_en_clean"
     ],
-    "keyword": "malaysia",
+    "keyword": "",
     "keywordMap": {
       "exact": [
-        "malaysia"
+        ""
       ],
       "fields": [
         "article_text_clean",
@@ -190,8 +190,10 @@ export class SearchResultComponent implements OnInit {
   }
 
   ngOnInit() {
-    // debugger;
-    this.searchByKeyword('malaysia');
+    // this.searchByKeyword('malaysia');
+    let s_word = this.router.url.split('=')[1];
+    this.searchByKeyword(s_word);
+    
   }
 
   ngAfterViewInit() {

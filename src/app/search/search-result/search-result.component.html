@@ -20,87 +20,11 @@
     </div>
   </div> 
 </div>
-
-
-<div class="container search">
- 
+<div class="container search"> 
   <div class="row">
     <div class="col-md-3" style="padding-top:10px;padding-left: 0px;padding-right: 0px;">
-      <!-- <div class="col-md-3">
-            <h3>Advance Search</h3>
-          </div> -->
-      <!-- <div class="advTitle warna_bg" [style.background-color]="sharedService.getTheme()" style="color: rgb(255, 255, 255);height: 69px;padding: 1px 0px 0px 40px;">
-        <h3 class="font-size-m">
-          <b>Advance Search</b>
-        </h3>
-      </div> -->
-      <!-- <div class="col-md-9 hidden-xs">
-          <h3>Search Result</h3>
-            <span class="btn btn-default pull-right font-size-s" *ngIf="">English</span>
-            <span class="btn btn-default pull-right font-size-s" *ngIf="">Bahasa Malaysia</span>
-        </div> -->
       <div style="background-color: #f5f5f5">
-        <div *ngIf="local">
-          
-          <!--                
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <h4 class="panel-title">
-                      <a data-toggle="collapse" data-parent="#internal">Filter</a>
-                    </h4>
-                  </div>
-                  <div id="filter" class="panel-collapse collapse">
-                    <div class="panel-body">
-                      <div class="panel-group" id="filterItem">
-                        <div class="panel panel-default">
-                          <div class="panel-heading">
-                            <h4 class="panel-title">
-                              <a data-toggle="collapse" data-parent="#filterItem">Tarikh</a>
-                            </h4>
-                          </div>
-                          <div id="filterByDate" class="panel-collapse collapse">
-                            <div class="panel-body">
-                            </div>
-                          </div>
-                        </div>
-                        <div class="panel panel-default">
-                          <div class="panel-heading">
-                            <h4 class="panel-title">
-                              <a data-toggle="collapse" data-parent="#filterItem" href="#filterByAuthor">Author</a>
-                            </h4>
-                          </div>
-                          <div id="filterByAuthor" class="panel-collapse collapse">
-                            <div class="panel-body">
-                            </div>
-                          </div>
-                        </div>
-                        <div class="panel panel-default">
-                          <div class="panel-heading">
-                            <h4 class="panel-title">
-                              <a data-toggle="collapse" data-parent="#filterItem" href="#filterByTopic">Topic</a>
-                            </h4>
-                          </div>
-                          <div id="filterByTopic" class="panel-collapse collapse">
-                            <div class="panel-body">
-                            </div>
-                          </div>
-                        </div>
-                        <div class="panel panel-default">
-                          <div class="panel-heading">
-                            <h4 class="panel-title">
-                              <a data-toggle="collapse" data-parent="#filterItem" href="#filterBySubTopic">Sub Topic</a>
-                            </h4>
-                          </div>
-                          <div id="filterBySubTopic" class="panel-collapse collapse">
-                            <div class="panel-body">
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div> -->
+        <div *ngIf="local">          
           <ul class="side-menu-list">
             <li style="padding: 10px;">
               <header class="font-size-s;" style="cursor: pointer;" (click)="sKeyword = !sKeyword">
@@ -131,7 +55,7 @@
                           <input matInput placeholder="Type Exclude words" ([ngModel])="inpExcWord">
                       </mat-form-field>                  
                     </mat-radio-group>   
-                    <div class="pull-right button-row">
+                    <div>
                       <button class="btn btn-md" mat-raised-button color="primary">
                       <i [class]="sharedService.icon.check"></i> Submit</button>
                       <button mat-raised-button color="warn"><i [class]="sharedService.icon.refresh"></i> Reset</button>
@@ -283,17 +207,14 @@
     <div class="col-md-9">   
       <h3 class="font-size-l">
           <b>{{'home.search.searchresult' | translate}}</b>
-        </h3>    
-      <div class="">
-        
-        <div class="input-group form-group">
-          <input class="form-control" type=text />
-          <span class="input-group-addon warna_bg">
-            <i class="fa fa-search"></i>
-            <span class="hidden-xs font-size-s"></span>
-          </span>
-        </div>
-      </div>
+        </h3>  
+         <div class="example-full-width">
+            <mat-form-field class="example-full-width">
+              <input type="text" class="font-size-l example-full-width" matInput placeholder="Search here" [(ngModel)]="ser_word">
+              <mat-icon matSuffix (click)="searchByKeyword(ser_word)" style="cursor:pointer;"><i class="fa fa-search"></i></mat-icon>
+              <!-- <mat-icon matSuffix *ngIf="ser_word.length>0" (click)="ser_word=''" style="cursor:pointer;"><i class="fa fa-times"></i></mat-icon> -->
+            </mat-form-field>            
+          </div>
       
       <mat-tab-group>
           <mat-tab label="{{'home.search.local' | translate}}">
