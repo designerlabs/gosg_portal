@@ -12,7 +12,7 @@ import {
   MatSortModule, MatTableModule, MatPaginator, MatSort
 } from '@angular/material';
 import { tileLayer, latLng, circle, polygon, marker, icon, Layer } from 'leaflet';
-import L = require('leaflet');
+import * as L from 'leaflet';
 
 @Component({
   selector: 'gosg-agencydirectory',
