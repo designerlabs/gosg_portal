@@ -38,7 +38,10 @@
       "filmonth": "Month Published",
       "filauth": "Author",
       "filtop": "Topics",
-      "filsubtopic": "Sub Topics"
+      "filsubtopic": "Sub Topics",
+      "local": "Local",
+      "onlineser": "Online Services",
+      "global":"Global"
     },
     "breadcrumb": {
       "calendar": "Calendar",

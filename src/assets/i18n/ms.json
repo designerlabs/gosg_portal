@@ -38,7 +38,10 @@
       "filmonth": "Bulan Diterbitkan",
       "filauth": "Penulis",
       "filtop": "Topik",
-      "filsubtopic": "Sub Topik" 
+      "filsubtopic": "Sub Topik",
+      "local": "Dalaman",
+      "onlineser": "Perkhidmatan Dalam Talian",
+      "global":"Global" 
     },
     "breadcrumb":{
       "calendar": "Kalendar",

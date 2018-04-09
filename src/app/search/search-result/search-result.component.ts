@@ -48,10 +48,11 @@ export class SearchResultComponent implements OnInit {
   selTopicDisp="";
   selSubTopicDisp="";
 
-  chktopic = false;
-  chksubtopic = false;
-  chktitle= false;
-  chkdes = false;
+  chkKeyValue = "1";
+  chktopic = true;
+  chksubtopic = true;
+  chktitle= true;
+  chkdes = true;
   chkosminis = false;
   chkosagency = false;
   chkostitle = false;
