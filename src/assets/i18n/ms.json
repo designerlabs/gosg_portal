@@ -400,7 +400,9 @@
   },
   "subscription":{
     "successMsg" :"Terima kasih. Emel anda telah berjaya disimpan. Emel pengaktifan langganan telah dihantar. Sila klik pada pautan untuk pengaktifan langganan.",
-    "btnsubscribe" : "Langgan"
+    "btnsubscribe" : "Langgan",
+    "setactivetitle": "Langgan senarai mel",
+    "setactivemsg": "Terima kasih. E-mel anda telah disahkan."
   },
   "onlineservices": {
     "btnonlineservice" : "Perkhidmatan Dalam Talian",

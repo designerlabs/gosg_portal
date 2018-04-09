@@ -128,6 +128,7 @@ import { SubscriptionComponent } from '../subscription/subscription.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { UnsubscribeComponent } from '../unsubscribe/unsubscribe.component';
+import { SetactiveComponent } from '../subscription/setactive/setactive.component';
 // import { SearchResultComponent } from '../search/search-result/search-result.component';
 export function HttpLoaderFactory(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -206,11 +207,12 @@ export function HttpLoaderFactory(http: Http) {
     EventCalendarComponent,
     AgencydirectoryComponent,
     SubscriptionComponent,
-    UnsubscribeComponent
+    UnsubscribeComponent,
+    SetactiveComponent
     // SearchResultComponent
   ],
 
-  exports: [
+  exports: [    
     ContactComponent,
     SearchComponent,
     SearchIntComponent,
@@ -245,6 +247,7 @@ export function HttpLoaderFactory(http: Http) {
     HomeComponent,
     FeedbackComponent,
     ConfirmComponent,
+    SetactiveComponent,
     BrowserAnimationsModule,
     ConfirmDialogComponent,
     MatButtonModule,

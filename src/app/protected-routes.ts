@@ -36,12 +36,13 @@ import { OnlineserviceComponent } from './onlineservice/onlineservice.component'
 import { SubscriptionComponent } from './subscription/subscription.component';
 import { UnsubscribeComponent } from './unsubscribe/unsubscribe.component';
 import { AgencydirectoryComponent } from './agencydirectory/agencydirectory.component';
+import { SetactiveComponent } from './subscription/setactive/setactive.component';
 // import { NavRouterActivator } from './header/nav/nav-router-activator.service'
 
 // import { appRoutes } from './routes';
 
 export const protectedRoutes: Routes = [
-
+    
     {path: '404', component: ErrorComponent },
     {path: 'dashboard', component: DashboardComponent},
     {path: 'agencydir', component: AgencydirectoryComponent},
@@ -72,6 +73,7 @@ export const protectedRoutes: Routes = [
     {path: 'mailbox', component: MailboxComponent},
     {path: 'feedback', component: FeedbackProtectedComponent},
     {path: 'onlineservice', component: OnlineserviceComponent},
+    {path: 'subscription/set_active/:id', component: SetactiveComponent},
     {path: 'subscription', component: SubscriptionComponent},
     {path: 'unsubscribe', component: UnsubscribeComponent},
     {path: '', redirectTo: 'dashboard', pathMatch: 'full'},

@@ -1,0 +1,35 @@
+<div class="container-fluid animated slideInDown" style="background: #a7a495;">
+    <div class="container">
+      <!-- <ngx-loading [show]="loading" [config]="{ fullScreenBackdrop: true }"></ngx-loading> -->
+      <div class="row">
+        <div class="col-md-12">
+          <h1 style="margin-top: 10px;" class="font-size-l">{{'home.breadcrumb.subscription' | translate}}</h1>
+          <hr class="hr-custom2">
+          <ul class="list-inline" style="clear:both;">
+            <li>
+              <a class="font-size-s" href="/index/">
+                {{'home.menu.home' | translate }}
+              </a>
+            </li>
+            <li>/</li>
+            <li>
+              {{'home.breadcrumb.subscription' | translate}}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container" style="color: #000; padding-bottom:20px;">
+      <div class="text-center">
+          <h2 class="font-size-l" [style.color]="sharedservice.getTheme()"><b> {{'subscription.setactivetitle' | translate}} </b></h2>
+
+          <div class="row padding">
+              <div class="col-md-12">
+                <div class="font-size-m" style="margin-top: 20px; text-align: center;">
+                   {{'subscription.setactivemsg' | translate}} 
+                </div>
+              </div>
+          </div>
+      </div>
+  </div>
