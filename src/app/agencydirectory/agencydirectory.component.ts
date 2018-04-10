@@ -127,7 +127,7 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit {
 
     translate.onLangChange.subscribe((event: LangChangeEvent) => {
       const myLang = translate.currentLang;
-      console.log(this.popup.isPopupOpen)
+      // console.log(this.popup.isPopupOpen)
       if (myLang == 'en') {
         translate.get('HOME').subscribe((res: any) => {
           this.lang = 'en';
@@ -169,6 +169,9 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit {
 
 
   ngAfterViewInit(){
+    this.getAgencyData(this.pageCount, this.pageSize);
+    this.getMinistry();
+    this.getAllAgenciesMarkers()
   }
 
   goToMarkerPoint(dLat, dLong, dName, dAddress, dEmail,dFax, dPhone) {
@@ -277,7 +280,7 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit {
       data => {
         this.portalservice.errorHandling(data, (function () {
           this.agencyList = data['agencyList'];
-          console.log(this.agencyList)
+          // console.log(this.agencyList)
           // console.log(this.agencyList.length)
 
           for (i = 0; i <= this.agencyList.length-1; i++) {
@@ -310,14 +313,14 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit {
   // get agencyType Data 
   getAgencyData(count, size) {
 
-    console.log('get')
+    // console.log('get')
     // this.loading = true;
     this.portalservice.readPortal('agency/language/' + this.languageId, count, size).subscribe(
       // this.http.get(this.dataUrl).subscribe(
       data => {
         this.portalservice.errorHandling(data, (function () {
           this.recordList = data;
-          console.log(this.recordList)
+          // console.log(this.recordList)
 
           if (this.recordList.agencyList.length > 0) {
             // this.dataSource.data = this.recordList.list;
@@ -333,7 +336,7 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit {
 
             this.showNoData = false;
           } else {
-            // this.dataSource.data = []; 
+            this.recordTable = []; 
             this.showNoData = true;
           }
         }).bind(this));
@@ -344,7 +347,7 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit {
   }
 
   pageChange(event, totalPages) {
-    console.log(event)
+    // console.log(event)
     this.getAgencyData(this.pageCount, event.value);
     this.pageSize = event.value;
     this.noPrevData = true;
@@ -361,7 +364,7 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit {
         data => {
           this.portalservice.errorHandling(data, (function () {
             this.recordList = data;
-            console.log(this.recordList)
+            // console.log(this.recordList)
 
             if (this.recordList.agencyList.length > 0) {
               // this.dataSource.data = this.recordList.list;
@@ -377,7 +380,7 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit {
 
               this.showNoData = false;
             } else {
-              // this.dataSource.data = []; 
+              this.recordTable = []; 
               this.showNoData = true;
             }
           }).bind(this));
