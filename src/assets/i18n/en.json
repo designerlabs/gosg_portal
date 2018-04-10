@@ -306,6 +306,7 @@
     "securitypolicy": "Security Policy",
     "disclaimer": "Disclaimer",
     "selectall" : "Select All",
+    "plsselect" : "Please Select",
     "placeholder": {
       "keyword":"Keyword"
     },

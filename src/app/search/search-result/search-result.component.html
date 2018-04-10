@@ -216,16 +216,20 @@
             </mat-form-field>            
           </div>
       
-      <mat-tab-group>
-          <mat-tab label="{{'home.search.local' | translate}}">
-              <ul id="intSearch">
+      <mat-tab-group #tabGroup (selectedTabChange)="changeTab($event)">
+          <mat-tab label="{{'home.search.local' | translate}}" >
+              <ul class="intSearch" *ngIf="tabIndex==0">
                   <li *ngFor="let int of intData; let i = index;">
                     <int-search [showdata]="int" [indx]="i"></int-search>
                   </li>
                 </ul>
           </mat-tab>
           <mat-tab label="{{'home.search.onlineser' | translate}}">
-
+              <ul class="intSearch" *ngIf="tabIndex==1">
+                  <li *ngFor="let int of intData; let i = index;">
+                    <int-search [showdata]="int" [indx]="i"></int-search>
+                  </li>
+                </ul>
           </mat-tab>
           <mat-tab label="{{'home.search.global' | translate}}">
 

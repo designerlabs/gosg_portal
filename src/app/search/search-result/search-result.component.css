@@ -1,4 +1,4 @@
-#intSearch {
+.intSearch {
     list-style: none;
     padding-left: 0;
 }
@@ -16,10 +16,10 @@ a.titleSer {
     font-size: 12px;
     width: auto;
 }
-#intSearch li {
+.intSearch li {
     padding: 5px 0px;
 }
-#intSearch li p span.highlight {
+.intSearch li p span.highlight {
     font-weight: 700;
     background-color: transparent;
     color: #333;

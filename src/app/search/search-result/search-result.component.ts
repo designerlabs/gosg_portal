@@ -3,7 +3,7 @@ import { SharedService } from '../../common/shared.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 
-import { MatPaginator, MatSort } from '@angular/material';
+import { MatPaginator, MatSort, MatTabChangeEvent } from '@angular/material';
 import { MatTableModule } from '@angular/material/table';
 import { ToastrService } from "ngx-toastr";
 import { APP_CONFIG, AppConfig } from '../../config/app.config.module';
@@ -29,6 +29,7 @@ export class SearchResultComponent implements OnInit {
   panelOpenState: boolean = false;
   selKey = "yes";
   align: string;
+  tabIndex =0;
   sKeyword = false;
   sSpeci = false;
   sFilter = false;
@@ -113,86 +114,147 @@ export class SearchResultComponent implements OnInit {
     { id: 18, nameEn: 'Description', nameMs: 'Deskripsi' }
   ];
   public internalFilter = [
-    { id: 21, nameEn: 'Month Published', nameMs: 'Bulan Diterbitkan', objName: 'histogram', objName_en: 'histogram' },
-    { id: 22, nameEn: 'Author', nameMs: 'Penulis', objName: 'category_name', objName_en: 'author_name' },
-    { id: 23, nameEn: 'Topics', nameMs: 'Topik', objName: 'category_name', objName_en: 'author_name_en' },
-    { id: 24, nameEn: 'Sub Topics', nameMs: 'Sub Topik', objName: 'topic_name', objName_en: 'topic_name_en' }
+    { id: 21, nameEn: 'Month Published', nameMs: 'Bulan Diterbitkan' },
+    { id: 22, nameEn: 'Author', nameMs: 'Penulis' },
+    { id: 23, nameEn: 'Topics', nameMs: 'Topik' },
+    { id: 24, nameEn: 'Sub Topics', nameMs: 'Sub Topik'  }
   ];
+
+  locResFields = [
+    "category_name",
+    "topic_name",
+    "article_name",
+    "category_name_en",
+    "topic_name_en",
+    "article_name_en",
+    "author_name",
+    "article_insert_date",
+    "idarticle",
+    "article_text_clean",
+    "article_text_en_clean"
+  ];
+
+  locFields = [
+    "article_text_clean",
+    "article_text_en_clean",
+    "article_name",
+    "article_name_en",
+    "category_name",
+    "category_name_en",
+    "topic_name",
+    "topic_name_en"
+  ];
+
+  locAggregations = [
+    {
+        "name": "category_name",
+        "type": "terms",
+        "field": "category_name.raw"
+    },
+    {
+        "name": "topic_name",
+        "type": "terms",
+        "field": "topic_name.raw"
+    },
+    {
+        "name": "category_name_en",
+        "type": "terms",
+        "field": "category_name_en.raw"
+    },
+    {
+        "name": "topic_name_en",
+        "type": "terms",
+        "field": "topic_name_en.raw"
+    },
+    {
+        "name": "author_name",
+        "type": "terms",
+        "field": "author_name.raw"
+    },
+    {
+        "name": "histogram",
+        "type": "dateHistogram",
+        "field": "article_insert_date",
+        "interval": "month"
+    }
+  ];
+
+  osResFields = [
+    "ministry_name",
+    "agency_name",
+    "title_ms",
+    "desc_ms",
+    "url_ms",
+    "ministry_name_en",
+    "agency_name_en",
+    "title_en",
+    "desc_en",
+    "url_en"
+  ];
+
+  osFields = [
+    "title_ms",
+    "title_en",
+    "desc_ms",
+    "desc_en",
+    "agency_name",
+    "agency_name_en",
+    "ministry_name",
+    "ministry_name_en"
+  ];
+
+  osAggregations = [
+    {
+        "name": "ministry_name",
+        "type": "terms",
+        "field": "ministry_name.raw"
+    },
+    {
+        "name": "agency_name",
+        "type": "terms",
+        "field": "agency_name.raw"
+    },
+    {
+        "name": "ministry_name_en",
+        "type": "terms",
+        "field": "ministry_name_en.raw"
+    },
+    {
+        "name": "agency_name_en",
+        "type": "terms",
+        "field": "agency_name_en.raw"
+    }
+  ];
+
+  finalResFields = this.locResFields;
+  finalFields = this.locFields;
+  finalAggregations= this.locAggregations;  
 
   public obj = {
     "size": 10,
     "from": 0,
-    "responseFields": [
-      "category_name",
-      "topic_name",
-      "article_name",
-      "category_name_en",
-      "topic_name_en",
-      "article_name_en",
-      "author_name",
-      "article_insert_date",
-      "idarticle",
-      "article_text_clean",
-      "article_text_en_clean"
-    ],
+    "responseFields": this.finalResFields,
     "keyword": "",
     "keywordMap": {
       "exact": [
         ""
       ],
-      "fields": [
-        "article_text_clean",
-        "article_text_en_clean",
-        "article_name",
-        "article_name_en",
-        "category_name",
-        "category_name_en",
-        "topic_name",
-        "topic_name_en"
-      ]
+      "fields": this.finalFields,
     },
-    "aggregations": [
-      {
-        "name": "category_name",
-        "type": "terms",
-        "field": "category_name.raw"
-      },
-      {
-        "name": "topic_name",
-        "type": "terms",
-        "field": "topic_name.raw"
-      },
-      {
-        "name": "category_name_en",
-        "type": "terms",
-        "field": "category_name_en.raw"
-      },
-      {
-        "name": "topic_name_en",
-        "type": "terms",
-        "field": "topic_name_en.raw"
-      },
-      {
-        "name": "author_name",
-        "type": "terms",
-        "field": "author_name.raw"
-      },
-      {
-        "name": "histogram",
-        "type": "dateHistogram",
-        "field": "article_insert_date",
-        "interval": "month"
-      }
-    ],
+    "aggregations": this.finalAggregations,
     "filters": {
-
     }
   }
 
   ngOnInit() {
     // this.searchByKeyword('malaysia');
-    let s_word = this.router.url.split('=')[1];
-    this.searchByKeyword(s_word);
+    let q_word = this.router.url.split('=')[1];
+    if(q_word){
+      this.searchByKeyword(q_word);
+    }else {
+      this.toastr.error("Please enter a word to search");
+    }
+    
     
   }
 
@@ -212,23 +274,6 @@ export class SearchResultComponent implements OnInit {
   chksubtop(eve) {
     this.selSubTopicDisp = eve.source.triggerValue.split(',')[0];
   }
-  // highlight_words(word, element) {
-  //     if(word) {
-  //         let textNodes;
-  //         word = word.replace(/\W/g, '');
-  //         let str = word.split(" ");
-  //         $(str).each(function() {
-  //             let term = this;
-  //             let textNodes = $(element).contents().filter(function() { return this.nodeType === 3 });
-  //             textNodes.each(function() {
-  //                 let content = $(this).text();
-  //                 let regex = new RegExp(this.term, "gi");
-  //               content = content.replace(regex, '<span class="highlight">' + term + '</span>');
-  //               $(this).replaceWith(content);
-  //             }.bind(this));
-  //         });
-  //     }
-  // }
 
   changeAryVal(objs){
     let aryObj : any;
@@ -246,38 +291,77 @@ export class SearchResultComponent implements OnInit {
     });
     return retn;
   }
+  
+
+  changeTab(e){
+    let tabInx = e.index;
+    this.tabIndex = e.index;
+    let k_word='';
+    if(this.ser_word.trim().length > 0){
+      k_word = this.ser_word.trim()
+    }else {
+      k_word = this.router.url.split('=')[1];
+    }
+    if (tabInx === 0){
+      //In Local tab
+      
+    }else if (tabInx === 1){
+      //In Online Service tab
+    }else if(tabInx === 2){
+      //In Global tab
+    }
+    this.searchByKeyword(k_word);
+  }
 
   searchByKeyword(valkeyword) {
-    this.loading = true;
-    this.obj.keyword = valkeyword;
-    this.obj.keywordMap.exact = [valkeyword];
-    // debugger;
-    let dataUrl = 'https://www.malaysia.gov.my/public/query/0/internal';
-    
-    this.arymonth = [];
-    return this.http.post(dataUrl, this.obj)
-      .map(res => res.json())
-      .subscribe(rData => {
-        console.log(rData);
-        this.intData = rData.data;
-        //   this.aggrData = rData.aggregations;
-        this.author = this.changeAryVal(rData.aggregations.author_name);        
-        this.monthPub = this.changeAryVal(rData.aggregations.histogram);       
-
-        if (this.languageId === 1) {
-          this.topics = this.changeAryVal(rData.aggregations.category_name_en);
-          this.subTopics = this.changeAryVal(rData.aggregations.topic_name_en);
-        } else {
-          this.topics = this.changeAryVal(rData.aggregations.category_name);
-          this.subTopics = this.changeAryVal(rData.aggregations.topic_name);
-        }
-        //   this.serchService.searchResData = rData.data;
-        this.loading = false;
-      },
-        error => {
+    if(valkeyword.trim().length > 0){
+      this.loading = true;
+      this.obj.keyword = valkeyword;
+      this.obj.keywordMap.exact = [valkeyword];
+      let dataUrl = '';
+      if(this.tabIndex === 0){
+        this.obj.responseFields = this.locResFields;
+        this.obj.keywordMap.fields = this.locFields;
+        this.obj.aggregations = this.locAggregations; 
+        dataUrl = 'https://www.malaysia.gov.my/public/query/0/internal'; 
+      }else if(this.tabIndex === 1){
+        this.obj.responseFields = this.osResFields
+        this.obj.keywordMap.fields = this.osFields
+        this.obj.aggregations = this.osAggregations
+        dataUrl = 'https://www.malaysia.gov.my/public/query/5/';
+      }
+      // debugger;
+      // let dataUrl = 'https://www.malaysia.gov.my/public/query/0/internal';
+      // https://www.malaysia.gov.my/public/query/5/ --------- for Online services
+      
+      this.arymonth = [];
+      return this.http.post(dataUrl, this.obj)
+        .map(res => res.json())
+        .subscribe(rData => {
+          console.log(rData);
+          this.intData = rData.data;
+          //   this.aggrData = rData.aggregations;
+          this.author = this.changeAryVal(rData.aggregations.author_name);        
+          this.monthPub = this.changeAryVal(rData.aggregations.histogram);       
+  
+          if (this.languageId === 1) {
+            this.topics = this.changeAryVal(rData.aggregations.category_name_en);
+            this.subTopics = this.changeAryVal(rData.aggregations.topic_name_en);
+          } else {
+            this.topics = this.changeAryVal(rData.aggregations.category_name);
+            this.subTopics = this.changeAryVal(rData.aggregations.topic_name);
+          }
+          //   this.serchService.searchResData = rData.data;
           this.loading = false;
-          this.toastr.error(this.translate.instant('common.err.servicedown'), '');
-        });
+        },
+          error => {
+            this.loading = false;
+            this.toastr.error(this.translate.instant('common.err.servicedown'), '');
+          });
+    }else{
+      this.toastr.error("Please enter a word to search");
+    }
+    
   }
 
   chkKeyword(eve, id) {
@@ -291,6 +375,6 @@ export class SearchResultComponent implements OnInit {
   showdatafn(val) {
     this.dataEach = val;
     this.serchService.searchResData = val;
-  }A84A1E
+  }
 
 }

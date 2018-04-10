@@ -306,6 +306,7 @@
     "securitypolicy": "Dasar Keselamatan",
     "disclaimer": "Penafian",
     "selectall" : "Pilih Semua",
+    "plsselect" : "Sila Pilih",
     "placeholder": {
       "keyword":"Kata Kunci"
     },

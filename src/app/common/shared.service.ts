@@ -106,6 +106,7 @@ export class SharedService {
    // NEW
   
    readPortal(moduleName, page?, size?, keyword?): Observable<any[]> {
+    this.languageId = localStorage.getItem('langID');
     let readUrl;
     if(!keyword && page) {
       console.log(1);
