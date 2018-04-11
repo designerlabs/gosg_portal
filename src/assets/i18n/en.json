@@ -41,7 +41,9 @@
       "filsubtopic": "Sub Topics",
       "local": "Local",
       "onlineser": "Online Services",
-      "global":"Global"
+      "global":"Global",
+      "result": "Results",
+      "resultsfound": "Results Found in"
     },
     "breadcrumb": {
       "calendar": "Calendar",

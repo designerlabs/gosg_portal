@@ -30,34 +30,45 @@ export class SearchResultComponent implements OnInit {
   selKey = "yes";
   align: string;
   tabIndex =0;
-  sKeyword = false;
-  sSpeci = false;
-  sFilter = false;
+  sKeyword = false; //side menu 
+  sSpeci = false; //side menu
+  sFilter = false; //side menu
   intData: any[];
   aggrData: any[];
-  author: any[];
-  topics: any[];
-  monthPub: any[];
+  ddauthor: any[];
+  ddtopics: any[];
+  ddmonthPub: any[];
   arymonth: any[];
-  subTopics: any[];
+  ddsubTopics: any[];
+  ddministry: any[];
+  ddagency: any[];
   valMonPub="";
   valAuthor="";
   valTopic="";
   valSubTopic="";
+  valMinistry="";
+
   selMonPubDisp="";
   selAuthDisp="";
   selTopicDisp="";
   selSubTopicDisp="";
+  selMinisDisp ="";
+  selAgencyDisp="";
   ser_word = "";
   chkKeyValue = "1";
   chktopic = true;
   chksubtopic = true;
   chktitle= true;
   chkdes = true;
-  chkosminis = false;
-  chkosagency = false;
-  chkostitle = false;
-  chkosdes = false;
+  chkosminis = true;
+  chkosagency = true;
+  chkostitle = true;
+  chkosdes = true;
+
+// Paggination
+  totalElements=0; noPrevData = true; noNextData = false; pagefrom = 0;pageNumber = 1; totalPages = 0; pagesize = 10;
+  millisec = 0;
+  showNoData = false;
 
   constructor(
     private router: Router,
@@ -87,7 +98,7 @@ export class SearchResultComponent implements OnInit {
           this.languageId = 2;
         });
       }
-      // this.getAgencyList();     
+      this.searchByKeyword(this.ser_word); 
     });
   }
 
@@ -231,8 +242,8 @@ export class SearchResultComponent implements OnInit {
   finalAggregations= this.locAggregations;  
 
   public obj = {
-    "size": 10,
-    "from": 0,
+    "size": this.pagesize,
+    "from": this.pagefrom,
     "responseFields": this.finalResFields,
     "keyword": "",
     "keywordMap": {
@@ -252,10 +263,12 @@ export class SearchResultComponent implements OnInit {
     if(q_word){
       this.searchByKeyword(q_word);
     }else {
-      this.toastr.error("Please enter a word to search");
-    }
-    
-    
+      // this.toastr.error("Please enter a word to search");
+    }  
+  }
+
+  btnSubmit(){
+
   }
 
   ngAfterViewInit() {
@@ -274,7 +287,12 @@ export class SearchResultComponent implements OnInit {
   chksubtop(eve) {
     this.selSubTopicDisp = eve.source.triggerValue.split(',')[0];
   }
-
+  chkministry(eve) {
+    this.selMinisDisp = eve.source.triggerValue.split(',')[0];
+  }
+  chkagency(eve) {
+    this.selAgencyDisp = eve.source.triggerValue.split(',')[0];
+  }
   changeAryVal(objs){
     let aryObj : any;
 
@@ -303,13 +321,13 @@ export class SearchResultComponent implements OnInit {
       k_word = this.router.url.split('=')[1];
     }
     if (tabInx === 0){
-      //In Local tab
-      
+      //In Local tab      
     }else if (tabInx === 1){
       //In Online Service tab
     }else if(tabInx === 2){
       //In Global tab
     }
+    this.resetPage();
     this.searchByKeyword(k_word);
   }
 
@@ -318,6 +336,8 @@ export class SearchResultComponent implements OnInit {
       this.loading = true;
       this.obj.keyword = valkeyword;
       this.obj.keywordMap.exact = [valkeyword];
+      this.obj.from = this.pagefrom;
+      this.obj.size = this.pagesize;
       let dataUrl = '';
       if(this.tabIndex === 0){
         this.obj.responseFields = this.locResFields;
@@ -341,16 +361,42 @@ export class SearchResultComponent implements OnInit {
           console.log(rData);
           this.intData = rData.data;
           //   this.aggrData = rData.aggregations;
-          this.author = this.changeAryVal(rData.aggregations.author_name);        
-          this.monthPub = this.changeAryVal(rData.aggregations.histogram);       
-  
-          if (this.languageId === 1) {
-            this.topics = this.changeAryVal(rData.aggregations.category_name_en);
-            this.subTopics = this.changeAryVal(rData.aggregations.topic_name_en);
-          } else {
-            this.topics = this.changeAryVal(rData.aggregations.category_name);
-            this.subTopics = this.changeAryVal(rData.aggregations.topic_name);
+          if(rData.data.length>0){
+            if(this.tabIndex==0){
+              this.ddauthor = this.changeAryVal(rData.aggregations.author_name);this.ddmonthPub = this.changeAryVal(rData.aggregations.histogram);if (this.languageId === 1) {
+                this.ddtopics = this.changeAryVal(rData.aggregations.category_name_en);
+                this.ddsubTopics = this.changeAryVal(rData.aggregations.topic_name_en);
+              } else if (this.languageId === 2){
+                this.ddtopics = this.changeAryVal(rData.aggregations.category_name);
+                this.ddsubTopics = this.changeAryVal(rData.aggregations.topic_name);
+              }
+            }else if(this.tabIndex==1){
+              if (this.languageId === 1) {
+                this.ddministry = this.changeAryVal(rData.aggregations.ministry_name_en);
+                this.ddagency = this.changeAryVal(rData.aggregations.agency_name_en);
+              }else if (this.languageId === 2){
+                this.ddministry = this.changeAryVal(rData.aggregations.ministry_name);
+                this.ddagency = this.changeAryVal(rData.aggregations.agency_name);
+              }            
+            }
+            this.showNoData = false;
+          }else {
+            this.showNoData = true;
+            this.sKeyword = false; //side menu 
+            this.sSpeci = false; //side menu
+            this.sFilter = false; //side menu
           }
+
+          this.totalElements = rData.stats.hits;
+           let num = (rData.stats.hits)/(this.pagesize);
+           if(this.totalElements % this.pagesize > 0){
+            this.totalPages = Math.floor(num) + 1;
+           }else{
+            this.totalPages = num;
+           }
+           this.noNextData = this.pageNumber === this.totalPages;
+           this.millisec = rData.stats.tookMillis;
+           
           //   this.serchService.searchResData = rData.data;
           this.loading = false;
         },
@@ -377,4 +423,32 @@ export class SearchResultComponent implements OnInit {
     this.serchService.searchResData = val;
   }
 
+  paginatorL() {
+    this.pageNumber = this.pageNumber - 1;
+    this.pagefrom = this.pagefrom - this.pagesize;
+    this.noPrevData = this.pagefrom === 0;
+    this.searchByKeyword(this.ser_word);
+  }
+
+  paginatorR() {
+    this.pageNumber = this.pageNumber + 1;
+    this.pagefrom = this.pagefrom + this.pagesize;
+    this.noNextData = (this.pagefrom + this.pagesize) < this.totalElements ? false : true;
+    this.noPrevData = false;
+    this.searchByKeyword(this.ser_word);
+  }
+
+  pageChange(evt) {
+    this.resetPage();
+    this.pagesize = evt.value; 
+    this.searchByKeyword(this.ser_word);
+  }
+
+  resetPage(){
+    this.pageNumber = 1;
+    this.pagefrom = 0;
+    this.noNextData = false;
+    this.noPrevData = true;
+    this.pagesize = 10;
+  }
 }

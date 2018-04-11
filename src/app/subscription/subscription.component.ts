@@ -85,7 +85,6 @@ export class SubscriptionComponent implements OnInit {
 
   getAllCategory() {
     this.loading = true;
-    debugger;
     return this.sharedService.readPortal('/subscription/list')
       .subscribe(rData => {
         this.sharedService.errorHandling(rData, (function () {
