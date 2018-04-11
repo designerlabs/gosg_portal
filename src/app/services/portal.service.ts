@@ -37,6 +37,14 @@ export class PortalService {
                   }
             
               });
+              if(!this.langId){
+                if(localStorage.getItem('langID')){
+                  this.langId = localStorage.getItem('langID');
+                }else{
+                  this.langId = 1;
+                }
+                
+              }
   }
   
   private registerUrl: string = this.config.urlRegister;

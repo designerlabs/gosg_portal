@@ -54,12 +54,12 @@
               </mat-select>
             </mat-form-field>
           </div>
-          <div class="col-md-6">
-            <table class="table">
+          <div class="col-md-12">
+            <table class="table" *ngIf="!showNoData">
               <thead>
                 <tr>
-                  <td class="font-size-m">
-                    <label>{{ 'agencydir.label.agencyName' | translate }}</label>
+                  <td>
+                    <h4>{{ 'agencydir.label.agencyName' | translate }}</h4>
                   </td>
                 </tr>
               </thead>
@@ -68,8 +68,10 @@
                 itemsPerPage: 10,
                 currentPage: pageCount,
                 totalItems: totalRec }">
+                
                   <td>
-                    <a style="color: #1d1d1d" href="agencydir#" (click)="goToMarkerPoint(agc.agencyLatitude,agc.agencyLongitude, agc.agencyName, agc.agencyAddress, agc.agencyEmail, agc.agencyFax, agc.agencyPhoneNo)" title="agc.agencyLatitude">{{agc.agencyName}}</a>
+                    <a *ngIf="agc.agencyLatitude || agc.agencyLongitude" style="color: #1d1d1d" href="agencydir#" (click)="goToMarkerPoint(agc.agencyLatitude,agc.agencyLongitude, agc.agencyName, agc.agencyAddress, agc.agencyEmail, agc.agencyFax, agc.agencyPhoneNo)" title="agc.agencyLatitude">{{agc.agencyName}}</a>
+                    <a *ngIf="!agc.agencyLatitude || !agc.agencyLongitude" style="color: #cacaca; cursor:default;" href="agencydir#"  title="Latitude and Longitude Not Found">{{agc.agencyName}} <i class="fa fa-unlink"></i></a>
                   </td>
                 </tr>
               </tbody>
