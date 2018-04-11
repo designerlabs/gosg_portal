@@ -1,6 +1,7 @@
 .intSearch {
     list-style: none;
     padding-left: 0;
+    padding-top: 10px;
 }
 
 a.titleSer {
@@ -17,7 +18,8 @@ a.titleSer {
     width: auto;
 }
 .intSearch li {
-    padding: 5px 0px;
+    padding: 5px 0px 15px 0px;
+    
 }
 .intSearch li p span.highlight {
     font-weight: 700;
@@ -69,4 +71,13 @@ a.titleSer {
   
   .example-full-width {
     width: 100%;
+  }
+
+  .intSearch>li:nth-of-type(even) {
+    background-color: #f3f6f7 !important;
+  }
+
+  .inputser {
+    font-size: 24px;
+    font-weight: bold;
   }

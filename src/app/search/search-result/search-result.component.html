@@ -54,12 +54,7 @@
                       <mat-form-field class="example-full-width" *ngIf="chkKeyValue==3" style="padding-left: 15px;">
                           <input matInput placeholder="Type Exclude words" ([ngModel])="inpExcWord">
                       </mat-form-field>                  
-                    </mat-radio-group>   
-                    <div>
-                      <button class="btn btn-md" mat-raised-button color="primary">
-                      <i [class]="sharedService.icon.check"></i> Submit</button>
-                      <button mat-raised-button color="warn"><i [class]="sharedService.icon.refresh"></i> Reset</button>
-                    </div>                 
+                    </mat-radio-group>  
               </div>              
             </li>            
             <li style="padding: 10px;">
@@ -69,7 +64,7 @@
                   <i class="fa fa-angle-down  pull-right" *ngIf="sSpeci" style="font-size: 1.5em;"></i>
                 </span>
               </header>
-              <ul class="side-menu-list" *ngIf="sSpeci && local" style="margin-top: 10px;">
+              <ul class="side-menu-list" *ngIf="sSpeci && tabIndex==0" style="margin-top: 10px;">
                 <li>
                   <mat-checkbox class="example-margin" (change)="chkSpeci($event,11)" [(ngModel)]="chktopic">
                     <span class="font-size-s">
@@ -95,7 +90,7 @@
                   </mat-checkbox>
                 </li>
               </ul>
-              <ul class="side-menu-list" *ngIf="sSpeci && os" style="margin-top: 10px;">
+              <ul class="side-menu-list" *ngIf="sSpeci && tabIndex==1" style="margin-top: 10px;">
                   <li>
                     <mat-checkbox class="example-margin" (change)="chkSpeci($event,15)" [(ngModel)]="chkosminis">
                       <span class="font-size-s">
@@ -129,8 +124,8 @@
                   <i class="fa fa-angle-down  pull-right" *ngIf="sFilter" style="font-size: 1.5em;"></i>
                 </span>
               </header>
-              <ul class="side-menu-list" *ngIf="sFilter" style="margin-top: 10px;">
-                <li *ngIf="monthPub?.length>0">
+              <ul class="side-menu-list" *ngIf="sFilter && tabIndex==0" style="margin-top: 10px;">
+                <li *ngIf="ddmonthPub?.length>0">
                   <mat-form-field class="font-size-s" style="width:100%;">
                     <mat-select placeholder="{{'home.search.filmonth' | translate}}" (change)="chkmonpub($event)" [(ngModel)]="valMonPub" multiple>
                       <mat-select-trigger>
@@ -139,14 +134,14 @@
                           (+{{valMonPub.length - 1}} others)
                         </span>
                       </mat-select-trigger>
-                      <mat-option *ngFor="let i of monthPub" [value]="i.name" style="width:90%">
+                      <mat-option *ngFor="let i of ddmonthPub" [value]="i.name" style="width:90%">
                         <span>{{i.name | date:'MMMM yyyy'}}</span>
                         <span class="pull-right">({{i.val}})</span>
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
                 </li>
-                <li *ngIf="author?.length>0">
+                <li *ngIf="ddauthor?.length>0">
                   <mat-form-field class="font-size-s" style="width:100%;">
                     <mat-select placeholder="{{'home.search.filauth' | translate}}" (change)="chkauth($event)" [(ngModel)]="valAuthor" multiple>
                       <mat-select-trigger>
@@ -155,14 +150,14 @@
                           (+{{valAuthor.length - 1}} others)
                         </span>
                       </mat-select-trigger>
-                      <mat-option *ngFor="let i of author" [value]="i">
+                      <mat-option *ngFor="let i of ddauthor" [value]="i">
                         {{i.name}}
                         <span class="pull-right">({{i.val}})</span>
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
                 </li>
-                <li *ngIf="topics?.length>0">
+                <li *ngIf="ddtopics?.length>0">
                   <mat-form-field class="font-size-s" style="width:100%;">
                     <mat-select placeholder="{{'home.search.filtop' | translate}}" (change)="chkfiltrtopic($event)" [(ngModel)]="valTopic" multiple>
                       <mat-select-trigger>
@@ -171,14 +166,14 @@
                           (+{{valTopic.length - 1}} others)
                         </span>
                       </mat-select-trigger>
-                      <mat-option *ngFor="let i of topics" [value]="i">
+                      <mat-option *ngFor="let i of ddtopics" [value]="i">
                         {{i.name}}
                         <span class="pull-right">({{i.val}})</span>
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
                 </li>
-                <li *ngIf="subTopics?.length>0">
+                <li *ngIf="ddsubTopics?.length>0">
                   <mat-form-field class="font-size-s" style="width:100%;">
                     <mat-select placeholder="{{'home.search.filsubtopic' | translate}}" (change)="chksubtop($event)" [(ngModel)]="valSubTopic" multiple>
                       <mat-select-trigger>
@@ -187,7 +182,41 @@
                           (+{{valSubTopic.length - 1}} others)
                         </span>
                       </mat-select-trigger>
-                      <mat-option *ngFor="let i of subTopics" [value]="i">
+                      <mat-option *ngFor="let i of ddsubTopics" [value]="i">
+                        {{i.name}}
+                        <span class="pull-right">({{i.val}})</span>
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </li>
+              </ul>
+              <ul class="side-menu-list" *ngIf="sFilter && tabIndex==1" style="margin-top: 10px;">
+                <li *ngIf="ddministry?.length>0">
+                  <mat-form-field class="font-size-s" style="width:100%;">
+                    <mat-select placeholder="{{'home.search.specminis' | translate}}" (change)="chkministry($event)" [(ngModel)]="valMinistry" multiple>
+                      <mat-select-trigger>
+                        {{selMinisDisp}}
+                        <span *ngIf="valMinistry?.length > 1" class="example-additional-selection">
+                          (+{{valMinistry.length - 1}} others)
+                        </span>
+                      </mat-select-trigger>
+                      <mat-option *ngFor="let i of ddministry" [value]="i.name" >
+                        {{i.name}}
+                        <span class="pull-right">({{i.val}})</span>
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </li>
+                <li *ngIf="ddagency?.length>0">
+                  <mat-form-field class="font-size-s" style="width:100%;">
+                    <mat-select placeholder="{{'home.search.specagen' | translate}}" (change)="chkagency($event)" [(ngModel)]="valAgency" multiple>
+                      <mat-select-trigger>
+                        {{selAgencyDisp}}
+                        <span *ngIf="valAgency?.length > 1" class="example-additional-selection">
+                          (+{{valAgency.length - 1}} others)
+                        </span>
+                      </mat-select-trigger>
+                      <mat-option *ngFor="let i of ddagency" [value]="i.name" >
                         {{i.name}}
                         <span class="pull-right">({{i.val}})</span>
                       </mat-option>
@@ -195,6 +224,13 @@
                   </mat-form-field>
                 </li>
               </ul>              
+            </li>
+            <li style="padding: 10px;" *ngIf="sKeyword || sSpeci || sFilter">
+                <div>
+                  <button class="btn btn-md" mat-raised-button color="primary" (click)="btnSubmit()">
+                  <i [class]="sharedService.icon.check"></i> Submit</button>
+                  <button mat-raised-button color="warn"><i [class]="sharedService.icon.refresh"></i> Reset</button>
+                </div>
             </li>
           </ul>
         </div>
@@ -210,24 +246,30 @@
         </h3>  
          <div class="example-full-width">
             <mat-form-field class="example-full-width">
-              <input type="text" class="font-size-l example-full-width" matInput placeholder="Search here" [(ngModel)]="ser_word">
-              <mat-icon matSuffix (click)="searchByKeyword(ser_word)" style="cursor:pointer;"><i class="fa fa-search"></i></mat-icon>
+              <input type="text" class="inputser example-full-width" matInput placeholder="Search here" [(ngModel)]="ser_word" (keyup.enter)="resetPage();searchByKeyword(ser_word)">
+              <mat-icon matSuffix (click)="resetPage();searchByKeyword(ser_word)" style="cursor:pointer;"><i class="fa fa-search"></i></mat-icon>
               <!-- <mat-icon matSuffix *ngIf="ser_word.length>0" (click)="ser_word=''" style="cursor:pointer;"><i class="fa fa-times"></i></mat-icon> -->
             </mat-form-field>            
           </div>
       
       <mat-tab-group #tabGroup (selectedTabChange)="changeTab($event)">
           <mat-tab label="{{'home.search.local' | translate}}" >
+            <div style="padding-top:5px;" *ngIf="totalElements>0">
+                {{totalElements}} {{'home.search.resultsfound' | translate}} {{millisec}} ms
+            </div> 
               <ul class="intSearch" *ngIf="tabIndex==0">
                   <li *ngFor="let int of intData; let i = index;">
-                    <int-search [showdata]="int" [indx]="i"></int-search>
+                    <int-search [showdata]="int" [indx]="i" [keyw]='ser_word' [tabInx]='tabIndex' [pageNo]="(pageNumber == 1)?(i + 1):((pageNumber * pagesize)-pagesize)+(i+1)" ></int-search>
                   </li>
                 </ul>
           </mat-tab>
           <mat-tab label="{{'home.search.onlineser' | translate}}">
+              <div style="padding-top:5px;" *ngIf="totalElements>0">
+                  {{totalElements}} {{'home.search.resultsfound' | translate}} {{millisec}} ms
+              </div>  
               <ul class="intSearch" *ngIf="tabIndex==1">
                   <li *ngFor="let int of intData; let i = index;">
-                    <int-search [showdata]="int" [indx]="i"></int-search>
+                    <int-search [showdata]="int" [indx]="i" [keyw]='ser_word' [tabInx]='tabIndex' [pageNo]="(pageNumber == 1)?(i + 1):((pageNumber * pagesize)-pagesize)+(i+1)"></int-search>
                   </li>
                 </ul>
           </mat-tab>
@@ -235,6 +277,28 @@
 
           </mat-tab>
         </mat-tab-group>
+
+        <div *ngIf="showNoData" class="row text-align-Center padding-20"> {{ 'common.msg.nodata' | translate }} </div>
+
+        <div class="float-right paddingTop-15">
+          <mat-form-field class="table_footer_pagecount" style="display: inline-block; position: relative; text-align: left;">
+            <mat-select class="font-size-s text-align-Center" [(ngModel)]="pagesize" (change)="pageChange($event)">
+              <mat-option *ngFor="let pgcount of sharedService.pageSize" [value]="pgcount.size">{{pgcount.size}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <span class="float-right">
+            <span class="table_footer_pagination">{{ 'common.pagination.pages' | translate }}
+              <strong>{{pageNumber}}</strong> {{ 'common.pagination.of' | translate }}
+              <strong>{{totalPages}}</strong> {{ 'common.pagination.in' | translate }}
+              <strong>{{totalElements}}</strong> {{'home.search.result' | translate}}     </span>
+            <button mat-mini-fab color="basic" [disabled]="noPrevData" (click)="paginatorL()">
+              <i [ngClass]="sharedService.icon.arrLeft" aria-hidden="true"></i>
+            </button>
+            <button mat-mini-fab color="basic" [disabled]="noNextData" (click)="paginatorR()">
+              <i [ngClass]="sharedService.icon.arrRight" aria-hidden="true"></i>
+            </button>
+          </span>
+        </div>
     </div>
   </div>
 </div>

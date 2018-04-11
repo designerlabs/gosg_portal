@@ -41,7 +41,9 @@
       "filsubtopic": "Sub Topik",
       "local": "Dalaman",
       "onlineser": "Perkhidmatan Dalam Talian",
-      "global":"Global" 
+      "global":"Global",
+      "result": "Rekod",
+      "resultsfound": "Rekod Carian Dijumpai dalam masa" 
     },
     "breadcrumb":{
       "calendar": "Kalendar",
@@ -277,8 +279,8 @@
   },
   "mailbox":{
     "header":{
-      "from":"Dari",
-      "subject":"Subjek",
+      "from":"Daraipada",
+      "subject":"Perkara",
       "date":"Tarikh",
       "action":"Tindakan"
     },
@@ -287,15 +289,15 @@
       "mails":"mel"
     },
     "err":{
-      "deleteconfirm":"Are you sure to delete this mail?",
-      "deleteconfirm_multi":"Are you sure to delete the selected mails?",
-      "failtoload":"Sorry, Mail is not loading properly, Try again!",
-      "failtodelete":"Sorry, Mail is not deleted properly, Try again!",
-      "failtoview":"Sorry, Mail is not viewed properly, Try again!"
+      "deleteconfirm":"Adakah anda pasti memadam mel ini?",
+      "deleteconfirm_multi":"Adakah anda pasti memadam mel yang dipilih?",
+      "failtoload":"Harap maaf, Mel tidak dapat dibuka dengan betul, Sila cuba lagi!",
+      "failtodelete":"Harap maaf, Mel tidak dapat dipadam dengan betul, Sila cuba lagi!",
+      "failtoview":"Harap maaf, Mel tidak dapat dipaparkan dengan betul, Sila cuba lagi!"
     },
     "success":{
-      "deletesuccess":"Mail has been deleted successfully!",
-      "deletesuccess_multi":"Selected mails has been deleted successfully!"
+      "deletesuccess":"Mel telah berjaya dipadam!",
+      "deletesuccess_multi":"Mel yang dipilih telah berjaya dipadam!"
     }
   },
   "common":{
