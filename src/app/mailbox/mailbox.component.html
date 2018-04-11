@@ -31,7 +31,7 @@
         </div>
         <div class="row"></div>
         <div class="row mailContainer" *ngIf="mailContent?.object?.fromUser.email" [style.display]="isMailContainerShow">
-          <span class="pull-right" (click)="isMailContainerShow='none'" style="cursor: pointer;"><i class="fas fa-times"></i></span>
+          <span class="pull-right" (click)="isMailContainerShow='none'" style="cursor: pointer;"><i class="fa fa-times"></i></span>
               <p class="font-size-s">
                 From: {{mailContent?.object?.fromUser.email}} 
               </p>
@@ -46,7 +46,7 @@
         </div>
         <table class="mat-table" style="width:100%">
           <tr class="mat-header-row" style="height:45px">
-            <td width="5%" class="mat-header-cell text-center">No</td>
+            <td width="5%" class="mat-header-cell">No</td>
             <td width="5%" class="mat-header-cell text-center"></td>
             <td width="30%" class="mat-header-cell">{{'mailbox.header.from' | translate}}</td>
             <td class="mat-header-cell">{{'mailbox.header.subject' | translate}}</td>
