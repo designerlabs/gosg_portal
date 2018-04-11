@@ -125,7 +125,8 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit {
       }else{
         this.letter = '';
         this.keyword = '';
-        this.mymap.setView([2.924904, 101.694556], 13);
+        this.mymap.setView([5.8142568, 108.5806004], 5.2);
+        this.popup.remove();
         this.getAgencyData(this.pageCount, this.pageSize);
       }
       
@@ -140,7 +141,8 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit {
     // this.getDefaultMap();
     this.ministry = '';
     this.letter = '';
-    this.mymap.setView([2.924904, 101.694556], 13);
+    this.mymap.setView([5.8142568, 108.5806004], 5.2);
+    this.popup.remove();
   }
 
   constructor(
@@ -176,6 +178,12 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit {
         this.getMinistry();
         this.getAllAgenciesMarkers()
       }
+      this.letter = '';
+      this.keyword = '';
+      this.ministry = '';
+      this.pageCount = 1;
+      this.mymap.setView([5.8142568, 108.5806004], 5.2);
+      this.popup.remove();
     });
     if(!this.languageId){
       this.languageId = localStorage.getItem('langID');
@@ -193,7 +201,7 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit {
   }
 
   getDefaultMap(){
-    this.mymap = L.map('dirmap').setView([2.924904, 101.694556], 13);
+    this.mymap = L.map('dirmap').setView([5.8142568, 108.5806004], 5.2);
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
       attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
       maxZoom: 15,
