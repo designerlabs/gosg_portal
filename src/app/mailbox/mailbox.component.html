@@ -27,7 +27,7 @@
       </div>
       <div class="col-md-9 mat-elevation-z8">
         <div class="deleteAllBtn">
-          <!-- <button [disabled]="!mailboxId.length > 0" mat-raised-button color="warn" (click)="deleteAllModal.show()"><i class="fa fa-trash"></i> {{'common.buttons.delete' | translate}}</button> -->
+          <button [disabled]="!mailboxId.length > 0" mat-raised-button color="warn" (click)="deleteAllModal.show()"><i class="fa fa-trash"></i> {{'common.buttons.delete' | translate}}</button>
         </div>
         <div class="row"></div>
         <div class="row mailContainer" *ngIf="mailContent?.object?.fromUser.email" [style.display]="isMailContainerShow">
