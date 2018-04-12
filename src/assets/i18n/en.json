@@ -265,7 +265,15 @@
       "location": "Location",
       "start": "Start",
       "end": "End",
-      "desc": "Description"
+      "desc": "Description",
+      "organizerheader": "Organizer Details",
+      "organizer": "Organizer",
+      "organizeremail": "Organizer Email",
+      "organizeraddress": "Organizer Address",
+      "organizerurl": "Organizer Website",
+      "organizerfb": "Organizer FB",
+      "organizerphone": "Organizer Contact No",
+      "agency": "Agency"
     },
     "reset":"Reset this form?",      
     "msgsubmit": "Thank you. Your complaints/queries has been successfully sent. Responds will be received in 3 working days",

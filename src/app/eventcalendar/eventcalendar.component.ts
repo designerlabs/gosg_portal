@@ -19,12 +19,14 @@ import { SELECT_ITEM_HEIGHT_EM } from '@angular/material';
 })
 export class EventCalendarComponent implements OnInit, AfterViewInit, AfterContentChecked, AfterViewChecked{
   
-  callStatus: boolean = false;
+  initLoad: boolean = true;
+  langChge: boolean = false;
   options: Object;
   event: any = [];
   langId = localStorage.getItem('langID');
   localeVal: string;
   languageId = this.languageId;
+  mediaUrl: any = this.config.externalMediaURL +'/images/';
 
   constructor(
     private http: Http, 
@@ -45,7 +47,7 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
             this.lang = 'en';
             this.languageId = 1;
             this.localeVal = this.lang;
-      
+            this.langChge = true;
           });
         }
         
@@ -54,30 +56,32 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
             this.lang = 'ms';
             this.languageId = 2;
             this.localeVal = 'ms-my';
-          });
-          // alert(this.languageId + ',' + this.localeVal)
-        }
+            this.langChge = true;
+        });
+        // alert(this.languageId + ',' + this.localeVal)
+      }
 
-        alert(this.callStatus + " language")
+        // alert(this.initLoad + " language")
         
-        if(this.callStatus == false) {
-          this.getEvents();
-          this.options = this.getOptions(this.event);
-          $('#calendar').fullCalendar('destroy');
-          $('#calendar').fullCalendar(this.options);
-        }
+      if(this.langChge == true) {
+        this.getEvents();
+        this.options = this.getOptions(this.event,this.mediaUrl);
+        $('#calendar').fullCalendar('destroy');
+        $('#calendar').fullCalendar(this.options);
+      }
     });
+
     
   }
   lang = this.lang;
-
+  
   ngOnInit() {
-    alert(this.callStatus + " onInit")
+    // alert(this.initLoad + " onInit")
     // this.localeVal = 'en-us';
     // console.log(this.localeVal)
       this.getEvents();
       $('#calendar').fullCalendar('destroy');
-      $('#calendar').fullCalendar(this.getOptions(this.event));
+      $('#calendar').fullCalendar(this.getOptions(this.event,this.mediaUrl));
 
   }
 
@@ -86,10 +90,11 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
   }
 
   getEvents() {
-    this.callStatus = true;
+    this.initLoad = true;
     let sDate;
     let eDate;
-    this.event = [];
+    let sT;
+    let eT;
 
     this.portalService.getCalendarEvents().subscribe(data => {
   
@@ -109,20 +114,41 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
             'location': null,
             'color': null,
             'image': null,
+            'organizer': null,
+            'organizerEmail': null,
+            'organizerAddress': null,
+            'organizerUrl': null,
+            'organizerFb': null,
+            'organizerPhone': null,
+            'agency': null,
             'ext': null
           };
 
           sDate = new Date(item.eventStart);
           eDate = new Date(item.eventEnd);
+          sT = this.changeDateFormat(item.eventStart)
+          eT = this.changeDateFormat(item.eventEnd)
 
           body.id = item.id;
           body.title = item.eventName;
           body.start = sDate;
           body.end = eDate;
-          body.startTime = item.startTime;
+          body.startTime = sT;
+          body.endTime = eT;
           body.ext = item.externalData;
           body.desc = item.eventDescription;
           body.location = item.eventLocation;
+
+          if(item.agency)
+            body.agency = item.agency.agencyName;
+
+          // ORGANIZER DETAILS
+          body.organizer = item.organizer;
+          body.organizerEmail = item.organizerEmail;
+          body.organizerAddress = item.organizerAddress;
+          body.organizerUrl = item.organizerUrl;
+          body.organizerFb = item.organizerFb;
+          body.organizerPhone = item.organizerPhone;
 
           if(item.externalData == true) {
             body.color = '#0aaaaa';
@@ -133,13 +159,15 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
           
           this.event.push(body)
         }
-        console.log(this.event)
+        // console.log(this.event)
+        this.event = [''];
+     
         
       // });
     });
   }
 
-  getOptions(calEvent) {
+  getOptions(calEvent, mediaPath) {
 
     setTimeout(()=>{
       // this.getEvents();
@@ -159,8 +187,6 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
         },
         events: calEvent,
         eventClick: function(events) {
-          let sd = this.datePipe.transform(events.start._d, 'dd/MM/yyyy h:mm a')
-          let ed = this.datePipe.transform(events.end._d, 'dd/MM/yyyy h:mm a')
 
         if(events.ext == true)
           $('#titleHeader').css({'background': '#0aaaaa','border-radius':'6px 6px 0px 0px', 'border-bottom':'1px #666 solid'});
@@ -168,10 +194,20 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
           $('#titleHeader').css({'background': '#3a87ad','border-radius':'6px 6px 0px 0px', 'border-bottom':'1px #333 solid'});
         $('#title').html(events.title);
         $('#loc').html(events.location);
-        $('#start').html(sd);
-        $('#end').html(ed);
+        $('#start').html(events.startTime);
+        $('#end').html(events.endTime);
         $('#desc').html(events.desc);
+        $('#organizer').html(events.organizer);
+        $('#organizerEmail').html(events.organizerEmail);
+        $('#organizerAddress').html(events.organizerAddress);
+        $('#organizerUrl').html(events.organizerUrl);
+        $('#organizerFb').html(events.organizerFb);
+        $('#organizerPhone').html(events.organizerPhone);
+        $('#agency').html(events.agency);
         
+        if(events.image)
+          $("#eventImage").attr("src", mediaPath+events.image);
+
         $('#details').css('display','block');
         $('.overlay').css('display','block');
         
@@ -195,7 +231,7 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
         +'<div class="col-md-5" style="text-align: center; background: #3a87ad; color: #fafafa; width: 150px; height: 20px">'+this.translate.instant('calendar.view.internaldata')+'</div>'
         +'<div class="col-md-5" style="text-align: center; background: #0aaaaa; color: #fafafa; width: 150px; height: 20px">'+this.translate.instant('calendar.view.externaldata')+'</div>'
         +'</div>').insertAfter($('.fc-view-container'));
-    }, 100);
+    }, 1000);
 
     return this.options;
   }
@@ -213,6 +249,12 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
     
   }
 
+  changeDateFormat(dateVal) {
+    let res;
+    res = this.datePipe.transform(dateVal, 'dd/MM/yyyy h:mm a')
+
+    return res;
+  }
   // transform(value: string) {
   //   let datePipe = new DatePipe("en-US");
   //    value = datePipe.transform(value, 'dd/MM/yyyy hh:mm a');

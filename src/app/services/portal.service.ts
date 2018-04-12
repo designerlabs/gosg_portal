@@ -37,6 +37,7 @@ export class PortalService {
                   }
             
               });
+
               if(!this.langId){
                 if(localStorage.getItem('langID')){
                   this.langId = localStorage.getItem('langID');
@@ -162,7 +163,7 @@ export class PortalService {
   getCalendarEventsByID(id){
 
     console.log(this.calendarUrl+ '/'+id+'?language='+this.langId)
-    return this.http.get(this.calendarUrl + '/'+id+'?language='+localStorage.getItem('langID'))
+    return this.http.get(this.calendarUrl + '/'+id+'?language='+this.langId)
     .map((response: Response) => response.json())
     .retry(5)
     .catch(this.handleError);

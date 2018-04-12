@@ -265,7 +265,15 @@
       "location": "Lokasi",
       "start": "Mula",
       "end": "Tamat",
-      "desc": "Keterangan"
+      "desc": "Keterangan",
+      "organizerheader": "Maklumat Penganjur",
+      "organizer": "Penganjur",
+      "organizeremail": "Emel Penganjur",
+      "organizeraddress": "Alamat Penganjur",
+      "organizerurl": "Laman Web Penganjur",
+      "organizerfb": "Laman FB Penganjur",
+      "organizerphone": "No Telefon Penganjur",
+      "agency": "Agensi"
     },
     "reset":"Reset this form?",      
     "msgsubmit": "Thank you. Your complaints/queries has been successfully sent. Responds will be received in 3 working days",

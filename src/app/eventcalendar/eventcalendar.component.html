@@ -30,46 +30,82 @@
                     <div class="col-md-12">&nbsp;</div>
                     <div class="col-md-12 header-underlined">
                     <a class="boxclose" (click)="closePopup()"></a>
-                    <h4>Event Details</h4>
+                    <h4>{{ 'calendar.details.header' | translate }}</h4>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-12">&nbsp;</div>
                     <div class="col-md-12">
-                        <label class="font-size-s">Event Name</label>
+                        <img id="eventImage" style="width:200px">
+                    </div>
+                    <div class="col-md-12">&nbsp;</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">&nbsp;</div>
+                    <div class="col-md-12">
+                        <label class="font-size-s">{{ 'calendar.details.name' | translate }}</label>
                         <p class="font-size-m" id="title"></p>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-12">
-                        <label class="font-size-s">Location</label>
+                        <label class="font-size-s">{{ 'calendar.details.location' | translate }}</label>
                         <p class="font-size-m" id="loc"></p>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6">
-                        <label class="font-size-s">Start</label>
+                        <label class="font-size-s">{{ 'calendar.details.start' | translate }}</label>
                         <p class="font-size-m" id="start"></p>
                     </div>
                     <div class="col-md-6">
-                        <label class="font-size-s">End</label>
+                        <label class="font-size-s">{{ 'calendar.details.end' | translate }}</label>
                         <p class="font-size-m" id="end"></p>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-12">
-                        <label class="font-size-s">Description</label>
+                        <label class="font-size-s">{{ 'calendar.details.desc' | translate }}</label>
                         <p class="font-size-m" id="desc"></p>
                     </div>
                     <div class="col-md-12">&nbsp;</div>
                 </div>
 
-                <div *ngIf="image != null"> 
-                  <img [src]="appConfig.externalMediaURL +'/images/'+ image" style="width:200px">
+                <div class="row">
+                    <div class="col-md-12">&nbsp;</div>
+                    <div class="col-md-12"><h4>{{ 'calendar.details.organizerheader' | translate }}</h4></div>
+                    
+                    <div class="col-md-6">
+                        <label class="font-size-s">{{ 'calendar.details.organizer' | translate }}</label>
+                        <p class="font-size-m" id="organizer"></p>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="font-size-s">{{ 'calendar.details.organizeremail' | translate }}</label>
+                        <p class="font-size-m" id="organizerEmail"></p>
+                    </div>
+                    
+                    <div class="col-md-12">
+                        <label class="font-size-s">{{ 'calendar.details.organizeraddress' | translate }}</label>
+                        <p class="font-size-m" id="organizerAddress"></p>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="font-size-s">{{ 'calendar.details.organizerurl' | translate }}</label>
+                        <p class="font-size-m" id="organizerUrl"></p>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <label class="font-size-s">{{ 'calendar.details.organizerfb' | translate }}</label>
+                        <p class="font-size-m" id="organizerFb"></p>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="font-size-s">{{ 'calendar.details.organizerphone' | translate }}</label>
+                        <p class="font-size-m" id="organizerPhone"></p>
+                    </div>
+                    <div class="col-md-12">&nbsp;</div>
                 </div>
             </div>
         </div>
