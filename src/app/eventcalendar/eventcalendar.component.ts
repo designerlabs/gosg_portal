@@ -10,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 import { SharedService } from '../common/shared.service';
 import { DatePipe } from '@angular/common';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
+import { SELECT_ITEM_HEIGHT_EM } from '@angular/material';
 
 @Component({
   selector: 'gosg-eventcalendar',
@@ -18,6 +19,7 @@ import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 })
 export class EventCalendarComponent implements OnInit, AfterViewInit, AfterContentChecked, AfterViewChecked{
   
+  callStatus: boolean = false;
   options: Object;
   event: any = [];
   langId = localStorage.getItem('langID');
@@ -37,24 +39,114 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
 
     translate.onLangChange.subscribe((event: LangChangeEvent) => {
       const myLang = translate.currentLang;
+
       if (myLang == 'en') {
         translate.get('HOME').subscribe((res: any) => {
             this.lang = 'en';
             this.languageId = 1;
             this.localeVal = this.lang;
-        });
-  
-      }
-      if (myLang == 'ms') {
-        translate.get('HOME').subscribe((res: any) => {
+      
+          });
+        }
+        
+        if (myLang == 'ms') {
+          translate.get('HOME').subscribe((res: any) => {
             this.lang = 'ms';
             this.languageId = 2;
             this.localeVal = 'ms-my';
-        });
-      }
-      // console.log(this.localeVal)
-      // console.log(this.options)
+          });
+          // alert(this.languageId + ',' + this.localeVal)
+        }
 
+        alert(this.callStatus + " language")
+        
+        if(this.callStatus == false) {
+          this.getEvents();
+          this.options = this.getOptions(this.event);
+          $('#calendar').fullCalendar('destroy');
+          $('#calendar').fullCalendar(this.options);
+        }
+    });
+    
+  }
+  lang = this.lang;
+
+  ngOnInit() {
+    alert(this.callStatus + " onInit")
+    // this.localeVal = 'en-us';
+    // console.log(this.localeVal)
+      this.getEvents();
+      $('#calendar').fullCalendar('destroy');
+      $('#calendar').fullCalendar(this.getOptions(this.event));
+
+  }
+
+  ngAfterViewInit() { 
+    
+  }
+
+  getEvents() {
+    this.callStatus = true;
+    let sDate;
+    let eDate;
+    this.event = [];
+
+    this.portalService.getCalendarEvents().subscribe(data => {
+  
+      // this.sharedService.errorHandling(data, (function(){
+        // console.log(data['list'])
+        for(var item of data['list']) {
+          // console.log(item)
+
+          let body = {
+            'id': null,
+            'title': null,
+            'start': null,
+            'end': null,
+            'startTime': null,
+            'endTime': null,
+            'desc': null,
+            'location': null,
+            'color': null,
+            'image': null,
+            'ext': null
+          };
+
+          sDate = new Date(item.eventStart);
+          eDate = new Date(item.eventEnd);
+
+          body.id = item.id;
+          body.title = item.eventName;
+          body.start = sDate;
+          body.end = eDate;
+          body.startTime = item.startTime;
+          body.ext = item.externalData;
+          body.desc = item.eventDescription;
+          body.location = item.eventLocation;
+
+          if(item.externalData == true) {
+            body.color = '#0aaaaa';
+          } else {
+            body.image = item.image.mediaFile;
+          }
+          //   body.color = '#7e9e00';
+          
+          this.event.push(body)
+        }
+        console.log(this.event)
+        
+      // });
+    });
+  }
+
+  getOptions(calEvent) {
+
+    setTimeout(()=>{
+      // this.getEvents();
+      
+      // console.log(this.options)
+      // console.log("100ms after ngAfterViewInit ");
+      
       this.options = {
         locale: this.localeVal?this.localeVal: this.lang,
         editable: false,
@@ -65,77 +157,19 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
           right: null
           //  right: 'month,agendaWeek,agendaDay,listMonth'
         },
-        events: this.event,
+        events: calEvent,
         eventClick: function(events) {
-
-          if(events.ext == true)
-            $('#titleHeader').css({'background': '#0aaaaa','border-radius':'6px 6px 0px 0px', 'border-bottom':'1px #666 solid'});
-          else
-            $('#titleHeader').css({'background': '#3a87ad','border-radius':'6px 6px 0px 0px', 'border-bottom':'1px #333 solid'});
-          
-          $('#title').html(events.title);
-          $('#loc').html(events.location);
-          $('#start').html(datePipe.transform(events.start._d, 'dd/MM/yyyy h:mm aa'));
-          $('#end').html(datePipe.transform(events.end._d, 'dd/MM/yyyy h:mm aa'));
-          $('#desc').html(events.desc);
-          
-          $('#details').css('display','block');
-          $('.overlay').css('display','block');
-          
-          console.log(events)
-        },
-        eventMouseover: function(events) {
-          $('.fc-event').attr('title', events.title);
-        },
-        buttonText: {
-          today: this.translate.instant('calendar.view.today')
-        },
-        timeFormat: 'hh:mm a'
-        
-      };
-    
-      $('#calendar').fullCalendar('destroy');
-      $('#calendar').fullCalendar(this.options);
-
-      // $('<div class="col-md-5 pull-right" style="border: 0px solid #000; text-align: right; margin-right: -6.5%; margin-top: -2%">'
-        // +'<div class="col-md-2" style="text-align: right"><label>'+this.translate.instant('calendar.view.note')+'</label>:</div>'
-        // +'<div class="col-md-5" style="text-align: center; background: #3a87ad; color: #fafafa; width: 150px; height: 20px">'+this.translate.instant('calendar.view.internaldata')+'</div>'
-        // +'<div class="col-md-5" style="text-align: center; background: #0aaaaa; color: #fafafa; width: 150px; height: 20px">'+this.translate.instant('calendar.view.externaldata')+'</div>'
-        // +'</div>').insertBefore($('.fc-view-container'));
-      // alert(this.localeVal)
-    });
-    
-  }
-  lang = this.lang;
-
-  ngOnInit() {
-
-    this.localeVal = 'en-us';
-    console.log(this.localeVal)
-    this.getEvents();
-
-    this.options = {
-      locale: this.localeVal?this.localeVal: this.lang,
-      editable: false,
-      eventLimit: false,
-      header: {
-        left: 'prev,next today',
-        center: 'title',
-        right: null
-        //  right: 'month,agendaWeek,agendaDay,listMonth'
-      },
-      events: this.event,
-      eventClick: function(events) {
+          let sd = this.datePipe.transform(events.start._d, 'dd/MM/yyyy h:mm a')
+          let ed = this.datePipe.transform(events.end._d, 'dd/MM/yyyy h:mm a')
 
         if(events.ext == true)
           $('#titleHeader').css({'background': '#0aaaaa','border-radius':'6px 6px 0px 0px', 'border-bottom':'1px #666 solid'});
         else
           $('#titleHeader').css({'background': '#3a87ad','border-radius':'6px 6px 0px 0px', 'border-bottom':'1px #333 solid'});
-        
         $('#title').html(events.title);
         $('#loc').html(events.location);
-        $('#start').html(this.datePipe.transform(events.start._d, 'dd/MM/yyyy h:mm aa'));
-        $('#end').html(this.datePipe.transform(events.end._d, 'dd/MM/yyyy h:mm aa'));
+        $('#start').html(sd);
+        $('#end').html(ed);
         $('#desc').html(events.desc);
         
         $('#details').css('display','block');
@@ -156,76 +190,14 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
     $('#calendar').fullCalendar('destroy');
     $('#calendar').fullCalendar(this.options);
 
-    // $('<div class="col-md-5 pull-right" style="border: 0px solid #000; text-align: right; margin-right: -6.5%; margin-top: -2%">'
-      // +'<div class="col-md-2" style="text-align: right"><label>'+this.translate.instant('calendar.view.note')+'</label>:</div>'
-      // +'<div class="col-md-5" style="text-align: center; background: #3a87ad; color: #fafafa; width: 150px; height: 20px">'+this.translate.instant('calendar.view.internaldata')+'</div>'
-      // +'<div class="col-md-5" style="text-align: center; background: #0aaaaa; color: #fafafa; width: 150px; height: 20px">'+this.translate.instant('calendar.view.externaldata')+'</div>'
-      // +'</div>').insertBefore($('.fc-view-container'));
-    // alert(this.localeVal)
-  }
-
-  ngAfterViewInit() {
-    setTimeout(()=>{
-
-      console.log(this.options)
-      // console.log("100ms after ngAfterViewInit ");
-      $('#calendar').fullCalendar('destroy');
-      $('#calendar').fullCalendar(this.options);
-
       $('<div class="col-md-5 pull-right" style="border: 0px solid #000; text-align: right; position:absolute; top:0px; right:0px;">'
         +'<div class="col-md-2" style="text-align: right"><label>'+this.translate.instant('calendar.view.note')+'</label>:</div>'
         +'<div class="col-md-5" style="text-align: center; background: #3a87ad; color: #fafafa; width: 150px; height: 20px">'+this.translate.instant('calendar.view.internaldata')+'</div>'
         +'<div class="col-md-5" style="text-align: center; background: #0aaaaa; color: #fafafa; width: 150px; height: 20px">'+this.translate.instant('calendar.view.externaldata')+'</div>'
         +'</div>').insertAfter($('.fc-view-container'));
     }, 100);
-    
-  }
 
-  getEvents() {
-    let sDate;
-    let eDate;
-
-    this.portalService.getCalendarEvents().subscribe(data => {
-  
-      // this.sharedService.errorHandling(data, (function(){
-        
-        for(var item of data['list']) {
-
-          let body = {
-            'id': null,
-            'title': null,
-            'start': null,
-            'end': null,
-            'startTime': null,
-            'endTime': null,
-            'desc': null,
-            'location': null,
-            'color': null,
-            'ext': null
-          };
-
-          sDate = new Date(item.eventStart);
-          eDate = new Date(item.eventEnd);
-
-          body.id = item.id;
-          body.title = item.eventName;
-          body.start = sDate;
-          body.end = eDate;
-          // body.startTime = item.startTime;
-          // body.endTime = item.endTime;
-          body.ext = item.externalData;
-          body.desc = item.eventDescription;
-          body.location = item.eventLocation;
-          if(item.externalData == true)
-            body.color = '#0aaaaa';
-          // else
-          //   body.color = '#7e9e00';
-
-          this.event.push(body)
-        }
-        
-      // });
-    });
+    return this.options;
   }
 
   closePopup() {

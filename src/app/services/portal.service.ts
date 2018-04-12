@@ -37,6 +37,15 @@ export class PortalService {
                   }
             
               });
+
+              if(!this.langId){
+                if(localStorage.getItem('langID')){
+                  this.langId = localStorage.getItem('langID');
+                }else{
+                  this.langId = 1;
+                }
+                
+              }
   }
   
   private registerUrl: string = this.config.urlRegister;
@@ -144,8 +153,8 @@ export class PortalService {
 
   getCalendarEvents(){
 
-    console.log(this.calendarUrl+ '?language='+this.langId)
-    return this.http.get(this.calendarUrl + '?language='+localStorage.getItem('langID'))
+    // console.log(this.calendarUrl+ '?language='+localStorage.getItem('langID'))
+    return this.http.get(this.calendarUrl + '?language='+this.langId)
     .map((response: Response) => response.json())
     .retry(5)
     .catch(this.handleError);
@@ -176,7 +185,7 @@ export class PortalService {
   getAgenciesByKeyword(keyword){
 
     // console.log(this.agencyUrl+localStorage.getItem('langID')+'?keyword='+keyword)
-    return this.http.get(this.agencyUrl+localStorage.getItem('langID')+'?keyword='+keyword)
+    return this.http.get(this.agencyUrl+this.langId+'?keyword='+keyword)
     .map((response: Response) => response.json())
     .retry(5)
     .catch(this.handleError);
