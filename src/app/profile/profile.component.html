@@ -270,7 +270,7 @@
                     </div>
                     <div class="form-group col-md-4">
                       <mat-form-field *ngIf="isCorrsLocal" class="example-full-width font-size-s">
-                        <mat-select (change)="getCitiesByState($event)" formControlName="corrsStateLocal" placeholder="{{'profile.label.state' | translate}}">
+                        <mat-select (change)="getCitiesByStateD($event)" formControlName="corrsStateLocal" placeholder="{{'profile.label.state' | translate}}">
                           <mat-option *ngFor="let state of getStateData" [value]="state?.stateId">{{ state?.stateName }}</mat-option>
                         </mat-select>
                       </mat-form-field>

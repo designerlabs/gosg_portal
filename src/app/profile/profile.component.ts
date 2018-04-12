@@ -651,6 +651,23 @@ export class ProfileComponent implements OnInit, AfterViewInit {
        });
   }
 
+  getCitiesByStateD(e){
+    this.isStateChanged();
+    this.selectedState = e.value;
+    // this.perCityLocal.reset();
+    return this.sharedService.getCitiesbyState(e.value)
+      .subscribe(resCityData => {
+        if(e.source.ngControl.name == "perStateLocal") {
+          this.getPerCityData = resCityData;
+        } else {
+          this.getCorrsCityData = resCityData;
+        }
+      },
+      Error => {
+       this.toastr.error(this.translate.instant('common.err.servicedown'), '');            
+     });
+}
+
   getPostcodeByCity(e){
     this.isStateChanged();
     this.perPostcode.reset();
