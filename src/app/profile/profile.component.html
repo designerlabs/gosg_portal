@@ -206,11 +206,20 @@
                             <mat-error *ngIf="!validateCtrlChk(perPostcode) && profileForm.controls.perPostcode.errors?.pattern">
                               {{'profile.pattern.postcode' | translate }}
                             </mat-error>
+
+                            <mat-error *ngIf="!validateCtrlChk(perPostcode) && profileForm.controls.perPostcode.errors?.required">
+                              {{'profile.err.postcode' | translate }}
+                            </mat-error>
+
                           </mat-form-field>
                           <mat-form-field *ngIf="!isLocal" class="example-full-width font-size-s">
                             <input (keyup)="isChanged()" matInput formControlName="perPostcodeNotLocal" [textMask]="{mask: maskPostcode}" type="text" placeholder="{{'profile.label.postcode' | translate}}"  [required]="!!!isLocal"/>
                             <mat-error *ngIf="!validateCtrlChk(perPostcodeNotLocal) && profileForm.controls.perPostcodeNotLocal.errors?.pattern">
                                 {{'profile.pattern.postcode' | translate }}
+                              </mat-error>
+
+                              <mat-error *ngIf="!validateCtrlChk(perPostcodeNotLocal) && profileForm.controls.perPostcodeNotLocal.errors?.required">
+                                {{'profile.err.postcode' | translate }}
                               </mat-error>
                           </mat-form-field>
                         </div>
