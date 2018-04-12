@@ -33,7 +33,9 @@ export class SubscriptionComponent implements OnInit {
   lang = this.lang;
   languageId = this.languageId;
   showNoData = false;
+  errormsg = '';
   resetModal;
+  showerr = false;
   constructor(
     private router: Router,
     private validateService: ValidateService,
@@ -65,6 +67,7 @@ export class SubscriptionComponent implements OnInit {
       }
       // this.getRace(this.languageId);
       this.getAllCategory();
+      // this.selCategory.setValue("0");
     });
 
   }
@@ -108,7 +111,15 @@ export class SubscriptionComponent implements OnInit {
     this.createSubscriptions(formval.txtEmail, formval.selCategory)
     .subscribe(
       data => {
+        if(data.statusCode === "SUCCESS"){
           this.toastr.success(this.translate.instant('subscription.successMsg'), '');
+          this.showerr = false;
+        }else if(data.statusCode === "ERROR"){
+          this.toastr.error(data.statusDesc);
+          this.showerr = true;
+          this.errormsg = data.statusDesc;
+        }
+          
       },
       error => {
           this.toastr.error(this.translate.instant('common.err.servicedown'), '');
@@ -118,16 +129,17 @@ export class SubscriptionComponent implements OnInit {
   }
 
   createSubscriptions(emailval, subsval) {
-    if(!this.languageId){
-      this.languageId = 1;
-    }
+    // if(!this.languageId){
+    //   this.languageId = 1;
+    // }
+    this.languageId = localStorage.getItem('langID');
     this.categoryIds = '';
     subsval.forEach((item, index) => {
       this.categoryIds += '&categories='+item;
       console.log(item); // 9, 2, 5
       console.log(index); // 0, 1, 2
   });
-    return this.http.get(this.config.urlPortal + 'subscription?email=' + emailval+this.categoryIds)
+    return this.http.get(this.config.urlPortal + 'subscription?email=' + emailval+this.categoryIds + '&language='+ this.languageId)
       .map((response: Response) => response.json())
       .retry(5)
       .catch(this.handleError);      

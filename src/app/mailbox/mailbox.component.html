@@ -27,10 +27,11 @@
       </div>
       <div class="col-md-9 mat-elevation-z8">
         <div class="deleteAllBtn">
-          <!-- <button [disabled]="!mailboxId.length > 0" mat-raised-button color="warn" (click)="deleteAllModal.show()"><i class="fa fa-trash"></i> {{'common.buttons.delete' | translate}}</button> -->
+          <button [disabled]="!mailboxId.length > 0" mat-raised-button color="warn" (click)="deleteAllModal.show()"><i class="fa fa-trash"></i> {{'common.buttons.delete' | translate}}</button>
         </div>
         <div class="row"></div>
         <div class="row mailContainer" *ngIf="mailContent?.object?.fromUser.email" [style.display]="isMailContainerShow">
+          <span class="pull-right" (click)="isMailContainerShow='none'" style="cursor: pointer;"><i class="fa fa-times"></i></span>
               <p class="font-size-s">
                 From: {{mailContent?.object?.fromUser.email}} 
               </p>
@@ -45,8 +46,8 @@
         </div>
         <table class="mat-table" style="width:100%">
           <tr class="mat-header-row" style="height:45px">
-            <td width="5%" class="mat-header-cell text-center">No</td>
-            <!-- <td width="5%" class="mat-header-cell text-center"></td> -->
+            <td width="5%" class="mat-header-cell">No</td>
+            <td width="5%" class="mat-header-cell text-center"></td>
             <td width="30%" class="mat-header-cell">{{'mailbox.header.from' | translate}}</td>
             <td class="mat-header-cell">{{'mailbox.header.subject' | translate}}</td>
             <td width="10%" class="mat-header-cell">{{'mailbox.header.date' | translate}}</td>
@@ -54,7 +55,7 @@
           </tr>
           <tr class="mat-row table_row table_row_height" *ngFor="let data of mailData?.list; let i = index;" [style.font-weight]="data.read ? '' : 'bold'">
               <td class="mat-cell">{{i+1}}</td>
-            <!-- <td class="mat-cell text-center"><mat-checkbox [value]="data.inboxId"  (change)="isChecked($event);"></mat-checkbox></td> -->
+            <td class="mat-cell text-center"><mat-checkbox [value]="data.inboxId"  (change)="isChecked($event);"></mat-checkbox></td>
             <td class="mat-cell">{{data.fromUser.email}}</td>
             <td class="mat-cell">{{data.subject}}</td>
             <td class="mat-cell">{{data.submissionDate | date}}</td>

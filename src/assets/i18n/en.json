@@ -41,7 +41,9 @@
       "filsubtopic": "Sub Topics",
       "local": "Local",
       "onlineser": "Online Services",
-      "global":"Global"
+      "global":"Global",
+      "result": "Results",
+      "resultsfound": "Results Found in"
     },
     "breadcrumb": {
       "calendar": "Calendar",
@@ -201,7 +203,7 @@
   },
   "feedback": {
     "title": "COMPLAINTS AND QUERIES",
-    "desc": "Please limit your response to 10000 characters and include your email address and we will respond to you within three (3) working days. We can respond in two languages, English and Bahasa Melayu.",
+    "desc": "Please limit your response to 500 characters and include your email address and we will respond to you within three (3) working days. We can respond in two languages, English and Bahasa Melayu.",
     "label": {
       "type": "Type of feedback",
       "subjek": "Subject",
@@ -306,6 +308,7 @@
     "securitypolicy": "Security Policy",
     "disclaimer": "Disclaimer",
     "selectall" : "Select All",
+    "plsselect" : "Please Select",
     "placeholder": {
       "keyword":"Keyword"
     },

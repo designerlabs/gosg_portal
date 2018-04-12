@@ -117,7 +117,7 @@ export class MailboxComponent implements OnInit {
     subscribe(
       success => {
         this.getMails(this.mailPageCount, this.mailPageSize);
-        this.toastr.error(this.translate.instant('mailbox.success.deletesuccess'), '');     
+        this.toastr.success(this.translate.instant('mailbox.success.deletesuccess'), '');     
       },
       Error => {
 
@@ -156,7 +156,7 @@ export class MailboxComponent implements OnInit {
       success => {
         this.getMails(this.mailPageCount, this.mailPageSize);
         this.mailboxId = [];
-        this.toastr.error(this.translate.instant('mailbox.success.deletesuccess_multi'), '');     
+        this.toastr.success(this.translate.instant('mailbox.success.deletesuccess_multi'), '');     
       },
       Error => {
 

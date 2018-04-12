@@ -37,7 +37,6 @@ export class PortalService {
                   }
             
               });
-
               if(!this.langId){
                 if(localStorage.getItem('langID')){
                   this.langId = localStorage.getItem('langID');

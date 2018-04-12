@@ -41,7 +41,9 @@
       "filsubtopic": "Sub Topik",
       "local": "Dalaman",
       "onlineser": "Perkhidmatan Dalam Talian",
-      "global":"Global" 
+      "global":"Global",
+      "result": "Rekod",
+      "resultsfound": "Rekod Carian Dijumpai dalam masa" 
     },
     "breadcrumb":{
       "calendar": "Kalendar",
@@ -201,7 +203,7 @@
   },
   "feedback":{
     "title":"ADUAN DAN PERTANYAAN",
-    "desc":"Sila hadkan maklum balas anda kepada 10000 aksara dan sertakan bersama alamat emel dan kami akan memberikan maklum balas kepada anda dalam tempoh Tiga (3) hari bekerja. Maklum balas kami terdapat dalam dua bahasa iaitu Bahasa Inggeris dan Bahasa Melayu.",
+    "desc":"Sila hadkan maklum balas anda kepada 500 aksara dan sertakan bersama alamat emel dan kami akan memberikan maklum balas kepada anda dalam tempoh Tiga (3) hari bekerja. Maklum balas kami terdapat dalam dua bahasa iaitu Bahasa Inggeris dan Bahasa Melayu.",
     "label":{
       "type":"Jenis maklum balas",
       "subjek":"Subjek",
@@ -277,8 +279,8 @@
   },
   "mailbox":{
     "header":{
-      "from":"Dari",
-      "subject":"Subjek",
+      "from":"Daripada",
+      "subject":"Perkara",
       "date":"Tarikh",
       "action":"Tindakan"
     },
@@ -287,15 +289,15 @@
       "mails":"mel"
     },
     "err":{
-      "deleteconfirm":"Are you sure to delete this mail?",
-      "deleteconfirm_multi":"Are you sure to delete the selected mails?",
-      "failtoload":"Sorry, Mail is not loading properly, Try again!",
-      "failtodelete":"Sorry, Mail is not deleted properly, Try again!",
-      "failtoview":"Sorry, Mail is not viewed properly, Try again!"
+      "deleteconfirm":"Adakah anda pasti memadam mel ini?",
+      "deleteconfirm_multi":"Adakah anda pasti memadam mel yang dipilih?",
+      "failtoload":"Harap maaf, Mel tidak dapat dibuka dengan betul, Sila cuba lagi!",
+      "failtodelete":"Harap maaf, Mel tidak dapat dipadam dengan betul, Sila cuba lagi!",
+      "failtoview":"Harap maaf, Mel tidak dapat dipaparkan dengan betul, Sila cuba lagi!"
     },
     "success":{
-      "deletesuccess":"Mail has been deleted successfully!",
-      "deletesuccess_multi":"Selected mails has been deleted successfully!"
+      "deletesuccess":"Mel telah berjaya dipadam!",
+      "deletesuccess_multi":"Mel yang dipilih telah berjaya dipadam!"
     }
   },
   "common":{
@@ -306,6 +308,7 @@
     "securitypolicy": "Dasar Keselamatan",
     "disclaimer": "Penafian",
     "selectall" : "Pilih Semua",
+    "plsselect" : "Sila Pilih",
     "placeholder": {
       "keyword":"Kata Kunci"
     },
