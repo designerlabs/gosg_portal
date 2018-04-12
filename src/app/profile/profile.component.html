@@ -335,10 +335,14 @@
                       <i class="fa fa-refresh"></i> {{'feedback.label.reset' | translate }}</button> -->
                       <button *ngIf="isLocal" mat-raised-button type="button" color="primary" #updateBtn id="btnsubmit" class="form-control btn btn-md btn-success font-size-s"
                       (click)="updateProfile(profileForm.value);false" style="width: 100px; font-family: Roboto; margin-left: 5px;" [disabled]="((gender.invalid || race.invalid || perAddress1.invalid || perStateLocal.invalid || perCityLocal.invalid || perPostcode.invalid || !!!dt) || initialBtn)">
-                      <i class="fa fa-check"></i> {{'profile.label.submit' | translate }}</button>
+                      <i class="fa fa-check"></i> {{'profile.label.submit' | translate }}
+                    LOCAL
+                    </button>
                       <button *ngIf="!isLocal" mat-raised-button type="button" color="primary" #updateBtn id="btnsubmit" class="form-control btn btn-md btn-success font-size-s"
                       (click)="updateProfile(profileForm.value);false" style="width: 100px; font-family: Roboto; margin-left: 5px;" [disabled]="((gender.invalid || race.invalid || perAddress1.invalid || perStateNotLocal.invalid || perCityNotLocal.invalid || perPostcodeNotLocal.invalid || !!!dt ) || initialBtn)">
-                      <i class="fa fa-check"></i> {{'profile.label.submit' | translate }}</button>
+                      <i class="fa fa-check"></i> {{'profile.label.submit' | translate }}
+                    not local
+                    </button>
                   </div>
                 </div>
               
