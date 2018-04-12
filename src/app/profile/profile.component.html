@@ -179,7 +179,7 @@
                     </div>
                     <div class="form-group col-md-4">
                       <mat-form-field *ngIf="isLocal" class="example-full-width font-size-s">
-                        <mat-select (change)="getPostcodeByCity($event)" formControlName="perCityLocal"  [(ngModel)]="perCityLocalM" placeholder="{{'profile.label.city' | translate}}" [required]="!!isLocal" >
+                        <mat-select (change)="getPostcodeByCity($event)" formControlName="perCityLocal"  placeholder="{{'profile.label.city' | translate}}" [required]="!!isLocal" >
                           <mat-option *ngFor="let city of getPerCityData" #perCityLocal [attr.cityCode] = "city?.cityCode" [value]="city?.cityId">{{ city?.cityName }}</mat-option>
                         </mat-select>
                         <mat-error *ngIf="!validateCtrlChk(perCityLocal) && profileForm.controls.perCityLocal.errors?.required">
@@ -189,7 +189,7 @@
                      
                       </mat-form-field>
                       <mat-form-field *ngIf="!isLocal" class="example-full-width font-size-s">
-                        <input (keyup)="isChanged()" matInput formControlName="perCityNotLocal"  [(ngModel)]="perCityNotLocalM" type="text" placeholder="{{'profile.label.city' | translate}}"  [required]="!!!isLocal" />
+                        <input (keyup)="isChanged()" matInput formControlName="perCityNotLocal"  type="text" placeholder="{{'profile.label.city' | translate}}"  [required]="!!!isLocal" />
                         <mat-error *ngIf="!validateCtrlChk(perCityNotLocal) && profileForm.controls.perCityNotLocal.errors?.required">
                             {{'profile.err.city' | translate }}
                         </mat-error>
@@ -200,7 +200,7 @@
                   <div class="row">
                       <div class="form-group col-md-4">
                           <mat-form-field *ngIf="isLocal" class="example-full-width font-size-s">
-                            <mat-select (change)="isChanged()" #corsPost [(ngModel)]="perPostcodeM" formControlName="perPostcode" placeholder="{{'profile.label.postcode' | translate}}"  [required]="!!isLocal">
+                            <mat-select (change)="isChanged()" #corsPost formControlName="perPostcode" placeholder="{{'profile.label.postcode' | translate}}"  [required]="!!isLocal">
                                 <mat-option *ngFor="let postcode of getPerPostData" [value]="postcode?.postcodeId">{{ postcode?.postCode }}</mat-option>
                             </mat-select>
                             <mat-error *ngIf="!validateCtrlChk(perPostcode) && profileForm.controls.perPostcode.errors?.pattern">
@@ -213,7 +213,7 @@
 
                           </mat-form-field>
                           <mat-form-field *ngIf="!isLocal" class="example-full-width font-size-s">
-                            <input (keyup)="isChanged()" [(ngModel)]="perPostcodeNotLocalM" matInput formControlName="perPostcodeNotLocal" [textMask]="{mask: maskPostcode}" type="text" placeholder="{{'profile.label.postcode' | translate}}"  [required]="!!!isLocal"/>
+                            <input (keyup)="isChanged()"  matInput formControlName="perPostcodeNotLocal" [textMask]="{mask: maskPostcode}" type="text" placeholder="{{'profile.label.postcode' | translate}}"  [required]="!!!isLocal"/>
                             <mat-error *ngIf="!validateCtrlChk(perPostcodeNotLocal) && profileForm.controls.perPostcodeNotLocal.errors?.pattern">
                                 {{'profile.pattern.postcode' | translate }}
                               </mat-error>
@@ -329,13 +329,6 @@
                     </div>
                   </div>
                   <div class="form-group" style="float: right;">
-                    PerCityLocal: {{!!perCityLocalM}}<br>
-                    PerCityNonLocal: {{!!perCityNotLocalM}}<br>
-                    perPostcodeM: {{!!perPostcodeM}}<br>
-                    PerPostCodeNotLocal: {{!!perPostcodeNotLocalM}}<br>
-                    perStateLocal.invalid: {{perStateLocal.invalid}}<br>
-                    perCityLocal.invalid:  {{perCityLocal.invalid}}<br>
-                    perPostcode.invalid: {{perPostcode.invalid}}
                       <!-- <button mat-raised-button color="warn" type="button" id="btnreset" class="form-control btn btn-md btn-warning font-size-s"
                       style="width: 115px; font-family: Roboto;" (click)="showResetMsg()">
                       <i class="fa fa-refresh"></i> {{'feedback.label.reset' | translate }}</button> -->

@@ -637,6 +637,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   getCitiesByState(e){
       this.isStateChanged();
       this.selectedState = e.value;
+      this.perCityLocal.reset();
       return this.sharedService.getCitiesbyState(e.value)
         .subscribe(resCityData => {
           if(e.source.ngControl.name == "perStateLocal") {
@@ -652,6 +653,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
   getPostcodeByCity(e){
     this.isStateChanged();
+    this.perPostcode.reset();
     return this.sharedService.getPostCodeData(e.value)
       .subscribe(resPostCodeData => {
         this.getPerPostData = resPostCodeData;
