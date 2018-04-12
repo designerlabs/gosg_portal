@@ -13,6 +13,12 @@ import { ContactComponent } from './staticpage/contact.component';
 import { FaqComponent } from './staticpage/faq.component';
 import { AboutusComponent } from './staticpage/aboutus.component';
 import { ManualComponent } from './staticpage/manual.component';
+import { ClientCharterComponent } from './staticpage/bottommenu/clientcharter.component';
+import { HelpComponent } from './staticpage/bottommenu/help.component';
+import { PrivacyPolicyComponent } from './staticpage/bottommenu/privacypolicy.component';
+import { SecurityPolicyComponent } from './staticpage/bottommenu/securitypolicy.component';
+import { CopyrightNoticeComponent } from './staticpage/bottommenu/copyrightnotice.component';
+import { DisclaimerComponent } from './staticpage/bottommenu/disclaimer.component';
 import { DataprotectionComponent} from './staticpage/dataprotection.component';
 import { ProfileUpdatedComponent } from './profile-updated/profile-updated.component';
 
@@ -25,16 +31,23 @@ import { FirsttimeloginComponent } from './firsttimelogin/firsttimelogin.compone
 import { AnnouncementComponent } from './announcement/announcement.component';
 import { AnnouncementlistComponent } from './announcementlist/announcementlist.component';
 import { AnnouncementdetailsComponent } from './announcementdetails/announcementdetails.component';
-// 
+import { EventCalendarComponent } from './eventcalendar/eventcalendar.component';
+import { OnlineserviceComponent } from './onlineservice/onlineservice.component';
+import { SubscriptionComponent } from './subscription/subscription.component';
+import { UnsubscribeComponent } from './unsubscribe/unsubscribe.component';
+import { AgencydirectoryComponent } from './agencydirectory/agencydirectory.component';
+import { SetactiveComponent } from './subscription/setactive/setactive.component';
 // import { NavRouterActivator } from './header/nav/nav-router-activator.service'
 
 // import { appRoutes } from './routes';
 
 export const protectedRoutes: Routes = [
-
+    
     {path: '404', component: ErrorComponent },
     {path: 'dashboard', component: DashboardComponent},
+    {path: 'agencydir', component: AgencydirectoryComponent},
     {path: 'profile', component: ProfileComponent},
+    {path: 'calendar', component: EventCalendarComponent},
     {path: 'profileupdate', component: ProfileUpdatedComponent},
     {path: 'appsmgmt', component: AppManagementComponent},
     {path: 'index', component: HomeProtectedComponent},
@@ -49,10 +62,20 @@ export const protectedRoutes: Routes = [
     {path: 'faq', component: FaqComponent},
     {path: 'aboutus', component: AboutusComponent},
     {path: 'manual', component: ManualComponent},
+    {path: 'clientcharter', component: ClientCharterComponent},
+    {path: 'help', component: HelpComponent},
+    {path: 'privacypolicy', component: PrivacyPolicyComponent},
+    {path: 'securitypolicy', component: SecurityPolicyComponent},
+    {path: 'copyrightnotice', component: CopyrightNoticeComponent},
+    {path: 'disclaimer', component: DisclaimerComponent},
     {path: 'dataprotection', component: DataprotectionComponent},
     {path: 'contact', component: ContactComponent},
     {path: 'mailbox', component: MailboxComponent},
     {path: 'feedback', component: FeedbackProtectedComponent},
+    {path: 'onlineservice', component: OnlineserviceComponent},
+    {path: 'subscription/set_active/:id', component: SetactiveComponent},
+    {path: 'subscription', component: SubscriptionComponent},
+    {path: 'unsubscribe', component: UnsubscribeComponent},
     {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
     {path: '**', component: ErrorComponent}
     //{path: 'user', loadChildren: 'app/user/user.module#UserModule'}

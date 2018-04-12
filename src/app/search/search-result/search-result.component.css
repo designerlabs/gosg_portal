@@ -1,0 +1,83 @@
+.intSearch {
+    list-style: none;
+    padding-left: 0;
+    padding-top: 10px;
+}
+
+a.titleSer {
+    color: #1ebebc !important;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.cat {
+    background-color: #666;
+    color: #fff;
+    padding: 5px;
+    font-size: 12px;
+    width: auto;
+}
+.intSearch li {
+    padding: 5px 0px 15px 0px;
+    
+}
+.intSearch li p span.highlight {
+    font-weight: 700;
+    background-color: transparent;
+    color: #333;
+    font-size: 14px;
+    padding: 0;
+}
+
+.example-h2 {
+    margin: 10px;
+  }
+  
+  .example-section {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    height: 60px;
+  }
+  
+  .example-margin {
+    margin: 0 10px;
+  }
+  .mat-radio-button ~ .mat-radio-button {
+	padding-right: 16px;
+	}
+    .side-menu-list {
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+}
+.example-radio-group {
+    display: inline-flex;
+    flex-direction: column;
+  }
+  
+  .example-radio-button {
+    margin: 5px;
+  }
+  
+  .example-selected-value {
+    margin: 15px 0;
+  }
+  .example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+
+  .intSearch>li:nth-of-type(even) {
+    background-color: #f3f6f7 !important;
+  }
+
+  .inputser {
+    font-size: 24px;
+    font-weight: bold;
+  }

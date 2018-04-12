@@ -1,0 +1,98 @@
+<div class="container-fluid animated slideInDown" style="background: #a7a495;">
+  <div class="container">
+    <!-- <ngx-loading [show]="loading" [config]="{ fullScreenBackdrop: true }"></ngx-loading> -->
+    <div class="row">
+      <div class="col-md-12">
+        <h1 style="margin-top: 10px;" class="font-size-l">{{'home.breadcrumb.onlineservice' | translate}}</h1>
+        <hr class="hr-custom2">
+        <ul class="list-inline" style="clear:both;">
+          <li>
+            <a class="font-size-s" href="/index/">
+              {{'home.menu.home' | translate }}
+            </a>
+          </li>
+          <li>/</li>
+          <li>
+            {{'home.breadcrumb.onlineservice' | translate}}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container formbg">
+  <div class="col-md-12">&nbsp;</div>
+  <div class="row">    
+    <div class="form-group col-md-4">
+        <mat-form-field class="example-full-width font-size-m" style="width: 100%;">
+          <mat-select id="selbyagency" tabindex="1" placeholder="{{'onlineservices.basedonagency' | translate}}" (change)="selByAgency($event)" [(ngModel)]="valByAgency">
+            <mat-option value="0"> {{'common.selectall' | translate}} </mat-option>
+            <mat-option *ngFor="let data of listAgency" [value]="data.list[inxlan]?.agencyId">{{ data.list[inxlan]?.agencyName }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    <div class="form-group col-md-4">
+      <mat-form-field class="example-full-width font-size-m" style="width: 100%;">
+         
+        <mat-select id="selbyalpha" tabindex="2" placeholder="{{'onlineservices.basedonatoz' | translate}}" (change)="selByAlpha($event)" [(ngModel)]="valByAlpha">
+          <mat-option value="0"> {{'common.selectall' | translate}} </mat-option>
+          <mat-option *ngFor="let data of dataAlpha" [value]="data">{{ data }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>    
+  </div>
+  <div class="row" style="padding:20px 0px 20px 0px;">
+    <div class="col-md-12">
+      <div class="col-md-4">     
+          <mat-checkbox class="example-margin" id="rdoOnline" (change)="chkDocument($event, 1)" [(ngModel)]="chkOnline" tabindex="3"><span class="font-size-m">
+            {{'onlineservices.btnonlineservice' | translate}}</span></mat-checkbox>
+        </div>
+        <div class="col-md-4">        
+        <mat-checkbox class="example-margin font-size-m" id="rdoDown" (change)="chkDocument($event, 2)" [(ngModel)]="chkDownload" tabindex="4"><span class="font-size-m">{{'onlineservices.btndownload' | translate}}</span></mat-checkbox>
+        </div>
+        <div class="col-md-2">
+            <button mat-raised-button color="warn" type="button" id="btnreset" class="btn btn-md btn-warning pull-right font-size-s" (click)="reset()" tabindex="5">
+                <i [ngClass]="sharedService.icon.refresh"></i>&nbsp; {{'common.buttons.reset' | translate}}</button>
+        </div>
+    </div>
+  </div>
+  <div class="container">
+    <table class="table table-striped" *ngIf="!showNoData">
+        <thead>
+          <tr style="padding:0px 24px">
+            <th style="width:2%; font-weight: 800;" class="font-size-m">No</th>
+            <th style="width:80%; font-weight: 800;" class="font-size-m" >{{'onlineservices.agencyappname' | translate}}</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let element of datatblAgency; let i = index;" style="min-height: 50px !important;">
+              <td class="font-size-m">{{(seqPageNum == 1) ? (i + 1) : ((seqPageNum * seqPageSize) - seqPageSize) + (i + 1) }}</td>
+              <td>
+                <a class="appUrl hoverlnk font-size-m" [href]="element.agencyApplicationUrl" target="_blank"> {{ element.agencyApplicationName}} <span class="onlineSignTag"><i [ngClass]="(!element.agencyApplicationUrl || element.agencyApplicationUrl == '-') ? 'fa fa-unlink' : (element.isDocument) ? 'fa fa-download' : 'fa fa-link'"></i></span></a>
+              </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div *ngIf="showNoData" class="row text-align-Center padding-20"> {{ 'common.msg.nodata' | translate }} </div>
+  </div>
+  <div class="float-right paddingTop-15">
+    <mat-form-field class="table_footer_pagecount" style="display: inline-block; position: relative; text-align: left;">
+      <mat-select class="font-size-s text-align-Center" [(ngModel)]="sharedService.defaultPageSize" (change)="pageChange($event, dataPage?.totalPages)">
+        <mat-option *ngFor="let pgcount of sharedService.pageSize" [value]="pgcount.size">{{pgcount.size}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <span class="float-right">
+      <span class="table_footer_pagination">{{ 'common.pagination.pages' | translate }}
+        <strong>{{dataPage?.pageNumber}}</strong> {{ 'common.pagination.of' | translate }}
+        <strong>{{dataPage?.totalPages}}</strong> {{ 'common.pagination.in' | translate }}
+        <strong>{{dataPage?.totalElements}}</strong> Application</span>
+      <button mat-mini-fab color="basic" [disabled]="noPrevData" (click)="paginatorL(dataPage?.pageNumber)">
+        <i [ngClass]="sharedService.icon.arrLeft" aria-hidden="true"></i>
+      </button>
+      <button mat-mini-fab color="basic" [disabled]="noNextData" (click)="paginatorR(dataPage?.pageNumber, dataPage?.totalPages)">
+        <i [ngClass]="sharedService.icon.arrRight" aria-hidden="true"></i>
+      </button>
+    </span>
+  </div>
+</div>

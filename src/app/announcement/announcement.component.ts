@@ -5,6 +5,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { BreadcrumbService } from '../header/breadcrumb/breadcrumb.service';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
+import { SharedService } from '../common/shared.service';
 
 @Component({
   selector: 'gosg-announcement',
@@ -24,37 +25,44 @@ export class AnnouncementComponent implements OnInit {
     announces: any[];
     announceRes: any;
     announceData: any;
+    languageId: any;
 
     @Output() langChange = new EventEmitter();
-    constructor(public articleService: ArticleService,  private route: ActivatedRoute, 
-        private navService: NavService, private translate: TranslateService, private router: Router, 
-        private breadcrumbService: BreadcrumbService, @Inject(APP_CONFIG) private config: AppConfig) {
-        this.lang = translate.currentLang;
+    constructor(
+        public articleService: ArticleService, 
+        private route: ActivatedRoute, 
+        private navService: NavService, 
+        private translate: TranslateService, 
+        private router: Router, 
+        private breadcrumbService: BreadcrumbService, 
+        private sharedservice: SharedService,
+        @Inject(APP_CONFIG) private config: AppConfig) {
 
-            translate.onLangChange.subscribe((event: LangChangeEvent) => {
 
-            const myLang = translate.currentLang;
-
-            if (myLang === 'en') {
-
-                translate.get('HOME').subscribe((res: any) => {
-                    this.lang = '1';
-                    this.moduleName = this.router.url.split('/')[1];
-                });
-                this.triggerAnnouncement(this.moduleName, this.lang);
-            }
-            if (myLang === 'ms') {
-
-                translate.get('HOME').subscribe((res: any) => {
-                    this.lang = '2';
-                    this.moduleName = this.router.url.split('/')[1];
-                });
-                this.triggerAnnouncement(this.moduleName, this.lang);
-            }
-
-            //
-            console.log('language: '+ this.lang);
+    /* LANGUAGE FUNC */
+    translate.onLangChange.subscribe((event: LangChangeEvent) => {
+        translate.get('HOME').subscribe((res: any) => {
+          this.sharedservice.readPortal('language/all').subscribe((data:any) => {
+            let getLang = data.list;
+            let myLangData =  getLang.filter(function(val) {
+              if(val.languageCode == translate.currentLang){
+                this.lang = val.languageCode;
+                this.languageId = val.languageId;
+              }
+            }.bind(this));
+          })
         });
+      });
+      if(!this.languageId){
+        if(localStorage.getItem('langID')){
+          this.languageId = localStorage.getItem('langID');
+        }else{
+          this.languageId = 1;
+        }
+        
+      }
+  
+      /* LANGUAGE FUNC */
 
     }
 

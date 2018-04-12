@@ -5,6 +5,7 @@ export let APP_CONFIG = new InjectionToken<AppConfig>('app.config');
 
 let baseURL =  environment.mockApiURL;
 let uapURL = environment.uapURL;
+let mediaURL = environment.mediaURL;
 let registrationUrl = uapURL+'registration/';
 
 
@@ -20,6 +21,7 @@ let pollUrl = commonURL + "polls";
 
 export class AppConfig {
     apiEndpoint: string;
+    urlEvents: string;
     urlMenu: string;
     urlSlider: string;
     urlFooter: string;
@@ -51,6 +53,7 @@ export class AppConfig {
     urlIntSearch:string;
     urlUserType:string;
     urlMail:string;
+    urlAgency:string;
     urlAppAgency:string;
     urlUapStaging:string;
     urlComplete: string;
@@ -67,17 +70,24 @@ export class AppConfig {
     urlFont: string;
     urlCompleteEmail:string;
     urlCompletePhone:string;
+    externalMediaURL: string;
+    urlPortal:string;
+    urlProtected: string;
+    urlSubscription: string;
 }
 
 export const APP_DI_CONFIG: AppConfig = {
     apiEndpoint: '',
+    urlPortal: commonURL,
+    urlProtected: protectedBaseURL,
     urlMenu: './app/apidata/menudata',
-    urlSlider: baseURL+'slider',
-    urlFooter: './app/apidata/footer',
-    // urlFooter: commonURL + 'footer',
+    urlSlider: commonURL+'slider',
+    urlEvents: commonURL+'calendar',
+    // urlFooter: './app/apidata/footer',
+    urlFooter: commonURL + 'footer',
     urlArticle: './app/apidata/topic',
     urlCountry: commonURL+'country/all',
-    urlState: commonURL+'state',
+    urlState: commonURL+'state/all',
     urlColor: commonURL+ 'color/active',
     urlFont: commonURL+ 'font/active',
     urlPostcode: commonURL+'postcode/city/',
@@ -114,10 +124,13 @@ export const APP_DI_CONFIG: AppConfig = {
     urlGetProfileEmail: protectedBaseURL+'user/profile/email',
     urlGetProfilePhone: protectedBaseURL+'user/profile/phone',
     urlAppAgency: './app/apidata/appAgency',
+    urlAgency: commonURL + 'agency/language/',
     urlUapStaging: 'https://uapstaging.malaysia.gov.my/uap/validatesigncryption.jsp?language=',
     urlUapStagingProfile: 'https://uapstaging.malaysia.gov.my/myprofile/update/updatechannel.jsp?tag=',
     urlPoll: commonURL + 'polls',
-    urlPollProtected: protectedBaseURL + 'polls'
+    urlPollProtected: protectedBaseURL + 'polls',
+    externalMediaURL: mediaURL+"media",
+    urlSubscription: registrationUrl + 'subscription',
 
 };
 

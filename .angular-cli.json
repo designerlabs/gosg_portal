@@ -11,7 +11,12 @@
       "assets": [
         "assets",
         "favicon-16x16.png",
-        "app/apidata"
+        "app/apidata",
+        {
+          "glob": "**/*",
+          "input": "../node_modules/leaflet/dist/images",
+          "output": "./assets/"
+        }
       ],
       "index": "index.html",
       "main": "main.portal.ts",
@@ -25,10 +30,13 @@
         "../node_modules/owl.carousel/dist/assets/owl.carousel.css",
         "../node_modules/owl.carousel/dist/assets/owl.theme.default.css",
         "../node_modules/animate.css/animate.min.css",
-        "../node_modules/ngx-toastr/toastr.css"
+        "../node_modules/ngx-toastr/toastr.css",
+        "./assets/fullcalendar_style/fullcalendar.min.css",
+        "../node_modules/leaflet/dist/leaflet.css"
       ],
       "scripts": [
-        "../node_modules/jquery/dist/jquery.min.js"
+        "../node_modules/jquery/dist/jquery.min.js",
+        "../node_modules/owl.carousel/dist/owl.carousel.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {
@@ -44,7 +52,12 @@
       "assets": [
         "assets",
         "favicon-16x16.png",
-        "app/apidata"
+        "app/apidata",
+        {
+          "glob": "**/*",
+          "input": "../node_modules/leaflet/dist/images",
+          "output": "./assets/"
+        }
       ],
       "index": "index.html",
       "main": "main.protected.ts",
@@ -58,10 +71,13 @@
         "../node_modules/owl.carousel/dist/assets/owl.carousel.css",
         "../node_modules/owl.carousel/dist/assets/owl.theme.default.css",
         "../node_modules/animate.css/animate.min.css",
-        "../node_modules/ngx-toastr/toastr.css"
+        "../node_modules/ngx-toastr/toastr.css",
+        "./assets/fullcalendar_style/fullcalendar.min.css",
+        "../node_modules/leaflet/dist/leaflet.css"
       ],
       "scripts": [
-        "../node_modules/jquery/dist/jquery.min.js"
+        "../node_modules/jquery/dist/jquery.min.js",
+        "../node_modules/owl.carousel/dist/owl.carousel.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

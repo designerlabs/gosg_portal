@@ -24,6 +24,13 @@ import { AnnouncementComponent } from "../announcement/announcement.component";
 import { FaqComponent } from "../staticpage/faq.component";
 import { ManualComponent } from "../staticpage/manual.component";
 import { SidenavComponent } from "../staticpage/sidenav.component";
+import { ClientCharterComponent } from "../staticpage/bottommenu/clientcharter.component";
+import { HelpComponent } from "../staticpage/bottommenu/help.component";
+import { PrivacyPolicyComponent } from "../staticpage/bottommenu/privacypolicy.component";
+import { SecurityPolicyComponent } from "../staticpage/bottommenu/securitypolicy.component";
+import { CopyrightNoticeComponent } from "../staticpage/bottommenu/copyrightnotice.component";
+import { DisclaimerComponent } from "../staticpage/bottommenu/disclaimer.component";
+import { SidenavBottomComponent } from "../staticpage/bottommenu/sidenavbottom.component";
 import { DataprotectionComponent } from '../staticpage/dataprotection.component';
 import { NavComponent } from "../header/nav/nav.component";
 import { TopnavComponent } from "../header/topnav/topnav.component";
@@ -31,7 +38,7 @@ import { TopnavComponent } from "../header/topnav/topnav.component";
 import { BreadcrumbService } from '../header/breadcrumb/breadcrumb.service';
 import { SharedService }from '../common/shared.service';
 import { ValidateService }from '../common/validate.service';
-import { SearchResultComponent } from '../search/search-result/search-result.component';
+
 import { SearchService } from '../search/search.service';
 
 import { TopicFeatureComponent } from '../topic-feature/topic-feature.component';
@@ -59,8 +66,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsModalService } from 'ngx-bootstrap/modal';
+import { EventCalendarComponent } from '../eventcalendar/eventcalendar.component';
+// import { FullCalendarModule } from 'ng-fullcalendar';
+import { DatePipe } from '@angular/common';
+import { AgencydirectoryComponent } from '../agencydirectory/agencydirectory.component';
 
 import { SidenavmainComponent } from "../sidenavmain/sidenavmain.component";
+
 import {
       MatButtonModule,
       MatInputModule,
@@ -93,7 +105,7 @@ import {
       MatTooltipModule,
       MatNativeDateModule,
       MatSortModule,
-      MatPaginatorModule,
+      MatPaginatorModule      
     }from '@angular/material';
 
 import { A11yModule } from "@angular/cdk/a11y";
@@ -111,6 +123,13 @@ import { AnnouncementdetailsComponent } from '../announcementdetails/announcemen
 import { AnnouncementlistComponent } from '../announcementlist/announcementlist.component';
 // import { Nav } from '../header/nav/nav.router.guard.service';
 import { NavRouterGuardService } from '../header/nav/nav-router-guard.service';
+import { OnlineserviceComponent } from '../onlineservice/onlineservice.component';
+import { SubscriptionComponent } from '../subscription/subscription.component';
+import {NgxPaginationModule} from 'ngx-pagination';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import { UnsubscribeComponent } from '../unsubscribe/unsubscribe.component';
+import { SetactiveComponent } from '../subscription/setactive/setactive.component';
+// import { SearchResultComponent } from '../search/search-result/search-result.component';
 export function HttpLoaderFactory(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -139,7 +158,9 @@ export function HttpLoaderFactory(http: Http) {
     NguiAutoCompleteModule,
     MatDialogModule,
     // DialogsModule,
-    ModalModule.forRoot()
+	  NgxPaginationModule,
+    ModalModule.forRoot(),
+    LeafletModule.forRoot()
     
   ],
 
@@ -158,9 +179,16 @@ export function HttpLoaderFactory(http: Http) {
     FaqComponent,
     NavComponent,
     ManualComponent,
+    ClientCharterComponent,
+    HelpComponent,
+    PrivacyPolicyComponent,
+    SecurityPolicyComponent,
+    CopyrightNoticeComponent,
+    DisclaimerComponent,
     SidenavComponent,
+    SidenavBottomComponent,
     DataprotectionComponent,
-    SearchResultComponent,
+   
     TopicFeatureComponent,
     FooterComponent,
     HighlightboxComponent,
@@ -174,10 +202,17 @@ export function HttpLoaderFactory(http: Http) {
     ConfirmComponent,
     SharedPipe,
     ConfirmDialogComponent,
-    SidenavmainComponent
+    SidenavmainComponent,
+    OnlineserviceComponent,
+    EventCalendarComponent,
+    AgencydirectoryComponent,
+    SubscriptionComponent,
+    UnsubscribeComponent,
+    SetactiveComponent
+    // SearchResultComponent
   ],
 
-  exports: [
+  exports: [    
     ContactComponent,
     SearchComponent,
     SearchIntComponent,
@@ -192,9 +227,15 @@ export function HttpLoaderFactory(http: Http) {
     FaqComponent,
     NavComponent,
     ManualComponent,
+    ClientCharterComponent,
+    HelpComponent,
+    PrivacyPolicyComponent,
+    SecurityPolicyComponent,
+    CopyrightNoticeComponent,
+    DisclaimerComponent,
     SidenavComponent,
+    SidenavBottomComponent,
     DataprotectionComponent,
-    SearchResultComponent,
     TopicFeatureComponent,
     FooterComponent,
     HighlightboxComponent,
@@ -206,6 +247,7 @@ export function HttpLoaderFactory(http: Http) {
     HomeComponent,
     FeedbackComponent,
     ConfirmComponent,
+    SetactiveComponent,
     BrowserAnimationsModule,
     ConfirmDialogComponent,
     MatButtonModule,
@@ -215,6 +257,8 @@ export function HttpLoaderFactory(http: Http) {
     MatCheckboxModule,
     MatDialogModule,
     // DialogsModule,
+    NgxPaginationModule,
+    // LeafletModule,
 
      // CDK
      A11yModule,
@@ -257,10 +301,13 @@ export function HttpLoaderFactory(http: Http) {
      MatNativeDateModule,
      MatSortModule,
      MatPaginatorModule,
-     SharedPipe
+     SharedPipe,
+     EventCalendarComponent,
+     AgencydirectoryComponent
+    //  SearchResultComponent
     
   ],
 
-  providers: [SliderService, BsModalService, TopnavService, SharedService, ValidateService, BreadcrumbService, PortalService, AuthService, ArticleService, NavRouterActivator, NavService, AnnouncementlistService, TransService, DialogsService, SearchService, NavRouterGuardService]
+  providers: [SliderService, BsModalService, TopnavService, SharedService, DatePipe, ValidateService, BreadcrumbService, PortalService, AuthService, ArticleService, NavRouterActivator, NavService, AnnouncementlistService, TransService, DialogsService, SearchService, NavRouterGuardService]
 })
 export class SharedModule { }

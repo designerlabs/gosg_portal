@@ -21,41 +21,46 @@
   </div>
 
   <div class="container">
+      <div class="col-md-12">&nbsp;</div>
       <div class="col-md-3 padding-left-0">
           <gosg-sidenav-dashboard></gosg-sidenav-dashboard>
       </div>
-      <div class="col-md-9 mat-elevation-z8" style="margin-top:15px;">
-        <div class="deleteAllBtn"><button [disabled]="!mailboxId.length > 0" mat-raised-button color="warn" (click)="deleteAllModal.show()"><i class="fa fa-trash"></i> {{'common.buttons.delete' | translate}}</button></div>
+      <div class="col-md-9 mat-elevation-z8">
+        <div class="deleteAllBtn">
+          <button [disabled]="!mailboxId.length > 0" mat-raised-button color="warn" (click)="deleteAllModal.show()"><i class="fa fa-trash"></i> {{'common.buttons.delete' | translate}}</button>
+        </div>
         <div class="row"></div>
-        <div class="row mailContainer" *ngIf="mailContent?.message?.fromUser.email" [style.display]="isMailContainerShow">
+        <div class="row mailContainer" *ngIf="mailContent?.object?.fromUser.email" [style.display]="isMailContainerShow">
+          <span class="pull-right" (click)="isMailContainerShow='none'" style="cursor: pointer;"><i class="fa fa-times"></i></span>
               <p class="font-size-s">
-                From: {{mailContent?.message?.fromUser.email}} 
+                From: {{mailContent?.object?.fromUser.email}} 
               </p>
               <p class="font-size-s">
-                Date: {{mailContent?.message?.submissionDate | date}}
+                Date: {{mailContent?.object?.submissionDate | date}}
               </p>
               <p class="font-size-s">
-                Subject: {{mailContent?.message?.subject}} 
+                Subject: {{mailContent?.object?.subject}} 
               </p>
-              <div class="font-size-m">
-                {{mailContent?.message?.content}}
+              <div class="font-size-m" [innerHtml]="mailContent?.object?.content">
               </div>
         </div>
         <table class="mat-table" style="width:100%">
           <tr class="mat-header-row" style="height:45px">
+            <td width="5%" class="mat-header-cell">No</td>
             <td width="5%" class="mat-header-cell text-center"></td>
             <td width="30%" class="mat-header-cell">{{'mailbox.header.from' | translate}}</td>
             <td class="mat-header-cell">{{'mailbox.header.subject' | translate}}</td>
             <td width="10%" class="mat-header-cell">{{'mailbox.header.date' | translate}}</td>
             <td width="15%" class="mat-header-cell text-center">{{'mailbox.header.action' | translate}}</td>
           </tr>
-          <tr class="mat-row table_row table_row_height" *ngFor="let data of mailData?.messageList" [style.font-weight]="data.read ? '' : 'bold'">
-            <td class="mat-cell text-center"><mat-checkbox [value]="data.messageId"  (change)="isChecked($event);"></mat-checkbox></td>
+          <tr class="mat-row table_row table_row_height" *ngFor="let data of mailData?.list; let i = index;" [style.font-weight]="data.read ? '' : 'bold'">
+              <td class="mat-cell">{{i+1}}</td>
+            <td class="mat-cell text-center"><mat-checkbox [value]="data.inboxId"  (change)="isChecked($event);"></mat-checkbox></td>
             <td class="mat-cell">{{data.fromUser.email}}</td>
             <td class="mat-cell">{{data.subject}}</td>
             <td class="mat-cell">{{data.submissionDate | date}}</td>
             <td class="mat-cell text-center"> 
-              <button (click)="getMail($event, data.messageId)" class="btn btn-sm btn-warning"><i class="fa fa-eye font-size-s"></i></button>
+              <button (click)="getMail($event, data.inboxId)" class="btn btn-sm btn-warning"><i class="fa fa-eye font-size-s"></i></button>
               <button class="btn btn-sm btn-danger" (click)="deleteModal.show()"><i class="fa fa-trash font-size-s"></i></button>
             </td>
             <app-confirm-dialog  #deleteModal 
@@ -63,12 +68,12 @@
             [content]="'common.msg.delete'"
             [state]="'common.state.warn'"
             [isReset]="'true'"
-            (resetMethod)="resetMethod($event, data.messageId)">
+            (resetMethod)="resetMethod($event, data.inboxId)">
             </app-confirm-dialog>
 
           </tr>
         </table>
-
+        <div *ngIf="showNoData" class="row text-align-Center padding-20"> {{ 'common.msg.nodata' | translate }} </div>
             <!-- <mat-paginator [length]="mailData?.length">
             </mat-paginator> -->
             <mat-form-field style="width:50px;">
@@ -80,7 +85,7 @@
                 </mat-select>
               </mat-form-field>
               <div style="float:right; margin-top: 10px;">
-                  <span style="color:#000; padding-right:20px;">Pages <strong>{{mailData?.pageNumber}}</strong> of <strong>{{mailData?.totalPages}}</strong> in <strong>{{mailData?.totalElements}}</strong> mails</span>
+                  <span style="color:#000; padding-right:20px;">{{ 'common.pagination.pages' | translate }} <strong>{{mailData?.pageNumber}}</strong> {{ 'common.pagination.of' | translate }} <strong>{{mailData?.totalPages}}</strong> {{ 'common.pagination.in' | translate }} <strong>{{mailData?.totalElements}}</strong> {{ 'mailbox.pagination.mails' | translate }}</span>
                   <button mat-mini-fab color="basic" [disabled]="noPrevData" (click)="paginatorL(mailData?.pageNumber)"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
                   <button mat-mini-fab color="basic" [disabled]="noNextData"  (click)="paginatorR(mailData?.pageNumber, mailData?.totalPages)"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
               </div>

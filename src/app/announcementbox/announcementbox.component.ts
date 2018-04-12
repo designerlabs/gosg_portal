@@ -54,7 +54,7 @@ export class AnnouncementboxComponent implements OnInit {
         }else {
             langID = 1;
         }
-        return this.http.get(this.announcementUrl + '?langId=' + langID)
+        return this.http.get(this.announcementUrl + '?language=' + langID)
             .map(res => res.json())
             .subscribe(data => {
               console.log(data);

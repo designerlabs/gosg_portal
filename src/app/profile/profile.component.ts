@@ -378,8 +378,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                             
                           }
                            //this.getPostCodeByCityId(data.user.address.permanentAddressCity.cityId);                     
-                          this.getPostcodeByCityP(data.user.address.permanentAddressCity.cityId);
+                          // this.getPostcodeByCityP(data.user.address.permanentAddressCity.cityCode);
                            if(data.user.address.permanentAddressPostcode){
+                            this.getPostcodeByCityP(data.user.address.permanentAddressCity.cityId);
                             // this.getPerPostCodeFlag = true;
                             // this.getperPostCode = data.user.address.permanentAddressPostcode.postcodeId;
                             this.profileForm.get('perPostcode').setValue(data.user.address.permanentAddressPostcode.postcodeId);    
@@ -437,8 +438,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                             // this.postCodeObj2 = {value: data.user.address.correspondingAddressCity.cityId};
                           }
                           
-                          this.getPostcodeByCityC(data.user.address.correspondingAddressCity.cityId);
+                          
                           if(data.user.address.correspondingAddressPostcode){
+                           this.getPostcodeByCityC(data.user.address.correspondingAddressCity.cityId);
                            this.profileForm.get('corrsPostcode').setValue(data.user.address.correspondingAddressPostcode.postcodeId);    
                          }
     
@@ -645,7 +647,6 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
   getPostcodeByCity(e){
     this.isStateChanged();
- 
     return this.sharedService.getPostCodeData(e.value)
       .subscribe(resPostCodeData => {
         this.getPerPostData = resPostCodeData;
@@ -1184,8 +1185,8 @@ let bodyUpdate =
 
     console.log(this.initial);
     console.log(this.profileForm.invalid)
-        console.log(formValues);
-        console.log(this.profileForm.value);
+    console.log(formValues);
+    console.log(this.profileForm.value);
     this.protectedService.updateProfile(bodyUpdate)
     .subscribe(
       data => {

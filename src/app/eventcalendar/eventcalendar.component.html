@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1 style="margin-top: 10px;" class="font-size-l">{{'calendar.title' | translate}}</h1>
+                <h1 style="margin-top: 10px;" class="font-size-m">{{'calendar.title' | translate}}</h1>
                 <hr class="hr-custom2">
                 <ul class="list-inline" style="clear:both;">
                     <li>
@@ -20,22 +20,55 @@
     </div>
 </div>
 <div class="container">
-  <div *ngIf="isOpen" class="overlay"></div>
-  <div class="col-md-12">&nbsp;</div>
-  <div class="col-md-12">
-  <div *ngIf="calendarOptions">
-      <ng-fullcalendar #ucCalendar [options]="calendarOptions" (eventClick)="eventClick($event.detail)" (eventDrop)="updateEvent($event.detail)"
-          (eventResize)="updateEvent($event.detail)" (clickButton)="clickButton($event.detail)"></ng-fullcalendar>
+    <div class="overlay"></div>
+    <div class="col-md-12">&nbsp;</div>
+    <div class="col-md-12">
+        <div id="calendar"></div>
+        <div id="details">
+            <div class="details-content absolute-center container">
+                <div id="titleHeader" class="row">
+                    <div class="col-md-12">&nbsp;</div>
+                    <div class="col-md-12 header-underlined">
+                    <a class="boxclose" (click)="closePopup()"></a>
+                    <h4>Event Details</h4>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">&nbsp;</div>
+                    <div class="col-md-12">
+                        <label class="font-size-s">Event Name</label>
+                        <p class="font-size-m" id="title"></p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <label class="font-size-s">Location</label>
+                        <p class="font-size-m" id="loc"></p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class="font-size-s">Start</label>
+                        <p class="font-size-m" id="start"></p>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="font-size-s">End</label>
+                        <p class="font-size-m" id="end"></p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <label class="font-size-s">Description</label>
+                        <p class="font-size-m" id="desc"></p>
+                    </div>
+                    <div class="col-md-12">&nbsp;</div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div [ngClass]="{ 'details-show':isOpen,'details-hide':!isOpen }">
-      <div class="details-content">
-        <a class="boxclose" (click)="closePopup()"></a>
-        <h3>Event Details:</h3>
-        <p>Location: {{ displayEvent?.event?.desc }}</p>
-        <p>Start: {{ displayEvent?.event?.start }}</p>
-        <p>End: {{ displayEvent?.event?.end }}</p>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-12">&nbsp;</div>
+    <div class="col-md-12">&nbsp;</div>
 </div>

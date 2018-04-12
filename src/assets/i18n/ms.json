@@ -4,6 +4,7 @@
     "menu": {
       "home": "Laman Utama",
       "calendar": "Kalendar",
+      "agencycdir": "Direktori Agensi",
       "register": "Daftar",
       "setting": "Tetapan",
       "contact": "Hubungi Kami",
@@ -11,10 +12,38 @@
       "manual": "Manual",
       "aboutus": "Mengenai Kami",
       "onlineservice": "Perkhidmatan Digital",
-      "logout":"Log keluar"
+      "logout":"Log keluar",
+      "themecolor": "Warna Tema",
+      "fontsize": "Saiz Fon",
+      "fonttype": "Jenis Fon",
+      "login": "Log Masuk"
     },
     "search": {
-      "label": "Bagaimana Kami Boleh Membantu Anda?"
+      "label": "Bagaimana Kami Boleh Membantu Anda?",
+      "find": "CARI",
+      "instruction": "Taipkan kata kunci carian di sini",
+      "searchresult": "Keputusan Carian",
+      "keywordset": "Tetapan Kata Kunci",
+      "specification": "Spesifikasi Carian",
+      "filter": "Tapisan Berasaskan",
+      "exword" : "Perkataan yang tepat",
+      "alword": "Semua dari perkataan",
+      "anyword": "Mana-mana dari perkataan",
+      "spectopic": "Topik",
+      "specsubtopic": "Sub Topik",
+      "specdes": "Diskripsi",
+      "specminis":"Kementerian",
+      "specagen":"Agensi",
+      "spectitle":"Tajuk",
+      "filmonth": "Bulan Diterbitkan",
+      "filauth": "Penulis",
+      "filtop": "Topik",
+      "filsubtopic": "Sub Topik",
+      "local": "Dalaman",
+      "onlineser": "Perkhidmatan Dalam Talian",
+      "global":"Global",
+      "result": "Rekod",
+      "resultsfound": "Rekod Carian Dijumpai dalam masa" 
     },
     "breadcrumb":{
       "calendar": "Kalendar",
@@ -23,7 +52,11 @@
       "profile": "Profil Saya",
       "dashboard": "Dashboard",
       "appmgmt": "Pengurusan Permohonan",
-      "mailbox": "Peti Pesanan"
+      "mailbox": "Peti Pesanan",
+      "onlineservice": "Perkhidmatan Dalam Talian",
+      "subscription": "Langganan",
+      "unsubscribe": "Hentikan langganan",
+      "search": "Search"
     },
     "expandButton": {
       "less": "Lihat Ringkasan",
@@ -89,7 +122,7 @@
   },
   "profile":{
     "msg":{
-      "updateSuccess": "Kemaskini berjaya.",
+      "updateSuccess": "Profil telah berjaya di kemaskini.",
       "updateFail": "Kemaskini gagal.",
       "editbtnE" : "Kemaskini diaktifkan.",
       "editbtnD" : "Kemaskini tidak aktif."
@@ -156,7 +189,13 @@
   },
   
   "dashboard":{
-
+    "sidenav": {
+      "dashboard": "Dashboard",
+      "profile": "Profil",
+      "inbox": "Peti Masuk",
+      "appmgmt": "Pengurusan Aplikasi",
+      "companyprofile": "Profil Syarikat"
+    }
   },
   
   "errorlabel":{
@@ -187,6 +226,18 @@
     }
 
   },
+  "agencydir": {
+    "title":"Direktori Agensi",
+    "filterby": {
+      "all":"Semua",
+      "ministry":"Kementerian/Negeri",
+      "alphabet":"A-Z"
+    },
+    "label": {
+      "agencyName":"Nama Agensi",
+      "total":"Jumlah Capaian"
+    }
+  },
   "calendar": {
     "title": "MY KALENDAR",
     "desc": "Please limit your response to 10000 characters and include your email address and we will respond to you within three (3) working days. We can respond in two languages, English and Bahasa Melayu.",
@@ -202,6 +253,20 @@
       "words": " characters left.",
       "choose": "--Please Select--"
     },
+    "view":{
+      "today": "Hari Ini",
+      "internaldata": "Data Dalaman",
+      "externaldata": "Data Luaran",
+      "note": "Nota"
+    },
+    "details":{
+      "header": "Maklumat Acara",
+      "name": "Nama",
+      "location": "Lokasi",
+      "start": "Mula",
+      "end": "Tamat",
+      "desc": "Keterangan"
+    },
     "reset":"Reset this form?",      
     "msgsubmit": "Thank you. Your complaints/queries has been successfully sent. Responds will be received in 3 working days",
     "err":{
@@ -214,31 +279,39 @@
   },
   "mailbox":{
     "header":{
-      "from":"",
-      "subject":"",
-      "date":"",
-      "action":""
+      "from":"Daripada",
+      "subject":"Perkara",
+      "date":"Tarikh",
+      "action":"Tindakan"
     },
     
     "pagination":{
-      "pages":"",
-      "of":"",
-      "in":"",
-      "mails":""
+      "mails":"mel"
     },
     "err":{
-      "deleteconfirm":"Are you sure to delete this mail?",
-      "deleteconfirm_multi":"Are you sure to delete the selected mails?",
-      "failtoload":"Sorry, Mail is not loading properly, Try again!",
-      "failtodelete":"Sorry, Mail is not deleted properly, Try again!",
-      "failtoview":"Sorry, Mail is not viewed properly, Try again!"
+      "deleteconfirm":"Adakah anda pasti memadam mel ini?",
+      "deleteconfirm_multi":"Adakah anda pasti memadam mel yang dipilih?",
+      "failtoload":"Harap maaf, Mel tidak dapat dibuka dengan betul, Sila cuba lagi!",
+      "failtodelete":"Harap maaf, Mel tidak dapat dipadam dengan betul, Sila cuba lagi!",
+      "failtoview":"Harap maaf, Mel tidak dapat dipaparkan dengan betul, Sila cuba lagi!"
     },
     "success":{
-      "deletesuccess":"Mail has been deleted successfully!",
-      "deletesuccess_multi":"Selected mails has been deleted successfully!"
+      "deletesuccess":"Mel telah berjaya dipadam!",
+      "deletesuccess_multi":"Mel yang dipilih telah berjaya dipadam!"
     }
   },
   "common":{
+    "copyrightnotice": "Notis Hakcipta",
+    "clientcharter": "Piagam Pelanggan",
+    "help": "Bantuan",
+    "privacypolicy": "Dasar Privasi",
+    "securitypolicy": "Dasar Keselamatan",
+    "disclaimer": "Penafian",
+    "selectall" : "Pilih Semua",
+    "plsselect" : "Sila Pilih",
+    "placeholder": {
+      "keyword":"Kata Kunci"
+    },
     "buttons":{
       "delete":"Padam",
       "update":"Kemaskini",
@@ -270,13 +343,20 @@
     "msg":{
       "reset":"Set semula borang ini?",
       "delete":"Padam mesej ini?",
-      "success":"Successfully added!" 
+      "success":"Successfully added!",
+      "nodata": "Tiada maklumat" 
     },
     "state":{
       "success":"bg_header bg_success_header",
       "error":"bg_header bg_error_header",
       "warn":"bg_header bg_warn_header",
       "info":"bg_header bg_info_header"
+    },
+    
+    "pagination":{
+      "pages":"Halaman",
+      "of":"daripada",
+      "in":"dalam"
     }
   },
   "appmngt":{
@@ -312,11 +392,26 @@
     "recommend" : "Cadangan Penambahbaikan Anda",
     "youranswer" : "Jawapan anda adalah",
     "seeAnswer" : "INGIN MENGETAHUI KEPUTUSAN TERKINI SURVEY MENGENAI LAMAN WEB MYGOV YANG BARU?",
-    "displayAnswer" : " YA, PAPARKAN KEPUTUSAN TERKINI "
+    "displayAnswer" : " YA, PAPARKAN KEPUTUSAN TERKINI ",
+    "comment": "Komen"
   },
   "announcement":{
     "title":"Sorotan Terkini",
     "description":"Semua Sorotan Terkini",
-    "message":"Tiada maklumat terkini."
+    "message":"Tiada maklumat terkini.",
+    "tender": "Tender"
+  },
+  "subscription":{
+    "successMsg" :"Terima kasih. Emel anda telah berjaya disimpan. Emel pengaktifan langganan telah dihantar. Sila klik pada pautan untuk pengaktifan langganan.",
+    "btnsubscribe" : "Langgan",
+    "setactivetitle": "Langgan senarai mel",
+    "setactivemsg": "Terima kasih. E-mel anda telah disahkan."
+  },
+  "onlineservices": {
+    "btnonlineservice" : "Perkhidmatan Dalam Talian",
+    "btndownload": "Borang Muat Turun",
+    "agencyappname": "Nama Permohonan Agensi",
+    "basedonagency": "Permohonan berdasarkan Agensi",
+    "basedonatoz" : "Permohonan berdasarkan A-Z"
   }
 }

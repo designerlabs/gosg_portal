@@ -9,6 +9,7 @@ import { TranslateService, LangChangeEvent } from "@ngx-translate/core";
 
 @Injectable()
 export class ProtectedService {
+  languageId: any;
   lang = this.lang;
   langId = this.langId;
   constructor(private http: Http, @Inject(APP_CONFIG) private config: AppConfig, private translate: TranslateService) {
@@ -32,6 +33,14 @@ export class ProtectedService {
                   }
             
               });
+
+              if(!this.languageId){
+                if(localStorage.getItem('langID')){
+                  this.languageId = localStorage.getItem('langID');
+                }else{
+                  this.languageId = 1;
+                }
+              }
    }
 
    private feedbackUrl: string = this.config.urlFeedbackProtected;
@@ -47,7 +56,7 @@ export class ProtectedService {
   private getUserUrl: string = this.config.urlGetUser;
   private pollUrl: string = this.config.urlPollProtected;
   // private serviceUrl = 'https://jsonplaceholder.typicode.com/users';
-  private inboxUrl = this.mailUrl+"pages/";
+  private inboxUrl = this.mailUrl;
 
 
   createProfile(user) {
@@ -58,7 +67,7 @@ export class ProtectedService {
   
   getProfile(userId){
     return this.http
-    .get(this.profileUrl+"/"+userId+"?langId="+localStorage.getItem('langID')).map((response: Response) => response.json())
+    .get(this.profileUrl+"/"+userId+"?language="+this.languageId).map((response: Response) => response.json())
     .catch(this.handleError);
 
   } 
@@ -66,38 +75,38 @@ export class ProtectedService {
 
   getUser(){
     return this.http
-    .get(this.getUserUrl+"?langId="+localStorage.getItem('langID')).map((response: Response) => response.json())
+    .get(this.getUserUrl+"?language="+localStorage.getItem('langID')).map((response: Response) => response.json())
     .catch(this.handleError);
   } 
 
   updateProfile(user) {
     return this.http
-    .put(this.profileUrl+"/update/"+user.pid+"?langId="+localStorage.getItem('langID'), user).map((response: Response) => response.json())
+    .put(this.profileUrl+"/update/"+user.pid+"?language="+localStorage.getItem('langID'), user).map((response: Response) => response.json())
     .catch(this.handleError);
   }
 
   updateEmail(pid, user) {
     return this.http
-    .put(this.profileEmailUrl+"/update/"+pid+"?requestEmail="+user+"&langId="+localStorage.getItem('langID'), user).map((response: Response) => response.json())
+    .put(this.profileEmailUrl+"/update/"+pid+"?requestEmail="+user+"&language="+localStorage.getItem('langID'), user).map((response: Response) => response.json())
     .catch(this.handleError);
   }
 
   updatePhone(pid, user) {
     return this.http
-    .put(this.profilePhoneUrl+"/update/"+pid+"?requestEmail="+user+"&langId="+localStorage.getItem('langID'), user).map((response: Response) => response.json())
+    .put(this.profilePhoneUrl+"/update/"+pid+"?requestEmail="+user+"&language="+localStorage.getItem('langID'), user).map((response: Response) => response.json())
     .catch(this.handleError);
   }
 
-  getMails(icno, pages, size){
+  getMails(pages, size){
     return this.http
-    .get(`${this.inboxUrl}${icno}?page=${pages}&size=${size}`)
+    .get(`${this.inboxUrl}?page=${pages}&size=${size}`)
     .map((response: Response) => response.json())
     .catch(this.handleError);
   }
 
   deleteMail(msgId){
     return this.http
-    .delete(this.mailUrl+"delete/"+msgId).map((response: Response) => response.json())
+    .delete(this.mailUrl+msgId).map((response: Response) => response.json())
     .catch(this.handleError);
   }
   
@@ -109,19 +118,19 @@ export class ProtectedService {
 
   completeTran(rnd){
     return this.http
-    .put(this.completeUrl+"?randomNo="+rnd+"&langId="+localStorage.getItem('langID'),'').map((response: Response) => response.json())
+    .put(this.completeUrl+"?randomNo="+rnd+"&language="+localStorage.getItem('langID'),'').map((response: Response) => response.json())
     .catch(this.handleError);
   }
 
   completeProfileEmail(){ 
     return this.http
-    .put(this.completeUrlEmail+"?langId="+localStorage.getItem('langID'),'').map((response: Response) => response.json())
+    .put(this.completeUrlEmail+"?language="+localStorage.getItem('langID'),'').map((response: Response) => response.json())
     .catch(this.handleError);
   }
 
   completeProfilePhone(){ 
     return this.http
-    .put(this.completeUrlPhone+"?langId="+localStorage.getItem('langID'),'').map((response: Response) => response.json())
+    .put(this.completeUrlPhone+"?language="+localStorage.getItem('langID'),'').map((response: Response) => response.json())
     .catch(this.handleError);
   }
 
@@ -151,7 +160,7 @@ export class ProtectedService {
 
   getMail(msgId){
     return this.http
-    .get(this.mailUrl+"id/"+msgId).map((response: Response) => response.json())
+    .get(this.mailUrl+msgId).map((response: Response) => response.json())
     .catch(this.handleError);
   }
 

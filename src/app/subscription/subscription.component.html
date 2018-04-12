@@ -1,0 +1,75 @@
+<div class="container-fluid animated slideInDown" style="background: #a7a495;">
+  <div class="container">
+    <!-- <ngx-loading [show]="loading" [config]="{ fullScreenBackdrop: true }"></ngx-loading> -->
+    <div class="row">
+      <div class="col-md-12">
+        <h1 style="margin-top: 10px;" class="font-size-l">{{'home.breadcrumb.subscription' | translate}}</h1>
+        <hr class="hr-custom2">
+        <ul class="list-inline" style="clear:both;">
+          <li>
+            <a class="font-size-s" href="/index/">
+              {{'home.menu.home' | translate }}
+            </a>
+          </li>
+          <li>/</li>
+          <li>
+            {{'home.breadcrumb.subscription' | translate}}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container" style="color: #000; padding-bottom:20px;">
+  <form [formGroup]="subscriptionForm" autocomplete="off" (ngSubmit)="update(subscriptionForm.value)" role="form" novalidate>
+    <div class="col-md-12" style="text-align:center">
+      <h2>
+        <b>{{'home.breadcrumb.subscription' | translate}}</b>
+      </h2>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <mat-form-field class="example-full-width font-size-m" style="margin-top: 20px; width:100%">
+          <input matInput formControlName="txtEmail" #txtEmail type="text" placeholder="Email" required />
+          <!-- <mat-error *ngIf="!validateCtrlChk(txtEmail) && subscriptionForm.controls.txtEmail.errors?.required">
+            Email address is required
+          </mat-error> -->
+          <mat-error *ngIf="!validateCtrlChk(txtEmail) && subscriptionForm.controls.txtEmail.errors?.required">
+              {{'register.err.email' | translate }}
+            </mat-error>
+            <mat-error *ngIf="!validateCtrlChk(txtEmail) && subscriptionForm.controls.txtEmail.errors?.pattern">
+              {{'register.pattern.email' | translate }}
+            </mat-error>
+        </mat-form-field>
+      </div>
+      <!-- </div>
+    <div class="row" *ngIf="!showNoData"> -->
+      <div class="col-md-6" *ngIf="!showNoData">
+        <mat-form-field class="example-full-width font-size-m" style="margin-top: 20px; width:100%">
+          <mat-select placeholder="Select Category" [formControl]="selCategory" multiple (change)="chk($event)" required>
+            <mat-select-trigger>
+              {{selCategoryVal}}
+              <span *ngIf="selCategory.value?.length > 1" class="example-additional-selection">
+                (+{{selCategory.value.length - 1}} others)
+              </span>
+            </mat-select-trigger>
+            <!-- <mat-option value='0'>{{'common.plsselect' | translate }}</mat-option> -->
+            <mat-option *ngFor="let data of dataSubs" [value]="data.categoryId">{{data.categoryName}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="!validateCtrlChk(selCategory) && subscriptionForm.controls.selCategory.errors?.required">
+              Category is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-2" style="padding-top:40px;">
+        <button mat-raised-button type="button" color="primary" class="form-control btn btn-md btn-success font-size-s" (click)="update(subscriptionForm.value);"
+          style="width: 100px; font-family: Roboto; margin-left: 5px;" [disabled]="subscriptionForm.invalid">
+          <i class="fa fa-check"> </i> {{'subscription.btnsubscribe' | translate}}   </button>
+      </div>
+    </div>
+    <div *ngIf="showNoData" class="row text-align-Center padding-20"> No Data Found </div>
+    <div *ngIf="showerr" class="row text-align-Center padding-20"> <h3>
+          <b class='text-danger'>{{errormsg}}</b>
+      </h3> </div>
+  </form>
+</div>

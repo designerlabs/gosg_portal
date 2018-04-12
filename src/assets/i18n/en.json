@@ -4,6 +4,7 @@
     "menu": {
       "home": "Home",
       "calendar": "Calendar",
+      "agencycdir": "Agencies Directory",
       "register": "Register",
       "setting": "Settings",
       "contact": "Contact",
@@ -11,10 +12,38 @@
       "manual": "User Manual",
       "aboutus": "About Us",
       "onlineservice": "Digital Services",
-      "logout":"Logout"
+      "logout":"Logout",
+      "themecolor": "Theme Color",
+      "fontsize": "Font Size",
+      "fonttype": "Font Type",
+      "login": "Login"
     },
     "search": {
-      "label": "How Can We Help You?"
+      "label": "How Can We Help You?",
+      "find": "FIND",
+      "instruction": "Type search keywords here",
+      "searchresult": "Search Results",
+      "keywordset": "Keyword Settings",
+      "specification": "Specification",
+      "filter": "Filter",
+      "exword" : "Exact word",
+      "alword": "All word",
+      "anyword": "Any word",
+      "spectopic": "Topics",
+      "specsubtopic": "Sub Topics",
+      "specdes": "Description",
+      "specminis":"Ministries",
+      "specagen":"Agencies",
+      "spectitle":"Title",
+      "filmonth": "Month Published",
+      "filauth": "Author",
+      "filtop": "Topics",
+      "filsubtopic": "Sub Topics",
+      "local": "Local",
+      "onlineser": "Online Services",
+      "global":"Global",
+      "result": "Results",
+      "resultsfound": "Results Found in"
     },
     "breadcrumb": {
       "calendar": "Calendar",
@@ -23,7 +52,11 @@
       "profile": "My Profile",
       "dashboard": "Dashboard",
       "appmgmt": "Application Management",
-      "mailbox": "Mail Box"
+      "mailbox": "Mail Box",
+      "onlineservice": "Online Services",
+      "subscription": "Subscription",
+      "unsubscribe": "Unsubscribe",
+      "search": "Search"
     },
     "expandButton": {
       "less": "Show Less",
@@ -89,7 +122,7 @@
   },
   "profile":{
     "msg":{
-      "updateSuccess": "Profile updated.",
+      "updateSuccess": "Profile has been updated successfully.",
       "updateFail": "Profile not updated.",
       "editbtnE" : "Edit activated.",
       "editbtnD" : "Edit deactivated."
@@ -156,7 +189,13 @@
   },
 
   "dashboard": {
-
+    "sidenav": {
+      "dashboard": "Dashboard",
+      "profile": "Profile",
+      "inbox": "Inbox",
+      "appmgmt": "Application Management",
+      "companyprofile": "Company Profile"
+    }
   },
 
   "errorlabel": {
@@ -187,6 +226,18 @@
       
     }
   },
+  "agencydir": {
+    "title":"Agencies Directory",
+    "filterby": {
+      "all":"All",
+      "ministry":"Ministry/State",
+      "alphabet":"A-Z"
+    },
+    "label": {
+      "agencyName":"Agency Name",
+      "total":"Total Results"
+    }
+  },
   "calendar": {
     "title": "MY CALENDAR",
     "desc": "Please limit your response to 10000 characters and include your email address and we will respond to you within three (3) working days. We can respond in two languages, English and Bahasa Melayu.",
@@ -201,6 +252,20 @@
       "submit": "Send",
       "words": " characters left.",
       "choose": "--Please Select--"
+    },
+    "view":{
+      "today": "Today",
+      "internaldata": "Internal Data",
+      "externaldata": "External Data",
+      "note": "Note"
+    },
+    "details":{
+      "header": "Event Details",
+      "name": "Name",
+      "location": "Location",
+      "start": "Start",
+      "end": "End",
+      "desc": "Description"
     },
     "reset":"Reset this form?",      
     "msgsubmit": "Thank you. Your complaints/queries has been successfully sent. Responds will be received in 3 working days",
@@ -219,13 +284,6 @@
       "date":"Date",
       "action":"Action"
     },
-    
-    "pagination":{
-      "pages":"Pages",
-      "of":"of",
-      "in":"in",
-      "mails":"mails"
-    },
     "err":{
       "deleteconfirm":"Are you sure to delete this mail?",
       "deleteconfirm_multi":"Are you sure to delete the selected mails?",
@@ -236,9 +294,24 @@
     "success":{
       "deletesuccess":"Mail has been deleted successfully!",
       "deletesuccess_multi":"Selected mails has been deleted successfully!"
+    },
+    
+    "pagination":{
+      "mails":"mails"
     }
   },
   "common":{
+    "copyrightnotice": "Copyright Notice",
+    "clientcharter": "Client Charter",
+    "help": "Help",
+    "privacypolicy": "Privacy Policy",
+    "securitypolicy": "Security Policy",
+    "disclaimer": "Disclaimer",
+    "selectall" : "Select All",
+    "plsselect" : "Please Select",
+    "placeholder": {
+      "keyword":"Keyword"
+    },
     "buttons":{
       "delete":"Delete",
       "update":"Update",
@@ -270,13 +343,20 @@
     "msg":{
       "reset":"Reset this form?",
       "delete":"Are you sure to delete the record?",
-      "success":"Successfully added!"  
+      "success":"Successfully added!",
+      "nodata": "No data found"  
     },
     "state":{
       "success":"bg_header bg_success_header",
       "error":"bg_header bg_error_header",
       "warn":"bg_header bg_warn_header",
       "info":"bg_header bg_info_header"
+    },
+    
+    "pagination":{
+      "pages":"Pages",
+      "of":"of",
+      "in":"in"
     }
   },
   "appmngt":{
@@ -284,10 +364,12 @@
       "moreOpt": "More Search Options",
       "appNumber": "Application Number",
       "agency": "Agency",
+      "chooseAgency": "Choose Agency",
       "startDate": "Start Date",
       "endDate": "End Date",
       "appStatus": "Application Status",
-      "search": "Search"
+      "search": "Search",
+      "chooseStatus": "Choose Status"
     },
     "tableHeader":{
       "num": "No.",
@@ -310,11 +392,26 @@
     "recommend" : "Your recommendation for improvement",
     "youranswer" : "Your answer is",
     "seeAnswer" : "WOULD YOU LIKE TO KNOW THE RESULTS OF THE LATEST SURVEY ON THE NEW MYGOV WEB SITE?",
-    "displayAnswer" : " YES, DISPLAY THE LATEST RESULTS "
+    "displayAnswer" : " YES, DISPLAY THE LATEST RESULTS ",
+    "comment": "Comment"
   },
   "announcement":{
     "title":"Highlights",
     "description":"All Highlight",
-    "message":"No latest information."
+    "message":"No latest information.",
+    "tender": "Tender"
+  },
+  "subscription":{
+    "successMsg" :"Thank you. Your email has been successfully saved. An activation email has been sent. Please click on the link to activate the subscription.",
+    "btnsubscribe" : "Subscribe",
+    "setactivetitle": "Subscribe to mailing list",
+    "setactivemsg": "Thank you. Your email has been verified."
+  },
+   "onlineservices": {
+     "btnonlineservice" : "Online Service",
+     "btndownload": "Download",
+     "agencyappname": "Agency Application Name",
+     "basedonagency": "Application based on Agency",
+     "basedonatoz" : "Application based on A-Z"
   }
 }

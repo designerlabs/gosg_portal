@@ -7,10 +7,10 @@
         <div class="sliderContainer container item" *ngFor="let data of slides; let i = index;">
             <div class="container" style="margin: 0px auto; background-image: linear-gradient(to right, transparent 30%, #a7a495 58%), linear-gradient(to left, transparent 80%, #a7a495 95%);">
 
-                <img [src]="data.image" class="slider_img">
+                <img [src]="config.externalMediaURL+'/images/'+data.sliderImage.mediaFile" class="slider_img">
                 <span class="sliderBox">
-                        <h3 class="font-size-l">{{data.title}}</h3>
-                        <p class="font-size-s">{{data.description}}</p>
+                        <h3 class="font-size-l">{{data.sliderTitle}}</h3>
+                        <p class="font-size-s">{{data.sliderDescription}}</p>
                     </span>
             </div>
         </div>

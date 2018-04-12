@@ -94,9 +94,6 @@ export class SidenavmainComponent implements OnInit {
       }, err => {
         
       })
-
-
-
   }
 
   fontminus() {

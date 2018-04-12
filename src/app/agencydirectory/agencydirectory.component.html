@@ -1,0 +1,98 @@
+<div class="container-fluid animated slideInDown" style="background: #a7a495;">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 style="margin-top: 10px;" class="font-size-m">{{'agencydir.title' | translate}}</h1>
+        <hr class="hr-custom2">
+        <ul class="list-inline" style="clear:both;">
+          <li>
+            <a class="font-size-s" href="/index/">
+              {{'home.menu.agencycdir' | translate }}
+            </a>
+          </li>
+          <!-- <li>/</li>
+                  <li>
+                      {{'home.breadcrumb.calendar' | translate}}
+                  </li> -->
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container agcdir">
+  <div class="row">
+    <div class="col-md-12 padding-m">
+      <div class="col-md-6">
+
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field class="example-full-width">
+              <!-- (keydown)="applyFilter($event.target.value)" -->
+              <input matInput (keyup)="applySearchFilter($event.target.value)" [(ngModel)]="keyword" [ngModelOptions]="{standalone: true}"
+                placeholder="{{ 'common.placeholder.keyword' | translate }}">
+              <button mat-button *ngIf="keyword" matSuffix mat-icon-button (click)="keyword='';resetSearch()">
+                <mat-icon>x</mat-icon>
+              </button>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field class="example-full-width">
+              <mat-select placeholder="{{ 'agencydir.filterby.all' | translate }} {{ 'agencydir.filterby.ministry' | translate }}" [(ngModel)]="ministry"
+                (change)="applyFilter('ministry',$event.value)">
+                <mat-option [value]="0">{{ 'agencydir.filterby.all' | translate }} {{ 'agencydir.filterby.ministry' | translate }}</mat-option>
+                <mat-option *ngFor="let ministry of ministryList" [value]="ministry.ministryCode" (click)="goToMarkerPoint(ministry.ministryLatitude,ministry.ministryLongitude, ministry.ministryName, ministry.ministryAddress, ministry.ministryEmail, ministry.ministryFax, ministry.ministryPhone)">{{ ministry.ministryName }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field class="example-full-width">
+              <mat-select placeholder="{{ 'agencydir.filterby.all' | translate }}" [(ngModel)]="letter" (change)="applyFilter('letter',$event.value)">
+                <mat-option [value]="0">{{ 'agencydir.filterby.all' | translate }}</mat-option>
+                <mat-option *ngFor="let l of letters" [value]="l" style="text-transform: capitalize">{{ l }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-12">
+            <table class="table" *ngIf="!showNoData">
+              <thead>
+                <tr>
+                  <td>
+                    <h4>{{ 'agencydir.label.agencyName' | translate }}</h4>
+                  </td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let agc of recordTable | paginate: { id: 'listing_pagination',
+                itemsPerPage: 10,
+                currentPage: pageCount,
+                totalItems: totalRec }">
+                
+                  <td>
+                    <a *ngIf="agc.agencyLatitude || agc.agencyLongitude" style="color: #1d1d1d" href="agencydir#" (click)="goToMarkerPoint(agc.agencyLatitude,agc.agencyLongitude, agc.agencyName, agc.agencyAddress, agc.agencyEmail, agc.agencyFax, agc.agencyPhoneNo)" title="agc.agencyLatitude">{{agc.agencyName}}</a>
+                    <a *ngIf="!agc.agencyLatitude || !agc.agencyLongitude" style="color: #cacaca; cursor:default;" href="agencydir#"  title="Latitude and Longitude Not Found">{{agc.agencyName}} <i class="fa fa-unlink"></i></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div *ngIf="showNoData" class="row text-align-Center padding-20">{{ 'common.msg.nodata' | translate }} </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div id="dirmap"></div>
+        <!-- <div style="height: 400px;" leaflet [leafletOptions]="options" [leafletLayers]="markers"></div> -->
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2">
+      {{ 'agencydir.label.total' | translate }}: {{ totalRec }}
+    </div>
+    <div class="col-md-10"><pagination-controls id="listing_pagination" maxSize="5" directionLinks="true" (pageChange)="pageChange(pageCount = $event,totalRec)"></pagination-controls></div>
+    <div class="col-md-12">&nbsp;</div>
+</div>
+</div>
