@@ -303,6 +303,11 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                     this.accountStatus = data.user.accountStatus.accountStatusId;
                     this.nationality = data.user.country.countryName;
                     this.countryId = data.user.country.countryId;
+                    if(data.user.country.countryId == 152){
+                      this.isLocal = true;
+                    }else{
+                      this.isLocal = false;
+                    }
                     this.passport = data.user.passportNo;
                     this.idno = data.user.pid;
                     this.regemail = data.user.email;
@@ -632,6 +637,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   getCitiesByState(e){
       this.isStateChanged();
       this.selectedState = e.value;
+      this.perCityLocal.reset();
       return this.sharedService.getCitiesbyState(e.value)
         .subscribe(resCityData => {
           if(e.source.ngControl.name == "perStateLocal") {
@@ -645,8 +651,26 @@ export class ProfileComponent implements OnInit, AfterViewInit {
        });
   }
 
+  getCitiesByStateD(e){
+    this.isStateChanged();
+    this.selectedState = e.value;
+    // this.perCityLocal.reset();
+    return this.sharedService.getCitiesbyState(e.value)
+      .subscribe(resCityData => {
+        if(e.source.ngControl.name == "perStateLocal") {
+          this.getPerCityData = resCityData;
+        } else {
+          this.getCorrsCityData = resCityData;
+        }
+      },
+      Error => {
+       this.toastr.error(this.translate.instant('common.err.servicedown'), '');            
+     });
+}
+
   getPostcodeByCity(e){
     this.isStateChanged();
+    this.perPostcode.reset();
     return this.sharedService.getPostCodeData(e.value)
       .subscribe(resPostCodeData => {
         this.getPerPostData = resPostCodeData;

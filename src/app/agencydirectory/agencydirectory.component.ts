@@ -188,6 +188,8 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit {
     if(!this.languageId){
       this.languageId = localStorage.getItem('langID');
       //this.getData();
+    }else{
+      this.languageId = 1;
     }
   }
   lang = this.lang;
