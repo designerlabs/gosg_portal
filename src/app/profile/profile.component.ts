@@ -303,6 +303,12 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                     this.accountStatus = data.user.accountStatus.accountStatusId;
                     this.nationality = data.user.country.countryName;
                     this.countryId = data.user.country.countryId;
+                    debugger;
+                    if(data.user.country.countryId == 152){
+                      this.isLocal = true;
+                    }else{
+                      this.isLocal = false;
+                    }
                     this.passport = data.user.passportNo;
                     this.idno = data.user.pid;
                     this.regemail = data.user.email;
