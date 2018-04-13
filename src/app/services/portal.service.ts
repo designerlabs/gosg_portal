@@ -169,6 +169,15 @@ export class PortalService {
     .catch(this.handleError);
   }
 
+  getCalendarEventsByAgencyID(id){
+
+    // console.log(this.calendarUrl+ '?agencyId='+id+'&language='+this.langId)
+    return this.http.get(this.calendarUrl + '?agencyId='+id+'&language='+this.langId)
+    .map((response: Response) => response.json())
+    .retry(5)
+    .catch(this.handleError);
+  }
+
   // END CALENDAR
 
   // AGENCIES DIRECTORY
