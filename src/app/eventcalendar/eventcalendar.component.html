@@ -1,3 +1,6 @@
+<!-- <div class="container right-content">
+    <ngx-loading [show]="loading" [config]="{ fullScreenBackdrop: true }"></ngx-loading> -->
+    
 <div class="container-fluid animated slideInDown" style="background: #a7a495;">
     <div class="container">
         <div class="row">
@@ -22,6 +25,23 @@
 <div class="container">
     <div class="overlay"></div>
     <div class="col-md-12">&nbsp;</div>
+    <!-- <div class="row"> -->
+      <div class="col-md-4">
+        <mat-form-field class="example-full-width">
+          <input matInput tabindex="1" placeholder="{{ 'calendar.details.agency' | translate }}" [(ngModel)]="agencySel" (click)="getSearchData(agencySel)" (keyup)="getSearchData(agencySel)">
+          <button mat-button *ngIf="agencySel" matSuffix mat-icon-button aria-label="Clear" (click)="agencySel=''; resetSearch()">
+            <mat-icon style="color: #000">X</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <div *ngIf="isActiveList" [ngClass]="{'listParent':searchAgencyResult.length < 10,'listParent-w-scroll':searchAgencyResult.length >= 10}" (scroll)="onScroll($event)">
+          <ul class="list-group pmd-z-depth pmd-list pmd-card-list pmd-list">
+            <li class="list-group-item" *ngFor="let data of searchAgencyResult">
+              <a class="list-link" (click)="getValue(data.agencyId, data.agencyName, data.agencyMinistry.ministryName, data.agencyCode)">{{data.agencyName}}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
     <div class="col-md-12">
         <div id="calendar"></div>
         <div id="details">
@@ -37,7 +57,7 @@
                 <div class="row" id="imageContainer">
                     <div class="col-md-12">&nbsp;</div>
                     <div class="col-md-12">
-                        <img id="eventImage" style="width:200px">
+                        <img id="eventImage" style="width: auto; height: 200px">
                     </div>
                     <div class="col-md-12">&nbsp;</div>
                 </div>
@@ -77,8 +97,13 @@
 
                 <div class="row">
                     <div class="col-md-12">&nbsp;</div>
-                    <div class="col-md-12"><h4>{{ 'calendar.details.organizerheader' | translate }}</h4></div>
+                    <div class="col-md-12"><h4 style="color: #1d1d1d">{{ 'calendar.details.organizerheader' | translate }}</h4></div>
                     
+                    <div class="col-md-12">
+                        <label class="font-size-s">{{ 'calendar.details.agency' | translate }}</label>
+                        <p class="font-size-m" id="agency"></p>
+                    </div>
+
                     <div class="col-md-6">
                         <label class="font-size-s">{{ 'calendar.details.organizer' | translate }}</label>
                         <p class="font-size-m" id="organizer"></p>
@@ -112,3 +137,4 @@
     </div>
     <div class="col-md-12">&nbsp;</div>
 </div>
+<!-- </div> -->
