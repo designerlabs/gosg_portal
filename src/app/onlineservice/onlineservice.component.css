@@ -19,3 +19,7 @@ a.appUrl:hover, a.appUrl:focus {
 .onlineSignTag i{
   font-size:13px;
 }
+
+.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-placeholder{
+  font-size:30px !important;
+}

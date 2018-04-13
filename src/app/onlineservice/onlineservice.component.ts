@@ -19,6 +19,8 @@ import { Http, Response } from '@angular/http';
   styleUrls: ['./onlineservice.component.css']
 })
 export class OnlineserviceComponent implements OnInit {
+  keyword: boolean = false;
+  agencyUrl: any;
 
   lang = this.lang;
   languageId = this.languageId;
@@ -40,8 +42,8 @@ export class OnlineserviceComponent implements OnInit {
   chkOnline = false;
   chkDownload = false;
   isDocument;
-  valByAlpha = "0";
-  valByAgency = "0";
+  valByAlpha;
+  valByAgency;
 
   constructor(
     private router: Router,
@@ -84,12 +86,14 @@ export class OnlineserviceComponent implements OnInit {
     this.valByAlpha = "0";
     this.valByAgency = "0";
     this.getAgencyList();
+    this.loadAlpha();
     this.selAllAgency(this.pageCount, this.pageSize);
   }
 
   getAgencyList() {
     return this.sharedService.readPortal('agency','1','999')
       .subscribe(rData => {
+        debugger;
         this.listAgency = rData['list'];
       },
         Error => {
@@ -98,15 +102,24 @@ export class OnlineserviceComponent implements OnInit {
   }
 
   selByAgency(eve) {
+    debugger;
     this.pageCount = 1;
     this.noPrevData = true;
     this.chkDownload = false;
     this.chkOnline = false;
-    this.valByAlpha = "0";    
-    if (eve.value !== "0") {
-      this.getDataSelByAgency(eve.value);
-    } else {
+    this.valByAlpha = "0"; 
+    if(eve.value == 1){
+      this.keyword = false;
+      this.selAgency(this.pageCount, this.pageSize);
+    }else if(eve.value == 0){
+      this.keyword = false;
       this.selAllAgency(this.pageCount, this.pageSize);
+    }else if(eve.value == 2){
+      this.keyword = true;
+      // this.datatblAgency = [''];
+    }else{
+      this.keyword = false;
+      this.getDataSelByAgency(eve.value);
     }
   }
 
@@ -116,6 +129,7 @@ export class OnlineserviceComponent implements OnInit {
       return this.http.get(this.config.urlPortal + dataUrl + '&language=' + this.languageId)
         .map(res => res.json())
         .subscribe(rData => {
+          debugger;
           this.sharedService.errorHandling(rData, (function () {
             this.dataPage = rData;
             if (rData['agencyApplicationList'].length > 0) {
@@ -148,6 +162,25 @@ export class OnlineserviceComponent implements OnInit {
     this.getDataSelByAlpha(eve.value);
   }
 
+  loadAlpha(isDocument?, keyword?, agency?){
+    let dataUrl;
+    if(agency){
+      dataUrl = 'agency/agencyid/app/alpha?language='+this.languageId;
+    }else if(agency && (typeof isDocument !== 'undefined')){
+      dataUrl = 'agency/agencyid/app/alpha?document='+isDocument+'&language='+this.languageId;
+    }else if(keyword){
+      dataUrl = 'agency/application/search/onlineservices/alpha?keyword='+keyword+'&language='+this.languageId;
+    }else if(keyword && (typeof isDocument !== 'undefined')){
+      dataUrl = 'agency/application/search/onlineservices/alpha?keyword='+keyword+'&document='+isDocument+'&language='+this.languageId;
+    }else{
+      dataUrl = 'agency/application/search/onlineservices/alpha?language='+this.languageId;
+    }
+    return this.http.get(this.config.urlPortal + dataUrl)
+    .subscribe(rData => {
+      debugger;
+    })
+  }
+  
   getDataSelByAlpha(val){
     let dataUrl="";
       if (val !== "0") {
@@ -217,6 +250,44 @@ export class OnlineserviceComponent implements OnInit {
         });
   }
 
+  selAgency(page, pagesize, isDocument?, letter?) {
+    this.loading = true;
+    
+    if(typeof isDocument !== 'undefined'){
+      this.agencyUrl = 'agency/agencyid/app?document='+isDocument+'&page='+page+'&size='+pagesize+'&language='+this.languageId;
+    }else if(typeof letter !== 'undefined'){
+      this.agencyUrl = 'agency/agencyid/app?letter='+letter+'&page='+page+'&size='+pagesize+'&language='+this.languageId;
+    }else if(typeof isDocument !== 'undefined' && typeof letter !== 'undefined'){
+      this.agencyUrl = 'agency/agencyid/app?document='+isDocument+'&letter='+letter+'&page='+page+'&size='+pagesize+'&language='+this.languageId;
+    }else{
+      this.agencyUrl = 'agency/agencyid/app?page='+page+'&size='+pagesize+'&language='+this.languageId;
+    }
+
+    return this.http.get(this.config.urlPortal+this.agencyUrl)
+      .subscribe(rData => {
+        debugger;
+        this.sharedService.errorHandling(rData, (function () {
+          // this.dataPage = rData;
+          // if (rData['agencyApplicationList'].length > 0) {
+          //   this.seqPageNum = this.dataPage.pageNumber;
+          //   this.seqPageSize = this.dataPage.pageSize;
+          //   this.noNextData = this.dataPage.pageNumber === this.dataPage.totalPages;
+          //   this.datatblAgency = rData['agencyApplicationList'];
+          //   this.showNoData = false;
+          // } else {
+          //   this.showNoData = true;
+          //   this.seqPageNum = this.dataPage.pageNumber;
+          //   this.seqPageSize = this.dataPage.pageSize;
+          //   this.noNextData = this.dataPage.pageNumber === this.dataPage.totalPages;
+          // }
+        }).bind(this));
+        this.loading = false;
+      },
+        error => {
+          this.toastr.error(this.translate.instant('common.err.servicedown'), '');
+        });
+  }
+
   reset() {
     this.chkDownload = false;
     this.chkOnline = false;
@@ -233,18 +304,36 @@ export class OnlineserviceComponent implements OnInit {
     this.noPrevData = true;
     if(!e.checked){
       this.selAllAgency(this.pageCount, this.pageSize);
-    };
-    this.valByAlpha = "0";
-    this.valByAgency = "0";
-    // let isDocument;
-    if (val === 1) { // isDocument = false
-      this.chkDownload = false;
+      this.selAgency(this.pageCount, this.pageSize);
+    }else{
+      if(this.valByAgency == "0"){
       
-      this.isDocument = "false";
-    } else if (val === 2) { // isDocument = true
-      this.chkOnline = false;
-      this.isDocument = "true";
-    }
+      }else if(this.valByAgency == "1"){
+        if (val === 1) { // isDocument = false
+          this.chkDownload = false;
+          this.isDocument = false;
+        } else if (val === 2) { // isDocument = true
+          this.chkOnline = false;
+          this.isDocument = true;
+          
+        }
+        this.selAgency(this.pageCount, this.pageSize, this.isDocument);
+      }else{
+        
+      }
+    };
+
+    console.log(this.chkDownload);
+    console.log(this.chkOnline);
+    console.log(this.chkDownload && this.chkOnline);
+
+   
+
+    
+    // this.valByAlpha = "0";
+    // this.valByAgency = "0";
+    // let isDocument;
+   
     this.getChkDocData(this.isDocument);    
   }
   getChkDocData(val){

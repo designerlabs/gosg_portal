@@ -24,21 +24,45 @@
   <div class="col-md-12">&nbsp;</div>
   <div class="row">    
     <div class="form-group col-md-4">
-        <mat-form-field class="example-full-width font-size-m" style="width: 100%;">
-          <mat-select id="selbyagency" tabindex="1" placeholder="{{'onlineservices.basedonagency' | translate}}" (change)="selByAgency($event)" [(ngModel)]="valByAgency">
-            <mat-option value="0"> {{'common.selectall' | translate}} </mat-option>
-            <mat-option *ngFor="let data of listAgency" [value]="data.list[inxlan]?.agencyId">{{ data.list[inxlan]?.agencyName }}</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-    <div class="form-group col-md-4">
-      <mat-form-field class="example-full-width font-size-m" style="width: 100%;">
-         
-        <mat-select id="selbyalpha" tabindex="2" placeholder="{{'onlineservices.basedonatoz' | translate}}" (change)="selByAlpha($event)" [(ngModel)]="valByAlpha">
+          <div class="form-group">
+            <label for="usr">{{'onlineservices.basedonagency' | translate}}</label>
+            <select id="selbyagency" tabindex="1" class="form-control" (change)="selByAgency($event.target)" [(ngModel)]="valByAgency">
+                <option value="0"> {{'common.selectall' | translate}}</option>
+                <option value="1">By Agency</option>
+                <option value="2">By Keyword</option>
+              </select>
+          </div>
+      <!-- <mat-form-field class="example-full-width font-size-m" style="width: 100%;">
+        
+        <mat-select id="selbyagency" tabindex="1" placeholder="" (change)="selByAgency($event)" [(ngModel)]="valByAgency">
           <mat-option value="0"> {{'common.selectall' | translate}} </mat-option>
+          <mat-option value="1"> By Agency</mat-option>
+          <mat-option value="2"> By Keyword</mat-option>
+          <mat-option *ngFor="let data of listAgency" [value]="data.list[inxlan]?.agencyId">{{ data.list[inxlan]?.agencyName }}</mat-option>
+        </mat-select>
+      </mat-form-field> -->
+    </div>
+    <div *ngIf="keyword" class="form-group col-md-4">
+        <div class="form-group">
+          <label for="usr">Search by Keyword</label>
+          <input type="text" class="form-control" [(ngModel)]="valByKeyword">
+        </div>
+    </div>
+    <div class="form-group col-md-4">
+        <div class="form-group">
+          <label for="usr">{{'onlineservices.basedonatoz' | translate}}</label>
+          <select id="selbyalpha" tabindex="2" class="form-control" (change)="selByAlpha($event)" [(ngModel)]="valByAlpha">
+              <option value="0"> {{'common.selectall' | translate}}</option>
+              <option *ngFor="let data of dataAlpha" [value]="data">{{ data }}</option>
+          </select>
+          
+        </div>
+      <!-- <mat-form-field class="example-full-width font-size-m" style="width: 100%;">
+        <mat-select id="selbyalpha" tabindex="2" (change)="selByAlpha($event)" [(ngModel)]="valByAlpha">
+          <mat-option value="0" selected> {{'common.selectall' | translate}} </mat-option>
           <mat-option *ngFor="let data of dataAlpha" [value]="data">{{ data }}</mat-option>
         </mat-select>
-      </mat-form-field>
+      </mat-form-field> -->
     </div>    
   </div>
   <div class="row" style="padding:20px 0px 20px 0px;">
