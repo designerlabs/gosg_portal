@@ -19,6 +19,23 @@ import { Http, Response } from '@angular/http';
   styleUrls: ['./onlineservice.component.css']
 })
 export class OnlineserviceComponent implements OnInit {
+
+  dropdownOpt = [
+    {
+      "id": 0,
+      "value": "Show All"
+    },{
+      "id":1,
+      "value":"By Agency"
+    },
+    {
+      "id":2,
+      "value": "By Keyword"
+    }
+  ];
+
+
+
   onlyAgency: boolean = false;
   keyword: boolean = false;
   agencyUrl: any;
@@ -79,7 +96,7 @@ export class OnlineserviceComponent implements OnInit {
       }
 
       this.onlyAgency = false;
-      this.loadAlpha();
+      this.loadAlpha(true);
       this.selAllAgency(this.pageCount, this.pageSize);
       this.selAgency(this.pageCount, this.pageSize);
       // this.getAgencyList();
@@ -92,9 +109,136 @@ export class OnlineserviceComponent implements OnInit {
     this.valByAlpha = "0";
     this.valByAgency = "0";
     // this.getAgencyList();
-    this.loadAlpha();
+    this.loadAlpha(true);
     this.selAllAgency(this.pageCount, this.pageSize);
   }
+
+
+  /**
+   * 
+   * Select an options
+   */
+
+  selByOptions(event){
+    if(event.value == 0){
+      this.keyword = false;
+      this.onlyAgency = false;
+      this.loadAlpha(true);
+      this.selAllAgency(this.pageCount, this.pageSize);
+    }else if(event.value == 1){
+      this.keyword = false;
+      this.onlyAgency = true;
+      this.loadAlpha(false, true);
+      this.selAgency(this.pageCount, this.pageSize);
+    }else if(event.value == 2){
+      this.keyword = true;
+      this.onlyAgency = false;
+    }  
+  }
+
+
+
+
+/**
+ * 
+ * Load Alpha
+ */
+
+ 
+loadAlpha(onlineService?, agency?, isDocument?, keyword?){
+  let dataUrl;
+  if(onlineService){
+    dataUrl = 'agency/application/search/onlineservices/alpha?language='+this.languageId;
+  }else if(agency){
+    dataUrl = 'agency/agencyid/app/alpha?language='+this.languageId;
+  }
+  
+  else if(agency && (typeof isDocument !== 'undefined')){
+    dataUrl = 'agency/agencyid/app/alpha?document='+isDocument+'&language='+this.languageId;
+  }else if(keyword){
+    dataUrl = 'agency/application/search/onlineservices/alpha?keyword='+keyword+'&language='+this.languageId;
+  }else if(keyword && (typeof isDocument !== 'undefined')){
+    dataUrl = 'agency/application/search/onlineservices/alpha?keyword='+keyword+'&document='+isDocument+'&language='+this.languageId;
+  }
+  return this.http.get(this.config.urlPortal + dataUrl)
+  .map(res => res.json())
+  .subscribe(rData => {
+    this.dataAlpha = rData.letters;
+  })
+}
+
+
+/**
+ * 
+ * 
+ * Checkbox selections
+ *
+ */
+
+chkDocument(e, val) {
+
+  let agencyVal = this.valByAgency;
+  let alphaVal = this.valByAlpha;
+  debugger;
+  if((agencyVal) && (alphaVal !== "0")){
+    if(agencyVal == "0"){
+      if(!e.checked){
+        this.selAllAgency(this.pageCount, this.pageSize, undefined, undefined, alphaVal);
+      }else{
+        if(val === 1){
+          this.selAllAgency(this.pageCount, this.pageSize, false, undefined, alphaVal);
+        }else if(val === 2){
+          this.selAllAgency(this.pageCount, this.pageSize, true, undefined, alphaVal);
+        }
+      }
+    }else if(agencyVal == "1"){
+      if(!e.checked){
+        this.selAgency(this.pageCount, this.pageSize, undefined, alphaVal);
+      }else{
+        if(val === 1){
+          this.selAgency(this.pageCount, this.pageSize, false, alphaVal);
+        }else if(val === 2){
+          this.selAgency(this.pageCount, this.pageSize, true, alphaVal);
+        }
+      }
+    }
+  }else if(agencyVal == "0"){
+
+    if(!e.checked){
+      this.selAllAgency(this.pageCount, this.pageSize, undefined);
+    }else{
+      if(val === 1){
+        this.selAllAgency(this.pageCount, this.pageSize, false);
+      }else if(val === 2){
+        this.selAllAgency(this.pageCount, this.pageSize, true);
+      }
+    }
+   
+  }
+  else if(agencyVal == "1"){
+    if(!e.checked){
+      this.selAgency(this.pageCount, this.pageSize, undefined);
+    }else{
+      if(val === 1){
+        this.selAgency(this.pageCount, this.pageSize, false);
+      }else if(val === 2){
+        this.selAgency(this.pageCount, this.pageSize, true);
+      }
+    }
+  }
+  else if(alphaVal !== "0"){
+    if(!e.checked){
+      this.selAllAgency(this.pageCount, this.pageSize, undefined, undefined, alphaVal);
+    }else{
+      if(val === 1){
+        this.selAllAgency(this.pageCount, this.pageSize, undefined, undefined, alphaVal);
+      }else if(val === 2){
+        this.selAllAgency(this.pageCount, this.pageSize, undefined, undefined, alphaVal);
+      }
+    }
+  }
+}
+
 
   getAgencyList() {
     return this.sharedService.readPortal('agency','1','999')
@@ -169,25 +313,6 @@ export class OnlineserviceComponent implements OnInit {
     this.getDataSelByAlpha(eve.target.value);
   }
 
-  loadAlpha(isDocument?, keyword?, agency?){
-    let dataUrl;
-    if(agency){
-      dataUrl = 'agency/agencyid/app/alpha?language='+this.languageId;
-    }else if(agency && (typeof isDocument !== 'undefined')){
-      dataUrl = 'agency/agencyid/app/alpha?document='+isDocument+'&language='+this.languageId;
-    }else if(keyword){
-      dataUrl = 'agency/application/search/onlineservices/alpha?keyword='+keyword+'&language='+this.languageId;
-    }else if(keyword && (typeof isDocument !== 'undefined')){
-      dataUrl = 'agency/application/search/onlineservices/alpha?keyword='+keyword+'&document='+isDocument+'&language='+this.languageId;
-    }else{
-      dataUrl = 'agency/application/search/onlineservices/alpha?language='+this.languageId;
-    }
-    return this.http.get(this.config.urlPortal + dataUrl)
-    .map(res => res.json())
-    .subscribe(rData => {
-      this.dataAlpha = rData.letters;
-    })
-  }
   
   getDataSelByAlpha(val){
     let dataUrl="";
@@ -338,78 +463,7 @@ export class OnlineserviceComponent implements OnInit {
     this.sharedService.defaultPageSize = this.sharedService.pageSize[0].size;
     this.selAllAgency(this.pageCount, this.pageSize);
   }
-  chkDocument(e, val) {
-    
-    this.pageCount = 1;
-    this.noPrevData = true;
-    if(!e.checked){
-      if((this.valByAlpha !== '0')){
-        this.selAllAgency(this.pageCount, this.pageSize, undefined, undefined, this.valByAlpha);
-        this.selAgency(this.pageCount, this.pageSize, undefined, this.valByAlpha);
-      }else{
-        this.selAllAgency(this.pageCount, this.pageSize);
-        this.selAgency(this.pageCount, this.pageSize);
-      }
-      
-    }else{
-      if(this.valByAgency == "0"){
-        if((this.valByAlpha !== '0')){
-          if (val === 1) { // isDocument = false
-            this.chkDownload = false;
-            this.isDocument = false;
-            debugger;
-            this.selAllAgency(this.pageCount, this.pageSize, this.isDocument, undefined, this.valByAlpha);
-          } else if (val === 2) { // isDocument = true
-            this.chkOnline = false;
-            this.isDocument = true;
-            debugger;
-    
-            this.selAllAgency(this.pageCount, this.pageSize, this.isDocument, undefined, this.valByAlpha);
-          }
-        }else{
-          if (val === 1) { // isDocument = false
-            this.chkDownload = false;
-            this.isDocument = false;
-            this.selAllAgency(this.pageCount, this.pageSize, this.isDocument);
-          } else if (val === 2) { // isDocument = true
-            this.chkOnline = false;
-            this.isDocument = true;
-            this.selAllAgency(this.pageCount, this.pageSize, this.isDocument);
-          }
-        }
-        
-        
-      }else if(this.valByAgency == "1"){
-        if (val === 1) { // isDocument = false
-          this.chkDownload = false;
-          this.isDocument = false;
-        } else if (val === 2) { // isDocument = true
-          this.chkOnline = false;
-          this.isDocument = true;
-          
-        }
-        
-        this.selAgency(this.pageCount, this.pageSize, this.isDocument);
-      }else if((this.valByAgency == '0') && (this.valByAlpha !== '0')){
-          debugger;
-      } else{
-        
-      }
-    };
-
-    console.log(this.chkDownload);
-    console.log(this.chkOnline);
-    console.log(this.chkDownload && this.chkOnline);
-
-   
-
-    
-    // this.valByAlpha = "0";
-    // this.valByAgency = "0";
-    // let isDocument;
-   
-    // this.getChkDocData(this.isDocument);    
-  }
+  
   getChkDocData(val){
     this.loading = true;
     if(this.valByAgency == "0"){
