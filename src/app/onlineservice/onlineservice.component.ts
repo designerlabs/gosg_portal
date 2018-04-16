@@ -19,6 +19,7 @@ import { Http, Response } from '@angular/http';
   styleUrls: ['./onlineservice.component.css']
 })
 export class OnlineserviceComponent implements OnInit {
+  onlyAgency: boolean = false;
   keyword: boolean = false;
   agencyUrl: any;
 
@@ -34,14 +35,15 @@ export class OnlineserviceComponent implements OnInit {
   seqPageSize = 0;
   showNoData = false;
   listAgency = [];
-  datatblAgency = [];
-  dataAlpha = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+  datatblAgencyPage = [];
+  dataAlpha = [];
   dataPage = null;
   inxlan = 0;
   public loading = false;
   chkOnline = false;
   chkDownload = false;
   isDocument;
+  dataAgencyPage = null;
   valByAlpha;
   valByAgency;
 
@@ -75,7 +77,11 @@ export class OnlineserviceComponent implements OnInit {
           this.inxlan = 1;
         });
       }
-      
+
+      this.onlyAgency = false;
+      this.loadAlpha();
+      this.selAllAgency(this.pageCount, this.pageSize);
+      this.selAgency(this.pageCount, this.pageSize);
       // this.getAgencyList();
       this.reset();
      
@@ -85,7 +91,7 @@ export class OnlineserviceComponent implements OnInit {
   ngOnInit() {
     this.valByAlpha = "0";
     this.valByAgency = "0";
-    this.getAgencyList();
+    // this.getAgencyList();
     this.loadAlpha();
     this.selAllAgency(this.pageCount, this.pageSize);
   }
@@ -93,7 +99,6 @@ export class OnlineserviceComponent implements OnInit {
   getAgencyList() {
     return this.sharedService.readPortal('agency','1','999')
       .subscribe(rData => {
-        debugger;
         this.listAgency = rData['list'];
       },
         Error => {
@@ -102,22 +107,25 @@ export class OnlineserviceComponent implements OnInit {
   }
 
   selByAgency(eve) {
-    debugger;
     this.pageCount = 1;
     this.noPrevData = true;
     this.chkDownload = false;
     this.chkOnline = false;
     this.valByAlpha = "0"; 
     if(eve.value == 1){
+      this.onlyAgency = true;
       this.keyword = false;
       this.selAgency(this.pageCount, this.pageSize);
     }else if(eve.value == 0){
+      this.onlyAgency = false;
       this.keyword = false;
       this.selAllAgency(this.pageCount, this.pageSize);
     }else if(eve.value == 2){
+      this.onlyAgency = false;
       this.keyword = true;
       // this.datatblAgency = [''];
     }else{
+      this.onlyAgency = false;
       this.keyword = false;
       this.getDataSelByAgency(eve.value);
     }
@@ -129,7 +137,6 @@ export class OnlineserviceComponent implements OnInit {
       return this.http.get(this.config.urlPortal + dataUrl + '&language=' + this.languageId)
         .map(res => res.json())
         .subscribe(rData => {
-          debugger;
           this.sharedService.errorHandling(rData, (function () {
             this.dataPage = rData;
             if (rData['agencyApplicationList'].length > 0) {
@@ -147,10 +154,10 @@ export class OnlineserviceComponent implements OnInit {
           }).bind(this));
           this.loading = false;
         },
-          error => {
-            this.loading = false;
-            this.toastr.error(this.translate.instant('common.err.servicedown'), '');
-          });
+        error => {
+          this.loading = false;
+          this.toastr.error(this.translate.instant('common.err.servicedown'), '');
+        });
   }
 
   selByAlpha(eve) {
@@ -158,8 +165,8 @@ export class OnlineserviceComponent implements OnInit {
     this.noPrevData = true;
     this.chkDownload = false;
     this.chkOnline = false;
-    console.log(eve.value);
-    this.getDataSelByAlpha(eve.value);
+    console.log(eve.target.value);
+    this.getDataSelByAlpha(eve.target.value);
   }
 
   loadAlpha(isDocument?, keyword?, agency?){
@@ -176,8 +183,9 @@ export class OnlineserviceComponent implements OnInit {
       dataUrl = 'agency/application/search/onlineservices/alpha?language='+this.languageId;
     }
     return this.http.get(this.config.urlPortal + dataUrl)
+    .map(res => res.json())
     .subscribe(rData => {
-      debugger;
+      this.dataAlpha = rData.letters;
     })
   }
   
@@ -185,29 +193,48 @@ export class OnlineserviceComponent implements OnInit {
     let dataUrl="";
       if (val !== "0") {
         this.loading = true;
-        if(this.valByAgency !== "0"){
-          dataUrl='agency/application/search?letter=' + val +'&agencyId=' + this.valByAgency + '&page=' + this.pageCount + '&size=' + this.pageSize;
-        }else{
-          dataUrl = 'agency/application/search?letter=' + val + '&page=' + this.pageCount + '&size=' + this.pageSize ;
+        if(this.valByAgency == "1"){
+          // this.selAgency(this.pageCount, this.pageSize, undefined, val);
+          dataUrl = 'agency/agencyid/app?letter='+val+'&page='+this.pageCount+'&size='+this.pageSize;
+          // dataUrl='agency/application/search?letter=' + val +'&agencyId=' + this.valByAgency + '&page=' + this.pageCount + '&size=' + this.pageSize;
+        }else if(this.valByAgency == "0"){
+          dataUrl = 'agency/application/search/onlineservices?letter=' + val + '&page=' + this.pageCount + '&size=' + this.pageSize ;
         }
         // return this.sharedService.readPortal(dataUrl, this.pageCount, this.pageSize)
-        return this.http.get( this.config.urlPortal + dataUrl + '&language=' + this.languageId)
+        return this.http.get(this.config.urlPortal + dataUrl + '&language=' + this.languageId)
           .map(res => res.json())
           .subscribe(rData => {
             this.sharedService.errorHandling(rData, (function () {
               this.dataPage = rData;
-              if (rData['agencyApplicationList'].length > 0) {
-                this.seqPageNum = this.dataPage.pageNumber;
-                this.seqPageSize = this.dataPage.pageSize;
-                this.noNextData = this.dataPage.pageNumber === this.dataPage.totalPages;
-                this.datatblAgency = rData['agencyApplicationList'];
-                this.showNoData = false;
-              } else {
-                this.showNoData = true;
-                this.seqPageNum = this.dataPage.pageNumber;
-                this.seqPageSize = this.dataPage.pageSize;
-                this.noNextData = this.dataPage.pageNumber === this.dataPage.totalPages;
+              if(this.valByAgency == "1"){
+                this.dataAgencyPage = rData;
+                if (rData['list'].length > 0) {
+                  this.seqPageNum = this.dataAgencyPage.pageNumber;
+                  this.seqPageSize = this.dataAgencyPage.pageSize;
+                  this.noNextData = this.dataAgencyPage.pageNumber === this.dataAgencyPage.totalPages;
+                  this.datatblAgencyPage = rData['list'];
+                  this.showNoData = false;
+                } else {
+                  this.showNoData = true;
+                  this.seqPageNum = this.dataAgencyPage.pageNumber;
+                  this.seqPageSize = this.dataAgencyPage.pageSize;
+                  this.noNextData = this.dataAgencyPage.pageNumber === this.dataAgencyPage.totalPages;
+                }
+              }else{
+                if (rData['list'].length > 0) {
+                  this.seqPageNum = this.dataPage.pageNumber;
+                  this.seqPageSize = this.dataPage.pageSize;
+                  this.noNextData = this.dataPage.pageNumber === this.dataPage.totalPages;
+                  this.datatblAgency = rData['list'];
+                  this.showNoData = false;
+                } else {
+                  this.showNoData = true;
+                  this.seqPageNum = this.dataPage.pageNumber;
+                  this.seqPageSize = this.dataPage.pageSize;
+                  this.noNextData = this.dataPage.pageNumber === this.dataPage.totalPages;
+                }
               }
+             
             }).bind(this));
             this.loading = false;
           },
@@ -224,17 +251,30 @@ export class OnlineserviceComponent implements OnInit {
       }  
   }
 
-  selAllAgency(page, pagesize) {
+  selAllAgency(page, pagesize, isDocument?, keyword?, letter?) {
     this.loading = true;
-    return this.sharedService.readPortal('agency/application/all/agencyapp/os', page, pagesize)
+    let dataUrl = '';
+    if(letter && (typeof isDocument !== 'undefined')){
+      dataUrl = 'agency/application/search/onlineservices?page='+page+'&size='+pagesize+'&letter='+letter+'&document='+isDocument+'&language='+this.languageId;
+    }else if(letter){
+      dataUrl = 'agency/application/search/onlineservices?page='+page+'&size='+pagesize+'&letter='+letter+'&language='+this.languageId;
+    }else if(typeof isDocument !== 'undefined'){
+      dataUrl = 'agency/application/search/onlineservices?page='+page+'&size='+pagesize+'&document='+isDocument+'&language='+this.languageId;
+    }else{
+      dataUrl = 'agency/application/search/onlineservices?page='+page+'&size='+pagesize+'&language='+this.languageId;
+    }
+
+    // return this.sharedService.readPortal('agency/application/search/onlineservices', page, pagesize)
+    return this.http.get(this.config.urlPortal+dataUrl)
+      .map(res => res.json())
       .subscribe(rData => {
         this.sharedService.errorHandling(rData, (function () {
           this.dataPage = rData;
-          if (rData['agencyApplicationList'].length > 0) {
+          if (rData['list'].length > 0) {
             this.seqPageNum = this.dataPage.pageNumber;
             this.seqPageSize = this.dataPage.pageSize;
             this.noNextData = this.dataPage.pageNumber === this.dataPage.totalPages;
-            this.datatblAgency = rData['agencyApplicationList'];
+            this.datatblAgency = rData['list'];
             this.showNoData = false;
           } else {
             this.showNoData = true;
@@ -252,7 +292,6 @@ export class OnlineserviceComponent implements OnInit {
 
   selAgency(page, pagesize, isDocument?, letter?) {
     this.loading = true;
-    
     if(typeof isDocument !== 'undefined'){
       this.agencyUrl = 'agency/agencyid/app?document='+isDocument+'&page='+page+'&size='+pagesize+'&language='+this.languageId;
     }else if(typeof letter !== 'undefined'){
@@ -264,22 +303,22 @@ export class OnlineserviceComponent implements OnInit {
     }
 
     return this.http.get(this.config.urlPortal+this.agencyUrl)
+      .map(res => res.json())
       .subscribe(rData => {
-        debugger;
         this.sharedService.errorHandling(rData, (function () {
-          // this.dataPage = rData;
-          // if (rData['agencyApplicationList'].length > 0) {
-          //   this.seqPageNum = this.dataPage.pageNumber;
-          //   this.seqPageSize = this.dataPage.pageSize;
-          //   this.noNextData = this.dataPage.pageNumber === this.dataPage.totalPages;
-          //   this.datatblAgency = rData['agencyApplicationList'];
-          //   this.showNoData = false;
-          // } else {
-          //   this.showNoData = true;
-          //   this.seqPageNum = this.dataPage.pageNumber;
-          //   this.seqPageSize = this.dataPage.pageSize;
-          //   this.noNextData = this.dataPage.pageNumber === this.dataPage.totalPages;
-          // }
+          this.dataAgencyPage = rData;
+          if (rData['list'].length > 0) {
+            this.seqPageNum = this.dataAgencyPage.pageNumber;
+            this.seqPageSize = this.dataAgencyPage.pageSize;
+            this.noNextData = this.dataAgencyPage.pageNumber === this.dataAgencyPage.totalPages;
+            this.datatblAgencyPage = rData['list'];
+            this.showNoData = false;
+          } else {
+            this.showNoData = true;
+            this.seqPageNum = this.dataAgencyPage.pageNumber;
+            this.seqPageSize = this.dataAgencyPage.pageSize;
+            this.noNextData = this.dataAgencyPage.pageNumber === this.dataAgencyPage.totalPages;
+          }
         }).bind(this));
         this.loading = false;
       },
@@ -300,14 +339,46 @@ export class OnlineserviceComponent implements OnInit {
     this.selAllAgency(this.pageCount, this.pageSize);
   }
   chkDocument(e, val) {
+    
     this.pageCount = 1;
     this.noPrevData = true;
     if(!e.checked){
-      this.selAllAgency(this.pageCount, this.pageSize);
-      this.selAgency(this.pageCount, this.pageSize);
+      if((this.valByAlpha !== '0')){
+        this.selAllAgency(this.pageCount, this.pageSize, undefined, undefined, this.valByAlpha);
+        this.selAgency(this.pageCount, this.pageSize, undefined, this.valByAlpha);
+      }else{
+        this.selAllAgency(this.pageCount, this.pageSize);
+        this.selAgency(this.pageCount, this.pageSize);
+      }
+      
     }else{
       if(this.valByAgency == "0"){
-      
+        if((this.valByAlpha !== '0')){
+          if (val === 1) { // isDocument = false
+            this.chkDownload = false;
+            this.isDocument = false;
+            debugger;
+            this.selAllAgency(this.pageCount, this.pageSize, this.isDocument, undefined, this.valByAlpha);
+          } else if (val === 2) { // isDocument = true
+            this.chkOnline = false;
+            this.isDocument = true;
+            debugger;
+    
+            this.selAllAgency(this.pageCount, this.pageSize, this.isDocument, undefined, this.valByAlpha);
+          }
+        }else{
+          if (val === 1) { // isDocument = false
+            this.chkDownload = false;
+            this.isDocument = false;
+            this.selAllAgency(this.pageCount, this.pageSize, this.isDocument);
+          } else if (val === 2) { // isDocument = true
+            this.chkOnline = false;
+            this.isDocument = true;
+            this.selAllAgency(this.pageCount, this.pageSize, this.isDocument);
+          }
+        }
+        
+        
       }else if(this.valByAgency == "1"){
         if (val === 1) { // isDocument = false
           this.chkDownload = false;
@@ -317,8 +388,11 @@ export class OnlineserviceComponent implements OnInit {
           this.isDocument = true;
           
         }
+        
         this.selAgency(this.pageCount, this.pageSize, this.isDocument);
-      }else{
+      }else if((this.valByAgency == '0') && (this.valByAlpha !== '0')){
+          debugger;
+      } else{
         
       }
     };
@@ -334,33 +408,36 @@ export class OnlineserviceComponent implements OnInit {
     // this.valByAgency = "0";
     // let isDocument;
    
-    this.getChkDocData(this.isDocument);    
+    // this.getChkDocData(this.isDocument);    
   }
   getChkDocData(val){
     this.loading = true;
-    return this.sharedService.readPortal('agency/application/all/agencyapp/os/lang', this.pageCount, this.pageSize, val)
-      .subscribe(rData => {
-        this.sharedService.errorHandling(rData, (function () {
-          this.dataPage = rData;
-          if (rData['agencyApplicationList'].length > 0) {
-            this.seqPageNum = this.dataPage.pageNumber;
-            this.seqPageSize = this.dataPage.pageSize;
-            this.noNextData = this.dataPage.pageNumber === this.dataPage.totalPages;
-            this.datatblAgency = rData['agencyApplicationList'];
-            this.showNoData = false;
-          } else {
-            this.showNoData = true;
-            this.seqPageNum = this.dataPage.pageNumber;
-            this.seqPageSize = this.dataPage.pageSize;
-            this.noNextData = this.dataPage.pageNumber === this.dataPage.totalPages;
-          }
-        }).bind(this));
-        this.loading = false;
-      },
-        error => {
-          this.toastr.error(this.translate.instant('common.err.servicedown'), '');
-          this.loading = false;
-        });
+    if(this.valByAgency == "0"){
+      this.selAllAgency(this.pageCount, this.pageSize, val)
+    }
+    // return this.sharedService.readPortal('agency/application/all/agencyapp/os/lang', this.pageCount, this.pageSize, val)
+    //   .subscribe(rData => {
+    //     this.sharedService.errorHandling(rData, (function () {
+    //       this.dataPage = rData;
+    //       if (rData['agencyApplicationList'].length > 0) {
+    //         this.seqPageNum = this.dataPage.pageNumber;
+    //         this.seqPageSize = this.dataPage.pageSize;
+    //         this.noNextData = this.dataPage.pageNumber === this.dataPage.totalPages;
+    //         this.datatblAgency = rData['agencyApplicationList'];
+    //         this.showNoData = false;
+    //       } else {
+    //         this.showNoData = true;
+    //         this.seqPageNum = this.dataPage.pageNumber;
+    //         this.seqPageSize = this.dataPage.pageSize;
+    //         this.noNextData = this.dataPage.pageNumber === this.dataPage.totalPages;
+    //       }
+    //     }).bind(this));
+    //     this.loading = false;
+    //   },
+    //     error => {
+    //       this.toastr.error(this.translate.instant('common.err.servicedown'), '');
+    //       this.loading = false;
+    //     });
   }
 
   paginatorL(page) {
@@ -369,7 +446,7 @@ export class OnlineserviceComponent implements OnInit {
     this.pageCount = page - 1;
 
     if(this.valByAgency != "0" ){
-      this.getDataSelByAgency(this.valByAgency);
+      this.selAgency(this.pageCount, this.pageSize);
     }else if(this.valByAlpha != "0"){
       this.getDataSelByAlpha(this.valByAlpha);
     }else if(this.chkOnline || this.chkDownload){
@@ -384,9 +461,10 @@ export class OnlineserviceComponent implements OnInit {
     let pageInc: any;
     pageInc = page + 1;
     this.pageCount = pageInc;
-
+    debugger;
     if(this.valByAgency != "0" ){
-      this.getDataSelByAgency(this.valByAgency);
+      // this.getDataSelByAgency(this.valByAgency);
+      this.selAgency(pageInc, this.pageSize);
     }else if(this.valByAlpha != "0"){
       this.getDataSelByAlpha(this.valByAlpha);
     }else if(this.chkOnline || this.chkDownload){
