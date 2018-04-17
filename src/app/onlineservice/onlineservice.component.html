@@ -34,10 +34,10 @@
     <div *ngIf="keyword" class="form-group col-md-4">
         <div class="form-group">
           <label for="usr">Search by Keyword</label>
-          <input type="text" class="form-control" [(ngModel)]="valByKeyword">
+          <input type="text" class="form-control" [(ngModel)]="valByKeyword" (keyup)="searchByKeyword(valByKeyword)">
         </div>
     </div>
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-4" *ngIf="!keyword">
         <div class="form-group">
           <label for="usr">{{'onlineservices.basedonatoz' | translate}}</label>
           <select id="selbyalpha" tabindex="2" class="form-control" (change)="selByAlpha($event)" [(ngModel)]="valByAlpha">
@@ -60,6 +60,10 @@
             <button mat-raised-button color="warn" type="button" id="btnreset" class="btn btn-md btn-warning pull-right font-size-s" (click)="reset()" tabindex="5">
                 <i [ngClass]="sharedService.icon.refresh"></i>&nbsp; {{'common.buttons.reset' | translate}}</button>
         </div>
+    </div>
+    <div class="col-md-12">
+      <div class="container">Note: ( <i class="fa fa-unlink"></i> : Broken links &nbsp; &nbsp;
+      <i class="fa fa-link"></i> : Valid links &nbsp; &nbsp; <i class="fa fa-download"></i> : Downloadable links)</div>
     </div>
   </div>
   <div *ngIf="!onlyAgency">

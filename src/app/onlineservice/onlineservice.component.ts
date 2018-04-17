@@ -19,6 +19,7 @@ import { Http, Response } from '@angular/http';
   styleUrls: ['./onlineservice.component.css']
 })
 export class OnlineserviceComponent implements OnInit {
+  valByKeyword: any;
 
   dropdownOpt = [
     {
@@ -120,6 +121,12 @@ export class OnlineserviceComponent implements OnInit {
    */
 
   selByOptions(event){
+    this.valByKeyword = "";
+    this.chkDownload = false;
+    this.pageCount = 1;
+    this.pageSize = 10;
+    this.chkOnline = false;
+    this.valByAlpha = "0";
     if(event.value == 0){
       this.keyword = false;
       this.onlyAgency = false;
@@ -133,6 +140,7 @@ export class OnlineserviceComponent implements OnInit {
     }else if(event.value == 2){
       this.keyword = true;
       this.onlyAgency = false;
+      this.selAllAgency(this.pageCount, this.pageSize);
     }  
   }
 
@@ -147,14 +155,16 @@ export class OnlineserviceComponent implements OnInit {
  
 loadAlpha(onlineService?, agency?, isDocument?, keyword?){
   let dataUrl;
-  if(onlineService){
+ 
+  
+  if(agency && (typeof isDocument !== 'undefined')){
+    dataUrl = 'agency/agencyid/app/alpha?document='+isDocument+'&language='+this.languageId;
+  }else if(onlineService && (typeof isDocument !== 'undefined')){
+    dataUrl = 'agency/application/search/onlineservices/alpha?document='+isDocument+'&language='+this.languageId;
+  }else  if(onlineService){
     dataUrl = 'agency/application/search/onlineservices/alpha?language='+this.languageId;
   }else if(agency){
     dataUrl = 'agency/agencyid/app/alpha?language='+this.languageId;
-  }
-  
-  else if(agency && (typeof isDocument !== 'undefined')){
-    dataUrl = 'agency/agencyid/app/alpha?document='+isDocument+'&language='+this.languageId;
   }else if(keyword){
     dataUrl = 'agency/application/search/onlineservices/alpha?keyword='+keyword+'&language='+this.languageId;
   }else if(keyword && (typeof isDocument !== 'undefined')){
@@ -176,28 +186,46 @@ loadAlpha(onlineService?, agency?, isDocument?, keyword?){
  */
 
 chkDocument(e, val) {
-
   let agencyVal = this.valByAgency;
   let alphaVal = this.valByAlpha;
-  debugger;
+  this.pageCount = 1;
+  this.pageSize = 10;
+  if(val == 1){
+    this.chkDownload = false;
+    this.chkOnline = true;
+  }else if(val == 2){
+    this.chkDownload = true;
+    this.chkOnline = false;
+  }
+
+  if(!e.checked){
+    this.chkDownload = undefined;
+    this.chkOnline = undefined;
+  }
   if((agencyVal) && (alphaVal !== "0")){
     if(agencyVal == "0"){
       if(!e.checked){
+        this.loadAlpha(true,false);
         this.selAllAgency(this.pageCount, this.pageSize, undefined, undefined, alphaVal);
       }else{
         if(val === 1){
+          this.loadAlpha(true,false, false);
           this.selAllAgency(this.pageCount, this.pageSize, false, undefined, alphaVal);
         }else if(val === 2){
+          this.loadAlpha(true,false, true);
           this.selAllAgency(this.pageCount, this.pageSize, true, undefined, alphaVal);
         }
       }
     }else if(agencyVal == "1"){
       if(!e.checked){
+        this.loadAlpha(false, true);
         this.selAgency(this.pageCount, this.pageSize, undefined, alphaVal);
       }else{
         if(val === 1){
+          this.loadAlpha(false,true, false);
           this.selAgency(this.pageCount, this.pageSize, false, alphaVal);
         }else if(val === 2){
+          this.loadAlpha(false,true, true);
           this.selAgency(this.pageCount, this.pageSize, true, alphaVal);
         }
       }
@@ -205,11 +233,14 @@ chkDocument(e, val) {
   }else if(agencyVal == "0"){
 
     if(!e.checked){
+      this.loadAlpha(true, false);
       this.selAllAgency(this.pageCount, this.pageSize, undefined);
     }else{
       if(val === 1){
+        this.loadAlpha(true, false, false);
         this.selAllAgency(this.pageCount, this.pageSize, false);
       }else if(val === 2){
+        this.loadAlpha(true, false, true);
         this.selAllAgency(this.pageCount, this.pageSize, true);
       }
     }
@@ -217,26 +248,191 @@ chkDocument(e, val) {
   }
   else if(agencyVal == "1"){
     if(!e.checked){
+      this.loadAlpha(false, true);
       this.selAgency(this.pageCount, this.pageSize, undefined);
     }else{
       if(val === 1){
+        this.loadAlpha(false, true, false);
         this.selAgency(this.pageCount, this.pageSize, false);
       }else if(val === 2){
+        this.loadAlpha(false, true, true);
         this.selAgency(this.pageCount, this.pageSize, true);
       }
     }
   }
   else if(alphaVal !== "0"){
     if(!e.checked){
+      this.loadAlpha();
       this.selAllAgency(this.pageCount, this.pageSize, undefined, undefined, alphaVal);
     }else{
       if(val === 1){
+        this.loadAlpha();
         this.selAllAgency(this.pageCount, this.pageSize, undefined, undefined, alphaVal);
       }else if(val === 2){
+        this.loadAlpha();
         this.selAllAgency(this.pageCount, this.pageSize, undefined, undefined, alphaVal);
       }
     }
-  }
+  }else if(agencyVal == "2"){
+    if(this.valByKeyword){
+      if(!e.checked){
+        this.selAllAgency(this.pageCount, this.pageSize, undefined, this.valByKeyword);
+      }else{
+        if(val === 1){
+          this.selAllAgency(this.pageCount, this.pageSize, false, this.valByKeyword);
+        }else if(val === 2){
+          this.selAllAgency(this.pageCount, this.pageSize, true, this.valByKeyword);
+        }else{
+          this.selAllAgency(this.pageCount, this.pageSize, undefined, this.valByKeyword);
+        }
+      }
+      
+     
+    }else{
+      if(!e.checked){
+        this.selAllAgency(this.pageCount, this.pageSize);
+      }else{
+        if(val === 1){
+          this.selAllAgency(this.pageCount, this.pageSize, false);
+        }else if(val === 2){
+          this.selAllAgency(this.pageCount, this.pageSize, true);
+        }else{
+          this.selAllAgency(this.pageCount, this.pageSize);
+        }
+      }
+    }
+    
+  } 
+}
+
+
+/**
+ * 
+ * 
+ * Left and Right pagination navigation
+ */
+
+paginatorL(page) {
+  let agencyVal = this.valByAgency;
+  let alphaVal = this.valByAlpha;
+
+  this.noPrevData = page <= 2 ? true : false;
+  this.noNextData = false;
+  this.pageCount = page - 1;
+
+  if((agencyVal) && (alphaVal !== "0")){
+    if(agencyVal == "0"){
+      if(this.chkOnline){
+        this.selAllAgency(this.pageCount, this.pageSize, false, undefined, alphaVal);
+      }else if(this.chkDownload){
+        this.selAllAgency(this.pageCount, this.pageSize, true, undefined, alphaVal);
+      }else{
+        this.selAllAgency(this.pageCount, this.pageSize, undefined, undefined, alphaVal);
+      }
+    }else if(agencyVal == "1"){
+      if(this.chkOnline){
+        this.selAgency(this.pageCount, this.pageSize, false, alphaVal);
+      }else if(this.chkDownload){
+        this.selAgency(this.pageCount, this.pageSize, true, alphaVal);
+      }else{
+        this.selAgency(this.pageCount, this.pageSize, undefined, alphaVal);
+      }
+    }
+    
+  }else if(agencyVal == "0"){
+    if(this.chkOnline){
+      this.selAllAgency(this.pageCount, this.pageSize, false);
+    }else if(this.chkDownload){
+      this.selAllAgency(this.pageCount, this.pageSize, true);
+    }else{
+      this.selAllAgency(this.pageCount, this.pageSize, undefined);
+    }
+  }else if(agencyVal == "1"){
+    if(this.chkOnline){
+      this.selAgency(this.pageCount, this.pageSize, false);
+    }else if(this.chkDownload){
+      this.selAgency(this.pageCount, this.pageSize, true);
+    }else{
+      this.selAgency(this.pageCount, this.pageSize, undefined);
+    }
+  }else if(agencyVal == "2"){
+    if(this.valByKeyword){
+      if(this.chkOnline){
+        this.selAllAgency(this.pageCount, this.pageSize, false, this.valByKeyword);
+      }else if(this.chkDownload){
+        this.selAllAgency(this.pageCount, this.pageSize, true, this.valByKeyword);
+      }else{
+        this.selAllAgency(this.pageCount, this.pageSize, undefined, this.valByKeyword);
+      }
+     
+    }
+    
+  } else{
+    this.selAllAgency(page - 1, this.pageSize);
+  }  
+}
+
+paginatorR(page, totalPages) {
+  let agencyVal = this.valByAgency;
+  let alphaVal = this.valByAlpha;
+
+  this.noPrevData = page >= 1 ? false : true;
+  let pageInc: any;
+  pageInc = page + 1;
+  this.pageCount = pageInc;
+  
+
+  if((agencyVal) && (alphaVal !== "0")){
+    if(agencyVal == "0"){
+      if(this.chkOnline){
+        this.selAllAgency(pageInc, this.pageSize, false, undefined, alphaVal);
+      }else if(this.chkDownload){
+        this.selAllAgency(pageInc, this.pageSize, true, undefined, alphaVal);
+      }else{
+        this.selAllAgency(pageInc, this.pageSize, undefined, undefined, alphaVal);
+      }
+    }else if(agencyVal == "1"){
+      if(this.chkOnline){
+        this.selAgency(pageInc, this.pageSize, false, alphaVal);
+      }else if(this.chkDownload){
+        this.selAgency(pageInc, this.pageSize, true, alphaVal);
+      }else{
+        this.selAgency(pageInc, this.pageSize, undefined, alphaVal);
+      }
+    }
+    
+  }else if(agencyVal == "0"){
+    if(this.chkOnline){
+      this.selAllAgency(pageInc, this.pageSize, false);
+    }else if(this.chkDownload){
+      this.selAllAgency(pageInc, this.pageSize, true);
+    }else{
+      this.selAllAgency(pageInc, this.pageSize, undefined);
+    }
+  }else if(agencyVal == "1"){
+    if(this.chkOnline){
+      this.selAgency(pageInc, this.pageSize, false);
+    }else if(this.chkDownload){
+      this.selAgency(pageInc, this.pageSize, true);
+    }else{
+      this.selAgency(pageInc, this.pageSize, undefined);
+    }
+  }else if(agencyVal == "2"){
+    if(this.valByKeyword){
+      if(this.chkOnline){
+        this.selAllAgency(pageInc, this.pageSize, false, this.valByKeyword);
+      }else if(this.chkDownload){
+        this.selAllAgency(pageInc, this.pageSize, true, this.valByKeyword);
+      }else{
+        this.selAllAgency(pageInc, this.pageSize, undefined, this.valByKeyword);
+      }
+     
+    }
+    
+  }else{
+    this.selAllAgency(pageInc, this.pageSize);
+  }  
+ 
 }
 
 
@@ -306,11 +502,17 @@ chkDocument(e, val) {
 
   selByAlpha(eve) {
     this.pageCount = 1;
+    this.pageSize = 10;
     this.noPrevData = true;
     this.chkDownload = false;
     this.chkOnline = false;
     console.log(eve.target.value);
     this.getDataSelByAlpha(eve.target.value);
+  }
+
+
+  searchByKeyword(val){
+    this.selAllAgency(this.pageCount, this.pageSize, undefined, val);
   }
 
   
@@ -369,7 +571,7 @@ chkDocument(e, val) {
             });
       } else {
         if(this.valByAgency !== "0"){
-          this.getDataSelByAgency(this.valByAgency);
+          this.selAgency(this.pageCount, this.pageSize);
         }else{
           this.selAllAgency(this.pageCount, this.pageSize);
         }        
@@ -381,6 +583,10 @@ chkDocument(e, val) {
     let dataUrl = '';
     if(letter && (typeof isDocument !== 'undefined')){
       dataUrl = 'agency/application/search/onlineservices?page='+page+'&size='+pagesize+'&letter='+letter+'&document='+isDocument+'&language='+this.languageId;
+    }else if(keyword && (typeof isDocument !== 'undefined')){ 
+      dataUrl = 'agency/application/search/onlineservices?page='+page+'&size='+pagesize+'&keyword='+keyword+'&document='+isDocument+'&language='+this.languageId;
+    }else if(keyword){ 
+      dataUrl = 'agency/application/search/onlineservices?page='+page+'&size='+pagesize+'&keyword='+keyword+'&language='+this.languageId;
     }else if(letter){
       dataUrl = 'agency/application/search/onlineservices?page='+page+'&size='+pagesize+'&letter='+letter+'&language='+this.languageId;
     }else if(typeof isDocument !== 'undefined'){
@@ -417,12 +623,12 @@ chkDocument(e, val) {
 
   selAgency(page, pagesize, isDocument?, letter?) {
     this.loading = true;
-    if(typeof isDocument !== 'undefined'){
-      this.agencyUrl = 'agency/agencyid/app?document='+isDocument+'&page='+page+'&size='+pagesize+'&language='+this.languageId;
+    if(typeof isDocument !== 'undefined' && typeof letter !== 'undefined'){
+      this.agencyUrl = 'agency/agencyid/app?document='+isDocument+'&letter='+letter+'&page='+page+'&size='+pagesize+'&language='+this.languageId;
     }else if(typeof letter !== 'undefined'){
       this.agencyUrl = 'agency/agencyid/app?letter='+letter+'&page='+page+'&size='+pagesize+'&language='+this.languageId;
-    }else if(typeof isDocument !== 'undefined' && typeof letter !== 'undefined'){
-      this.agencyUrl = 'agency/agencyid/app?document='+isDocument+'&letter='+letter+'&page='+page+'&size='+pagesize+'&language='+this.languageId;
+    }else if(typeof isDocument !== 'undefined'){
+      this.agencyUrl = 'agency/agencyid/app?document='+isDocument+'&page='+page+'&size='+pagesize+'&language='+this.languageId;
     }else{
       this.agencyUrl = 'agency/agencyid/app?page='+page+'&size='+pagesize+'&language='+this.languageId;
     }
@@ -453,8 +659,10 @@ chkDocument(e, val) {
   }
 
   reset() {
+    this.onlyAgency = false;
     this.chkDownload = false;
     this.chkOnline = false;
+    this.keyword = false;
     this.valByAlpha = "0";
     this.valByAgency = "0";
     this.pageCount = 1;
@@ -469,64 +677,9 @@ chkDocument(e, val) {
     if(this.valByAgency == "0"){
       this.selAllAgency(this.pageCount, this.pageSize, val)
     }
-    // return this.sharedService.readPortal('agency/application/all/agencyapp/os/lang', this.pageCount, this.pageSize, val)
-    //   .subscribe(rData => {
-    //     this.sharedService.errorHandling(rData, (function () {
-    //       this.dataPage = rData;
-    //       if (rData['agencyApplicationList'].length > 0) {
-    //         this.seqPageNum = this.dataPage.pageNumber;
-    //         this.seqPageSize = this.dataPage.pageSize;
-    //         this.noNextData = this.dataPage.pageNumber === this.dataPage.totalPages;
-    //         this.datatblAgency = rData['agencyApplicationList'];
-    //         this.showNoData = false;
-    //       } else {
-    //         this.showNoData = true;
-    //         this.seqPageNum = this.dataPage.pageNumber;
-    //         this.seqPageSize = this.dataPage.pageSize;
-    //         this.noNextData = this.dataPage.pageNumber === this.dataPage.totalPages;
-    //       }
-    //     }).bind(this));
-    //     this.loading = false;
-    //   },
-    //     error => {
-    //       this.toastr.error(this.translate.instant('common.err.servicedown'), '');
-    //       this.loading = false;
-    //     });
   }
 
-  paginatorL(page) {
-    this.noPrevData = page <= 2 ? true : false;
-    this.noNextData = false;
-    this.pageCount = page - 1;
 
-    if(this.valByAgency != "0" ){
-      this.selAgency(this.pageCount, this.pageSize);
-    }else if(this.valByAlpha != "0"){
-      this.getDataSelByAlpha(this.valByAlpha);
-    }else if(this.chkOnline || this.chkDownload){
-      this.getChkDocData(this.isDocument);
-    }else{
-      this.selAllAgency(page - 1, this.pageSize);
-    }  
-  }
-
-  paginatorR(page, totalPages) {
-    this.noPrevData = page >= 1 ? false : true;
-    let pageInc: any;
-    pageInc = page + 1;
-    this.pageCount = pageInc;
-    debugger;
-    if(this.valByAgency != "0" ){
-      // this.getDataSelByAgency(this.valByAgency);
-      this.selAgency(pageInc, this.pageSize);
-    }else if(this.valByAlpha != "0"){
-      this.getDataSelByAlpha(this.valByAlpha);
-    }else if(this.chkOnline || this.chkDownload){
-      this.getChkDocData(this.isDocument);
-    }else{
-      this.selAllAgency(pageInc, this.pageSize);
-    }   
-  }
 
   pageChange(event, totalPages) {
     this.pageSize = event.value;
