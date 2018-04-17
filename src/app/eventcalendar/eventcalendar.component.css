@@ -201,3 +201,16 @@ right: 0;
     cursor: pointer;
 }
 
+.note {
+    color: #666;
+    font-weight: bold;
+    margin-right: -15%;
+}
+
+.internal {
+    text-align: center; background: #3a87ad; color: #fafafa; width: 150px; height: 20px
+}
+
+.external {
+    text-align: center; background: #0aaaaa; color: #fafafa; width: 150px; height: 20px
+}

@@ -182,7 +182,7 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
   }
 
   getEvents() {
-    this.initLoad = true;
+    this.initLoad = false;
     let sDate;
     let eDate;
     let sT;
@@ -245,15 +245,17 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
           if(item.externalData == true) {
             body.color = '#0aaaaa';
             body.image = null;
+            // alert(item.image.mediaFile)
           } else {
-            body.image = item.image.mediaFile;
+            if(item.image)
+              body.image = item.image.mediaFile;
           }
           //   body.color = '#7e9e00';
           
           this.event.push(body)
         }
         console.log(this.event)
-        this.event = [''];
+        this.event = [];
      
         
       // });
@@ -332,7 +334,7 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
           this.event.push(body)
         }
         console.log(this.event)
-        this.event = [''];
+        this.event = [];
         
       // });
     });
@@ -379,6 +381,7 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
         $('#agency').html(events.agency?events.agency:'-');
         
         if(events.image && !events.ext ) {
+          alert(events.title)
           $("#imageContainer").css('display','block');
           $("#eventImage").attr("src", mediaPath+events.image);
         } else {
@@ -403,11 +406,11 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
     $('#calendar').fullCalendar('destroy');
     $('#calendar').fullCalendar(this.options);
 
-      $('<div class="col-md-5 pull-right" style="border: 0px solid #000; text-align: right; position:absolute; top:0px; right:0px;">'
-        +'<div class="col-md-2" style="text-align: right"><label>'+this.translate.instant('calendar.view.note')+'</label>:</div>'
-        +'<div class="col-md-5" style="text-align: center; background: #3a87ad; color: #fafafa; width: 150px; height: 20px">'+this.translate.instant('calendar.view.internaldata')+'</div>'
-        +'<div class="col-md-5" style="text-align: center; background: #0aaaaa; color: #fafafa; width: 150px; height: 20px">'+this.translate.instant('calendar.view.externaldata')+'</div>'
-        +'</div>').insertAfter($('.fc-view-container'));
+      // $(''
+      //   +''+this.translate.instant('')+''
+      //   +''+this.translate.instant()+'</div>'
+      //   +''+this.translate.instant()+'</div>'
+      //   +'</div>').insertAfter($('.fc-view-container'));
     }, 1000);
 
     return this.options;
