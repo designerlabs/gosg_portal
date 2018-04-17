@@ -1,12 +1,13 @@
 import { Component, OnInit, Inject, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import * as $ from 'jquery';
-import { AppConfig } from '../config/app.config.module';
+import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 import { DialogsService } from '../dialogs/dialogs.service';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { PortalService } from '../services/portal.service';
 import { HttpClient } from '@angular/common/http';
+import { Http, Response } from '@angular/http';
 import {
   MatInputModule, MatPaginatorModule, MatProgressSpinnerModule,
   MatSortModule, MatTableModule, MatPaginator, MatSort
@@ -20,6 +21,7 @@ import * as L from 'leaflet';
   styleUrls: ['./agencydirectory.component.css']
 })
 export class AgencydirectoryComponent implements OnInit, AfterViewInit {
+  dataAlpha= [];
   keyword: string;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -85,15 +87,18 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit {
     if (keyword != "" && keyword != null && keyword.length != null && keyword.length >= 3) {
       this.ministry = '';
       this.letter = '';
+      this.loadAlpha(undefined, keyword);
       this.getSearchData(this.pageCount, 10, keyword);
     } else {
       this.recordList = null;
+      this.loadAlpha();
       this.getAgencyData(this.pageCount, 10);
     }
   }
 
   applyFilter(type, filter?) {
-    console.log(filter)
+    console.log(filter);
+    this.loadAlpha(filter);
     if(filter != 0){
       if (type == 'ministry') {
         if (filter) {
@@ -138,6 +143,7 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit {
     this.step = 0;
     this.recordList = null;
     this.getAgencyData(this.pageCount, this.pageSize);
+    this.loadAlpha();
     // this.getDefaultMap();
     this.ministry = '';
     this.letter = '';
@@ -146,12 +152,13 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit {
   }
 
   constructor(
-    private http: HttpClient,
+    private http: Http,
     private portalservice: PortalService,
     private dialogsService: DialogsService,
     private translate: TranslateService,
     private router: Router,
-    private toastr: ToastrService) {
+    private toastr: ToastrService,
+    @Inject(APP_CONFIG) private config: AppConfig) {
 
     translate.onLangChange.subscribe((event: LangChangeEvent) => {
       const myLang = translate.currentLang;
@@ -197,11 +204,32 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     
     this.getDefaultMap();
-
+    this.loadAlpha();
     // this.getMinistry();
     // this.getAllAgenciesMarkers()
   }
 
+  
+  loadAlpha(ministryCode?, keyword?){
+    let dataUrl;
+   
+    
+    if(keyword && (typeof ministryCode !== 'undefined')){
+      dataUrl = 'agency/search/alpha?keyword='+keyword+'&ministryRefCode='+ministryCode+'&language='+this.languageId;
+    }else if(typeof ministryCode !== 'undefined'){
+      dataUrl = 'agency/search/alpha?ministryRefCode='+ministryCode+'&language='+this.languageId;
+    }else  if(keyword){
+      dataUrl = 'agency/search/alpha?keyword='+keyword+'&language='+this.languageId;
+    }else{
+      dataUrl = 'agency/search/alpha?language='+this.languageId;
+    }
+    return this.http.get(this.config.urlPortal + dataUrl)
+    .map(res => res.json())
+    .subscribe(rData => {
+      this.dataAlpha = rData.letters;
+    })
+  }
+  
   getDefaultMap(){
     this.mymap = L.map('dirmap').setView([5.8142568, 108.5806004], 5.2);
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
