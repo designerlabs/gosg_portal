@@ -381,7 +381,7 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
         $('#agency').html(events.agency?events.agency:'-');
         
         if(events.image && !events.ext ) {
-          alert(events.title)
+          // alert(events.title)
           $("#imageContainer").css('display','block');
           $("#eventImage").attr("src", mediaPath+events.image);
         } else {
