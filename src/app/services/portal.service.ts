@@ -220,7 +220,11 @@ export class PortalService {
     if(!keyword && page) {
       // console.log(1);
       readUrl = this.config.urlPortal + moduleName + '?page=' + page + '&size=' + size  + '&language='+this.langId;
-    } else if(keyword) {
+    }else if(keyword && custom) {
+      console.log('custom and keyword');
+      readUrl = this.config.urlPortal + moduleName + '?keyword='+keyword+'&page=' + page + '&size=' + size  + '&language='+this.langId+'&'+custom;
+    } 
+    else if(keyword) {
       // console.log(2);
       readUrl = this.config.urlPortal + moduleName + '?keyword='+keyword+'&page=' + page + '&size=' + size  + '&language='+this.langId;
     } else if(custom) {

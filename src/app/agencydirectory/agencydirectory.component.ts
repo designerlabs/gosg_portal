@@ -97,8 +97,12 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit {
   }
 
   applyFilter(type, filter?) {
+    debugger;
+    if(type != 'letter'){
+      this.loadAlpha(filter);
+    }
     console.log(filter);
-    this.loadAlpha(filter);
+   
     if(filter != 0){
       if (type == 'ministry') {
         if (filter) {
@@ -112,6 +116,9 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit {
           this.keyword = '';
         }
       } else if (type == 'letter') {
+
+        
+
         if (filter) {
           this.letter = filter;
           this.pageCount = 1;
@@ -122,7 +129,11 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit {
         }
       }
 
-      this.getSearchData(this.pageCount, this.pageSize, null, filter != 0 ? filter : '');
+      if(this.keyword && filter){
+        this.getSearchData(this.pageCount, this.pageSize, this.keyword, filter);
+      }else{
+        this.getSearchData(this.pageCount, this.pageSize, null, filter != 0 ? filter : '');
+      }
     }else{
       if(this.ministry){
         this.keyword = '';
@@ -212,8 +223,6 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit {
   
   loadAlpha(ministryCode?, keyword?){
     let dataUrl;
-   
-    
     if(keyword && (typeof ministryCode !== 'undefined')){
       dataUrl = 'agency/search/alpha?keyword='+keyword+'&ministryRefCode='+ministryCode+'&language='+this.languageId;
     }else if(typeof ministryCode !== 'undefined'){
@@ -437,11 +446,12 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit {
     console.log('search')
 
     if (keyword != "" && keyword != null && keyword.length != null && keyword.length >= 3) {
-
+      
       this.portalservice.readPortal('agency/language/' + this.languageId, count, size, keyword).subscribe(
         data => {
           this.portalservice.errorHandling(data, (function () {
             this.recordList = data;
+            debugger;
             // console.log(this.recordList)
 
             if (this.recordList.agencyList.length > 0) {
