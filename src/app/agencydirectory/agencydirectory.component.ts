@@ -97,7 +97,6 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit {
   }
 
   applyFilter(type, filter?) {
-    debugger;
     if(type != 'letter'){
       this.loadAlpha(filter);
     }
@@ -451,7 +450,6 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit {
         data => {
           this.portalservice.errorHandling(data, (function () {
             this.recordList = data;
-            debugger;
             // console.log(this.recordList)
 
             if (this.recordList.agencyList.length > 0) {
