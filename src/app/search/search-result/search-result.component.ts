@@ -12,8 +12,13 @@ import { Subject } from 'rxjs/Subject';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Http, Response } from '@angular/http';
 import { SearchService } from '../../search/search.service';
+// import * as moment_ from 'moment';
+import * as moment from 'moment';
+// const moment:moment.MomentStatic = (<any>moment_)['default'] || moment_;
 // import { SharedModule } from '../../shared/shared.module';
 // import { MatTabsModule } from '@angular/material/tabs';
+declare var jquery:any;
+declare var $ :any;
 
 @Component({
   selector: 'app-search-result',
@@ -24,7 +29,7 @@ export class SearchResultComponent implements OnInit {
   lang = this.lang;
   languageId = this.languageId;
   public loading = false;
-
+  date: moment.Moment;
   dataEach = '';
   panelOpenState: boolean = false;
   selKey = "yes";
@@ -38,16 +43,16 @@ export class SearchResultComponent implements OnInit {
   ddauthor: any[];
   ddtopics: any[];
   ddmonthPub: any[];
-  arymonth: any[];
+  // arymonth: any[];
   ddsubTopics: any[];
   ddministry: any[];
   ddagency: any[];
-  valMonPub="";
-  valAuthor="";
-  valTopic="";
-  valSubTopic="";
-  valMinistry="";
-
+  valMonPub: any[];
+  valAuthor:any[];
+  valTopic:any[];
+  valSubTopic:any[];
+  valMinistry:any[];
+  valAgency:any[];
   selMonPubDisp="";
   selAuthDisp="";
   selTopicDisp="";
@@ -56,6 +61,7 @@ export class SearchResultComponent implements OnInit {
   selAgencyDisp="";
   ser_word = "";
   chkKeyValue = "1";
+  inpExcWord = '';
   chktopic = true;
   chksubtopic = true;
   chktitle= true;
@@ -64,6 +70,7 @@ export class SearchResultComponent implements OnInit {
   chkosagency = true;
   chkostitle = true;
   chkosdes = true;
+  chkGlobValue = '';
 
 // Paggination
   totalElements=0; noPrevData = true; noNextData = false; pagefrom = 0;pageNumber = 1; totalPages = 0; pagesize = 10;
@@ -77,7 +84,8 @@ export class SearchResultComponent implements OnInit {
     private toastr: ToastrService,
     private http: Http,
     @Inject(APP_CONFIG) private config: AppConfig,
-    private serchService: SearchService
+    private serchService: SearchService,
+    // private moment : Moment
   ) {
     this.lang = translate.currentLang;
     this.languageId = 2;
@@ -131,6 +139,8 @@ export class SearchResultComponent implements OnInit {
     { id: 24, nameEn: 'Sub Topics', nameMs: 'Sub Topik'  }
   ];
 
+  dataGlobe = ['gov.my','edu.my','org.my','.my']
+
   locResFields = [
     "category_name",
     "topic_name",
@@ -144,7 +154,7 @@ export class SearchResultComponent implements OnInit {
     "article_text_clean",
     "article_text_en_clean"
   ];
-
+  
   locFields = [
     "article_text_clean",
     "article_text_en_clean",
@@ -238,7 +248,7 @@ export class SearchResultComponent implements OnInit {
   ];
 
   finalResFields = this.locResFields;
-  finalFields = this.locFields;
+  // finalFields = this.locFields;
   finalAggregations= this.locAggregations;  
 
   public obj = {
@@ -247,10 +257,11 @@ export class SearchResultComponent implements OnInit {
     "responseFields": this.finalResFields,
     "keyword": "",
     "keywordMap": {
-      "exact": [
-        ""
-      ],
-      "fields": this.finalFields,
+      "exact": [""],
+      "fields": this.locFields.slice(),
+      "not": [""],
+      // "all": [""],
+      // "any": [""]
     },
     "aggregations": this.finalAggregations,
     "filters": {
@@ -259,24 +270,117 @@ export class SearchResultComponent implements OnInit {
 
   ngOnInit() {
     // this.searchByKeyword('malaysia');
-    let q_word = this.router.url.split('=')[1];
-    if(q_word){
-      this.searchByKeyword(q_word);
-    }else {
-      // this.toastr.error("Please enter a word to search");
-    }  
+    // let q_word = this.router.url.split('=')[1];
+    // if(q_word){
+    //   this.searchByKeyword(q_word);
+    // }else {
+    //   // this.toastr.error("Please enter a word to search");
+    // }  
+    // localStorage.setItem('ser_word', this.ser_word);
+    this.date = moment();
+
+    this.ser_word = localStorage.getItem('ser_word');
+    if(this.ser_word.length > 0){      
+      this.searchByKeyword(this.ser_word);
+    }
   }
 
   btnSubmit(){
+    this.searchByKeyword(this.ser_word);
+  }
+
+  addFilterAry(ary, resObjen, resObjms){
+    if(ary.length > 0){
+      let res = [];
+      ary.forEach(ele =>{
+        if(ele.name){
+          res.push(ele.name);
+        }else{
+          res.push(ele);
+        }      
+      });
+      if(this.languageId === 1){          
+        this.obj.filters[resObjen] = res;
+      }else if(this.languageId === 2){          
+        this.obj.filters[resObjms] = res;
+      }  
+    }
+  }
+
+  addKeySettings(keyVal){
+    let key_ary : any;
+    key_ary = this.obj.keywordMap;
+    let inxall = $.inArray('all', Object.keys(key_ary));
+    let inxany = $.inArray('any', Object.keys(key_ary));
+    let inxexact = $.inArray('exact', Object.keys(key_ary));
+
+    if(keyVal === "1"){         // exact
+      if(inxall >= 0){
+        delete key_ary.all;
+      }
+      if(inxany >= 0){
+        delete key_ary.any;
+      }
+      if(inxexact < 0){
+        let ele = {'exact': []};
+        ele.exact = [this.ser_word];
+        jQuery.extend(key_ary, ele);
+      }else{
+        key_ary.exact = [this.ser_word];
+      }      
+      key_ary.not = [this.inpExcWord]; 
+    }else if(keyVal === "2"){     //all
+      if(inxexact >= 0){
+        delete key_ary.exact;
+      }
+      if(inxany >= 0){
+        delete key_ary.any;
+      }
+      if(inxall < 0){
+        let ele = {'all': []};
+        ele.all = [this.ser_word];
+        jQuery.extend(key_ary, ele);
+      }else{
+        key_ary.all = [this.ser_word];
+      }
+      key_ary.not = [this.inpExcWord];
+    }else if(keyVal === "3"){     //any
+      if(inxexact >= 0){
+        delete key_ary.exact;
+      }
+      if(inxall >= 0){
+        delete key_ary.all;
+      }
+      if(inxany < 0){
+        let ele = {'any': []};
+        ele.any = [this.ser_word];
+        jQuery.extend(key_ary, ele);
+      }else{
+        key_ary.any = [this.ser_word];
+      }
+      key_ary.not = [this.inpExcWord];
+    }
 
   }
 
-  ngAfterViewInit() {
-    // debugger;
-    // this.highlight_words('Malaysia','#intSearch');
+  addSpecFiltr(methodNm, msField, enField){
+    let res_ary = this.obj.keywordMap.fields;
+    let inx_ms; let inx_en;
+
+    inx_ms = jQuery.inArray(msField, res_ary);      
+    if(methodNm === 'add' && inx_ms < 0){
+      res_ary.push(msField);
+      res_ary.push(enField);
+    }else if(methodNm === 'remove' && inx_ms >= 0){
+      res_ary.splice(inx_ms,1);
+      inx_en = jQuery.inArray(enField, res_ary);
+      res_ary.splice(inx_en,1);
+    }
   }
+  
   chkmonpub(eve) {
     this.selMonPubDisp = eve.source.triggerValue.split(',')[0];
+    // let d = moment.
   }
   chkauth(eve) {
     this.selAuthDisp = eve.source.triggerValue.split(',')[0];
@@ -312,6 +416,7 @@ export class SearchResultComponent implements OnInit {
   
 
   changeTab(e){
+    
     let tabInx = e.index;
     this.tabIndex = e.index;
     let k_word='';
@@ -320,50 +425,198 @@ export class SearchResultComponent implements OnInit {
     }else {
       k_word = this.router.url.split('=')[1];
     }
+    this.inpExcWord = '';
     if (tabInx === 0){
       //In Local tab      
+      this.chktopic = true;
+      this.chksubtopic = true;
+      this.chktitle= true;
+      this.chkdes = true;     
+      this.obj.keywordMap.fields = this.locFields.slice();
+      this.resetPage();
+      this.searchByKeyword(k_word);
     }else if (tabInx === 1){
       //In Online Service tab
+      this.chkosminis = true;
+      this.chkosagency = true;
+      this.chkostitle = true;
+      this.chkosdes = true;
+      this.obj.keywordMap.fields = this.osFields.slice();
+      this.resetPage();
+      this.searchByKeyword(k_word);
     }else if(tabInx === 2){
       //In Global tab
     }
-    this.resetPage();
-    this.searchByKeyword(k_word);
+    
   }
 
   searchByKeyword(valkeyword) {
+    if(localStorage.getItem('ser_word').length === 0){
+      localStorage.setItem('ser_word',valkeyword);
+    }
     if(valkeyword.trim().length > 0){
       this.loading = true;
       this.obj.keyword = valkeyword;
-      this.obj.keywordMap.exact = [valkeyword];
+      if(this.inpExcWord.length === 0){
+        this.obj.keywordMap.exact = [valkeyword];
+      }
+      
       this.obj.from = this.pagefrom;
       this.obj.size = this.pagesize;
       let dataUrl = '';
       if(this.tabIndex === 0){
-        this.obj.responseFields = this.locResFields;
-        this.obj.keywordMap.fields = this.locFields;
-        this.obj.aggregations = this.locAggregations; 
+        this.obj.responseFields = this.locResFields.slice();
+        // this.obj.keywordMap.fields = this.locFields;
+        this.obj.aggregations = this.locAggregations.slice(); 
+        this.obj.filters = {};
         dataUrl = 'https://www.malaysia.gov.my/public/query/0/internal'; 
-      }else if(this.tabIndex === 1){
-        this.obj.responseFields = this.osResFields
-        this.obj.keywordMap.fields = this.osFields
-        this.obj.aggregations = this.osAggregations
-        dataUrl = 'https://www.malaysia.gov.my/public/query/5/';
+
+        // Search Specification
+        if(this.chktopic){       
+          this.addSpecFiltr('add','category_name', 'category_name_en');
+        }else {
+            this.addSpecFiltr('remove', 'category_name', 'category_name_en');
+        }
+
+        if(this.chksubtopic){
+          this.addSpecFiltr('add','topic_name', 'topic_name_en');
+        }else {
+          this.addSpecFiltr('remove', 'topic_name', 'topic_name_en');
+        }
+
+        if(this.chktitle){
+          this.addSpecFiltr('add','article_name', 'article_name_en');
+        }else {
+          this.addSpecFiltr('remove', 'article_name', 'article_name_en');
+        }
+
+        if(this.chkdes){
+          this.addSpecFiltr('add','article_text_clean', 'article_text_en_clean');
+        }else {
+          this.addSpecFiltr('remove', 'article_text_clean', 'article_text_en_clean');
+        }
+
+        // Filter - Month Filter
+      if(this.valMonPub){
+        if(this.valMonPub.length > 0){        
+          let article_insert_date = [];        
+          let selmon = this.valMonPub;        
+          selmon.forEach(ele => {
+            let mFrom = moment(ele).format('YYYY-MM-DD');
+            let addDays = moment(ele).add(30, 'days'); 
+            let mTo = moment(addDays.toDate()).format('YYYY-MM-DD');      
+            let objloc = {
+              'gte': mFrom,
+              'lte': mTo
+            }     
+            article_insert_date.push(objloc);
+          });
+          if($.inArray('ranges',Object.keys(this.obj.filters)) >= 0){
+            // If the range filter exist already
+            this.obj.filters["ranges"]["article_insert_date"] = article_insert_date;
+          }else {
+            let range = {
+              'ranges':{
+                'article_insert_date':[]
+              }
+            }  
+            range.ranges.article_insert_date = article_insert_date;
+            jQuery.extend(this.obj.filters, range);
+          }
+        }
       }
-      // debugger;
-      // let dataUrl = 'https://www.malaysia.gov.my/public/query/0/internal';
-      // https://www.malaysia.gov.my/public/query/5/ --------- for Online services
+        //Author Filter
+      if(this.valAuthor){       
+        this.addFilterAry(this.valAuthor, 'author_name', 'author_name');
+      }  
+      // Topics Filter
+      if(this.valTopic){
+        this.addFilterAry(this.valTopic, 'category_name_en', 'category_name');        
+      }
+
+      // Sub Topics Filter
+      if(this.valSubTopic){
+        this.addFilterAry(this.valSubTopic, 'topic_name_en', 'topic_name');        
+      }
+
+
+      }else if(this.tabIndex === 1){
+        this.obj.responseFields = this.osResFields.slice();
+        // this.obj.keywordMap.fields = this.osFields;
+        this.obj.aggregations = this.osAggregations.slice();
+        this.obj.filters = {};
+        dataUrl = 'https://www.malaysia.gov.my/public/query/5/';
+
+        if(this.chkosminis){
+          this.addSpecFiltr('add','ministry_name', 'ministry_name_en');
+        }else {
+          this.addSpecFiltr('remove', 'ministry_name', 'ministry_name_en');
+        }
+  
+        if(this.chkosagency){
+          this.addSpecFiltr('add','agency_name', 'agency_name_en');
+        }else {
+          this.addSpecFiltr('remove', 'agency_name', 'agency_name_en');
+        }
+        if(this.chkostitle){
+          this.addSpecFiltr('add','title_ms', 'title_en');
+        }else {
+          this.addSpecFiltr('remove', 'title_ms', 'title_en');
+        }
+        if(this.chkosdes){
+          this.addSpecFiltr('add','desc_ms', 'desc_en');
+        }else {
+          this.addSpecFiltr('remove', 'desc_ms', 'desc_en');
+        }
+  
+        // Ministry Filter
+        if(this.valMinistry){
+          this.addFilterAry(this.valMinistry, 'ministry_name_en', 'ministry_name');
+        }
+        // Agency Filter
+        if(this.valAgency){
+          this.addFilterAry(this.valAgency, 'agency_name_en', 'agency_name');
+        }
+      }
+      // Local tab or Online services tab
+    if(this.tabIndex === 0 || this.tabIndex === 1){ 
+      if(this.inpExcWord.length > 0){     
+        this.addKeySettings(this.chkKeyValue);      
+      }
+    }
       
-      this.arymonth = [];
+      // this.arymonth = [];
       return this.http.post(dataUrl, this.obj)
         .map(res => res.json())
         .subscribe(rData => {
           console.log(rData);
           this.intData = rData.data;
           //   this.aggrData = rData.aggregations;
-          if(rData.data.length>0){
-            if(this.tabIndex==0){
-              this.ddauthor = this.changeAryVal(rData.aggregations.author_name);this.ddmonthPub = this.changeAryVal(rData.aggregations.histogram);if (this.languageId === 1) {
+          this.selMonPubDisp = '';
+          this.selAuthDisp = '';
+          this.selTopicDisp = '';
+          this.selSubTopicDisp = '';
+          this.selMinisDisp = '';
+          this.selAgencyDisp = '';
+          this.ddauthor = [];
+          this.ddtopics = [];
+          this.ddmonthPub = [];
+          // this.arymonth = [];
+          this.ddsubTopics = [];
+          this.ddministry = [];
+          this.ddagency = [];
+
+          this.valMonPub = [];
+          this.valAuthor = [];
+          this.valTopic = [];
+          this.valSubTopic = [];
+          this.valMinistry = [];
+          this.valAgency = [];
+          if(rData.data.length>0){            
+            if(this.tabIndex==0){              
+              this.ddauthor = this.changeAryVal(rData.aggregations.author_name);
+              this.ddmonthPub = this.changeAryVal(rData.aggregations.histogram);
+              if (this.languageId === 1) {
                 this.ddtopics = this.changeAryVal(rData.aggregations.category_name_en);
                 this.ddsubTopics = this.changeAryVal(rData.aggregations.topic_name_en);
               } else if (this.languageId === 2){
@@ -394,7 +647,12 @@ export class SearchResultComponent implements OnInit {
            }else{
             this.totalPages = num;
            }
-           this.noNextData = this.pageNumber === this.totalPages;
+           if(this.totalPages > 0){
+            this.noNextData = this.pageNumber === this.totalPages;
+           }else{
+            this.noNextData = true;
+           }
+           
            this.millisec = rData.stats.tookMillis;
            
           //   this.serchService.searchResData = rData.data;
@@ -410,7 +668,12 @@ export class SearchResultComponent implements OnInit {
     
   }
 
+  changeGlob(eve, val){
+
+  }
+
   chkKeyword(eve, id) {
+    this.inpExcWord = '';
     // this.toastr.success(id);
   }
 
@@ -450,5 +713,26 @@ export class SearchResultComponent implements OnInit {
     this.noNextData = false;
     this.noPrevData = true;
     this.pagesize = 10;
+  }
+
+  btnFilterReset(){
+    this.inpExcWord = '';
+    this.chktopic = true;
+    this.chksubtopic = true;
+    this.chktitle= true;
+    this.chkdes = true;
+    this.chkosminis = true;
+    this.chkosagency = true;
+    this.chkostitle = true;
+    this.chkosdes = true;
+
+    this.valMonPub = [];
+    this.valAuthor = [];
+    this.valTopic = [];
+    this.valSubTopic = [];
+
+    this.valMinistry = [];
+    this.valAgency = [];
+    this.searchByKeyword(this.ser_word);
   }
 }
