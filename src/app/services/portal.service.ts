@@ -169,6 +169,15 @@ export class PortalService {
     .catch(this.handleError);
   }
 
+  getCalendarEventsByAgencyID(id){
+
+    // console.log(this.calendarUrl+ '?agencyId='+id+'&language='+this.langId)
+    return this.http.get(this.calendarUrl + '?agencyId='+id+'&language='+this.langId)
+    .map((response: Response) => response.json())
+    .retry(5)
+    .catch(this.handleError);
+  }
+
   // END CALENDAR
 
   // AGENCIES DIRECTORY
@@ -211,7 +220,11 @@ export class PortalService {
     if(!keyword && page) {
       // console.log(1);
       readUrl = this.config.urlPortal + moduleName + '?page=' + page + '&size=' + size  + '&language='+this.langId;
-    } else if(keyword) {
+    }else if(keyword && custom) {
+      console.log('custom and keyword');
+      readUrl = this.config.urlPortal + moduleName + '?keyword='+keyword+'&page=' + page + '&size=' + size  + '&language='+this.langId+'&'+custom;
+    } 
+    else if(keyword) {
       // console.log(2);
       readUrl = this.config.urlPortal + moduleName + '?keyword='+keyword+'&page=' + page + '&size=' + size  + '&language='+this.langId;
     } else if(custom) {
