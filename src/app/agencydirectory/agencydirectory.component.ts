@@ -225,7 +225,12 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit {
     if(keyword && (typeof ministryCode !== 'undefined')){
       dataUrl = 'agency/search/alpha?keyword='+keyword+'&ministryRefCode='+ministryCode+'&language='+this.languageId;
     }else if(typeof ministryCode !== 'undefined'){
-      dataUrl = 'agency/search/alpha?ministryRefCode='+ministryCode+'&language='+this.languageId;
+      if(ministryCode){
+        dataUrl = 'agency/search/alpha?ministryRefCode='+ministryCode+'&language='+this.languageId;
+      }else{
+        dataUrl = 'agency/search/alpha?language='+this.languageId;
+      }
+      
     }else  if(keyword){
       dataUrl = 'agency/search/alpha?keyword='+keyword+'&language='+this.languageId;
     }else{
