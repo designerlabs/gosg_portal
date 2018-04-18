@@ -166,13 +166,13 @@
                         <mat-select (change)="getCitiesByState($event)" formControlName="perStateLocal" placeholder="{{'profile.label.state' | translate}}" [required]="!!isLocal">
                           <mat-option *ngFor="let state of getStateData" [value]="state?.stateId">{{ state?.stateName }}</mat-option>
                         </mat-select>
-                        <mat-error *ngIf="!validateCtrlChk(perStateLocal) && profileForm.controls.perStateLocal.errors.required">
+                        <mat-error *ngIf="!!isLocal && !validateCtrlChk(perStateLocal) && profileForm.controls.perStateLocal.errors.required">
                           {{'profile.err.state' | translate }}
                         </mat-error>
                       </mat-form-field>
                       <mat-form-field *ngIf="!isLocal" class="example-full-width font-size-s">
                         <input (keyup)="isChanged()" matInput formControlName="perStateNotLocal" type="text" placeholder="{{'profile.label.state' | translate}}" [required]="!!!isLocal" />
-                        <mat-error *ngIf="!validateCtrlChk(perStateNotLocal) && profileForm.controls.perStateNotLocal.errors.required">
+                        <mat-error *ngIf="!!!isLocal && !validateCtrlChk(perStateNotLocal) && profileForm.controls.perStateNotLocal.errors.required">
                             {{'profile.err.state' | translate }}
                         </mat-error>
                       </mat-form-field>
