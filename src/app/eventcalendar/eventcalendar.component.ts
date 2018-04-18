@@ -327,7 +327,8 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
             body.color = '#0aaaaa';
             body.image = null;
           } else {
-            body.image = item.image.mediaFile;
+            if(item.image)
+              body.image = item.image.mediaFile;
           }
           //   body.color = '#7e9e00';
           
@@ -381,7 +382,7 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
         $('#agency').html(events.agency?events.agency:'-');
         
         if(events.image && !events.ext ) {
-          alert(events.title)
+          // alert(events.title)
           $("#imageContainer").css('display','block');
           $("#eventImage").attr("src", mediaPath+events.image);
         } else {
