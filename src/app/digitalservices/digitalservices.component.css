@@ -1,0 +1,38 @@
+.dserviceList > ul li.a {
+    display: inline-block;
+    vertical-align: top;
+    margin-bottom: 5%;
+    /* width: 45%!important; */
+    width: 100%!important;
+    border-top: #00bdbb 2px solid;
+    margin-right: 20px!important;
+    margin-left: -5%;
+}
+
+.dserviceList h4 {
+    font-weight: bold;
+}
+
+.dserviceList > ul > li > ul > li > a, .dserviceList > ul > li > ul > li > a:visited {
+    color: #666;
+    text-decoration: none;
+}
+
+.dserviceList > ul > li > ul > li > a:hover {
+    color: #666;
+    text-decoration: underline;
+}
+
+.ds-style {
+    color: #666;
+}
+
+.textCenter {
+    text-align: center
+}
+
+.no-styles {
+    text-decoration: none;
+    list-style: none;
+    margin-left: -5%;
+}
