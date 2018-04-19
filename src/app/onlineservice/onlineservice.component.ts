@@ -121,6 +121,7 @@ export class OnlineserviceComponent implements OnInit {
    */
 
   selByOptions(event){
+    this.sharedService.defaultPageSize = this.sharedService.pageSize[0].size;
     this.valByKeyword = "";
     this.chkDownload = false;
     this.pageCount = 1;
@@ -188,6 +189,7 @@ loadAlpha(onlineService?, agency?, isDocument?, keyword?){
 chkDocument(e, val) {
   let agencyVal = this.valByAgency;
   let alphaVal = this.valByAlpha;
+  this.sharedService.defaultPageSize = this.sharedService.pageSize[0].size;
   this.pageCount = 1;
   this.pageSize = 10;
   if(val == 1){
@@ -571,6 +573,7 @@ paginatorR(page, totalPages) {
     this.noPrevData = true;
     this.chkDownload = false;
     this.chkOnline = false;
+    this.sharedService.defaultPageSize = this.sharedService.pageSize[0].size;
     console.log(eve.target.value);
     this.getDataSelByAlpha(eve.target.value);
   }
