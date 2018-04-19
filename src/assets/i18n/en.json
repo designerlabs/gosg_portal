@@ -431,7 +431,7 @@
      "btnonlineservice" : "Online Service",
      "btndownload": "Download",
      "agencyappname": "Agency Application Name",
-     "basedonagency": "Application based on Agency",
-     "basedonatoz" : "Application based on A-Z"
+     "basedonagency": "Search Application",
+     "basedonatoz" : "Search by A-Z"
   }
 }

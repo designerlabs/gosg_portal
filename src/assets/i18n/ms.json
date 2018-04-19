@@ -431,7 +431,7 @@
     "btnonlineservice" : "Perkhidmatan Dalam Talian",
     "btndownload": "Borang Muat Turun",
     "agencyappname": "Nama Permohonan Agensi",
-    "basedonagency": "Permohonan berdasarkan Agensi",
-    "basedonatoz" : "Permohonan berdasarkan A-Z"
+    "basedonagency": "Carian Permohonan",
+    "basedonatoz" : "Carian berdasarkan A-Z"
   }
 }
