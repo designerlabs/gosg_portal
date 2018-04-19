@@ -74,6 +74,8 @@ export class AppConfig {
     urlPortal:string;
     urlProtected: string;
     urlSubscription: string;
+    urlDigitalServices: string;
+    urlDigitalServicesDetails: string;
 }
 
 export const APP_DI_CONFIG: AppConfig = {
@@ -131,7 +133,8 @@ export const APP_DI_CONFIG: AppConfig = {
     urlPollProtected: protectedBaseURL + 'polls',
     externalMediaURL: mediaURL+"media",
     urlSubscription: registrationUrl + 'subscription',
-
+    urlDigitalServices: commonURL + 'digitalservice',
+    urlDigitalServicesDetails: commonURL + 'digitalservice/details',
 };
 
 @NgModule({

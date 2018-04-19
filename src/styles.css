@@ -422,3 +422,7 @@ a.appUrl:hover, a.appUrl:focus {
 span.highlightWord {
   font-weight: bold !important;
 }
+
+.border-on {
+  border: 1px solid #000;
+}

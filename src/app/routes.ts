@@ -42,6 +42,7 @@ import { AgencydirectoryComponent } from './agencydirectory/agencydirectory.comp
 import { SubscriptionComponent } from './subscription/subscription.component';
 import { UnsubscribeComponent } from './unsubscribe/unsubscribe.component';
 import { SetactiveComponent } from './subscription/setactive/setactive.component';
+import { DigitalservicesComponent } from './digitalservices/digitalservices.component';
 
 export const appRoutes: Routes = [
    
@@ -49,6 +50,7 @@ export const appRoutes: Routes = [
     {path: 'index', component: HomeComponent},
     {path: 'agencydir', component: AgencydirectoryComponent},
     {path: 'calendar', component: EventCalendarComponent},
+    {path: 'digitalservices', component: DigitalservicesComponent},
     {path: 'search/searchResult', component: SearchResultComponent},
     {path: 'topic/:id', component: ArticleComponent, canActivate: [NavRouterActivator]  },
     {path: 'announcement', component: AnnouncementComponent },

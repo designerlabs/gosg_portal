@@ -60,6 +60,8 @@ export class PortalService {
   private pollUrl: string = this.config.urlPoll;
   private calendarUrl: string = this.config.urlEvents;
   private agencyUrl: string = this.config.urlAgency;
+  private digitalServicesUrl: string = this.config.urlDigitalServices;
+  private digitalServicesDetailsUrl: string = this.config.urlDigitalServicesDetails;
 
   private portalUrl: string = this.config.urlPortal;
   private protected: string = this.config.urlProtected;
@@ -149,8 +151,16 @@ export class PortalService {
     .catch(this.handleError);
   }
 
-  // CALENDAR
+  // DIGITAL SERVICES
+  getDigitalServices() {
+    // console.log(this.calendarUrl+ '?language='+localStorage.getItem('langID'))
+    return this.http.get(this.digitalServicesDetailsUrl + '?language='+this.langId)
+    .map((response: Response) => response.json())
+    .retry(5)
+    .catch(this.handleError);
+  }
 
+  // CALENDAR
   getCalendarEvents(){
 
     // console.log(this.calendarUrl+ '?language='+localStorage.getItem('langID'))

@@ -5,6 +5,7 @@
       "home": "Laman Utama",
       "calendar": "Kalendar",
       "agencycdir": "Direktori Agensi",
+      "digitalsvc": "Perkhidmatan Digital",
       "register": "Daftar",
       "setting": "Tetapan",
       "contact": "Hubungi Kami",
@@ -236,6 +237,17 @@
     "label": {
       "agencyName":"Nama Agensi",
       "total":"Jumlah Capaian"
+    }
+  },
+  "digitalservices": {
+    "title":"Perkhidmatan Digital",
+    "label": {
+      "agencyName":"Nama Agensi",
+      "total":"Jumlah Capaian"
+    },
+    "msg": {  
+      "login": "Sila Log Masuk / Daftar Untuk Mengakses PERKHIDMATAN Yang Disediakan",
+      "instruction": "Perkhidmatan yang ditawarkan oleh Gerbang MyGovernment perlu menggunakan nombor kad pengenalan bagi warganegara Malaysia"
     }
   },
   "calendar": {

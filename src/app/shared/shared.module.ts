@@ -129,6 +129,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { UnsubscribeComponent } from '../unsubscribe/unsubscribe.component';
 import { SetactiveComponent } from '../subscription/setactive/setactive.component';
+import { DigitalservicesComponent } from '../digitalservices/digitalservices.component';
 // import { SearchResultComponent } from '../search/search-result/search-result.component';
 export function HttpLoaderFactory(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -208,7 +209,8 @@ export function HttpLoaderFactory(http: Http) {
     AgencydirectoryComponent,
     SubscriptionComponent,
     UnsubscribeComponent,
-    SetactiveComponent
+    SetactiveComponent,
+    DigitalservicesComponent
     // SearchResultComponent
   ],
 
@@ -303,7 +305,8 @@ export function HttpLoaderFactory(http: Http) {
      MatPaginatorModule,
      SharedPipe,
      EventCalendarComponent,
-     AgencydirectoryComponent
+     AgencydirectoryComponent,
+     DigitalservicesComponent
     //  SearchResultComponent
     
   ],

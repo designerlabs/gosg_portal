@@ -4,6 +4,7 @@
     "menu": {
       "home": "Home",
       "calendar": "Calendar",
+      "digitalsvc": "Digital Services",
       "agencycdir": "Agencies Directory",
       "register": "Register",
       "setting": "Settings",
@@ -236,6 +237,17 @@
     "label": {
       "agencyName":"Agency Name",
       "total":"Total Results"
+    }
+  },
+  "digitalservices": {
+    "title":"Digital Services",
+    "label": {
+      "agencyName":"Nama Agensi",
+      "total":"Jumlah Capaian"
+    },
+    "msg": {
+      "login": "Please Login / Register To Access Services Provided",
+      "instruction": "The services available in MyGovernment need to use the identification number for citizens"
     }
   },
   "calendar": {

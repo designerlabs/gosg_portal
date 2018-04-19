@@ -66,8 +66,7 @@ imports: [
     AppComponent,
     RegisterComponent,
     LoginComponent,
-    SearchResultComponent
-  
+    SearchResultComponent,
   
   ],
  
