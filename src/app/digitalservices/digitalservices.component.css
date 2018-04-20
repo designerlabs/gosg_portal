@@ -1,3 +1,11 @@
+.dserviceList {
+    display: table;
+}
+
+.dserviceList > ul {
+    display: table-cell;
+}
+
 .dserviceList > ul li.a {
     display: inline-block;
     vertical-align: top;
@@ -7,6 +15,7 @@
     border-top: #00bdbb 2px solid;
     margin-right: 20px!important;
     margin-left: -5%;
+    background: #f3f3f3;
 }
 
 .dserviceList h4 {
@@ -32,7 +41,14 @@
 }
 
 .no-styles {
+    font-size: 0.8em;
     text-decoration: none;
     list-style: none;
     margin-left: -5%;
+}
+
+.clickable-icons {
+    font-size: 1em;
+    color: rgb(0, 189, 187);
+    cursor: pointer;
 }

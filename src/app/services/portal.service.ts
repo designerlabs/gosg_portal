@@ -154,7 +154,7 @@ export class PortalService {
   // DIGITAL SERVICES
   getDigitalServices() {
     // console.log(this.calendarUrl+ '?language='+localStorage.getItem('langID'))
-    return this.http.get(this.digitalServicesDetailsUrl + '?language='+this.langId)
+    return this.http.get(this.digitalServicesUrl + '?language='+this.langId)
     .map((response: Response) => response.json())
     .retry(5)
     .catch(this.handleError);

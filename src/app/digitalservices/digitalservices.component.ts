@@ -14,7 +14,7 @@ import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 })
 export class DigitalservicesComponent implements OnInit {
 
-  dsData: any = [];
+  dsData:any = [];
   languageId = this.languageId;
 
   constructor(
@@ -62,16 +62,16 @@ export class DigitalservicesComponent implements OnInit {
 
   getDServices() {
 
-    this.dsData = [];
     this.portalservice.getDigitalServices().subscribe(data => {
   
-        // this.dsData = data.list;
-        // console.log(data['list'])
-        for(var item of data.list) {
-          console.log(item)
-          if(item.details.length != 0)
-          this.dsData.push(item);
-        }
+        this.dsData = data.list;
+        // console.log(data.list)
+        // for(var item of data.list) {
+          // console.log(data.list)
+          // if(data.list.details)
+          //   this.dsData.push(data.list);
+        // }
+        // this.dsData = [''];
         console.log(this.dsData)
     });
   }
