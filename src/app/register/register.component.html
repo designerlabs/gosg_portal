@@ -92,7 +92,7 @@
                       {{'register.err.codetel' | translate }}  
                     </mat-error>
                 </mat-form-field>
-                <mat-form-field class="font-size-s" style="width:80%" >
+                <mat-form-field class="font-size-s" style="width:75%; float: right; clear: both;">
                   <input matInput formControlName="telefon" tabindex="4" #tele [textMask]="{mask: maskCitizen}" placeholder="{{'register.label.tel' | translate }}"  required>
                   <mat-error *ngIf="!validateCtrlChk(telefon) && citizenFormGrp.controls.telefon.errors.required">
                     {{'register.err.tel' | translate }}
