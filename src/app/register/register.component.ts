@@ -168,6 +168,13 @@ export class RegisterComponent implements OnInit, AfterViewInit {
                     }
                     this.getUserType();
                 });
+
+                if(!this.languageId){
+                    this.languageId = localStorage.getItem('langID');
+                    //this.getData();
+                  }else{
+                    this.languageId = 1;
+                  }
             }
 
              
