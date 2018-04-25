@@ -38,6 +38,7 @@ import { UnsubscribeComponent } from './unsubscribe/unsubscribe.component';
 import { AgencydirectoryComponent } from './agencydirectory/agencydirectory.component';
 import { SetactiveComponent } from './subscription/setactive/setactive.component';
 import { DigitalservicesComponent } from './digitalservices/digitalservices.component';
+import { RssComponent } from './article/rss/rss.component';
 // import { NavRouterActivator } from './header/nav/nav-router-activator.service'
 
 // import { appRoutes } from './routes';
@@ -56,6 +57,8 @@ export const protectedRoutes: Routes = [
     {path: 'firsttime', component: FirsttimeloginComponent},
     {path: 'search/searchResult', component: SearchResultComponent},
     {path: 'topic/:id', component: ArticleComponent, canActivate: [NavRouterActivator]  },
+    {path: 'rss/:id', component: RssComponent},
+    {path: 'rss/id/:id', component: RssComponent},
     {path: 'subtopic/:id1/:id2', component: SubarticleComponent },
     {path: 'announcement', component: AnnouncementComponent },
     {path: 'announcement/:id', component: AnnouncementlistComponent},

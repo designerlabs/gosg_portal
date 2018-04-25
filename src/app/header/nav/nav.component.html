@@ -12,15 +12,15 @@
                     </li>
                     <!--<li><a [routerLink]="['public/new']" routerLinkActive="active">Create Event</a></li>-->
                     <li *ngFor="let menu of menus" [routerLinkActive]="['active']"  [routerLinkActiveOptions]="{exact:true}">
-                        <a class="drop"  (mouseover)="changeStyle($event)" (mouseout)="changeStyle($event)" href="#">{{menu.title}}
+                        <a class="drop"  (mouseover)="changeStyle($event)" (mouseout)="changeStyle($event)">{{menu.title}}
                             <span class="caret"></span>
                         </a>
-                       
-                        <div class="dropdown_5columns" [ngClass]="color"><!-- Begin 5 columns container -->  
+                       <!-- Begin 5 columns container -->  
+                        <div class="dropdown_5columns" [ngClass]="color">
                             <div class="col_6">
                                 <ul>  
                                     <li class="col-md-4" *ngFor="let data of menu.data">
-                                        <a  class="font-size-s" href="" (click)="handleClickMe(data.topic_id)" [routerLink]="['topic', data.topic_id]" ><i class="fa fa-arrow-circle-right"></i> {{data.name}}</a>
+                                        <a  class="font-size-s" href="" (click)="handleClickMe(data.categoryId)" [routerLink]="['topic', data.categoryId]" ><i class="fa fa-arrow-circle-right"></i> {{data.categoryName}}</a>
                                     </li>
                                 </ul>  
                             </div>  

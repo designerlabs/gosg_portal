@@ -13,6 +13,7 @@ import 'rxjs/add/operator/switchMap';
   styleUrls: ['./article.component.css']
 })
 export class ArticleComponent implements OnInit {
+    
     moduleName: string;
     
   @ViewChild('textarea') textarea: ElementRef;
@@ -27,6 +28,7 @@ export class ArticleComponent implements OnInit {
   @Output() langChange = new EventEmitter();
   constructor(public articleService: ArticleService,  private route: ActivatedRoute, private navService: NavService, private translate: TranslateService, private router: Router, private breadcrumbService: BreadcrumbService) {
     this.lang = translate.currentLang;
+    this.langId = 1;
 
         translate.onLangChange.subscribe((event: LangChangeEvent) => {
 
@@ -36,9 +38,10 @@ export class ArticleComponent implements OnInit {
 
             translate.get('HOME').subscribe((res: any) => {
                 this.lang = 'en';
+                this.langId = 1;
                 this.moduleName = this.router.url.split('/')[1];
                 this.topicID = parseInt(this.router.url.split('/')[2]);
-                this.navService.triggerArticle(this.moduleName,this.lang, this.topicID);
+                this.navService.triggerArticle(this.moduleName, this.langId, this.topicID);
             });
 
         }
@@ -46,9 +49,10 @@ export class ArticleComponent implements OnInit {
 
             translate.get('HOME').subscribe((res: any) => {
                 this.lang = 'ms';
+                this.langId = 2;
                 this.moduleName = this.router.url.split('/')[1];
                 this.topicID = parseInt(this.router.url.split('/')[2]);
-                this.navService.triggerArticle(this.moduleName, this.lang, this.topicID);
+                this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID);
             });
         }
     });
@@ -57,12 +61,13 @@ export class ArticleComponent implements OnInit {
 
 
   lang = this.lang;
+  langId = this.langId;
 
   ngOnInit() {
         this.articleData = this.articleService.getArticle();
         this.moduleName = this.router.url.split('/')[1];
         this.topicID = parseInt(this.router.url.split('/')[2]);
-        this.navService.triggerArticle(this.moduleName, this.lang, this.topicID);
+        this.navService.triggerArticle(this.moduleName, this.langId, this.topicID);
       }
 
    getTheme(){
@@ -76,7 +81,7 @@ export class ArticleComponent implements OnInit {
         console.log(_getSubID);
         const _getTopicID = parseInt(this.router.url.split('/')[2]);
         _getSubID = parseInt(_getSubID[1]);
-        this.navService.getSubArticleUrl(_getTopicID, _getSubID, this.lang);
+        this.navService.getSubArticleUrl(_getTopicID, _getSubID,this.langId);
         this.router.navigate(['/subtopic', _getTopicID, _getSubID]);
         event.preventDefault();
     }

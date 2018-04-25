@@ -22,6 +22,7 @@ export class NavComponent implements OnInit, AfterViewInit {
   menus: IMenu[];
   articles: any[];
   lang = 'en';
+  langId = 1;
   active_color = 'blue';
   inactive_color = 'red';
   setUrl = 'portal';
@@ -35,6 +36,7 @@ export class NavComponent implements OnInit, AfterViewInit {
 
                 translate.get('HOME').subscribe((res: any) => {
                     this.lang = 'en';
+                    this.langId = 1;
                     this.imgSrc = 'logo_en';
                     this.getMenu();
                 });
@@ -44,6 +46,7 @@ export class NavComponent implements OnInit, AfterViewInit {
 
                 translate.get('HOME').subscribe((res: any) => {
                     this.lang = 'ms';
+                    this.langId = 2;
                     this.imgSrc = 'logo_ms';
                     this.getMenu();
                 });
@@ -56,7 +59,7 @@ export class NavComponent implements OnInit, AfterViewInit {
   private menuUrl: string = this.config.urlMenu;
   ngOnInit() {
     this.imgSrc = 'logo_ms';
-    this.navService.getMenuData(this.lang)
+    this.navService.getMenuData(this.langId)
             .subscribe(resMenuData => this.menus = resMenuData);
   }
 
@@ -69,7 +72,7 @@ export class NavComponent implements OnInit, AfterViewInit {
   handleClickMe(e){
         this.menuClick.emit(e);
         this.menuId = e;
-        this.navService.triggerArticle('',this.lang, e);
+        // this.navService.triggerArticle('',this.langId, e);
     }
 
   ngAfterViewInit() {
@@ -82,8 +85,8 @@ export class NavComponent implements OnInit, AfterViewInit {
 
 
     getMenu(){
-        this.navService.getMenuData(this.lang)
-            .subscribe(resMenuData => this.menus = resMenuData);
+        this.navService.getMenuData(this.langId)
+            .subscribe(resMenuData => {this.menus = resMenuData});
     }
 
     getTheme(){

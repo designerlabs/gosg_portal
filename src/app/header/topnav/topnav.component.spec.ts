@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TopnavService } from './topnav.service';
 import * as $ from 'jquery';
 import { Http, Response} from '@angular/http';
+import { SharedService } from '../../common/shared.service';
 
 describe('TopnavComponent', () => {
 
@@ -22,7 +23,8 @@ describe('TopnavComponent', () => {
       imports: [
         TranslateModule.forRoot(),
         RouterTestingModule,
-        FormsModule
+        FormsModule,
+        SharedService
       ],
       declarations: [
         TopnavComponent

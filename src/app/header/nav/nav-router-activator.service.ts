@@ -8,6 +8,7 @@ import { NavRouterGuardService } from './nav-router-guard.service';
 
 export class NavRouterActivator implements CanActivate {
       lang = 'en';
+      langId = 1;
       eventExists;
     // tslint:disable-next-line:max-line-length
     constructor(private navService: NavService, private router: Router, private translate: TranslateService, private navGuardService: NavRouterGuardService){
@@ -16,15 +17,17 @@ export class NavRouterActivator implements CanActivate {
             let myLang = translate.currentLang;
 
             if (myLang === 'en') {
-
+                
                 translate.get('HOME').subscribe((res: any) => {
+                    this.langId = 1;
                     this.lang = 'en';
                 });
 
             }
             if (myLang === 'ms') {
-
+                
                 translate.get('HOME').subscribe((res: any) => {
+                    this.langId = 2;
                     this.lang = 'ms';
 
                 });
@@ -33,12 +36,13 @@ export class NavRouterActivator implements CanActivate {
     }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+        debugger;
     //    const eventExists =  !!this.navService.triggerArticle('', this.lang, +route.params['id']); // Old code
     if (route.params['id']) {
-        this.eventExists =  !!this.navGuardService.guardRoute(this.lang, route.params['id']);
+        this.eventExists =  !!this.navGuardService.guardRoute(route.url[0].path, this.langId, route.params['id']);
     }else {
         if (route.params['id1']) {
-            this.eventExists =  !!this.navGuardService.guardRoute(this.lang, route.params['id1'], route.params['id2']);
+            this.eventExists =  !!this.navGuardService.guardRoute(route.url[0].path, this.langId, route.params['id1'], route.params['id2']);
         }
     }
        // tslint:disable-next-line:curly

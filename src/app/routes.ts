@@ -43,6 +43,7 @@ import { SubscriptionComponent } from './subscription/subscription.component';
 import { UnsubscribeComponent } from './unsubscribe/unsubscribe.component';
 import { SetactiveComponent } from './subscription/setactive/setactive.component';
 import { DigitalservicesComponent } from './digitalservices/digitalservices.component';
+import { RssComponent } from './article/rss/rss.component';
 
 export const appRoutes: Routes = [
    
@@ -53,6 +54,8 @@ export const appRoutes: Routes = [
     {path: 'digitalservices', component: DigitalservicesComponent},
     {path: 'search/searchResult', component: SearchResultComponent},
     {path: 'topic/:id', component: ArticleComponent, canActivate: [NavRouterActivator]  },
+    {path: 'rss/:id', component: RssComponent},
+    {path: 'rss/id/:id', component: RssComponent},
     {path: 'announcement', component: AnnouncementComponent },
     {path: 'announcement/:id', component: AnnouncementlistComponent, canActivate: [NavRouterActivator]},
     {path: 'announcement/:id1/:id2', component: AnnouncementdetailsComponent, canActivate: [NavRouterActivator]},

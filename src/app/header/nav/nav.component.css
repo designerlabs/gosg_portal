@@ -11,8 +11,9 @@
 
 li.active > a {
   color: #fff !important;
-  background: #00bdbb !important; }
+  background: #4e5d6c !important; }
   li.active > a:hover {
+    cursor: pointer;
     color: #fff !important; }
 
 .nav > li {
@@ -37,7 +38,7 @@ li.active > a {
   height: 60px; }
 
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > li > a:hover {
-  background: #00bdbb;
+  background: #4e5d6c;
   color: #fff; }
 
 .navbar-default .navbar-nav > li > a {
@@ -49,15 +50,15 @@ li.active > a {
   height: 60px;
   line-height: 60px; }
   .navbar-default .navbar-nav > li > a:hover {
-    background: #00bdbb !important;
+    background: #4e5d6c !important;
     color: #fff !important; }
 
 .navbar-default .navbar-nav > li > a:hover {
-  background: #00bdbb !important;
+  background: #4e5d6c !important;
   color: #fff; }
 
 .navbar-default .navbar-nav > li > .active > a:hover {
-  background: #00bdbb !important;
+  background: #4e5d6c !important;
   color: #fff !important; }
 
 .navbar-brand {
@@ -91,7 +92,6 @@ li.active > a {
   top: auto;
   width: 100%;
   border-top: 1px #1ebebc solid; 
-
 }
 
 .col_1,
@@ -158,6 +158,11 @@ li.active > a {
 #main-menu p {
   line-height: 18px;
   margin: 0 0 10px 0; }
+
+
+  #main-menu li a:hover{
+    cursor: pointer;
+  }
 
 #main-menu li:hover div a {
   font-size: 15px;

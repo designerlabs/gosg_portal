@@ -36,10 +36,12 @@ export class NavService {
   private urlAnnouncement: string = this.config.urlAnnouncementSub;
   private subUrl: string = this.config.urlSubtopic;
 
+  
 
-  getMenuData(lang: string): Observable<IMenu[]> {
-    return this.http.get(this.menuUrl + '-' + lang + '.json')
-      .map((response: Response) => response.json())
+  getMenuData(lang): Observable<IMenu[]> {
+    
+    return this.http.get(this.config.urlPortal + 'cp/menu?language=' + lang)
+      .map((response: Response) => response.json().corePortalMenuList)
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
 
   }
@@ -48,9 +50,9 @@ export class NavService {
 
     if (!isNaN(ID)) {
 
-      return this.http.get(this.articleUrl + '-' + ID + '-' + lang + '.json')
+      return this.http.get(this.config.urlPortal + moduleName + '/' +ID + '?language=' + lang)
         .take(1)
-        .map((response: Response) => response.json())
+        .map((response: Response) => response.json().results)
 
         // .catch((error:any) =>
         // Observable.throw(error.json().error || 'Server error')
@@ -92,6 +94,30 @@ export class NavService {
     }
   }
 
+
+  getSubRss(moduleName, subID: number, lang) {
+    // alert("Test");
+ 
+ 
+     if (!isNaN(subID)) {
+       return this.http.get(this.config.urlPortal  + moduleName +'/id/'+ subID + '?language=' + lang)
+         .take(1)
+         .map((response: Response) => response.json().results)
+         // .catch((error:any) =>
+         // Observable.throw(error.json().error || 'Server error')
+         // );
+         .catch(
+         (err: Response, caught: Observable<any[]>) => {
+           if (err !== undefined) {
+             this.router.navigate(['/404']);
+             return Observable.throw('The Web server (running the Web site) is currently unable to handle the HTTP request due to a temporary overloading or maintenance of the server.');
+           }
+           return Observable.throw(caught); // <-----
+         }
+         );
+     }
+   }
+
   triggerSubArticle(topicID, subID, lang) {
    // alert("Trigger sub acrticle");
     if (!isNaN(subID)) {
@@ -109,6 +135,24 @@ export class NavService {
     }
   }
 
+
+  triggerSubRss(topicID, subID, lang) {
+    // alert("Trigger sub acrticle");
+     if (!isNaN(subID)) {
+       return this.route.paramMap
+         .switchMap((params: ParamMap) =>
+           this.getSubRss(topicID, subID, lang))
+         .subscribe(resSliderData => {
+           this.articleService.articles = resSliderData;
+           this.articles = resSliderData;
+           this.breadcrumb = this.breadcrumbService.getBreadcrumb();
+           this.isValid = this.breadcrumbService.isValid = true;
+           this.breadcrumb = this.breadcrumb.name = '';
+ 
+         });
+     }
+   }
+ 
   triggerArticle(moduleName, lang, topicID) {
     if (!isNaN(topicID)) {
       return this.route.paramMap
