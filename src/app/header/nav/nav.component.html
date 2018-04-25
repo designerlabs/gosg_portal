@@ -6,7 +6,7 @@
                 <a [routerLink]="['/index']" class="navbar-brand" ><img src="assets/images/{{imgSrc }}.jpg" width="100%"></a>
                 </div>
                 <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav font-size-s" id="main-menu">
+                <ul class="nav navbar-nav font-size-s hidden-xs hidden-sm" id="main-menu">
                     <li [routerLinkActive]="['active']"  [routerLinkActiveOptions]="{exact:true}">
                     <a [routerLink]="['/index']"><i class="fa fa-home"></i> {{ 'home.menu.home' | translate }}</a>
                     </li>
