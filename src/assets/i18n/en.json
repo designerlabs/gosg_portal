@@ -376,7 +376,8 @@
     "pagination":{
       "pages":"Pages",
       "of":"of",
-      "in":"in"
+      "in":"in",
+      "records":"Records"
     }
   },
   "appmngt":{

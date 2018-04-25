@@ -376,7 +376,8 @@
     "pagination":{
       "pages":"Halaman",
       "of":"daripada",
-      "in":"dalam"
+      "in":"dalam",
+      "records":"Rekod"
     }
   },
   "appmngt":{

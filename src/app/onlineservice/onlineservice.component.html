@@ -97,7 +97,7 @@
           <span class="table_footer_pagination">{{ 'common.pagination.pages' | translate }}
             <strong>{{dataPage?.pageNumber}}</strong> {{ 'common.pagination.of' | translate }}
             <strong>{{dataPage?.totalPages}}</strong> {{ 'common.pagination.in' | translate }}
-            <strong>{{dataPage?.totalElements}}</strong> Application</span>
+            <strong>{{dataPage?.totalElements}}</strong> {{ 'common.pagination.records' | translate }}</span>
           <button mat-mini-fab color="basic" [disabled]="noPrevData" (click)="paginatorL(dataPage?.pageNumber)">
             <i [ngClass]="sharedService.icon.arrLeft" aria-hidden="true"></i>
           </button>

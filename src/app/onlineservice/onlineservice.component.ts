@@ -21,19 +21,7 @@ import { Http, Response } from '@angular/http';
 export class OnlineserviceComponent implements OnInit {
   valByKeyword: any;
 
-  dropdownOpt = [
-    {
-      "id": 0,
-      "value": "Show All"
-    },{
-      "id":1,
-      "value":"By Agency"
-    },
-    {
-      "id":2,
-      "value": "By Keyword"
-    }
-  ];
+  dropdownOpt = [];
 
 
 
@@ -85,7 +73,22 @@ export class OnlineserviceComponent implements OnInit {
           this.lang = 'en';
           this.languageId = 1;
           this.inxlan = 0;
+          this.dropdownOpt = [
+            {
+              "id": 0,
+              "value": "Show All"
+            },{
+              "id":1,
+              "value":"By Agency"
+            },
+            {
+              "id":2,
+              "value": "By Keyword"
+            }
+          ];
         });
+
+       
 
       }
       if (myLang == 'ms') {
@@ -93,6 +96,19 @@ export class OnlineserviceComponent implements OnInit {
           this.lang = 'ms';
           this.languageId = 2;
           this.inxlan = 1;
+          this.dropdownOpt = [
+            {
+              "id": 0,
+              "value": "Tunjukkan Semua"
+            },{
+              "id":1,
+              "value":"Oleh Agensi"
+            },
+            {
+              "id":2,
+              "value": "Oleh Kata Kunci"
+            }
+          ];
         });
       }
 
@@ -104,11 +120,35 @@ export class OnlineserviceComponent implements OnInit {
       this.reset();
      
     });
+
+
+    if(!this.languageId){
+      if(localStorage.getItem('langID')){
+        this.languageId = localStorage.getItem('langID');
+      }else{
+        this.languageId = 1;
+      }
+      //this.getData();
+    }
+
   }
 
   ngOnInit() {
     this.valByAlpha = "0";
     this.valByAgency = "0";
+    this.dropdownOpt = [
+      {
+        "id": 0,
+        "value": "Show All"
+      },{
+        "id":1,
+        "value":"By Agency"
+      },
+      {
+        "id":2,
+        "value": "By Keyword"
+      }
+    ];
     // this.getAgencyList();
     this.loadAlpha(true);
     this.selAllAgency(this.pageCount, this.pageSize);
