@@ -16,7 +16,8 @@ let commonURL = uapURL+'service/';
 
 // backend service
 let baseLocalURL = './app/apidata/';
-let searchServiceURL = 'https://www.malaysia.gov.my/public/';
+let searchServiceURL = 'http://10.1.70.219:9200/gosg/';
+// let searchServiceURL = 'https://www.malaysia.gov.my/public/';
 let pollUrl = commonURL + "polls";
 
 export class AppConfig {
@@ -114,7 +115,7 @@ export const APP_DI_CONFIG: AppConfig = {
     portalURL: portalBaseURL,
     urlDashboard: uapURL + 'portal-protected/dashboard/',
     protectedURL:protectedBaseURL,
-    urlIntSearch: searchServiceURL + 'query/0/internal',
+    urlIntSearch: searchServiceURL + 'content',
     urlUserType:uapURL+'service/user/type/lang/',
     urlMail: protectedBaseURL+'inbox/',
     urlUAP: uapURL,

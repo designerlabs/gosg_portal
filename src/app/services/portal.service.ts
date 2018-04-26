@@ -62,7 +62,9 @@ export class PortalService {
   private agencyUrl: string = this.config.urlAgency;
   private digitalServicesUrl: string = this.config.urlDigitalServices;
   private digitalServicesDetailsUrl: string = this.config.urlDigitalServicesDetails;
-
+  
+  private internalUrl: string = this.config.urlIntSearch;
+  
   private portalUrl: string = this.config.urlPortal;
   private protected: string = this.config.urlProtected;
   
@@ -210,15 +212,6 @@ export class PortalService {
     .catch(this.handleError);
   }
 
-  // getCalendarEventsByID(id){
-
-  //   console.log(this.calendarUrl+ '/'+id+'?language='+localStorage.getItem('langID'))
-  //   return this.http.get(this.calendarUrl + '/'+id+'?language='+localStorage.getItem('langID'))
-  //   .map((response: Response) => response.json())
-  //   .retry(5)
-  //   .catch(this.handleError);
-  // }
-
   // END AGENCIES DIRECTORY
 
   // NEW
@@ -289,6 +282,19 @@ export class PortalService {
       .catch(this.handleError);
   }
     
+
+// ONLINE SEARCH
+
+  getInternal(data){
+    return this.http.post(this.internalUrl, data).map((response:Response) => response.json())
+    .retry(5)
+    .catch(this.handleError);
+  }
+
+
+
+// ONLINE SEARCH END
+
   // create(data, moduleName) {
   //   let createUrl = this.config.urlProtected   + moduleName + '?language='+this.languageId;
   

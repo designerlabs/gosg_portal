@@ -27,7 +27,7 @@ declare var $ :any;
 })
 export class SearchResultComponent implements OnInit {
   lang = this.lang;
-  languageId = this.languageId;
+  languageId : any;
   public loading = false;
   date: moment.Moment;
   dataEach = '';
@@ -72,6 +72,8 @@ export class SearchResultComponent implements OnInit {
   chkosdes = true;
   chkGlobValue = '';
 
+  private internalUrl: string = this.config.urlIntSearch;
+
 // Paggination
   totalElements=0; noPrevData = true; noNextData = false; pagefrom = 0;pageNumber = 1; totalPages = 0; pagesize = 10;
   millisec = 0;
@@ -88,7 +90,7 @@ export class SearchResultComponent implements OnInit {
     // private moment : Moment
   ) {
     this.lang = translate.currentLang;
-    this.languageId = 2;
+    this.languageId = 1;
     translate.onLangChange.subscribe((event: LangChangeEvent) => {
 
       const myLang = translate.currentLang;
@@ -108,12 +110,19 @@ export class SearchResultComponent implements OnInit {
       }
       this.searchByKeyword(this.ser_word); 
     });
+    
+    if(!this.languageId){
+      this.languageId = localStorage.getItem('langID');
+      //this.getData();
+    }else{
+      this.languageId = 1;
+    }
+    console.log(this.languageId)
   }
 
   public local = true;
   public os = false;
   public global = false;
-
 
   public keywordType = [
     { id: 1, nameEn: 'Exact word', nameMs: 'Perkataan yang tepat' },
@@ -251,22 +260,41 @@ export class SearchResultComponent implements OnInit {
   // finalFields = this.locFields;
   finalAggregations= this.locAggregations;  
 
+  // public obj = {
+  //   "size": this.pagesize,
+  //   "from": this.pagefrom,
+  //   "responseFields": this.finalResFields,
+  //   "keyword": "",
+  //   "keywordMap": {
+  //     "exact": [""],
+  //     "fields": this.locFields.slice(),
+  //     "not": [""],
+  //     // "all": [""],
+  //     // "any": [""]
+  //   },
+  //   "aggregations": this.finalAggregations,
+  //   "filters": {
+  //   }
+  // }
+
   public obj = {
     "size": this.pagesize,
     "from": this.pagefrom,
-    "responseFields": this.finalResFields,
     "keyword": "",
-    "keywordMap": {
-      "exact": [""],
-      "fields": this.locFields.slice(),
-      "not": [""],
-      // "all": [""],
-      // "any": [""]
-    },
-    "aggregations": this.finalAggregations,
-    "filters": {
+    "filters":{
+        "ranges":
+        {
+            "end_date": [
+                {
+                    "gte": "now/d",
+                    "time_zone":"+08:00"
+                }
+            ]
+        },
+        "ref_language_id": this.languageId
     }
-  }
+}
+  
 
   ngOnInit() {
     // this.searchByKeyword('malaysia');
@@ -290,6 +318,9 @@ export class SearchResultComponent implements OnInit {
   }
 
   addFilterAry(ary, resObjen, resObjms){
+
+    console.log(ary);
+
     if(ary.length > 0){
       let res = [];
       ary.forEach(ele =>{
@@ -309,7 +340,7 @@ export class SearchResultComponent implements OnInit {
 
   addKeySettings(keyVal){
     let key_ary : any;
-    key_ary = this.obj.keywordMap;
+    // key_ary = this.obj.keywordMap;
     let inxall = $.inArray('all', Object.keys(key_ary));
     let inxany = $.inArray('any', Object.keys(key_ary));
     let inxexact = $.inArray('exact', Object.keys(key_ary));
@@ -364,17 +395,17 @@ export class SearchResultComponent implements OnInit {
   }
 
   addSpecFiltr(methodNm, msField, enField){
-    let res_ary = this.obj.keywordMap.fields;
+    // let res_ary = this.obj.keywordMap.fields;
     let inx_ms; let inx_en;
 
-    inx_ms = jQuery.inArray(msField, res_ary);      
+    // inx_ms = jQuery.inArray(msField, res_ary);      
     if(methodNm === 'add' && inx_ms < 0){
-      res_ary.push(msField);
-      res_ary.push(enField);
+      // res_ary.push(msField);
+      // res_ary.push(enField);
     }else if(methodNm === 'remove' && inx_ms >= 0){
-      res_ary.splice(inx_ms,1);
-      inx_en = jQuery.inArray(enField, res_ary);
-      res_ary.splice(inx_en,1);
+      // res_ary.splice(inx_ms,1);
+      // inx_en = jQuery.inArray(enField, res_ary);
+      // res_ary.splice(inx_en,1);
     }
   }
   
@@ -403,7 +434,8 @@ export class SearchResultComponent implements OnInit {
     aryObj = {
       name: "",
       val: ""
-    };let retn = [];
+    };
+    let retn = [];
     Object.keys(objs).map(function (inx) {
       aryObj = new Object;
       aryObj.name = inx;
@@ -432,7 +464,7 @@ export class SearchResultComponent implements OnInit {
       this.chksubtopic = true;
       this.chktitle= true;
       this.chkdes = true;     
-      this.obj.keywordMap.fields = this.locFields.slice();
+      // this.obj.keywordMap.fields = this.locFields.slice();
       this.resetPage();
       this.searchByKeyword(k_word);
     }else if (tabInx === 1){
@@ -441,7 +473,7 @@ export class SearchResultComponent implements OnInit {
       this.chkosagency = true;
       this.chkostitle = true;
       this.chkosdes = true;
-      this.obj.keywordMap.fields = this.osFields.slice();
+      // this.obj.keywordMap.fields = this.osFields.slice();
       this.resetPage();
       this.searchByKeyword(k_word);
     }else if(tabInx === 2){
@@ -451,25 +483,31 @@ export class SearchResultComponent implements OnInit {
   }
 
   searchByKeyword(valkeyword) {
+
+    console.log(valkeyword)
+    console.log(this.date)
+
     if(localStorage.getItem('ser_word').length === 0){
       localStorage.setItem('ser_word',valkeyword);
     }
+
     if(valkeyword.trim().length > 0){
       this.loading = true;
       this.obj.keyword = valkeyword;
-      if(this.inpExcWord.length === 0){
-        this.obj.keywordMap.exact = [valkeyword];
-      }
+      // if(this.inpExcWord.length === 0){
+      //   this.obj.keywordMap.exact = [valkeyword];
+      // }
       
       this.obj.from = this.pagefrom;
       this.obj.size = this.pagesize;
+      this.obj.filters.ref_language_id = this.languageId.toString();
       let dataUrl = '';
       if(this.tabIndex === 0){
-        this.obj.responseFields = this.locResFields.slice();
+        // this.obj.responseFields = this.locResFields.slice();
         // this.obj.keywordMap.fields = this.locFields;
-        this.obj.aggregations = this.locAggregations.slice(); 
-        this.obj.filters = {};
-        dataUrl = 'https://www.malaysia.gov.my/public/query/0/internal'; 
+        // this.obj.aggregations = this.locAggregations.slice(); 
+        // this.obj.filters = {};
+        dataUrl = this.internalUrl;
 
         // Search Specification
         if(this.chktopic){       
@@ -541,10 +579,10 @@ export class SearchResultComponent implements OnInit {
 
 
       }else if(this.tabIndex === 1){
-        this.obj.responseFields = this.osResFields.slice();
+        // this.obj.responseFields = this.osResFields.slice();
         // this.obj.keywordMap.fields = this.osFields;
-        this.obj.aggregations = this.osAggregations.slice();
-        this.obj.filters = {};
+        // this.obj.aggregations = this.osAggregations.slice();
+        // this.obj.filters = {};
         dataUrl = 'https://www.malaysia.gov.my/public/query/5/';
 
         if(this.chkosminis){
@@ -584,12 +622,16 @@ export class SearchResultComponent implements OnInit {
         this.addKeySettings(this.chkKeyValue);      
       }
     }
+
+    console.log("Current Search Object:")
+    console.log(this.obj)
       
       // this.arymonth = [];
       return this.http.post(dataUrl, this.obj)
         .map(res => res.json())
         .subscribe(rData => {
           console.log(rData);
+
           this.intData = rData.data;
           //   this.aggrData = rData.aggregations;
           this.selMonPubDisp = '';
@@ -612,18 +654,26 @@ export class SearchResultComponent implements OnInit {
           this.valSubTopic = [];
           this.valMinistry = [];
           this.valAgency = [];
-          if(rData.data.length>0){            
-            if(this.tabIndex==0){              
-              this.ddauthor = this.changeAryVal(rData.aggregations.author_name);
-              this.ddmonthPub = this.changeAryVal(rData.aggregations.histogram);
-              if (this.languageId === 1) {
-                this.ddtopics = this.changeAryVal(rData.aggregations.category_name_en);
-                this.ddsubTopics = this.changeAryVal(rData.aggregations.topic_name_en);
-              } else if (this.languageId === 2){
-                this.ddtopics = this.changeAryVal(rData.aggregations.category_name);
-                this.ddsubTopics = this.changeAryVal(rData.aggregations.topic_name);
-              }
-            }else if(this.tabIndex==1){
+          if(rData.data.length>0){    
+            
+            
+            if(this.tabIndex==0){ // LOCAL
+
+              // this.ddauthor = this.changeAryVal(rData.aggregations.author_name);
+              // this.ddmonthPub = this.changeAryVal(rData.aggregations.histogram);
+              // if (this.languageId === 1) {
+
+              console.log(rData.data.category)
+                this.ddtopics = this.changeAryVal(rData.data.category.topic);
+                this.ddsubTopics = this.changeAryVal(rData.data.category.sub_topic);
+              // } 
+              // else if (this.languageId === 2){
+              //   this.ddtopics = this.changeAryVal(rData.aggregations.category_name);
+              //   this.ddsubTopics = this.changeAryVal(rData.aggregations.topic_name);
+              // }
+
+            }else if(this.tabIndex==1){ // ONLINE SERVICES
+
               if (this.languageId === 1) {
                 this.ddministry = this.changeAryVal(rData.aggregations.ministry_name_en);
                 this.ddagency = this.changeAryVal(rData.aggregations.agency_name_en);
@@ -633,6 +683,7 @@ export class SearchResultComponent implements OnInit {
               }            
             }
             this.showNoData = false;
+
           }else {
             this.showNoData = true;
             this.sKeyword = false; //side menu 
