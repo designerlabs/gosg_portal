@@ -9,18 +9,14 @@ declare var $ :any;
   selector: 'int-search',
     // template: '<div *ngFor="let int of intData"><h4>{{int.article_name}}</h4><span class="label primary">{{int.category_name}}</span><p>{{int.article_text_clean | slice:0:100}}</p></div>'
     template: `<div *ngIf='tabInx==0'><h4><span class="font-size-m">{{pageNo}}. </span>
-    <a *ngIf='lang==2' class="titleSer warna_title_color font-size-m">{{showdata.article_name}}</a>
-    <a *ngIf='lang==1' class="titleSer warna_title_color font-size-m">{{showdata.article_name_en}}</a></h4>
-    <span *ngIf='lang==2' class="cat">{{showdata.category_name}}</span>
-    <span *ngIf='lang==1' class="cat">{{showdata.category_name_en}}</span>
-    <p style="padding-top:15px" class="font-size-s sertxt" id="{{showdata.idarticle}}" [innerHtml]="dataHilight"> 
+    <a class="titleSer warna_title_color font-size-m">{{showdata.content_title}}</a></h4>
+    <span class="cat">{{showdata.content_keywords}}</span>
+    <p style="padding-top:15px" class="font-size-s sertxt" id="{{showdata.content_id}}" [innerHtml]="dataHilight"> 
     </p></div>
     <div *ngIf='tabInx==1'><h4><span class="font-size-m">{{pageNo}}. </span>
-      <a *ngIf='lang==2' class="titleSer warna_title_color font-size-m" href='{{showdata.url_ms}}' target='_blank'>{{showdata.title_ms}}</a>
-      <a *ngIf='lang==1' class="titleSer warna_title_color font-size-m" href='{{showdata.url_en}}' target='_blank'>{{showdata.title_en}}</a>
+      <a class="titleSer warna_title_color font-size-m" href='{{showdata.url_ms}}' target='_blank'>{{showdata.title_ms}}</a>
     </h4>
-    <span *ngIf='lang==2' class="cat">{{showdata.agency_name}}</span>
-    <span *ngIf='lang==1' class="cat">{{showdata.agency_name_en}}</span>
+    <span class="cat">{{showdata.agency_name}}</span>
     <p style="padding-top:15px" class="font-size-s sertxt" [innerHtml]="dataHilight"> 
     </p></div>
                 `,
@@ -54,19 +50,13 @@ export class SearchIntComponent implements OnInit {
     addHighlight(keyword){
       let span1 = document.createElement("span");      
       let maintxt;
-      if(this.lang == '1'){ //english
+      
         if(this.tabInx == 0){ // local tab
-          maintxt = this.showdata.article_text_en_clean;
+          maintxt = this.showdata.content_text_excerpt;
         }else if(this.tabInx ==1){ //os tab
-          maintxt = this.showdata.desc_en;
+          maintxt = this.showdata.content_description;
         }
-      }else if(this.lang == '2'){ //malay
-        if(this.tabInx == 0){ // local tab
-          maintxt = this.showdata.article_text_clean;
-        }else if(this.tabInx ==1){ //os tab
-          maintxt = this.showdata.desc_ms;
-        }
-      }
+      
       if(maintxt !=="null"){
         let nameNode = document.createTextNode(maintxt); 
         span1.appendChild(nameNode);
