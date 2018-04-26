@@ -1,4 +1,53 @@
 <div class="container-fluid lifeEventContainer animated fadeIn">
+        <div>
+                <h2 class="font-size-l" style="text-align: center;" [style.color]="getTheme()">
+                        INFORMASI MENGIKUT PERISTIWA KEHIDUPAN 
+                        <span class="customUnderLine" [style.border-color]="getTheme()"></span>
+                </h2>
+        
+                <p style="text-align: center;" class="font-size-s"> Capaian maklumat dan perkhidmatan kerajaan berdasarkan kategori peristiwa kehidupan</p>
+        </div>
+        <div class="container" *ngFor="let leData of lifeEventData" style="padding:0px;">
+        <div class="row"  *ngIf="leData.type =='citizen'">
+                <div class="col-md-3 col-sm-12 col-xs-12 lifeEventBox" *ngFor="let getContent of leData.data">
+                        <div class="innerBox">
+                                <div class="lifeEventBox-title">
+                                        <h2 class="font-size-m"  style="border-top:3px solid;" [style.border-color]="getTheme()" [style.color]="getTheme()">{{getContent.categoryName}}</h2>
+                                </div>
+                
+                                <div class="lifeEventBox-description font-size-s">
+                                        <a *ngFor="let subData of getContent.subCategoryList; let i = index; let lastItem = last">
+                                                {{subData.categoryName}} <i class="{{lastItem ? '' : 'fa fa-angle-right'}}" style="font-weight: bold;"></i>
+                                        </a>
+                                </div>
+                        </div>
+                        
+                        <!-- <div class="lifeEventBox-title">
+                                <h2 class="font-size-l" [style.color]="getTheme()">{{getContent.categoryName}}</h2>
+                        </div>
+                        <p style="text-align: center;" *ngFor="let data for getContent.subCategoryList" class="font-size-s"> {{ data | json}}</p> -->
+                </div>
+        </div>
+</div>
+        <!-- <div class="container" *ngFor="let leData of lifeEventData" style="padding:0px;">
+                <div *ngIf="leData.type =='citizen'">
+                        <div *ngFor="let citi of leData.data">
+                                <h2 class="font-size-1" style="text-align: center;" [style.color]="getTheme()">
+                                        {{citi.categoryName}}
+                                        <span class="customUnderLine" [style.border-color]="getTheme()"></span>
+                                </h2>
+                                <p style="text-align: center;" *ngFor="let data for citi.subCategoryList" class="font-size-s"> {{ data | json}}</p>
+                        </div>
+                </div>
+                
+                <div *ngIf="leData.type =='noncitizen'">
+                       <div *ngFor="let nonciti of leData.data">
+                                {{nonciti.categoryName}}
+                       </div>
+                </div>
+        </div> -->
+</div>
+<!-- <div class="container-fluid lifeEventContainer animated fadeIn">
         <div class="container" *ngFor="let leData of lifeEventData" style="padding:0px;">
                 <div>
                         <h2 class="font-size-1" style="text-align: center;" [style.color]="getTheme()">
@@ -25,4 +74,4 @@
                         </div>
                 </div>
         </div>
-</div>
+</div> -->
