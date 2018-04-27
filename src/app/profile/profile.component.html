@@ -33,7 +33,7 @@
       <!-- <p>Status(isRegLocal): {{isRegLocal}}</p> -->
       <!-- <p>Status(isLocal): {{isLocal}}</p>
       <p>Status(isCorrsLocal): {{isCorrsLocal}}</p> -->
-      
+
       <mat-tab-group>
           <mat-tab label="{{'profile.label.personalDetails' | translate}}" class="font-size-s">
             <div style="padding-top:10px;"></div>
@@ -52,13 +52,13 @@
                       </div>
                   </div>
                   <div class="row">
-      
+
                     <div class="form-group col-md-4">
                       <label class="font-size-m" for="nationality">{{'profile.label.nationality' | translate}}</label>
                       <div class="staticLabel font-size-m boldText" for="nationality">{{nationality}}</div>
                     </div>
-                 
-                    
+
+
                     <div class="form-group col-md-4">
                       <label class="font-size-m" for="dob">{{'profile.label.dateofbirth' | translate}} *</label>
                         <mat-form-field class="example-full-width font-size-m" style="margin-top: -25px">
@@ -66,16 +66,16 @@
                           <input style="display:none;" placeholder="{{ dateFormatExample }}" matInput formControlName="dob" [matDatepicker]="dateOfBirth" (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)" [max]="maxDate"  required />
                           <mat-datepicker-toggle matSuffix [for]="dateOfBirth" style="color:#333;"></mat-datepicker-toggle>
                           <mat-datepicker #dateOfBirth [disabled]="initialBtn"></mat-datepicker>
-                          
+
                           <mat-error *ngIf="!!dt">
                             {{'profile.err.dob' | translate }}
                           </mat-error>
                           <span class="mat-error" style="font-size: 60%;" *ngIf="!!!dt">{{'profile.err.dob' | translate }}</span>
                         </mat-form-field>
-                        
+
                     </div>
-      
-                
+
+
                     <div class="form-group col-md-4">
                       <label class="font-size-l" for="regdate">{{'profile.label.regisdate' | translate}}</label>
                       <br />
@@ -87,7 +87,7 @@
                         <label class="font-size-m" for="nationality">{{'profile.label.passport' | translate}}</label>
                         <div class="staticLabel font-size-m boldText" for="nationality">{{passport}}</div>
                       </div>
-      
+
                       <div class="form-group col-md-4">
                         <label class="font-size-m" for="email">{{'profile.label.email' | translate}}</label>
                         <div>
@@ -125,7 +125,7 @@
                     </div>
                   </div>
                   <div class="row">
-                    
+
                   </div>
                   <div class="row">
                     <div class="form-group col-lg-12" style="padding-top:15px;">
@@ -149,7 +149,7 @@
                       </mat-form-field>
                     </div>
                   </div>
-            
+
                   <div class="row">
                     <div class="form-group col-md-4">
                       <mat-form-field class="example-full-width font-size-s">
@@ -184,16 +184,16 @@
                         </mat-select>
                         <mat-error *ngIf="!validateCtrlChk(perCityLocal) && profileForm.controls.perCityLocal.errors?.required">
                           {{'profile.err.city' | translate }}
-                          
+
                       </mat-error>
-                     
+
                       </mat-form-field>
                       <mat-form-field *ngIf="!isLocal" class="example-full-width font-size-s">
                         <input (keyup)="isChanged()" matInput formControlName="perCityNotLocal"  type="text" placeholder="{{'profile.label.city' | translate}}"  [required]="!!!isLocal" />
                         <mat-error *ngIf="!validateCtrlChk(perCityNotLocal) && profileForm.controls.perCityNotLocal.errors?.required">
                             {{'profile.err.city' | translate }}
                         </mat-error>
-                        
+
                       </mat-form-field>
                     </div>
                   </div>
@@ -223,14 +223,14 @@
                               </mat-error>
                           </mat-form-field>
                         </div>
-      
+
                     <div class="form-group col-md-4 input-group" style="padding-left: 15px; padding-right: 15px;">
                         <mat-form-field class="font-size-s" style="width:30%">
                             <mat-select formControlName="percodeTele" #percodetele placeholder="{{'profile.label.codetel' | translate}}">
                               <mat-option *ngFor="let country of countries" [value]="country.countryDialCode">
                                 + {{ country.countryDialCode }} {{ country.countryCode }}
                               </mat-option>
-                            </mat-select>                      
+                            </mat-select>
                           </mat-form-field>
                       <mat-form-field class="example-full-width font-size-s" style="width:70%">
                         <input matInput formControlName="perTelephone" (keyup)="isChanged()" [textMask]="{mask: maskForeigner}" id="perTelephone" type="text"
@@ -290,7 +290,7 @@
                     </div>
                   </div>
                   <div class="row">
-      
+
                     <div class="form-group col-md-4">
                       <mat-form-field *ngIf="isCorrsLocal" class="example-full-width font-size-s">
                         <mat-select (change)="isChanged()" #corsPost formControlName="corrsPostcode" placeholder="{{'profile.label.postcode' | translate}}">
@@ -307,26 +307,26 @@
                             <mat-option *ngFor="let country of countries" [value]="country.countryDialCode">
                               + {{ country.countryDialCode }} {{ country.countryCode }}
                             </mat-option>
-                          </mat-select>                     
+                          </mat-select>
                         </mat-form-field>
                       <mat-form-field class="example-full-width font-size-s" style="width:70%">
                         <input matInput (keyup)="isChanged()" #corshomephone formControlName="corrsTelephone" [textMask]="{mask: maskForeigner}"
                           type="text" placeholder="{{'profile.label.homeph' | translate}}" />
                       </mat-form-field>
                     </div>
-                    <div class="form-group input-group col-md-4" style="padding-left: 15px; padding-right: 15px;">
+                    <!-- <div class="form-group input-group col-md-4" style="padding-left: 15px; padding-right: 15px;">
                         <mat-form-field class="font-size-s" style="width:30%">
                             <mat-select formControlName="mobilecodeTelefon" #mobilecodetele placeholder="{{'profile.label.codetel' | translate}}" >
                               <mat-option *ngFor="let country of countries" [value]="country.countryDialCode">
                                 + {{ country.countryDialCode }} {{ country.countryCode }}
                               </mat-option>
-                            </mat-select>                     
+                            </mat-select>
                           </mat-form-field>
                       <mat-form-field class="example-full-width font-size-s" style="width:70%">
                         <input matInput #corsmobile formControlName="corrsMobile" [textMask]="{mask: maskForeigner}" type="text"
                           placeholder="{{'profile.label.mobile' | translate}}" value="{{ mobileNo }}" />
                       </mat-form-field>
-                    </div>
+                    </div> -->
                   </div>
                   <div class="form-group" style="float: right;">
                       <!-- <button mat-raised-button color="warn" type="button" id="btnreset" class="form-control btn btn-md btn-warning font-size-s"
@@ -342,7 +342,7 @@
                     </button>
                   </div>
                 </div>
-              
+
               </form>
           </mat-tab>
           <mat-tab label="{{'profile.label.changeEmail' | translate}}" class="font-size-s">
@@ -377,7 +377,7 @@
                             </mat-option>
                           </mat-select>
                           <mat-error *ngIf="!validateCtrlChk(codeTelefonf) && phoneForm.controls.codeTelefonf.errors?.required">
-                              {{'register.err.codetel' | translate }}  
+                              {{'register.err.codetel' | translate }}
                             </mat-error>
                         </mat-form-field>
                         <mat-form-field class="font-size-s" style="width:80%">
@@ -391,7 +391,7 @@
                             </mat-error>
                           </mat-form-field>
                   </div>
-               
+
                 <div class="form-group" style="float: right;">
                     <button mat-raised-button type="button" color="primary" class="form-control btn btn-md btn-success font-size-s"
                     (click)="updateProfilePhone(phoneForm.value);false" style="width: 100px; font-family: Roboto; margin-left: 5px;" [disabled]="telefonf.invalid || codeTelefonf.invalid">
@@ -400,9 +400,9 @@
               </form>
           </mat-tab>
         </mat-tab-group>
-      
 
-      
+
+
   </div>
-  
+
 </div>
