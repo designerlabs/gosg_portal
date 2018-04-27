@@ -22,7 +22,7 @@
 </div>
 <div class="container formbg">
   <div class="col-md-12">&nbsp;</div>
-  <div class="row">    
+  <div class="row">
     <div class="form-group col-md-4">
       <div class="form-group">
         <label for="usr">{{'onlineservices.basedonagency' | translate}}</label>
@@ -45,15 +45,15 @@
               <option *ngFor="let data of dataAlpha" [value]="data">{{ data }}</option>
           </select>
         </div>
-    </div>    
+    </div>
   </div>
   <div class="row" style="padding:20px 0px 20px 0px;">
     <div class="col-md-12">
-      <div class="col-md-4">     
+      <div class="col-md-4">
           <mat-checkbox class="example-margin" id="rdoOnline" (change)="chkDocument($event, 1)" [(ngModel)]="chkOnline" tabindex="3"><span class="font-size-m">
             {{'onlineservices.btnonlineservice' | translate}}</span></mat-checkbox>
         </div>
-        <div class="col-md-4">        
+        <div class="col-md-4">
         <mat-checkbox class="example-margin font-size-m" id="rdoDown" (change)="chkDocument($event, 2)" [(ngModel)]="chkDownload" tabindex="4"><span class="font-size-m">{{'onlineservices.btndownload' | translate}}</span></mat-checkbox>
         </div>
         <div class="col-md-2">
@@ -84,7 +84,7 @@
                 </tr>
             </tbody>
         </table>
-    
+
         <div *ngIf="showNoData" class="row text-align-Center padding-20"> {{ 'common.msg.nodata' | translate }} </div>
       </div>
       <div class="float-right paddingTop-15">
@@ -129,11 +129,11 @@
                     </div>
                     <!-- <a class="appUrl hoverlnk font-size-m" [href]="element.agencyApplicationUrl" target="_blank"> {{ element.agencyApplicationName}} <span class="onlineSignTag"><i [ngClass]="(!element.agencyApplicationUrl || element.agencyApplicationUrl == '-') ? 'fa fa-unlink' : (element.isDocument) ? 'fa fa-download' : 'fa fa-link'"></i></span></a> -->
                   </td>
-                 
+
                 </tr>
             </tbody>
         </table>
-    
+
         <div *ngIf="showNoData" class="row text-align-Center padding-20"> {{ 'common.msg.nodata' | translate }} </div>
       </div>
       <div class="float-right paddingTop-15">
@@ -146,7 +146,7 @@
           <span class="table_footer_pagination">{{ 'common.pagination.pages' | translate }}
             <strong>{{dataAgencyPage?.pageNumber}}</strong> {{ 'common.pagination.of' | translate }}
             <strong>{{dataAgencyPage?.totalPages}}</strong> {{ 'common.pagination.in' | translate }}
-            <strong>{{dataAgencyPage?.totalElements}}</strong> Application</span>
+            <strong>{{dataAgencyPage?.totalElements}}</strong> {{ 'common.pagination.records' | translate }}</span>
           <button mat-mini-fab color="basic" [disabled]="noPrevData" (click)="paginatorL(dataAgencyPage?.pageNumber)">
             <i [ngClass]="sharedService.icon.arrLeft" aria-hidden="true"></i>
           </button>
@@ -159,5 +159,5 @@
       {{element | json }}
     </div> -->
   </div>
-  
+
 </div>
