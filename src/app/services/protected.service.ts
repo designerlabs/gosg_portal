@@ -15,15 +15,15 @@ export class ProtectedService {
   constructor(private http: Http, @Inject(APP_CONFIG) private config: AppConfig, private translate: TranslateService) {
 
     translate.onLangChange.subscribe((event: LangChangeEvent) => {
-      
+
                   const myLang = translate.currentLang;
-      
+
                   if (myLang == 'en') {
                       translate.get('HOME').subscribe((res: any) => {
                           this.lang = 'en';
                           this.langId = 1;
                       });
-      
+
                   }
                   if (myLang == 'ms') {
                       translate.get('HOME').subscribe((res: any) => {
@@ -31,7 +31,7 @@ export class ProtectedService {
                           this.langId = 2;
                       });
                   }
-            
+
               });
 
               if(!this.languageId){
@@ -64,20 +64,20 @@ export class ProtectedService {
     .post(this.profileUrl, user).map((response: Response) => response.json())
     .catch(this.handleError);
   }
-  
+
   getProfile(userId){
     return this.http
     .get(this.profileUrl+"/"+userId+"?language="+this.languageId).map((response: Response) => response.json())
     .catch(this.handleError);
 
-  } 
+  }
 
 
   getUser(){
     return this.http
     .get(this.getUserUrl+"?language="+localStorage.getItem('langID')).map((response: Response) => response.json())
     .catch(this.handleError);
-  } 
+  }
 
   updateProfile(user) {
     return this.http
@@ -93,7 +93,7 @@ export class ProtectedService {
 
   updatePhone(pid, user) {
     return this.http
-    .put(this.profilePhoneUrl+"/update/"+pid+"?requestEmail="+user+"&language="+localStorage.getItem('langID'), user).map((response: Response) => response.json())
+    .put(this.profilePhoneUrl+"/update/"+pid+"?requestPhone="+user+"&language="+localStorage.getItem('langID'), user).map((response: Response) => response.json())
     .catch(this.handleError);
   }
 
@@ -109,7 +109,7 @@ export class ProtectedService {
     .delete(this.mailUrl+msgId).map((response: Response) => response.json())
     .catch(this.handleError);
   }
-  
+
   deleteMails(msgId){
     return this.http
     .delete(this.mailUrl+"delete/selected?id="+msgId).map((response: Response) => response.json())
@@ -122,13 +122,13 @@ export class ProtectedService {
     .catch(this.handleError);
   }
 
-  completeProfileEmail(){ 
+  completeProfileEmail(){
     return this.http
     .put(this.completeUrlEmail+"?language="+localStorage.getItem('langID'),'').map((response: Response) => response.json())
     .catch(this.handleError);
   }
 
-  completeProfilePhone(){ 
+  completeProfilePhone(){
     return this.http
     .put(this.completeUrlPhone+"?language="+localStorage.getItem('langID'),'').map((response: Response) => response.json())
     .catch(this.handleError);
@@ -156,7 +156,7 @@ export class ProtectedService {
       .retry(5)
       .catch(this.handleError);
   }
-  
+
 
   getMail(msgId){
     return this.http

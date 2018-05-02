@@ -23,8 +23,18 @@
 
             .lifeEventBox {
                 position: relative;
-                padding: 10px 40px;
+                padding: 10px 25px;
                 text-align: center;
+            }
+
+            .lifeEventBox-description{
+                padding:10px;
+            }
+
+            .lifeEventBox .innerBox{
+                display: block;
+                background: #e8e8e8;
+                min-height: 225px;
             }
 
             .lefteventlist{
@@ -61,6 +71,12 @@
                 height: 95%;
             }
 
+            .lifeEventBox h2, .lifeEventBox h2 span {
+                padding: 10px 5px;
+                color: #000;
+                font-weight: 600;
+            }
+
             .text {
                 white-space: nowrap;
                 color: white;
@@ -75,15 +91,18 @@
 
             .lifeEventBox a {
                 text-decoration: none;
-                display: block;
-                height: 170px;
+                cursor: pointer;
                 overflow: hidden;
-                color: #333;
+                color: #666;
+            }
+
+            .lifeEventBox a:hover {
+                color: #000;
             }
 
             .lifeEventBox-title{
-                color:rgb(0, 189, 187);
                 text-transform: uppercase;
+                background-color: #f1f1f1;
             }
 
             .text button{

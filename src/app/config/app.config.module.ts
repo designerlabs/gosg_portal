@@ -98,7 +98,7 @@ export const APP_DI_CONFIG: AppConfig = {
     urlRace: commonURL+'race/lang/',
     urlCity: commonURL+'city/state/',
     urlReligion: commonURL+'religion/lang/',
-    urlLifeevent: './app/apidata/lifeevent',
+    urlLifeevent: commonURL+'life/event',
     urlSubtopic: './app/apidata/subtopic',
     urlTopics: './app/apidata/articlemenu',
     urlHighlights: './app/apidata/highlightbox',
