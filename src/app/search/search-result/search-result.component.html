@@ -26,7 +26,7 @@
       <div style="background-color: #f5f5f5">
         <div *ngIf="tabIndex==0 || tabIndex==1">          
           <ul class="side-menu-list">
-            <li style="padding: 10px;">
+            <!-- <li style="padding: 10px;">
               <header class="font-size-s;" style="cursor: pointer;" (click)="sKeyword = !sKeyword">
                 <span>
                     {{'home.search.keywordset' | translate}}
@@ -56,7 +56,7 @@
                       </mat-form-field>                  
                     </mat-radio-group>  
               </div>              
-            </li>            
+            </li>             -->
             <li style="padding: 10px;">
               <header (click)="sSpeci = !sSpeci" class="font-size-m;" class="font-size-s;" style="cursor: pointer;">
                 <span>{{'home.search.specification' | translate}}
@@ -136,7 +136,7 @@
                       </mat-select-trigger>
                       <mat-option *ngFor="let i of ddmonthPub" [value]="i.name" style="width:90%">
                         <span>{{i.name | date:'MMMM yyyy'}}</span>
-                        <span class="pull-right">({{i.val}})</span>
+                        <!-- <span class="pull-right">({{i.val}})</span> -->
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
@@ -158,23 +158,23 @@
                   </mat-form-field>
                 </li>
                 <li>
-                  <mat-form-field class="font-size-s" style="width:100%;">
+                  <mat-form-field class="font-size-s example-full-width">
                     <mat-select placeholder="{{'home.search.filtop' | translate}}" (change)="chkfiltrtopic($event)" [(ngModel)]="valTopic" multiple>
                       <mat-select-trigger>
                         {{selTopicDisp}}
-                        <span *ngIf="valTopic?.length > 1" class="example-additional-selection">
+                        <span *ngIf="valTopic?.length > 1" class="example-additional-selection pull-right">
                           (+{{valTopic.length - 1}} others)
                         </span>
                       </mat-select-trigger>
-                      <mat-option *ngFor="let i of ddtopics" [value]="i">
-                        {{i.name}}
-                        <span class="pull-right">({{i.val}})</span>
+                      <mat-option *ngFor="let i of ddtopics" [value]="i.val" class="example-full-width">
+                        {{i.val}}
+                        <!-- <span class="pull-right">{{i.val}}</span> -->
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
                 </li>
                 <li>
-                  <mat-form-field class="font-size-s" style="width:100%;">
+                  <mat-form-field class="font-size-s example-full-width">
                     <mat-select placeholder="{{'home.search.filsubtopic' | translate}}" (change)="chksubtop($event)" [(ngModel)]="valSubTopic" multiple>
                       <mat-select-trigger>
                         {{selSubTopicDisp}}
@@ -182,9 +182,9 @@
                           (+{{valSubTopic.length - 1}} others)
                         </span>
                       </mat-select-trigger>
-                      <mat-option *ngFor="let i of ddsubTopics" [value]="i">
-                        {{i.name}}
-                        <span class="pull-right">({{i.val}})</span>
+                      <mat-option *ngFor="let i of ddsubTopics" [value]="i.val" style="width: 100vw">
+                        {{i.val}}
+                        <!-- <span class="pull-right">{{i.val}}</span> -->
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
@@ -253,6 +253,7 @@
             </ul>
         </div>
       </div>
+      <!-- <button class="btn btn-md" mat-raised-button (click)="checkCurrObj()">CHECK</button> -->
     </div>
     <div class="col-md-9">   
       <h3 class="font-size-l">

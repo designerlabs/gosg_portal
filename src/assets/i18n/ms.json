@@ -246,7 +246,8 @@
       "total":"Jumlah Capaian"
     },
     "msg": {  
-      "login": "Sila Log Masuk / Daftar Untuk Mengakses PERKHIDMATAN Yang Disediakan",
+      "beforeLogin": "Sila Log Masuk / Daftar Untuk Mengakses PERKHIDMATAN Yang Disediakan",
+      "afterLogin": "Senarai perkhidmatan yang ditawarkan oleh Gerbang MyGovernment",
       "instruction": "Perkhidmatan yang ditawarkan oleh Gerbang MyGovernment perlu menggunakan nombor kad pengenalan bagi warganegara Malaysia"
     }
   },

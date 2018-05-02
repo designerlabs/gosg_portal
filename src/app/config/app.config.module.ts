@@ -52,6 +52,7 @@ export class AppConfig {
     portalURL:string;
     protectedURL:string;
     urlIntSearch:string;
+    urlOsSearch:string;
     urlUserType:string;
     urlMail:string;
     urlAgency:string;
@@ -116,6 +117,7 @@ export const APP_DI_CONFIG: AppConfig = {
     urlDashboard: uapURL + 'portal-protected/dashboard/',
     protectedURL:protectedBaseURL,
     urlIntSearch: searchServiceURL + 'content',
+    urlOsSearch: searchServiceURL + 'agency',
     urlUserType:uapURL+'service/user/type/lang/',
     urlMail: protectedBaseURL+'inbox/',
     urlUAP: uapURL,
