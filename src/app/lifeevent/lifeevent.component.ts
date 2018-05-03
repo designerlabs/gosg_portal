@@ -11,6 +11,8 @@ import { SharedService } from '../common/shared.service';
   styleUrls: ['./lifeevent.component.css']
 })
 export class LifeeventComponent implements OnInit {
+  lifeEventDesc: any;
+  lifeEventTitle: any;
   lifeEventData: any[];
   lang = 'en';
   constructor(private translate: TranslateService, private http: Http, @Inject(APP_CONFIG) private config: AppConfig, private sharedService: SharedService) {
@@ -34,9 +36,11 @@ export class LifeeventComponent implements OnInit {
 
   private lifeEventUrl: string = 'life/event';
   getData(lang: string){
-        
+
          return this.sharedService.readPortal(this.lifeEventUrl)
           .subscribe(resSliderData => {
+                this.lifeEventTitle = resSliderData['contentCategoryName'];
+                this.lifeEventDesc = resSliderData['contentCategoryDescription'];
                 this.lifeEventData = resSliderData['contentCategoryResourceList'];
             });
     }

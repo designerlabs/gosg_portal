@@ -22,9 +22,6 @@ export class OnlineserviceComponent implements OnInit {
   valByKeyword: any;
 
   dropdownOpt = [];
-
-
-
   onlyAgency: boolean = false;
   keyword: boolean = false;
   agencyUrl: any;
@@ -88,7 +85,7 @@ export class OnlineserviceComponent implements OnInit {
           ];
         });
 
-       
+
 
       }
       if (myLang == 'ms') {
@@ -118,7 +115,7 @@ export class OnlineserviceComponent implements OnInit {
       this.selAgency(this.pageCount, this.pageSize);
       // this.getAgencyList();
       this.reset();
-     
+
     });
 
 
@@ -156,7 +153,7 @@ export class OnlineserviceComponent implements OnInit {
 
 
   /**
-   * 
+   *
    * Select an options
    */
 
@@ -182,22 +179,22 @@ export class OnlineserviceComponent implements OnInit {
       this.keyword = true;
       this.onlyAgency = false;
       this.selAllAgency(this.pageCount, this.pageSize);
-    }  
+    }
   }
 
 
 
 
 /**
- * 
+ *
  * Load Alpha
  */
 
- 
+
 loadAlpha(onlineService?, agency?, isDocument?, keyword?){
   let dataUrl;
- 
-  
+
+
   if(agency && (typeof isDocument !== 'undefined')){
     dataUrl = 'agency/agencyid/app/alpha?document='+isDocument+'&language='+this.languageId;
   }else if(onlineService && (typeof isDocument !== 'undefined')){
@@ -220,8 +217,8 @@ loadAlpha(onlineService?, agency?, isDocument?, keyword?){
 
 
 /**
- * 
- * 
+ *
+ *
  * Checkbox selections
  *
  */
@@ -286,7 +283,7 @@ chkDocument(e, val) {
         this.selAllAgency(this.pageCount, this.pageSize, true);
       }
     }
-   
+
   }
   else if(agencyVal == "1"){
     if(!e.checked){
@@ -328,8 +325,8 @@ chkDocument(e, val) {
           this.selAllAgency(this.pageCount, this.pageSize, undefined, this.valByKeyword);
         }
       }
-      
-     
+
+
     }else{
       if(!e.checked){
         this.selAllAgency(this.pageCount, this.pageSize);
@@ -343,14 +340,14 @@ chkDocument(e, val) {
         }
       }
     }
-    
-  } 
+
+  }
 }
 
 
 /**
- * 
- * 
+ *
+ *
  * Left and Right pagination navigation
  */
 
@@ -380,7 +377,7 @@ paginatorL(page) {
         this.selAgency(this.pageCount, this.pageSize, undefined, alphaVal);
       }
     }
-    
+
   }else if(agencyVal == "0"){
     if(this.chkOnline){
       this.selAllAgency(this.pageCount, this.pageSize, false);
@@ -406,12 +403,12 @@ paginatorL(page) {
       }else{
         this.selAllAgency(this.pageCount, this.pageSize, undefined, this.valByKeyword);
       }
-     
+
     }
-    
+
   } else{
     this.selAllAgency(page - 1, this.pageSize);
-  }  
+  }
 }
 
 
@@ -468,12 +465,12 @@ pageChange(event, totalPages) {
       }else{
         this.selAllAgency(this.pageCount, this.pageSize, undefined, this.valByKeyword);
       }
-     
+
     }
-    
+
   }else{
     this.selAllAgency(this.pageCount, this.pageSize);
-  }  
+  }
 
 }
 
@@ -487,7 +484,7 @@ paginatorR(page, totalPages) {
   let pageInc: any;
   pageInc = page + 1;
   this.pageCount = pageInc;
-  
+
 
   if((agencyVal) && (alphaVal !== "0")){
     if(agencyVal == "0"){
@@ -507,7 +504,7 @@ paginatorR(page, totalPages) {
         this.selAgency(pageInc, this.pageSize, undefined, alphaVal);
       }
     }
-    
+
   }else if(agencyVal == "0"){
     if(this.chkOnline){
       this.selAllAgency(pageInc, this.pageSize, false);
@@ -533,13 +530,13 @@ paginatorR(page, totalPages) {
       }else{
         this.selAllAgency(pageInc, this.pageSize, undefined, this.valByKeyword);
       }
-     
+
     }
-    
+
   }else{
     this.selAllAgency(pageInc, this.pageSize);
-  }  
- 
+  }
+
 }
 
 
@@ -558,7 +555,7 @@ paginatorR(page, totalPages) {
     this.noPrevData = true;
     this.chkDownload = false;
     this.chkOnline = false;
-    this.valByAlpha = "0"; 
+    this.valByAlpha = "0";
     if(eve.value == 1){
       this.onlyAgency = true;
       this.keyword = false;
@@ -623,7 +620,7 @@ paginatorR(page, totalPages) {
     this.selAllAgency(this.pageCount, this.pageSize, undefined, val);
   }
 
-  
+
   getDataSelByAlpha(val){
     let dataUrl="";
       if (val !== "0") {
@@ -669,7 +666,7 @@ paginatorR(page, totalPages) {
                   this.noNextData = this.dataPage.pageNumber === this.dataPage.totalPages;
                 }
               }
-             
+
             }).bind(this));
             this.loading = false;
           },
@@ -682,8 +679,8 @@ paginatorR(page, totalPages) {
           this.selAgency(this.pageCount, this.pageSize);
         }else{
           this.selAllAgency(this.pageCount, this.pageSize);
-        }        
-      }  
+        }
+      }
   }
 
   selAllAgency(page, pagesize, isDocument?, keyword?, letter?) {
@@ -691,9 +688,9 @@ paginatorR(page, totalPages) {
     let dataUrl = '';
     if(letter && (typeof isDocument !== 'undefined')){
       dataUrl = 'agency/application/search/onlineservices?page='+page+'&size='+pagesize+'&letter='+letter+'&document='+isDocument+'&language='+this.languageId;
-    }else if(keyword && (typeof isDocument !== 'undefined')){ 
+    }else if(keyword && (typeof isDocument !== 'undefined')){
       dataUrl = 'agency/application/search/onlineservices?page='+page+'&size='+pagesize+'&keyword='+keyword+'&document='+isDocument+'&language='+this.languageId;
-    }else if(keyword){ 
+    }else if(keyword){
       dataUrl = 'agency/application/search/onlineservices?page='+page+'&size='+pagesize+'&keyword='+keyword+'&language='+this.languageId;
     }else if(letter){
       dataUrl = 'agency/application/search/onlineservices?page='+page+'&size='+pagesize+'&letter='+letter+'&language='+this.languageId;
@@ -779,7 +776,7 @@ paginatorR(page, totalPages) {
     this.sharedService.defaultPageSize = this.sharedService.pageSize[0].size;
     this.selAllAgency(this.pageCount, this.pageSize);
   }
-  
+
   getChkDocData(val){
     this.loading = true;
     if(this.valByAgency == "0"){
