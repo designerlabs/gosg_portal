@@ -53,7 +53,7 @@
             color: #1ebebc !important;
         }
 
-        
+
 
         .intro-box h4 {
             color: #333;
@@ -66,7 +66,7 @@
         }
 
         .topic_bg_title {
-            margin-top: 100px;
+            margin: -120px 0px;
             cursor: default;
             color: #fff;
             position: relative;

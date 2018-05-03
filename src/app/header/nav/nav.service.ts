@@ -36,10 +36,10 @@ export class NavService {
   private urlAnnouncement: string = this.config.urlAnnouncementSub;
   private subUrl: string = this.config.urlSubtopic;
 
-  
+
 
   getMenuData(lang): Observable<IMenu[]> {
-    
+
     return this.http.get(this.config.urlPortal + 'cp/menu?language=' + lang)
       .map((response: Response) => response.json().corePortalMenuList)
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
@@ -52,7 +52,7 @@ export class NavService {
 
       return this.http.get(this.config.urlPortal + moduleName + '/' +ID + '?language=' + lang)
         .take(1)
-        .map((response: Response) => response.json().results)
+        .map((response: Response) => response.json().contentCategoryResource.results)
 
         // .catch((error:any) =>
         // Observable.throw(error.json().error || 'Server error')
@@ -97,8 +97,8 @@ export class NavService {
 
   getSubRss(moduleName, subID: number, lang) {
     // alert("Test");
- 
- 
+
+
      if (!isNaN(subID)) {
        return this.http.get(this.config.urlPortal  + moduleName +'/id/'+ subID + '?language=' + lang)
          .take(1)
@@ -121,6 +121,8 @@ export class NavService {
   triggerSubArticle(topicID, subID, lang) {
    // alert("Trigger sub acrticle");
     if (!isNaN(subID)) {
+      this.articleService.articles = [''];
+      this.articles = [''];
       return this.route.paramMap
         .switchMap((params: ParamMap) =>
           this.getSubArticleUrl(topicID, subID, lang))
@@ -139,6 +141,8 @@ export class NavService {
   triggerSubRss(topicID, subID, lang) {
     // alert("Trigger sub acrticle");
      if (!isNaN(subID)) {
+      this.articleService.articles = [''];
+      this.articles = [''];
        return this.route.paramMap
          .switchMap((params: ParamMap) =>
            this.getSubRss(topicID, subID, lang))
@@ -148,13 +152,15 @@ export class NavService {
            this.breadcrumb = this.breadcrumbService.getBreadcrumb();
            this.isValid = this.breadcrumbService.isValid = true;
            this.breadcrumb = this.breadcrumb.name = '';
- 
+
          });
      }
    }
- 
+
   triggerArticle(moduleName, lang, topicID) {
     if (!isNaN(topicID)) {
+      this.articles = [''];
+      this.articleService.articles = [''];
       return this.route.paramMap
         .switchMap((params: ParamMap) =>
           this.getArticleData(moduleName, lang, topicID))

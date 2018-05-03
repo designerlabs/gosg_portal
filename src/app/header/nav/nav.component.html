@@ -15,15 +15,15 @@
                         <a class="drop"  (mouseover)="changeStyle($event)" (mouseout)="changeStyle($event)">{{menu.title}}
                             <span class="caret"></span>
                         </a>
-                       <!-- Begin 5 columns container -->  
+                       <!-- Begin 5 columns container -->
                         <div class="dropdown_5columns" [ngClass]="color">
                             <div class="col_6">
-                                <ul>  
+                                <ul>
                                     <li class="col-md-4" *ngFor="let data of menu.data">
-                                        <a  class="font-size-s" href="" (click)="handleClickMe(data.categoryId)" [routerLink]="['topic', data.categoryId]" ><i class="fa fa-arrow-circle-right"></i> {{data.categoryName}}</a>
+                                        <a  class="font-size-s" href="" (click)="handleClickMe(data.categoryId)" [routerLink]="['category', data.categoryId]" ><i class="fa fa-arrow-circle-right"></i> {{data.categoryName}}</a>
                                     </li>
-                                </ul>  
-                            </div>  
+                                </ul>
+                            </div>
                         </div>
                     </li>
                     <li>
@@ -32,9 +32,9 @@
                     <li>
                         <a href="" (click)="searchfunc($event)" class="h_search_btn"><i class="fa fa-search"></i></a>
                     </li>
-                    
-                    
-             
+
+
+
                 </ul>
                 </div>
             </div>

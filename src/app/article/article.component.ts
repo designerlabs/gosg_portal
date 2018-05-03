@@ -1,6 +1,7 @@
-import { Component, Output, Input, EventEmitter, OnInit, AfterViewChecked, AfterViewInit,  ViewChild, ElementRef } from '@angular/core';
+import { Component, Output, Input, EventEmitter, OnInit, AfterViewChecked, AfterViewInit,  ViewChild, ElementRef, Inject } from '@angular/core';
 import { ArticleService } from './article.service';
 import { NavService } from '../header/nav/nav.service';
+import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { BreadcrumbService } from '../header/breadcrumb/breadcrumb.service';
@@ -13,9 +14,9 @@ import 'rxjs/add/operator/switchMap';
   styleUrls: ['./article.component.css']
 })
 export class ArticleComponent implements OnInit {
-    
+
     moduleName: string;
-    
+
   @ViewChild('textarea') textarea: ElementRef;
   @Output() menuClick = new EventEmitter();
 
@@ -26,7 +27,7 @@ export class ArticleComponent implements OnInit {
 
   articleData: any;
   @Output() langChange = new EventEmitter();
-  constructor(public articleService: ArticleService,  private route: ActivatedRoute, private navService: NavService, private translate: TranslateService, private router: Router, private breadcrumbService: BreadcrumbService) {
+  constructor(public articleService: ArticleService,  private route: ActivatedRoute, private navService: NavService, private translate: TranslateService, private router: Router, private breadcrumbService: BreadcrumbService, @Inject(APP_CONFIG) private config: AppConfig) {
     this.lang = translate.currentLang;
     this.langId = 1;
 
@@ -103,13 +104,15 @@ export class ArticleComponent implements OnInit {
     }
 
     checkImgData(e){
-
-        const chkData = e.search('<img');
-        if (chkData != -1){
-            return true;
-        }else{
-            return false;
+        if(e){
+          const chkData = e.search('<img');
+          if (chkData != -1){
+              return true;
+          }else{
+              return false;
+          }
         }
+
     }
 
 }
