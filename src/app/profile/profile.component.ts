@@ -126,8 +126,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   public corrsPostcodeNotLocal: FormControl
   public corrsTelephone: FormControl
   public corrscodeTelefon: FormControl
-  // public corrsMobile: FormControl
-  // public mobilecodeTelefon: FormControl
+  public corrsMobile: FormControl
+  public mobilecodeTelefon: FormControl
   public uid: any
   public regData: any[]
   countryList:string;
@@ -232,8 +232,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.corrsPostcodeNotLocal = new FormControl()
     this.corrsTelephone = new FormControl()
     this.corrscodeTelefon = new FormControl()
-    // this.corrsMobile = new FormControl()
-    // this.mobilecodeTelefon = new FormControl()
+    this.corrsMobile = new FormControl()
+    this.mobilecodeTelefon = new FormControl()
 
     this.emailForm = new FormGroup({
       emailaddressUpdate: this.emailaddressUpdate
@@ -277,8 +277,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       corrsPostcodeNotLocal: this.corrsPostcodeNotLocal,
       corrsTelephone: this.corrsTelephone,
       corrscodeTelefon: this.corrscodeTelefon,
-      // corrsMobile: this.corrsMobile,
-      // mobilecodeTelefon: this.mobilecodeTelefon
+      corrsMobile: this.corrsMobile,
+      mobilecodeTelefon: this.mobilecodeTelefon
     });
 
     this.profileForm.disable();
@@ -325,9 +325,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                       // this.profileForm.get('corrsMobile').setValue(telenum);
                       const telecode = (data.user.mobilePhoneNo).split('*')[0];
                       this.phoneForm.get('codeTelefonf').setValue(telecode);
-                      // this.profileForm.get('mobilecodeTelefon').setValue(telecode);
+                      this.profileForm.get('mobilecodeTelefon').setValue(telecode);
                     }else {
-                      // this.profileForm.get('corrsMobile').setValue((data.user.mobilePhoneNo));
+                      this.profileForm.get('corrsMobile').setValue((data.user.mobilePhoneNo));
                     }
 
                     if(data.user.gender){
@@ -1157,7 +1157,7 @@ let bodyUpdate =
     bodyUpdate.agencyForwardUrl = this.agencyForwardUrl;
     bodyUpdate.roles = this.roles;
     bodyUpdate.email = this.regemail;
-    // bodyUpdate.mobilePhoneNo = formValues.mobilecodeTelefon + '*' + formValues.corrsMobile;
+    bodyUpdate.mobilePhoneNo = formValues.mobilecodeTelefon + '*' + formValues.corrsMobile;
     bodyUpdate.registrationDate = this.regdate;
     bodyUpdate.address.addressId = this.addressId;
     bodyUpdate.address.permanentAddress1 = formValues.perAddress1;
