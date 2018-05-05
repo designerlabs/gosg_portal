@@ -39,12 +39,13 @@ import { AgencydirectoryComponent } from './agencydirectory/agencydirectory.comp
 import { SetactiveComponent } from './subscription/setactive/setactive.component';
 import { DigitalservicesComponent } from './digitalservices/digitalservices.component';
 import { RssComponent } from './article/rss/rss.component';
+import { ContentComponent } from './article/content/content.component';
 // import { NavRouterActivator } from './header/nav/nav-router-activator.service'
 
 // import { appRoutes } from './routes';
 
 export const protectedRoutes: Routes = [
-    
+
     {path: '404', component: ErrorComponent },
     {path: 'dashboard', component: DashboardComponent},
     {path: 'agencydir', component: AgencydirectoryComponent},
@@ -56,10 +57,11 @@ export const protectedRoutes: Routes = [
     {path: 'index', component: HomeProtectedComponent},
     {path: 'firsttime', component: FirsttimeloginComponent},
     {path: 'search/searchResult', component: SearchResultComponent},
-    {path: 'topic/:id', component: ArticleComponent, canActivate: [NavRouterActivator]  },
+    {path: 'category/:id', component: ArticleComponent, canActivate: [NavRouterActivator]  },
     {path: 'rss/:id', component: RssComponent},
     {path: 'rss/id/:id', component: RssComponent},
-    {path: 'subtopic/:id1/:id2', component: SubarticleComponent },
+    {path: 'subcategory/:id1/:id2', component: SubarticleComponent },
+    {path: 'article/:id1/:id2', component: ContentComponent},
     {path: 'announcement', component: AnnouncementComponent },
     {path: 'announcement/:id', component: AnnouncementlistComponent},
     {path: 'announcement/:id/:id', component: AnnouncementdetailsComponent},
