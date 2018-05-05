@@ -8,13 +8,12 @@ import { BreadcrumbService } from '../../header/breadcrumb/breadcrumb.service';
 
 import 'rxjs/add/operator/switchMap';
 
-
 @Component({
-  selector: 'app-article',
-  templateUrl: './subarticle.component.html',
-  styleUrls: ['./subarticle.component.css']
+  selector: 'gosg-content',
+  templateUrl: './content.component.html',
+  styleUrls: ['./content.component.css']
 })
-export class SubarticleComponent implements OnInit {
+export class ContentComponent implements OnInit {
   @Output() menuClick = new EventEmitter();
   breadcrumb: any;
   isValid: any;
@@ -29,7 +28,6 @@ export class SubarticleComponent implements OnInit {
   handleClickMe(e){
     console.log(e);
   }
-
 
   constructor(public articleService: ArticleService,  private route: ActivatedRoute, private navService: NavService, private translate: TranslateService, private router: Router, private breadcrumbService: BreadcrumbService) {
     this.lang = translate.currentLang;
@@ -58,59 +56,58 @@ export class SubarticleComponent implements OnInit {
                 this.subID = parseInt(this.router.url.split('/')[3]);
             });
         }
-        this.navService.triggerSubArticle(this.topicID, this.subID, this.langId);
+        this.navService.triggerContent(this.topicID, this.subID, this.langId);
 
     });
-  }
+   }
 
-  lang = this.lang;
-  langId = this.langId;
+   lang = this.lang;
+   langId = this.langId;
 
   ngOnInit() {
-    debugger;
     this.articleData = this.articleService.getArticle();
     this.topicID = parseInt(this.router.url.split('/')[2]);
     this.subID = parseInt(this.router.url.split('/')[3]);
   //  console.log("from article "+ this.topicID)
-    this.navService.triggerSubArticle(this.topicID, this.subID, this.langId);
+    this.navService.triggerContent(this.topicID, this.subID, this.langId);
     // this.triggerArticle(this.lang,this.topicID)
   }
 
+
   getTheme(){
-        return localStorage.getItem('themeColor');
-    }
+    return localStorage.getItem('themeColor');
+  }
 
-    clickSideMenu(e){
-      this.router.navigate( ['/subcategory', e.parentId, e.categoryId]);
-      // this.navService.getSubArticleUrl(e.parentId,  e.categoryId, this.langId);
-      this.navService.triggerSubArticle(e.parentId,  e.categoryId, this.langId);
-      event.preventDefault();
-    }
+  clickSideMenu(e){
+    this.router.navigate( ['/subcategory', e.parentId, e.categoryId]);
+    // this.navService.getSubArticleUrl(e.parentId,  e.categoryId, this.langId);
+    this.navService.triggerContent(e.parentId,  e.categoryId, this.langId);
+    event.preventDefault();
+  }
 
-    clickContentFromMenu(pId, aId){
-      this.navService.triggerSubArticle(pId,  aId, this.langId);
-      this.navService.getSubArticleUrl(pId,  aId,this.langId);
-      this.router.navigate( ['/article', pId, aId]);
-      event.preventDefault();
-      // const _getSubLabel = e.json_url.split('&');
-        // let _getSubID = _getSubLabel[1].split('=');
-        // console.log(_getSubLabel);
-        // console.log(_getSubID);
-        // const _getTopicID = parseInt(this.router.url.split('/')[2]);
-        // _getSubID = parseInt(_getSubID[1]);
-        // this.navService.getSubArticleUrl(_getTopicID, _getSubID,this.langId);
-        // this.router.navigate(['/subtopic', _getTopicID, _getSubID]);
-        // event.preventDefault();
-    }
+  clickContentFromMenu(pId, aId){
+    this.navService.triggerContent(pId,  aId, this.langId);
+    this.navService.getSubArticleUrl(pId,  aId,this.langId);
+    this.router.navigate( ['/article', pId, aId]);
+    event.preventDefault();
+    // const _getSubLabel = e.json_url.split('&');
+      // let _getSubID = _getSubLabel[1].split('=');
+      // console.log(_getSubLabel);
+      // console.log(_getSubID);
+      // const _getTopicID = parseInt(this.router.url.split('/')[2]);
+      // _getSubID = parseInt(_getSubID[1]);
+      // this.navService.getSubArticleUrl(_getTopicID, _getSubID,this.langId);
+      // this.router.navigate(['/subtopic', _getTopicID, _getSubID]);
+      // event.preventDefault();
+  }
 
-
-    checkImgData(e){
-        const chkData = e.search('<img');
-        if (chkData != -1){
-            return true;
-        }else{
-            return false;
-        }
-    }
+  checkImgData(e){
+      const chkData = e.search('<img');
+      if (chkData != -1){
+          return true;
+      }else{
+          return false;
+      }
+  }
 
 }

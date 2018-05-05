@@ -42,7 +42,7 @@ export class ArticleComponent implements OnInit {
                 this.langId = 1;
                 this.moduleName = this.router.url.split('/')[1];
                 this.topicID = parseInt(this.router.url.split('/')[2]);
-                this.navService.triggerArticle(this.moduleName, this.langId, this.topicID);
+                // this.navService.triggerArticle(this.moduleName, this.langId, this.topicID);
             });
 
         }
@@ -53,9 +53,12 @@ export class ArticleComponent implements OnInit {
                 this.langId = 2;
                 this.moduleName = this.router.url.split('/')[1];
                 this.topicID = parseInt(this.router.url.split('/')[2]);
-                this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID);
+                // this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID);
             });
         }
+
+        this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID);
+
     });
 
   }
@@ -68,7 +71,7 @@ export class ArticleComponent implements OnInit {
         this.articleData = this.articleService.getArticle();
         this.moduleName = this.router.url.split('/')[1];
         this.topicID = parseInt(this.router.url.split('/')[2]);
-        this.navService.triggerArticle(this.moduleName, this.langId, this.topicID);
+        // this.navService.triggerArticle(this.moduleName, this.langId, this.topicID);
       }
 
    getTheme(){
@@ -76,15 +79,36 @@ export class ArticleComponent implements OnInit {
     }
 
     clickSideMenu(e){
-        const _getSubLabel = e.json_url.split('&');
-        let _getSubID = _getSubLabel[1].split('=');
-        console.log(_getSubLabel);
-        console.log(_getSubID);
-        const _getTopicID = parseInt(this.router.url.split('/')[2]);
-        _getSubID = parseInt(_getSubID[1]);
-        this.navService.getSubArticleUrl(_getTopicID, _getSubID,this.langId);
-        this.router.navigate(['/subtopic', _getTopicID, _getSubID]);
-        event.preventDefault();
+
+      this.navService.getSubArticleUrl(e.parentId,  e.categoryId,this.langId);
+      this.router.navigate( ['/subcategory', e.parentId, e.categoryId]);
+      event.preventDefault();
+      // const _getSubLabel = e.json_url.split('&');
+        // let _getSubID = _getSubLabel[1].split('=');
+        // console.log(_getSubLabel);
+        // console.log(_getSubID);
+        // const _getTopicID = parseInt(this.router.url.split('/')[2]);
+        // _getSubID = parseInt(_getSubID[1]);
+        // this.navService.getSubArticleUrl(_getTopicID, _getSubID,this.langId);
+        // this.router.navigate(['/subtopic', _getTopicID, _getSubID]);
+        // event.preventDefault();
+    }
+
+
+    clickContentFromMenu(pId, aId){
+      debugger;
+      this.navService.triggerContent(pId,  aId,this.langId);
+      this.router.navigate( ['/article', pId, aId]);
+      event.preventDefault();
+      // const _getSubLabel = e.json_url.split('&');
+        // let _getSubID = _getSubLabel[1].split('=');
+        // console.log(_getSubLabel);
+        // console.log(_getSubID);
+        // const _getTopicID = parseInt(this.router.url.split('/')[2]);
+        // _getSubID = parseInt(_getSubID[1]);
+        // this.navService.getSubArticleUrl(_getTopicID, _getSubID,this.langId);
+        // this.router.navigate(['/subtopic', _getTopicID, _getSubID]);
+        // event.preventDefault();
     }
 
 
