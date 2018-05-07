@@ -67,12 +67,12 @@ export class SubarticleComponent implements OnInit {
   langId = this.langId;
 
   ngOnInit() {
-    debugger;
     this.articleData = this.articleService.getArticle();
     this.topicID = parseInt(this.router.url.split('/')[2]);
     this.subID = parseInt(this.router.url.split('/')[3]);
   //  console.log("from article "+ this.topicID)
-    this.navService.triggerSubArticle(this.topicID, this.subID, this.langId);
+    this.leftmenuAcc();
+    this.navService.triggerSubArticle(this.topicID, this.subID, localStorage.getItem('langID'));
     // this.triggerArticle(this.lang,this.topicID)
   }
 
@@ -80,16 +80,34 @@ export class SubarticleComponent implements OnInit {
         return localStorage.getItem('themeColor');
     }
 
+    leftmenuAcc(){
+      var acc = document.getElementsByClassName("accordion");
+      var i;
+
+      for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+          this.classList.toggle("active");
+          var panel = this.nextElementSibling;
+          if (panel.style.maxHeight){
+            panel.style.maxHeight = null;
+          } else {
+            panel.style.maxHeight = panel.scrollHeight + "px";
+          }
+        });
+      }
+    }
+
+
     clickSideMenu(e){
-      this.router.navigate( ['/subcategory', e.parentId, e.categoryId]);
+      this.router.navigate( ['/subcategory', e.parentCode, e.categoryCode]);
       // this.navService.getSubArticleUrl(e.parentId,  e.categoryId, this.langId);
-      this.navService.triggerSubArticle(e.parentId,  e.categoryId, this.langId);
+      this.navService.triggerSubArticle(e.parentCode,  e.categoryCode, localStorage.getItem('langID'));
       event.preventDefault();
     }
 
     clickContentFromMenu(pId, aId){
-      this.navService.triggerSubArticle(pId,  aId, this.langId);
-      this.navService.getSubArticleUrl(pId,  aId,this.langId);
+      this.navService.triggerSubArticle(pId,  aId, localStorage.getItem('langID'));
+      this.navService.getSubArticleUrl(pId,  aId, localStorage.getItem('langID'));
       this.router.navigate( ['/article', pId, aId]);
       event.preventDefault();
       // const _getSubLabel = e.json_url.split('&');

@@ -69,7 +69,7 @@ export class ContentComponent implements OnInit {
     this.topicID = parseInt(this.router.url.split('/')[2]);
     this.subID = parseInt(this.router.url.split('/')[3]);
   //  console.log("from article "+ this.topicID)
-    this.navService.triggerContent(this.topicID, this.subID, this.langId);
+    this.navService.triggerContent(this.topicID, this.subID, localStorage.getItem('langID'));
     // this.triggerArticle(this.lang,this.topicID)
   }
 
@@ -79,15 +79,15 @@ export class ContentComponent implements OnInit {
   }
 
   clickSideMenu(e){
-    this.router.navigate( ['/subcategory', e.parentId, e.categoryId]);
+    this.router.navigate( ['/subcategory', e.parentCode, e.categoryCode]);
     // this.navService.getSubArticleUrl(e.parentId,  e.categoryId, this.langId);
-    this.navService.triggerContent(e.parentId,  e.categoryId, this.langId);
+    this.navService.triggerContent(e.parentCode,  e.categoryCode, localStorage.getItem('langID'));
     event.preventDefault();
   }
 
   clickContentFromMenu(pId, aId){
-    this.navService.triggerContent(pId,  aId, this.langId);
-    this.navService.getSubArticleUrl(pId,  aId,this.langId);
+    this.navService.triggerContent(pId,  aId, localStorage.getItem('langID'));
+    this.navService.getSubArticleUrl(pId,  aId, localStorage.getItem('langID'));
     this.router.navigate( ['/article', pId, aId]);
     event.preventDefault();
     // const _getSubLabel = e.json_url.split('&');

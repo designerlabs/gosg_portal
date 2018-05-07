@@ -20,7 +20,7 @@
                             <div class="col_6">
                                 <ul>
                                     <li class="col-md-4" *ngFor="let data of menu.data">
-                                        <a  class="font-size-s" href="" (click)="handleClickMe(data.categoryId)" [routerLink]="['category', data.categoryId]" ><i class="fa fa-arrow-circle-right"></i> {{data.categoryName}}</a>
+                                        <a  class="font-size-s" href="" (click)="handleClickMe(data.categoryCode)" [routerLink]="['category', data.categoryCode]" ><i class="fa fa-arrow-circle-right"></i> {{data.categoryName}}</a>
                                     </li>
                                 </ul>
                             </div>

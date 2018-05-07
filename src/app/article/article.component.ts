@@ -15,6 +15,8 @@ import 'rxjs/add/operator/switchMap';
 })
 export class ArticleComponent implements OnInit {
 
+  langIdVal: string;
+  subID: number;
     moduleName: string;
 
   @ViewChild('textarea') textarea: ElementRef;
@@ -53,13 +55,29 @@ export class ArticleComponent implements OnInit {
                 this.langId = 2;
                 this.moduleName = this.router.url.split('/')[1];
                 this.topicID = parseInt(this.router.url.split('/')[2]);
+                this.subID = parseInt(this.router.url.split('/')[3]);
                 // this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID);
             });
         }
 
-        this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID);
+
+        if(this.moduleName == 'subcategory'){
+          this.navService.triggerSubArticle(this.topicID, this.subID, this.langId);
+        }else if(this.moduleName == 'article'){
+          this.navService.triggerContent(this.topicID, this.subID, this.langId);
+        }else{
+          this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID);
+        }
+
+
 
     });
+
+    if(localStorage.getItem('langID')){
+      this.langIdVal = localStorage.getItem('langID');
+    }else{
+      this.langIdVal = this.langId;
+    }
 
   }
 
@@ -67,11 +85,12 @@ export class ArticleComponent implements OnInit {
   lang = this.lang;
   langId = this.langId;
 
+
   ngOnInit() {
         this.articleData = this.articleService.getArticle();
         this.moduleName = this.router.url.split('/')[1];
         this.topicID = parseInt(this.router.url.split('/')[2]);
-        // this.navService.triggerArticle(this.moduleName, this.langId, this.topicID);
+        this.navService.triggerArticle(this.moduleName, this.langIdVal, this.topicID);
       }
 
    getTheme(){
@@ -80,8 +99,8 @@ export class ArticleComponent implements OnInit {
 
     clickSideMenu(e){
 
-      this.navService.getSubArticleUrl(e.parentId,  e.categoryId,this.langId);
-      this.router.navigate( ['/subcategory', e.parentId, e.categoryId]);
+      this.navService.getSubArticleUrl(e.parentCode,  e.categoryCode, this.langIdVal);
+      this.router.navigate( ['/subcategory', e.parentCode, e.categoryCode]);
       event.preventDefault();
       // const _getSubLabel = e.json_url.split('&');
         // let _getSubID = _getSubLabel[1].split('=');
@@ -96,8 +115,7 @@ export class ArticleComponent implements OnInit {
 
 
     clickContentFromMenu(pId, aId){
-      debugger;
-      this.navService.triggerContent(pId,  aId,this.langId);
+      this.navService.triggerContent(pId,  aId, this.langIdVal);
       this.router.navigate( ['/article', pId, aId]);
       event.preventDefault();
       // const _getSubLabel = e.json_url.split('&');
@@ -110,9 +128,6 @@ export class ArticleComponent implements OnInit {
         // this.router.navigate(['/subtopic', _getTopicID, _getSubID]);
         // event.preventDefault();
     }
-
-
-
 
 
     triggerArticle(moduleName, lang, topicID){
