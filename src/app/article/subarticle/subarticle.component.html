@@ -31,20 +31,31 @@
                         {{article.categoryName}}
                     </h4>
 
-                    <mat-accordion>
-                      <mat-expansion-panel *ngFor="let content of article.menuLeft">
-                          <mat-expansion-panel-header>
-                            <mat-panel-title (click)="clickSideMenu(content)">
-                              <a class="warna_font sideBarMenu--link font-size-s" [routerLinkActive]="['active']"  [style.font-weight]="content.active ? 'bold' : 'normal'"  [style.color]="content.active ? getTheme() : '#333'"> {{content.categoryName}} </a>
-                            </mat-panel-title>
-                          </mat-expansion-panel-header>
-                          <div *ngFor="let subcontent of content.subMenuLeft">
-                            <a class="warna_font sideBarMenu--link font-size-s" style="color:#333" (click)="clickContentFromMenu(content.parentCode, subcontent.contentCode)">
-                              {{subcontent.contentTitle}}
-                            </a>
-                          </div>
-                      </mat-expansion-panel>
-                    </mat-accordion>
+                    <div *ngFor="let content of article.menuLeft; let i = index">
+                        <mat-accordion *ngIf="content.subMenuLeft.length !=0">
+                            <mat-expansion-panel>
+                                <mat-expansion-panel-header>
+                                  <mat-panel-title  (click)="clickSideMenu(content)">
+                                    <a class="warna_font sideBarMenu--link font-size-s" [routerLinkActive]="['active']"  [style.font-weight]="content.active ? 'bold' : 'normal'"  [style.color]="content.active ? getTheme() : '#333'" >{{content.categoryName}}</a>
+                                  </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <div *ngFor="let subcontent of content.subMenuLeft" class="submenu">
+                                  <a class="warna_font sideBarMenu--link font-size-s" style="color:#333" (click)="clickContentFromMenu(content.parentCode, subcontent.contentCode)">
+                                    {{subcontent.contentTitle}}
+                                  </a>
+                                </div>
+                            </mat-expansion-panel>
+                          </mat-accordion>
+                          <mat-accordion *ngIf="content.subMenuLeft.length == 0" multi="true" displayMode="flat">
+                            <mat-expansion-panel hideToggle="true">
+                                <mat-expansion-panel-header (click)="clickSideMenu(content)">
+                                  <mat-panel-title>
+                                    <a class="warna_font sideBarMenu--link font-size-s" [routerLinkActive]="['active']"  [style.font-weight]="content.active ? 'bold' : 'normal'"  [style.color]="content.active ? getTheme() : '#333'" >{{content.categoryName}}</a>
+                                  </mat-panel-title>
+                                </mat-expansion-panel-header>
+                            </mat-expansion-panel>
+                          </mat-accordion>
+                    </div>
                 </div>
             </div>
         </div>

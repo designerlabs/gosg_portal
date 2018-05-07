@@ -217,14 +217,14 @@
       "words": " characters left.",
       "choose": "--Please Select--"
     },
-    "reset":"Reset this form?",      
+    "reset":"Reset this form?",
     "msgsubmit": "Thank you. Your complaints/queries has been successfully sent. Responds will be received in 3 working days",
     "err":{
       "drop": "This field is required",
-      "submit": "Sorry, server down.",        
+      "submit": "Sorry, server down.",
       "type":"Sorry, type of feedback is unavailable.",
       "subject":"Sorry, subjects is unavailable."
-      
+
     }
   },
   "agencydir": {
@@ -287,14 +287,14 @@
       "organizerphone": "Organizer Contact No",
       "agency": "Agency"
     },
-    "reset":"Reset this form?",      
+    "reset":"Reset this form?",
     "msgsubmit": "Thank you. Your complaints/queries has been successfully sent. Responds will be received in 3 working days",
     "err":{
       "drop": "This field is required",
-      "submit": "Sorry, server down.",        
+      "submit": "Sorry, server down.",
       "type":"Sorry, type of feedback is unavailable.",
       "subject":"Sorry, subjects is unavailable."
-      
+
     }
   },
   "mailbox":{
@@ -315,7 +315,7 @@
       "deletesuccess":"Mail has been deleted successfully!",
       "deletesuccess_multi":"Selected mails has been deleted successfully!"
     },
-    
+
     "pagination":{
       "mails":"mails"
     }
@@ -329,6 +329,10 @@
     "disclaimer": "Disclaimer",
     "selectall" : "Select All",
     "plsselect" : "Please Select",
+    "note": "Note",
+    "brokenlink": "Broken Link",
+    "validlink":"Valid Link",
+    "downloadablelink":"Downloadable Link",
     "placeholder": {
       "keyword":"Keyword"
     },
@@ -364,7 +368,7 @@
       "reset":"Reset this form?",
       "delete":"Are you sure to delete the record?",
       "success":"Successfully added!",
-      "nodata": "No data found"  
+      "nodata": "No data found"
     },
     "state":{
       "success":"bg_header bg_success_header",
@@ -372,7 +376,7 @@
       "warn":"bg_header bg_warn_header",
       "info":"bg_header bg_info_header"
     },
-    
+
     "pagination":{
       "pages":"Pages",
       "of":"of",

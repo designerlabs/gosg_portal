@@ -1,8 +1,19 @@
-.sideBarMenu--title {
+        .sideBarMenu--title {
             font-size: 20px;
             color: #333;
             font-weight: 600;
             margin-bottom: 20px;
+        }
+
+        .submenu{
+          padding-left:40px;
+          padding-left: 17px;
+          padding-bottom: 10px;
+          padding-top: 0px;
+        }
+
+        .mat-expansion-panel-header{
+          padding: 0 10px !important;
         }
 
         .defaultColor{
