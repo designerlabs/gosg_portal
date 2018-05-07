@@ -997,6 +997,8 @@ getPostcodeByCityC(e){
       this.toastr.info(this.translate.instant('profile.msg.editbtnE'), '');
       this.initialBtn = false
       this.profileForm.enable()
+      this.profileForm.get('mobilecodeTelefon').disable();
+      this.profileForm.get('corrsMobile').disable();
       // this.dob.enable();
       this.checkReqValues();
     } else {

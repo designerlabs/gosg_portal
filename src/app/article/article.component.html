@@ -33,33 +33,32 @@
 
                     </h4>
 
-                    <mat-accordion>
-                      <mat-expansion-panel *ngFor="let content of article.menuLeft" >
-                          <mat-expansion-panel-header>
-                            <mat-panel-title>
-                              {{content.categoryName}}
-                            </mat-panel-title>
-                          </mat-expansion-panel-header>
-                          <div *ngFor="let subcontent of content.subMenuLeft">
-                            <a class="warna_font sideBarMenu--link font-size-s" style="color:#333" (click)="clickContentFromMenu(content.parentCode, subcontent.contentCode)">
-                              {{subcontent.contentTitle}}
-                            </a>
-                          </div>
-                      </mat-expansion-panel>
+                    <div *ngFor="let content of article.menuLeft; let i = index">
+                        <mat-accordion *ngIf="content.subMenuLeft.length !=0">
+                            <mat-expansion-panel>
+                                <mat-expansion-panel-header>
+                                  <mat-panel-title  (click)="clickSideMenu(content)">
+                                    <a class="warna_font sideBarMenu--link font-size-s" [routerLinkActive]="['active']"  [style.font-weight]="content.active ? 'bold' : 'normal'"  [style.color]="content.active ? getTheme() : '#333'" >{{content.categoryName}}</a>
+                                  </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <div *ngFor="let subcontent of content.subMenuLeft">
+                                  <a class="warna_font sideBarMenu--link font-size-s" style="color:#333" (click)="clickContentFromMenu(content.parentCode, subcontent.contentCode)">
+                                    {{subcontent.contentTitle}}
+                                  </a>
+                                </div>
+                            </mat-expansion-panel>
+                          </mat-accordion>
+                          <div *ngIf="content.subMenuLeft.length == 0">
+                              <mat-expansion-panel>
+                                  <mat-expansion-panel-header>
+                                    <mat-panel-title  (click)="clickSideMenu(content)">
+                                      <a class="warna_font sideBarMenu--link font-size-s" [routerLinkActive]="['active']"  [style.font-weight]="content.active ? 'bold' : 'normal'"  [style.color]="content.active ? getTheme() : '#333'" >{{content.categoryName}}</a>
+                                    </mat-panel-title>
+                                  </mat-expansion-panel-header>
+                              </mat-expansion-panel>
+                            </div>
+                    </div>
 
-                          <!-- <mat-expansion-panel (opened)="panelOpenState = true"
-                                               (closed)="panelOpenState = false">
-                            <mat-expansion-panel-header>
-                              <mat-panel-title>
-                                Self aware panel
-                              </mat-panel-title>
-                              <mat-panel-description>
-                                Currently I am {{panelOpenState ? 'open' : 'closed'}}
-                              </mat-panel-description>
-                            </mat-expansion-panel-header>
-                            <p>I'm visible because I am open</p>
-                          </mat-expansion-panel> -->
-                        </mat-accordion>
 
 
                     <!-- <ul class="list-unstyled">
