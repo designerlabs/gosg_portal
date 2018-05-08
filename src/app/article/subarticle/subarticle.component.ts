@@ -15,12 +15,13 @@ import 'rxjs/add/operator/switchMap';
   styleUrls: ['./subarticle.component.css']
 })
 export class SubarticleComponent implements OnInit {
+  statusID: any;
   @Output() menuClick = new EventEmitter();
   breadcrumb: any;
   isValid: any;
   topicID: number;
   subID: number;
-
+  step = 0;
   articles: any[];
 
   articleData: any;
@@ -70,55 +71,28 @@ export class SubarticleComponent implements OnInit {
     this.articleData = this.articleService.getArticle();
     this.topicID = parseInt(this.router.url.split('/')[2]);
     this.subID = parseInt(this.router.url.split('/')[3]);
-  //  console.log("from article "+ this.topicID)
-    this.leftmenuAcc();
     this.navService.triggerSubArticle(this.topicID, this.subID, localStorage.getItem('langID'));
-    // this.triggerArticle(this.lang,this.topicID)
   }
 
   getTheme(){
         return localStorage.getItem('themeColor');
     }
 
-    leftmenuAcc(){
-      var acc = document.getElementsByClassName("accordion");
-      var i;
-
-      for (i = 0; i < acc.length; i++) {
-        acc[i].addEventListener("click", function() {
-          this.classList.toggle("active");
-          var panel = this.nextElementSibling;
-          if (panel.style.maxHeight){
-            panel.style.maxHeight = null;
-          } else {
-            panel.style.maxHeight = panel.scrollHeight + "px";
-          }
-        });
-      }
-    }
-
 
     clickSideMenu(e){
-      this.router.navigate( ['/subcategory', e.parentCode, e.categoryCode]);
-      // this.navService.getSubArticleUrl(e.parentId,  e.categoryId, this.langId);
+      this.statusID = '';
+      this.navService.getSubArticleUrl(e.parentId,  e.categoryId,localStorage.getItem('langID'));
       this.navService.triggerSubArticle(e.parentCode,  e.categoryCode, localStorage.getItem('langID'));
+      this.router.navigate( ['/subcategory', e.parentCode, e.categoryCode]);
       event.preventDefault();
     }
 
-    clickContentFromMenu(pId, aId){
-      this.navService.triggerSubArticle(pId,  aId, localStorage.getItem('langID'));
-      this.navService.getSubArticleUrl(pId,  aId, localStorage.getItem('langID'));
+    clickContentFromMenu(pId, aId, status){
+      this.statusID = status;
+      this.navService.triggerContent(pId,  aId, localStorage.getItem('langID'));
+      this.navService.getContentUrl(pId,  aId, localStorage.getItem('langID'));
       this.router.navigate( ['/article', pId, aId]);
       event.preventDefault();
-      // const _getSubLabel = e.json_url.split('&');
-        // let _getSubID = _getSubLabel[1].split('=');
-        // console.log(_getSubLabel);
-        // console.log(_getSubID);
-        // const _getTopicID = parseInt(this.router.url.split('/')[2]);
-        // _getSubID = parseInt(_getSubID[1]);
-        // this.navService.getSubArticleUrl(_getTopicID, _getSubID,this.langId);
-        // this.router.navigate(['/subtopic', _getTopicID, _getSubID]);
-        // event.preventDefault();
     }
 
 
