@@ -140,7 +140,7 @@
                     </mat-select>
                   </mat-form-field>
                 </li>
-                <li>
+                <li *ngIf="chktopic">
                   <mat-form-field class="font-size-s example-full-width">
                     <mat-select placeholder="{{'home.search.filtop' | translate}}" (change)="chkfiltrtopic($event)" [(ngModel)]="valTopic" multiple>
                       <mat-select-trigger>
@@ -156,7 +156,7 @@
                     </mat-select>
                   </mat-form-field>
                 </li>
-                <li>
+                <li *ngIf="chksubtopic">
                   <mat-form-field class="font-size-s example-full-width">
                     <mat-select placeholder="{{'home.search.filsubtopic' | translate}}" (change)="chksubtop($event)" [(ngModel)]="valSubTopic" multiple>
                       <mat-select-trigger>
@@ -174,7 +174,7 @@
                 </li>
               </ul>
               <ul class="side-menu-list" *ngIf="sFilter && tabIndex==1" style="margin-top: 10px;">
-                <li>
+                <li *ngIf="chkosminis">
                   <mat-form-field class="font-size-s" style="width:100%;">
                     <mat-select placeholder="{{'home.search.specminis' | translate}}" (change)="chkministry($event)" [(ngModel)]="valMinistry" multiple>
                       <mat-select-trigger>
@@ -190,7 +190,7 @@
                     </mat-select>
                   </mat-form-field>
                 </li>
-                <li>
+                <li *ngIf="chkosagency">
                   <mat-form-field class="font-size-s" style="width:100%;">
                     <mat-select placeholder="{{'home.search.specagen' | translate}}" (change)="chkagency($event)" [(ngModel)]="valAgency" multiple>
                       <mat-select-trigger>

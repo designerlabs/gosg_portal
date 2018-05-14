@@ -877,17 +877,23 @@ export class SearchResultComponent implements OnInit {
   }
 
   chkSpeci(e, type, elemName) {
-    // console.log(e)
+    console.log(e)
     // console.log(type)
 
     switch (type) {
 
       case "content_topic":
         this.chktopic = e.checked
+        if(e.checked == false)
+          this.selTopicDisp = "";
+          this.valTopic = [];
         break;
 
       case "content_sub_topic":
         this.chksubtopic = e.checked
+        if(e.checked == false)
+          this.selSubTopicDisp = "";
+          this.valSubTopic = [];
         break;
 
       case "content_title":
@@ -908,10 +914,16 @@ export class SearchResultComponent implements OnInit {
 
       case "ministry_name":
         this.chkosminis = e.checked
+        if(e.checked == false)
+          this.selMinisDisp = "";
+          this.valMinistry = [];
         break;
 
       case "agency_name":
         this.chkosagency = e.checked
+        if(e.checked == false)
+          this.selAgencyDisp = "";
+          this.valAgency = [];
         break;
 
       case "citizen":
