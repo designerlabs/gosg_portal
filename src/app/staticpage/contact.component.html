@@ -2,10 +2,10 @@
     <div class="row" style="margin-top: 20px;margin-bottom: 20px;">
         <div class="col-md-4 address">
             <h4 class="font-size-m" style="font-weight: bold;" [style.color]="getTheme()">
-                HUBUNGI KAMI
+                {{ 'home.menu.contact' | translate }}
             </h4>
             <br>
-            <p style="margin-left:0px">UNIT PEMODENAN TADBIRAN <br>DAN PERANCANGAN PENGURUSAN MALAYSIA</p>
+            <!-- <p style="margin-left:0px">UNIT PEMODENAN TADBIRAN <br>DAN PERANCANGAN PENGURUSAN MALAYSIA</p>
             <p><span [style.background]="getTheme()" class="glyphicon glyphicon-home primary"></span> Aras 6, Blok B2 <br>Kompleks Jabatan Perdana Menteri <br>
             Pusat Pentadbiran Kerajaan Persekutuan <br> 62502 Putrajaya Malaysia
             </p>
@@ -22,16 +22,27 @@
             <p><span [style.background]="getTheme()" class="glyphicon glyphicon-print primary"></span> 603 8888 3721
             </p>
             <p><span [style.background]="getTheme()" class="glyphicon glyphicon-envelope primary"></span> admin[at]mampu[dot]gov[dot]my
-            </p>
+            </p> -->
+            <div *ngFor="let eachitm of dataContact">
+                <div *ngIf="eachitm.footerContentIcon">
+                    <span [style.background-color]="getTheme()" ngClass="fa fa-{{eachitm.footerContentIcon}} primary" style="width: 15px;"></span>
+                    <p style="display: inline;" *ngIf="eachitm.enabled" [innerHtml]="eachitm.footerContentName"></p>                    
+                </div>
+            
+                <p *ngIf="eachitm.enabled && !eachitm.footerContentIcon" [innerHtml]="eachitm.footerContentName"></p>
+                <br>
+            </div>
         </div>
         <div class="col-md-8">
-            <div class="tabs-section">
+            <!-- <div class="tabs-section">
                 <div class="tab-content" id="tab-1">
                     <div class="map-responsive">
                         <iframe class="mapstyle" src="https://www.google.com/maps/d/u/0/embed?mid=1HCp_1z3uCoY6LbkzQxveYauOp8o"></iframe>
+                        <div id="dirmap"></div>
                     </div>
                 </div>
-            </div>
+            </div> -->
+            <div class="map-responsive mapstyle" id="dirmap"></div>
         </div>
     </div>
 </div>

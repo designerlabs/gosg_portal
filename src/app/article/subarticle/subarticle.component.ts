@@ -92,6 +92,7 @@ export class SubarticleComponent implements OnInit {
 
 
     clickSideMenu(e){
+
       this.statusID = '';
       this.navService.getSubArticleUrl(e.parentId,  e.categoryId,localStorage.getItem('langID'));
       this.navService.triggerSubArticle(e.parentCode,  e.categoryCode, localStorage.getItem('langID'));
@@ -100,6 +101,7 @@ export class SubarticleComponent implements OnInit {
     }
 
     clickContentFromMenu(pId, aId, status){
+   
       this.statusID = status;
       this.navService.triggerContent(pId,  aId, localStorage.getItem('langID'));
       this.navService.getContentUrl(pId,  aId, localStorage.getItem('langID'));
