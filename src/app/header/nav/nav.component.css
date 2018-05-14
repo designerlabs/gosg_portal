@@ -62,11 +62,12 @@ li.active > a {
 .btn-primary {
   background-color: #337ab7;
   text-shadow: 1px 1px #00285e;
+  letter-spacing: 0.2em;
 }
 
 .btn-primary:hover {
   color: #000;
-  font-weight: bolder;
+  /* font-weight: bolder; */
   background-color: #6abaff;
   text-shadow: 1px 1px #337ab7;
 }

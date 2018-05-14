@@ -8,6 +8,7 @@ import { RouterLinkActive, Router } from '@angular/router';
 import { NavService } from './nav.service';
 import * as $ from 'jquery';
 import { SearchService } from '../../search/search.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-nav',
@@ -34,7 +35,15 @@ export class NavComponent implements OnInit, AfterViewInit {
     private articleUrl: string = this.config.urlArticle;
     private menuUrl: string = this.config.urlMenu;
 
-    constructor(private translate: TranslateService, @Inject(APP_CONFIG) private config: AppConfig, private http: Http, private navService: NavService, private router: Router, private searchService: SearchService) {
+    constructor(
+        private translate: TranslateService,
+        private toastr: ToastrService, 
+        @Inject(APP_CONFIG) private config: AppConfig, 
+        private http: Http, 
+        private navService: NavService, 
+        private router: Router, 
+        private searchService: SearchService)
+         {
         translate.onLangChange.subscribe((event: LangChangeEvent) => {
 
             const myLang = translate.currentLang;
@@ -65,7 +74,7 @@ export class NavComponent implements OnInit, AfterViewInit {
         } else {
             this.languageId = 1;
         }
-        console.log(this.languageId)
+        // console.log(this.languageId)
     }
 
     ngOnInit() {
@@ -120,7 +129,7 @@ export class NavComponent implements OnInit, AfterViewInit {
         this.navService.getPopularData(body)
             .subscribe(resPopularData => {
                 this.popData = resPopularData
-                console.log(this.popData)
+                // console.log(this.popData)
             });
     }
 
@@ -133,11 +142,15 @@ export class NavComponent implements OnInit, AfterViewInit {
     }
 
     mainSearch(key) {
-        console.log(key)
-        $('#searchDDown').css({ 'display': 'none' });
-        localStorage.setItem('ser_word', key);
-        this.router.navigate(['search/searchResult']);
-        this.internal(key);
+        // console.log(key)
+        if(key) {
+            $('#searchDDown').css({ 'display': 'none' });
+            localStorage.setItem('ser_word', key);
+            this.router.navigate(['search/searchResult']);
+            this.internal(key);
+        } else {
+            this.toastr.error(this.translate.instant('common.msg.searchKeyword'), '');
+        }
     }
 
     internal(key) {
@@ -160,7 +173,7 @@ export class NavComponent implements OnInit, AfterViewInit {
             }
         }
 
-        console.log(body)
+        // console.log(body)
         this.searchService.getInternal(JSON.stringify(body)).subscribe(
             data => {
                 this.searchService.setIntData(data);

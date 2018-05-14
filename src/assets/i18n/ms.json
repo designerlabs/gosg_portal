@@ -24,6 +24,7 @@
       "find": "CARI",
       "instruction": "Taipkan kata kunci carian di sini",
       "searchresult": "Keputusan Carian",
+      "popSearch": "Carian Popular",
       "keywordset": "Tetapan Kata Kunci",
       "specification": "Spesifikasi Carian",
       "filter": "Tapisan Berasaskan",
@@ -370,7 +371,8 @@
       "reset":"Set semula borang ini?",
       "delete":"Padam mesej ini?",
       "success":"Successfully added!",
-      "nodata": "Tiada maklumat"
+      "nodata": "Tiada maklumat",
+      "searchKeyword": "Sila masukkan kata kunci carian"
     },
     "state":{
       "success":"bg_header bg_success_header",

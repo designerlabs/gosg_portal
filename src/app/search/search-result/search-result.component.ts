@@ -133,7 +133,7 @@ export class SearchResultComponent implements OnInit {
     } else {
       this.languageId = 1;
     }
-    console.log(this.languageId)
+    // console.log(this.languageId)
   }
 
   public local = true;
@@ -607,7 +607,7 @@ export class SearchResultComponent implements OnInit {
       // console.log(this.chkKeyValue)
       // console.log(this.inpExcWord)
       if (this.inpExcWord)
-        console.log(this.keywordSplitter(this.inpExcWord))
+        // console.log(this.keywordSplitter(this.inpExcWord))
 
       // console.log(this.locFields)
 
@@ -624,7 +624,7 @@ export class SearchResultComponent implements OnInit {
         this.keywordMap.not = arrKeywordeySetting;
         delete this.keywordMap.all;
         delete this.keywordMap.any;
-        console.log(this.keywordMap)
+        // console.log(this.keywordMap)
         this.mainObj.keywordMap = this.keywordMap;
       } else if (this.chkKeyValue == "2" && this.inpExcWord) {
         arrKeywordeySetting = this.keywordSplitter(this.inpExcWord);
@@ -632,7 +632,7 @@ export class SearchResultComponent implements OnInit {
         this.keywordMap.not = arrKeywordeySetting;
         delete this.keywordMap.exact;
         delete this.keywordMap.any;
-        console.log(this.keywordMap)
+        // console.log(this.keywordMap)
         this.mainObj.keywordMap = this.keywordMap;
       } else if (this.chkKeyValue == "3" && this.inpExcWord) {
         arrKeywordeySetting = this.keywordSplitter(this.inpExcWord)
@@ -640,7 +640,7 @@ export class SearchResultComponent implements OnInit {
         this.keywordMap.not = arrKeywordeySetting;
         delete this.keywordMap.all;
         delete this.keywordMap.exact;
-        console.log(this.keywordMap)
+        // console.log(this.keywordMap)
         this.mainObj.keywordMap = this.keywordMap;
       }
 
@@ -734,14 +734,16 @@ export class SearchResultComponent implements OnInit {
       return this.http.post(dataUrl, payloadObj)
         .map(res => res.json())
         .subscribe(rData => {
-          // console.log("CURRENT SEARCH RESULT:")
-          // console.log(rData);
+          console.log("CURRENT SEARCH RESULT:")
+          console.log(rData);
 
           let num;
 
           if (this.tabIndex == 0 || this.tabIndex == 1) {
-            this.totalElements = rData.stats.hits.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            num = (rData.stats.hits) / (this.pagesize);
+            if(rData.stats.hits) {
+              this.totalElements = rData.stats.hits.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+              num = (rData.stats.hits) / (this.pagesize);
+            }
             this.millisec = rData.stats.tookMillis;
             this.intData = rData.data;
           } else {
@@ -755,10 +757,10 @@ export class SearchResultComponent implements OnInit {
 
           num = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
           
-          console.log(num)
-          console.log(this.totalElements.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
+          // console.log(num)
+          // console.log(this.totalElements.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
 
-          console.log(this.intData)
+          // console.log(this.intData)
 
           this.selMonPubDisp = '';
           this.selAuthDisp = '';
@@ -864,12 +866,12 @@ export class SearchResultComponent implements OnInit {
   changeGlob(eve, val) {
     this.chkGlobValue = val;
     this.searchByKeyword(this.ser_word);
-    console.log(this.chkGlobValue)
+    // console.log(this.chkGlobValue)
   }
 
   chkKeyword(eve, id) {
-    console.log(eve)
-    console.log(this.inpExcWord)
+    // console.log(eve)
+    // console.log(this.inpExcWord)
     // this.inpExcWord = '';
     // this.toastr.success(id);
   }
@@ -1019,7 +1021,7 @@ export class SearchResultComponent implements OnInit {
     this.valMinistry = [];
     this.valAgency = [];
 
-    console.log(this.ser_word)
+    // console.log(this.ser_word)
 
     // console.log(this.mainObj)
 
@@ -1044,7 +1046,7 @@ export class SearchResultComponent implements OnInit {
     if (this.mainObj.keywordMap)
       delete this.mainObj.keywordMap
 
-    console.log(this.mainObj)
+    // console.log(this.mainObj)
     // debugger;
     // console.log(this.rangesObj)
     // console.log(this.refLangObj)

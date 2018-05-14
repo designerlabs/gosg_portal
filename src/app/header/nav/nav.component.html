@@ -38,7 +38,7 @@
                     <li class="col-md-12">
                         <div id="search-expand">
                             <div class="input-group">
-                                <input class="form-control" type="text" [(ngModel)]="ser_word" placeholder="How Can We Help You?" id="input_keyword">
+                                <input class="form-control" style="border: 1px inset #4e5d6c" type="text" [(ngModel)]="ser_word" placeholder="{{'home.search.label' | translate}}" id="input_keyword">
                                 <span class="input-group-btn">
                                     <button class="btn btn-default" id="submit_keyword" type="button" value="Submit" (click)="mainSearch(ser_word)"><span class="fa fa-search"></span><span class="sr-only">Search Keyword</span></button>
                                 </span>
@@ -47,9 +47,9 @@
                         <div class="col-md-12">&nbsp;</div>
                         <div id="search-tag">
                             <h6 class="font-size-s" style="font-family: Roboto; color: #222">
-                            Popular Searches:
+                                {{'home.search.popSearch' | translate}}
                             </h6>
-                            <button *ngFor="let key of popData" class="btn btn-primary btn-sm" style="margin-right: 1%;" type="button" (click)="mainSearch(key)" value="{{key}}">
+                            <button *ngFor="let key of popData" class="btn btn-primary btn-sm" style="margin-right: 1%; margin-bottom: 1%" type="button" (click)="mainSearch(key)" value="{{key}}">
                                 {{ key }}
                             </button>
                         </div>

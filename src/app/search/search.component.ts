@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SearchService } from '../search/search.service';
+import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-search',
@@ -9,7 +11,12 @@ import { SearchService } from '../search/search.service';
 })
 export class SearchComponent implements OnInit {
 
-    constructor(private router: Router, private searchService:SearchService) { 
+    constructor(
+        private translate: TranslateService,
+        private router: Router, 
+        private searchService:SearchService,
+        private toastr: ToastrService
+    ) { 
     
         if(!this.languageId){
         this.languageId = localStorage.getItem('langID');
@@ -27,9 +34,17 @@ export class SearchComponent implements OnInit {
     }
 
     mainSearch(key) {
-        localStorage.setItem('ser_word', key);
-        this.router.navigate(['search/searchResult']);
-        this.internal(key); 
+        if(key) {
+            $('#searchDDown').css({ 'display': 'none' });
+            localStorage.setItem('ser_word', key);
+            this.router.navigate(['search/searchResult']);
+            this.internal(key);
+        } else {
+            this.toastr.error(this.translate.instant('common.msg.searchKeyword'), '');
+        }
+        // localStorage.setItem('ser_word', key);
+        // this.router.navigate(['search/searchResult']);
+        // this.internal(key); 
     }
     
     internal(key) {

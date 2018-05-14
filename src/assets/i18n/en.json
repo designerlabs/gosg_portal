@@ -24,6 +24,7 @@
       "find": "FIND",
       "instruction": "Type search keywords here",
       "searchresult": "Search Results",
+      "popSearch": "Popular Searches",
       "keywordset": "Keyword Settings",
       "specification": "Search Specification",
       "filter": "Filter",
@@ -369,7 +370,8 @@
       "reset":"Reset this form?",
       "delete":"Are you sure to delete the record?",
       "success":"Successfully added!",
-      "nodata": "No data found"
+      "nodata": "No data found",
+      "searchKeyword": "Please enter a word to search"
     },
     "state":{
       "success":"bg_header bg_success_header",
