@@ -35,6 +35,7 @@ export class NavService {
   private articleUrl: string = this.config.urlArticle;
   private urlAnnouncement: string = this.config.urlAnnouncementSub;
   private subUrl: string = this.config.urlSubtopic;
+  private popularUrl: string = this.config.urlPopularSearch;
 
   
 
@@ -42,6 +43,14 @@ export class NavService {
     
     return this.http.get(this.config.urlPortal + 'cp/menu?language=' + lang)
       .map((response: Response) => response.json().corePortalMenuList)
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+
+  }
+
+  getPopularData(body) {
+    
+    return this.http.post(this.popularUrl, body)
+      .map((response: Response) => response.json().data[0].term)
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
 
   }

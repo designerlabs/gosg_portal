@@ -1,34 +1,41 @@
 import { Component, OnInit, AfterViewInit, Input, Output, EventEmitter, Inject } from '@angular/core';
 // import { AuthService } from '../../auth/auth.service'
 import { IMenu, IUrl } from './nav.model';
-import { Http, Response} from '@angular/http';
+import { Http, Response } from '@angular/http';
 import { APP_CONFIG, AppConfig } from '../../config/app.config.module';
-import {TranslateService, LangChangeEvent } from '@ngx-translate/core';
-import { RouterLinkActive  } from '@angular/router';
+import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
+import { RouterLinkActive, Router } from '@angular/router';
 import { NavService } from './nav.service';
 import * as $ from 'jquery';
+import { SearchService } from '../../search/search.service';
 
 @Component({
-  selector: 'app-nav',
-  templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.css']
-  
-  
+    selector: 'app-nav',
+    templateUrl: './nav.component.html',
+    styleUrls: ['./nav.component.css']
+
 })
 export class NavComponent implements OnInit, AfterViewInit {
 
-  @Output() menuClick = new EventEmitter();
-  imgSrc: string;
-  menus: IMenu[];
-  articles: any[];
-  lang = 'en';
-  langId = 1;
-  active_color = 'blue';
-  inactive_color = 'red';
-  setUrl = 'portal';
-  menuId: number;
-  constructor(private translate: TranslateService, @Inject(APP_CONFIG) private config: AppConfig, private http: Http, private navService: NavService) {
-    translate.onLangChange.subscribe((event: LangChangeEvent) => {
+    @Output() menuClick = new EventEmitter();
+    languageId: any;
+    imgSrc: string;
+    menus: IMenu[];
+    articles: any[];
+    lang = 'en';
+    langId = 1;
+    active_color = 'blue';
+    inactive_color = 'red';
+    setUrl = 'portal';
+    menuId: number;
+    popData: any;
+    ser_word = "";
+
+    private articleUrl: string = this.config.urlArticle;
+    private menuUrl: string = this.config.urlMenu;
+
+    constructor(private translate: TranslateService, @Inject(APP_CONFIG) private config: AppConfig, private http: Http, private navService: NavService, private router: Router, private searchService: SearchService) {
+        translate.onLangChange.subscribe((event: LangChangeEvent) => {
 
             const myLang = translate.currentLang;
 
@@ -52,54 +59,114 @@ export class NavComponent implements OnInit, AfterViewInit {
                 });
             }
         });
-   }
 
+        if (!this.languageId) {
+            this.languageId = localStorage.getItem('langID');
+        } else {
+            this.languageId = 1;
+        }
+        console.log(this.languageId)
+    }
 
-  private articleUrl: string = this.config.urlArticle;
-  private menuUrl: string = this.config.urlMenu;
-  ngOnInit() {
-    this.imgSrc = 'logo_ms';
-    this.navService.getMenuData(this.langId)
+    ngOnInit() {
+        this.imgSrc = 'logo_ms';
+        this.navService.getMenuData(this.langId)
             .subscribe(resMenuData => this.menus = resMenuData);
-  }
+        this.getPop();
+    }
 
-  color:string = 'red';
-  
-  changeStyle($event){
-    this.color = $event.type == 'mouseover' ? 'animated fadeIn' : '';
-  }
+    color: string = 'red';
 
-  handleClickMe(e){
+    changeStyle($event) {
+        this.color = $event.type == 'mouseover' ? 'animated fadeIn' : '';
+    }
+
+    handleClickMe(e) {
         this.menuClick.emit(e);
         this.menuId = e;
         // this.navService.triggerArticle('',this.langId, e);
     }
 
-  ngAfterViewInit() {
-        $(function(){
-            $('#main-menu > li > a').css({'backgroundColor': '#fff', 'color': '#000'});
+    ngAfterViewInit() {
+        $(function () {
+            $('#main-menu > li > a').css({ 'backgroundColor': '#fff', 'color': '#000' });
             $('#main-menu > li > a.active').css('background-color', localStorage.getItem('themeColor'));
-       });
+        });
 
     }
 
+    dropdownDisplay(action) {
+        $(function () {
 
-    getMenu(){
+            if (action == 'show')
+                $('#searchDDown').css({ 'display': 'block' });
+            else
+                $('#searchDDown').css({ 'display': 'none' });
+            // $('#searchDDown').css('background-color', localStorage.getItem('themeColor'));
+        });
+    }
+
+    getMenu() {
         this.navService.getMenuData(this.langId)
-            .subscribe(resMenuData => {this.menus = resMenuData});
+            .subscribe(resMenuData => { this.menus = resMenuData });
     }
 
-    getTheme(){
+    getPop() {
+        let body = {
+            "size": 10,
+            "filters": {
+            }
+        };
+        this.navService.getPopularData(body)
+            .subscribe(resPopularData => {
+                this.popData = resPopularData
+                console.log(this.popData)
+            });
+    }
+
+    getTheme() {
         return localStorage.getItem('themeColor');
     }
 
-    getUrl(){
+    getUrl() {
         return 'portal';
     }
 
-    searchfunc(eveny) {
-        alert('search');
-        event.preventDefault();
+    mainSearch(key) {
+        console.log(key)
+        $('#searchDDown').css({ 'display': 'none' });
+        localStorage.setItem('ser_word', key);
+        this.router.navigate(['search/searchResult']);
+        this.internal(key);
+    }
+
+    internal(key) {
+
+        let body = {
+            "size": 10,
+            "from": 0,
+            "keyword": key,
+            "filters": {
+                "ranges":
+                    {
+                        "end_date": [
+                            {
+                                "gte": "now/d",
+                                "time_zone": "+08:00"
+                            }
+                        ]
+                    },
+                "ref_language_id": this.languageId
+            }
+        }
+
+        console.log(body)
+        this.searchService.getInternal(JSON.stringify(body)).subscribe(
+            data => {
+                this.searchService.setIntData(data);
+            });
+
+
     }
 
 }

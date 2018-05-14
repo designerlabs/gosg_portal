@@ -17,7 +17,7 @@ let commonURL = uapURL+'service/';
 // backend service
 let baseLocalURL = './app/apidata/';
 let searchServiceURL = 'http://10.1.70.219:9200/gosg/';
-// let searchServiceURL = 'https://www.malaysia.gov.my/public/';
+let searchServicePublicURL = 'https://www.malaysia.gov.my/public/';
 let pollUrl = commonURL + "polls";
 
 export class AppConfig {
@@ -53,6 +53,7 @@ export class AppConfig {
     protectedURL:string;
     urlIntSearch:string;
     urlOsSearch:string;
+    urlGlobalSearch:string;
     urlUserType:string;
     urlMail:string;
     urlAgency:string;
@@ -78,6 +79,7 @@ export class AppConfig {
     urlSubscription: string;
     urlDigitalServices: string;
     urlDigitalServicesDetails: string;
+    urlPopularSearch: string;
 }
 
 export const APP_DI_CONFIG: AppConfig = {
@@ -116,8 +118,10 @@ export const APP_DI_CONFIG: AppConfig = {
     portalURL: portalBaseURL,
     urlDashboard: uapURL + 'portal-protected/dashboard/',
     protectedURL:protectedBaseURL,
+    urlPopularSearch: searchServiceURL + 'popular',
     urlIntSearch: searchServiceURL + 'content',
     urlOsSearch: searchServiceURL + 'agency',
+    urlGlobalSearch: searchServicePublicURL + 'query/1/',
     urlUserType:uapURL+'service/user/type/lang/',
     urlMail: protectedBaseURL+'inbox/',
     urlUAP: uapURL,
@@ -137,7 +141,7 @@ export const APP_DI_CONFIG: AppConfig = {
     externalMediaURL: mediaURL+"media",
     urlSubscription: registrationUrl + 'subscription',
     urlDigitalServices: commonURL + 'digitalservice',
-    urlDigitalServicesDetails: commonURL + 'digitalservice/details',
+    urlDigitalServicesDetails: commonURL + 'digitalservice/details'
 };
 
 @NgModule({
