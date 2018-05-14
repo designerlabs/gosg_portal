@@ -32,7 +32,7 @@
                     </h4>
 
                     <mat-accordion>
-                            <mat-expansion-panel  *ngFor="let content of article.menuLeft; let i = index" multi="false" displayMode="flat" [hideToggle]="content.subMenuLeft.length==0 ? true: null"  [expanded]="content.activeMenu || (i == statusID)">
+                            <mat-expansion-panel  *ngFor="let content of article.menuLeft; let i = index" multi="false" displayMode="flat" [hideToggle]="content.subMenuLeft.length==0 ? true: null"  [expanded]="statusID ? (i == statusID) : content?.activeMenu">
 
                                 <mat-expansion-panel-header>
                                   <mat-panel-title  (click)="clickSideMenu(content)">

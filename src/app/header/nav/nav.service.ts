@@ -17,18 +17,19 @@ import 'rxjs/add/observable/of';
 
 @Injectable()
 export class NavService {
-
+  myMethod$: Observable<any>;
   articles: any[];
   breadcrumb: any;
   isValid: any;
   topicStatus: any;
   dataT: any;
-
+  private myMethodSubject = new Subject<any>();
   announces: any[];
 
   // tslint:disable-next-line:max-line-length
   constructor(private http: Http, @Inject(APP_CONFIG) private config: AppConfig, private route: ActivatedRoute, private router: Router, private breadcrumbService: BreadcrumbService, private articleService: ArticleService, private announceService: AnnouncementlistService) {
     this.topicStatus = true;
+    this.myMethod$ = this.myMethodSubject.asObservable();
   }
 
   private menuUrl: string = this.config.urlMenu;
@@ -45,6 +46,8 @@ export class NavService {
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
 
   }
+
+
 
   getArticleData(moduleName, lang: string, ID: number): Observable<boolean[]> {
 

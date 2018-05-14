@@ -1,4 +1,4 @@
-import { Component, Output, Input, EventEmitter, OnInit, AfterViewChecked, AfterViewInit  } from '@angular/core';
+import { Component, Output, Input, EventEmitter, OnInit, AfterContentInit, AfterViewChecked, AfterViewInit  } from '@angular/core';
 import { ArticleService } from '../article.service';
 
 import { NavService } from '../../header/nav/nav.service';
@@ -13,14 +13,14 @@ import 'rxjs/add/operator/switchMap';
   templateUrl: './content.component.html',
   styleUrls: ['./content.component.css']
 })
-export class ContentComponent implements OnInit {
+export class ContentComponent implements OnInit, AfterViewChecked {
   statusID: any;
   @Output() menuClick = new EventEmitter();
   breadcrumb: any;
   isValid: any;
   topicID: number;
   subID: number;
-
+  moduleName: string;
   articles: any[];
 
   articleData: any;
@@ -43,6 +43,7 @@ export class ContentComponent implements OnInit {
             translate.get('HOME').subscribe((res: any) => {
                 this.lang = 'en';
                 this.langId = 1;
+                this.moduleName = this.router.url.split('/')[1];
                 this.topicID = parseInt(this.router.url.split('/')[2]);
                 this.subID = parseInt(this.router.url.split('/')[3]);
             });
@@ -53,17 +54,33 @@ export class ContentComponent implements OnInit {
             translate.get('HOME').subscribe((res: any) => {
                 this.lang = 'ms';
                 this.langId = 2;
+                this.moduleName = this.router.url.split('/')[1];
                 this.topicID = parseInt(this.router.url.split('/')[2]);
                 this.subID = parseInt(this.router.url.split('/')[3]);
             });
         }
-        this.navService.triggerContent(this.topicID, this.subID, this.langId);
+
+
+        if(this.moduleName == 'subcategory'){
+          this.navService.triggerSubArticle(this.topicID, this.subID, this.langId);
+        }else if(this.moduleName == 'article'){
+          this.navService.triggerContent(this.topicID, this.subID, this.langId);
+        }else{
+          this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID);
+        }
 
     });
    }
 
    lang = this.lang;
    langId = this.langId;
+
+
+   ngAfterViewChecked(){
+     if(localStorage.getItem('subtopicID')){
+       this.statusID = localStorage.getItem('subtopicID');
+     }
+  }
 
   ngOnInit() {
     this.articleData = this.articleService.getArticle();
@@ -89,6 +106,7 @@ export class ContentComponent implements OnInit {
     this.statusID = status;
     this.navService.triggerContent(pId,  aId, localStorage.getItem('langID'));
     this.navService.getContentUrl(pId,  aId, localStorage.getItem('langID'));
+    localStorage.setItem('subtopicID', status);
     this.router.navigate( ['/article', pId, aId]);
     event.preventDefault();
   }

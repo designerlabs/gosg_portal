@@ -23,7 +23,7 @@ export class SubarticleComponent implements OnInit {
   subID: number;
   step = 0;
   articles: any[];
-
+  moduleName: string;
   articleData: any;
   @Output() langChange = new EventEmitter();
 
@@ -45,6 +45,7 @@ export class SubarticleComponent implements OnInit {
             translate.get('HOME').subscribe((res: any) => {
                 this.lang = 'en';
                 this.langId = 1;
+                this.moduleName = this.router.url.split('/')[1];
                 this.topicID = parseInt(this.router.url.split('/')[2]);
                 this.subID = parseInt(this.router.url.split('/')[3]);
             });
@@ -55,11 +56,22 @@ export class SubarticleComponent implements OnInit {
             translate.get('HOME').subscribe((res: any) => {
                 this.lang = 'ms';
                 this.langId = 2;
+                this.moduleName = this.router.url.split('/')[1];
                 this.topicID = parseInt(this.router.url.split('/')[2]);
                 this.subID = parseInt(this.router.url.split('/')[3]);
             });
         }
-        this.navService.triggerSubArticle(this.topicID, this.subID, this.langId);
+
+
+        if(this.moduleName == 'subcategory'){
+          this.navService.triggerSubArticle(this.topicID, this.subID, this.langId);
+        }else if(this.moduleName == 'article'){
+          this.navService.triggerContent(this.topicID, this.subID, this.langId);
+        }else{
+          this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID);
+        }
+
+        // this.navService.triggerSubArticle(this.topicID, this.subID, this.langId);
 
     });
   }
@@ -91,6 +103,7 @@ export class SubarticleComponent implements OnInit {
       this.statusID = status;
       this.navService.triggerContent(pId,  aId, localStorage.getItem('langID'));
       this.navService.getContentUrl(pId,  aId, localStorage.getItem('langID'));
+      localStorage.setItem('subtopicID', status);
       this.router.navigate( ['/article', pId, aId]);
       event.preventDefault();
     }

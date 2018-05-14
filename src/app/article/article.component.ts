@@ -1,4 +1,4 @@
-import { Component, Output, Input, EventEmitter, OnInit, AfterViewChecked, AfterViewInit,  ViewChild, ElementRef, Inject } from '@angular/core';
+import { Component, Output, Input, EventEmitter, OnInit, AfterViewChecked, AfterViewInit,  ViewChild, ElementRef, Inject, AfterContentInit } from '@angular/core';
 import { ArticleService } from './article.service';
 import { NavService } from '../header/nav/nav.service';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
@@ -14,7 +14,6 @@ import 'rxjs/add/operator/switchMap';
   styleUrls: ['./article.component.css']
 })
 export class ArticleComponent implements OnInit {
-
   statusID: any;
   langIdVal: string;
   subID: number;
@@ -85,6 +84,7 @@ export class ArticleComponent implements OnInit {
 
   lang = this.lang;
   langId = this.langId;
+
 
 
   ngOnInit() {
