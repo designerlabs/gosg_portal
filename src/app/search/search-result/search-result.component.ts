@@ -755,7 +755,8 @@ export class SearchResultComponent implements OnInit {
             this.intData = this.changeAryVal(rData.data,'global')
           }
 
-          num = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+          if(num)
+            num = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
           
           // console.log(num)
           // console.log(this.totalElements.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
@@ -830,28 +831,28 @@ export class SearchResultComponent implements OnInit {
 
             }
 
+            if (this.totalElements % this.pagesize > 0) {
+              this.totalPages = Math.floor(num) + 1;
+            } else {
+              this.totalPages = num;
+            }
+            if (this.totalPages > 0) {
+              this.noNextData = this.pageNumber === this.totalPages;
+            } else {
+              this.noNextData = true;
+            }
+  
+  
+            //   this.serchService.searchResData = rData.data;
+            this.showNoData = false;
+            this.loading = false;
+
           } else {
             this.showNoData = true;
             this.sKeyword = false; //side menu 
             this.sSpeci = false; //side menu
             this.sFilter = false; //side menu
           }
-
-          if (this.totalElements % this.pagesize > 0) {
-            this.totalPages = Math.floor(num) + 1;
-          } else {
-            this.totalPages = num;
-          }
-          if (this.totalPages > 0) {
-            this.noNextData = this.pageNumber === this.totalPages;
-          } else {
-            this.noNextData = true;
-          }
-
-
-          //   this.serchService.searchResData = rData.data;
-          this.showNoData = false;
-          this.loading = false;
         },
           error => {
             this.loading = false;
