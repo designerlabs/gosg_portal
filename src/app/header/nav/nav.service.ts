@@ -17,18 +17,19 @@ import 'rxjs/add/observable/of';
 
 @Injectable()
 export class NavService {
-
+  myMethod$: Observable<any>;
   articles: any[];
   breadcrumb: any;
   isValid: any;
   topicStatus: any;
   dataT: any;
-
+  private myMethodSubject = new Subject<any>();
   announces: any[];
 
   // tslint:disable-next-line:max-line-length
   constructor(private http: Http, @Inject(APP_CONFIG) private config: AppConfig, private route: ActivatedRoute, private router: Router, private breadcrumbService: BreadcrumbService, private articleService: ArticleService, private announceService: AnnouncementlistService) {
     this.topicStatus = true;
+    this.myMethod$ = this.myMethodSubject.asObservable();
   }
 
   private menuUrl: string = this.config.urlMenu;
@@ -37,10 +38,10 @@ export class NavService {
   private subUrl: string = this.config.urlSubtopic;
   private popularUrl: string = this.config.urlPopularSearch;
 
-  
+
 
   getMenuData(lang): Observable<IMenu[]> {
-    
+
     return this.http.get(this.config.urlPortal + 'cp/menu?language=' + lang)
       .map((response: Response) => response.json().corePortalMenuList)
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
@@ -55,13 +56,14 @@ export class NavService {
 
   }
 
+
   getArticleData(moduleName, lang: string, ID: number): Observable<boolean[]> {
 
     if (!isNaN(ID)) {
 
       return this.http.get(this.config.urlPortal + moduleName + '/' +ID + '?language=' + lang)
         .take(1)
-        .map((response: Response) => response.json().results)
+        .map((response: Response) => response.json().contentCategoryResource.results)
 
         // .catch((error:any) =>
         // Observable.throw(error.json().error || 'Server error')
@@ -79,15 +81,30 @@ export class NavService {
   }
 
   getSubArticleUrl(topicID, subID: number, lang) {
-   // alert("Test");
-
-    let urlA = this.subUrl + '-' + subID + '-' + lang + '.json';
-    console.log(urlA);
-
     if (!isNaN(subID)) {
-      return this.http.get(this.subUrl + '-' + subID + '-' + lang + '.json')
+      return this.http.get(this.config.urlPortal  + 'subcategory/' + topicID + '/' +subID + '?language=' + lang)
         .take(1)
-        .map((response: Response) => response.json())
+        .map((response: Response) => response.json().contentCategoryResource.results)
+        // .catch((error:any) =>
+        // Observable.throw(error.json().error || 'Server error')
+        // );
+        .catch(
+        (err: Response, caught: Observable<any[]>) => {
+          if (err !== undefined) {
+            this.router.navigate(['/404']);
+            return Observable.throw('The Web server (running the Web site) is currently unable to handle the HTTP request due to a temporary overloading or maintenance of the server.');
+          }
+          return Observable.throw(caught); // <-----
+        }
+        );
+    }
+  }
+
+  getContentUrl(topicID, subID: number, lang) {
+    if (!isNaN(subID)) {
+      return this.http.get(this.config.urlPortal  + 'article/' + topicID + '/' +subID + '?language=' + lang)
+        .take(1)
+        .map((response: Response) => response.json().contentCategoryResource.results)
         // .catch((error:any) =>
         // Observable.throw(error.json().error || 'Server error')
         // );
@@ -106,8 +123,8 @@ export class NavService {
 
   getSubRss(moduleName, subID: number, lang) {
     // alert("Test");
- 
- 
+
+
      if (!isNaN(subID)) {
        return this.http.get(this.config.urlPortal  + moduleName +'/id/'+ subID + '?language=' + lang)
          .take(1)
@@ -130,6 +147,8 @@ export class NavService {
   triggerSubArticle(topicID, subID, lang) {
    // alert("Trigger sub acrticle");
     if (!isNaN(subID)) {
+      this.articleService.articles = [''];
+      this.articles = [''];
       return this.route.paramMap
         .switchMap((params: ParamMap) =>
           this.getSubArticleUrl(topicID, subID, lang))
@@ -144,10 +163,31 @@ export class NavService {
     }
   }
 
+  triggerContent(topicID, subID, lang) {
+    // alert("Trigger sub acrticle");
+     if (!isNaN(subID)) {
+       this.articleService.articles = [''];
+       this.articles = [''];
+       return this.route.paramMap
+         .switchMap((params: ParamMap) =>
+           this.getContentUrl(topicID, subID, lang))
+         .subscribe(resSliderData => {
+           this.articleService.articles = resSliderData;
+           this.articles = resSliderData;
+           this.breadcrumb = this.breadcrumbService.getBreadcrumb();
+           this.isValid = this.breadcrumbService.isValid = true;
+           this.breadcrumb = this.breadcrumb.name = '';
+
+         });
+     }
+   }
+
 
   triggerSubRss(topicID, subID, lang) {
     // alert("Trigger sub acrticle");
      if (!isNaN(subID)) {
+      this.articleService.articles = [''];
+      this.articles = [''];
        return this.route.paramMap
          .switchMap((params: ParamMap) =>
            this.getSubRss(topicID, subID, lang))
@@ -157,13 +197,15 @@ export class NavService {
            this.breadcrumb = this.breadcrumbService.getBreadcrumb();
            this.isValid = this.breadcrumbService.isValid = true;
            this.breadcrumb = this.breadcrumb.name = '';
- 
+
          });
      }
    }
- 
+
   triggerArticle(moduleName, lang, topicID) {
     if (!isNaN(topicID)) {
+      this.articles = [''];
+      this.articleService.articles = [''];
       return this.route.paramMap
         .switchMap((params: ParamMap) =>
           this.getArticleData(moduleName, lang, topicID))

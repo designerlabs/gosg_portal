@@ -1,9 +1,9 @@
 
 <div class="container-fluid animated slideInDown" style="background: #a7a495;">
     <div class="container" *ngFor="let article of articleService.articles">
-     <div class="row" *ngFor="let data of article.results">
+     <div class="row">
         <div class="col-md-12">
-            <h1 style="margin-top: 10px;" class="font-size-l">{{data.title}}</h1>
+            <h1 style="margin-top: 10px;" class="font-size-l">{{article.categoryName}}</h1>
             <hr class="hr-custom2">
             <ul class="list-inline" style="clear:both;">
                 <li>
@@ -23,35 +23,70 @@
 
 <div style="margin-top:10px;" class="container" *ngFor="let article of articleService.articles">
 
-    <div class="row" *ngFor="let data of article.results">
+    <div class="row">
         <div class="col-sm-3">
+
             <div class="row">
                 <div class="col-md-12 sideBarMenu">
                     <h4 class="sideBarMenu--title padding-bottom-l font-size-m warna_font">
-                        {{data.title}}
-
+                        {{article.categoryName}}
                     </h4>
-                    <ul class="list-unstyled">
-                        <li class="liList" *ngFor="let content of data.menu_left">
+
+                    <mat-accordion>
+                        <!-- <div *ngIf="contentMain.subMenuLeft.length !=0"> -->
+                            <mat-expansion-panel  *ngFor="let content of article.menuLeft; let i = index" multi="false" displayMode="flat" [hideToggle]="content.subMenuLeft.length==0 ? true: null"  [expanded]="content.activeMenu  || (i == statusID)">
+                              {{status}}
+                                <mat-expansion-panel-header>
+                                  <mat-panel-title  (click)="clickSideMenu(content)">
+                                    <a class="warna_font sideBarMenu--link font-size-s" [routerLinkActive]="['active']"  [style.font-weight]="content.activeMenu ? 'bold' : 'normal'"  [style.color]="content.activeMenu ? getTheme() : '#333'" >{{content.categoryName}}</a>
+                                  </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <div *ngFor="let subcontent of content.subMenuLeft" class="submenu" >
+                                  <div  (click)="clickContentFromMenu(content.parentCode, subcontent.contentCode, i)">
+                                    <a class="warna_font sideBarMenu--link font-size-s" #subContent [style.font-weight]="subcontent.activeMenu ? 'bold' : 'normal'"  [style.color]="subcontent.activeMenu ? getTheme() : '#333'">
+                                    {{subcontent.contentTitle}}
+                                    </a>
+                                  </div>
+                                </div>
+                            </mat-expansion-panel>
+                          <!-- </div> -->
+
+                            <!-- <div *ngIf="contentMain.subMenuLeft.length ==0">
+                                <mat-expansion-panel hideToggle="true" *ngFor="let content of article.menuLeft; let i = index"  multi="true" displayMode="flat">
+                                    <mat-expansion-panel-header (click)="clickSideMenu(content)">
+                                      <mat-panel-title>
+                                        <a class="warna_font sideBarMenu--link font-size-s" [routerLinkActive]="['active']"  [style.font-weight]="content.activeMenu ? 'bold' : 'normal'"  [style.color]="content.activeMenu ? getTheme() : '#333'" >{{content.categoryName}}</a>
+                                      </mat-panel-title>
+                                    </mat-expansion-panel-header>
+                                </mat-expansion-panel>
+                            </div> -->
+
+
+                        </mat-accordion>
+
+
+
+                    <!-- <ul class="list-unstyled">
+                        <li class="liList" *ngFor="let content of article.menuLeft">
                             <div class="col-xs-12 col-md-12 col-sm-12">
-                                <a class="warna_font sideBarMenu--link font-size-s" [routerLinkActive]="['active']"  [style.font-weight]="content.active ? 'bold' : 'normal'"  [style.color]="content.active ? getTheme() : '#333'"  href="" (click)="clickSideMenu(content)">
-                                {{content.label}}
-                          
+                                <a class="warna_font sideBarMenu--link font-size-s" [routerLinkActive]="['active']"  [style.font-weight]="content.active ? 'bold' : 'normal'"  [style.color]="content.active ? getTheme() : '#333'" (click)="clickSideMenu(content)">
+                                {{content.categoryName}}
+
                                 </a>
                             </div>
                             <ul style="list-style: none; padding-left: 15px;">
-                                <li *ngFor="let subcontent of content.sub_menu_left">
-                                     <a class="warna_font sideBarMenu--link font-size-s" style="color:#333"  href="" (click)="clickSideMenu(content)">
-                                        {{subcontent.label}}
-                                        
+                                <li *ngFor="let subcontent of content.subMenuLeft">
+                                     <a class="warna_font sideBarMenu--link font-size-s" style="color:#333"  href="" (click)="clickContentFromMenu(content.parentCode, subcontent.contentCode)">
+                                        {{subcontent.contentTitle}}
+
                                     </a>
                                 </li>
                             </ul>
-                            <!--<div class="col-xs-2">(6)</div>-->
-                           
+
+
                         </li>
 
-                    </ul>
+                    </ul> -->
                 </div>
             </div>
         </div>
@@ -60,41 +95,49 @@
 
             <div class="row">
                 <div class="col-md-12 warna_font">
-                    <div  *ngIf="checkImgData(data.description)" style="position:absolute; width:auto;">
-                        <h2 class="topic_bg_title font-size-l">
-                            <span style="padding-left:10px;">
-                                {{data.title}}
-                            </span>
-                        </h2>
-                    </div>
+                  <div *ngIf="article.image">
+                      <div>
+                          <img [src]="config.externalMediaURL + '/images/'+ article.image.mediaFile" style="width:100%;">
+                          <div style="position:absolute; width:auto;">
+                              <h2 class="topic_bg_title font-size-l">
+                                  <span style="padding-left:10px;">
+                                      {{article.categoryName}}
+                                  </span>
+                              </h2>
+                          </div>
+                      </div>
+                  </div>
 
+                  <div *ngIf="!article.image">
+                      <div>
+                          <h2 class="titleWObg font-size-l">
+                              {{article.categoryName}}
+                          </h2>
+                      </div>
+                  </div>
 
-                    <div  *ngIf="!checkImgData(data.description)" style="position:relative;">
-                        <h2 class="titleWObg font-size-l">
-                                {{data.title}}
-                        </h2>
-                    </div>
+                  <span class="font-size-s defaultColor" [innerHTML]="article.categoryDescription"></span>
 
-
-                    <span class="font-size-s defaultColor" [innerHTML]="data.description">
-
-                    </span>
 
                     <div class="row padding-top-xl">
 
-                        <div class="col-sm-6" *ngFor="let leftContent of data.content">
+                        <div  *ngFor="let rightContent of article.subCategoryList; let index=index; let odd=odd; let even=even;">
+                          <div class="col-sm-6">
                              <div>
                                 <div style="width:100%; margin-right:10px; height:auto;">
-                                    <a class="intro-box warna_border_color" [style.border-color]="getTheme()" href="" (click)="clickSideMenu(leftContent)">
+                                    <a class="intro-box warna_border_color" [style.border-color]="getTheme()" href="" (click)="clickSideMenu(rightContent)">
                                         <h4 class="font-size-m warna_font">
-                                            {{leftContent.label}}
+                                            {{rightContent.categoryName}}
                                         </h4>
-                                        <span class="warna_font article-size font-size-s" [innerHTML]="leftContent.description"></span>
+                                        <span class="warna_font article-size font-size-s" [innerHTML]="rightContent.categoryDescription"></span>
                                         <div class="font-size-s" style="text-align: right;"><i class="fa fa-caret-right"></i> {{'home.readmore' | translate }}</div>
                                     </a>
                                 </div>
+                              </div>
                             </div>
+                            <div *ngIf="odd" class="clearfix"></div>
                         </div>
+
                     </div>
 
                 </div>

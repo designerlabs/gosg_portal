@@ -1,6 +1,7 @@
-import { Component, Output, Input, EventEmitter, OnInit, AfterViewChecked, AfterViewInit,  ViewChild, ElementRef } from '@angular/core';
+import { Component, Output, Input, EventEmitter, OnInit, AfterViewChecked, AfterViewInit,  ViewChild, ElementRef, Inject, AfterContentInit } from '@angular/core';
 import { ArticleService } from './article.service';
 import { NavService } from '../header/nav/nav.service';
+import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { BreadcrumbService } from '../header/breadcrumb/breadcrumb.service';
@@ -13,9 +14,11 @@ import 'rxjs/add/operator/switchMap';
   styleUrls: ['./article.component.css']
 })
 export class ArticleComponent implements OnInit {
-    
+  statusID: any;
+  langIdVal: string;
+  subID: number;
     moduleName: string;
-    
+
   @ViewChild('textarea') textarea: ElementRef;
   @Output() menuClick = new EventEmitter();
 
@@ -26,7 +29,7 @@ export class ArticleComponent implements OnInit {
 
   articleData: any;
   @Output() langChange = new EventEmitter();
-  constructor(public articleService: ArticleService,  private route: ActivatedRoute, private navService: NavService, private translate: TranslateService, private router: Router, private breadcrumbService: BreadcrumbService) {
+  constructor(public articleService: ArticleService,  private route: ActivatedRoute, private navService: NavService, private translate: TranslateService, private router: Router, private breadcrumbService: BreadcrumbService, @Inject(APP_CONFIG) private config: AppConfig) {
     this.lang = translate.currentLang;
     this.langId = 1;
 
@@ -41,7 +44,7 @@ export class ArticleComponent implements OnInit {
                 this.langId = 1;
                 this.moduleName = this.router.url.split('/')[1];
                 this.topicID = parseInt(this.router.url.split('/')[2]);
-                this.navService.triggerArticle(this.moduleName, this.langId, this.topicID);
+                // this.navService.triggerArticle(this.moduleName, this.langId, this.topicID);
             });
 
         }
@@ -52,10 +55,29 @@ export class ArticleComponent implements OnInit {
                 this.langId = 2;
                 this.moduleName = this.router.url.split('/')[1];
                 this.topicID = parseInt(this.router.url.split('/')[2]);
-                this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID);
+                this.subID = parseInt(this.router.url.split('/')[3]);
+                // this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID);
             });
         }
+
+
+        if(this.moduleName == 'subcategory'){
+          this.navService.triggerSubArticle(this.topicID, this.subID, this.langId);
+        }else if(this.moduleName == 'article'){
+          this.navService.triggerContent(this.topicID, this.subID, this.langId);
+        }else{
+          this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID);
+        }
+
+
+
     });
+
+    if(localStorage.getItem('langID')){
+      this.langIdVal = localStorage.getItem('langID');
+    }else{
+      this.langIdVal = this.langId;
+    }
 
   }
 
@@ -63,11 +85,13 @@ export class ArticleComponent implements OnInit {
   lang = this.lang;
   langId = this.langId;
 
+
+
   ngOnInit() {
         this.articleData = this.articleService.getArticle();
         this.moduleName = this.router.url.split('/')[1];
         this.topicID = parseInt(this.router.url.split('/')[2]);
-        this.navService.triggerArticle(this.moduleName, this.langId, this.topicID);
+        this.navService.triggerArticle(this.moduleName, localStorage.getItem('langID'), this.topicID);
       }
 
    getTheme(){
@@ -75,19 +99,22 @@ export class ArticleComponent implements OnInit {
     }
 
     clickSideMenu(e){
-        const _getSubLabel = e.json_url.split('&');
-        let _getSubID = _getSubLabel[1].split('=');
-        console.log(_getSubLabel);
-        console.log(_getSubID);
-        const _getTopicID = parseInt(this.router.url.split('/')[2]);
-        _getSubID = parseInt(_getSubID[1]);
-        this.navService.getSubArticleUrl(_getTopicID, _getSubID,this.langId);
-        this.router.navigate(['/subtopic', _getTopicID, _getSubID]);
-        event.preventDefault();
+      this.statusID = '';
+      this.navService.getSubArticleUrl(e.parentCode,  e.categoryCode, localStorage.getItem('langID'));
+      this.navService.triggerSubArticle(e.parentCode,  e.categoryCode, localStorage.getItem('langID'));
+      this.router.navigate(['/subcategory', e.parentCode, e.categoryCode]);
+      event.preventDefault();
     }
 
 
+    clickContentFromMenu(pId, aId, status){
 
+      this.statusID = status;
+      this.navService.triggerContent(pId,  aId, localStorage.getItem('langID'));
+      this.navService.getContentUrl(pId,  aId, localStorage.getItem('langID'));
+      this.router.navigate(['/article', pId, aId]);
+      event.preventDefault();
+    }
 
 
     triggerArticle(moduleName, lang, topicID){
@@ -103,13 +130,15 @@ export class ArticleComponent implements OnInit {
     }
 
     checkImgData(e){
-
-        const chkData = e.search('<img');
-        if (chkData != -1){
-            return true;
-        }else{
-            return false;
+        if(e){
+          const chkData = e.search('<img');
+          if (chkData != -1){
+              return true;
+          }else{
+              return false;
+          }
         }
+
     }
 
 }

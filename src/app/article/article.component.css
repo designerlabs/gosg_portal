@@ -1,8 +1,23 @@
- .sideBarMenu--title {
+        .sideBarMenu--title {
             font-size: 20px;
             color: #333;
             font-weight: 600;
             margin-bottom: 20px;
+        }
+
+        .submenu{
+          padding-left:40px;
+          padding-left: 17px;
+          padding-bottom: 10px;
+          padding-top: 0px;
+        }
+
+        .submenu a{
+          cursor: pointer;
+        }
+
+        .mat-expansion-panel-header{
+          padding: 0 10px !important;
         }
 
         .defaultColor{
@@ -53,7 +68,7 @@
             color: #1ebebc !important;
         }
 
-        
+
 
         .intro-box h4 {
             color: #333;
@@ -66,7 +81,7 @@
         }
 
         .topic_bg_title {
-            margin-top: 100px;
+            margin: -140px 0px;
             cursor: default;
             color: #fff;
             position: relative;

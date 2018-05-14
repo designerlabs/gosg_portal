@@ -7,6 +7,7 @@ import { NavRouterGuardService } from './nav-router-guard.service';
 @Injectable()
 
 export class NavRouterActivator implements CanActivate {
+  langIdVal: any;
       lang = 'en';
       langId = 1;
       eventExists;
@@ -17,7 +18,7 @@ export class NavRouterActivator implements CanActivate {
             let myLang = translate.currentLang;
 
             if (myLang === 'en') {
-                
+
                 translate.get('HOME').subscribe((res: any) => {
                     this.langId = 1;
                     this.lang = 'en';
@@ -25,7 +26,7 @@ export class NavRouterActivator implements CanActivate {
 
             }
             if (myLang === 'ms') {
-                
+
                 translate.get('HOME').subscribe((res: any) => {
                     this.langId = 2;
                     this.lang = 'ms';
@@ -33,16 +34,21 @@ export class NavRouterActivator implements CanActivate {
                 });
             }
         });
+
+        if(localStorage.getItem('langID')){
+          this.langIdVal = localStorage.getItem('langID');
+        }else{
+          this.langIdVal = this.langId
+        }
     }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-        debugger;
     //    const eventExists =  !!this.navService.triggerArticle('', this.lang, +route.params['id']); // Old code
     if (route.params['id']) {
-        this.eventExists =  !!this.navGuardService.guardRoute(route.url[0].path, this.langId, route.params['id']);
+        this.eventExists =  !!this.navGuardService.guardRoute(route.url[0].path, this.langIdVal, route.params['id']);
     }else {
         if (route.params['id1']) {
-            this.eventExists =  !!this.navGuardService.guardRoute(route.url[0].path, this.langId, route.params['id1'], route.params['id2']);
+            this.eventExists =  !!this.navGuardService.guardRoute(route.url[0].path, this.langIdVal, route.params['id1'], route.params['id2']);
         }
     }
        // tslint:disable-next-line:curly

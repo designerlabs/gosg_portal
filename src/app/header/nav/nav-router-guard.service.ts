@@ -28,7 +28,6 @@ export class NavRouterGuardService {
    }
 
   guardRoute(moduleName, lang, id1, id2?) {
-    debugger;
   // this.moduleName = this.router.url.split('/')[1];
   return !!this.navService.triggerArticle(moduleName, lang, +id1);
   // if (this.moduleName !== 'announcement') {

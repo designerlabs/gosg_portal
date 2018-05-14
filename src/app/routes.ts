@@ -44,22 +44,24 @@ import { UnsubscribeComponent } from './unsubscribe/unsubscribe.component';
 import { SetactiveComponent } from './subscription/setactive/setactive.component';
 import { DigitalservicesComponent } from './digitalservices/digitalservices.component';
 import { RssComponent } from './article/rss/rss.component';
+import { ContentComponent } from './article/content/content.component';
 
 export const appRoutes: Routes = [
-   
+
     {path: '404', component: ErrorComponent },
     {path: 'index', component: HomeComponent},
     {path: 'agencydir', component: AgencydirectoryComponent},
     {path: 'calendar', component: EventCalendarComponent},
     {path: 'digitalservices', component: DigitalservicesComponent},
     {path: 'search/searchResult', component: SearchResultComponent},
-    {path: 'topic/:id', component: ArticleComponent, canActivate: [NavRouterActivator]  },
+    {path: 'category/:id', component: ArticleComponent, canActivate: [NavRouterActivator]  },
     {path: 'rss/:id', component: RssComponent},
     {path: 'rss/id/:id', component: RssComponent},
     {path: 'announcement', component: AnnouncementComponent },
     {path: 'announcement/:id', component: AnnouncementlistComponent, canActivate: [NavRouterActivator]},
     {path: 'announcement/:id1/:id2', component: AnnouncementdetailsComponent, canActivate: [NavRouterActivator]},
-    {path: 'subtopic/:id1/:id2', component: SubarticleComponent },
+    {path: 'subcategory/:id1/:id2', component: SubarticleComponent },
+    {path: 'article/:id1/:id2', component: ContentComponent},
     {path: 'login', component: LoginComponent},
     {path: 'register', component: RegisterComponent },
 
@@ -79,7 +81,7 @@ export const appRoutes: Routes = [
     {path: 'subscription/set_active/:id', component: SetactiveComponent},
     {path: 'subscription', component: SubscriptionComponent},
     {path: 'unsubscribe', component: UnsubscribeComponent},
-    
+
     {path: '', redirectTo: 'index', pathMatch: 'full'},
     {path: '**', component: ErrorComponent}
 
@@ -87,7 +89,7 @@ export const appRoutes: Routes = [
     // {path: this.tempurl+'/fe/:id', component: EventDetailsComponent, canActivate:[EventRouterActivator] },
     // {path: this.tempurl+'/fe/topic/:id', component: ArticleComponent, canActivate:[NavRouterActivator]  },
     // {path: this.tempurl+'/fe/subtopic/:id1/:id2', component: SubarticleComponent },
-   
+
     //{path: 'user', loadChildren: 'app/user/user.module#UserModule'}
-    
+
 ];

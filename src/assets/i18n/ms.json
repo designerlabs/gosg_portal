@@ -44,7 +44,7 @@
       "onlineser": "Perkhidmatan Dalam Talian",
       "global":"Global",
       "result": "Rekod",
-      "resultsfound": "Rekod Carian Dijumpai dalam masa" 
+      "resultsfound": "Rekod Carian Dijumpai dalam masa"
     },
     "breadcrumb":{
       "calendar": "Kalendar",
@@ -188,7 +188,7 @@
       "captcha":"Kod Verifikasi mestilah sah"
     }
   },
-  
+
   "dashboard":{
     "sidenav": {
       "dashboard": "Dashboard",
@@ -198,9 +198,9 @@
       "companyprofile": "Profil Syarikat"
     }
   },
-  
+
   "errorlabel":{
-    
+
   },
   "feedback":{
     "title":"ADUAN DAN PERTANYAAN",
@@ -288,14 +288,14 @@
       "organizerphone": "No Telefon Penganjur",
       "agency": "Agensi"
     },
-    "reset":"Reset this form?",      
+    "reset":"Reset this form?",
     "msgsubmit": "Thank you. Your complaints/queries has been successfully sent. Responds will be received in 3 working days",
     "err":{
       "drop": "This field is required",
-      "submit": "Sorry, server down.",        
+      "submit": "Sorry, server down.",
       "type":"Sorry, type of feedback is unavailable.",
       "subject":"Sorry, subjects is unavailable."
-      
+
     }
   },
   "mailbox":{
@@ -305,7 +305,7 @@
       "date":"Tarikh",
       "action":"Tindakan"
     },
-    
+
     "pagination":{
       "mails":"mel"
     },
@@ -330,6 +330,11 @@
     "disclaimer": "Penafian",
     "selectall" : "Pilih Semua",
     "plsselect" : "Sila Pilih",
+    "note": "Nota",
+    "brokenlink": "Pautan Rosak",
+    "validlink":"Pautan Sah",
+    "downloadablelink":"Pautan Boleh Dimuat Turun",
+
     "placeholder": {
       "keyword":"Kata Kunci"
     },
@@ -365,7 +370,7 @@
       "reset":"Set semula borang ini?",
       "delete":"Padam mesej ini?",
       "success":"Successfully added!",
-      "nodata": "Tiada maklumat" 
+      "nodata": "Tiada maklumat"
     },
     "state":{
       "success":"bg_header bg_success_header",
@@ -373,7 +378,7 @@
       "warn":"bg_header bg_warn_header",
       "info":"bg_header bg_info_header"
     },
-    
+
     "pagination":{
       "pages":"Halaman",
       "of":"daripada",
