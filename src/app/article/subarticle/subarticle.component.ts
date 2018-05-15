@@ -14,7 +14,7 @@ import 'rxjs/add/operator/switchMap';
   templateUrl: './subarticle.component.html',
   styleUrls: ['./subarticle.component.css']
 })
-export class SubarticleComponent implements OnInit {
+export class SubarticleComponent implements OnInit, AfterViewChecked {
   statusID: any;
   @Output() menuClick = new EventEmitter();
   breadcrumb: any;
@@ -86,26 +86,33 @@ export class SubarticleComponent implements OnInit {
     this.navService.triggerSubArticle(this.topicID, this.subID, localStorage.getItem('langID'));
   }
 
+  ngAfterViewChecked(){
+    if(localStorage.getItem('subtopicID')){
+      this.statusID = localStorage.getItem('subtopicID');
+    }
+ }
+
   getTheme(){
         return localStorage.getItem('themeColor');
     }
 
 
-    clickSideMenu(e){
-
-      this.statusID = '';
+    clickSideMenu(e, status){
+      debugger;
+      this.statusID = status;
+      localStorage.setItem('subtopicID', status);
       this.navService.getSubArticleUrl(e.parentId,  e.categoryId,localStorage.getItem('langID'));
       this.navService.triggerSubArticle(e.parentCode,  e.categoryCode, localStorage.getItem('langID'));
       this.router.navigate( ['/subcategory', e.parentCode, e.categoryCode]);
       event.preventDefault();
     }
 
-    clickContentFromMenu(pId, aId, status){
-   
-      this.statusID = status;
+    clickContentFromMenu(pId, aId){
+      debugger;
+      this.statusID =  localStorage.getItem('subtopicID');
       this.navService.triggerContent(pId,  aId, localStorage.getItem('langID'));
       this.navService.getContentUrl(pId,  aId, localStorage.getItem('langID'));
-      localStorage.setItem('subtopicID', status);
+      // localStorage.setItem('subtopicID', status);
       this.router.navigate( ['/article', pId, aId]);
       event.preventDefault();
     }
