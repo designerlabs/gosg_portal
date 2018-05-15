@@ -25,7 +25,6 @@
 
     <div class="row">
         <div class="col-sm-3">
-
             <div class="row">
                 <div class="col-md-12 sideBarMenu">
                     <h4 class="sideBarMenu--title padding-bottom-l font-size-m warna_font">
@@ -143,44 +142,28 @@
 
                     <div *ngIf="article.content">
                       <div>
-                          <div *ngIf="article.image">
-                              <div>
-                                  <img [src]="config.externalMediaURL + '/images/'+ article.image.mediaFile" style="width:100%;">
-                                  <div style="position:absolute; width:auto;">
-                                      <h2 class="topic_bg_title font-size-l">
-                                          <span style="padding-left:10px;">
-                                              {{article.content.contentTitle}}
-                                          </span>
-                                      </h2>
-                                  </div>
-                              </div>
-                          </div>
-
-                          <div *ngIf="!article.image">
-                            <h2 class="titleWObg font-size-l">
-                                {{article.content.contentTitle}}
-                            </h2>
-                          </div>
-
-                          <div class="padding-top-xl">
-                            <div class="defaultColor" [innerHTML]="article.content?.contentText"></div>
-                          </div>
-
-                        <!-- <div class="col-sm-6" *ngIf="rightContent.content">
-                          <div class="row">
-                            <div class="col-md-12 warna_font">
-                              <h2 class="titleWObg font-size-l">
-                                  {{rightContent.content?.contentTitle}}
-                              </h2>
-
-                              <span class="font-size-s defaultColor" [innerHTML]="rightContent.content?.contentDescription"></span>
-
-                              <div class="padding-top-xl">
-                                <div class="defaultColor" [innerHTML]="rightContent.content?.contentText"></div>
-                              </div>
+                        <div *ngIf="article.image">
+                            <div>
+                                <img [src]="config.externalMediaURL + '/images/'+ article.image.mediaFile" style="width:100%;">
+                                <div style="position:absolute; width:auto;">
+                                    <h2 class="topic_bg_title font-size-l">
+                                        <span style="padding-left:10px;">
+                                            {{article.content.contentTitle}}
+                                        </span>
+                                    </h2>
+                                </div>
                             </div>
-                          </div>
-                        </div> -->
+                        </div>
+
+                        <div *ngIf="!article.image">
+                          <h2 class="titleWObg font-size-l">
+                              {{article.content.contentTitle}}
+                          </h2>
+                        </div>
+
+                        <div class="padding-top-xl">
+                          <div class="defaultColor" [innerHTML]="article.content?.contentText"></div>
+                        </div>
                       </div>
                     </div>
                 </div>
