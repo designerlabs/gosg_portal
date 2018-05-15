@@ -95,51 +95,94 @@
 
             <div class="row">
                 <div class="col-md-12 warna_font">
-                  <div *ngIf="article.image">
-                      <div>
-                          <img [src]="config.externalMediaURL + '/images/'+ article.image.mediaFile" style="width:100%;">
-                          <div style="position:absolute; width:auto;">
-                              <h2 class="topic_bg_title font-size-l">
-                                  <span style="padding-left:10px;">
-                                      {{article.categoryName}}
-                                  </span>
-                              </h2>
-                          </div>
-                      </div>
-                  </div>
-
-                  <div *ngIf="!article.image">
-                      <div>
-                          <h2 class="titleWObg font-size-l">
-                              {{article.categoryName}}
-                          </h2>
-                      </div>
-                  </div>
-
-                  <span class="font-size-s defaultColor" [innerHTML]="article.categoryDescription"></span>
 
 
-                    <div class="row padding-top-xl">
 
-                        <div  *ngFor="let rightContent of article.subCategoryList; let index=index; let odd=odd; let even=even;">
-                          <div class="col-sm-6">
-                             <div>
-                                <div style="width:100%; margin-right:10px; height:auto;">
-                                    <a class="intro-box warna_border_color" [style.border-color]="getTheme()" href="" (click)="clickSideMenu(rightContent)">
-                                        <h4 class="font-size-m warna_font">
-                                            {{rightContent.categoryName}}
-                                        </h4>
-                                        <span class="warna_font article-size font-size-s" [innerHTML]="rightContent.categoryDescription"></span>
-                                        <div class="font-size-s" style="text-align: right;"><i class="fa fa-caret-right"></i> {{'home.readmore' | translate }}</div>
-                                    </a>
-                                </div>
-                              </div>
+                    <div *ngIf="!article.content" class="row padding-top-xl">
+                      <div *ngIf="article.image">
+                        <div>
+                            <img [src]="config.externalMediaURL + '/images/'+ article.image.mediaFile" style="width:100%;">
+                            <div style="position:absolute; width:auto;">
+                                <h2 class="topic_bg_title font-size-l">
+                                    <span style="padding-left:10px;">
+                                        {{article.categoryName}}
+                                    </span>
+                                </h2>
                             </div>
-                            <div *ngIf="odd" class="clearfix"></div>
                         </div>
+                    </div>
+
+                    <div *ngIf="!article.image">
+                        <div>
+                            <h2 class="titleWObg font-size-l">
+                                {{article.categoryName}}
+                            </h2>
+                        </div>
+                    </div>
+
+                    <span class="font-size-s defaultColor" [innerHTML]="article.categoryDescription"></span>
+                    <div  *ngFor="let rightContent of article.subCategoryList; let index=index; let odd=odd; let even=even;">
+                      <div class="col-sm-6">
+                          <div>
+                            <div style="width:100%; margin-right:10px; height:auto;">
+                                <a class="intro-box warna_border_color" [style.border-color]="getTheme()" href="" (click)="clickSideMenu(rightContent)">
+                                    <h4 class="font-size-m warna_font">
+                                        {{rightContent.categoryName}}
+                                    </h4>
+                                    <span class="warna_font article-size font-size-s" [innerHTML]="rightContent.categoryDescription"></span>
+                                    <div class="font-size-s" style="text-align: right;"><i class="fa fa-caret-right"></i> {{'home.readmore' | translate }}</div>
+                                </a>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div *ngIf="odd" class="clearfix"></div>
+                    </div>
 
                     </div>
 
+                    <div *ngIf="article.content">
+                      <div>
+                          <div *ngIf="article.image">
+                              <div>
+                                  <img [src]="config.externalMediaURL + '/images/'+ article.image.mediaFile" style="width:100%;">
+                                  <div style="position:absolute; width:auto;">
+                                      <h2 class="topic_bg_title font-size-l">
+                                          <span style="padding-left:10px;">
+                                              {{article.content.contentTitle}}
+                                          </span>
+                                      </h2>
+                                  </div>
+                              </div>
+                          </div>
+
+                          <div *ngIf="!article.image">
+                            <h2 class="titleWObg font-size-l">
+                                {{article.content.contentTitle}}
+                            </h2>
+                          </div>
+
+                          <div class="padding-top-xl">
+                            <div class="defaultColor" [innerHTML]="article.content?.contentText"></div>
+                          </div>
+
+                        <!-- <div class="col-sm-6" *ngIf="rightContent.content">
+                          <div class="row">
+                            <div class="col-md-12 warna_font">
+                              <h2 class="titleWObg font-size-l">
+                                  {{rightContent.content?.contentTitle}}
+                              </h2>
+
+                              <span class="font-size-s defaultColor" [innerHTML]="rightContent.content?.contentDescription"></span>
+
+                              <div class="padding-top-xl">
+                                <div class="defaultColor" [innerHTML]="rightContent.content?.contentText"></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div> -->
+                      </div>
+                    </div>
                 </div>
             </div>
         </div>
