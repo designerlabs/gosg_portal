@@ -132,6 +132,7 @@ import { SetactiveComponent } from '../subscription/setactive/setactive.componen
 import { DigitalservicesComponent } from '../digitalservices/digitalservices.component';
 import { RssComponent } from '../article/rss/rss.component';
 import { ContentComponent } from '../article/content/content.component';
+import { EparticipationComponent } from '../eparticipation/eparticipation.component';
 // import { SearchResultComponent } from '../search/search-result/search-result.component';
 export function HttpLoaderFactory(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -214,7 +215,8 @@ export function HttpLoaderFactory(http: Http) {
     SetactiveComponent,
     DigitalservicesComponent,
     RssComponent,
-    ContentComponent
+    ContentComponent,
+    EparticipationComponent
     // SearchResultComponent
   ],
 

@@ -1,5 +1,5 @@
 import { Component, Output, Input, EventEmitter, OnInit, AfterViewChecked, AfterViewInit,  ViewChild, ElementRef, Inject, AfterContentInit } from '@angular/core';
-import { ArticleService } from './article.service';
+import { ArticleService } from '../article/article.service';
 import { NavService } from '../header/nav/nav.service';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
@@ -9,18 +9,15 @@ import { BreadcrumbService } from '../header/breadcrumb/breadcrumb.service';
 import 'rxjs/add/operator/switchMap';
 
 @Component({
-  selector: 'app-article',
-  templateUrl: './article.component.html',
-  styleUrls: ['./article.component.css']
+  selector: 'gosg-eparticipation',
+  templateUrl: './eparticipation.component.html',
+  styleUrls: ['./eparticipation.component.css']
 })
-export class ArticleComponent implements OnInit {
+export class EparticipationComponent implements OnInit {
   statusID: any;
   langIdVal: string;
   subID: number;
   moduleName: string;
-
-  @ViewChild('textarea') textarea: ElementRef;
-  @Output() menuClick = new EventEmitter();
 
   breadcrumb: any;
   isValid: any;
@@ -29,6 +26,7 @@ export class ArticleComponent implements OnInit {
 
   articleData: any;
   @Output() langChange = new EventEmitter();
+
   constructor(public articleService: ArticleService,  private route: ActivatedRoute, private navService: NavService, private translate: TranslateService, private router: Router, private breadcrumbService: BreadcrumbService, @Inject(APP_CONFIG) private config: AppConfig) {
     this.lang = translate.currentLang;
     this.langId = 1;
@@ -78,67 +76,63 @@ export class ArticleComponent implements OnInit {
     }else{
       this.langIdVal = this.langId;
     }
+   }
 
-  }
-
-
-  lang = this.lang;
-  langId = this.langId;
-
-
+   lang = this.lang;
+   langId = this.langId;
 
   ngOnInit() {
-        this.articleData = this.articleService.getArticle();
-        this.moduleName = this.router.url.split('/')[1];
-        this.topicID = parseInt(this.router.url.split('/')[2]);
-        this.navService.triggerArticle(this.moduleName, localStorage.getItem('langID'), this.topicID);
+    this.articleData = this.articleService.getArticle();
+    this.moduleName = this.router.url.split('/')[1];
+    this.topicID = parseInt(this.router.url.split('/')[2]);
+    this.navService.triggerArticle(this.moduleName, localStorage.getItem('langID'), this.topicID);
+  }
+
+  getTheme(){
+    return localStorage.getItem('themeColor');
+}
+
+clickSideMenu(e){
+  this.statusID = '';
+  this.navService.getSubArticleUrl(e.parentCode,  e.categoryCode, localStorage.getItem('langID'));
+  this.navService.triggerSubArticle(e.parentCode,  e.categoryCode, localStorage.getItem('langID'));
+  this.router.navigate(['/subcategory', e.parentCode, e.categoryCode]);
+  event.preventDefault();
+}
+
+
+clickContentFromMenu(pId, aId, status){
+
+  this.statusID = status;
+  this.navService.triggerContent(pId,  aId, localStorage.getItem('langID'));
+  this.navService.getContentUrl(pId,  aId, localStorage.getItem('langID'));
+  this.router.navigate(['/article', pId, aId]);
+  event.preventDefault();
+}
+
+
+triggerArticle(moduleName, lang, topicID){
+    this.route.paramMap
+    .switchMap((params: ParamMap) =>
+    this.navService.getArticleData(moduleName, lang, topicID))
+    .subscribe(resSliderData => {
+        this.articles = resSliderData;
+        this.breadcrumb = this.breadcrumbService.getBreadcrumb();
+        this.isValid = this.breadcrumbService.isValid = true;
+        this.breadcrumb = this.breadcrumb.name = '';
+    });
+}
+
+checkImgData(e){
+    if(e){
+      const chkData = e.search('<img');
+      if (chkData != -1){
+          return true;
+      }else{
+          return false;
       }
-
-   getTheme(){
-        return localStorage.getItem('themeColor');
     }
 
-    clickSideMenu(e){
-      this.statusID = '';
-      this.navService.getSubArticleUrl(e.parentCode,  e.categoryCode, localStorage.getItem('langID'));
-      this.navService.triggerSubArticle(e.parentCode,  e.categoryCode, localStorage.getItem('langID'));
-      this.router.navigate(['/subcategory', e.parentCode, e.categoryCode]);
-      event.preventDefault();
-    }
-
-
-    clickContentFromMenu(pId, aId, status){
-
-      this.statusID = status;
-      this.navService.triggerContent(pId,  aId, localStorage.getItem('langID'));
-      this.navService.getContentUrl(pId,  aId, localStorage.getItem('langID'));
-      this.router.navigate(['/article', pId, aId]);
-      event.preventDefault();
-    }
-
-
-    triggerArticle(moduleName, lang, topicID){
-        this.route.paramMap
-        .switchMap((params: ParamMap) =>
-        this.navService.getArticleData(moduleName, lang, topicID))
-        .subscribe(resSliderData => {
-            this.articles = resSliderData;
-            this.breadcrumb = this.breadcrumbService.getBreadcrumb();
-            this.isValid = this.breadcrumbService.isValid = true;
-            this.breadcrumb = this.breadcrumb.name = '';
-        });
-    }
-
-    checkImgData(e){
-        if(e){
-          const chkData = e.search('<img');
-          if (chkData != -1){
-              return true;
-          }else{
-              return false;
-          }
-        }
-
-    }
+}
 
 }
