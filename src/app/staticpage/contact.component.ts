@@ -147,7 +147,7 @@ export class ContactComponent{
                 this.dataContact[5].footerContentName,
                 this.dataContact[4].footerContentName,
                 this.dataContact[3].footerContentName
-              );
+            );
             
 
             console.log(this.dataContact);
