@@ -1,5 +1,15 @@
-import { Component } from '@angular/core';
-import { TranslateService, LangChangeEvent} from '@ngx-translate/core';
+import { Component, OnInit, Injectable, Inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
+import { APP_CONFIG, AppConfig } from '../config/app.config.module';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
+import { Http, Response } from '@angular/http';
+import * as $ from 'jquery';
+import {
+    MatInputModule, MatPaginatorModule, MatProgressSpinnerModule,
+    MatSortModule, MatTableModule, MatPaginator, MatSort
+  } from '@angular/material';
 import { FaqService } from './faq.service';
 
 @Component({
@@ -20,39 +30,70 @@ import { FaqService } from './faq.service';
 
 export class FaqComponent{
   lang = this.lang;
-  faqData: string;
-  faqList: string[]= [];
+  langID = 1;
+  faqData = null;
+  faqList = [];
+  faqAnswer: any;
+  faqQuestion: any;
 
-  /*constructor(private translate:TranslateService,private faqService:FaqService){
-        this.lang = translate.currentLang;
-        this.getMyEnFaq();
-        translate.onLangChange.subscribe((event: LangChangeEvent) => {
-            let myLang = translate.currentLang;
-            if (myLang == "en") {
-              console.log("ENGLISH");
-              this.getMyEnFaq();
-            }
-            if (myLang == "ms") {
-                console.log("MALAY");
-                this.getMyEnFaq();
-            }
-        });
+  private urlFaq: string = this.config.urlFaq;
+
+  constructor(private translate: TranslateService, 
+      private router: Router, 
+      private http: Http, 
+      @Inject(APP_CONFIG) private config: AppConfig) {
+
+      this.lang = translate.currentLang;
+
+      translate.onLangChange.subscribe((event: LangChangeEvent) => {
+  
+          const myLang = translate.currentLang;
+      
+          if (myLang == 'en') {
+      
+              translate.get('HOME').subscribe((res: any) => {
+                  this.lang = 'en';
+                  this.langID = 1;
+                  this.getFaq(this.langID);
+              });
+          }
+
+          if (myLang == 'ms') {
+      
+              translate.get('HOME').subscribe((res: any) => {
+                  this.lang = 'ms';
+                  this.langID = 2;
+                  this.getFaq(this.langID);
+              });
+          }
+  
+      });
   }
 
-  getMyEnFaq(){
-      this.faqService.getFaqData()
-                .subscribe(
-                returnedData => {
-                  this.faqData = returnedData.results;
-                  console.log(this.faqData);
-                  for(let result of this.faqData){
-                        this.faqList.push(result['FAQ_question_'+this.lang]);
-                        this.faqList.push(result['FAQ_answer_en'+this.lang]);
-                  }
-                  //console.log(this.faqQuestion);
-                },
-                error=>alert(error),
-              );
-    }*/
+  ngOnInit() {
+    this.langID = 0;
+    if (this.lang === 'ms') {
+      this.langID = 2;
+    }else {
+      this.langID = 1;
+    }
+
+    this.getFaq(this.langID);    
+  }
+
+  getFaq(lang) {
+   
+    return this.http.get(this.urlFaq + '?language=' + lang + '&page=1&size=99')
+    
+    .map((response: Response) => response.json())
+    .subscribe(resSliderData => {
+      this.faqData = resSliderData   
+      this.faqList = this.faqData['list'];
+    
+      console.log(this.faqList);
+
+    });
+
+  }
 
 }

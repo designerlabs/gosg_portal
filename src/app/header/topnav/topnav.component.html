@@ -15,11 +15,13 @@
         </li>
         <li>|</li>
         <li>
-          <a routerLinkActive="topactive" [routerLink]="['manual']">{{ 'home.menu.manual' | translate }}</a>
+          <!-- <a routerLinkActive="topactive" [routerLink]="['manual']">{{ 'home.menu.manual' | translate }}</a> -->
+          <a routerLinkActive="topactive" (click)="clickManual()">{{ 'home.menu.manual' | translate }}</a>
         </li>
         <li>|</li>
         <li>
-          <a routerLinkActive="topactive" [routerLink]="['aboutus']">{{ 'home.menu.aboutus' | translate }}</a>
+          <!-- <a routerLinkActive="topactive" [routerLink]="['aboutus']">{{ 'home.menu.aboutus' | translate }}</a> -->
+          <!-- <a routerLinkActive="topactive" (click)="clickAboutus()">{{ 'home.menu.aboutus' | translate }}</a> -->
         </li>
       </ul>
 
