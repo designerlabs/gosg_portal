@@ -3,8 +3,10 @@ import * as moment from 'moment';
 import * as $ from 'jquery';
 import { TranslateService } from '@ngx-translate/core';
 import { TopnavService } from './topnav.service';
+import { NavService } from '../../header/nav/nav.service';
 import {SharedService } from '../../common/shared.service';
 import { debug } from 'util';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 let num = 0;
 @Component({
   selector: 'app-topnav',
@@ -47,7 +49,12 @@ export class TopnavComponent implements OnInit, AfterViewInit {
 
   @Output() showsidenav = new EventEmitter();
 
-  constructor(private translate: TranslateService, private topnavservice: TopnavService, private sharedservice: SharedService) {
+  constructor(private translate: TranslateService, 
+    private topnavservice: TopnavService, 
+    private sharedservice: SharedService, 
+    private route: ActivatedRoute,
+    private router: Router,
+    private navService: NavService) {
     translate.addLangs(['en', 'ms']);
 
     if(localStorage.getItem('langID') == "2"){
@@ -201,7 +208,7 @@ export class TopnavComponent implements OnInit, AfterViewInit {
   showProfileMenu(){
     //this.profileShow = !(this.profileShow);
     this.showProfile.emit(this.profileShow);
-  }
+  }  
 
   showSidenavMenu(){
     this.showsidenav.emit(this.sidenavShow);
@@ -311,5 +318,21 @@ export class TopnavComponent implements OnInit, AfterViewInit {
       }, err => {
         
       })
+  }
+
+  clickManual(){
+    //location.reload();
+    this.navService.triggerContent(811, 15021, localStorage.getItem('langID'));
+    this.navService.getContentUrl(811, 15021, localStorage.getItem('langID'));
+    this.router.navigate(['/article', 811, 15021]);
+    event.preventDefault();
+  }
+
+  clickAboutus(){
+    //location.reload();
+    this.navService.triggerContent(811, 15019, localStorage.getItem('langID'));
+    this.navService.getContentUrl(811, 15019, localStorage.getItem('langID'));
+    this.router.navigate(['/article', 811, 15019]);
+    event.preventDefault();
   }
 }
