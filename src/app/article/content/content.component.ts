@@ -94,10 +94,11 @@ export class ContentComponent implements OnInit, AfterViewChecked {
     return localStorage.getItem('themeColor');
   }
 
-  clickSideMenu(e){
-    this.statusID = '';
+  clickSideMenu(e, status){
+    this.statusID = status;
     this.navService.getSubArticleUrl(e.parentId,  e.categoryId, localStorage.getItem('langID'));
     this.navService.triggerSubArticle(e.parentCode,  e.categoryCode, localStorage.getItem('langID'));
+    localStorage.setItem('subtopicID', status);
     this.router.navigate( ['/subcategory', e.parentCode, e.categoryCode]);
     event.preventDefault();
   }

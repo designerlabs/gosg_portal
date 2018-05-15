@@ -98,7 +98,6 @@ export class SubarticleComponent implements OnInit, AfterViewChecked {
 
 
     clickSideMenu(e, status){
-      debugger;
       this.statusID = status;
       localStorage.setItem('subtopicID', status);
       this.navService.getSubArticleUrl(e.parentId,  e.categoryId,localStorage.getItem('langID'));
@@ -108,7 +107,6 @@ export class SubarticleComponent implements OnInit, AfterViewChecked {
     }
 
     clickContentFromMenu(pId, aId){
-      debugger;
       this.statusID =  localStorage.getItem('subtopicID');
       this.navService.triggerContent(pId,  aId, localStorage.getItem('langID'));
       this.navService.getContentUrl(pId,  aId, localStorage.getItem('langID'));
