@@ -100,7 +100,8 @@ export class ContactComponent{
                 });
             }
 
-            this.mymap.setView([5.8142568, 108.5806004], 5.2);
+           // this.mymap.setView([5.8142568, 108.5806004], 6);
+            this.mymap.setView([2.9414613,101.6575362], 13);
     
         });
     }
@@ -132,23 +133,21 @@ export class ContactComponent{
                 this.tltContact = this.footer.filter(fdata => fdata.title === 'CONTACT US')[0];
             }
             this.dataContact = this.tltContact.footerContents;
-
-            let latlong = this.dataContact[2].footerContentName;
-            console.log(latlong);
-
+            let latlong = this.dataContact[2].footerContentName;          
             var partsOfStr = latlong.split(',');
+            console.log(latlong);
             console.log(partsOfStr);
 
 
             this.addMarker(
                 parseFloat(partsOfStr[0]),
-                parseFloat(partsOfStr[1])
-                // this.agencyList[i].agencyName,
-                // this.agencyList[i].agencyAddress,
-                // this.agencyList[i].agencyEmail,
-                // this.agencyList[i].agencyFax,
-                // this.agencyList[i].agencyPhoneNo
-              );
+                parseFloat(partsOfStr[1]),                
+                this.dataContact[0].footerContentName,
+                this.dataContact[1].footerContentName,
+                this.dataContact[5].footerContentName,
+                this.dataContact[4].footerContentName,
+                this.dataContact[3].footerContentName
+            );
             
 
             console.log(this.dataContact);
@@ -156,9 +155,10 @@ export class ContactComponent{
     }
 
     getDefaultMap(){
-        this.mymap = L.map('dirmap').setView([5.8142568, 108.5806004], 5.2);
+        this.mymap = L.map('dirmap').setView([2.9414613,101.6575362], 13);
+        //this.mymap = L.map('map', { zoomControl:false });
         L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+            //attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
             maxZoom: 20,
             id: 'mapbox.streets',
             accessToken: 'pk.eyJ1IjoicmVkemEiLCJhIjoiY2pmcGZxNzRrMjYzbzMwcG83bGRxY2FtZyJ9.uMHQpYc0Pvjl4us27nHH8w'

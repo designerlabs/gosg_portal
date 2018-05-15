@@ -299,7 +299,7 @@ export class NavService {
     }
 
   getAnnouncementDetails(moduleName, lang: number, id1?: string, id2?: string): Observable<boolean[]> {
-    return this.http.get(this.urlAnnouncement + '/id/' + id1 + '/' + id2 + '?language=' + lang)
+    return this.http.get(this.articleUrl + '/' + id1 + '/' + id2 + '?language=' + lang)
     .take(1)
     .map((response: Response) => response.json())
     .catch(

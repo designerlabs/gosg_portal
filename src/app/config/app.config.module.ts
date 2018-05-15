@@ -80,6 +80,7 @@ export class AppConfig {
     urlDigitalServices: string;
     urlDigitalServicesDetails: string;
     urlPopularSearch: string;
+    urlFaq: string;
 }
 
 export const APP_DI_CONFIG: AppConfig = {
@@ -91,7 +92,7 @@ export const APP_DI_CONFIG: AppConfig = {
     urlEvents: commonURL+'calendar',
     // urlFooter: './app/apidata/footer',
     urlFooter: commonURL + 'footer',
-    urlArticle: './app/apidata/topic',
+    urlArticle: commonURL+'article',
     urlCountry: commonURL+'country/all',
     urlState: commonURL+'state/all',
     urlColor: commonURL+ 'color/active',
@@ -105,7 +106,8 @@ export const APP_DI_CONFIG: AppConfig = {
     urlTopics: './app/apidata/articlemenu',
     urlHighlights: './app/apidata/highlightbox',
     urlGender: commonURL+'gender/lang/',
-    urlAnnouncement : commonURL + 'announcement/date/publish',    
+    urlAnnouncement : commonURL + 'highlight/tender',    
+    // urlAnnouncement : commonURL + 'announcement/date/publish',    
     urlAnnouncementSub: commonURL + 'announcement/category',
     urlCalendar: './app/apidata/calendar',
     urlEvent: './app/apidata/event',
@@ -141,7 +143,8 @@ export const APP_DI_CONFIG: AppConfig = {
     externalMediaURL: mediaURL+"media",
     urlSubscription: registrationUrl + 'subscription',
     urlDigitalServices: commonURL + 'digitalservice',
-    urlDigitalServicesDetails: commonURL + 'digitalservice/details'
+    urlDigitalServicesDetails: commonURL + 'digitalservice/details',
+    urlFaq: commonURL + 'faq'
 };
 
 @NgModule({
