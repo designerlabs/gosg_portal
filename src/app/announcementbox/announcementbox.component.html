@@ -10,13 +10,13 @@
                     <div class="annoucement card__back warna_bg" style="height: 240px; background-color: rgb(0, 189, 187);">
                     <h4 class="mainCard font-size-m" style="font-family: Roboto;">{{'home.currentHighlights'|translate|uppercase}}</h4><br>
                         <ul class="" style="list-style:none; padding:0px;text-align:left">
-                          <li style="padding:1px 0px 1px 0px;" *ngFor="let item of (announcementData ? announcementData.slice(0,3): []) ">
+                          <li style="padding:1px 0px 1px 0px;" *ngFor="let item of (announcementData ? announcementData.contentList.slice(0,3): []) ">
                               <h4 class="font-size-s" style="font-family: Roboto;"><i class="fa fa-bullhorn" aria-hidden="true"></i>
-                            <a (click)="getDetailAnnounce(item.announcementCodeRunningNo, item.announcementCategoryCode)" style="color:#FFFFFF;">
-                                 {{item.announcementDescription | slice:0:30}}...</a>          
+                            <a (click)="getDetailAnnounce(item.contentCode,announcementData.categoryCode)" style="color:#FFFFFF;">
+                                &nbsp;{{item.contentTitle | slice:0:30}}...</a>          
                             </h4></li>                
                         </ul>
-                        <a routerLink="/announcement" class="plain_tag">
+                        <a routerLink="/category/739" class="plain_tag">
                         <p class="font-size-s" style="font-family: Roboto;"><i class="fa fa-caret-right"></i>{{'home.readmore'|translate}}</p></a>
                     </div>
                 </div>
