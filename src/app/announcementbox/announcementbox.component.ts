@@ -31,13 +31,12 @@ export class AnnouncementboxComponent implements OnInit {
             const myLang = translate.currentLang;
             if (myLang === 'en') {
                this.lang = 'en';
-            //    this.getData(this.languageId);
-               this.getCalendarData(this.lang);
             }
             if (myLang === 'ms') {
               this.lang = 'ms';
-              this.getCalendarData(this.lang);
             }
+            this.getCalendarData(this.lang);
+            this.getData(this.languageId);
         });
 
         if (!this.languageId) {
@@ -45,7 +44,6 @@ export class AnnouncementboxComponent implements OnInit {
         } else {
             this.languageId = 1;
         }
-        this.getData(this.languageId);
     }
 
     ngOnInit() {
@@ -53,7 +51,7 @@ export class AnnouncementboxComponent implements OnInit {
         this.getCalendarData(this.lang)
     }
 
-    getData(lang);
+    // getData(lang);
 
     getData(lang: string) {
         // let langID = 0;
@@ -85,13 +83,13 @@ export class AnnouncementboxComponent implements OnInit {
     }
 
     triggerAnnouncementAll(moduleName, lang, id1, id2) {
-        if (lang === 'ms') {
-            lang = 2;
-        }
+        // if (lang === 'ms') {
+        //     lang = 2;
+        // }
 
-        if (lang === 'en') {
-            lang = 1;
-        }
+        // if (lang === 'en') {
+        //     lang = 1;
+        // }
 
         this.route.paramMap
         .switchMap((params: ParamMap) =>

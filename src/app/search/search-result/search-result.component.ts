@@ -580,6 +580,11 @@ export class SearchResultComponent implements OnInit {
     let nullObj = {};
     let payloadObj: Object;
 
+    let env = window.location.hostname;
+    let envOrigin = window.location.origin;
+    let localURL = envOrigin+'/gosg/';
+
+    console.log(env)
     // console.log(valkeyword)
     // console.log(this.date)
 
@@ -652,7 +657,10 @@ export class SearchResultComponent implements OnInit {
         this.mainObj.aggregations = this.locAggregations;
         // console.log(this.mainObj)
 
-        dataUrl = this.internalUrl;
+        if(env == 'localhost')
+          dataUrl = this.internalUrl;
+        else
+          dataUrl = localURL+'content';
 
         // Search Specification
         if (this.valTopic && this.category_topic) {
@@ -701,7 +709,11 @@ export class SearchResultComponent implements OnInit {
         delete this.mainObj.aggregations;
         this.mainObj.aggregations = this.osAggregations;
 
-        dataUrl = this.osUrl;
+        
+        if(env == 'localhost')
+          dataUrl = this.osUrl;
+        else
+          dataUrl = localURL+'agency';
 
         // Ministry Filter
         if (this.valMinistry) {

@@ -49,8 +49,23 @@ export class NavService {
   }
 
   getPopularData(body) {
+    let dataUrl;
+    let env = window.location.hostname;
+    let envOrigin = window.location.origin;
+    let localURL = envOrigin+'/gosg/';
+
+    console.log(window.location)
+    console.log(env)
+    // console.log(localURL)
     
-    return this.http.post(this.popularUrl, body)
+    if(env == 'localhost')
+      dataUrl = this.popularUrl;
+    else
+      dataUrl = localURL+'popular';
+    
+    console.log(dataUrl)
+
+    return this.http.post(dataUrl, body)
       .map((response: Response) => response.json().data[0].term)
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
 
