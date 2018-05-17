@@ -81,6 +81,7 @@ export class AppConfig {
     urlDigitalServicesDetails: string;
     urlPopularSearch: string;
     urlFaq: string;
+    urlDashboardData: string;
 }
 
 export const APP_DI_CONFIG: AppConfig = {
@@ -147,7 +148,8 @@ export const APP_DI_CONFIG: AppConfig = {
     urlSubscription: registrationUrl + 'subscription',
     urlDigitalServices: commonURL + 'digitalservice',
     urlDigitalServicesDetails: commonURL + 'digitalservice/details',
-    urlFaq: commonURL + 'faq'
+    urlFaq: commonURL + 'faq',
+    urlDashboardData: protectedBaseURL + 'dservice/dashboard'
 };
 
 @NgModule({

@@ -197,6 +197,12 @@
       "inbox": "Peti Masuk",
       "appmgmt": "Pengurusan Aplikasi",
       "companyprofile": "Profil Syarikat"
+    },
+    "card":{
+      "total": "Total Application",
+      "approved": "Approved",
+      "rejected": "Rejected",
+      "process": "In-Progress"
     }
   },
 

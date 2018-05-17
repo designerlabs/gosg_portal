@@ -25,7 +25,53 @@
         <gosg-sidenav-dashboard></gosg-sidenav-dashboard>
     </div>
     <div class="col-md-9">
-  <h1>dashboard works!</h1>
+      <div class="row">
+        <div class="col-md-3 padding-5">
+            <mat-card class="card">
+              <h4 class="title-card">{{'dashboard.card.total' | translate}}</h4>
+              <div class="col-md-4" style="padding-top: 5px;">
+                <span class="dot" style="padding-left: 15px; padding-top: 15px;"><i class="fa fa-area-chart iconColor"></i></span>
+              </div>
+              <div class="col-md-8">
+                <h1 (click)="getListApp()" class="noCard">10</h1>
+              </div>             
+              
+            </mat-card>
+        </div>
+        <div class="col-md-3 padding-5">
+            <mat-card class="card">
+              <h4 class="title-card">{{'dashboard.card.process' | translate}}</h4>
+              <div class="col-md-4" style="padding-top: 5px;">
+                  <span class="dot" style="padding-left: 15px; padding-top: 15px;">&nbsp;<i class="fa fa-spinner iconColor"></i></span>
+              </div>
+              <div class="col-md-8">
+                <h1 (click)="getListApp()" class="noCard">10</h1>
+              </div> 
+            </mat-card>
+        </div>
+        <div class="col-md-3 padding-5">
+            <mat-card class="card">
+              <h4 class="title-card">{{'dashboard.card.approved' | translate}}</h4>
+              <div class="col-md-4" style="padding-top: 5px;">
+                <span class="dot" style="padding-left: 16px; padding-top: 15px;">&nbsp;<i class="fa fa-thumbs-up iconColor"></i></span>
+              </div>
+              <div class="col-md-8">
+                <h1 (click)="getListApp()" class="noCard">10</h1>
+              </div> 
+            </mat-card>
+        </div>
+        <div class="col-md-3 padding-5">
+            <mat-card class="card">
+              <h4 class="title-card">{{'dashboard.card.rejected' | translate}}</h4>
+              <div class="col-md-4" style="padding-top: 5px;">
+                <span class="dot" style="padding-left: 14px; padding-top: 15px;">&nbsp;&nbsp;<i class="fa fa-times iconColor"></i></span>
+              </div>
+              <div class="col-md-8">
+                <h1 (click)="getListApp()" class="noCard">10</h1>
+              </div> 
+            </mat-card>
+        </div>
+      </div>
     </div>
 </div>
   
