@@ -35,9 +35,9 @@
               <li class="container a"><h4>{{ dsvc.title }}</h4>
                   <ul *ngFor="let d of dsvc.details" style="padding-bottom: 10px;">
                       <li class="no-styles">
-                          <a href="{{ d.url }}">{{ d.title }}</a>
+                          <a [href]="d.url">{{ d.title }}</a>
                           &nbsp;
-                          <a data-toggle="tooltip" target="_blank" title="{{ d.description }}"><span class="fa fa-info-circle clickable-icons"></span> </a>
+                          <a [href]="mediaUrl + d.manual?.mediaFile" data-toggle="tooltip" target="_blank" title="{{ d.description }}"><span class="fa fa-info-circle clickable-icons"></span> </a>
                       </li>
                     </ul>
                 </li>

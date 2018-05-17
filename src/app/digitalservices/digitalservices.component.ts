@@ -16,6 +16,7 @@ export class DigitalservicesComponent implements OnInit {
 
   dsData:any = [];
   languageId = this.languageId;
+  mediaUrl: any;
 
   constructor(
     private http: Http,
@@ -57,6 +58,7 @@ export class DigitalservicesComponent implements OnInit {
   lang = this.lang;
 
   ngOnInit() {
+    this.mediaUrl = this.config.externalMediaURL +'/documents/';
     this.getDServices();
   }
 
