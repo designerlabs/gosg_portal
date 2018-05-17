@@ -98,8 +98,9 @@ export class ArticleComponent implements OnInit {
         return localStorage.getItem('themeColor');
     }
 
-    clickSideMenu(e){
-      this.statusID = '';
+    clickSideMenu(e, status){
+      this.statusID = status;
+      localStorage.setItem('subtopicID', status);
       this.navService.getSubArticleUrl(e.parentCode,  e.categoryCode, localStorage.getItem('langID'));
       this.navService.triggerSubArticle(e.parentCode,  e.categoryCode, localStorage.getItem('langID'));
       this.router.navigate(['/subcategory', e.parentCode, e.categoryCode]);
