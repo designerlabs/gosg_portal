@@ -149,11 +149,13 @@ export class NavComponent implements OnInit, AfterViewInit {
     }
 
     mainSearch(key) {
+        let loc = window.location.hostname;
         this.env = this.envPathName.split('/')[1];
 
         if(this.env == 'search') {
             // alert(key)
             this.ser_word = key;
+            console.log(loc)
             console.log(this.env)
             console.log(this.ser_word)
         } else {

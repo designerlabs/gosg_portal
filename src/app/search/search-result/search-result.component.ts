@@ -487,7 +487,7 @@ export class SearchResultComponent implements OnInit {
     }
     this.inpExcWord = '';
     if (tabInx === 0) {
-      this.btnFilterReset();
+      // this.btnFilterReset();
       //In Local tab      
       this.chktopic = true;
       this.chksubtopic = true;
@@ -505,7 +505,7 @@ export class SearchResultComponent implements OnInit {
       this.resetPage();
       this.searchByKeyword(k_word);
     } else if (tabInx === 1) {
-      this.btnFilterReset();
+      // this.btnFilterReset();
       //In Online Service tab
       this.chkosminis = true;
       this.chkosagency = true;
@@ -525,6 +525,10 @@ export class SearchResultComponent implements OnInit {
       this.resetPage();
       this.searchByKeyword(k_word);
     } else if (tabInx === 2) {
+
+      this.intData = [];
+      this.totalElements = 0;
+      
       //In Global tab
       this.btnFilterReset();
       this.resetPage();
@@ -575,6 +579,8 @@ export class SearchResultComponent implements OnInit {
   }
 
   searchByKeyword(valkeyword) {
+    console.log(this.tabIndex)
+
     let arrKeyword: any = [];
     let arrKeywordeySetting: any = [];
     let nullObj = {};
@@ -584,7 +590,7 @@ export class SearchResultComponent implements OnInit {
     let envOrigin = window.location.origin;
     let localURL = envOrigin+'/gosg/';
 
-    console.log(env)
+    // console.log(env)
     // console.log(valkeyword)
     // console.log(this.date)
 
@@ -708,7 +714,6 @@ export class SearchResultComponent implements OnInit {
 
         delete this.mainObj.aggregations;
         this.mainObj.aggregations = this.osAggregations;
-
         
         if(env == 'localhost')
           dataUrl = this.osUrl;
@@ -718,8 +723,6 @@ export class SearchResultComponent implements OnInit {
         // Ministry Filter
         if (this.valMinistry) {
           this.addFilterAry(this.valMinistry, 'ministry_name');
-          // this.checkCurrObj(this.category_topic);
-          // this.addFilterAry(this.valTopic, this.category_topic);   
         }
         // Agency Filter
         if (this.valAgency) {
@@ -749,28 +752,31 @@ export class SearchResultComponent implements OnInit {
           console.log("CURRENT SEARCH RESULT:")
           console.log(rData);
 
+          this.totalElements = 0;
+
           let num;
+          let dataLength = 0;
 
           if (this.tabIndex == 0 || this.tabIndex == 1) {
             if(rData.stats.hits) {
-              this.totalElements = rData.stats.hits.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+              this.totalElements = rData.stats.hits;
               num = (rData.stats.hits) / (this.pagesize);
+              dataLength = rData.data.length;
             }
             this.millisec = rData.stats.tookMillis;
             this.intData = rData.data;
           } else {
-            this.totalElements = rData.data.countinfo.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            this.totalElements = rData.data.countinfo;
             num = (rData.data.countinfo) / (this.pagesize);
             delete rData.data.countinfo;
+            dataLength = Object.keys(rData.data).length;
             // this.millisec = rData.data.tookMillis;
             
             this.intData = this.changeAryVal(rData.data,'global')
+            
           }
 
-          if(num)
-            num = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-          
-          // console.log(num)
+          console.log(this.totalElements)
           // console.log(this.totalElements.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
 
           // console.log(this.intData)
@@ -795,7 +801,7 @@ export class SearchResultComponent implements OnInit {
           this.valMinistry = [];
           this.valAgency = [];
 
-          if (rData.data.length > 0) {
+          if (dataLength > 0) {
 
             if (this.tabIndex == 0) { // LOCAL
               let topic: any = {};
@@ -848,13 +854,18 @@ export class SearchResultComponent implements OnInit {
             } else {
               this.totalPages = num;
             }
+
             if (this.totalPages > 0) {
               this.noNextData = this.pageNumber === this.totalPages;
             } else {
               this.noNextData = true;
             }
-  
-  
+            
+            if(num && num > 999)
+              this.totalPages = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+            // this.totalElements.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+
             //   this.serchService.searchResData = rData.data;
             this.showNoData = false;
             this.loading = false;
@@ -865,6 +876,7 @@ export class SearchResultComponent implements OnInit {
             this.sSpeci = false; //side menu
             this.sFilter = false; //side menu
           }
+          rData = null;
         },
           error => {
             this.loading = false;

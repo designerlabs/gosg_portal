@@ -13,6 +13,7 @@ declare var $ :any;
     <span class="cat">{{showdata.content_keywords}}</span>
     <p style="padding-top:15px" class="font-size-s sertxt" id="{{showdata.content_id}}" [innerHtml]="dataHilight"> 
     </p><span class="font-size-s">{{showdata.publish_date | date:'dd/MM/yyyy hh:mm a'}} </span></div>
+
     <div *ngIf='tabInx==1'><h4><span class="font-size-m">{{pageNo}}. </span>
       <a class="titleSer warna_title_color font-size-m" href='{{showdata.agency_application_url }}' target='_blank'>{{showdata.title }}</a>
     </h4>
@@ -21,6 +22,7 @@ declare var $ :any;
     </p>
     <span class="font-size-s">{{showdata.publish_date | date:'dd/MM/yyyy hh:mm a'}} </span>
     </div>
+    
     <div *ngIf='tabInx==2'><h4><span class="font-size-m">{{pageNo}}. </span>
     <a class="titleSer warna_title_color font-size-m" href='{{showdata.url }}' target='_blank'>{{showdata.title }}</a>
   </h4>
