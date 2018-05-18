@@ -199,10 +199,10 @@
       "companyprofile": "Profil Syarikat"
     },
     "card":{
-      "total": "Total Application",
-      "approved": "Approved",
-      "rejected": "Rejected",
-      "process": "In-Progress"
+      "total": "Jumlah Permohonan",
+      "approved": "Lulus",
+      "rejected": "Tidak Lulus",
+      "process": "Dalam Proses"
     }
   },
 
