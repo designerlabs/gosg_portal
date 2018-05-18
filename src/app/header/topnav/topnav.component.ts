@@ -322,16 +322,16 @@ export class TopnavComponent implements OnInit, AfterViewInit {
 
   clickManual(){
     //location.reload();
-    this.navService.triggerContent(811, 15021, localStorage.getItem('langID'));
-    this.navService.getContentUrl(811, 15021, localStorage.getItem('langID'));
+    this.navService.triggerContent(15021, localStorage.getItem('langID'));
+    this.navService.getContentUrl(15021, localStorage.getItem('langID'));
     this.router.navigate(['/content', 15021]);
     event.preventDefault();
   }
 
   clickAboutus(){
     //location.reload();
-    this.navService.triggerContent(811, 15019, localStorage.getItem('langID'));
-    this.navService.getContentUrl(811, 15019, localStorage.getItem('langID'));
+    this.navService.triggerContent(15019, localStorage.getItem('langID'));
+    this.navService.getContentUrl(15019, localStorage.getItem('langID'));
     this.router.navigate(['/content', 15019]);
     event.preventDefault();
   }
