@@ -33,7 +33,7 @@
                 <span class="dot" style="padding-left: 15px; padding-top: 15px;"><i class="fa fa-area-chart iconColor"></i></span>
               </div>
               <div class="col-md-8">
-                <h1 (click)="getListApp()" class="noCard">10</h1>
+                <h1 (click)="getListApp()" class="noCard">{{totalApp}}</h1>
               </div>             
               
             </mat-card>
@@ -45,7 +45,7 @@
                   <span class="dot" style="padding-left: 15px; padding-top: 15px;">&nbsp;<i class="fa fa-spinner iconColor"></i></span>
               </div>
               <div class="col-md-8">
-                <h1 (click)="getListApp()" class="noCard">10</h1>
+                <h1 (click)="getListApp()" class="noCard">{{inProgress}}</h1>
               </div> 
             </mat-card>
         </div>
@@ -56,7 +56,7 @@
                 <span class="dot" style="padding-left: 16px; padding-top: 15px;">&nbsp;<i class="fa fa-thumbs-up iconColor"></i></span>
               </div>
               <div class="col-md-8">
-                <h1 (click)="getListApp()" class="noCard">10</h1>
+                <h1 (click)="getListApp()" class="noCard">{{approved}}</h1>
               </div> 
             </mat-card>
         </div>
@@ -67,7 +67,7 @@
                 <span class="dot" style="padding-left: 14px; padding-top: 15px;">&nbsp;&nbsp;<i class="fa fa-times iconColor"></i></span>
               </div>
               <div class="col-md-8">
-                <h1 (click)="getListApp()" class="noCard">10</h1>
+                <h1 (click)="getListApp()" class="noCard">{{rejected}}</h1>
               </div> 
             </mat-card>
         </div>

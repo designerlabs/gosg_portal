@@ -10,6 +10,11 @@ import {
     MatInputModule, MatPaginatorModule, MatProgressSpinnerModule,
     MatSortModule, MatTableModule, MatPaginator, MatSort
   } from '@angular/material';
+import { ProtectedService } from '../services/protected.service';
+import { BehaviorSubject } from "rxjs/BehaviorSubject";
+import { ToastrService } from 'ngx-toastr';
+import { SharedService } from '../common/shared.service';
+import { DialogsService } from '../dialogs/dialogs.service';
 
 @Component({
   selector: 'gosg-dashboard',
@@ -17,10 +22,16 @@ import {
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+
   uid: any;
   lang = this.lang;
   langID = 1;
-  dashboardData= [];
+  dashboardData: any;
+
+  totalApp: any;
+  inProgress: any;
+  approved: any;
+  rejected: any;
 
   constructor(
     private activatedRoute:ActivatedRoute,
@@ -28,6 +39,10 @@ export class DashboardComponent implements OnInit {
     private router: Router,
     private http: Http, 
     private translate: TranslateService, 
+    private protectedService: ProtectedService,
+    private dialogsService: DialogsService,
+    private toastr: ToastrService,
+    private sharedService: SharedService
   ) { 
 
     this.lang = translate.currentLang;
@@ -56,8 +71,9 @@ export class DashboardComponent implements OnInit {
 
   }   
   
-  private urlDashboardData: string = this.config.urlDashboardData;
+  
   ngOnInit() {
+    this.getNoApp();
   }
 
   getListApp(){
@@ -66,14 +82,19 @@ export class DashboardComponent implements OnInit {
   }
 
   getNoApp(){
-    return this.http.get(this.urlDashboardData)
-    
-    .map((response: Response) => response.json())
-    .subscribe(resSliderData => {
-      this.dashboardData = resSliderData       
-      console.log(this.dashboardData);
-
-    });
+   
+    this.protectedService.getDashboardData().subscribe(
+      data => {
+        this.dashboardData = data;
+        console.log(this.dashboardData);
+        this.totalApp = this.dashboardData.total;
+        this.inProgress = this.dashboardData.pending;
+        this.approved = this.dashboardData.success;
+        this.rejected = this.dashboardData.failed;
+      },
+      error => {
+        this.toastr.error(this.translate.instant('Sorry'), '');            
+    });    
   }
   
 }
