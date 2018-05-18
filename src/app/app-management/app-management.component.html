@@ -81,7 +81,7 @@
                 <input matInput [matDatepicker]="startData" formControlName="startData" placeholder="{{'appmngt.setSearch.startDate' | translate}}"
                   name="startDate" id="startDate">
                 <mat-datepicker-toggle matSuffix [for]="startData" style="color:#333;"></mat-datepicker-toggle>
-                <mat-datepicker #startData startView="year" [startAt]="startDate"></mat-datepicker>
+                <mat-datepicker #startData startView="day" [startAt]="startDate"></mat-datepicker>
               </mat-form-field>
             </div>
             <div class="col-md-4">
@@ -89,7 +89,7 @@
                 <input matInput [matDatepicker]="endData" formControlName="endData" placeholder="{{'appmngt.setSearch.endDate' | translate}}"
                   name="endDate" id="endDate">
                 <mat-datepicker-toggle matSuffix [for]="endData" style="color:#333;"></mat-datepicker-toggle>
-                <mat-datepicker #endData startView="year" [startAt]="startDate"></mat-datepicker>
+                <mat-datepicker #endData startView="day" [startAt]="startDate"></mat-datepicker>
               </mat-form-field>
             </div>
             <div class="col-md-4">
