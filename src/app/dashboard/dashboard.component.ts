@@ -81,6 +81,10 @@ export class DashboardComponent implements OnInit {
     event.preventDefault();
   }
 
+  getTheme() {
+    return localStorage.getItem('themeColor');
+  }
+
   getNoApp(){
    
     this.protectedService.getDashboardData().subscribe(
