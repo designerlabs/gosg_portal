@@ -253,7 +253,7 @@
       <mat-tab-group #tabGroup (selectedTabChange)="changeTab($event)">
           <mat-tab label="{{'home.search.local' | translate}}" >
             <div style="padding-top:5px;" *ngIf="totalElements>0">
-                {{totalElements}} {{'home.search.resultsfound' | translate}} {{millisec}} ms
+                {{totalElements | number:'2.0'}} {{'home.search.resultsfound' | translate}} {{millisec}} ms
             </div> 
               <ul class="intSearch" *ngIf="tabIndex==0">
                   <li *ngFor="let int of intData; let i = index;">
@@ -263,7 +263,7 @@
           </mat-tab>
           <mat-tab label="{{'home.search.onlineser' | translate}}">
               <div style="padding-top:5px;" *ngIf="totalElements>0">
-                  {{totalElements}} {{'home.search.resultsfound' | translate}} {{millisec}} ms
+                  {{totalElements | number:'2.0'}} {{'home.search.resultsfound' | translate}} {{millisec}} ms
               </div>  
               <ul class="intSearch" *ngIf="tabIndex==1">
                   <li *ngFor="let int of intData; let i = index;">
@@ -272,8 +272,8 @@
                 </ul>
           </mat-tab>
           <mat-tab label="{{'home.search.global' | translate}}"> 
-            <div style="padding-top:5px;" *ngIf="totalElements>0 && tabIndex==2">
-                {{totalElements}} {{'home.search.searchresult' | translate}}
+            <div style="padding-top:5px;" *ngIf="totalElements>0">
+                {{totalElements  | number:'2.0'}} {{'home.search.searchresult' | translate}}
             </div> 
             <ul class="intSearch" *ngIf="tabIndex==2">
                 <li *ngFor="let int of intData; let i = index;">
@@ -295,7 +295,7 @@
             <span class="table_footer_pagination">{{ 'common.pagination.pages' | translate }}
               <strong>{{pageNumber}}</strong> {{ 'common.pagination.of' | translate }}
               <strong>{{totalPages}}</strong> {{ 'common.pagination.in' | translate }}
-              <strong>{{totalElements}}</strong> {{'home.search.result' | translate}}     </span>
+              <strong>{{totalElements | number:'2.0'}}</strong> {{'home.search.result' | translate}}     </span>
             <button mat-mini-fab color="basic" [disabled]="noPrevData" (click)="paginatorL()">
               <i [ngClass]="sharedService.icon.arrLeft" aria-hidden="true"></i>
             </button>

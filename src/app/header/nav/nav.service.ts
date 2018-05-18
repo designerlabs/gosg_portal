@@ -57,12 +57,12 @@ export class NavService {
     console.log(window.location)
     console.log(env)
     // console.log(localURL)
-    
+
     if(env == 'localhost')
       dataUrl = this.popularUrl;
     else
       dataUrl = localURL+'popular';
-    
+
     console.log(dataUrl)
 
     return this.http.post(dataUrl, body)
@@ -95,9 +95,9 @@ export class NavService {
     }
   }
 
-  getSubArticleUrl(topicID, subID: number, lang) {
+  getSubArticleUrl(subID: number, lang) {
     if (!isNaN(subID)) {
-      return this.http.get(this.config.urlPortal  + 'subcategory/' + topicID + '/' +subID + '?language=' + lang)
+      return this.http.get(this.config.urlPortal  + 'subcategory/'+subID + '?language=' + lang)
         .take(1)
         .map((response: Response) => response.json().contentCategoryResource.results)
         // .catch((error:any) =>
@@ -115,9 +115,9 @@ export class NavService {
     }
   }
 
-  getContentUrl(topicID, subID: number, lang) {
+  getContentUrl(subID: number, lang) {
     if (!isNaN(subID)) {
-      return this.http.get(this.config.urlPortal  + 'article/' + topicID + '/' +subID + '?language=' + lang)
+      return this.http.get(this.config.urlPortal  + 'content/' +subID + '?language=' + lang)
         .take(1)
         .map((response: Response) => response.json().contentCategoryResource.results)
         // .catch((error:any) =>
@@ -159,14 +159,14 @@ export class NavService {
      }
    }
 
-  triggerSubArticle(topicID, subID, lang) {
+  triggerSubArticle(subID, lang) {
    // alert("Trigger sub acrticle");
     if (!isNaN(subID)) {
       this.articleService.articles = [''];
       this.articles = [''];
       return this.route.paramMap
         .switchMap((params: ParamMap) =>
-          this.getSubArticleUrl(topicID, subID, lang))
+          this.getSubArticleUrl(subID, lang))
         .subscribe(resSliderData => {
           this.articleService.articles = resSliderData;
           this.articles = resSliderData;
@@ -178,14 +178,14 @@ export class NavService {
     }
   }
 
-  triggerContent(topicID, subID, lang) {
+  triggerContent( subID, lang) {
     // alert("Trigger sub acrticle");
      if (!isNaN(subID)) {
        this.articleService.articles = [''];
        this.articles = [''];
        return this.route.paramMap
          .switchMap((params: ParamMap) =>
-           this.getContentUrl(topicID, subID, lang))
+           this.getContentUrl(subID, lang))
          .subscribe(resSliderData => {
            this.articleService.articles = resSliderData;
            this.articles = resSliderData;

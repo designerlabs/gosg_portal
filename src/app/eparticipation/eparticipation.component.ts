@@ -60,9 +60,9 @@ export class EparticipationComponent implements OnInit {
 
 
         if(this.moduleName == 'subcategory'){
-          this.navService.triggerSubArticle(this.topicID, this.subID, this.langId);
+          this.navService.triggerSubArticle(this.subID, this.langId);
         }else if(this.moduleName == 'article'){
-          this.navService.triggerContent(this.topicID, this.subID, this.langId);
+          this.navService.triggerContent(this.subID, this.langId);
         }else{
           this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID);
         }
@@ -94,9 +94,9 @@ export class EparticipationComponent implements OnInit {
 
 clickSideMenu(e){
   this.statusID = '';
-  this.navService.getSubArticleUrl(e.parentCode,  e.categoryCode, localStorage.getItem('langID'));
-  this.navService.triggerSubArticle(e.parentCode,  e.categoryCode, localStorage.getItem('langID'));
-  this.router.navigate(['/subcategory', e.parentCode, e.categoryCode]);
+  this.navService.getSubArticleUrl(e.categoryCode, localStorage.getItem('langID'));
+  this.navService.triggerSubArticle(e.categoryCode, localStorage.getItem('langID'));
+  this.router.navigate(['/subcategory', e.categoryCode]);
   event.preventDefault();
 }
 
@@ -104,9 +104,9 @@ clickSideMenu(e){
 clickContentFromMenu(pId, aId, status){
 
   this.statusID = status;
-  this.navService.triggerContent(pId,  aId, localStorage.getItem('langID'));
-  this.navService.getContentUrl(pId,  aId, localStorage.getItem('langID'));
-  this.router.navigate(['/article', pId, aId]);
+  this.navService.triggerContent(aId, localStorage.getItem('langID'));
+  this.navService.getContentUrl(aId, localStorage.getItem('langID'));
+  this.router.navigate(['/content', aId]);
   event.preventDefault();
 }
 
