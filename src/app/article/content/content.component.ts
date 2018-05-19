@@ -95,7 +95,6 @@ export class ContentComponent implements OnInit {
     this.statusID = status;
     this.navService.getSubArticleUrl( e.categoryId, localStorage.getItem('langID'));
     this.navService.triggerSubArticle(e.categoryCode, localStorage.getItem('langID'));
-    localStorage.setItem('subtopicID', status);
     this.router.navigate( ['/subcategory', e.categoryCode]);
     event.preventDefault();
   }
@@ -104,7 +103,6 @@ export class ContentComponent implements OnInit {
     this.statusID = status;
     this.navService.triggerContent(aId, localStorage.getItem('langID'));
     this.navService.getContentUrl( aId, localStorage.getItem('langID'));
-    localStorage.setItem('subtopicID', status);
     this.router.navigate( ['/content', aId]);
     event.preventDefault();
   }

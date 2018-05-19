@@ -100,7 +100,6 @@ export class ArticleComponent implements OnInit {
 
     clickSideMenu(e, status){
       this.statusID = status;
-      localStorage.setItem('subtopicID', status);
       this.navService.getSubArticleUrl(e.categoryCode, localStorage.getItem('langID'));
       this.navService.triggerSubArticle(e.categoryCode, localStorage.getItem('langID'));
       this.router.navigate(['/subcategory', e.categoryCode]);
