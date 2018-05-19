@@ -452,18 +452,18 @@ span.highlightWord {
 .dot {
   height: 65px;
   width: 65px;
-  background-color: #1ebebc;
+  /* background-color: #1ebebc; */
   border-radius: 50%;
   display: inline-block;
 }
 
 .noCard{
-  cursor:pointer; 
+  /* cursor:pointer;  */
   font-weight: bold;
   text-align: center;
 }
 
 .iconColor{
-  color: white;
+  color: #ebebeb;
   font-size: 30px;
 }

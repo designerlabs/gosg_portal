@@ -57,6 +57,7 @@ export class ProtectedService {
   private pollUrl: string = this.config.urlPollProtected;
   // private serviceUrl = 'https://jsonplaceholder.typicode.com/users';
   private inboxUrl = this.mailUrl;
+  private urlDashboardData: string = this.config.urlDashboardData;
 
 
   createProfile(user) {
@@ -176,6 +177,12 @@ export class ProtectedService {
     return this.http.post(this.pollUrl, data)
     .map((response: Response) => response.json())
     .retry(5)
+    .catch(this.handleError);
+  }
+
+  getDashboardData(){
+    return this.http
+    .get(this.urlDashboardData).map((response: Response) => response.json())
     .catch(this.handleError);
   }
 
