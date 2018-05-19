@@ -13,7 +13,7 @@ import 'rxjs/add/operator/switchMap';
   templateUrl: './content.component.html',
   styleUrls: ['./content.component.css']
 })
-export class ContentComponent implements OnInit, AfterViewChecked {
+export class ContentComponent implements OnInit {
   statusID: any;
   @Output() menuClick = new EventEmitter();
   breadcrumb: any;
@@ -77,12 +77,6 @@ export class ContentComponent implements OnInit, AfterViewChecked {
    lang = this.lang;
    langId = this.langId;
 
-
-   ngAfterViewChecked(){
-     if(localStorage.getItem('subtopicID')){
-       this.statusID = localStorage.getItem('subtopicID');
-     }
-  }
 
   ngOnInit() {
     this.articleData = this.articleService.getArticle();
