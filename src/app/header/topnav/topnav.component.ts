@@ -14,7 +14,7 @@ let num = 0;
   styleUrls: ['./topnav.component.css']
 })
 export class TopnavComponent implements OnInit, AfterViewInit {
-  
+
   translatedText: string;
   supportedLanguages: any[];
   colors: any[];
@@ -49,9 +49,9 @@ export class TopnavComponent implements OnInit, AfterViewInit {
 
   @Output() showsidenav = new EventEmitter();
 
-  constructor(private translate: TranslateService, 
-    private topnavservice: TopnavService, 
-    private sharedservice: SharedService, 
+  constructor(private translate: TranslateService,
+    private topnavservice: TopnavService,
+    private sharedservice: SharedService,
     private route: ActivatedRoute,
     private router: Router,
     private navService: NavService) {
@@ -64,7 +64,7 @@ export class TopnavComponent implements OnInit, AfterViewInit {
       translate.setDefaultLang('en');
       translate.use('en');
     }
-    
+
 
 
     if (translate.getDefaultLang() == 'ms') {
@@ -82,7 +82,7 @@ export class TopnavComponent implements OnInit, AfterViewInit {
 
   currlang: string = this.currlang;
   currlangMOB: string = this.currlangMOB;
-  
+
 
   ngOnInit() {
 
@@ -92,7 +92,7 @@ export class TopnavComponent implements OnInit, AfterViewInit {
     this.loadDefaultFonts();
     this.loadDefaultColor();
     this.getLangID();
-   
+
     console.log('topnav.comp.ts');
 
     this.getUserProfile();
@@ -110,10 +110,10 @@ export class TopnavComponent implements OnInit, AfterViewInit {
       data => {
         this.getThemeFonts = data;
       }, err => {
-        
+
       })
   }
-  
+
 
   getLangID(){
     if(!localStorage.getItem('langID')){
@@ -144,7 +144,7 @@ export class TopnavComponent implements OnInit, AfterViewInit {
           }
         })
       }, err => {
-        
+
       })
   }
 
@@ -152,7 +152,7 @@ export class TopnavComponent implements OnInit, AfterViewInit {
     this.sharedservice.getThemeColor().subscribe(
       data => {
         this.defaultColors = data;
-        data.filter(function(color, index){ 
+        data.filter(function(color, index){
           if(color.defaultColor == true){
             console.log(color.colorCode);
             if (!localStorage.getItem('themeColor')) {
@@ -164,7 +164,7 @@ export class TopnavComponent implements OnInit, AfterViewInit {
           }
         })
       }, err => {
-        
+
       })
   }
 
@@ -184,7 +184,7 @@ export class TopnavComponent implements OnInit, AfterViewInit {
       this.translate.use('en');
     }
     localStorage.setItem('langID', this.langId);
- 
+
   }
 
   loadColor(){
@@ -192,12 +192,12 @@ export class TopnavComponent implements OnInit, AfterViewInit {
       data => {
         this.getThemeColors = data;
       }, err => {
-        
+
       })
   }
 
 
-  
+
 
   showConfBar() {
     this.edited = !(this.edited);
@@ -208,7 +208,7 @@ export class TopnavComponent implements OnInit, AfterViewInit {
   showProfileMenu(){
     //this.profileShow = !(this.profileShow);
     this.showProfile.emit(this.profileShow);
-  }  
+  }
 
   showSidenavMenu(){
     this.showsidenav.emit(this.sidenavShow);
@@ -254,7 +254,7 @@ export class TopnavComponent implements OnInit, AfterViewInit {
           }
         })
       }, err => {
-        
+
       })
 
   }
@@ -316,7 +316,7 @@ export class TopnavComponent implements OnInit, AfterViewInit {
           }
         })
       }, err => {
-        
+
       })
   }
 
@@ -324,7 +324,7 @@ export class TopnavComponent implements OnInit, AfterViewInit {
     //location.reload();
     this.navService.triggerContent(811, 15021, localStorage.getItem('langID'));
     this.navService.getContentUrl(811, 15021, localStorage.getItem('langID'));
-    this.router.navigate(['/article', 811, 15021]);
+    this.router.navigate(['/content', 15021]);
     event.preventDefault();
   }
 
@@ -332,7 +332,7 @@ export class TopnavComponent implements OnInit, AfterViewInit {
     //location.reload();
     this.navService.triggerContent(811, 15019, localStorage.getItem('langID'));
     this.navService.getContentUrl(811, 15019, localStorage.getItem('langID'));
-    this.router.navigate(['/article', 811, 15019]);
+    this.router.navigate(['/content', 15019]);
     event.preventDefault();
   }
 }

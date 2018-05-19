@@ -11,6 +11,7 @@ import { SharedService } from '../common/shared.service';
   selector: 'gosg-announcement',
   templateUrl: './announcement.component.html',
   styleUrls: ['./announcement.component.css']
+
 })
 export class AnnouncementComponent implements OnInit {
 
@@ -29,12 +30,12 @@ export class AnnouncementComponent implements OnInit {
 
     @Output() langChange = new EventEmitter();
     constructor(
-        public articleService: ArticleService, 
-        private route: ActivatedRoute, 
-        private navService: NavService, 
-        private translate: TranslateService, 
-        private router: Router, 
-        private breadcrumbService: BreadcrumbService, 
+        public articleService: ArticleService,
+        private route: ActivatedRoute,
+        private navService: NavService,
+        private translate: TranslateService,
+        private router: Router,
+        private breadcrumbService: BreadcrumbService,
         private sharedservice: SharedService,
         @Inject(APP_CONFIG) private config: AppConfig) {
 
@@ -59,9 +60,9 @@ export class AnnouncementComponent implements OnInit {
         }else{
           this.languageId = 1;
         }
-        
+
       }
-  
+
       /* LANGUAGE FUNC */
 
     }

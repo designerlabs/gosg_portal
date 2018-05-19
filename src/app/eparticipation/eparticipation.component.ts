@@ -96,7 +96,7 @@ clickSideMenu(e){
   this.statusID = '';
   this.navService.getSubArticleUrl(e.parentCode,  e.categoryCode, localStorage.getItem('langID'));
   this.navService.triggerSubArticle(e.parentCode,  e.categoryCode, localStorage.getItem('langID'));
-  this.router.navigate(['/subcategory', e.parentCode, e.categoryCode]);
+  this.router.navigate(['/subcategory', e.categoryCode]);
   event.preventDefault();
 }
 
@@ -106,7 +106,7 @@ clickContentFromMenu(pId, aId, status){
   this.statusID = status;
   this.navService.triggerContent(pId,  aId, localStorage.getItem('langID'));
   this.navService.getContentUrl(pId,  aId, localStorage.getItem('langID'));
-  this.router.navigate(['/article', pId, aId]);
+  this.router.navigate(['/content', aId]);
   event.preventDefault();
 }
 

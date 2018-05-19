@@ -62,8 +62,8 @@ export const appRoutes: Routes = [
     {path: 'eparticipation', component: EparticipationComponent},
     {path: 'announcement/:id', component: AnnouncementlistComponent, canActivate: [NavRouterActivator]},
     {path: 'announcement/:id1/:id2', component: AnnouncementdetailsComponent, canActivate: [NavRouterActivator]},
-    {path: 'subcategory/:id1/:id2', component: SubarticleComponent },
-    {path: 'article/:id1/:id2', component: ContentComponent},
+    {path: 'subcategory/:id1', component: SubarticleComponent },
+    {path: 'content/:id1', component: ContentComponent},
     {path: 'login', component: LoginComponent},
     {path: 'register', component: RegisterComponent },
 
