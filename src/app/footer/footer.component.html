@@ -126,7 +126,7 @@
       <div class="col-md-12 text-right hidden-xs" *ngIf="dataBottomLnk.length>0">
         <ul class="list-inline hidden-xs font-size-s">
           <li *ngFor="let btmlink of dataBottomLnk; let last = last">
-            <a [routerLink]="[btmlink.footerContentUrl]">
+            <a [href]="[btmlink.footerContentUrl]">
               {{btmlink.footerContentName}}
               <span *ngIf="!last">|</span>
             </a>
