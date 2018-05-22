@@ -13,8 +13,8 @@
                           <li style="padding:1px 0px 1px 0px;" *ngFor="let item of (announcementData ? announcementData.contentList.slice(0,3): []) ">
                               <h4 class="font-size-s" style="font-family: Roboto;"><i class="fa fa-bullhorn" aria-hidden="true"></i>
                             <a (click)="getDetailAnnounce(item.contentCode,announcementData.categoryCode)" style="color:#FFFFFF;">
-                                &nbsp;{{item.contentTitle | slice:0:30}}...</a>          
-                            </h4></li>                
+                                &nbsp;{{item.contentTitle | slice:0:30}}...</a>
+                            </h4></li>
                         </ul>
                         <a routerLink="/category/739" class="plain_tag">
                         <p class="font-size-s" style="font-family: Roboto;"><i class="fa fa-caret-right"></i>{{'home.readmore'|translate}}</p></a>
@@ -48,7 +48,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="tender">
-                        <a href="https://www.malaysia.gov.my/public/cms/topic/39/"><img src="https://www.malaysia.gov.my/public/static/images/tender-01.svg" alt="tender"></a>
+                        <a href="./category/2"><img src="https://www.malaysia.gov.my/public/static/images/tender-01.svg" alt="tender"></a>
                         <h4 class="font-size-m" style="text-align: center; font-family: Roboto;">TENDER</h4>
                     </div>
                 </div>
