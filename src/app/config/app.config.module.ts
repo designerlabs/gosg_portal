@@ -84,6 +84,7 @@ export class AppConfig {
     urlDashboardData: string;
     statusAppUrl: string;
     urlAgencyList: string;
+    dataAppUrl: string;
 
 }
 
@@ -154,7 +155,8 @@ export const APP_DI_CONFIG: AppConfig = {
     urlFaq: commonURL + 'faq',
     urlDashboardData: protectedBaseURL + 'dservice/dashboard',
     statusAppUrl: protectedBaseURL + 'dservice/group',
-    urlAgencyList: protectedBaseURL + 'dservice/agencylist'
+    urlAgencyList: protectedBaseURL + 'dservice/agencylist',
+    dataAppUrl: protectedBaseURL + 'dservice',
 };
 
 @NgModule({

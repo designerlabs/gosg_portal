@@ -60,6 +60,7 @@ export class ProtectedService {
   private urlDashboardData: string = this.config.urlDashboardData;
   private statusAppUrl: string = this.config.statusAppUrl;
   private urlAgencyList: string = this.config.urlAgencyList;
+  private dataAppUrl: string = this.config.dataAppUrl;
 
 
   createProfile(user) {
@@ -197,6 +198,12 @@ export class ProtectedService {
   getListAgency(lang){
     return this.http
     .get(this.urlAgencyList + '?language='+lang).map((response: Response) => response.json())
+    .catch(this.handleError);
+  }
+
+  getDataApp(lang, param, size, count){
+    return this.http
+    .get(this.dataAppUrl + '?language='+lang+'&page='+count+'&size='+size+param).map((response: Response) => response.json())
     .catch(this.handleError);
   }
 

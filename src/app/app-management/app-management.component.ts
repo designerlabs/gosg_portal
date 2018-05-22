@@ -8,6 +8,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 import { PortalService } from '../services/portal.service';
 import { Http } from '@angular/http';
+import * as moment from 'moment';
 
 @Component({
   selector: 'gosg-app-management',
@@ -33,13 +34,15 @@ export class AppManagementComponent implements OnInit {
   mailboxId=[];
   mailPageSize = 10;
   mailPageCount = 1;
+  pageSize = 10;
+  pageCount = 1;
   noPrevData = true;
   noNextData = false;
   rerender = false;
   isMailContainerShow = 'block';
-  languageId = this.languageId;
   collapse:boolean = true;
   barClass: string = "container-fluid";
+  param = "";
 
   constructor(
     private protectedService: ProtectedService,
@@ -79,7 +82,7 @@ export class AppManagementComponent implements OnInit {
     }
 
   ngOnInit() {
-    this.getDataApp();
+    
     this.appNumber = new FormControl(),
     this.agency = new FormControl(),
     this.appStatus = new FormControl(),
@@ -94,7 +97,8 @@ export class AppManagementComponent implements OnInit {
     })
 
     this.getStatusApp();
-    this.getAgencyApp(this.langID)
+    this.getAgencyApp(this.langID);
+    this.getDataAppList(this.langID, this.pageSize, this.pageCount);
     this.getMails(this.mailPageCount, this.mailPageSize);
   }
 
@@ -159,9 +163,9 @@ export class AppManagementComponent implements OnInit {
     });
   }
 
-  getDataApp(){
-    this.portalService.getDataApp().subscribe(data => {
-      this.dataApp = data.dataTable;
+  getDataAppList(lang, size, count){
+    this.protectedService.getDataApp(lang, this.param, size, count).subscribe(data => {
+      this.dataApp = data.list;
       console.log(this.dataApp);
     });
   }
@@ -182,35 +186,52 @@ export class AppManagementComponent implements OnInit {
 
   searchapp(formValues: any){
 
-    let epochS = new Date(formValues.startData).getTime();
-    let epochE = new Date(formValues.endData).getTime();
+    let sDate = new Date(formValues.startData);
+    let eDate = new Date(formValues.endData);  
+
+    let startD = moment(sDate).format('YYYY-MM-DD');
+    let endD = moment(eDate).format('YYYY-MM-DD');   
+    let strVar = "";
     
-    if(epochS == 0){
-      epochS = null;
+    console.log("epochS : "+startD+" epochE: "+endD);
+
+    if(formValues.appNumber != null){
+      strVar += '&appNo='+formValues.appNumber;
     }
 
-    if(epochE == 0){
-      epochE = null;
+    if(formValues.agency != null){
+      strVar += '&agencyRefCode='+formValues.agency;
     }
 
-    console.log("epochS : "+epochS+" epochE: "+epochE);
-
-    let body = {
-      "no_app": null,
-      "agensi": null,
-      "status": null,
-      "startD": null,
-      "endD": null
+    if(formValues.appStatus != null){
+      strVar += '&status='+formValues.appStatus;
     }
 
-    body.no_app = formValues.appNumber;
-    body.agensi = formValues.agency;
-    body.status = formValues.appStatus;
-    body.startD = epochS;
-    body.endD = epochE;
+    if(formValues.startData != null){
+      strVar += '&start='+startD;
+    }
+
+    if(formValues.endData != null){
+      strVar += '&end='+endD;
+    }
+
+    this.param = strVar;
+
+    // let body = {
+    //   "no_app": null,
+    //   "agensi": null,
+    //   "status": null,
+    //   "startD": null,
+    //   "endD": null
+    // }
+
+    // body.no_app = formValues.appNumber;
+    // body.agensi = formValues.agency;
+    // body.status = formValues.appStatus;
+    // body.startD = epochS;
+    // body.endD = epochE;
     
-    let datasend = JSON.stringify(body);
+    // let datasend = JSON.stringify(body);
 
-    console.log(datasend);
   }
 }
