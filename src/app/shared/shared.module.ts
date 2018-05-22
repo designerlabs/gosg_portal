@@ -105,7 +105,7 @@ import {
       MatTooltipModule,
       MatNativeDateModule,
       MatSortModule,
-      MatPaginatorModule      
+      MatPaginatorModule
     }from '@angular/material';
 
 import { A11yModule } from "@angular/cdk/a11y";
@@ -153,7 +153,7 @@ export function HttpLoaderFactory(http: Http) {
     MatFormFieldModule,
     MatProgressBarModule,
     MatMenuModule,
-    MatInputModule, 
+    MatInputModule,
     MatSelectModule,
     MatExpansionModule,
     TranslateModule,
@@ -165,7 +165,7 @@ export function HttpLoaderFactory(http: Http) {
 	  NgxPaginationModule,
     ModalModule.forRoot(),
     LeafletModule.forRoot()
-    
+
   ],
 
   declarations: [
@@ -192,7 +192,7 @@ export function HttpLoaderFactory(http: Http) {
     SidenavComponent,
     SidenavBottomComponent,
     DataprotectionComponent,
-   
+
     TopicFeatureComponent,
     FooterComponent,
     HighlightboxComponent,
@@ -220,13 +220,14 @@ export function HttpLoaderFactory(http: Http) {
     // SearchResultComponent
   ],
 
-  exports: [    
+  exports: [
     ContactComponent,
     SearchComponent,
     SearchIntComponent,
     LifeeventComponent,
     SliderComponent,
     TopnavComponent,
+    RouterModule,
     AboutusComponent,
     AnnouncementComponent,
     AnnouncementlistComponent,
@@ -259,7 +260,7 @@ export function HttpLoaderFactory(http: Http) {
     BrowserAnimationsModule,
     ConfirmDialogComponent,
     MatButtonModule,
-    MatInputModule, 
+    MatInputModule,
     MatFormFieldModule,
     MatSelectModule,
     MatCheckboxModule,
@@ -277,7 +278,7 @@ export function HttpLoaderFactory(http: Http) {
      ScrollDispatchModule,
      CdkStepperModule,
      CdkTableModule,
-     
+
      // Material
      MatAutocompleteModule,
 
@@ -314,7 +315,7 @@ export function HttpLoaderFactory(http: Http) {
      AgencydirectoryComponent,
      DigitalservicesComponent
     //  SearchResultComponent
-    
+
   ],
 
   providers: [SliderService, BsModalService, TopnavService, SharedService, DatePipe, ValidateService, BreadcrumbService, PortalService, AuthService, ArticleService, NavRouterActivator, NavService, AnnouncementlistService, TransService, DialogsService, SearchService, NavRouterGuardService]
