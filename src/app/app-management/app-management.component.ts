@@ -43,6 +43,8 @@ export class AppManagementComponent implements OnInit {
   collapse:boolean = true;
   barClass: string = "container-fluid";
   param = "";
+  dateSubmission: any;
+  statusDesc: any;
 
   constructor(
     private protectedService: ProtectedService,
@@ -95,6 +97,8 @@ export class AppManagementComponent implements OnInit {
       startData : this.startData,
       endData : this.endData
     })
+
+    console.log("langID"+this.langID );
 
     this.getStatusApp();
     this.getAgencyApp(this.langID);
@@ -166,6 +170,22 @@ export class AppManagementComponent implements OnInit {
   getDataAppList(lang, size, count){
     this.protectedService.getDataApp(lang, this.param, size, count).subscribe(data => {
       this.dataApp = data.list;
+     
+      for(let i=0; i<this.dataApp.length; i++){  
+        
+        this.dateSubmission = moment(new Date(this.dataApp[i].submissionDatetime)).format('DD-MM-YYYY hh:ss');
+        //moment(sDate).format('YYYY-MM-DD')
+        //new Date(this.dataApp[i].submissionDatetime)
+        console.log(this.dateSubmission);
+        let stat: any;
+        this.dataStatus.forEach(element => {
+          if(this.dataApp[i].status == element.statusId){
+            this.statusDesc = element.statusDescription;
+            //this.statusDesc.push(stat);
+          }
+
+        });
+      }
       console.log(this.dataApp);
     });
   }
@@ -182,6 +202,7 @@ export class AppManagementComponent implements OnInit {
 
   resetMethod(event) {
     this.resetSearch();
+    
   }
 
   searchapp(formValues: any){

@@ -120,17 +120,21 @@
         <th width="15%" class="mat-header-cell text-center">{{'appmngt.tableHeader.status' | translate}}</th>
         <th width="15%" class="mat-header-cell text-center">{{'appmngt.tableHeader.action' | translate}}</th>
       </tr>
-      <tr class="mat-row" *ngFor="let data of dataApp" role="row">
-        <td class="mat-cell text-center">{{data.dataId}}</td>
-        <td class="mat-cell">{{data.no_app}}</td>
-        <td class="mat-cell">{{data.name_app}}</td>
-        <td class="mat-cell">{{data.agency}}</td>
-        <td class="mat-cell text-center">{{data.submit}}</td>
-        <td class="mat-cell text-center">{{data.status}}</td>
-        <td class="mat-cell text-center">
-          <button class="btn btn-sm btn-warning">
+      <tr class="mat-row" *ngFor="let data of dataApp; let i = index;" role="row">
+        <td class="mat-cell text-center">{{i+1}}</td>
+        <td class="mat-cell">{{data.submissionRefno}}</td>
+        <td class="mat-cell">{{data.transactionId}}</td>
+        <td class="mat-cell">{{data.agencyName}}</td>
+        <td class="mat-cell text-center">{{dateSubmission}}</td>
+        <td class="mat-cell text-center">{{statusDesc}}</td>
+        <td *ngIf="langID == 1" class="mat-cell text-center">
+            {{data.messageEN}}
+          <!-- <button class="btn btn-sm btn-warning">
             <i class="fa fa-eye font-size-s"></i>
-          </button>
+          </button> -->
+        </td>
+        <td *ngIf="langID == 2" class="mat-cell text-center">
+            {{data.messageBM}}
         </td>
       </tr>
     </table>
