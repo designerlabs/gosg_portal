@@ -58,6 +58,8 @@ export class ProtectedService {
   // private serviceUrl = 'https://jsonplaceholder.typicode.com/users';
   private inboxUrl = this.mailUrl;
   private urlDashboardData: string = this.config.urlDashboardData;
+  private statusAppUrl: string = this.config.statusAppUrl;
+  private urlAgencyList: string = this.config.urlAgencyList;
 
 
   createProfile(user) {
@@ -183,6 +185,18 @@ export class ProtectedService {
   getDashboardData(){
     return this.http
     .get(this.urlDashboardData).map((response: Response) => response.json())
+    .catch(this.handleError);
+  }
+
+  getListApp(){
+    return this.http
+    .get(this.statusAppUrl).map((response: Response) => response.json())
+    .catch(this.handleError);
+  }
+
+  getListAgency(lang){
+    return this.http
+    .get(this.urlAgencyList + '?language='+lang).map((response: Response) => response.json())
     .catch(this.handleError);
   }
 

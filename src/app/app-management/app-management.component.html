@@ -61,7 +61,7 @@
             <div class="col-md-4">
               <mat-form-field>
                 <mat-select formControlName="agency" placeholder="{{'appmngt.setSearch.agency' | translate}}" name="agency" id="agency">
-                  <mat-option *ngFor="let data of dataAgency" [value]="data.agencyId">{{data.agency}}
+                  <mat-option *ngFor="let data of dataAgency" [value]="data.agencyId">{{data.agencyName}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
@@ -69,7 +69,7 @@
             <div class="col-md-4">
               <mat-form-field>
                 <mat-select formControlName="appStatus" placeholder="{{'appmngt.setSearch.appStatus' | translate}}" name="appStatus" id="appStatus">
-                  <mat-option *ngFor="let data of data" [value]="data.statusId">{{data.status}}
+                  <mat-option *ngFor="let data of dataStatus" [value]="data.statusId">{{data.statusDescription}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
@@ -109,7 +109,7 @@
 
       <p>&nbsp;</p>
     </form>
-    <!-- <div class="row"></div> -->
+    
     <table class="mat-table" style="width:100%; z-index: 9999;">
       <tr class="mat-header-row" style="height:45px">
         <th width="5%" class="mat-header-cell">{{'appmngt.tableHeader.num' | translate}}</th>

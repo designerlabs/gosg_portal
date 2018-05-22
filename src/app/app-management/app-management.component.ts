@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation, ChangeDetectorRef, Inject, Renderer } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { SharedService } from '../common/shared.service';
 import { ToastrService } from 'ngx-toastr';
 import { DialogsService } from '../dialogs/dialogs.service';
@@ -15,9 +15,12 @@ import { Http } from '@angular/http';
   styleUrls: ['./app-management.component.css'],
 })
 export class AppManagementComponent implements OnInit {
+
+  lang = this.lang;
+  langID = 1;
   dataApp: any;
   dataAgency: any;
-  data: any;
+  dataStatus: any;
   showHide: boolean = false;
   mailData: any;
   mailContent: any;
@@ -50,6 +53,29 @@ export class AppManagementComponent implements OnInit {
     private _renderer: Renderer,
     @Inject(APP_CONFIG) private config: AppConfig) {
       
+      this.lang = translate.currentLang;
+
+      translate.onLangChange.subscribe((event: LangChangeEvent) => {
+
+          const myLang = translate.currentLang;
+      
+          if (myLang == 'en') {
+      
+              translate.get('HOME').subscribe((res: any) => {
+                  this.lang = 'en';
+                  this.langID = 1;
+              });
+          }
+
+          if (myLang == 'ms') {
+      
+              translate.get('HOME').subscribe((res: any) => {
+                  this.lang = 'ms';
+                  this.langID = 2;
+              });
+          }
+
+      });
     }
 
   ngOnInit() {
@@ -67,7 +93,8 @@ export class AppManagementComponent implements OnInit {
       endData : this.endData
     })
 
-    this.languageId = 2;
+    this.getStatusApp();
+    this.getAgencyApp(this.langID)
     this.getMails(this.mailPageCount, this.mailPageSize);
   }
 
@@ -114,21 +141,21 @@ export class AppManagementComponent implements OnInit {
   changeShowStatus(){
     console.log(this.showHide);
     this.showHide = !this.showHide;
-    this.getAgencyApp();
+    this.getAgencyApp(this.langID);
     this.getStatusApp();
   }
 
-  getAgencyApp(){
-    this.portalService.getAgencyApp().subscribe(data => {
-      this.dataAgency = data.agencyList;
+  getAgencyApp(lang){
+    this.protectedService.getListAgency(lang).subscribe(data => {
+      this.dataAgency = data.list;
       console.log(this.dataAgency);
     });
   }
 
   getStatusApp(){
-    this.portalService.getStatusApp().subscribe(data => {
-      this.data = data.status;
-      console.log(this.data);
+    this.protectedService.getListApp().subscribe(data => {
+      this.dataStatus = data.list;
+      console.log(this.dataStatus);
     });
   }
 
@@ -154,6 +181,20 @@ export class AppManagementComponent implements OnInit {
   }
 
   searchapp(formValues: any){
+
+    let epochS = new Date(formValues.startData).getTime();
+    let epochE = new Date(formValues.endData).getTime();
+    
+    if(epochS == 0){
+      epochS = null;
+    }
+
+    if(epochE == 0){
+      epochE = null;
+    }
+
+    console.log("epochS : "+epochS+" epochE: "+epochE);
+
     let body = {
       "no_app": null,
       "agensi": null,
@@ -162,13 +203,14 @@ export class AppManagementComponent implements OnInit {
       "endD": null
     }
 
-    console.log(formValues);
     body.no_app = formValues.appNumber;
     body.agensi = formValues.agency;
     body.status = formValues.appStatus;
-    body.startD = formValues.startData;
-    body.endD = formValues.endData;
+    body.startD = epochS;
+    body.endD = epochE;
     
     let datasend = JSON.stringify(body);
+
+    console.log(datasend);
   }
 }
