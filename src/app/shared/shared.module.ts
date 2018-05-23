@@ -46,7 +46,7 @@ import { FooterComponent } from '../footer/footer.component';
 import { HighlightboxComponent } from '../highlightbox/highlightbox.component';
 import { ArticleComponent } from '../article/article.component';
 import { ErrorComponent } from "../error/error.component";
-import { SubarticleComponent } from "../article/subarticle/subarticle.component";
+
 import { PollComponent } from "../poll/poll.component";
 import { BreadcrumbComponent } from "../header/breadcrumb/breadcrumb.component";
 
@@ -199,7 +199,6 @@ export function HttpLoaderFactory(http: Http) {
     ArticleComponent,
     ErrorComponent,
     PollComponent,
-    SubarticleComponent,
     BreadcrumbComponent,
     HomeComponent,
     FeedbackComponent,
@@ -251,7 +250,6 @@ export function HttpLoaderFactory(http: Http) {
     ArticleComponent,
     ErrorComponent,
     PollComponent,
-    SubarticleComponent,
     BreadcrumbComponent,
     HomeComponent,
     FeedbackComponent,

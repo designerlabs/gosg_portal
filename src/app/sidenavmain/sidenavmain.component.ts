@@ -30,7 +30,7 @@ export class SidenavmainComponent implements OnInit {
   langId = this.langId;
   @Output()
   openSlide:EventEmitter<string> = new EventEmitter();
-  constructor( 
+  constructor(
     private topnavservice: TopnavService,
     private sharedservice: SharedService
   ) { }
@@ -92,7 +92,7 @@ export class SidenavmainComponent implements OnInit {
           }
         })
       }, err => {
-        
+
       })
   }
 
@@ -134,7 +134,7 @@ export class SidenavmainComponent implements OnInit {
       data => {
         this.getThemeFonts = data;
       }, err => {
-        
+
       })
   }
 
@@ -144,14 +144,13 @@ export class SidenavmainComponent implements OnInit {
         this.defaultFonts = data;
         data.filter(function(font){
           if(font.defaultFont == true){
-            console.log(font.fontName);
             if (!localStorage.getItem('customFontType')) {
               $('body, .font-size-s, .font-size-m, .font-size-l, .font-size-xl, .font-size-xxl').css('font-family', font.fontName);
             }
           }
         })
       }, err => {
-        
+
       })
   }
 
@@ -160,7 +159,7 @@ export class SidenavmainComponent implements OnInit {
       data => {
         this.getThemeColors = data;
       }, err => {
-        
+
       })
   }
 
@@ -180,14 +179,14 @@ export class SidenavmainComponent implements OnInit {
           }
         })
       }, err => {
-        
+
       })
   }
 
   fn_changeFont(dynum) {
     $('.font-size-s').css('font-size', 14 + dynum + 'px');
   }
-  
+
 
   onChange($event, deviceValue) {
     $('body, .font-size-s, .font-size-m, .font-size-l, .font-size-xl, .font-size-xxl').css('font-family', deviceValue);
@@ -209,7 +208,7 @@ export class SidenavmainComponent implements OnInit {
           }
         })
       }, err => {
-        
+
       })
   }
 

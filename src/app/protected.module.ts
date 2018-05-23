@@ -31,6 +31,7 @@ import { PollProtectedComponent } from './poll/poll-protected.component';
 import { HomeProtectedComponent } from './home/home-protected.component';
 import { ProfileUpdatedComponent } from './profile-updated/profile-updated.component';
 import { SearchResultComponent } from './search/search-result/search-result.component';
+import { SubarticleComponent } from './article/subarticle/subarticle.component';
 
 
 export function HttpLoaderFactory(http: Http) {
@@ -51,7 +52,8 @@ export function HttpLoaderFactory(http: Http) {
     PollProtectedComponent,
     HomeProtectedComponent,
     ProfileUpdatedComponent,
-    SearchResultComponent
+    SearchResultComponent,
+    SubarticleComponent
   ],
   imports: [
     SharedModule,
@@ -77,7 +79,7 @@ export function HttpLoaderFactory(http: Http) {
   schemas:[
     CUSTOM_ELEMENTS_SCHEMA
   ],
-  
+
   providers: [ ProtectedService],
   bootstrap: [ProtectedComponent]
 })
