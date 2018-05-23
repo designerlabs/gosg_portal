@@ -344,6 +344,7 @@
     "placeholder": {
       "keyword":"Keyword"
     },
+    "showNoData":"No Data Found",
     "buttons":{
       "delete":"Delete",
       "update":"Update",

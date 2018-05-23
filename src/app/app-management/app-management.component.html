@@ -25,7 +25,7 @@
   <div class="col-md-3 padding-left-0">
     <gosg-sidenav-dashboard></gosg-sidenav-dashboard>
   </div>
-  <div class="col-md-9 mat-elevation-z8" style="margin-top:15px;">
+  <div class="col-md-9 mat-elevation-z8">
     <div class="moreSearchOptBtn">
         <!-- (click)="changeShowStatus()" [ngClass]="{ 'editBtn-active': showHide, 'editBtn': !showHide  }" -->
         <!-- <i class="fa fa-search font-size-l"></i> -->
@@ -79,8 +79,9 @@
             <div class="row">
               <div class="col-md-4">
                 <mat-form-field>
+                  <!-- <div>{{startData | date:'dd/MM/yyyy' }}</div> -->
                   <input matInput [matDatepicker]="startData" formControlName="startData" placeholder="{{'appmngt.setSearch.startDate' | translate}}"
-                    name="startDate" id="startDate">
+                    name="startDate" id="startDate" readonly>
                   <mat-datepicker-toggle matSuffix [for]="startData" style="color:#333;"></mat-datepicker-toggle>
                   <mat-datepicker #startData startView="day" [startAt]="startDate"></mat-datepicker>
                 </mat-form-field>
@@ -88,7 +89,7 @@
               <div class="col-md-4">
                 <mat-form-field>
                   <input matInput [matDatepicker]="endData" formControlName="endData" placeholder="{{'appmngt.setSearch.endDate' | translate}}"
-                    name="endDate" id="endDate">
+                    name="endDate" id="endDate" readonly>
                   <mat-datepicker-toggle matSuffix [for]="endData" style="color:#333;"></mat-datepicker-toggle>
                   <mat-datepicker #endData startView="day" [startAt]="startDate"></mat-datepicker>
                 </mat-form-field>
@@ -96,12 +97,12 @@
               <div class="col-md-4">
                 
                 <button tabindex="" mat-raised-button color="warn" type="button" id="btnreset" 
-                  class="form-control btn btn-md btn-warning font-size-s pull-right"
-                  style="width: auto; height: 35px; font-family: Roboto; margin-left: 5px;" (click)="resetModal.show()">
+                  class="form-control btn btn-md btn-warning font-size-s pull-right bttnCustom"
+                  (click)="resetModal.show()" style="margin-left: 5px;">
                   <i class="fa fa-refresh"></i> {{'feedback.label.reset' | translate }}</button>
                 <button mat-raised-button type="button" color="primary" id="searchbtn" 
-                  class="form-control btn btn-md btn-success font-size-s pull-right"
-                  (click)="searchapp(searchForm.value)" style="width: auto; height: 35px; font-family: Roboto;">
+                  class="form-control btn btn-md btn-success font-size-s pull-right bttnCustom"
+                  (click)="searchapp(searchForm.value)">
                   <i class="fa fa-search"></i> {{'appmngt.setSearch.search' | translate}}</button>
                 
               </div>
@@ -139,6 +140,10 @@
         <td *ngIf="langID == 2" class="mat-cell text-center">
             {{data.messageBM}}
         </td>
+      </tr>
+      <tr *ngIf="showNoData">
+        <td colspan="8" class="showData">
+          <hr><br>{{'common.showNoData' | translate}}</td>
       </tr>
     </table>
 

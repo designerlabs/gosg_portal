@@ -341,10 +341,10 @@
     "brokenlink": "Pautan Rosak",
     "validlink":"Pautan Sah",
     "downloadablelink":"Pautan Boleh Dimuat Turun",
-
     "placeholder": {
       "keyword":"Kata Kunci"
     },
+    "showNoData":"Tiada Data Ditemui",
     "buttons":{
       "delete":"Padam",
       "update":"Kemaskini",

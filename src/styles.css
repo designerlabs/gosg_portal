@@ -467,3 +467,15 @@ span.highlightWord {
   color: #ebebeb;
   font-size: 30px;
 }
+
+.showData{
+  color: black;
+  text-align: center;
+  font-size: 15px;
+}
+
+.bttnCustom{
+  width: auto; 
+  height: 35px; 
+  font-family: Roboto; 
+}
