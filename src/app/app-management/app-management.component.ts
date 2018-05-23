@@ -20,31 +20,26 @@ export class AppManagementComponent implements OnInit {
   lang = this.lang;
   langID = 1;
   dataApp: any;
+  dataAppPage: any;
   dataAgency: any;
   dataStatus: any;
   showHide: boolean = false;
-  mailData: any;
-  mailContent: any;
   searchForm: FormGroup;
   appNumber: FormControl;
   agency: FormControl;
   appStatus: FormControl;
   startData: FormControl;
   endData: FormControl;
-  mailboxId=[];
-  mailPageSize = 10;
-  mailPageCount = 1;
   pageSize = 10;
   pageCount = 1;
   noPrevData = true;
   noNextData = false;
   rerender = false;
-  isMailContainerShow = 'block';
   collapse:boolean = true;
   barClass: string = "container-fluid";
   param = "";
-  dateSubmission: any;
-  statusDesc: any;
+  dateSubmission = [];
+  statusDesc = [];
 
   constructor(
     private protectedService: ProtectedService,
@@ -79,6 +74,10 @@ export class AppManagementComponent implements OnInit {
                   this.langID = 2;
               });
           }
+          
+          this.getStatusApp(this.langID);
+          this.getAgencyApp(this.langID);
+          this.getDataAppList(this.pageCount, this.pageSize);
 
       });
     }
@@ -98,32 +97,19 @@ export class AppManagementComponent implements OnInit {
       endData : this.endData
     })
 
-    console.log("langID"+this.langID );
-
-    this.getStatusApp();
+    this.getStatusApp(this.langID);
     this.getAgencyApp(this.langID);
-    this.getDataAppList(this.langID, this.pageSize, this.pageCount);
-    this.getMails(this.mailPageCount, this.mailPageSize);
+    this.getDataAppList(this.pageCount, this.pageSize);
   }
 
-  getMails(page, size){
-    this.protectedService.getMails(page, size).
-    subscribe(data => {
-      this.mailData  = data;
-    },
-    Error => {
-
-     this.toastr.error(this.translate.instant('mailbox.err.failtoload'), '');            
-   });
-  }
 
   pageChange(event){
-    // this.getMails(this.mailPageCount, event.value);
-    this.mailPageSize = event.value;
+    this.getDataAppList(this.pageCount, event.value);
+    this.pageSize = event.value;
   }
 
   paginatorL(page){
-    // this.getMails(page-1, this.mailPageSize);
+    this.getDataAppList(page-1, this.pageSize);
     this.noPrevData = page <= 2 ? true : false;
     this.noNextData = false;
   }
@@ -132,7 +118,7 @@ export class AppManagementComponent implements OnInit {
     this.noPrevData = page >= 1 ? false : true;
     let pageInc = page+1;
     this.noNextData = pageInc === totalPages;
-    // this.getMails(page+1, this.mailPageSize);
+    this.getDataAppList(page+1, this.pageSize);
   }
 
   toggleCollapse() {
@@ -150,43 +136,45 @@ export class AppManagementComponent implements OnInit {
     console.log(this.showHide);
     this.showHide = !this.showHide;
     this.getAgencyApp(this.langID);
-    this.getStatusApp();
+    this.getStatusApp(this.langID);
   }
 
   getAgencyApp(lang){
     this.protectedService.getListAgency(lang).subscribe(data => {
       this.dataAgency = data.list;
-      console.log(this.dataAgency);
     });
   }
 
-  getStatusApp(){
-    this.protectedService.getListApp().subscribe(data => {
+  getStatusApp(lang){
+    this.protectedService.getListApp(lang).subscribe(data => {
       this.dataStatus = data.list;
       console.log(this.dataStatus);
     });
   }
 
-  getDataAppList(lang, size, count){
-    this.protectedService.getDataApp(lang, this.param, size, count).subscribe(data => {
+  getDataAppList(page, size){
+
+    this.protectedService.getDataApp(page, size, this.param).subscribe(data => {
       this.dataApp = data.list;
-     
+      this.dataAppPage = data;
+      this.noNextData = data.pageNumber === data.totalPages;
+      this.dateSubmission = [];
+      this.statusDesc = [];
+      
       for(let i=0; i<this.dataApp.length; i++){  
+
+        let dateS = moment(new Date(this.dataApp[i].submissionDatetime)).format('DD-MM-YYYY hh:ss');
+        this.dateSubmission.push(dateS);
         
-        this.dateSubmission = moment(new Date(this.dataApp[i].submissionDatetime)).format('DD-MM-YYYY hh:ss');
-        //moment(sDate).format('YYYY-MM-DD')
-        //new Date(this.dataApp[i].submissionDatetime)
-        console.log(this.dateSubmission);
         let stat: any;
         this.dataStatus.forEach(element => {
-          if(this.dataApp[i].status == element.statusId){
-            this.statusDesc = element.statusDescription;
-            //this.statusDesc.push(stat);
+          if(this.dataApp[i].status == element.statusCode){
+            stat = element.statusDescription;
+            this.statusDesc.push(stat);
           }
 
         });
       }
-      console.log(this.dataApp);
     });
   }
 
@@ -196,13 +184,14 @@ export class AppManagementComponent implements OnInit {
     this.appStatus.reset();
     this.endData = null;
     this.startData = null;
-    this.searchForm.get('endData').setValue("");
-    this.searchForm.get('startData').setValue("");
+    this.searchForm.get('endData').setValue(null);
+    this.searchForm.get('startData').setValue(null);
+    this.param = "";
   }
 
   resetMethod(event) {
     this.resetSearch();
-    
+    this.getDataAppList(this.pageCount,this.pageSize);
   }
 
   searchapp(formValues: any){
@@ -214,10 +203,8 @@ export class AppManagementComponent implements OnInit {
     let endD = moment(eDate).format('YYYY-MM-DD');   
     let strVar = "";
     
-    console.log("epochS : "+startD+" epochE: "+endD);
-
     if(formValues.appNumber != null){
-      strVar += '&appNo='+formValues.appNumber;
+      strVar += '&submissionRefno='+formValues.appNumber;
     }
 
     if(formValues.agency != null){
@@ -237,22 +224,7 @@ export class AppManagementComponent implements OnInit {
     }
 
     this.param = strVar;
-
-    // let body = {
-    //   "no_app": null,
-    //   "agensi": null,
-    //   "status": null,
-    //   "startD": null,
-    //   "endD": null
-    // }
-
-    // body.no_app = formValues.appNumber;
-    // body.agensi = formValues.agency;
-    // body.status = formValues.appStatus;
-    // body.startD = epochS;
-    // body.endD = epochE;
-    
-    // let datasend = JSON.stringify(body);
+    this.getDataAppList(this.pageCount,this.pageSize);
 
   }
 }

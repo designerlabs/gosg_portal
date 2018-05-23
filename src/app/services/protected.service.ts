@@ -22,6 +22,7 @@ export class ProtectedService {
                       translate.get('HOME').subscribe((res: any) => {
                           this.lang = 'en';
                           this.langId = 1;
+                          this.languageId = 1;
                       });
 
                   }
@@ -29,6 +30,7 @@ export class ProtectedService {
                       translate.get('HOME').subscribe((res: any) => {
                           this.lang = 'ms';
                           this.langId = 2;
+                          this.languageId = 2;
                       });
                   }
 
@@ -183,15 +185,15 @@ export class ProtectedService {
     .catch(this.handleError);
   }
 
-  getDashboardData(){
+  getDashboardData(lang){
     return this.http
-    .get(this.urlDashboardData).map((response: Response) => response.json())
+    .get(this.urlDashboardData + '?language='+lang).map((response: Response) => response.json())
     .catch(this.handleError);
   }
 
-  getListApp(){
+  getListApp(lang){
     return this.http
-    .get(this.statusAppUrl).map((response: Response) => response.json())
+    .get(this.statusAppUrl + '?language='+lang).map((response: Response) => response.json())
     .catch(this.handleError);
   }
 
@@ -201,9 +203,9 @@ export class ProtectedService {
     .catch(this.handleError);
   }
 
-  getDataApp(lang, param, size, count){
+  getDataApp(page, size, param){
     return this.http
-    .get(this.dataAppUrl + '?language='+lang+'&page='+count+'&size='+size+param).map((response: Response) => response.json())
+    .get(this.dataAppUrl + '?language='+this.languageId+'&page='+page+'&size='+size+param).map((response: Response) => response.json())
     .catch(this.handleError);
   }
 
