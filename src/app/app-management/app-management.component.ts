@@ -7,6 +7,7 @@ import { ProtectedService } from '../services/protected.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 import { PortalService } from '../services/portal.service';
+import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 import { Http } from '@angular/http';
 import * as moment from 'moment';
 
@@ -40,6 +41,7 @@ export class AppManagementComponent implements OnInit {
   param = "";
   dateSubmission = [];
   statusDesc = [];
+  showNoData = false;
 
   constructor(
     private protectedService: ProtectedService,
@@ -154,12 +156,21 @@ export class AppManagementComponent implements OnInit {
 
   getDataAppList(page, size){
 
-    this.protectedService.getDataApp(page, size, this.param).subscribe(data => {
+    this.protectedService.getDataApp(page, size, this.param).subscribe(
+    data => {
       this.dataApp = data.list;
       this.dataAppPage = data;
       this.noNextData = data.pageNumber === data.totalPages;
       this.dateSubmission = [];
       this.statusDesc = [];
+      this.showNoData = false;
+
+      if(this.dataApp.length == 0){
+        this.showNoData = true;        
+      }
+
+      console.log(this.dataApp.length);    
+      console.log(this.showNoData);     
       
       for(let i=0; i<this.dataApp.length; i++){  
 
