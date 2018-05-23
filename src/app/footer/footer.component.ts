@@ -80,7 +80,6 @@ export class FooterComponent implements OnInit {
     }else {
       this.langID = 1;
     }
-    console.log('footer.comp.ts');
     this.getFooter(this.langID);
   }
 
@@ -130,8 +129,6 @@ export class FooterComponent implements OnInit {
   }
 
   onResize(event) {
-    // console.log(event.target.innerWidth);
-    // console.log(event.target.innerHeight);
 
     if (event.target.innerWidth >= 767) {
       this.showcontact = true;

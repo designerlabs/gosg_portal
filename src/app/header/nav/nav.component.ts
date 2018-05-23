@@ -77,14 +77,12 @@ export class NavComponent implements OnInit, AfterViewInit {
         } else {
             this.languageId = 1;
         }
-        // console.log(this.languageId)
     }
 
     ngOnInit() {
 
         this.env = this.envPathName.split('/')[1];
-        console.log(this.env)
-
+        
         this.imgSrc = 'logo_ms';
         this.navService.getMenuData(this.langId)
             .subscribe(resMenuData => this.menus = resMenuData);
@@ -136,7 +134,6 @@ export class NavComponent implements OnInit, AfterViewInit {
         this.navService.getPopularData(body)
             .subscribe(resPopularData => {
                 this.popData = resPopularData
-                // console.log(this.popData)
             });
     }
 
@@ -153,13 +150,10 @@ export class NavComponent implements OnInit, AfterViewInit {
         this.env = this.envPathName.split('/')[1];
 
         if(this.env == 'search') {
-            // alert(key)
+            
             this.ser_word = key;
-            console.log(loc)
-            console.log(this.env)
-            console.log(this.ser_word)
         } else {
-        // console.log(key)
+    
             if(key) {
                 $('#searchDDown').css({ 'display': 'none' });
                 localStorage.setItem('ser_word', key);
@@ -191,7 +185,6 @@ export class NavComponent implements OnInit, AfterViewInit {
             }
         }
 
-        // console.log(body)
         this.searchService.getInternal(JSON.stringify(body)).subscribe(
             data => {
                 this.searchService.setIntData(data);
