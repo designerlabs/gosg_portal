@@ -93,8 +93,6 @@ export class TopnavComponent implements OnInit, AfterViewInit {
     this.loadDefaultColor();
     this.getLangID();
 
-    console.log('topnav.comp.ts');
-
     this.getUserProfile();
 
     if(this.currlang == 'English'){
@@ -122,7 +120,6 @@ export class TopnavComponent implements OnInit, AfterViewInit {
   }
 
   getUserProfile(){
-    console.log(this.state);
     let getUsrID = localStorage.getItem('usrID');
     if(getUsrID){
       this.admin = true;
@@ -137,7 +134,6 @@ export class TopnavComponent implements OnInit, AfterViewInit {
         this.defaultFonts = data;
         data.filter(function(font){
           if(font.defaultFont == true){
-            console.log(font.fontName);
             if (!localStorage.getItem('customFontType')) {
               $('body, .font-size-s, .font-size-m, .font-size-l, .font-size-xl, .font-size-xxl').css('font-family', font.fontName);
             }
@@ -154,7 +150,6 @@ export class TopnavComponent implements OnInit, AfterViewInit {
         this.defaultColors = data;
         data.filter(function(color, index){
           if(color.defaultColor == true){
-            console.log(color.colorCode);
             if (!localStorage.getItem('themeColor')) {
               localStorage.setItem('themeColor', color.colorCode);
               localStorage.setItem('themeIndex', index);
@@ -308,7 +303,6 @@ export class TopnavComponent implements OnInit, AfterViewInit {
         this.defaultFonts = data;
         data.filter(function(font){
           if(font.defaultFont == true){
-            console.log(font.fontName);
             $('#fontOptSideMenu2').val(font.fontName);
               $('body, .font-size-s, .font-size-m, .font-size-l, .font-size-xl, .font-size-xxl').css('font-family', font.fontName);
               localStorage.setItem('customFontType', font.fontName);

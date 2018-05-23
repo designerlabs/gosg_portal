@@ -55,8 +55,6 @@ export class NavService {
     let localURL = envOrigin+'/gosg/';
 
     console.log(window.location)
-    console.log(env)
-    // console.log(localURL)
 
     if(env == 'localhost')
       dataUrl = this.popularUrl;
@@ -225,7 +223,6 @@ export class NavService {
         .switchMap((params: ParamMap) =>
           this.getArticleData(moduleName, lang, topicID))
         .subscribe(resSliderData => {
-          console.log(resSliderData);
           this.articleService.articles = resSliderData;
           this.articles = resSliderData;
           this.breadcrumb = this.breadcrumbService.getBreadcrumb();
@@ -236,9 +233,7 @@ export class NavService {
   }
 
   getAnnouncement(moduleName, lang: number): Observable<boolean[]> {
-    console.log('ANNOUNCEMENT: ');
-    console.log(this.urlAnnouncement + '?language=' + lang);
-
+ 
     return this.http.get(this.urlAnnouncement + '?language=' + lang)
     .take(1)
     .map((response: Response) => response.json())

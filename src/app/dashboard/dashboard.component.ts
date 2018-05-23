@@ -73,7 +73,7 @@ export class DashboardComponent implements OnInit {
   
   
   ngOnInit() {
-    this.getNoApp();
+    this.getNoApp(this.langID);
   }
 
   getListApp(){
@@ -85,9 +85,9 @@ export class DashboardComponent implements OnInit {
     return localStorage.getItem('themeColor');
   }
 
-  getNoApp(){
+  getNoApp(lang){
    
-    this.protectedService.getDashboardData().subscribe(
+    this.protectedService.getDashboardData(lang).subscribe(
       data => {
         this.dashboardData = data;
         console.log(this.dashboardData);

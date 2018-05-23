@@ -22,6 +22,7 @@ export class ProtectedService {
                       translate.get('HOME').subscribe((res: any) => {
                           this.lang = 'en';
                           this.langId = 1;
+                          this.languageId = 1;
                       });
 
                   }
@@ -29,6 +30,7 @@ export class ProtectedService {
                       translate.get('HOME').subscribe((res: any) => {
                           this.lang = 'ms';
                           this.langId = 2;
+                          this.languageId = 2;
                       });
                   }
 
@@ -60,6 +62,7 @@ export class ProtectedService {
   private urlDashboardData: string = this.config.urlDashboardData;
   private statusAppUrl: string = this.config.statusAppUrl;
   private urlAgencyList: string = this.config.urlAgencyList;
+  private dataAppUrl: string = this.config.dataAppUrl;
 
 
   createProfile(user) {
@@ -182,21 +185,27 @@ export class ProtectedService {
     .catch(this.handleError);
   }
 
-  getDashboardData(){
+  getDashboardData(lang){
     return this.http
-    .get(this.urlDashboardData).map((response: Response) => response.json())
+    .get(this.urlDashboardData + '?language='+lang).map((response: Response) => response.json())
     .catch(this.handleError);
   }
 
-  getListApp(){
+  getListApp(lang){
     return this.http
-    .get(this.statusAppUrl).map((response: Response) => response.json())
+    .get(this.statusAppUrl + '?language='+lang).map((response: Response) => response.json())
     .catch(this.handleError);
   }
 
   getListAgency(lang){
     return this.http
     .get(this.urlAgencyList + '?language='+lang).map((response: Response) => response.json())
+    .catch(this.handleError);
+  }
+
+  getDataApp(page, size, param){
+    return this.http
+    .get(this.dataAppUrl + '?language='+this.languageId+'&page='+page+'&size='+size+param).map((response: Response) => response.json())
     .catch(this.handleError);
   }
 
