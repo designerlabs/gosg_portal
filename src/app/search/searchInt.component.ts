@@ -9,7 +9,7 @@ declare var $ :any;
   selector: 'int-search',
     // template: '<div *ngFor="let int of intData"><h4>{{int.article_name}}</h4><span class="label primary">{{int.category_name}}</span><p>{{int.article_text_clean | slice:0:100}}</p></div>'
     template: `<div *ngIf='tabInx==0' style='padding: 10px'><h4><span class="font-size-m">{{pageNo}}. </span>
-    <a href='{{showdata.content_url}}' class="titleSer warna_title_color font-size-m">{{showdata.content_title}}</a></h4>
+    <a routerLink='{{showdata.content_url}}' class="titleSer warna_title_color font-size-m">{{showdata.content_title}}</a></h4>
     <span class="cat">{{showdata.content_keywords}}</span>
     <p style="padding-top:15px" class="font-size-s sertxt" id="{{showdata.content_id}}" [innerHtml]="dataHilight"> 
     </p><span class="font-size-s">{{showdata.publish_date | date:'dd/MM/yyyy hh:mm a'}} </span></div>
@@ -43,6 +43,10 @@ export class SearchIntComponent implements OnInit {
     lang = localStorage.getItem('langID');
     dataHilight;
     span = document.createElement("span");
+
+    hName = window.location.hostname;
+    env = window.location.href.split('/')[3];
+
     constructor(private router: Router, private searchService:SearchService) { }
     
     getTheme(){
@@ -55,7 +59,10 @@ export class SearchIntComponent implements OnInit {
     }
     
     ngOnInit() {
-        // console.log(this.showdata);
+        console.log(this.env);
+        if(this.hName == "localhost")
+          this.env = ""
+        
         this.addHighlight(this.keyw);
     }
 

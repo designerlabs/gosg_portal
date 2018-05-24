@@ -54,14 +54,14 @@ export class NavService {
     let envOrigin = window.location.origin;
     let localURL = envOrigin+'/gosg/';
 
-    console.log(window.location)
+    // console.log(window.location)
 
     if(env == 'localhost')
       dataUrl = this.popularUrl;
     else
       dataUrl = localURL+'popular';
 
-    console.log(dataUrl)
+    // console.log(dataUrl)
 
     return this.http.post(dataUrl, body)
       .map((response: Response) => response.json().data[0].term)

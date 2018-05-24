@@ -210,7 +210,7 @@
             </li>
             <li style="padding: 10px;" *ngIf="sKeyword || sSpeci || sFilter">
                 <div>
-                  <button class="btn btn-md" mat-raised-button color="primary" (click)="btnSubmit()">
+                  <button [disabled]="locUnchecked >= 4 || osUnchecked >= 4?'true':'false'" class="btn btn-md" mat-raised-button color="primary" (click)="btnSubmit()">
                   <i [class]="sharedService.icon.check"></i> Submit</button>
                   <button mat-raised-button color="warn" (click)="btnFilterReset()"><i [class]="sharedService.icon.refresh"></i> Reset</button>
                 </div>
@@ -286,7 +286,7 @@
         <div *ngIf="showNoData" class="row text-align-Center padding-20"> {{ 'common.msg.nodata' | translate }} </div>
 
         <div class="float-right paddingTop-15">
-          <mat-form-field class="table_footer_pagecount" style="display: inline-block; position: relative; text-align: left;">
+          <mat-form-field *ngIf="tabIndex!=2" class="table_footer_pagecount" style="display: inline-block; position: relative; text-align: left;">
             <mat-select class="font-size-s text-align-Center" [(ngModel)]="pagesize" (change)="pageChange($event)">
               <mat-option *ngFor="let pgcount of sharedService.pageSize" [value]="pgcount.size">{{pgcount.size}}</mat-option>
             </mat-select>

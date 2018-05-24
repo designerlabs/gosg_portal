@@ -35,6 +35,8 @@ export class NavComponent implements OnInit, AfterViewInit {
     envPathName = window.location.pathname;
     envOrigin = window.location.origin;
 
+    hName = window.location.hostname;
+
     private articleUrl: string = this.config.urlArticle;
     private menuUrl: string = this.config.urlMenu;
 
@@ -84,8 +86,7 @@ export class NavComponent implements OnInit, AfterViewInit {
         this.env = this.envPathName.split('/')[1];
         
         this.imgSrc = 'logo_ms';
-        this.navService.getMenuData(this.langId)
-            .subscribe(resMenuData => this.menus = resMenuData);
+        this.navService.getMenuData(this.langId).subscribe(resMenuData => this.menus = resMenuData);
         this.getPop();
     }
 

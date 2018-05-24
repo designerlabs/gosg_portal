@@ -78,6 +78,19 @@ export class SearchResultComponent implements OnInit {
   chkostitle = true;
   chkosdes = true;
   chkGlobValue = 'gov.my';
+  
+  locUnchecked:any = 0;
+  osUnchecked:any = 0;
+
+  dLocTopic: boolean = false;
+  dLocSubtopic: boolean = false;
+  dLocTitle: boolean = false;
+  dLocDesc: boolean = false;
+
+  dOsMministry: boolean = false;
+  dOsAgency: boolean = false;
+  dOsTopic: boolean = false;
+  dOsDesc: boolean = false;
 
   // CONTENT FILTER FIELDS
 
@@ -579,7 +592,7 @@ export class SearchResultComponent implements OnInit {
   }
 
   searchByKeyword(valkeyword) {
-    console.log(this.tabIndex)
+    // console.log(this.tabIndex)
 
     let arrKeyword: any = [];
     let arrKeywordeySetting: any = [];
@@ -737,8 +750,8 @@ export class SearchResultComponent implements OnInit {
         payloadObj = nullObj;
       }
 
-      console.log("CURRENT SEARCH OBJECT:")
-      console.log(this.mainObj)
+      // console.log("CURRENT SEARCH OBJECT:")
+      // console.log(this.mainObj)
       // console.log("CURRENT SEARCH OBJECT IN JSON:")
       // console.log(JSON.stringify(this.mainObj))
 
@@ -749,8 +762,8 @@ export class SearchResultComponent implements OnInit {
       return this.http.post(dataUrl, payloadObj)
         .map(res => res.json())
         .subscribe(rData => {
-          console.log("CURRENT SEARCH RESULT:")
-          console.log(rData);
+          // console.log("CURRENT SEARCH RESULT:")
+          // console.log(rData);
 
           this.totalElements = 0;
 
@@ -776,7 +789,7 @@ export class SearchResultComponent implements OnInit {
             
           }
 
-          console.log(this.totalElements)
+          // console.log(this.totalElements)
           // console.log(this.totalElements.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
 
           // console.log(this.intData)
@@ -901,54 +914,98 @@ export class SearchResultComponent implements OnInit {
     // this.toastr.success(id);
   }
 
+
   chkSpeci(e, type, elemName) {
-    console.log(e)
+    // console.log(e)
     // console.log(type)
 
     switch (type) {
 
       case "content_topic":
         this.chktopic = e.checked
-        if(e.checked == false)
+        if(e.checked == false) {
           this.selTopicDisp = "";
           this.valTopic = [];
+          this.locUnchecked = this.locUnchecked+1;
+        } else if(e.checked == true) {
+          this.locUnchecked = this.locUnchecked-1;
+        }
         break;
 
       case "content_sub_topic":
         this.chksubtopic = e.checked
-        if(e.checked == false)
+        if(e.checked == false) {
           this.selSubTopicDisp = "";
           this.valSubTopic = [];
+          this.locUnchecked = this.locUnchecked+1;
+        } else if(e.checked == true) {
+          this.locUnchecked = this.locUnchecked-1;
+        }
+        
         break;
 
       case "content_title":
         this.chktitle = e.checked
+        if(e.checked == false) {
+          this.locUnchecked = this.locUnchecked+1;
+        } else if(e.checked == true) {
+          this.locUnchecked = this.locUnchecked-1;
+        }
+        
         break;
 
       case "content_description":
         this.chkdes = e.checked
+        if(e.checked == false) {
+          this.locUnchecked = this.locUnchecked+1;
+        } else if(e.checked == true) {
+          this.locUnchecked = this.locUnchecked-1;
+        }
+        
         break;
 
       case "title":
         this.chkostitle = e.checked
+        if(e.checked == false) {
+          this.osUnchecked = this.osUnchecked+1;
+        } else if(e.checked == true) {
+          this.osUnchecked = this.osUnchecked-1;
+        }
+        
         break;
 
       case "description":
         this.chkosdes = e.checked
+        if(e.checked == false) {
+          this.osUnchecked = this.osUnchecked+1;
+        } else if(e.checked == true) {
+          this.osUnchecked = this.osUnchecked-1;
+        }
+        
         break;
 
       case "ministry_name":
         this.chkosminis = e.checked
-        if(e.checked == false)
+        if(e.checked == false) {
           this.selMinisDisp = "";
           this.valMinistry = [];
+          this.osUnchecked = this.osUnchecked+1;
+        } else if(e.checked == true) {
+          this.osUnchecked = this.osUnchecked-1;
+        }
+        
         break;
 
       case "agency_name":
         this.chkosagency = e.checked
-        if(e.checked == false)
+        if(e.checked == false) {
           this.selAgencyDisp = "";
           this.valAgency = [];
+          this.osUnchecked = this.osUnchecked+1;
+        } else if(e.checked == true) {
+          this.osUnchecked = this.osUnchecked-1;
+        }
+        
         break;
 
       case "citizen":
@@ -1026,6 +1083,7 @@ export class SearchResultComponent implements OnInit {
   }
 
   pageChange(evt) {
+    console.log(evt.value)
     this.resetPage();
     this.pagesize = evt.value;
     this.searchByKeyword(this.ser_word);
