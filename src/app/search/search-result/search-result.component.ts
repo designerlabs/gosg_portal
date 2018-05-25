@@ -750,8 +750,8 @@ export class SearchResultComponent implements OnInit {
         payloadObj = nullObj;
       }
 
-      // console.log("CURRENT SEARCH OBJECT:")
-      // console.log(this.mainObj)
+      console.log("CURRENT SEARCH OBJECT:")
+      console.log(this.mainObj)
       // console.log("CURRENT SEARCH OBJECT IN JSON:")
       // console.log(JSON.stringify(this.mainObj))
 
@@ -762,8 +762,8 @@ export class SearchResultComponent implements OnInit {
       return this.http.post(dataUrl, payloadObj)
         .map(res => res.json())
         .subscribe(rData => {
-          // console.log("CURRENT SEARCH RESULT:")
-          // console.log(rData);
+          console.log("CURRENT SEARCH RESULT:")
+          console.log(rData);
 
           this.totalElements = 0;
 
