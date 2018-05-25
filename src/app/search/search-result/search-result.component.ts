@@ -500,6 +500,8 @@ export class SearchResultComponent implements OnInit {
     }
     this.inpExcWord = '';
     if (tabInx === 0) {
+
+      this.intData = [];
       // this.btnFilterReset();
       //In Local tab      
       this.chktopic = true;
@@ -518,6 +520,8 @@ export class SearchResultComponent implements OnInit {
       this.resetPage();
       this.searchByKeyword(k_word);
     } else if (tabInx === 1) {
+
+      this.intData = [];
       // this.btnFilterReset();
       //In Online Service tab
       this.chkosminis = true;
@@ -612,7 +616,7 @@ export class SearchResultComponent implements OnInit {
     }
 
     if (valkeyword.trim().length > 0) {
-      this.loading = true;
+      // this.loading = true;
       if (this.tabIndex == 0 || this.tabIndex == 1) {
         this.mainObj.keyword = valkeyword;
         this.mainObj.from = this.pagefrom;
