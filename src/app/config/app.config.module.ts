@@ -80,6 +80,8 @@ export class AppConfig {
     urlDigitalServices: string;
     urlDigitalServicesDetails: string;
     urlPopularSearch: string;
+    urlFaq: string;
+    urlManual: string;
 }
 
 export const APP_DI_CONFIG: AppConfig = {
@@ -89,6 +91,8 @@ export const APP_DI_CONFIG: AppConfig = {
     urlMenu: './app/apidata/menudata',
     urlSlider: commonURL+'slider',
     urlEvents: commonURL+'calendar',
+    urlFaq: commonURL+'faq/all',
+    urlManual: commonURL+'article/usermanual',
     // urlFooter: './app/apidata/footer',
     urlFooter: commonURL + 'footer',
     urlArticle: './app/apidata/topic',

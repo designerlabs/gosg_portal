@@ -48,6 +48,16 @@ export class NavService {
 
   }
 
+
+  getFAQData(lang): Observable<IMenu[]> {
+
+    return this.http.get(this.config.urlFaq + '?language=' + lang)
+      .map((response: Response) => response.json().faqList)
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+
+  }
+  
+
   getPopularData(body) {
     
     return this.http.post(this.popularUrl, body)
