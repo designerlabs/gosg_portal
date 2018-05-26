@@ -46,7 +46,7 @@ import { FooterComponent } from '../footer/footer.component';
 import { HighlightboxComponent } from '../highlightbox/highlightbox.component';
 import { ArticleComponent } from '../article/article.component';
 import { ErrorComponent } from "../error/error.component";
-import { SubarticleComponent } from "../article/subarticle/subarticle.component";
+
 import { PollComponent } from "../poll/poll.component";
 import { BreadcrumbComponent } from "../header/breadcrumb/breadcrumb.component";
 
@@ -72,6 +72,7 @@ import { DatePipe } from '@angular/common';
 import { AgencydirectoryComponent } from '../agencydirectory/agencydirectory.component';
 
 import { SidenavmainComponent } from "../sidenavmain/sidenavmain.component";
+import { LoadingModule } from 'ngx-loading';
 
 import {
       MatButtonModule,
@@ -105,7 +106,7 @@ import {
       MatTooltipModule,
       MatNativeDateModule,
       MatSortModule,
-      MatPaginatorModule      
+      MatPaginatorModule
     }from '@angular/material';
 
 import { A11yModule } from "@angular/cdk/a11y";
@@ -132,6 +133,7 @@ import { SetactiveComponent } from '../subscription/setactive/setactive.componen
 import { DigitalservicesComponent } from '../digitalservices/digitalservices.component';
 import { RssComponent } from '../article/rss/rss.component';
 import { ContentComponent } from '../article/content/content.component';
+import { EparticipationComponent } from '../eparticipation/eparticipation.component';
 // import { SearchResultComponent } from '../search/search-result/search-result.component';
 export function HttpLoaderFactory(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -152,7 +154,7 @@ export function HttpLoaderFactory(http: Http) {
     MatFormFieldModule,
     MatProgressBarModule,
     MatMenuModule,
-    MatInputModule, 
+    MatInputModule,
     MatSelectModule,
     MatExpansionModule,
     TranslateModule,
@@ -163,8 +165,9 @@ export function HttpLoaderFactory(http: Http) {
     // DialogsModule,
 	  NgxPaginationModule,
     ModalModule.forRoot(),
+    LoadingModule,
     LeafletModule.forRoot()
-    
+
   ],
 
   declarations: [
@@ -191,14 +194,13 @@ export function HttpLoaderFactory(http: Http) {
     SidenavComponent,
     SidenavBottomComponent,
     DataprotectionComponent,
-   
+
     TopicFeatureComponent,
     FooterComponent,
     HighlightboxComponent,
     ArticleComponent,
     ErrorComponent,
     PollComponent,
-    SubarticleComponent,
     BreadcrumbComponent,
     HomeComponent,
     FeedbackComponent,
@@ -214,17 +216,19 @@ export function HttpLoaderFactory(http: Http) {
     SetactiveComponent,
     DigitalservicesComponent,
     RssComponent,
-    ContentComponent
+    ContentComponent,
+    EparticipationComponent
     // SearchResultComponent
   ],
 
-  exports: [    
+  exports: [
     ContactComponent,
     SearchComponent,
     SearchIntComponent,
     LifeeventComponent,
     SliderComponent,
     TopnavComponent,
+    RouterModule,
     AboutusComponent,
     AnnouncementComponent,
     AnnouncementlistComponent,
@@ -248,7 +252,6 @@ export function HttpLoaderFactory(http: Http) {
     ArticleComponent,
     ErrorComponent,
     PollComponent,
-    SubarticleComponent,
     BreadcrumbComponent,
     HomeComponent,
     FeedbackComponent,
@@ -257,7 +260,7 @@ export function HttpLoaderFactory(http: Http) {
     BrowserAnimationsModule,
     ConfirmDialogComponent,
     MatButtonModule,
-    MatInputModule, 
+    MatInputModule,
     MatFormFieldModule,
     MatSelectModule,
     MatCheckboxModule,
@@ -275,7 +278,7 @@ export function HttpLoaderFactory(http: Http) {
      ScrollDispatchModule,
      CdkStepperModule,
      CdkTableModule,
-     
+
      // Material
      MatAutocompleteModule,
 
@@ -312,7 +315,7 @@ export function HttpLoaderFactory(http: Http) {
      AgencydirectoryComponent,
      DigitalservicesComponent
     //  SearchResultComponent
-    
+
   ],
 
   providers: [SliderService, BsModalService, TopnavService, SharedService, DatePipe, ValidateService, BreadcrumbService, PortalService, AuthService, ArticleService, NavRouterActivator, NavService, AnnouncementlistService, TransService, DialogsService, SearchService, NavRouterGuardService]

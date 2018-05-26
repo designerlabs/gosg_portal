@@ -31,6 +31,11 @@ export class NavComponent implements OnInit, AfterViewInit {
     menuId: number;
     popData: any;
     ser_word = "";
+    env:any;
+    envPathName = window.location.pathname;
+    envOrigin = window.location.origin;
+
+    hName = window.location.hostname;
 
     private articleUrl: string = this.config.urlArticle;
     private menuUrl: string = this.config.urlMenu;
@@ -74,13 +79,14 @@ export class NavComponent implements OnInit, AfterViewInit {
         } else {
             this.languageId = 1;
         }
-        // console.log(this.languageId)
     }
 
     ngOnInit() {
+
+        this.env = this.envPathName.split('/')[1];
+        
         this.imgSrc = 'logo_ms';
-        this.navService.getMenuData(this.langId)
-            .subscribe(resMenuData => this.menus = resMenuData);
+        this.navService.getMenuData(this.langId).subscribe(resMenuData => this.menus = resMenuData);
         this.getPop();
     }
 
@@ -129,7 +135,6 @@ export class NavComponent implements OnInit, AfterViewInit {
         this.navService.getPopularData(body)
             .subscribe(resPopularData => {
                 this.popData = resPopularData
-                // console.log(this.popData)
             });
     }
 
@@ -142,14 +147,22 @@ export class NavComponent implements OnInit, AfterViewInit {
     }
 
     mainSearch(key) {
-        // console.log(key)
-        if(key) {
-            $('#searchDDown').css({ 'display': 'none' });
-            localStorage.setItem('ser_word', key);
-            this.router.navigate(['search/searchResult']);
-            this.internal(key);
+        let loc = window.location.hostname;
+        this.env = this.envPathName.split('/')[1];
+
+        if(this.env == 'search') {
+            
+            this.ser_word = key;
         } else {
-            this.toastr.error(this.translate.instant('common.msg.searchKeyword'), '');
+    
+            if(key) {
+                $('#searchDDown').css({ 'display': 'none' });
+                localStorage.setItem('ser_word', key);
+                this.router.navigate(['search/searchResult']);
+                this.internal(key);
+            } else {
+                this.toastr.error(this.translate.instant('common.msg.searchKeyword'), '');
+            }
         }
     }
 
@@ -173,7 +186,6 @@ export class NavComponent implements OnInit, AfterViewInit {
             }
         }
 
-        // console.log(body)
         this.searchService.getInternal(JSON.stringify(body)).subscribe(
             data => {
                 this.searchService.setIntData(data);

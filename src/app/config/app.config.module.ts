@@ -82,6 +82,11 @@ export class AppConfig {
     urlPopularSearch: string;
     urlFaq: string;
     urlManual: string;
+    urlDashboardData: string;
+    statusAppUrl: string;
+    urlAgencyList: string;
+    dataAppUrl: string;
+
 }
 
 export const APP_DI_CONFIG: AppConfig = {
@@ -95,7 +100,7 @@ export const APP_DI_CONFIG: AppConfig = {
     urlManual: commonURL+'article/usermanual',
     // urlFooter: './app/apidata/footer',
     urlFooter: commonURL + 'footer',
-    urlArticle: './app/apidata/topic',
+    urlArticle: commonURL+'article',
     urlCountry: commonURL+'country/all',
     urlState: commonURL+'state/all',
     urlColor: commonURL+ 'color/active',
@@ -109,7 +114,8 @@ export const APP_DI_CONFIG: AppConfig = {
     urlTopics: './app/apidata/articlemenu',
     urlHighlights: './app/apidata/highlightbox',
     urlGender: commonURL+'gender/lang/',
-    urlAnnouncement : commonURL + 'announcement/date/publish',    
+    urlAnnouncement : commonURL + 'highlight/tender',    
+    // urlAnnouncement : commonURL + 'announcement/date/publish',    
     urlAnnouncementSub: commonURL + 'announcement/category',
     urlCalendar: './app/apidata/calendar',
     urlEvent: './app/apidata/event',
@@ -122,6 +128,9 @@ export const APP_DI_CONFIG: AppConfig = {
     portalURL: portalBaseURL,
     urlDashboard: uapURL + 'portal-protected/dashboard/',
     protectedURL:protectedBaseURL,
+    // urlPopularSearch: uapURL + 'popular',
+    // urlIntSearch: uapURL + 'content',
+    // urlOsSearch: uapURL + 'agency',
     urlPopularSearch: searchServiceURL + 'popular',
     urlIntSearch: searchServiceURL + 'content',
     urlOsSearch: searchServiceURL + 'agency',
@@ -145,7 +154,12 @@ export const APP_DI_CONFIG: AppConfig = {
     externalMediaURL: mediaURL+"media",
     urlSubscription: registrationUrl + 'subscription',
     urlDigitalServices: commonURL + 'digitalservice',
-    urlDigitalServicesDetails: commonURL + 'digitalservice/details'
+    urlDigitalServicesDetails: commonURL + 'digitalservice/details',
+    // urlFaq: commonURL + 'faq',
+    urlDashboardData: protectedBaseURL + 'dservice/dashboard',
+    statusAppUrl: protectedBaseURL + 'dservice/group',
+    urlAgencyList: protectedBaseURL + 'dservice/agencylist',
+    dataAppUrl: protectedBaseURL + 'dservice',
 };
 
 @NgModule({

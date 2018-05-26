@@ -45,6 +45,7 @@ import { SetactiveComponent } from './subscription/setactive/setactive.component
 import { DigitalservicesComponent } from './digitalservices/digitalservices.component';
 import { RssComponent } from './article/rss/rss.component';
 import { ContentComponent } from './article/content/content.component';
+import { EparticipationComponent } from './eparticipation/eparticipation.component';
 
 export const appRoutes: Routes = [
 
@@ -58,10 +59,11 @@ export const appRoutes: Routes = [
     {path: 'rss/:id', component: RssComponent},
     {path: 'rss/id/:id', component: RssComponent},
     {path: 'announcement', component: AnnouncementComponent },
+    {path: 'eparticipation', component: EparticipationComponent},
     {path: 'announcement/:id', component: AnnouncementlistComponent, canActivate: [NavRouterActivator]},
     {path: 'announcement/:id1/:id2', component: AnnouncementdetailsComponent, canActivate: [NavRouterActivator]},
-    {path: 'subcategory/:id1/:id2', component: SubarticleComponent },
-    {path: 'article/:id1/:id2', component: ContentComponent},
+    {path: 'subcategory/:id1', component: SubarticleComponent },
+    {path: 'content/:id1', component: ContentComponent},
     {path: 'login', component: LoginComponent},
     {path: 'register', component: RegisterComponent },
 

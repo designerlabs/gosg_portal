@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation, ChangeDetectorRef, Inject, Renderer } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { SharedService } from '../common/shared.service';
 import { ToastrService } from 'ngx-toastr';
 import { DialogsService } from '../dialogs/dialogs.service';
@@ -7,7 +7,9 @@ import { ProtectedService } from '../services/protected.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 import { PortalService } from '../services/portal.service';
+import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 import { Http } from '@angular/http';
+import * as moment from 'moment';
 
 @Component({
   selector: 'gosg-app-management',
@@ -15,28 +17,31 @@ import { Http } from '@angular/http';
   styleUrls: ['./app-management.component.css'],
 })
 export class AppManagementComponent implements OnInit {
+
+  lang = this.lang;
+  langID = 1;
   dataApp: any;
+  dataAppPage: any;
   dataAgency: any;
-  data: any;
+  dataStatus: any;
   showHide: boolean = false;
-  mailData: any;
-  mailContent: any;
   searchForm: FormGroup;
   appNumber: FormControl;
   agency: FormControl;
   appStatus: FormControl;
   startData: FormControl;
   endData: FormControl;
-  mailboxId=[];
-  mailPageSize = 10;
-  mailPageCount = 1;
+  pageSize = 10;
+  pageCount = 1;
   noPrevData = true;
   noNextData = false;
   rerender = false;
-  isMailContainerShow = 'block';
-  languageId = this.languageId;
   collapse:boolean = true;
   barClass: string = "container-fluid";
+  param = "";
+  dateSubmission = [];
+  statusDesc = [];
+  showNoData = false;
 
   constructor(
     private protectedService: ProtectedService,
@@ -50,10 +55,37 @@ export class AppManagementComponent implements OnInit {
     private _renderer: Renderer,
     @Inject(APP_CONFIG) private config: AppConfig) {
       
+      this.lang = translate.currentLang;
+
+      translate.onLangChange.subscribe((event: LangChangeEvent) => {
+
+          const myLang = translate.currentLang;
+      
+          if (myLang == 'en') {
+      
+              translate.get('HOME').subscribe((res: any) => {
+                  this.lang = 'en';
+                  this.langID = 1;
+              });
+          }
+
+          if (myLang == 'ms') {
+      
+              translate.get('HOME').subscribe((res: any) => {
+                  this.lang = 'ms';
+                  this.langID = 2;
+              });
+          }
+          
+          this.getStatusApp(this.langID);
+          this.getAgencyApp(this.langID);
+          this.getDataAppList(this.pageCount, this.pageSize);
+
+      });
     }
 
   ngOnInit() {
-    this.getDataApp();
+    
     this.appNumber = new FormControl(),
     this.agency = new FormControl(),
     this.appStatus = new FormControl(),
@@ -67,28 +99,19 @@ export class AppManagementComponent implements OnInit {
       endData : this.endData
     })
 
-    this.languageId = 2;
-    this.getMails(this.mailPageCount, this.mailPageSize);
+    this.getStatusApp(this.langID);
+    this.getAgencyApp(this.langID);
+    this.getDataAppList(this.pageCount, this.pageSize);
   }
 
-  getMails(page, size){
-    this.protectedService.getMails(page, size).
-    subscribe(data => {
-      this.mailData  = data;
-    },
-    Error => {
-
-     this.toastr.error(this.translate.instant('mailbox.err.failtoload'), '');            
-   });
-  }
 
   pageChange(event){
-    // this.getMails(this.mailPageCount, event.value);
-    this.mailPageSize = event.value;
+    this.getDataAppList(this.pageCount, event.value);
+    this.pageSize = event.value;
   }
 
   paginatorL(page){
-    // this.getMails(page-1, this.mailPageSize);
+    this.getDataAppList(page-1, this.pageSize);
     this.noPrevData = page <= 2 ? true : false;
     this.noNextData = false;
   }
@@ -97,7 +120,7 @@ export class AppManagementComponent implements OnInit {
     this.noPrevData = page >= 1 ? false : true;
     let pageInc = page+1;
     this.noNextData = pageInc === totalPages;
-    // this.getMails(page+1, this.mailPageSize);
+    this.getDataAppList(page+1, this.pageSize);
   }
 
   toggleCollapse() {
@@ -114,28 +137,55 @@ export class AppManagementComponent implements OnInit {
   changeShowStatus(){
     console.log(this.showHide);
     this.showHide = !this.showHide;
-    this.getAgencyApp();
-    this.getStatusApp();
+    this.getAgencyApp(this.langID);
+    this.getStatusApp(this.langID);
   }
 
-  getAgencyApp(){
-    this.portalService.getAgencyApp().subscribe(data => {
-      this.dataAgency = data.agencyList;
-      console.log(this.dataAgency);
+  getAgencyApp(lang){
+    this.protectedService.getListAgency(lang).subscribe(data => {
+      this.dataAgency = data.list;
     });
   }
 
-  getStatusApp(){
-    this.portalService.getStatusApp().subscribe(data => {
-      this.data = data.status;
-      console.log(this.data);
+  getStatusApp(lang){
+    this.protectedService.getListApp(lang).subscribe(data => {
+      this.dataStatus = data.list;
+      console.log(this.dataStatus);
     });
   }
 
-  getDataApp(){
-    this.portalService.getDataApp().subscribe(data => {
-      this.dataApp = data.dataTable;
-      console.log(this.dataApp);
+  getDataAppList(page, size){
+
+    this.protectedService.getDataApp(page, size, this.param).subscribe(
+    data => {
+      this.dataApp = data.list;
+      this.dataAppPage = data;
+      this.noNextData = data.pageNumber === data.totalPages;
+      this.dateSubmission = [];
+      this.statusDesc = [];
+      this.showNoData = false;
+
+      if(this.dataApp.length == 0){
+        this.showNoData = true;        
+      }
+
+      console.log(this.dataApp.length);    
+      console.log(this.showNoData);     
+      
+      for(let i=0; i<this.dataApp.length; i++){  
+
+        let dateS = moment(new Date(this.dataApp[i].submissionDatetime)).format('DD-MM-YYYY hh:ss');
+        this.dateSubmission.push(dateS);
+        
+        let stat: any;
+        this.dataStatus.forEach(element => {
+          if(this.dataApp[i].status == element.statusCode){
+            stat = element.statusDescription;
+            this.statusDesc.push(stat);
+          }
+
+        });
+      }
     });
   }
 
@@ -145,30 +195,47 @@ export class AppManagementComponent implements OnInit {
     this.appStatus.reset();
     this.endData = null;
     this.startData = null;
-    this.searchForm.get('endData').setValue("");
-    this.searchForm.get('startData').setValue("");
+    this.searchForm.get('endData').setValue(null);
+    this.searchForm.get('startData').setValue(null);
+    this.param = "";
   }
 
   resetMethod(event) {
     this.resetSearch();
+    this.getDataAppList(this.pageCount,this.pageSize);
   }
 
   searchapp(formValues: any){
-    let body = {
-      "no_app": null,
-      "agensi": null,
-      "status": null,
-      "startD": null,
-      "endD": null
+
+    let sDate = new Date(formValues.startData);
+    let eDate = new Date(formValues.endData);  
+
+    let startD = moment(sDate).format('YYYY-MM-DD');
+    let endD = moment(eDate).format('YYYY-MM-DD');   
+    let strVar = "";
+    
+    if(formValues.appNumber != null){
+      strVar += '&submissionRefno='+formValues.appNumber;
     }
 
-    console.log(formValues);
-    body.no_app = formValues.appNumber;
-    body.agensi = formValues.agency;
-    body.status = formValues.appStatus;
-    body.startD = formValues.startData;
-    body.endD = formValues.endData;
-    
-    let datasend = JSON.stringify(body);
+    if(formValues.agency != null){
+      strVar += '&agencyRefCode='+formValues.agency;
+    }
+
+    if(formValues.appStatus != null){
+      strVar += '&status='+formValues.appStatus;
+    }
+
+    if(formValues.startData != null){
+      strVar += '&start='+startD;
+    }
+
+    if(formValues.endData != null){
+      strVar += '&end='+endD;
+    }
+
+    this.param = strVar;
+    this.getDataAppList(this.pageCount,this.pageSize);
+
   }
 }

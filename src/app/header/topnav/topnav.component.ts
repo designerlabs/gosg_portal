@@ -3,8 +3,10 @@ import * as moment from 'moment';
 import * as $ from 'jquery';
 import { TranslateService } from '@ngx-translate/core';
 import { TopnavService } from './topnav.service';
+import { NavService } from '../../header/nav/nav.service';
 import {SharedService } from '../../common/shared.service';
 import { debug } from 'util';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 let num = 0;
 @Component({
   selector: 'app-topnav',
@@ -12,7 +14,7 @@ let num = 0;
   styleUrls: ['./topnav.component.css']
 })
 export class TopnavComponent implements OnInit, AfterViewInit {
-  
+
   translatedText: string;
   supportedLanguages: any[];
   colors: any[];
@@ -47,7 +49,12 @@ export class TopnavComponent implements OnInit, AfterViewInit {
 
   @Output() showsidenav = new EventEmitter();
 
-  constructor(private translate: TranslateService, private topnavservice: TopnavService, private sharedservice: SharedService) {
+  constructor(private translate: TranslateService,
+    private topnavservice: TopnavService,
+    private sharedservice: SharedService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private navService: NavService) {
     translate.addLangs(['en', 'ms']);
 
     if(localStorage.getItem('langID') == "2"){
@@ -57,7 +64,7 @@ export class TopnavComponent implements OnInit, AfterViewInit {
       translate.setDefaultLang('en');
       translate.use('en');
     }
-    
+
 
 
     if (translate.getDefaultLang() == 'ms') {
@@ -75,7 +82,7 @@ export class TopnavComponent implements OnInit, AfterViewInit {
 
   currlang: string = this.currlang;
   currlangMOB: string = this.currlangMOB;
-  
+
 
   ngOnInit() {
 
@@ -85,8 +92,6 @@ export class TopnavComponent implements OnInit, AfterViewInit {
     this.loadDefaultFonts();
     this.loadDefaultColor();
     this.getLangID();
-   
-    console.log('topnav.comp.ts');
 
     this.getUserProfile();
 
@@ -103,10 +108,10 @@ export class TopnavComponent implements OnInit, AfterViewInit {
       data => {
         this.getThemeFonts = data;
       }, err => {
-        
+
       })
   }
-  
+
 
   getLangID(){
     if(!localStorage.getItem('langID')){
@@ -115,7 +120,6 @@ export class TopnavComponent implements OnInit, AfterViewInit {
   }
 
   getUserProfile(){
-    console.log(this.state);
     let getUsrID = localStorage.getItem('usrID');
     if(getUsrID){
       this.admin = true;
@@ -130,14 +134,13 @@ export class TopnavComponent implements OnInit, AfterViewInit {
         this.defaultFonts = data;
         data.filter(function(font){
           if(font.defaultFont == true){
-            console.log(font.fontName);
             if (!localStorage.getItem('customFontType')) {
               $('body, .font-size-s, .font-size-m, .font-size-l, .font-size-xl, .font-size-xxl').css('font-family', font.fontName);
             }
           }
         })
       }, err => {
-        
+
       })
   }
 
@@ -145,9 +148,8 @@ export class TopnavComponent implements OnInit, AfterViewInit {
     this.sharedservice.getThemeColor().subscribe(
       data => {
         this.defaultColors = data;
-        data.filter(function(color, index){ 
+        data.filter(function(color, index){
           if(color.defaultColor == true){
-            console.log(color.colorCode);
             if (!localStorage.getItem('themeColor')) {
               localStorage.setItem('themeColor', color.colorCode);
               localStorage.setItem('themeIndex', index);
@@ -157,7 +159,7 @@ export class TopnavComponent implements OnInit, AfterViewInit {
           }
         })
       }, err => {
-        
+
       })
   }
 
@@ -177,7 +179,7 @@ export class TopnavComponent implements OnInit, AfterViewInit {
       this.translate.use('en');
     }
     localStorage.setItem('langID', this.langId);
- 
+
   }
 
   loadColor(){
@@ -185,12 +187,12 @@ export class TopnavComponent implements OnInit, AfterViewInit {
       data => {
         this.getThemeColors = data;
       }, err => {
-        
+
       })
   }
 
 
-  
+
 
   showConfBar() {
     this.edited = !(this.edited);
@@ -247,7 +249,7 @@ export class TopnavComponent implements OnInit, AfterViewInit {
           }
         })
       }, err => {
-        
+
       })
 
   }
@@ -301,7 +303,6 @@ export class TopnavComponent implements OnInit, AfterViewInit {
         this.defaultFonts = data;
         data.filter(function(font){
           if(font.defaultFont == true){
-            console.log(font.fontName);
             $('#fontOptSideMenu2').val(font.fontName);
               $('body, .font-size-s, .font-size-m, .font-size-l, .font-size-xl, .font-size-xxl').css('font-family', font.fontName);
               localStorage.setItem('customFontType', font.fontName);
@@ -309,7 +310,23 @@ export class TopnavComponent implements OnInit, AfterViewInit {
           }
         })
       }, err => {
-        
+
       })
+  }
+
+  clickManual(){
+    //location.reload();
+    this.navService.triggerContent(15021, localStorage.getItem('langID'));
+    this.navService.getContentUrl(15021, localStorage.getItem('langID'));
+    this.router.navigate(['/content', 15021]);
+    event.preventDefault();
+  }
+
+  clickAboutus(){
+    //location.reload();
+    this.navService.triggerContent(15019, localStorage.getItem('langID'));
+    this.navService.getContentUrl(15019, localStorage.getItem('langID'));
+    this.router.navigate(['/content', 15019]);
+    event.preventDefault();
   }
 }

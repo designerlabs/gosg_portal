@@ -13,7 +13,7 @@ import 'rxjs/add/operator/switchMap';
   templateUrl: './content.component.html',
   styleUrls: ['./content.component.css']
 })
-export class ContentComponent implements OnInit, AfterViewChecked {
+export class ContentComponent implements OnInit {
   statusID: any;
   @Output() menuClick = new EventEmitter();
   breadcrumb: any;
@@ -45,7 +45,8 @@ export class ContentComponent implements OnInit, AfterViewChecked {
                 this.langId = 1;
                 this.moduleName = this.router.url.split('/')[1];
                 this.topicID = parseInt(this.router.url.split('/')[2]);
-                this.subID = parseInt(this.router.url.split('/')[3]);
+                var tt = this.router.url.split('/');
+                this.subID = parseInt(tt[tt.length-1]);
             });
 
         }
@@ -56,15 +57,16 @@ export class ContentComponent implements OnInit, AfterViewChecked {
                 this.langId = 2;
                 this.moduleName = this.router.url.split('/')[1];
                 this.topicID = parseInt(this.router.url.split('/')[2]);
-                this.subID = parseInt(this.router.url.split('/')[3]);
+                var tt = this.router.url.split('/');
+                this.subID = parseInt(tt[tt.length-1]);
             });
         }
 
 
         if(this.moduleName == 'subcategory'){
-          this.navService.triggerSubArticle(this.topicID, this.subID, this.langId);
-        }else if(this.moduleName == 'article'){
-          this.navService.triggerContent(this.topicID, this.subID, this.langId);
+          this.navService.triggerSubArticle(this.subID, this.langId);
+        }else if(this.moduleName == 'content'){
+          this.navService.triggerContent(this.subID, this.langId);
         }else{
           this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID);
         }
@@ -76,17 +78,12 @@ export class ContentComponent implements OnInit, AfterViewChecked {
    langId = this.langId;
 
 
-   ngAfterViewChecked(){
-     if(localStorage.getItem('subtopicID')){
-       this.statusID = localStorage.getItem('subtopicID');
-     }
-  }
-
   ngOnInit() {
     this.articleData = this.articleService.getArticle();
     this.topicID = parseInt(this.router.url.split('/')[2]);
-    this.subID = parseInt(this.router.url.split('/')[3]);
-    this.navService.triggerContent(this.topicID, this.subID, localStorage.getItem('langID'));
+    var tt = this.router.url.split('/');
+    this.subID = parseInt(tt[tt.length-1]);
+    this.navService.triggerContent(this.subID, localStorage.getItem('langID'));
   }
 
 
@@ -94,20 +91,19 @@ export class ContentComponent implements OnInit, AfterViewChecked {
     return localStorage.getItem('themeColor');
   }
 
-  clickSideMenu(e){
-    this.statusID = '';
-    this.navService.getSubArticleUrl(e.parentId,  e.categoryId, localStorage.getItem('langID'));
-    this.navService.triggerSubArticle(e.parentCode,  e.categoryCode, localStorage.getItem('langID'));
-    this.router.navigate( ['/subcategory', e.parentCode, e.categoryCode]);
+  clickSideMenu(e, status){
+    this.statusID = status;
+    this.navService.getSubArticleUrl( e.categoryId, localStorage.getItem('langID'));
+    this.navService.triggerSubArticle(e.categoryCode, localStorage.getItem('langID'));
+    this.router.navigate( ['/subcategory', e.categoryCode]);
     event.preventDefault();
   }
 
   clickContentFromMenu(pId, aId, status){
     this.statusID = status;
-    this.navService.triggerContent(pId,  aId, localStorage.getItem('langID'));
-    this.navService.getContentUrl(pId,  aId, localStorage.getItem('langID'));
-    localStorage.setItem('subtopicID', status);
-    this.router.navigate( ['/article', pId, aId]);
+    this.navService.triggerContent(aId, localStorage.getItem('langID'));
+    this.navService.getContentUrl( aId, localStorage.getItem('langID'));
+    this.router.navigate( ['/content', aId]);
     event.preventDefault();
   }
 

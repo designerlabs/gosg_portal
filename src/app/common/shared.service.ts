@@ -75,7 +75,7 @@ export class SharedService {
   ];
   defaultPageSize = this.pageSize[0].size;
   getCountryData(): Observable<any[]> {
-    //  console.log(this.countryUrl);
+   
     return this.http.get(this.countryUrl)
       .map((response: Response) => response.json().countryList)
       .retry(5)
@@ -86,7 +86,7 @@ export class SharedService {
 
 
   getStateData(): Observable<any[]> {
-    //  console.log(this.countryUrl);
+    
     return this.http.get(this.stateUrl)
       .map((response: Response) => response.json().stateList)
       .retry(5)
@@ -95,7 +95,7 @@ export class SharedService {
   }
 
   getPostCodeData(code): Observable<any[]> {
-    //  console.log(this.countryUrl);
+    
     return this.http.get(this.postcodeUrl+'id/'+ code)
       .map((response: Response) => response.json().postcodeList)
       .retry(5)
@@ -109,17 +109,16 @@ export class SharedService {
     this.languageId = localStorage.getItem('langID');
     let readUrl;
     if(!keyword && page) {
-      console.log(1);
+     
       readUrl = this.config.urlPortal + moduleName + '?page=' + page + '&size=' + size  + '&language='+this.languageId;
     } else if(keyword) {
-      console.log(2);
+      
       readUrl = this.config.urlPortal + moduleName + '?keyword='+keyword+'&page=' + page + '&size=' + size  + '&language='+this.languageId;
     } else {
-      console.log(3);
+      
       readUrl = this.config.urlPortal + moduleName + '?language='+this.languageId;
     }
-    console.log(readUrl)
-
+    
     return this.http.get(readUrl)
       .map((response: Response) => response.json())
       .retry(5)
@@ -137,8 +136,6 @@ export class SharedService {
       readUrl = this.config.urlProtected + moduleName + '?language='+this.languageId;
     }
 
-    console.log(readUrl)
-
     return this.http.get(readUrl)
       .map((response: Response) => response.json())
       .retry(5)
@@ -147,7 +144,7 @@ export class SharedService {
   
   readPortalById(moduleName, id): Observable<any[]> {
     let readUrl = this.config.urlPortal + moduleName + id + '?language='+this.languageId;
-    console.log(readUrl)
+    
     return this.http.get(readUrl)
       .map((response: Response) => response.json())
       .retry(5)
@@ -180,8 +177,7 @@ export class SharedService {
 
   delete(id,moduleName) {
     let deleteUrl = this.config.urlProtected  + moduleName + id+ '?language='+this.languageId;
-    console.log(deleteUrl)
-
+   
     return this.http.delete(deleteUrl, null)
     .map((response: Response) => response.json())
     .catch(this.handleError);
@@ -285,7 +281,7 @@ export class SharedService {
 
   private handleError(error: Response) {
     let msg = `Status code ${error.status} on url ${error.url}`;
-    console.error(msg);
+  
     return Observable.throw(msg);
 
   }

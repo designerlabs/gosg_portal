@@ -111,12 +111,12 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
     // console.log(event.target.scrollHeight+' - '+event.target.scrollTop +  'Required scroll bottom ' +(event.target.scrollHeight - 250) +' Container height: 250px');
     if(event.target.scrollTop >= (event.target.scrollHeight - 250)) {
       // console.log(this.searchAgencyResultEn.length)
-      console.log(event)
+      // console.log(event)
 
       let keywordVal;
       
       this.getSearchData(keywordVal, this.languageId, 1, this.searchAgencyResult.length+10)
-      console.log(this.searchAgencyResult)
+      // console.log(this.searchAgencyResult)
     }
   }
 
@@ -142,8 +142,8 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
 
         this.portalService.errorHandling(data, (function(){
 
-          console.log(data['agencyList'])
-          console.log(data['agencyList'].length)
+          // console.log(data['agencyList'])
+          // console.log(data['agencyList'].length)
 
           if(data['agencyList'].length != 0) {
               this.searchAgencyResult = data['agencyList'];
@@ -167,13 +167,13 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
   
   getValue(aId,aName,mName, refCode){
 
-    console.log(this.languageId + ', ' + aId+ ', ' + aName+ ', ' + mName+ ', ' + refCode)
+    // console.log(this.languageId + ', ' + aId+ ', ' + aName+ ', ' + mName+ ', ' + refCode)
     this.agencySel = aName;
     this.isActiveList = false;
 
     this.getEventByAgency(aId);
      
-    console.log(this.event)
+    // console.log(this.event)
     $('#calendar').fullCalendar('destroy');
     $('#calendar').fullCalendar(this.getOptions(this.event,this.mediaUrl));
 
@@ -254,7 +254,7 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
           
           this.event.push(body)
         }
-        console.log(this.event)
+        // console.log(this.event)
         this.event = [];
      
         
@@ -334,7 +334,7 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
           
           this.event.push(body)
         }
-        console.log(this.event)
+        // console.log(this.event)
         this.event = [];
         
       // });
@@ -392,7 +392,7 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
         $('#details').css('display','block');
         $('.overlay').css('display','block');
         
-        console.log(events)
+        // console.log(events)
       },
       eventMouseover: function(events) {
         $('.fc-event').attr('title', events.title);

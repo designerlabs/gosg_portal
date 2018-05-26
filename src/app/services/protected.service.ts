@@ -22,6 +22,7 @@ export class ProtectedService {
                       translate.get('HOME').subscribe((res: any) => {
                           this.lang = 'en';
                           this.langId = 1;
+                          this.languageId = 1;
                       });
 
                   }
@@ -29,6 +30,7 @@ export class ProtectedService {
                       translate.get('HOME').subscribe((res: any) => {
                           this.lang = 'ms';
                           this.langId = 2;
+                          this.languageId = 2;
                       });
                   }
 
@@ -57,6 +59,10 @@ export class ProtectedService {
   private pollUrl: string = this.config.urlPollProtected;
   // private serviceUrl = 'https://jsonplaceholder.typicode.com/users';
   private inboxUrl = this.mailUrl;
+  private urlDashboardData: string = this.config.urlDashboardData;
+  private statusAppUrl: string = this.config.statusAppUrl;
+  private urlAgencyList: string = this.config.urlAgencyList;
+  private dataAppUrl: string = this.config.dataAppUrl;
 
 
   createProfile(user) {
@@ -176,6 +182,30 @@ export class ProtectedService {
     return this.http.post(this.pollUrl, data)
     .map((response: Response) => response.json())
     .retry(5)
+    .catch(this.handleError);
+  }
+
+  getDashboardData(lang){
+    return this.http
+    .get(this.urlDashboardData + '?language='+lang).map((response: Response) => response.json())
+    .catch(this.handleError);
+  }
+
+  getListApp(lang){
+    return this.http
+    .get(this.statusAppUrl + '?language='+lang).map((response: Response) => response.json())
+    .catch(this.handleError);
+  }
+
+  getListAgency(lang){
+    return this.http
+    .get(this.urlAgencyList + '?language='+lang).map((response: Response) => response.json())
+    .catch(this.handleError);
+  }
+
+  getDataApp(page, size, param){
+    return this.http
+    .get(this.dataAppUrl + '?language='+this.languageId+'&page='+page+'&size='+size+param).map((response: Response) => response.json())
     .catch(this.handleError);
   }
 

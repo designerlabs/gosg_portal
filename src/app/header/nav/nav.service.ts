@@ -59,8 +59,21 @@ export class NavService {
   
 
   getPopularData(body) {
-    
-    return this.http.post(this.popularUrl, body)
+    let dataUrl;
+    let env = window.location.hostname;
+    let envOrigin = window.location.origin;
+    let localURL = envOrigin+'/gosg/';
+
+    // console.log(window.location)
+
+    if(env == 'localhost')
+      dataUrl = this.popularUrl;
+    else
+      dataUrl = localURL+'popular';
+
+    // console.log(dataUrl)
+
+    return this.http.post(dataUrl, body)
       .map((response: Response) => response.json().data[0].term)
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
 
@@ -90,9 +103,9 @@ export class NavService {
     }
   }
 
-  getSubArticleUrl(topicID, subID: number, lang) {
+  getSubArticleUrl(subID: number, lang) {
     if (!isNaN(subID)) {
-      return this.http.get(this.config.urlPortal  + 'subcategory/' + topicID + '/' +subID + '?language=' + lang)
+      return this.http.get(this.config.urlPortal  + 'subcategory/'+subID + '?language=' + lang)
         .take(1)
         .map((response: Response) => response.json().contentCategoryResource.results)
         // .catch((error:any) =>
@@ -110,9 +123,9 @@ export class NavService {
     }
   }
 
-  getContentUrl(topicID, subID: number, lang) {
+  getContentUrl(subID: number, lang) {
     if (!isNaN(subID)) {
-      return this.http.get(this.config.urlPortal  + 'article/' + topicID + '/' +subID + '?language=' + lang)
+      return this.http.get(this.config.urlPortal  + 'content/' +subID + '?language=' + lang)
         .take(1)
         .map((response: Response) => response.json().contentCategoryResource.results)
         // .catch((error:any) =>
@@ -154,14 +167,14 @@ export class NavService {
      }
    }
 
-  triggerSubArticle(topicID, subID, lang) {
+  triggerSubArticle(subID, lang) {
    // alert("Trigger sub acrticle");
     if (!isNaN(subID)) {
       this.articleService.articles = [''];
       this.articles = [''];
       return this.route.paramMap
         .switchMap((params: ParamMap) =>
-          this.getSubArticleUrl(topicID, subID, lang))
+          this.getSubArticleUrl(subID, lang))
         .subscribe(resSliderData => {
           this.articleService.articles = resSliderData;
           this.articles = resSliderData;
@@ -173,14 +186,14 @@ export class NavService {
     }
   }
 
-  triggerContent(topicID, subID, lang) {
+  triggerContent( subID, lang) {
     // alert("Trigger sub acrticle");
      if (!isNaN(subID)) {
        this.articleService.articles = [''];
        this.articles = [''];
        return this.route.paramMap
          .switchMap((params: ParamMap) =>
-           this.getContentUrl(topicID, subID, lang))
+           this.getContentUrl(subID, lang))
          .subscribe(resSliderData => {
            this.articleService.articles = resSliderData;
            this.articles = resSliderData;
@@ -220,7 +233,6 @@ export class NavService {
         .switchMap((params: ParamMap) =>
           this.getArticleData(moduleName, lang, topicID))
         .subscribe(resSliderData => {
-          console.log(resSliderData);
           this.articleService.articles = resSliderData;
           this.articles = resSliderData;
           this.breadcrumb = this.breadcrumbService.getBreadcrumb();
@@ -231,9 +243,7 @@ export class NavService {
   }
 
   getAnnouncement(moduleName, lang: number): Observable<boolean[]> {
-    console.log('ANNOUNCEMENT: ');
-    console.log(this.urlAnnouncement + '?language=' + lang);
-
+ 
     return this.http.get(this.urlAnnouncement + '?language=' + lang)
     .take(1)
     .map((response: Response) => response.json())
@@ -309,7 +319,7 @@ export class NavService {
     }
 
   getAnnouncementDetails(moduleName, lang: number, id1?: string, id2?: string): Observable<boolean[]> {
-    return this.http.get(this.urlAnnouncement + '/id/' + id1 + '/' + id2 + '?language=' + lang)
+    return this.http.get(this.articleUrl + '/' + id1 + '/' + id2 + '?language=' + lang)
     .take(1)
     .map((response: Response) => response.json())
     .catch(

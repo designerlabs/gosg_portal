@@ -66,7 +66,6 @@ export class ProtectedComponent implements OnInit {
   getUserRegData(name){
     this.portalService.login(name).subscribe(
       data => {
-        console.log(data);
         if(data.length != 0){
           localStorage.setItem('userNationality', data[0].country);
         }else{
@@ -83,7 +82,6 @@ export class ProtectedComponent implements OnInit {
   }
 
   showProfile(data){
-    console.log(this.isProfile);
     document.getElementById("mySidenavProtected").style.width = "250px";
     this.isProfile = data;
     console.log(this.isProfile);
@@ -161,8 +159,7 @@ export class ProtectedComponent implements OnInit {
     let getUsrID = localStorage.getItem('usrID');
     let getUserID = localStorage.getItem('userId');
     let getUserCountry = localStorage.getItem('userNationality');
-    console.log(this.userId);
-    console.log(getUserCountry)
+    
     this.getUserData();
     this.activatedRoute.queryParamMap.skip(1).subscribe((queryParams: Params) => {
       this.userId = queryParams.get('id');

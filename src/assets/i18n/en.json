@@ -197,6 +197,12 @@
       "inbox": "Inbox",
       "appmgmt": "Application Management",
       "companyprofile": "Company Profile"
+    },
+    "card":{
+      "total": "Total Application",
+      "approved": "Approved",
+      "rejected": "Failed",
+      "process": "In-Progress"
     }
   },
 
@@ -338,6 +344,7 @@
     "placeholder": {
       "keyword":"Keyword"
     },
+    "showNoData":"No Data Found",
     "buttons":{
       "delete":"Delete",
       "update":"Update",

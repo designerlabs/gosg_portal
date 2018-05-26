@@ -197,6 +197,12 @@
       "inbox": "Peti Masuk",
       "appmgmt": "Pengurusan Aplikasi",
       "companyprofile": "Profil Syarikat"
+    },
+    "card":{
+      "total": "Jumlah Permohonan",
+      "approved": "Lulus",
+      "rejected": "Tidak Lulus",
+      "process": "Dalam Proses"
     }
   },
 
@@ -335,10 +341,10 @@
     "brokenlink": "Pautan Rosak",
     "validlink":"Pautan Sah",
     "downloadablelink":"Pautan Boleh Dimuat Turun",
-
     "placeholder": {
       "keyword":"Kata Kunci"
     },
+    "showNoData":"Tiada Data Ditemui",
     "buttons":{
       "delete":"Padam",
       "update":"Kemaskini",

@@ -1,3 +1,25 @@
+<div class="container-fluid animated slideInDown" style="background: #a7a495;">
+    <div class="container">
+            <div class="row">
+            <div class="col-md-12">
+                <h1 style="margin-top: 10px;" class="font-size-l"> {{ 'home.menu.contact' | translate }}</h1>
+                <hr class="hr-custom2"><br>
+                <ul class="list-inline" style="clear:both;">
+                    <li>
+                        <a class="font-size-s" style="color: #fff;" href="/index/">
+                            {{'home.menu.home' | translate }}
+                        </a>
+                    </li>
+                    <!-- <li>/</li>
+                    <li>
+                        {{'home.breadcrumb.register' | translate}}
+                    </li> -->
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="container">
     <div class="row" style="margin-top: 20px;margin-bottom: 20px;">
         <div class="col-md-4 address">
@@ -25,7 +47,7 @@
             </p> -->
             <div *ngFor="let eachitm of dataContact">
                 <div *ngIf="eachitm.footerContentIcon">
-                    <span [style.background-color]="getTheme()" ngClass="fa fa-{{eachitm.footerContentIcon}} primary" style="width: 15px;"></span>
+                    <span [style.background-color]="getTheme()" ngClass="fa fa-{{eachitm.footerContentIcon}} primary" style="width: 25px; height: 25px; border-radius: 25px; padding: 5px;"></span>
                     <p style="display: inline;" *ngIf="eachitm.enabled" [innerHtml]="eachitm.footerContentName"></p>                    
                 </div>
             

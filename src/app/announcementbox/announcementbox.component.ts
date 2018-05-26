@@ -12,6 +12,7 @@ import { BreadcrumbService } from '../header/breadcrumb/breadcrumb.service';
   styleUrls: ['./announcementbox.component.css']
 })
 export class AnnouncementboxComponent implements OnInit {
+    languageId: any;
    lang = 'en';
    announcementData: any;
    calendarData: any;
@@ -30,35 +31,40 @@ export class AnnouncementboxComponent implements OnInit {
             const myLang = translate.currentLang;
             if (myLang === 'en') {
                this.lang = 'en';
-               this.getData(this.lang);
-               this.getCalendarData(this.lang);
             }
             if (myLang === 'ms') {
               this.lang = 'ms';
-              this.getData(this.lang);
-              this.getCalendarData(this.lang);
             }
+            this.getCalendarData(this.lang);
+            this.getData(this.languageId);
         });
+
+        if (!this.languageId) {
+            this.languageId = localStorage.getItem('langID');
+        } else {
+            this.languageId = 1;
+        }
     }
 
     ngOnInit() {
-        this.getData(this.lang);
+        this.getData(this.languageId);
+        this.getCalendarData(this.lang)
     }
 
-    getData(lang);
+    // getData(lang);
 
     getData(lang: string) {
-        let langID = 0;
-        if (lang === 'ms') {
-            langID = 2;
-        }else {
-            langID = 1;
-        }
-        return this.http.get(this.announcementUrl + '?language=' + langID)
+        // let langID = 0;
+        // if (lang === 'ms') {
+        //     langID = 2;
+        // }else {
+        //     langID = 1;
+        // }
+        return this.http.get(this.announcementUrl + '?language=' + this.languageId)
             .map(res => res.json())
             .subscribe(data => {
-              console.log(data);
-                this.announcementData = data.announcementList;
+            //   console.log(data);
+                this.announcementData = data.contentCategoryResource.results[0];
                 console.log(this.announcementData);
             });
     }
@@ -68,7 +74,7 @@ export class AnnouncementboxComponent implements OnInit {
            .map(res => res.json())
           .subscribe(data => {
                 this.calendarData = data;
-                console.log(this.calendarData);
+                // console.log(this.calendarData);d
             });
     }
 
@@ -77,17 +83,17 @@ export class AnnouncementboxComponent implements OnInit {
     }
 
     triggerAnnouncementAll(moduleName, lang, id1, id2) {
-        if (lang === 'ms') {
-            lang = 2;
-        }
+        // if (lang === 'ms') {
+        //     lang = 2;
+        // }
 
-        if (lang === 'en') {
-            lang = 1;
-        }
+        // if (lang === 'en') {
+        //     lang = 1;
+        // }
 
         this.route.paramMap
         .switchMap((params: ParamMap) =>
-        this.navService.getAnnouncementDetails(moduleName, lang, id1, id2))
+        this.navService.getAnnouncementDetails(moduleName, this.languageId, id1, id2))
         .subscribe(resAllAnnounce => {
             this.announceRes = resAllAnnounce;
             // convert object to array
@@ -110,8 +116,8 @@ export class AnnouncementboxComponent implements OnInit {
             console.log(id);
         }
 
-        this.triggerAnnouncementAll('announcement',  this.lang, childid, id);
-        this.router.navigate(['announcement',   childid, id]);
+        this.triggerAnnouncementAll('article',  this.languageId, childid, id);
+        this.router.navigate(['article',   childid, id]);
         event.preventDefault();
     }
 

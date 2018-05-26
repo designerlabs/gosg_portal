@@ -15,6 +15,7 @@ import { AnnouncementlistService } from '../announcementlist/announcementlist.se
 })
 export class AnnouncementlistComponent implements OnInit {
 
+    languageId: any;
   moduleName: string;
     @ViewChild('textarea') textarea: ElementRef;
     @Output() menuClick = new EventEmitter();
@@ -60,11 +61,18 @@ export class AnnouncementlistComponent implements OnInit {
             console.log('langMY');
         });
 
+        if (!this.languageId) {
+            this.languageId = localStorage.getItem('langID');
+        } else {
+            this.languageId = 1;
+        }
+
     }
 
     lang = this.lang;
 
     ngOnInit() {
+        alert('teasd')
         this.moduleName = this.router.url.split('/')[1];
         this.announcementID = this.router.url.split('/')[2];
         this.navService.triggerAnnouncementList(this.lang, this.announcementID);

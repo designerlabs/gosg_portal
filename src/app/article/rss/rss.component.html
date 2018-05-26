@@ -36,19 +36,19 @@
                             <div class="col-xs-12 col-md-12 col-sm-12">
                                 <a class="warna_font sideBarMenu--link font-size-s" [routerLinkActive]="['active']"  [style.font-weight]="content.active ? 'bold' : 'normal'"  [style.color]="content.active ? getTheme() : '#333'"  href="" (click)="clickSideMenu(content.leftMenuId)">
                                 {{content.leftMenu_label}}
-                          
+
                                 </a>
                             </div>
                             <ul *ngIf="content.sub_menu_left" style="list-style: none; padding-left: 15px;">
                                 <li *ngFor="let subcontent of content.sub_menu_left">
                                      <a class="warna_font sideBarMenu--link font-size-s" style="color:#333"  href="" (click)="clickSideMenu(content)">
                                         {{subcontent.label}}
-                                        
+
                                     </a>
                                 </li>
                             </ul>
                             <!--<div class="col-xs-2">(6)</div>-->
-                           
+
                         </li>
 
                     </ul>
@@ -60,16 +60,16 @@
 
             <div class="row">
                 <div class="col-md-12 warna_font">
-                    <div  *ngIf="checkImgData(article.contentDescription)" style="position:absolute; width:auto;">
+                    <!-- <div  *ngIf="checkImgData(article.contentDescription)" style="position:absolute; width:auto;">
                         <h2 class="topic_bg_title font-size-l">
                             <span style="padding-left:10px;">
                                 {{article.contentTitle}}
                             </span>
                         </h2>
-                    </div>
+                    </div> -->
 
 
-                    <div  *ngIf="!checkImgData(article.contentDescription)" style="position:relative;">
+                    <div style="position:relative;">
                         <h2 class="titleWObg font-size-l">
                                 {{article.contentTitle}}
                         </h2>
@@ -79,10 +79,10 @@
                     <span class="font-size-s defaultColor" [innerHTML]="article.contentDescription">
 
                     </span>
-                    
+
                     <div *ngIf="!article.rssCategories">
                             <div class="row">&nbsp;</div>
-                        
+
                         <span style="background: #ececec; padding: 10px; color: #000; display: inline-block;">{{feedUrl}}</span>
                         <button class="btn btn-md btn-success" (click)="copyLink(feedUrl)">
                             <i class="fa fa-copy"></i>

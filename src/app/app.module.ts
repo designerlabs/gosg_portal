@@ -24,6 +24,7 @@ import { TextMaskModule, conformToMask } from 'angular2-text-mask';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { ConfirmComponent } from './message/confirm.component';
 import { SearchResultComponent } from './search/search-result/search-result.component';
+import { SubarticleComponent } from './article/subarticle/subarticle.component';
 
 
 // import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule } from "@angular/material";
@@ -60,16 +61,17 @@ imports: [
     // MatFormFieldModule,
     // MatInputModule,
 
-    
+
   ],
   declarations: [
     AppComponent,
     RegisterComponent,
     LoginComponent,
     SearchResultComponent,
-  
+    SubarticleComponent
+
   ],
- 
+
   schemas:[
     CUSTOM_ELEMENTS_SCHEMA
   ],

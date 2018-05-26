@@ -17,7 +17,7 @@ export class ArticleComponent implements OnInit {
   statusID: any;
   langIdVal: string;
   subID: number;
-    moduleName: string;
+  moduleName: string;
 
   @ViewChild('textarea') textarea: ElementRef;
   @Output() menuClick = new EventEmitter();
@@ -62,9 +62,9 @@ export class ArticleComponent implements OnInit {
 
 
         if(this.moduleName == 'subcategory'){
-          this.navService.triggerSubArticle(this.topicID, this.subID, this.langId);
-        }else if(this.moduleName == 'article'){
-          this.navService.triggerContent(this.topicID, this.subID, this.langId);
+          this.navService.triggerSubArticle(this.subID, this.langId);
+        }else if(this.moduleName == 'content'){
+          this.navService.triggerContent(this.subID, this.langId);
         }else{
           this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID);
         }
@@ -98,11 +98,11 @@ export class ArticleComponent implements OnInit {
         return localStorage.getItem('themeColor');
     }
 
-    clickSideMenu(e){
-      this.statusID = '';
-      this.navService.getSubArticleUrl(e.parentCode,  e.categoryCode, localStorage.getItem('langID'));
-      this.navService.triggerSubArticle(e.parentCode,  e.categoryCode, localStorage.getItem('langID'));
-      this.router.navigate(['/subcategory', e.parentCode, e.categoryCode]);
+    clickSideMenu(e, status){
+      this.statusID = status;
+      this.navService.getSubArticleUrl(e.categoryCode, localStorage.getItem('langID'));
+      this.navService.triggerSubArticle(e.categoryCode, localStorage.getItem('langID'));
+      this.router.navigate(['/subcategory', e.categoryCode]);
       event.preventDefault();
     }
 
@@ -110,9 +110,9 @@ export class ArticleComponent implements OnInit {
     clickContentFromMenu(pId, aId, status){
 
       this.statusID = status;
-      this.navService.triggerContent(pId,  aId, localStorage.getItem('langID'));
-      this.navService.getContentUrl(pId,  aId, localStorage.getItem('langID'));
-      this.router.navigate(['/article', pId, aId]);
+      this.navService.triggerContent(aId, localStorage.getItem('langID'));
+      this.navService.getContentUrl(aId, localStorage.getItem('langID'));
+      this.router.navigate(['/content', aId]);
       event.preventDefault();
     }
 
