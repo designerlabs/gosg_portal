@@ -123,9 +123,49 @@ export class NavService {
     }
   }
 
+  getSubArticleUrlOthers(subID: number, lang, url) {
+    if (!isNaN(subID)) {
+      return this.http.get(this.config.urlPortal  +url+'/'+'subcategory/'+subID + '?language=' + lang)
+        .take(1)
+        .map((response: Response) => response.json().contentCategoryResource.results)
+        // .catch((error:any) =>
+        // Observable.throw(error.json().error || 'Server error')
+        // );
+        .catch(
+        (err: Response, caught: Observable<any[]>) => {
+          if (err !== undefined) {
+            this.router.navigate(['/404']);
+            return Observable.throw('The Web server (running the Web site) is currently unable to handle the HTTP request due to a temporary overloading or maintenance of the server.');
+          }
+          return Observable.throw(caught); // <-----
+        }
+        );
+    }
+  }
+
   getContentUrl(subID: number, lang) {
     if (!isNaN(subID)) {
       return this.http.get(this.config.urlPortal  + 'content/' +subID + '?language=' + lang)
+        .take(1)
+        .map((response: Response) => response.json().contentCategoryResource.results)
+        // .catch((error:any) =>
+        // Observable.throw(error.json().error || 'Server error')
+        // );
+        .catch(
+        (err: Response, caught: Observable<any[]>) => {
+          if (err !== undefined) {
+            this.router.navigate(['/404']);
+            return Observable.throw('The Web server (running the Web site) is currently unable to handle the HTTP request due to a temporary overloading or maintenance of the server.');
+          }
+          return Observable.throw(caught); // <-----
+        }
+        );
+    }
+  }
+
+  getContentUrlOther(subID: number, lang, url) {
+    if (!isNaN(subID)) {
+      return this.http.get(this.config.urlPortal  + url+'/'+ 'content/' +subID + '?language=' + lang)
         .take(1)
         .map((response: Response) => response.json().contentCategoryResource.results)
         // .catch((error:any) =>
@@ -186,6 +226,25 @@ export class NavService {
     }
   }
 
+  triggerSubArticleOther(subID, lang, url) {
+    // alert("Trigger sub acrticle");
+     if (!isNaN(subID)) {
+       this.articleService.articles = [''];
+       this.articles = [''];
+       return this.route.paramMap
+         .switchMap((params: ParamMap) =>
+           this.getSubArticleUrlOthers(subID, lang, url))
+         .subscribe(resSliderData => {
+           this.articleService.articles = resSliderData;
+           this.articles = resSliderData;
+           this.breadcrumb = this.breadcrumbService.getBreadcrumb();
+           this.isValid = this.breadcrumbService.isValid = true;
+           this.breadcrumb = this.breadcrumb.name = '';
+ 
+         });
+     }
+   }
+
   triggerContent( subID, lang) {
     // alert("Trigger sub acrticle");
      if (!isNaN(subID)) {
@@ -194,6 +253,25 @@ export class NavService {
        return this.route.paramMap
          .switchMap((params: ParamMap) =>
            this.getContentUrl(subID, lang))
+         .subscribe(resSliderData => {
+           this.articleService.articles = resSliderData;
+           this.articles = resSliderData;
+           this.breadcrumb = this.breadcrumbService.getBreadcrumb();
+           this.isValid = this.breadcrumbService.isValid = true;
+           this.breadcrumb = this.breadcrumb.name = '';
+
+         });
+     }
+   }
+
+   triggerContentOther( subID, lang, url) {
+    // alert("Trigger sub acrticle");
+     if (!isNaN(subID)) {
+       this.articleService.articles = [''];
+       this.articles = [''];
+       return this.route.paramMap
+         .switchMap((params: ParamMap) =>
+           this.getContentUrlOther(subID, lang, url))
          .subscribe(resSliderData => {
            this.articleService.articles = resSliderData;
            this.articles = resSliderData;

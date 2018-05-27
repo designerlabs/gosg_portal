@@ -134,6 +134,9 @@ import { DigitalservicesComponent } from '../digitalservices/digitalservices.com
 import { RssComponent } from '../article/rss/rss.component';
 import { ContentComponent } from '../article/content/content.component';
 import { EparticipationComponent } from '../eparticipation/eparticipation.component';
+import { ArchivecategoryComponent } from '../archive/archivecategory/archivecategory.component';
+import { ArchivesubcategoryComponent } from '../archive/archivesubcategory/archivesubcategory.component';
+import { ArchivecontentComponent } from '../archive/archivecontent/archivecontent.component';
 // import { SearchResultComponent } from '../search/search-result/search-result.component';
 export function HttpLoaderFactory(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -217,7 +220,10 @@ export function HttpLoaderFactory(http: Http) {
     DigitalservicesComponent,
     RssComponent,
     ContentComponent,
-    EparticipationComponent
+    EparticipationComponent,
+    ArchivecategoryComponent,
+    ArchivesubcategoryComponent,
+    ArchivecontentComponent
     // SearchResultComponent
   ],
 

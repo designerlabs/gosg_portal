@@ -46,6 +46,9 @@ import { DigitalservicesComponent } from './digitalservices/digitalservices.comp
 import { RssComponent } from './article/rss/rss.component';
 import { ContentComponent } from './article/content/content.component';
 import { EparticipationComponent } from './eparticipation/eparticipation.component';
+import { ArchivecategoryComponent } from './archive/archivecategory/archivecategory.component';
+import { ArchivesubcategoryComponent } from './archive/archivesubcategory/archivesubcategory.component';
+import { ArchivecontentComponent } from './archive/archivecontent/archivecontent.component';
 
 export const appRoutes: Routes = [
 
@@ -64,6 +67,9 @@ export const appRoutes: Routes = [
     {path: 'announcement/:id1/:id2', component: AnnouncementdetailsComponent, canActivate: [NavRouterActivator]},
     {path: 'subcategory/:id1', component: SubarticleComponent },
     {path: 'content/:id1', component: ContentComponent},
+    {path: 'archive/category/:id', component:ArchivecategoryComponent},
+    {path: 'archive/subcategory/:id', component:ArchivesubcategoryComponent},
+    {path: 'archive/content/:id', component:ArchivecontentComponent},
     {path: 'login', component: LoginComponent},
     {path: 'register', component: RegisterComponent },
 
