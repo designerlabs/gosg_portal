@@ -56,7 +56,7 @@ export class NavService {
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
 
   }
-  
+
 
   getPopularData(body) {
     let dataUrl;
@@ -122,6 +122,28 @@ export class NavService {
         );
     }
   }
+
+  getSubArticleUrlByAgency(lang) {
+
+      return this.http.get(this.config.urlPortal  + 'publication/agencies?language=' + lang)
+        .take(1)
+        .map((response: Response) => response.json().contentCategoryResource.results)
+        // .catch((error:any) =>
+        // Observable.throw(error.json().error || 'Server error')
+        // );
+        .catch(
+        (err: Response, caught: Observable<any[]>) => {
+          if (err !== undefined) {
+            this.router.navigate(['/404']);
+            return Observable.throw('The Web server (running the Web site) is currently unable to handle the HTTP request due to a temporary overloading or maintenance of the server.');
+          }
+          return Observable.throw(caught); // <-----
+        }
+        );
+
+  }
+
+
 
   getSubArticleUrlOthers(subID: number, lang, url) {
     if (!isNaN(subID)) {
@@ -240,9 +262,28 @@ export class NavService {
            this.breadcrumb = this.breadcrumbService.getBreadcrumb();
            this.isValid = this.breadcrumbService.isValid = true;
            this.breadcrumb = this.breadcrumb.name = '';
- 
+
          });
      }
+   }
+
+   triggerSubArticleAgency(lang) {
+    // alert("Trigger sub acrticle");
+
+       this.articleService.articles = [''];
+       this.articles = [''];
+       return this.route.paramMap
+         .switchMap((params: ParamMap) =>
+           this.getSubArticleUrlByAgency(lang))
+         .subscribe(resSliderData => {
+           this.articleService.articles = resSliderData;
+           this.articles = resSliderData;
+           this.breadcrumb = this.breadcrumbService.getBreadcrumb();
+           this.isValid = this.breadcrumbService.isValid = true;
+           this.breadcrumb = this.breadcrumb.name = '';
+
+         });
+
    }
 
   triggerContent( subID, lang) {
@@ -321,7 +362,7 @@ export class NavService {
   }
 
   getAnnouncement(moduleName, lang: number): Observable<boolean[]> {
- 
+
     return this.http.get(this.urlAnnouncement + '?language=' + lang)
     .take(1)
     .map((response: Response) => response.json())

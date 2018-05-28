@@ -44,7 +44,7 @@ import { SearchService } from '../search/search.service';
 import { TopicFeatureComponent } from '../topic-feature/topic-feature.component';
 import { FooterComponent } from '../footer/footer.component';
 import { HighlightboxComponent } from '../highlightbox/highlightbox.component';
-import { ArticleComponent } from '../article/article.component';
+
 import { ErrorComponent } from "../error/error.component";
 
 import { PollComponent } from "../poll/poll.component";
@@ -201,7 +201,6 @@ export function HttpLoaderFactory(http: Http) {
     TopicFeatureComponent,
     FooterComponent,
     HighlightboxComponent,
-    ArticleComponent,
     ErrorComponent,
     PollComponent,
     BreadcrumbComponent,
@@ -255,7 +254,6 @@ export function HttpLoaderFactory(http: Http) {
     TopicFeatureComponent,
     FooterComponent,
     HighlightboxComponent,
-    ArticleComponent,
     ErrorComponent,
     PollComponent,
     BreadcrumbComponent,

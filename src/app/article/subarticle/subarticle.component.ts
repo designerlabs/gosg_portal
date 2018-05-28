@@ -85,7 +85,12 @@ export class SubarticleComponent implements OnInit {
     this.topicID = parseInt(this.router.url.split('/')[2]);
     var tt = this.router.url.split('/');
     this.subID = parseInt(tt[tt.length-1]);
-    this.navService.triggerSubArticle(this.subID, localStorage.getItem('langID'));
+    if(location.pathname.indexOf('agency') !== -1){
+      this.navService.triggerSubArticleAgency(localStorage.getItem('langID'));
+    }else{
+      this.navService.triggerSubArticle(this.subID, localStorage.getItem('langID'));
+    }
+
   }
 
 

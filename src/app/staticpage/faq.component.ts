@@ -38,19 +38,19 @@ export class FaqComponent{
 
   private urlFaq: string = this.config.urlFaq;
 
-  constructor(private translate: TranslateService, 
-      private router: Router, 
-      private http: Http, 
+  constructor(private translate: TranslateService,
+      private router: Router,
+      private http: Http,
       @Inject(APP_CONFIG) private config: AppConfig) {
 
       this.lang = translate.currentLang;
 
       translate.onLangChange.subscribe((event: LangChangeEvent) => {
-  
+
           const myLang = translate.currentLang;
-      
+
           if (myLang == 'en') {
-      
+
               translate.get('HOME').subscribe((res: any) => {
                   this.lang = 'en';
                   this.langID = 1;
@@ -59,14 +59,14 @@ export class FaqComponent{
           }
 
           if (myLang == 'ms') {
-      
+
               translate.get('HOME').subscribe((res: any) => {
                   this.lang = 'ms';
                   this.langID = 2;
                   this.getFaq(this.langID);
               });
           }
-  
+
       });
   }
 
@@ -78,18 +78,17 @@ export class FaqComponent{
       this.langID = 1;
     }
 
-    this.getFaq(this.langID);    
+    this.getFaq(this.langID);
   }
 
   getFaq(lang) {
-   
+
     return this.http.get(this.urlFaq + '?language=' + lang + '&page=1&size=99')
-    
+
     .map((response: Response) => response.json())
     .subscribe(resSliderData => {
-      this.faqData = resSliderData   
-      this.faqList = this.faqData['list'];
-    
+      this.faqData = resSliderData
+      this.faqList = this.faqData['faqList'];
       console.log(this.faqList);
 
     });
