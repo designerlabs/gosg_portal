@@ -97,7 +97,7 @@ export class SidenavprotectedComponent implements OnInit {
           }
         })
       }, err => {
-        
+
       })
   }
 
@@ -139,7 +139,7 @@ export class SidenavprotectedComponent implements OnInit {
       data => {
         this.getThemeFonts = data;
       }, err => {
-        
+
       })
   }
 
@@ -155,7 +155,7 @@ export class SidenavprotectedComponent implements OnInit {
           }
         })
       }, err => {
-        
+
       })
   }
 
@@ -164,7 +164,7 @@ export class SidenavprotectedComponent implements OnInit {
       data => {
         this.getThemeColors = data;
       }, err => {
-        
+
       })
   }
 
@@ -183,14 +183,14 @@ export class SidenavprotectedComponent implements OnInit {
           }
         })
       }, err => {
-        
+
       })
   }
 
   fn_changeFont(dynum) {
     $('.font-size-s').css('font-size', 14 + dynum + 'px');
   }
-  
+
 
   onChange($event, deviceValue) {
     $('body, .font-size-s, .font-size-m, .font-size-l, .font-size-xl, .font-size-xxl').css('font-family', deviceValue);
@@ -210,7 +210,7 @@ export class SidenavprotectedComponent implements OnInit {
           }
         })
       }, err => {
-        
+
       })
   }
 

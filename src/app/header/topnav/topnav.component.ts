@@ -89,8 +89,8 @@ export class TopnavComponent implements OnInit, AfterViewInit {
     this.colors = this.topnavservice.getColors();
     this.loadFont();
     this.loadColor();
-    this.loadDefaultFonts();
-    this.loadDefaultColor();
+    // this.loadDefaultFonts();
+    // this.loadDefaultColor();
     this.getLangID();
 
     this.getUserProfile();

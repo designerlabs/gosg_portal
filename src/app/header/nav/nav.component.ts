@@ -18,6 +18,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class NavComponent implements OnInit, AfterViewInit {
 
+    mobile: boolean;
     @Output() menuClick = new EventEmitter();
     languageId: any;
     imgSrc: string;
@@ -42,11 +43,11 @@ export class NavComponent implements OnInit, AfterViewInit {
 
     constructor(
         private translate: TranslateService,
-        private toastr: ToastrService, 
-        @Inject(APP_CONFIG) private config: AppConfig, 
-        private http: Http, 
-        private navService: NavService, 
-        private router: Router, 
+        private toastr: ToastrService,
+        @Inject(APP_CONFIG) private config: AppConfig,
+        private http: Http,
+        private navService: NavService,
+        private router: Router,
         private searchService: SearchService)
          {
         translate.onLangChange.subscribe((event: LangChangeEvent) => {
@@ -83,8 +84,12 @@ export class NavComponent implements OnInit, AfterViewInit {
 
     ngOnInit() {
 
+      if (window.screen.width === 360) { // 768px portrait
+        this.mobile = true;
+      }
+
         this.env = this.envPathName.split('/')[1];
-        
+
         this.imgSrc = 'logo_ms';
         this.navService.getMenuData(this.langId).subscribe(resMenuData => this.menus = resMenuData);
         this.getPop();
@@ -151,10 +156,10 @@ export class NavComponent implements OnInit, AfterViewInit {
         this.env = this.envPathName.split('/')[1];
 
         if(this.env == 'search') {
-            
+
             this.ser_word = key;
         } else {
-    
+
             if(key) {
                 $('#searchDDown').css({ 'display': 'none' });
                 localStorage.setItem('ser_word', key);

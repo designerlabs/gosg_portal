@@ -99,6 +99,54 @@
 
         <div *ngIf="article.template === 'publication' || article.template === 'eparticipation'">
             <div class="col-sm-6">
+
+                <div *ngIf="article.subCategoryList" class="row padding-top-xl">
+                    <div *ngIf="article.image">
+                      <div>
+                          <img [src]="config.externalMediaURL + '/images/'+ article.image.mediaFile" style="width:100%;">
+                          <div style="position:absolute; width:auto;">
+                              <h2 class="topic_bg_title font-size-l">
+                                  <span style="padding-left:10px;">
+                                      {{article.categoryName}}
+                                  </span>
+                              </h2>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div *ngIf="!article.image">
+                      <div>
+                          <h2 class="titleWObg font-size-l">
+                              {{article.categoryName}}
+                          </h2>
+                      </div>
+                  </div>
+
+                  <span class="font-size-s defaultColor" [innerHTML]="article.categoryDescription"></span>
+                  <div  *ngFor="let rightContent of article.subCategoryList; let index=index; let odd=odd; let even=even;">
+                    <div class="col-sm-6">
+                        <div>
+                          <div style="width:100%; margin-right:10px; height:auto;">
+
+
+                              <a class="intro-box warna_border_color" [style.border-color]="getTheme()" href="" (click)="clickSideMenu(rightContent)">
+                                  <h4 class="font-size-m warna_font">
+                                      {{rightContent.categoryName}}
+                                  </h4>
+                                  <span class="warna_font article-size font-size-s" [innerHTML]="rightContent.categoryDescription"></span>
+                                  <div class="font-size-s" style="text-align: right;"><i class="fa fa-caret-right"></i> {{'home.readmore' | translate }}</div>
+                              </a>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div *ngIf="odd" class="clearfix"></div>
+                  </div>
+
+                  </div>
+              <div *ngIf="article.contentList && !article.subCategoryList">
+
+
               <mat-tab-group>
                 <mat-tab *ngFor="let tab of article.contentList" label="{{tab.tab}}">
                   <div style="height:20px;"></div>
@@ -121,6 +169,7 @@
                   </div>
                 </mat-tab>
               </mat-tab-group>
+            </div>
           </div>
         </div>
 

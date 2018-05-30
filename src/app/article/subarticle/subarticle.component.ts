@@ -107,6 +107,13 @@ export class SubarticleComponent implements OnInit {
       event.preventDefault();
     }
 
+    clickSideMenuByAgency(e, status){
+      this.navService.getSubArticleUrlByAgency(localStorage.getItem('langID'));
+      this.navService.triggerSubArticleAgency(localStorage.getItem('langID'));
+      this.router.navigate(['/subcategory', 'agency']);
+      event.preventDefault();
+    }
+
     clickContentFromMenu(pId, aId){
       this.navService.triggerContent(aId, localStorage.getItem('langID'));
       this.navService.getContentUrl(aId, localStorage.getItem('langID'));

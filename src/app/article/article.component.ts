@@ -108,6 +108,7 @@ export class ArticleComponent implements OnInit {
 
     clickSideMenuByAgency(e, status){
       this.navService.getSubArticleUrlByAgency(localStorage.getItem('langID'));
+      this.navService.triggerSubArticleAgency(localStorage.getItem('langID'));
       this.router.navigate(['/subcategory', 'agency']);
       event.preventDefault();
     }

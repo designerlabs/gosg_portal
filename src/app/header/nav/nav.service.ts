@@ -147,7 +147,7 @@ export class NavService {
 
   getSubArticleUrlOthers(subID: number, lang, url) {
     if (!isNaN(subID)) {
-      return this.http.get(this.config.urlPortal  +url+'/'+'subcategory/'+subID + '?language=' + lang)
+      return this.http.get(this.config.urlPortal +'subcategory/'+subID + '?language=' + lang+'&type='+url)
         .take(1)
         .map((response: Response) => response.json().contentCategoryResource.results)
         // .catch((error:any) =>
@@ -187,7 +187,7 @@ export class NavService {
 
   getContentUrlOther(subID: number, lang, url) {
     if (!isNaN(subID)) {
-      return this.http.get(this.config.urlPortal  + url+'/'+ 'content/' +subID + '?language=' + lang)
+      return this.http.get(this.config.urlPortal + 'content/' +subID + '?language=' + lang+'&type='+url)
         .take(1)
         .map((response: Response) => response.json().contentCategoryResource.results)
         // .catch((error:any) =>
@@ -269,7 +269,6 @@ export class NavService {
 
    triggerSubArticleAgency(lang) {
     // alert("Trigger sub acrticle");
-
        this.articleService.articles = [''];
        this.articles = [''];
        return this.route.paramMap
