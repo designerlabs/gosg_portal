@@ -65,7 +65,7 @@ export class AnnouncementboxComponent implements OnInit {
             .subscribe(data => {
             //   console.log(data);
                 this.announcementData = data.contentCategoryResource.results[0];
-                console.log(this.announcementData);
+                // console.log(this.announcementData);
             });
     }
 

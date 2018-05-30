@@ -57,6 +57,7 @@ export class AppConfig {
     urlUserType:string;
     urlMail:string;
     urlAgency:string;
+    urlSiteMap:string;
     urlAppAgency:string;
     urlUapStaging:string;
     urlComplete: string;
@@ -86,6 +87,7 @@ export class AppConfig {
     statusAppUrl: string;
     urlAgencyList: string;
     dataAppUrl: string;
+    urlStatistic: string;
 
 }
 
@@ -155,6 +157,8 @@ export const APP_DI_CONFIG: AppConfig = {
     urlSubscription: registrationUrl + 'subscription',
     urlDigitalServices: commonURL + 'digitalservice',
     urlDigitalServicesDetails: commonURL + 'digitalservice/details',
+    urlSiteMap: commonURL + 'sitemapdetails',
+    urlStatistic: commonURL + 'statistics?year=2018',
     // urlFaq: commonURL + 'faq',
     urlDashboardData: protectedBaseURL + 'dservice/dashboard',
     statusAppUrl: protectedBaseURL + 'dservice/group',
