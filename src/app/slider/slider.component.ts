@@ -27,9 +27,8 @@ export class SliderComponent implements OnInit {
 
   @ViewChild('owlElement') owlElement: OwlCarousel;
 
-
-
   slides: any[];
+  languageId: any;
 
   constructor( 
     private translate: TranslateService,
@@ -39,36 +38,33 @@ export class SliderComponent implements OnInit {
     private breadcrumbService: BreadcrumbService,
     private sharedservice:SharedService
   ) {
-    this.lang = translate.currentLang;
-    translate.onLangChange.subscribe((event: LangChangeEvent) => {
-
-        const myLang = translate.currentLang;
-
-        if (myLang == 'en') {
-
-            translate.get('HOME').subscribe((res: any) => {
-                this.lang = 'en';
-                this.getSlide(this.lang);
-            });
-
-        }
-        if (myLang == 'ms') {
-
-            translate.get('HOME').subscribe((res: any) => {
-                this.lang = 'ms';
-                this.getSlide(this.lang);
-            });
-        }
-    });
+    
   }
 
   lang = this.lang;
   ngOnInit() {
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      // this.sharedService.errorHandling(event, (function(){
+        const myLang = this.translate.currentLang;
+        if (myLang === 'en') {
+           this.lang = 'en';
+           this.languageId = 1;
+           this.getSlide(this.languageId);
+           console.log('english');
+        }
+        if (myLang === 'ms') {
+          this.lang = 'ms';
+          this.languageId = 2;
+          this.getSlide(this.languageId);
+          console.log('from malay');
+        }
+      // }).bind(this));
+    });
     console.log('slider.comp.ts');
-    this.getSlide(this.lang);
+    //this.getSlide(this.lang);
     this.breadcrumb = this.breadcrumbService.getBreadcrumb();
-        this.breadcrumb = this.breadcrumb.name = '';
-        this.isValid = this.breadcrumbService.isValid = false;
+    this.breadcrumb = this.breadcrumb.name = '';
+    this.isValid = this.breadcrumbService.isValid = false;
   }
 
     private sliderUrl: string = this.config.urlSlider;

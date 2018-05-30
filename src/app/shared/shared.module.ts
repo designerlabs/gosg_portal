@@ -134,6 +134,8 @@ import { DigitalservicesComponent } from '../digitalservices/digitalservices.com
 import { RssComponent } from '../article/rss/rss.component';
 import { ContentComponent } from '../article/content/content.component';
 import { EparticipationComponent } from '../eparticipation/eparticipation.component';
+import { StatisticComponent } from '../statistic/statistic.component';
+import { SitemapComponent } from '../sitemap/sitemap.component';
 import { ArchivecategoryComponent } from '../archive/archivecategory/archivecategory.component';
 import { ArchivesubcategoryComponent } from '../archive/archivesubcategory/archivesubcategory.component';
 import { ArchivecontentComponent } from '../archive/archivecontent/archivecontent.component';
@@ -220,6 +222,8 @@ export function HttpLoaderFactory(http: Http) {
     RssComponent,
     ContentComponent,
     EparticipationComponent,
+    StatisticComponent,
+    SitemapComponent,
     ArchivecategoryComponent,
     ArchivesubcategoryComponent,
     ArchivecontentComponent

@@ -62,6 +62,8 @@ export class PortalService {
   private agencyUrl: string = this.config.urlAgency;
   private digitalServicesUrl: string = this.config.urlDigitalServices;
   private digitalServicesDetailsUrl: string = this.config.urlDigitalServicesDetails;
+  private siteMapUrl: string = this.config.urlSiteMap;
+  private statisticUrl: string = this.config.urlStatistic;
   
   private internalUrl: string = this.config.urlIntSearch;
   
@@ -157,6 +159,24 @@ export class PortalService {
   getDigitalServices() {
     // console.log(this.calendarUrl+ '?language='+localStorage.getItem('langID'))
     return this.http.get(this.digitalServicesUrl + '?language='+this.langId)
+    .map((response: Response) => response.json())
+    .retry(5)
+    .catch(this.handleError);
+  }
+
+  // SITE MAP
+  getSitemapData() {
+    // console.log(this.calendarUrl+ '?language='+localStorage.getItem('langID'))
+    return this.http.get(this.siteMapUrl + '?language='+this.langId)
+    .map((response: Response) => response.json())
+    .retry(5)
+    .catch(this.handleError);
+  }
+
+  // STATISTIC
+  getStatisticData(type) {
+    // console.log(this.statisticUrl+ '&type=' + type)
+    return this.http.get(this.statisticUrl+ '&type=' + type)
     .map((response: Response) => response.json())
     .retry(5)
     .catch(this.handleError);
