@@ -36,35 +36,37 @@ export class PollComponent implements OnInit {
     pollPercent;
     progressbarVal;
     pollReference;
+    public browserLang: string;
     // calcValue = 90;
     // tslint:disable-next-line:max-line-length
     constructor(private translate: TranslateService, private http: Http, @Inject(APP_CONFIG) private config: AppConfig, private toastr: ToastrService, private sharedService: SharedService, private portalservice: PortalService) {
-        this.lang = translate.currentLang;
-        this.languageId = 2;
-        translate.onLangChange.subscribe((event: LangChangeEvent) => {
+
+    }
+
+    ngOnInit() {
+        this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
           // this.sharedService.errorHandling(event, (function(){
-            const myLang = translate.currentLang;
+            const myLang = this.translate.currentLang;
             if (myLang === 'en') {
                this.lang = 'en';
                this.languageId = 1;
-               this.getData('1');
+               this.getData(this.languageId);
+               console.log('english');
             }
             if (myLang === 'ms') {
               this.lang = 'ms';
               this.languageId = 2;
-              this.getData('2');
+              this.getData(this.languageId);
               console.log('from malay');
             }
           // }).bind(this));
         });
-    }
 
-    ngOnInit() {
-        this.getData(this.languageId);
+
         // this.getUserIpAddr();
     }
 
-   getData(languageId) { 
+   getData(languageId) {
          return this.http.get(this.config.urlPoll + '/question/lang/' + languageId + '/?active=true')
            .map(res => res.json())
           .subscribe(eventData => {
