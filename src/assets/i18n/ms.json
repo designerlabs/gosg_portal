@@ -17,7 +17,8 @@
       "themecolor": "Warna Tema",
       "fontsize": "Saiz Fon",
       "fonttype": "Jenis Fon",
-      "login": "Log Masuk"
+      "login": "Log Masuk",
+      "sitemap": "Peta Laman"
     },
     "search": {
       "label": "Bagaimana Kami Boleh Membantu Anda?",
@@ -448,5 +449,8 @@
     "agencyappname": "Nama Permohonan Agensi",
     "basedonagency": "Carian Permohonan",
     "basedonatoz" : "Carian berdasarkan A-Z"
+  },
+   "sitemap": {
+     "header" : "Peta Laman"
   }
 }

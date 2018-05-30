@@ -17,7 +17,8 @@
       "themecolor": "Theme Color",
       "fontsize": "Font Size",
       "fonttype": "Font Type",
-      "login": "Login"
+      "login": "Login",
+      "sitemap": "Site Map"
     },
     "search": {
       "label": "How Can We Help You?",
@@ -448,5 +449,8 @@
      "agencyappname": "Agency Application Name",
      "basedonagency": "Search Application",
      "basedonatoz" : "Search by A-Z"
+  },
+   "sitemap": {
+     "header" : "Site Map"
   }
 }
