@@ -1,20 +1,18 @@
 import { Component, Output, Input, EventEmitter, OnInit, AfterViewChecked, AfterViewInit,  ViewChild, ElementRef, Inject, AfterContentInit } from '@angular/core';
-import { ArticleService } from './article.service';
-import { NavService } from '../header/nav/nav.service';
-import { APP_CONFIG, AppConfig } from '../config/app.config.module';
+import { ArticleService } from '../../article/article.service';
+import { NavService } from '../../header/nav/nav.service';
+import { APP_CONFIG, AppConfig } from '../../config/app.config.module';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {TranslateService, LangChangeEvent } from '@ngx-translate/core';
-import { BreadcrumbService } from '../header/breadcrumb/breadcrumb.service';
+import { BreadcrumbService } from '../../header/breadcrumb/breadcrumb.service';
 
 import 'rxjs/add/operator/switchMap';
-
 @Component({
-  selector: 'app-article',
-  templateUrl: './article.component.html',
-  styleUrls: ['./article.component.css']
+  selector: 'gosg-archivecategory',
+  templateUrl: './archivecategory.component.html',
+  styleUrls: ['./archivecategory.component.css']
 })
-export class ArticleComponent implements OnInit {
-  statusID: any;
+export class ArchivecategoryComponent implements OnInit {statusID: any;
   langIdVal: string;
   subID: number;
   moduleName: string;
@@ -42,8 +40,8 @@ export class ArticleComponent implements OnInit {
             translate.get('HOME').subscribe((res: any) => {
                 this.lang = 'en';
                 this.langId = 1;
-                this.moduleName = this.router.url.split('/')[1];
-                this.topicID = parseInt(this.router.url.split('/')[2]);
+                this.moduleName = this.router.url.split('/')[2];
+                this.topicID = parseInt(this.router.url.split('/')[3]);
                 // this.navService.triggerArticle(this.moduleName, this.langId, this.topicID);
             });
 
@@ -53,9 +51,9 @@ export class ArticleComponent implements OnInit {
             translate.get('HOME').subscribe((res: any) => {
                 this.lang = 'ms';
                 this.langId = 2;
-                this.moduleName = this.router.url.split('/')[1];
-                this.topicID = parseInt(this.router.url.split('/')[2]);
-                this.subID = parseInt(this.router.url.split('/')[3]);
+                this.moduleName = this.router.url.split('/')[2];
+                this.topicID = parseInt(this.router.url.split('/')[3]);
+                this.subID = parseInt(this.router.url.split('/')[4]);
                 // this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID);
             });
         }
@@ -89,8 +87,8 @@ export class ArticleComponent implements OnInit {
 
   ngOnInit() {
         this.articleData = this.articleService.getArticle();
-        this.moduleName = this.router.url.split('/')[1];
-        this.topicID = parseInt(this.router.url.split('/')[2]);
+        this.moduleName = this.router.url.split('/')[2];
+        this.topicID = parseInt(this.router.url.split('/')[3]);
         this.navService.triggerArticle(this.moduleName, localStorage.getItem('langID'), this.topicID);
       }
 
@@ -98,26 +96,29 @@ export class ArticleComponent implements OnInit {
         return localStorage.getItem('themeColor');
     }
 
-    clickSideMenu(e, status){
+    clickSideMenu(e, status, url){
       this.statusID = status;
-      this.navService.getSubArticleUrl(e.categoryCode, localStorage.getItem('langID'));
-      this.navService.triggerSubArticle(e.categoryCode, localStorage.getItem('langID'));
-      this.router.navigate(['/subcategory', e.categoryCode]);
+      this.navService.getSubArticleUrlOthers(e.categoryCode, localStorage.getItem('langID'), url);
+      this.navService.triggerSubArticleOther(e.categoryCode, localStorage.getItem('langID'), url);
+      this.router.navigate(['/archive/subcategory', e.categoryCode]);
       event.preventDefault();
     }
 
-    clickSideMenuByAgency(e, status){
-      this.navService.getSubArticleUrlByAgency(localStorage.getItem('langID'));
-      this.router.navigate(['/subcategory', 'agency']);
+    clickSideMenuOthers(e, status, url){
+      this.statusID = status;
+      this.navService.getSubArticleUrlOthers(e.categoryCode, localStorage.getItem('langID'), url);
+      this.navService.triggerSubArticleOther(e.categoryCode, localStorage.getItem('langID'), url);
+      this.router.navigate(['/archive/subcategory', e.categoryCode]);
       event.preventDefault();
     }
+
 
     clickContentFromMenu(pId, aId, status){
 
       this.statusID = status;
       this.navService.triggerContent(aId, localStorage.getItem('langID'));
       this.navService.getContentUrl(aId, localStorage.getItem('langID'));
-      this.router.navigate(['/content', aId]);
+      this.router.navigate(['/archive/content', aId]);
       event.preventDefault();
     }
 
@@ -147,3 +148,4 @@ export class ArticleComponent implements OnInit {
     }
 
 }
+

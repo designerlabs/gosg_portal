@@ -1,5 +1,5 @@
-import { Component, Output, Input, EventEmitter, OnInit, AfterViewChecked, AfterViewInit  } from '@angular/core';
-import { ArticleService } from '../article.service';
+import { Component, Output, Input, EventEmitter, OnInit, AfterContentInit, AfterViewChecked, AfterViewInit  } from '@angular/core';
+import { ArticleService } from '../../article/article.service';
 
 import { NavService } from '../../header/nav/nav.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
@@ -8,29 +8,27 @@ import { BreadcrumbService } from '../../header/breadcrumb/breadcrumb.service';
 
 import 'rxjs/add/operator/switchMap';
 
-
 @Component({
-  selector: 'app-article',
-  templateUrl: './subarticle.component.html',
-  styleUrls: ['./subarticle.component.css']
+  selector: 'gosg-archivecontent',
+  templateUrl: './archivecontent.component.html',
+  styleUrls: ['./archivecontent.component.css']
 })
-export class SubarticleComponent implements OnInit {
+export class ArchivecontentComponent implements OnInit {
   statusID: any;
   @Output() menuClick = new EventEmitter();
   breadcrumb: any;
   isValid: any;
   topicID: number;
   subID: number;
-  step = 0;
-  articles: any[];
   moduleName: string;
+  articles: any[];
+
   articleData: any;
   @Output() langChange = new EventEmitter();
 
   handleClickMe(e){
     console.log(e);
   }
-
 
   constructor(public articleService: ArticleService,  private route: ActivatedRoute, private navService: NavService, private translate: TranslateService, private router: Router, private breadcrumbService: BreadcrumbService) {
     this.lang = translate.currentLang;
@@ -46,6 +44,7 @@ export class SubarticleComponent implements OnInit {
                 this.lang = 'en';
                 this.langId = 1;
                 this.moduleName = this.router.url.split('/')[1];
+                this.topicID = parseInt(this.router.url.split('/')[2]);
                 var tt = this.router.url.split('/');
                 this.subID = parseInt(tt[tt.length-1]);
             });
@@ -72,56 +71,50 @@ export class SubarticleComponent implements OnInit {
           this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID);
         }
 
-        // this.navService.triggerSubArticle(this.topicID, this.subID, this.langId);
-
     });
-  }
+   }
 
-  lang = this.lang;
-  langId = this.langId;
+   lang = this.lang;
+   langId = this.langId;
+
 
   ngOnInit() {
     this.articleData = this.articleService.getArticle();
     this.topicID = parseInt(this.router.url.split('/')[2]);
     var tt = this.router.url.split('/');
     this.subID = parseInt(tt[tt.length-1]);
-    if(location.pathname.indexOf('agency') !== -1){
-      this.navService.triggerSubArticleAgency(localStorage.getItem('langID'));
-    }else{
-      this.navService.triggerSubArticle(this.subID, localStorage.getItem('langID'));
-    }
-
+    this.navService.triggerContentOther(this.subID, localStorage.getItem('langID'), 'archive');
   }
 
 
   getTheme(){
-        return localStorage.getItem('themeColor');
-    }
+    return localStorage.getItem('themeColor');
+  }
 
+  clickSideMenu(e, status, url){
+    this.statusID = status;
+    this.navService.getSubArticleUrlOthers( e.categoryId, localStorage.getItem('langID'), url);
+    this.navService.triggerSubArticleOther(e.categoryCode, localStorage.getItem('langID'), url);
+    this.router.navigate( ['/archive/subcategory', e.categoryCode]);
+    event.preventDefault();
+  }
 
-    clickSideMenu(e, status){
-      this.statusID = status;
-      this.navService.getSubArticleUrl(e.categoryId, localStorage.getItem('langID'));
-      this.navService.triggerSubArticle(e.categoryCode, localStorage.getItem('langID'));
-      this.router.navigate( ['/subcategory', e.categoryCode]);
-      event.preventDefault();
-    }
+  clickContentFromMenu(pId, aId, status, url){
+    this.statusID = status;
+    this.navService.triggerContentOther(aId, localStorage.getItem('langID'), url);
+    this.navService.getContentUrlOther( aId, localStorage.getItem('langID'), url);
+    this.router.navigate( ['/archive/content', aId]);
+    event.preventDefault();
+  }
 
-    clickContentFromMenu(pId, aId){
-      this.navService.triggerContent(aId, localStorage.getItem('langID'));
-      this.navService.getContentUrl(aId, localStorage.getItem('langID'));
-      this.router.navigate( ['/content', aId]);
-      event.preventDefault();
-    }
-
-
-    checkImgData(e){
-        const chkData = e.search('<img');
-        if (chkData != -1){
-            return true;
-        }else{
-            return false;
-        }
-    }
+  checkImgData(e){
+      const chkData = e.search('<img');
+      if (chkData != -1){
+          return true;
+      }else{
+          return false;
+      }
+  }
 
 }
+

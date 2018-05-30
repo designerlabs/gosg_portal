@@ -42,14 +42,13 @@
                                     </mat-panel-title>
                                   </mat-expansion-panel-header>
                                   <div *ngFor="let subcontent of content.subMenuLeft" class="submenu" >
-                                    <div  (click)="clickContentFromMenu(content.parentCode, subcontent.contentCode, i)">
+                                    <div  (click)="clickContentFromMenu(content.parentCode, subcontent.contentCode, 'archive')">
                                       <a class="warna_font sideBarMenu--link font-size-s"  #subContent [style.font-weight]="subcontent.activeMenu ? 'bold' : 'normal'"  [style.color]="subcontent.activeMenu ? getTheme() : '#333'">
                                         {{subcontent.contentTitle}}
                                       </a>
                                     </div>
                                   </div>
                               </mat-expansion-panel>
-
                             <!-- </div> -->
 
                               <!-- <div *ngIf="contentMain.subMenuLeft.length ==0">
@@ -61,45 +60,38 @@
                                       </mat-expansion-panel-header>
                                   </mat-expansion-panel>
                               </div> -->
-                              <mat-expansion-panel *ngIf="article.template === 'publication'">
-                                  <mat-expansion-panel-header>
-                                    <mat-panel-title>
-                                      <a href="">test</a>
-                                    </mat-panel-title>
-                                  </mat-expansion-panel-header>
-                                </mat-expansion-panel>
+
 
                           </mat-accordion>
-
                     <!-- </div> -->
                 </div>
             </div>
         </div>
 
-        <div *ngIf="article.template === 'publication' || article.template === 'eparticipation'">
+        <div *ngIf="article.template === 'archive'">
             <div class="col-sm-6" *ngFor="let rightContent of article.subCategoryList;">
-              <mat-tab-group>
-                <mat-tab *ngFor="let tab of rightContent.contentList" label="{{tab.tab}}">
-                  <div style="height:20px;"></div>
-                  <div *ngFor="let tabContent of tab.contents; let index=index; let odd=odd; let even=even;">
-                      <div class="col-sm-6">
-                        <div>
-                          <div style="width:100%; margin-right:10px; height:auto;">
-                              <a class="intro-box warna_border_color" [style.border-color]="getTheme()" href="" (click)="clickContentFromMenu(article.categoryCode, tabContent.contentCode)">
-                                  <h4 class="font-size-m warna_font">
-                                      {{tabContent.contentTitle}}
-                                  </h4>
-                                  <span class="warna_font article-size font-size-s" [innerHTML]="tabContent.contentDescription"></span>
-                                  <div class="font-size-s" style="text-align: right;"><i class="fa fa-caret-right"></i> {{'home.readmore' | translate }}</div>
-                              </a>
+              
+                <div *ngFor="let tab of rightContent.contents; let index=index; let odd=odd; let even=even;">
+                    <div style="height:20px;"></div>
+                    <div>
+                        <div class="col-sm-6">
+                          <div>
+                            <div style="width:100%; margin-right:10px; height:auto;">
+                                <a class="intro-box warna_border_color" [style.border-color]="getTheme()" href="" (click)="clickContentFromMenu(article.categoryCode, tab.contentCode, 'archive')">
+                                    <h4 class="font-size-m warna_font">
+                                        {{tab.contentTitle}}
+                                    </h4>
+                                    <span class="warna_font article-size font-size-s" [innerHTML]="tab.contentDescription"></span>
+                                    <div class="font-size-s" style="text-align: right;"><i class="fa fa-caret-right"></i> {{'home.readmore' | translate }}</div>
+                                </a>
+                            </div>
                           </div>
                         </div>
-                      </div>
-
-                      <div *ngIf="odd" class="clearfix"></div>
-                  </div>
-                </mat-tab>
-              </mat-tab-group>
+  
+                        <div *ngIf="odd" class="clearfix"></div>
+                    </div>
+                </div>
+              
           </div>
         </div>
         <div *ngIf="article.template === 'content'">
@@ -138,7 +130,7 @@
                       <div class="col-sm-6">
                           <div>
                             <div style="width:100%; margin-right:10px; height:auto;">
-                                <a class="intro-box warna_border_color" [style.border-color]="getTheme()" href="" (click)="clickContentFromMenu(article.categoryCode, rightContent2.contentCode)">
+                                <a class="intro-box warna_border_color" [style.border-color]="getTheme()" href="" (click)="clickContentFromMenu(article.categoryCode, rightContent2.contentCode, 'archive')">
                                     <h4 class="font-size-m warna_font">
                                         {{rightContent2.contentTitle}}
                                     </h4>

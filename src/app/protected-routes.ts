@@ -43,6 +43,9 @@ import { ContentComponent } from './article/content/content.component';
 import { EparticipationComponent } from './eparticipation/eparticipation.component';
 import { StatisticComponent } from './statistic/statistic.component';
 import { SitemapComponent } from './sitemap/sitemap.component';
+import { ArchivecategoryComponent } from './archive/archivecategory/archivecategory.component';
+import { ArchivesubcategoryComponent } from './archive/archivesubcategory/archivesubcategory.component';
+import { ArchivecontentComponent } from './archive/archivecontent/archivecontent.component';
 // import { NavRouterActivator } from './header/nav/nav-router-activator.service'
 
 // import { appRoutes } from './routes';
@@ -66,6 +69,9 @@ export const protectedRoutes: Routes = [
     {path: 'rss/id/:id', component: RssComponent},
     {path: 'subcategory/:id1', component: SubarticleComponent },
     {path: 'content/:id1', component: ContentComponent},
+    {path: 'archive/category/:id', component:ArchivecategoryComponent},
+    {path: 'archive/subcategory/:id', component:ArchivesubcategoryComponent},
+    {path: 'archive/content/:id', component:ArchivecontentComponent},
     {path: 'announcement', component: AnnouncementComponent },
     {path: 'announcement/:id', component: AnnouncementlistComponent},
     {path: 'announcement/:id/:id', component: AnnouncementdetailsComponent},

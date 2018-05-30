@@ -44,7 +44,7 @@ import { SearchService } from '../search/search.service';
 import { TopicFeatureComponent } from '../topic-feature/topic-feature.component';
 import { FooterComponent } from '../footer/footer.component';
 import { HighlightboxComponent } from '../highlightbox/highlightbox.component';
-import { ArticleComponent } from '../article/article.component';
+
 import { ErrorComponent } from "../error/error.component";
 
 import { PollComponent } from "../poll/poll.component";
@@ -136,6 +136,9 @@ import { ContentComponent } from '../article/content/content.component';
 import { EparticipationComponent } from '../eparticipation/eparticipation.component';
 import { StatisticComponent } from '../statistic/statistic.component';
 import { SitemapComponent } from '../sitemap/sitemap.component';
+import { ArchivecategoryComponent } from '../archive/archivecategory/archivecategory.component';
+import { ArchivesubcategoryComponent } from '../archive/archivesubcategory/archivesubcategory.component';
+import { ArchivecontentComponent } from '../archive/archivecontent/archivecontent.component';
 // import { SearchResultComponent } from '../search/search-result/search-result.component';
 export function HttpLoaderFactory(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -200,7 +203,6 @@ export function HttpLoaderFactory(http: Http) {
     TopicFeatureComponent,
     FooterComponent,
     HighlightboxComponent,
-    ArticleComponent,
     ErrorComponent,
     PollComponent,
     BreadcrumbComponent,
@@ -221,7 +223,10 @@ export function HttpLoaderFactory(http: Http) {
     ContentComponent,
     EparticipationComponent,
     StatisticComponent,
-    SitemapComponent
+    SitemapComponent,
+    ArchivecategoryComponent,
+    ArchivesubcategoryComponent,
+    ArchivecontentComponent
     // SearchResultComponent
   ],
 
@@ -253,7 +258,6 @@ export function HttpLoaderFactory(http: Http) {
     TopicFeatureComponent,
     FooterComponent,
     HighlightboxComponent,
-    ArticleComponent,
     ErrorComponent,
     PollComponent,
     BreadcrumbComponent,

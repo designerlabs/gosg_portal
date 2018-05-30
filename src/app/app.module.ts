@@ -25,6 +25,7 @@ import { FeedbackComponent } from './feedback/feedback.component';
 import { ConfirmComponent } from './message/confirm.component';
 import { SearchResultComponent } from './search/search-result/search-result.component';
 import { SubarticleComponent } from './article/subarticle/subarticle.component';
+import { ArticleComponent } from './article/article.component';
 
 
 // import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule } from "@angular/material";
@@ -68,7 +69,8 @@ imports: [
     RegisterComponent,
     LoginComponent,
     SearchResultComponent,
-    SubarticleComponent
+    SubarticleComponent,
+    ArticleComponent
 
   ],
 

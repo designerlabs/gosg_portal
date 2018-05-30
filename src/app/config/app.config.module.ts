@@ -81,6 +81,7 @@ export class AppConfig {
     urlDigitalServicesDetails: string;
     urlPopularSearch: string;
     urlFaq: string;
+    urlManual: string;
     urlDashboardData: string;
     statusAppUrl: string;
     urlAgencyList: string;
@@ -95,6 +96,8 @@ export const APP_DI_CONFIG: AppConfig = {
     urlMenu: './app/apidata/menudata',
     urlSlider: commonURL+'slider',
     urlEvents: commonURL+'calendar',
+    urlFaq: commonURL+'faq/all',
+    urlManual: commonURL+'article/usermanual',
     // urlFooter: './app/apidata/footer',
     urlFooter: commonURL + 'footer',
     urlArticle: commonURL+'article',
@@ -152,7 +155,7 @@ export const APP_DI_CONFIG: AppConfig = {
     urlSubscription: registrationUrl + 'subscription',
     urlDigitalServices: commonURL + 'digitalservice',
     urlDigitalServicesDetails: commonURL + 'digitalservice/details',
-    urlFaq: commonURL + 'faq',
+    // urlFaq: commonURL + 'faq',
     urlDashboardData: protectedBaseURL + 'dservice/dashboard',
     statusAppUrl: protectedBaseURL + 'dservice/group',
     urlAgencyList: protectedBaseURL + 'dservice/agencylist',

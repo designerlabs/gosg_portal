@@ -32,7 +32,7 @@ import { HomeProtectedComponent } from './home/home-protected.component';
 import { ProfileUpdatedComponent } from './profile-updated/profile-updated.component';
 import { SearchResultComponent } from './search/search-result/search-result.component';
 import { SubarticleComponent } from './article/subarticle/subarticle.component';
-
+import { ArticleComponent } from './article/article.component';
 
 export function HttpLoaderFactory(http: Http) {
    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -53,7 +53,8 @@ export function HttpLoaderFactory(http: Http) {
     HomeProtectedComponent,
     ProfileUpdatedComponent,
     SearchResultComponent,
-    SubarticleComponent
+    SubarticleComponent,
+    ArticleComponent
   ],
   imports: [
     SharedModule,

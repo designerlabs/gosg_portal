@@ -1,5 +1,5 @@
 import { Component, Output, Input, EventEmitter, OnInit, AfterViewChecked, AfterViewInit  } from '@angular/core';
-import { ArticleService } from '../article.service';
+import { ArticleService } from '../../article/article.service';
 
 import { NavService } from '../../header/nav/nav.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
@@ -8,13 +8,12 @@ import { BreadcrumbService } from '../../header/breadcrumb/breadcrumb.service';
 
 import 'rxjs/add/operator/switchMap';
 
-
 @Component({
-  selector: 'app-article',
-  templateUrl: './subarticle.component.html',
-  styleUrls: ['./subarticle.component.css']
+  selector: 'gosg-archivesubcategory',
+  templateUrl: './archivesubcategory.component.html',
+  styleUrls: ['./archivesubcategory.component.css'],
 })
-export class SubarticleComponent implements OnInit {
+export class ArchivesubcategoryComponent implements OnInit {
   statusID: any;
   @Output() menuClick = new EventEmitter();
   breadcrumb: any;
@@ -65,9 +64,9 @@ export class SubarticleComponent implements OnInit {
 
 
         if(this.moduleName == 'subcategory'){
-          this.navService.triggerSubArticle(this.subID, this.langId);
+          this.navService.triggerSubArticleOther(this.subID, this.langId, 'archive');
         }else if(this.moduleName == 'content'){
-          this.navService.triggerContent(this.subID, this.langId);
+          this.navService.triggerContentOther(this.subID, this.langId, 'archive');
         }else{
           this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID);
         }
@@ -85,12 +84,7 @@ export class SubarticleComponent implements OnInit {
     this.topicID = parseInt(this.router.url.split('/')[2]);
     var tt = this.router.url.split('/');
     this.subID = parseInt(tt[tt.length-1]);
-    if(location.pathname.indexOf('agency') !== -1){
-      this.navService.triggerSubArticleAgency(localStorage.getItem('langID'));
-    }else{
-      this.navService.triggerSubArticle(this.subID, localStorage.getItem('langID'));
-    }
-
+    this.navService.triggerSubArticleOther(this.subID, localStorage.getItem('langID'), 'archive');
   }
 
 
@@ -101,16 +95,16 @@ export class SubarticleComponent implements OnInit {
 
     clickSideMenu(e, status){
       this.statusID = status;
-      this.navService.getSubArticleUrl(e.categoryId, localStorage.getItem('langID'));
-      this.navService.triggerSubArticle(e.categoryCode, localStorage.getItem('langID'));
-      this.router.navigate( ['/subcategory', e.categoryCode]);
+      this.navService.getSubArticleUrlOthers(e.catgoryId, localStorage.getItem('langID'), 'archive');
+      this.navService.triggerSubArticleOther(e.categoryCode, localStorage.getItem('langID'), 'archive');
+      this.router.navigate( ['/archive/subcategory', e.categoryCode]);
       event.preventDefault();
     }
 
-    clickContentFromMenu(pId, aId){
-      this.navService.triggerContent(aId, localStorage.getItem('langID'));
-      this.navService.getContentUrl(aId, localStorage.getItem('langID'));
-      this.router.navigate( ['/content', aId]);
+    clickContentFromMenu(pId, aId, url){
+      this.navService.triggerContentOther(aId, localStorage.getItem('langID'), url);
+      this.navService.getContentUrlOther(aId, localStorage.getItem('langID'),  url);
+      this.router.navigate( ['/archive/content', aId]);
       event.preventDefault();
     }
 
