@@ -41,6 +41,8 @@ import { DigitalservicesComponent } from './digitalservices/digitalservices.comp
 import { RssComponent } from './article/rss/rss.component';
 import { ContentComponent } from './article/content/content.component';
 import { EparticipationComponent } from './eparticipation/eparticipation.component';
+import { StatisticComponent } from './statistic/statistic.component';
+import { SitemapComponent } from './sitemap/sitemap.component';
 // import { NavRouterActivator } from './header/nav/nav-router-activator.service'
 
 // import { appRoutes } from './routes';
@@ -67,6 +69,8 @@ export const protectedRoutes: Routes = [
     {path: 'announcement', component: AnnouncementComponent },
     {path: 'announcement/:id', component: AnnouncementlistComponent},
     {path: 'announcement/:id/:id', component: AnnouncementdetailsComponent},
+    {path: 'statistic', component: StatisticComponent},
+    {path: 'sitemap', component: SitemapComponent},
 
     {path: 'faq', component: FaqComponent},
     {path: 'aboutus', component: AboutusComponent},

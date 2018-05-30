@@ -32,10 +32,10 @@ export class NavComponent implements OnInit, AfterViewInit {
     popData: any;
     ser_word = "";
     env:any;
-    envPathName = window.location.pathname;
-    envOrigin = window.location.origin;
+    // envPathName = window.location.pathname;
+    // envOrigin = window.location.origin;
 
-    hName = window.location.hostname;
+    // hName = window.location.hostname;
 
     private articleUrl: string = this.config.urlArticle;
     private menuUrl: string = this.config.urlMenu;
@@ -83,7 +83,9 @@ export class NavComponent implements OnInit, AfterViewInit {
 
     ngOnInit() {
 
-        this.env = this.envPathName.split('/')[1];
+        this.env = this.router.url.split('/')[1];
+        console.log(this.env)
+        // this.env = this.envPathName.split('/')[1];
         
         this.imgSrc = 'logo_ms';
         this.navService.getMenuData(this.langId).subscribe(resMenuData => this.menus = resMenuData);
@@ -147,14 +149,15 @@ export class NavComponent implements OnInit, AfterViewInit {
     }
 
     mainSearch(key) {
-        let loc = window.location.hostname;
-        this.env = this.envPathName.split('/')[1];
+        // let loc = window.location.hostname;
+        this.env = this.router.url.split('/')[1];
+        console.log(this.env)
+        // this.env = this.envPathName.split('/')[1];
 
         if(this.env == 'search') {
-            
             this.ser_word = key;
+            this.internal(key);
         } else {
-    
             if(key) {
                 $('#searchDDown').css({ 'display': 'none' });
                 localStorage.setItem('ser_word', key);
