@@ -26,11 +26,17 @@
       <mat-expansion-panel-header style="background: #f5f5f5">
         <mat-panel-title style="font-weight: bold;">
           <span class="module_title">{{ category.name }}</span>
-          <span class="module_counts pull-right" *ngIf="category.count">{{ category.count }} {{ 'common.pagination.pages' | translate }}</span>
+          <span class="module_counts pull-right">{{ category.contents.length }} {{ 'common.pagination.pages' | translate }}</span>
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <div style="padding-bottom: 0px; border-bottom: 1px solid #e6e6e6;" *ngFor="let content of category.contents">
-        <a class="submenu_link" routerLinkActive="submenu_link_active" (click)="scrollTop()" [routerLink]=[content.url]>{{content.name}}</a>
+      <div style="padding-bottom: 0px; border-bottom: 1px solid #e6e6e6;">
+
+        <ul [ngClass]="{'columnList':category.contents.length >= 10,'oneColumnList':category.contents.length < 10}">
+          <li *ngFor="let content of category.contents">
+            <a class="submenu_link" routerLinkActive="submenu_link_active" (click)="scrollTop()" [routerLink]=[content.url]>{{content.name}}</a>
+          </li>
+        </ul>
+
       </div>
     </mat-expansion-panel>
     <br />
