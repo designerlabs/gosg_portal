@@ -253,7 +253,7 @@
       "agencyName":"Nama Agensi",
       "total":"Jumlah Capaian"
     },
-    "msg": {  
+    "msg": {
       "beforeLogin": "Sila Log Masuk / Daftar Untuk Mengakses PERKHIDMATAN Yang Disediakan",
       "afterLogin": "Senarai perkhidmatan yang ditawarkan oleh Gerbang MyGovernment",
       "instruction": "Perkhidmatan yang ditawarkan oleh Gerbang MyGovernment perlu menggunakan nombor kad pengenalan bagi warganegara Malaysia"
@@ -372,6 +372,7 @@
     "brokenlink": "Pautan Rosak",
     "validlink":"Pautan Sah",
     "downloadablelink":"Pautan Boleh Dimuat Turun",
+    "byagency":"Penerbitan Mengikut Agensi",
     "placeholder": {
       "keyword":"Kata Kunci"
     },

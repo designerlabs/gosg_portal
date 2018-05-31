@@ -372,6 +372,7 @@
     "brokenlink": "Broken Link",
     "validlink":"Valid Link",
     "downloadablelink":"Downloadable Link",
+    "byagency":"Publication by Agency",
     "placeholder": {
       "keyword":"Keyword"
     },

@@ -15,6 +15,7 @@ import 'rxjs/add/operator/switchMap';
   styleUrls: ['./subarticle.component.css']
 })
 export class SubarticleComponent implements OnInit {
+  agencyActive: boolean = false;
   statusID: any;
   @Output() menuClick = new EventEmitter();
   breadcrumb: any;
@@ -62,15 +63,18 @@ export class SubarticleComponent implements OnInit {
                 this.subID = parseInt(tt[tt.length-1]);
             });
         }
-
-
-        if(this.moduleName == 'subcategory'){
+        if(location.pathname.indexOf('agency') !== -1){
+          this.agencyActive = true;
+          this.navService.triggerSubArticleAgency(this.langId);
+        }
+        else if(this.moduleName == 'subcategory'){
           this.navService.triggerSubArticle(this.subID, this.langId);
         }else if(this.moduleName == 'content'){
           this.navService.triggerContent(this.subID, this.langId);
         }else{
           this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID);
         }
+
 
         // this.navService.triggerSubArticle(this.topicID, this.subID, this.langId);
 
@@ -86,8 +90,10 @@ export class SubarticleComponent implements OnInit {
     var tt = this.router.url.split('/');
     this.subID = parseInt(tt[tt.length-1]);
     if(location.pathname.indexOf('agency') !== -1){
+      this.agencyActive = true;
       this.navService.triggerSubArticleAgency(localStorage.getItem('langID'));
     }else{
+      this.agencyActive = false;
       this.navService.triggerSubArticle(this.subID, localStorage.getItem('langID'));
     }
 
@@ -100,6 +106,7 @@ export class SubarticleComponent implements OnInit {
 
 
     clickSideMenu(e, status){
+      this.agencyActive = false;
       this.statusID = status;
       this.navService.getSubArticleUrl(e.categoryId, localStorage.getItem('langID'));
       this.navService.triggerSubArticle(e.categoryCode, localStorage.getItem('langID'));
@@ -108,6 +115,7 @@ export class SubarticleComponent implements OnInit {
     }
 
     clickSideMenuByAgency(e, status){
+      this.agencyActive = true;
       this.navService.getSubArticleUrlByAgency(localStorage.getItem('langID'));
       this.navService.triggerSubArticleAgency(localStorage.getItem('langID'));
       this.router.navigate(['/subcategory', 'agency']);
