@@ -47,10 +47,10 @@
                                   </div>
                                 </div>
                             </mat-expansion-panel>
-                            <mat-expansion-panel *ngIf="article.template === 'publication'">
+                            <mat-expansion-panel hideToggle="true" *ngIf="article.template === 'publication'" multi="true" displayMode="flat">
                                 <mat-expansion-panel-header>
                                   <mat-panel-title  (click)="clickSideMenuByAgency(content, i)">
-                                    <a class="warna_font sideBarMenu--link font-size-s" [routerLinkActive]="['active']">By Agency</a>
+                                    <a class="warna_font sideBarMenu--link font-size-s" [style.color]="getTheme()"  [routerLinkActive]="['active']">By Agency</a>
                                   </mat-panel-title>
                                 </mat-expansion-panel-header>
                               </mat-expansion-panel>

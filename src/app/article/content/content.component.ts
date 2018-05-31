@@ -99,6 +99,13 @@ export class ContentComponent implements OnInit {
     event.preventDefault();
   }
 
+  clickSideMenuByAgency(e, status){
+    this.navService.getSubArticleUrlByAgency(localStorage.getItem('langID'));
+    this.navService.triggerSubArticleAgency(localStorage.getItem('langID'));
+    this.router.navigate(['/subcategory', 'agency']);
+    event.preventDefault();
+  }
+
   clickContentFromMenu(pId, aId, status){
     this.statusID = status;
     this.navService.triggerContent(aId, localStorage.getItem('langID'));
