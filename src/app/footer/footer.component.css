@@ -14,6 +14,9 @@
   left: 3.5%;
   position: absolute; }
 
+  .access_page_link:hover{
+    color: #7aeae9;
+  }
 
 @media screen and (max-width: 760px) and (min-width: 320px) {
   .loop1 {
