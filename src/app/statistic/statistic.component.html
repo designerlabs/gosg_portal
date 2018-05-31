@@ -1,3 +1,46 @@
-<p>
-  statistic works!
-</p>
+<div class="container-fluid animated slideInDown" style="background: #a7a495;">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 style="margin-top: 10px;" class="font-size-m">{{'statistic.header' | translate}}</h1>
+        <hr class="hr-custom2">
+        <ul class="list-inline" style="clear:both;">
+          <li>
+            <a class="font-size-s" href="/index/">
+              {{ 'home.menu.statistic' | translate }}
+            </a>
+          </li>
+          <!-- <li>/</li>
+                    <li>
+                        {{'home.breadcrumb.calendar' | translate}}
+                    </li> -->
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<br />
+<div class="container">
+  <!-- {{ 'statistic.months.short.01' | translate }} -->
+  <table class="table table-striped" style="border-color: rgb(0, 189, 187);">
+    <thead style="background: #1ebebc; color: #fafafa;">
+      <tr style="vertical-align: middle">
+        <th>{{'statistic.label.users' | translate}}</th>
+        <th style="text-align: center; padding: 5px" *ngFor="let mon of allUsersByYear">{{ 'statistic.months.short.'+mon[0] | translate }}</th>
+        <th style="text-align: center">{{'statistic.label.total' | translate}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{'statistic.label.allusers' | translate}}</td>
+        <td style="text-align: center" *ngFor="let monAll of allUsersByYear">{{ monAll[1] }}</td>
+        <td style="text-align: center">{{ totalUsers }}</td>
+      </tr>
+      <tr>
+        <td>{{'statistic.label.newusers' | translate}}</td>
+        <td style="text-align: center" *ngFor="let monNew of newUsersByYear">{{ monNew[1] }}</td>
+        <td style="text-align: center">{{ totalNewUsers }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
