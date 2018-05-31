@@ -13,7 +13,6 @@ import { BreadcrumbService } from '../header/breadcrumb/breadcrumb.service';
 
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 
-
 @Component({
   selector: 'app-slider',
   templateUrl: './slider.component.html',
@@ -22,6 +21,7 @@ import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 export class SliderComponent implements OnInit {
   breadcrumb: any;
   isValid: any;
+  translateLoader = false;
   @Output() langChange = new EventEmitter();
 
 
@@ -44,24 +44,32 @@ export class SliderComponent implements OnInit {
   lang = this.lang;
   ngOnInit() {
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
-      // this.sharedService.errorHandling(event, (function(){
+      // this.sharedService.errorHandling(event, (function(){      
+        console.log(event);
+        this.translateLoader = true;
+        console.log("Display Trans : "+this.translateLoader);
         const myLang = this.translate.currentLang;
+
+        
         if (myLang === 'en') {
-           this.lang = 'en';
-           this.languageId = 1;
-           this.getSlide(this.languageId);
-           console.log('english');
+          this.lang = 'en';
+          this.languageId = 1;
+          console.log('Translate ENGLISH');
         }
         if (myLang === 'ms') {
           this.lang = 'ms';
-          this.languageId = 2;
-          this.getSlide(this.languageId);
-          console.log('from malay');
+          this.languageId = 2;          
+          console.log('Translate MALAY');
         }
+
+        console.log("LANG:  "+this.lang);
+
+        this.getSlide(this.languageId);
       // }).bind(this));
     });
     console.log('slider.comp.ts');
-    //this.getSlide(this.lang);
+    this.getSlide(this.lang);
+    
     this.breadcrumb = this.breadcrumbService.getBreadcrumb();
     this.breadcrumb = this.breadcrumb.name = '';
     this.isValid = this.breadcrumbService.isValid = false;
@@ -72,6 +80,7 @@ export class SliderComponent implements OnInit {
       this.sharedservice.readPortal('slider')
           .subscribe(resSliderData => {
                 this.slides = resSliderData['sliderList'];
+                console.log(this.slides);
             });
     }
 
