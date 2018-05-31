@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class TopnavService {
 
+    flagLang: any;
+
   getUserMenu(){
         return USERMENU;
     }
@@ -16,6 +18,10 @@ export class TopnavService {
     }
 
   constructor() { }
+
+  getEventLang(){
+    this.flagLang = true;
+  }
 
 }
 const USERMENU = [{

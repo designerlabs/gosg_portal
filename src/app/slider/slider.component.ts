@@ -12,6 +12,7 @@ import {TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { BreadcrumbService } from '../header/breadcrumb/breadcrumb.service';
 
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
+import { TopnavService } from '../header/topnav/topnav.service';
 
 @Component({
   selector: 'app-slider',
@@ -21,7 +22,6 @@ import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 export class SliderComponent implements OnInit {
   breadcrumb: any;
   isValid: any;
-  translateLoader = false;
   @Output() langChange = new EventEmitter();
 
 
@@ -32,6 +32,7 @@ export class SliderComponent implements OnInit {
 
   constructor( 
     private translate: TranslateService,
+    private topnavservice: TopnavService,
     private router: Router,
     private http: Http,
     @Inject(APP_CONFIG) private config: AppConfig,
@@ -45,11 +46,8 @@ export class SliderComponent implements OnInit {
   ngOnInit() {
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       // this.sharedService.errorHandling(event, (function(){      
-        console.log(event);
-        this.translateLoader = true;
-        console.log("Display Trans : "+this.translateLoader);
+        
         const myLang = this.translate.currentLang;
-
         
         if (myLang === 'en') {
           this.lang = 'en';
@@ -62,9 +60,10 @@ export class SliderComponent implements OnInit {
           console.log('Translate MALAY');
         }
 
-        console.log("LANG:  "+this.lang);
-
-        this.getSlide(this.languageId);
+        console.log("tested: "+ this.topnavservice.flagLang);
+        if(this.topnavservice.flagLang != undefined){
+          this.getSlide(this.languageId);
+        }
       // }).bind(this));
     });
     console.log('slider.comp.ts');

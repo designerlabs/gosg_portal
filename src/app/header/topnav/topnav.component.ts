@@ -179,7 +179,7 @@ export class TopnavComponent implements OnInit, AfterViewInit {
       this.translate.use('en');
     }
     localStorage.setItem('langID', this.langId);
-
+    this.topnavservice.getEventLang();
   }
 
   loadColor(){
