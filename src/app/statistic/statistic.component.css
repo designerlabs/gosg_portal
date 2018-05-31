@@ -1,0 +1,11 @@
+table {
+    color: #1d1d1d
+}
+
+.table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: #ffffff;
+}
+
+.table-striped>tbody>tr:nth-of-type(even) {
+    background-color: #eaeaea;
+}
