@@ -99,6 +99,16 @@ export class ArchivecontentComponent implements OnInit {
     event.preventDefault();
   }
 
+
+  clickSideMenuSubCategory(e, status, url){
+    this.statusID = status;
+    this.navService.getSubArticleUrlOthers(e, localStorage.getItem('langID'), url);
+    this.navService.triggerSubArticleOther(e, localStorage.getItem('langID'), url);
+    this.router.navigate(['/archive/subcategory', e]);
+    event.preventDefault();
+  }
+
+
   clickContentFromMenu(pId, aId, status, url){
     this.statusID = status;
     this.navService.triggerContentOther(aId, localStorage.getItem('langID'), url);

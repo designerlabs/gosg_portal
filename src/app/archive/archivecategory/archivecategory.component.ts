@@ -113,6 +113,15 @@ export class ArchivecategoryComponent implements OnInit {statusID: any;
     }
 
 
+    clickSideMenuSubCategory(e, status, url){
+      this.statusID = status;
+      this.navService.getSubArticleUrlOthers(e, localStorage.getItem('langID'), url);
+      this.navService.triggerSubArticleOther(e, localStorage.getItem('langID'), url);
+      this.router.navigate(['/archive/subcategory', e]);
+      event.preventDefault();
+    }
+
+
     clickContentFromMenu(pId, aId, status){
 
       this.statusID = status;

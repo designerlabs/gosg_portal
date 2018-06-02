@@ -187,7 +187,7 @@ export class NavService {
 
   getContentUrlOther(subID: number, lang, url) {
     if (!isNaN(subID)) {
-      return this.http.get(this.config.urlPortal + 'content/' +subID + '?language=' + lang+'&type='+url)
+      return this.http.get(this.config.urlPortal + 'content/' +subID + '?language=' + lang+'&type='+url+'&view=true')
         .take(1)
         .map((response: Response) => response.json().contentCategoryResource.results)
         // .catch((error:any) =>
