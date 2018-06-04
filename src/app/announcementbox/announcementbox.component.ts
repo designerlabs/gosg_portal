@@ -23,8 +23,8 @@ export class AnnouncementboxComponent implements OnInit {
    private announcementUrl: string = this.config.urlAnnouncement;
    private calendarUrl: string = this.config.urlCalendar;
 
-    constructor(private translate: TranslateService, private http: Http, 
-        @Inject(APP_CONFIG) private config: AppConfig, private route: ActivatedRoute, 
+    constructor(private translate: TranslateService, private http: Http,
+        @Inject(APP_CONFIG) private config: AppConfig, private route: ActivatedRoute,
         private navService: NavService,  private breadcrumbService: BreadcrumbService,private router: Router){
         this.lang = translate.currentLang;
         translate.onLangChange.subscribe((event: LangChangeEvent) => {
@@ -82,7 +82,7 @@ export class AnnouncementboxComponent implements OnInit {
         return localStorage.getItem('themeColor');
     }
 
-    triggerAnnouncementAll(moduleName, lang, id1, id2) {
+    triggerAnnouncementAll(id1, lang ) {
         // if (lang === 'ms') {
         //     lang = 2;
         // }
@@ -93,7 +93,7 @@ export class AnnouncementboxComponent implements OnInit {
 
         this.route.paramMap
         .switchMap((params: ParamMap) =>
-        this.navService.getAnnouncementDetails(moduleName, this.languageId, id1, id2))
+        this.navService.getContentUrl(id1, this.languageId))
         .subscribe(resAllAnnounce => {
             this.announceRes = resAllAnnounce;
             // convert object to array
@@ -109,15 +109,14 @@ export class AnnouncementboxComponent implements OnInit {
     }
 
     getDetailAnnounce(id, childid?) {
-
         if (childid) {
             console.log(id, childid);
         } else {
             console.log(id);
         }
 
-        this.triggerAnnouncementAll('article',  this.languageId, childid, id);
-        this.router.navigate(['article',   childid, id]);
+        this.triggerAnnouncementAll(id, this.languageId);
+        this.router.navigate(['content',   id]);
         event.preventDefault();
     }
 
