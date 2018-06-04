@@ -430,9 +430,9 @@ span.highlightWord {
 .card{
   min-height: 150px;
   /* text-align: center; */
-  border-radius: 15px !important;
-  background: darkgrey !important;
-  padding-top: 20px !important;
+  /* border-radius: 15px !important; */
+  background: none;
+  padding-top: 0px !important;
   padding-right: 0px !important;
   padding-left: 0px !important;
 }

@@ -22,7 +22,7 @@
 <br />
 <div class="container">
   <!-- {{ 'statistic.months.short.01' | translate }} -->
-  <table class="table table-striped" style="border-color: rgb(0, 189, 187);">
+  <table class="table table-striped" style="border: 1px solid rgb(0, 189, 187);">
     <thead style="background: #1ebebc; color: #fafafa;">
       <tr style="vertical-align: middle">
         <th>{{'statistic.label.users' | translate}}</th>
@@ -34,12 +34,12 @@
       <tr>
         <td>{{'statistic.label.allusers' | translate}}</td>
         <td style="text-align: center" *ngFor="let monAll of allUsersByYear">{{ monAll[1] }}</td>
-        <td style="text-align: center">{{ totalUsers }}</td>
+        <td style="text-align: center; font-weight: bold">{{ totalUsers }}</td>
       </tr>
       <tr>
         <td>{{'statistic.label.newusers' | translate}}</td>
         <td style="text-align: center" *ngFor="let monNew of newUsersByYear">{{ monNew[1] }}</td>
-        <td style="text-align: center">{{ totalNewUsers }}</td>
+        <td style="text-align: center; font-weight: bold">{{ totalNewUsers }}</td>
       </tr>
     </tbody>
   </table>

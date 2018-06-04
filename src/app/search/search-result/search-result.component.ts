@@ -318,7 +318,7 @@ export class SearchResultComponent implements OnInit {
     this.date = moment();
 
     this.ser_word = localStorage.getItem('ser_word');
-    if (this.ser_word.length > 0) {
+    if(this.ser_word.length > 0) {
       this.searchByKeyword(this.ser_word);
     }
   }
@@ -607,7 +607,6 @@ export class SearchResultComponent implements OnInit {
     let envOrigin = window.location.origin;
     let localURL = envOrigin+'/gosg/';
 
-    // console.log(env)
     // console.log(valkeyword)
     // console.log(this.date)
 
@@ -622,7 +621,7 @@ export class SearchResultComponent implements OnInit {
         this.mainObj.from = this.pagefrom;
         this.mainObj.size = this.pagesize;
 
-        if (this.languageId)
+        if(this.languageId)
           this.mainObj.filters.ref_language_id = this.languageId.toString();
         else
           this.mainObj.filters.ref_language_id = "1"
