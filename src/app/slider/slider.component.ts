@@ -61,14 +61,14 @@ export class SliderComponent implements OnInit {
         }
 
         console.log("tested: "+ this.topnavservice.flagLang);
-        if(this.topnavservice.flagLang != undefined){
-          this.getSlide(this.languageId);
-        }
+        //if(this.topnavservice.flagLang != undefined){
+          console.log(this.languageId);
+          this.getSlide(this.lang);
+        //}
       // }).bind(this));
     });
     console.log('slider.comp.ts');
-    this.getSlide(this.lang);
-    
+    this.getSlide(this.lang);    
     this.breadcrumb = this.breadcrumbService.getBreadcrumb();
     this.breadcrumb = this.breadcrumb.name = '';
     this.isValid = this.breadcrumbService.isValid = false;

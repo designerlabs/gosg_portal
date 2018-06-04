@@ -42,7 +42,7 @@
                                     </mat-panel-title>
                                   </mat-expansion-panel-header>
                                   <div *ngFor="let subcontent of content.subMenuLeft" class="submenu" >
-                                    <div  (click)="clickContentFromMenu(content.parentCode, subcontent.contentCode, 'archive')">
+                                    <div  (click)="clickSideMenuSubCategory(subcontent.contentCode, i, 'archive')">
                                       <a class="warna_font sideBarMenu--link font-size-s"  #subContent [style.font-weight]="subcontent.activeMenu ? 'bold' : 'normal'"  [style.color]="subcontent.activeMenu ? getTheme() : '#333'">
                                         {{subcontent.contentTitle}}
                                       </a>
@@ -69,6 +69,58 @@
         </div>
 
         <div *ngIf="article.template === 'archive'">
+
+
+            <div class="col-sm-6" *ngFor="let rightContent of article.subCategoryList;">
+
+                <div class="row">
+
+                    <div class="col-md-12 warna_font">
+                      <div class="col-sm-12">
+                          <div *ngIf="article.image">
+                              <div>
+                                  <img [src]="config.externalMediaURL + '/images/'+ article.image.mediaFile" style="width:100%;">
+                                  <div style="position:absolute; width:auto;">
+                                      <h2 class="topic_bg_title font-size-l">
+                                          <span style="padding-left:10px;">
+                                              {{rightContent.categoryName}}
+                                          </span>
+                                      </h2>
+                                  </div>
+                              </div>
+                          </div>
+                          <div *ngIf="!article.image">
+                              <div>
+                                  <h2 class="titleWObg font-size-l">
+                                      {{rightContent.categoryName}}
+                                  </h2>
+                              </div>
+                          </div>
+                          <span class="font-size-s defaultColor" [innerHTML]="rightContent.categoryDescription"></span>
+                          <div class="row">&nbsp;</div>
+                      </div>
+                        <div  *ngFor="let agencyLst of rightContent.contents; let index=index; let odd=odd; let even=even;">
+                            <div class="col-sm-6">
+                                <div>
+                                  <div style="width:100%; margin-right:10px; height:auto;">
+                                      <a class="intro-box warna_border_color" [style.border-color]="getTheme()" href="" (click)="clickContentFromMenu(article.categoryCode, agencyLst.contentCode, 'archive')">
+                                          <h4 class="font-size-m warna_font">
+                                              {{agencyLst.contentTitle}}
+                                          </h4>
+                                          <span class="warna_font article-size font-size-s" [innerHTML]="agencyLst.contentDescription"></span>
+                                          <div class="font-size-s" style="text-align: right;"><i class="fa fa-caret-right"></i> {{'home.readmore' | translate }}</div>
+                                      </a>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div *ngIf="odd" class="clearfix"></div>
+                          </div>
+                    </div>
+                </div>
+              </div>
+
+<!--
             <div class="col-sm-6" *ngFor="let rightContent of article.subCategoryList;">
 
                 <div *ngFor="let tab of rightContent.contents; let index=index; let odd=odd; let even=even;">
@@ -92,7 +144,7 @@
                     </div>
                 </div>
 
-          </div>
+          </div> -->
         </div>
         <div *ngIf="article.template === 'content'">
           <div class="col-sm-6" *ngFor="let rightContent of article.subCategoryList;">

@@ -40,7 +40,7 @@
                                 </mat-panel-title>
                               </mat-expansion-panel-header>
                               <div *ngFor="let subcontent of content.subMenuLeft" class="submenu" >
-                                <div  (click)="clickContentFromMenu(content.parentCode, subcontent.contentCode, i)">
+                                <div  (click)="clickSideMenuSubCategory(subcontent.contentCode, i, 'archive')">
                                   <a class="warna_font sideBarMenu--link font-size-s" #subContent [style.font-weight]="subcontent.activeMenu ? 'bold' : 'normal'"  [style.color]="subcontent.activeMenu ? getTheme() : '#333'">
                                   {{subcontent.contentTitle}}
                                   </a>
