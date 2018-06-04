@@ -51,6 +51,7 @@ import { SitemapComponent } from './sitemap/sitemap.component';
 import { ArchivecategoryComponent } from './archive/archivecategory/archivecategory.component';
 import { ArchivesubcategoryComponent } from './archive/archivesubcategory/archivesubcategory.component';
 import { ArchivecontentComponent } from './archive/archivecontent/archivecontent.component';
+import { GalleryComponent } from './gallery/gallery.component';
 
 export const appRoutes: Routes = [
 
@@ -59,7 +60,7 @@ export const appRoutes: Routes = [
     {path: 'agencydir', component: AgencydirectoryComponent},
     {path: 'calendar', component: EventCalendarComponent},
     {path: 'digitalservices', component: DigitalservicesComponent},
-    {path: 'search/searchResult', component: SearchResultComponent},
+    {path: 'search/searchResult/:id', component: SearchResultComponent},
     {path: 'category/:id', component: ArticleComponent, canActivate: [NavRouterActivator]  },
     {path: 'rss/:id', component: RssComponent},
     {path: 'rss/id/:id', component: RssComponent},
@@ -71,7 +72,10 @@ export const appRoutes: Routes = [
     {path: 'content/:id1', component: ContentComponent},
     {path: 'archive/category/:id', component:ArchivecategoryComponent},
     {path: 'archive/subcategory/:id', component:ArchivesubcategoryComponent},
-    {path: 'archive/content/:id', component:ArchivecontentComponent},
+    {path: 'archive/:id', component:ArchivecontentComponent},
+    {path: 'gallery/category/:id', component:GalleryComponent},
+    {path: 'gallery', component:GalleryComponent},
+    {path: 'gallery/content/:id', component:GalleryComponent},
     {path: 'login', component: LoginComponent},
     {path: 'register', component: RegisterComponent },
 
