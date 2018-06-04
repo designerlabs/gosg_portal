@@ -34,11 +34,12 @@ export class SharedService {
       });
     });
     if(!this.languageId){
-      if(localStorage.getItem('langID')){
-        this.languageId = localStorage.getItem('langID');
-      }else{
-        this.languageId = 1;
-      }
+      this.languageId = localStorage.getItem('langID'); // by N 04062018
+      // if(localStorage.getItem('langID')){
+      //   this.languageId = localStorage.getItem('langID');
+      // }else{
+      //   this.languageId = 1;
+      // }
       
     }
 
@@ -106,7 +107,7 @@ export class SharedService {
    // NEW
   
    readPortal(moduleName, page?, size?, keyword?): Observable<any[]> {
-    this.languageId = localStorage.getItem('langID');
+    //this.languageId = localStorage.getItem('langID');
     let readUrl;
     if(!keyword && page) {
      
@@ -118,6 +119,10 @@ export class SharedService {
       
       readUrl = this.config.urlPortal + moduleName + '?language='+this.languageId;
     }
+
+    console.log("API: ");
+    console.log(readUrl);
+    console.log("LAng : "+this.languageId);
     
     return this.http.get(readUrl)
       .map((response: Response) => response.json())

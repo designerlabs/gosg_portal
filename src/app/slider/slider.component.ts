@@ -61,10 +61,10 @@ export class SliderComponent implements OnInit {
         }
 
         console.log("tested: "+ this.topnavservice.flagLang);
-        //if(this.topnavservice.flagLang != undefined){
+        if(this.topnavservice.flagLang != undefined){
           console.log(this.languageId);
           this.getSlide(this.lang);
-        //}
+        }
       // }).bind(this));
     });
     console.log('slider.comp.ts');
