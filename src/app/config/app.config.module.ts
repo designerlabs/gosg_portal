@@ -6,6 +6,7 @@ export let APP_CONFIG = new InjectionToken<AppConfig>('app.config');
 let baseURL =  environment.mockApiURL;
 let uapURL = environment.uapURL;
 let mediaURL = environment.mediaURL;
+let searchURL = environment.miaugeoURL;
 let registrationUrl = uapURL+'registration/';
 
 
@@ -16,7 +17,7 @@ let commonURL = uapURL+'service/';
 
 // backend service
 let baseLocalURL = './app/apidata/';
-let searchServiceURL = 'http://10.1.70.219:9200/gosg/';
+let searchServiceURL = searchURL;
 let searchServicePublicURL = 'https://www.malaysia.gov.my/public/';
 let pollUrl = commonURL + "polls";
 
@@ -41,7 +42,7 @@ export class AppConfig {
     urlHighlights: string;
     urlGender: string;
     urlPoll: string;
-    urlAnnouncement: string;       
+    urlAnnouncement: string;
     urlAnnouncementSub: string;
     urlCalendar: string;
     urlEvent: string;
@@ -118,12 +119,12 @@ export const APP_DI_CONFIG: AppConfig = {
     urlTopics: './app/apidata/articlemenu',
     urlHighlights: './app/apidata/highlightbox',
     urlGender: commonURL+'gender/lang/',
-    urlAnnouncement : commonURL + 'highlight/tender',    
-    // urlAnnouncement : commonURL + 'announcement/date/publish',    
+    urlAnnouncement : commonURL + 'highlight/tender',
+    // urlAnnouncement : commonURL + 'announcement/date/publish',
     urlAnnouncementSub: commonURL + 'announcement/category',
     urlCalendar: './app/apidata/calendar',
     urlEvent: './app/apidata/event',
-    urlRegister: registrationUrl+'register',    
+    urlRegister: registrationUrl+'register',
     urlFeedbackType: commonURL+'feedback/type/lang/',
     urlFeedbackSubject: commonURL+'feedback/subject/lang/',
     urlFeedback: commonURL+'feedback',
