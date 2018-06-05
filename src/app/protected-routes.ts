@@ -46,7 +46,7 @@ import { SitemapComponent } from './sitemap/sitemap.component';
 import { ArchivecategoryComponent } from './archive/archivecategory/archivecategory.component';
 import { ArchivesubcategoryComponent } from './archive/archivesubcategory/archivesubcategory.component';
 import { ArchivecontentComponent } from './archive/archivecontent/archivecontent.component';
-import { GalleryComponent } from './gallery/gallery.component';
+//import { GalleryComponent } from './gallery/gallery.component';
 // import { NavRouterActivator } from './header/nav/nav-router-activator.service'
 
 // import { appRoutes } from './routes';
@@ -78,9 +78,9 @@ export const protectedRoutes: Routes = [
     {path: 'announcement/:id/:id', component: AnnouncementdetailsComponent},
     {path: 'statistic', component: StatisticComponent},
     {path: 'sitemap', component: SitemapComponent},
-    {path: 'gallery/category/:id', component:GalleryComponent},
-    {path: 'gallery', component:GalleryComponent},
-    {path: 'gallery/content/:id', component:GalleryComponent},
+    // {path: 'gallery/category/:id', component:GalleryComponent},
+    // {path: 'gallery', component:GalleryComponent},
+    // {path: 'gallery/content/:id', component:GalleryComponent},
 
     {path: 'faq', component: FaqComponent},
     {path: 'aboutus', component: AboutusComponent},
