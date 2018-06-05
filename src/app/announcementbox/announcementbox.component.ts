@@ -31,9 +31,11 @@ export class AnnouncementboxComponent implements OnInit {
             const myLang = translate.currentLang;
             if (myLang === 'en') {
                this.lang = 'en';
+               this.languageId = 1; 
             }
             if (myLang === 'ms') {
               this.lang = 'ms';
+              this.languageId = 2;          
             }
             this.getCalendarData(this.lang);
             this.getData(this.languageId);

@@ -27,6 +27,7 @@ export class AppConfig {
     urlSlider: string;
     urlFooter: string;
     urlArticle: string;
+    urlGallery: string;
     urlCountry: string;
     urlState:string;
     urlPostcode:string;
@@ -103,6 +104,7 @@ export const APP_DI_CONFIG: AppConfig = {
     // urlFooter: './app/apidata/footer',
     urlFooter: commonURL + 'footer',
     urlArticle: commonURL+'article',
+    urlGallery: commonURL+'gallerydetails',
     urlCountry: commonURL+'country/all',
     urlState: commonURL+'state/all',
     urlColor: commonURL+ 'color/active',

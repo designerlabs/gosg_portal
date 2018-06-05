@@ -32,11 +32,6 @@ export class NavComponent implements OnInit, AfterViewInit {
     menuId: number;
     popData: any;
     ser_word = "";
-    env:any;
-    // envPathName = window.location.pathname;
-    // envOrigin = window.location.origin;
-
-    // hName = window.location.hostname;
 
     private articleUrl: string = this.config.urlArticle;
     private menuUrl: string = this.config.urlMenu;
@@ -59,6 +54,7 @@ export class NavComponent implements OnInit, AfterViewInit {
                 translate.get('HOME').subscribe((res: any) => {
                     this.lang = 'en';
                     this.langId = 1;
+                    this.languageId = 1;
                     this.imgSrc = 'logo_en';
                     this.getMenu();
                 });
@@ -69,6 +65,7 @@ export class NavComponent implements OnInit, AfterViewInit {
                 translate.get('HOME').subscribe((res: any) => {
                     this.lang = 'ms';
                     this.langId = 2;
+                    this.languageId = 2;
                     this.imgSrc = 'logo_ms';
                     this.getMenu();
                 });
@@ -83,10 +80,6 @@ export class NavComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit() {
-
-        this.env = this.router.url.split('/')[1];
-        console.log(this.env)
-        // this.env = this.envPathName.split('/')[1];
 
         this.imgSrc = 'logo_ms';
         this.navService.getMenuData(this.langId).subscribe(resMenuData => this.menus = resMenuData);
@@ -150,23 +143,13 @@ export class NavComponent implements OnInit, AfterViewInit {
     }
 
     mainSearch(key) {
-        // let loc = window.location.hostname;
-        this.env = this.router.url.split('/')[1];
-        console.log(this.env)
-        // this.env = this.envPathName.split('/')[1];
-
-        if(this.env == 'search') {
-            this.ser_word = key;
+        if(key) {
+            $('#searchDDown').css({ 'display': 'none' });
+            localStorage.setItem('ser_word', key);
+            this.router.navigate(['search/searchResult', key]);
             this.internal(key);
         } else {
-            if(key) {
-                $('#searchDDown').css({ 'display': 'none' });
-                localStorage.setItem('ser_word', key);
-                this.router.navigate(['search/searchResult']);
-                this.internal(key);
-            } else {
-                this.toastr.error(this.translate.instant('common.msg.searchKeyword'), '');
-            }
+            this.toastr.error(this.translate.instant('common.msg.searchKeyword'), '');
         }
     }
 
@@ -186,11 +169,53 @@ export class NavComponent implements OnInit, AfterViewInit {
                             }
                         ]
                     },
-                "ref_language_id": this.languageId
-            }
+                "ref_language_id": this.languageId.toString()
+            },
+            "aggregations": [
+              {
+                "name": "histogram",
+                "type": "dateHistogram",
+                "field": "publish_date",
+                "interval": "month",
+                "time_zone": "+08:00",
+                "minDocCount": 1,
+                "size": 10
+              },
+              {
+                "name": "filter_topic.category",
+                "type": "filter",
+                "field": "category.is_active",
+                "filter": {
+                  "category.is_active": true
+                },
+                "subAggregation": {
+                  "name": "active_cat",
+                  "type": "terms",
+                  "field": "category.topic.raw",
+                  "size": "10"
+                }
+              },
+              {
+                "name": "filter_sub_topic.category",
+                "type": "filter",
+                "field": "category.is_active",
+                "filter": {
+                  "category.is_active": true
+                },
+                "subAggregation": {
+                  "name": "active_cat",
+                  "type": "terms",
+                  "field": "category.sub_topic.raw",
+                  "size": "10"
+                }
+              }
+            ]
         }
 
-        this.searchService.getInternal(JSON.stringify(body)).subscribe(
+        console.log(body)
+        // console.log(JSON.stringify(body))
+
+        this.searchService.getInternal(body).subscribe(
             data => {
                 this.searchService.setIntData(data);
             });

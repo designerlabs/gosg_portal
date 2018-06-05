@@ -139,6 +139,9 @@ import { SitemapComponent } from '../sitemap/sitemap.component';
 import { ArchivecategoryComponent } from '../archive/archivecategory/archivecategory.component';
 import { ArchivesubcategoryComponent } from '../archive/archivesubcategory/archivesubcategory.component';
 import { ArchivecontentComponent } from '../archive/archivecontent/archivecontent.component';
+import { GalleryService } from '../gallery/gallery.service';
+//import { GalleryComponent } from '../gallery/gallery.component';
+//import { GalleryService } from '../gallery/gallery.service';
 // import { SearchResultComponent } from '../search/search-result/search-result.component';
 export function HttpLoaderFactory(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -226,7 +229,8 @@ export function HttpLoaderFactory(http: Http) {
     SitemapComponent,
     ArchivecategoryComponent,
     ArchivesubcategoryComponent,
-    ArchivecontentComponent
+    ArchivecontentComponent,
+    //GalleryComponent
     // SearchResultComponent
   ],
 
@@ -326,6 +330,6 @@ export function HttpLoaderFactory(http: Http) {
 
   ],
 
-  providers: [SliderService, BsModalService, TopnavService, SharedService, DatePipe, ValidateService, BreadcrumbService, PortalService, AuthService, ArticleService, NavRouterActivator, NavService, AnnouncementlistService, TransService, DialogsService, SearchService, NavRouterGuardService]
+  providers: [SliderService, BsModalService, TopnavService, SharedService, DatePipe, ValidateService, BreadcrumbService, PortalService, AuthService, ArticleService, NavRouterActivator, NavService, AnnouncementlistService, TransService, DialogsService, SearchService, NavRouterGuardService, GalleryService]
 })
 export class SharedModule { }

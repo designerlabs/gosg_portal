@@ -34,6 +34,7 @@ export class NavService {
 
   private menuUrl: string = this.config.urlMenu;
   private articleUrl: string = this.config.urlArticle;
+  private galleryUrl: string = this.config.urlGallery;
   private urlAnnouncement: string = this.config.urlAnnouncementSub;
   private subUrl: string = this.config.urlSubtopic;
   private popularUrl: string = this.config.urlPopularSearch;
@@ -77,6 +78,30 @@ export class NavService {
       .map((response: Response) => response.json().data[0].term)
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
 
+  }
+
+
+  getGalleryData(moduleName, lang: string, ID: number): Observable<boolean[]> {
+
+    if (!isNaN(ID)) {
+
+      return this.http.get(this.config.urlPortal + this.galleryUrl + '?id=' +ID + '&language=' + lang)
+        .take(1)
+        .map((response: Response) => response.json().contentCategoryResource.results)
+
+        // .catch((error:any) =>
+        // Observable.throw(error.json().error || 'Server error')
+        // );
+        .catch(
+        (err: Response, caught: Observable<any[]>) => {
+          if (err !== undefined) {
+            this.router.navigate(['/404']);
+            return Observable.throw('The Web server (running the Web site) is currently unable to handle the HTTP request due to a temporary overloading or maintenance of the server.');
+          }
+          return Observable.throw(caught); // <-----
+        }
+        );
+    }
   }
 
 
