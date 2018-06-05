@@ -51,7 +51,7 @@ export class PollProtectedComponent implements OnInit, OnDestroy {
     private topnavservice: TopnavService,) {
       this.lang = translate.currentLang;
       this.languageId = 2;
-      translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
         // this.sharedService.errorHandling(event, (function(){
         const myLang = translate.currentLang;
           if (myLang === 'en') {
