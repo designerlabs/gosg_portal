@@ -667,12 +667,10 @@ export class SearchResultComponent implements OnInit, OnDestroy {
         this.mainObj.aggregations = this.locAggregations;
         // console.log(this.mainObj)
 
-        // if(env == 'localhost')
+        if(env == 'localhost')
           dataUrl = this.internalUrl;
-        // else
-        //   dataUrl = localURL+'content';
-
-        console.log(dataUrl)
+        else
+          dataUrl = localURL+'content';
 
         // Search Specification
         if (this.valTopic && this.category_topic) {
@@ -721,12 +719,10 @@ export class SearchResultComponent implements OnInit, OnDestroy {
         delete this.mainObj.aggregations;
         this.mainObj.aggregations = this.osAggregations;
         
-        // if(env == 'localhost')
+        if(env == 'localhost')
           dataUrl = this.osUrl;
-        // else
-        //   dataUrl = localURL+'agency';
-
-        console.log(dataUrl)
+        else
+          dataUrl = localURL+'agency';
 
         // Ministry Filter
         if (this.valMinistry) {
