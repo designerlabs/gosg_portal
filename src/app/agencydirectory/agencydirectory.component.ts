@@ -107,7 +107,7 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
       this.loadAlpha(filter);
     }
     console.log(filter);
-   
+
     if(filter != 0){
       if (type == 'ministry') {
         if (filter) {
@@ -122,7 +122,7 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
         }
       } else if (type == 'letter') {
 
-        
+
 
         if (filter) {
           this.letter = filter;
@@ -150,7 +150,7 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
         this.popup.remove();
         this.getAgencyData(this.pageCount, this.pageSize);
       }
-      
+
     }
 
   }
@@ -217,7 +217,7 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
     }else{
       this.languageId = 1;
     }
-    
+
     this.getDefaultMap();
     this.loadAlpha();
     // this.getMinistry();
@@ -228,7 +228,7 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
     this.subscriptionLang.unsubscribe();
   }
 
-  
+
   loadAlpha(ministryCode?, keyword?){
     let dataUrl;
     if(keyword && (typeof ministryCode !== 'undefined')){
@@ -239,7 +239,7 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
       }else{
         dataUrl = 'agency/search/alpha?language='+this.languageId;
       }
-      
+
     }else  if(keyword){
       dataUrl = 'agency/search/alpha?keyword='+keyword+'&language='+this.languageId;
     }else{
@@ -251,7 +251,7 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
       this.dataAlpha = rData.letters;
     })
   }
-  
+
   getDefaultMap(){
     this.mymap = L.map('dirmap').setView([5.8142568, 108.5806004], 5.2);
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
@@ -312,7 +312,7 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
       +"</div>")
       .openOn(this.mymap);
 
-    } else 
+    } else
       console.log('latlong are NULL')
   }
 
@@ -322,51 +322,71 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
     // .openOn(this.mymap);
     // this.mymap.setView([agcLat, agcLong], 15);
     console.log(e);
-    
+
   }
 
   addMarker(agcLat, agcLong, mName, mAddress, mEmail, mFax, mPhone) {
-    
-    this.marker = L.marker([agcLat, agcLong], {icon:this.defaultIcon})
-    .bindPopup("<div class='row'>"
-    +"<div class='col-md-12'>"
-    +"<h4>"+mName+"<h4>"
-    +"</div>"
-    +"<div class='col-md-2'>"
-    +"<i class='fa fa-home' style='font-size: 1.2em; margin-top: 90%'></i>"
-    +"</div>"
-    +"<div class='col-md-10'>"
-    +"<p style='font-size: 1em'>"+mAddress+"</p>"
-    +"</div>"
-    +"<div class='col-md-2'>"
-    +"<i class='fa fa-map-marker' style='font-size: 1.2em; margin-top: 85%'></i>"
-    +"</div>"
-    +"<div class='col-md-10'>"
-    +"<p>"+agcLat+","+agcLong+"</p>"
-    +"</div>"
-    +"<div class='col-md-2'>"
-    +"<i class='fa fa-phone' style='font-size: 1.2em; margin-top: 90%'></i>"
-    +"</div>"
-    +"<div class='col-md-10'>"
-    +"<p style='font-size: 1em'>"+mPhone+"</p>"
-    +"</div>"
-    +"<div class='col-md-2'>"
-    +"<i class='fa fa-fax' style='font-size: 1.2em; margin-top: 90%'></i>"
-    +"</div>"
-    +"<div class='col-md-10'>"
-    +"<p style='font-size: 1em'>"+mFax+"</p>"
-    +"</div>"
-    +"<div class='col-md-2'>"
-    +"<i class='fa fa-envelope' style='font-size: 1.2em; margin-top: 90%'></i>"
-    +"</div>"
-    +"<div class='col-md-10'>"
-    +"<p style='font-size: 1em'>"+mEmail+"</p>"
-    +"</div>"
-    +"</div>")
-    // .setLatLng([agcLat,agcLong])
-    .addTo(this.mymap);
 
-    this.marker.on('click',this.onMapClick)
+    if(!isNaN(agcLat)){
+      if(agcLat !== "NaN"){
+      console.log(typeof(agcLat), 'in');
+      this.marker = L.marker([agcLat, agcLong], {icon:this.defaultIcon})
+      .bindPopup(`
+      <div class='row'>
+          <div class='col-md-12'><h4>${mName}<h4>
+          </div>
+      <div class='col-md-2'>
+        <i class='fa fa-home' style='font-size: 1.2em; margin-top: 90%'></i>
+      </div>
+
+      `)
+      // .setLatLng([agcLat,agcLong])
+      .addTo(this.mymap);
+
+      this.marker.on('click',this.onMapClick)
+    }
+    }
+
+    /*
+    "<div class='row'>"
+      +"<div class='col-md-12'>"
+      +"<h4>"+mName+"<h4>"
+      +"</div>"
+      +"<div class='col-md-2'>"
+      +"<i class='fa fa-home' style='font-size: 1.2em; margin-top: 90%'></i>"
+      +"</div>"
+      +"<div class='col-md-10'>"
+      +"<p style='font-size: 1em'>"+mAddress+"</p>"
+      +"</div>"
+      +"<div class='col-md-2'>"
+      +"<i class='fa fa-map-marker' style='font-size: 1.2em; margin-top: 85%'></i>"
+      +"</div>"
+      +"<div class='col-md-10'>"
+      +"<p>"+agcLat+","+agcLong+"</p>"
+      +"</div>"
+      +"<div class='col-md-2'>"
+      +"<i class='fa fa-phone' style='font-size: 1.2em; margin-top: 90%'></i>"
+      +"</div>"
+      +"<div class='col-md-10'>"
+      +"<p style='font-size: 1em'>"+mPhone+"</p>"
+      +"</div>"
+      +"<div class='col-md-2'>"
+      +"<i class='fa fa-fax' style='font-size: 1.2em; margin-top: 90%'></i>"
+      +"</div>"
+      +"<div class='col-md-10'>"
+      +"<p style='font-size: 1em'>"+mFax+"</p>"
+      +"</div>"
+      +"<div class='col-md-2'>"
+      +"<i class='fa fa-envelope' style='font-size: 1.2em; margin-top: 90%'></i>"
+      +"</div>"
+      +"<div class='col-md-10'>"
+      +"<p style='font-size: 1em'>"+mEmail+"</p>"
+      +"</div>"
+      +"</div>"*/
+
+
+
+
   }
 
   getAllAgenciesMarkers() {
@@ -405,7 +425,7 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
       });
   }
 
-  // get agencyType Data 
+  // get agencyType Data
   getAgencyData(count, size) {
 
     // console.log('get')
@@ -431,7 +451,7 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
 
             this.showNoData = false;
           } else {
-            this.recordTable = []; 
+            this.recordTable = [];
             this.showNoData = true;
           }
         }).bind(this));
@@ -448,7 +468,7 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
     }else{
       this.getAgencyData(this.pageCount, 10);
     }
-    
+
     this.pageSize = 10;
     this.noPrevData = true;
   }
@@ -459,7 +479,7 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
     console.log('search')
 
     if (keyword != "" && keyword != null && keyword.length != null && keyword.length >= 3) {
-      
+
       this.portalservice.readPortal('agency/language/' + this.languageId, count, size, keyword).subscribe(
         data => {
           this.portalservice.errorHandling(data, (function () {
@@ -480,7 +500,7 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
 
               this.showNoData = false;
             } else {
-              this.recordTable = []; 
+              this.recordTable = [];
               this.showNoData = true;
             }
           }).bind(this));
@@ -498,16 +518,16 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
         }else{
           this.custom = 'letter=' + this.letter + '&page=' + count + '&size=' + size;
         }
-        
+
       }else{
         if(this.ministry){
           this.custom = 'ministryRefCode=' + this.ministry + '&page=' + count + '&size=' + size;
         }else{
           this.custom = 'page=' + count + '&size=' + size;
         }
-        
+
       }
-      
+
 
       searchUrl = 'agency/search';
 
@@ -533,7 +553,7 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
 
               this.showNoData = false;
             } else {
-              // this.dataSource.data = []; 
+              // this.dataSource.data = [];
               this.showNoData = true;
             }
           }).bind(this));
