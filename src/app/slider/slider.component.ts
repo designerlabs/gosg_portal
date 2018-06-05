@@ -60,23 +60,33 @@ export class SliderComponent implements OnInit {
           console.log('Translate MALAY');
         }
 
-        console.log("tested: "+ this.topnavservice.flagLang);
-        if(this.topnavservice.flagLang != undefined){
-          console.log(this.languageId);
-          this.getSlide(this.lang);
+        if(this.topnavservice.flagLang){
+          this.getSlide(this.languageId);
+          console.log("Top Nav True");
         }
+        
       // }).bind(this));
     });
+
+    if(!this.languageId){
+      this.languageId = localStorage.getItem('langID');
+      //this.getData();
+    }else{
+      this.languageId = 1;
+    }
+
     console.log('slider.comp.ts');
-    this.getSlide(this.lang);
+    console.log("OUtside Translate: "+this.languageId);
+    this.getSlide(this.languageId);
     this.breadcrumb = this.breadcrumbService.getBreadcrumb();
     this.breadcrumb = this.breadcrumb.name = '';
     this.isValid = this.breadcrumbService.isValid = false;
   }
 
     private sliderUrl: string = this.config.urlSlider;
-    getSlide(lang: string) {
-      this.sharedservice.readPortal('slider')
+    getSlide(language) {
+
+      this.sharedservice.readPortal('slider','','','',language)
           .subscribe(resSliderData => {
                 this.slides = resSliderData['sliderList'];
                 console.log(this.slides);

@@ -140,7 +140,7 @@ import { ArchivecategoryComponent } from '../archive/archivecategory/archivecate
 import { ArchivesubcategoryComponent } from '../archive/archivesubcategory/archivesubcategory.component';
 import { ArchivecontentComponent } from '../archive/archivecontent/archivecontent.component';
 import { GalleryService } from '../gallery/gallery.service';
-//import { GalleryComponent } from '../gallery/gallery.component';
+import { GalleryComponent } from '../gallery/gallery.component';
 //import { GalleryService } from '../gallery/gallery.service';
 // import { SearchResultComponent } from '../search/search-result/search-result.component';
 export function HttpLoaderFactory(http: Http) {
@@ -230,7 +230,7 @@ export function HttpLoaderFactory(http: Http) {
     ArchivecategoryComponent,
     ArchivesubcategoryComponent,
     ArchivecontentComponent,
-    //GalleryComponent
+    GalleryComponent
     // SearchResultComponent
   ],
 
@@ -343,7 +343,7 @@ export function HttpLoaderFactory(http: Http) {
     TransService, DialogsService, 
     SearchService, 
     NavRouterGuardService, 
-    //GalleryService
+    GalleryService
   ]
 })
 export class SharedModule { }
