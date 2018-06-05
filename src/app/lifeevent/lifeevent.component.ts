@@ -38,7 +38,7 @@ export class LifeeventComponent implements OnInit, OnDestroy {
         if(this.topnavservice.flagLang){
           this.subscription = this.getData(this.languageId);
         }
-        
+
       // }).bind(this));
 
     });
@@ -46,6 +46,7 @@ export class LifeeventComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscriptionLang.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
   ngOnInit() {
