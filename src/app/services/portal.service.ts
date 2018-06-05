@@ -156,18 +156,18 @@ export class PortalService {
   }
 
   // DIGITAL SERVICES
-  getDigitalServices() {
+  getDigitalServices(lang) {
     // console.log(this.calendarUrl+ '?language='+localStorage.getItem('langID'))
-    return this.http.get(this.digitalServicesUrl + '?language='+this.langId)
+    return this.http.get(this.digitalServicesUrl + '?language='+lang)
     .map((response: Response) => response.json())
     .retry(5)
     .catch(this.handleError);
   }
 
   // SITE MAP
-  getSitemapData() {
+  getSitemapData(lang) {
     // console.log(this.calendarUrl+ '?language='+localStorage.getItem('langID'))
-    return this.http.get(this.siteMapUrl + '?language='+this.langId)
+    return this.http.get(this.siteMapUrl + '?language='+lang)
     .map((response: Response) => response.json())
     .retry(5)
     .catch(this.handleError);
