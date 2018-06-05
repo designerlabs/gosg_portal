@@ -1,10 +1,11 @@
-import { Component, Output, EventEmitter, OnInit, ViewChild, Inject } from '@angular/core';
-
+import { Component, Output, EventEmitter, OnInit, ViewChild, Inject, OnDestroy } from '@angular/core';
+import { ISubscription } from "rxjs/Subscription";
 import { ISlider, IResult } from './slider.model';
 import { Http, Response} from '@angular/http';
 import { Router } from '@angular/router';
 
 import * as $ from 'jquery';
+
 
 import {OwlCarousel} from 'ng2-owl-carousel';
 import {SharedService } from '../common/shared.service'
@@ -19,16 +20,17 @@ import { TopnavService } from '../header/topnav/topnav.service';
   templateUrl: './slider.component.html',
   styleUrls: ['./slider.component.css']
 })
-export class SliderComponent implements OnInit {
+export class SliderComponent implements OnInit, OnDestroy {
   breadcrumb: any;
   isValid: any;
-  @Output() langChange = new EventEmitter();
-
-
-  @ViewChild('owlElement') owlElement: OwlCarousel;
-
   slides: any[];
   languageId: any;
+
+  private subscription: ISubscription;
+  private subscriptionLang: ISubscription;
+
+  @Output() langChange = new EventEmitter();
+  @ViewChild('owlElement') owlElement: OwlCarousel; 
 
   constructor(
     private translate: TranslateService,
@@ -40,58 +42,60 @@ export class SliderComponent implements OnInit {
     private sharedservice:SharedService
   ) {
 
-  }
-
-  lang = this.lang;
-  ngOnInit() {
-    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+    this.subscriptionLang = this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       // this.sharedService.errorHandling(event, (function(){
-
         const myLang = this.translate.currentLang;
-
         if (myLang === 'en') {
-          this.lang = 'en';
-          this.languageId = 1;
-          console.log('Translate ENGLISH');
+           this.lang = 'en';
+           this.languageId = 1;
         }
         if (myLang === 'ms') {
           this.lang = 'ms';
           this.languageId = 2;
-          console.log('Translate MALAY');
         }
 
         if(this.topnavservice.flagLang){
           this.getSlide(this.languageId);
-          console.log("Top Nav True");
+          //this.subscription = this.getSlide(this.languageId);
         }
         
       // }).bind(this));
+
     });
+
+  }
+
+  lang = this.lang;
+
+  ngOnDestroy() {
+    this.subscriptionLang.unsubscribe();
+    //this.subscription.unsubscribe();
+  }
+
+  ngOnInit() {
+    
 
     if(!this.languageId){
       this.languageId = localStorage.getItem('langID');
-      //this.getData();
     }else{
       this.languageId = 1;
     }
 
-    console.log('slider.comp.ts');
-    console.log("OUtside Translate: "+this.languageId);
+    //this.subscription = this.getSlide(this.languageId);
     this.getSlide(this.languageId);
     this.breadcrumb = this.breadcrumbService.getBreadcrumb();
     this.breadcrumb = this.breadcrumb.name = '';
     this.isValid = this.breadcrumbService.isValid = false;
   }
 
-    private sliderUrl: string = this.config.urlSlider;
-    getSlide(language) {
+  getSlide(lang:any) {
 
-      this.sharedservice.readPortal('slider','','','',language)
-          .subscribe(resSliderData => {
-                this.slides = resSliderData['sliderList'];
-                console.log(this.slides);
-            });
-    }
+    this.sharedservice.readPortal('slider','','','',lang)
+        .subscribe(resSliderData => {
+              this.slides = resSliderData['sliderList'];
+              console.log(this.slides);
+          });
+  }
 
   next() {
     this.owlElement.next();
