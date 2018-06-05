@@ -1,4 +1,4 @@
-import { Component, Output, Input, EventEmitter, OnInit, AfterViewChecked, AfterViewInit,  ViewChild, ElementRef, Inject, AfterContentInit } from '@angular/core';
+import { Component, Output, Input, EventEmitter, OnInit, AfterViewChecked, AfterViewInit,  ViewChild, ElementRef, Inject, AfterContentInit, OnDestroy } from '@angular/core';
 import { ArticleService } from '../../article/article.service';
 import { NavService } from '../../header/nav/nav.service';
 import { APP_CONFIG, AppConfig } from '../../config/app.config.module';
@@ -7,15 +7,23 @@ import {TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { BreadcrumbService } from '../../header/breadcrumb/breadcrumb.service';
 
 import 'rxjs/add/operator/switchMap';
+import { ISubscription } from 'rxjs/Subscription';
+import { TopnavService } from '../../header/topnav/topnav.service';
 @Component({
   selector: 'gosg-archivecategory',
   templateUrl: './archivecategory.component.html',
   styleUrls: ['./archivecategory.component.css']
 })
-export class ArchivecategoryComponent implements OnInit {statusID: any;
+export class ArchivecategoryComponent implements OnInit, OnDestroy {
+
+  lang = this.lang;
+  langId = this.langId;
+  statusID: any;
   langIdVal: string;
   subID: number;
   moduleName: string;
+  private subscription: ISubscription;
+  private subscriptionLang: ISubscription;
 
   @ViewChild('textarea') textarea: ElementRef;
   @Output() menuClick = new EventEmitter();
@@ -27,49 +35,48 @@ export class ArchivecategoryComponent implements OnInit {statusID: any;
 
   articleData: any;
   @Output() langChange = new EventEmitter();
-  constructor(public articleService: ArticleService,  private route: ActivatedRoute, private navService: NavService, private translate: TranslateService, private router: Router, private breadcrumbService: BreadcrumbService, @Inject(APP_CONFIG) private config: AppConfig) {
+  constructor(public articleService: ArticleService, private topnavservice: TopnavService, private route: ActivatedRoute, private navService: NavService, private translate: TranslateService, private router: Router, private breadcrumbService: BreadcrumbService, @Inject(APP_CONFIG) private config: AppConfig) {
     this.lang = translate.currentLang;
     this.langId = 1;
-
-        translate.onLangChange.subscribe((event: LangChangeEvent) => {
-
-        const myLang = translate.currentLang;
-
-        if (myLang == 'en') {
-
-            translate.get('HOME').subscribe((res: any) => {
-                this.lang = 'en';
-                this.langId = 1;
-                this.moduleName = this.router.url.split('/')[2];
-                this.topicID = parseInt(this.router.url.split('/')[3]);
-                // this.navService.triggerArticle(this.moduleName, this.langId, this.topicID);
-            });
-
+    
+    this.subscriptionLang = this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      // this.sharedService.errorHandling(event, (function(){
+        const myLang = this.translate.currentLang;
+        if (myLang === 'en') {
+           this.lang = 'en';
+           this.langId = 1;
+           this.moduleName = this.router.url.split('/')[2];
+           this.topicID = parseInt(this.router.url.split('/')[3]);
         }
-        if (myLang == 'ms') {
-
-            translate.get('HOME').subscribe((res: any) => {
-                this.lang = 'ms';
-                this.langId = 2;
-                this.moduleName = this.router.url.split('/')[2];
-                this.topicID = parseInt(this.router.url.split('/')[3]);
-                this.subID = parseInt(this.router.url.split('/')[4]);
-                // this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID);
-            });
+        if (myLang === 'ms') {
+          this.lang = 'ms';
+          this.langId = 2;
+          this.moduleName = this.router.url.split('/')[2];
+          this.topicID = parseInt(this.router.url.split('/')[3]);
+          this.subID = parseInt(this.router.url.split('/')[4]);
         }
 
+        if(this.topnavservice.flagLang){
 
-        if(this.moduleName == 'subcategory'){
-          this.navService.triggerSubArticle(this.subID, this.langId);
-        }else if(this.moduleName == 'content'){
-          this.navService.triggerContent(this.subID, this.langId);
-        }else{
-          this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID);
+          if(this.moduleName == 'subcategory'){
+            this.navService.triggerSubArticle(this.subID, this.langId);
+          }else if(this.moduleName == 'content'){
+            this.navService.triggerContent(this.subID, this.langId);
+          }else{
+            this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID);
+          }
         }
-
-
 
     });
+
+  }
+
+
+  ngOnDestroy() {
+    this.subscriptionLang.unsubscribe();
+  }
+
+  ngOnInit() {
 
     if(localStorage.getItem('langID')){
       this.langIdVal = localStorage.getItem('langID');
@@ -77,15 +84,6 @@ export class ArchivecategoryComponent implements OnInit {statusID: any;
       this.langIdVal = this.langId;
     }
 
-  }
-
-
-  lang = this.lang;
-  langId = this.langId;
-
-
-
-  ngOnInit() {
         this.articleData = this.articleService.getArticle();
         this.moduleName = this.router.url.split('/')[2];
         this.topicID = parseInt(this.router.url.split('/')[3]);
