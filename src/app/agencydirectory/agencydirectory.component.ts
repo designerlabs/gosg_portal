@@ -24,7 +24,7 @@ import { TopnavService } from '../header/topnav/topnav.service';
 })
 export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  dataAlpha= [];
+  dataAlpha = [];
   keyword: string;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -45,7 +45,7 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
   letters = this.genCharArray('a', 'z');
   ministry: any = '';
   letter: any = '';
-  custom:any;
+  custom: any;
   // allMarkers: any = [];
   markers: Layer[] = [];
 
@@ -55,15 +55,15 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
 
   mymap;
   marker;
-  popup= L.popup();
+  popup = L.popup();
   defaultIcon = L.icon({
-      iconUrl: 'assets/marker-icon.png',
-      shadowUrl: 'assets/marker-shadow.png',
-      iconSize:     [25, 41], // size of the icon
-      shadowSize:   [40, 41], // size of the shadow
-      iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
-      shadowAnchor: [0, 0],  // the same for the shadow
-      popupAnchor:  [12, 0] // point from which the popup should open relative to the iconAnchor
+    iconUrl: 'assets/marker-icon.png',
+    shadowUrl: 'assets/marker-shadow.png',
+    iconSize: [25, 41], // size of the icon
+    shadowSize: [40, 41], // size of the shadow
+    iconAnchor: [0, 0], // point of the icon which will correspond to marker's location
+    shadowAnchor: [0, 0],  // the same for the shadow
+    popupAnchor: [12, 0] // point from which the popup should open relative to the iconAnchor
   });
   private subscription: ISubscription;
   private subscriptionLang: ISubscription;
@@ -103,12 +103,12 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
   }
 
   applyFilter(type, filter?) {
-    if(type != 'letter'){
+    if (type != 'letter') {
       this.loadAlpha(filter);
     }
     console.log(filter);
 
-    if(filter != 0){
+    if (filter != 0) {
       if (type == 'ministry') {
         if (filter) {
           this.ministry = filter;
@@ -134,16 +134,16 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
         }
       }
 
-      if(this.keyword && filter){
+      if (this.keyword && filter) {
         this.getSearchData(this.pageCount, this.pageSize, this.keyword, filter);
-      }else{
+      } else {
         this.getSearchData(this.pageCount, this.pageSize, null, filter != 0 ? filter : '');
       }
-    }else{
-      if(this.ministry){
+    } else {
+      if (this.ministry) {
         this.keyword = '';
         this.getSearchData(this.pageCount, this.pageSize);
-      }else{
+      } else {
         this.letter = '';
         this.keyword = '';
         this.mymap.setView([5.8142568, 108.5806004], 5.2);
@@ -172,49 +172,49 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
     private portalservice: PortalService,
     private dialogsService: DialogsService,
     private translate: TranslateService,
-    private topnavservice:TopnavService,
+    private topnavservice: TopnavService,
     private router: Router,
     private toastr: ToastrService,
     @Inject(APP_CONFIG) private config: AppConfig) {
 
     this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
       // this.sharedService.errorHandling(event, (function(){
-        const myLang = this.translate.currentLang;
-        if (myLang === 'en') {
-           this.lang = 'en';
-           this.languageId = 1;
-           if(this.popup.isPopupOpen)
-             this.popup.closePopup()
-        }
-        if (myLang === 'ms') {
-          this.lang = 'ms';
-          this.languageId = 2;
-          if(this.popup.isPopupOpen)
-            this.popup.closePopup()
-        }
+      const myLang = this.translate.currentLang;
+      if (myLang === 'en') {
+        this.lang = 'en';
+        this.languageId = 1;
+        if (this.popup.isPopupOpen)
+          this.popup.closePopup()
+      }
+      if (myLang === 'ms') {
+        this.lang = 'ms';
+        this.languageId = 2;
+        if (this.popup.isPopupOpen)
+          this.popup.closePopup()
+      }
 
-        if(this.topnavservice.flagLang){
-          this.getAgencyData(this.pageCount, this.pageSize);
-          this.getMinistry();
-          this.getAllAgenciesMarkers()
-        }
+      if (this.topnavservice.flagLang) {
+        this.getAgencyData(this.pageCount, this.pageSize);
+        this.getMinistry();
+        this.getAllAgenciesMarkers()
+      }
 
-        this.letter = '';
-        this.keyword = '';
-        this.ministry = '';
-        this.pageCount = 1;
-        this.mymap.setView([5.8142568, 108.5806004], 5.2);
-        this.popup.remove();
+      this.letter = '';
+      this.keyword = '';
+      this.ministry = '';
+      this.pageCount = 1;
+      this.mymap.setView([5.8142568, 108.5806004], 5.2);
+      this.popup.remove();
 
     });
   }
 
   ngOnInit() {
 
-    if(!this.languageId){
+    if (!this.languageId) {
       this.languageId = localStorage.getItem('langID');
       //this.getData();
-    }else{
+    } else {
       this.languageId = 1;
     }
 
@@ -229,88 +229,91 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
   }
 
 
-  loadAlpha(ministryCode?, keyword?){
+  loadAlpha(ministryCode?, keyword?) {
     let dataUrl;
-    if(keyword && (typeof ministryCode !== 'undefined')){
-      dataUrl = 'agency/search/alpha?keyword='+keyword+'&ministryRefCode='+ministryCode+'&language='+this.languageId;
-    }else if(typeof ministryCode !== 'undefined'){
-      if(ministryCode){
-        dataUrl = 'agency/search/alpha?ministryRefCode='+ministryCode+'&language='+this.languageId;
-      }else{
-        dataUrl = 'agency/search/alpha?language='+this.languageId;
+    if (keyword && (typeof ministryCode !== 'undefined')) {
+      dataUrl = 'agency/search/alpha?keyword=' + keyword + '&ministryRefCode=' + ministryCode + '&language=' + this.languageId;
+    } else if (typeof ministryCode !== 'undefined') {
+      if (ministryCode) {
+        dataUrl = 'agency/search/alpha?ministryRefCode=' + ministryCode + '&language=' + this.languageId;
+      } else {
+        dataUrl = 'agency/search/alpha?language=' + this.languageId;
       }
 
-    }else  if(keyword){
-      dataUrl = 'agency/search/alpha?keyword='+keyword+'&language='+this.languageId;
-    }else{
-      dataUrl = 'agency/search/alpha?language='+this.languageId;
+    } else if (keyword) {
+      dataUrl = 'agency/search/alpha?keyword=' + keyword + '&language=' + this.languageId;
+    } else {
+      dataUrl = 'agency/search/alpha?language=' + this.languageId;
     }
     return this.http.get(this.config.urlPortal + dataUrl)
-    .map(res => res.json())
-    .subscribe(rData => {
-      this.dataAlpha = rData.letters;
-    })
+      .map(res => res.json())
+      .subscribe(rData => {
+        this.dataAlpha = rData.letters;
+      })
   }
 
-  getDefaultMap(){
+  getDefaultMap() {
     this.mymap = L.map('dirmap').setView([5.8142568, 108.5806004], 5.2);
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
       attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
       maxZoom: 15,
       id: 'mapbox.streets',
       accessToken: 'pk.eyJ1IjoicmVkemEiLCJhIjoiY2pmcGZxNzRrMjYzbzMwcG83bGRxY2FtZyJ9.uMHQpYc0Pvjl4us27nHH8w'
-  }).addTo(this.mymap);
+    }).addTo(this.mymap);
   }
 
 
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     this.getAgencyData(this.pageCount, this.pageSize);
     this.getMinistry();
     this.getAllAgenciesMarkers()
   }
 
-  goToMarkerPoint(dLat, dLong, dName, dAddress, dEmail,dFax, dPhone) {
-    if(dLat && dLong) {
+  goToMarkerPoint(dLat, dLong, dName, dAddress, dEmail, dFax, dPhone) {
+    if (dLat && dLong) {
       this.mymap.setView([dLat, dLong], 13);
 
       this.popup = L.popup()
-      .setLatLng([dLat, dLong])
-      .setContent("<div class='row'>"
-      +"<div class='col-md-12'>"
-      +"<h4>"+dName+"<h4>"
-      +"</div>"
-      +"<div class='col-md-2'>"
-      +"<i class='fa fa-home' style='font-size: 1.2em; margin-top: 90%'></i>"
-      +"</div>"
-      +"<div class='col-md-10'>"
-      +"<p style='font-size: 1em'>"+dAddress+"</p>"
-      +"</div>"
-      +"<div class='col-md-2'>"
-      +"<i class='fa fa-map-marker' style='font-size: 1.2em; margin-top: 85%'></i>"
-      +"</div>"
-      +"<div class='col-md-10'>"
-      +"<p>"+dLat+","+dLong+"</p>"
-      +"</div>"
-      +"<div class='col-md-2'>"
-      +"<i class='fa fa-phone' style='font-size: 1.2em; margin-top: 90%'></i>"
-      +"</div>"
-      +"<div class='col-md-10'>"
-      +"<p style='font-size: 1em'>"+dPhone+"</p>"
-      +"</div>"
-      +"<div class='col-md-2'>"
-      +"<i class='fa fa-fax' style='font-size: 1.2em; margin-top: 90%'></i>"
-      +"</div>"
-      +"<div class='col-md-10'>"
-      +"<p style='font-size: 1em'>"+dFax+"</p>"
-      +"</div>"
-      +"<div class='col-md-2'>"
-      +"<i class='fa fa-envelope' style='font-size: 1.2em; margin-top: 90%'></i>"
-      +"</div>"
-      +"<div class='col-md-10'>"
-      +"<p style='font-size: 1em'>"+dEmail+"</p>"
-      +"</div>"
-      +"</div>")
-      .openOn(this.mymap);
+        .setLatLng([dLat, dLong])
+        .setContent(`
+        <div class='row'>
+        <div class='col-md-12'>
+          <h4>${dName}
+            <h4>
+        </div>
+        <div class='col-md-2'>
+          <i class='fa fa-home' style='font-size: 1.2em; margin-top: 90%'></i>
+        </div>
+        <div class='col-md-10'>
+          <p style='font-size: 1em'>${dAddress}</p>
+        </div>
+        <div class='col-md-2'>
+          <i class='fa fa-map-marker' style='font-size: 1.2em; margin-top: 85%'></i>
+        </div>
+        <div class='col-md-10'>
+          <p>${dLat},${dLong}</p>
+        </div>
+        <div class='col-md-2'>
+          <i class='fa fa-phone' style='font-size: 1.2em; margin-top: 90%'></i>
+        </div>
+        <div class='col-md-10'>
+          <p style='font-size: 1em'>${dPhone}</p>
+        </div>
+        <div class='col-md-2'>
+          <i class='fa fa-fax' style='font-size: 1.2em; margin-top: 90%'></i>
+        </div>
+        <div class='col-md-10'>
+          <p style='font-size: 1em'>${dFax}</p>
+        </div>
+        <div class='col-md-2'>
+          <i class='fa fa-envelope' style='font-size: 1.2em; margin-top: 90%'></i>
+        </div>
+        <div class='col-md-10'>
+          <p style='font-size: 1em'>${dEmail}</p>
+        </div>
+      </div>
+        `)
+        .openOn(this.mymap);
 
     } else
       console.log('latlong are NULL')
@@ -327,65 +330,54 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
 
   addMarker(agcLat, agcLong, mName, mAddress, mEmail, mFax, mPhone) {
 
-    if(!isNaN(agcLat)){
-      if(agcLat !== "NaN"){
-      console.log(typeof(agcLat), 'in');
-      this.marker = L.marker([agcLat, agcLong], {icon:this.defaultIcon})
-      .bindPopup(`
-      <div class='row'>
-          <div class='col-md-12'><h4>${mName}<h4>
+    if (!isNaN(agcLat)) {
+      if (agcLat !== "NaN") {
+        console.log(typeof (agcLat), 'in');
+        this.marker = L.marker([agcLat, agcLong], { icon: this.defaultIcon })
+          .bindPopup(`
+          <div class='row'>
+          <div class='col-md-12'>
+            <h4>${mName}
+              <h4>
           </div>
-      <div class='col-md-2'>
-        <i class='fa fa-home' style='font-size: 1.2em; margin-top: 90%'></i>
-      </div>
-
+          <div class='col-md-2'>
+            <i class='fa fa-home' style='font-size: 1.2em; margin-top: 90%'></i>
+          </div>
+          <div class='col-md-10'>
+            <p style='font-size: 1em'>${mAddress}</p>
+          </div>
+          <div class='col-md-2'>
+            <i class='fa fa-map-marker' style='font-size: 1.2em; margin-top: 85%'></i>
+          </div>
+          <div class='col-md-10'>
+            <p>${agcLat},${agcLong}</p>
+          </div>
+          <div class='col-md-2'>
+            <i class='fa fa-phone' style='font-size: 1.2em; margin-top: 90%'></i>
+          </div>
+          <div class='col-md-10'>
+            <p style='font-size: 1em'>${mPhone}</p>
+          </div>
+          <div class='col-md-2'>
+            <i class='fa fa-fax' style='font-size: 1.2em; margin-top: 90%'></i>
+          </div>
+          <div class='col-md-10'>
+            <p style='font-size: 1em'>${mFax}</p>
+          </div>
+          <div class='col-md-2'>
+            <i class='fa fa-envelope' style='font-size: 1.2em; margin-top: 90%'></i>
+          </div>
+          <div class='col-md-10'>
+            <p style='font-size: 1em'>${mEmail}</p>
+          </div>
+        </div>
       `)
-      // .setLatLng([agcLat,agcLong])
-      .addTo(this.mymap);
+          // .setLatLng([agcLat,agcLong])
+          .addTo(this.mymap);
 
-      this.marker.on('click',this.onMapClick)
+        this.marker.on('click', this.onMapClick)
+      }
     }
-    }
-
-    /*
-    "<div class='row'>"
-      +"<div class='col-md-12'>"
-      +"<h4>"+mName+"<h4>"
-      +"</div>"
-      +"<div class='col-md-2'>"
-      +"<i class='fa fa-home' style='font-size: 1.2em; margin-top: 90%'></i>"
-      +"</div>"
-      +"<div class='col-md-10'>"
-      +"<p style='font-size: 1em'>"+mAddress+"</p>"
-      +"</div>"
-      +"<div class='col-md-2'>"
-      +"<i class='fa fa-map-marker' style='font-size: 1.2em; margin-top: 85%'></i>"
-      +"</div>"
-      +"<div class='col-md-10'>"
-      +"<p>"+agcLat+","+agcLong+"</p>"
-      +"</div>"
-      +"<div class='col-md-2'>"
-      +"<i class='fa fa-phone' style='font-size: 1.2em; margin-top: 90%'></i>"
-      +"</div>"
-      +"<div class='col-md-10'>"
-      +"<p style='font-size: 1em'>"+mPhone+"</p>"
-      +"</div>"
-      +"<div class='col-md-2'>"
-      +"<i class='fa fa-fax' style='font-size: 1.2em; margin-top: 90%'></i>"
-      +"</div>"
-      +"<div class='col-md-10'>"
-      +"<p style='font-size: 1em'>"+mFax+"</p>"
-      +"</div>"
-      +"<div class='col-md-2'>"
-      +"<i class='fa fa-envelope' style='font-size: 1.2em; margin-top: 90%'></i>"
-      +"</div>"
-      +"<div class='col-md-10'>"
-      +"<p style='font-size: 1em'>"+mEmail+"</p>"
-      +"</div>"
-      +"</div>"*/
-
-
-
 
   }
 
@@ -398,7 +390,7 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
           // console.log(this.agencyList)
           // console.log(this.agencyList.length)
 
-          for (i = 0; i <= this.agencyList.length-1; i++) {
+          for (i = 0; i <= this.agencyList.length - 1; i++) {
             // console.log(i)
             // console.log(this.agencyList[i].ministryName)
             // console.log(mLat + ',' + mLong)
@@ -463,9 +455,9 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
 
   pageChange(event, totalPages) {
     // console.log(event)
-    if(this.ministry){
+    if (this.ministry) {
       this.getSearchData(this.pageCount, 10);
-    }else{
+    } else {
       this.getAgencyData(this.pageCount, 10);
     }
 
@@ -512,17 +504,17 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
         });
 
     } else if (this.letter || this.ministry || (this.letter && this.ministry)) {
-      if(this.letter !== 0){
-        if(this.ministry){
+      if (this.letter !== 0) {
+        if (this.ministry) {
           this.custom = 'letter=' + this.letter + '&ministryRefCode=' + this.ministry + '&page=' + count + '&size=' + size;
-        }else{
+        } else {
           this.custom = 'letter=' + this.letter + '&page=' + count + '&size=' + size;
         }
 
-      }else{
-        if(this.ministry){
+      } else {
+        if (this.ministry) {
           this.custom = 'ministryRefCode=' + this.ministry + '&page=' + count + '&size=' + size;
-        }else{
+        } else {
           this.custom = 'page=' + count + '&size=' + size;
         }
 
@@ -579,7 +571,7 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
             console.log(this.ministryList)
             // console.log(this.ministryList.length)
 
-            for (i = 0; i <= this.ministryList.length-1; i++) {
+            for (i = 0; i <= this.ministryList.length - 1; i++) {
               // console.log(i)
               // console.log(this.ministryList[i].ministryName)
               // console.log(mLat + ',' + mLong)
@@ -609,7 +601,7 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
   malformedDataHandler(data) {
     let tData;
 
-    if(!data || data === 'undefined' || data == "")
+    if (!data || data === 'undefined' || data == "")
       tData = "0.0"
     else
       tData = data;

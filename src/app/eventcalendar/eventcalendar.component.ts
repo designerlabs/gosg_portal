@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Inject, AfterViewInit, AfterContentChecked, AfterViewChecked, Input, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject, AfterViewInit, AfterContentChecked, AfterViewChecked, Input, ElementRef, OnDestroy } from '@angular/core';
 // import { CalendarComponent } from 'ng-fullcalendar';
 import * as $ from 'jquery';
 import 'fullcalendar';
@@ -11,13 +11,15 @@ import { SharedService } from '../common/shared.service';
 import { DatePipe } from '@angular/common';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { SELECT_ITEM_HEIGHT_EM } from '@angular/material';
+import { ISubscription } from 'rxjs/Subscription';
+import { TopnavService } from '../header/topnav/topnav.service';
 
 @Component({
   selector: 'gosg-eventcalendar',
   templateUrl: './eventcalendar.component.html',
   styleUrls: ['./eventcalendar.component.css']
 })
-export class EventCalendarComponent implements OnInit, AfterViewInit, AfterContentChecked, AfterViewChecked{
+export class EventCalendarComponent implements OnInit, AfterViewInit, AfterContentChecked, AfterViewChecked, OnDestroy{
   
   @Input()
   agencySel: String
@@ -36,6 +38,8 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
   localeVal: string;
   languageId = this.languageId;
   mediaUrl: any = this.config.externalMediaURL +'/images/';
+  private subscription: ISubscription;
+  private subscriptionLang: ISubscription;
 
   constructor(
     private http: Http, 
@@ -43,12 +47,13 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
     private portalService:PortalService,
     private toastr: ToastrService,
     private element:ElementRef,
-    private datePipe:DatePipe,
+    private datePipe:DatePipe, 
+    private topnavservice: TopnavService,
     private translate: TranslateService,
     private sharedService :SharedService
   ) {
 
-    translate.onLangChange.subscribe((event: LangChangeEvent) => {
+    this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
       const myLang = translate.currentLang;
 
       if (myLang == 'en') {
@@ -70,16 +75,24 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
         // alert(this.languageId + ',' + this.localeVal)
       }
 
-        // alert(this.initLoad + " language")
+      if(this.topnavservice.flagLang){
         
-      if(this.langChge == true) {
-        this.agencySel = "";
-        this.getEvents();
-        this.options = this.getOptions(this.event,this.mediaUrl);
-        $('#calendar').fullCalendar('destroy');
-        $('#calendar').fullCalendar(this.options);
+        if(this.langChge == true) {
+          this.agencySel = "";
+          this.getEvents();
+          this.options = this.getOptions(this.event,this.mediaUrl);
+          $('#calendar').fullCalendar('destroy');
+          $('#calendar').fullCalendar(this.options);
+        }
       }
+
+        // alert(this.initLoad + " language")
     });
+    
+  }
+  lang = this.lang;
+  
+  ngOnInit() {
     
     if(!this.languageId){
       this.languageId = localStorage.getItem('langID');
@@ -87,12 +100,6 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
     }else{
       this.languageId = 1;
     }
-
-    
-  }
-  lang = this.lang;
-  
-  ngOnInit() {
     // alert(this.initLoad + " onInit")
     // this.localeVal = 'en-us';
     // console.log(this.localeVal)
@@ -104,6 +111,10 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
 
   ngAfterViewInit() { 
     
+  }
+
+  ngOnDestroy() {
+    this.subscriptionLang.unsubscribe();
   }
 
   onScroll(event){
