@@ -7,7 +7,6 @@ import { SharedService } from '../common/shared.service';
 import { TopnavComponent } from '../header/topnav/topnav.component';
 import { TopnavService } from '../header/topnav/topnav.service';
 
-
 @Component({
   selector: 'app-lifeevent',
   templateUrl: './lifeevent.component.html',
@@ -39,8 +38,6 @@ export class LifeeventComponent implements OnInit, OnDestroy {
           this.subscription = this.getData(this.languageId);
         }
 
-      // }).bind(this));
-
     });
   }
 
@@ -53,7 +50,6 @@ export class LifeeventComponent implements OnInit, OnDestroy {
 
     if(!this.languageId){
       this.languageId = localStorage.getItem('langID');
-      //this.getData();
     }else{
       this.languageId = 1;
     }
