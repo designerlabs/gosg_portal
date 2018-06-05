@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 import * as $ from 'jquery';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 import { DialogsService } from '../dialogs/dialogs.service';
@@ -14,13 +14,16 @@ import {
 } from '@angular/material';
 import { tileLayer, latLng, circle, polygon, marker, icon, Layer } from 'leaflet';
 import * as L from 'leaflet';
+import { ISubscription } from 'rxjs/Subscription';
+import { TopnavService } from '../header/topnav/topnav.service';
 
 @Component({
   selector: 'gosg-agencydirectory',
   templateUrl: './agencydirectory.component.html',
   styleUrls: ['./agencydirectory.component.css']
 })
-export class AgencydirectoryComponent implements OnInit, AfterViewInit {
+export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestroy {
+
   dataAlpha= [];
   keyword: string;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -35,6 +38,7 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit {
   recordList: Object;
   agencyList: Object;
   ministryList: Object;
+  lang = this.lang;
   langId = localStorage.getItem('langID');
   languageId = this.languageId;
   recordTable = null;
@@ -61,6 +65,8 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit {
       shadowAnchor: [0, 0],  // the same for the shadow
       popupAnchor:  [12, 0] // point from which the popup should open relative to the iconAnchor
   });
+  private subscription: ISubscription;
+  private subscriptionLang: ISubscription;
 
   genCharArray(charA, charZ) {
     let a = [], i = charA.charCodeAt(0), j = charZ.charCodeAt(0);
@@ -166,57 +172,60 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit {
     private portalservice: PortalService,
     private dialogsService: DialogsService,
     private translate: TranslateService,
+    private topnavservice:TopnavService,
     private router: Router,
     private toastr: ToastrService,
     @Inject(APP_CONFIG) private config: AppConfig) {
 
-    translate.onLangChange.subscribe((event: LangChangeEvent) => {
-      const myLang = translate.currentLang;
-      // console.log(this.popup.isPopupOpen)
-      if (myLang == 'en') {
-        translate.get('HOME').subscribe((res: any) => {
-          this.lang = 'en';
-          this.languageId = 1;
-        });
-          if(this.popup.isPopupOpen)
-            this.popup.closePopup()
-        this.getAgencyData(this.pageCount, this.pageSize);
-        this.getMinistry();
-        this.getAllAgenciesMarkers()
-      }
-      if (myLang == 'ms') {
-        translate.get('HOME').subscribe((res: any) => {
+    this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      // this.sharedService.errorHandling(event, (function(){
+        const myLang = this.translate.currentLang;
+        if (myLang === 'en') {
+           this.lang = 'en';
+           this.languageId = 1;
+           if(this.popup.isPopupOpen)
+             this.popup.closePopup()
+        }
+        if (myLang === 'ms') {
           this.lang = 'ms';
           this.languageId = 2;
-        });
-        if(this.popup.isPopupOpen)
-          this.popup.closePopup()
-        this.getAgencyData(this.pageCount, this.pageSize);
-        this.getMinistry();
-        this.getAllAgenciesMarkers()
-      }
-      this.letter = '';
-      this.keyword = '';
-      this.ministry = '';
-      this.pageCount = 1;
-      this.mymap.setView([5.8142568, 108.5806004], 5.2);
-      this.popup.remove();
+          if(this.popup.isPopupOpen)
+            this.popup.closePopup()
+        }
+
+        if(this.topnavservice.flagLang){
+          this.getAgencyData(this.pageCount, this.pageSize);
+          this.getMinistry();
+          this.getAllAgenciesMarkers()
+        }
+
+        this.letter = '';
+        this.keyword = '';
+        this.ministry = '';
+        this.pageCount = 1;
+        this.mymap.setView([5.8142568, 108.5806004], 5.2);
+        this.popup.remove();
+
     });
+  }
+
+  ngOnInit() {
+
     if(!this.languageId){
       this.languageId = localStorage.getItem('langID');
       //this.getData();
     }else{
       this.languageId = 1;
     }
-  }
-  lang = this.lang;
-
-  ngOnInit() {
     
     this.getDefaultMap();
     this.loadAlpha();
     // this.getMinistry();
     // this.getAllAgenciesMarkers()
+  }
+
+  ngOnDestroy() {
+    this.subscriptionLang.unsubscribe();
   }
 
   
