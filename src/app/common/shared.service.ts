@@ -15,9 +15,9 @@ import 'rxjs/add/observable/throw';
 export class SharedService {
 
   constructor(
-    private http: Http, 
-    @Inject(APP_CONFIG) private config: AppConfig,  
-    private translate: TranslateService, 
+    private http: Http,
+    @Inject(APP_CONFIG) private config: AppConfig,
+    private translate: TranslateService,
     private toastr: ToastrService) {
           /* LANGUAGE FUNC */
     translate.onLangChange.subscribe((event: LangChangeEvent) => {
@@ -39,7 +39,7 @@ export class SharedService {
       }else{
         this.languageId = 1;
       }
-      
+
     }
 
     /* LANGUAGE FUNC */
@@ -67,7 +67,7 @@ export class SharedService {
     refresh: 'fa fa-refresh',
     view: 'fa fa-eye'
   }
-  
+
   pageSize =  [
     {"id": 1, "size": 10},
     {"id": 2, "size": 25},
@@ -75,7 +75,7 @@ export class SharedService {
   ];
   defaultPageSize = this.pageSize[0].size;
   getCountryData(): Observable<any[]> {
-   
+
     return this.http.get(this.countryUrl)
       .map((response: Response) => response.json().countryList)
       .retry(5)
@@ -86,7 +86,7 @@ export class SharedService {
 
 
   getStateData(): Observable<any[]> {
-    
+
     return this.http.get(this.stateUrl)
       .map((response: Response) => response.json().stateList)
       .retry(5)
@@ -95,45 +95,27 @@ export class SharedService {
   }
 
   getPostCodeData(code): Observable<any[]> {
-    
+
     return this.http.get(this.postcodeUrl+'id/'+ code)
       .map((response: Response) => response.json().postcodeList)
       .retry(5)
       .catch(this.handleError);
   }
-  
- 
+
+
    // NEW
-  
-   readPortal(moduleName, page?, size?, keyword?): Observable<any[]> {
-    this.languageId = localStorage.getItem('langID');
+
+   readPortal(moduleName, page?, size?, keyword?, lang?): Observable<any[]> {
     let readUrl;
     if(!keyword && page) {
-     
-      readUrl = this.config.urlPortal + moduleName + '?page=' + page + '&size=' + size  + '&language='+this.languageId;
+
+      readUrl = this.config.urlPortal + moduleName + '?page=' + page + '&size=' + size  + '&language='+lang;
     } else if(keyword) {
-      
-      readUrl = this.config.urlPortal + moduleName + '?keyword='+keyword+'&page=' + page + '&size=' + size  + '&language='+this.languageId;
+
+      readUrl = this.config.urlPortal + moduleName + '?keyword='+keyword+'&page=' + page + '&size=' + size  + '&language='+lang;
     } else {
-      
-      readUrl = this.config.urlPortal + moduleName + '?language='+this.languageId;
-    }
-    
-    return this.http.get(readUrl)
-      .map((response: Response) => response.json())
-      .retry(5)
-      .catch(this.handleError);
-  }
-  
-  readProtected(moduleName, page?, size?, keyword?): Observable<any[]> {
-    let readUrl;
-    
-    if(!keyword && page) {
-      readUrl = this.config.urlProtected + moduleName + '?page=' + page + '&size=' + size  + '&language='+this.languageId;
-    } else if(keyword) {
-      readUrl = this.config.urlProtected + moduleName + '?keyword='+keyword+'&page=' + page + '&size=' + size  + '&language='+this.languageId;
-    } else {
-      readUrl = this.config.urlProtected + moduleName + '?language='+this.languageId;
+
+      readUrl = this.config.urlPortal + moduleName + '?language='+lang;
     }
 
     return this.http.get(readUrl)
@@ -141,43 +123,60 @@ export class SharedService {
       .retry(5)
       .catch(this.handleError);
   }
-  
-  readPortalById(moduleName, id): Observable<any[]> {
-    let readUrl = this.config.urlPortal + moduleName + id + '?language='+this.languageId;
-    
+
+  readProtected(moduleName, page?, size?, keyword?, lang?): Observable<any[]> {
+    let readUrl;
+
+    if(!keyword && page) {
+      readUrl = this.config.urlProtected + moduleName + '?page=' + page + '&size=' + size  + '&language='+lang;
+    } else if(keyword) {
+      readUrl = this.config.urlProtected + moduleName + '?keyword='+keyword+'&page=' + page + '&size=' + size  + '&language='+lang;
+    } else {
+      readUrl = this.config.urlProtected + moduleName + '?language='+lang;
+    }
+
     return this.http.get(readUrl)
       .map((response: Response) => response.json())
       .retry(5)
       .catch(this.handleError);
   }
-  
-  readProtectedById(moduleName, id): Observable<any[]> {
-    let readUrl = this.config.urlProtected + moduleName + id + '?language='+this.languageId;
+
+  readPortalById(moduleName, id, lang?): Observable<any[]> {
+    let readUrl = this.config.urlPortal + moduleName + id + '?language='+lang;
+
     return this.http.get(readUrl)
       .map((response: Response) => response.json())
       .retry(5)
       .catch(this.handleError);
   }
-    
-  create(data, moduleName) {
-    let createUrl = this.config.urlProtected   + moduleName + '?language='+this.languageId;
-  
+
+  readProtectedById(moduleName, id, lang?): Observable<any[]> {
+    let readUrl = this.config.urlProtected + moduleName + id + '?language='+lang;
+    return this.http.get(readUrl)
+      .map((response: Response) => response.json())
+      .retry(5)
+      .catch(this.handleError);
+  }
+
+  create(data, moduleName, lang?) {
+    let createUrl = this.config.urlProtected   + moduleName + '?language='+lang;
+
     return this.http.post(createUrl, data)
     .map((response: Response) => response.json())
     .catch(this.handleError);
   }
 
-  update(data,moduleName) {
-    let updateUrl = this.config.urlProtected  + moduleName +'?language='+this.languageId;
+  update(data,moduleName, lang?) {
+    let updateUrl = this.config.urlProtected  + moduleName +'?language='+lang;
 
     return this.http.put(updateUrl, data)
     .map((response: Response) => response.json())
     .catch(this.handleError);
   }
 
-  delete(id,moduleName) {
-    let deleteUrl = this.config.urlProtected  + moduleName + id+ '?language='+this.languageId;
-   
+  delete(id,moduleName, lang?) {
+    let deleteUrl = this.config.urlProtected  + moduleName + id+ '?language='+lang;
+
     return this.http.delete(deleteUrl, null)
     .map((response: Response) => response.json())
     .catch(this.handleError);
@@ -281,7 +280,7 @@ export class SharedService {
 
   private handleError(error: Response) {
     let msg = `Status code ${error.status} on url ${error.url}`;
-  
+
     return Observable.throw(msg);
 
   }
