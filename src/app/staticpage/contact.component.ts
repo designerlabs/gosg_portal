@@ -1,4 +1,5 @@
-import { Component, OnInit, Injectable, Inject } from '@angular/core';
+import { Component, OnInit, Injectable, Inject, OnDestroy } from '@angular/core';
+import { ISubscription } from "rxjs/Subscription";
 import { Router } from '@angular/router';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
@@ -12,6 +13,7 @@ import {
   } from '@angular/material';
 import { tileLayer, latLng, circle, polygon, marker, icon, Layer } from 'leaflet';
 import * as L from 'leaflet';
+import { TopnavService } from '../header/topnav/topnav.service';
 
 @Component({
     selector: 'app-contact',
@@ -46,12 +48,12 @@ import * as L from 'leaflet';
     ]
 })
 
-export class ContactComponent{
+export class ContactComponent implements OnInit, OnDestroy{
        getTheme(){
         return localStorage.getItem('themeColor');
     }
 
-    langID = 1;
+    langID: any;
     lang: any;
     footer = [];
     dataContact= [];
@@ -69,16 +71,20 @@ export class ContactComponent{
         shadowAnchor: [0, 0],  // the same for the shadow
         popupAnchor:  [12, 0] // point from which the popup should open relative to the iconAnchor
     });
+
+    private subscriptionLang: ISubscription;
+    private subscription: ISubscription;
     private footerUrl: string = this.config.urlFooter;
 
     constructor(private translate: TranslateService, 
         private router: Router, 
         private http: Http, 
-        @Inject(APP_CONFIG) private config: AppConfig) {
+        @Inject(APP_CONFIG) private config: AppConfig,
+        private topnavservice: TopnavService,) {
 
         this.lang = translate.currentLang;
 
-        translate.onLangChange.subscribe((event: LangChangeEvent) => {
+        this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
     
             const myLang = translate.currentLang;
         
@@ -87,7 +93,7 @@ export class ContactComponent{
                 translate.get('HOME').subscribe((res: any) => {
                     this.lang = 'en';
                     this.langID = 1;
-                    this.getContactUs(this.langID);
+                    //this.getContactUs(this.langID);
                 });
             }
 
@@ -96,8 +102,12 @@ export class ContactComponent{
                 translate.get('HOME').subscribe((res: any) => {
                     this.lang = 'ms';
                     this.langID = 2;
-                    this.getContactUs(this.langID);
+                    //this.getContactUs(this.langID);
                 });
+            }
+
+            if(this.topnavservice.flagLang){
+                this.subscription = this.getContactUs(this.langID);
             }
 
            // this.mymap.setView([5.8142568, 108.5806004], 6);
@@ -106,16 +116,27 @@ export class ContactComponent{
         });
     }
 
+    ngOnDestroy() {
+        this.subscriptionLang.unsubscribe();
+        this.subscription.unsubscribe();
+    }
+
     ngOnInit() {
-        this.langID = 0;
-        if (this.lang === 'ms') {
-          this.langID = 2;
-        }else {
-          this.langID = 1;
+        // this.langID = 0;
+        // if (this.lang === 'ms') {
+        //   this.langID = 2;
+        // }else {
+        //   this.langID = 1;
+        // }
+
+        if(!this.langID){
+            this.langID = localStorage.getItem('langID');
+        }else{
+        this.langID = 1;
         }
 
         this.getDefaultMap();
-        this.getContactUs(this.langID);
+        this.subscription  = this.getContactUs(this.langID);
         
     }
 
