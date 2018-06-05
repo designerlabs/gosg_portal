@@ -1,4 +1,5 @@
-import { Component, OnInit , Inject} from '@angular/core';
+import { Component, OnInit , Inject, OnDestroy} from '@angular/core';
+import { ISubscription } from "rxjs/Subscription";
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { Http } from '@angular/http';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
@@ -37,35 +38,32 @@ export class PollComponent implements OnInit {
     pollPercent;
     progressbarVal;
     pollReference;
+    private subscriptionLang: ISubscription;
+    private subscription: ISubscription;
     public browserLang: string;
     // calcValue = 90;
     // tslint:disable-next-line:max-line-length
     constructor(private translate: TranslateService,private topnavservice: TopnavService, private http: Http, @Inject(APP_CONFIG) private config: AppConfig, private toastr: ToastrService, private sharedService: SharedService, private portalservice: PortalService) {
-
-    }
-
-    ngOnInit() {
-      this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      this.subscriptionLang = this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
         // this.sharedService.errorHandling(event, (function(){
           const myLang = this.translate.currentLang;
           if (myLang === 'en') {
              this.lang = 'en';
              this.languageId = 1;
-             console.log('english');
           }
           if (myLang === 'ms') {
             this.lang = 'ms';
             this.languageId = 2;
-            console.log('from malay');
           }
 
           if(this.topnavservice.flagLang){
-            this.getData(this.languageId);
+            this.subscription = this.getData(this.languageId);
           }
-          console.log("Poll language : "+ this.topnavservice.flagLang);
-        // }).bind(this));
-
       });
+    }
+
+    ngOnInit() {
+
 
       if(!this.languageId){
         this.languageId = localStorage.getItem('langID');
@@ -73,9 +71,14 @@ export class PollComponent implements OnInit {
       }else{
         this.languageId = 1;
       }
-      this.getData(this.languageId);
+      this.subscription = this.getData(this.languageId);
 
         // this.getUserIpAddr();
+    }
+
+    ngOnDestroy() {
+      this.subscriptionLang.unsubscribe();
+      this.subscription.unsubscribe();
     }
 
    getData(languageId) {
