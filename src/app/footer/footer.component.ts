@@ -1,10 +1,12 @@
-import { Component, OnInit, Injectable, Inject } from '@angular/core';
+import { Component, OnInit, Injectable, Inject, OnDestroy } from '@angular/core';
+import { ISubscription } from "rxjs/Subscription";
 import { Router } from '@angular/router';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { Http, Response } from '@angular/http';
+import { TopnavService } from '../header/topnav/topnav.service';
 
 @Component({
   selector: 'app-footer',
@@ -14,11 +16,11 @@ import { Http, Response } from '@angular/http';
     '(window:resize)': 'onResize($event)'
   }
 })
-export class FooterComponent implements OnInit {
+export class FooterComponent implements OnInit, OnDestroy {
 
   footer= [];
   ftsociallink: any[];
-  langID = 1;
+  langID: any;
   dataSocialLnk= [];
   tltSocialLnk;
   dataContact= [];
@@ -35,11 +37,16 @@ export class FooterComponent implements OnInit {
   tltBottomLnk;
   copyright=[];
   dateOfUpdate=[];
+  private subscriptionLang: ISubscription;
+  private subscription: ISubscription;
 
-  constructor(private translate: TranslateService, private router: Router, private http: Http, @Inject(APP_CONFIG) private config: AppConfig) {
+  constructor(private translate: TranslateService, 
+    private router: Router, private http: Http, 
+    @Inject(APP_CONFIG) private config: AppConfig,
+    private topnavservice: TopnavService,) {
     this.lang = translate.currentLang;
     
-    translate.onLangChange.subscribe((event: LangChangeEvent) => {
+    this.subscriptionLang  = translate.onLangChange.subscribe((event: LangChangeEvent) => {
 
       const myLang = translate.currentLang;
 
@@ -48,20 +55,21 @@ export class FooterComponent implements OnInit {
         translate.get('HOME').subscribe((res: any) => {
           this.lang = 'en';
           this.langID = 1;
-          this.getFooter(this.langID);
+          //this.getFooter(this.langID);
         });
-        // this.router.navigateByUrl('public')
       }
       if (myLang == 'ms') {
 
         translate.get('HOME').subscribe((res: any) => {
           this.lang = 'ms';
           this.langID = 2;
-          this.getFooter(this.langID);
+          //this.getFooter(this.langID);
         });
-        // this.router.navigateByUrl('public')
       }
 
+      if(this.topnavservice.flagLang){
+        this.subscription = this.getFooter(this.langID);
+      }
     });
   }
 
@@ -73,14 +81,26 @@ export class FooterComponent implements OnInit {
 
   private footerUrl: string = this.config.urlFooter;
 
+  ngOnDestroy() {
+    this.subscriptionLang.unsubscribe();
+    this.subscription.unsubscribe();
+  }
+  
   ngOnInit() {
-    this.langID = 0;
-    if (this.lang === 'ms') {
-      this.langID = 2;
-    }else {
+    // this.langID = 0;
+    // if (this.lang === 'ms') {
+    //   this.langID = 2;
+    // }else {
+    //   this.langID = 1;
+    // }
+
+    if(!this.langID){
+      this.langID = localStorage.getItem('langID');
+    }else{
       this.langID = 1;
     }
-    this.getFooter(this.langID);
+    this.subscription = this.getFooter(this.langID);
+    //this.getFooter(this.langID);
   }
 
   getFooter(lang) {
