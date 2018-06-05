@@ -23,7 +23,7 @@ import { TopnavService } from '../header/topnav/topnav.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
 
   uid: any;
   lang = this.lang;
@@ -83,7 +83,7 @@ export class DashboardComponent implements OnInit {
   
   ngOnDestroy() {
     this.subscriptionLang.unsubscribe();
-    this.subscription.unsubscribe();
+    //this.subscription.unsubscribe();
   }
   
   ngOnInit() {

@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewEncapsulation, ChangeDetectorRef, Inject, Renderer } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ChangeDetectorRef, Inject, Renderer, OnDestroy } from '@angular/core';
+import { ISubscription } from "rxjs/Subscription";
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { SharedService } from '../common/shared.service';
 import { ToastrService } from 'ngx-toastr';
@@ -10,16 +11,17 @@ import { PortalService } from '../services/portal.service';
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 import { Http } from '@angular/http';
 import * as moment from 'moment';
+import { TopnavService } from '../header/topnav/topnav.service';
 
 @Component({
   selector: 'gosg-app-management',
   templateUrl: './app-management.component.html',
   styleUrls: ['./app-management.component.css'],
 })
-export class AppManagementComponent implements OnInit {
+export class AppManagementComponent implements OnInit, OnDestroy {
 
   lang = this.lang;
-  langID = 1;
+  langID: any;
   dataApp: any;
   dataAppPage: any;
   dataAgency: any;
@@ -42,6 +44,8 @@ export class AppManagementComponent implements OnInit {
   dateSubmission = [];
   statusDesc = [];
   showNoData = false;
+  private subscription: ISubscription;
+  private subscriptionLang: ISubscription;
 
   constructor(
     private protectedService: ProtectedService,
@@ -53,11 +57,12 @@ export class AppManagementComponent implements OnInit {
     private translate:TranslateService, 
     private http: Http, 
     private _renderer: Renderer,
+    private topnavservice: TopnavService,
     @Inject(APP_CONFIG) private config: AppConfig) {
       
       this.lang = translate.currentLang;
 
-      translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
 
           const myLang = translate.currentLang;
       
@@ -76,7 +81,10 @@ export class AppManagementComponent implements OnInit {
                   this.langID = 2;
               });
           }
-          
+          if(this.topnavservice.flagLang){
+            //this.getSlide(this.languageId);
+            //this.subscription = this.getSlide(this.languageId);
+          }
           this.getStatusApp(this.langID);
           this.getAgencyApp(this.langID);
           this.getDataAppList(this.pageCount, this.pageSize);
@@ -84,7 +92,18 @@ export class AppManagementComponent implements OnInit {
       });
     }
 
+  ngOnDestroy() {
+    this.subscriptionLang.unsubscribe();
+    //this.subscription.unsubscribe();
+  }
+
   ngOnInit() {
+
+    if(!this.langID){
+      this.langID = localStorage.getItem('langID');
+    }else{
+      this.langID = 1;
+    }
     
     this.appNumber = new FormControl(),
     this.agency = new FormControl(),
