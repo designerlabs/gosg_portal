@@ -51,7 +51,7 @@ import { SitemapComponent } from './sitemap/sitemap.component';
 import { ArchivecategoryComponent } from './archive/archivecategory/archivecategory.component';
 import { ArchivesubcategoryComponent } from './archive/archivesubcategory/archivesubcategory.component';
 import { ArchivecontentComponent } from './archive/archivecontent/archivecontent.component';
-import { GalleryComponent } from './gallery/gallery.component';
+//import { GalleryComponent } from './gallery/gallery.component';
 
 export const appRoutes: Routes = [
 
@@ -73,9 +73,9 @@ export const appRoutes: Routes = [
     {path: 'archive/category/:id', component:ArchivecategoryComponent},
     {path: 'archive/subcategory/:id', component:ArchivesubcategoryComponent},
     {path: 'archive/:id', component:ArchivecontentComponent},
-    {path: 'gallery/category/:id', component:GalleryComponent},
-    {path: 'gallery', component:GalleryComponent},
-    {path: 'gallery/content/:id', component:GalleryComponent},
+    //{path: 'gallery/category/:id', component:GalleryComponent},
+    //{path: 'gallery', component:GalleryComponent},
+    //{path: 'gallery/content/:id', component:GalleryComponent},
     {path: 'login', component: LoginComponent},
     {path: 'register', component: RegisterComponent },
 
