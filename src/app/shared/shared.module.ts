@@ -139,6 +139,7 @@ import { SitemapComponent } from '../sitemap/sitemap.component';
 import { ArchivecategoryComponent } from '../archive/archivecategory/archivecategory.component';
 import { ArchivesubcategoryComponent } from '../archive/archivesubcategory/archivesubcategory.component';
 import { ArchivecontentComponent } from '../archive/archivecontent/archivecontent.component';
+import { GalleryService } from '../gallery/gallery.service';
 //import { GalleryComponent } from '../gallery/gallery.component';
 //import { GalleryService } from '../gallery/gallery.service';
 // import { SearchResultComponent } from '../search/search-result/search-result.component';

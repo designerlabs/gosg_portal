@@ -30,7 +30,7 @@ export class SliderComponent implements OnInit {
   slides: any[];
   languageId: any;
 
-  constructor( 
+  constructor(
     private translate: TranslateService,
     private topnavservice: TopnavService,
     private router: Router,
@@ -39,16 +39,16 @@ export class SliderComponent implements OnInit {
     private breadcrumbService: BreadcrumbService,
     private sharedservice:SharedService
   ) {
-    
+
   }
 
   lang = this.lang;
   ngOnInit() {
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
-      // this.sharedService.errorHandling(event, (function(){      
-        
+      // this.sharedService.errorHandling(event, (function(){
+
         const myLang = this.translate.currentLang;
-        
+
         if (myLang === 'en') {
           this.lang = 'en';
           this.languageId = 1;
@@ -56,7 +56,7 @@ export class SliderComponent implements OnInit {
         }
         if (myLang === 'ms') {
           this.lang = 'ms';
-          this.languageId = 2;          
+          this.languageId = 2;
           console.log('Translate MALAY');
         }
 
@@ -68,7 +68,7 @@ export class SliderComponent implements OnInit {
       // }).bind(this));
     });
     console.log('slider.comp.ts');
-    this.getSlide(this.lang);    
+    this.getSlide(this.lang);
     this.breadcrumb = this.breadcrumbService.getBreadcrumb();
     this.breadcrumb = this.breadcrumb.name = '';
     this.isValid = this.breadcrumbService.isValid = false;
