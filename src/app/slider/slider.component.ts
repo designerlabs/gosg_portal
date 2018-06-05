@@ -72,8 +72,7 @@ export class SliderComponent implements OnInit, OnDestroy {
     //this.subscription.unsubscribe();
   }
 
-  ngOnInit() {
-    
+  ngOnInit() {    
 
     if(!this.languageId){
       this.languageId = localStorage.getItem('langID');

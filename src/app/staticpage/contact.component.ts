@@ -189,41 +189,41 @@ export class ContactComponent implements OnInit, OnDestroy{
     addMarker(agcLat, agcLong, mName?, mAddress?, mEmail?, mFax?, mPhone?) {
     
         this.marker = L.marker([agcLat, agcLong], {icon:this.defaultIcon})
-        .bindPopup("<div class='row'>"
-        +"<div class='col-md-12'>"
-        +"<h4>"+mName+"<h4>"
-        +"</div>"
-        +"<div class='col-md-2'>"
-        +"<i class='fa fa-home' style='font-size: 1.2em; margin-top: 90%'></i>"
-        +"</div>"
-        +"<div class='col-md-10'>"
-        +"<p style='font-size: 1em'>"+mAddress+"</p>"
-        +"</div>"
-        +"<div class='col-md-2'>"
-        +"<i class='fa fa-map-marker' style='font-size: 1.2em; margin-top: 85%'></i>"
-        +"</div>"
-        +"<div class='col-md-10'>"
-        +"<p>"+agcLat+","+agcLong+"</p>"
-        +"</div>"
-        +"<div class='col-md-2'>"
-        +"<i class='fa fa-phone' style='font-size: 1.2em; margin-top: 90%'></i>"
-        +"</div>"
-        +"<div class='col-md-10'>"
-        +"<p style='font-size: 1em'>"+mPhone+"</p>"
-        +"</div>"
-        +"<div class='col-md-2'>"
-        +"<i class='fa fa-fax' style='font-size: 1.2em; margin-top: 90%'></i>"
-        +"</div>"
-        +"<div class='col-md-10'>"
-        +"<p style='font-size: 1em'>"+mFax+"</p>"
-        +"</div>"
-        +"<div class='col-md-2'>"
-        +"<i class='fa fa-envelope' style='font-size: 1.2em; margin-top: 90%'></i>"
-        +"</div>"
-        +"<div class='col-md-10'>"
-        +"<p style='font-size: 1em'>"+mEmail+"</p>"
-        +"</div>"
-        +"</div>")
+        .bindPopup(`<div class='row'>
+        <div class='col-md-12'>
+        <h4>${mName}<h4>
+        </div>
+        <div class='col-md-2'>
+        <i class='fa fa-home' style='font-size: 1.2em; margin-top: 90%'></i>
+        </div>
+        <div class='col-md-10'>
+        <p style='font-size: 1em'>${mAddress}</p>
+        </div>
+        <div class='col-md-2'>
+        <i class='fa fa-map-marker' style='font-size: 1.2em; margin-top: 85%'></i>
+        </div>
+        <div class='col-md-10'>
+        <p>${agcLat},${agcLong}</p>
+        </div>
+        <div class='col-md-2'>
+        <i class='fa fa-phone' style='font-size: 1.2em; margin-top: 90%'></i>
+        </div>
+        <div class='col-md-10'>
+        <p style='font-size: 1em'>${mPhone}</p>
+        </div>
+        <div class='col-md-2'>
+        <i class='fa fa-fax' style='font-size: 1.2em; margin-top: 90%'></i>
+        </div>
+        <div class='col-md-10'>
+        <p style='font-size: 1em'>${mFax}</p>
+        </div>
+        <div class='col-md-2'>
+        <i class='fa fa-envelope' style='font-size: 1.2em; margin-top: 90%'></i>
+        </div>
+        <div class='col-md-10'>
+        <p style='font-size: 1em'>${mEmail}</p>
+        </div>
+        </div>`)
         // .setLatLng([agcLat,agcLong])
         .addTo(this.mymap);
     

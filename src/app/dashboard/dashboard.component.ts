@@ -1,4 +1,5 @@
-import { Component, OnInit, Inject, Output, Input, EventEmitter } from '@angular/core';
+import { Component, OnInit, Inject, Output, Input, EventEmitter, OnDestroy } from '@angular/core';
+import { ISubscription } from "rxjs/Subscription";
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
@@ -15,6 +16,7 @@ import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { ToastrService } from 'ngx-toastr';
 import { SharedService } from '../common/shared.service';
 import { DialogsService } from '../dialogs/dialogs.service';
+import { TopnavService } from '../header/topnav/topnav.service';
 
 @Component({
   selector: 'gosg-dashboard',
@@ -25,13 +27,15 @@ export class DashboardComponent implements OnInit {
 
   uid: any;
   lang = this.lang;
-  langID = 1;
+  langID: any;
   dashboardData: any;
 
   totalApp: any;
   inProgress: any;
   approved: any;
   rejected: any;
+  private subscription: ISubscription;
+  private subscriptionLang: ISubscription;
 
   constructor(
     private activatedRoute:ActivatedRoute,
@@ -42,12 +46,13 @@ export class DashboardComponent implements OnInit {
     private protectedService: ProtectedService,
     private dialogsService: DialogsService,
     private toastr: ToastrService,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private topnavservice: TopnavService,
   ) { 
 
     this.lang = translate.currentLang;
 
-    translate.onLangChange.subscribe((event: LangChangeEvent) => {
+    this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
 
         const myLang = translate.currentLang;
     
@@ -67,12 +72,28 @@ export class DashboardComponent implements OnInit {
             });
         }
 
+        if(this.topnavservice.flagLang){
+          //this.getSlide(this.languageId);
+          //this.subscription = this.getSlide(this.languageId);
+        }
+
     });
 
   }   
   
+  ngOnDestroy() {
+    this.subscriptionLang.unsubscribe();
+    this.subscription.unsubscribe();
+  }
   
   ngOnInit() {
+
+    if(!this.langID){
+      this.langID = localStorage.getItem('langID');
+    }else{
+      this.langID = 1;
+    }
+
     this.getNoApp(this.langID);
   }
 
