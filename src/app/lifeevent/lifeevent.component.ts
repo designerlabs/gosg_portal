@@ -19,34 +19,24 @@ export class LifeeventComponent implements OnInit, OnDestroy {
   lifeEventData: any[];
   lang = 'en';
   languageId = this.languageId;
-  count;
   private subscription: ISubscription;
   private subscriptionLang: ISubscription;
 
   constructor(private translate: TranslateService, private topnavservice: TopnavService, private http: Http, @Inject(APP_CONFIG) private config: AppConfig, private sharedService: SharedService) {
-    this.count = 0;
     this.subscriptionLang = this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       // this.sharedService.errorHandling(event, (function(){
         const myLang = this.translate.currentLang;
         if (myLang === 'en') {
            this.lang = 'en';
            this.languageId = 1;
-           console.log('english');
         }
         if (myLang === 'ms') {
           this.lang = 'ms';
           this.languageId = 2;
-          console.log('from malay');
         }
 
         if(this.topnavservice.flagLang){
-
           this.subscription = this.getData(this.languageId);
-          console.log('calling from translate');
-          this.count++;
-          console.log("count: "+this.count);
-          return true;
-          
         }
         
       // }).bind(this));
@@ -67,7 +57,6 @@ export class LifeeventComponent implements OnInit, OnDestroy {
       this.languageId = 1;
     }
     this.subscription = this.getData(this.languageId);
-    console.log('calling from oninit');
   }
 
   private lifeEventUrl: string = 'life/event';
