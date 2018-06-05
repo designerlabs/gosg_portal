@@ -1,4 +1,5 @@
-import { Component, OnInit,Inject, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit,Inject, ViewEncapsulation, OnDestroy } from '@angular/core';
+import { ISubscription } from "rxjs/Subscription";
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { Http } from '@angular/http';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
@@ -7,6 +8,7 @@ import { SharedService } from '../common/shared.service';
 import { debounce } from 'rxjs/operators/debounce';
 import { ProtectedService } from '../services/protected.service';
 import { SharedPipe } from '../common/shared.pipe';
+import { TopnavService } from '../header/topnav/topnav.service';
 
 @Component({
   selector: 'gosg-poll-protected',
@@ -14,7 +16,7 @@ import { SharedPipe } from '../common/shared.pipe';
   styleUrls: ['./poll-protected.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class PollProtectedComponent implements OnInit {
+export class PollProtectedComponent implements OnInit, OnDestroy {
   pollDataTitle: string;
   pollDataQuestion: string;
   pollDataQuestionID;
@@ -36,6 +38,8 @@ export class PollProtectedComponent implements OnInit {
   pollPercent;
   progressbarVal;
   pollReference;
+  private subscriptionLang: ISubscription;
+  private subscription: ISubscription;
   
   constructor(
     private translate: TranslateService,
@@ -43,7 +47,8 @@ export class PollProtectedComponent implements OnInit {
     @Inject(APP_CONFIG) private config: AppConfig,
     private toastr: ToastrService,
     private sharedService: SharedService,
-    private protectedService: ProtectedService) {
+    private protectedService: ProtectedService,
+    private topnavservice: TopnavService,) {
       this.lang = translate.currentLang;
       this.languageId = 2;
       translate.onLangChange.subscribe((event: LangChangeEvent) => {
@@ -52,20 +57,32 @@ export class PollProtectedComponent implements OnInit {
           if (myLang === 'en') {
              this.lang = 'en';
              this.languageId = 1;
-             this.getData('1');
           }
           if (myLang === 'ms') {
             this.lang = 'ms';
             this.languageId = 2;
-            this.getData('2');
-            console.log('from malay');
+          }
+
+          if(this.topnavservice.flagLang){
+            this.subscription = this.getData(this.languageId);
           }
         // }).bind(this));
       });
     }
 
+  ngOnDestroy() {
+    this.subscriptionLang.unsubscribe();
+    this.subscription.unsubscribe();
+  }
+
   ngOnInit() {
-    this.getData(this.languageId);
+    if(!this.languageId){
+      this.languageId = localStorage.getItem('langID');
+    }else{
+      this.languageId = 1;
+    }
+
+    this.subscription = this.getData(this.languageId);
   }
 
 
