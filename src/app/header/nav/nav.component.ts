@@ -32,6 +32,7 @@ export class NavComponent implements OnInit, AfterViewInit {
     menuId: number;
     popData: any;
     ser_word = "";
+    page;
 
     private articleUrl: string = this.config.urlArticle;
     private menuUrl: string = this.config.urlMenu;
@@ -80,7 +81,8 @@ export class NavComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit() {
-
+        this.page = this.router.url.split('/')[1];
+        // console.log(this.page)
         this.imgSrc = 'logo_ms';
         this.navService.getMenuData(this.langId).subscribe(resMenuData => this.menus = resMenuData);
         this.getPop();
@@ -143,11 +145,16 @@ export class NavComponent implements OnInit, AfterViewInit {
     }
 
     mainSearch(key) {
+        this.page = this.router.url.split('/')[1];
         if(key) {
             $('#searchDDown').css({ 'display': 'none' });
             localStorage.setItem('ser_word', key);
             this.router.navigate(['search/searchResult', key]);
             this.internal(key);
+            console.log(this.page)
+            if(this.page == 'search')
+                window.location.reload();
+
         } else {
             this.toastr.error(this.translate.instant('common.msg.searchKeyword'), '');
         }

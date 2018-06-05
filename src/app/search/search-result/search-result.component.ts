@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Inject, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, Inject, AfterViewInit, OnDestroy } from '@angular/core';
 import { SharedService } from '../../common/shared.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
@@ -14,6 +14,8 @@ import { Http, Response } from '@angular/http';
 import { SearchService } from '../../search/search.service';
 // import * as moment_ from 'moment';
 import * as moment from 'moment';
+import { ISubscription } from 'rxjs/Subscription';
+import { TopnavService } from '../../header/topnav/topnav.service';
 // const moment:moment.MomentStatic = (<any>moment_)['default'] || moment_;
 // import { SharedModule } from '../../shared/shared.module';
 // import { MatTabsModule } from '@angular/material/tabs';
@@ -26,7 +28,7 @@ declare var $: any;
   styleUrls: ['./search-result.component.css'],
 })
 
-export class SearchResultComponent implements OnInit {
+export class SearchResultComponent implements OnInit, OnDestroy {
   
   errorMessage: any;
   observableGlobalItem: any;
@@ -108,45 +110,38 @@ export class SearchResultComponent implements OnInit {
   totalElements = 0; noPrevData = true; noNextData = false; pagefrom = 0; pageNumber = 1; totalPages = 0; pagesize = 10;
   millisec = 0;
   showNoData = false;
+  
+  private subscription: ISubscription;
+  private subscriptionLang: ISubscription;
 
   constructor(
     private router: Router,
     private sharedService: SharedService,
     private translate: TranslateService,
     private toastr: ToastrService,
+    private topnavservice: TopnavService,
     private http: Http,
     @Inject(APP_CONFIG) private config: AppConfig,
     private serchService: SearchService,
     // private moment : Moment
   ) {
-    this.lang = translate.currentLang;
-    this.languageId = 1;
-    translate.onLangChange.subscribe((event: LangChangeEvent) => {
-
-      const myLang = translate.currentLang;
-
-      if (myLang == 'en') {
-        translate.get('HOME').subscribe((res: any) => {
-          this.lang = 'en';
-          this.languageId = 1;
-        });
-
-      }
-      if (myLang == 'ms') {
-        translate.get('HOME').subscribe((res: any) => {
+    this.subscriptionLang = this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      // this.sharedService.errorHandling(event, (function(){
+        const myLang = this.translate.currentLang;
+        if (myLang === 'en') {
+           this.lang = 'en';
+           this.languageId = 1;
+        }
+        if (myLang === 'ms') {
           this.lang = 'ms';
           this.languageId = 2;
-        });
-      }
-      this.searchByKeyword(this.ser_word);
-    });
+        }
 
-    if (!this.languageId) {
-      this.languageId = localStorage.getItem('langID');
-    } else {
-      this.languageId = 1;
-    }
-    // console.log(this.languageId)
+        if(this.topnavservice.flagLang){
+          this.searchByKeyword(this.ser_word);
+        }
+
+    });
   }
 
   public local = true;
@@ -158,24 +153,6 @@ export class SearchResultComponent implements OnInit {
     { id: 2, nameEn: 'All word', nameMs: 'Semua dari perkataan' },
     { id: 3, nameEn: 'Any word', nameMs: 'Mana-mana dari perkataan' }
   ];
-
-  // public internalSpec = [
-  //   { id: 11, nameEn: 'Topics', nameMs: 'Topik' },
-  //   { id: 12, nameEn: 'Sub Topics', nameMs: 'Sub Topik' },
-  //   { id: 13, nameEn: 'Title', nameMs: 'Tajuk' },
-  //   { id: 14, nameEn: 'Description', nameMs: 'Deskripsi' },
-
-  //   { id: 15, nameEn: 'Ministries', nameMs: 'Kementerian' },
-  //   { id: 16, nameEn: 'Agencies', nameMs: 'Agensi' },
-  //   { id: 17, nameEn: 'Title', nameMs: 'Tajuk' },
-  //   { id: 18, nameEn: 'Description', nameMs: 'Deskripsi' }
-  // ];
-  // public internalFilter = [
-  //   { id: 21, nameEn: 'Month Published', nameMs: 'Bulan Diterbitkan' },
-  //   { id: 22, nameEn: 'Author', nameMs: 'Penulis' },
-  //   { id: 23, nameEn: 'Topics', nameMs: 'Topik' },
-  //   { id: 24, nameEn: 'Sub Topics', nameMs: 'Sub Topik'  }
-  // ];
 
   dataGlobe = ['gov.my', 'edu.my', 'org.my', '.my']
 
@@ -315,12 +292,23 @@ export class SearchResultComponent implements OnInit {
     //   // this.toastr.error("Please enter a word to search");
     // }  
     // localStorage.setItem('ser_word', this.ser_word);
+
+    if(!this.languageId){
+      this.languageId = localStorage.getItem('langID');
+    }else{
+      this.languageId = 1;
+    }
+
     this.date = moment();
 
     this.ser_word = localStorage.getItem('ser_word');
     if(this.ser_word.length > 0) {
       this.searchByKeyword(this.ser_word);
     }
+  }
+
+  ngOnDestroy() {
+    this.subscriptionLang.unsubscribe();
   }
 
   btnSubmit() {
@@ -607,7 +595,7 @@ export class SearchResultComponent implements OnInit {
     let envOrigin = window.location.origin;
     let localURL = envOrigin+'/gosg/';
 
-    // console.log(valkeyword)
+    // console.log(localURL)
     // console.log(this.date)
 
     if (localStorage.getItem('ser_word').length === 0) {
