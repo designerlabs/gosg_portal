@@ -1,5 +1,6 @@
 
-import { Component, OnInit,ElementRef, Input, ViewChild, Inject, ViewContainerRef  } from '@angular/core';
+import { Component, OnInit,ElementRef, Input, ViewChild, Inject, ViewContainerRef, OnDestroy  } from '@angular/core';
+import { ISubscription } from "rxjs/Subscription";
 import { FormControl, FormGroup, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import {TranslateService, LangChangeEvent } from '@ngx-translate/core';
@@ -13,6 +14,7 @@ import { PortalService } from '../services/portal.service';
 import { ToastrService } from 'ngx-toastr';
 import { ValidateService } from '../common/validate.service';
 import { SharedService} from '../common/shared.service';
+import { TopnavService } from '../header/topnav/topnav.service';
 
 @Component({
   selector: 'gosg-feedback',
@@ -20,14 +22,12 @@ import { SharedService} from '../common/shared.service';
   styleUrls: ['./feedback.component.css']
 })
 
-export class FeedbackComponent implements OnInit {
+export class FeedbackComponent implements OnInit, OnDestroy {
   submitMsg: any;
   
   @Input() state:string;
   @Input() getEmail;
   @Input() getFullname;
-
-
 
   public feedbackFormgrp: FormGroup;
   feedback_message: FormControl;
@@ -44,6 +44,8 @@ export class FeedbackComponent implements OnInit {
   resultdata :any=[];
   typeFb: any[];
   subjectFb = [];
+  private subscriptionLang: ISubscription;
+  private subscription: ISubscription;
   
   constructor(
     public snackBar: MatSnackBar,
@@ -56,10 +58,11 @@ export class FeedbackComponent implements OnInit {
     private portalService:PortalService,
     private validateService:ValidateService,
     private toastr: ToastrService,
-    private sharedService :SharedService
+    private sharedService :SharedService,
+    private topnavservice: TopnavService,
   ) {
 
-      translate.onLangChange.subscribe((event: LangChangeEvent) => {
+    this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
         const myLang = translate.currentLang;
         if (myLang == 'en') {
           translate.get('HOME').subscribe((res: any) => {
@@ -74,16 +77,31 @@ export class FeedbackComponent implements OnInit {
               this.languageId = 2;
           });
         }
-        this.getSubType();
-        this.getTypenSubject();
+
+        if(this.topnavservice.flagLang){
+          this.getSubType();
+          this.getTypenSubject();
+        }
+        
       });
     }
     lang = this.lang;
     
     resetMsg = this.resetMsg;
+
+    ngOnDestroy() {
+      this.subscriptionLang.unsubscribe();
+      this.subscription.unsubscribe();
+    }
     
     ngOnInit() {
-      this.languageId = 2;
+      //this.languageId = 2;
+      if(!this.languageId){
+        this.languageId = localStorage.getItem('langID');
+      }else{
+        this.languageId = 1;
+      }
+
       this.checkLog();
       // this.getUserData();
       this.getTypenSubject();
