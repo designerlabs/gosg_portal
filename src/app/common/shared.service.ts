@@ -109,6 +109,9 @@ export class SharedService {
 
    readPortal(moduleName, page?, size?, keyword?, lang?): Observable<any[]> {
     let readUrl;
+    if(!lang){
+      lang = localStorage.getItem('langID');
+    }
     if(!keyword && page) {
 
       readUrl = this.config.urlPortal + moduleName + '?page=' + page + '&size=' + size  + '&language='+lang;
@@ -128,7 +131,9 @@ export class SharedService {
 
   readProtected(moduleName, page?, size?, keyword?, lang?): Observable<any[]> {
     let readUrl;
-
+    if(!lang){
+      lang = localStorage.getItem('langID');
+    }
     if(!keyword && page) {
       readUrl = this.config.urlProtected + moduleName + '?page=' + page + '&size=' + size  + '&language='+lang;
     } else if(keyword) {
@@ -144,6 +149,9 @@ export class SharedService {
   }
 
   readPortalById(moduleName, id, lang?): Observable<any[]> {
+    if(!lang){
+      lang = localStorage.getItem('langID');
+    }
     let readUrl = this.config.urlPortal + moduleName + id + '?language='+lang;
 
     return this.http.get(readUrl)
@@ -153,6 +161,9 @@ export class SharedService {
   }
 
   readProtectedById(moduleName, id, lang?): Observable<any[]> {
+    if(!lang){
+      lang = localStorage.getItem('langID');
+    }
     let readUrl = this.config.urlProtected + moduleName + id + '?language='+lang;
     return this.http.get(readUrl)
       .map((response: Response) => response.json())
@@ -161,6 +172,9 @@ export class SharedService {
   }
 
   create(data, moduleName, lang?) {
+    if(!lang){
+      lang = localStorage.getItem('langID');
+    }
     let createUrl = this.config.urlProtected   + moduleName + '?language='+lang;
 
     return this.http.post(createUrl, data)
@@ -169,6 +183,9 @@ export class SharedService {
   }
 
   update(data,moduleName, lang?) {
+    if(!lang){
+      lang = localStorage.getItem('langID');
+    }
     let updateUrl = this.config.urlProtected  + moduleName +'?language='+lang;
 
     return this.http.put(updateUrl, data)
@@ -177,6 +194,9 @@ export class SharedService {
   }
 
   delete(id,moduleName, lang?) {
+    if(!lang){
+      lang = localStorage.getItem('langID');
+    }
     let deleteUrl = this.config.urlProtected  + moduleName + id+ '?language='+lang;
 
     return this.http.delete(deleteUrl, null)
