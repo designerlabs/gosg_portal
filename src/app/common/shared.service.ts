@@ -33,6 +33,7 @@ export class SharedService {
         })
       });
     });
+    console.log("TESTED Languange: "+this.languageId);
     if(!this.languageId){
       //this.languageId = localStorage.getItem('langID'); // by N 04062018
       if(localStorage.getItem('langID')){

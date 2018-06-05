@@ -329,6 +329,20 @@ export function HttpLoaderFactory(http: Http) {
 
   ],
 
-  providers: [SliderService, BsModalService, TopnavService, SharedService, DatePipe, ValidateService, BreadcrumbService, PortalService, AuthService, ArticleService, NavRouterActivator, NavService, AnnouncementlistService, TransService, DialogsService, SearchService, NavRouterGuardService, GalleryService]
+  providers: [
+    SliderService, 
+    BsModalService, 
+    TopnavService, 
+    SharedService, 
+    DatePipe, 
+    ValidateService, 
+    BreadcrumbService, 
+    PortalService, AuthService, ArticleService, 
+    NavRouterActivator, NavService, AnnouncementlistService, 
+    TransService, DialogsService, 
+    SearchService, 
+    NavRouterGuardService, 
+    //GalleryService
+  ]
 })
 export class SharedModule { }
