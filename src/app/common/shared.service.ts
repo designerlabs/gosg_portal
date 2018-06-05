@@ -34,12 +34,12 @@ export class SharedService {
       });
     });
     if(!this.languageId){
-      this.languageId = localStorage.getItem('langID'); // by N 04062018
-      // if(localStorage.getItem('langID')){
-      //   this.languageId = localStorage.getItem('langID');
-      // }else{
-      //   this.languageId = 1;
-      // }
+      //this.languageId = localStorage.getItem('langID'); // by N 04062018
+      if(localStorage.getItem('langID')){
+        this.languageId = localStorage.getItem('langID');
+      }else{
+        this.languageId = 1;
+      }
       
     }
 
