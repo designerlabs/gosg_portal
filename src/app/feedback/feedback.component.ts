@@ -91,7 +91,7 @@ export class FeedbackComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
       this.subscriptionLang.unsubscribe();
-      this.subscription.unsubscribe();
+      //this.subscription.unsubscribe();
     }
     
     ngOnInit() {
