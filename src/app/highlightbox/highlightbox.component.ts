@@ -1,14 +1,16 @@
-import { Component, OnInit , Inject} from '@angular/core';
+import { Component, OnInit , Inject, OnDestroy} from '@angular/core';
+import { ISubscription } from "rxjs/Subscription";
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { Http } from '@angular/http';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
+import { TopnavService } from '../header/topnav/topnav.service';
 
 @Component({
   selector: 'app-highlightbox',
   templateUrl: './highlightbox.component.html',
   styleUrls: ['./highlightbox.component.css']
 })
-export class HighlightboxComponent implements OnInit {
+export class HighlightboxComponent implements OnInit, OnDestroy {
     highlightData: any;
     hotTopic: string;
     hotTopicContent: any[];
@@ -20,12 +22,14 @@ export class HighlightboxComponent implements OnInit {
     hotTopicImg: string;
     peyertaanImg: string;
     permohonanImg: string;
+    private subscription: ISubscription;
+    private subscriptionLang: ISubscription;
     lang = 'en';
     filter= false;
 
-    constructor(private translate: TranslateService, private http: Http, @Inject(APP_CONFIG) private config: AppConfig){
+    constructor(private translate: TranslateService, private topnavservice: TopnavService, private http: Http, @Inject(APP_CONFIG) private config: AppConfig){
         this.lang = translate.currentLang;
-        translate.onLangChange.subscribe((event: LangChangeEvent) => {
+        this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
             const myLang = translate.currentLang;
             if (myLang == 'en') {
                this.lang = 'en';
@@ -35,12 +39,22 @@ export class HighlightboxComponent implements OnInit {
               this.lang = 'ms';
               this.getData(this.lang);
             }
+
+            if(this.topnavservice.flagLang){
+              this.subscription = this.getData(this.lang);
+            }
         });
     }
 
     ngOnInit(){
-        this.getData(this.lang);
+      this.subscription = this.getData(this.lang);
     }
+
+    ngOnDestroy() {
+      this.subscriptionLang.unsubscribe();
+      this.subscription.unsubscribe();
+    }
+
 
    private highlightUrl: string = this.config.urlHighlights;
    getData(lang: string){
