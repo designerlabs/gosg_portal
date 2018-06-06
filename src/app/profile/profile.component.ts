@@ -1,4 +1,6 @@
-import { Component, OnInit, Inject, Input, AfterViewInit, ViewChild, ElementRef } from '@angular/core'
+import { Component, OnInit, Inject, Input, AfterViewInit, ViewChild, ElementRef, OnDestroy } from '@angular/core'
+import { ISubscription } from "rxjs/Subscription";
+import { TopnavService } from '../header/topnav/topnav.service';
 import { FormControl, FormGroup, Validators, FormBuilder  } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { SharedService } from '../common/shared.service';
@@ -49,7 +51,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   maskDateFormat: any;
   maskForeigner: any;
   maskPostcode: any;
- getPerPostCodeFlag = false;
+  getPerPostCodeFlag = false;
+  private subscriptionLang: ISubscription;
+  private subscription: ISubscription;
 
   @ViewChild('perhomephone') homephone: ElementRef
   @ViewChild('perPost') perPost: ElementRef
@@ -150,12 +154,13 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     private elementRef: ElementRef,
     private activatedRoute: ActivatedRoute,
     private toastr: ToastrService,
+    private topnavservice: TopnavService,
     @Inject(APP_CONFIG) private config: AppConfig,
 
     ) {
       this.lang = translate.currentLang;
-      this.languageId = 2;
-    translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      // this.languageId = 2;
+      this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
 
                   const myLang = translate.currentLang;
 
@@ -172,14 +177,29 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                           this.languageId = 2;
                       });
                   }
-                  this.getRace(this.languageId);
-                  this.getReligion(this.languageId );
-                  this.getGenderVal(this.languageId);
+
+                  if(this.topnavservice.flagLang){
+                    this.getRace(this.languageId);
+                    this.getReligion(this.languageId );
+                    this.getGenderVal(this.languageId);
+                  }
+                  
               });
 
   }
 
+  ngOnDestroy() {
+    this.subscriptionLang.unsubscribe();
+    //this.subscription.unsubscribe();
+  }
+
   ngOnInit() {
+    if(!this.languageId){
+      this.languageId = localStorage.getItem('langID');
+    }else{
+      this.languageId = 1;
+    }
+    
     this.initialBtn = true;
   //  this.profileUpdated();
     let today = new Date();
