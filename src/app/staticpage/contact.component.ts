@@ -108,10 +108,11 @@ export class ContactComponent implements OnInit, OnDestroy{
 
             if(this.topnavservice.flagLang){
                 this.subscription = this.getContactUs(this.langID);
+                this.mymap.setView([2.9414613,101.6575362], 13);
             }
 
            // this.mymap.setView([5.8142568, 108.5806004], 6);
-            this.mymap.setView([2.9414613,101.6575362], 13);
+            //this.mymap.setView([2.9414613,101.6575362], 13);
     
         });
     }
