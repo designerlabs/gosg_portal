@@ -149,6 +149,8 @@ export class PortalService {
   }
 
   getUserType(data){
+    console.log(this.usertypeUrl);
+    console.log(data);
     return this.http.get(this.usertypeUrl + data)
     .map((response: Response) => response.json())
     .retry(5)

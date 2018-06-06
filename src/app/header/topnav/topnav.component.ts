@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit, OnDestroy } from '@angular/core';
+import { ISubscription } from "rxjs/Subscription";
 import * as moment from 'moment';
 import * as $ from 'jquery';
 import { TranslateService } from '@ngx-translate/core';
@@ -13,7 +14,7 @@ let num = 0;
   templateUrl: './topnav.component.html',
   styleUrls: ['./topnav.component.css']
 })
-export class TopnavComponent implements OnInit, AfterViewInit {
+export class TopnavComponent implements OnInit, AfterViewInit, OnDestroy {
 
   translatedText: string;
   supportedLanguages: any[];
@@ -26,6 +27,8 @@ export class TopnavComponent implements OnInit, AfterViewInit {
   langId = this.langId;
   defaultColors: any;
   defaultFonts: any;
+  private subscriptionLang: ISubscription;
+  private subscription: ISubscription;
   fontTy(arg0: any): any {
     throw new Error("Method not implemented.");
   }
@@ -83,6 +86,10 @@ export class TopnavComponent implements OnInit, AfterViewInit {
   currlang: string = this.currlang;
   currlangMOB: string = this.currlangMOB;
 
+  ngOnDestroy() {
+    //this.subscriptionLang.unsubscribe();
+    //this.subscription.unsubscribe();
+  }
 
   ngOnInit() {
 
@@ -94,6 +101,8 @@ export class TopnavComponent implements OnInit, AfterViewInit {
     this.getLangID();
 
     this.getUserProfile();
+
+    console.log(this.colors);
 
     if(this.currlang == 'English'){
       this.isActive = true;
@@ -186,6 +195,7 @@ export class TopnavComponent implements OnInit, AfterViewInit {
     this.sharedservice.getThemeColor().subscribe(
       data => {
         this.getThemeColors = data;
+        console.log(this.getThemeColors);
       }, err => {
 
       })

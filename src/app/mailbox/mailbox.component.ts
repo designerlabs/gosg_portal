@@ -1,4 +1,6 @@
-import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { ISubscription } from "rxjs/Subscription";
+import { TopnavService } from '../header/topnav/topnav.service';
 import {Http} from '@angular/http';
 import { ProtectedService } from '../services/protected.service';
 import { Observable } from 'rxjs/Observable';
@@ -15,7 +17,7 @@ import { DialogsService } from '../dialogs/dialogs.service';
   templateUrl: './mailbox.component.html',
   styleUrls: ['./mailbox.component.css']
 })
-export class MailboxComponent implements OnInit {
+export class MailboxComponent implements OnInit, OnDestroy {
   mailData: any;
   mailContent: any;
   mailboxId=[];
@@ -27,22 +29,39 @@ export class MailboxComponent implements OnInit {
   isMailContainerShow = 'block';
   languageId = this.languageId;
   showNoData = false;
+  private subscriptionLang: ISubscription;
+  private subscription: ISubscription;
+  
   constructor(
     private protectedService: ProtectedService,
     private dialogsService: DialogsService,
     private cdRef:ChangeDetectorRef,
     private toastr: ToastrService,
     private sharedService: SharedService,
-    private translate:TranslateService
+    private translate:TranslateService,
+    private topnavservice: TopnavService,
     ) {
-      sharedService.loadTranslate();
-      
+        sharedService.loadTranslate();
+        
+        // if(this.topnavservice.flagLang){
+        //   this.getMails(this.mailPageCount, this.mailPageSize);
+        // }
+
      }
 
      lang = this.lang;
   
+  ngOnDestroy() {
+    //this.subscriptionLang.unsubscribe();
+    //this.subscription.unsubscribe();
+  }
   ngOnInit() {
-    this.languageId = 2;
+    //this.languageId = 2;
+    if(!this.languageId){
+      this.languageId = localStorage.getItem('langID');
+    }else{
+      this.languageId = 1;
+    }
     this.getMails(this.mailPageCount, this.mailPageSize);
   }
 
