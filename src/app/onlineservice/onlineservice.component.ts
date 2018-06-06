@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { SharedService } from '../common/shared.service';
@@ -12,13 +12,15 @@ import { MatRadioModule } from '@angular/material/radio';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { Http, Response } from '@angular/http';
+import { ISubscription } from 'rxjs/Subscription';
+import { TopnavService } from '../header/topnav/topnav.service';
 
 @Component({
   selector: 'gosg-onlineservice',
   templateUrl: './onlineservice.component.html',
   styleUrls: ['./onlineservice.component.css']
 })
-export class OnlineserviceComponent implements OnInit {
+export class OnlineserviceComponent implements OnInit, OnDestroy {
   valByKeyword: any;
 
   dropdownOpt = [];
@@ -49,19 +51,23 @@ export class OnlineserviceComponent implements OnInit {
   dataAgencyPage = null;
   valByAlpha;
   valByAgency;
+  
+  private subscription: ISubscription;
+  private subscriptionLang: ISubscription;
 
   constructor(
     private router: Router,
     private sharedService: SharedService,
     private translate: TranslateService,
     private toastr: ToastrService,
+    private topnavservice: TopnavService,
     private http: Http,
     @Inject(APP_CONFIG) private config: AppConfig,
 
   ) {
     this.lang = translate.currentLang;
     this.languageId = 2;
-    translate.onLangChange.subscribe((event: LangChangeEvent) => {
+    this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
 
       const myLang = translate.currentLang;
 
@@ -85,9 +91,8 @@ export class OnlineserviceComponent implements OnInit {
           ];
         });
 
-
-
       }
+      
       if (myLang == 'ms') {
         translate.get('HOME').subscribe((res: any) => {
           this.lang = 'ms';
@@ -109,15 +114,20 @@ export class OnlineserviceComponent implements OnInit {
         });
       }
 
-      this.onlyAgency = false;
-      this.loadAlpha(true);
-      this.selAllAgency(this.pageCount, this.pageSize);
-      this.selAgency(this.pageCount, this.pageSize);
-      // this.getAgencyList();
-      this.reset();
+      if(this.topnavservice.flagLang){
+
+        this.onlyAgency = false;
+        this.loadAlpha(true);
+        // this.selAllAgency(this.pageCount, this.pageSize);d
+        this.selAgency(this.pageCount, this.pageSize);
+        this.reset();
+      }
 
     });
 
+  }
+
+  ngOnInit() {
 
     if(!this.languageId){
       if(localStorage.getItem('langID')){
@@ -127,10 +137,7 @@ export class OnlineserviceComponent implements OnInit {
       }
       //this.getData();
     }
-
-  }
-
-  ngOnInit() {
+    
     this.valByAlpha = "0";
     this.valByAgency = "0";
     this.dropdownOpt = [
@@ -149,6 +156,10 @@ export class OnlineserviceComponent implements OnInit {
     // this.getAgencyList();
     this.loadAlpha(true);
     this.selAllAgency(this.pageCount, this.pageSize);
+  }
+
+  ngOnDestroy() {
+    this.subscriptionLang.unsubscribe();
   }
 
 

@@ -1,18 +1,20 @@
-import { Component, OnInit , Inject} from '@angular/core';
+import { Component, OnInit , Inject, OnDestroy} from '@angular/core';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { Http } from '@angular/http';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 import { NavService } from '../header/nav/nav.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { BreadcrumbService } from '../header/breadcrumb/breadcrumb.service';
+import { ISubscription } from 'rxjs/Subscription';
+import { TopnavService } from '../header/topnav/topnav.service';
 
 @Component({
   selector: 'app-announcementbox',
   templateUrl: './announcementbox.component.html',
   styleUrls: ['./announcementbox.component.css']
 })
-export class AnnouncementboxComponent implements OnInit {
-    languageId: any;
+export class AnnouncementboxComponent implements OnInit, OnDestroy {
+   languageId: any;
    lang = 'en';
    announcementData: any;
    calendarData: any;
@@ -22,12 +24,20 @@ export class AnnouncementboxComponent implements OnInit {
    isValid: any;
    private announcementUrl: string = this.config.urlAnnouncement;
    private calendarUrl: string = this.config.urlCalendar;
+   private subscription: ISubscription;
+   private subscriptionLang: ISubscription;
 
-    constructor(private translate: TranslateService, private http: Http,
-        @Inject(APP_CONFIG) private config: AppConfig, private route: ActivatedRoute,
-        private navService: NavService,  private breadcrumbService: BreadcrumbService,private router: Router){
+    constructor(private translate: TranslateService, 
+        private http: Http,
+        @Inject(APP_CONFIG) private config: AppConfig, 
+        private route: ActivatedRoute,
+        private navService: NavService, 
+        private topnavservice: TopnavService,
+        private breadcrumbService: BreadcrumbService, 
+        private router: Router
+    ){
         this.lang = translate.currentLang;
-        translate.onLangChange.subscribe((event: LangChangeEvent) => {
+        this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
             const myLang = translate.currentLang;
             if (myLang === 'en') {
                this.lang = 'en';
@@ -37,20 +47,28 @@ export class AnnouncementboxComponent implements OnInit {
               this.lang = 'ms';
               this.languageId = 2;          
             }
-            this.getCalendarData(this.lang);
-            this.getData(this.languageId);
+
+            if(this.topnavservice.flagLang){
+                this.getCalendarData(this.lang);
+                this.getData(this.languageId);
+            }
         });
+    }
+
+    ngOnInit() {
 
         if (!this.languageId) {
             this.languageId = localStorage.getItem('langID');
         } else {
             this.languageId = 1;
         }
-    }
 
-    ngOnInit() {
         this.getData(this.languageId);
         this.getCalendarData(this.lang)
+    }
+
+    ngOnDestroy() {
+      this.subscriptionLang.unsubscribe();
     }
 
     // getData(lang);

@@ -1,4 +1,4 @@
-import { Component, Output, Input, EventEmitter, OnInit, AfterContentInit, AfterViewChecked, AfterViewInit  } from '@angular/core';
+import { Component, Output, Input, EventEmitter, OnInit, AfterContentInit, AfterViewChecked, AfterViewInit, OnDestroy  } from '@angular/core';
 import { ArticleService } from '../article.service';
 
 import { NavService } from '../../header/nav/nav.service';
@@ -7,13 +7,15 @@ import {TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { BreadcrumbService } from '../../header/breadcrumb/breadcrumb.service';
 
 import 'rxjs/add/operator/switchMap';
+import { ISubscription } from 'rxjs/Subscription';
+import { TopnavService } from '../../header/topnav/topnav.service';
 
 @Component({
   selector: 'gosg-content',
   templateUrl: './content.component.html',
   styleUrls: ['./content.component.css']
 })
-export class ContentComponent implements OnInit {
+export class ContentComponent implements OnInit, OnDestroy {
   statusID: any;
   @Output() menuClick = new EventEmitter();
   breadcrumb: any;
@@ -29,12 +31,14 @@ export class ContentComponent implements OnInit {
   handleClickMe(e){
     console.log(e);
   }
+  private subscription: ISubscription;
+  private subscriptionLang: ISubscription;
 
-  constructor(public articleService: ArticleService,  private route: ActivatedRoute, private navService: NavService, private translate: TranslateService, private router: Router, private breadcrumbService: BreadcrumbService) {
+  constructor(public articleService: ArticleService, private topnavservice: TopnavService, private route: ActivatedRoute, private navService: NavService, private translate: TranslateService, private router: Router, private breadcrumbService: BreadcrumbService) {
     this.lang = translate.currentLang;
     this.langId = 1;
 
-        translate.onLangChange.subscribe((event: LangChangeEvent) => {
+        this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
 
         const myLang = translate.currentLang;
 
@@ -62,13 +66,15 @@ export class ContentComponent implements OnInit {
             });
         }
 
+        if(this.topnavservice.flagLang){
 
-        if(this.moduleName == 'subcategory'){
-          this.navService.triggerSubArticle(this.subID, this.langId);
-        }else if(this.moduleName == 'content'){
-          this.navService.triggerContent(this.subID, this.langId);
-        }else{
-          this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID);
+          if(this.moduleName == 'subcategory'){
+            this.navService.triggerSubArticle(this.subID, this.langId);
+          }else if(this.moduleName == 'content'){
+            this.navService.triggerContent(this.subID, this.langId);
+          }else{
+            this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID);
+          }
         }
 
     });
@@ -79,6 +85,13 @@ export class ContentComponent implements OnInit {
 
 
   ngOnInit() {
+
+    if(!this.langId){
+      this.langId = localStorage.getItem('langID');
+    }else{
+      this.langId = 1;
+    }
+
     this.articleData = this.articleService.getArticle();
     this.topicID = parseInt(this.router.url.split('/')[2]);
     var tt = this.router.url.split('/');
@@ -86,6 +99,9 @@ export class ContentComponent implements OnInit {
     this.navService.triggerContent(this.subID, localStorage.getItem('langID'));
   }
 
+  ngOnDestroy() {
+    this.subscriptionLang.unsubscribe();
+  }
 
   getTheme(){
     return localStorage.getItem('themeColor');

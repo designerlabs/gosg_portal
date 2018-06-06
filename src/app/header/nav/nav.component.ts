@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Input, Output, EventEmitter, Inject } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input, Output, EventEmitter, Inject, OnDestroy } from '@angular/core';
 // import { AuthService } from '../../auth/auth.service'
 import { IMenu, IUrl } from './nav.model';
 import { Http, Response } from '@angular/http';
@@ -9,6 +9,8 @@ import { NavService } from './nav.service';
 import * as $ from 'jquery';
 import { SearchService } from '../../search/search.service';
 import { ToastrService } from 'ngx-toastr';
+import { ISubscription } from 'rxjs/Subscription';
+import { TopnavService } from '../topnav/topnav.service';
 
 @Component({
     selector: 'app-nav',
@@ -16,7 +18,7 @@ import { ToastrService } from 'ngx-toastr';
     styleUrls: ['./nav.component.css']
 
 })
-export class NavComponent implements OnInit, AfterViewInit {
+export class NavComponent implements OnInit, AfterViewInit, OnDestroy {
 
     mobile: boolean;
     @Output() menuClick = new EventEmitter();
@@ -37,15 +39,19 @@ export class NavComponent implements OnInit, AfterViewInit {
     private articleUrl: string = this.config.urlArticle;
     private menuUrl: string = this.config.urlMenu;
 
+    private subscription: ISubscription;
+    private subscriptionLang: ISubscription;
+    
     constructor(
         private translate: TranslateService,
         private toastr: ToastrService,
         @Inject(APP_CONFIG) private config: AppConfig,
         private http: Http,
         private navService: NavService,
+        private topnavservice: TopnavService,
         private router: Router,
         private searchService: SearchService)
-         {
+        {
         translate.onLangChange.subscribe((event: LangChangeEvent) => {
 
             const myLang = translate.currentLang;
@@ -57,7 +63,6 @@ export class NavComponent implements OnInit, AfterViewInit {
                     this.langId = 1;
                     this.languageId = 1;
                     this.imgSrc = 'logo_en';
-                    this.getMenu();
                 });
 
             }
@@ -68,24 +73,32 @@ export class NavComponent implements OnInit, AfterViewInit {
                     this.langId = 2;
                     this.languageId = 2;
                     this.imgSrc = 'logo_ms';
-                    this.getMenu();
                 });
             }
+
+            if(this.topnavservice.flagLang){
+              this.getMenu();
+            }
         });
+    }
+
+    ngOnInit() {
 
         if (!this.languageId) {
             this.languageId = localStorage.getItem('langID');
         } else {
             this.languageId = 1;
         }
-    }
 
-    ngOnInit() {
         this.page = this.router.url.split('/')[1];
         // console.log(this.page)
         this.imgSrc = 'logo_ms';
-        this.navService.getMenuData(this.langId).subscribe(resMenuData => this.menus = resMenuData);
+        this.getMenu();
         this.getPop();
+    }
+
+    ngOnDestroy() {
+      this.subscriptionLang.unsubscribe();
     }
 
     color: string = 'red';
@@ -120,7 +133,7 @@ export class NavComponent implements OnInit, AfterViewInit {
     }
 
     getMenu() {
-        this.navService.getMenuData(this.langId)
+        this.navService.getMenuData(this.languageId)
             .subscribe(resMenuData => { this.menus = resMenuData });
     }
 
