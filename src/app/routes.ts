@@ -72,7 +72,7 @@ export const appRoutes: Routes = [
     {path: 'content/:id1', component: ContentComponent},
     {path: 'archive/category/:id', component:ArchivecategoryComponent},
     {path: 'archive/subcategory/:id', component:ArchivesubcategoryComponent},
-    {path: 'archive/:id', component:ArchivecontentComponent},
+    {path: 'archive/content/:id', component:ArchivecontentComponent},
     {path: 'gallery/category/:id', component:GalleryComponent},
     {path: 'gallery', component:GalleryComponent},
     {path: 'gallery/content/:id', component:GalleryComponent},

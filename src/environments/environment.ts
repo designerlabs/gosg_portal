@@ -10,5 +10,5 @@ export const environment = {
   mediaURL: '/',
   mockApiURL :'/',
   baseURL: '/',
-  miaugeoURL: 'http://10.24.18.151:9200/gosg/'
+  miaugeoURL:  '/gosg/'
 };

@@ -43,11 +43,11 @@ export class SitemapComponent implements OnInit, OnDestroy {
             this.lang = 'ms';
             this.languageId = 2;
           }
-  
+
           if(this.topnavservice.flagLang){
             this.getCategories(this.languageId);
           }
-  
+
       });
   }
 
@@ -60,6 +60,7 @@ export class SitemapComponent implements OnInit, OnDestroy {
     }
 
     this.getCategories(this.languageId);
+    window.scrollTo(0,0);
   }
 
   ngOnDestroy() {
