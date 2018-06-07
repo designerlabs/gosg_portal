@@ -88,12 +88,12 @@ export class TopnavComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy() {
     //this.subscriptionLang.unsubscribe();
-    //this.subscription.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
   ngOnInit() {
 
-    this.colors = this.topnavservice.getColors();
+    //this.colors = this.topnavservice.getColors();
     this.loadFont();
     this.loadColor();
     // this.loadDefaultFonts();
