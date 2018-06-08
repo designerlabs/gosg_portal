@@ -9,6 +9,7 @@ import {SharedService } from '../../common/shared.service';
 import { debug } from 'util';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 let num = 0;
+
 @Component({
   selector: 'app-topnav',
   templateUrl: './topnav.component.html',
@@ -138,6 +139,7 @@ export class TopnavComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   loadDefaultFonts(){
+    alert("ok");
     this.sharedservice.getThemeFont().subscribe(
       data => {
         this.defaultFonts = data;
@@ -246,6 +248,7 @@ export class TopnavComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   resetBgColor() {
+    alert("test");
 
     this.sharedservice.getThemeColor().subscribe(
       data => {

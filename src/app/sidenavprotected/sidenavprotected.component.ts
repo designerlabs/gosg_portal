@@ -36,15 +36,22 @@ export class SidenavprotectedComponent implements OnInit {
 
   ngOnInit() {
     this.colors = this.topnavservice.getColors();
-    this.loadFont();
-    this.loadColor();
-    this.loadDefaultFonts();
-    this.loadDefaultColor();
+    // this.loadFont();
+    // this.loadColor();
+    // this.loadDefaultFonts();
+    // this.loadDefaultColor();
     this.loadCustomFontType();
   }
 
   openNav() {
     document.getElementById("mySidenavProtected").style.width = "250px";
+  }
+
+  callApiProtected(){
+    this.loadFont();
+    this.loadColor();
+    // this.loadDefaultFonts();
+    // this.loadDefaultColor();
   }
 
   closeNav() {
