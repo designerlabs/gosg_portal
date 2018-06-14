@@ -1,5 +1,7 @@
 
-import { Component, OnInit,ElementRef, Input, ViewChild, Inject, ViewContainerRef  } from '@angular/core';
+import { Component, OnInit,ElementRef, Input, ViewChild, Inject, ViewContainerRef, OnDestroy  } from '@angular/core';
+import { ISubscription } from "rxjs/Subscription";
+import { TopnavService } from '../header/topnav/topnav.service';
 import { FormControl, FormGroup, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import {TranslateService, LangChangeEvent } from '@ngx-translate/core';
@@ -20,7 +22,7 @@ import {environment} from '../../environments/environment';
   styleUrls: ['./feedback-protected.component.css']
 })
 
-export class FeedbackProtectedComponent implements OnInit {
+export class FeedbackProtectedComponent implements OnInit, OnDestroy {
   regemail: any;
   fullname: any;
   userId: any;
@@ -46,6 +48,8 @@ export class FeedbackProtectedComponent implements OnInit {
   resultdata :any=[];
   typeFb: any[];
   subjectFb = [];
+  private subscriptionLang: ISubscription;
+  private subscription: ISubscription;
 
   constructor(
     public snackBar: MatSnackBar,
@@ -58,9 +62,10 @@ export class FeedbackProtectedComponent implements OnInit {
     private protectedService:ProtectedService,
     private validateService:ValidateService,
     private toastr: ToastrService,
-    private sharedService :SharedService
+    private sharedService :SharedService,
+    private topnavservice: TopnavService,
   ) {
-    translate.onLangChange.subscribe((event: LangChangeEvent) => {
+    this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
       const myLang = translate.currentLang;
       if (myLang == 'en') {
         translate.get('HOME').subscribe((res: any) => {
@@ -75,16 +80,28 @@ export class FeedbackProtectedComponent implements OnInit {
             this.languageId = 2;
         });
       }
-      this.getSubType();
-      this.getTypenSubject();
+      if(this.topnavservice.flagLang){
+        this.getSubType();
+        this.getTypenSubject();
+      }
     });
   }
   lang = this.lang;
   
   resetMsg = this.resetMsg;
 
+  ngOnDestroy() {
+    this.subscriptionLang.unsubscribe();
+    //this.subscription.unsubscribe();
+  }
+
   ngOnInit() {
-    this.languageId = 2;
+    //this.languageId = 2;
+    if(!this.languageId){
+      this.languageId = localStorage.getItem('langID');
+    }else{
+      this.languageId = 1;
+    }
     //this.checkLog();
     this.getUserData();
     this.getTypenSubject();

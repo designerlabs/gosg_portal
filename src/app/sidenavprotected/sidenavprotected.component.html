@@ -36,7 +36,7 @@
             <a href="../uapsso/Logout" (click)="logout()"><i class="fa fa-sign-out" aria-hidden="true"></i> {{ 'home.menu.logout' | translate }}</a>
         </li>
         <li>
-            <mat-expansion-panel>
+            <mat-expansion-panel (opened)="callApiProtected()">
                 <mat-expansion-panel-header>
                   <mat-panel-title class="font-size-m">
                       <i class="fa fa-cog" aria-hidden="true"></i>&nbsp;{{ 'home.menu.setting' | translate }}

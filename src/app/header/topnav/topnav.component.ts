@@ -9,6 +9,7 @@ import {SharedService } from '../../common/shared.service';
 import { debug } from 'util';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 let num = 0;
+
 @Component({
   selector: 'app-topnav',
   templateUrl: './topnav.component.html',
@@ -27,6 +28,8 @@ export class TopnavComponent implements OnInit, AfterViewInit, OnDestroy {
   langId = this.langId;
   defaultColors: any;
   defaultFonts: any;
+  private subscriptionLang: ISubscription;
+  private subscription: ISubscription;
   fontTy(arg0: any): any {
     throw new Error("Method not implemented.");
   }
@@ -83,12 +86,11 @@ export class TopnavComponent implements OnInit, AfterViewInit, OnDestroy {
 
   currlang: string = this.currlang;
   currlangMOB: string = this.currlangMOB;
-  private subscription: ISubscription;
-  private subscriptionLang: ISubscription;
+
 
   ngOnInit() {
 
-    this.colors = this.topnavservice.getColors();
+    //this.colors = this.topnavservice.getColors();
     this.loadFont();
     this.loadColor();
     // this.loadDefaultFonts();
@@ -96,6 +98,8 @@ export class TopnavComponent implements OnInit, AfterViewInit, OnDestroy {
     this.getLangID();
 
     this.getUserProfile();
+
+    console.log(this.colors);
 
     if(this.currlang == 'English'){
       this.isActive = true;
@@ -138,7 +142,8 @@ export class TopnavComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   loadDefaultFonts(){
-    this.subscription =  this.sharedservice.getThemeFont().subscribe(
+    alert("ok");
+    this.sharedservice.getThemeFont().subscribe(
       data => {
         this.defaultFonts = data;
         data.filter(function(font){
@@ -195,6 +200,7 @@ export class TopnavComponent implements OnInit, AfterViewInit, OnDestroy {
     this.sharedservice.getThemeColor().subscribe(
       data => {
         this.getThemeColors = data;
+        console.log(this.getThemeColors);
       }, err => {
 
       })
@@ -245,6 +251,7 @@ export class TopnavComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   resetBgColor() {
+    alert("test");
 
     this.sharedservice.getThemeColor().subscribe(
       data => {

@@ -1,4 +1,6 @@
-import { Component, Inject, Input, TemplateRef,  OnInit, Output, EventEmitter, ViewChild, ElementRef, InjectionToken, AfterViewInit } from '@angular/core';
+import { Component, Inject, Input, TemplateRef,  OnInit, Output, EventEmitter, ViewChild, ElementRef, InjectionToken, AfterViewInit, OnDestroy } from '@angular/core';
+import { ISubscription } from "rxjs/Subscription";
+import { TopnavService } from '../header/topnav/topnav.service';
 import { FormControl, FormGroup, Validators, FormBuilder  } from '@angular/forms';
 import { BreadcrumbService } from '../header/breadcrumb/breadcrumb.service';
 import { SharedService } from '../common/shared.service';
@@ -37,7 +39,7 @@ declare function unescape(s:string): string;
     ]
 })
 
-export class RegisterComponent implements OnInit, AfterViewInit {
+export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
     refUrl: string;
     errMsg: string;
     getEmail: any;
@@ -73,6 +75,8 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     public supportedLanguages: any[];
     result: any[];
     getResult:any;
+    private subscriptionLang: ISubscription;
+    private subscription: ISubscription;
     @Output() langChange = new EventEmitter();
 
     @ViewChild('tele') tele: ElementRef;
@@ -135,10 +139,11 @@ export class RegisterComponent implements OnInit, AfterViewInit {
                 textMask:TextMaskModule,
                 private dialogsService: DialogsService,
                 private toastr: ToastrService,
-                private modalService: BsModalService
+                private modalService: BsModalService,
+                private topnavservice: TopnavService,
             ) {
                 this.lang = translate.currentLang;
-                this.languageId = 2;
+                //this.languageId = 2;
                 this.registration_Form = fb.group({
                     "Name": this.nama_penuh,
                     "Email": this.emel,
@@ -149,7 +154,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
                 });
 
                 
-                translate.onLangChange.subscribe((event: LangChangeEvent) => {
+                this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
 
                     const myLang = translate.currentLang;
 
@@ -166,15 +171,19 @@ export class RegisterComponent implements OnInit, AfterViewInit {
                             this.languageId = 2;
                         });
                     }
-                    this.getUserType();
+
+                    if(this.topnavservice.flagLang){
+                        this.getUserType(this.languageId);
+                    }
+                    
                 });
 
-                if(!this.languageId){
-                    this.languageId = localStorage.getItem('langID');
-                    //this.getData();
-                  }else{
-                    this.languageId = 1;
-                  }
+                // if(!this.languageId){
+                //     this.languageId = localStorage.getItem('langID');
+                //     //this.getData();
+                //   }else{
+                //     this.languageId = 1;
+                //   }
             }
 
              
@@ -188,8 +197,8 @@ export class RegisterComponent implements OnInit, AfterViewInit {
                 this.modal.hide();
               }
 
-    getUserType(){
-        this.portalservice.getUserType(this.languageId)
+    getUserType(lang){
+        this.portalservice.getUserType(lang)
             .subscribe(
                 userData => {
                     this.getUserData = userData.userTypeList
@@ -208,13 +217,22 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     private registerUrl: string = this.config.urlRegister;
     private uapstagingUrl: string = this.config.urlUapStaging;
     
-    ngOnInit() {    
+    ngOnDestroy() {
+        this.subscriptionLang.unsubscribe();
+        //this.subscription.unsubscribe();
+    }
 
+    ngOnInit() {    
+        if(!this.languageId){
+            this.languageId = localStorage.getItem('langID');
+        }else{
+            this.languageId = 1;
+        }
         // this.citizenFormGrp.get('telefon').disable();
         this.refUrl =  location.search.split('refUrl=')[1];
         console.log(unescape(this.refUrl));
         
-        this.getUserType();
+        this.getUserType(this.languageId);
         this.maskCitizen = this.validateService.getMask().telephone;
         this.maskForeigner = this.validateService.getMask().telephonef;
         this.maskICNo = this.validateService.getMask().icno;
