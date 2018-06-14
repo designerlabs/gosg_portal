@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit, OnDestroy } from '@angular/core';
+import { ISubscription } from "rxjs/Subscription";
 import * as moment from 'moment';
 import * as $ from 'jquery';
 import { TranslateService } from '@ngx-translate/core';
@@ -13,7 +14,7 @@ let num = 0;
   templateUrl: './topnav.component.html',
   styleUrls: ['./topnav.component.css']
 })
-export class TopnavComponent implements OnInit, AfterViewInit {
+export class TopnavComponent implements OnInit, AfterViewInit, OnDestroy {
 
   translatedText: string;
   supportedLanguages: any[];
@@ -82,7 +83,8 @@ export class TopnavComponent implements OnInit, AfterViewInit {
 
   currlang: string = this.currlang;
   currlangMOB: string = this.currlangMOB;
-
+  private subscription: ISubscription;
+  private subscriptionLang: ISubscription;
 
   ngOnInit() {
 
@@ -103,8 +105,15 @@ export class TopnavComponent implements OnInit, AfterViewInit {
   }
 
 
+  ngOnDestroy() {
+    // this.subscriptionLang.unsubscribe();
+    this.subscription.unsubscribe();
+  }
+
+
+
   loadFont(){
-    this.sharedservice.getThemeFont().subscribe(
+   this.subscription =  this.sharedservice.getThemeFont().subscribe(
       data => {
         this.getThemeFonts = data;
       }, err => {
@@ -129,7 +138,7 @@ export class TopnavComponent implements OnInit, AfterViewInit {
   }
 
   loadDefaultFonts(){
-    this.sharedservice.getThemeFont().subscribe(
+    this.subscription =  this.sharedservice.getThemeFont().subscribe(
       data => {
         this.defaultFonts = data;
         data.filter(function(font){
