@@ -129,6 +129,15 @@ export class ArticleComponent implements OnInit, OnDestroy {
     event.preventDefault();
   }
 
+  getModule(data){
+    let a = data.split("/");
+    return a[1];
+  }
+
+  getID(data){
+    let a = data.split("/");
+    return a[2];
+  }
 
   triggerArticle(moduleName, lang, topicID) {
     this.route.paramMap

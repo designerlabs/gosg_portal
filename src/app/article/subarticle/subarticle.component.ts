@@ -103,7 +103,7 @@ export class SubarticleComponent implements OnInit, OnDestroy {
     this.topicID = parseInt(this.router.url.split('/')[2]);
     var tt = this.router.url.split('/');
     this.subID = parseInt(tt[tt.length - 1]);
-    
+
     if (location.pathname.indexOf('agency') !== -1) {
       this.agencyActive = true;
       this.navService.triggerSubArticleAgency(localStorage.getItem('langID'));
@@ -138,6 +138,17 @@ export class SubarticleComponent implements OnInit, OnDestroy {
     this.navService.triggerSubArticleAgency(localStorage.getItem('langID'));
     this.router.navigate(['/subcategory', 'agency']);
     event.preventDefault();
+  }
+
+
+  getModule(data){
+    let a = data.split("/");
+    return a[1];
+  }
+
+  getID(data){
+    let a = data.split("/");
+    return a[2];
   }
 
   clickContentFromMenu(pId, aId) {

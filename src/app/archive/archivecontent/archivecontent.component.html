@@ -13,7 +13,13 @@
               </li>
               <li>/</li>
               <li>
-                  {{'home.breadcrumb.register' | translate}}
+                  <div *ngFor="let article of articleService.articles">
+                   <div *ngFor="let breadCrum of article.breadcrum; let i = index; let lastItem = last" style="display: inline;">
+                     <a *ngIf="breadCrum.breadcrumUrl" href="" [routerLink]="['/'+getModule(breadCrum.breadcrumUrl), getID(breadCrum.breadcrumUrl)]">{{breadCrum.breadcrumName}}</a>
+                     <a *ngIf="!breadCrum.breadcrumUrl">{{breadCrum.breadcrumName}}</a>
+                     <span>{{lastItem ? '' : '&nbsp;/&nbsp;'}}</span>
+                   </div>
+                  </div>
               </li>
           </ul>
       </div>
