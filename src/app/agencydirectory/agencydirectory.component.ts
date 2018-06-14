@@ -419,38 +419,37 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
 
   // get agencyType Data
   getAgencyData(count, size) {
+      this.portalservice.readPortal('agency/language/' + this.languageId, count, size).subscribe(
+        // this.http.get(this.dataUrl).subscribe(
+        data => {
+          this.portalservice.errorHandling(data, (function () {
+            this.recordList = data;
+            // console.log(this.recordList)
 
-    // console.log('get')
-    // this.loading = true;
-    this.portalservice.readPortal('agency/language/' + this.languageId, count, size).subscribe(
-      // this.http.get(this.dataUrl).subscribe(
-      data => {
-        this.portalservice.errorHandling(data, (function () {
-          this.recordList = data;
-          // console.log(this.recordList)
+            if (this.recordList.agencyList.length > 0) {
+              // this.dataSource.data = this.recordList.list;
+              this.seqPageNum = this.recordList.pageNumber;
+              this.seqPageSize = this.recordList.pageSize;
+              this.totalRec = this.recordList.totalElements;
+              this.recordTable = this.recordList.agencyList;
+              this.noNextData = this.recordList.pageNumber === this.recordList.totalPages;
+              // console.log(this.seqPageNum)
+              // console.log(this.seqPageSize)
+              console.log(this.recordTable)
+              // console.log(this.recordTable[0])
 
-          if (this.recordList.agencyList.length > 0) {
-            // this.dataSource.data = this.recordList.list;
-            this.seqPageNum = this.recordList.pageNumber;
-            this.seqPageSize = this.recordList.pageSize;
-            this.totalRec = this.recordList.totalElements;
-            this.recordTable = this.recordList.agencyList;
-            this.noNextData = this.recordList.pageNumber === this.recordList.totalPages;
-            // console.log(this.seqPageNum)
-            // console.log(this.seqPageSize)
-            console.log(this.recordTable)
-            // console.log(this.recordTable[0])
+              this.showNoData = false;
+            } else {
+              this.recordTable = [];
+              this.showNoData = true;
+            }
+          }).bind(this));
+          // this.loading = false;
+        }, err => {
+          // this.loading = false;
+        });
 
-            this.showNoData = false;
-          } else {
-            this.recordTable = [];
-            this.showNoData = true;
-          }
-        }).bind(this));
-        // this.loading = false;
-      }, err => {
-        // this.loading = false;
-      });
+
   }
 
   pageChange(event, totalPages) {
@@ -458,7 +457,14 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
     if (this.ministry) {
       this.getSearchData(this.pageCount, 10);
     } else {
-      this.getAgencyData(this.pageCount, 10);
+      if(this.keyword ){
+        this.getSearchData(this.pageCount, 10, this.keyword);
+      }else if(this.letter){
+        this.getSearchData(this.pageCount, 10);
+      }else{
+        this.getAgencyData(this.pageCount, 10);
+      }
+
     }
 
     this.pageSize = 10;
@@ -469,7 +475,7 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
     let searchUrl;
     let wPaging = '&page=' + count + '&size=' + size;
     console.log('search')
-
+    console.log(this.letter);
     if (keyword != "" && keyword != null && keyword.length != null && keyword.length >= 3) {
 
       this.portalservice.readPortal('agency/language/' + this.languageId, count, size, keyword).subscribe(
