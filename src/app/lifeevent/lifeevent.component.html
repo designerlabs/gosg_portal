@@ -6,28 +6,72 @@
       </h2>
       <p style="text-align: center;" class="font-size-s">{{lifeEventDesc}}</p>
     </div>
-        <div class="container" *ngFor="let leData of lifeEventData" style="padding:0px;">
-          <div class="row"  *ngIf="leData.type =='citizen'">
-            <div class="col-md-3 col-sm-12 col-xs-12 lifeEventBox" *ngFor="let getContent of leData.data">
-              <div class="innerBox">
-                <div class="lifeEventBox-title">
-                  <h2 class="font-size-m"  style="border-top:3px solid;" [style.border-color]="getTheme()" [style.color]="getTheme()">{{getContent.categoryName}}</h2>
-                </div>
 
-                <div class="lifeEventBox-description font-size-s">
-                  <a *ngFor="let subData of getContent.subCategoryList; let i = index; let lastItem = last">
-                          {{subData.categoryName}} <i class="{{lastItem ? '' : 'fa fa-angle-right'}}" style="font-weight: bold;"></i>
-                  </a>
+
+
+
+
+    <div class="container lifeevent_tab">
+        <mat-tab-group dynamicHeight>
+            <mat-tab label="Citizen">
+              <div class="example-small-box mat-elevation-z4">
+                  <div *ngFor="let leData of lifeEventData" style="padding:0px;">
+                    <div class="row"  *ngIf="leData.type =='citizen'">
+                      <div  *ngFor="let getContent of leData.data;  let index=index; let odd=odd; let even=even;">
+                        <div class="col-md-3 col-sm-12 col-xs-12 lifeEventBox">
+                          <div class="innerBox">
+                            <div class="lifeEventBox-title">
+                              <h2 class="font-size-m"  style="border-top:3px solid;" [style.border-color]="getTheme()">
+                                <a  class="lifeEventCategory" [style.color]="getTheme()" href="" [routerLink]="['/category', getContent.categoryCode]">{{getContent.categoryName}}</a>
+                              </h2>
+                            </div>
+
+                            <div class="lifeEventBox-description font-size-s">
+                              <a [routerLink]="['/subcategory', subData.categoryCode]" *ngFor="let subData of getContent.subCategoryList; let i = index; let lastItem = last">
+                                      {{subData.categoryName}} <i class="{{lastItem ? '' : 'fa fa-angle-right'}}" style="font-weight: bold;"></i>
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                        <div *ngIf="(index + 1) % 4 == 0" class="clearfix"></div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+            </mat-tab>
+            <mat-tab label="Non Citizen">
+              <div class="example-large-box mat-elevation-z4">
+                <div *ngFor="let leData of lifeEventData" style="padding:0px;">
+                  <div class="row"  *ngIf="leData.type =='noncitizen'">
+                    <div class="col-md-3 col-sm-12 col-xs-12 lifeEventBox" *ngFor="let getContent of leData.data">
+                      <div class="innerBox">
+                        <div class="lifeEventBox-title">
+                          <h2 class="font-size-m"  style="border-top:3px solid;" [style.border-color]="getTheme()">
+                            <a  class="lifeEventCategory" [style.color]="getTheme()" href="" [routerLink]="['/category', getContent.categoryCode]">{{getContent.categoryName}}</a>
+                          </h2>
+                        </div>
+
+                        <div class="lifeEventBox-description font-size-s">
+                          <a [routerLink]="['/subcategory', subData.categoryCode]" *ngFor="let subData of getContent.subCategoryList; let i = index; let lastItem = last">
+                                  {{subData.categoryName}} <i class="{{lastItem ? '' : 'fa fa-angle-right'}}" style="font-weight: bold;"></i>
+                          </a>
+                        </div>
+                      </div>
+
+                      <!-- <div class="lifeEventBox-title">
+                              <h2 class="font-size-l" [style.color]="getTheme()">{{getContent.categoryName}}</h2>
+                      </div>
+                      <p style="text-align: center;" *ngFor="let data for getContent.subCategoryList" class="font-size-s"> {{ data | json}}</p> -->
+                    </div>
+                  </div>
                 </div>
               </div>
+            </mat-tab>
+          </mat-tab-group>
+    </div>
 
-              <!-- <div class="lifeEventBox-title">
-                      <h2 class="font-size-l" [style.color]="getTheme()">{{getContent.categoryName}}</h2>
-              </div>
-              <p style="text-align: center;" *ngFor="let data for getContent.subCategoryList" class="font-size-s"> {{ data | json}}</p> -->
-            </div>
-          </div>
-        </div>
+
+
         <!-- <div class="container" *ngFor="let leData of lifeEventData" style="padding:0px;">
                 <div *ngIf="leData.type =='citizen'">
                         <div *ngFor="let citi of leData.data">

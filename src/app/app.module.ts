@@ -26,6 +26,8 @@ import { ConfirmComponent } from './message/confirm.component';
 import { SearchResultComponent } from './search/search-result/search-result.component';
 import { SubarticleComponent } from './article/subarticle/subarticle.component';
 import { ArticleComponent } from './article/article.component';
+import { LifeeventComponent } from './lifeevent/lifeevent.component';
+import { HomeComponent } from './home/home.component';
 
 
 // import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule } from "@angular/material";
@@ -70,7 +72,9 @@ imports: [
     LoginComponent,
     SearchResultComponent,
     SubarticleComponent,
-    ArticleComponent
+    ArticleComponent,
+    LifeeventComponent,
+    HomeComponent
 
   ],
 

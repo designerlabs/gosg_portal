@@ -134,7 +134,7 @@
           </div>
 
         </div>
-        <div *ngIf="article.template === 'content'">
+        <div *ngIf="article.template === 'content' || article.template === 'lifeevent'">
           <div class="col-sm-6" *ngFor="let rightContent of article.subCategoryList;">
 
             <div class="row">
@@ -214,6 +214,13 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div *ngIf="article.template === 'lifeevent'" class="col-sm-3">
+          <ul class="rightMenu">
+            <li *ngFor="let rightContent of article.menuRight;">
+              <a [href]="rightContent.agencyApplicationUrl" target="_blank">{{rightContent.agencyApplicationName}}</a>
+            </li>
+          </ul>
         </div>
         </div>
 

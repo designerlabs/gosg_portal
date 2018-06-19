@@ -31,6 +31,7 @@ import { PollProtectedComponent } from './poll/poll-protected.component';
 import { HomeProtectedComponent } from './home/home-protected.component';
 import { ProfileUpdatedComponent } from './profile-updated/profile-updated.component';
 import { SearchResultComponent } from './search/search-result/search-result.component';
+import {LifeeventComponent } from './lifeevent/lifeevent.component';
 import { SubarticleComponent } from './article/subarticle/subarticle.component';
 import { ArticleComponent } from './article/article.component';
 
@@ -52,6 +53,7 @@ export function HttpLoaderFactory(http: Http) {
     PollProtectedComponent,
     HomeProtectedComponent,
     ProfileUpdatedComponent,
+    LifeeventComponent,
     SearchResultComponent,
     SubarticleComponent,
     ArticleComponent
