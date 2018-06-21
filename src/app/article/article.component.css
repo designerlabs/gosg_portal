@@ -24,6 +24,11 @@
             color:#333;
         }
 
+        .content_description{
+          padding-bottom: 20px;
+          display: block;
+        }
+
         .list-unstyled {
             margin-top: -15px;
         }

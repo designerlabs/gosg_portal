@@ -1,8 +1,8 @@
 <div class="container-fluid lifeEventContainer animated fadeIn">
     <div>
-      <h2 class="font-size-l" style="text-align: center; padding: 10px 0px;" [style.color]="getTheme()">
+      <h2 class="font-size-l" style="text-align: center; padding: 10px 0px;" [style.color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
         {{lifeEventTitle}}
-        <span class="customUnderLine" [style.border-color]="getTheme()"></span>
+        <span class="customUnderLine" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'"></span>
       </h2>
       <p style="text-align: center;" class="font-size-s">{{lifeEventDesc}}</p>
     </div>
@@ -21,8 +21,8 @@
                         <div class="col-md-3 col-sm-12 col-xs-12 lifeEventBox">
                           <div class="innerBox">
                             <div class="lifeEventBox-title">
-                              <h2 class="font-size-m"  style="border-top:3px solid;" [style.border-color]="getTheme()">
-                                <a  class="lifeEventCategory" [style.color]="getTheme()" href="" [routerLink]="['/category', getContent.categoryCode]">{{getContent.categoryName}}</a>
+                              <h2 class="font-size-m"  style="border-top:3px solid;" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
+                                <a  class="lifeEventCategory" [style.color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" href="" [routerLink]="['/category', getContent.categoryCode]">{{getContent.categoryName}}</a>
                               </h2>
                             </div>
 
@@ -46,8 +46,8 @@
                     <div class="col-md-3 col-sm-12 col-xs-12 lifeEventBox" *ngFor="let getContent of leData.data">
                       <div class="innerBox">
                         <div class="lifeEventBox-title">
-                          <h2 class="font-size-m"  style="border-top:3px solid;" [style.border-color]="getTheme()">
-                            <a  class="lifeEventCategory" [style.color]="getTheme()" href="" [routerLink]="['/category', getContent.categoryCode]">{{getContent.categoryName}}</a>
+                          <h2 class="font-size-m"  style="border-top:3px solid;" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
+                            <a  class="lifeEventCategory" [style.color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" href="" [routerLink]="['/category', getContent.categoryCode]">{{getContent.categoryName}}</a>
                           </h2>
                         </div>
 
@@ -59,7 +59,7 @@
                       </div>
 
                       <!-- <div class="lifeEventBox-title">
-                              <h2 class="font-size-l" [style.color]="getTheme()">{{getContent.categoryName}}</h2>
+                              <h2 class="font-size-l" [style.color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">{{getContent.categoryName}}</h2>
                       </div>
                       <p style="text-align: center;" *ngFor="let data for getContent.subCategoryList" class="font-size-s"> {{ data | json}}</p> -->
                     </div>
@@ -75,9 +75,9 @@
         <!-- <div class="container" *ngFor="let leData of lifeEventData" style="padding:0px;">
                 <div *ngIf="leData.type =='citizen'">
                         <div *ngFor="let citi of leData.data">
-                                <h2 class="font-size-1" style="text-align: center;" [style.color]="getTheme()">
+                                <h2 class="font-size-1" style="text-align: center;" [style.color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
                                         {{citi.categoryName}}
-                                        <span class="customUnderLine" [style.border-color]="getTheme()"></span>
+                                        <span class="customUnderLine" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'"></span>
                                 </h2>
                                 <p style="text-align: center;" *ngFor="let data for citi.subCategoryList" class="font-size-s"> {{ data | json}}</p>
                         </div>
@@ -93,25 +93,25 @@
 <!-- <div class="container-fluid lifeEventContainer animated fadeIn">
         <div class="container" *ngFor="let leData of lifeEventData" style="padding:0px;">
                 <div>
-                        <h2 class="font-size-1" style="text-align: center;" [style.color]="getTheme()">
+                        <h2 class="font-size-1" style="text-align: center;" [style.color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
                                 {{leData.title}}
-                        <span class="customUnderLine" [style.border-color]="getTheme()"></span>
+                        <span class="customUnderLine" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'"></span>
                         </h2>
                         <p style="text-align: center;" class="font-size-s"> {{leData.description}}</p>
                 </div>
                 <div class="row">
                         <div class="col-md-3 col-sm-12 col-xs-12 lifeEventBox" *ngFor="let getContent of leData.content">
-                                <a href="" class="lifeEventBg" style="border-top:3px solid;" [style.border-color]="getTheme()">
+                                <a href="" class="lifeEventBg" style="border-top:3px solid;" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
                                         <div class="lifeEventBox-title">
-                                                <h2 class="font-size-l" [style.color]="getTheme()">{{getContent.name}}</h2>
+                                                <h2 class="font-size-l" [style.color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">{{getContent.name}}</h2>
                                         </div>
                                         <div class="lifeEventBox-description font-size-s lefteventlist"  [innerHTML]="getContent.text">
                                         </div>
                                 </a>
                                 <div class="overlay">
                                         <div class="text" *ngFor="let getAction of leData.action">
-                                                <a class="btn warna_bg warna_border_color" [style.background-color]="getTheme()" href="/public/cms/topic/44/sub_topic/315/">{{getAction.button1}}</a>
-                                                <a class="btn warna_bg warna_border_color" [style.background-color]="getTheme()" href="/public/cms/topic/44/sub_topic/315/">{{getAction.button2}}</a>
+                                                <a class="btn warna_bg warna_border_color" [style.background-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" href="/public/cms/topic/44/sub_topic/315/">{{getAction.button1}}</a>
+                                                <a class="btn warna_bg warna_border_color" [style.background-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" href="/public/cms/topic/44/sub_topic/315/">{{getAction.button2}}</a>
                                         </div>
                                 </div>
                         </div>

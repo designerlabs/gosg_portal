@@ -1,13 +1,13 @@
 <div class="animated fadeIn" *ngIf="footer.length>0">
   <!-- *ngFor="let data of footer" -->
-  <div class="primary col-md-12" [style.background]="getTheme()" *ngIf="dataSocialLnk.length>0">
+  <div class="primary col-md-12" [style.background]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" *ngIf="dataSocialLnk.length>0">
     <!-- *ngIf="data.titleCode ==4"  id="social-area"-->
     <div class="col-sm-12" style="padding-bottom:10px;padding-top: 10px; text-align: center;" id="social-icons">
       <div class="footersocial">
         <span *ngFor="let sdata of dataSocialLnk">
           <a [href]="sdata.footerContentUrl" target="_blank" style="width:30px;">
             <span class="social_icon_bg" title="{{sdata.footerContentName}}" data-toggle="tooltip" data-original-title="Tooltip on top">
-              <span class="icon-social" [style.color]="getTheme()">
+              <span class="icon-social" [style.color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
                 <i ngClass="fa fa-{{sdata.footerContentIcon}}" style="padding:5px 2px 0px 0px"></i>
               </span>
             </span>
@@ -20,19 +20,19 @@
     <!--  *ngIf="data.titleCode==1 || data.titleCode==2 || data.titleCode==3 || data.titleCode==7" -->
     <div class="footer-left">
       <div class="col-md-4" style="min-height:200px">
-        <button [style.background-color]="getTheme()" class="btn btn-sm footer-toggle fa fa-angle-down pull-right visible-xs" (click)="showFooter('contact')">
+        <button [style.background-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" class="btn btn-sm footer-toggle fa fa-angle-down pull-right visible-xs" (click)="showFooter('contact')">
           <span class="sr-only">{{tltContact.titleCode}}</span>
         </button>
-        <h4 [style.color]="getTheme()" class="footer-heading font-size-m warna_title_color" style="padding-left: 40px;">
+        <h4 [style.color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" class="footer-heading font-size-m warna_title_color" style="padding-left: 40px;">
           {{tltContact.title}}
-          <span [style.border-color]="getTheme()" class="footer-title-underline warna_border_color"></span>
+          <span [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" class="footer-title-underline warna_border_color"></span>
         </h4>
         <!--CONTACT US-->
         <div *ngIf="showcontact && dataContact.length>0" class="address footer" style="margin-top: 0%; position:relative;">
           <div *ngFor="let eachitm of dataContact">
             <div *ngIf="eachitm.footerContentIcon" style="margin-left:30px;">
               <p class="font-size-s">
-                <span [style.background-color]="getTheme()" ngClass="fa fa-{{eachitm.footerContentIcon}}"></span>
+                <span [style.background-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" ngClass="fa fa-{{eachitm.footerContentIcon}}"></span>
               </p>
               <div *ngIf="eachitm.enabled" [innerHtml]="eachitm.footerContentName" class="font-size-s">
               </div>
@@ -44,12 +44,12 @@
       </div>
 
       <div class="col-md-4" style="min-height:200px">
-        <button [style.background-color]="getTheme()" class="btn btn-sm footer-toggle fa fa-angle-down pull-right visible-xs" (click)="showFooter('access')">
+        <button [style.background-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" class="btn btn-sm footer-toggle fa fa-angle-down pull-right visible-xs" (click)="showFooter('access')">
           <span class="sr-only">{{tltAccessPage.titleCode}}</span>
         </button>
-        <h4 [style.color]="getTheme()" class="footer-heading font-size-m warna_title_color" style="padding-left: 40px;">
+        <h4 [style.color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" class="footer-heading font-size-m warna_title_color" style="padding-left: 40px;">
           {{tltAccessPage.title}}
-          <span [style.border-color]="getTheme()" class="footer-title-underline warna_border_color"></span>
+          <span [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" class="footer-title-underline warna_border_color"></span>
         </h4>
         <!--CAPAIAN/ ACCESS PAGE-->
         <div *ngIf="showaccess && dataAccessPage.length>0">
@@ -66,12 +66,12 @@
       </div>
 
       <div class="col-md-4" style="min-height:20px">
-        <button [style.background-color]="getTheme()" class="btn btn-sm footer-toggle fa fa-angle-down pull-right visible-xs" (click)="showFooter('visitor')">
+        <button [style.background-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" class="btn btn-sm footer-toggle fa fa-angle-down pull-right visible-xs" (click)="showFooter('visitor')">
           <span class="sr-only">{{tltNoOfVisitor.titleCode}}</span>
         </button>
-        <h4 [style.color]="getTheme()" class="footer-heading font-size-m warna_title_color" style="padding-left: 40px;">
+        <h4 [style.color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" class="footer-heading font-size-m warna_title_color" style="padding-left: 40px;">
           {{tltNoOfVisitor.title}}
-          <span [style.border-color]="getTheme()" class="footer-title-underline warna_border_color"></span>
+          <span [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" class="footer-title-underline warna_border_color"></span>
         </h4>
         <!--JUMLAH PELAWAT/ Visitor count-->
         <div class="address footer" *ngIf="showvisitor && dataNoOfVisitor.length>0" style="margin-top: 0%;">
@@ -84,12 +84,12 @@
         </div>
       </div>
       <div class="col-md-4" style="min-height:200px">
-        <button [style.background-color]="getTheme()" class="btn btn-sm footer-toggle fa fa-angle-down pull-right visible-xs" (click)="showFooter('extlinks')">
+        <button [style.background-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" class="btn btn-sm footer-toggle fa fa-angle-down pull-right visible-xs" (click)="showFooter('extlinks')">
           <span class="sr-only">{{tltExtLnk.titleCode}}</span>
         </button>
-        <h4 [style.color]="getTheme()" class="footer-heading font-size-m warna_title_color" style="padding-left: 40px;">
+        <h4 [style.color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" class="footer-heading font-size-m warna_title_color" style="padding-left: 40px;">
           {{tltExtLnk.title}}
-          <span [style.border-color]="getTheme()" class="footer-title-underline warna_border_color"></span>
+          <span [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" class="footer-title-underline warna_border_color"></span>
         </h4>
         <!--Pautan luar/ External links-->
         <div class="sub-add" *ngIf="showextlinks && dataExtLnk.length>0">

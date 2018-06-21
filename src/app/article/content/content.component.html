@@ -87,7 +87,8 @@
           </div>
         </div>
         <div *ngIf="article.template === 'lifeevent'" class="col-sm-3">
-          <ul class="rightMenu">
+          <h4 class="sideBarMenu--title padding-bottom-l font-size-m warna_font">{{'common.onlineservice' | translate }}</h4>
+          <ul class="rightMenu" [style.background-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
             <li *ngFor="let rightContent of article.menuRight;">
               <a [href]="rightContent.agencyApplicationUrl" target="_blank">{{rightContent.agencyApplicationName}}</a>
             </li>
