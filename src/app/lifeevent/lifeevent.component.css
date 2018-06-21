@@ -21,6 +21,23 @@
                 color:black;
             }
 
+            .mat-tab-header{
+              margin: 0 auto !important;
+            }
+
+            .tabbing{
+              text-align: center;
+
+            }
+
+            .lifeEventCategory:hover{
+              color: #333 !important;
+            }
+
+            .tabbing li{
+              display: inline;
+            }
+
             .lifeEventBox {
                 position: relative;
                 padding: 10px 25px;

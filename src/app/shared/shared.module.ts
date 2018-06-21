@@ -16,7 +16,6 @@ import { SliderService } from '../slider/slider.service';
 import { SearchComponent } from '../search/search.component';
 import { SearchIntComponent } from '../search/searchInt.component';
 
-import { LifeeventComponent } from "../lifeevent/lifeevent.component";
 import { AboutusComponent } from "../staticpage/aboutus.component";
 import { AnnouncementboxComponent } from "../announcementbox/announcementbox.component";
 import { AnnouncementComponent } from "../announcement/announcement.component";
@@ -141,6 +140,7 @@ import { ArchivesubcategoryComponent } from '../archive/archivesubcategory/archi
 import { ArchivecontentComponent } from '../archive/archivecontent/archivecontent.component';
 import { GalleryService } from '../gallery/gallery.service';
 import { GalleryComponent } from '../gallery/gallery.component';
+// import { LifeeventComponent } from '../lifeevent/lifeevent.component';
 //import { GalleryService } from '../gallery/gallery.service';
 // import { SearchResultComponent } from '../search/search-result/search-result.component';
 export function HttpLoaderFactory(http: Http) {
@@ -182,7 +182,6 @@ export function HttpLoaderFactory(http: Http) {
     ContactComponent,
     SearchComponent,
     SearchIntComponent,
-    LifeeventComponent,
     SliderComponent,
     TopnavComponent,
     AboutusComponent,
@@ -209,7 +208,6 @@ export function HttpLoaderFactory(http: Http) {
     ErrorComponent,
     PollComponent,
     BreadcrumbComponent,
-    HomeComponent,
     FeedbackComponent,
     ConfirmComponent,
     SharedPipe,
@@ -238,7 +236,6 @@ export function HttpLoaderFactory(http: Http) {
     ContactComponent,
     SearchComponent,
     SearchIntComponent,
-    LifeeventComponent,
     SliderComponent,
     TopnavComponent,
     RouterModule,
@@ -265,7 +262,6 @@ export function HttpLoaderFactory(http: Http) {
     ErrorComponent,
     PollComponent,
     BreadcrumbComponent,
-    HomeComponent,
     FeedbackComponent,
     ConfirmComponent,
     SetactiveComponent,
@@ -331,18 +327,18 @@ export function HttpLoaderFactory(http: Http) {
   ],
 
   providers: [
-    SliderService, 
-    BsModalService, 
-    TopnavService, 
-    SharedService, 
-    DatePipe, 
-    ValidateService, 
-    BreadcrumbService, 
-    PortalService, AuthService, ArticleService, 
-    NavRouterActivator, NavService, AnnouncementlistService, 
-    TransService, DialogsService, 
-    SearchService, 
-    NavRouterGuardService, 
+    SliderService,
+    BsModalService,
+    TopnavService,
+    SharedService,
+    DatePipe,
+    ValidateService,
+    BreadcrumbService,
+    PortalService, AuthService, ArticleService,
+    NavRouterActivator, NavService, AnnouncementlistService,
+    TransService, DialogsService,
+    SearchService,
+    NavRouterGuardService,
     GalleryService
   ]
 })

@@ -28,6 +28,7 @@ export class SidenavmainComponent implements OnInit {
   plusBtn = false;
   admin: boolean;
   langId = this.langId;
+  panelOpenState: any;
   @Output()
   openSlide:EventEmitter<string> = new EventEmitter();
   constructor(
@@ -37,11 +38,20 @@ export class SidenavmainComponent implements OnInit {
 
   ngOnInit() {
     this.colors = this.topnavservice.getColors();
-    this.loadFont();
-    this.loadColor();
-    this.loadDefaultFonts();
-    this.loadDefaultColor();
 
+      // this.loadFont(); 
+      // this.loadColor();
+      // this.loadDefaultFonts();
+      // this.loadDefaultColor();   
+    
+  }
+
+  callApi(){
+    
+    this.loadFont(); 
+    this.loadColor();
+    // this.loadDefaultFonts();
+    // this.loadDefaultColor(); 
   }
 
   openNav() {

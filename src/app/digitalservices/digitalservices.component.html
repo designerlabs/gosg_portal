@@ -32,8 +32,9 @@
   <div class="row">
       <div class="col-md-6 dserviceList" *ngFor="let dsvc of dsData">
           <ul>
-              <li class="container a"><h4>{{ dsvc.title }}</h4>
-                  <ul *ngFor="let d of dsvc.details" style="padding-bottom: 10px;">
+              <li class="container a">
+                  <h4>{{ dsvc.title }}</h4>
+                  <ul *ngFor="let d of dsvc.details" style="padding:10px 0px 5px 25px; ">
                       <li class="no-styles">
                           <a [href]="d.url">{{ d.title }}</a>
                           &nbsp;

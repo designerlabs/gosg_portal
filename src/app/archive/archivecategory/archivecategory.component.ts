@@ -38,7 +38,7 @@ export class ArchivecategoryComponent implements OnInit, OnDestroy {
   constructor(public articleService: ArticleService, private topnavservice: TopnavService, private route: ActivatedRoute, private navService: NavService, private translate: TranslateService, private router: Router, private breadcrumbService: BreadcrumbService, @Inject(APP_CONFIG) private config: AppConfig) {
     this.lang = translate.currentLang;
     this.langId = 1;
-    
+
     this.subscriptionLang = this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       // this.sharedService.errorHandling(event, (function(){
         const myLang = this.translate.currentLang;
@@ -140,6 +140,16 @@ export class ArchivecategoryComponent implements OnInit, OnDestroy {
             this.isValid = this.breadcrumbService.isValid = true;
             this.breadcrumb = this.breadcrumb.name = '';
         });
+    }
+
+    getModule(data){
+      let a = data.split("/");
+      return a[1];
+    }
+
+    getID(data){
+      let a = data.split("/");
+      return a[2];
     }
 
     checkImgData(e){

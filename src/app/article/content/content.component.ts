@@ -130,6 +130,16 @@ export class ContentComponent implements OnInit, OnDestroy {
     event.preventDefault();
   }
 
+  getModule(data){
+    let a = data.split("/");
+    return a[1];
+  }
+
+  getID(data){
+    let a = data.split("/");
+    return a[2];
+  }
+
   checkImgData(e){
       const chkData = e.search('<img');
       if (chkData != -1){
