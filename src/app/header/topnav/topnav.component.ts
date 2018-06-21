@@ -99,7 +99,7 @@ export class TopnavComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.getUserProfile();
 
-    console.log(this.colors);
+    // console.log(this.colors);
 
     if(this.currlang == 'English'){
       this.isActive = true;
@@ -200,7 +200,7 @@ export class TopnavComponent implements OnInit, AfterViewInit, OnDestroy {
     this.sharedservice.getThemeColor().subscribe(
       data => {
         this.getThemeColors = data;
-        console.log(this.getThemeColors);
+        // console.log(this.getThemeColors);
       }, err => {
 
       })

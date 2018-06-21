@@ -43,6 +43,8 @@
       "filauth": "Penulis",
       "filtop": "Topik",
       "filsubtopic": "Sub Topik",
+      "citizen": "Acara Warganegara",
+      "noncitizen": "Acara Bukan Warganegara",
       "local": "Dalaman",
       "onlineser": "Perkhidmatan Dalam Talian",
       "global":"Global",

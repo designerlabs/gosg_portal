@@ -33,8 +33,8 @@ export class SearchResultComponent implements OnInit, OnDestroy {
   errorMessage: any;
   observableGlobalItem: any;
   globVal: any;
-  chknoncitizen: any;
-  chkcitizen: any;
+  chknoncitizen: boolean = false;
+  chkcitizen: boolean = false;
   lang = this.lang;
   languageId: any;
   public loading = false;
@@ -250,8 +250,6 @@ export class SearchResultComponent implements OnInit, OnDestroy {
 
   // FILTERS
   public defaultFiltersObj: any = {
-    "life_event_citizen_flag": false,
-    "life_event_non_citizen_flag": false,
     "ref_language_id": this.languageId
   };
 
@@ -268,8 +266,9 @@ export class SearchResultComponent implements OnInit, OnDestroy {
   }
 
   public agencyDefaultFilterObj: any = {
-    "life_event_citizen_flag": false,
-    "life_event_non_citizen_flag": false,
+    "is_active": true,
+    "is_citizen_event": false,
+    "is_noncitizen_event": false,
     "is_document": false,
     "enabled": true
   }
@@ -279,8 +278,11 @@ export class SearchResultComponent implements OnInit, OnDestroy {
   }
 
   public lifeEventFiltersObj: any = {
-    "life_event_citizen_flag": false,
-    "life_event_non_citizen_flag": false,
+    "category": {
+      "is_active": true,
+      "is_citizen_event": false,
+      "is_noncitizen_event": false
+    }
   }
 
   ngOnInit() {
@@ -519,6 +521,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
       // this.mainObj.filters = this.agencyDefaultFilterObj.slice();
 
       delete this.mainObj.aggregations;
+      delete this.mainObj.filters.category;
       this.mainObj.aggregations = this.osAggregations;
       // console.log("OS : ")
       // console.log(this.mainObj)
@@ -664,6 +667,8 @@ export class SearchResultComponent implements OnInit, OnDestroy {
       if (this.tabIndex === 0) { // LOCAL SEARCH
 
         delete this.mainObj.aggregations;
+        // delete this.mainObj.filters.category;
+
         this.mainObj.aggregations = this.locAggregations;
         // console.log(this.mainObj)
 
@@ -673,12 +678,12 @@ export class SearchResultComponent implements OnInit, OnDestroy {
           dataUrl = localURL+'content';
 
         // Search Specification
-        if (this.valTopic && this.category_topic) {
+        if ((this.valTopic && this.valTopic.length >= 1) && this.category_topic) {
           this.checkCurrObj(this.category_topic);
           this.addFilterAry(this.valTopic, this.category_topic);
         }
 
-        if (this.valSubTopic && this.category_sub_topic) {
+        if ((this.valSubTopic && this.valSubTopic.length >= 1) && this.category_sub_topic) {
           this.checkCurrObj(this.category_sub_topic);
           this.addFilterAry(this.valSubTopic, this.category_sub_topic);
         }
@@ -712,7 +717,19 @@ export class SearchResultComponent implements OnInit, OnDestroy {
             }
           }
         }
+
+        if(this.chkcitizen) {
+          this.mainObj.filters.category.is_citizen_event = this.chkcitizen;
+        }
+
+        if(this.chknoncitizen) {
+          this.mainObj.filters.category.is_noncitizen_event = this.chknoncitizen;
+        }
+        
+        jQuery.extend(this.mainObj.filters, this.lifeEventFiltersObj);
         payloadObj = this.mainObj;
+
+        // console.log(payloadObj)
 
       } else if (this.tabIndex === 1) { // ONLINE SERVICE SEARCH
 
@@ -741,8 +758,8 @@ export class SearchResultComponent implements OnInit, OnDestroy {
         payloadObj = nullObj;
       }
 
-      // console.log("CURRENT SEARCH OBJECT:")
-      // console.log(this.mainObj)
+      console.log("CURRENT SEARCH OBJECT:")
+      console.log(this.mainObj)
       // console.log("CURRENT SEARCH OBJECT IN JSON:")
       // console.log(JSON.stringify(this.mainObj))
 
@@ -753,8 +770,8 @@ export class SearchResultComponent implements OnInit, OnDestroy {
       return this.http.post(dataUrl, payloadObj)
         .map(res => res.json())
         .subscribe(rData => {
-          // console.log("CURRENT SEARCH RESULT:")
-          // console.log(rData);
+          console.log("CURRENT SEARCH RESULT:")
+          console.log(rData);
 
           this.totalElements = 0;
 
@@ -826,7 +843,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
                 topic = { "name": item[0].name, "val": item[0].val }
                 this.ddsubTopics.push(topic)
               });
-
+              
               // console.log(this.ddtopics)
               // console.log(this.ddsubTopics)
 
@@ -1074,7 +1091,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
   }
 
   pageChange(evt) {
-    console.log(evt.value)
+    // console.log(evt.value)
     this.resetPage();
     this.pagesize = evt.value;
     this.searchByKeyword(this.ser_word);
@@ -1107,10 +1124,6 @@ export class SearchResultComponent implements OnInit, OnDestroy {
     this.valMinistry = [];
     this.valAgency = [];
 
-    // console.log(this.ser_word)
-
-    // console.log(this.mainObj)
-
     if (this.tabIndex == 0) {
       if (this.mainObj.filters.category_sub_topic)
         delete this.mainObj.filters.category_sub_topic;
@@ -1118,7 +1131,8 @@ export class SearchResultComponent implements OnInit, OnDestroy {
       if (this.mainObj.filters.category_topic)
         delete this.mainObj.filters.category_topic;
 
-      delete this.mainObj.filters.ranges;
+        delete this.mainObj.filters.ranges;
+        console.log('sini')
     } else if (this.tabIndex == 1) {
       delete this.mainObj.filters.agency_name;
       delete this.mainObj.filters.ministry_name;
@@ -1132,19 +1146,21 @@ export class SearchResultComponent implements OnInit, OnDestroy {
     if (this.mainObj.keywordMap)
       delete this.mainObj.keywordMap
 
-    // console.log(this.mainObj)
-    // debugger;
-    // console.log(this.rangesObj)
-    // console.log(this.refLangObj)
     if (this.tabIndex == 0) {
       this.mainObj.filters = this.defaultFiltersObj;
+      jQuery.extend(this.mainObj.filters, this.lifeEventFiltersObj);
+        
+      this.mainObj.filters.category.is_citizen_event = false;
+      this.mainObj.filters.category.is_noncitizen_event = false;
+        
+      this.chkcitizen = false;
+      this.chknoncitizen = false;
     } else if (this.tabIndex == 1) {
-      // this.mainObj.filters = this.agencyDefaultFilterObj;
       this.mainObj.aggregations = this.osAggregations;
     }
-    // debugger;
 
+    // console.log('onReset')
+    // console.log(this.mainObj)
     this.searchByKeyword(this.ser_word);
-    // debugger;
   }
 }

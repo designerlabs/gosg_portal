@@ -43,6 +43,8 @@
       "filauth": "Author",
       "filtop": "Topics",
       "filsubtopic": "Sub Topics",
+      "citizen": "Citizen Event",
+      "noncitizen": "Non-Citizen Event",
       "local": "Local",
       "onlineser": "Online Services",
       "global":"Global",
