@@ -1,9 +1,9 @@
 <input type="checkbox" class="read-more-state" id="post-2"  [(ngModel)]="filter" (click)="filterData()" />
 <div class="container topicContainer read-more-wrap" >
-    <div class="row"> 
+    <div class="row">
         <div class="col-md-4 col-xs-12 col-sm-12 topicBox" *ngFor="let topics of topicsData; let i = index" [attr.data-index]="i" [ngClass]="{'read-more-target': i >= 6}">
-            <a href="" [routerLink]="['/topic', topics.topic_id]" [style.border-color]="getTheme()">
-            <div class="topicBox-icon"><i class="fa fa-{{topics.icon}}  warna_title_color" aria-hidden="true" style="color: rgb(0, 189, 187);" [style.color]="getTheme()"></i></div>
+            <a href="" [routerLink]="['/topic', topics.topic_id]" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
+            <div class="topicBox-icon"><i class="fa fa-{{topics.icon}}  warna_title_color" aria-hidden="true" style="color: rgb(0, 189, 187);" [style.color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'"></i></div>
             <div class="topicBox-title"><h2 class="font-size-l" style="font-family: Roboto;">{{topics.name}}</h2></div>
             <div class="topicBox-description font-size-s" style="font-family: Roboto;">{{topics.description}}</div>
             </a>
@@ -11,9 +11,9 @@
     </div>
 </div>
 <div class="container read-more-container">
-    <label for="post-2" class="read-more-trigger btn btn-md" [style.background]="getTheme()">
+    <label for="post-2" class="read-more-trigger btn btn-md" [style.background]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
         {{filter ? ('home.expandButton.less' | translate) : ('home.expandButton.more' | translate) }} <i [ngClass]="filter ? 'fa fa-long-arrow-up' : 'fa fa-long-arrow-down'"></i>
-    </label> 
+    </label>
 </div>
 
 

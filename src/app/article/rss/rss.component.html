@@ -98,7 +98,7 @@
                         <div class="col-sm-6" *ngFor="let leftContent of article.rssCategories">
                              <div>
                                 <div style="width:100%; margin-right:10px; height:auto;">
-                                    <a class="intro-box warna_border_color" [style.border-color]="getTheme()" href="" (click)="clickSideMenu(leftContent.id)">
+                                    <a class="intro-box warna_border_color" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" href="" (click)="clickSideMenu(leftContent.id)">
                                         <h4 class="font-size-m warna_font">
                                             {{leftContent.label}}
                                         </h4>

@@ -128,7 +128,7 @@
                     <div class="col-sm-6">
                         <div>
                           <div style="width:100%; margin-right:10px; height:auto;">
-                              <a class="intro-box warna_border_color" [style.border-color]="getTheme()" href="" (click)="clickSideMenuOthers(rightContent, '', 'archive')">
+                              <a class="intro-box warna_border_color" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" href="" (click)="clickSideMenuOthers(rightContent, '', 'archive')">
                                   <h4 class="font-size-m warna_font">
                                       {{rightContent.categoryName}}
                                   </h4>

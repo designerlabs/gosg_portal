@@ -105,35 +105,38 @@
             <div class="col-sm-6">
 
                 <div *ngIf="article.subCategoryList" class="row padding-top-xl">
-                    <div *ngIf="article.image">
-                      <div>
-                          <img [src]="config.externalMediaURL + '/images/'+ article.image.mediaFile" style="width:100%;">
-                          <div style="position:absolute; width:auto;">
-                              <h2 class="topic_bg_title font-size-l">
-                                  <span style="padding-left:10px;">
-                                      {{article.categoryName}}
-                                  </span>
+                    <div class="col-sm-12">
+                      <div *ngIf="article.image">
+                        <div>
+                            <img [src]="config.externalMediaURL + '/images/'+ article.image.mediaFile" style="width:100%;">
+                            <div style="position:absolute; width:auto;">
+                                <h2 class="topic_bg_title font-size-l">
+                                    <span style="padding-left:10px;">
+                                        {{article.categoryName}}
+                                    </span>
+                                </h2>
+                            </div>
+                        </div>
+                      </div>
+
+                      <div *ngIf="!article.image">
+                          <div>
+                              <h2 class="titleWObg font-size-l">
+                                  {{article.categoryName}}
                               </h2>
                           </div>
                       </div>
-                  </div>
 
-                  <div *ngIf="!article.image">
-                      <div>
-                          <h2 class="titleWObg font-size-l">
-                              {{article.categoryName}}
-                          </h2>
-                      </div>
-                  </div>
+                      <span class="font-size-s defaultColor content_description" [innerHTML]="article.categoryDescription"></span>
+                    </div>
 
-                  <span class="font-size-s defaultColor" [innerHTML]="article.categoryDescription"></span>
                   <div  *ngFor="let rightContent of article.subCategoryList; let index=index; let odd=odd; let even=even;">
                     <div class="col-sm-6">
                         <div>
                           <div style="width:100%; margin-right:10px; height:auto;">
 
 
-                              <a class="intro-box warna_border_color" [style.border-color]="getTheme()" href="" (click)="clickSideMenu(rightContent)">
+                              <a class="intro-box warna_border_color" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" href="" (click)="clickSideMenu(rightContent)">
                                   <h4 class="font-size-m warna_font">
                                       {{rightContent.categoryName}}
                                   </h4>
@@ -159,7 +162,7 @@
                         <div class="col-sm-6">
                             <div>
                               <div style="width:100%; margin-right:10px; height:auto;">
-                                  <a class="intro-box warna_border_color" [style.border-color]="getTheme()" href="" (click)="clickContentFromMenu(article.categoryCode, tabContent.contentCode)">
+                                  <a class="intro-box warna_border_color" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" href="" (click)="clickContentFromMenu(article.categoryCode, tabContent.contentCode)">
                                       <h4 class="font-size-m warna_font">
                                           {{tabContent.contentTitle}}
                                       </h4>
@@ -179,7 +182,7 @@
                         <div class="col-sm-6">
                             <div>
                               <div style="width:100%; margin-right:10px; height:auto;">
-                                  <a class="intro-box warna_border_color" [style.border-color]="getTheme()" [href]="agencyContent.agencyWebsiteUrl" target="_blank">
+                                  <a class="intro-box warna_border_color" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" [href]="agencyContent.agencyWebsiteUrl" target="_blank">
                                       <h4 class="font-size-m warna_font">
                                           {{agencyContent.agencyName}}
                                       </h4>
@@ -211,35 +214,37 @@
 
 
                     <div *ngIf="!article.content" class="row padding-top-xl">
-                      <div *ngIf="article.image">
-                        <div>
-                            <img [src]="config.externalMediaURL + '/images/'+ article.image.mediaFile" style="width:100%;">
-                            <div style="position:absolute; width:auto;">
-                                <h2 class="topic_bg_title font-size-l">
-                                    <span style="padding-left:10px;">
-                                        {{article.categoryName}}
-                                    </span>
+                      <div class="col-sm-12">
+                        <div *ngIf="article.image">
+                          <div>
+                              <img [src]="config.externalMediaURL + '/images/'+ article.image.mediaFile" style="width:100%;">
+                              <div style="position:absolute; width:auto;">
+                                  <h2 class="topic_bg_title font-size-l">
+                                      <span style="padding-left:10px;">
+                                          {{article.categoryName}}
+                                      </span>
+                                  </h2>
+                              </div>
+                          </div>
+                        </div>
+
+                        <div *ngIf="!article.image">
+                            <div>
+                                <h2 class="titleWObg font-size-l">
+                                    {{article.categoryName}}
                                 </h2>
                             </div>
                         </div>
-                    </div>
 
-                    <div *ngIf="!article.image">
-                        <div>
-                            <h2 class="titleWObg font-size-l">
-                                {{article.categoryName}}
-                            </h2>
-                        </div>
+                      <span class="font-size-s defaultColor content_description" [innerHTML]="article.categoryDescription"></span>
                     </div>
-
-                    <span class="font-size-s defaultColor" [innerHTML]="article.categoryDescription"></span>
                     <div  *ngFor="let rightContent of article.subCategoryList; let index=index; let odd=odd; let even=even;">
                       <div class="col-sm-6">
                           <div>
                             <div style="width:100%; margin-right:10px; height:auto;">
 
 
-                                <a class="intro-box warna_border_color" [style.border-color]="getTheme()" href="" (click)="clickSideMenu(rightContent)">
+                                <a class="intro-box warna_border_color" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" href="" (click)="clickSideMenu(rightContent)">
                                     <h4 class="font-size-m warna_font">
                                         {{rightContent.categoryName}}
                                     </h4>
@@ -285,7 +290,8 @@
             </div>
         </div>
         <div *ngIf="article.template === 'lifeevent'" class="col-sm-3">
-          <ul class="rightMenu">
+          <h4 class="sideBarMenu--title padding-bottom-l font-size-m warna_font">{{'common.onlineservice' | translate }}</h4>
+          <ul class="rightMenu" [style.background-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
             <li *ngFor="let rightContent of article.menuRight;">
               <a [href]="rightContent.agencyApplicationUrl" target="_blank">{{rightContent.agencyApplicationName}}</a>
             </li>
