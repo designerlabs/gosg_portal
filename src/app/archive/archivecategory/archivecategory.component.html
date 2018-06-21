@@ -114,16 +114,17 @@
                           </div>
                       </div>
                   </div>
+                  <div class="col-md-12">
+                    <div *ngIf="!article.image">
+                        <div>
+                            <h2 class="titleWObg font-size-l">
+                                {{article.categoryName}}
+                            </h2>
+                        </div>
+                    </div>
 
-                  <div *ngIf="!article.image">
-                      <div>
-                          <h2 class="titleWObg font-size-l">
-                              {{article.categoryName}}
-                          </h2>
-                      </div>
+                    <span class="font-size-s defaultColor" [innerHTML]="article.categoryDescription"></span>
                   </div>
-
-                  <span class="font-size-s defaultColor" [innerHTML]="article.categoryDescription"></span>
                   <div  *ngFor="let rightContent of article.subCategoryList; let index=index; let odd=odd; let even=even;">
                     <div class="col-sm-6">
                         <div>
@@ -159,7 +160,7 @@
                           </div>
                       </div>
 
-                      <div *ngIf="!article.image">
+                      <div class="col-md-12" *ngIf="!article.image">
                         <h2 class="titleWObg font-size-l">
                             {{article.content.contentTitle}}
                         </h2>
