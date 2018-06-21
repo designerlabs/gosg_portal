@@ -53,7 +53,7 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
     maskICNo: any;
     state:string = 'small';
 
-    
+
     nonCiti: boolean;
     citi: boolean;
     permanentResident: boolean;
@@ -67,7 +67,7 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
         throw new Error("Method not implemented.");
     }
 
-      
+
     breadcrumb: any;
     isValid: any;
     topicID: number;
@@ -114,8 +114,8 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
     lang = this.lang;
     languageId = this.languageId;
     fnCaptch: any;
- 
-  
+
+
     ngAfterViewInit(){
 
         if (this.fnCaptch != undefined){
@@ -153,7 +153,7 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
                     "captcha": this.captcha
                 });
 
-                
+
                 this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
 
                     const myLang = translate.currentLang;
@@ -175,7 +175,7 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
                     if(this.topnavservice.flagLang){
                         this.getUserType(this.languageId);
                     }
-                    
+
                 });
 
                 // if(!this.languageId){
@@ -184,14 +184,21 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
                 //   }else{
                 //     this.languageId = 1;
                 //   }
+
+                System.import('../common/captcha.js')
+                .then(MyModule => {
+                    MyModule.CreateCaptchas();
+                    MyModule.getCaptcha();
+                    RegisterComponent.prototype.fnCaptch = MyModule;
+                });
             }
 
-             
+
               confirm(): void {
                 this.message = 'Confirmed!';
                 this.modal.hide();
               }
-             
+
               decline(): void {
                 this.message = 'Declined!';
                 this.modal.hide();
@@ -212,17 +219,17 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
         this.modalRef = this.modalService.show(template);
         this.content = content;
       }
-    
-    
+
+
     private registerUrl: string = this.config.urlRegister;
     private uapstagingUrl: string = this.config.urlUapStaging;
-    
+
     ngOnDestroy() {
         this.subscriptionLang.unsubscribe();
         //this.subscription.unsubscribe();
     }
 
-    ngOnInit() {    
+    ngOnInit() {
         if(!this.languageId){
             this.languageId = localStorage.getItem('langID');
         }else{
@@ -231,7 +238,7 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
         // this.citizenFormGrp.get('telefon').disable();
         this.refUrl =  location.search.split('refUrl=')[1];
         console.log(unescape(this.refUrl));
-        
+
         this.getUserType(this.languageId);
         this.maskCitizen = this.validateService.getMask().telephone;
         this.maskForeigner = this.validateService.getMask().telephonef;
@@ -250,7 +257,7 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
             this.passport = new FormControl('', [Validators.required, Validators.pattern(this.validateService.getPattern(6,10).passport)]), //A1234567 or AB123456
             this.country_pr = new FormControl(''),
             this.passport_pr = new FormControl('', [Validators.pattern(this.validateService.getPattern(6,10).passport)]), //A1234567 or AB123456
-            this.nama_penuhf = new FormControl('', [Validators.required, Validators.pattern(this.validateService.getPattern(2,60).name)]), 
+            this.nama_penuhf = new FormControl('', [Validators.required, Validators.pattern(this.validateService.getPattern(2,60).name)]),
             this.emelf = new FormControl('', [Validators.required, Validators.pattern(this.validateService.getPattern().email)]),
             this.telefonf = new FormControl('', [Validators.required]),
             this.codeTelefonf = new FormControl('', [Validators.required]),
@@ -272,10 +279,10 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
                 captcha: this.captcha,
             });
         this.flagGetCaptcha = true;
-    
+
         this.RemoveNonCitizenCtrl();
     }
-    
+
     openDialog() {
         this.dialogsService
             .confirm('Success!', 'Registeration successful!')
@@ -295,7 +302,7 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
         this.resetCap = false;
     }
 
-    
+
     ReCreateCaptchas() {
         this.resetCap = true;
         this.capt.nativeElement.value = '';
@@ -353,7 +360,7 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
         this.telefon.reset();
         this.codeTelefon.reset();
     }
-    
+
 
 
     addPRTRCtrl() {
@@ -387,7 +394,7 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
         this.passport_pr.reset();
     }
 
-    
+
 
     addNonCitizenCtrl() {
         this.citizenFormGrp.addControl('country', this.country);
@@ -423,27 +430,27 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
             this.resetPRTRCtrl();
         } else {
             this.resetNonCitizenCtrl();
-           
+
         }
         this.captcha.reset();
     }
-    
+
     citizenReg(formValues:any) {
         let body = {
-            "country":{  
+            "country":{
                 "countryId":null
              },
             "identificationNo":null,
             "phoneNo":null,
             "email":null,
             "fullName": null,
-            "userType":{  
+            "userType":{
                 "userTypeId":null
              },
              "passportNo":null
         };
 
-        
+
 
         // let profileBody = {
         //     "date_joined": null,
@@ -517,7 +524,7 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
                         this.errMsg = data.statusDesc;
                         this.infoModal.show();
                     }
-                    
+
                 },
                 error => {
                     this.toastr.error(this.translate.instant('common.err.servicedown'), '');
@@ -538,7 +545,7 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
                         this.errMsg = data.statusDesc;
                         this.infoModal.show();
                     }
-                    
+
                 },
                 error => {
                     this.toastr.error(this.translate.instant('common.err.servicedown'), '');
@@ -548,8 +555,8 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
 
         }
 
-        
-    
+
+
     }
 
     noncitizenReg(formValues) {
@@ -562,7 +569,7 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
         }else{
             return true;
         }
-        
+
     }
 
 
@@ -572,7 +579,7 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
         }else{
             return false;
         }
-        
+
     }
 
     getCountry() {
@@ -625,11 +632,6 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
 }
 
 
-System.import('../common/captcha.js')
-    .then(MyModule => {
-        MyModule.CreateCaptchas();
-        MyModule.getCaptcha();
-        RegisterComponent.prototype.fnCaptch = MyModule;
-    });
+
 
 
