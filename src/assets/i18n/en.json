@@ -347,6 +347,8 @@
     "downloadablelink":"Downloadable Link",
     "byagency":"Publication by Agency",
     "onlineservice": "Online Services",
+    "email":"Email",
+    "selectcat":"Select Category",
     "placeholder": {
       "keyword":"Keyword"
     },

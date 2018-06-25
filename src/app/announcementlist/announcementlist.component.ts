@@ -30,9 +30,9 @@ export class AnnouncementlistComponent implements OnInit {
     announceData: any;
     @Output() langChange = new EventEmitter();
     constructor(private route: ActivatedRoute,
-        private navService: NavService, private translate: TranslateService, private router: Router, 
+        private navService: NavService, private translate: TranslateService, private router: Router,
         // tslint:disable-next-line:max-line-length
-        private breadcrumbService: BreadcrumbService, @Inject(APP_CONFIG) private config: AppConfig, private announceService: AnnouncementlistService) {
+        private breadcrumbService: BreadcrumbService, @Inject(APP_CONFIG) private config: AppConfig, public announceService: AnnouncementlistService) {
         this.lang = translate.currentLang;
 
             translate.onLangChange.subscribe((event: LangChangeEvent) => {
@@ -86,7 +86,7 @@ export class AnnouncementlistComponent implements OnInit {
 
     clickSideMenu(e) {
         // tslint:disable-next-line:no-debugger
-      
+
         const _getModule = this.router.url.split('/')[1];
         // this.router.navigate(['announcement', e.code]);
         // this.triggerAnnouncementList(this.lang, e.code);
