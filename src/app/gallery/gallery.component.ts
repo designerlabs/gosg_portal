@@ -74,7 +74,7 @@ export class GalleryComponent implements OnInit {
         // }else if(this.moduleName == 'content'){
         //   this.navService.triggerContent(this.subID, this.langId);
         // }else{
-          this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID);
+          // this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID);
         // }
 
 
