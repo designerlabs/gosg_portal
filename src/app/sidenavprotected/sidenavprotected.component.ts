@@ -15,7 +15,7 @@ let num = 0;
 export class SidenavprotectedComponent implements OnInit {
   getThemeFonts: any;
   defaultFonts: any;
-  fontTy1(arg0: any): any {
+  fontTy(arg0: any): any {
     throw new Error("Method not implemented.");
   }
   getThemeColors: any;
