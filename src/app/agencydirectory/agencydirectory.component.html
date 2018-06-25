@@ -6,7 +6,7 @@
         <hr class="hr-custom2">
         <ul class="list-inline" style="clear:both;">
           <li>
-            <a class="font-size-s" href="/index/">
+            <a class="font-size-s" routerLink="/">
               {{'home.menu.agencycdir' | translate }}
             </a>
           </li>
@@ -69,7 +69,7 @@
                 itemsPerPage: 10,
                 currentPage: pageCount,
                 totalItems: totalRec }">
-                
+
                   <td>
                     <a *ngIf="agc.agencyLatitude || agc.agencyLongitude" style="color: #1d1d1d" href="agencydir#" (click)="goToMarkerPoint(agc.agencyLatitude,agc.agencyLongitude, agc.agencyName, agc.agencyAddress, agc.agencyEmail, agc.agencyFax, agc.agencyPhoneNo)" title="agc.agencyLatitude">{{agc.agencyName}}</a>
                     <a *ngIf="!agc.agencyLatitude || !agc.agencyLongitude" style="color: #cacaca; cursor:default;" href="agencydir#"  title="Latitude and Longitude Not Found">{{agc.agencyName}} <i class="fa fa-unlink"></i></a>

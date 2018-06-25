@@ -4,9 +4,9 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 // import { HomeComponent } from './home/home.component'
 import { HomeProtectedComponent } from './home/home-protected.component';
-import { SearchResultComponent } from './search/search-result/search-result.component';
-import { ArticleComponent } from './article/article.component';
-import { SubarticleComponent } from './article/subarticle/subarticle.component';
+import { SearchResultProdComponent } from './search/search-result/search-result-prod.component';
+import { ArticleprodComponent } from './article/articleprod.component';
+import { SubarticleprodComponent } from './article/subarticle/subarticleprod.component';
 import { NavRouterActivator } from './header/nav/nav-router-activator.service';
 import { ErrorComponent } from './error/error.component';
 import { ContactComponent } from './staticpage/contact.component';
@@ -63,12 +63,12 @@ export const protectedRoutes: Routes = [
     {path: 'appsmgmt', component: AppManagementComponent},
     {path: 'index', component: HomeProtectedComponent},
     {path: 'firsttime', component: FirsttimeloginComponent},
-    {path: 'search/searchResult/:id', component: SearchResultComponent},
+    {path: 'search/searchResult/:id', component: SearchResultProdComponent},
     {path: 'eparticipation', component: EparticipationComponent},
-    {path: 'category/:id', component: ArticleComponent, canActivate: [NavRouterActivator]  },
+    {path: 'category/:id', component: ArticleprodComponent, canActivate: [NavRouterActivator]  },
     {path: 'rss/:id', component: RssComponent},
     {path: 'rss/id/:id', component: RssComponent},
-    {path: 'subcategory/:id1', component: SubarticleComponent },
+    {path: 'subcategory/:id1', component: SubarticleprodComponent },
     {path: 'content/:id1', component: ContentComponent},
     {path: 'archive/category/:id', component:ArchivecategoryComponent},
     {path: 'archive/subcategory/:id', component:ArchivesubcategoryComponent},
