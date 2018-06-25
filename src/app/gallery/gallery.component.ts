@@ -74,7 +74,7 @@ export class GalleryComponent implements OnInit {
         // }else if(this.moduleName == 'content'){
         //   this.navService.triggerContent(this.subID, this.langId);
         // }else{
-        //   this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID);
+          this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID);
         // }
 
 
@@ -130,19 +130,6 @@ export class GalleryComponent implements OnInit {
       this.router.navigate(['/content', aId]);
       event.preventDefault();
     }
-
-
-    // triggerArticle(moduleName, lang, topicID){
-    //     this.route.paramMap
-    //     .switchMap((params: ParamMap) =>
-    //     this.navService.getGalleryData(moduleName, lang, topicID))
-    //     .subscribe(resSliderData => {
-    //         this.gallery = resSliderData;
-    //         this.breadcrumb = this.breadcrumbService.getBreadcrumb();
-    //         this.isValid = this.breadcrumbService.isValid = true;
-    //         this.breadcrumb = this.breadcrumb.name = '';
-    //     });
-    // }
 
     checkImgData(e){
         if(e){

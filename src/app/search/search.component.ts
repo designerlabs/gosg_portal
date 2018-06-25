@@ -37,7 +37,7 @@ export class SearchComponent implements OnInit {
         if(key) {
             $('#searchDDown').css({ 'display': 'none' });
             localStorage.setItem('ser_word', key);
-            this.router.navigate(['search/searchResult']);
+            this.router.navigate(['search/searchResult/'+key]);
             this.internal(key);
         } else {
             this.toastr.error(this.translate.instant('common.msg.searchKeyword'), '');
@@ -49,69 +49,6 @@ export class SearchComponent implements OnInit {
     
     internal(key) {
         
-        // let body = {
-        //        size: 10,
-        //        from: 0,
-        //        responseFields:[
-        //           'category_name',
-        //           'topic_name',
-        //           'article_name',
-        //           'category_name_en',
-        //           'topic_name_en',
-        //           'article_name_en',
-        //           'author_name',
-        //           'article_insert_date',
-        //           'idarticle',
-        //           'article_text_clean',
-        //           'article_text_en_clean'
-        //        ],
-        //        keywordMap:{
-        //           exact:[key],
-        //           fields:[
-        //              'article_text_clean',
-        //              'article_text_en_clean',
-        //              'article_name',
-        //              'article_name_en',
-        //              'category_name',
-        //              'category_name_en',
-        //              'topic_name',
-        //              'topic_name_en'
-        //           ]
-        //        },
-        //        aggregations:[
-        //           {
-        //              name:"category_name",
-        //              type:"terms",
-        //              field:"category_name.raw"
-        //           },
-        //           {
-        //              name:"topic_name",
-        //              type:"terms",
-        //              field:"topic_name.raw"
-        //           },
-        //           {
-        //              name:"category_name_en",
-        //              type:"terms",
-        //              field:"category_name_en.raw"
-        //           },
-        //           {
-        //              name:"topic_name_en",
-        //              type:"terms",
-        //              field:"topic_name_en.raw"
-        //           },
-        //           {
-        //              name:"author_name",
-        //              type:"terms",
-        //              field:"author_name.raw"
-        //           },
-        //           {
-        //              name:"histogram",
-        //              type:"dateHistogram",
-        //              field:"article_insert_date",
-        //              interval:"month"
-        //           }
-        //        ]
-        // }
         let body = {
             "size":10,
             "from":0,
