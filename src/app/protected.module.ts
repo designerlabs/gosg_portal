@@ -30,10 +30,10 @@ import { FeedbackProtectedComponent } from './feedback/feedback-protected.compon
 import { PollProtectedComponent } from './poll/poll-protected.component';
 import { HomeProtectedComponent } from './home/home-protected.component';
 import { ProfileUpdatedComponent } from './profile-updated/profile-updated.component';
-import { SearchResultComponent } from './search/search-result/search-result.component';
-import {LifeeventComponent } from './lifeevent/lifeevent.component';
-import { SubarticleComponent } from './article/subarticle/subarticle.component';
-import { ArticleComponent } from './article/article.component';
+import { SearchResultProdComponent } from './search/search-result/search-result-prod.component';
+import {LifeeventprodComponent } from './lifeevent/lifeeventprod.component';
+import { SubarticleprodComponent } from './article/subarticle/subarticleprod.component';
+import { ArticleprodComponent } from './article/articleprod.component';
 
 export function HttpLoaderFactory(http: Http) {
    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -53,10 +53,10 @@ export function HttpLoaderFactory(http: Http) {
     PollProtectedComponent,
     HomeProtectedComponent,
     ProfileUpdatedComponent,
-    LifeeventComponent,
-    SearchResultComponent,
-    SubarticleComponent,
-    ArticleComponent
+    LifeeventprodComponent,
+    SearchResultProdComponent,
+    SubarticleprodComponent,
+    ArticleprodComponent
   ],
   imports: [
     SharedModule,
