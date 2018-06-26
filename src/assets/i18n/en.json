@@ -448,7 +448,11 @@
     "successMsg" :"Thank you. Your email has been successfully saved. An activation email has been sent. Please click on the link to activate the subscription.",
     "btnsubscribe" : "Subscribe",
     "setactivetitle": "Subscribe to mailing list",
-    "setactivemsg": "Thank you. Your email has been verified."
+    "setactivemsg": "Thank you. Your email has been verified.",
+    "err":{
+      "email":"Email is required. IE: aaaa@bbb.com",
+      "category":"Category is required"
+    }
   },
    "onlineservices": {
      "btnonlineservice" : "Online Service",
