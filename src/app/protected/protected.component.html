@@ -13,4 +13,4 @@
   <app-footer></app-footer>
 </div>
 
-<gosg-firsttimelogin [loginfirst]='isFirstLogin'></gosg-firsttimelogin>
+<gosg-firsttimelogin *ngIf="isFirstLogin" [loginfirst]='isFirstLogin'></gosg-firsttimelogin>

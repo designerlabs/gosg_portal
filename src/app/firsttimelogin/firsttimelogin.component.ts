@@ -53,12 +53,12 @@ export class FirsttimeloginComponent implements OnInit {
   }
 
   getConfirmation(){
-    debugger;
     let body = {
       "REMOTE_USER": this.rndNo
     };
 
-    this.protectedservice.completeTran(this.rndNo)
+    if(this.rndNo){
+      this.protectedservice.completeTran(this.rndNo)
         .subscribe(
             userData => {
               if(userData.statusCode === 'S001'){
@@ -78,6 +78,8 @@ export class FirsttimeloginComponent implements OnInit {
               //this.toastr.error(this.translate.instant('feedback.err.subject'), '');
             }
         );
+    }
+
 }
 
   userIsLogged(){
