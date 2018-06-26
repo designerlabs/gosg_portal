@@ -31,7 +31,7 @@ export class FirsttimeloginComponent implements OnInit {
  @Input() loginfirst:boolean;
 
   ngOnInit() {
-   
+
     if(!environment.staging){
       this.rndNo =  location.search.split('rnd=')[1];
       console.log(this.rndNo);
@@ -39,7 +39,7 @@ export class FirsttimeloginComponent implements OnInit {
         this.getConfirmation();
       }, 5000);
     }
-    
+
 
     let timeleft = 10;
     // let downloadTimer = setInterval(function(){
@@ -48,17 +48,17 @@ export class FirsttimeloginComponent implements OnInit {
     //     clearInterval(downloadTimer);
     // },1000);
 
-    
-    
+
+
   }
 
   getConfirmation(){
-
     let body = {
       "REMOTE_USER": this.rndNo
     };
 
-    this.protectedservice.completeTran(this.rndNo)
+    if(this.rndNo){
+      this.protectedservice.completeTran(this.rndNo)
         .subscribe(
             userData => {
               if(userData.statusCode === 'S001'){
@@ -73,15 +73,17 @@ export class FirsttimeloginComponent implements OnInit {
                 console.log('cleared interval');
               }
               this.getUserData = userData.userTypeList;
-              
+
             },Error => {
               //this.toastr.error(this.translate.instant('feedback.err.subject'), '');
             }
         );
+    }
+
 }
 
   userIsLogged(){
-   return true; 
+   return true;
   }
 
 }

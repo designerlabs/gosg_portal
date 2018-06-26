@@ -386,7 +386,7 @@
                             <mat-error *ngIf="!validateCtrlChk(telefonf) && phoneForm.controls.telefonf.errors?.required">
                               {{'register.err.tel' | translate }}
                             </mat-error>
-                            <mat-error *ngIf="!validateCtrlChk(telefonf) && phoneForm.controls.telefonf.pattern">
+                            <mat-error *ngIf="!validateCtrlChk(telefonf) && phoneForm.controls.telefonf?.pattern">
                               {{'register.pattern.tel' | translate }}
                             </mat-error>
                           </mat-form-field>

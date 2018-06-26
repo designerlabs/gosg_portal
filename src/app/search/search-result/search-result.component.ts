@@ -29,7 +29,7 @@ declare var $: any;
 })
 
 export class SearchResultComponent implements OnInit, OnDestroy {
-  
+
   errorMessage: any;
   observableGlobalItem: any;
   globVal: any;
@@ -44,7 +44,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
   selKey = "yes";
   align: string;
   tabIndex = 0;
-  sKeyword = false; //side menu 
+  sKeyword = false; //side menu
   sSpeci = false; //side menu
   sFilter = false; //side menu
   intData: any[];
@@ -80,7 +80,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
   chkostitle = true;
   chkosdes = true;
   chkGlobValue = 'gov.my';
-  
+
   locUnchecked:any = 0;
   osUnchecked:any = 0;
 
@@ -110,13 +110,13 @@ export class SearchResultComponent implements OnInit, OnDestroy {
   totalElements = 0; noPrevData = true; noNextData = false; pagefrom = 0; pageNumber = 1; totalPages = 0; pagesize = 10;
   millisec = 0;
   showNoData = false;
-  
+
   private subscription: ISubscription;
   private subscriptionLang: ISubscription;
 
   constructor(
     private router: Router,
-    private sharedService: SharedService,
+    public sharedService: SharedService,
     private translate: TranslateService,
     private toastr: ToastrService,
     private topnavservice: TopnavService,
@@ -292,7 +292,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
     //   this.searchByKeyword(q_word);
     // }else {
     //   // this.toastr.error("Please enter a word to search");
-    // }  
+    // }
     // localStorage.setItem('ser_word', this.ser_word);
 
     if(!this.languageId){
@@ -361,8 +361,8 @@ export class SearchResultComponent implements OnInit, OnDestroy {
   //       jQuery.extend(key_ary, ele);
   //     }else{
   //       key_ary.exact = [this.ser_word];
-  //     }      
-  //     key_ary.not = [this.inpExcWord]; 
+  //     }
+  //     key_ary.not = [this.inpExcWord];
   //   }else if(keyVal === "2"){     //all
   //     if(inxexact >= 0){
   //       delete key_ary.exact;
@@ -405,7 +405,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
     // console.log(res_ary)
     // console.log(field)
 
-    // let inx = jQuery.inArray(field, res_ary);      
+    // let inx = jQuery.inArray(field, res_ary);
     if (methodNm === 'add') {
       res_ary[field] = [];
       // res_ary.push(enField);
@@ -493,7 +493,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
 
       this.intData = [];
       // this.btnFilterReset();
-      //In Local tab      
+      //In Local tab
       this.chktopic = true;
       this.chksubtopic = true;
       this.chktitle = true;
@@ -536,7 +536,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
 
       this.intData = [];
       this.totalElements = 0;
-      
+
       //In Global tab
       this.btnFilterReset();
       this.resetPage();
@@ -725,7 +725,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
         if(this.chknoncitizen) {
           this.mainObj.filters.category.is_noncitizen_event = this.chknoncitizen;
         }
-        
+
         jQuery.extend(this.mainObj.filters, this.lifeEventFiltersObj);
         payloadObj = this.mainObj;
 
@@ -735,7 +735,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
 
         delete this.mainObj.aggregations;
         this.mainObj.aggregations = this.osAggregations;
-        
+
         if(env == 'localhost')
           dataUrl = this.osUrl;
         else
@@ -792,9 +792,9 @@ export class SearchResultComponent implements OnInit, OnDestroy {
             delete rData.data.countinfo;
             dataLength = Object.keys(rData.data).length;
             // this.millisec = rData.data.tookMillis;
-            
+
             this.intData = this.changeAryVal(rData.data,'global')
-            
+
           }
 
           // console.log(this.totalElements)
@@ -843,7 +843,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
                 topic = { "name": item[0].name, "val": item[0].val }
                 this.ddsubTopics.push(topic)
               });
-              
+
               // console.log(this.ddtopics)
               // console.log(this.ddsubTopics)
 
@@ -881,7 +881,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
             } else {
               this.noNextData = true;
             }
-            
+
             if(num && num > 999)
               this.totalPages = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
@@ -893,7 +893,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
 
           } else {
             this.showNoData = true;
-            this.sKeyword = false; //side menu 
+            this.sKeyword = false; //side menu
             this.sSpeci = false; //side menu
             this.sFilter = false; //side menu
           }
@@ -949,7 +949,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
         } else if(e.checked == true) {
           this.locUnchecked = this.locUnchecked-1;
         }
-        
+
         break;
 
       case "content_title":
@@ -959,7 +959,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
         } else if(e.checked == true) {
           this.locUnchecked = this.locUnchecked-1;
         }
-        
+
         break;
 
       case "content_description":
@@ -969,7 +969,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
         } else if(e.checked == true) {
           this.locUnchecked = this.locUnchecked-1;
         }
-        
+
         break;
 
       case "title":
@@ -979,7 +979,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
         } else if(e.checked == true) {
           this.osUnchecked = this.osUnchecked-1;
         }
-        
+
         break;
 
       case "description":
@@ -989,7 +989,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
         } else if(e.checked == true) {
           this.osUnchecked = this.osUnchecked-1;
         }
-        
+
         break;
 
       case "ministry_name":
@@ -1001,7 +1001,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
         } else if(e.checked == true) {
           this.osUnchecked = this.osUnchecked-1;
         }
-        
+
         break;
 
       case "agency_name":
@@ -1013,7 +1013,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
         } else if(e.checked == true) {
           this.osUnchecked = this.osUnchecked-1;
         }
-        
+
         break;
 
       case "citizen":
@@ -1149,10 +1149,10 @@ export class SearchResultComponent implements OnInit, OnDestroy {
     if (this.tabIndex == 0) {
       this.mainObj.filters = this.defaultFiltersObj;
       jQuery.extend(this.mainObj.filters, this.lifeEventFiltersObj);
-        
+
       this.mainObj.filters.category.is_citizen_event = false;
       this.mainObj.filters.category.is_noncitizen_event = false;
-        
+
       this.chkcitizen = false;
       this.chknoncitizen = false;
     } else if (this.tabIndex == 1) {

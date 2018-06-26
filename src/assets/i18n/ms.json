@@ -352,6 +352,8 @@
     "downloadablelink":"Pautan Boleh Dimuat Turun",
     "byagency":"Penerbitan Mengikut Agensi",
     "onlineservice": "Perkhidmatan Dalam Talian",
+    "email":"Emel",
+    "selectcat":"Pilih Kategori",
     "placeholder": {
       "keyword":"Kata Kunci"
     },

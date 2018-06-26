@@ -2,7 +2,7 @@
 
     <a href="javascript:void(0)" class="closebtn" (click)="closeNav()"><i class="fa fa-times"></i></a>
 
-    
+
     <ul>
 
       <li>
@@ -20,7 +20,7 @@
         <li>
             <a routerLinkActive="topactive" href=""><i class="fa fa-building"></i> Company Profile</a>
         </li>
-        
+
         <li>
           <a routerLinkActive="topactive" [routerLink]="['contact']"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ 'home.menu.contact' | translate }}</a> </li>
         <li>
@@ -42,7 +42,7 @@
                       <i class="fa fa-cog" aria-hidden="true"></i>&nbsp;{{ 'home.menu.setting' | translate }}
                   </mat-panel-title>
                 </mat-expansion-panel-header>
-                
+
                 <div class="menu_botm" id="confBar2">
                     <div  id="themeContainer1">
 
@@ -66,20 +66,20 @@
                       </div>
                       <div class="settingBtm">
 
-                            <select #fontTy1 (change)="onChange($event, fontTy.value)" id="fontOptSideMenu3" class="form-control fontOption">
+                            <select #fontTy (change)="onChange($event, fontTy.value)" id="fontOptSideMenu3" class="form-control fontOption">
                                 <option *ngFor="let font of getThemeFonts;" [value]="font.fontName"  [selected]="font.defaultFont" >
                                     {{font.fontName}}
                                 </option>
                             </select>
-    
+
                               <span style="clear:both;"><div (click)="resetFontStyle()" id="resetFontStyle" class="btn btn-xs btn-default" style="padding:10px;"><i class="fa fa-refresh"></i></div></span>
                           </div>
-                    
+
                     </div>
                   </div>
-             
+
               </mat-expansion-panel>
         </li>
-        
+
     </ul>
   </div>
