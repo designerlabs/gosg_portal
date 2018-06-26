@@ -1,10 +1,12 @@
-import { Component, Output, Input, EventEmitter, OnInit, AfterViewChecked, AfterViewInit,  ViewChild, ElementRef, Inject, AfterContentInit } from '@angular/core';
+import { Component, Output, Input, EventEmitter, OnInit, AfterViewChecked, AfterViewInit,  ViewChild, ElementRef, Inject, AfterContentInit, OnDestroy } from '@angular/core';
 import { NavService } from '../header/nav/nav.service';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { BreadcrumbService } from '../header/breadcrumb/breadcrumb.service';
 import { GalleryService } from './gallery.service';
+import { SharedService } from '../common/shared.service';
+import { ISubscription } from 'rxjs/Subscription';
 
 
 @Component({
@@ -12,9 +14,8 @@ import { GalleryService } from './gallery.service';
   templateUrl: './gallery.component.html',
   styleUrls: ['./gallery.component.css']
 })
-export class GalleryComponent implements OnInit {
+export class GalleryComponent implements OnInit, OnDestroy {
   statusID: any;
-  langIdVal: string;
   subID: number;
   moduleName: string;
 
@@ -23,11 +24,13 @@ export class GalleryComponent implements OnInit {
 
   breadcrumb: any;
   isValid: any;
-  topicID: number;
+  galleryID: number;
   gallery: any[];
 
   galleryData: any;
   @Output() langChange = new EventEmitter();
+  
+  private subscriptionLang: ISubscription;
 
   constructor(
     public galleryService: GalleryService,  
@@ -36,23 +39,24 @@ export class GalleryComponent implements OnInit {
     private translate: TranslateService, 
     private router: Router, 
     private breadcrumbService: BreadcrumbService, 
+    private sharedService: SharedService,
     @Inject(APP_CONFIG) private config: AppConfig
   ) {
-    this.lang = translate.currentLang;
-    this.langId = 1;
 
-        translate.onLangChange.subscribe((event: LangChangeEvent) => {
+    this.lang = translate.currentLang;
+
+    this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
 
         const myLang = translate.currentLang;
-
+    
         if (myLang == 'en') {
 
             translate.get('HOME').subscribe((res: any) => {
                 this.lang = 'en';
                 this.langId = 1;
                 this.moduleName = this.router.url.split('/')[1];
-                this.topicID = parseInt(this.router.url.split('/')[2]);
-                // this.navService.triggerArticle(this.moduleName, this.langId, this.topicID);
+                this.galleryID = parseInt(this.router.url.split('/')[2]);
+                // this.navService.triggerArticle(this.moduleName, this.langId, this.galleryID);
             });
 
         }
@@ -62,9 +66,9 @@ export class GalleryComponent implements OnInit {
                 this.lang = 'ms';
                 this.langId = 2;
                 this.moduleName = this.router.url.split('/')[1];
-                this.topicID = parseInt(this.router.url.split('/')[2]);
+                this.galleryID = parseInt(this.router.url.split('/')[2]);
                 this.subID = parseInt(this.router.url.split('/')[3]);
-                // this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID);
+                // this.navService.triggerArticle(this.moduleName,  this.langId, this.galleryID);
             });
         }
 
@@ -74,18 +78,12 @@ export class GalleryComponent implements OnInit {
         // }else if(this.moduleName == 'content'){
         //   this.navService.triggerContent(this.subID, this.langId);
         // }else{
-          // this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID);
+          // this.navService.triggerArticle(this.moduleName,  this.langId, this.galleryID);
         // }
 
 
 
     });
-
-    if(localStorage.getItem('langID')){
-      this.langIdVal = localStorage.getItem('langID');
-    }else{
-      this.langIdVal = this.langId;
-    }
 
   }
 
@@ -93,15 +91,26 @@ export class GalleryComponent implements OnInit {
   lang = this.lang;
   langId = this.langId;
 
-
+  ngOnDestroy() {
+    this.subscriptionLang.unsubscribe();
+    //this.subscription.unsubscribe();
+  }
 
   ngOnInit() {
-        this.galleryData = this.galleryService.getGallery();
-        console.log(this.galleryData);
-        this.moduleName = this.router.url.split('/')[1];
-        // this.topicID = parseInt(this.router.url.split('/')[2]);
-        // this.navService.triggerArticle(this.moduleName, localStorage.getItem('langID'), this.topicID);
-      }
+
+    if(!this.langId){
+      this.langId = localStorage.getItem('langID');
+    }else{
+      this.langId = 1;
+    }
+
+    this.galleryData = this.galleryService.getGallery();
+    this.moduleName = this.router.url.split('/')[1];
+    // this.galleryID = parseInt(this.router.url.split('/')[2]);
+    this.navService.triggerGalleries(localStorage.getItem('langID'));
+    // console.log(this.galleryData);
+
+    }
 
    getTheme(){
         return localStorage.getItem('themeColor');

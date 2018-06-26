@@ -19,6 +19,7 @@
       "fonttype": "Font Type",
       "login": "Login",
       "sitemap": "Site Map",
+      "gallery": "Gallery",
       "statistic": "Online Statistics"
     },
     "search": {
@@ -62,6 +63,7 @@
       "onlineservice": "Online Services",
       "subscription": "Subscription",
       "unsubscribe": "Unsubscribe",
+      "gallery": "Gallery",
       "search": "Search"
     },
     "expandButton": {
@@ -308,6 +310,9 @@
       "subject":"Sorry, subjects is unavailable."
 
     }
+  },
+  "gallery":{
+    "header": "Gallery"
   },
   "mailbox":{
     "header":{

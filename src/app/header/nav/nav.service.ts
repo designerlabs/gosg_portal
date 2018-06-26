@@ -14,11 +14,13 @@ import { BreadcrumbService } from '../../header/breadcrumb/breadcrumb.service';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/of';
+import { GalleryService } from '../../gallery/gallery.service';
 
 @Injectable()
 export class NavService {
   myMethod$: Observable<any>;
   articles: any[];
+  galleries: any[];
   breadcrumb: any;
   isValid: any;
   topicStatus: any;
@@ -27,7 +29,7 @@ export class NavService {
   announces: any[];
 
   // tslint:disable-next-line:max-line-length
-  constructor(private http: Http, @Inject(APP_CONFIG) private config: AppConfig, private route: ActivatedRoute, private router: Router, private breadcrumbService: BreadcrumbService, private articleService: ArticleService, private announceService: AnnouncementlistService) {
+  constructor(private http: Http, @Inject(APP_CONFIG) private config: AppConfig, private route: ActivatedRoute, private router: Router, private breadcrumbService: BreadcrumbService, private galleryService: GalleryService, private articleService: ArticleService, private announceService: AnnouncementlistService) {
     this.topicStatus = true;
     this.myMethod$ = this.myMethodSubject.asObservable();
   }
@@ -81,13 +83,20 @@ export class NavService {
   }
 
 
-  getGalleryData(moduleName, lang: string, ID: number): Observable<boolean[]> {
+  getGalleryData(lang: string, ID?: number): Observable<boolean[]> {
 
-    if (!isNaN(ID)) {
+    let getApi;
 
-      return this.http.get(this.config.urlPortal + this.galleryUrl + '?id=' +ID + '&language=' + lang)
+    if(ID)
+      getApi = this.config.urlGallery + '?language=' + lang+ '&id=' +ID;
+    else
+      getApi = this.config.urlGallery + '?language=' + lang;
+
+    // if (!isNaN(ID)) {
+
+      return this.http.get(getApi)
         .take(1)
-        .map((response: Response) => response.json().contentCategoryResource.results)
+        .map((response: Response) => response.json())
 
         // .catch((error:any) =>
         // Observable.throw(error.json().error || 'Server error')
@@ -101,7 +110,7 @@ export class NavService {
           return Observable.throw(caught); // <-----
         }
         );
-    }
+    // }
   }
 
 
@@ -368,22 +377,40 @@ export class NavService {
      }
    }
 
-  triggerArticle(moduleName, lang, topicID) {
-    if (!isNaN(topicID)) {
-      this.articles = [''];
-      this.articleService.articles = [''];
-      return this.route.paramMap
-        .switchMap((params: ParamMap) =>
-          this.getArticleData(moduleName, lang, topicID))
-        .subscribe(resSliderData => {
-          this.articleService.articles = resSliderData;
-          this.articles = resSliderData;
-          this.breadcrumb = this.breadcrumbService.getBreadcrumb();
-          this.isValid = this.breadcrumbService.isValid = true;
-          this.breadcrumb = this.breadcrumb.name = '';
-        });
-    }
-  }
+   triggerArticle(moduleName, lang, topicID) {
+     if (!isNaN(topicID)) {
+       this.articles = [''];
+       this.articleService.articles = [''];
+       return this.route.paramMap
+         .switchMap((params: ParamMap) =>
+           this.getArticleData(moduleName, lang, topicID))
+         .subscribe(resSliderData => {
+           this.articleService.articles = resSliderData;
+           this.articles = resSliderData;
+           this.breadcrumb = this.breadcrumbService.getBreadcrumb();
+           this.isValid = this.breadcrumbService.isValid = true;
+           this.breadcrumb = this.breadcrumb.name = '';
+         });
+     }
+   }
+
+   triggerGalleries(lang, galleryID?) {
+    //  if (!isNaN(galleryID)) {
+       this.galleries = [''];
+       this.galleryService.galleries = [''];
+       return this.route.paramMap
+         .switchMap((params: ParamMap) =>
+           this.getGalleryData(lang, galleryID))
+         .subscribe(resGalleryData => {
+           this.galleryService.galleries = resGalleryData;
+           console.log(this.galleryService.galleries)
+           this.galleries = resGalleryData;
+           this.breadcrumb = this.breadcrumbService.getBreadcrumb();
+           this.isValid = this.breadcrumbService.isValid = true;
+           this.breadcrumb = this.breadcrumb.name = '';
+         });
+    //  }
+   }
 
   getAnnouncement(moduleName, lang: number): Observable<boolean[]> {
 
