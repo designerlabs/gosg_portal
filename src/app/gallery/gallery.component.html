@@ -26,31 +26,70 @@
       <div class="row">
         <div class="col-md-12 sideBarMenu">
           <h4 class="sideBarMenu--title padding-bottom-l font-size-m warna_font">
+            <i *ngIf="galleryService.galleries.mediaType == 'documents'" class="fa fa-file-o"></i>
+            <i *ngIf="galleryService.galleries.mediaType == 'images'" class="fa fa-image"></i>
+            <i *ngIf="galleryService.galleries.mediaType == 'audios'" class="fa fa-file-audio-o"></i>
+            <i *ngIf="galleryService.galleries.mediaType == 'videos'" class="fa fa-file-video-o"></i>
             {{galleryService.galleries.mediaType}}
           </h4>
           <div *ngFor="let content of galleryService.galleries.leftMenu">
-            <mat-card class="card" (click)="clickSideMenu(content, i)" [routerLinkActive]="['active']" [style.font-weight]="content.active ? 'bold' : 'normal'" [style.color]="content.active ? getTheme() : '#333'">{{content.name}}</mat-card>
+            <mat-card style="margin-bottom: 1%; cursor: pointer;" (click)="clickSideMenu(content.id, content.active)">
+              <i *ngIf="content.name == 'documents'" class="fa fa-file-o"></i>
+              <i *ngIf="content.name == 'images'" class="fa fa-image"></i>
+              <i *ngIf="content.name == 'audios'" class="fa fa-file-audio-o"></i>
+              <i *ngIf="content.name == 'videos'" class="fa fa-file-video-o"></i>
+              <a [routerLinkActive]="['active']" [style.font-weight]="content.active ? 'bold' : 'normal'" [style.color]="content.active ? getTheme() : '#333'">{{content.name}}</a>
+            </mat-card>
           </div>
 
         </div>
       </div>
     </div>
 
-    <!-- <div class="col-sm-6">
-          <div class="row">
-            <div class="col-md-12 warna_font">
-              <h2 class="titleWObg font-size-l">
-                  {{gallery.content?.contentTitle}}
-              </h2>
+    <div class="col-sm-9 warna_font">
+      <div class="row">
+        <div class="col-md-12">
+          <h2 class="titleWObg font-size-l">
+            <i *ngIf="galleryService.galleries.mediaType == 'documents'" class="fa fa-file-o"></i>
+            <i *ngIf="galleryService.galleries.mediaType == 'images'" class="fa fa-image"></i>
+            <i *ngIf="galleryService.galleries.mediaType == 'audios'" class="fa fa-file-audio-o"></i>
+            <i *ngIf="galleryService.galleries.mediaType == 'videos'" class="fa fa-file-video-o"></i>
+            {{galleryService.galleries.mediaType}}
+          </h2>
+        </div>
+      </div>
 
-              <span *ngIf="gallery.content?.contentDescription !== '-'" class="font-size-s defaultColor" [innerHTML]="gallery.content?.contentDescription"></span>
+      <div class="row">
+          <div class="col-md-12" *ngFor="let content of galleryService.galleries.list" style="color: #333; border: 0px solid #000">
 
-              <div class="padding-top-xl">
-                <div class="defaultColor" [innerHTML]="gallery.content?.contentText"></div>
+            <div class="ml" *ngIf="galleryService.galleries.mediaType == 'images'">
+              <div class="ml-pnl">
+                <mat-card style="margin-bottom: 5%; width: fit-content; padding-left: 0; padding-right: 0;">
+                  <img src="{{ mediaUrl }}/{{ content.name }}" width="150px" height="auto">
+                </mat-card>
               </div>
             </div>
+            <div *ngIf="galleryService.galleries.mediaType == 'audios'">
+
+            </div>
+            <div *ngIf="galleryService.galleries.mediaType == 'videos'">
+
+            </div>
+            <div *ngIf="galleryService.galleries.mediaType == 'documents'">
+              {{ content.title }}
+              <a *ngIf="content.name !== '-'" class="font-size-s defaultColor" [href]="mediaUrl+'/'+content.name">
+                <i *ngIf="galleryService.galleries.mediaType == 'documents'" class="fa fa-download"></i>
+              </a>
+            </div>
+            <!-- <span *ngIf="content.name !== '-'" class="font-size-s defaultColor" [innerHTML]="content.name"></span>
+
+            <div class="padding-top-xl">
+              <div class="defaultColor" [innerHTML]="content.title"></div>
+            </div> -->
+
           </div>
-        </div> -->
+      </div>
+    </div>
     <!-- <div *ngIf="gallery.template === 'lifeevent'" class="col-sm-3">
           <h4 class="sideBarMenu--title padding-bottom-l font-size-m warna_font">{{'common.onlineservice' | translate }}</h4>
           <ul class="rightMenu" [style.background-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
@@ -59,7 +98,7 @@
             </li>
           </ul>
         </div> -->
-        <div class="col-md-12">&nbsp;</div>
+    <div class="col-md-12">&nbsp;</div>
   </div>
 
 </div>

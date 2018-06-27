@@ -31,6 +31,9 @@ export class GalleryComponent implements OnInit, OnDestroy {
   @Output() langChange = new EventEmitter();
   
   private subscriptionLang: ISubscription;
+  
+  mediaUrl: any = this.config.externalMediaURL;
+  // mediaUrl: any = this.config.externalMediaURL.split('/')[2];
 
   constructor(
     public galleryService: GalleryService,  
@@ -72,17 +75,6 @@ export class GalleryComponent implements OnInit, OnDestroy {
             });
         }
 
-
-        // if(this.moduleName == 'subcategory'){
-        //   this.navService.triggerSubArticle(this.subID, this.langId);
-        // }else if(this.moduleName == 'content'){
-        //   this.navService.triggerContent(this.subID, this.langId);
-        // }else{
-          // this.navService.triggerArticle(this.moduleName,  this.langId, this.galleryID);
-        // }
-
-
-
     });
 
   }
@@ -97,6 +89,9 @@ export class GalleryComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+
+    this.mediaUrl = this.mediaUrl.replace("/media","");
+    console.log(this.mediaUrl)
 
     if(!this.langId){
       this.langId = localStorage.getItem('langID');
@@ -116,11 +111,10 @@ export class GalleryComponent implements OnInit, OnDestroy {
         return localStorage.getItem('themeColor');
     }
 
-    clickSideMenu(e, status){
+    clickSideMenu(id){
       this.statusID = status;
-      this.navService.getSubArticleUrl(e.categoryCode, localStorage.getItem('langID'));
-      this.navService.triggerSubArticle(e.categoryCode, localStorage.getItem('langID'));
-      this.router.navigate(['/subcategory', e.categoryCode]);
+      this.navService.triggerGalleries(localStorage.getItem('langID'), id);
+      // this.router.navigate(['gallery']);
       event.preventDefault();
     }
 
