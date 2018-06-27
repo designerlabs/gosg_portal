@@ -452,7 +452,9 @@
     "err":{
       "email":"Email is required. IE: aaaa@bbb.com",
       "category":"Category is required"
-    }
+    },
+    "textMsg" : "Do you wish to Unsubscribe?",
+    "unsubMsg" : " Thank you. Your email has been removed from our email address. "
   },
    "onlineservices": {
      "btnonlineservice" : "Online Service",
