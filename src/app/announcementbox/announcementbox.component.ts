@@ -83,9 +83,9 @@ export class AnnouncementboxComponent implements OnInit, OnDestroy {
         return this.http.get(this.announcementUrl + '?language=' + this.languageId)
             .map(res => res.json())
             .subscribe(data => {
-            //   console.log(data);
+            //   
                 this.announcementData = data.contentCategoryResource.results[0];
-                // console.log(this.announcementData);
+                // 
             });
     }
 
@@ -94,7 +94,7 @@ export class AnnouncementboxComponent implements OnInit, OnDestroy {
            .map(res => res.json())
           .subscribe(data => {
                 this.calendarData = data;
-                // console.log(this.calendarData);d
+                // 
             });
     }
 
@@ -130,9 +130,9 @@ export class AnnouncementboxComponent implements OnInit, OnDestroy {
 
     getDetailAnnounce(id, childid?) {
         if (childid) {
-            console.log(id, childid);
+            
         } else {
-            console.log(id);
+            
         }
 
         this.triggerAnnouncementAll(id, this.languageId);

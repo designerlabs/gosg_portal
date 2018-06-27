@@ -92,7 +92,7 @@ export class SliderComponent implements OnInit, OnDestroy {
     this.sharedservice.readPortal('slider','','','',lang)
         .subscribe(resSliderData => {
               this.slides = resSliderData['sliderList'];
-              console.log(this.slides);
+              
           });
   }
 

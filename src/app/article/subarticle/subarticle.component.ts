@@ -31,7 +31,7 @@ export class SubarticleComponent implements OnInit, OnDestroy {
   @Output() langChange = new EventEmitter();
 
   handleClickMe(e) {
-    console.log(e);
+
   }
 
   private subscription: ISubscription;
@@ -123,7 +123,7 @@ export class SubarticleComponent implements OnInit, OnDestroy {
   }
 
 
-  clickSideMenu(e, status) {
+  clickSideMenu(e, status, event) {
     this.agencyActive = false;
     this.statusID = status;
     this.navService.getSubArticleUrl(e.categoryId, localStorage.getItem('langID'));
@@ -132,7 +132,7 @@ export class SubarticleComponent implements OnInit, OnDestroy {
     event.preventDefault();
   }
 
-  clickSideMenuByAgency(e, status) {
+  clickSideMenuByAgency(e, status, event) {
     this.agencyActive = true;
     this.navService.getSubArticleUrlByAgency(localStorage.getItem('langID'));
     this.navService.triggerSubArticleAgency(localStorage.getItem('langID'));
@@ -151,7 +151,7 @@ export class SubarticleComponent implements OnInit, OnDestroy {
     return a[2];
   }
 
-  clickContentFromMenu(pId, aId) {
+  clickContentFromMenu(pId, aId, event) {
     this.navService.triggerContent(aId, localStorage.getItem('langID'));
     this.navService.getContentUrl(aId, localStorage.getItem('langID'));
     this.router.navigate(['/content', aId]);

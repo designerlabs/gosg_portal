@@ -110,7 +110,7 @@ export class FaqComponent implements OnInit, OnDestroy{
     .subscribe(resSliderData => {
       this.faqData = resSliderData
       this.faqList = this.faqData['faqList'];
-      console.log(this.faqList);
+      
 
     });
 

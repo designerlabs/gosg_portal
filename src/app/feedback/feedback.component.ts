@@ -165,7 +165,7 @@ export class FeedbackComponent implements OnInit, OnDestroy {
       else{
         this.isAdmin = false;
       }
-      // console.log(value);
+      // 
     }
     
     getSubType(){
@@ -229,7 +229,7 @@ export class FeedbackComponent implements OnInit, OnDestroy {
         body.feedbackEmail = "TEST@yopmail.com";
         datasend =JSON.stringify(body); 
 
-        console.log(JSON.stringify(body));
+        
       
         this.portalService.feedback(datasend).subscribe(
           data => {
@@ -246,7 +246,7 @@ export class FeedbackComponent implements OnInit, OnDestroy {
       }
       else{
 
-        console.log(JSON.stringify(body));
+        
 
         this.portalService.feedback(datasend).subscribe(
           data => {

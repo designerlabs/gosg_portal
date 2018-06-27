@@ -27,7 +27,7 @@ export class ArchivecontentComponent implements OnInit {
   @Output() langChange = new EventEmitter();
 
   handleClickMe(e){
-    console.log(e);
+    
   }
 
   constructor(public articleService: ArticleService,  private route: ActivatedRoute, private navService: NavService, private translate: TranslateService, private router: Router, private breadcrumbService: BreadcrumbService) {

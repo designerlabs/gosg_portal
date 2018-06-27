@@ -69,7 +69,6 @@ export class RssComponent implements OnInit {
    langId = this.langId;
 
   ngOnInit() {
-    debugger;
     this.rssId = this.route.snapshot.paramMap.get('id');
     this.rssParam = this.route.snapshot.url[1].path;
     this.feedUrl = this.config.urlPortal+'rss/feeder/'+this.rssId+'?language='+this.langId;

@@ -46,7 +46,7 @@ export class SetactiveComponent implements OnInit {
     this.languageId = localStorage.getItem('langID');
     let para = this.router.url.split('/')[3];
     this.val_token = para.split('?')[0];
-    console.log(this.val_token);
+    
     this.setActive(this.val_token)
     .subscribe(rData => {
       if(rData.statusCode === 'SUCCESS'){

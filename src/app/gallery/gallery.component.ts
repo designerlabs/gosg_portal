@@ -91,7 +91,6 @@ export class GalleryComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
     this.mediaUrl = this.mediaUrl.replace("/media","");
-    console.log(this.mediaUrl)
 
     if(!this.langId){
       this.langId = localStorage.getItem('langID');
@@ -101,9 +100,7 @@ export class GalleryComponent implements OnInit, OnDestroy {
 
     this.galleryData = this.galleryService.getGallery();
     this.moduleName = this.router.url.split('/')[1];
-    // this.galleryID = parseInt(this.router.url.split('/')[2]);
     this.navService.triggerGalleries(localStorage.getItem('langID'));
-    // console.log(this.galleryData);
 
     }
 

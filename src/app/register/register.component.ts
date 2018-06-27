@@ -237,7 +237,7 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
         }
         // this.citizenFormGrp.get('telefon').disable();
         this.refUrl =  location.search.split('refUrl=')[1];
-        console.log(unescape(this.refUrl));
+        
 
         this.getUserType(this.languageId);
         this.maskCitizen = this.validateService.getMask().telephone;
@@ -560,7 +560,7 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     noncitizenReg(formValues) {
-        console.log(formValues);
+        
     }
 
     isCitizen() {

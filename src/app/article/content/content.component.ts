@@ -29,7 +29,7 @@ export class ContentComponent implements OnInit, OnDestroy {
   @Output() langChange = new EventEmitter();
 
   handleClickMe(e){
-    console.log(e);
+
   }
   private subscription: ISubscription;
   private subscriptionLang: ISubscription;
@@ -107,7 +107,7 @@ export class ContentComponent implements OnInit, OnDestroy {
     return localStorage.getItem('themeColor');
   }
 
-  clickSideMenu(e, status){
+  clickSideMenu(e, status, event){
     this.statusID = status;
     this.navService.getSubArticleUrl( e.categoryId, localStorage.getItem('langID'));
     this.navService.triggerSubArticle(e.categoryCode, localStorage.getItem('langID'));
@@ -115,14 +115,14 @@ export class ContentComponent implements OnInit, OnDestroy {
     event.preventDefault();
   }
 
-  clickSideMenuByAgency(e, status){
+  clickSideMenuByAgency(e, status, event){
     this.navService.getSubArticleUrlByAgency(localStorage.getItem('langID'));
     this.navService.triggerSubArticleAgency(localStorage.getItem('langID'));
     this.router.navigate(['/subcategory', 'agency']);
     event.preventDefault();
   }
 
-  clickContentFromMenu(pId, aId, status){
+  clickContentFromMenu(pId, aId, status, event){
     this.statusID = status;
     this.navService.triggerContent(aId, localStorage.getItem('langID'));
     this.navService.getContentUrl( aId, localStorage.getItem('langID'));

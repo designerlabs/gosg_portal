@@ -21,7 +21,7 @@ export class ConfirmComponent implements OnInit {
   showErrorMessage()
   {
     this.ErrorMessageIsVisible = true;
-    console.log(this.ErrorMessageIsVisible);
+    
       // this.ErrorMsg = msg;
       // this.ErrorMessageIsVisible = true;
   }
@@ -29,6 +29,6 @@ export class ConfirmComponent implements OnInit {
   hideErrorMsg()
   {
       this.ErrorMessageIsVisible = false;
-      console.log(this.ErrorMessageIsVisible);
+      
   }
 }

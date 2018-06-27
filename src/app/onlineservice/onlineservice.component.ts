@@ -51,7 +51,7 @@ export class OnlineserviceComponent implements OnInit, OnDestroy {
   dataAgencyPage = null;
   valByAlpha;
   valByAgency;
-  
+
   private subscription: ISubscription;
   private subscriptionLang: ISubscription;
 
@@ -92,7 +92,7 @@ export class OnlineserviceComponent implements OnInit, OnDestroy {
         });
 
       }
-      
+
       if (myLang == 'ms') {
         translate.get('HOME').subscribe((res: any) => {
           this.lang = 'ms';
@@ -137,7 +137,7 @@ export class OnlineserviceComponent implements OnInit, OnDestroy {
       }
       //this.getData();
     }
-    
+
     this.valByAlpha = "0";
     this.valByAgency = "0";
     this.dropdownOpt = [
@@ -622,7 +622,7 @@ paginatorR(page, totalPages) {
     this.chkDownload = false;
     this.chkOnline = false;
     this.sharedService.defaultPageSize = this.sharedService.pageSize[0].size;
-    console.log(eve.target.value);
+
     this.getDataSelByAlpha(eve.target.value);
   }
 

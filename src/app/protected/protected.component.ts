@@ -41,7 +41,7 @@ export class ProtectedComponent implements OnInit {
   pageSize;
   entryService;
   constructor(private activatedRoute:ActivatedRoute, @Inject(APP_CONFIG) private config: AppConfig, private protectedService:ProtectedService, router:Router, private portalService:PortalService) {
-      
+
       this.clientHeight = window.innerHeight - 200;
   }
   getExpand(data) {
@@ -71,7 +71,7 @@ export class ProtectedComponent implements OnInit {
         }else{
           alert('username not found');
         }
-          
+
       },
       error => {
         alert('error');
@@ -84,7 +84,7 @@ export class ProtectedComponent implements OnInit {
   showProfile(data){
     document.getElementById("mySidenavProtected").style.width = "250px";
     this.isProfile = data;
-    console.log(this.isProfile);
+
     if(localStorage.getItem('customFontType')){
       $('#fontOptSideMenu3').val(localStorage.getItem('customFontType'));
   }
@@ -108,9 +108,9 @@ export class ProtectedComponent implements OnInit {
             localStorage.setItem('fullname',data.user.fullName);
             localStorage.setItem('email',data.user.email);
           }else{
-            
+
           }
-          
+
         },
         error => {
           //location.href = this.config.urlUAP +'uapsso/Logout';
@@ -129,13 +129,10 @@ export class ProtectedComponent implements OnInit {
         localStorage.setItem('usrID', data[0].id);
         //this.getUserRegData(data[0].fullname);
         }else{
-          debugger;
-
           //location.href = this.config.urlUAP+'portal/index';
         }
       },
       error => {
-        debugger;
         //location.href = this.config.urlUAP+'portal/index';
       });
   }
@@ -151,28 +148,28 @@ export class ProtectedComponent implements OnInit {
       this.isFirstLogin = false;
     }
   }
- 
+
 
   ngOnInit() {
-    
+
     this.checkFirstTime();
     let getUsrID = localStorage.getItem('usrID');
     let getUserID = localStorage.getItem('userId');
     let getUserCountry = localStorage.getItem('userNationality');
-    
+
     this.getUserData();
     this.activatedRoute.queryParamMap.skip(1).subscribe((queryParams: Params) => {
       this.userId = queryParams.get('id');
       if(this.userId){
         this.getProfileData(this.userId);
-        console.log('got user id' + this.userId)
+
       }
     });
     if(getUsrID){
-      console.log('no userid 1' + this.userId);
+
       this.getProfileData(getUsrID);
     }else{
-      console.log('no userid 2' + this.userId)
+
 
     }
 

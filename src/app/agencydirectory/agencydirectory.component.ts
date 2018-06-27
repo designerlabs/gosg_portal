@@ -105,8 +105,7 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
   applyFilter(type, filter?) {
     if (type != 'letter') {
       this.loadAlpha(filter);
-    }
-    console.log(filter);
+    };
 
     if (filter != 0) {
       if (type == 'ministry') {
@@ -387,15 +386,15 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
       data => {
         this.portalservice.errorHandling(data, (function () {
           this.agencyList = data['agencyList'];
-          // console.log(this.agencyList)
-          // console.log(this.agencyList.length)
+
+
 
           for (i = 0; i <= this.agencyList.length - 1; i++) {
-            // console.log(i)
-            // console.log(this.agencyList[i].ministryName)
-            // console.log(mLat + ',' + mLong)
-            // console.log(parseFloat(this.agencyList[i].ministryLatitude))
-            // console.log(parseFloat(this.agencyList[i].ministryLongitude))
+
+
+
+
+
 
             this.addMarker(
               parseFloat(this.malformedDataHandler(this.agencyList[i].agencyLatitude)),
@@ -424,7 +423,7 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
         data => {
           this.portalservice.errorHandling(data, (function () {
             this.recordList = data;
-            // console.log(this.recordList)
+
 
             if (this.recordList.agencyList.length > 0) {
               // this.dataSource.data = this.recordList.list;
@@ -433,10 +432,10 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
               this.totalRec = this.recordList.totalElements;
               this.recordTable = this.recordList.agencyList;
               this.noNextData = this.recordList.pageNumber === this.recordList.totalPages;
-              // console.log(this.seqPageNum)
-              // console.log(this.seqPageSize)
+
+
               console.log(this.recordTable)
-              // console.log(this.recordTable[0])
+
 
               this.showNoData = false;
             } else {
@@ -453,7 +452,7 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
   }
 
   pageChange(event, totalPages) {
-    // console.log(event)
+
     if (this.ministry) {
       this.getSearchData(this.pageCount, 10);
     } else {
@@ -482,7 +481,7 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
         data => {
           this.portalservice.errorHandling(data, (function () {
             this.recordList = data;
-            // console.log(this.recordList)
+
 
             if (this.recordList.agencyList.length > 0) {
               // this.dataSource.data = this.recordList.list;
@@ -491,10 +490,10 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
               this.totalRec = this.recordList.totalElements;
               this.recordTable = this.recordList.agencyList;
               this.noNextData = this.recordList.pageNumber === this.recordList.totalPages;
-              // console.log(this.seqPageNum)
-              // console.log(this.seqPageSize)
+
+
               console.log(this.recordTable)
-              // console.log(this.recordTable[0])
+
 
               this.showNoData = false;
             } else {
@@ -544,10 +543,10 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
               this.totalRec = this.recordList.totalElements;
               this.recordTable = this.recordList.agencyList;
               this.noNextData = this.recordList.pageNumber === this.recordList.totalPages;
-              // console.log(this.seqPageNum)
-              // console.log(this.seqPageSize)
+
+
               console.log(this.recordTable)
-              // console.log(this.recordTable[0])
+
 
               this.showNoData = false;
             } else {
@@ -575,14 +574,14 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
           this.portalservice.errorHandling(data, (function () {
             this.ministryList = data['list'];
             console.log(this.ministryList)
-            // console.log(this.ministryList.length)
+
 
             for (i = 0; i <= this.ministryList.length - 1; i++) {
-              // console.log(i)
-              // console.log(this.ministryList[i].ministryName)
-              // console.log(mLat + ',' + mLong)
-              // console.log(parseFloat(this.ministryList[i].ministryLatitude))
-              // console.log(parseFloat(this.ministryList[i].ministryLongitude))
+
+
+
+
+
 
               this.addMarker(
                 parseFloat(this.malformedDataHandler(this.ministryList[i].ministryLatitude)),
