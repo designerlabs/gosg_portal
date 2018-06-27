@@ -161,7 +161,7 @@
     }
     @media (min-width: 1200px) {
       .ml {
-        column-count: 3;
+        column-count: 5;
       }
     }
     .ml-pnl {

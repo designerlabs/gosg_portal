@@ -46,9 +46,9 @@
       </div>
     </div>
 
-    <div class="col-sm-9 warna_font">
+    <div class="col-sm-9" style="color: #333; border: 0px solid #000">
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-9">
           <h2 class="titleWObg font-size-l">
             <i *ngIf="galleryService.galleries.mediaType == 'documents'" class="fa fa-file-o"></i>
             <i *ngIf="galleryService.galleries.mediaType == 'images'" class="fa fa-image"></i>
@@ -59,36 +59,47 @@
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-md-12">
-          <div *ngFor="let content of galleryService.galleries.list" style="color: #333; border: 0px solid #000">
+      <div class="container col-md-12 ml">
+        <div *ngFor="let content of galleryService.galleries.list">
 
-            <div class="ml" *ngIf="galleryService.galleries.mediaType == 'images'">
+          <!-- IMAGES -->
+          <div *ngIf="galleryService.galleries.mediaType == 'images'">
               <div class="ml-pnl">
                 <mat-card style="margin-bottom: 5%; width: fit-content; padding-left: 0; padding-right: 0;">
                   <img src="{{ mediaUrl }}/{{ content.name }}" width="150px" height="auto">
                 </mat-card>
               </div>
-            </div>
-            <div *ngIf="galleryService.galleries.mediaType == 'audios'">
+          </div>
 
-            </div>
-            <div *ngIf="galleryService.galleries.mediaType == 'videos'">
+          <!-- AUDIOS -->
+          <div *ngIf="galleryService.galleries.mediaType == 'audios'">
+            <audio controls>
+                <source src="{{ mediaUrl }}/{{ content.name }}" type="audio/mp3">
+              Your browser does not support the audio element.
+              </audio>
+          </div>
 
-            </div>
-            <div *ngIf="galleryService.galleries.mediaType == 'documents'">
-              {{ content.title }}
-              <a *ngIf="content.name !== '-'" class="font-size-s defaultColor" [href]="mediaUrl+'/'+content.name">
-                <i *ngIf="galleryService.galleries.mediaType == 'documents'" class="fa fa-download"></i>
-              </a>
-            </div>
-            <!-- <span *ngIf="content.name !== '-'" class="font-size-s defaultColor" [innerHTML]="content.name"></span>
+          <!-- VIDEOS -->
+          <div *ngIf="galleryService.galleries.mediaType == 'videos'">
+            <video width="320" height="240" controls>
+                <source src="{{ mediaUrl }}/{{ content.name }}" type="video/mp4">
+              Your browser does not support the video tag.
+              </video>
+          </div>
+
+          <!-- DOCUMENTS -->
+          <div *ngIf="galleryService.galleries.mediaType == 'documents'">
+            {{ content.title }}
+            <a *ngIf="content.name !== '-'" class="font-size-s defaultColor" [href]="mediaUrl+'/'+content.name">
+              <i *ngIf="galleryService.galleries.mediaType == 'documents'" class="fa fa-download"></i>
+            </a>
+          </div>
+          <!-- <span *ngIf="content.name !== '-'" class="font-size-s defaultColor" [innerHTML]="content.name"></span>
 
             <div class="padding-top-xl">
               <div class="defaultColor" [innerHTML]="content.title"></div>
             </div> -->
 
-          </div>
         </div>
       </div>
     </div>
@@ -100,7 +111,7 @@
             </li>
           </ul>
         </div> -->
-    <div class="col-md-12">&nbsp;</div>
-  </div>
+      </div>
+      <div class="col-md-6">&nbsp;</div>
 
 </div>
