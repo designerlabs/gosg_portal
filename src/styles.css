@@ -99,7 +99,7 @@ html, body{
 }
 
 .container.search {
-  color: #333; 
+  color: #333;
 }
 
 .panel-body {
@@ -147,6 +147,10 @@ html, body{
             font-size: 20px;
             color: white;
             cursor: pointer;
+        }
+
+        .pointer{
+          cursor: pointer;
         }
         .copyright {
             background-color: #333;
