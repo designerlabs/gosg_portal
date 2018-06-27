@@ -27,7 +27,7 @@ declare var jQuery: any;
 export class SidenavComponent{
     /*activateLink(event){
         var link = event.srcElement;
-        console.log(link);
+        
             jQuery(link).wrap( "<span style='color: rgb(0, 189, 187)'></span>");
             jQuery(link).child().css({"color":"#00bdbb","text-decoration": "none","font-weight":"600"});
     }*/

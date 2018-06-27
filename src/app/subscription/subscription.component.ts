@@ -148,8 +148,8 @@ export class SubscriptionComponent implements OnInit,OnDestroy {
     this.categoryIds = '';
     subsval.forEach((item, index) => {
       this.categoryIds += '&categories='+item;
-      console.log(item); // 9, 2, 5
-      console.log(index); // 0, 1, 2
+      
+      
   });
     return this.http.get(this.config.urlPortal + 'subscription?email=' + emailval+this.categoryIds + '&language='+ this.languageId)
       .map((response: Response) => response.json())

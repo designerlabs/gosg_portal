@@ -42,12 +42,12 @@
 
                               <mat-expansion-panel  *ngFor="let content of article.menuLeft; let i = index" multi="false" displayMode="flat" [hideToggle]="content.subMenuLeft.length==0 ? true: null"    [expanded]="content?.activeMenu">
                                   <mat-expansion-panel-header>
-                                    <mat-panel-title class="pointer" (click)="clickSideMenu(content, i)">
+                                    <mat-panel-title class="pointer" (click)="clickSideMenu(content, i, $event)">
                                       <a class="warna_font sideBarMenu--link font-size-s" [routerLinkActive]="['active']"  [style.font-weight]="content.activeMenu ? 'bold' : 'normal'"  [style.color]="content.activeMenu ? getTheme() : '#333'" >{{content.categoryName}}</a>
                                     </mat-panel-title>
                                   </mat-expansion-panel-header>
                                   <div *ngFor="let subcontent of content.subMenuLeft" class="submenu" >
-                                    <div class="pointer" (click)="clickContentFromMenu(content.parentCode, subcontent.contentCode, i)">
+                                    <div class="pointer" (click)="clickContentFromMenu(content.parentCode, subcontent.contentCode, $event)">
                                       <a class="warna_font sideBarMenu--link font-size-s"  #subContent [style.font-weight]="subcontent.activeMenu ? 'bold' : 'normal'"  [style.color]="subcontent.activeMenu ? getTheme() : '#333'">
                                         {{subcontent.contentTitle}}
                                       </a>
@@ -68,7 +68,7 @@
                               </div> -->
                               <mat-expansion-panel hideToggle="true" *ngIf="article.template === 'publication'" multi="true" displayMode="flat">
                                   <mat-expansion-panel-header>
-                                    <mat-panel-title class="pointer" (click)="clickSideMenuByAgency(content, i)">
+                                    <mat-panel-title class="pointer" (click)="clickSideMenuByAgency(content, i, $event)">
                                       <a class="warna_font sideBarMenu--link font-size-s"  [style.font-weight]="agencyActive ? 'bold' : 'normal'"  [style.color]="agencyActive ? getTheme() : '#333'" [routerLinkActive]="['active']">{{'common.byagency' | translate}}</a>
                                     </mat-panel-title>
                                   </mat-expansion-panel-header>
@@ -90,7 +90,7 @@
                       <div *ngFor="let tabContent of tab.contents; let index=index; let odd=odd; let even=even;">
                           <div class="col-sm-6">
                             <div>
-                              <div style="width:100%; margin-right:10px; height:auto;" class="pointer" (click)="clickContentFromMenu(article.categoryCode, tabContent.contentCode)">
+                              <div style="width:100%; margin-right:10px; height:auto;" class="pointer" (click)="clickContentFromMenu(article.categoryCode, tabContent.contentCode, $event)">
                                   <a class="intro-box warna_border_color" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
                                       <h4 class="font-size-m warna_font">
                                           {{tabContent.contentTitle}}
@@ -169,7 +169,7 @@
                     <div  *ngFor="let rightContent2 of rightContent.contents; let index=index; let odd=odd; let even=even;">
                       <div class="col-sm-6">
                           <div>
-                            <div style="width:100%; margin-right:10px; height:auto;" class="pointer" (click)="clickContentFromMenu(article.categoryCode, rightContent2.contentCode)">
+                            <div style="width:100%; margin-right:10px; height:auto;" class="pointer" (click)="clickContentFromMenu(article.categoryCode, rightContent2.contentCode, $event)">
                                 <a class="intro-box warna_border_color" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
                                     <h4 class="font-size-m warna_font">
                                         {{rightContent2.contentTitle}}

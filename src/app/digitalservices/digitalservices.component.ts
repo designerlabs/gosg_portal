@@ -74,14 +74,14 @@ export class DigitalservicesComponent implements OnInit, OnDestroy {
     this.portalservice.getDigitalServices(lang).subscribe(data => {
 
       this.dsData = data.list;
-      // console.log(data.list)
+      // 
       // for(var item of data.list) {
-      // console.log(data.list)
+      // 
       // if(data.list.details)
       //   this.dsData.push(data.list);
       // }
       // this.dsData = [''];
-      console.log(this.dsData)
+      
     });
   }
 

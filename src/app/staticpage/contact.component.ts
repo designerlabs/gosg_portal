@@ -157,8 +157,8 @@ export class ContactComponent implements OnInit, OnDestroy{
             this.dataContact = this.tltContact.footerContents;
             let latlong = this.dataContact[2].footerContentName;          
             var partsOfStr = latlong.split(',');
-            console.log(latlong);
-            console.log(partsOfStr);
+            
+            
 
 
             this.addMarker(
@@ -172,7 +172,7 @@ export class ContactComponent implements OnInit, OnDestroy{
             );
             
 
-            console.log(this.dataContact);
+            
         });
     }
 

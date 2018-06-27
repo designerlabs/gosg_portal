@@ -183,7 +183,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                     this.getReligion(this.languageId );
                     this.getGenderVal(this.languageId);
                   }
-                  
+
               });
 
   }
@@ -199,7 +199,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     }else{
       this.languageId = 1;
     }
-    
+
     this.initialBtn = true;
   //  this.profileUpdated();
     let today = new Date();
@@ -492,7 +492,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                 }).bind(this));
               },
               error => {
-                console.log(error)
+
               }
             )
           }else{
@@ -519,7 +519,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   }
 
   isUserRegLocal(regCountry) {
-    // console.log(regCountry);
+    //
 
     if(regCountry == "MY") {
       this.isRegLocal = true;
@@ -571,7 +571,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   }
 
   isMalaysianChk(val) {
-    // console.log(val);
+    //
 
     this.isChanged();
     if(val == 152) {
@@ -605,7 +605,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
     year = century+year;
     display = month+"/"+day+"/"+year;
-    // console.log(display);
+    //
     if(this.isRegLocal == true) {
       this.profileForm.get('dob').setValue(new Date(year,month-1,day));
       this.dt= new Date(display).getTime();
@@ -898,7 +898,7 @@ getPostcodeByCityC(e){
       this.profileForm.get('corrscodeTelefon').setValue("");
       this.isCorrsLocal = false;
     }
-    console.log(e.checked);
+
     this.checkReqValues();
   }
 
@@ -1004,15 +1004,15 @@ getPostcodeByCityC(e){
     this.events.push(`${event.value}`);
     this.dt = new Date(this.events[0]).getTime();
     this.dateFormatExample = "";
-    // console.log(this.dt)
+    //
   }
 
   edit(){
     this.isActive = !this.isActive;
 
     if(this.isActive != false) {
-      console.log("edit enabled")
-      console.log(this.selectedCountry + " | " + this.selectedState  + " | " + this.selectedCity)
+
+
 
       this.toastr.info(this.translate.instant('profile.msg.editbtnE'), '');
       this.initialBtn = false
@@ -1022,7 +1022,7 @@ getPostcodeByCityC(e){
       // this.dob.enable();
       this.checkReqValues();
     } else {
-      console.log(this.profileForm.value);
+
       // this.toastr.info(this.translate.instant('profile.msg.editbtnD'), '');
 
       this.initialBtn = true
@@ -1069,7 +1069,7 @@ getPostcodeByCityC(e){
     }
 
     // if(this.isActive)
-    //   console.log(reqVal);
+    //
 
   }
 
@@ -1229,10 +1229,10 @@ let bodyUpdate =
     this.isSameAddress();
     this.checkReqValues();
 
-    console.log(this.initial);
-    console.log(this.profileForm.invalid)
-    console.log(formValues);
-    console.log(this.profileForm.value);
+
+
+
+
     this.protectedService.updateProfile(bodyUpdate)
     .subscribe(
       data => {

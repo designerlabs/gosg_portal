@@ -102,7 +102,7 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
     }
     // alert(this.initLoad + " onInit")
     // this.localeVal = 'en-us';
-    // console.log(this.localeVal)
+    // 
       this.getEvents();
       $('#calendar').fullCalendar('destroy');
       $('#calendar').fullCalendar(this.getOptions(this.event,this.mediaUrl));
@@ -119,15 +119,15 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
 
   onScroll(event){
 
-    // console.log(event.target.scrollHeight+' - '+event.target.scrollTop +  'Required scroll bottom ' +(event.target.scrollHeight - 250) +' Container height: 250px');
+    // 
     if(event.target.scrollTop >= (event.target.scrollHeight - 250)) {
-      // console.log(this.searchAgencyResultEn.length)
-      // console.log(event)
+      // 
+      // 
 
       let keywordVal;
       
       this.getSearchData(keywordVal, this.languageId, 1, this.searchAgencyResult.length+10)
-      // console.log(this.searchAgencyResult)
+      // 
     }
   }
 
@@ -142,8 +142,8 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
   getSearchData(keyword, langId, count, page){
 
     // if(keyword != "" && keyword != null && keyword.length != null && keyword.length >= 3) {
-      // console.log(keyword)
-      // console.log(keyword.length)
+      // 
+      // 
       // this.isActive = true;
       this.loading = true;
       
@@ -153,8 +153,8 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
 
         this.portalService.errorHandling(data, (function(){
 
-          // console.log(data['agencyList'])
-          // console.log(data['agencyList'].length)
+          // 
+          // 
 
           if(data['agencyList'].length != 0) {
               this.searchAgencyResult = data['agencyList'];
@@ -178,17 +178,17 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
   
   getValue(aId,aName,mName, refCode){
 
-    // console.log(this.languageId + ', ' + aId+ ', ' + aName+ ', ' + mName+ ', ' + refCode)
+    // 
     this.agencySel = aName;
     this.isActiveList = false;
 
     this.getEventByAgency(aId);
      
-    // console.log(this.event)
+    // 
     $('#calendar').fullCalendar('destroy');
     $('#calendar').fullCalendar(this.getOptions(this.event,this.mediaUrl));
 
-    // console.log(this.options)
+    // 
 
   }
 
@@ -202,9 +202,9 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
     this.portalService.getCalendarEvents().subscribe(data => {
   
       // this.sharedService.errorHandling(data, (function(){
-        // console.log(data['list'])
+        // 
         for(var item of data['list']) {
-          // console.log(item)
+          // 
 
           let body = {
             'id': null,
@@ -265,7 +265,7 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
           
           this.event.push(body)
         }
-        // console.log(this.event)
+        // 
         this.event = [];
      
         
@@ -283,9 +283,9 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
     this.portalService.getCalendarEventsByAgencyID(aId).subscribe(data => {
   
       // this.sharedService.errorHandling(data, (function(){
-        // console.log(data)
+        // 
         for(var item of data['list']) {
-          // console.log(item)
+          // 
 
           let body = {
             'id': null,
@@ -345,7 +345,7 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
           
           this.event.push(body)
         }
-        // console.log(this.event)
+        // 
         this.event = [];
         
       // });
@@ -357,8 +357,8 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
     setTimeout(()=>{
       // this.getEvents();
       
-      // console.log(this.options)
-      // console.log("100ms after ngAfterViewInit ");
+      // 
+      // 
       
       this.options = {
         locale: this.localeVal?this.localeVal: this.lang, 
@@ -403,7 +403,7 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
         $('#details').css('display','block');
         $('.overlay').css('display','block');
         
-        // console.log(events)
+        // 
       },
       eventMouseover: function(events) {
         $('.fc-event').attr('title', events.title);

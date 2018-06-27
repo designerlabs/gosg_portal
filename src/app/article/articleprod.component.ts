@@ -94,7 +94,7 @@ export class ArticleprodComponent implements OnInit, OnDestroy {
     this.moduleName = this.router.url.split('/')[1];
     this.topicID = parseInt(this.router.url.split('/')[2]);
     // this.navService.triggerArticle(this.moduleName, this.langId, this.topicID);
-    console.log('onInit')
+
   }
 
   ngOnDestroy() {
@@ -105,7 +105,7 @@ export class ArticleprodComponent implements OnInit, OnDestroy {
     return localStorage.getItem('themeColor');
   }
 
-  clickSideMenu(e, status) {
+  clickSideMenu(e, status, event) {
     this.statusID = status;
     this.navService.getSubArticleUrl(e.categoryCode, localStorage.getItem('langID'));
     this.navService.triggerSubArticle(e.categoryCode, localStorage.getItem('langID'));
@@ -113,14 +113,14 @@ export class ArticleprodComponent implements OnInit, OnDestroy {
     event.preventDefault();
   }
 
-  clickSideMenuByAgency(e, status) {
+  clickSideMenuByAgency(e, status, event) {
     this.navService.getSubArticleUrlByAgency(localStorage.getItem('langID'));
     this.navService.triggerSubArticleAgency(localStorage.getItem('langID'));
     this.router.navigate(['/subcategory', 'agency']);
     event.preventDefault();
   }
 
-  clickContentFromMenu(pId, aId, status) {
+  clickContentFromMenu(pId, aId, status, event) {
 
     this.statusID = status;
     this.navService.triggerContent(aId, localStorage.getItem('langID'));

@@ -72,7 +72,7 @@ export class AnnouncementComponent implements OnInit {
     ngOnInit() {
         this.moduleName = this.router.url.split('/')[1];
         this.triggerAnnouncement(this.moduleName, this.lang);
-        console.log('onInit Announcement');
+        
     }
 
     getTheme(){
@@ -82,8 +82,8 @@ export class AnnouncementComponent implements OnInit {
     clickSideMenu(e) {
         const _getModule = this.router.url.split('/')[1];
         this.router.navigate([_getModule, e.code]);
-        console.log(e);
-        console.log('sideMenu Announcement');
+        
+        
         event.preventDefault();
     }
 
@@ -91,7 +91,7 @@ export class AnnouncementComponent implements OnInit {
 
         const _getModule = this.router.url.split('/')[1];
         this.router.navigate([_getModule, e.code]);
-        console.log('content Announcement');
+        
         event.preventDefault();
     }
 
@@ -115,7 +115,7 @@ export class AnnouncementComponent implements OnInit {
             // const temp1 = this.announceRes[0];
             // const temp = Object.keys(temp1).map(key => temp1[key]);
             // this.announces = temp;
-            console.log(resAllAnnounce);
+            
             this.announces = resAllAnnounce;
             this.breadcrumb = this.breadcrumbService.getBreadcrumb();
             this.isValid = this.breadcrumbService.isValid = true;

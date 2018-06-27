@@ -38,10 +38,10 @@ export class AppComponent {
     }
 
     showsidenav(data){
-        console.log(this.isSideNav);
+        
         document.getElementById("mySidenav").style.width = "250px";
         this.isSideNav = data;
-        console.log(this.isSideNav);
+        
         if(localStorage.getItem('customFontType')){
             $('#fontOptSideMenu2').val(localStorage.getItem('customFontType'));
         }
@@ -58,7 +58,7 @@ export class AppComponent {
         return localStorage.getItem('themeColor');
     }
     OnInit() {
-        console.log('App.comp');
+        
     }
 
 }

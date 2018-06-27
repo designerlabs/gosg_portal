@@ -97,7 +97,7 @@ export class GalleryComponent implements OnInit {
 
   ngOnInit() {
         this.galleryData = this.galleryService.getGallery();
-        console.log(this.galleryData);
+        
         this.moduleName = this.router.url.split('/')[1];
         // this.topicID = parseInt(this.router.url.split('/')[2]);
         // this.navService.triggerArticle(this.moduleName, localStorage.getItem('langID'), this.topicID);

@@ -105,8 +105,7 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
   applyFilter(type, filter?) {
     if (type != 'letter') {
       this.loadAlpha(filter);
-    }
-    console.log(filter);
+    };
 
     if (filter != 0) {
       if (type == 'ministry') {

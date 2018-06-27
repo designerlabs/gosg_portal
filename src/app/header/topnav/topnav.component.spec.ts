@@ -33,8 +33,8 @@ describe('TopnavComponent', () => {
     }).compileComponents();
 
     fixture = TestBed.createComponent(TopnavComponent);
-    // console.log(fixture);
-    // debugger;
+    // 
+    
     
   }));
 
@@ -44,8 +44,8 @@ describe('TopnavComponent', () => {
     //fixture.detectChanges();
 
     const component = fixture.componentInstance;
-    // console.log(component);
-    // debugger;
+    // 
+    
     expect(component.currlang).toBe('English');
     fixture.debugElement.nativeElement.querySelector('button').click();
     expect(component.currlang).toBe('Bahasa Malaysia');
