@@ -61,7 +61,7 @@ export class UnsubscribeComponent implements OnInit {
     
     return this.http.get(this.config.urlPortal + 'subscription/unsub?code='+this.emailId).subscribe(
       data => {
-        this.toastr.success('Unsubscribe done successfully.');
+        this.toastr.success(this.translate.instant('subscription.unsubMsg'), '');
       }, error => {
         this.toastr.error('Token is invalid');
       }

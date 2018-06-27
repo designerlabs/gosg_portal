@@ -34,21 +34,29 @@ export class NavRouterActivator implements CanActivate {
                 });
             }
         });
+        // this.langIdVal = this.getLanguageValue();
+    }
 
-        if(localStorage.getItem('langID')){
-          this.langIdVal = localStorage.getItem('langID');
-        }else{
-          this.langIdVal = this.langId
-        }
+
+    getLanguageValue(){
+      if(this.translate.currentLang == 'ms'){
+        return 2;
+      }else if(this.translate.currentLang == 'en'){
+       return 1;
+      }else if(localStorage.getItem('langID')){
+        return parseInt(localStorage.getItem('langID'))
+      }else{
+        return 1;
+      }
     }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     //    const eventExists =  !!this.navService.triggerArticle('', this.lang, +route.params['id']); // Old code
     if (route.params['id']) {
-        this.eventExists =  !!this.navGuardService.guardRoute(route.url[0].path, this.langIdVal, route.params['id']);
+        this.eventExists =  !!this.navGuardService.guardRoute(route.url[0].path, this.getLanguageValue(), route.params['id']);
     }else {
         if (route.params['id1']) {
-            this.eventExists =  !!this.navGuardService.guardRoute(route.url[0].path, this.langIdVal, route.params['id1'], route.params['id2']);
+            this.eventExists =  !!this.navGuardService.guardRoute(route.url[0].path,  this.getLanguageValue(), route.params['id1'], route.params['id2']);
         }
     }
        // tslint:disable-next-line:curly

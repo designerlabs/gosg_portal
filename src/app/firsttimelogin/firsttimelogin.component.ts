@@ -61,7 +61,7 @@ export class FirsttimeloginComponent implements OnInit {
       this.protectedservice.completeTran(this.rndNo)
         .subscribe(
             userData => {
-              if(userData.statusCode === 'S001'){
+              if(userData.statusCode === 'Success'){
                 if(userData.statusDesc === 'Success'){
                   window.location.href = this.config.urlDashboard;
                 }else{

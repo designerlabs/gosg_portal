@@ -453,7 +453,13 @@
     "successMsg" :"Terima kasih. Emel anda telah berjaya disimpan. Emel pengaktifan langganan telah dihantar. Sila klik pada pautan untuk pengaktifan langganan.",
     "btnsubscribe" : "Langgan",
     "setactivetitle": "Langgan senarai mel",
-    "setactivemsg": "Terima kasih. E-mel anda telah disahkan."
+    "setactivemsg": "Terima kasih. E-mel anda telah disahkan.",
+    "err":{
+      "email":"Emel wajib diisi. IE: aaaa@bbb.com",
+      "category":"Kategori wajib diisi"
+    },
+    "textMsg" : "Adakah anda ingin berhenti melanggan",
+    "unsubMsg" : "Terima Kasih. Emel anda telah dikeluarkan daripada langganan emel kami."
   },
   "onlineservices": {
     "btnonlineservice" : "Perkhidmatan Dalam Talian",

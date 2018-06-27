@@ -107,8 +107,8 @@
                         <div  *ngFor="let agencyLst of rightContent.contents; let index=index; let odd=odd; let even=even;">
                             <div class="col-sm-6">
                                 <div>
-                                  <div style="width:100%; margin-right:10px; height:auto;">
-                                      <a class="intro-box warna_border_color" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" href="" (click)="clickContentFromMenu(article.categoryCode, agencyLst.contentCode, 'archive')">
+                                  <div style="width:100%; margin-right:10px; height:auto;" class="pointer" (click)="clickContentFromMenu(article.categoryCode, agencyLst.contentCode, 'archive')">
+                                      <a class="intro-box warna_border_color" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
                                           <h4 class="font-size-m warna_font">
                                               {{agencyLst.contentTitle}}
                                           </h4>
@@ -186,8 +186,8 @@
                     <div  *ngFor="let rightContent2 of rightContent.contents; let index=index; let odd=odd; let even=even;">
                       <div class="col-sm-6">
                           <div>
-                            <div style="width:100%; margin-right:10px; height:auto;">
-                                <a class="intro-box warna_border_color" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" href="" (click)="clickContentFromMenu(article.categoryCode, rightContent2.contentCode, 'archive')">
+                            <div style="width:100%; margin-right:10px; height:auto;" class="pointer" (click)="clickContentFromMenu(article.categoryCode, rightContent2.contentCode, 'archive')">
+                                <a class="intro-box warna_border_color" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
                                     <h4 class="font-size-m warna_font">
                                         {{rightContent2.contentTitle}}
                                     </h4>
