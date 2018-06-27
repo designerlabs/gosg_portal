@@ -60,7 +60,8 @@
       </div>
 
       <div class="row">
-          <div class="col-md-12" *ngFor="let content of galleryService.galleries.list" style="color: #333; border: 0px solid #000">
+        <div class="col-md-12">
+          <div *ngFor="let content of galleryService.galleries.list" style="color: #333; border: 0px solid #000">
 
             <div class="ml" *ngIf="galleryService.galleries.mediaType == 'images'">
               <div class="ml-pnl">
@@ -88,6 +89,7 @@
             </div> -->
 
           </div>
+        </div>
       </div>
     </div>
     <!-- <div *ngIf="gallery.template === 'lifeevent'" class="col-sm-3">
