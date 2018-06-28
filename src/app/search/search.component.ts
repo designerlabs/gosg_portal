@@ -30,7 +30,6 @@ export class SearchComponent implements OnInit {
 
     lang = this.lang;
     languageId = this.languageId;
-    keyword1:any;
     getTheme() {
         return localStorage.getItem('themeColor');
     }

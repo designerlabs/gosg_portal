@@ -46,7 +46,6 @@ export class AppManagementComponent implements OnInit, OnDestroy {
   statusDesc = [];
   showNoData = false;
 
-  startDate: any;
   private subscription: ISubscription;
   private subscriptionLang: ISubscription;
 
