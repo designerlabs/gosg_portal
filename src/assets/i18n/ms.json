@@ -49,7 +49,9 @@
       "onlineser": "Perkhidmatan Dalam Talian",
       "global":"Global",
       "result": "Rekod",
-      "resultsfound": "Rekod Carian Dijumpai dalam masa"
+      "resultsfound": "Rekod Carian Dijumpai dalam masa",
+      "resultnotfound": "Tiada maklumat yang dijumpai. Sila cuba lagi.",
+      "searchkey": "Cari disini"
     },
     "breadcrumb":{
       "calendar": "Kalendar",

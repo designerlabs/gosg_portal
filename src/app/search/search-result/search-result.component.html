@@ -262,7 +262,7 @@
       </h3>
       <div class="example-full-width">
         <mat-form-field class="example-full-width">
-          <input type="text" class="inputser example-full-width" matInput placeholder="Search here" [(ngModel)]="ser_word" (keyup.enter)="resetPage();searchByKeyword(ser_word)">
+          <input type="text" class="inputser example-full-width" matInput placeholder="{{'home.search.searchkey' | translate }}" [(ngModel)]="ser_word" (keyup.enter)="resetPage();searchByKeyword(ser_word)">
           <mat-icon matSuffix (click)="resetPage(); searchByKeyword(ser_word)" style="cursor:pointer;">
             <i class="fa fa-search"></i>
           </mat-icon>
@@ -303,7 +303,7 @@
         </mat-tab>
       </mat-tab-group>
 
-      <div *ngIf="showNoData" class="row text-align-Center padding-20"> {{ 'common.msg.nodata' | translate }} </div>
+      <div *ngIf="showNoData" class="row text-align-Center padding-20"> {{ 'home.search.resultnotfound' | translate }} </div>
 
       <div class="float-right paddingTop-15">
         <mat-form-field *ngIf="tabIndex!=2" class="table_footer_pagecount" style="display: inline-block; position: relative; text-align: left;">

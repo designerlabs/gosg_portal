@@ -49,7 +49,9 @@
       "onlineser": "Online Services",
       "global":"Global",
       "result": "Results",
-      "resultsfound": "Results Found in"
+      "resultsfound": "Results Found in",
+      "resultnotfound": "No information found. Please try again",
+      "searchkey": "Search here"
     },
     "breadcrumb": {
       "calendar": "Calendar",
