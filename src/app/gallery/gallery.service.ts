@@ -9,7 +9,8 @@ import { BreadcrumbService } from '../header/breadcrumb/breadcrumb.service';
 @Injectable()
 export class GalleryService {
     @Output() menuClick = new EventEmitter();
-    galleries: any[];
+    // galleries: any[];
+    galleries: any;
     breadcrumb: any;
     isValid: any;
 

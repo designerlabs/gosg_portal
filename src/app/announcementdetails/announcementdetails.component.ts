@@ -32,7 +32,7 @@ export class AnnouncementdetailsComponent implements OnInit {
     constructor(public articleService: ArticleService,  private route: ActivatedRoute, 
         private navService: NavService, private translate: TranslateService, private router: Router, 
         // tslint:disable-next-line:max-line-length
-        private breadcrumbService: BreadcrumbService, @Inject(APP_CONFIG) private config: AppConfig, private announceService: AnnouncementlistService) {
+        private breadcrumbService: BreadcrumbService, @Inject(APP_CONFIG) private config: AppConfig, public announceService: AnnouncementlistService) {
         this.lang = translate.currentLang;
 
             translate.onLangChange.subscribe((event: LangChangeEvent) => {
