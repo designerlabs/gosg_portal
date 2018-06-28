@@ -120,7 +120,7 @@ export class PollProtectedComponent implements OnInit, OnDestroy {
 
   submitPoll(event) {
     // this.getAnsData(this.lang);
-    // debugger;
+    
     const data = {
         'pollsComment': this.pollComment,
         'pollsAnswerId' : this.pollAnswer.id,
@@ -136,7 +136,7 @@ export class PollProtectedComponent implements OnInit, OnDestroy {
             this.pollDataQuestion = resData.questionTitle;
             this.pollDataQuestionID = resData.questionId;
             this.pollReference = resData.pollReference;
-            console.log(this.resultData);
+            
           }).bind(this));
         }, Error => {
             this.toastr.error(this.translate.instant('common.err.servicedown'), '');
@@ -169,7 +169,7 @@ export class PollProtectedComponent implements OnInit, OnDestroy {
         this.pollPercent  = 0;
     }
     this.progressbarVal = Math.round(this.pollPercent);
-    // console.log(this.progressbarVal);
+    // 
     return this.progressbarVal;
     }
   }

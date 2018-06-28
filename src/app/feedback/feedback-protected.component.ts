@@ -183,7 +183,7 @@ checkLog(){
   else{
     this.isAdmin = false;
   }
-  // console.log(value);
+  // 
 }
 
 getSubType(){

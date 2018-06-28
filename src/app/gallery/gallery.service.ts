@@ -9,14 +9,14 @@ import { BreadcrumbService } from '../header/breadcrumb/breadcrumb.service';
 @Injectable()
 export class GalleryService {
     @Output() menuClick = new EventEmitter();
-    gallery: any[];
+    galleries: any[];
     breadcrumb: any;
     isValid: any;
 
     constructor(private http: Http, @Inject(APP_CONFIG) private config: AppConfig, private route: ActivatedRoute,private breadcrumbService: BreadcrumbService, private router: Router) { }
 
     getGallery() {
-        return this.gallery;
+        return this.galleries;
     }
 
     public article = {
@@ -28,12 +28,12 @@ export class GalleryService {
     triggerContent(subID, lang) {
         // alert("Trigger sub acrticle");
         if (!isNaN(subID)) {
-            this.gallery = [''];
+            this.galleries = [''];
             return this.route.paramMap
                 .switchMap((params: ParamMap) =>
                     this.getContentUrl(subID, lang))
                 .subscribe(resSliderData => {
-                    this.gallery = resSliderData;
+                    this.galleries = resSliderData;
                     this.breadcrumb = this.breadcrumbService.getBreadcrumb();
                     this.isValid = this.breadcrumbService.isValid = true;
                     this.breadcrumb = this.breadcrumb.name = '';

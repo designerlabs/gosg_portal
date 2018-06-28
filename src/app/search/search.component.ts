@@ -67,7 +67,7 @@ export class SearchComponent implements OnInit {
             }
         }
 
-        console.log(body)
+        
         this.searchService.getInternal(JSON.stringify(body)).subscribe(
             data => {   
             this.searchService.setIntData(data);
@@ -80,7 +80,7 @@ export class SearchComponent implements OnInit {
     public autoCompleteArr = ['lesen', 'pendidikan', 'myGovernment'];
 
     ngOnInit() {
-        console.log('search.comp.ts');
+        
     }
 
 }

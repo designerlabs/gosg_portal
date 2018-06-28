@@ -31,7 +31,7 @@ export class TopicFeatureComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log('topic-feature.comp.ts');
+        
       this.getData(this.lang);
     }
 

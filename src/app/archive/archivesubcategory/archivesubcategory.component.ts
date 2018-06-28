@@ -27,7 +27,7 @@ export class ArchivesubcategoryComponent implements OnInit {
   @Output() langChange = new EventEmitter();
 
   handleClickMe(e){
-    console.log(e);
+    
   }
 
 

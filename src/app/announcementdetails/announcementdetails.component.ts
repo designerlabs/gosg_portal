@@ -77,10 +77,10 @@ export class AnnouncementdetailsComponent implements OnInit {
 
     clickSideMenu(e) {
         const _getModule = this.router.url.split('/')[1];
-        console.log(e);
-        console.log(this.router.url);
+        
+        
         this.router.navigate([_getModule, e.code]);
-        console.log('sideMenu');
+        
         event.preventDefault();
     }
 

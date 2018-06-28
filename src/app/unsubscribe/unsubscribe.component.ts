@@ -53,7 +53,7 @@ export class UnsubscribeComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe(params => {
       this.emailId = params['code'];
-      console.log(this.emailId); // Print the parameter to the console. 
+      
   });
   }
 

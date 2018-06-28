@@ -45,7 +45,6 @@ export class TopnavComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() sidenavShow = true;
 
   @Input() state:string;
-  debugger;
 
   @Output() topNavClick = new EventEmitter();
 
@@ -99,7 +98,7 @@ export class TopnavComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.getUserProfile();
 
-    // console.log(this.colors);
+    //
 
     if(this.currlang == 'English'){
       this.isActive = true;
@@ -200,7 +199,7 @@ export class TopnavComponent implements OnInit, AfterViewInit, OnDestroy {
     this.sharedservice.getThemeColor().subscribe(
       data => {
         this.getThemeColors = data;
-        // console.log(this.getThemeColors);
+        //
       }, err => {
 
       })
@@ -225,7 +224,7 @@ export class TopnavComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   langEventChange(data) {
-    console.log(data);
+
   }
 
   setClickedColor(index, firstItem) {

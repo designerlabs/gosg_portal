@@ -72,7 +72,7 @@ export class SitemapComponent implements OnInit, OnDestroy {
     this.portalservice.getSitemapData(lang).subscribe(data => {
 
       this.catData = data.list;
-      console.log(this.catData)
+      
     });
   }
 

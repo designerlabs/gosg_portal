@@ -149,8 +149,8 @@ export class PortalService {
   }
 
   getUserType(data){
-    console.log(this.usertypeUrl);
-    console.log(data);
+    
+    
     return this.http.get(this.usertypeUrl + data)
     .map((response: Response) => response.json())
     .retry(5)
@@ -159,7 +159,7 @@ export class PortalService {
 
   // DIGITAL SERVICES
   getDigitalServices(lang) {
-    // console.log(this.calendarUrl+ '?language='+localStorage.getItem('langID'))
+    // 
     return this.http.get(this.digitalServicesUrl + '?language='+lang)
     .map((response: Response) => response.json())
     .retry(5)
@@ -168,7 +168,7 @@ export class PortalService {
 
   // SITE MAP
   getSitemapData(lang) {
-    // console.log(this.calendarUrl+ '?language='+localStorage.getItem('langID'))
+    // 
     return this.http.get(this.siteMapUrl + '?language='+lang)
     .map((response: Response) => response.json())
     .retry(5)
@@ -177,7 +177,7 @@ export class PortalService {
 
   // STATISTIC
   getStatisticData(type) {
-    // console.log(this.statisticUrl+ '&type=' + type)
+    // 
     return this.http.get(this.statisticUrl+ '&type=' + type)
     .map((response: Response) => response.json())
     .retry(5)
@@ -187,7 +187,7 @@ export class PortalService {
   // CALENDAR
   getCalendarEvents(){
 
-    // console.log(this.calendarUrl+ '?language='+localStorage.getItem('langID'))
+    // 
     return this.http.get(this.calendarUrl + '?language='+this.langId)
     .map((response: Response) => response.json())
     .retry(5)
@@ -196,7 +196,7 @@ export class PortalService {
 
   getCalendarEventsByID(id){
 
-    console.log(this.calendarUrl+ '/'+id+'?language='+this.langId)
+    
     return this.http.get(this.calendarUrl + '/'+id+'?language='+this.langId)
     .map((response: Response) => response.json())
     .retry(5)
@@ -205,7 +205,7 @@ export class PortalService {
 
   getCalendarEventsByAgencyID(id){
 
-    // console.log(this.calendarUrl+ '?agencyId='+id+'&language='+this.langId)
+    // 
     return this.http.get(this.calendarUrl + '?agencyId='+id+'&language='+this.langId)
     .map((response: Response) => response.json())
     .retry(5)
@@ -218,7 +218,7 @@ export class PortalService {
 
   // getAgencies(){
 
-  //   // console.log(this.agencyUrl+localStorage.getItem('langID')+'?keyword='+keyword)
+  //   // 
   //   return this.http.get(this.agencyUrl+localStorage.getItem('langID')+'?keyword='+keyword)
   //   .map((response: Response) => response.json())
   //   .retry(5)
@@ -227,7 +227,7 @@ export class PortalService {
 
   getAgenciesByKeyword(keyword){
 
-    // console.log(this.agencyUrl+localStorage.getItem('langID')+'?keyword='+keyword)
+    // 
     return this.http.get(this.agencyUrl+this.langId+'?keyword='+keyword)
     .map((response: Response) => response.json())
     .retry(5)
@@ -243,23 +243,23 @@ export class PortalService {
     let reqLang = localStorage.getItem('langID');
     
     if(!keyword && page) {
-      // console.log(1);
+      // 
       readUrl = this.config.urlPortal + moduleName + '?page=' + page + '&size=' + size  + '&language='+this.langId;
     }else if(keyword && custom) {
-      console.log('custom and keyword');
+      
       readUrl = this.config.urlPortal + moduleName + '?keyword='+keyword+'&page=' + page + '&size=' + size  + '&language='+this.langId+'&'+custom;
     } 
     else if(keyword) {
-      // console.log(2);
+      // 
       readUrl = this.config.urlPortal + moduleName + '?keyword='+keyword+'&page=' + page + '&size=' + size  + '&language='+this.langId;
     } else if(custom) {
-      console.log('custom');
+      
       readUrl = this.config.urlPortal + moduleName + '?'+custom+ '&language='+this.langId;
     } else {
-      console.log(3);
+      
       readUrl = this.config.urlPortal + moduleName + '?language='+this.langId;
     }
-    console.log(readUrl)
+    
 
     return this.http.get(readUrl)
       .map((response: Response) => response.json())
@@ -279,7 +279,7 @@ export class PortalService {
       readUrl = this.config.urlProtected + moduleName + '?language='+this.langId;
     }
 
-    console.log(readUrl)
+    
 
     return this.http.get(readUrl)
       .map((response: Response) => response.json())
@@ -289,7 +289,7 @@ export class PortalService {
   
   readPortalById(moduleName, id): Observable<any[]> {
     let readUrl = this.config.urlPortal + moduleName + id + '?language='+this.langId;
-    console.log(readUrl)
+    
     return this.http.get(readUrl)
       .map((response: Response) => response.json())
       .retry(5)
@@ -335,7 +335,7 @@ export class PortalService {
 
   // delete(id,moduleName) {
   //   let deleteUrl = this.config.urlProtected  + moduleName + id+ '?language='+this.languageId;
-  //   console.log(deleteUrl)
+  //   
 
   //   return this.http.delete(deleteUrl, null)
   //   .map((response: Response) => response.json())

@@ -319,13 +319,13 @@ export class SearchResultComponent implements OnInit, OnDestroy {
 
   addFilterAry(ary, resObj, type?) {
 
-    // console.log(ary);
+    // 
 
     if (ary.length > 0) {
 
       let res = [];
       ary.forEach(ele => {
-        // console.log(ele)
+        // 
         if (ele.name) {
           res.push(ele.name);
         } else {
@@ -399,11 +399,11 @@ export class SearchResultComponent implements OnInit, OnDestroy {
 
   addSpecFiltr(methodNm, field) {
     let key = field;
-    // console.log(this.mainObj)
+    // 
 
     let res_ary = this.mainObj.filters;
-    // console.log(res_ary)
-    // console.log(field)
+    // 
+    // 
 
     // let inx = jQuery.inArray(field, res_ary);
     if (methodNm === 'add') {
@@ -439,7 +439,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
 
   changeAryVal(objs, type) {
 
-    // console.log(objs)
+    // 
 
     let aryObj: any;
     let retn = [];
@@ -474,7 +474,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
       // do something with person
       retn.push(aryObj);
     });
-    // console.log(retn)
+    // 
     return retn;
   }
 
@@ -502,10 +502,10 @@ export class SearchResultComponent implements OnInit, OnDestroy {
 
       delete this.mainObj.aggregations;
       this.mainObj.aggregations = this.locAggregations;
-      // console.log("LOCAL : ")
-      // console.log(this.mainObj)
+      // 
+      // 
       // this.mainObj.aggregations = {};
-      // console.log(this.mainObj)
+      // 
 
       this.resetPage();
       this.searchByKeyword(k_word);
@@ -523,10 +523,10 @@ export class SearchResultComponent implements OnInit, OnDestroy {
       delete this.mainObj.aggregations;
       delete this.mainObj.filters.category;
       this.mainObj.aggregations = this.osAggregations;
-      // console.log("OS : ")
-      // console.log(this.mainObj)
+      // 
+      // 
       // this.mainObj.aggregations = {};
-      // console.log(this.mainObj)
+      // 
 
       // jQuery.extend(this.mainObj.filters, this.agencyDefaultFilterObj);
       // this.mainObj.keywordMap.fields = this.osFields.slice();
@@ -573,21 +573,21 @@ export class SearchResultComponent implements OnInit, OnDestroy {
   }
 
   keywordSplitter(str) {
-    // console.log(str)
+    // 
     let res: any = [];
 
     str = str.split(" ");
     str.forEach(el => {
-      // console.log(el)
+      // 
       res.push(el);
     });
     // res = str;
-    // console.log(res)
+    // 
     return res;
   }
 
   searchByKeyword(valkeyword) {
-    // console.log(this.tabIndex)
+    // 
 
     let arrKeyword: any = [];
     let arrKeywordeySetting: any = [];
@@ -598,8 +598,8 @@ export class SearchResultComponent implements OnInit, OnDestroy {
     let envOrigin = window.location.origin;
     let localURL = envOrigin+'/gosg/';
 
-    // console.log(localURL)
-    // console.log(this.date)
+    // 
+    // 
 
     if (localStorage.getItem('ser_word').length === 0) {
       localStorage.setItem('ser_word', valkeyword);
@@ -622,12 +622,12 @@ export class SearchResultComponent implements OnInit, OnDestroy {
 
       // KEYWORD MAP AREA
 
-      // console.log(this.chkKeyValue)
-      // console.log(this.inpExcWord)
+      // 
+      // 
       if (this.inpExcWord)
-        // console.log(this.keywordSplitter(this.inpExcWord))
+        // 
 
-      // console.log(this.locFields)
+      // 
 
       if (this.tabIndex == 0)
         this.keywordMap.fields = this.locFields;
@@ -642,7 +642,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
         this.keywordMap.not = arrKeywordeySetting;
         delete this.keywordMap.all;
         delete this.keywordMap.any;
-        // console.log(this.keywordMap)
+        // 
         this.mainObj.keywordMap = this.keywordMap;
       } else if (this.chkKeyValue == "2" && this.inpExcWord) {
         arrKeywordeySetting = this.keywordSplitter(this.inpExcWord);
@@ -650,7 +650,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
         this.keywordMap.not = arrKeywordeySetting;
         delete this.keywordMap.exact;
         delete this.keywordMap.any;
-        // console.log(this.keywordMap)
+        // 
         this.mainObj.keywordMap = this.keywordMap;
       } else if (this.chkKeyValue == "3" && this.inpExcWord) {
         arrKeywordeySetting = this.keywordSplitter(this.inpExcWord)
@@ -658,7 +658,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
         this.keywordMap.not = arrKeywordeySetting;
         delete this.keywordMap.all;
         delete this.keywordMap.exact;
-        // console.log(this.keywordMap)
+        // 
         this.mainObj.keywordMap = this.keywordMap;
       }
 
@@ -670,7 +670,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
         // delete this.mainObj.filters.category;
 
         this.mainObj.aggregations = this.locAggregations;
-        // console.log(this.mainObj)
+        // 
 
         if(env == 'localhost')
           dataUrl = this.internalUrl;
@@ -729,7 +729,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
         jQuery.extend(this.mainObj.filters, this.lifeEventFiltersObj);
         payloadObj = this.mainObj;
 
-        // console.log(payloadObj)
+        // 
 
       } else if (this.tabIndex === 1) { // ONLINE SERVICE SEARCH
 
@@ -758,20 +758,20 @@ export class SearchResultComponent implements OnInit, OnDestroy {
         payloadObj = nullObj;
       }
 
-      console.log("CURRENT SEARCH OBJECT:")
-      console.log(this.mainObj)
-      // console.log("CURRENT SEARCH OBJECT IN JSON:")
-      // console.log(JSON.stringify(this.mainObj))
+      
+      
+      // 
+      // 
 
-      // debugger;
+      
 
       this.loading = true;
       // this.arymonth = [];
       return this.http.post(dataUrl, payloadObj)
         .map(res => res.json())
         .subscribe(rData => {
-          console.log("CURRENT SEARCH RESULT:")
-          console.log(rData);
+          
+          
 
           this.totalElements = 0;
 
@@ -797,10 +797,10 @@ export class SearchResultComponent implements OnInit, OnDestroy {
 
           }
 
-          // console.log(this.totalElements)
-          // console.log(this.totalElements.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
+          // 
+          // 
 
-          // console.log(this.intData)
+          // 
 
           this.selMonPubDisp = '';
           this.selAuthDisp = '';
@@ -832,7 +832,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
                 this.ddmonthPub = this.changeAryVal(rData.aggregations.histogram[0],'generic');
               }
 
-              // console.log(rData.aggregations['filter_topic.category'][0].active_cat)
+              // 
               rData.aggregations['filter_topic.category'][0].active_cat.forEach(item => {
                 item = this.changeAryVal(item,'generic')
                 topic = { "name": item[0].name, "val": item[0].val }
@@ -844,8 +844,8 @@ export class SearchResultComponent implements OnInit, OnDestroy {
                 this.ddsubTopics.push(topic)
               });
 
-              // console.log(this.ddtopics)
-              // console.log(this.ddsubTopics)
+              // 
+              // 
 
             } else if (this.tabIndex == 1) { // ONLINE SERVICES
               let ministry: any = {};
@@ -853,20 +853,20 @@ export class SearchResultComponent implements OnInit, OnDestroy {
 
               rData.aggregations.ministryAgg.forEach(item => {
                 item = this.changeAryVal(item,'generic');
-                // console.log(item)
+                // 
                 ministry = { "name": item[0].name, "val": item[0].val }
                 this.ddministry.push(ministry);
               });
 
               rData.aggregations.agencyAgg.forEach(item => {
                 item = this.changeAryVal(item,'generic');
-                // console.log(item)
+                // 
                 agency = { "name": item[0].name, "val": item[0].val }
                 this.ddagency.push(agency);
               });
 
-              // console.log(this.ddministry)
-              // console.log(this.ddagency)
+              // 
+              // 
 
             }
 
@@ -912,20 +912,20 @@ export class SearchResultComponent implements OnInit, OnDestroy {
   changeGlob(eve, val) {
     this.chkGlobValue = val;
     this.searchByKeyword(this.ser_word);
-    // console.log(this.chkGlobValue)
+    // 
   }
 
   chkKeyword(eve, id) {
-    // console.log(eve)
-    // console.log(this.inpExcWord)
+    // 
+    // 
     // this.inpExcWord = '';
     // this.toastr.success(id);
   }
 
 
   chkSpeci(e, type, elemName) {
-    // console.log(e)
-    // console.log(type)
+    // 
+    // 
 
     switch (type) {
 
@@ -1027,15 +1027,15 @@ export class SearchResultComponent implements OnInit, OnDestroy {
     }
     this.chkSpec(type, e.source);
 
-    // console.log(this.locFields)
-    // console.log(this.osFields)
+    // 
+    // 
     // this.toastr.success(id);
   }
 
   chkSpec(type, src) {
     let found, foundIndex, tot;
 
-    // console.log(this.locFields.length-1)
+    // 
     if (this.tabIndex == 0) {
       found = this.locFields.find(k => k == type);
       foundIndex = this.locFields.findIndex(k => k == type);
@@ -1091,7 +1091,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
   }
 
   pageChange(evt) {
-    // console.log(evt.value)
+    // 
     this.resetPage();
     this.pagesize = evt.value;
     this.searchByKeyword(this.ser_word);
@@ -1132,7 +1132,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
         delete this.mainObj.filters.category_topic;
 
         delete this.mainObj.filters.ranges;
-        console.log('sini')
+        
     } else if (this.tabIndex == 1) {
       delete this.mainObj.filters.agency_name;
       delete this.mainObj.filters.ministry_name;
@@ -1159,8 +1159,8 @@ export class SearchResultComponent implements OnInit, OnDestroy {
       this.mainObj.aggregations = this.osAggregations;
     }
 
-    // console.log('onReset')
-    // console.log(this.mainObj)
+    // 
+    // 
     this.searchByKeyword(this.ser_word);
   }
 }

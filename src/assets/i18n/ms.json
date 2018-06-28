@@ -19,6 +19,7 @@
       "fonttype": "Jenis Fon",
       "login": "Log Masuk",
       "sitemap": "Peta Laman",
+      "gallery": "Galeri",
       "statistic": "Statistik Atas Talian"
     },
     "search": {
@@ -64,6 +65,7 @@
       "onlineservice": "Perkhidmatan Dalam Talian",
       "subscription": "Langganan",
       "unsubscribe": "Hentikan langganan",
+      "gallery": "Galeri",
       "search": "Search"
     },
     "expandButton": {
@@ -310,6 +312,9 @@
       "subject":"Sorry, subjects is unavailable."
 
     }
+  },
+  "gallery":{
+    "header": "Galeri"
   },
   "mailbox":{
     "header":{

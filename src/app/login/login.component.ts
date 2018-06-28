@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   loginSubmit(){
     this.portalService.login(this.loginName).subscribe(
       data => {
-        console.log(data);
+        
         if(data.length != 0){
         
           localStorage.setItem('userId', data[0].id);

@@ -41,7 +41,7 @@ export class NavComponent implements OnInit, AfterViewInit, OnDestroy {
 
     private subscription: ISubscription;
     private subscriptionLang: ISubscription;
-    
+
     constructor(
         private translate: TranslateService,
         private toastr: ToastrService,
@@ -91,7 +91,7 @@ export class NavComponent implements OnInit, AfterViewInit, OnDestroy {
         }
 
         this.page = this.router.url.split('/')[1];
-        // console.log(this.page)
+        //
         this.imgSrc = 'logo_ms';
         this.getMenu();
         this.getPop();
@@ -164,7 +164,7 @@ export class NavComponent implements OnInit, AfterViewInit, OnDestroy {
             localStorage.setItem('ser_word', key);
             this.router.navigate(['search/searchResult', key]);
             this.internal(key);
-            console.log(this.page)
+
             if(this.page == 'search')
                 window.location.reload();
 
@@ -232,8 +232,8 @@ export class NavComponent implements OnInit, AfterViewInit, OnDestroy {
             ]
         }
 
-        console.log(body)
-        // console.log(JSON.stringify(body))
+
+        //
 
         this.searchService.getInternal(body).subscribe(
             data => {

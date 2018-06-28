@@ -58,7 +58,7 @@ export class AnnouncementlistComponent implements OnInit {
                     this.navService.triggerAnnouncementList(this.lang, this.announcementID);
                 });
             }
-            console.log('langMY');
+            
         });
 
         if (!this.languageId) {
@@ -76,8 +76,8 @@ export class AnnouncementlistComponent implements OnInit {
         this.moduleName = this.router.url.split('/')[1];
         this.announcementID = this.router.url.split('/')[2];
         this.navService.triggerAnnouncementList(this.lang, this.announcementID);
-        console.log('onInit');
-        console.log('###############################################');
+        
+        
     }
 
     getTheme() {
@@ -92,7 +92,7 @@ export class AnnouncementlistComponent implements OnInit {
         // this.triggerAnnouncementList(this.lang, e.code);
         this.navService.triggerAnnouncementList(this.lang, e.code);
         this.router.navigate(['/announcement', e.code]);
-        console.log('sideMenu List' + ['announcement', e.code]);
+        
         event.preventDefault();
     }
 
@@ -103,7 +103,7 @@ export class AnnouncementlistComponent implements OnInit {
         if (e.runningNo) {
             this.router.navigate(['announcement', _getAnnounceID, e.runningNo]);
         }
-        console.log('2');
+        
         event.preventDefault();
   }
 

@@ -111,7 +111,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.protectedService.getDashboardData(lang).subscribe(
       data => {
         this.dashboardData = data;
-        console.log(this.dashboardData);
+        
         this.totalApp = this.dashboardData.total;
         this.inProgress = this.dashboardData.pending;
         this.approved = this.dashboardData.success;

@@ -78,9 +78,9 @@ export class ProfileUpdatedComponent implements OnInit {
                 clearInterval(this.intervalProfile);
                 this.router.navigate(['/profile']);
               }else{
-                console.log(userData.statusDesc);
+                
                 clearInterval(this.intervalProfile);
-                console.log('cleared interval');
+                
               }
             
               
@@ -97,9 +97,9 @@ export class ProfileUpdatedComponent implements OnInit {
                 clearInterval(this.intervalProfile);
                 this.router.navigate(['/profile']);
               }else{
-                console.log(userData.statusDesc);
+                
                 clearInterval(this.intervalProfile);
-                console.log('cleared interval');
+                
               }
             },Error => {
               //this.toastr.error(this.translate.instant('feedback.err.subject'), '');

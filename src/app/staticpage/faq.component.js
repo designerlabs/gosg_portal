@@ -20,11 +20,11 @@ var FaqComponent = (function () {
               translate.onLangChange.subscribe((event: LangChangeEvent) => {
                   let myLang = translate.currentLang;
                   if (myLang == "en") {
-                    console.log("ENGLISH");
+                    
                     this.getMyEnFaq();
                   }
                   if (myLang == "ms") {
-                      console.log("MALAY");
+                      
                       this.getMyEnFaq();
                   }
               });
@@ -35,12 +35,12 @@ var FaqComponent = (function () {
                       .subscribe(
                       returnedData => {
                         this.faqData = returnedData.results;
-                        console.log(this.faqData);
+                        
                         for(let result of this.faqData){
                               this.faqList.push(result['FAQ_question_'+this.lang]);
                               this.faqList.push(result['FAQ_answer_en'+this.lang]);
                         }
-                        //console.log(this.faqQuestion);
+                        //
                       },
                       error=>alert(error),
                     );

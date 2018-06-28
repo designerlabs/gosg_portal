@@ -171,6 +171,7 @@ export function HttpLoaderFactory(http: Http) {
     NguiAutoCompleteModule,
     MatDialogModule,
     // DialogsModule,
+    MatCardModule,
 	  NgxPaginationModule,
     ModalModule.forRoot(),
     LoadingModule,

@@ -154,7 +154,7 @@ export class AppManagementComponent implements OnInit, OnDestroy {
   }
 
   changeShowStatus(){
-    console.log(this.showHide);
+    
     this.showHide = !this.showHide;
     this.getAgencyApp(this.langID);
     this.getStatusApp(this.langID);
@@ -169,7 +169,7 @@ export class AppManagementComponent implements OnInit, OnDestroy {
   getStatusApp(lang){
     this.protectedService.getListApp(lang).subscribe(data => {
       this.dataStatus = data.list;
-      console.log(this.dataStatus);
+      
     });
   }
 
@@ -188,8 +188,8 @@ export class AppManagementComponent implements OnInit, OnDestroy {
         this.showNoData = true;        
       }
 
-      console.log(this.dataApp.length);    
-      console.log(this.showNoData);     
+      
+      
       
       for(let i=0; i<this.dataApp.length; i++){  
 
