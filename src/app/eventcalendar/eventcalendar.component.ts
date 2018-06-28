@@ -20,7 +20,7 @@ import { TopnavService } from '../header/topnav/topnav.service';
   styleUrls: ['./eventcalendar.component.css']
 })
 export class EventCalendarComponent implements OnInit, AfterViewInit, AfterContentChecked, AfterViewChecked, OnDestroy{
-  
+
   @Input()
   agencySel: String
 
@@ -42,12 +42,12 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
   private subscriptionLang: ISubscription;
 
   constructor(
-    private http: Http, 
-    @Inject(APP_CONFIG) private config: AppConfig, 
+    private http: Http,
+    @Inject(APP_CONFIG) private config: AppConfig,
     private portalService:PortalService,
     private toastr: ToastrService,
     private element:ElementRef,
-    private datePipe:DatePipe, 
+    private datePipe:DatePipe,
     private topnavservice: TopnavService,
     private translate: TranslateService,
     private sharedService :SharedService
@@ -64,7 +64,7 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
             this.langChge = true;
           });
         }
-        
+
         if (myLang == 'ms') {
           translate.get('HOME').subscribe((res: any) => {
             this.lang = 'ms';
@@ -76,7 +76,7 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
       }
 
       if(this.topnavservice.flagLang){
-        
+
         if(this.langChge == true) {
           this.agencySel = "";
           this.getEvents();
@@ -88,12 +88,12 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
 
         // alert(this.initLoad + " language")
     });
-    
+
   }
   lang = this.lang;
-  
+
   ngOnInit() {
-    
+
     if(!this.languageId){
       this.languageId = localStorage.getItem('langID');
       //this.getData();
@@ -102,15 +102,15 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
     }
     // alert(this.initLoad + " onInit")
     // this.localeVal = 'en-us';
-    // 
+    //
       this.getEvents();
       $('#calendar').fullCalendar('destroy');
       $('#calendar').fullCalendar(this.getOptions(this.event,this.mediaUrl));
 
   }
 
-  ngAfterViewInit() { 
-    
+  ngAfterViewInit() {
+
   }
 
   ngOnDestroy() {
@@ -119,15 +119,15 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
 
   onScroll(event){
 
-    // 
+    //
     if(event.target.scrollTop >= (event.target.scrollHeight - 250)) {
-      // 
-      // 
+      //
+      //
 
       let keywordVal;
-      
+
       this.getSearchData(keywordVal, this.languageId, 1, this.searchAgencyResult.length+10)
-      // 
+      //
     }
   }
 
@@ -139,22 +139,22 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
     // this.getModuleData(this.pageCount, this.pageSize);
   }
 
-  getSearchData(keyword, langId, count, page){
+  getSearchData(keyword, langId?, count?, page?){
 
     // if(keyword != "" && keyword != null && keyword.length != null && keyword.length >= 3) {
-      // 
-      // 
+      //
+      //
       // this.isActive = true;
       this.loading = true;
-      
+
     setTimeout(()=>{
       this.portalService.readPortal('agency/language/'+this.languageId, count, page, keyword).subscribe(
         data => {
 
         this.portalService.errorHandling(data, (function(){
 
-          // 
-          // 
+          //
+          //
 
           if(data['agencyList'].length != 0) {
               this.searchAgencyResult = data['agencyList'];
@@ -175,20 +175,20 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
     //   this.isActiveListBm = false;
     // }
   }
-  
+
   getValue(aId,aName,mName, refCode){
 
-    // 
+    //
     this.agencySel = aName;
     this.isActiveList = false;
 
     this.getEventByAgency(aId);
-     
-    // 
+
+    //
     $('#calendar').fullCalendar('destroy');
     $('#calendar').fullCalendar(this.getOptions(this.event,this.mediaUrl));
 
-    // 
+    //
 
   }
 
@@ -200,11 +200,11 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
     let eT;
 
     this.portalService.getCalendarEvents().subscribe(data => {
-  
+
       // this.sharedService.errorHandling(data, (function(){
-        // 
+        //
         for(var item of data['list']) {
-          // 
+          //
 
           let body = {
             'id': null,
@@ -262,13 +262,13 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
               body.image = item.image.mediaFile;
           }
           //   body.color = '#7e9e00';
-          
+
           this.event.push(body)
         }
-        // 
+        //
         this.event = [];
-     
-        
+
+
       // });
     });
   }
@@ -281,11 +281,11 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
     let eT;
 
     this.portalService.getCalendarEventsByAgencyID(aId).subscribe(data => {
-  
+
       // this.sharedService.errorHandling(data, (function(){
-        // 
+        //
         for(var item of data['list']) {
-          // 
+          //
 
           let body = {
             'id': null,
@@ -342,12 +342,12 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
               body.image = item.image.mediaFile;
           }
           //   body.color = '#7e9e00';
-          
+
           this.event.push(body)
         }
-        // 
+        //
         this.event = [];
-        
+
       // });
     });
   }
@@ -356,12 +356,12 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
 
     setTimeout(()=>{
       // this.getEvents();
-      
-      // 
-      // 
-      
+
+      //
+      //
+
       this.options = {
-        locale: this.localeVal?this.localeVal: this.lang, 
+        locale: this.localeVal?this.localeVal: this.lang,
         editable: false,
         eventLimit: false,
         header: {
@@ -370,7 +370,7 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
           right: null
           //  right: 'month,agendaWeek,agendaDay,listMonth'
         },
-        events: calEvent,             
+        events: calEvent,
         firstDay: 0,
         eventClick: function(events) {
 
@@ -391,7 +391,7 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
         $('#organizerFb').html(events.organizerFb?events.organizerFb:'-');
         $('#organizerPhone').html(events.organizerPhone?events.organizerPhone:'-');
         $('#agency').html(events.agency?events.agency:'-');
-        
+
         if(events.image && !events.ext ) {
           // alert(events.title)
           $("#imageContainer").css('display','block');
@@ -402,8 +402,8 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
 
         $('#details').css('display','block');
         $('.overlay').css('display','block');
-        
-        // 
+
+        //
       },
       eventMouseover: function(events) {
         $('.fc-event').attr('title', events.title);
@@ -412,9 +412,9 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
         today: this.translate.instant('calendar.view.today')
       },
       timeFormat: 'hh:mm a'
-      
+
     };
-  
+
     $('#calendar').fullCalendar('destroy');
     $('#calendar').fullCalendar(this.options);
 
@@ -434,11 +434,11 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
   }
 
   ngAfterContentChecked() {
-    
+
   }
 
   ngAfterViewChecked() {
-    
+
   }
 
   changeDateFormat(dateVal) {

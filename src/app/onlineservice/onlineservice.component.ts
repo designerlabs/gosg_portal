@@ -57,7 +57,7 @@ export class OnlineserviceComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    private sharedService: SharedService,
+    public sharedService: SharedService,
     private translate: TranslateService,
     private toastr: ToastrService,
     private topnavservice: TopnavService,

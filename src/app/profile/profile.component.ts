@@ -233,7 +233,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.perCityNotLocal = new FormControl()
     this.codeTelefonf = new FormControl()
     this.telefonf = new FormControl()
-    this.emailaddressUpdate = new FormControl('', [Validators.required, Validators.email]);
+    this.emailaddressUpdate = new FormControl('', [Validators.required, Validators.email])
     this.perPostcode = new FormControl()
     this.perPostcodeNotLocal = new FormControl()
     this.perTelephone = new FormControl()

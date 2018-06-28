@@ -27,19 +27,19 @@
       </div>
       <div class="col-md-9 mat-elevation-z8">
         <div class="deleteAllBtn">
-          <button [disabled]="!mailboxId.length > 0" mat-raised-button color="warn" (click)="deleteAllModal.show()"><i class="fa fa-trash"></i> {{'common.buttons.delete' | translate}}</button>
+          <button [disabled]="!(mailboxId.length > 0)" mat-raised-button color="warn" (click)="deleteAllModal.show()"><i class="fa fa-trash"></i> {{'common.buttons.delete' | translate}}</button>
         </div>
         <div class="row"></div>
         <div class="row mailContainer" *ngIf="mailContent?.object?.fromUser.email" [style.display]="isMailContainerShow">
           <span class="pull-right" (click)="isMailContainerShow='none'" style="cursor: pointer;"><i class="fa fa-times"></i></span>
               <p class="font-size-s">
-                From: {{mailContent?.object?.fromUser.email}} 
+                From: {{mailContent?.object?.fromUser.email}}
               </p>
               <p class="font-size-s">
                 Date: {{mailContent?.object?.submissionDate | date}}
               </p>
               <p class="font-size-s">
-                Subject: {{mailContent?.object?.subject}} 
+                Subject: {{mailContent?.object?.subject}}
               </p>
               <div class="font-size-m" [innerHtml]="mailContent?.object?.content">
               </div>
@@ -59,12 +59,12 @@
             <td class="mat-cell">{{data.fromUser.email}}</td>
             <td class="mat-cell">{{data.subject}}</td>
             <td class="mat-cell">{{data.submissionDate | date}}</td>
-            <td class="mat-cell text-center"> 
+            <td class="mat-cell text-center">
               <button (click)="getMail($event, data.inboxId)" class="btn btn-sm btn-warning"><i class="fa fa-eye font-size-s"></i></button>
               <button class="btn btn-sm btn-danger" (click)="deleteModal.show()"><i class="fa fa-trash font-size-s"></i></button>
             </td>
-            <app-confirm-dialog  #deleteModal 
-            [title]="'common.icon.warn'" 
+            <app-confirm-dialog  #deleteModal
+            [title]="'common.icon.warn'"
             [content]="'common.msg.delete'"
             [state]="'common.state.warn'"
             [isReset]="'true'"
@@ -89,14 +89,14 @@
                   <button mat-mini-fab color="basic" [disabled]="noPrevData" (click)="paginatorL(mailData?.pageNumber)"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
                   <button mat-mini-fab color="basic" [disabled]="noNextData"  (click)="paginatorR(mailData?.pageNumber, mailData?.totalPages)"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
               </div>
-              
-              
+
+
         </div>
   </div>
 
 
-  <app-confirm-dialog  #deleteAllModal 
-  [title]="'common.icon.warn'" 
+  <app-confirm-dialog  #deleteAllModal
+  [title]="'common.icon.warn'"
   [content]="'common.msg.delete'"
   [state]="'common.state.warn'"
   [isReset]="'true'"

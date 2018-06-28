@@ -13,11 +13,11 @@ export class SearchComponent implements OnInit {
 
     constructor(
         private translate: TranslateService,
-        private router: Router, 
+        private router: Router,
         private searchService:SearchService,
         private toastr: ToastrService
-    ) { 
-    
+    ) {
+
         if(!this.languageId){
         this.languageId = localStorage.getItem('langID');
         }else{
@@ -28,7 +28,7 @@ export class SearchComponent implements OnInit {
 
     lang = this.lang;
     languageId = this.languageId;
-
+    keyword1:any;
     getTheme() {
         return localStorage.getItem('themeColor');
     }
@@ -44,11 +44,11 @@ export class SearchComponent implements OnInit {
         }
         // localStorage.setItem('ser_word', key);
         // this.router.navigate(['search/searchResult']);
-        // this.internal(key); 
+        // this.internal(key);
     }
-    
+
     internal(key) {
-        
+
         let body = {
             "size":10,
             "from":0,
@@ -67,20 +67,20 @@ export class SearchComponent implements OnInit {
             }
         }
 
-        
+
         this.searchService.getInternal(JSON.stringify(body)).subscribe(
-            data => {   
+            data => {
             this.searchService.setIntData(data);
         });
-        
-        
+
+
     }
 
     //autocomplete test data
     public autoCompleteArr = ['lesen', 'pendidikan', 'myGovernment'];
 
     ngOnInit() {
-        
+
     }
 
 }

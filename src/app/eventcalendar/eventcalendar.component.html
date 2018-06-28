@@ -1,6 +1,6 @@
 <!-- <div class="container right-content">
     <ngx-loading [show]="loading" [config]="{ fullScreenBackdrop: true }"></ngx-loading> -->
-    
+
 <div class="container-fluid animated slideInDown" style="background: #a7a495;">
     <div class="container">
         <div class="row">
@@ -34,7 +34,7 @@
           </button>
         </mat-form-field>
 
-        <div *ngIf="isActiveList" [ngClass]="{'listParent':searchAgencyResult.length < 10,'listParent-w-scroll':searchAgencyResult.length >= 10}" (scroll)="onScroll($event)">
+        <div *ngIf="isActiveList" [ngClass]="{'listParent':(searchAgencyResult.length < 10),'listParent-w-scroll':(searchAgencyResult.length >= 10)}" (scroll)="onScroll($event)">
           <ul class="list-group pmd-z-depth pmd-list pmd-card-list pmd-list">
             <li class="list-group-item" *ngFor="let data of searchAgencyResult">
               <a class="list-link" (click)="getValue(data.agencyId, data.agencyName, data.agencyMinistry.ministryName, data.agencyCode)">{{data.agencyName}}</a>
@@ -104,7 +104,7 @@
                 <div class="row">
                     <div class="col-md-12">&nbsp;</div>
                     <div class="col-md-12"><h4 style="color: #1d1d1d">{{ 'calendar.details.organizerheader' | translate }}</h4></div>
-                    
+
                     <div class="col-md-12">
                         <label class="font-size-s">{{ 'calendar.details.agency' | translate }}</label>
                         <p class="font-size-m" id="agency"></p>
@@ -118,7 +118,7 @@
                         <label class="font-size-s">{{ 'calendar.details.organizeremail' | translate }}</label>
                         <p class="font-size-m" id="organizerEmail"></p>
                     </div>
-                    
+
                     <div class="col-md-12">
                         <label class="font-size-s">{{ 'calendar.details.organizeraddress' | translate }}</label>
                         <p class="font-size-m" id="organizerAddress"></p>
@@ -127,7 +127,7 @@
                         <label class="font-size-s">{{ 'calendar.details.organizerurl' | translate }}</label>
                         <p class="font-size-m" id="organizerUrl"></p>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <label class="font-size-s">{{ 'calendar.details.organizerfb' | translate }}</label>
                         <p class="font-size-m" id="organizerFb"></p>

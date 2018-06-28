@@ -47,7 +47,8 @@ export class SidenavprotectedComponent implements OnInit {
     document.getElementById("mySidenavProtected").style.width = "250px";
   }
 
-  callApiProtected(){
+  callApiProtected()
+  {
     this.loadFont();
     this.loadColor();
     // this.loadDefaultFonts();
@@ -67,7 +68,8 @@ export class SidenavprotectedComponent implements OnInit {
     this.firstItem = firstItem;
   }
 
-  logout(e){
+  logout(e)
+  {
     e.preventDefault();
     location.href=this.config.urlUAP+'uapsso/Logout';
   }

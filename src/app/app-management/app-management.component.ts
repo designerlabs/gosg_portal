@@ -41,6 +41,7 @@ export class AppManagementComponent implements OnInit, OnDestroy {
   collapse:boolean = true;
   barClass: string = "container-fluid";
   param = "";
+  startDate:any;
   dateSubmission = [];
   statusDesc = [];
   showNoData = false;
@@ -54,20 +55,20 @@ export class AppManagementComponent implements OnInit, OnDestroy {
     private toastr: ToastrService,
     private sharedService: SharedService,
     private portalService:PortalService,
-    private translate:TranslateService, 
-    private http: Http, 
+    private translate:TranslateService,
+    private http: Http,
     private _renderer: Renderer,
     private topnavservice: TopnavService,
     @Inject(APP_CONFIG) private config: AppConfig) {
-      
+
       this.lang = translate.currentLang;
 
       this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
 
           const myLang = translate.currentLang;
-      
+
           if (myLang == 'en') {
-      
+
               translate.get('HOME').subscribe((res: any) => {
                   this.lang = 'en';
                   this.langID = 1;
@@ -75,7 +76,7 @@ export class AppManagementComponent implements OnInit, OnDestroy {
           }
 
           if (myLang == 'ms') {
-      
+
               translate.get('HOME').subscribe((res: any) => {
                   this.lang = 'ms';
                   this.langID = 2;
@@ -104,13 +105,13 @@ export class AppManagementComponent implements OnInit, OnDestroy {
     }else{
       this.langID = 1;
     }
-    
+
     this.appNumber = new FormControl(),
     this.agency = new FormControl(),
     this.appStatus = new FormControl(),
     this.startData = new FormControl(),
     this.endData = new FormControl(),
-    this.searchForm = new FormGroup({    
+    this.searchForm = new FormGroup({
       appNumber : this.appNumber,
       agency :  this.agency,
       appStatus : this.appStatus,
@@ -154,7 +155,7 @@ export class AppManagementComponent implements OnInit, OnDestroy {
   }
 
   changeShowStatus(){
-    
+
     this.showHide = !this.showHide;
     this.getAgencyApp(this.langID);
     this.getStatusApp(this.langID);
@@ -169,7 +170,7 @@ export class AppManagementComponent implements OnInit, OnDestroy {
   getStatusApp(lang){
     this.protectedService.getListApp(lang).subscribe(data => {
       this.dataStatus = data.list;
-      
+
     });
   }
 
@@ -185,17 +186,17 @@ export class AppManagementComponent implements OnInit, OnDestroy {
       this.showNoData = false;
 
       if(this.dataApp.length == 0){
-        this.showNoData = true;        
+        this.showNoData = true;
       }
 
-      
-      
-      
-      for(let i=0; i<this.dataApp.length; i++){  
+
+
+
+      for(let i=0; i<this.dataApp.length; i++){
 
         let dateS = moment(new Date(this.dataApp[i].submissionDatetime)).format('DD-MM-YYYY hh:ss');
         this.dateSubmission.push(dateS);
-        
+
         let stat: any;
         this.dataStatus.forEach(element => {
           if(this.dataApp[i].status == element.statusCode){
@@ -227,12 +228,12 @@ export class AppManagementComponent implements OnInit, OnDestroy {
   searchapp(formValues: any){
 
     let sDate = new Date(formValues.startData);
-    let eDate = new Date(formValues.endData);  
+    let eDate = new Date(formValues.endData);
 
     let startD = moment(sDate).format('YYYY-MM-DD');
-    let endD = moment(eDate).format('YYYY-MM-DD');   
+    let endD = moment(eDate).format('YYYY-MM-DD');
     let strVar = "";
-    
+
     if(formValues.appNumber != null){
       strVar += '&submissionRefno='+formValues.appNumber;
     }

@@ -4,5 +4,6 @@ export const environment = {
   uapURL : '/',
   mediaURL: '/',
   mockApiURL :'/',
-  baseURL: '/'
+  baseURL: '/',
+  miaugeoURL:  '/gosg/'
 };

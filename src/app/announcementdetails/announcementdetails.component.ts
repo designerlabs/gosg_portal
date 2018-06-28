@@ -29,10 +29,10 @@ export class AnnouncementdetailsComponent implements OnInit {
     announceData: any;
 
     @Output() langChange = new EventEmitter();
-    constructor(public articleService: ArticleService,  private route: ActivatedRoute, 
-        private navService: NavService, private translate: TranslateService, private router: Router, 
+    constructor(public articleService: ArticleService,  private route: ActivatedRoute,
+        private navService: NavService, private translate: TranslateService, private router: Router,
         // tslint:disable-next-line:max-line-length
-        private breadcrumbService: BreadcrumbService, @Inject(APP_CONFIG) private config: AppConfig, private announceService: AnnouncementlistService) {
+        private breadcrumbService: BreadcrumbService, @Inject(APP_CONFIG) private config: AppConfig, public announceService: AnnouncementlistService) {
         this.lang = translate.currentLang;
 
             translate.onLangChange.subscribe((event: LangChangeEvent) => {
@@ -77,10 +77,10 @@ export class AnnouncementdetailsComponent implements OnInit {
 
     clickSideMenu(e) {
         const _getModule = this.router.url.split('/')[1];
-        
-        
+
+
         this.router.navigate([_getModule, e.code]);
-        
+
         event.preventDefault();
     }
 
