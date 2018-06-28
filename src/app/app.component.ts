@@ -21,6 +21,8 @@ export class AppComponent {
     bHeight = '70px';
     bTop = '35px';
 
+    loading: any;
+
     constructor() {
         this.clientHeight = window.innerHeight - 200;
     }

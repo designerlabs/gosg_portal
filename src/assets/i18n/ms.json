@@ -19,6 +19,7 @@
       "fonttype": "Jenis Fon",
       "login": "Log Masuk",
       "sitemap": "Peta Laman",
+      "gallery": "Galeri",
       "statistic": "Statistik Atas Talian"
     },
     "search": {
@@ -49,7 +50,9 @@
       "onlineser": "Perkhidmatan Dalam Talian",
       "global":"Global",
       "result": "Rekod",
-      "resultsfound": "Rekod Carian Dijumpai dalam masa"
+      "resultsfound": "Rekod Carian Dijumpai dalam masa",
+      "resultnotfound": "Tiada maklumat yang dijumpai. Sila cuba lagi.",
+      "searchkey": "Cari disini"
     },
     "breadcrumb":{
       "calendar": "Kalendar",
@@ -62,6 +65,7 @@
       "onlineservice": "Perkhidmatan Dalam Talian",
       "subscription": "Langganan",
       "unsubscribe": "Hentikan langganan",
+      "gallery": "Galeri",
       "search": "Search"
     },
     "expandButton": {
@@ -308,6 +312,9 @@
       "subject":"Sorry, subjects is unavailable."
 
     }
+  },
+  "gallery":{
+    "header": "Galeri"
   },
   "mailbox":{
     "header":{

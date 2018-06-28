@@ -11,6 +11,8 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class SearchComponent implements OnInit {
 
+    keyword1: any;
+
     constructor(
         private translate: TranslateService,
         private router: Router,
