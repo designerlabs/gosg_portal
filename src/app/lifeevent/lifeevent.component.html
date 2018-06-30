@@ -13,7 +13,7 @@
 
     <div class="container lifeevent_tab">
         <mat-tab-group dynamicHeight>
-            <mat-tab label="Citizen">
+            <mat-tab label="{{'register.label.citi' | translate}}">
               <div class="example-small-box mat-elevation-z4">
                   <div *ngFor="let leData of lifeEventData" style="padding:0px;">
                     <div class="row"  *ngIf="leData.type =='citizen'">
@@ -39,7 +39,7 @@
                   </div>
               </div>
             </mat-tab>
-            <mat-tab label="Non Citizen">
+            <mat-tab label="{{'register.label.nonciti' | translate}}">
               <div class="example-large-box mat-elevation-z4">
                 <div *ngFor="let leData of lifeEventData" style="padding:0px;">
                   <div class="row"  *ngIf="leData.type =='noncitizen'">
