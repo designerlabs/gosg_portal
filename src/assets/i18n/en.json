@@ -32,6 +32,7 @@
       "specification": "Search Specification",
       "filter": "Filter",
       "exword" : "Exact word",
+      "excludeword" : "Excluding Words",
       "alword": "All word",
       "anyword": "Any word",
       "spectopic": "Topics",

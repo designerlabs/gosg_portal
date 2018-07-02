@@ -32,6 +32,7 @@
       "specification": "Spesifikasi Carian",
       "filter": "Tapisan Berasaskan",
       "exword" : "Perkataan yang tepat",
+      "excludeword" : "Selain Perkataan",
       "alword": "Semua dari perkataan",
       "anyword": "Mana-mana dari perkataan",
       "spectopic": "Topik",

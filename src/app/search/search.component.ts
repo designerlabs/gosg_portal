@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { SearchService } from '../search/search.service';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
+import { NavService } from '../header/nav/nav.service';
 
 @Component({
   selector: 'app-search',
@@ -12,10 +13,12 @@ import { TranslateService } from '@ngx-translate/core';
 export class SearchComponent implements OnInit {
 
     keyword1: any;
+    popData: any;
 
     constructor(
         private translate: TranslateService,
         private router: Router,
+        private navService:NavService,
         private searchService:SearchService,
         private toastr: ToastrService
     ) {
@@ -79,9 +82,23 @@ export class SearchComponent implements OnInit {
 
     //autocomplete test data
     public autoCompleteArr = ['lesen', 'pendidikan', 'myGovernment'];
+    // public autoCompleteArr = ['lesen', 'pendidikan', 'myGovernment'];
 
     ngOnInit() {
+        this.getPop();
+        console.log(this.popData)
+    }
 
+    getPop() {
+        let body = {
+            "size": 10,
+            "filters": {
+            }
+        };
+        this.navService.getPopularData(body)
+            .subscribe(resPopularData => {
+                this.popData = resPopularData
+            });
     }
 
 }
