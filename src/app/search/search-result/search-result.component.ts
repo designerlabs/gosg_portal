@@ -1106,6 +1106,9 @@ export class SearchResultComponent implements OnInit, OnDestroy {
   }
 
   btnFilterReset() {
+    this.locUnchecked = 0;
+    this.osUnchecked = 0;
+
     this.inpExcWord = '';
     this.chktopic = true;
     this.chksubtopic = true;

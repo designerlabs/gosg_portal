@@ -40,19 +40,19 @@
                     {{'home.search.exword' | translate}}
                   </mat-radio-button>
                   <mat-form-field class="example-full-width" *ngIf="chkKeyValue==1" style="padding-left: 15px;">
-                    <input matInput placeholder="Type Exclude words" [(ngModel)]="inpExcWord">
+                    <input matInput placeholder="{{'home.search.excludeword' | translate}}" [(ngModel)]="inpExcWord">
                   </mat-form-field>
                   <mat-radio-button class="example-radio-button" (change)="chkKeyword($event,2)" value="2">
                     {{'home.search.alword' | translate}}
                   </mat-radio-button>
                   <mat-form-field class="example-full-width" *ngIf="chkKeyValue==2" style="padding-left: 15px;">
-                    <input matInput placeholder="Type Exclude words" [(ngModel)]="inpExcWord">
+                    <input matInput placeholder="{{'home.search.excludeword' | translate}}" [(ngModel)]="inpExcWord">
                   </mat-form-field>
                   <mat-radio-button class="example-radio-button" (change)="chkKeyword($event,3)" value="3">
                     {{'home.search.anyword' | translate}}
                   </mat-radio-button>
                   <mat-form-field class="example-full-width" *ngIf="chkKeyValue==3" style="padding-left: 15px;">
-                    <input matInput placeholder="Type Exclude words" [(ngModel)]="inpExcWord">
+                    <input matInput placeholder="{{'home.search.excludeword' | translate}}" [(ngModel)]="inpExcWord">
                   </mat-form-field>
                 </mat-radio-group>
               </div>
