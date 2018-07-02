@@ -90,6 +90,7 @@ export class AppConfig {
     urlAgencyList: string;
     dataAppUrl: string;
     urlStatistic: string;
+    registerationUrl: string;
 
 }
 
@@ -103,6 +104,7 @@ export const APP_DI_CONFIG: AppConfig = {
     urlFaq: commonURL+'faq/all',
     urlManual: commonURL+'article/usermanual',
     // urlFooter: './app/apidata/footer',
+    registerationUrl: registrationUrl,
     urlFooter: commonURL + 'footer',
     urlArticle: commonURL+'article',
     urlGallery: commonURL+'gallerydetails',
