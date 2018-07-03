@@ -46,6 +46,8 @@ import { SitemapComponent } from './sitemap/sitemap.component';
 import { ArchivecategoryComponent } from './archive/archivecategory/archivecategory.component';
 import { ArchivesubcategoryComponent } from './archive/archivesubcategory/archivesubcategory.component';
 import { ArchivecontentComponent } from './archive/archivecontent/archivecontent.component';
+import { PolicereportComponent } from './pdrm/policereport/policereport.component';
+
 //import { GalleryComponent } from './gallery/gallery.component';
 // import { NavRouterActivator } from './header/nav/nav-router-activator.service'
 
@@ -100,6 +102,7 @@ export const protectedRoutes: Routes = [
     {path: 'subscription', component: SubscriptionComponent},
     {path: 'unsubscribe', component: UnsubscribeComponent},
     {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
+    {path: 'pdrm/police-report', component: PolicereportComponent},
     {path: '**', component: ErrorComponent}
     //{path: 'user', loadChildren: 'app/user/user.module#UserModule'}
 ];

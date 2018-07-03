@@ -34,6 +34,7 @@ import { SearchResultProdComponent } from './search/search-result/search-result-
 import {LifeeventprodComponent } from './lifeevent/lifeeventprod.component';
 import { SubarticleprodComponent } from './article/subarticle/subarticleprod.component';
 import { ArticleprodComponent } from './article/articleprod.component';
+import { PolicereportComponent } from './pdrm/policereport/policereport.component';
 
 export function HttpLoaderFactory(http: Http) {
    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -56,7 +57,8 @@ export function HttpLoaderFactory(http: Http) {
     LifeeventprodComponent,
     SearchResultProdComponent,
     SubarticleprodComponent,
-    ArticleprodComponent
+    ArticleprodComponent,    
+    PolicereportComponent
   ],
   imports: [
     SharedModule,
@@ -76,7 +78,7 @@ export function HttpLoaderFactory(http: Http) {
     RouterModule.forRoot(protectedRoutes),
     NguiAutoCompleteModule,
     ButtonsModule.forRoot(),
-    AccordionModule.forRoot(),
+    AccordionModule.forRoot(), 
     OwlModule
   ],
   schemas:[

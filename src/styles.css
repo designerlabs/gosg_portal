@@ -462,6 +462,14 @@ span.highlightWord {
   padding: 5px;
 }
 
+.padding-15{
+  padding: 15px;
+}
+
+.padding-right20{
+  padding-right: 20px;
+}
+
 .title-card{
   min-height: 40px !important;
   background: white;

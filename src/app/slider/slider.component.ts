@@ -102,7 +102,6 @@ export class SliderComponent implements OnInit, OnDestroy {
     if(getUrlSlider != undefined){
 
       let httpStr = getUrlSlider.substring(0, 4);   
-      console.log(httpStr);
 
       if(httpStr.toLowerCase() == 'http'){
         window.open(getUrlSlider,'_blank');
