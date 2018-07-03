@@ -162,6 +162,36 @@
                     <div *ngIf="!tabContent.agencyList">
                         <div class="col-sm-6">
                             <div>
+                              <div *ngIf="tabContent.agency">
+                                  <div>
+                                    <img [src]="tabContent.agency.agencyImage" width="100" height="100">
+                                  </div>
+                                  <div>
+                                    <h5>{{tabContent.agency.agencyName}}</h5>
+                                    <h3>{{tabContent.agency.agencyDescription}}</h3>
+                                  </div>
+                                  <div>
+                                    <span>{{tabContent.status}}</span>
+                                  </div>
+                                  <div>
+                                    <span>
+                                      {{tabContent.publishDate}}
+                                    </span>
+                                    <span>
+                                        {{tabContent.endDate}}
+                                    </span>
+                                  </div>
+                              </div>
+                              <!-- <div>
+                                <img [src]="tabContent.agency.agencyImage" width="100" height="100">
+                              </div>
+                              <div>
+                                <h5>{{tabContent.agency.agencyName}}</h5>
+                              </div>
+                              <div>
+                                <h2>{{tabContent.agency.agencyDescription}}</h2>
+                              </div> -->
+
                               <div style="width:100%; margin-right:10px; height:auto;" class="pointer" (click)="clickContentFromMenu(article.categoryCode, tabContent.contentCode, '', $event)">
                                   <a class="intro-box warna_border_color" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
                                       <h4 class="font-size-m warna_font">
