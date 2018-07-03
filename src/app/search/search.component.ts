@@ -13,7 +13,7 @@ import { NavService } from '../header/nav/nav.service';
 export class SearchComponent implements OnInit {
 
     keyword1: any;
-    popData: any;
+    public popData: any = [];
 
     constructor(
         private translate: TranslateService,
@@ -81,12 +81,11 @@ export class SearchComponent implements OnInit {
     }
 
     //autocomplete test data
-    public autoCompleteArr = ['lesen', 'pendidikan', 'myGovernment'];
+    public autoCompleteArr = this.popData;
     // public autoCompleteArr = ['lesen', 'pendidikan', 'myGovernment'];
 
     ngOnInit() {
         this.getPop();
-        console.log(this.popData)
     }
 
     getPop() {
@@ -97,7 +96,9 @@ export class SearchComponent implements OnInit {
         };
         this.navService.getPopularData(body)
             .subscribe(resPopularData => {
-                this.popData = resPopularData
+                this.popData = resPopularData;
+                console.log(this.popData)
+                this.autoCompleteArr = this.popData;
             });
     }
 

@@ -227,9 +227,9 @@
               <div>
                 <button [disabled]="locUnchecked >= 4 || osUnchecked >= 4?'true':'false'" class="btn btn-md" mat-raised-button color="primary"
                   (click)="btnSubmit()">
-                  <i [class]="sharedService.icon.check"></i> Submit</button>
+                  <i [class]="sharedService.icon.check"></i> {{'common.buttons.submit' | translate}}</button>
                 <button mat-raised-button color="warn" (click)="btnFilterReset()">
-                  <i [class]="sharedService.icon.refresh"></i> Reset</button>
+                  <i [class]="sharedService.icon.refresh"></i> {{'common.buttons.reset' | translate}}</button>
               </div>
             </li>
           </ul>
