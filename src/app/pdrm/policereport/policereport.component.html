@@ -1,0 +1,75 @@
+<div class="container-fluid animated slideInDown" style="background: #a7a495;">
+  <div class="container">
+       <div class="row">
+          <div class="col-md-12">
+              <h1 style="margin-top: 10px;" class="font-size-l"> {{ 'home.menu.policeReport' | translate }}</h1>
+              <hr class="hr-custom2"><br>
+              <ul class="list-inline" style="clear:both;">
+                  <li>
+                      <a class="font-size-s" style="color: #fff;" routerLink="/">
+                          {{'home.menu.home' | translate }}
+                      </a>
+                  </li>
+                  <!-- <li>/</li>
+                  <li>
+                      {{'home.breadcrumb.register' | translate}}
+                  </li> -->
+              </ul>
+          </div>
+      </div>
+  </div>
+</div>
+
+<div class="row">
+    <br>
+    <form [formGroup]="searchForm" (ngSubmit)="searchapp(searchForm.value)" #adSearchForm="ngForm" 
+        id="adSearch-form" role="form" novalidate="novalidate">
+
+        <div class="col-md-1"></div>
+        <div class="example-container mat-elevation-z8 padding-right20 col-md-10" >
+            
+            <div class="row padding-15">
+                <div class="col-md-12">
+                    <span>Masukkan No. Repot Polis.</span> 
+                </div>                    
+            </div>
+
+            <div class="row padding-15">
+                <div class="col-md-3">
+                    <mat-form-field>
+                        <input matInput placeholder="No. Kad Pengenalan" formControlName="ic" (keyup)="checkReqValues()"
+                        required tabindex="1">
+                        <mat-error *ngIf="searchForm.controls.ic.hasError('required')">
+                            No. Kad Pengenalan diperlukan.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                
+                <div class="col-md-3">
+                    <mat-form-field>
+                        <input matInput placeholder="No. Repot Polis" formControlName="noreport" (keyup)="checkReqValues()"
+                        required tabindex="2">
+                        <mat-error *ngIf="searchForm.controls.noreport.hasError('required')">
+                            No. Repot Polis diperlukan.
+                        </mat-error>
+                    </mat-form-field>
+                    <span style="color: black">/</span>
+                </div>
+
+                <div class="col-md-1">
+                    <mat-form-field>
+                        <input matInput placeholder="" formControlName="yearreport" (keyup)="checkReqValues()"
+                        required tabindex="2">
+                        <mat-error *ngIf="searchForm.controls.yearreport.hasError('required')">
+                            Tahun Repot Polis diperlukan.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    
+    </form>
+
+
+</div><br>
