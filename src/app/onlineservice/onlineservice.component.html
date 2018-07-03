@@ -79,7 +79,7 @@
                 <tr *ngFor="let element of datatblAgency; let i = index;" style="min-height: 50px !important;">
                   <td class="font-size-m">{{(seqPageNum == 1) ? (i + 1) : ((seqPageNum * seqPageSize) - seqPageSize) + (i + 1) }}</td>
                   <td>
-                    <a class="appUrl hoverlnk font-size-m" [href]="element.agencyApplicationUrl" target="_blank"> {{ element.agencyApplicationName}} <span class="onlineSignTag"><i [ngClass]="(!element.agencyApplicationUrl || element.agencyApplicationUrl == '-') ? 'fa fa-unlink' : (element.isDocument) ? 'fa fa-download' : 'fa fa-link'"></i></span></a>
+                    <a class="appUrl hoverlnk font-size-m" [href]="element.agencyApplicationUrl" (click)="appTracking(element.agencyApplicationCode)"  target="_blank"> {{ element.agencyApplicationName}} <span class="onlineSignTag"><i [ngClass]="(!element.agencyApplicationUrl || element.agencyApplicationUrl == '-') ? 'fa fa-unlink' : (element.isDocument) ? 'fa fa-download' : 'fa fa-link'"></i></span></a>
                   </td>
                 </tr>
             </tbody>
@@ -125,7 +125,7 @@
                       <strong>{{element.agencyName}}</strong>
                     </span>
                     <div *ngFor="let agencyApp of element.agencyApplications">
-                        <a class="appUrl hoverlnk font-size-m" [href]="agencyApp.agencyApplicationUrl" target="_blank"> {{ agencyApp.agencyApplicationName}} <span class="onlineSignTag"><i [ngClass]="(!agencyApp.agencyApplicationUrl || agencyApp.agencyApplicationUrl == '-') ? 'fa fa-unlink' : (agencyApp.isDocument) ? 'fa fa-download' : 'fa fa-link'"></i></span></a>
+                        <a class="appUrl hoverlnk font-size-m" [href]="agencyApp.agencyApplicationUrl" (click)="appTracking(agencyApp.agencyApplicationCode)"  target="_blank"> {{ agencyApp.agencyApplicationName}} <span class="onlineSignTag"><i [ngClass]="(!agencyApp.agencyApplicationUrl || agencyApp.agencyApplicationUrl == '-') ? 'fa fa-unlink' : (agencyApp.isDocument) ? 'fa fa-download' : 'fa fa-link'"></i></span></a>
                     </div>
                     <!-- <a class="appUrl hoverlnk font-size-m" [href]="element.agencyApplicationUrl" target="_blank"> {{ element.agencyApplicationName}} <span class="onlineSignTag"><i [ngClass]="(!element.agencyApplicationUrl || element.agencyApplicationUrl == '-') ? 'fa fa-unlink' : (element.isDocument) ? 'fa fa-download' : 'fa fa-link'"></i></span></a> -->
                   </td>

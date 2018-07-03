@@ -22,28 +22,28 @@
 
 <div class="row">
     <br>
-    <form [formGroup]="searchForm" role="form" novalidate="novalidate">
+    <form [formGroup]="searchForm" #adSearchForm="ngForm" id="adSearch-form" role="form" novalidate="novalidate">
 
         <div class="col-md-1"></div>
         <div class="example-container mat-elevation-z8 padding-right20 col-md-10" >
-            
+
             <div class="row padding-15">
                 <div class="col-md-12">
-                    <span>Masukkan No. Repot Polis.</span> 
-                </div>                    
+                    <span class="colorBlack">Masukkan No. Repot Polis.</span>
+                </div>
             </div>
 
             <div class="row padding-15">
                 <div class="col-md-3">
                     <mat-form-field>
-                        <input matInput placeholder="No. Kad Pengenalan" formControlName="ic" (keyup)="checkReqValues()"
+                        <input matInput placeholder="No. Kad Pengenalan" formControlName="ic"
                         required tabindex="1">
                         <mat-error *ngIf="searchForm.controls.ic.hasError('required')">
                             No. Kad Pengenalan diperlukan.
                         </mat-error>
                     </mat-form-field>
                 </div>
-                
+
                 <div class="col-md-3">
                     <mat-form-field>
                         <input matInput placeholder="No. Repot Polis" formControlName="noreport" (keyup)="checkReqValues()"
@@ -70,15 +70,34 @@
                         <i class="fa fa-refresh"></i> {{'feedback.label.reset' | translate }}</button>
                     <button mat-raised-button type="button" color="primary" id="searchbtn" 
                         class="form-control btn btn-md btn-success font-size-s pull-right bttnCustom"
-                        (click)="searchapp(searchForm.value)">
+                        (click)="searchApp(searchForm.value)">
                         <i class="fa fa-search"></i> {{'appmngt.setSearch.search' | translate}}</button>
                 </div>
             </div>
+
         </div>
         <div class="col-md-1"></div>
-    
+
     </form>
 </div><br>
+
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+        <span class="colorBlack">STATUS REPOT POLIS</span><br>
+    </div>
+    <div class="col-md-1"></div>  
+</div>
+
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+        <span class="colorBlack">Perhatian:</span><br>
+        <span style="text-align: justify; color: black">Semua jenis Repot Polis bertarikh dari 1 Ogos 2011 hingga kini (kecuali Repot Kemalangan Jalan Raya)
+             yang dibuat di kawasan Kontinjen Kuala Lumpur dan Selangor boleh disemak buat masa ini</span>
+    </div>
+    <div class="col-md-1"></div>  
+</div>
 
 <app-confirm-dialog #resetModal 
     [title]="'common.icon.warn'" 

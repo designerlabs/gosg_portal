@@ -219,7 +219,7 @@
           <h4 class="sideBarMenu--title padding-bottom-l font-size-m warna_font">{{'common.onlineservice' | translate }}</h4>
           <ul class="rightMenu" [style.background-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
             <li *ngFor="let rightContent of article.menuRight;">
-              <a [href]="rightContent.agencyApplicationUrl" target="_blank">{{rightContent.agencyApplicationName}}</a>
+              <a [href]="rightContent.agencyApplicationUrl" (click)="appTracking(rightContent.agencyApplicationCode)" target="_blank">{{rightContent.agencyApplicationName}}</a>
             </li>
           </ul>
         </div>

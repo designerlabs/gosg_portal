@@ -95,9 +95,13 @@ export class PolicereportComponent implements OnInit, OnDestroy {
     // this.subscription = this.getFaq(this.langID);
   }
 
+  searchApp(formValues: any){
+    console.log(formValues);
+  }
+
   checkReqValues() {
 
-    let reqVal:any = ["ic", "noreport", "yearrepoart"];
+    let reqVal:any = ["ic", "noreport", "yearreport"];
     let nullPointers:any = [];
 
     for (var reqData of reqVal) {

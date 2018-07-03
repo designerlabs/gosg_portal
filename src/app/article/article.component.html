@@ -101,7 +101,113 @@
         </div>
 
 
-        <div *ngIf="article.template === 'publication' || article.template === 'eparticipation'">
+
+        <div *ngIf="article.template === 'eparticipation'">
+            <div class="col-sm-6">
+
+                <div *ngIf="article.subCategoryList" class="row padding-top-xl">
+                    <div class="col-sm-12">
+                      <div *ngIf="article.image">
+                        <div>
+                            <img [src]="config.externalMediaURL + '/images/'+ article.image.mediaFile" style="width:100%;">
+                            <div style="position:absolute; width:auto;">
+                                <h2 class="topic_bg_title font-size-l">
+                                    <span style="padding-left:10px;">
+                                        {{article.categoryName}}
+                                    </span>
+                                </h2>
+                            </div>
+                        </div>
+                      </div>
+
+                      <div *ngIf="!article.image">
+                          <div>
+                              <h2 class="titleWObg font-size-l">
+                                  {{article.categoryName}}
+                              </h2>
+                          </div>
+                      </div>
+
+                      <span class="font-size-s defaultColor content_description" [innerHTML]="article.categoryDescription"></span>
+                    </div>
+
+                  <div  *ngFor="let rightContent of article.subCategoryList; let index=index; let odd=odd; let even=even;">
+                    <div class="col-sm-6">
+                        <div>
+                          <div style="width:100%; margin-right:10px; height:auto;" class="pointer" (click)="clickSideMenu(rightContent, '', $event)">
+
+
+                              <a class="intro-box warna_border_color" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
+                                  <h4 class="font-size-m warna_font">
+                                      {{rightContent.categoryName}}
+                                  </h4>
+                                  <span class="warna_font article-size font-size-s" [innerHTML]="rightContent.categoryDescription"></span>
+                                  <div class="font-size-s" style="text-align: right;"><i class="fa fa-caret-right"></i> {{'home.readmore' | translate }}</div>
+                              </a>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div *ngIf="odd" class="clearfix"></div>
+                  </div>
+
+                  </div>
+              <div *ngIf="article.contentList && !article.subCategoryList">
+
+
+              <mat-tab-group>
+                <mat-tab *ngFor="let tab of article.contentList" label="{{tab.tab}}">
+                  <div style="height:20px;"></div>
+                  <div *ngFor="let tabContent of tab.contents; let index=index; let odd=odd; let even=even;">
+                    <div *ngIf="!tabContent.agencyList">
+                        <div class="col-sm-6">
+                            <div>
+                              <div style="width:100%; margin-right:10px; height:auto;" class="pointer" (click)="clickContentFromMenu(article.categoryCode, tabContent.contentCode, '', $event)">
+                                  <a class="intro-box warna_border_color" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
+                                      <h4 class="font-size-m warna_font">
+                                          {{tabContent.contentTitle}}
+                                      </h4>
+                                      <span class="warna_font article-size font-size-s" [innerHTML]="tabContent.contentDescription"></span>
+                                      <div class="font-size-s" style="text-align: right;"><i class="fa fa-caret-right"></i> {{'home.readmore' | translate }}</div>
+                                  </a>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div *ngIf="odd" class="clearfix"></div>
+                    </div>
+
+
+                    <div *ngIf="tabContent.agencyList">
+                      <div *ngFor="let agencyContent of tabContent.agencyList; let index=index; let odd=odd; let even=even;">
+                        <div class="col-sm-6">
+                            <div>
+                              <div style="width:100%; margin-right:10px; height:auto;">
+                                  <a class="intro-box warna_border_color" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" [href]="agencyContent.agencyWebsiteUrl" target="_blank">
+                                      <h4 class="font-size-m warna_font">
+                                          {{agencyContent.agencyName}}
+                                      </h4>
+                                  </a>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div *ngIf="odd" class="clearfix"></div>
+                      </div>
+
+                    </div>
+
+
+
+                  </div>
+                </mat-tab>
+              </mat-tab-group>
+            </div>
+          </div>
+        </div>
+
+
+        <div *ngIf="article.template === 'publication'">
             <div class="col-sm-6">
 
                 <div *ngIf="article.subCategoryList" class="row padding-top-xl">
@@ -293,7 +399,7 @@
           <h4 class="sideBarMenu--title padding-bottom-l font-size-m warna_font">{{'common.onlineservice' | translate }}</h4>
           <ul class="rightMenu" [style.background-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
             <li *ngFor="let rightContent of article.menuRight;">
-              <a [href]="rightContent.agencyApplicationUrl" target="_blank">{{rightContent.agencyApplicationName}}</a>
+              <a [href]="rightContent.agencyApplicationUrl" (click)="appTracking(rightContent.agencyApplicationCode)" target="_blank">{{rightContent.agencyApplicationName}}</a>
             </li>
           </ul>
         </div>
