@@ -22,32 +22,32 @@
 
 <div class="row">
     <br>
-    <form [formGroup]="searchForm" (ngSubmit)="searchapp(searchForm.value)" #adSearchForm="ngForm" 
+    <form [formGroup]="searchForm" #adSearchForm="ngForm"
         id="adSearch-form" role="form" novalidate="novalidate">
 
         <div class="col-md-1"></div>
         <div class="example-container mat-elevation-z8 padding-right20 col-md-10" >
-            
+
             <div class="row padding-15">
                 <div class="col-md-12">
-                    <span>Masukkan No. Repot Polis.</span> 
-                </div>                    
+                    <span>Masukkan No. Repot Polis.</span>
+                </div>
             </div>
 
             <div class="row padding-15">
                 <div class="col-md-3">
                     <mat-form-field>
-                        <input matInput placeholder="No. Kad Pengenalan" formControlName="ic" (keyup)="checkReqValues()"
+                        <input matInput placeholder="No. Kad Pengenalan" formControlName="ic"
                         required tabindex="1">
                         <mat-error *ngIf="searchForm.controls.ic.hasError('required')">
                             No. Kad Pengenalan diperlukan.
                         </mat-error>
                     </mat-form-field>
                 </div>
-                
+
                 <div class="col-md-3">
                     <mat-form-field>
-                        <input matInput placeholder="No. Repot Polis" formControlName="noreport" (keyup)="checkReqValues()"
+                        <input matInput placeholder="No. Repot Polis" formControlName="noreport"
                         required tabindex="2">
                         <mat-error *ngIf="searchForm.controls.noreport.hasError('required')">
                             No. Repot Polis diperlukan.
@@ -58,7 +58,7 @@
 
                 <div class="col-md-1">
                     <mat-form-field>
-                        <input matInput placeholder="" formControlName="yearreport" (keyup)="checkReqValues()"
+                        <input matInput placeholder="" formControlName="yearreport"
                         required tabindex="2">
                         <mat-error *ngIf="searchForm.controls.yearreport.hasError('required')">
                             Tahun Repot Polis diperlukan.
@@ -68,7 +68,7 @@
             </div>
         </div>
         <div class="col-md-1"></div>
-    
+
     </form>
 
 
