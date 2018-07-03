@@ -31,7 +31,7 @@ export class SliderComponent implements OnInit, OnDestroy {
   private subscriptionLang: ISubscription;
 
   @Output() langChange = new EventEmitter();
-  @ViewChild('owlElement') owlElement: OwlCarousel; 
+  @ViewChild('owlElement') owlElement: OwlCarousel;
 
   constructor(
     private translate: TranslateService,
@@ -59,7 +59,7 @@ export class SliderComponent implements OnInit, OnDestroy {
           this.getSlide(this.languageId);
           //this.subscription = this.getSlide(this.languageId);
         }
-        
+
       // }).bind(this));
 
     });
@@ -73,7 +73,7 @@ export class SliderComponent implements OnInit, OnDestroy {
     //this.subscription.unsubscribe();
   }
 
-  ngOnInit() {    
+  ngOnInit() {
 
     if(!this.languageId){
       this.languageId = localStorage.getItem('langID');
@@ -93,20 +93,20 @@ export class SliderComponent implements OnInit, OnDestroy {
     this.sharedservice.readPortal('slider','','','',lang)
     .subscribe(resSliderData => {
           this.slides = resSliderData['sliderList'];
-          
+
     });
   }
 
   getUrl(getUrlSlider){
-
+    debugger;
     if(getUrlSlider != undefined){
 
-      let httpStr = getUrlSlider.substring(0, 4);   
+      let httpStr = getUrlSlider.substring(0, 4);
 
       if(httpStr.toLowerCase() == 'http'){
         window.open(getUrlSlider,'_blank');
       }
-      
+
       else{
         window.open(getUrlSlider);
       }
