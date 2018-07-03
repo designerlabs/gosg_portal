@@ -5,9 +5,7 @@ import { Router } from '@angular/router';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { APP_CONFIG, AppConfig } from '../../config/app.config.module';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
-import { Http, Response } from '@angular/http';
+import { Http } from '@angular/http';
 import * as $ from 'jquery';
 import {
     MatInputModule, MatPaginatorModule, MatProgressSpinnerModule,
@@ -23,18 +21,13 @@ export class PolicereportComponent implements OnInit, OnDestroy {
 
   lang = this.lang;
   langID: any;
+  complete: boolean;
 
-  searchForm: FormGroup;
-  
+  searchForm: FormGroup;  
   public ic: FormControl;  
   public noreport: FormControl;
   public yearreport: FormControl
 
-
-  faqData = null;
-  faqList = [];
-  faqAnswer: any;
-  faqQuestion: any;
   private subscriptionLang: ISubscription;
   private subscription: ISubscription;
 
@@ -48,7 +41,6 @@ export class PolicereportComponent implements OnInit, OnDestroy {
     private topnavservice: TopnavService,) {
 
     this.lang = translate.currentLang;
-
     this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
 
         const myLang = translate.currentLang;
@@ -70,7 +62,7 @@ export class PolicereportComponent implements OnInit, OnDestroy {
         }
 
         if(this.topnavservice.flagLang){
-          this.subscription = this.getFaq(this.langID);
+          //this.subscription = this.getFaq(this.langID);
         }
 
     });
@@ -78,7 +70,7 @@ export class PolicereportComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscriptionLang.unsubscribe();
-    this.subscription.unsubscribe();
+   // this.subscription.unsubscribe();
   }
 
   ngOnInit() {
@@ -100,21 +92,53 @@ export class PolicereportComponent implements OnInit, OnDestroy {
       yearreport: this.yearreport      
     });
 
-    this.subscription = this.getFaq(this.langID);
+    // this.subscription = this.getFaq(this.langID);
   }
 
-  getFaq(lang) {
+  checkReqValues() {
 
-    return this.http.get(this.urlFaq + '?language=' + lang + '&page=1&size=99')
+    let reqVal:any = ["ic", "noreport", "yearrepoart"];
+    let nullPointers:any = [];
 
-    .map((response: Response) => response.json())
-    .subscribe(resSliderData => {
-      this.faqData = resSliderData
-      this.faqList = this.faqData['faqList'];
+    for (var reqData of reqVal) {
+      let elem = this.searchForm.get(reqData);
+
+      if (elem.value == "" || elem.value == null) {
+        elem.setValue(null)
+        nullPointers.push(null)
+      }
+    }
+      
+    if(nullPointers.length > 0) {
+      this.complete = false;
+    } else {
+      this.complete = true;
+    }
+  }
+
+  resetSearch(){
+    //this.appNumber.reset();
+    this.searchForm.get('ic').setValue(null);
+    this.searchForm.get('noreport').setValue(null);
+    this.searchForm.get('yearreport').setValue(null);
+  }
+
+  resetMethod(event) {
+    this.resetSearch();
+  }
+
+  // getFaq(lang) {
+
+  //   return this.http.get(this.urlFaq + '?language=' + lang + '&page=1&size=99')
+
+  //   .map((response: Response) => response.json())
+  //   .subscribe(resSliderData => {
+  //     this.faqData = resSliderData
+  //     this.faqList = this.faqData['faqList'];
       
 
-    });
+  //   });
 
-  }
+  // }
 
 }
