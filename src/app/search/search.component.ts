@@ -80,9 +80,8 @@ export class SearchComponent implements OnInit {
 
     }
 
-    //autocomplete test data
+    //autocomplete data
     public autoCompleteArr = this.popData;
-    // public autoCompleteArr = ['lesen', 'pendidikan', 'myGovernment'];
 
     ngOnInit() {
         this.getPop();
@@ -97,7 +96,6 @@ export class SearchComponent implements OnInit {
         this.navService.getPopularData(body)
             .subscribe(resPopularData => {
                 this.popData = resPopularData;
-                console.log(this.popData)
                 this.autoCompleteArr = this.popData;
             });
     }
