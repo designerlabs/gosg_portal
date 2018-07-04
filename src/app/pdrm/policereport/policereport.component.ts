@@ -138,7 +138,6 @@ export class PolicereportComponent implements OnInit, OnDestroy {
 
       else{
         let newUrl = "http://";
-        console.log(newUrl+varUrl);
         window.open(newUrl+varUrl,'_blank');
       }
 

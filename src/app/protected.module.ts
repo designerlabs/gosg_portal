@@ -35,6 +35,8 @@ import {LifeeventprodComponent } from './lifeevent/lifeeventprod.component';
 import { SubarticleprodComponent } from './article/subarticle/subarticleprod.component';
 import { ArticleprodComponent } from './article/articleprod.component';
 import { PolicereportComponent } from './pdrm/policereport/policereport.component';
+import { StatuspositionComponent } from './pdrm/statusposition/statusposition.component';
+import { SummontrafficComponent } from './pdrm/summontraffic/summontraffic.component';
 
 export function HttpLoaderFactory(http: Http) {
    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -58,7 +60,9 @@ export function HttpLoaderFactory(http: Http) {
     SearchResultProdComponent,
     SubarticleprodComponent,
     ArticleprodComponent,    
-    PolicereportComponent
+    PolicereportComponent,
+    StatuspositionComponent,
+    SummontrafficComponent
   ],
   imports: [
     SharedModule,
