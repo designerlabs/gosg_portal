@@ -124,7 +124,7 @@ export const APP_DI_CONFIG: AppConfig = {
     urlAnnouncement : commonURL + 'highlight/tender',
     // urlAnnouncement : commonURL + 'announcement/date/publish',
     urlAnnouncementSub: commonURL + 'announcement/category',
-    urlCalendar: './app/apidata/calendar',
+    urlCalendar: commonURL + './calendar',
     urlEvent: './app/apidata/event',
     urlRegister: registrationUrl+'register',
     urlFeedbackType: commonURL+'feedback/type/lang/',
