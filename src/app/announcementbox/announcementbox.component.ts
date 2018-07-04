@@ -7,6 +7,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { BreadcrumbService } from '../header/breadcrumb/breadcrumb.service';
 import { ISubscription } from 'rxjs/Subscription';
 import { TopnavService } from '../header/topnav/topnav.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-announcementbox',
@@ -33,6 +34,7 @@ export class AnnouncementboxComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         private navService: NavService, 
         private topnavservice: TopnavService,
+        private datePipe:DatePipe,
         private breadcrumbService: BreadcrumbService, 
         private router: Router
     ){
@@ -49,7 +51,7 @@ export class AnnouncementboxComponent implements OnInit, OnDestroy {
             }
 
             if(this.topnavservice.flagLang){
-                this.getCalendarData(this.lang);
+                this.getCalendarData(this.languageId);
                 this.getData(this.languageId);
             }
         });
@@ -64,7 +66,7 @@ export class AnnouncementboxComponent implements OnInit, OnDestroy {
         }
 
         this.getData(this.languageId);
-        this.getCalendarData(this.lang)
+        this.getCalendarData(this.languageId);
     }
 
     ngOnDestroy() {
@@ -80,6 +82,7 @@ export class AnnouncementboxComponent implements OnInit, OnDestroy {
         // }else {
         //     langID = 1;
         // }
+
         return this.http.get(this.announcementUrl + '?language=' + this.languageId)
             .map(res => res.json())
             .subscribe(data => {
@@ -90,12 +93,32 @@ export class AnnouncementboxComponent implements OnInit, OnDestroy {
     }
 
     getCalendarData(lang: string) {
-        return this.http.get(this.calendarUrl + '-' + lang + '.json')
-           .map(res => res.json())
-          .subscribe(data => {
-                this.calendarData = data;
-                // 
-            });
+        let calArr = [];
+        let dDay1;
+        let dMonth1;
+        let eTitle1;
+        let dDay2;
+        let dMonth2;
+        let eTitle2;
+        return this.http.get(this.calendarUrl + '?language='+this.languageId+'&sort=id,DESC')
+        .map(res => res.json())
+        .subscribe(data => {
+
+            dDay1 = this.datePipe.transform(data.list[0].eventStart, 'dd');
+            dDay2 = this.datePipe.transform(data.list[1].eventStart, 'dd');
+
+            dMonth1 = this.datePipe.transform(data.list[0].eventStart, 'MMMM');
+            dMonth2 = this.datePipe.transform(data.list[1].eventStart, 'MMMM');
+
+            eTitle1 = data.list[0].eventName;
+            eTitle2 = data.list[1].eventName;
+            
+            calArr.push({"day":dDay1,"month":dMonth1,"title":eTitle1})
+            calArr.push({"day":dDay2,"month":dMonth2,"title":eTitle2})
+
+            this.calendarData = calArr;
+            console.log(this.calendarData)
+        });
     }
 
     getTheme() {
