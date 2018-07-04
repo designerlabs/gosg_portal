@@ -515,6 +515,6 @@ em {
   padding-left: 0px;
 }
 
-colorBlack{
-  color: #000;
+lineHr{
+  border-top: #9c9c9d 2px solid;
 }
