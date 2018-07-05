@@ -1,9 +1,9 @@
 import { Component, OnInit, Injectable, Inject, OnDestroy } from '@angular/core';
 import { ISubscription } from "rxjs/Subscription";
-import { TopnavService } from '../../header/topnav/topnav.service';
+import { TopnavService } from '../header/topnav/topnav.service';
 import { Router } from '@angular/router';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
-import { APP_CONFIG, AppConfig } from '../../config/app.config.module';
+import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Http } from '@angular/http';
 import * as $ from 'jquery';
@@ -12,14 +12,16 @@ import {
     MatSortModule, MatTableModule, MatPaginator, MatSort
   } from '@angular/material';
 
-import { ProtectedService } from '../../services/protected.service';
+import { ProtectedService } from '../services/protected.service';
+import { tileLayer, latLng, circle, polygon, marker, icon, Layer } from 'leaflet';
+import * as L from 'leaflet';
 
 @Component({
-  selector: 'gosg-summontraffic',
-  templateUrl: './summontraffic.component.html',
-  styleUrls: ['./summontraffic.component.css']
+  selector: 'gosg-schoolsearch',
+  templateUrl: './schoolsearch.component.html',
+  styleUrls: ['./schoolsearch.component.css']
 })
-export class SummontrafficComponent implements OnInit {
+export class SchoolsearchComponent implements OnInit {
 
   lang = this.lang;
   langID: any;
@@ -42,8 +44,24 @@ export class SummontrafficComponent implements OnInit {
 
   searchForm: FormGroup;  
   public optSelect: FormControl;
-  public ic: FormControl;  
-  public noCar: FormControl;
+  public state: FormControl;  
+  public typeSchool: FormControl;
+  public ppd: FormControl;  
+  public speacialEd: FormControl;
+  public schoolname: FormControl;
+
+  mymap;
+  marker;
+  popup = L.popup();
+  defaultIcon = L.icon({
+    iconUrl: 'assets/marker-icon.png',
+    shadowUrl: 'assets/marker-shadow.png',
+    iconSize: [25, 41], // size of the icon
+    shadowSize: [40, 41], // size of the shadow
+    iconAnchor: [0, 0], // point of the icon which will correspond to marker's location
+    shadowAnchor: [0, 0],  // the same for the shadow
+    popupAnchor: [12, 0] // point from which the popup should open relative to the iconAnchor
+  });
 
   private subscriptionLang: ISubscription;
   private subscription: ISubscription;
@@ -100,19 +118,22 @@ export class SummontrafficComponent implements OnInit {
     }
 
     this.optSelect = new FormControl();
-    this.ic = new FormControl();
-    this.noCar = new FormControl();
+    this.state = new FormControl();
+    this.typeSchool = new FormControl();
+    this.ppd = new FormControl();
+    this.speacialEd = new FormControl();
+    this.schoolname = new FormControl();
 
     this.searchForm = new FormGroup({   
 
       optSelect: this.optSelect,
-      ic: this.ic,
-      noCar: this.noCar    
+      state: this.state,
+      typeSchool: this.typeSchool,    
+      ppd: this.ppd,
+      speacialEd: this.speacialEd,
+      schoolname: this.schoolname
     });
     
-    this.searchForm.get('optSelect').setValue(1);
-    this.varSelect = 1;
-
     this.getDataAppList(this.pageCount, this.pageSize);
 
   }
@@ -158,6 +179,18 @@ export class SummontrafficComponent implements OnInit {
     this.name = "MUHAMMAD ISYRAF RAZIQ B YUSOF";
     this.summon =  "1";
     this.ammount = "300";
+
+    this.getDefaultMap();
+  }
+
+  getDefaultMap() {
+    this.mymap = L.map('dirmap').setView([5.8142568, 108.5806004], 5.2);
+    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+      attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+      maxZoom: 15,
+      id: 'mapbox.streets',
+      accessToken: 'pk.eyJ1IjoicmVkemEiLCJhIjoiY2pmcGZxNzRrMjYzbzMwcG83bGRxY2FtZyJ9.uMHQpYc0Pvjl4us27nHH8w'
+    }).addTo(this.mymap);
   }
 
   isNumber(evt) {
@@ -177,14 +210,9 @@ export class SummontrafficComponent implements OnInit {
 
     let reqVal = [];
     let nullPointers:any = [];
-
-    if(this.varSelect == 1){
-      reqVal = ["ic"];
-    }
-
-    if(this.varSelect == 2){
-      reqVal = ["noCar"];
-    }    
+   
+    reqVal =  ["optSelect","state","ppd","speacialEd"];
+    
 
     for (var reqData of reqVal) {
       let elem = this.searchForm.get(reqData);
@@ -203,8 +231,11 @@ export class SummontrafficComponent implements OnInit {
   }
 
   resetSearch(){
-    this.searchForm.get('ic').setValue(null);
-    this.searchForm.get('noCar').setValue(null);
+    this.searchForm.get('optSelect').setValue(null);
+    this.searchForm.get('state').setValue(null);
+    this.searchForm.get('typeSchool').setValue(null);
+    this.searchForm.get('ppd').setValue(null);
+    this.searchForm.get('speacialEd').setValue(null);
     this.showDetails = false;
   }
 

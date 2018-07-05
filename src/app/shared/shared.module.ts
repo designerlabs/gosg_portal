@@ -140,6 +140,7 @@ import { ArchivesubcategoryComponent } from '../archive/archivesubcategory/archi
 import { ArchivecontentComponent } from '../archive/archivecontent/archivecontent.component';
 import { GalleryService } from '../gallery/gallery.service';
 import { GalleryComponent, DialogDataExampleDialog } from '../gallery/gallery.component';
+import { SchoolsearchComponent } from '../schoolsearch/schoolsearch.component';
 // import { LifeeventComponent } from '../lifeevent/lifeevent.component';
 //import { GalleryService } from '../gallery/gallery.service';
 // import { SearchResultComponent } from '../search/search-result/search-result.component';
@@ -230,7 +231,8 @@ export function HttpLoaderFactory(http: Http) {
     ArchivesubcategoryComponent,
     ArchivecontentComponent,
     GalleryComponent,
-    DialogDataExampleDialog
+    DialogDataExampleDialog,
+    SchoolsearchComponent
     // SearchResultComponent
   ],
 

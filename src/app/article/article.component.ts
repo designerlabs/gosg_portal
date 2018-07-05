@@ -139,6 +139,12 @@ export class ArticleComponent implements OnInit, OnDestroy {
     return a[2];
   }
 
+  getJson(x, p){
+    let z = x.replace('[', '').replace(']', '');
+    let y = z.split(',');
+    return y[p]
+  }
+
   appTracking(refCode){
     const readUrl = `${this.config.registerationUrl}agencyapplication/tracking?refCode=${refCode}&source=life-event`;
     const req = this.http.post(readUrl,'')
