@@ -190,9 +190,6 @@ export class AppManagementComponent implements OnInit, OnDestroy {
         this.showNoData = true;
       }
 
-
-
-
       for(let i=0; i<this.dataApp.length; i++){
 
         let dateS = moment(new Date(this.dataApp[i].submissionDatetime)).format('DD-MM-YYYY hh:ss');

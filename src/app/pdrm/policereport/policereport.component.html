@@ -36,40 +36,42 @@
                 <div class="row padding-15">
                     <div class="col-md-3">
                         <mat-form-field>
-                            <input matInput placeholder="No. Kad Pengenalan" formControlName="ic"
-                            required tabindex="1">
+                            <input matInput placeholder="No. Kad Pengenalan" formControlName="ic" (keydown)="isNumber($event)"
+                            maxlength="12" required tabindex="1" style="color: black">
                             <mat-error *ngIf="searchForm.controls.ic.hasError('required')">
                                 No. Kad Pengenalan diperlukan.
                             </mat-error>
                         </mat-form-field>
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-6">
                         <mat-form-field>
-                            <input matInput placeholder="No. Repot Polis" formControlName="noreport" (keyup)="checkReqValues()"
-                            maxlength="6" required tabindex="2">
+                            <input matInput placeholder="No. Repot Polis" formControlName="noreport" (keyup)="checkReqValues()" (keydown)="isNumber($event)"
+                            maxlength="6" required tabindex="2"  style="color: black">
                             <mat-error *ngIf="searchForm.controls.noreport.hasError('required')">
                                 No. Repot Polis diperlukan.
                             </mat-error>
                         </mat-form-field>
                         <span style="color: black">/</span>
                         <mat-form-field style="width:10%;">
-                            <input matInput placeholder="" formControlName="yearreport" (keyup)="checkReqValues()" maxlength="2"
-                            required tabindex="2">
+                            <mat-select formControlName="yearreport" placeholder="" (change)="checkReqValues()" required>
+                                <mat-option [value]=null></mat-option>
+                                <mat-option *ngFor="let year of listYear" [value]="year">{{year}}</mat-option>                      
+                            </mat-select>
                             <!-- <mat-error *ngIf="searchForm.controls.yearreport.hasError('required')">
                                 Tahun Repot Polis diperlukan.
                             </mat-error> -->
-                        </mat-form-field>
+                        </mat-form-field>&nbsp;
+                        <span style="color: black">Contoh No Repot Polis: 012345/18</span>
                     </div>
 
-                    <div class="col-md-3"></div>
                     <div class="col-md-3">
                         <button tabindex="" mat-raised-button color="warn" type="button" id="btnreset" 
                             class="form-control btn btn-md btn-warning font-size-s pull-right bttnCustom"
                             (click)="resetModal.show()" style="margin-left: 5px;">
                             <i class="fa fa-refresh"></i> {{'feedback.label.reset' | translate }}</button>
                         <button mat-raised-button type="button" color="primary" id="searchbtn" 
-                            class="form-control btn btn-md btn-success font-size-s pull-right bttnCustom"
+                            class="form-control btn btn-md btn-success font-size-s pull-right bttnCustom" [disabled]="!complete"
                             (click)="searchApp(searchForm.value)">
                             <i class="fa fa-search"></i> {{'appmngt.setSearch.search' | translate}}</button>
                     </div>
@@ -80,60 +82,70 @@
         </form>
     </div><br>
 
-    <div class="row container">
-        <div class="col-md-12" style="color: black; font-weight: bold;">
-            STATUS REPOT POLIS<br>
-            <hr class="lineHr" style="border-top: #9c9c9d 2px solid;">
+    <div *ngIf="showDetails">
+        <div class="row container">
+            <div class="col-md-12" style="color: black; font-weight: bold;">
+                STATUS REPOT POLIS<br>
+                <hr class="lineHr" style="border-top: #9c9c9d 2px solid;">
+            </div>
+        </div>
+
+        <div class="row container">
+            <div class="col-md-3" style="color: black">
+                NO. REPOT POLIS<br>
+                TARIKH DAN MASA REPOT POLIS<br>
+                STATUS SIASATAN REPOT
+            </div>
+
+            <div class="col-md-9" style="color: black; font-weight: bold;">
+                {{noRptPol}}<br>
+                {{dateRptPol}}<br>
+                {{statusRpt}}
+            </div>
+        </div>
+
+        <div class="row container">
+            <div class="col-md-12" style="color: black"> 
+                <hr class="lineHr" style="border-top: #9c9c9d 2px solid;">
+            </div>
+            <div class="col-md-3" style="color: black">            
+                NO. KERTAS SIASATAN<br>
+                SEKSYEN SIASATAN<br>
+                STATUS SIASATAN<br>
+                PEGAWAI PENYIASAT<br>
+                SURAT PEMBERITAHUAN
+            </div>
+
+            <div class="col-md-9" style="color: black; font-weight: bold;">
+                {{noKertasSiasat}}<br>
+                {{seksyenSiasat}}<br>
+                {{statusSiasat}}<br>
+                {{pegawaiSiasat}}<br>
+                <span *ngFor="let item of letter">
+                    <div (click)="openLink(item)">
+                        <i class="fa fa-folder-o"></i>&nbsp;{{item}}<br>
+                    </div>
+                </span>
+            </div>
+            <div class="col-md-12" style="color: black"> 
+                <hr class="lineHr" style="border-top: #9c9c9d 2px solid;">
+            </div>
         </div>
     </div>
 
-    <div class="row container">
-        <div class="col-md-3" style="color: black">
-            NO. REPOT POLIS<br>
-            TARIKH DAN MASA REPOT POLIS<br>
-            STATUS SIASATAN REPOT
-        </div>
-
-        <div class="col-md-9" style="color: black; font-weight: bold;">
-            {{noRptPol}}<br>
-            {{dateRptPol}}<br>
-            {{statusRpt}}
+    <div *ngIf="showDetails">
+        <div class="row container">
+            <div class="col-md-12" style="color: black; font-weight: bold; text-align: center;">
+                ANDA TIADA REPOT POLIS.<br>
+            </div>
         </div>
     </div>
-
-    <div class="row container">
-        <div class="col-md-12" style="color: black"> 
-            <hr class="lineHr" style="border-top: #9c9c9d 2px solid;">
-        </div>
-        <div class="col-md-3" style="color: black">            
-            NO. KERTAS SIASATAN<br>
-            SEKSYEN SIASATAN<br>
-            STATUS SIASATAN<br>
-            PEGAWAI PENYIASAT<br>
-            SURAT PEMBERITAHUAN
-        </div>
-
-        <div class="col-md-9" style="color: black; font-weight: bold;">
-            {{noKertasSiasat}}<br>
-            {{seksyenSiasat}}<br>
-            {{statusSiasat}}<br>
-            {{pegawaiSiasat}}<br>
-            <span *ngFor="let item of letter">
-                <div (click)="openLink(item)">
-                    <i class="fa fa-folder-o"></i>&nbsp;{{item}}<br>
-                </div>
-            </span>
-        </div>
-        <div class="col-md-12" style="color: black"> 
-            <hr class="lineHr" style="border-top: #9c9c9d 2px solid;">
-        </div>
-    </div><br>
 
     <div class="row container">
         <div class="col-md-12">
-            <span style="color:black;font-weight: bold;">Perhatian:</span><br>
+            <span style="color:black;font-weight: bold;">Perhatian:</span><br><br>
             <span style="text-align: justify; color: black">Semua jenis Repot Polis bertarikh dari 1 Ogos 2011 hingga kini (kecuali Repot Kemalangan Jalan Raya)
-                yang dibuat di kawasan Kontinjen Kuala Lumpur dan Selangor boleh disemak buat masa ini</span>
+                yang dibuat di kawasan Kontinjen Kuala Lumpur dan Selangor boleh disemak buat masa ini</span><br><br>
         </div> 
     </div>
 </div>
