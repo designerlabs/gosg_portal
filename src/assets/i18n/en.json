@@ -311,12 +311,16 @@
       "drop": "This field is required",
       "submit": "Sorry, server down.",
       "type":"Sorry, type of feedback is unavailable.",
-      "subject":"Sorry, subjects is unavailable."
+      "subject":"Sorry, subjects is unavailable.",
+      "noactivitydata":"No activity found."
 
     }
   },
   "gallery":{
-    "header": "Gallery"
+    "header": "Gallery",
+    "label": {
+      "download": "Download"
+    }
   },
   "mailbox":{
     "header":{

@@ -450,7 +450,6 @@ export class NavService {
            this.getGalleryData(lang, galleryID))
          .subscribe(resGalleryData => {
            this.galleryService.galleries = resGalleryData;
-           console.log(this.galleryService.galleries)
            this.galleries = resGalleryData;
            this.breadcrumb = this.breadcrumbService.getBreadcrumb();
            this.isValid = this.breadcrumbService.isValid = true;

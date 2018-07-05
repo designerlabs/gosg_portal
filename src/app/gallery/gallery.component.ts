@@ -7,7 +7,14 @@ import { BreadcrumbService } from '../header/breadcrumb/breadcrumb.service';
 import { GalleryService } from './gallery.service';
 import { SharedService } from '../common/shared.service';
 import { ISubscription } from 'rxjs/Subscription';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
+import { TopnavService } from '../header/topnav/topnav.service';
 
+export interface DialogData {
+  type;
+  title;
+  path;
+}
 
 @Component({
   selector: 'gosg-gallery',
@@ -26,6 +33,12 @@ export class GalleryComponent implements OnInit, OnDestroy {
   isValid: any;
   galleryID: number;
   gallery: any[];
+  mediaSource: any;
+  showPopup: boolean;
+  isImages:boolean;
+  isDocument:boolean;
+  isAudio:boolean;
+  isVideo:boolean;
 
   galleryData: any;
   @Output() langChange = new EventEmitter();
@@ -43,7 +56,9 @@ export class GalleryComponent implements OnInit, OnDestroy {
     private router: Router, 
     private breadcrumbService: BreadcrumbService, 
     private sharedService: SharedService,
-    @Inject(APP_CONFIG) private config: AppConfig
+    @Inject(APP_CONFIG) private config: AppConfig,
+    private topnavservice: TopnavService,
+    public dialog: MatDialog
   ) {
 
     this.lang = translate.currentLang;
@@ -75,6 +90,19 @@ export class GalleryComponent implements OnInit, OnDestroy {
             });
         }
 
+        if(this.topnavservice.flagLang){
+
+          this.galleryData = this.galleryService.getGallery();
+          this.moduleName = this.router.url.split('/')[1];
+          this.navService.triggerGalleries(this.langId);
+      
+          this.showPopup = false;
+          this.isImages = false;
+          this.isAudio = false;
+          this.isDocument = false;
+          this.isVideo = false;
+        }
+
     });
 
   }
@@ -101,6 +129,12 @@ export class GalleryComponent implements OnInit, OnDestroy {
     this.galleryData = this.galleryService.getGallery();
     this.moduleName = this.router.url.split('/')[1];
     this.navService.triggerGalleries(localStorage.getItem('langID'));
+
+    this.showPopup = false;
+    this.isImages = false;
+    this.isAudio = false;
+    this.isDocument = false;
+    this.isVideo = false;
 
     }
 
@@ -143,4 +177,23 @@ export class GalleryComponent implements OnInit, OnDestroy {
 
     }
 
+    openDialog(mPath, mType, mTitle?) {
+      this.mediaSource = mPath;
+      this.dialog.open(DialogDataExampleDialog, {
+        data: {
+          type: mType,
+          path: mPath,
+          title: mTitle
+        }
+      });
+    }
+
+}
+
+@Component({
+  selector: 'gallery-media-content',
+  templateUrl: './gallery-media-content.html',
+})
+export class DialogDataExampleDialog {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 }

@@ -22,16 +22,17 @@
 
 <div style="margin-top:10px;" class="container">
   <div class="row">
+      <div class="col-md-12">&nbsp;</div>
     <div class="col-sm-3">
       <div class="row">
         <div class="col-md-12 sideBarMenu">
-          <h4 class="sideBarMenu--title padding-bottom-l font-size-m warna_font">
+          <!-- <h4 class="sideBarMenu--title padding-bottom-l font-size-m warna_font">
             <i *ngIf="galleryService.galleries.mediaType == 'documents'" class="fa fa-file-o"></i>
             <i *ngIf="galleryService.galleries.mediaType == 'images'" class="fa fa-image"></i>
             <i *ngIf="galleryService.galleries.mediaType == 'audios'" class="fa fa-file-audio-o"></i>
             <i *ngIf="galleryService.galleries.mediaType == 'videos'" class="fa fa-file-video-o"></i>
             {{galleryService.galleries.mediaType}}
-          </h4>
+          </h4> -->
           <div *ngFor="let content of galleryService.galleries.leftMenu">
             <mat-card style="margin-bottom: 1%; cursor: pointer;" (click)="clickSideMenu(content.id, content.active)">
               <i *ngIf="content.name == 'documents'" class="fa fa-file-o"></i>
@@ -57,61 +58,47 @@
             {{galleryService.galleries.mediaType}}
           </h2>
         </div>
+        <div class="col-md-9">&nbsp;</div>
       </div>
 
-      <div class="container col-md-12 ml">
-        <div *ngFor="let content of galleryService.galleries.list">
+      <div class="container">
+        <div class="col-md-9 galleryTbl">
+          <div *ngFor="let content of galleryService.galleries.list">
 
-          <!-- IMAGES -->
-          <div *ngIf="galleryService.galleries.mediaType == 'images'">
-              <div class="ml-pnl">
-                <mat-card style="margin-bottom: 5%; width: fit-content; padding-left: 0; padding-right: 0;">
-                  <img src="{{ mediaUrl }}/{{ content.name }}" width="150px" height="auto">
-                </mat-card>
-              </div>
+            <!-- IMAGES -->
+            <div *ngIf="galleryService.galleries.mediaType == 'images'">
+              <mat-card style="margin-bottom: 10%; margin-left: 0; margin-right: 0; width: fit-content; padding-left: 0; padding-right: 0; cursor: pointer;">
+                <img style="cursor: pointer;" (click)="openDialog(mediaUrl+'/'+content.name,galleryService.galleries.mediaType, content.title)" src="{{ mediaUrl }}/{{ content.name }}"
+                  width="150px" height="auto">
+              </mat-card>
+            </div>
+
+            <!-- AUDIOS -->
+            <div *ngIf="galleryService.galleries.mediaType == 'audios'">
+              <button mat-button color="primary" (click)="openDialog(mediaUrl+'/'+content.name,galleryService.galleries.mediaType, content.title)"><i class="font-size-l fa fa-play-circle-o"></i>&nbsp;{{ content.title }}</button>
+            </div>
+
+            <!-- VIDEOS -->
+            <div *ngIf="galleryService.galleries.mediaType == 'videos'">
+              <button mat-button color="warn" (click)="openDialog(mediaUrl+'/'+content.name,galleryService.galleries.mediaType, content.title)"><i class="font-size-l fa fa-play-circle-o"></i>&nbsp;{{ content.title }}</button>
+            </div>
+
+            <!-- DOCUMENTS -->
+            <div *ngIf="galleryService.galleries.mediaType == 'documents'">
+              <span *ngIf="content.title.length > 25" class="font-size-s" title="{{ content.title }}">{{ content.title | slice:0:25 }}...</span>&nbsp;
+              <span *ngIf="content.title.length <= 25" class="font-size-s">{{ content.title }}</span>&nbsp;
+              <a *ngIf="content.name !== '-'" class="font-size-s" [href]="mediaUrl+'/'+content.name" title="{{ 'gallery.label.download' | translate }}: {{ content.title }}">
+                <i class="font-size-s defaultColor fa fa-download"></i>
+              </a>
+            </div>
+
           </div>
-
-          <!-- AUDIOS -->
-          <div *ngIf="galleryService.galleries.mediaType == 'audios'">
-            <audio controls>
-                <source src="{{ mediaUrl }}/{{ content.name }}" type="audio/mp3">
-              Your browser does not support the audio element.
-              </audio>
-          </div>
-
-          <!-- VIDEOS -->
-          <div *ngIf="galleryService.galleries.mediaType == 'videos'">
-            <video width="320" height="240" controls>
-                <source src="{{ mediaUrl }}/{{ content.name }}" type="video/mp4">
-              Your browser does not support the video tag.
-              </video>
-          </div>
-
-          <!-- DOCUMENTS -->
-          <div *ngIf="galleryService.galleries.mediaType == 'documents'">
-            {{ content.title }}
-            <a *ngIf="content.name !== '-'" class="font-size-s defaultColor" [href]="mediaUrl+'/'+content.name">
-              <i *ngIf="galleryService.galleries.mediaType == 'documents'" class="fa fa-download"></i>
-            </a>
-          </div>
-          <!-- <span *ngIf="content.name !== '-'" class="font-size-s defaultColor" [innerHTML]="content.name"></span>
-
-            <div class="padding-top-xl">
-              <div class="defaultColor" [innerHTML]="content.title"></div>
-            </div> -->
-
+          <div class="col-md-9">&nbsp;</div>
         </div>
+
       </div>
     </div>
-    <!-- <div *ngIf="gallery.template === 'lifeevent'" class="col-sm-3">
-          <h4 class="sideBarMenu--title padding-bottom-l font-size-m warna_font">{{'common.onlineservice' | translate }}</h4>
-          <ul class="rightMenu" [style.background-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
-            <li *ngFor="let rightContent of gallery.menuRight;">
-              <a [href]="rightContent.agencyApplicationUrl" target="_blank">{{rightContent.agencyApplicationName}}</a>
-            </li>
-          </ul>
-        </div> -->
-      </div>
-      <div class="col-md-6">&nbsp;</div>
-
+    
+    <div class="col-md-9">&nbsp;</div>
+  </div>
 </div>

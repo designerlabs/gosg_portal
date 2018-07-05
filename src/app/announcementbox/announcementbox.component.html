@@ -30,13 +30,16 @@
                             <h4 class="mainCalen font-size-m" style="text-align: center; font-family: Roboto;">{{'home.calendarTitle'|translate | uppercase}}</h4>
                             <div class="dynamicCalen" style="padding: 0px 10px;">
                                 <div class="row rwCalen" style="cursor: pointer;" data-attr="497148400637395" *ngFor="let item of calendarData">
-                                    <div class="col-xs-3" style="padding-left: 30px;">
+                                    <div *ngIf="calendarData" class="col-xs-3" style="padding-left: 30px;">
                                         <h1>{{item.day}}</h1>
                                     </div>
-                                    <div class="col-xs-9 text-left">
+                                    <div *ngIf="calendarData.length != 0" class="col-xs-9 text-left">
                                         <h4>{{item.month}}</h4>
                                         <p style="margin-top: -10px">{{item.title}}</p>
                                     </div>
+                                </div>
+                                <div *ngIf="!calendarData" class="col-xs-12" style="padding-left: 30px; padding-top: 50px">
+                                    <p>{{'calendar.err.noactivitydata'|translate|uppercase}}</p>
                                 </div>
                             </div>
                         </a>
