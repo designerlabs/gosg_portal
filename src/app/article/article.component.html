@@ -103,7 +103,7 @@
 
 
         <div *ngIf="article.template === 'eparticipation'">
-            <div class="col-sm-6">
+            <div class="col-sm-9">
 
                 <div *ngIf="article.subCategoryList" class="row padding-top-xl">
                     <div class="col-sm-12">
@@ -160,25 +160,35 @@
                   <div style="height:20px;"></div>
                   <div *ngFor="let tabContent of tab.contents; let index=index; let odd=odd; let even=even;">
                     <div *ngIf="!tabContent.agencyList">
-                        <div class="col-sm-6">
+                        <div class="col-sm-4">
                             <div>
                               <div *ngIf="tabContent.agency"  style="width:100%; margin-right:10px; height:auto;">
                                 <div style="text-align: center;" class="intro-box warna_border_color" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
                                     <div style="padding-top: 10px;">
                                         <img [src]="config.externalMediaURL +'/images/'+ tabContent.agency.agencyImage?.mediaFile" width="60" height="60">
                                     </div>
-                                    <h5 class="font-size-m warna_font">{{tabContent.agency.agencyName}}</h5>
+                                    <h5 class="font-size-m warna_font" (click)="clickContentFromMenu(article.categoryCode, tabContent.contentCode, '', $event)">
+                                        <a [style.color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" style="cursor: pointer; font-weight: 600;">
+                                          {{tabContent.agency.agencyName}}
+                                        </a>
+
+                                    </h5>
                                     <h3 class="font-size-s warna_font" style="padding-top: 0px; margin: 0px;">{{tabContent.agency.agencyDescription}}</h3>
                                     <div style="padding:10px 0 10px 0px;">
-                                        <span style="padding:5px; color:#fff;" [style.background]="tabContent.status === 'Tutup' || tabContent.status === 'Closed' ? '#df2222' : '#29c615'">{{tabContent.status}}</span>
+                                        <span style="padding:5px; color:#fff;" [style.background]="tabContent.status === 'Tutup' || tabContent.status === 'Close' ? '#df2222' : '#29c615'">{{tabContent.status}}</span>
                                     </div>
                                     <div>
                                         <div>
-                                           Start: {{tabContent.publishDate | date:'medium' }}
+                                          Open : {{tabContent.publishDate | date:'medium' }}
                                         </div>
                                         <div>
-                                            End: {{tabContent.endDate | date:'medium' }}
+                                          Close : {{tabContent.endDate | date:'medium' }}
                                         </div>
+                                    </div>
+                                    <div style="padding-top:5px;">
+                                      <button (click)="clickContentFromMenu(article.categoryCode, tabContent.contentCode, '', $event)" class="btn btn-success">
+                                        Result
+                                      </button>
                                     </div>
                                 </div>
                               </div>
@@ -192,7 +202,7 @@
                                 <h2>{{tabContent.agency.agencyDescription}}</h2>
                               </div> -->
 
-                              <div style="width:100%; margin-right:10px; height:auto;" class="pointer" (click)="clickContentFromMenu(article.categoryCode, tabContent.contentCode, '', $event)">
+                              <div *ngIf="!tabContent.agency" style="width:100%; margin-right:10px; height:auto;" class="pointer" (click)="clickContentFromMenu(article.categoryCode, tabContent.contentCode, '', $event)">
                                   <a class="intro-box warna_border_color" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
                                       <h4 class="font-size-m warna_font">
                                           {{tabContent.contentTitle}}
@@ -204,20 +214,28 @@
                             </div>
                           </div>
 
-                          <div *ngIf="odd" class="clearfix"></div>
+                          <div *ngIf="(index + 1) % 3 == 0" class="clearfix"></div>
                     </div>
 
 
                     <div *ngIf="tabContent.agencyList">
                       <div *ngFor="let agencyContent of tabContent.agencyList; let index=index; let odd=odd; let even=even;">
-                        <div class="col-sm-6">
+                        <div class="col-sm-4">
                             <div>
-                              <div style="width:100%; margin-right:10px; height:auto;">
-                                  <a class="intro-box warna_border_color" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" [href]="agencyContent.agencyWebsiteUrl" target="_blank">
-                                      <h4 class="font-size-m warna_font">
-                                          {{agencyContent.agencyName}}
-                                      </h4>
-                                  </a>
+                              <div style="width:100%; margin-right:10px; height:auto; text-align: center">
+                                  <div class="intro-box warna_border_color" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
+                                    <div style="padding-top: 10px;">
+                                        <img [src]="config.externalMediaURL +'/images/'+ agencyContent.agencyImage?.mediaFile" width="60" height="60">
+                                    </div>
+                                    <h4 class="font-size-m warna_font">
+                                        <a [style.color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" style="cursor: pointer; font-weight: 600;" [href]="agencyContent.agencyWebsiteUrl" target="_blank"> {{agencyContent.agencyName}} </a>
+                                    </h4>
+                                    <div>
+                                        <a *ngIf="getJson(agencyContent.agencyEparticipationArchiveUrl, 0) !== 'URL Not Specified'" class="badge" [href]="getJson(agencyContent.agencyEparticipationArchiveUrl, 0)" target="_blank">{{getJson(agencyContent.agencyEparticipationArchiveUrl, 1)}}</a>
+                                        <a *ngIf="getJson(agencyContent.agencyEparticipationPolicyUrl, 0) !== 'URL Not Specified'" class="badge" [href]="getJson(agencyContent.agencyEparticipationPolicyUrl, 0)"  target="_blank">{{getJson(agencyContent.agencyEparticipationPolicyUrl, 1)}}</a>
+                                        <a *ngIf="getJson(agencyContent.agencyEparticipationUrl, 0) !== 'URL Not Specified'" class="badge" [href]="getJson(agencyContent.agencyEparticipationUrl, 0)" target="_blank">{{getJson(agencyContent.agencyEparticipationUrl, 1)}}</a>
+                                    </div>
+                                  </div>
                               </div>
                             </div>
                           </div>
