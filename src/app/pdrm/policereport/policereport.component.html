@@ -20,83 +20,122 @@
   </div>
 </div>
 
-<div class="row">
-    <br>
-    <form [formGroup]="searchForm" #adSearchForm="ngForm" id="adSearch-form" role="form" novalidate="novalidate">
+<div class="container ds-style">
+    <div class="row container">
+        <br>
+        <form [formGroup]="searchForm" #adSearchForm="ngForm" id="adSearch-form" role="form" novalidate="novalidate">
 
-        <div class="col-md-1"></div>
-        <div class="example-container mat-elevation-z8 padding-right20 col-md-10" >
+            <div class="example-container mat-elevation-z8 padding-right20" >
 
-            <div class="row padding-15">
-                <div class="col-md-12">
-                    <span class="colorBlack">Masukkan No. Repot Polis.</span>
+                <div class="row padding-15">
+                    <div class="col-md-12" style="color: black">
+                        Masukkan No. Repot Polis.
+                    </div>
                 </div>
+
+                <div class="row padding-15">
+                    <div class="col-md-3">
+                        <mat-form-field>
+                            <input matInput placeholder="No. Kad Pengenalan" formControlName="ic"
+                            required tabindex="1">
+                            <mat-error *ngIf="searchForm.controls.ic.hasError('required')">
+                                No. Kad Pengenalan diperlukan.
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-3">
+                        <mat-form-field>
+                            <input matInput placeholder="No. Repot Polis" formControlName="noreport" (keyup)="checkReqValues()"
+                            maxlength="6" required tabindex="2">
+                            <mat-error *ngIf="searchForm.controls.noreport.hasError('required')">
+                                No. Repot Polis diperlukan.
+                            </mat-error>
+                        </mat-form-field>
+                        <span style="color: black">/</span>
+                        <mat-form-field style="width:10%;">
+                            <input matInput placeholder="" formControlName="yearreport" (keyup)="checkReqValues()" maxlength="2"
+                            required tabindex="2">
+                            <!-- <mat-error *ngIf="searchForm.controls.yearreport.hasError('required')">
+                                Tahun Repot Polis diperlukan.
+                            </mat-error> -->
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3">
+                        <button tabindex="" mat-raised-button color="warn" type="button" id="btnreset" 
+                            class="form-control btn btn-md btn-warning font-size-s pull-right bttnCustom"
+                            (click)="resetModal.show()" style="margin-left: 5px;">
+                            <i class="fa fa-refresh"></i> {{'feedback.label.reset' | translate }}</button>
+                        <button mat-raised-button type="button" color="primary" id="searchbtn" 
+                            class="form-control btn btn-md btn-success font-size-s pull-right bttnCustom"
+                            (click)="searchApp(searchForm.value)">
+                            <i class="fa fa-search"></i> {{'appmngt.setSearch.search' | translate}}</button>
+                    </div>
+                </div>
+
             </div>
 
-            <div class="row padding-15">
-                <div class="col-md-3">
-                    <mat-form-field>
-                        <input matInput placeholder="No. Kad Pengenalan" formControlName="ic"
-                        required tabindex="1">
-                        <mat-error *ngIf="searchForm.controls.ic.hasError('required')">
-                            No. Kad Pengenalan diperlukan.
-                        </mat-error>
-                    </mat-form-field>
-                </div>
+        </form>
+    </div><br>
 
-                <div class="col-md-3">
-                    <mat-form-field>
-                        <input matInput placeholder="No. Repot Polis" formControlName="noreport" (keyup)="checkReqValues()"
-                        maxlength="6" required tabindex="2">
-                        <mat-error *ngIf="searchForm.controls.noreport.hasError('required')">
-                            No. Repot Polis diperlukan.
-                        </mat-error>
-                    </mat-form-field>
-                    <span style="color: black">/</span>
-                    <mat-form-field style="width:10%;">
-                        <input matInput placeholder="" formControlName="yearreport" (keyup)="checkReqValues()" maxlength="2"
-                        required tabindex="2">
-                        <!-- <mat-error *ngIf="searchForm.controls.yearreport.hasError('required')">
-                            Tahun Repot Polis diperlukan.
-                        </mat-error> -->
-                    </mat-form-field>
-                </div>
-
-                <div class="col-md-3"></div>
-                <div class="col-md-3">
-                    <button tabindex="" mat-raised-button color="warn" type="button" id="btnreset" 
-                        class="form-control btn btn-md btn-warning font-size-s pull-right bttnCustom"
-                        (click)="resetModal.show()" style="margin-left: 5px;">
-                        <i class="fa fa-refresh"></i> {{'feedback.label.reset' | translate }}</button>
-                    <button mat-raised-button type="button" color="primary" id="searchbtn" 
-                        class="form-control btn btn-md btn-success font-size-s pull-right bttnCustom"
-                        (click)="searchApp(searchForm.value)">
-                        <i class="fa fa-search"></i> {{'appmngt.setSearch.search' | translate}}</button>
-                </div>
-            </div>
-
+    <div class="row container">
+        <div class="col-md-12" style="color: black; font-weight: bold;">
+            STATUS REPOT POLIS<br>
+            <hr class="lineHr" style="border-top: #9c9c9d 2px solid;">
         </div>
-        <div class="col-md-1"></div>
-
-    </form>
-</div><br>
-
-<div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-10">
-        <span class="colorBlack">STATUS REPOT POLIS</span><br>
     </div>
-    <div class="col-md-1"></div>  
-</div>
 
-<div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-10">
-        <span class="colorBlack">Perhatian:</span><br>
-        <span style="text-align: justify; color: black">Semua jenis Repot Polis bertarikh dari 1 Ogos 2011 hingga kini (kecuali Repot Kemalangan Jalan Raya)
-             yang dibuat di kawasan Kontinjen Kuala Lumpur dan Selangor boleh disemak buat masa ini</span>
+    <div class="row container">
+        <div class="col-md-3" style="color: black">
+            NO. REPOT POLIS<br>
+            TARIKH DAN MASA REPOT POLIS<br>
+            STATUS SIASATAN REPOT
+        </div>
+
+        <div class="col-md-9" style="color: black; font-weight: bold;">
+            {{noRptPol}}<br>
+            {{dateRptPol}}<br>
+            {{statusRpt}}
+        </div>
     </div>
-    <div class="col-md-1"></div>  
+
+    <div class="row container">
+        <div class="col-md-12" style="color: black"> 
+            <hr class="lineHr" style="border-top: #9c9c9d 2px solid;">
+        </div>
+        <div class="col-md-3" style="color: black">            
+            NO. KERTAS SIASATAN<br>
+            SEKSYEN SIASATAN<br>
+            STATUS SIASATAN<br>
+            PEGAWAI PENYIASAT<br>
+            SURAT PEMBERITAHUAN
+        </div>
+
+        <div class="col-md-9" style="color: black; font-weight: bold;">
+            {{noKertasSiasat}}<br>
+            {{seksyenSiasat}}<br>
+            {{statusSiasat}}<br>
+            {{pegawaiSiasat}}<br>
+            <span *ngFor="let item of letter">
+                <div (click)="openLink(item)">
+                    <i class="fa fa-folder-o"></i>&nbsp;{{item}}<br>
+                </div>
+            </span>
+        </div>
+        <div class="col-md-12" style="color: black"> 
+            <hr class="lineHr" style="border-top: #9c9c9d 2px solid;">
+        </div>
+    </div><br>
+
+    <div class="row container">
+        <div class="col-md-12">
+            <span style="color:black;font-weight: bold;">Perhatian:</span><br>
+            <span style="text-align: justify; color: black">Semua jenis Repot Polis bertarikh dari 1 Ogos 2011 hingga kini (kecuali Repot Kemalangan Jalan Raya)
+                yang dibuat di kawasan Kontinjen Kuala Lumpur dan Selangor boleh disemak buat masa ini</span>
+        </div> 
+    </div>
 </div>
 
 <app-confirm-dialog #resetModal 

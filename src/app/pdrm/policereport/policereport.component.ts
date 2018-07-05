@@ -23,6 +23,15 @@ export class PolicereportComponent implements OnInit, OnDestroy {
   langID: any;
   complete: boolean;
 
+  public noRptPol: any;
+  public dateRptPol: any;
+  public statusRpt: any;
+  public noKertasSiasat: any;
+  public seksyenSiasat: any;
+  public statusSiasat: any;
+  public pegawaiSiasat: any;
+  public letter = [];
+
   searchForm: FormGroup;  
   public ic: FormControl;  
   public noreport: FormControl;
@@ -92,11 +101,47 @@ export class PolicereportComponent implements OnInit, OnDestroy {
       yearreport: this.yearreport      
     });
 
+    this.noRptPol = "THSL/006026/11";
+    this.dateRptPol = "2011-02-18 17:44:40";
+    this.statusRpt =  "Buka Kertas Siasatan Baru";
+
+    this.noKertasSiasat = "DW/JSJ/KS/01114/11";
+    this.seksyenSiasat = "29 (1) AKTA KESALAHAN KECIL 1955,25 (1) (n) PERATURAN-PERATURAN PENDAFTARAN NEGARA 1990";
+    this.statusSiasat = "Dituduh";
+    this.pegawaiSiasat = "C/INSP NURUL HAFIDZ BIN MOHD DERUS";
+    this.letter = ["www.google.com","www.yahoo.com","www.google.com"];
+
     // this.subscription = this.getFaq(this.langID);
   }
 
   searchApp(formValues: any){
     console.log(formValues);
+
+    this.noRptPol = "THSL/006026/11";
+    this.dateRptPol = "2011-02-18 17:44:40";
+    this.statusRpt =  "Buka Kertas Siasatan Baru";
+
+    this.noKertasSiasat = "DW/JSJ/KS/01114/11";
+    this.seksyenSiasat = "29 (1) AKTA KESALAHAN KECIL 1955,25 (1) (n) PERATURAN-PERATURAN PENDAFTARAN NEGARA 1990";
+    this.statusSiasat = "Dituduh";
+    this.pegawaiSiasat = "C/INSP NURUL HAFIDZ BIN MOHD DERUS";
+    this.letter = ["www.google.com","www.yahoo.com","www.google.com"];
+  }
+
+  openLink(varUrl){
+    if(varUrl != undefined){
+      let httpStr = varUrl.substring(0, 4);
+
+      if(httpStr.toLowerCase() == 'http'){
+        window.open(varUrl,'_blank');
+      }
+
+      else{
+        let newUrl = "http://";
+        window.open(newUrl+varUrl,'_blank');
+      }
+
+    }
   }
 
   checkReqValues() {

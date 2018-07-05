@@ -47,6 +47,8 @@ import { ArchivecategoryComponent } from './archive/archivecategory/archivecateg
 import { ArchivesubcategoryComponent } from './archive/archivesubcategory/archivesubcategory.component';
 import { ArchivecontentComponent } from './archive/archivecontent/archivecontent.component';
 import { PolicereportComponent } from './pdrm/policereport/policereport.component';
+import { SummontrafficComponent } from './pdrm/summontraffic/summontraffic.component';
+import { StatuspositionComponent } from './pdrm/statusposition/statusposition.component';
 
 //import { GalleryComponent } from './gallery/gallery.component';
 // import { NavRouterActivator } from './header/nav/nav-router-activator.service'
@@ -103,6 +105,8 @@ export const protectedRoutes: Routes = [
     {path: 'unsubscribe', component: UnsubscribeComponent},
     {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
     {path: 'pdrm/police-report', component: PolicereportComponent},
+    {path: 'pdrm/summon-traffic', component: SummontrafficComponent},
+    {path: 'pdrm/status-position', component: StatuspositionComponent},
     {path: '**', component: ErrorComponent}
     //{path: 'user', loadChildren: 'app/user/user.module#UserModule'}
 ];
