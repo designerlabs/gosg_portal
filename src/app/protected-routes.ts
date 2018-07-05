@@ -49,6 +49,7 @@ import { ArchivecontentComponent } from './archive/archivecontent/archivecontent
 import { PolicereportComponent } from './pdrm/policereport/policereport.component';
 import { SummontrafficComponent } from './pdrm/summontraffic/summontraffic.component';
 import { StatuspositionComponent } from './pdrm/statusposition/statusposition.component';
+import { SchoolsearchComponent } from './schoolsearch/schoolsearch.component';
 
 //import { GalleryComponent } from './gallery/gallery.component';
 // import { NavRouterActivator } from './header/nav/nav-router-activator.service'
@@ -107,6 +108,7 @@ export const protectedRoutes: Routes = [
     {path: 'pdrm/police-report', component: PolicereportComponent},
     {path: 'pdrm/summon-traffic', component: SummontrafficComponent},
     {path: 'pdrm/status-position', component: StatuspositionComponent},
+    {path: 'school-search', component: SchoolsearchComponent},
     {path: '**', component: ErrorComponent}
     //{path: 'user', loadChildren: 'app/user/user.module#UserModule'}
 ];

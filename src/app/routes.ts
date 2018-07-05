@@ -52,6 +52,7 @@ import { ArchivecategoryComponent } from './archive/archivecategory/archivecateg
 import { ArchivesubcategoryComponent } from './archive/archivesubcategory/archivesubcategory.component';
 import { ArchivecontentComponent } from './archive/archivecontent/archivecontent.component';
 import { GalleryComponent } from './gallery/gallery.component';
+import { SchoolsearchComponent } from './schoolsearch/schoolsearch.component';
 
 export const appRoutes: Routes = [
 
@@ -97,6 +98,7 @@ export const appRoutes: Routes = [
     {path: 'unsubscribe', component: UnsubscribeComponent},
     {path: 'statistic', component: StatisticComponent},
     {path: 'sitemap', component: SitemapComponent},
+    {path: 'school-search', component: SchoolsearchComponent},
 
     {path: '', redirectTo: 'index', pathMatch: 'full'},
     {path: '**', component: ErrorComponent}
