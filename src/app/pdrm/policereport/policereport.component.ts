@@ -31,6 +31,8 @@ export class PolicereportComponent implements OnInit, OnDestroy {
   public statusSiasat: any;
   public pegawaiSiasat: any;
   public letter = [];
+  public listYear = [];
+  public showDetails = false;
 
   searchForm: FormGroup;  
   public ic: FormControl;  
@@ -101,21 +103,24 @@ export class PolicereportComponent implements OnInit, OnDestroy {
       yearreport: this.yearreport      
     });
 
-    this.noRptPol = "THSL/006026/11";
-    this.dateRptPol = "2011-02-18 17:44:40";
-    this.statusRpt =  "Buka Kertas Siasatan Baru";
+    this.getYear();
+  }
 
-    this.noKertasSiasat = "DW/JSJ/KS/01114/11";
-    this.seksyenSiasat = "29 (1) AKTA KESALAHAN KECIL 1955,25 (1) (n) PERATURAN-PERATURAN PENDAFTARAN NEGARA 1990";
-    this.statusSiasat = "Dituduh";
-    this.pegawaiSiasat = "C/INSP NURUL HAFIDZ BIN MOHD DERUS";
-    this.letter = ["www.google.com","www.yahoo.com","www.google.com"];
+  getYear(){
+    let y = new Date();
+    let ny = y.getFullYear().toString();
+    let year = ny.substr(-2);
 
-    // this.subscription = this.getFaq(this.langID);
+    this.listYear = [];
+
+    for (let i = 11; i < parseInt(year)+1; i++) { 
+      this.listYear.push(i);
+    }
   }
 
   searchApp(formValues: any){
-    console.log(formValues);
+
+    this.showDetails = true;
 
     this.noRptPol = "THSL/006026/11";
     this.dateRptPol = "2011-02-18 17:44:40";
@@ -144,6 +149,15 @@ export class PolicereportComponent implements OnInit, OnDestroy {
     }
   }
 
+  isNumber(evt) {
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return false;
+    }
+    return true;
+  }
+
   checkReqValues() {
 
     let reqVal:any = ["ic", "noreport", "yearreport"];
@@ -163,6 +177,8 @@ export class PolicereportComponent implements OnInit, OnDestroy {
     } else {
       this.complete = true;
     }
+
+    this.getYear();
   }
 
   resetSearch(){
@@ -170,6 +186,7 @@ export class PolicereportComponent implements OnInit, OnDestroy {
     this.searchForm.get('ic').setValue(null);
     this.searchForm.get('noreport').setValue(null);
     this.searchForm.get('yearreport').setValue(null);
+    this.showDetails = false;
   }
 
   resetMethod(event) {
