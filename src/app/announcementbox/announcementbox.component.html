@@ -26,7 +26,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="calendar warna_bg" style="padding: 1px; background-color: rgb(0, 189, 187);" [style.background-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
-                        <a href="https://www.malaysia.gov.my/public/cms/calendar/" style="color:#fff;" >
+                        <a routerLink="/calendar" style="color:#fff;" >
                             <h4 class="mainCalen font-size-m" style="text-align: center; font-family: Roboto;">{{'home.calendarTitle'|translate | uppercase}}</h4>
                             <div class="dynamicCalen" style="padding: 0px 10px;">
                                 <div class="row rwCalen" style="cursor: pointer;" data-attr="497148400637395" *ngFor="let item of calendarData">
