@@ -1,0 +1,27 @@
+<div mat-dialog-content style="text-align: center; margin-right: auto; margin-left: auto; padding-left: 15px; padding-right: 15px; padding-top: 15px">
+
+    <!-- IMAGES -->
+    <div *ngIf="data.type=='images'">
+        <img src="{{ data.path }}" width="auto" height="auto">
+        <h5 mat-dialog-title>{{ data.title }}</h5>
+    </div>
+
+    <!-- AUDIOS -->
+    <div *ngIf="data.type=='audios'">
+      <audio controls>
+          <source src="{{ data.path }}" type="audio/mp3">
+        Your browser does not support the audio element.
+        </audio>
+        <h5 mat-dialog-title>{{ data.title }}</h5>
+    </div>
+
+    <!-- VIDEOS -->
+    <div *ngIf="data.type=='videos'">
+      <video width="320" height="240" controls>
+          <source src="{{ data.path }}" type="video/mp4">
+        Your browser does not support the video tag.
+        </video>
+        <h5 mat-dialog-title>{{ data.title }}</h5>
+    </div>
+
+</div>

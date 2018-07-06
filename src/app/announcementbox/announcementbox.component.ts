@@ -23,6 +23,7 @@ export class AnnouncementboxComponent implements OnInit, OnDestroy {
    announceRes: any;
    breadcrumb: any;
    isValid: any;
+   date = new Date();
    private announcementUrl: string = this.config.urlAnnouncement;
    private calendarUrl: string = this.config.urlCalendar;
    private subscription: ISubscription;
@@ -100,24 +101,30 @@ export class AnnouncementboxComponent implements OnInit, OnDestroy {
         let dDay2;
         let dMonth2;
         let eTitle2;
-        return this.http.get(this.calendarUrl + '?language='+this.languageId+'&sort=id,DESC')
+        let currDate = this.date.toISOString();
+        let currMonth = currDate.substr(0,7);
+
+        return this.http.get(this.calendarUrl + '?language='+this.languageId+'&keyword='+currMonth+'&notExpired=false&sort=id,DESC')
+        // return this.http.get(this.calendarUrl + '?language='+this.languageId+'&keyword='+currMonth+'&notExpired=false&sort=id,DESC')
         .map(res => res.json())
         .subscribe(data => {
 
-            dDay1 = this.datePipe.transform(data.list[0].eventStart, 'dd');
-            dDay2 = this.datePipe.transform(data.list[1].eventStart, 'dd');
+            if(data.list.length != 0) {
+                dDay1 = this.datePipe.transform(data.list[0].eventStart, 'dd');
+                dDay2 = this.datePipe.transform(data.list[1].eventStart, 'dd');
 
-            dMonth1 = this.datePipe.transform(data.list[0].eventStart, 'MMMM');
-            dMonth2 = this.datePipe.transform(data.list[1].eventStart, 'MMMM');
+                dMonth1 = this.datePipe.transform(data.list[0].eventStart, 'MMMM');
+                dMonth2 = this.datePipe.transform(data.list[1].eventStart, 'MMMM');
 
-            eTitle1 = data.list[0].eventName;
-            eTitle2 = data.list[1].eventName;
-            
-            calArr.push({"day":dDay1,"month":dMonth1,"title":eTitle1})
-            calArr.push({"day":dDay2,"month":dMonth2,"title":eTitle2})
+                eTitle1 = data.list[0].eventName;
+                eTitle2 = data.list[1].eventName;
+                
+                calArr.push({"day":dDay1,"month":dMonth1,"title":eTitle1})
+                calArr.push({"day":dDay2,"month":dMonth2,"title":eTitle2})
 
-            this.calendarData = calArr;
-            console.log(this.calendarData)
+                this.calendarData = calArr;
+                console.log(this.calendarData)
+            } 
         });
     }
 

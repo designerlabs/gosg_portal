@@ -143,6 +143,12 @@
       list-style: none;
       margin-left: -5%;
     }
+
+    .galleryTbl {
+      column-count: 4;
+      column-gap: 0;
+      position: relative;
+    }
     
     /* MASONRY CSS */
     .ml {

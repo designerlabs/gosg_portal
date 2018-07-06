@@ -139,7 +139,7 @@ import { ArchivecategoryComponent } from '../archive/archivecategory/archivecate
 import { ArchivesubcategoryComponent } from '../archive/archivesubcategory/archivesubcategory.component';
 import { ArchivecontentComponent } from '../archive/archivecontent/archivecontent.component';
 import { GalleryService } from '../gallery/gallery.service';
-import { GalleryComponent } from '../gallery/gallery.component';
+import { GalleryComponent, DialogDataExampleDialog } from '../gallery/gallery.component';
 import { SchoolsearchComponent } from '../schoolsearch/schoolsearch.component';
 // import { LifeeventComponent } from '../lifeevent/lifeevent.component';
 //import { GalleryService } from '../gallery/gallery.service';
@@ -231,6 +231,7 @@ export function HttpLoaderFactory(http: Http) {
     ArchivesubcategoryComponent,
     ArchivecontentComponent,
     GalleryComponent,
+    DialogDataExampleDialog,
     SchoolsearchComponent
     // SearchResultComponent
   ],
@@ -343,6 +344,7 @@ export function HttpLoaderFactory(http: Http) {
     SearchService,
     NavRouterGuardService,
     GalleryService
-  ]
+  ],
+  entryComponents: [DialogDataExampleDialog],
 })
 export class SharedModule { }
