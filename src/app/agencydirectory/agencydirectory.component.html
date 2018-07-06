@@ -89,10 +89,20 @@
   </div>
 
   <div class="row">
-    <div class="col-md-2">
+    <div class="col-md-2" style="padding-top: 8px;">
       {{ 'agencydir.label.total' | translate }}: {{ totalRec }}
     </div>
-    <div class="col-md-10"><pagination-controls id="listing_pagination" maxSize="5" directionLinks="true" (pageChange)="pageChange(pageCount = $event,totalRec)"></pagination-controls></div>
+    <div class="col-md-10">
+      <span style="color:#000; padding-right:20px;">{{ 'common.pagination.pages' | translate }} 
+        <strong>{{recordList?.pageNumber}}</strong> {{ 'common.pagination.of' | translate }} 
+        <strong>{{recordList?.totalPages}}</strong> </span>
+      <button mat-mini-fab color="basic" [disabled]="noPrevData" (click)="paginatorL(recordList?.pageNumber)">
+        <i class="fa fa-angle-left" aria-hidden="true"></i></button>
+      <button mat-mini-fab color="basic" [disabled]="noNextData"  (click)="paginatorR(recordList?.pageNumber, recordList?.totalPages)">
+        <i class="fa fa-angle-right" aria-hidden="true"></i></button>
+    </div>
+    <!-- <div class="col-md-10"><pagination-controls id="listing_pagination" maxSize="5" directionLinks="true" 
+      (pageChange)="pageChange(pageCount = $event,totalRec)"></pagination-controls></div> -->
     <div class="col-md-12">&nbsp;</div>
 </div>
 </div>

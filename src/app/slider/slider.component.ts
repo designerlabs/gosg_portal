@@ -98,7 +98,7 @@ export class SliderComponent implements OnInit, OnDestroy {
   }
 
   getUrl(getUrlSlider){
-    debugger;
+  
     if(getUrlSlider != undefined){
 
       let httpStr = getUrlSlider.substring(0, 4);

@@ -35,7 +35,7 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
   totalRec = 0;
   noPrevData = true;
   noNextData = false;
-  recordList: Object;
+  recordList = null;
   agencyList: Object;
   ministryList: Object;
   lang = this.lang;
@@ -268,9 +268,25 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
     this.getAllAgenciesMarkers()
   }
 
-  goToMarkerPoint(dLat, dLong, dName, dAddress, dEmail, dFax, dPhone) {
+  goToMarkerPoint(dLat, dLong, dName, dAddress, dEmail, dFax, dPhone, fb, tw, web) {
     if (dLat && dLong) {
       this.mymap.setView([dLat, dLong], 13);
+
+      let varWeb = "";
+      let varfb = "";
+      let vartw = "";
+
+      if(fb != null){
+        varfb = `<a href='${fb}' target='_blank'><i  class='fa fa-facebook' style='font-size: 1.2em; title='Facebook'></i></a>`
+      }
+
+      if(web != null){
+        varWeb = `<a href='${web}' target='_blank'><i  class='fa fa-globe' style='font-size: 1.2em; title='Website'></i></a>`
+      }
+
+      if(tw != null){
+        vartw = `<a href='${tw}' target='_blank'><i  class='fa fa-twitter' style='font-size: 1.2em; title='Twitter'></i></a>`
+      }
 
       this.popup = L.popup()
         .setLatLng([dLat, dLong])
@@ -310,6 +326,9 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
         <div class='col-md-10'>
           <p style='font-size: 1em'>${dEmail}</p>
         </div>
+        <div class='col-md-12' style='text-align: center;'>
+          ${varWeb}&nbsp;${varfb}&nbsp;${vartw}      
+        </div>
       </div>
         `)
         .openOn(this.mymap);
@@ -327,11 +346,27 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
 
   }
 
-  addMarker(agcLat, agcLong, mName, mAddress, mEmail, mFax, mPhone) {
+  addMarker(agcLat, agcLong, mName, mAddress, mEmail, mFax, mPhone, fb, tw, web) {
+
+    let varWeb = "";
+    let varfb = "";
+    let vartw = "";
+
+    if(fb != null){
+      varfb = `<a href='${fb}' target='_blank'><i  class='fa fa-facebook' style='font-size: 1.2em; title='Facebook'></i></a>`
+    }
+
+    if(web != null){
+      varWeb = `<a href='${web}' target='_blank'><i  class='fa fa-globe' style='font-size: 1.2em; title='Website'></i></a>`
+    }
+
+    if(tw != null){
+      vartw = `<a href='${tw}' target='_blank'><i  class='fa fa-twitter' style='font-size: 1.2em; title='Twitter'></i></a>`
+    }
 
     if (!isNaN(agcLat)) {
       if (agcLat !== "NaN") {
-        console.log(typeof (agcLat), 'in');
+
         this.marker = L.marker([agcLat, agcLong], { icon: this.defaultIcon })
           .bindPopup(`
           <div class='row'>
@@ -369,6 +404,9 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
           <div class='col-md-10'>
             <p style='font-size: 1em'>${mEmail}</p>
           </div>
+          <div class='col-md-12' style='text-align: center;'>
+            ${varWeb}&nbsp;${varfb}&nbsp;${vartw}      
+          </div>
         </div>
       `)
           // .setLatLng([agcLat,agcLong])
@@ -403,7 +441,10 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
               this.agencyList[i].agencyAddress,
               this.agencyList[i].agencyEmail,
               this.agencyList[i].agencyFax,
-              this.agencyList[i].agencyPhoneNo
+              this.agencyList[i].agencyPhoneNo,
+              this.agencyList[i].agencyFacebook,
+              this.agencyList[i].agencyTwitter,
+              this.agencyList[i].agencyWebsiteUrl
             );
           }
 
@@ -412,7 +453,6 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
       error => {
         this.toastr.error(JSON.parse(error._body).statusDesc, '');
         // this.loading = false;
-        console.log(error);
       });
   }
 
@@ -433,10 +473,6 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
               this.recordTable = this.recordList.agencyList;
               this.noNextData = this.recordList.pageNumber === this.recordList.totalPages;
 
-
-              console.log(this.recordTable)
-
-
               this.showNoData = false;
             } else {
               this.recordTable = [];
@@ -451,30 +487,29 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
 
   }
 
-  pageChange(event, totalPages) {
+  // pageChange(event, totalPages) { redza
 
-    if (this.ministry) {
-      this.getSearchData(this.pageCount, 10);
-    } else {
-      if(this.keyword ){
-        this.getSearchData(this.pageCount, 10, this.keyword);
-      }else if(this.letter){
-        this.getSearchData(this.pageCount, 10);
-      }else{
-        this.getAgencyData(this.pageCount, 10);
-      }
+  //   if (this.ministry) {
+  //     this.getSearchData(this.pageCount, 10);
+  //   } else {
+  //     if(this.keyword ){
+  //       this.getSearchData(this.pageCount, 10, this.keyword);
+  //     }else if(this.letter){
+  //       this.getSearchData(this.pageCount, 10);
+  //     }else{
+  //       this.getAgencyData(this.pageCount, 10);
+  //     }
 
-    }
+  //   }
 
-    this.pageSize = 10;
-    this.noPrevData = true;
-  }
+  //   this.pageSize = 10;
+  //   this.noPrevData = true;
+  // }
 
   getSearchData(count, size, keyword?, filter?) {
     let searchUrl;
     let wPaging = '&page=' + count + '&size=' + size;
-    console.log('search')
-    console.log(this.letter);
+   
     if (keyword != "" && keyword != null && keyword.length != null && keyword.length >= 3) {
 
       this.portalservice.readPortal('agency/language/' + this.languageId, count, size, keyword).subscribe(
@@ -491,10 +526,6 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
               this.recordTable = this.recordList.agencyList;
               this.noNextData = this.recordList.pageNumber === this.recordList.totalPages;
 
-
-              console.log(this.recordTable)
-
-
               this.showNoData = false;
             } else {
               this.recordTable = [];
@@ -505,7 +536,6 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
         error => {
           this.toastr.error(JSON.parse(error._body).statusDesc, '');
           // this.loading = false;
-          console.log(error);
         });
 
     } else if (this.letter || this.ministry || (this.letter && this.ministry)) {
@@ -528,13 +558,10 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
 
       searchUrl = 'agency/search';
 
-      console.log(this.custom);
-
       this.portalservice.readPortal(searchUrl, null, null, null, this.custom).subscribe(
         data => {
           this.portalservice.errorHandling(data, (function () {
             this.recordList = data;
-            console.log(this.recordList)
 
             if (this.recordList.agencyList.length > 0) {
               // this.dataSource.data = this.recordList.list;
@@ -543,10 +570,6 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
               this.totalRec = this.recordList.totalElements;
               this.recordTable = this.recordList.agencyList;
               this.noNextData = this.recordList.pageNumber === this.recordList.totalPages;
-
-
-              console.log(this.recordTable)
-
 
               this.showNoData = false;
             } else {
@@ -558,11 +581,69 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
         error => {
           this.toastr.error(JSON.parse(error._body).statusDesc, '');
           // this.loading = false;
-          console.log(error);
+       
         });
     }
-    console.log(searchUrl)
 
+  }
+
+  pageChange(event,totalPages){
+    if (this.ministry) {
+      this.getSearchData(this.pageCount, 10);
+    } else {
+      if(this.keyword ){
+        this.getSearchData(this.pageCount, 10, this.keyword);
+      }else if(this.letter){
+        this.getSearchData(this.pageCount, 10);
+      }else{
+        this.getAgencyData(this.pageCount, 10);
+      }
+
+    }
+
+    this.pageSize = 10;
+    this.noPrevData = true;
+    // this.getDataAppList(this.pageCount, event.value);
+    // this.pageSize = event.value;
+  }
+
+  paginatorL(page){
+   // this.getDataAppList(page-1, this.pageSize);
+   if (this.ministry) {
+    this.getSearchData(page-1, 10);
+  } else {
+    if(this.keyword ){
+      this.getSearchData(page-1, 10, this.keyword);
+    }else if(this.letter){
+      this.getSearchData(page-1, 10);
+    }else{
+      this.getAgencyData(page-1, 10);
+    }
+
+  }
+    this.noPrevData = page <= 2 ? true : false;
+    this.noNextData = false;
+  }
+
+  paginatorR(page, totalPages){
+    this.noPrevData = page >= 1 ? false : true;
+    let pageInc = page+1;
+    this.noNextData = pageInc === totalPages;
+
+    if (this.ministry) {
+      this.getSearchData(page+1, 10);
+    } else {
+      if(this.keyword ){
+        this.getSearchData(page+1, 10, this.keyword);
+      }else if(this.letter){
+        this.getSearchData(page+1, 10);
+      }else{
+        this.getAgencyData(page+1, 10);
+      }
+
+    }
+
+   // this.getDataAppList(page+1, this.pageSize);
   }
 
   // GET MINISTRY
@@ -573,15 +654,8 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
         data => {
           this.portalservice.errorHandling(data, (function () {
             this.ministryList = data['list'];
-            console.log(this.ministryList)
-
 
             for (i = 0; i <= this.ministryList.length - 1; i++) {
-
-
-
-
-
 
               this.addMarker(
                 parseFloat(this.malformedDataHandler(this.ministryList[i].ministryLatitude)),
@@ -590,7 +664,10 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
                 this.ministryList[i].ministryAddress,
                 this.ministryList[i].ministryEmail,
                 this.ministryList[i].ministryFax,
-                this.ministryList[i].ministryPhone
+                this.ministryList[i].ministryPhone,
+                this.ministryList[i].ministryFacebook,
+                this.ministryList[i].ministryTwitter,
+                this.ministryList[i].ministryWebsiteUrl
               );
             }
 
@@ -599,7 +676,6 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
         error => {
           this.toastr.error(JSON.parse(error._body).statusDesc, '');
           // this.loading = false;
-          console.log(error);
         });
   }
 
