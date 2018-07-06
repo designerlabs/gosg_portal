@@ -105,7 +105,6 @@ export class AnnouncementboxComponent implements OnInit, OnDestroy {
         let currMonth = currDate.substr(0,7);
 
         return this.http.get(this.calendarUrl + '?language='+this.languageId+'&keyword='+currMonth+'&notExpired=false&sort=id,DESC')
-        // return this.http.get(this.calendarUrl + '?language='+this.languageId+'&keyword='+currMonth+'&notExpired=false&sort=id,DESC')
         .map(res => res.json())
         .subscribe(data => {
 
@@ -123,7 +122,6 @@ export class AnnouncementboxComponent implements OnInit, OnDestroy {
                 calArr.push({"day":dDay2,"month":dMonth2,"title":eTitle2})
 
                 this.calendarData = calArr;
-                console.log(this.calendarData)
             } 
         });
     }
