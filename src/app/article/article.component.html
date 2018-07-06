@@ -231,9 +231,9 @@
                                         <a [style.color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" style="cursor: pointer; font-weight: 600;" [href]="agencyContent.agencyWebsiteUrl" target="_blank"> {{agencyContent.agencyName}} </a>
                                     </h4>
                                     <div>
-                                        <a *ngIf="getJson(agencyContent.agencyEparticipationArchiveUrl, 0) !== 'URL Not Specified'" class="badge" [href]="getJson(agencyContent.agencyEparticipationArchiveUrl, 0)" target="_blank">{{getJson(agencyContent.agencyEparticipationArchiveUrl, 1)}}</a>
-                                        <a *ngIf="getJson(agencyContent.agencyEparticipationPolicyUrl, 0) !== 'URL Not Specified'" class="badge" [href]="getJson(agencyContent.agencyEparticipationPolicyUrl, 0)"  target="_blank">{{getJson(agencyContent.agencyEparticipationPolicyUrl, 1)}}</a>
-                                        <a *ngIf="getJson(agencyContent.agencyEparticipationUrl, 0) !== 'URL Not Specified'" class="badge" [href]="getJson(agencyContent.agencyEparticipationUrl, 0)" target="_blank">{{getJson(agencyContent.agencyEparticipationUrl, 1)}}</a>
+                                        <a *ngIf="getJson(agencyContent.agencyEparticipationArchiveUrl, 0) !== 'nourl'" class="badge" [href]="getJson(agencyContent.agencyEparticipationArchiveUrl, 0)" target="_blank">{{getJson(agencyContent.agencyEparticipationArchiveUrl, 1)}}</a>
+                                        <a *ngIf="getJson(agencyContent.agencyEparticipationPolicyUrl, 0) !== 'nourl'" class="badge" [href]="getJson(agencyContent.agencyEparticipationPolicyUrl, 0)"  target="_blank">{{getJson(agencyContent.agencyEparticipationPolicyUrl, 1)}}</a>
+                                        <a *ngIf="getJson(agencyContent.agencyEparticipationUrl, 0) !== 'nourl'" class="badge" [href]="getJson(agencyContent.agencyEparticipationUrl, 0)" target="_blank">{{getJson(agencyContent.agencyEparticipationUrl, 1)}}</a>
                                     </div>
                                   </div>
                               </div>
