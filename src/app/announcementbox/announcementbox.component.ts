@@ -29,14 +29,14 @@ export class AnnouncementboxComponent implements OnInit, OnDestroy {
    private subscription: ISubscription;
    private subscriptionLang: ISubscription;
 
-    constructor(private translate: TranslateService, 
+    constructor(private translate: TranslateService,
         private http: Http,
-        @Inject(APP_CONFIG) private config: AppConfig, 
+        @Inject(APP_CONFIG) private config: AppConfig,
         private route: ActivatedRoute,
-        private navService: NavService, 
+        private navService: NavService,
         private topnavservice: TopnavService,
         private datePipe:DatePipe,
-        private breadcrumbService: BreadcrumbService, 
+        private breadcrumbService: BreadcrumbService,
         private router: Router
     ){
         this.lang = translate.currentLang;
@@ -44,11 +44,11 @@ export class AnnouncementboxComponent implements OnInit, OnDestroy {
             const myLang = translate.currentLang;
             if (myLang === 'en') {
                this.lang = 'en';
-               this.languageId = 1; 
+               this.languageId = 1;
             }
             if (myLang === 'ms') {
               this.lang = 'ms';
-              this.languageId = 2;          
+              this.languageId = 2;
             }
 
             if(this.topnavservice.flagLang){
@@ -87,9 +87,9 @@ export class AnnouncementboxComponent implements OnInit, OnDestroy {
         return this.http.get(this.announcementUrl + '?language=' + this.languageId)
             .map(res => res.json())
             .subscribe(data => {
-            //   
+            //
                 this.announcementData = data.contentCategoryResource.results[0];
-                // 
+                //
             });
     }
 
@@ -117,12 +117,12 @@ export class AnnouncementboxComponent implements OnInit, OnDestroy {
 
                 eTitle1 = data.list[0].eventName;
                 eTitle2 = data.list[1].eventName;
-                
+
                 calArr.push({"day":dDay1,"month":dMonth1,"title":eTitle1})
                 calArr.push({"day":dDay2,"month":dMonth2,"title":eTitle2})
 
                 this.calendarData = calArr;
-            } 
+            }
         });
     }
 
@@ -158,9 +158,9 @@ export class AnnouncementboxComponent implements OnInit, OnDestroy {
 
     getDetailAnnounce(id, childid?) {
         if (childid) {
-            
+
         } else {
-            
+
         }
 
         this.triggerAnnouncementAll(id, this.languageId);
