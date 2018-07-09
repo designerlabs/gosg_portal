@@ -110,16 +110,17 @@ export class AnnouncementboxComponent implements OnInit, OnDestroy {
 
             if(data.list.length != 0) {
                 dDay1 = this.datePipe.transform(data.list[0].eventStart, 'dd');
-                dDay2 = this.datePipe.transform(data.list[1].eventStart, 'dd');
-
                 dMonth1 = this.datePipe.transform(data.list[0].eventStart, 'MMMM');
-                dMonth2 = this.datePipe.transform(data.list[1].eventStart, 'MMMM');
-
                 eTitle1 = data.list[0].eventName;
-                eTitle2 = data.list[1].eventName;
+                
+                if(data.list.length == 2) {
+                    dDay2 = this.datePipe.transform(data.list[1].eventStart, 'dd');
+                    dMonth2 = this.datePipe.transform(data.list[1].eventStart, 'MMMM');
+                    eTitle2 = data.list[1].eventName;
+                    calArr.push({"day":dDay2,"month":dMonth2,"title":eTitle2})
+                }
                 
                 calArr.push({"day":dDay1,"month":dMonth1,"title":eTitle1})
-                calArr.push({"day":dDay2,"month":dMonth2,"title":eTitle2})
 
                 this.calendarData = calArr;
             } 

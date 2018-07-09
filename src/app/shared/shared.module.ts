@@ -129,7 +129,6 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { UnsubscribeComponent } from '../unsubscribe/unsubscribe.component';
 import { SetactiveComponent } from '../subscription/setactive/setactive.component';
-import { DigitalservicesComponent } from '../digitalservices/digitalservices.component';
 import { RssComponent } from '../article/rss/rss.component';
 import { ContentComponent } from '../article/content/content.component';
 import { EparticipationComponent } from '../eparticipation/eparticipation.component';
@@ -221,7 +220,6 @@ export function HttpLoaderFactory(http: Http) {
     SubscriptionComponent,
     UnsubscribeComponent,
     SetactiveComponent,
-    DigitalservicesComponent,
     RssComponent,
     ContentComponent,
     EparticipationComponent,
@@ -324,8 +322,7 @@ export function HttpLoaderFactory(http: Http) {
      MatPaginatorModule,
      SharedPipe,
      EventCalendarComponent,
-     AgencydirectoryComponent,
-     DigitalservicesComponent
+     AgencydirectoryComponent
     //  SearchResultComponent
 
   ],

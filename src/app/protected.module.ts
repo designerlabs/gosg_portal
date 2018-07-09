@@ -37,6 +37,7 @@ import { ArticleprodComponent } from './article/articleprod.component';
 import { PolicereportComponent } from './pdrm/policereport/policereport.component';
 import { StatuspositionComponent } from './pdrm/statusposition/statusposition.component';
 import { SummontrafficComponent } from './pdrm/summontraffic/summontraffic.component';
+import { DigitalservicesprodComponent } from './digitalservices/digitalservicesprod.component';
 
 export function HttpLoaderFactory(http: Http) {
    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -62,6 +63,7 @@ export function HttpLoaderFactory(http: Http) {
     ArticleprodComponent,    
     PolicereportComponent,
     StatuspositionComponent,
+    DigitalservicesprodComponent,
     SummontrafficComponent
   ],
   imports: [
