@@ -38,7 +38,7 @@
                 <div class="row padding-15">
                     <div class="col-md-4">
                         <mat-form-field class="example-full-width">
-                            <mat-select formControlName="optSelect" placeholder="Kategori Sekolah" (change)="getSelection($event)" required>
+                            <mat-select formControlName="optSelect" placeholder="Kategori Sekolah" (change)="checkReqValues()" required>
                                 <mat-option [value]=1>Prasekolah</mat-option>
                                 <mat-option [value]=2>Sekolah Rendah</mat-option>      
                                 <mat-option [value]=3>Sekolah Menengah</mat-option>               
@@ -155,46 +155,66 @@
     <div *ngIf="showDetails">
         <div class="row container">
             <div class="col-md-12" style="color: black; font-weight: bold;">
-                STATUS SAMAN TRAFIK PDRM<br>
+                HASIL CARIAN<br>
                 <hr class="lineHr" style="border-top: #9c9c9d 2px solid;">
             </div>
         </div>
 
         <div class="row container">
             <div class="col-md-3" style="color: black">
-                No. Kad Pengenalan Baru<br>
-                Nama<br>
-                Jumlah Saman<br>
-                Jumlah Amaun (RM)
+                Jumlah hasil carian<br>
+                Catatan: PPD - Pejabat Pendidikan Daerah, PK - Pendidikan Khas
             </div>
 
             <div class="col-md-9" style="color: black; font-weight: bold;">
-                {{kp}}<br>
-                {{name}}<br>
-                {{summon}}<br>
-                {{ammount}}
+                77<br>
             </div>
         </div> 
 
         <div class="row container" style="padding-left: 30px;">
-            <table class="mat-table" style="width:100%; z-index: 9999;">
+            <!-- <table class="mat-table" style="width:100%; z-index: 9999;">
                 <tr class="mat-header-row" style="height:45px; font-weight: bold;">
                     <th width="5%" class="mat-header-cell">{{'appmngt.tableHeader.num' | translate}}</th>
-                    <th width="15%" class="mat-header-cell">No. Kenderaan</th>
-                    <th class="mat-header-cell">No. Saman</th>
-                    <th width="15%" class="mat-header-cell">Tarikh & Masa Kesalahan</th>
-                    <th width="15%" class="mat-header-cell">Tempat Kesalahan</th>
-                    <th width="10%" class="mat-header-cell text-center">Amaun (RM)</th>
-                    <th width="10%" class="mat-header-cell text-center">Imej</th>
+                    <th width="15%" class="mat-header-cell">Kod Sekolah</th>
+                    <th class="mat-header-cell">Nama Sekolah</th>
+                    <th width="15%" class="mat-header-cell">PDD</th>
+                    <th width="15%" class="mat-header-cell">PK</th>
+                    <th width="10%" class="mat-header-cell text-center">Alamat</th>
+                    <th width="10%" class="mat-header-cell text-center">No. Telefon</th>
                 </tr>
-                <tr class="mat-row" *ngFor="let data of dataApp; let i = index;" role="row">
+                <tr class="mat-row" *ngFor="let data of recordData; let i = index;" role="row">
                     <td class="mat-cell text-center">{{i+1}}</td>
-                    <td class="mat-cell">{{data.submissionRefno}}</td>
-                    <td class="mat-cell">{{data.submissionName}}</td>
-                    <td class="mat-cell text-center">kk</td>
-                    <td class="mat-cell">tt</td>
+                    <td class="mat-cell">{{data.agencyName}}</td>
+                    <td class="mat-cell">{{data.agencyAddress}}</td>
+                    <td class="mat-cell text-center">{{data.agencyLatitude}}</td>
+                    <td class="mat-cell">{{data.agencyLongitude}}</td>
                     <td class="mat-cell text-right">300</td>
                     <td class="mat-cell text-center">-</td>
+                </tr>
+                <tr *ngIf="showNoData">
+                    <td colspan="8" class="showData">
+                    <hr><br>{{'common.showNoData' | translate}}</td>
+                </tr>
+            </table> -->
+
+            <table class="table getSearch" style="width:100%; z-index: 9999;">
+                <tr class="tableHeader" style="height:45px; font-weight: bold;">
+                    <th width="5%">{{'appmngt.tableHeader.num' | translate}}</th>
+                    <th width="15%">Kod Sekolah</th>
+                    <th >Nama Sekolah</th>
+                    <th width="15%">PDD</th>
+                    <th width="15%">PK</th>
+                    <th width="10%" class="text-center">Alamat</th>
+                    <th width="10%" class="text-center">No. Telefon</th>
+                </tr>
+                <tr *ngFor="let data of recordData; let i = index;" role="row">
+                    <td class="text-center">{{i+1}}</td>
+                    <td>{{data.agencyName}}</td>
+                    <td>{{data.agencyAddress}}</td>
+                    <td class="text-center">{{data.agencyLatitude}}</td>
+                    <td >{{data.agencyLongitude}}</td>
+                    <td class="text-right">300</td>
+                    <td class="text-center">-</td>
                 </tr>
                 <tr *ngIf="showNoData">
                     <td colspan="8" class="showData">
@@ -223,7 +243,6 @@
                 <button mat-mini-fab color="basic" [disabled]="noNextData"  (click)="paginatorR(dataAppPage?.pageNumber, dataAppPage?.totalPages)">
                     <i class="fa fa-angle-right" aria-hidden="true"></i></button>
             </div>
-
         </div>
     </div>
 

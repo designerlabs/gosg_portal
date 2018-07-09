@@ -1,4 +1,6 @@
 import { Component, OnInit, Injectable, Inject, OnDestroy } from '@angular/core';
+import { MatDialog, MatDialogRef, MatDialogConfig, MAT_DIALOG_DATA, MatPaginator, 
+        MatSort } from '@angular/material';
 import { ISubscription } from "rxjs/Subscription";
 import { TopnavService } from '../header/topnav/topnav.service';
 import { Router } from '@angular/router';
@@ -7,14 +9,11 @@ import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Http } from '@angular/http';
 import * as $ from 'jquery';
-import {
-    MatInputModule, MatPaginatorModule, MatProgressSpinnerModule,
-    MatSortModule, MatTableModule, MatPaginator, MatSort
-  } from '@angular/material';
-
 import { ProtectedService } from '../services/protected.service';
 import { tileLayer, latLng, circle, polygon, marker, icon, Layer } from 'leaflet';
 import * as L from 'leaflet';
+import { SharedService } from '../common/shared.service';
+import { PortalService } from '../services/portal.service';
 
 @Component({
   selector: 'gosg-schoolsearch',
@@ -27,20 +26,16 @@ export class SchoolsearchComponent implements OnInit {
   langID: any;
   complete: boolean;
   param = "";
-  dataApp: any;
+  dataApp = null;
+  recordData = null;
   dataAppPage: any;
   pageSize = 10;
   pageCount = 1;
   noPrevData = true;
   noNextData = false;
   showNoData = false;
-
-  public kp: any;
-  public name: any;
-  public summon: any;
-  public ammount: any;
+  
   public showDetails = false;
-  public varSelect: any;
 
   searchForm: FormGroup;  
   public optSelect: FormControl;
@@ -67,9 +62,12 @@ export class SchoolsearchComponent implements OnInit {
   private subscription: ISubscription;
 
   private urlFaq: string = this.config.urlFaq;
+  // dataSource = new MatTableDataSource<object>(this.recordData);
 
   constructor(
     private protectedService: ProtectedService,
+    private sharedService: SharedService,
+    private portalservice: PortalService,
     private translate: TranslateService,
     private router: Router,
     private http: Http,
@@ -134,17 +132,22 @@ export class SchoolsearchComponent implements OnInit {
       schoolname: this.schoolname
     });
     
-    this.getDataAppList(this.pageCount, this.pageSize);
-
+    this.getDefaultMap();
   }
 
   getDataAppList(page, size){
 
-    this.protectedService.getDataApp(page, size, this.param).subscribe(
+    this.portalservice.readPortal('agency/language/' + this.langID, page, size).subscribe(
     data => {
-      this.dataApp = data.list;
-      this.dataAppPage = data;
-      this.noNextData = data.pageNumber === data.totalPages;
+      // this.dataApp = data;
+      // this.dataAppPage = data;
+      // this.noNextData = data.pageNumber === data.totalPages;
+      // this.showNoData = false;
+
+      this.dataApp = data;
+      this.recordData = this.dataApp.agencyList;
+      this.dataAppPage = this.dataApp;
+      this.noNextData = this.dataApp.pageNumber === this.dataApp.totalPages;
       this.showNoData = false;
 
       if(this.dataApp.length == 0){
@@ -174,17 +177,11 @@ export class SchoolsearchComponent implements OnInit {
   searchApp(formValues: any){
 
     this.showDetails = true;
-
-    this.kp = "971020085921";
-    this.name = "MUHAMMAD ISYRAF RAZIQ B YUSOF";
-    this.summon =  "1";
-    this.ammount = "300";
-
-    this.getDefaultMap();
+    this.getDataAppList(this.pageCount, this.pageSize);
   }
 
   getDefaultMap() {
-    this.mymap = L.map('dirmap').setView([5.8142568, 108.5806004], 5.2);
+    this.mymap = L.map('dirmap').setView([4.8142568, 108.5806004], 6.2);
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
       attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
       maxZoom: 15,
@@ -200,10 +197,6 @@ export class SchoolsearchComponent implements OnInit {
         return false;
     }
     return true;
-  }
-
-  getSelection(e){ //when change selection
-    this.varSelect = e.value;
   }
 
   checkReqValues() {
@@ -231,6 +224,8 @@ export class SchoolsearchComponent implements OnInit {
   }
 
   resetSearch(){
+    
+    this.mymap.setView([4.8142568, 108.5806004], 6.2);
     this.searchForm.get('optSelect').setValue(null);
     this.searchForm.get('state').setValue(null);
     this.searchForm.get('typeSchool').setValue(null);

@@ -1,4 +1,4 @@
-import { Component, Output, Input, EventEmitter, OnInit, AfterViewChecked, AfterViewInit  } from '@angular/core';
+import { Component, Output, Input, EventEmitter, OnInit, AfterViewChecked, AfterViewInit, OnDestroy  } from '@angular/core';
 import { ArticleService } from '../../article/article.service';
 
 import { NavService } from '../../header/nav/nav.service';
@@ -7,18 +7,25 @@ import {TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { BreadcrumbService } from '../../header/breadcrumb/breadcrumb.service';
 
 import 'rxjs/add/operator/switchMap';
+import { ISubscription } from 'rxjs/Subscription';
+import { TopnavService } from '../../header/topnav/topnav.service';
 
 @Component({
   selector: 'gosg-archivesubcategory',
   templateUrl: './archivesubcategory.component.html',
   styleUrls: ['./archivesubcategory.component.css'],
 })
-export class ArchivesubcategoryComponent implements OnInit {
+export class ArchivesubcategoryComponent implements OnInit, OnDestroy{
+  lang = this.lang;
+  langId = this.langId;
   statusID: any;
+  langIdVal: string;
   @Output() menuClick = new EventEmitter();
   breadcrumb: any;
   isValid: any;
   topicID: number;
+  private subscription: ISubscription;
+  private subscriptionLang: ISubscription;
   subID: number;
   step = 0;
   articles: any[];
@@ -27,59 +34,58 @@ export class ArchivesubcategoryComponent implements OnInit {
   @Output() langChange = new EventEmitter();
 
   handleClickMe(e){
-    
+
   }
 
 
-  constructor(public articleService: ArticleService,  private route: ActivatedRoute, private navService: NavService, private translate: TranslateService, private router: Router, private breadcrumbService: BreadcrumbService) {
+  constructor(public articleService: ArticleService,  private topnavservice: TopnavService,  private route: ActivatedRoute, private navService: NavService, private translate: TranslateService, private router: Router, private breadcrumbService: BreadcrumbService) {
     this.lang = translate.currentLang;
     this.langId = 1;
 
-        translate.onLangChange.subscribe((event: LangChangeEvent) => {
-
-        const myLang = translate.currentLang;
-
-        if (myLang == 'en') {
-
-            translate.get('HOME').subscribe((res: any) => {
-                this.lang = 'en';
-                this.langId = 1;
-                this.moduleName = this.router.url.split('/')[1];
-                var tt = this.router.url.split('/');
-                this.subID = parseInt(tt[tt.length-1]);
-            });
-
+    this.subscriptionLang = this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      // this.sharedService.errorHandling(event, (function(){
+        const myLang = this.translate.currentLang;
+        if (myLang === 'en') {
+           this.lang = 'en';
+           this.langId = 1;
+           this.moduleName = this.router.url.split('/')[2];
+           this.topicID = parseInt(this.router.url.split('/')[3]);
         }
-        if (myLang == 'ms') {
-
-            translate.get('HOME').subscribe((res: any) => {
-                this.lang = 'ms';
-                this.langId = 2;
-                this.moduleName = this.router.url.split('/')[1];
-                this.topicID = parseInt(this.router.url.split('/')[2]);
-                var tt = this.router.url.split('/');
-                this.subID = parseInt(tt[tt.length-1]);
-            });
+        if (myLang === 'ms') {
+          this.lang = 'ms';
+          this.langId = 2;
+          this.moduleName = this.router.url.split('/')[2];
+          this.topicID = parseInt(this.router.url.split('/')[3]);
+          this.subID = parseInt(this.router.url.split('/')[4]);
         }
 
-
-        if(this.moduleName == 'subcategory'){
-          this.navService.triggerSubArticleOther(this.subID, this.langId, 'archive');
-        }else if(this.moduleName == 'content'){
-          this.navService.triggerContentOther(this.subID, this.langId, 'archive');
-        }else{
-          this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID);
+        if(this.topnavservice.flagLang){
+          if(this.moduleName == 'subcategory'){
+            this.navService.triggerSubArticleOther(this.topicID, this.langId,'archive');
+          }else if(this.moduleName == 'content'){
+            this.navService.triggerContent(this.subID, this.langId);
+          }else{
+            this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID);
+          }
         }
-
-        // this.navService.triggerSubArticle(this.topicID, this.subID, this.langId);
 
     });
   }
 
-  lang = this.lang;
-  langId = this.langId;
+
+  ngOnDestroy() {
+    this.subscriptionLang.unsubscribe();
+  }
 
   ngOnInit() {
+
+
+    if(localStorage.getItem('langID')){
+      this.langIdVal = localStorage.getItem('langID');
+    }else{
+      this.langIdVal = this.langId;
+    }
+
     this.articleData = this.articleService.getArticle();
     this.topicID = parseInt(this.router.url.split('/')[2]);
     var tt = this.router.url.split('/');
@@ -117,6 +123,18 @@ export class ArchivesubcategoryComponent implements OnInit {
       this.router.navigate( ['/archive/content', aId]);
       event.preventDefault();
     }
+
+    triggerArticle(moduleName, lang, topicID){
+      this.route.paramMap
+      .switchMap((params: ParamMap) =>
+      this.navService.getArticleData(moduleName, lang, topicID))
+      .subscribe(resSliderData => {
+          this.articles = resSliderData;
+          this.breadcrumb = this.breadcrumbService.getBreadcrumb();
+          this.isValid = this.breadcrumbService.isValid = true;
+          this.breadcrumb = this.breadcrumb.name = '';
+      });
+  }
 
     getModule(data){
       let a = data.split("/");

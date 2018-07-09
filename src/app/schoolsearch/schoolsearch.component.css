@@ -18,4 +18,14 @@
     width: 100%;
 }
 
-#dirmap { height: 600px; }
+#dirmap { height: 500px; }
+
+.getSearch{
+    border-collapse: separate!important;
+    color: black;
+    border-color: gray;
+}
+
+.tableHeader{
+    background-color: gray;
+}
