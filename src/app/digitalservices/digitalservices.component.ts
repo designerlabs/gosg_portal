@@ -73,7 +73,6 @@ export class DigitalservicesComponent implements OnInit, OnDestroy {
     this.getDServices(this.languageId);
     this.getUserData();
 
-    alert(this.isLogin)
   }
 
   ngOnDestroy() {
@@ -114,9 +113,20 @@ export class DigitalservicesComponent implements OnInit, OnDestroy {
 })
 export class DigitalServiceDialog {
   constructor(
-    public dialogRef: MatDialogRef<DigitalServiceDialog>) {}
+    public dialogRef: MatDialogRef<DigitalServiceDialog>,
+    private router: Router) {}
 
     onNoClick() {
+      this.dialogRef.close();
+    }
+
+    goToRegister() {
+      this.router.navigate(['/register']);
+      this.dialogRef.close();
+    }
+
+    goToLogin() {
+      this.router.navigate(['/portal-protected/']);
       this.dialogRef.close();
     }
 

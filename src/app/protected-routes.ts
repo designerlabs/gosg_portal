@@ -37,7 +37,6 @@ import { SubscriptionComponent } from './subscription/subscription.component';
 import { UnsubscribeComponent } from './unsubscribe/unsubscribe.component';
 import { AgencydirectoryComponent } from './agencydirectory/agencydirectory.component';
 import { SetactiveComponent } from './subscription/setactive/setactive.component';
-import { DigitalservicesComponent } from './digitalservices/digitalservices.component';
 import { RssComponent } from './article/rss/rss.component';
 import { ContentComponent } from './article/content/content.component';
 import { EparticipationComponent } from './eparticipation/eparticipation.component';
@@ -50,6 +49,7 @@ import { PolicereportComponent } from './pdrm/policereport/policereport.componen
 import { SummontrafficComponent } from './pdrm/summontraffic/summontraffic.component';
 import { StatuspositionComponent } from './pdrm/statusposition/statusposition.component';
 import { SchoolsearchComponent } from './schoolsearch/schoolsearch.component';
+import { DigitalservicesprodComponent } from './digitalservices/digitalservicesprod.component';
 
 //import { GalleryComponent } from './gallery/gallery.component';
 // import { NavRouterActivator } from './header/nav/nav-router-activator.service'
@@ -61,7 +61,7 @@ export const protectedRoutes: Routes = [
     {path: '404', component: ErrorComponent },
     {path: 'dashboard', component: DashboardComponent},
     {path: 'agencydir', component: AgencydirectoryComponent},
-    {path: 'digitalservices', component: DigitalservicesComponent},
+    {path: 'digitalservices', component: DigitalservicesprodComponent},
     {path: 'profile', component: ProfileComponent},
     {path: 'calendar', component: EventCalendarComponent},
     {path: 'profileupdate', component: ProfileUpdatedComponent},

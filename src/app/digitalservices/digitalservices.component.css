@@ -9,7 +9,7 @@
 .dserviceList > ul li.a {
     display: inline-block;
     vertical-align: top;
-    /* margin-bottom: 5%; */
+    margin-bottom: 2%;
     /* width: 45%!important; */
     width: 100%!important;
     border-top: #00bdbb 2px solid;
