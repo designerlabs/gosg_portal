@@ -126,7 +126,8 @@ export class DigitalServiceDialog {
     }
 
     goToLogin() {
-      this.router.navigate(['./portal-protected/']);
+      // this.router.navigate(['./portal-protected/']);
+      window.location.href = "../portal-protected/";
       this.dialogRef.close();
     }
 
