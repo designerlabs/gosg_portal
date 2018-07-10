@@ -2,8 +2,9 @@
 
     <!-- IMAGES -->
     <div *ngIf="data.type=='images'">
+        <h4 mat-dialog-title><strong>{{ data.title }}</strong></h4>
         <img src="{{ data.path }}" width="auto" height="auto">
-        <h5 mat-dialog-title>{{ data.title }}</h5>
+        <h5>{{ data.desc }}</h5>
     </div>
 
     <!-- AUDIOS -->

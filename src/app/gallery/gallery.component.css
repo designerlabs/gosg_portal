@@ -149,6 +149,20 @@
       column-gap: 0;
       position: relative;
     }
+
+    .galleryBtn {
+      margin-right: 1%;
+    }
+
+    .mediaContent {
+      text-align:  center; justify-content: space-between
+    }
+    
+    .example-card {
+      max-width: 150px;
+      cursor: pointer;
+      padding: 0;
+    }
     
     /* MASONRY CSS */
     .ml {
@@ -269,3 +283,4 @@
         flex-basis: 25%;
       }
     }
+    
