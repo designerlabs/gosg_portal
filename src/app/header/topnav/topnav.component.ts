@@ -141,7 +141,6 @@ export class TopnavComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   loadDefaultFonts(){
-    alert("ok");
     this.sharedservice.getThemeFont().subscribe(
       data => {
         this.defaultFonts = data;
@@ -250,8 +249,6 @@ export class TopnavComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   resetBgColor() {
-    alert("test");
-
     this.sharedservice.getThemeColor().subscribe(
       data => {
         this.defaultColors = data;

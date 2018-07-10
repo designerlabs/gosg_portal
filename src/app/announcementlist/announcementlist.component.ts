@@ -58,7 +58,7 @@ export class AnnouncementlistComponent implements OnInit {
                     this.navService.triggerAnnouncementList(this.lang, this.announcementID);
                 });
             }
-            
+
         });
 
         if (!this.languageId) {
@@ -72,12 +72,11 @@ export class AnnouncementlistComponent implements OnInit {
     lang = this.lang;
 
     ngOnInit() {
-        alert('teasd')
         this.moduleName = this.router.url.split('/')[1];
         this.announcementID = this.router.url.split('/')[2];
         this.navService.triggerAnnouncementList(this.lang, this.announcementID);
-        
-        
+
+
     }
 
     getTheme() {
@@ -92,7 +91,7 @@ export class AnnouncementlistComponent implements OnInit {
         // this.triggerAnnouncementList(this.lang, e.code);
         this.navService.triggerAnnouncementList(this.lang, e.code);
         this.router.navigate(['/announcement', e.code]);
-        
+
         event.preventDefault();
     }
 
@@ -103,7 +102,7 @@ export class AnnouncementlistComponent implements OnInit {
         if (e.runningNo) {
             this.router.navigate(['announcement', _getAnnounceID, e.runningNo]);
         }
-        
+
         event.preventDefault();
   }
 
