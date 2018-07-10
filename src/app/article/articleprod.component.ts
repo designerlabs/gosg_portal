@@ -139,6 +139,13 @@ export class ArticleprodComponent implements OnInit, OnDestroy {
     return a[2];
   }
 
+  getJson(x, p){
+    let z = x.replace('[', '').replace(']', '');
+    let y = z.split(',');
+    return y[p]
+  }
+
+
   triggerArticle(moduleName, lang, topicID) {
     this.route.paramMap
       .switchMap((params: ParamMap) =>
