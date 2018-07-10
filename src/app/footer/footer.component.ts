@@ -137,11 +137,15 @@ export class FooterComponent implements OnInit, OnDestroy {
 
   getUrl(ele){
     let split_url = ele.split('/');
+
     if(ele.includes('/')){
-      if(split_url.length > 1){
-        this.router.navigate(['/'+split_url[0], split_url[1]]);
-        window.scrollTo(0, 0);
-      }
+      let lastIndex = ele.lastIndexOf('/'),
+          firstSet = ele.substr(0, lastIndex),
+          secondSet = ele.substr(lastIndex),
+          splitSet = secondSet.split('/');
+      this.router.navigate(['/'+firstSet, splitSet[1]]);
+      window.scrollTo(0, 0);
+
     }else{
       this.router.navigate(['/'+split_url[0]]);
       window.scrollTo(0, 0);
