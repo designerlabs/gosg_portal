@@ -40,12 +40,12 @@ export class FooterComponent implements OnInit, OnDestroy {
   private subscriptionLang: ISubscription;
   private subscription: ISubscription;
 
-  constructor(private translate: TranslateService, 
-    private router: Router, private http: Http, 
+  constructor(private translate: TranslateService,
+    private router: Router, private http: Http,
     @Inject(APP_CONFIG) private config: AppConfig,
     private topnavservice: TopnavService,) {
     this.lang = translate.currentLang;
-    
+
     this.subscriptionLang  = translate.onLangChange.subscribe((event: LangChangeEvent) => {
 
       const myLang = translate.currentLang;
@@ -85,7 +85,7 @@ export class FooterComponent implements OnInit, OnDestroy {
     this.subscriptionLang.unsubscribe();
     this.subscription.unsubscribe();
   }
-  
+
   ngOnInit() {
     // this.langID = 0;
     // if (this.lang === 'ms') {
@@ -109,7 +109,7 @@ export class FooterComponent implements OnInit, OnDestroy {
     // return this.http.get(this.footerUrl + '-ms.json')
       .map((response: Response) => response.json())
       .subscribe(resSliderData => {
-        this.footer = resSliderData['footerResourceList'];        
+        this.footer = resSliderData['footerResourceList'];
         this.tltContact = this.footer.filter(fdata => fdata.titleCode === 1)[0];
         this.dataContact = this.tltContact.footerContents;
         this.tltAccessPage = this.footer.filter(fdata => fdata.titleCode === 2)[0];
@@ -126,14 +126,30 @@ export class FooterComponent implements OnInit, OnDestroy {
         }else{
             this.copyright = [];
             this.dateOfUpdate = [];
-        }  
+        }
         this.tltBottomLnk = this.footer.filter(fdata => fdata.titleCode === 6)[0];
         this.dataBottomLnk = this.tltBottomLnk.footerContents;
-        this.tltExtLnk = this.footer.filter(fdata => fdata.titleCode === 7)[0];        
+        this.tltExtLnk = this.footer.filter(fdata => fdata.titleCode === 7)[0];
         this.dataExtLnk = this.tltExtLnk.footerContents;
       });
     // }
   }
+
+  getUrl(ele){
+    let split_url = ele.split('/');
+    if(ele.includes('/')){
+      if(split_url.length > 1){
+        this.router.navigate(['/'+split_url[0], split_url[1]]);
+        window.scrollTo(0, 0);
+      }
+    }else{
+      this.router.navigate(['/'+split_url[0]]);
+      window.scrollTo(0, 0);
+
+    }
+
+  }
+
 
   getTheme() {
     return localStorage.getItem('themeColor');

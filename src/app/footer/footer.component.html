@@ -57,7 +57,7 @@
             <div class="sub-add">
               <ul class="hoverlnk" style="columns: 2; list-style-type: none; padding-left: 3px;">
                 <li *ngFor="let eachitm of dataAccessPage"  style="margin-bottom: 7px;">
-                  <a *ngIf="eachitm.enabled" [href]="[eachitm.footerContentUrl]" class="font-size-s access_page_link" [innerHtml]="eachitm.footerContentName"></a>
+                  <a *ngIf="eachitm.enabled" (click)="getUrl(eachitm.footerContentUrl)" class="font-size-s access_page_link" [innerHtml]="eachitm.footerContentName"></a>
                 </li>
               </ul>
             </div>
