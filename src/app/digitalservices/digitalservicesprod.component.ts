@@ -8,20 +8,15 @@ import { ToastrService } from 'ngx-toastr';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 import { ISubscription } from 'rxjs/Subscription';
 import { TopnavService } from '../header/topnav/topnav.service';
-import { MatDialog, MatDialogRef } from '@angular/material';
-
-// export interface DialogData {
-//   type;
-//   title;
-//   path;
-// }
+import { ProtectedService } from '../services/protected.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'gosg-digitalservices',
   templateUrl: './digitalservices.component.html',
   styleUrls: ['./digitalservices.component.css']
 })
-export class DigitalservicesComponent implements OnInit, OnDestroy {
+export class DigitalservicesprodComponent implements OnInit, OnDestroy {
 
   dsData: any = [];
   languageId = this.languageId;
@@ -38,10 +33,10 @@ export class DigitalservicesComponent implements OnInit, OnDestroy {
     private dialogsService: DialogsService,
     private translate: TranslateService,
     private topnavservice: TopnavService,
+    private protectedService:ProtectedService,
     private router: Router,
     private toastr: ToastrService,
-    @Inject(APP_CONFIG) private config: AppConfig,
-    public dialog: MatDialog) {
+    @Inject(APP_CONFIG) private config: AppConfig) {
 
     this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
       const myLang = this.translate.currentLang;
@@ -72,7 +67,6 @@ export class DigitalservicesComponent implements OnInit, OnDestroy {
     this.mediaUrl = this.config.externalMediaURL + '/documents/';
     this.getDServices(this.languageId);
     this.getUserData();
-
   }
 
   ngOnDestroy() {
@@ -97,38 +91,13 @@ export class DigitalservicesComponent implements OnInit, OnDestroy {
   }
 
   getUserData(){
-    this.isLogin = false;
+    if(!environment.staging){
+    this.protectedService.getUser().subscribe(
+      data => {
+        console.log(data)
+        this.isLogin = true;
+      });
   }
-
-  openDialog() {
-    this.dialog.open(DigitalServiceDialog, {
-    });
-  }
-
 }
-
-@Component({
-  selector: 'digital-service-popup',
-  templateUrl: './digital-service-popup.html',
-})
-export class DigitalServiceDialog {
-  constructor(
-    public dialogRef: MatDialogRef<DigitalServiceDialog>,
-    private router: Router) {}
-
-    onNoClick() {
-      this.dialogRef.close();
-    }
-
-    goToRegister() {
-      this.router.navigate(['/register']);
-      this.dialogRef.close();
-    }
-
-    goToLogin() {
-      // this.router.navigate(['./portal-protected/']);
-      window.location.href = "../portal-protected/";
-      this.dialogRef.close();
-    }
 
 }

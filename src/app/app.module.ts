@@ -28,6 +28,7 @@ import { SubarticleComponent } from './article/subarticle/subarticle.component';
 import { ArticleComponent } from './article/article.component';
 import { LifeeventComponent } from './lifeevent/lifeevent.component';
 import { HomeComponent } from './home/home.component';
+import { DigitalservicesComponent, DigitalServiceDialog } from './digitalservices/digitalservices.component';
 
 
 // import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule } from "@angular/material";
@@ -74,7 +75,9 @@ imports: [
     SubarticleComponent,
     ArticleComponent,
     LifeeventComponent,
-    HomeComponent
+    DigitalservicesComponent,
+    HomeComponent,
+    DigitalServiceDialog
 
   ],
 
@@ -82,6 +85,7 @@ imports: [
     CUSTOM_ELEMENTS_SCHEMA
   ],
   providers: [ConfirmComponent,FeedbackComponent],
+  entryComponents: [DigitalServiceDialog],
   bootstrap: [AppComponent]
 })
 
