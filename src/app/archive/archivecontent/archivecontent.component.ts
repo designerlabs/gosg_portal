@@ -72,15 +72,16 @@ export class ArchivecontentComponent implements OnInit, OnDestroy {
 
         if(this.topnavservice.flagLang){
 
-        if(this.moduleName == 'subcategory'){
-          this.navService.triggerSubArticleOther(this.subID, this.langId, 'archive');
-        }else if(this.moduleName == 'content'){
-          this.navService.triggerContentOther(this.topicID, this.langId, 'archive');
-        }else{
-          this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID);
+          if(this.moduleName == 'subcategory'){
+            this.navService.triggerSubArticleOther(this.subID, this.langId, 'archive');
+          }else if(this.moduleName == 'content'){
+            this.navService.triggerContentOther(this.topicID, this.langId, 'archive');
+          }else{
+            this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID);
+          }
         }
 
-    });
+      });
    }
 
    lang = this.lang;
