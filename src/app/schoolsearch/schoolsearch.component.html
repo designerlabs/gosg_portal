@@ -214,7 +214,7 @@
                 </tr>
                 <tr *ngFor="let data of recordData; let i = index;" role="row">
                     <td class="text-center">{{i+1}}</td>
-                    <td>{{data.agencyName}}</td>
+                    <td (click)="goToMarkerPoint(data.agencyLatitude,data.agencyLongitude,data.agencyName,data.agencyAddress,300,400,500)">{{data.agencyName}}</td>
                     <td>{{data.agencyAddress}}</td>
                     <td class="text-center">{{data.agencyLatitude}}</td>
                     <td >{{data.agencyLongitude}}</td>

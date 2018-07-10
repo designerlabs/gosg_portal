@@ -238,4 +238,54 @@ export class SchoolsearchComponent implements OnInit {
     this.resetSearch();
   }
 
+  goToMarkerPoint(dLat, dLong, dName, dAddress, dEmail, dFax, dPhone) {
+    if (dLat && dLong) {
+      this.mymap.setView([dLat, dLong], 13);
+
+      this.popup = L.popup()
+        .setLatLng([dLat, dLong])
+        .setContent(`
+        <div class='row'>
+          <div class='col-md-12'>
+            <h4>${dName}
+              <h4>
+          </div>
+          <div class='col-md-2'>
+            <i class='fa fa-home' style='font-size: 1.2em; margin-top: 90%'></i>
+          </div>
+          <div class='col-md-10'>
+            <p style='font-size: 1em'>${dAddress}</p>
+          </div>
+          <div class='col-md-2'>
+            <i class='fa fa-map-marker' style='font-size: 1.2em; margin-top: 85%'></i>
+          </div>
+          <div class='col-md-10'>
+            <p>${dLat},${dLong}</p>
+          </div>
+          <div class='col-md-2'>
+            <i class='fa fa-phone' style='font-size: 1.2em; margin-top: 90%'></i>
+          </div>
+          <div class='col-md-10'>
+            <p style='font-size: 1em'>${dPhone}</p>
+          </div>
+          <div class='col-md-2'>
+            <i class='fa fa-fax' style='font-size: 1.2em; margin-top: 90%'></i>
+          </div>
+          <div class='col-md-10'>
+            <p style='font-size: 1em'>${dFax}</p>
+          </div>
+          <div class='col-md-2'>
+            <i class='fa fa-envelope' style='font-size: 1.2em; margin-top: 90%'></i>
+          </div>
+          <div class='col-md-10'>
+            <p style='font-size: 1em'>${dEmail}</p>
+          </div>
+        </div>
+        `)
+        .openOn(this.mymap);
+
+    } else
+      console.log('latlong are NULL')
+  }
+
 }
