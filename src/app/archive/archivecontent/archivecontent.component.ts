@@ -1,10 +1,11 @@
-import { Component, Output, Input, EventEmitter, OnInit, AfterContentInit, AfterViewChecked, AfterViewInit  } from '@angular/core';
+import { Component, Output, Input, EventEmitter, OnInit, AfterContentInit, AfterViewChecked, AfterViewInit , OnDestroy} from '@angular/core';
 import { ArticleService } from '../../article/article.service';
-
+import { ISubscription } from "rxjs/Subscription";
 import { NavService } from '../../header/nav/nav.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { BreadcrumbService } from '../../header/breadcrumb/breadcrumb.service';
+import { TopnavService } from '../../header/topnav/topnav.service';
 
 import 'rxjs/add/operator/switchMap';
 
@@ -13,7 +14,7 @@ import 'rxjs/add/operator/switchMap';
   templateUrl: './archivecontent.component.html',
   styleUrls: ['./archivecontent.component.css']
 })
-export class ArchivecontentComponent implements OnInit {
+export class ArchivecontentComponent implements OnInit, OnDestroy {
   statusID: any;
   @Output() menuClick = new EventEmitter();
   breadcrumb: any;
@@ -22,6 +23,8 @@ export class ArchivecontentComponent implements OnInit {
   subID: number;
   moduleName: string;
   articles: any[];
+  
+  private subscriptionLang: ISubscription;
 
   articleData: any;
   @Output() langChange = new EventEmitter();
@@ -30,11 +33,14 @@ export class ArchivecontentComponent implements OnInit {
     
   }
 
-  constructor(public articleService: ArticleService,  private route: ActivatedRoute, private navService: NavService, private translate: TranslateService, private router: Router, private breadcrumbService: BreadcrumbService) {
+  constructor(public articleService: ArticleService,  private route: ActivatedRoute, 
+    private navService: NavService, private translate: TranslateService, private router: Router, 
+    private topnavservice: TopnavService,
+    private breadcrumbService: BreadcrumbService) {
     this.lang = translate.currentLang;
     this.langId = 1;
 
-        translate.onLangChange.subscribe((event: LangChangeEvent) => {
+        this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
 
         const myLang = translate.currentLang;
 
@@ -62,13 +68,15 @@ export class ArchivecontentComponent implements OnInit {
             });
         }
 
+        if(this.topnavservice.flagLang){
 
-        if(this.moduleName == 'subcategory'){
-          this.navService.triggerSubArticle(this.subID, this.langId);
-        }else if(this.moduleName == 'content'){
-          this.navService.triggerContent(this.subID, this.langId);
-        }else{
-          this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID);
+          if(this.moduleName == 'subcategory'){
+            this.navService.triggerSubArticle(this.subID, this.langId);
+          }else if(this.moduleName == 'content'){
+            this.navService.triggerContent(this.subID, this.langId);
+          }else{
+            this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID);
+          }
         }
 
     });
@@ -77,8 +85,19 @@ export class ArchivecontentComponent implements OnInit {
    lang = this.lang;
    langId = this.langId;
 
+  ngOnDestroy() {
+    this.subscriptionLang.unsubscribe();
+    //this.subscription.unsubscribe();
+  }
 
   ngOnInit() {
+
+    if(!this.langId){
+      this.langId = localStorage.getItem('langID');
+    }else{
+      this.langId = 1;
+    }
+
     this.articleData = this.articleService.getArticle();
     this.topicID = parseInt(this.router.url.split('/')[2]);
     var tt = this.router.url.split('/');

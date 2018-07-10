@@ -84,6 +84,7 @@ export class AppManagementComponent implements OnInit, OnDestroy {
               });
           }
           if(this.topnavservice.flagLang){
+            console.log("lalalla");
             //this.getSlide(this.languageId);
             //this.subscription = this.getSlide(this.languageId);
           }
