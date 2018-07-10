@@ -14,6 +14,7 @@ export interface DialogData {
   type;
   title;
   path;
+  desc;
 }
 
 @Component({
@@ -177,15 +178,20 @@ export class GalleryComponent implements OnInit, OnDestroy {
 
     }
 
-    openDialog(mPath, mType, mTitle?) {
+    openDialog(mPath, mType, mTitle?, mDesc?) {
       this.mediaSource = mPath;
       this.dialog.open(DialogDataExampleDialog, {
         data: {
           type: mType,
           path: mPath,
-          title: mTitle
+          title: mTitle,
+          desc: mDesc
         }
       });
+    }
+
+    downloadFile(filePath) {
+      window.open(filePath);
     }
 
 }

@@ -61,44 +61,50 @@
         <div class="col-md-9">&nbsp;</div>
       </div>
 
-      <div class="container">
-        <div class="col-md-9 galleryTbl">
+      <!-- <div class="container"> -->
+        <div class="col-md-12 galleryTbl">
           <div *ngFor="let content of galleryService.galleries.list">
 
             <!-- IMAGES -->
             <div *ngIf="galleryService.galleries.mediaType == 'images'">
-              <mat-card style="margin-bottom: 10%; margin-left: 0; margin-right: 0; width: fit-content; padding-left: 0; padding-right: 0; cursor: pointer;">
-                <img style="cursor: pointer;" (click)="openDialog(mediaUrl+'/'+content.name,galleryService.galleries.mediaType, content.title)" src="{{ mediaUrl }}/{{ content.name }}"
-                  width="150px" height="auto">
-              </mat-card>
+              <!-- <mat-card class="example-card">
+                  <mat-card-header>
+                    <mat-card-title>{{ content.title }}</mat-card-title>
+                  </mat-card-header> -->
+                    <img style="cursor: pointer; border: 1px solid" (click)="openDialog(config.externalMediaURL +content.name,galleryService.galleries.mediaType, content.title, content.description)" src="{{ config.externalMediaURL }}/{{ content.name }}"
+                    width="150px" height="auto">
+              <!-- </mat-card> -->
             </div>
 
             <!-- AUDIOS -->
-            <div *ngIf="galleryService.galleries.mediaType == 'audios'">
-              <button mat-button color="primary" (click)="openDialog(mediaUrl+'/'+content.name,galleryService.galleries.mediaType, content.title)"><i class="font-size-l fa fa-play-circle-o"></i>&nbsp;{{ content.title }}</button>
+            <div *ngIf="galleryService.galleries.mediaType == 'audios'" class="mediaContent">
+              <button mat-button color="primary" (click)="openDialog(config.externalMediaURL +content.name,galleryService.galleries.mediaType, content.title)" title="{{ content.title }}"><i class="font-size-l fa fa-play-circle-o"></i>&nbsp;&nbsp;{{ content.title | slice:0:20 }}...</button>
             </div>
 
             <!-- VIDEOS -->
-            <div *ngIf="galleryService.galleries.mediaType == 'videos'">
-              <button mat-button color="warn" (click)="openDialog(mediaUrl+'/'+content.name,galleryService.galleries.mediaType, content.title)"><i class="font-size-l fa fa-play-circle-o"></i>&nbsp;{{ content.title }}</button>
+            <div *ngIf="galleryService.galleries.mediaType == 'videos'" class="mediaContent">
+              <button mat-button color="warn" (click)="openDialog(config.externalMediaURL +content.name,galleryService.galleries.mediaType, content.title)"><i class="font-size-l fa fa-play-circle-o"></i>&nbsp;&nbsp;{{ content.title }}</button>
             </div>
 
             <!-- DOCUMENTS -->
-            <div *ngIf="galleryService.galleries.mediaType == 'documents'">
-              <span *ngIf="content.title.length > 25" class="font-size-s" title="{{ content.title }}">{{ content.title | slice:0:25 }}...</span>&nbsp;
+            <div *ngIf="galleryService.galleries.mediaType == 'documents'" class="mediaContent">
+                <button class="galleryBtn" mat-button (click)="downloadFile(config.externalMediaURL +content.name)"><i class="font-size-l fa fa-download"></i>&nbsp;&nbsp;{{ content.title }}</button>
+              <!-- <span *ngIf="content.title.length > 25" class="font-size-s" title="{{ content.title }}">{{ content.title | slice:0:25 }}...</span>&nbsp;
               <span *ngIf="content.title.length <= 25" class="font-size-s">{{ content.title }}</span>&nbsp;
-              <a *ngIf="content.name !== '-'" class="font-size-s" [href]="mediaUrl+'/'+content.name" title="{{ 'gallery.label.download' | translate }}: {{ content.title }}">
+              <a *ngIf="content.name !== '-'" class="font-size-s" [href]="config.externalMediaURL +mediaUrl+'/'+content.name" title="{{ 'gallery.label.download' | translate }}: {{ content.title }}">
                 <i class="font-size-s defaultColor fa fa-download"></i>
-              </a>
+              </a> -->
             </div>
-
+            
+            
           </div>
           <div class="col-md-9">&nbsp;</div>
         </div>
+        <div class="col-md-9">&nbsp;</div>
 
-      </div>
+      <!-- </div> -->
     </div>
     
-    <div class="col-md-9">&nbsp;</div>
   </div>
+  <div class="col-md-9">&nbsp;</div>
 </div>
