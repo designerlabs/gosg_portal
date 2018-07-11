@@ -362,6 +362,8 @@
     "onlineservice": "Perkhidmatan Dalam Talian",
     "email":"Emel",
     "selectcat":"Pilih Kategori",
+    "open":"Buka",
+    "close":"Tutup",
     "placeholder": {
       "keyword":"Kata Kunci"
     },
@@ -375,7 +377,8 @@
       "no":"Tidak",
       "ok":"OK",
       "cancel":"Batal",
-      "home":"Laman Utama"
+      "home":"Laman Utama",
+      "result":"Hasil Kajian"
     },
     "err":{
       "servicedown": "Harap maaf, Pelayan tidak aktif ",
