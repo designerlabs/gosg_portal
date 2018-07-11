@@ -362,6 +362,8 @@
     "onlineservice": "Online Services",
     "email":"Email",
     "selectcat":"Select Category",
+    "open":"Open",
+    "close":"Close",
     "placeholder": {
       "keyword":"Keyword"
     },
@@ -375,7 +377,8 @@
       "no":"No",
       "ok":"Ok",
       "cancel":"Cancel",
-      "home":"Home"
+      "home":"Home",
+      "result":"Result"
     },
     "err":{
       "servicedown": "Sorry, Server is down",

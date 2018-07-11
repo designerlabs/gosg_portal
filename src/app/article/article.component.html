@@ -179,15 +179,15 @@
                                     </div>
                                     <div>
                                         <div>
-                                          Open : {{tabContent.publishDate | date:'medium' }}
+                                            {{'common.open' | translate}} : {{tabContent.publishDate | date:'medium' }}
                                         </div>
                                         <div>
-                                          Close : {{tabContent.endDate | date:'medium' }}
+                                            {{'common.close' | translate}} : {{tabContent.endDate | date:'medium' }}
                                         </div>
                                     </div>
                                     <div style="padding-top:5px;">
                                       <button (click)="clickContentFromMenu(article.categoryCode, tabContent.contentCode, '', $event)" class="btn btn-success">
-                                        Result
+                                        {{'common.buttons.result' | translate}}
                                       </button>
                                     </div>
                                 </div>
