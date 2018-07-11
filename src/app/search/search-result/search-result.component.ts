@@ -771,8 +771,6 @@ export class SearchResultComponent implements OnInit, OnDestroy {
         .map(res => res.json())
         .subscribe(rData => {
           
-          
-
           this.totalElements = 0;
 
           let num;
@@ -796,11 +794,6 @@ export class SearchResultComponent implements OnInit, OnDestroy {
             this.intData = this.changeAryVal(rData.data,'global')
 
           }
-
-          // 
-          // 
-
-          // 
 
           this.selMonPubDisp = '';
           this.selAuthDisp = '';
@@ -864,9 +857,6 @@ export class SearchResultComponent implements OnInit, OnDestroy {
                 agency = { "name": item[0].name, "val": item[0].val }
                 this.ddagency.push(agency);
               });
-
-              // 
-              // 
 
             }
 

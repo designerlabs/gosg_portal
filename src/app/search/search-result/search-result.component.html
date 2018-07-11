@@ -3,7 +3,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <h1 style="margin-top: 10px;" class="font-size-l">{{'home.breadcrumb.search' | translate}}</h1>
+        <h1 style="margin-top: 10px;" class="font-size-l">{{'home.menu.search' | translate}}</h1>
         <hr class="hr-custom2">
         <ul class="list-inline" style="clear:both;">
           <li>
@@ -13,7 +13,7 @@
           </li>
           <li>/</li>
           <li>
-            {{'home.breadcrumb.search' | translate}}
+            {{'home.menu.search' | translate}}
           </li>
         </ul>
       </div>
@@ -304,8 +304,9 @@
       </mat-tab-group>
 
       <div *ngIf="showNoData" class="row text-align-Center padding-20"> {{ 'home.search.resultnotfound' | translate }} </div>
+      <br />
 
-      <div class="float-right paddingTop-15">
+      <div *ngIf="totalElements > 0" class="float-right paddingTop-15">
         <mat-form-field *ngIf="tabIndex!=2" class="table_footer_pagecount" style="display: inline-block; position: relative; text-align: left;">
           <mat-select class="font-size-s text-align-Center" [(ngModel)]="pagesize" (change)="pageChange($event)">
             <mat-option *ngFor="let pgcount of sharedService.pageSize" [value]="pgcount.size">{{pgcount.size}}</mat-option>
