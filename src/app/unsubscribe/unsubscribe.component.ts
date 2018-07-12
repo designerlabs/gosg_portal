@@ -18,6 +18,8 @@ export class UnsubscribeComponent implements OnInit {
   lang = this.lang;
   languageId = this.languageId;
 
+  unsubcribeStat: any;
+
   constructor(
     private router: Router,
     private sharedService: SharedService,
@@ -61,6 +63,8 @@ export class UnsubscribeComponent implements OnInit {
     
     return this.http.get(this.config.urlPortal + 'subscription/unsub?code='+this.emailId).subscribe(
       data => {
+
+        console.log(data);
         this.toastr.success(this.translate.instant('subscription.unsubMsg'), '');
       }, error => {
         this.toastr.error('Token is invalid');
