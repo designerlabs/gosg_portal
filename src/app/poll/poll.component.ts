@@ -148,9 +148,9 @@ export class PollComponent implements OnInit {
         );
 
         this.toastr.success(
-            `${this.translate.instant('poll.respon')} : ${this.pollComment} <br>
-              ${this.translate.instant('poll.answer')} : ${this.pollAnswer.answer}`
-          )
+            `<div><strong>${this.translate.instant('poll.respon')} :</strong> ${this.pollComment}</div>
+            <div><strong>${this.translate.instant('poll.answer')} :</strong> ${this.pollAnswer.answer}</div>`,'',{closeButton:true, timeOut:4000, progressBar:true, enableHtml:true}
+        )
 
       //  this.toastr.success('Recommendation is : ' + this.pollComment + ', Answer is ' + this.pollAnswer.answer);
         this.showResult = true;
