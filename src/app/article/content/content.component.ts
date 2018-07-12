@@ -123,8 +123,8 @@ export class ContentComponent implements OnInit, OnDestroy {
 
   clickSideMenu(e, status, event){
     this.statusID = status;
-    this.navService.getSubArticleUrl( e.categoryId, localStorage.getItem('langID'));
-    this.navService.triggerSubArticle(e.categoryCode, localStorage.getItem('langID'));
+    // this.navService.getSubArticleUrl( e.categoryId, localStorage.getItem('langID'));
+    // this.navService.triggerSubArticle(e.categoryCode, localStorage.getItem('langID'));
     this.router.navigate( ['/subcategory', e.categoryCode]);
     event.preventDefault();
   }
