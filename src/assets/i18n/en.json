@@ -314,7 +314,6 @@
       "type":"Sorry, type of feedback is unavailable.",
       "subject":"Sorry, subjects is unavailable.",
       "noactivitydata":"No activity found."
-
     }
   },
   "gallery":{
@@ -341,7 +340,6 @@
       "deletesuccess":"Mail has been deleted successfully!",
       "deletesuccess_multi":"Selected mails has been deleted successfully!"
     },
-
     "pagination":{
       "mails":"mails"
     }
@@ -456,7 +454,6 @@
     "comment": "Comment",
     "respon": "Recommendation is",
     "answer": "Answer is"
-
   },
   "announcement":{
     "title":"Highlights",
@@ -474,6 +471,7 @@
       "category":"Category is required"
     },
     "textMsg" : "Do you wish to Unsubscribe?",
+    "textMsgSubs" : "Do you wish to subscribe again?",
     "unsubMsg" : " Thank you. Your email has been removed from our email address. "
   },
    "onlineservices": {

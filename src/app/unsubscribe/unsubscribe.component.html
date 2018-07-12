@@ -22,11 +22,17 @@
   </div>
   <div class="container" style="color: #000; text-align:center">
       <div class="col-md-12" style="text-align:center; margin-bottom: 30px;">
-          <h2>
+          <h2 *ngIf="unsubcribeStat == true">
             <b>{{'home.breadcrumb.unsubscribe' | translate}}</b>
           </h2>
-          <p>
+          <p *ngIf="unsubcribeStat == true">
             {{'subscription.textMsg' | translate}}
+          </p> 
+          <h2 *ngIf="unsubcribeStat == false">
+            <b>{{'home.breadcrumb.subscription' | translate}}</b>
+          </h2>
+          <p *ngIf="unsubcribeStat == false">
+            {{'subscription.textMsgSubs' | translate}}
           </p> 
           <button class="btn btn-md btn-success" (click)="unsubs()" *ngIf="unsubcribeStat == true">
             <i class="fa fa-check"> </i> {{'home.breadcrumb.unsubscribe' | translate}}

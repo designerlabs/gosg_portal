@@ -329,10 +329,6 @@
       "date":"Tarikh",
       "action":"Tindakan"
     },
-
-    "pagination":{
-      "mails":"mel"
-    },
     "err":{
       "deleteconfirm":"Adakah anda pasti memadam mel ini?",
       "deleteconfirm_multi":"Adakah anda pasti memadam mel yang dipilih?",
@@ -343,6 +339,9 @@
     "success":{
       "deletesuccess":"Mel telah berjaya dipadam!",
       "deletesuccess_multi":"Mel yang dipilih telah berjaya dipadam!"
+    },
+    "pagination":{
+      "mails":"mel"
     }
   },
   "common":{
@@ -472,6 +471,7 @@
       "category":"Kategori wajib diisi"
     },
     "textMsg" : "Adakah anda ingin berhenti melanggan",
+    "textMsgSubs" : "Adakah anda ingin melanggan semula?",
     "unsubMsg" : "Terima Kasih. Emel anda telah dikeluarkan daripada langganan emel kami."
   },
   "onlineservices": {
