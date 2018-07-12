@@ -28,8 +28,11 @@
           <p>
             {{'subscription.textMsg' | translate}}
           </p> 
-          <button class="btn btn-md btn-success" (click)="unsubs()">
+          <button class="btn btn-md btn-success" (click)="unsubs()" *ngIf="unsubscribe == true">
             <i class="fa fa-check"> </i> {{'home.breadcrumb.unsubscribe' | translate}}
+          </button>
+          <button class="btn btn-md btn-success" (click)="subs()" *ngIf="unsubscribe == false">
+            <i class="fa fa-check"> </i> {{'home.breadcrumb.subscription' | translate}}
           </button>
           <button class="btn btn-md btn-danger" (click)="gotoHome()">
               <i class="fa fa-times"> </i> {{'common.buttons.cancel' | translate}}
