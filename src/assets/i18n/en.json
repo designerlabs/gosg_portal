@@ -466,6 +466,7 @@
     "btnsubscribe" : "Subscribe",
     "setactivetitle": "Subscribe to mailing list",
     "setactivemsg": "Thank you. Your email has been verified.",
+    "setactivemsgError": "Please subscribe again.",
     "err":{
       "email":"Email is required. IE: aaaa@bbb.com",
       "category":"Category is required"

@@ -52,7 +52,7 @@ export class SetactiveComponent implements OnInit {
       if(rData.statusCode === 'SUCCESS'){
         this.chktoken = true;
       }else if(rData.statusCode === "ERROR"){
-        this.toastr.error(rData.statusDesc);
+        // this.toastr.error(rData.statusDesc);
         this.chktoken = false;
         this.errormsg = rData.statusDesc;
       }
@@ -74,6 +74,14 @@ export class SetactiveComponent implements OnInit {
     let msg = `Status code ${error.status} on url ${error.url}`;
     console.error(msg);
     return Observable.throw(msg);
+  }
+
+  subs(){
+    this.router.navigate(['subscription']);
+  }
+
+  gotoHome(){
+    this.router.navigate(['index']);
   }
 
 }
