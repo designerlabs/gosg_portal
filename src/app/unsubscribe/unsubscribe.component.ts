@@ -72,7 +72,7 @@ export class UnsubscribeComponent implements OnInit {
         }
 
         else{
-          this.toastr.success(JSON.parse(data["_body"]).statusDesc, '');
+          this.toastr.error(JSON.parse(data["_body"]).statusDesc, '');
         }
 
         this.unsubcribeStat = false;
