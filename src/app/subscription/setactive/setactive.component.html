@@ -31,8 +31,24 @@
               </div>
           </div>
       </div>
-      <div *ngIf="!chktoken" class="row text-align-Center padding-20"><h3>
+      <div *ngIf="!chktoken" class="row text-align-Center padding-20">
+        <!-- <h3>
           <b class='text-danger'>{{errormsg}}</b>
-      </h3> </div>
+        </h3>  -->
+        <h2 class="font-size-l" [style.color]="sharedservice.getTheme()"><b> {{errormsg}} </b></h2>
+          <div class="row padding">
+              <div class="col-md-12">
+                <div class="font-size-m" style="margin-top: 20px; text-align: center;">
+                   {{'subscription.setactivemsgError' | translate}} 
+                </div>
+                <button class="btn btn-md btn-success" (click)="subs()">
+                    <i class="fa fa-check"> </i> {{'home.breadcrumb.subscription' | translate}}
+                </button>
+                <button class="btn btn-md btn-danger" (click)="gotoHome()">
+                  <i class="fa fa-times"> </i> {{'common.buttons.cancel' | translate}}
+                </button> 
+              </div>
+        </div>
+      </div>
   </div>
   
