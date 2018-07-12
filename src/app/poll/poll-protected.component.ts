@@ -142,7 +142,13 @@ export class PollProtectedComponent implements OnInit, OnDestroy {
             this.toastr.error(this.translate.instant('common.err.servicedown'), '');
         }
     );
-    this.toastr.success('Recommendation is : ' + this.pollComment + ', Answer is ' + this.pollAnswer.answer);
+
+    this.toastr.success(
+      `${this.translate.instant('poll.respon')} : ${this.pollComment},
+        ${this.translate.instant('poll.answer')} : ${this.pollAnswer.answer}`
+    )
+    
+    //this.toastr.success('Recommendation is : ' + this.pollComment + ', Answer is ' + this.pollAnswer.answer);
     this.showResult = true;
     localStorage.setItem('polldone', this.pollReference);
   }

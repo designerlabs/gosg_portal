@@ -453,7 +453,10 @@
     "youranswer" : "Your answer is",
     "seeAnswer" : "WOULD YOU LIKE TO KNOW THE RESULTS OF THE LATEST SURVEY ON THE NEW MYGOV WEB SITE?",
     "displayAnswer" : " YES, DISPLAY THE LATEST RESULTS ",
-    "comment": "Comment"
+    "comment": "Comment",
+    "respon": "Recommendation is",
+    "answer": "Answer is"
+
   },
   "announcement":{
     "title":"Highlights",

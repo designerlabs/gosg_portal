@@ -452,7 +452,9 @@
     "youranswer" : "Jawapan anda adalah",
     "seeAnswer" : "INGIN MENGETAHUI KEPUTUSAN TERKINI SURVEY MENGENAI LAMAN WEB MYGOV YANG BARU?",
     "displayAnswer" : " YA, PAPARKAN KEPUTUSAN TERKINI ",
-    "comment": "Komen"
+    "comment": "Komen",
+    "respon": "Cadangan ialah",
+    "answer": "Jawapan ialah"
   },
   "announcement":{
     "title":"Sorotan Terkini",
