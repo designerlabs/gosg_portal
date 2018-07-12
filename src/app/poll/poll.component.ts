@@ -148,7 +148,7 @@ export class PollComponent implements OnInit {
         );
 
         this.toastr.success(
-            `${this.translate.instant('poll.respon')} : ${this.pollComment}
+            `${this.translate.instant('poll.respon')} : ${this.pollComment} <br>
               ${this.translate.instant('poll.answer')} : ${this.pollAnswer.answer}`
           )
 
