@@ -148,7 +148,7 @@ export class PollComponent implements OnInit {
         );
 
         this.toastr.success(
-            `${this.translate.instant('poll.respon')} : ${this.pollComment}, 
+            `${this.translate.instant('poll.respon')} : ${this.pollComment}
               ${this.translate.instant('poll.answer')} : ${this.pollAnswer.answer}`
           )
 
@@ -156,7 +156,7 @@ export class PollComponent implements OnInit {
         this.showResult = true;
         localStorage.setItem('polldone', this.pollReference);
     }
-    
+
     closeResult() {
         this.latestResult = true;
         this.showResult = false;
