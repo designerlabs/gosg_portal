@@ -152,8 +152,8 @@ export class SubarticleprodComponent implements OnInit, OnDestroy {
   }
 
   clickContentFromMenu(pId, aId, event) {
-    this.navService.triggerContent(aId, localStorage.getItem('langID'));
-    this.navService.getContentUrl(aId, localStorage.getItem('langID'));
+    // this.navService.triggerContent(aId, localStorage.getItem('langID'));
+    // this.navService.getContentUrl(aId, localStorage.getItem('langID'));
     this.router.navigate(['/content', aId]);
     event.preventDefault();
   }

@@ -107,8 +107,8 @@ export class ArticleprodComponent implements OnInit, OnDestroy {
 
   clickSideMenu(e, status, event) {
     this.statusID = status;
-    this.navService.getSubArticleUrl(e.categoryCode, localStorage.getItem('langID'));
-    this.navService.triggerSubArticle(e.categoryCode, localStorage.getItem('langID'));
+    // this.navService.getSubArticleUrl(e.categoryCode, localStorage.getItem('langID'));
+    // this.navService.triggerSubArticle(e.categoryCode, localStorage.getItem('langID'));
     this.router.navigate(['/subcategory', e.categoryCode]);
     event.preventDefault();
   }
@@ -123,8 +123,8 @@ export class ArticleprodComponent implements OnInit, OnDestroy {
   clickContentFromMenu(pId, aId, status, event) {
 
     this.statusID = status;
-    this.navService.triggerContent(aId, localStorage.getItem('langID'));
-    this.navService.getContentUrl(aId, localStorage.getItem('langID'));
+    // this.navService.triggerContent(aId, localStorage.getItem('langID'));
+    // this.navService.getContentUrl(aId, localStorage.getItem('langID'));
     this.router.navigate(['/content', aId]);
     event.preventDefault();
   }

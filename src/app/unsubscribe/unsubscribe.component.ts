@@ -18,6 +18,8 @@ export class UnsubscribeComponent implements OnInit {
   lang = this.lang;
   languageId = this.languageId;
 
+  unsubcribeStat = true;
+
   constructor(
     private router: Router,
     private sharedService: SharedService,
@@ -59,12 +61,25 @@ export class UnsubscribeComponent implements OnInit {
 
   unsubs(){
     
-    return this.http.get(this.config.urlPortal + 'subscription/unsub?code='+this.emailId).subscribe(
+    return this.http.get(this.config.urlPortal + 'subscription/unsub?code='+this.emailId+ '&language='+ this.languageId).subscribe(
       data => {
-        this.toastr.success(this.translate.instant('subscription.unsubMsg'), '');
-      }, error => {
-        this.toastr.error('Token is invalid');
+        
+        let errMsg = "";
+        errMsg = JSON.parse(data["_body"]).statusCode;
+
+        if(errMsg.toLowerCase() == 'success'){
+          this.toastr.success(this.translate.instant('subscription.unsubMsg'), '');
+        }
+
+        else{
+          this.toastr.error(JSON.parse(data["_body"]).statusDesc, '');
+        }
+
+        this.unsubcribeStat = false;
       }
+      // , error => {
+      //   this.toastr.error('Token is invalid');
+      // }
     )
     // http://10.1.70.148:8080//portal/unsubscribe?email=f41a5c939e5343b908d8fc447d0c2775effeb0879a982570f6e7dedb601745ef
 
@@ -72,10 +87,12 @@ export class UnsubscribeComponent implements OnInit {
     //   data => {
        
     //   }
-    // )
-
-   
+    // )   
     
+  }
+
+  subs(){
+    this.router.navigate(['subscription']);
   }
 
   gotoHome(){

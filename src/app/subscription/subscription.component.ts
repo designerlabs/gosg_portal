@@ -52,7 +52,7 @@ export class SubscriptionComponent implements OnInit,OnDestroy {
     @Inject(APP_CONFIG) private config: AppConfig,
   ) {
     this.lang = translate.currentLang;
-    this.languageId = 2;
+    //this.languageId = 2;
     this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
 
       const myLang = translate.currentLang;
@@ -78,8 +78,11 @@ export class SubscriptionComponent implements OnInit,OnDestroy {
     if(!this.languageId){
       this.languageId = localStorage.getItem('langID');
     }else{
-      this.languageId = 1;
+      this.languageId = this.languageId;
     }
+
+    console.log("off");
+    console.log(this.languageId);
 
     this.txtEmail = new FormControl('', [Validators.required, Validators.pattern(this.validateService.getPattern().email)]);    
     this.selCategory = new FormControl();
