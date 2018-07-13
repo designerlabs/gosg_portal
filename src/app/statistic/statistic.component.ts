@@ -18,13 +18,18 @@ export class StatisticComponent implements OnInit {
 
   StatByYearAll: any = [["01", "0"], ["02", "0"], ["03", "0"], ["04", "0"], ["05", "0"], ["06", "0"], ["07", "0"], ["08", "0"], ["09", "0"], ["10", "0"], ["11", "0"], ["12", "0"]]
   StatByYearNew: any = [["01", "0"], ["02", "0"], ["03", "0"], ["04", "0"], ["05", "0"], ["06", "0"], ["07", "0"], ["08", "0"], ["09", "0"], ["10", "0"], ["11", "0"], ["12", "0"]]
+  StatByYearDservice: any = [{"name":"01","val":0},{"name":"02","val":0},{"name":"03","val":0},{"name":"04","val":0},{"name":"05","val":0},{"name":"06","val":0},{"name":"07","val":0},{"name":"08","val":0},{"name":"09","val":0},{"name":"10","val":0},{"name":"11","val":0},{"name":"12","val":0}];
   allUsersByYear: any;
   newUsersByYear: any;
+  dserviceByYear: any;
   allUsersData: any = [];
   newUsersData: any = [];
+  dServiceData: any = [];
+  dserviceRpt: any;
   totalUsers: any;
   totalNewUsers: any;
   languageId = this.languageId;
+  sum = (total, currentValue) => total + currentValue;
 
   constructor(
     private http: Http,
@@ -65,8 +70,68 @@ export class StatisticComponent implements OnInit {
   lang = this.lang;
 
   ngOnInit() {
+
+    if(!this.languageId){
+      this.languageId = localStorage.getItem('langID');
+    }else{
+      this.languageId = 1;
+    }
+
     this.getUsersStatData(1);
     this.getUsersStatData(2);
+    this.getDserviceReport(this.languageId);
+    // console.log(this.generateStatByYearFor('dservice'));
+  }
+
+  getDserviceReport(lng) {
+
+
+    let aryObj: any;
+    let retn = [];
+    let newArrObj:any;
+
+    aryObj = {
+      mName: "",
+      mVal: ""
+    };
+
+    this.portalservice.getDserviceRptData(lng).subscribe(data => {
+      this.dServiceData = data.list;
+      this.dserviceByYear = this.StatByYearDservice;
+
+      this.dServiceData.forEach(dsvc => {
+
+        if(dsvc.report) {
+          
+          // if(dsvc.title == "Registration Form 1") {
+
+            Object.keys(dsvc.report).map(function (inx) {
+              aryObj = new Object;
+              
+              aryObj.name = inx;
+              aryObj.val = dsvc.report[inx];
+              
+              retn.push(aryObj);
+
+            });
+
+            retn.forEach(el => {
+              el.name = this.convertMonthName(el.name);
+            });
+
+            dsvc.report = retn;
+            retn = [];
+            
+            // }
+            
+          } else {
+            dsvc.report = this.StatByYearDservice;
+          }
+          // console.log(JSON.stringify(dsvc.report))
+      });
+      console.log(this.dServiceData)
+
+    });
   }
 
   getUsersStatData(type) {
@@ -105,4 +170,68 @@ export class StatisticComponent implements OnInit {
     });
   }
 
+  generateStatByYearFor(name:String) {
+    let objName:String = name;
+    let StatByYear: any = [["01", "0"], ["02", "0"], ["03", "0"], ["04", "0"], ["05", "0"], ["06", "0"], ["07", "0"], ["08", "0"], ["09", "0"], ["10", "0"], ["11", "0"], ["12", "0"]]
+    let genObj = {objName:StatByYear};
+    return genObj;
+  }
+
+  convertMonthName(objName:String) {
+
+    let objElem;
+
+    switch (objName) {
+
+      case "jan":
+        objElem = "01"
+        break;
+
+      case "feb":
+        objElem = "02"
+        break;
+
+      case "mar":
+        objElem = "03"
+        break;
+
+      case "apr":
+        objElem = "04"
+        break;
+
+      case "may":
+        objElem = "05"
+        break;
+
+      case "jun":
+        objElem = "06"
+        break;
+
+      case "jul":
+        objElem = "07"
+        break;
+
+      case "aug":
+        objElem = "08"
+        break;
+
+      case "sep":
+        objElem = "09"
+        break;
+
+      case "oct":
+        objElem = "10"
+        break;
+
+      case "nov":
+        objElem = "11"
+        break;
+
+      case "dec":
+        objElem = "12"
+        break;
+
+    }
+    return objElem;
+  }
 }
