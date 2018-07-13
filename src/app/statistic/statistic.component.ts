@@ -115,7 +115,6 @@ export class StatisticComponent implements OnInit {
 
             dsvc.report = retn;
             sum = retn.reduce((sum, item) => sum + item.val, 0);
-            console.log(sum)
             retn = [];
             
             // }
@@ -127,7 +126,6 @@ export class StatisticComponent implements OnInit {
           }
 
         });
-        console.log(this.dServiceData)
 
     });
   }
