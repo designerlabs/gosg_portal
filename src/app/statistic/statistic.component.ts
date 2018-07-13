@@ -129,7 +129,6 @@ export class StatisticComponent implements OnInit {
           }
           // console.log(JSON.stringify(dsvc.report))
       });
-      console.log(this.dServiceData)
 
     });
   }
