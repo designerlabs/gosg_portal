@@ -57,11 +57,6 @@ export class StatisticComponent implements OnInit {
         });
       }
 
-      if (!this.languageId) {
-        this.languageId = localStorage.getItem('langID');
-      } else {
-        this.languageId = 1;
-      }
       // this.getUsersStatData(1);
       // this.getUsersStatData(2);
 
@@ -85,10 +80,10 @@ export class StatisticComponent implements OnInit {
 
   getDserviceReport(lng) {
 
-
     let aryObj: any;
     let retn = [];
     let newArrObj:any;
+    let sum: any;
 
     aryObj = {
       mName: "",
@@ -112,7 +107,6 @@ export class StatisticComponent implements OnInit {
               aryObj.val = dsvc.report[inx];
               
               retn.push(aryObj);
-
             });
 
             retn.forEach(el => {
@@ -120,15 +114,20 @@ export class StatisticComponent implements OnInit {
             });
 
             dsvc.report = retn;
+            sum = retn.reduce((sum, item) => sum + item.val, 0);
+            console.log(sum)
             retn = [];
             
             // }
             
+            dsvc.rptTotal = sum;
           } else {
             dsvc.report = this.StatByYearDservice;
+            dsvc.rptTotal = 0;
           }
-          // console.log(JSON.stringify(dsvc.report))
-      });
+
+        });
+        console.log(this.dServiceData)
 
     });
   }
