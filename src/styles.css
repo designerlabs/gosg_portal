@@ -422,6 +422,10 @@ p.font-size-s > strong {
     padding-right: 0px;
   }
 
+  .lifeEventBox{
+    padding: 0px 25px !important;
+  }
+
   .lifeEventContainer h2, .lifeEventContainer p{
     padding-left: 5px !important;
     padding-right: 5px !important;
