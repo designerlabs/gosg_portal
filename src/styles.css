@@ -114,6 +114,10 @@ html, body{
   list-style: square;
 }
 
+.custom_list_number{
+  list-style:decimal;
+}
+
 .custom_list li{
   padding:5px 0;
 }
