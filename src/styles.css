@@ -19,9 +19,6 @@ em{
 .error :-moz-placeholder { color: #999; }
 .error :-ms-input-placeholder { color: #999; }  */
 
-ngui-auto-complete{
-  /* display: none !important; */
-}
 
 .mat-fab.mat-accent, .mat-mini-fab.mat-accent, .mat-raised-button.mat-accent {
   background-color: #5bc0de;

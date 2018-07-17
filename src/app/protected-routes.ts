@@ -38,7 +38,7 @@ import { UnsubscribeComponent } from './unsubscribe/unsubscribe.component';
 import { AgencydirectoryComponent } from './agencydirectory/agencydirectory.component';
 import { SetactiveComponent } from './subscription/setactive/setactive.component';
 import { RssComponent } from './article/rss/rss.component';
-import { ContentComponent } from './article/content/content.component';
+import { ContentProdComponent } from './article/content/contentprod.component';
 import { EparticipationComponent } from './eparticipation/eparticipation.component';
 import { StatisticComponent } from './statistic/statistic.component';
 import { SitemapComponent } from './sitemap/sitemap.component';
@@ -75,7 +75,7 @@ export const protectedRoutes: Routes = [
     {path: 'rss/:id', component: RssComponent},
     {path: 'rss/id/:id', component: RssComponent},
     {path: 'subcategory/:id1', component: SubarticleprodComponent },
-    {path: 'content/:id1', component: ContentComponent},
+    {path: 'content/:id1', component: ContentProdComponent},
     {path: 'archive/category/:id', component:ArchivecategoryComponent},
     {path: 'archive/subcategory/:id', component:ArchivesubcategoryComponent},
     {path: 'archive/content/:id', component:ArchivecontentComponent},

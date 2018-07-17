@@ -130,7 +130,6 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { UnsubscribeComponent } from '../unsubscribe/unsubscribe.component';
 import { SetactiveComponent } from '../subscription/setactive/setactive.component';
 import { RssComponent } from '../article/rss/rss.component';
-import { ContentComponent } from '../article/content/content.component';
 import { EparticipationComponent } from '../eparticipation/eparticipation.component';
 import { StatisticComponent } from '../statistic/statistic.component';
 import { SitemapComponent } from '../sitemap/sitemap.component';
@@ -140,6 +139,7 @@ import { ArchivecontentComponent } from '../archive/archivecontent/archiveconten
 import { GalleryService } from '../gallery/gallery.service';
 import { GalleryComponent, DialogDataExampleDialog } from '../gallery/gallery.component';
 import { SchoolsearchComponent } from '../schoolsearch/schoolsearch.component';
+import { LeftmenuComponent } from '../article/leftmenu/leftmenu.component';
 // import { LifeeventComponent } from '../lifeevent/lifeevent.component';
 //import { GalleryService } from '../gallery/gallery.service';
 // import { SearchResultComponent } from '../search/search-result/search-result.component';
@@ -221,7 +221,6 @@ export function HttpLoaderFactory(http: Http) {
     UnsubscribeComponent,
     SetactiveComponent,
     RssComponent,
-    ContentComponent,
     EparticipationComponent,
     StatisticComponent,
     SitemapComponent,
@@ -230,7 +229,8 @@ export function HttpLoaderFactory(http: Http) {
     ArchivecontentComponent,
     GalleryComponent,
     DialogDataExampleDialog,
-    SchoolsearchComponent
+    SchoolsearchComponent,
+    LeftmenuComponent
     // SearchResultComponent
   ],
 
@@ -242,6 +242,7 @@ export function HttpLoaderFactory(http: Http) {
     TopnavComponent,
     RouterModule,
     AboutusComponent,
+    LeftmenuComponent,
     AnnouncementComponent,
     AnnouncementlistComponent,
     AnnouncementdetailsComponent,

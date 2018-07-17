@@ -35,7 +35,13 @@
                         {{article.categoryName}}
                     </h4>
 
+
+
+
                     <mat-accordion>
+
+                        <gosg-leftmenu [sessions]="article.menuLeft" ></gosg-leftmenu>
+
                         <!-- <div *ngIf="contentMain.subMenuLeft.length !=0"> -->
                             <mat-expansion-panel  *ngFor="let content of article.menuLeft; let i = index" multi="false" displayMode="flat" [hideToggle]="content.subMenuLeft.length==0 ? true: null"  [expanded]="content.activeMenu  || (i == statusID) || article.menuLeft.length <= 1">
                                 <mat-expansion-panel-header>
@@ -58,44 +64,8 @@
                                   </mat-panel-title>
                                 </mat-expansion-panel-header>
                               </mat-expansion-panel>
-                          <!-- </div> -->
-
-                            <!-- <div *ngIf="contentMain.subMenuLeft.length ==0">
-                                <mat-expansion-panel hideToggle="true" *ngFor="let content of article.menuLeft; let i = index"  multi="true" displayMode="flat">
-                                    <mat-expansion-panel-header (click)="clickSideMenu(content)">
-                                      <mat-panel-title>
-                                        <a class="warna_font sideBarMenu--link font-size-s" [routerLinkActive]="['active']"  [style.font-weight]="content.activeMenu ? 'bold' : 'normal'"  [style.color]="content.activeMenu ? getTheme() : '#333'" >{{content.categoryName}}</a>
-                                      </mat-panel-title>
-                                    </mat-expansion-panel-header>
-                                </mat-expansion-panel>
-                            </div> -->
-
 
                         </mat-accordion>
-
-
-
-                    <!-- <ul class="list-unstyled">
-                        <li class="liList" *ngFor="let content of article.menuLeft">
-                            <div class="col-xs-12 col-md-12 col-sm-12">
-                                <a class="warna_font sideBarMenu--link font-size-s" [routerLinkActive]="['active']"  [style.font-weight]="content.active ? 'bold' : 'normal'"  [style.color]="content.active ? getTheme() : '#333'" (click)="clickSideMenu(content)">
-                                {{content.categoryName}}
-
-                                </a>
-                            </div>
-                            <ul style="list-style: none; padding-left: 15px;">
-                                <li *ngFor="let subcontent of content.subMenuLeft">
-                                     <a class="warna_font sideBarMenu--link font-size-s" style="color:#333"  href="" (click)="clickContentFromMenu(content.parentCode, subcontent.contentCode)">
-                                        {{subcontent.contentTitle}}
-
-                                    </a>
-                                </li>
-                            </ul>
-
-
-                        </li>
-
-                    </ul> -->
                 </div>
             </div>
         </div>

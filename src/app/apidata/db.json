@@ -3528,7 +3528,190 @@
       "id": 9
     }
   ],
-  "Menu": [],
+  "Menu": [
+    {
+  "type": "RESPONSE",
+  "statusCode": "SUCCESS",
+  "statusDesc": "Find Content Category",
+  "contentCategoryResource": {
+    "results": [
+      {
+        "categoryId": 111,
+        "categoryName": "Education Support",
+        "categoryCode": 10,
+        "categoryDescription": "Information on financial aid for education at the primary level up to tertiary level in Malaysia.",
+        "parentCode": 9,
+        "template": "content",
+        "breadcrum": [
+          {
+            "breadcrumSort": 1,
+            "breadcrumName": "Education Support",
+            "breadcrumUrl": "/category/10"
+          }
+        ],
+        "menuLeft": [
+          {
+            "categoryId": 222,
+            "categoryName": "Education Support 1",
+            "categoryCode": 11,
+            "categoryDescription": "Education Support 1 Desc",
+            "parentCode": 10,
+            "subCategories": [
+              {
+                "categoryId": 333,
+                "categoryName": "Education Support 2",
+                "categoryCode": 12,
+                "categoryDescription": "Education Support 2 Desc",
+                "parentCode": 11,
+                "subCategories": [
+                  {
+                    "categoryId": 444,
+                    "categoryName": "Education Support 3",
+                    "categoryCode": 13,
+                    "categoryDescription": "Education Support 3 Desc",
+                    "parentCode": 12,
+                    "subCategories": [
+                      {
+                        "categoryId": 555,
+                        "categoryName": "Education Support 4",
+                        "categoryCode": 14,
+                        "categoryDescription": "Education Support 4 Desc",
+                        "parentCode": 13,
+                        "subCategories": [],
+                        "contents": [
+                          {
+                            "contentId": 1450,
+                            "contentTitle": "Fundamental",
+                            "contentDescription": "Fundamental",
+                            "contentCode": 60,
+                            "contentSort": 0,
+                            "activeMenu": false
+                          }
+                        ],
+                        "categorySort": 0,
+                        "activeMenu": false
+                      }
+                    ],
+                    "contents": [
+                      {
+                        "contentId": 1451,
+                        "contentTitle": "Financial Aid",
+                        "contentDescription": "Financial Aid",
+                        "contentCode": 61,
+                        "contentSort": 0,
+                        "activeMenu": false
+                      }
+                    ],
+                    "categorySort": 0,
+                    "activeMenu": false
+                  }
+                ],
+                "contents": [
+                  {
+                    "contentId": 1200,
+                    "contentTitle": "Aid",
+                    "contentDescription": "Aid",
+                    "contentCode": 637,
+                    "contentSort": 0,
+                    "activeMenu": false
+                  },
+                  {
+                    "contentId": 1201,
+                    "contentTitle": "The Supplementary Food Programme",
+                    "contentDescription": "The Supplementary Food Programme",
+                    "contentCode": 640,
+                    "contentSort": 0,
+                    "activeMenu": false
+                  }
+                ],
+                "categorySort": 0,
+                "activeMenu": false
+              },
+              {
+                "categoryId": 45,
+                "categoryName": "Education Support 1",
+                "categoryCode": 874,
+                "categoryDescription": "ccdc",
+                "parentCode": 453,
+                "subCategories": [],
+                "contents": [],
+                "categorySort": 0,
+                "activeMenu": false
+              }
+            ],
+            "contents": [
+              {
+                "contentId": 132,
+                "contentTitle": "Content Financial",
+                "contentDescription": "Content Financial",
+                "contentCode": 637,
+                "contentSort": 0,
+                "activeMenu": false
+              },
+              {
+                "contentId": 143,
+                "contentTitle": "Programme",
+                "contentDescription": "Programme",
+                "contentCode": 640,
+                "contentSort": 0,
+                "activeMenu": false
+              }
+            ],
+            "categorySort": 0,
+            "activeMenu": false
+          },
+          {
+            "categoryId": 5,
+            "categoryName": "Education Support 2",
+            "categoryCode": 12,
+            "categoryDescription": "Education Support 2 Desc",
+            "parentCode": 10,
+            "subCategories": [],
+            "contents": [
+              {
+                "contentId": 1453,
+                "contentTitle": "Types of Assistance",
+                "contentDescription": "Types of Assistance",
+                "contentCode": 637,
+                "contentSort": 0,
+                "activeMenu": false
+              },
+              {
+                "contentId": 23399,
+                "contentTitle": "Assistance",
+                "contentDescription": "Assistance",
+                "contentCode": 640,
+                "contentSort": 0,
+                "activeMenu": false
+              }
+            ],
+            "categorySort": 0,
+            "activeMenu": false
+          }
+        ],
+        "subCategoryList": [
+          {
+            "categoryId": 222,
+            "categoryName": "Education Support 1",
+            "categoryDescription": "Education Support 1 Desc",
+            "categoryCode": 11,
+            "parentCode": 10,
+            "categorySort": 0
+          },
+          {
+            "categoryId": 5,
+            "categoryName": "Education Support 2",
+            "categoryDescription": "Education Support 2 Desc",
+            "categoryCode": 12,
+            "parentCode": 10,
+            "categorySort": 0
+          }
+        ]
+      }
+    ]
+  }
+}
+  ],
   "poll": [
     {
       "questionId": 1,
@@ -3817,8 +4000,8 @@
     }
       ]
     }
-    
-    
+
+
   ],
   "groupList": [
     {
@@ -3877,7 +4060,7 @@
           "moduleGroupName": "123",
           "moduleGroupId":3,
           "subModuleGroups": [
-            { 
+            {
               "subModuleGroupId": 1,
               "moduleName": "city",
               "permission": {
@@ -3888,7 +4071,7 @@
                 "isDelete": false
               }
             },
-            { 
+            {
               "subModuleGroupId": 2,
               "moduleName": "state",
               "permission": {
@@ -3907,7 +4090,7 @@
           "moduleGroupName": "address module",
           "moduleGroupId":4,
           "subModuleGroups": [
-            { 
+            {
               "subModuleGroupId": 1,
               "moduleName": "city",
               "permission": {
@@ -3918,7 +4101,7 @@
                 "isDelete": false
               }
             },
-            { 
+            {
               "subModuleGroupId": 2,
               "moduleName": "state",
               "permission": {
@@ -3973,11 +4156,11 @@
           "moduleGroupName": "123",
           "moduleGroupId":3,
           "subModuleGroups": [
-            { 
+            {
               "subModuleGroupId": 1,
               "moduleName": "city"
             },
-            { 
+            {
               "subModuleGroupId": 2,
               "moduleName": "state"
             }
@@ -3989,11 +4172,11 @@
           "moduleGroupName": "address module",
           "moduleGroupId":4,
           "subModuleGroups": [
-            { 
+            {
               "subModuleGroupId": 1,
               "moduleName": "city"
             },
-            { 
+            {
               "subModuleGroupId": 2,
               "moduleName": "state"
             }

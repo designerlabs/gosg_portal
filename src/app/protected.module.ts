@@ -38,6 +38,7 @@ import { PolicereportComponent } from './pdrm/policereport/policereport.componen
 import { StatuspositionComponent } from './pdrm/statusposition/statusposition.component';
 import { SummontrafficComponent } from './pdrm/summontraffic/summontraffic.component';
 import { DigitalservicesprodComponent } from './digitalservices/digitalservicesprod.component';
+import { ContentProdComponent } from './article/content/contentprod.component';
 
 export function HttpLoaderFactory(http: Http) {
    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -60,11 +61,12 @@ export function HttpLoaderFactory(http: Http) {
     LifeeventprodComponent,
     SearchResultProdComponent,
     SubarticleprodComponent,
-    ArticleprodComponent,    
+    ArticleprodComponent,
     PolicereportComponent,
     StatuspositionComponent,
     DigitalservicesprodComponent,
-    SummontrafficComponent
+    SummontrafficComponent,
+    ContentProdComponent
   ],
   imports: [
     SharedModule,
@@ -84,7 +86,7 @@ export function HttpLoaderFactory(http: Http) {
     RouterModule.forRoot(protectedRoutes),
     NguiAutoCompleteModule,
     ButtonsModule.forRoot(),
-    AccordionModule.forRoot(), 
+    AccordionModule.forRoot(),
     OwlModule
   ],
   schemas:[
