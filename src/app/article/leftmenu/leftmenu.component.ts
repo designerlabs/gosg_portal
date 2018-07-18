@@ -26,6 +26,7 @@ export class LeftmenuComponent {
   statusID: any;
   paramURL: any;
   @Input() sessions: any;
+  @Input() menuType: any;
 
   constructor(private router:Router, private navService: NavService, private activatedRoute: ActivatedRoute){
 
@@ -41,6 +42,7 @@ export class LeftmenuComponent {
   }
 
   clickSideMenu(e, status, event) {
+    //alert( this.paramURL = this.activatedRoute.snapshot.url[0].path)
     debugger;
     this.statusID = status;
     this.router.navigate(['/subcategory', e.categoryCode]);
@@ -48,14 +50,14 @@ export class LeftmenuComponent {
   }
 
   clickContentFromMenu(pId, aId, status, event) {
-    debugger;
+    //alert( this.paramURL = this.activatedRoute.snapshot.url[0].path)
     this.statusID = status;
     this.router.navigate(['/content', aId]);
     event.preventDefault();
   }
 
   clickSideMenuByAgency(e, status, event) {
-    debugger;
+    //alert( this.paramURL = this.activatedRoute.snapshot.url[0].path)
     this.navService.getSubArticleUrlByAgency(localStorage.getItem('langID'));
     this.navService.triggerSubArticleAgency(localStorage.getItem('langID'));
     this.router.navigate(['/subcategory', 'agency']);

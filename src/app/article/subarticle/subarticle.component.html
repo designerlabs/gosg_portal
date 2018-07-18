@@ -41,7 +41,7 @@
                     <!-- <div *ngFor="let contentMain of article.menuLeft;"> -->
                         <mat-accordion>
                           <!-- <div *ngIf="contentMain.subMenuLeft.length !=0"> -->
-                              <gosg-leftmenu [sessions]="article.menuLeft" ></gosg-leftmenu>
+                              <gosg-leftmenu [sessions]="article.menuLeft" [menuType]="moduleName" ></gosg-leftmenu>
                               <mat-expansion-panel  *ngFor="let content of article.menuLeft; let i = index" multi="false" displayMode="flat" [hideToggle]="content.subMenuLeft.length==0 ? true: null"    [expanded]="content?.activeMenu">
                                   <mat-expansion-panel-header>
                                     <mat-panel-title class="pointer" (click)="clickSideMenu(content, i, $event)">

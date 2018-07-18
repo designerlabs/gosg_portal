@@ -41,7 +41,7 @@
 
                     <mat-accordion>
 
-                            <gosg-leftmenu [sessions]="article.menuLeft" ></gosg-leftmenu>
+                            <gosg-leftmenu [sessions]="article.menuLeft"  [menuType]="moduleName"></gosg-leftmenu>
                             <mat-expansion-panel  *ngFor="let content of article.menuLeft; let i = index" multi="false" displayMode="flat" [hideToggle]="content.subMenuLeft.length==0 ? true: null"  [expanded]="statusID ? (i == statusID) : content?.activeMenu">
 
                                 <mat-expansion-panel-header>
