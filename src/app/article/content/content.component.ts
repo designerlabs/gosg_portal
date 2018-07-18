@@ -95,6 +95,7 @@ export class ContentComponent implements OnInit, OnDestroy {
 
     this.articleData = this.articleService.getArticle();
     this.topicID = parseInt(this.router.url.split('/')[2]);
+    this.moduleName = this.router.url.split('/')[1];
     var tt = this.router.url.split('/');
     this.subID = parseInt(tt[tt.length-1]);
     this.navService.triggerContent(this.subID, localStorage.getItem('langID'));
