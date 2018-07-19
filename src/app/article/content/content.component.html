@@ -37,35 +37,8 @@
 
                     </h4>
 
-                    <mat-accordion>
-                            <mat-expansion-panel  *ngFor="let content of article.menuLeft; let i = index" multi="false" displayMode="flat" [hideToggle]="content.subMenuLeft.length==0 ? true: null"  [expanded]="statusID ? (i == statusID) : content?.activeMenu">
 
-                                <mat-expansion-panel-header>
-                                  <mat-panel-title  class="pointer" (click)="clickSideMenu(content, i, $event)">
-                                    <a class="warna_font sideBarMenu--link font-size-s" [routerLinkActive]="['active']"  [style.font-weight]="content.activeMenu ? 'bold' : 'normal'"  [style.color]="content.activeMenu ? getTheme() : '#333'" >{{content.categoryName}}</a>
-                                  </mat-panel-title>
-                                </mat-expansion-panel-header>
-                                <div *ngFor="let subcontent of content.subMenuLeft" class="submenu" >
-                                  <div class="pointer" (click)="clickContentFromMenu(content.parentCode, subcontent.contentCode, i, $event)">
-
-                                    <a class="warna_font sideBarMenu--link font-size-s" #subContent [style.font-weight]="subcontent.activeMenu ? 'bold' : 'normal'"  [style.color]="subcontent.activeMenu ? getTheme() : '#333'">
-                                    {{subcontent.contentTitle}}
-                                    </a>
-                                  </div>
-                                </div>
-                            </mat-expansion-panel>
-
-
-                            <mat-expansion-panel hideToggle="true" *ngIf="article.template === 'publication'" multi="true" displayMode="flat">
-                                <mat-expansion-panel-header>
-                                  <mat-panel-title  class="pointer" (click)="clickSideMenuByAgency(content, i, $event)">
-                                    <a class="warna_font sideBarMenu--link font-size-s" [style.color]="'#333'" [routerLinkActive]="['active']">{{'common.byagency' | translate}}</a>
-                                  </mat-panel-title>
-                                </mat-expansion-panel-header>
-                              </mat-expansion-panel>
-
-
-                        </mat-accordion>
+                    <gosg-leftmenu [sessions]="article.menuLeft"  [menuType]="moduleName" [templateName]="article.template"></gosg-leftmenu>
 
                 </div>
             </div>

@@ -19,9 +19,6 @@ em{
 .error :-moz-placeholder { color: #999; }
 .error :-ms-input-placeholder { color: #999; }  */
 
-ngui-auto-complete{
-  /* display: none !important; */
-}
 
 .mat-fab.mat-accent, .mat-mini-fab.mat-accent, .mat-raised-button.mat-accent {
   background-color: #5bc0de;
@@ -444,6 +441,14 @@ p.font-size-s > strong {
     padding: 15px 0px 0px !important;
   }
 
+  .dashboard_l_menu{
+    display: none;
+  }
+
+  .dashboard_s_menu{
+    display: block;
+  }
+
 }
 
 
@@ -452,6 +457,15 @@ p.font-size-s > strong {
     display: block;
     width: auto !important;
   }
+
+  .dashboard_l_menu{
+    display: block;
+  }
+
+  .dashboard_s_menu{
+    display: none;
+  }
+  
 }
 
 @media screen and (max-width: 960px) and (min-width: 481px){

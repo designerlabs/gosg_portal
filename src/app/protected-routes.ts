@@ -38,7 +38,7 @@ import { UnsubscribeComponent } from './unsubscribe/unsubscribe.component';
 import { AgencydirectoryComponent } from './agencydirectory/agencydirectory.component';
 import { SetactiveComponent } from './subscription/setactive/setactive.component';
 import { RssComponent } from './article/rss/rss.component';
-import { ContentComponent } from './article/content/content.component';
+import { ContentProdComponent } from './article/content/contentprod.component';
 import { EparticipationComponent } from './eparticipation/eparticipation.component';
 import { StatisticComponent } from './statistic/statistic.component';
 import { SitemapComponent } from './sitemap/sitemap.component';
@@ -52,6 +52,8 @@ import { SchoolsearchComponent } from './schoolsearch/schoolsearch.component';
 import { DigitalservicesprodComponent } from './digitalservices/digitalservicesprod.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { TrafficinfoComponent } from './trafficinfo/trafficinfo.component';
+import { PerhilitanComponent } from './perhilitan/perhilitan.component';
+import { ReplacementmycardComponent } from './replacementmycard/replacementmycard.component';
 
 //import { GalleryComponent } from './gallery/gallery.component';
 // import { NavRouterActivator } from './header/nav/nav-router-activator.service'
@@ -76,7 +78,7 @@ export const protectedRoutes: Routes = [
     {path: 'rss/:id', component: RssComponent},
     {path: 'rss/id/:id', component: RssComponent},
     {path: 'subcategory/:id1', component: SubarticleprodComponent },
-    {path: 'content/:id1', component: ContentComponent},
+    {path: 'content/:id1', component: ContentProdComponent},
     {path: 'archive/category/:id', component:ArchivecategoryComponent},
     {path: 'archive/subcategory/:id', component:ArchivesubcategoryComponent},
     {path: 'archive/content/:id', component:ArchivecontentComponent},
@@ -112,6 +114,8 @@ export const protectedRoutes: Routes = [
     {path: 'pdrm/status-position', component: StatuspositionComponent},
     {path: 'school-search', component: SchoolsearchComponent},
     {path: 'trafficinfo', component: TrafficinfoComponent },
+    {path: 'perhilitan', component: PerhilitanComponent},
+    {path: 'get_user_approval', component: ReplacementmycardComponent},
     {path: '**', component: ErrorComponent}
     //{path: 'user', loadChildren: 'app/user/user.module#UserModule'}
 ];

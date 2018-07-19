@@ -16,7 +16,7 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './content.component.html',
   styleUrls: ['./content.component.css']
 })
-export class ContentComponent implements OnInit, OnDestroy {
+export class ContentProdComponent implements OnInit, OnDestroy {
   statusID: any;
   @Output() menuClick = new EventEmitter();
   breadcrumb: any;
