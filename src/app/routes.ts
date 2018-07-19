@@ -53,6 +53,7 @@ import { ArchivesubcategoryComponent } from './archive/archivesubcategory/archiv
 import { ArchivecontentComponent } from './archive/archivecontent/archivecontent.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { SchoolsearchComponent } from './schoolsearch/schoolsearch.component';
+import { TrafficinfoComponent } from './trafficinfo/trafficinfo.component';
 
 export const appRoutes: Routes = [
 
@@ -99,6 +100,7 @@ export const appRoutes: Routes = [
     {path: 'statistic', component: StatisticComponent},
     {path: 'sitemap', component: SitemapComponent},
     {path: 'school-search', component: SchoolsearchComponent},
+    {path: 'trafficinfo', component: TrafficinfoComponent },
 
     {path: '', redirectTo: 'index', pathMatch: 'full'},
     {path: '**', component: ErrorComponent}

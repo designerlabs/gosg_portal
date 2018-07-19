@@ -6,6 +6,7 @@
       "calendar": "Calendar",
       "digitalsvc": "Digital Services",
       "agencycdir": "Agencies Directory",
+      "trafficinfo":"Traffic Information",
       "register": "Register",
       "setting": "Settings",
       "contact": "Contact Us",
@@ -524,5 +525,30 @@
           "12": "December"
         }
       }
+  },
+  "trafficinfo": {
+    "title":"Traffic Information",
+    "filterby": {
+      "all":"All",
+      "streetname":"Choose Street Name",
+      "ministry":"Ministry/State",
+      "alphabet":"A-Z"
+    },
+    "label": {
+      "prediction":"TRAFFIC PREDICTION",
+      "current":"Current",
+      "1hr":"After 1 Hour",
+      "2hr":"After 2 Hour",
+      "3hr":"After 3 Hour",
+      "legend":"Legend",
+      "title":"Lembah Klang Traffic Information",
+      "desc":"Current traffic analysis and next 3 hour forecast for main roads in the Klang Valley.",
+      "light":"Light Traffic",
+      "moderate":"Moderate Traffic",
+      "heavy":"Heavy Traffic",
+      "bumper":"Bumper to Bumper",
+      "streetname":"Street Name",
+      "total":"Total Results"
+    }
   }
 }

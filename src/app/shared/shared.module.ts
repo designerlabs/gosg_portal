@@ -140,6 +140,7 @@ import { ArchivecontentComponent } from '../archive/archivecontent/archiveconten
 import { GalleryService } from '../gallery/gallery.service';
 import { GalleryComponent, DialogDataExampleDialog } from '../gallery/gallery.component';
 import { SchoolsearchComponent } from '../schoolsearch/schoolsearch.component';
+import { TrafficinfoComponent } from '../trafficinfo/trafficinfo.component';
 // import { LifeeventComponent } from '../lifeevent/lifeevent.component';
 //import { GalleryService } from '../gallery/gallery.service';
 // import { SearchResultComponent } from '../search/search-result/search-result.component';
@@ -230,7 +231,8 @@ export function HttpLoaderFactory(http: Http) {
     ArchivecontentComponent,
     GalleryComponent,
     DialogDataExampleDialog,
-    SchoolsearchComponent
+    SchoolsearchComponent,
+    TrafficinfoComponent
     // SearchResultComponent
   ],
 

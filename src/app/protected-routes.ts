@@ -51,6 +51,7 @@ import { StatuspositionComponent } from './pdrm/statusposition/statusposition.co
 import { SchoolsearchComponent } from './schoolsearch/schoolsearch.component';
 import { DigitalservicesprodComponent } from './digitalservices/digitalservicesprod.component';
 import { GalleryComponent } from './gallery/gallery.component';
+import { TrafficinfoComponent } from './trafficinfo/trafficinfo.component';
 
 //import { GalleryComponent } from './gallery/gallery.component';
 // import { NavRouterActivator } from './header/nav/nav-router-activator.service'
@@ -110,6 +111,7 @@ export const protectedRoutes: Routes = [
     {path: 'pdrm/summon-traffic', component: SummontrafficComponent},
     {path: 'pdrm/status-position', component: StatuspositionComponent},
     {path: 'school-search', component: SchoolsearchComponent},
+    {path: 'trafficinfo', component: TrafficinfoComponent },
     {path: '**', component: ErrorComponent}
     //{path: 'user', loadChildren: 'app/user/user.module#UserModule'}
 ];
