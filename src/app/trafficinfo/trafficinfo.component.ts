@@ -12,7 +12,7 @@ import {
   MatInputModule, MatPaginatorModule, MatProgressSpinnerModule,
   MatSortModule, MatTableModule, MatPaginator, MatSort
 } from '@angular/material';
-import { tileLayer, latLng, circle, polygon, marker, icon, Layer } from 'leaflet';
+import { tileLayer, latLng, circle, polygon, marker, icon, Layer, polyline } from 'leaflet';
 import * as L from 'leaflet';
 import { ISubscription } from 'rxjs/Subscription';
 import { TopnavService } from '../header/topnav/topnav.service';
@@ -48,7 +48,15 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
   ministry: any = '';
   letter: any = '';
   custom: any;
-  bounto;
+  rp;
+  PLJlnMaarof:any = [
+    [3.137046,101.672828],
+    [3.137564,101.672801],
+    [3.137958,101.672748],
+    [3.138121,101.672707],
+    [3.141048,101.671842]
+  ];
+
   // allMarkers: any = [];
   markers: Layer[] = [];
 
@@ -68,7 +76,7 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
     shadowAnchor: [0, 0],  // the same for the shadow
     popupAnchor: [12, 0] // point from which the popup should open relative to the iconAnchor
   });
-  route = L.polyline([[ 101.741834,3.081827],[ 101.741807,3.082012],[ 101.741794,3.08221],[ 101.741738,3.083809],[ 101.741723,3.084906],[ 101.741723,3.084907],[ 101.741711,3.085749],[ 101.741651,3.086318],[ 101.741521,3.086954],[ 101.741301,3.088004],[ 101.740145,3.091723],[ 101.739996,3.092204],[ 101.739529,3.093657],[ 101.738819,3.096002]]);
+  // route = L.polyline([[ 101.741834,3.081827],[ 101.741807,3.082012],[ 101.741794,3.08221],[ 101.741738,3.083809],[ 101.741723,3.084906],[ 101.741723,3.084907],[ 101.741711,3.085749],[ 101.741651,3.086318],[ 101.741521,3.086954],[ 101.741301,3.088004],[ 101.740145,3.091723],[ 101.739996,3.092204],[ 101.739529,3.093657],[ 101.738819,3.096002]], {color: 'red'}).addTo(this.mymap);
 
   constructor(
     private http: Http,
@@ -104,7 +112,7 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
       this.keyword = '';
       this.ministry = '';
       this.pageCount = 1;
-      this.mymap.setView([3.108097, 101.730555], 15);
+      this.mymap.setView([3.135341, 101.672427], 15);
       this.popup.remove();
 
     }); }
@@ -123,21 +131,20 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   getDefaultMap() {
-    this.mymap = L.map('dirmap').setView([3.108097, 101.730555], 15);      
-    console.log(this.route.getBounds());
-    this.mymap.fitBounds(this.route.getBounds(), {
-      // padding: L.point(24, 24),
-      maxZoom: 15,
-      animate: true
-    });
-    
-    L.marker([3.109500, 101.732733]).addTo(this.mymap);
+    // this.mymap.setView([3.057417, 101.719596], 15);
+    this.mymap = L.map('dirmap').setView([3.135341, 101.672427], 15);      
+    // console.log(this.route.getBounds());
+
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
       attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
       maxZoom: 18,
       id: 'mapbox.streets',
       accessToken: 'pk.eyJ1IjoicmVkemEiLCJhIjoiY2pmcGZxNzRrMjYzbzMwcG83bGRxY2FtZyJ9.uMHQpYc0Pvjl4us27nHH8w'
     }).addTo(this.mymap);
+    
+    this.rp = L.polyline(this.PLJlnMaarof, {color: 'red'}).addTo(this.mymap);
+    this.mymap.fitBounds(this.rp.getBounds());
+    
   }
 
   getStreetNamesData() {

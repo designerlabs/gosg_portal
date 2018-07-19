@@ -1106,6 +1106,9 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
   }
 
   btnFilterReset() {
+    this.locUnchecked = 0;
+    this.osUnchecked = 0;
+
     this.inpExcWord = '';
     this.chktopic = true;
     this.chksubtopic = true;
@@ -1132,7 +1135,7 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
         delete this.mainObj.filters.category_topic;
 
         delete this.mainObj.filters.ranges;
-
+        
     } else if (this.tabIndex == 1) {
       delete this.mainObj.filters.agency_name;
       delete this.mainObj.filters.ministry_name;
@@ -1159,8 +1162,8 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
       this.mainObj.aggregations = this.osAggregations;
     }
 
-    //
-    //
+    // 
+    // 
     this.searchByKeyword(this.ser_word);
   }
 }

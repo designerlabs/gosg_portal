@@ -12,7 +12,7 @@
                            ngui-auto-complete
                            [source]="autoCompleteArr"
                            placeholder="{{ 'home.search.instruction' | translate }}"
-                           no-match-found-text="{{ 'home.search.resultnotfound' | translate }}">
+                           no-match-found-text=" ">
                     <span class="input-group-btn">
                         <button class="btn btn-secondary" [style.background]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" type="button"
                                 (click)="mainSearch(keyword1)">

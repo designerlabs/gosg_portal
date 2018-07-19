@@ -260,7 +260,7 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
       id: 'mapbox.streets',
       accessToken: 'pk.eyJ1IjoicmVkemEiLCJhIjoiY2pmcGZxNzRrMjYzbzMwcG83bGRxY2FtZyJ9.uMHQpYc0Pvjl4us27nHH8w'
     }).addTo(this.mymap);
-    this.marker = L.marker([3.049836, 101.646424], { icon: this.defaultIcon }).addTo(this.mymap);
+    // this.marker = L.marker([3.049836, 101.646424], { icon: this.defaultIcon }).addTo(this.mymap);
   }
 
 
