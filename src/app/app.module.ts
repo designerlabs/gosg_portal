@@ -79,7 +79,7 @@ imports: [
     DigitalservicesComponent,
     HomeComponent,
     DigitalServiceDialog,
-    ContentComponent
+    ContentComponent,
 
   ],
 
