@@ -36,49 +36,8 @@
                         {{article.categoryName}}
                     </h4>
 
-                    <!-- <gosg-leftmenu></gosg-leftmenu> -->
+                      <gosg-leftmenu [sessions]="article.menuLeft"  [menuType]="moduleName" [templateName]="article.template"></gosg-leftmenu>
 
-                    <!-- <div *ngFor="let contentMain of article.menuLeft;"> -->
-                        <mat-accordion>
-                          <!-- <div *ngIf="contentMain.subMenuLeft.length !=0"> -->
-                              <gosg-leftmenu [sessions]="article.menuLeft" [menuType]="moduleName" ></gosg-leftmenu>
-                              <mat-expansion-panel  *ngFor="let content of article.menuLeft; let i = index" multi="false" displayMode="flat" [hideToggle]="content.subMenuLeft.length==0 ? true: null"    [expanded]="content?.activeMenu">
-                                  <mat-expansion-panel-header>
-                                    <mat-panel-title class="pointer" (click)="clickSideMenu(content, i, $event)">
-                                      <a class="warna_font sideBarMenu--link font-size-s" [routerLinkActive]="['active']"  [style.font-weight]="content.activeMenu ? 'bold' : 'normal'"  [style.color]="content.activeMenu ? getTheme() : '#333'" >{{content.categoryName}}</a>
-                                    </mat-panel-title>
-                                  </mat-expansion-panel-header>
-                                  <div *ngFor="let subcontent of content.subMenuLeft" class="submenu" >
-                                    <div class="pointer" (click)="clickContentFromMenu(content.parentCode, subcontent.contentCode, $event)">
-                                      <a class="warna_font sideBarMenu--link font-size-s"  #subContent [style.font-weight]="subcontent.activeMenu ? 'bold' : 'normal'"  [style.color]="subcontent.activeMenu ? getTheme() : '#333'">
-                                        {{subcontent.contentTitle}}
-                                      </a>
-                                    </div>
-                                  </div>
-                              </mat-expansion-panel>
-
-                            <!-- </div> -->
-
-                              <!-- <div *ngIf="contentMain.subMenuLeft.length ==0">
-                                  <mat-expansion-panel hideToggle="true" *ngFor="let content of article.menuLeft; let i = index"  multi="true" displayMode="flat">
-                                      <mat-expansion-panel-header (click)="clickSideMenu(content)">
-                                        <mat-panel-title>
-                                          <a class="warna_font sideBarMenu--link font-size-s" [routerLinkActive]="['active']"  [style.font-weight]="content.activeMenu ? 'bold' : 'normal'"  [style.color]="content.activeMenu ? getTheme() : '#333'" >{{content.categoryName}}</a>
-                                        </mat-panel-title>
-                                      </mat-expansion-panel-header>
-                                  </mat-expansion-panel>
-                              </div> -->
-                              <mat-expansion-panel hideToggle="true" *ngIf="article.template === 'publication'" multi="true" displayMode="flat">
-                                  <mat-expansion-panel-header>
-                                    <mat-panel-title class="pointer" (click)="clickSideMenuByAgency(content, i, $event)">
-                                      <a class="warna_font sideBarMenu--link font-size-s"  [style.font-weight]="agencyActive ? 'bold' : 'normal'"  [style.color]="agencyActive ? getTheme() : '#333'" [routerLinkActive]="['active']">{{'common.byagency' | translate}}</a>
-                                    </mat-panel-title>
-                                  </mat-expansion-panel-header>
-                                </mat-expansion-panel>
-
-                          </mat-accordion>
-
-                    <!-- </div> -->
                 </div>
             </div>
         </div>
