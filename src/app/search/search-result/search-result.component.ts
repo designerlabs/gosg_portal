@@ -894,7 +894,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
             this.toastr.error(this.translate.instant('common.err.servicedown'), '');
           });
     } else {
-      this.toastr.error("Please enter a word to search");
+      this.toastr.error(this.translate.instant('common.msg.searchKeyword'), '');
     }
 
   }
