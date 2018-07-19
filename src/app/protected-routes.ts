@@ -52,6 +52,7 @@ import { SchoolsearchComponent } from './schoolsearch/schoolsearch.component';
 import { DigitalservicesprodComponent } from './digitalservices/digitalservicesprod.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { PerhilitanComponent } from './perhilitan/perhilitan.component';
+import { ReplacementmycardComponent } from './replacementmycard/replacementmycard.component';
 
 //import { GalleryComponent } from './gallery/gallery.component';
 // import { NavRouterActivator } from './header/nav/nav-router-activator.service'
@@ -112,6 +113,7 @@ export const protectedRoutes: Routes = [
     {path: 'pdrm/status-position', component: StatuspositionComponent},
     {path: 'school-search', component: SchoolsearchComponent},
     {path: 'perhilitan', component: PerhilitanComponent},
+    {path: 'get_user_approval', component: ReplacementmycardComponent},
     {path: '**', component: ErrorComponent}
     //{path: 'user', loadChildren: 'app/user/user.module#UserModule'}
 ];

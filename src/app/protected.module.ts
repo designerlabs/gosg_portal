@@ -40,6 +40,7 @@ import { SummontrafficComponent } from './pdrm/summontraffic/summontraffic.compo
 import { DigitalservicesprodComponent } from './digitalservices/digitalservicesprod.component';
 import { ContentProdComponent } from './article/content/contentprod.component';
 import { PerhilitanComponent } from './perhilitan/perhilitan.component';
+import { ReplacementmycardComponent } from './replacementmycard/replacementmycard.component';
 
 export function HttpLoaderFactory(http: Http) {
    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -68,7 +69,8 @@ export function HttpLoaderFactory(http: Http) {
     DigitalservicesprodComponent,
     SummontrafficComponent,
     ContentProdComponent,
-    PerhilitanComponent
+    PerhilitanComponent,
+    ReplacementmycardComponent
   ],
   imports: [
     SharedModule,

@@ -22,7 +22,8 @@
       "gallery": "Gallery",
       "statistic": "Online Statistics",
       "search": "Search",
-      "policeReport": "Semakan Status Laporan Polis"
+      "policeReport": "Semakan Status Laporan Polis",
+      "mykadapproval": "User Approval"
     },
     "search": {
       "label": "How Can We Help You?",
@@ -402,7 +403,8 @@
       "delete":"Are you sure to delete the record?",
       "success":"Successfully added!",
       "nodata": "No data found",
-      "searchKeyword": "Please enter a word to search"
+      "searchKeyword": "Please enter a word to search",
+      "mykad":"Do you agree to share your profile from MyGovernment Portal?"
     },
     "state":{
       "success":"bg_header bg_success_header",

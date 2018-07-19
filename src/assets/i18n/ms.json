@@ -22,7 +22,8 @@
       "gallery": "Galeri",
       "statistic": "Statistik Atas Talian",
       "search": "Carian",
-      "policeReport": "Semakan Status Laporan Polis"
+      "policeReport": "Semakan Status Laporan Polis",
+      "mykadapproval": "Kelulusan Pengguna"
     },
     "search": {
       "label": "Bagaimana Kami Boleh Membantu Anda?",
@@ -402,7 +403,8 @@
       "delete":"Padam mesej ini?",
       "success":"Successfully added!",
       "nodata": "Tiada maklumat",
-      "searchKeyword": "Sila masukkan kata kunci carian"
+      "searchKeyword": "Sila masukkan kata kunci carian",
+      "mykad":"Adakah anda bersetuju untuk berkongsi profil dari MyGovernment Portal?"
     },
     "state":{
       "success":"bg_header bg_success_header",
