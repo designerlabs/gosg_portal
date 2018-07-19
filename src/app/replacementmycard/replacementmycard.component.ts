@@ -77,7 +77,7 @@ export class ReplacementmycardComponent implements OnInit {
 
   clickYes(){
     let newUrl = "";
-    window.open("https://www.w3schools.com");
+    window.open("https://www.w3schools.com?status=ya");
     console.log();
   }
 
