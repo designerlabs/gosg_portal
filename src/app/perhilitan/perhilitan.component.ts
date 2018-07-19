@@ -153,6 +153,4 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
     console.log(e.value);
   }
 
-
-
 }
