@@ -1,0 +1,184 @@
+<div class="container-fluid animated slideInDown" style="background: #a7a495;">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 style="margin-top: 10px;" class="font-size-l">{{'home.breadcrumb.perhilitan' | translate}}</h1>
+        <hr class="hr-custom2">
+        <ul class="list-inline" style="clear:both;">
+          <li>
+            <a class="font-size-s" routerLink="/">
+                      {{'home.menu.home' | translate }}
+                  </a>
+          </li>
+          <li>/</li>
+          <li>
+            {{'home.breadcrumb.perhilitan' | translate}}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="col-md-12">&nbsp;</div>
+
+
+  <div class="col-md-3 padding-left-0">
+    <mat-vertical-stepper [linear]="isLinear" #stepper (click)="step1($event)">
+      <mat-step [stepControl]="firstFormGroup">
+        <form [formGroup]="firstFormGroup">
+          <ng-template matStepLabel>Maklumat Pemohon</ng-template>
+          <!-- <mat-form-field>
+            <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperNext>Next</button>
+          </div> -->
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="secondFormGroup" >
+        <form [formGroup]="secondFormGroup">
+          <ng-template matStepLabel>Maklumat Pemilik 1/2</ng-template>
+          <!-- <mat-form-field>
+            <input matInput placeholder="Address" formControlName="secondCtrl" required>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div> -->
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="thirdFormGroup">
+        <form [formGroup]="thirdFormGroup">
+          <ng-template matStepLabel>Maklumat Pemilik 2/2</ng-template>
+          <mat-form-field>
+            <input matInput placeholder="Address" formControlName="thirdCtrl" required>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="fourthFormGroup">
+        <form [formGroup]="fourthFormGroup">
+          <ng-template matStepLabel>Maklumat Syarikat</ng-template>
+          <mat-form-field>
+            <input matInput placeholder="Address" formControlName="fourthCtrl" required>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="fifthFormGroup">
+        <form [formGroup]="fifthFormGroup">
+          <ng-template matStepLabel>Lesen & Lampiran</ng-template>
+          <mat-form-field>
+            <input matInput placeholder="Address" formControlName="fifthCtrl" required>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        You are now done.
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button (click)="stepper.reset()">Reset</button>
+        </div>
+      </mat-step>
+    </mat-vertical-stepper>
+  </div>
+
+  <div class="col-md-9">
+
+    <div>
+      <form [formGroup]="pemohonForm" role="form" novalidate="novalidate">
+        <div class="row">
+          <div class="col-md-12">
+            <mat-form-field  class="example-full-width">
+              <input matInput formControlName="namaPemohon" placeholder="Nama Pemohon" required>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-3">
+            <mat-form-field  class="example-full-width">
+              <input matInput formControlName="icPemohon" placeholder="No.IC/Pasport" required>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <mat-form-field  class="example-full-width">
+              <input matInput formControlName="phonePemohon" placeholder="No. Telefon" required>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field  class="example-full-width">
+              <input matInput formControlName="emailPemohon" placeholder="Emel" required>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <mat-form-field  class="example-full-width">
+              <input matInput formControlName="add1" placeholder="Alamat Tetap" required>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <mat-form-field  class="example-full-width">
+              <input matInput formControlName="add2" placeholder="" required>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <mat-form-field  class="example-full-width">
+              <input matInput formControlName="add3" placeholder="" required>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-3">
+            <mat-form-field  class="example-full-width">
+              <input matInput formControlName="poskodPemohon" placeholder="Poskod" required>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <mat-form-field  class="example-full-width">
+              <input matInput formControlName="daerahPemohon" placeholder="Daerah" required>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field  class="example-full-width">
+              <input matInput formControlName="negeriPemohon" placeholder="Negeri" required>
+            </mat-form-field>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <form [formGroup]="pemilik1Form" role="form" novalidate="novalidate">
+        <div class="col-md-12">
+          <mat-panel-title>
+            <mat-form-field>
+              <input matInput formControlName="namaPemilik" placeholder="Nama Pemilik" required>
+            </mat-form-field>
+          </mat-panel-title>
+        </div>
+    </form>
+  </div>
+</div>
+
+

@@ -39,6 +39,7 @@ import { StatuspositionComponent } from './pdrm/statusposition/statusposition.co
 import { SummontrafficComponent } from './pdrm/summontraffic/summontraffic.component';
 import { DigitalservicesprodComponent } from './digitalservices/digitalservicesprod.component';
 import { ContentProdComponent } from './article/content/contentprod.component';
+import { PerhilitanComponent } from './perhilitan/perhilitan.component';
 
 export function HttpLoaderFactory(http: Http) {
    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -66,7 +67,8 @@ export function HttpLoaderFactory(http: Http) {
     StatuspositionComponent,
     DigitalservicesprodComponent,
     SummontrafficComponent,
-    ContentProdComponent
+    ContentProdComponent,
+    PerhilitanComponent
   ],
   imports: [
     SharedModule,
