@@ -26,7 +26,7 @@
       <mat-form-field class="example-full-width">
         <mat-select placeholder="{{ 'trafficinfo.filterby.streetname' | translate }}" [(ngModel)]="streetName">
           <!-- <mat-option [value]="0">{{ 'trafficinfo.label.streetname' | translate }}</mat-option> -->
-          <mat-option *ngFor="let sn of streetNames" [value]="sn.Street">{{ sn.Street }}</mat-option>
+          <mat-option *ngFor="let sn of streetNames" [value]="sn.name" (click)="getTrafficPredictionData(sn.name, sn.latlng)">{{ sn.name }}</mat-option>
           <!-- 
             (change)="applyFilter('ministry',$event.value)"
             (click)="goToMarkerPoint(ministry.ministryLatitude,ministry.ministryLongitude, ministry.ministryName, ministry.ministryAddress, ministry.ministryEmail, ministry.ministryFax, ministry.ministryPhone,ministry.ministryFacebook,ministry.ministryTwitter,ministry.ministryWebsiteUrl)" 
@@ -34,9 +34,48 @@
         </mat-select>
       </mat-form-field>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-8">
       <div id="dirmap"></div>
       <div class="col-md-12">&nbsp;</div>
+    </div>
+    <div class="col-md-4">
+      <div class="row" style="color: #1d1d1d; min-height: 280px">
+        <!-- Predictions -->
+        <h5>{{ 'trafficinfo.label.prediction' | translate }}</h5>
+        <h3 *ngIf="!gotPrediction && showNoData"> - </h3>
+        <h3 *ngIf="gotPrediction && selStreetName.length > 30 && !showNoData" title="{{ selStreetName }}">{{ selStreetName | slice:0:30}}...</h3>
+        <h3 *ngIf="gotPrediction && selStreetName.length < 30 && !showNoData">{{ selStreetName }}</h3>
+        <table *ngIf="gotPrediction && !showNoData" class="table">
+          <tbody>
+            <tr>
+              <td class="text-align-Center boldText" style="border: 1px solid #000000; width: 25%;">{{ 'trafficinfo.label.current' | translate }}</td>
+              <td class="text-align-Center boldText" style="border: 1px solid #000000; width: 25%;">{{ 'trafficinfo.label.1hr' | translate }}</td>
+              <td class="text-align-Center boldText" style="border: 1px solid #000000; width: 25%;">{{ 'trafficinfo.label.2hr' | translate }}</td>
+              <td class="text-align-Center boldText" style="border: 1px solid #000000; width: 25%;;">{{ 'trafficinfo.label.3hr' | translate }}</td>
+            </tr>
+            <tr>
+              <td *ngFor="let pData of predictionData" [ngStyle]="{'background': 'transparent', 'height': '100px', 'border': '0px solid #000000', 'cursor':'help' }" title="{{ pData.status }}">
+                <!-- <i *ngIf="pData.color == 'darkred' || pData.color == 'red' || pData.color == 'green'" class="fa fa-car font-size-xxl" style="margin: 15%; color: #ffffff"></i> -->
+                <!-- <i *ngIf="pData.color == 'yellow'" class="fa fa-car font-size-xxl" style="margin: 15%; color: #000000"></i> -->
+                <i class="fa fa-car font-size-xxl stroke" [ngStyle]="{ 'margin': '15%', 'color': pData.color }"></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row">
+        <div style="padding: 10px; color: #1d1d1d; border: 1px solid black;">
+          <h4>{{ 'trafficinfo.label.legend' | translate }}</h4>
+          <div class="sma_box green"></div>
+          <p class="font-size-m">{{ 'trafficinfo.label.light' | translate }}</p>
+          <div class="sma_box yellow"></div>
+          <p class="font-size-m">{{ 'trafficinfo.label.moderate' | translate }}</p>
+          <div class="sma_box red"></div>
+          <p class="font-size-m">{{ 'trafficinfo.label.heavy' | translate }}</p>
+          <div class="sma_box darkred"></div>
+          <p class="font-size-m">{{ 'trafficinfo.label.bumper' | translate }}</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>

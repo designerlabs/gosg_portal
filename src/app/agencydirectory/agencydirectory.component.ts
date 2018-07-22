@@ -220,8 +220,8 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
 
     this.getDefaultMap();
     this.loadAlpha();
-    // this.getMinistry();
-    // this.getAllAgenciesMarkers()
+    this.getMinistry();
+    this.getAllAgenciesMarkers()
   }
 
   ngOnDestroy() {

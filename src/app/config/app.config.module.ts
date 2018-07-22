@@ -94,7 +94,7 @@ export class AppConfig {
     urlDserviceRpt: string;
     registerationUrl: string;
     UrlStreetNameAPI: string;
-    UrlTrafficMarkersAPI: string;
+    UrlTrafficPolylines: string;
     UrlTrafficPredictionAPI: string;
 
 }
@@ -176,7 +176,7 @@ export const APP_DI_CONFIG: AppConfig = {
     urlAgencyList: protectedBaseURL + 'dservice/agencylist',
     dataAppUrl: protectedBaseURL + 'dservice',
     UrlStreetNameAPI: trafficInfoURL+"street?rows=100",
-    UrlTrafficMarkersAPI: trafficInfoURL+"kl",
+    UrlTrafficPolylines: trafficInfoURL+"kl",
     UrlTrafficPredictionAPI: trafficInfoURL+"traffic?streetName="
 };
 

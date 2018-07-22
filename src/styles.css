@@ -678,4 +678,39 @@ lineHr{
   border-top: #9c9c9d 2px solid;
 }
 
+.sma_box {
+  float: left;
+  width: 20px;
+  height: 20px;
+  margin: 5px;
+  border: 1px solid rgba(0, 0, 0, .2);
+}
+
+.red {
+  background:red;
+}
+
+.darkred {
+  background: darkred;
+}
+
+.yellow {
+  background: yellow;
+}
+
+.green {
+  background: green;
+}
+
+.stroke {
+    -webkit-text-stroke: 1px black;
+    /* color: white; */
+    text-shadow:
+        0px 0px 0 #000,
+      -1px -1px 0 #000,  
+       1px -1px 0 #000,
+       -1px 1px 0 #000,
+        1px 1px 0 #000;
+}
+
 ngui-auto-complete .no-match-found {display: none};

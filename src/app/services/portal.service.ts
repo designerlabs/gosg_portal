@@ -66,6 +66,8 @@ export class PortalService {
   private statisticUrl: string = this.config.urlStatistic;
   private dserviceptUrl: string = this.config.urlDserviceRpt;
   private trafficUrl: string = this.config.UrlStreetNameAPI;
+  private trafficFlowUrl: string = this.config.UrlTrafficPolylines;
+  private trafficPredictionUrl: string = this.config.UrlTrafficPredictionAPI;
 
   private internalUrl: string = this.config.urlIntSearch;
 
@@ -247,6 +249,22 @@ export class PortalService {
   getStreetNames(){
 
     return this.http.get(this.trafficUrl)
+    .map((response: Response) => response.json())
+    .retry(5)
+    .catch(this.handleError);
+  }
+
+  getTrafficFlows(){
+
+    return this.http.get(this.trafficFlowUrl)
+    .map((response: Response) => response.json())
+    .retry(5)
+    .catch(this.handleError);
+  }
+
+  getTrafficPrediction(sn){
+
+    return this.http.get(this.trafficPredictionUrl+sn)
     .map((response: Response) => response.json())
     .retry(5)
     .catch(this.handleError);
