@@ -531,6 +531,7 @@
   },
   "trafficinfo": {
     "title":"Informasi Trafik",
+    "title2":"Informasi Trafik Lembah Klang",
     "filterby": {
       "all":"All",
       "streetname":"Pilih Nama Jalan",

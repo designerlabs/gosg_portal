@@ -37,6 +37,7 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
   totalRec = 0;
   noPrevData = true;
   noNextData = false;
+  allStreetNames:any;
   streetNames = [];
   streetFlows = null;
   gotPrediction:boolean;
@@ -113,6 +114,7 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit() {
     this.gotPrediction = false;
     this.getDefaultMap();
+    // this.getStreetNamesData();
     this.getTrafficFlowData();
   }
 
@@ -145,11 +147,11 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
   //       // this.http.get(this.dataUrl).subscribe(
   //       data => {
   //         this.portalservice.errorHandling(data, (function () {
-  //           this.snd = data;
+  //           this.allStreetNames = data;
 
-  //           if (this.snd.length > 0) {
+  //           if (this.allStreetNames.length > 0) {
   //             // this.middleMan();
-  //             res = this.snd;
+  //             res = this.allStreetNames;
   //             // this.showNoData = false;
   //           } else {
   //             res = null;
@@ -160,7 +162,6 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
   //       }, err => {
   //         // this.loading = false;
   //       });
-  //       console.log(this.streetNames)
   //       return res;
   // }
 
@@ -175,8 +176,10 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
 
               this.streetFlows.records.forEach(el => {
                 
+                // console.log(this.allStreetNames)
                 if(el.street) {
                   el.jam = this.str2arr(el.jam);
+                  
 
                   this.streetNames.push({ 'name': el.street, 'latlng': el.jam[0] });
                   
