@@ -36,7 +36,9 @@
                         {{article.categoryName}}
                     </h4>
 
-                      <gosg-leftmenu [sessions]="article.menuLeft"  [menuType]="moduleName" [templateName]="article.template"></gosg-leftmenu>
+                    <mat-accordion>
+                        <gosg-leftmenu [sessions]="article.menuLeft"  [menuType]="moduleName" [templateName]="article.template"></gosg-leftmenu>
+                      </mat-accordion>
 
                 </div>
             </div>
