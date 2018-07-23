@@ -113,7 +113,7 @@
                                                     </div>
                                                     <h5 class="font-size-m warna_font" (click)="clickContentFromMenu(article.categoryCode, tabContent.contentCode, '', $event)">
                                                         <a [style.color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" style="cursor: pointer; font-weight: 600;">
-                                                            {{tabContent.agency.agencyName}}
+                                                            {{tabContent.contentTitle}}
                                                         </a>
 
                                                     </h5>
@@ -123,10 +123,10 @@
                                                     </div>
                                                     <div>
                                                         <div>
-                                                            {{'common.open' | translate}} : {{tabContent.publishDate | date:'medium' }}
+                                                            {{'common.open' | translate}} : {{tabContent.publishDate | date }}
                                                         </div>
                                                         <div>
-                                                            {{'common.close' | translate}} : {{tabContent.endDate | date:'medium' }}
+                                                            {{'common.close' | translate}} : {{tabContent.endDate | date }}
                                                         </div>
                                                     </div>
                                                     <div style="padding-top:5px;">
