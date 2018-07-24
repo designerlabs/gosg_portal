@@ -19,7 +19,7 @@ import { NavService } from '../../header/nav/nav.service';
       </div>
 
 
-      <mat-expansion-panel *ngFor="let subcontent of content?.subCategories; let j = index" multi="false" displayMode="flat" [hideToggle]="subcontent?.contents?.length==0 ? true: null"  [expanded]="subcontent.activeMenu  || (j == statusID) || sessions.length <= 1"  class="submenu" >
+      <mat-expansion-panel *ngFor="let subcontent of content?.subCategories; let j = index" multi="false" displayMode="flat" [hideToggle]="subcontent?.contents?.length==0 ? true: null"  [expanded]="subcontent.activeMenu  || (j == statusID) || subcontent.length <= 1"  class="submenu" >
         <mat-expansion-panel-header>
           <mat-panel-title class="pointer" (click)="clickSideMenu(subcontent, j, $event)">
             <a class="warna_font sideBarMenu--link font-size-s" #subContent [style.font-weight]="subcontent?.activeMenu ? 'bold' : 'normal'"  [style.color]="subcontent?.activeMenu ? getTheme() : '#333'">
