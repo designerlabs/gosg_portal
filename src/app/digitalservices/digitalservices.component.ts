@@ -111,9 +111,13 @@ export class DigitalservicesComponent implements OnInit, OnDestroy {
   selector: 'digital-service-popup',
   templateUrl: './digital-service-popup.html',
 })
+
+
 export class DigitalServiceDialog {
+  
   constructor(
     public dialogRef: MatDialogRef<DigitalServiceDialog>,
+    private translate: TranslateService,
     private router: Router) {}
 
     onNoClick() {

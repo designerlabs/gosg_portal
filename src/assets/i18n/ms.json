@@ -5,6 +5,7 @@
       "home": "Laman Utama",
       "calendar": "Kalendar",
       "agencycdir": "Direktori Agensi",
+      "trafficinfo":"Informasi Trafik",
       "digitalsvc": "Perkhidmatan Digital",
       "register": "Daftar",
       "setting": "Tetapan",
@@ -255,8 +256,16 @@
       "alphabet":"A-Z"
     },
     "label": {
+      "latlong":"Latitud and Longitud ",
       "agencyName":"Nama Agensi",
+      "search":"Carian Agensi",
+      "searchbyagcname":"Carian berdasarkan nama Agensi",
+      "searchbymin":"Agensi berdasarkan Kementerian/Negeri",
+      "searchbyalpha":"Agensi berdasarkan A-Z",
       "total":"Jumlah Capaian"
+    },
+    "msg":{
+      "notfound": "Tidak dijumpai"
     }
   },
   "digitalservices": {
@@ -268,7 +277,8 @@
     "msg": {
       "beforeLogin": "Sila Log Masuk / Daftar Untuk Mengakses PERKHIDMATAN Yang Disediakan",
       "afterLogin": "Senarai perkhidmatan yang ditawarkan oleh Gerbang MyGovernment",
-      "instruction": "Perkhidmatan yang ditawarkan oleh Gerbang MyGovernment perlu menggunakan nombor kad pengenalan bagi warganegara Malaysia"
+      "instruction": "Perkhidmatan yang ditawarkan oleh Gerbang MyGovernment perlu menggunakan nombor kad pengenalan bagi warganegara Malaysia",
+      "access": "Maaf, Perkhidmatan Digital kami hanya ditawarkan kepada pengguna yang sah sahaja."
     }
   },
   "calendar": {
@@ -527,5 +537,31 @@
           "12": "Disember"
         }
       }
+  },
+  "trafficinfo": {
+    "title":"Informasi Trafik",
+    "title2":"Informasi Trafik Lembah Klang",
+    "filterby": {
+      "all":"All",
+      "streetname":"Pilih Nama Jalan",
+      "ministry":"Ministry/State",
+      "alphabet":"A-Z"
+    },
+    "label": {
+      "prediction":"RAMALAN TRAFIK",
+      "current":"Terkini",
+      "1hr":"Selepas 1 Jam",
+      "2hr":"Selepas 2 Jam",
+      "3hr":"Selepas 3 Jam",
+      "legend":"Petunjuk Jalan",
+      "title":"Informasi Trafik Lembah Klang",
+      "desc":"Analisa trafik semasa dan ramalan 3 jam berikutnya bagi jalan-jalan utama di Lembah Klang.",
+      "light":"Lancar",
+      "moderate":"Sederhana",
+      "heavy":"Sesak",
+      "bumper":"Padat",
+      "streetname":"Nama Jalan",
+      "total":"Jumlah Keputusan"
+    }
   }
 }

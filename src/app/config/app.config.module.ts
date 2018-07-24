@@ -7,6 +7,7 @@ let baseURL =  environment.mockApiURL;
 let uapURL = environment.uapURL;
 let mediaURL = environment.mediaURL;
 let searchURL = environment.miaugeoURL;
+let trafficInfoURL = environment.trafficInfoURL;
 let registrationUrl = uapURL+'registration/';
 
 
@@ -92,6 +93,9 @@ export class AppConfig {
     urlStatistic: string;
     urlDserviceRpt: string;
     registerationUrl: string;
+    UrlStreetNameAPI: string;
+    UrlTrafficPolylines: string;
+    UrlTrafficPredictionAPI: string;
 
 }
 
@@ -171,6 +175,9 @@ export const APP_DI_CONFIG: AppConfig = {
     statusAppUrl: protectedBaseURL + 'dservice/group',
     urlAgencyList: protectedBaseURL + 'dservice/agencylist',
     dataAppUrl: protectedBaseURL + 'dservice',
+    UrlStreetNameAPI: trafficInfoURL+"street?rows=100",
+    UrlTrafficPolylines: trafficInfoURL+"kl",
+    UrlTrafficPredictionAPI: trafficInfoURL+"traffic?streetName="
 };
 
 @NgModule({

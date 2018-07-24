@@ -51,6 +51,7 @@ import { StatuspositionComponent } from './pdrm/statusposition/statusposition.co
 import { SchoolsearchComponent } from './schoolsearch/schoolsearch.component';
 import { DigitalservicesprodComponent } from './digitalservices/digitalservicesprod.component';
 import { GalleryComponent } from './gallery/gallery.component';
+import { TrafficinfoComponent } from './trafficinfo/trafficinfo.component';
 import { PerhilitanComponent } from './perhilitan/perhilitan.component';
 import { ReplacementmycardComponent } from './replacementmycard/replacementmycard.component';
 
@@ -112,6 +113,7 @@ export const protectedRoutes: Routes = [
     {path: 'pdrm/summon-traffic', component: SummontrafficComponent},
     {path: 'pdrm/status-position', component: StatuspositionComponent},
     {path: 'school-search', component: SchoolsearchComponent},
+    {path: 'trafficinfo', component: TrafficinfoComponent },
     {path: 'perhilitan', component: PerhilitanComponent},
     {path: 'get_user_approval', component: ReplacementmycardComponent},
     {path: '**', component: ErrorComponent}

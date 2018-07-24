@@ -68,7 +68,7 @@
 
               <!-- hintLabel="{{'register.label.emailplh' | translate }}" -->
 
-              <mat-form-field class="example-full-width font-size-s" [disabled]="true">
+              <mat-form-field class="example-full-width font-size-s">
                 <input matInput formControlName="emel" tabindex="3" placeholder="{{'register.label.email' | translate }}" required>
                 <mat-error *ngIf="!validateCtrlChk(emel) && citizenFormGrp.controls.emel.errors.required">
                   {{'register.err.email' | translate }}
@@ -82,18 +82,18 @@
               <!-- Country Code -->
               <div class="example-full-width input-group">
                 <mat-form-field class="font-size-s" style="width:20%">
-                  <mat-select formControlName="codeTelefon" #codetele placeholder="{{'register.label.codetel' | translate }}" tabindex="5" required>
+                  <mat-select formControlName="codeTelefon" #codetele placeholder="{{'register.label.codetel' | translate }}" tabindex="4" required>
                     <mat-option *ngFor="let country of countries" [value]="country.countryDialCode">
                       <span class="col-md-6">+ {{ country.countryDialCode }}</span>
                       <span class="col-md-6"> {{ country.countryCode }}</span>
                     </mat-option>
                   </mat-select>
                   <mat-error *ngIf="!validateCtrlChk(codeTelefon) && citizenFormGrp.controls.codeTelefon.errors.required">
-                      {{'register.err.codetel' | translate }}  
+                      {{'register.err.codetel' | translate }}
                     </mat-error>
                 </mat-form-field>
                 <mat-form-field class="font-size-s" style="width:75%; float: right; clear: both;">
-                  <input matInput formControlName="telefon" tabindex="4" #tele [textMask]="{mask: maskCitizen}" placeholder="{{'register.label.tel' | translate }}"  required>
+                  <input matInput formControlName="telefon" tabindex="5" #tele [textMask]="{mask: maskCitizen}" placeholder="{{'register.label.tel' | translate }}"  required>
                   <mat-error *ngIf="!validateCtrlChk(telefon) && citizenFormGrp.controls.telefon.errors.required">
                     {{'register.err.tel' | translate }}
                   </mat-error>
@@ -109,7 +109,7 @@
             <!-- *************************** TR and PR FIELDS ******************** [@myAwesomeAnimation]='state'-->
             <div *ngIf="isPRTR()" class="form-group animated fadeIn">
               <mat-form-field class="example-full-width font-size-s">
-                <mat-select formControlName="country_pr" placeholder="{{'register.label.country' | translate }}" tabindex="5" required="true ? citi : false" (change)="countryChange($event)">
+                <mat-select formControlName="country_pr" placeholder="{{'register.label.country' | translate }}" tabindex="6" required="true ? citi : false" (change)="countryChange($event)">
                   <mat-option *ngFor="let country of countries" [value]="country.countryId">
                     {{ country.countryName }}
                   </mat-option>
@@ -120,7 +120,7 @@
               </mat-form-field>
 
               <mat-form-field class="example-full-width font-size-s">
-                <input matInput #psport formControlName="passport_pr" tabindex="6" minlength="6" maxlength="10" placeholder="{{'register.label.passport' | translate }}"
+                <input matInput #psport formControlName="passport_pr" tabindex="7" minlength="6" maxlength="10" placeholder="{{'register.label.passport' | translate }}"
                   required="true ? citi : false">
                 <mat-error *ngIf="!validateCtrlChk(passport) && citizenFormGrp.controls.passport.errors.required">
                   {{'register.err.passport' | translate }}
@@ -191,11 +191,11 @@
                         </mat-option>
                       </mat-select>
                       <mat-error *ngIf="!validateCtrlChk(codeTelefonf) && citizenFormGrp.controls.codeTelefonf.errors.required">
-                          {{'register.err.codetel' | translate }}  
+                          {{'register.err.codetel' | translate }}
                         </mat-error>
                     </mat-form-field>
-                    <mat-form-field class="font-size-s" style="width:80%">
-                        <input matInput formControlName="telefonf" tabindex="5" #tele [textMask]="{mask: maskForeigner}" placeholder="{{'register.label.tel' | translate }}"
+                    <mat-form-field class="font-size-s" style="width:75%">
+                        <input matInput formControlName="telefonf" tabindex="6" #tele [textMask]="{mask: maskForeigner}" placeholder="{{'register.label.tel' | translate }}"
                           required>
                         <mat-error *ngIf="!validateCtrlChk(telefonf) && citizenFormGrp.controls.telefonf.errors.required">
                           {{'register.err.tel' | translate }}
@@ -206,7 +206,7 @@
                       </mat-form-field>
               </div>
 
-              
+
 
             </div>
 
@@ -217,7 +217,7 @@
               </span>
 
               <mat-form-field class="example-full-width font-size-s">
-                <input matInput formControlName="captcha" #capt tabindex="6" id="UserCaptchaCode" placeholder="{{'register.label.codeplh' | translate }}"
+                <input matInput formControlName="captcha" #capt tabindex="7" id="UserCaptchaCode" placeholder="{{'register.label.codeplh' | translate }}"
                   required>
                 <mat-error *ngIf="!validateCtrlChk(captcha) && citizenFormGrp.controls.captcha.errors.required">
                   {{'register.err.vercode' | translate }}

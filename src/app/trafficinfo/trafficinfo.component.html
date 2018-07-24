@@ -1,0 +1,88 @@
+<div class="container-fluid animated slideInDown" style="background: #a7a495;">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 style="margin-top: 10px;" class="font-size-m">{{'trafficinfo.title' | translate}}</h1>
+        <hr class="hr-custom2">
+        <ul class="list-inline" style="clear:both;">
+          <li>
+            <a class="font-size-s" routerLink="/">
+              {{'home.menu.home' | translate }}
+            </a>
+          </li>
+          <li>/</li>
+          <li>
+              {{'trafficinfo.title' | translate}}
+          </li>
+          <li>/</li>
+          <li>
+              {{'trafficinfo.title2' | translate}}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container" style="z-index: 400;">
+  <div class="row">
+    <div class="col-md-12">
+    <div class="col-md-12"><h4 style="color: #1d1d1d;">{{'trafficinfo.title2' | translate}}</h4></div>
+    <div class="col-md-12">
+      <div class="col-md-6">
+      <mat-form-field class="example-full-width">
+        <mat-select placeholder="{{ 'trafficinfo.filterby.streetname' | translate }} ({{ totalRec }})" [(ngModel)]="streetName">
+          <mat-option *ngFor="let sn of streetNames" [value]="sn.name" [disabled]="sn.disabled" (click)="getTrafficPredictionData(sn.name, sn.latlng)">{{ sn.name }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      </div>
+    </div>
+    </div>
+    <div class="col-md-12">
+    <div class="col-md-8">
+      <div id="dirmap" style="z-index: 400;"></div>
+      <div class="col-md-12">&nbsp;</div>
+    </div>
+    <div class="col-md-4">
+      <div class="row" style="color: #1d1d1d; min-height: 280px">
+        <!-- Predictions -->
+        <div class="col-md-12">
+        <h5>{{ 'trafficinfo.label.prediction' | translate }}</h5>
+        <h3 *ngIf="!gotPrediction || showNoData"> - </h3>
+        <h3 *ngIf="gotPrediction && selStreetName.length > 30 && !showNoData" title="{{ selStreetName }}">{{ selStreetName | slice:0:30}}...</h3>
+        <h3 *ngIf="gotPrediction && selStreetName.length < 30 && !showNoData">{{ selStreetName }}</h3>
+        <table *ngIf="gotPrediction && !showNoData" class="table">
+          <tbody>
+            <tr>
+              <td class="text-align-Center boldText" style="border: 1px solid #000000; width: 25%;">{{ 'trafficinfo.label.current' | translate }}</td>
+              <td class="text-align-Center boldText" style="border: 1px solid #000000; width: 25%;">{{ 'trafficinfo.label.1hr' | translate }}</td>
+              <td class="text-align-Center boldText" style="border: 1px solid #000000; width: 25%;">{{ 'trafficinfo.label.2hr' | translate }}</td>
+              <td class="text-align-Center boldText" style="border: 1px solid #000000; width: 25%;;">{{ 'trafficinfo.label.3hr' | translate }}</td>
+            </tr>
+            <tr>
+              <td *ngFor="let pData of predictionData" class="car-icon" [ngStyle]="{'background': 'transparent', 'height': 'auto', 'border': '1px solid #000000', 'cursor':'help' }">
+                <i class="fa fa-car font-size-xl car-style" [ngStyle]="{ 'color':pData.color}"></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+        <div style="padding: 10px; color: #1d1d1d; border: 1px solid black; margin-bottom: 2%">
+          <h4>{{ 'trafficinfo.label.legend' | translate }}</h4>
+          <div class="sma_box green"></div>
+          <p class="font-size-m">{{ 'trafficinfo.label.light' | translate }}</p>
+          <div class="sma_box yellow"></div>
+          <p class="font-size-m">{{ 'trafficinfo.label.moderate' | translate }}</p>
+          <div class="sma_box red"></div>
+          <p class="font-size-m">{{ 'trafficinfo.label.heavy' | translate }}</p>
+          <div class="sma_box darkred"></div>
+          <p class="font-size-m">{{ 'trafficinfo.label.bumper' | translate }}</p>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>

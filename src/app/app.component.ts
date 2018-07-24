@@ -17,7 +17,8 @@ export class AppComponent {
     translatedText: string;
     supportedLanguages: any[];
     @Input() langChange: string;
-    zIndex = '888';
+    zIndex = '8888';
+    zIndex2 = '9999';
     bHeight = '70px';
     bTop = '35px';
 
@@ -28,12 +29,14 @@ export class AppComponent {
     }
     getExpand(data) {
         if (data) {
-            this.zIndex = '888';
+            this.zIndex = '8888';
+            this.zIndex2 = '9999';
             this.bHeight = '70px';
             this.bTop = '35px';
 
         } else {
-            this.zIndex = '888';
+            this.zIndex = '8888';
+            this.zIndex2 = '9999';
             this.bHeight = '105px';
             this.bTop = '85px';
         }

@@ -7,8 +7,12 @@
         <ul class="list-inline" style="clear:both;">
           <li>
             <a class="font-size-s" routerLink="/">
-              {{'home.menu.agencycdir' | translate }}
+              {{'home.menu.home' | translate }}
             </a>
+          </li>
+          <li>/</li>
+          <li>
+              {{'home.menu.agencycdir' | translate }}
           </li>
           <!-- <li>/</li>
                   <li>
@@ -29,7 +33,7 @@
             <mat-form-field class="example-full-width">
               <!-- (keydown)="applyFilter($event.target.value)" -->
               <input matInput (keyup)="applySearchFilter($event.target.value)" [(ngModel)]="keyword" [ngModelOptions]="{standalone: true}"
-                placeholder="{{ 'common.placeholder.keyword' | translate }}">
+                placeholder="{{ 'agencydir.label.search' | translate }}">
               <button mat-button *ngIf="keyword" matSuffix mat-icon-button (click)="keyword='';resetSearch()">
                 <mat-icon>x</mat-icon>
               </button>
@@ -39,7 +43,7 @@
         <div class="row">
           <div class="col-md-6">
             <mat-form-field class="example-full-width">
-              <mat-select placeholder="{{ 'agencydir.filterby.all' | translate }} {{ 'agencydir.filterby.ministry' | translate }}" [(ngModel)]="ministry"
+              <mat-select title="{{ 'agencydir.label.searchbymin' | translate }}" placeholder="{{ 'agencydir.label.searchbymin' | translate }}" [(ngModel)]="ministry"
                 (change)="applyFilter('ministry',$event.value)">
                 <mat-option [value]="0">{{ 'agencydir.filterby.all' | translate }} {{ 'agencydir.filterby.ministry' | translate }}</mat-option>
                 <mat-option *ngFor="let ministry of ministryList" [value]="ministry.ministryCode" (click)="goToMarkerPoint(ministry.ministryLatitude,ministry.ministryLongitude, ministry.ministryName, ministry.ministryAddress, ministry.ministryEmail, ministry.ministryFax, ministry.ministryPhone,ministry.ministryFacebook,ministry.ministryTwitter,ministry.ministryWebsiteUrl)">{{ ministry.ministryName }}</mat-option>
@@ -48,7 +52,7 @@
           </div>
           <div class="col-md-6">
             <mat-form-field class="example-full-width" *ngIf="!keyword">
-              <mat-select placeholder="{{ 'agencydir.filterby.all' | translate }}" [(ngModel)]="letter" (change)="applyFilter('letter',$event.value)">
+              <mat-select placeholder="{{ 'agencydir.label.searchbyalpha' | translate }}" [(ngModel)]="letter" (change)="applyFilter('letter',$event.value)">
                 <mat-option [value]="0">{{ 'agencydir.filterby.all' | translate }}</mat-option>
                 <mat-option *ngFor="let l of dataAlpha" [value]="l" style="text-transform: capitalize">{{ l }}</mat-option>
               </mat-select>
@@ -71,8 +75,8 @@
                 totalItems: totalRec }">
 
                   <td>
-                    <a *ngIf="agc.agencyLatitude || agc.agencyLongitude" style="color: #1d1d1d" href="agencydir#" (click)="goToMarkerPoint(agc.agencyLatitude,agc.agencyLongitude, agc.agencyName, agc.agencyAddress, agc.agencyEmail, agc.agencyFax, agc.agencyPhoneNo,agc.agencyFacebook,agc.agencyTwitter,agc.agencyWebsiteUrl)" title="agc.agencyLatitude">{{agc.agencyName}}</a>
-                    <a *ngIf="!agc.agencyLatitude || !agc.agencyLongitude" style="color: #cacaca; cursor:default;" href="agencydir#"  title="Latitude and Longitude Not Found">{{agc.agencyName}} <i class="fa fa-unlink"></i></a>
+                    <a *ngIf="agc.agencyLatitude || agc.agencyLongitude" style="color: #1d1d1d" href="agencydir#" (click)="goToMarkerPoint(agc.agencyLatitude,agc.agencyLongitude, agc.agencyName, agc.agencyAddress, agc.agencyEmail, agc.agencyFax, agc.agencyPhoneNo,agc.agencyFacebook,agc.agencyTwitter,agc.agencyWebsiteUrl)">{{agc.agencyName}}</a>
+                    <a *ngIf="!agc.agencyLatitude || !agc.agencyLongitude" style="color: #cacaca; cursor:default;" href="agencydir#"  title="{{ 'agencydir.label.latlong' | translate }}{{ 'agencydir.msg.notfound' | translate }}">{{agc.agencyName}} <i class="fa fa-unlink"></i></a>
                   </td>
                 </tr>
               </tbody>
