@@ -256,8 +256,16 @@
       "alphabet":"A-Z"
     },
     "label": {
+      "latlong":"Latitude and Longitude ",
       "agencyName":"Agency Name",
+      "search":"Search Agency",
+      "searchbyagcname":"Search by Agency Name",
+      "searchbymin":"Agency by Ministry/State",
+      "searchbyalpha":"Agency based on A-Z",
       "total":"Total Results"
+    },
+    "msg":{
+      "notfound": "Not Found"
     }
   },
   "digitalservices": {
@@ -269,7 +277,8 @@
     "msg": {
       "beforeLogin": "Please Login / Register To Access Services Provided",
       "afterLogin": "Here are the services available.",
-      "instruction": "The services available in MyGovernment need to use the identification number for citizens"
+      "instruction": "The services available in MyGovernment need to use the identification number for citizens",
+      "access": "Sorry, our Digital Services are available to authorized users only"
     }
   },
   "calendar": {

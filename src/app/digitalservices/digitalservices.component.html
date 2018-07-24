@@ -42,8 +42,8 @@
                           <a *ngIf="isLogin" [href]="d.url">{{ d.title }}</a>
                           <a *ngIf="!isLogin" (click)="openDialog()" style="cursor: pointer;">{{ d.title }}</a>
                           &nbsp;
-                          <a *ngIf="isLogin" [href]="mediaUrl + d.manual?.mediaFile" data-toggle="tooltip" target="_blank" title="{{ d.description }}"><span class="fa fa-info-circle clickable-icons"></span> </a>
-                          <a *ngIf="!isLogin" (click)="openDialog()" title="{{ d.description }}" style="cursor: pointer;"><span class="fa fa-info-circle clickable-icons"></span> </a>
+                          <a *ngIf="isLogin" [href]="mediaUrl + d.manual?.mediaFile" data-toggle="tooltip" target="_blank" title="{{ d.description }}"><span *ngIf="d.manual" class="fa fa-info-circle clickable-icons"></span> </a>
+                          <a *ngIf="!isLogin" (click)="openDialog()" title="{{ d.description }}" style="cursor: pointer;"><span *ngIf="d.manual" class="fa fa-info-circle clickable-icons"></span> </a>
                       </li>
                     </ul>
                 </li>

@@ -39,4 +39,4 @@
     color: #fff;
     cursor: pointer;
 }
-#dirmap { height: 500px; }
+#dirmap { height: 500px; z-index: 400 }

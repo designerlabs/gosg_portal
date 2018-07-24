@@ -177,7 +177,7 @@
       "name": "Nama penuh wajib diisi",
       "dob": "Tarikh Lahir wajib diisi",
       "gender": "Jantina wajib dipilih",
-      "race": "Race wajib dipilih",
+      "race": "Bangsa wajib dipilih",
       "perAddress1": "Alamat Tetap 1 wajib diisi",
       "state": "Negeri wajib dipilih",
       "city": "Bandar wajib dipilih",
@@ -256,8 +256,16 @@
       "alphabet":"A-Z"
     },
     "label": {
+      "latlong":"Latitud and Longitud ",
       "agencyName":"Nama Agensi",
+      "search":"Carian Agensi",
+      "searchbyagcname":"Carian berdasarkan nama Agensi",
+      "searchbymin":"Agensi berdasarkan Kementerian/Negeri",
+      "searchbyalpha":"Agensi berdasarkan A-Z",
       "total":"Jumlah Capaian"
+    },
+    "msg":{
+      "notfound": "Tidak dijumpai"
     }
   },
   "digitalservices": {
@@ -269,7 +277,8 @@
     "msg": {
       "beforeLogin": "Sila Log Masuk / Daftar Untuk Mengakses PERKHIDMATAN Yang Disediakan",
       "afterLogin": "Senarai perkhidmatan yang ditawarkan oleh Gerbang MyGovernment",
-      "instruction": "Perkhidmatan yang ditawarkan oleh Gerbang MyGovernment perlu menggunakan nombor kad pengenalan bagi warganegara Malaysia"
+      "instruction": "Perkhidmatan yang ditawarkan oleh Gerbang MyGovernment perlu menggunakan nombor kad pengenalan bagi warganegara Malaysia",
+      "access": "Maaf, Perkhidmatan Digital kami hanya ditawarkan kepada pengguna yang sah sahaja."
     }
   },
   "calendar": {

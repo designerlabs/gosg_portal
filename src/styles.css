@@ -722,3 +722,10 @@ lineHr{
 
 ngui-auto-complete .no-match-found {display: none};
 
+.center-icon-container {
+  height: auto; /*Set line-height to this value*/
+  width: auto;
+  background: #eee;
+  margin: 0 auto;
+}
+
