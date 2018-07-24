@@ -6,7 +6,7 @@ import { NavService } from '../../header/nav/nav.service';
 @Component({
   selector: 'gosg-leftmenu',
   template: `
-    <mat-expansion-panel *ngFor="let content of sessions; let i = index"  multi="false" displayMode="flat" [hideToggle]="content?.contents?.length==0 ? true: null"  [expanded]="content.activeMenu  || (i == statusID) || sessions.length <= 1">
+    <mat-expansion-panel *ngFor="let content of sessions; let i = index"  multi="false" displayMode="flat" [hideToggle]="content?.contents?.length==0 ? true: null"  [expanded]="content.activeMenu  || (i == statusID) || sessions.length <= 1" class="specific-class">
       <mat-expansion-panel-header>
         <mat-panel-title class="pointer" (click)="clickSideMenu(content, i, $event)">
           <a class="warna_font sideBarMenu--link font-size-s" [routerLinkActive]="['active']"  [style.font-weight]="content?.activeMenu ? 'bold' : 'normal'"  [style.color]="content?.activeMenu ? getTheme() : '#333'" >
