@@ -24,6 +24,14 @@ em{
   background-color: #5bc0de;
 }
 
+.mat-vertical-stepper-content{
+  float: right !important;
+  width: 80% !important;
+}
+
+.mat-vertical-stepper-header{
+  width: 20% !important;
+}
 
 .mat-fab.mat-warn, .mat-mini-fab.mat-warn, .mat-raised-button.mat-warn {
   background-color: #d9534f;
@@ -105,7 +113,6 @@ html, body{
 .container.search {
   color: #333;
 }
-
 
 .custom_list{
   list-style: square;
@@ -714,3 +721,4 @@ lineHr{
 }
 
 ngui-auto-complete .no-match-found {display: none};
+

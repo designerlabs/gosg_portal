@@ -23,79 +23,416 @@
   <div class="col-md-12">&nbsp;</div>
 
 
-  <div class="col-md-3 padding-left-0">
+  <div class="col-md-12 padding-left-0">
     <mat-vertical-stepper [linear]="isLinear" #stepper (click)="step1($event)">
       <mat-step [stepControl]="firstFormGroup">
         <form [formGroup]="firstFormGroup">
           <ng-template matStepLabel>Maklumat Pemohon</ng-template>
-          <!-- <mat-form-field>
-            <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
-          </mat-form-field>
           <div>
-            <button mat-button matStepperNext>Next</button>
-          </div> -->
+              <div class="row">
+                <div class="col-md-12">
+                  <mat-form-field  class="example-full-width">
+                    <input matInput formControlName="namaPemohon" placeholder="Nama Pemohon" required>
+                  </mat-form-field>
+                </div>
+              </div>
+      
+              <div class="row">
+                <div class="col-md-3">
+                  <mat-form-field  class="example-full-width">
+                    <input matInput formControlName="icPemohon" placeholder="No.IC/Pasport" required>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-3">
+                  <mat-form-field  class="example-full-width">
+                    <input matInput formControlName="phonePemohon" placeholder="No. Telefon" required>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field  class="example-full-width">
+                    <input matInput formControlName="emailPemohon" placeholder="Emel" required>
+                  </mat-form-field>
+                </div>
+              </div>
+      
+              <div class="row">
+                <div class="col-md-12">
+                  <mat-form-field class="example-full-width">
+                    <textarea matInput formControlName="add1" placeholder="Alamat Tetap" required></textarea>
+                  </mat-form-field>
+                </div>
+              </div>
+      
+              <div class="row">
+                <div class="col-md-4">
+                  <mat-form-field  class="example-full-width">
+                    <input matInput formControlName="poskodPemohon" placeholder="Poskod" required>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field  class="example-full-width">
+                    <input matInput formControlName="daerahPemohon" placeholder="Daerah" required>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field  class="example-full-width">
+                    <input matInput formControlName="negeriPemohon" placeholder="Negeri" required>
+                  </mat-form-field>
+                </div>
+              </div>
+          </div>
+
+          <div class="pull-right">
+            <button mat-raised-button matStepperNext color="primary" class="btn btn-md btn-success font-size-s">Next</button>
+          </div>
         </form>
       </mat-step>
+
+
       <mat-step [stepControl]="secondFormGroup" >
         <form [formGroup]="secondFormGroup">
           <ng-template matStepLabel>Maklumat Pemilik 1/2</ng-template>
-          <!-- <mat-form-field>
-            <input matInput placeholder="Address" formControlName="secondCtrl" required>
-          </mat-form-field>
           <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button matStepperNext>Next</button>
-          </div> -->
+            <div class="row">
+              <div class="col-md-4">
+                <mat-form-field class="example-full-width">
+                  <mat-select formControlName="warganegara" placeholder="Warganegara" required>
+                    <mat-option *ngFor="let nation of nationality" [value]="nation.nationalityId">
+                      {{nation.nationalityId}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-4">
+                <mat-form-field class="example-full-width">
+                  <mat-select formControlName="typeIC" placeholder="Jenis IC" required>
+                    <mat-option *ngFor="let listIC of listjic" [value]="listIC.id">
+                      {{listIC.text}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-4">
+                <mat-form-field  class="example-full-width">
+                  <input matInput formControlName="icpassport" placeholder="No.IC/Passport" required>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <mat-form-field  class="example-full-width">
+                  <input matInput formControlName="namaPemilik" placeholder="Nama Pemilik" required>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4">
+                <mat-form-field  class="example-full-width">
+                  <input matInput formControlName="phonePemilik" placeholder="No. Telefon" required>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-4">
+                <mat-form-field class="example-full-width">
+                  <mat-select formControlName="jobType" placeholder="Jenis Pekerjaan" required>
+                    <mat-option [value]="1">
+                      1
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-4">
+                <mat-form-field class="example-full-width">
+                  <mat-select formControlName="jobGroup" placeholder="Kumpulan Pekerjaan" required>
+                    <mat-option [value]="1">
+                      1
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+        
+            <div class="row">
+              <div class="col-md-12">
+                <mat-form-field class="example-full-width">
+                  <textarea matInput formControlName="addPemilik" placeholder="Alamat Tetap" required></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+    
+            <div class="row">
+              <div class="col-md-4">
+                <mat-form-field  class="example-full-width">
+                  <input matInput formControlName="poskodPemilik" placeholder="Poskod" required>
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <mat-form-field  class="example-full-width">
+                  <input matInput formControlName="daerahPemilik" placeholder="Daerah" required>
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <mat-form-field  class="example-full-width">
+                  <input matInput formControlName="negeriPemilik" placeholder="Negeri" required>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="pull-right">
+            <button mat-raised-button matStepperPrevious color="primary" class="btn btn-md btn-success font-size-s">Back</button>
+            <button mat-raised-button matStepperNext color="primary" class="btn btn-md btn-success font-size-s">Next</button>
+          </div>
         </form>
       </mat-step>
+
+
       <mat-step [stepControl]="thirdFormGroup">
         <form [formGroup]="thirdFormGroup">
           <ng-template matStepLabel>Maklumat Pemilik 2/2</ng-template>
-          <mat-form-field>
-            <input matInput placeholder="Address" formControlName="thirdCtrl" required>
-          </mat-form-field>
           <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button matStepperNext>Next</button>
+            <div class="row">
+              <div class="col-md-12">
+                <mat-form-field class="example-full-width">
+                  <textarea matInput formControlName="mailingAdd" placeholder="Alamat Surat Menyurat" required></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+    
+            <div class="row">
+              <div class="col-md-4">
+                <mat-form-field  class="example-full-width">
+                  <input matInput formControlName="mailingPoskod" placeholder="Poskod" required>
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <mat-form-field  class="example-full-width">
+                  <input matInput formControlName="mailingDaerah" placeholder="Daerah" required>
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <mat-form-field  class="example-full-width">
+                  <input matInput formControlName="mailingNegeri" placeholder="Negeri" required>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="pull-right">
+            <button mat-raised-button matStepperPrevious color="primary" class="btn btn-md btn-success font-size-s">Back</button>
+            <button mat-raised-button matStepperNext color="primary" class="btn btn-md btn-success font-size-s">Next</button>
           </div>
         </form>
       </mat-step>
+
+
       <mat-step [stepControl]="fourthFormGroup">
         <form [formGroup]="fourthFormGroup">
           <ng-template matStepLabel>Maklumat Syarikat</ng-template>
-          <mat-form-field>
-            <input matInput placeholder="Address" formControlName="fourthCtrl" required>
-          </mat-form-field>
           <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button matStepperNext>Next</button>
+            <div class="row">
+              <div class="col-md-6">
+                <mat-form-field class="example-full-width">
+                  <mat-select formControlName="companyType" placeholder="Jenis Syarikat" required>
+                    <mat-option [value]="1">
+                      1
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-6">
+                <mat-form-field class="example-full-width">
+                  <mat-select formControlName="jenisMilikan" placeholder="Jenis Pemilikan" required>
+                    <mat-option [value]="1">
+                      1
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <mat-form-field  class="example-full-width">
+                  <input matInput formControlName="registerType" placeholder="Jenis Pendaftaran Syarikat" required>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-6">
+                <mat-form-field  class="example-full-width">
+                  <input matInput formControlName="registerNo" placeholder="No. Pendaftaran Syarikat" required>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <mat-form-field  class="example-full-width">
+                  <input matInput formControlName="companyName" placeholder="Nama Syarikat" required>
+                </mat-form-field>
+              </div>
+            </div>
+        
+            <div class="row">
+              <div class="col-md-12">
+                <mat-form-field class="example-full-width">
+                  <textarea matInput formControlName="companyAdd" placeholder="Alamat" required></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+    
+            <div class="row">
+              <div class="col-md-4">
+                <mat-form-field  class="example-full-width">
+                  <input matInput formControlName="companyPoskod" placeholder="Poskod" required>
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <mat-form-field  class="example-full-width">
+                  <input matInput formControlName="companyDaerah" placeholder="Daerah" required>
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <mat-form-field  class="example-full-width">
+                  <input matInput formControlName="companyNegeri" placeholder="Negeri" required>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4">
+                <mat-form-field  class="example-full-width">
+                  <input matInput formControlName="companyPhone" placeholder="No. Telefon" required>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-4">
+                <mat-form-field  class="example-full-width">
+                  <input matInput formControlName="companyFax" placeholder="No. Faks" required>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="pull-right">
+            <button mat-raised-button matStepperPrevious color="primary" class="btn btn-md btn-success font-size-s">Back</button>
+            <button mat-raised-button matStepperNext color="primary" class="btn btn-md btn-success font-size-s">Next</button>
           </div>
         </form>
       </mat-step>
+
+
       <mat-step [stepControl]="fifthFormGroup">
         <form [formGroup]="fifthFormGroup">
           <ng-template matStepLabel>Lesen & Lampiran</ng-template>
-          <mat-form-field>
-            <input matInput placeholder="Address" formControlName="fifthCtrl" required>
-          </mat-form-field>
           <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button matStepperNext>Next</button>
+            <div class="row">
+              <div class="col-md-12">
+                <mat-form-field class="example-full-width">
+                  <mat-select formControlName="lsnActivity" placeholder="Aktiviti Lesen" required>
+                    <mat-option [value]="1">
+                      1
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <mat-form-field class="example-full-width">
+                  <mat-select formControlName="businessCat" placeholder="Kategori Perniagaan" required>
+                    <mat-option [value]="1">
+                      1
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <span class="displayDesc" style="color: #333;">Sila lampirkan dokumen berkaitan</span>
+              </div><br><br>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4">
+                <mat-form-field class="example-full-width" >
+                    <input matInput placeholder="Salinan Sijil PendaftaranSyarikat (Sijil SSM)" formControlName="file1" class="displayDesc"
+                    required readonly>
+                    <mat-error *ngIf="fifthFormGroup.controls.file1.hasError('required')">
+                      Salinan Sijil PendaftaranSyarikat (Sijil SSM) diperlukan
+                    </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-2">
+                <ng4-files-click (filesSelect)="uploadFile1($event)">
+                  <span role="button" class="btn btn-success btn-md"><i class="fa fa-search"></i> Muat Naik Fail</span>
+                </ng4-files-click>
+                <!-- <div *ngIf="selectedFilesEn">
+                  <img *ngIf="showImgEn" [src]="appConfig.externalMediaURL +'/'+ mediaPath +'/'+ selectedFilesEn" style="width:200px">
+                </div> -->                
+              </div>
+
+              <div class="col-md-4">
+                <mat-form-field class="example-full-width" >
+                    <input matInput placeholder="Salinan Surat Kelulusan PBT" formControlName="file2" class="displayDesc"
+                    required readonly>
+                    <mat-error *ngIf="fifthFormGroup.controls.file2.hasError('required')">
+                      Salinan Surat Kelulusan PBT diperlukan
+                    </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-2">
+                <ng4-files-click (filesSelect)="uploadFile2($event)">
+                  <span role="button" class="btn btn-success btn-md"><i class="fa fa-search"></i> Muat Naik Fail</span>
+                </ng4-files-click>
+                <!-- <div *ngIf="selectedFilesMy">
+                    <img *ngIf="showImgMy" [src]="appConfig.externalMediaURL+'/'+mediaPath+'/'+selectedFilesMy" style="width:200px">
+                </div> -->
+              </div>
+            </div>
+
+            <div class="row">
+              <br><br><br>
+              <div class="col-md-12">
+                <span class="displayDesc">Perakuan</span>
+              </div><br><br>
+
+              <div class="col-md-12">
+                <mat-checkbox formControlName="agreement" required></mat-checkbox>
+                <span class="displayJustify">
+                  Saya mengaku bahawa maklumat yang diberikan adalah benar. Jika didapati maklumat tersebut adalah 
+                  palsu, Jabatan Perlindungan Hidupan Liar & Taman Negara (PERHILITAN) Semenanjung Malaysia 
+                  berhak menolak permohonan ini. </span>
+              </div>
+            </div>
+
+          </div>
+          <div class="pull-right">
+            <button mat-raised-button matStepperPrevious color="primary"  class="btn btn-md btn-success font-size-s">Back</button>
+            <button mat-raised-button color="primary" class="btn btn-md btn-success font-size-s">Finish</button>
           </div>
         </form>
-      </mat-step>
-      <mat-step>
+      </mat-step><br>
+      <!-- <mat-step>
         <ng-template matStepLabel>Done</ng-template>
         You are now done.
         <div>
           <button mat-button matStepperPrevious>Back</button>
           <button mat-button (click)="stepper.reset()">Reset</button>
         </div>
-      </mat-step>
-    </mat-vertical-stepper>
+      </mat-step> -->
+    </mat-vertical-stepper><br>
   </div>
 
-  <div class="col-md-9">
+  <!-- <div class="col-md-9">
 
     <div>
       <form [formGroup]="pemohonForm" role="form" novalidate="novalidate">
@@ -162,7 +499,7 @@
           </mat-panel-title>
         </div>
     </form>
-  </div>
+  </div> -->
 </div>
 
 
