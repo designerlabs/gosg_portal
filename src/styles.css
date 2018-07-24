@@ -713,4 +713,11 @@ lineHr{
         1px 1px 0 #000;
 }
 
+.center-icon-container {
+  height: auto; /*Set line-height to this value*/
+  width: auto;
+  background: #eee;
+  margin: 0 auto;
+}
+
 ngui-auto-complete .no-match-found {display: none};

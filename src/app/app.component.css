@@ -80,7 +80,7 @@ footer{
     background:#666666;
 }
 .nav-bar-style{
-    z-index: 999;
+    z-index: 9999;
     position: fixed;
     width: 100%;
     top: 30px;
