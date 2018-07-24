@@ -256,12 +256,16 @@
       "alphabet":"A-Z"
     },
     "label": {
+      "latlong":"Latitude and Longitude ",
       "agencyName":"Agency Name",
       "search":"Search Agency",
       "searchbyagcname":"Search by Agency Name",
       "searchbymin":"Search by Ministry/State",
       "searchbyalpha":"Search based on A-Z",
       "total":"Total Results"
+    },
+    "msg":{
+      "notfound": "Not Found"
     }
   },
   "digitalservices": {

@@ -51,7 +51,7 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
   langId = localStorage.getItem('langID');
   languageId = this.languageId;
   recordTable = null;
-  // letters = this.genCharArray('a', 'z');
+  id;
   custom: any;
   rp;
 
@@ -116,6 +116,9 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
     this.getDefaultMap();
     // this.getStreetNamesData();
     this.getTrafficFlowData();
+    this.id = setInterval(() => {
+      this.getTrafficFlowData(); 
+    }, 300000);
   }
 
   ngAfterViewInit() {
@@ -124,6 +127,9 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscriptionLang.unsubscribe();
+    if (this.id) {
+      clearInterval(this.id);
+    }
   }
 
   getDefaultMap() {

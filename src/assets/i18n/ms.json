@@ -256,12 +256,16 @@
       "alphabet":"A-Z"
     },
     "label": {
+      "latlong":"Latitud and Longitud ",
       "agencyName":"Nama Agensi",
       "search":"Carian Agensi",
       "searchbyagcname":"Carian berdasarkan nama Agensi",
       "searchbymin":"Carian berdasarkan Kementerian/Negeri",
       "searchbyalpha":"Carian berdasarkan A-Z",
       "total":"Jumlah Capaian"
+    },
+    "msg":{
+      "notfound": "Tidak dijumpai"
     }
   },
   "digitalservices": {

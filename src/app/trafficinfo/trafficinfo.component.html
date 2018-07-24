@@ -59,7 +59,8 @@
               <td class="text-align-Center boldText" style="border: 1px solid #000000; width: 25%;;">{{ 'trafficinfo.label.3hr' | translate }}</td>
             </tr>
             <tr>
-              <td *ngFor="let pData of predictionData" [ngStyle]="{'background': pData.color, 'height': '80px', 'border': '1px solid #000000', 'cursor':'help' }">
+              <td *ngFor="let pData of predictionData" class="car-icon" [ngStyle]="{'background': 'transparent', 'height': 'auto', 'border': '1px solid #000000', 'cursor':'help' }">
+                <i class="fa fa-car font-size-xl car-style" [ngStyle]="{ 'color':pData.color}"></i>
               </td>
             </tr>
           </tbody>
