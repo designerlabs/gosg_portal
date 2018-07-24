@@ -346,6 +346,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                       const telecode = (data.user.mobilePhoneNo).split('*')[0];
                       this.phoneForm.get('codeTelefonf').setValue(telecode);
                       this.profileForm.get('mobilecodeTelefon').setValue(telecode);
+                      this.profileForm.get('corrsMobile').setValue(telenum);
                     }else {
                       this.profileForm.get('corrsMobile').setValue((data.user.mobilePhoneNo));
                     }
