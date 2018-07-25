@@ -24,15 +24,6 @@ em{
   background-color: #5bc0de;
 }
 
-.mat-vertical-stepper-content{
-  float: right !important;
-  width: 80% !important;
-}
-
-.mat-vertical-stepper-header{
-  width: 20% !important;
-}
-
 .mat-fab.mat-warn, .mat-mini-fab.mat-warn, .mat-raised-button.mat-warn {
   background-color: #d9534f;
 }
@@ -394,6 +385,16 @@ p.font-size-s > strong {
   overflow: auto;
 }
 
+.titleDescStepper{
+  margin-left: 5px;
+  font-size: 16px;
+}
+
+.mainTitleStepper{
+  color: #333;
+  padding-left: 20px;
+}
+
 
 /* .owl-carousel .owl-item img {
   display: block;
@@ -456,6 +457,10 @@ p.font-size-s > strong {
     display: block;
   }
 
+  .stepperTitle{
+    display: none;
+  }
+
 }
 
 
@@ -472,6 +477,8 @@ p.font-size-s > strong {
   .dashboard_s_menu{
     display: none;
   }
+
+  
   
 }
 

@@ -24,6 +24,7 @@ import {
   Ng4FilesStatus,
   Ng4FilesSelected
 } from '../ng4-files';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'gosg-perhilitan',
@@ -119,16 +120,14 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
 
         const myLang = translate.currentLang;
     
-        if (myLang == 'en') {
-    
+        if (myLang == 'en') {    
             translate.get('HOME').subscribe((res: any) => {
                 this.lang = 'en';
                 this.langID = 1;
             });
         }
 
-        if (myLang == 'ms') {
-    
+        if (myLang == 'ms') {    
             translate.get('HOME').subscribe((res: any) => {
                 this.lang = 'ms';
                 this.langID = 2;
@@ -227,6 +226,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
 
     this.getNationality(this.langID);
     this.getJIC(this.langID);
+    this.getUserData();
   }
 
   uploadFile1(selectedFiles: Ng4FilesSelected, lan): void {    
@@ -269,22 +269,70 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
     this.fifthFormGroup.controls.file2.setValue(nameFile1);
   }
 
+  getUserData(){
+    if(!environment.staging){
+      //this.getPerPostCodeFlag = false;
+      this.protectedService.getUser().subscribe(
+      data => {
+        this.sharedService.errorHandling(data, (function(){
+
+          console.log(data);
+          if(data.user){
+            
+            // this.userTypeId = data.user.userType.userTypeId;
+
+            // this.protectedService.getProfile(data.user.pid).subscribe(
+            // data => {
+            //   this.sharedService.errorHandling(data, (function(){
+            //     if(data.user) {
+            //       this.userId = data.user.userId;
+            //       this.fullname = data.user.fullName;
+            //       this.accountStatus = data.user.accountStatus.accountStatusId;
+            //       this.nationality = data.user.country.countryName;
+            //       this.countryId = data.user.country.countryId;
+            //       if(data.user.country.countryId == 152){
+            //         this.isLocal = true;
+            //       }else{
+            //         this.isLocal = false;
+            //       }
+            //       this.passport = data.user.passportNo;
+            //       this.idno = data.user.pid;
+            //       this.regemail = data.user.email;
+            //       this.regdate = data.user.registrationDate;
+            //       this.isStaff = data.user.isStaff;
+            //       this.isMyIdentityVerfied = data.user.isMyIdentityVerified;
+            //       this.isMyIdentityValid = data.user.isMyIdentityValid;
+            //       this.agencyForwardUrl = data.user.agencyForwardUrl;
+            //       this.roles = data.user.roles;      
+
+            //     }
+            //   }).bind(this));
+            // },
+            // error => {
+            // });
+          }else{
+          }
+        }).bind(this));
+
+      },
+      error => {
+          location.href = this.config.urlUAP +'uapsso/Logout';
+          //location.href = this.config.urlUAP+'portal/index';
+      });
+    }
+  }
+
   getNationality(lang){
     this.protectedService.getNationalityPerhilitan('perhilitan/dropdown/nationality',lang).subscribe(
       data => {
-
-        this.nationality = data.perhilitanNationalityResourceList;
-        console.log(this.nationality);
-     
+        this.nationality = data.perhilitanNationalityResourceList;     
     });
   }
 
   getJIC(lang){
     this.protectedService.getJenisIC('perhilitan/dropdown/ictype/1',lang).subscribe(
       data => {
-
-        this.listjic = data.dropdownResourceList;
-     
+        this.listjic = data.dropdownResourceList;     
     });
   }
 
