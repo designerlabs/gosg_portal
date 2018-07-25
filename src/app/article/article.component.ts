@@ -68,9 +68,9 @@ export class ArticleComponent implements OnInit, OnDestroy {
 
       if (this.topnavservice.flagLang) {
         if (this.moduleName == 'subcategory') {
-          this.navService.triggerSubArticle(this.subID, this.langId);
+          this.navService.triggerSubArticle(this.topicID, this.subID, this.langId);
         } else if (this.moduleName == 'content') {
-          this.navService.triggerContent(this.subID, this.langId);
+          this.navService.triggerContent(this.topicID, this.subID, this.langId);
         } else {
           this.navService.triggerArticle(this.moduleName, this.langId, this.topicID);
         }

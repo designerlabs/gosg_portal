@@ -184,9 +184,9 @@ export class NavService {
     }
   }
 
-  getSubArticleUrl(subID: number, lang) {
+  getSubArticleUrl(parID:number, subID: number, lang) {
     if (!isNaN(subID)) {
-      return this.http.get(this.config.urlPortal  + 'subcategory/'+subID + '?language=' + lang)
+      return this.http.get(this.config.urlPortal  + 'subcategory/'+parID+'/'+subID + '?language=' + lang)
         .take(1)
         .map((response: Response) => response.json().contentCategoryResource.results)
         // .catch((error:any) =>
@@ -246,9 +246,9 @@ export class NavService {
     }
   }
 
-  getContentUrl(subID: number, lang) {
+  getContentUrl(parID:number, subID: number, lang) {
     if (!isNaN(subID)) {
-      return this.http.get(this.config.urlPortal  + 'content/' +subID + '?language=' + lang)
+      return this.http.get(this.config.urlPortal  + 'content/' +parID+'/'+subID + '?language=' + lang)
         .take(1)
         .map((response: Response) => response.json().contentCategoryResource.results)
         // .catch((error:any) =>
@@ -310,14 +310,14 @@ export class NavService {
      }
    }
 
-  triggerSubArticle(subID, lang) {
+  triggerSubArticle(parID, subID, lang) {
    // alert("Trigger sub acrticle");
     if (!isNaN(subID)) {
       this.articleService.articles = [''];
       this.articles = [''];
       return this.route.paramMap
         .switchMap((params: ParamMap) =>
-          this.getSubArticleUrl(subID, lang))
+          this.getSubArticleUrl(parID, subID, lang))
         .subscribe(resSliderData => {
           this.articleService.articles = resSliderData;
           this.articles = resSliderData;
@@ -366,14 +366,14 @@ export class NavService {
 
    }
 
-  triggerContent( subID, lang) {
+  triggerContent(parID, subID, lang) {
     // alert("Trigger sub acrticle");
      if (!isNaN(subID)) {
        this.articleService.articles = [''];
        this.articles = [''];
        return this.route.paramMap
          .switchMap((params: ParamMap) =>
-           this.getContentUrl(subID, lang))
+           this.getContentUrl(parID, subID, lang))
          .subscribe(resSliderData => {
            this.articleService.articles = resSliderData;
            this.articles = resSliderData;
