@@ -287,11 +287,11 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
                 console.log("getprofile");
                 console.log(data);
 
-                this.firstFormGroup.get('namaPemohon').setValue(data.user.fullname);
+                this.firstFormGroup.get('namaPemohon').setValue(data.user.fullName);
                 this.firstFormGroup.get('icPemohon').setValue(data.user.identificationNo);
-                this.firstFormGroup.get('phonePemohon').setValue(data.user.fullname);
+                this.firstFormGroup.get('phonePemohon').setValue(data.user.fullName);
                 this.firstFormGroup.get('emailPemohon').setValue(data.user.email);
-                this.firstFormGroup.get('add1').setValue(data.user.permanentAddress1);
+                this.firstFormGroup.get('add1').setValue(data.user.addresss.permanentAddress1);
                 this.firstFormGroup.get('poskodPemohon').setValue(data.user.addresss.permanentAddressPostcode.postcodeId);
                 this.firstFormGroup.get('daerahPemohon').setValue(data.user.addresss.permanentAddressPostcode.city.cityId);
                 this.firstFormGroup.get('negeriPemohon').setValue(data.user.addresss.permanentAddressState.stateId);

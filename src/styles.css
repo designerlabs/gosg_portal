@@ -395,6 +395,10 @@ p.font-size-s > strong {
   padding-left: 20px;
 }
 
+.displayInfo{
+  color: #333;
+}
+
 
 /* .owl-carousel .owl-item img {
   display: block;
