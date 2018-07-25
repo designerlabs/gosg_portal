@@ -95,9 +95,12 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
 
   public nationality: any;
   public listjic: any;
+  public dbposkod: any;
+  public dbdaerah: any;
+  public dbnegeri: any;
+
   flagPemohon = false;
-  flagPemilik = false;
-  
+  flagPemilik = false;  
 
   constructor(
     private activatedRoute:ActivatedRoute,
@@ -279,48 +282,29 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
           console.log(data);
           if(data.user){
             
-            this.userTypeId = data.user.userType.userTypeId;
+            let phone = data.user.address.permanentAddressHomePhoneNo.split('*')[1];
 
-            this.protectedService.getProfile(data.user.pid).subscribe(
-            data => {
-              this.sharedService.errorHandling(data, (function(){
-                console.log("getprofile");
-                console.log(data);
+            this.firstFormGroup.get('namaPemohon').setValue(data.user.fullName);
+            this.firstFormGroup.get('icPemohon').setValue(data.user.identificationNo);
+            this.firstFormGroup.get('phonePemohon').setValue(phone);
+            this.firstFormGroup.get('emailPemohon').setValue(data.user.email);
+            this.firstFormGroup.get('add1').setValue(data.user.address.permanentAddress1);
+            this.firstFormGroup.get('poskodPemohon').setValue(data.user.address.permanentAddressPostcode.postCode);
+            this.firstFormGroup.get('daerahPemohon').setValue(data.user.address.permanentAddressCity.cityName);
+            this.firstFormGroup.get('negeriPemohon').setValue(data.user.address.permanentAddressState.stateName);
 
-                this.firstFormGroup.get('namaPemohon').setValue(data.user.fullName);
-                this.firstFormGroup.get('icPemohon').setValue(data.user.identificationNo);
-                this.firstFormGroup.get('phonePemohon').setValue(data.user.fullName);
-                this.firstFormGroup.get('emailPemohon').setValue(data.user.email);
-                this.firstFormGroup.get('add1').setValue(data.user.addresss.permanentAddress1);
-                this.firstFormGroup.get('poskodPemohon').setValue(data.user.addresss.permanentAddressPostcode.postcodeId);
-                this.firstFormGroup.get('daerahPemohon').setValue(data.user.addresss.permanentAddressPostcode.city.cityId);
-                this.firstFormGroup.get('negeriPemohon').setValue(data.user.addresss.permanentAddressState.stateId);
-                // if(data.user) {
-                //   this.userId = data.user.userId;
-                //   this.fullname = data.user.fullName;
-                //   this.accountStatus = data.user.accountStatus.accountStatusId;
-                //   this.nationality = data.user.country.countryName;
-                //   this.countryId = data.user.country.countryId;
-                //   if(data.user.country.countryId == 152){
-                //     this.isLocal = true;
-                //   }else{
-                //     this.isLocal = false;
-                //   }
-                //   this.passport = data.user.passportNo;
-                //   this.idno = data.user.pid;
-                //   this.regemail = data.user.email;
-                //   this.regdate = data.user.registrationDate;
-                //   this.isStaff = data.user.isStaff;
-                //   this.isMyIdentityVerfied = data.user.isMyIdentityVerified;
-                //   this.isMyIdentityValid = data.user.isMyIdentityValid;
-                //   this.agencyForwardUrl = data.user.agencyForwardUrl;
-                //   this.roles = data.user.roles;      
+            this.dbposkod = data.user.address.permanentAddressPostcode.postcodeId;
+            this.dbdaerah = data.user.address.permanentAddressCity.cityId;
+            this.dbnegeri = data.user.address.permanentAddressState.stateId;
 
-                // }
-              }).bind(this));
-            },
-            error => {
-            });
+            // this.protectedService.getProfile(data.user.pid).subscribe(
+            // data => {
+            //   this.sharedService.errorHandling(data, (function(){
+                                
+            //   }).bind(this));
+            // },
+            // error => {
+            // });
           }else{
           }
         }).bind(this));
