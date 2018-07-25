@@ -209,17 +209,10 @@ export class ProtectedService {
     .catch(this.handleError);
   }
 
-  getNationalityPerhilitan(modules, lang){
+  getProtected(modules, lang){
     return this.http
     .get(this.urlPerhilitan + modules + '?language='+lang).map((response: Response) => response.json())
     .catch(this.handleError);
   }
-
-  getJenisIC(modules, lang){
-    return this.http
-    .get(this.urlPerhilitan + modules + '?language='+lang).map((response: Response) => response.json())
-    .catch(this.handleError);
-  }
-
 }
 
