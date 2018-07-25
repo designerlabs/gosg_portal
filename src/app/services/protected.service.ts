@@ -63,6 +63,7 @@ export class ProtectedService {
   private statusAppUrl: string = this.config.statusAppUrl;
   private urlAgencyList: string = this.config.urlAgencyList;
   private dataAppUrl: string = this.config.dataAppUrl;
+  private urlPerhilitan: string = this.config.urlPerhilitan;
 
 
   createProfile(user) {
@@ -205,6 +206,18 @@ export class ProtectedService {
   getDataApp(page, size, param){
     return this.http
     .get(this.dataAppUrl + '?language='+this.languageId+'&page='+page+'&size='+size+param).map((response: Response) => response.json())
+    .catch(this.handleError);
+  }
+
+  getNationalityPerhilitan(modules, lang){
+    return this.http
+    .get(this.urlPerhilitan + modules + '?language='+lang).map((response: Response) => response.json())
+    .catch(this.handleError);
+  }
+
+  getJenisIC(modules, lang){
+    return this.http
+    .get(this.urlPerhilitan + modules + '?language='+lang).map((response: Response) => response.json())
     .catch(this.handleError);
   }
 
