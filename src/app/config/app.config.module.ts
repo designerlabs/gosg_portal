@@ -16,6 +16,8 @@ let portalBaseURL = 'http://localhost:8020/portal/';
 let protectedBaseURL = uapURL+'service-protected/';
 let commonURL = uapURL+'service/';
 
+let agencyURL = uapURL+'service-dservice-protected/'
+
 // backend service
 let baseLocalURL = './app/apidata/';
 let searchServiceURL = searchURL;
@@ -96,6 +98,7 @@ export class AppConfig {
     UrlStreetNameAPI: string;
     UrlTrafficPolylines: string;
     UrlTrafficPredictionAPI: string;
+    urlPerhilitan: string;
 
 }
 
@@ -177,7 +180,8 @@ export const APP_DI_CONFIG: AppConfig = {
     dataAppUrl: protectedBaseURL + 'dservice',
     UrlStreetNameAPI: trafficInfoURL+"street?rows=100",
     UrlTrafficPolylines: trafficInfoURL+"kl",
-    UrlTrafficPredictionAPI: trafficInfoURL+"traffic?streetName="
+    UrlTrafficPredictionAPI: trafficInfoURL+"traffic?streetName=",
+    urlPerhilitan: agencyURL
 };
 
 @NgModule({

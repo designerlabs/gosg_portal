@@ -112,14 +112,14 @@ export class AnnouncementboxComponent implements OnInit, OnDestroy {
                 dDay1 = this.datePipe.transform(data.list[0].eventStart, 'dd');
                 dMonth1 = this.datePipe.transform(data.list[0].eventStart, 'MMMM');
                 eTitle1 = data.list[0].eventName;
-                
+
                 if(data.list.length >= 2) {
                     dDay2 = this.datePipe.transform(data.list[1].eventStart, 'dd');
                     dMonth2 = this.datePipe.transform(data.list[1].eventStart, 'MMMM');
                     eTitle2 = data.list[1].eventName;
                     calArr.push({"day":dDay2,"month":dMonth2,"title":eTitle2})
                 }
-                
+
                 calArr.push({"day":dDay1,"month":dMonth1,"title":eTitle1})
 
                 this.calendarData = calArr;
@@ -131,7 +131,7 @@ export class AnnouncementboxComponent implements OnInit, OnDestroy {
         return localStorage.getItem('themeColor');
     }
 
-    triggerAnnouncementAll(id1, lang ) {
+    triggerAnnouncementAll(id0, id1, lang ) {
         // if (lang === 'ms') {
         //     lang = 2;
         // }
@@ -142,7 +142,7 @@ export class AnnouncementboxComponent implements OnInit, OnDestroy {
 
         this.route.paramMap
         .switchMap((params: ParamMap) =>
-        this.navService.getContentUrl(id1, this.languageId))
+        this.navService.getContentUrl(id0, id1, this.languageId))
         .subscribe(resAllAnnounce => {
             this.announceRes = resAllAnnounce;
             // convert object to array
@@ -157,14 +157,14 @@ export class AnnouncementboxComponent implements OnInit, OnDestroy {
         });
     }
 
-    getDetailAnnounce(id, childid?) {
+    getDetailAnnounce(id0, id, childid?) {
         if (childid) {
 
         } else {
 
         }
 
-        this.triggerAnnouncementAll(id, this.languageId);
+        this.triggerAnnouncementAll(id0, id, this.languageId);
         this.router.navigate(['content',   id]);
         event.preventDefault();
     }

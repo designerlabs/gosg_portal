@@ -43,19 +43,19 @@ export class GalleryComponent implements OnInit, OnDestroy {
 
   galleryData: any;
   @Output() langChange = new EventEmitter();
-  
+
   private subscriptionLang: ISubscription;
-  
+
   mediaUrl: any = this.config.externalMediaURL;
   // mediaUrl: any = this.config.externalMediaURL.split('/')[2];
 
   constructor(
-    public galleryService: GalleryService,  
-    private route: ActivatedRoute, 
-    private navService: NavService, 
-    private translate: TranslateService, 
-    private router: Router, 
-    private breadcrumbService: BreadcrumbService, 
+    public galleryService: GalleryService,
+    private route: ActivatedRoute,
+    private navService: NavService,
+    private translate: TranslateService,
+    private router: Router,
+    private breadcrumbService: BreadcrumbService,
     private sharedService: SharedService,
     @Inject(APP_CONFIG) private config: AppConfig,
     private topnavservice: TopnavService,
@@ -67,7 +67,7 @@ export class GalleryComponent implements OnInit, OnDestroy {
     this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
 
         const myLang = translate.currentLang;
-    
+
         if (myLang == 'en') {
 
             translate.get('HOME').subscribe((res: any) => {
@@ -96,7 +96,7 @@ export class GalleryComponent implements OnInit, OnDestroy {
           this.galleryData = this.galleryService.getGallery();
           this.moduleName = this.router.url.split('/')[1];
           this.navService.triggerGalleries(this.langId);
-      
+
           this.showPopup = false;
           this.isImages = false;
           this.isAudio = false;
@@ -160,8 +160,8 @@ export class GalleryComponent implements OnInit, OnDestroy {
     clickContentFromMenu(pId, aId, status){
 
       this.statusID = status;
-      this.navService.triggerContent(aId, localStorage.getItem('langID'));
-      this.navService.getContentUrl(aId, localStorage.getItem('langID'));
+      this.navService.triggerContent(pId, aId, localStorage.getItem('langID'));
+      this.navService.getContentUrl(pId, aId, localStorage.getItem('langID'));
       this.router.navigate(['/content', aId]);
       event.preventDefault();
     }

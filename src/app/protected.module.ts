@@ -9,6 +9,7 @@ import { NguiAutoCompleteModule } from '@ngui/auto-complete';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { DatepickerModule } from 'ngx-bootstrap/datepicker';
+import { Ng4FilesModule } from './ng4-files';
 
 import { AppConfigModule } from './config/app.config.module';
 // import { AppComponent } from './app.component';
@@ -91,7 +92,8 @@ export function HttpLoaderFactory(http: Http) {
     NguiAutoCompleteModule,
     ButtonsModule.forRoot(),
     AccordionModule.forRoot(),
-    OwlModule
+    OwlModule,
+    Ng4FilesModule
   ],
   schemas:[
     CUSTOM_ELEMENTS_SCHEMA
