@@ -136,7 +136,7 @@ export class SubarticleComponent implements OnInit, OnDestroy {
     this.statusID = status;
     this.navService.getSubArticleUrl(e.parentCode, e.categoryId, localStorage.getItem('langID'));
     this.navService.triggerSubArticle(e.parentCode, e.categoryCode, localStorage.getItem('langID'));
-    this.router.navigate(['/subcategory', e.categoryCode]);
+    this.router.navigate(['/subcategory', e.parentCode, e.categoryCode]);
     event.preventDefault();
   }
 

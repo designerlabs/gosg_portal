@@ -246,8 +246,13 @@ export class NavService {
     }
   }
 
-  getContentUrl(parID:number, subID: number, lang) {
+  getContentUrl(parID, subID: number, lang) {
     if (!isNaN(subID)) {
+      if(isNaN(parID)){
+
+      }else{
+
+      }
       return this.http.get(this.config.urlPortal  + 'content/' +parID+'/'+subID + '?language=' + lang)
         .take(1)
         .map((response: Response) => response.json().contentCategoryResource.results)

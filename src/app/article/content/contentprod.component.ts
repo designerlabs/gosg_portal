@@ -23,6 +23,7 @@ export class ContentProdComponent implements OnInit, OnDestroy {
   isValid: any;
   topicID: number;
   subID: number;
+  parID: number;
   moduleName: string;
   articles: any[];
 
@@ -52,6 +53,7 @@ export class ContentProdComponent implements OnInit, OnDestroy {
                 this.topicID = parseInt(this.router.url.split('/')[2]);
                 var tt = this.router.url.split('/');
                 this.subID = parseInt(tt[tt.length-1]);
+                this.parID = parseInt(tt[tt.length - 2]);
             });
 
         }
@@ -64,15 +66,16 @@ export class ContentProdComponent implements OnInit, OnDestroy {
                 this.topicID = parseInt(this.router.url.split('/')[2]);
                 var tt = this.router.url.split('/');
                 this.subID = parseInt(tt[tt.length-1]);
+                this.parID = parseInt(tt[tt.length - 2]);
             });
         }
 
         if(this.topnavservice.flagLang){
 
           if(this.moduleName == 'subcategory'){
-            this.navService.triggerSubArticle(this.subID, this.langId);
+            this.navService.triggerSubArticle(this.parID, this.subID, this.langId);
           }else if(this.moduleName == 'content'){
-            this.navService.triggerContent(this.subID, this.langId);
+            this.navService.triggerContent(this.parID, this.subID, this.langId);
           }else{
             this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID);
           }
@@ -98,7 +101,9 @@ export class ContentProdComponent implements OnInit, OnDestroy {
     this.moduleName = this.router.url.split('/')[1];
     var tt = this.router.url.split('/');
     this.subID = parseInt(tt[tt.length-1]);
-    this.navService.triggerContent(this.subID, localStorage.getItem('langID'));
+    this.parID = parseInt(tt[tt.length - 2]);
+
+    this.navService.triggerContent(this.parID, this.subID, localStorage.getItem('langID'));
   }
 
   ngOnDestroy() {
@@ -139,9 +144,9 @@ export class ContentProdComponent implements OnInit, OnDestroy {
 
   clickContentFromMenu(pId, aId, status, event){
     this.statusID = status;
-    this.navService.triggerContent(aId, localStorage.getItem('langID'));
-    this.navService.getContentUrl( aId, localStorage.getItem('langID'));
-    this.router.navigate( ['/content', aId]);
+    this.navService.triggerContent(pId, aId, localStorage.getItem('langID'));
+    this.navService.getContentUrl(pId, aId, localStorage.getItem('langID'));
+    this.router.navigate( ['/content', pId, aId]);
     event.preventDefault();
   }
 
