@@ -3,9 +3,11 @@ import { ArticleService } from '../article.service';
 import { APP_CONFIG, AppConfig } from '../../config/app.config.module';
 import { NavService } from '../../header/nav/nav.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { FormControl, FormGroup, Validators} from '@angular/forms';
 import {TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { BreadcrumbService } from '../../header/breadcrumb/breadcrumb.service';
-
+import { ValidateService } from '../../common/validate.service';
+import { SharedService} from '../../common/shared.service';
 import 'rxjs/add/operator/switchMap';
 import { ISubscription } from 'rxjs/Subscription';
 import { TopnavService } from '../../header/topnav/topnav.service';
@@ -23,8 +25,12 @@ export class ContentComponent implements OnInit, OnDestroy {
   isValid: any;
   topicID: number;
   subID: number;
+  parID: number;
   moduleName: string;
   articles: any[];
+  public scoreFormgrp: FormGroup;
+  score: FormControl;
+  remarks: FormControl;
 
   articleData: any;
   @Output() langChange = new EventEmitter();
@@ -35,7 +41,18 @@ export class ContentComponent implements OnInit, OnDestroy {
   private subscription: ISubscription;
   private subscriptionLang: ISubscription;
 
-  constructor(private http:HttpClient, public articleService: ArticleService, private topnavservice: TopnavService, private route: ActivatedRoute, private navService: NavService, private translate: TranslateService, private router: Router, private breadcrumbService: BreadcrumbService, @Inject(APP_CONFIG) private config: AppConfig) {
+  constructor(
+    private http:HttpClient,
+    public articleService: ArticleService,
+    private topnavservice: TopnavService,
+    private route: ActivatedRoute,
+    private navService: NavService,
+    private translate: TranslateService,
+    private router: Router,
+    private breadcrumbService: BreadcrumbService,
+    @Inject(APP_CONFIG) private config: AppConfig,
+    private validateService:ValidateService,
+    private sharedService :SharedService) {
     this.lang = translate.currentLang;
     this.langId = 1;
 
@@ -52,6 +69,7 @@ export class ContentComponent implements OnInit, OnDestroy {
                 this.topicID = parseInt(this.router.url.split('/')[2]);
                 var tt = this.router.url.split('/');
                 this.subID = parseInt(tt[tt.length-1]);
+                this.parID = parseInt(tt[tt.length - 2]);
             });
 
         }
@@ -64,15 +82,16 @@ export class ContentComponent implements OnInit, OnDestroy {
                 this.topicID = parseInt(this.router.url.split('/')[2]);
                 var tt = this.router.url.split('/');
                 this.subID = parseInt(tt[tt.length-1]);
+                this.parID = parseInt(tt[tt.length - 2]);
             });
         }
 
         if(this.topnavservice.flagLang){
 
           if(this.moduleName == 'subcategory'){
-            this.navService.triggerSubArticle(this.subID, this.langId);
+            this.navService.triggerSubArticle(this.parID, this.subID, this.langId);
           }else if(this.moduleName == 'content'){
-            this.navService.triggerContent(this.subID, this.langId);
+            this.navService.triggerContent(this.parID, this.subID, this.langId);
           }else{
             this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID);
           }
@@ -98,8 +117,21 @@ export class ContentComponent implements OnInit, OnDestroy {
     this.moduleName = this.router.url.split('/')[1];
     var tt = this.router.url.split('/');
     this.subID = parseInt(tt[tt.length-1]);
-    this.navService.triggerContent(this.subID, localStorage.getItem('langID'));
+    this.parID = parseInt(tt[tt.length - 2]);
+
+    this.navService.triggerContent(this.parID, this.subID, localStorage.getItem('langID'));
+    this.score = new FormControl('', [Validators.required]);
+    this.remarks = new FormControl('', [Validators.required]);
+    this.scoreFormgrp = new FormGroup({
+      score: this.score,
+      remarks: this.remarks
+
+    });
+
   }
+
+
+
 
   ngOnDestroy() {
     this.subscriptionLang.unsubscribe();
@@ -139,8 +171,8 @@ export class ContentComponent implements OnInit, OnDestroy {
 
   clickContentFromMenu(pId, aId, status, event){
     this.statusID = status;
-    this.navService.triggerContent(aId, localStorage.getItem('langID'));
-    this.navService.getContentUrl( aId, localStorage.getItem('langID'));
+    this.navService.triggerContent(pId, aId, localStorage.getItem('langID'));
+    this.navService.getContentUrl(pId, aId, localStorage.getItem('langID'));
     this.router.navigate( ['/content', aId]);
     event.preventDefault();
   }

@@ -16,6 +16,37 @@
   cursor: pointer;
 }
 
+
+input[type='radio']{
+  position: absolute;
+	margin: 0;
+  width: 50px;
+  height: 25px;
+  opacity: 0;
+  cursor: pointer;
+}
+
+
+input[type='radio'] + label{
+  margin: 0;
+    clear: none;
+
+    /* Left padding makes room for image */
+    padding: 5px 0 4px 24px;
+
+    /* Make look clickable because they are */
+    cursor: pointer;
+
+    background: #ff0;
+}
+input[type='radio'] + label > i{
+  font-size: 60px;
+}
+
+input[type='radio']:checked + label {
+  background: #ff0000;
+}
+
 .mat-expansion-panel-header{
   padding: 0 10px !important;
 }

@@ -57,6 +57,32 @@
 
               <div class="padding-top-xl">
                 <div class="defaultColor" [innerHTML]="article.content?.contentText"></div>
+                <div>
+                  <form [formGroup]="scoreFormgrp" #scoreForm="ngForm" id="score-form" role="form" novalidate="novalidate">
+                      <div class="radio">
+
+                              <input type="radio"  formControlName="score" value=1 checked>
+                              <label><i class="fa fa-smile-o"></i></label>
+
+                      </div>
+                      <div class="radio">
+
+                              <input type="radio" formControlName="score" value=0>
+                              <label><i class="fa fa-meh-o"></i></label>
+
+                      </div>
+                      <div class="radio">
+
+                              <input type="radio" formControlName="score" value=-1>
+                              <label><i class="fa fa-frown-o"></i></label>
+
+                      </div>
+                    <textarea formControlName="remarks"></textarea>
+                    <button class="btn btn-md btn-success">
+                      Submit
+                    </button>
+                  </form>
+                </div>
               </div>
             </div>
           </div>

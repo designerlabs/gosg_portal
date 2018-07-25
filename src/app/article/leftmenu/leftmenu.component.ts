@@ -74,18 +74,17 @@ export class LeftmenuComponent {
   }
 
   clickSideMenu(e, status, event) {
-    //alert( this.paramURL = this.activatedRoute.snapshot.url[0].path)
     this.statusID = status;
     this.agencyActive = false;
     if(this.paramURL == 'category'){
-      this.router.navigate(['/subcategory', e.categoryCode]);
+      this.router.navigate(['/subcategory', e.parentCode, e.categoryCode]);
     }else if(this.paramURL == 'subcategory'){
 
-      this.navService.getSubArticleUrl(e.categoryId, localStorage.getItem('langID'));
-      this.navService.triggerSubArticle(e.categoryCode, localStorage.getItem('langID'));
-      this.router.navigate(['/subcategory', e.categoryCode]);
+      this.navService.getSubArticleUrl(e.parentCode, e.categoryId, localStorage.getItem('langID'));
+      this.navService.triggerSubArticle(e.parentCode, e.categoryCode, localStorage.getItem('langID'));
+      this.router.navigate(['/subcategory', e.parentCode, e.categoryCode]);
     }else{
-      this.router.navigate(['/subcategory', e.categoryCode]);
+      this.router.navigate(['/subcategory', e.parentCode, e.categoryCode]);
     }
     event.preventDefault();
   }
@@ -93,14 +92,14 @@ export class LeftmenuComponent {
   clickContentFromMenu(pId, aId, status, event) {
     this.statusID = status;
     if(this.paramURL == 'category'){
-      this.router.navigate(['/content', aId]);
+      this.router.navigate(['/content', pId, aId]);
     }else if(this.paramURL == 'subcategory'){
-      this.router.navigate(['/content', aId]);
+      this.router.navigate(['/content', pId, aId]);
     }else{
-      this.navService.triggerContent(aId, localStorage.getItem('langID'));
-      this.navService.getContentUrl( aId, localStorage.getItem('langID'));
+      this.navService.triggerContent(pId, aId, localStorage.getItem('langID'));
+      this.navService.getContentUrl(pId, aId, localStorage.getItem('langID'));
 
-      this.router.navigate(['/content', aId]);
+      this.router.navigate(['/content', pId,  aId]);
     }
 
 
