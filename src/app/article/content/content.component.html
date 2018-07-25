@@ -60,20 +60,22 @@
                 <div>
                   <form [formGroup]="scoreFormgrp" #scoreForm="ngForm" id="score-form" role="form" novalidate="novalidate">
                       <div class="radio">
-                          <label>
+
                               <input type="radio"  formControlName="score" value=1 checked>
-                              <label>Like</label>
-                          </label>
+                              <label><i class="fa fa-smile-o"></i></label>
+
                       </div>
                       <div class="radio">
-                          <label>
-                              <input type="radio" formControlName="score" value=0>Neutral
-                          </label>
+
+                              <input type="radio" formControlName="score" value=0>
+                              <label><i class="fa fa-meh-o"></i></label>
+
                       </div>
                       <div class="radio">
-                          <label>
-                              <input type="radio" formControlName="score" value=-1>Dislike
-                          </label>
+
+                              <input type="radio" formControlName="score" value=-1>
+                              <label><i class="fa fa-frown-o"></i></label>
+
                       </div>
                     <textarea formControlName="remarks"></textarea>
                     <button class="btn btn-md btn-success">
