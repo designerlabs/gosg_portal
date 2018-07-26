@@ -544,12 +544,66 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
           this.secondFormGroup.get('poskodPemilik').disable();
           this.secondFormGroup.get('daerahPemilik').disable();
           this.secondFormGroup.get('negeriPemilik').disable();
-     
+
+          this.flag2 = false;   
         }
+
+        else{
+          this.flag2 = true; 
+
+          this.secondFormGroup.get('namaPemilik').setValue(data.noKpResourceList[0].nama);
+          this.secondFormGroup.get('phonePemilik').setValue(data.noKpResourceList[0].notel);
+          this.secondFormGroup.get('jobType').setValue(parseInt(data.noKpResourceList[0].pekerjaan));
+          this.secondFormGroup.get('jobGroup').setValue(parseInt(data.noKpResourceList[0].kumpulanpekerjaan));
+          this.secondFormGroup.get('addPemilik').setValue(data.noKpResourceList[0].alamat);
+          this.secondFormGroup.get('poskodPemilik').setValue(data.noKpResourceList[0].poskod);
+          this.secondFormGroup.get('daerahPemilik').setValue(data.noKpResourceList[0].daerah);
+          this.secondFormGroup.get('negeriPemilik').setValue(data.noKpResourceList[0].negeri);
+
+          this.thirdFormGroup.get('mailingAdd').setValue(data.noKpResourceList[0].alamatsurat);
+          this.thirdFormGroup.get('mailingPoskod').setValue(data.noKpResourceList[0].poskodsurat);        
+          this.thirdFormGroup.get('mailingDaerah').setValue(data.noKpResourceList[0].poskodsurat);
+          this.thirdFormGroup.get('mailingNegeri').setValue(data.noKpResourceList[0].poskodsurat);
+
+          this.selectedPoskod = data.noKpResourceList[0].poskodsurat;
+          this.selectedOccupation = parseInt(data.noKpResourceList[0].pekerjaan);
+          this.checkposkod('','');
+
+          this.secondFormGroup.get('namaPemilik').enable();
+          this.secondFormGroup.get('addPemilik').enable();
+          this.secondFormGroup.get('poskodPemilik').enable();
+          this.secondFormGroup.get('daerahPemilik').enable();
+          this.secondFormGroup.get('negeriPemilik').enable();
+          
+          this.checkReqValues2();
+        }
+
       }).bind(this));
     },
     error => {
     });
+
+  }
+
+  checkReqValues2() {
+
+    let reqVal: any = ["icpassport", "namaPemilik", "phonePemilik", "jobType", "jobGroup"];
+    let nullPointers: any = [];
+
+    for (var reqData of reqVal) {
+      let elem = this.secondFormGroup.get(reqData);
+
+      if (elem.value == "" || elem.value == null) {
+        elem.setValue(null)
+        nullPointers.push(null)
+      }
+    }
+
+    if (nullPointers.length > 0) {
+      this.flag2 = true;
+    } else {
+      this.flag2 = false;
+    }
   }
 
   checkReqValues5() {
@@ -596,6 +650,8 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
     else{
       this.secondFormGroup.get('jobGroup').enable();
     }
+
+    this.checkReqValues2();
   }
 
   checkposkod(val, formValue: any){
