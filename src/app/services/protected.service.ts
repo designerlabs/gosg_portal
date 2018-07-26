@@ -210,10 +210,9 @@ export class ProtectedService {
   }
 
   getProtected(modules, lang){
-    //this.urlPerhilitan
-    console.log(this.urlPerhilitan + modules + '?language='+lang);
+    
     return this.http
-    .get('http://10.1.70.148:8080/service-dservice-protected/' + modules + '?language='+lang).map((response: Response) => response.json())
+    .get(this.urlPerhilitan + modules + '?language='+lang).map((response: Response) => response.json())
     .catch(this.handleError);
   }
 }
