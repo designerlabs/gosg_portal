@@ -107,10 +107,10 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
   public dbnegeri: any;
 
   public selectedWarganegara: any;
+  public selectedPoskod: any;
   public selectedOccupation: any;
 
   flagHantar = true;
-
   flag4 = true;
   flag5 = true;
 
@@ -439,12 +439,13 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
           this.secondFormGroup.get('negeriPemilik').setValue(data.noKpResourceList[0].negeri);
 
           this.thirdFormGroup.get('mailingAdd').setValue(data.noKpResourceList[0].alamatsurat);
-          this.thirdFormGroup.get('mailingPoskod').setValue(data.noKpResourceList[0].poskodsurat);
-        
+          this.thirdFormGroup.get('mailingPoskod').setValue(data.noKpResourceList[0].poskodsurat);        
           this.thirdFormGroup.get('mailingDaerah').setValue(data.noKpResourceList[0].poskodsurat);
           this.thirdFormGroup.get('mailingNegeri').setValue(data.noKpResourceList[0].poskodsurat);
 
+          this.selectedPoskod = data.noKpResourceList[0].poskodsurat;
           this.selectedOccupation = parseInt(data.noKpResourceList[0].pekerjaan);
+          this.checkposkod('','');
 
           this.secondFormGroup.get('namaPemilik').disable();
           this.secondFormGroup.get('addPemilik').disable();
@@ -513,8 +514,12 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       valPoskod = formValue.companyPoskod;
     }
 
-    else if (val == 1){
+    else if(val == 1){
       valPoskod = formValue.mailingPoskod;
+    }
+
+    else if(val == ''){
+      valPoskod = this.selectedPoskod;
     }
 
     this.protectedService.getProtected('perhilitan/poskod/'+valPoskod,this.langID).subscribe(

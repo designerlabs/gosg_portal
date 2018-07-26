@@ -210,6 +210,8 @@ export class ProtectedService {
   }
 
   getProtected(modules, lang){
+
+    console.log(this.urlPerhilitan + modules + '?language='+lang);
     return this.http
     .get(this.urlPerhilitan + modules + '?language='+lang).map((response: Response) => response.json())
     .catch(this.handleError);
