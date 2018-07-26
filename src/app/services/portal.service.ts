@@ -58,6 +58,7 @@ export class PortalService {
   private statusAppUrl: string = this.config.urlAppAgency;
   private dataAppUrl: string = this.config.urlAppAgency;
   private pollUrl: string = this.config.urlPoll;
+  private ratingUrl: string = this.config.urlRating;
   private calendarUrl: string = this.config.urlEvents;
   private agencyUrl: string = this.config.urlAgency;
   private digitalServicesUrl: string = this.config.urlDigitalServices;
@@ -410,6 +411,13 @@ export class PortalService {
 
   submitPoll(data) {
     return this.http.post(this.pollUrl, data)
+    .map((response: Response) => response.json())
+    .retry(5)
+    .catch(this.handleError);
+  }
+
+  submitScore(data) {
+    return this.http.post(this.ratingUrl+"?language="+this.langId, data)
     .map((response: Response) => response.json())
     .retry(5)
     .catch(this.handleError);

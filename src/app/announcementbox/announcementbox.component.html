@@ -12,7 +12,7 @@
                         <ul class="" style="list-style:none; padding:0px;text-align:left">
                           <li style="padding:1px 0px 1px 0px;" *ngFor="let item of (announcementData ? announcementData.contentList.slice(0,3): []) ">
                               <h4 class="font-size-s" style="font-family: Roboto;"><i class="fa fa-bullhorn" aria-hidden="true"></i>
-                            <a (click)="getDetailAnnounce(item.parentCode, item.contentCode,announcementData.categoryCode)" style="color:#FFFFFF;">
+                            <a (click)="getDetailAnnounce(item.contentCode,announcementData.categoryCode)" style="color:#FFFFFF;">
                                 &nbsp;{{item.contentTitle | slice:0:30}}...</a>
                             </h4></li>
                         </ul>

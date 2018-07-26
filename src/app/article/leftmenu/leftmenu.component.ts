@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ArticleService } from '../article.service';
 import { Router, ActivatedRoute, ParamMap, Params } from '@angular/router';
 import { NavService } from '../../header/nav/nav.service';
+import { ContentComponent } from '../../article/content/content.component';
 
 @Component({
   selector: 'gosg-leftmenu',
@@ -62,7 +63,7 @@ export class LeftmenuComponent {
   @Input() menuType: any;
   @Input() templateName: any;
 
-  constructor(private router:Router, private navService: NavService, private activatedRoute: ActivatedRoute){
+  constructor(private router:Router, private navService: NavService, private activatedRoute: ActivatedRoute, private content:ContentComponent){
     this.activatedRoute.queryParams.subscribe(params => {
       this.paramURL = this.activatedRoute.snapshot.url[0].path;
     });
@@ -77,14 +78,14 @@ export class LeftmenuComponent {
     this.statusID = status;
     this.agencyActive = false;
     if(this.paramURL == 'category'){
-      this.router.navigate(['/subcategory', e.parentCode, e.categoryCode]);
+      this.router.navigate(['/subcategory', e.categoryCode]);
     }else if(this.paramURL == 'subcategory'){
 
-      this.navService.getSubArticleUrl(e.parentCode, e.categoryId, localStorage.getItem('langID'));
-      this.navService.triggerSubArticle(e.parentCode, e.categoryCode, localStorage.getItem('langID'));
-      this.router.navigate(['/subcategory', e.parentCode, e.categoryCode]);
+      this.navService.getSubArticleUrl(e.categoryId, localStorage.getItem('langID'));
+      this.navService.triggerSubArticle(e.categoryCode, localStorage.getItem('langID'));
+      this.router.navigate(['/subcategory', e.categoryCode]);
     }else{
-      this.router.navigate(['/subcategory', e.parentCode, e.categoryCode]);
+      this.router.navigate(['/subcategory', e.categoryCode]);
     }
     event.preventDefault();
   }
@@ -92,15 +93,18 @@ export class LeftmenuComponent {
   clickContentFromMenu(pId, aId, status, event) {
     this.statusID = status;
     if(this.paramURL == 'category'){
-      this.router.navigate(['/content', pId, aId]);
+      this.router.navigate(['/content', aId]);
     }else if(this.paramURL == 'subcategory'){
-      this.router.navigate(['/content', pId, aId]);
+      this.router.navigate(['/content', aId]);
+      // this.content.getRateReset();
     }else{
-      this.navService.triggerContent(pId, aId, localStorage.getItem('langID'));
-      this.navService.getContentUrl(pId, aId, localStorage.getItem('langID'));
+      this.navService.triggerContent(aId, localStorage.getItem('langID'));
+      this.navService.getContentUrl(aId, localStorage.getItem('langID'));
 
-      this.router.navigate(['/content', pId,  aId]);
+      this.router.navigate(['/content',  aId]);
+      this.content.getRateReset();
     }
+
 
 
     event.preventDefault();

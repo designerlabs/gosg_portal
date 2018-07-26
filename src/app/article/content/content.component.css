@@ -18,33 +18,53 @@
 
 
 input[type='radio']{
-  position: absolute;
-	margin: 0;
-  width: 50px;
-  height: 25px;
+  margin: 7px;
+  width: 60px;
+  height: 90px;
   opacity: 0;
+  left: 25px;
   cursor: pointer;
 }
 
+textarea {
+  color: #2b3e50 !important;
+}
+.radio{
+  display: inline;
+}
 
 input[type='radio'] + label{
-  margin: 0;
     clear: none;
-
-    /* Left padding makes room for image */
-    padding: 5px 0 4px 24px;
-
-    /* Make look clickable because they are */
+    padding: 15px 30px;
+    margin: 5px;
     cursor: pointer;
-
-    background: #ff0;
+    color: #ccc;
 }
+
 input[type='radio'] + label > i{
   font-size: 60px;
 }
 
-input[type='radio']:checked + label {
-  background: #ff0000;
+
+input[type='radio'] + label > span{
+  display: block;
+  text-align: center;
+  font-size:16px;
+}
+
+
+input[type='radio'].like:checked + label {
+  color: green;
+}
+
+
+input[type='radio'].neutral:checked + label {
+  color: black;
+}
+
+
+input[type='radio'].dislike:checked + label {
+  color: red;
 }
 
 .mat-expansion-panel-header{
