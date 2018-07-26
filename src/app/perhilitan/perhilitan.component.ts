@@ -111,11 +111,10 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
   public selectedOccupation: any;
 
   flagHantar = true;
+  flag2 = true;
+  flag3 = true;
   flag4 = true;
   flag5 = true;
-
-  flagPemohon = false;
-  flagPemilik = false;  
 
   constructor(
     private activatedRoute:ActivatedRoute,
@@ -340,6 +339,99 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
           location.href = this.config.urlUAP +'uapsso/Logout';
           //location.href = this.config.urlUAP+'portal/index';
       });
+    }
+
+    else{ //need to be deleted Noraini for local only
+      
+
+      let data = {
+        "user": {
+          "userId": 116,
+          "pid": "700101712555",
+          "identificationNo": "700101712555",
+          "passportNo": "",
+          "fullName": "ZAKARIA BIN MOHD NOR",
+          "email": "zakariatestgosg@yopmail.com",
+          "mobilePhoneNo": "1-684*123-1231 2312",
+          "agencyForwardUrl": "https://www.mimos.my",
+          "address": {
+            "addressId": 247,
+            "addressType": null,
+            "permanentAddress1": "no 123, jln kambingg 1",
+            "permanentAddress2": "",
+            "permanentAddress3": "",
+            "correspondingAddress1": "no 123, jln kambingg 1",
+            "correspondingAddress2": "",
+            "correspondingAddress3": "",
+            "permanentAddressCountry": {
+              "countryId": 152,
+              "countryCode": "MY",
+              "countryName": "Malaysia",
+              "countryDialCode": "60"
+            },
+            "permanentAddressState": {
+              "stateId": 25,
+              "stateName": "Sarawak",
+              "country": {
+                "countryId": 152,
+                "countryCode": "MY",
+                "countryName": "Malaysia",
+                "countryDialCode": "60"
+              }
+            },
+            "permanentAddressCity": {
+              "cityId": 375,
+              "cityName": "Simunjan",
+              "cityCode": "1340",
+              "state": {
+                "stateId": 25,
+                "stateName": "Sarawak",
+                "country": {
+                  "countryId": 152,
+                  "countryCode": "MY",
+                  "countryName": "Malaysia",
+                  "countryDialCode": "60"
+                }
+              }
+            },
+            "permanentAddressPostcode": {
+              "postcodeId": 2679,
+              "postCode": "94809",
+              "city": {
+                "cityId": 375,
+                "cityName": "Simunjan",
+                "cityCode": "1340",
+                "state": {
+                  "stateId": 25,
+                  "stateName": "Sarawak",
+                  "country": {
+                    "countryId": 152,
+                    "countryCode": "MY",
+                    "countryName": "Malaysia",
+                    "countryDialCode": "60"
+                  }
+                }
+              }
+            },
+            "permanentAddressHomePhoneNo": "60*019-2939 3939"
+          }
+        }
+      }
+
+      let phone = data.user.address.permanentAddressHomePhoneNo.split('*')[1];
+
+      this.firstFormGroup.get('namaPemohon').setValue(data.user.fullName);
+      this.firstFormGroup.get('icPemohon').setValue(data.user.identificationNo);
+      this.firstFormGroup.get('phonePemohon').setValue(phone);
+      this.firstFormGroup.get('emailPemohon').setValue(data.user.email);
+      this.firstFormGroup.get('add1').setValue(data.user.address.permanentAddress1);
+      this.firstFormGroup.get('poskodPemohon').setValue(data.user.address.permanentAddressPostcode.postCode);
+      this.firstFormGroup.get('daerahPemohon').setValue(data.user.address.permanentAddressCity.cityName);
+      this.firstFormGroup.get('negeriPemohon').setValue(data.user.address.permanentAddressState.stateName);
+
+      this.dbposkod = data.user.address.permanentAddressPostcode.postcodeId;
+      this.dbdaerah = data.user.address.permanentAddressCity.cityId;
+      this.dbnegeri = data.user.address.permanentAddressState.stateId;
     }
   }
 
