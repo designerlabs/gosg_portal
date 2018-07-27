@@ -29,7 +29,12 @@
 
   <div *ngIf="article.template === 'lifeevent'" class="row">
     <div class="scrollmenu">
-      <div *ngFor="let menuT of article.menuTop; let index = index;" >{{menuT.categoryName}}</div>
+      <div *ngFor="let menuT of article.menuTop; let index = index;" >
+        <div style="display: block;"><img [src]="config.externalMediaURL + '/images/'+ menuT.image?.mediaFile" width="40"></div>
+        <div style="display: inline;">{{menuT.categoryName}}</div>
+        <div *ngIf="menuT.activeMenu" class="activeBar"></div>
+
+      </div>
     </div>
   </div>
     <div class="row">
@@ -419,20 +424,7 @@
                     <div class="col-md-12 warna_font">
                         <div *ngIf="!article.content" class="row padding-top-xl">
                             <div class="col-sm-12">
-                                <div *ngIf="article.image">
-                                    <div>
-                                        <img [src]="config.externalMediaURL + '/images/'+ article.image.mediaFile" style="width:100%;">
-                                        <div style="position:absolute; width:auto;">
-                                            <h2 class="topic_bg_title font-size-l">
-                                                <span style="padding-left:10px;">
-                                                    {{article.categoryName}}
-                                                </span>
-                                            </h2>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div *ngIf="!article.image">
+                                <div>
                                     <div>
                                         <h2 class="titleWObg font-size-l">
                                             {{article.categoryName}}
