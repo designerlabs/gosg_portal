@@ -71,7 +71,7 @@
       "subscription": "Langganan",
       "unsubscribe": "Hentikan langganan",
       "gallery": "Galeri",
-      "search": "Search", 
+      "search": "Search",
       "perhilitan": "Perhilitan"
     },
     "expandButton": {
@@ -247,6 +247,14 @@
       "subject":"Harap maaf, pilihan subjek tidak dapat dipaparkan."
     }
 
+  },
+  "rating":{
+    "title":"title",
+    "like":"Like",
+    "neutral":"Neutral",
+    "dislike":"Dislike",
+    "remarks":"Remarks",
+    "msgsubmit":"Thank you. Your feedback has been successfully submitted."
   },
   "agencydir": {
     "title":"Direktori Agensi",

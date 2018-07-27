@@ -27,6 +27,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
   breadcrumb: any;
   isValid: any;
   topicID: number;
+  public selectedIndex: number = 4;
   articles: any[];
 
   articleData: any;
@@ -99,6 +100,11 @@ export class ArticleComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscriptionLang.unsubscribe();
+  }
+
+  getAlbum(tabId) {
+   debugger;
+    // API calls...
   }
 
   getTheme() {

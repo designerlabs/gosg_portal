@@ -16,6 +16,20 @@
           cursor: pointer;
         }
 
+        .scrollmenu div {
+          display: inline-block;
+          color: white;
+          text-align: center;
+          padding: 14px;
+          text-decoration: none;
+        }
+
+        .scrollmenu {
+          background-color: #333;
+          overflow: auto;
+          white-space: nowrap;
+        }
+
         .mat-expansion-panel-header{
           padding: 0 10px !important;
         }
