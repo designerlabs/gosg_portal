@@ -131,7 +131,7 @@ export class AnnouncementboxComponent implements OnInit, OnDestroy {
         return localStorage.getItem('themeColor');
     }
 
-    triggerAnnouncementAll(id0, id1, lang ) {
+    triggerAnnouncementAll(id1, lang ) {
         // if (lang === 'ms') {
         //     lang = 2;
         // }
@@ -142,7 +142,7 @@ export class AnnouncementboxComponent implements OnInit, OnDestroy {
 
         this.route.paramMap
         .switchMap((params: ParamMap) =>
-        this.navService.getContentUrl(id0, id1, this.languageId))
+        this.navService.getContentUrl(id1, this.languageId))
         .subscribe(resAllAnnounce => {
             this.announceRes = resAllAnnounce;
             // convert object to array
@@ -164,7 +164,7 @@ export class AnnouncementboxComponent implements OnInit, OnDestroy {
 
         }
 
-        this.triggerAnnouncementAll(id0, id, this.languageId);
+        this.triggerAnnouncementAll(id, this.languageId);
         this.router.navigate(['content',   id]);
         event.preventDefault();
     }

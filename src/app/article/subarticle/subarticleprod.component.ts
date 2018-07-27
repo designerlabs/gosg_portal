@@ -24,7 +24,6 @@ export class SubarticleprodComponent implements OnInit, OnDestroy {
   isValid: any;
   topicID: number;
   subID: number;
-  parID: number;
   step = 0;
   articles: any[];
   moduleName: string;
@@ -54,7 +53,6 @@ export class SubarticleprodComponent implements OnInit, OnDestroy {
           this.moduleName = this.router.url.split('/')[1];
           var tt = this.router.url.split('/');
           this.subID = parseInt(tt[tt.length - 1]);
-          this.parID = parseInt(tt[tt.length - 2]);
         });
 
       }
@@ -67,7 +65,6 @@ export class SubarticleprodComponent implements OnInit, OnDestroy {
           this.topicID = parseInt(this.router.url.split('/')[2]);
           var tt = this.router.url.split('/');
           this.subID = parseInt(tt[tt.length - 1]);
-          this.parID = parseInt(tt[tt.length - 2]);
         });
       }
 
@@ -77,9 +74,9 @@ export class SubarticleprodComponent implements OnInit, OnDestroy {
           this.navService.triggerSubArticleAgency(this.langId);
         }
         else if (this.moduleName == 'subcategory') {
-          this.navService.triggerSubArticle(this.parID, this.subID, this.langId);
+          this.navService.triggerSubArticle(this.subID, this.langId);
         } else if (this.moduleName == 'content') {
-          this.navService.triggerContent(this.parID, this.subID, this.langId);
+          this.navService.triggerContent(this.subID, this.langId);
         } else {
           this.navService.triggerArticle(this.moduleName, this.langId, this.topicID);
         }
@@ -107,14 +104,13 @@ export class SubarticleprodComponent implements OnInit, OnDestroy {
     this.moduleName = this.router.url.split('/')[1];
     var tt = this.router.url.split('/');
     this.subID = parseInt(tt[tt.length - 1]);
-    this.parID = parseInt(tt[tt.length - 2]);
 
     if (location.pathname.indexOf('agency') !== -1) {
       this.agencyActive = true;
       this.navService.triggerSubArticleAgency(localStorage.getItem('langID'));
     } else {
       this.agencyActive = false;
-      this.navService.triggerSubArticle(this.parID, this.subID, localStorage.getItem('langID'));
+      this.navService.triggerSubArticle(this.subID, localStorage.getItem('langID'));
     }
 
   }
@@ -131,9 +127,9 @@ export class SubarticleprodComponent implements OnInit, OnDestroy {
   clickSideMenu(e, status, event) {
     this.agencyActive = false;
     this.statusID = status;
-    this.navService.getSubArticleUrl(e.parentCode, e.categoryId, localStorage.getItem('langID'));
-    this.navService.triggerSubArticle(e.parentCode, e.categoryCode, localStorage.getItem('langID'));
-    this.router.navigate(['/subcategory', e.parentCode, e.categoryCode]);
+    this.navService.getSubArticleUrl(e.categoryId, localStorage.getItem('langID'));
+    this.navService.triggerSubArticle(e.categoryCode, localStorage.getItem('langID'));
+    this.router.navigate(['/subcategory', e.categoryCode]);
     event.preventDefault();
   }
 
@@ -159,7 +155,7 @@ export class SubarticleprodComponent implements OnInit, OnDestroy {
   clickContentFromMenu(pId, aId, event) {
     // this.navService.triggerContent(aId, localStorage.getItem('langID'));
     // this.navService.getContentUrl(aId, localStorage.getItem('langID'));
-    this.router.navigate(['/content', pId, aId]);
+    this.router.navigate(['/content', aId]);
     event.preventDefault();
   }
 

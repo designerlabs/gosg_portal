@@ -86,7 +86,7 @@ imports: [
   schemas:[
     CUSTOM_ELEMENTS_SCHEMA
   ],
-  providers: [ConfirmComponent,FeedbackComponent],
+  providers: [ConfirmComponent,FeedbackComponent, ContentComponent],
   entryComponents: [DigitalServiceDialog],
   bootstrap: [AppComponent]
 })

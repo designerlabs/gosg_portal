@@ -479,7 +479,7 @@
     "btnsubscribe" : "Langgan",
     "setactivetitle": "Langgan senarai mel",
     "setactivemsg": "Terima kasih. E-mel anda telah disahkan.",
-    "setactivemsgError": "Sila langgan semula.",
+    "setactivemsgError": "Sila ke menu langganan.",
     "err":{
       "email":"Emel wajib diisi. IE: aaaa@bbb.com",
       "category":"Kategori wajib diisi"

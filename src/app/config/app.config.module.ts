@@ -99,6 +99,7 @@ export class AppConfig {
     UrlTrafficPolylines: string;
     UrlTrafficPredictionAPI: string;
     urlPerhilitan: string;
+    urlRating: string;
 
 }
 
@@ -135,6 +136,7 @@ export const APP_DI_CONFIG: AppConfig = {
     urlCalendar: commonURL + './calendar',
     urlEvent: './app/apidata/event',
     urlRegister: registrationUrl+'register',
+    urlRating: registrationUrl+'content/rating/post',
     urlFeedbackType: commonURL+'feedback/type/lang/',
     urlFeedbackSubject: commonURL+'feedback/subject/lang/',
     urlFeedback: commonURL+'feedback',

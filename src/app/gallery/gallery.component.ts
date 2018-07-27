@@ -160,8 +160,8 @@ export class GalleryComponent implements OnInit, OnDestroy {
     clickContentFromMenu(pId, aId, status){
 
       this.statusID = status;
-      this.navService.triggerContent(pId, aId, localStorage.getItem('langID'));
-      this.navService.getContentUrl(pId, aId, localStorage.getItem('langID'));
+      this.navService.triggerContent(aId, localStorage.getItem('langID'));
+      this.navService.getContentUrl(aId, localStorage.getItem('langID'));
       this.router.navigate(['/content', aId]);
       event.preventDefault();
     }
