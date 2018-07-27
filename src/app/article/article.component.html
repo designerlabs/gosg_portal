@@ -28,9 +28,9 @@
 <div style="margin-top:10px;" class="container" *ngFor="let article of articleService.articles">
 
   <div *ngIf="article.template === 'lifeevent'" class="row">
-      <div class="scrollmenu">
-          <div *ngFor="let menuT of article.menuTop; let index = index;" >{{menuT.categoryName}}</div>
-        </div>
+    <div class="scrollmenu">
+      <div *ngFor="let menuT of article.menuTop; let index = index;" >{{menuT.categoryName}}</div>
+    </div>
   </div>
     <div class="row">
         <div class="col-sm-3">
@@ -417,11 +417,6 @@
 
                 <div class="row">
                     <div class="col-md-12 warna_font">
-
-
-                        <mat-tab-group [selectedIndex]="selectedIndex">
-                          <mat-tab *ngFor="let menuT of article.menuTop; let index = index;" label="{{menuT.categoryName}}"> Content 1 </mat-tab>
-                        </mat-tab-group>
                         <div *ngIf="!article.content" class="row padding-top-xl">
                             <div class="col-sm-12">
                                 <div *ngIf="article.image">
