@@ -118,7 +118,7 @@
                   <mat-select formControlName="warganegara" placeholder="Warganegara" required 
                     (change)="checkWarganegara(secondFormGroup.value)">
                     <mat-option *ngFor="let nation of nationality" [value]="nation.nationalityId">
-                      {{nation.nationalityId}}
+                      {{nation.isNationality}}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
@@ -176,25 +176,17 @@
                 </mat-form-field>
               </div>
 
-              <div class="col-md-4" *ngIf="selectedOccupation == 1">
+              <div class="col-md-4">
                 <mat-form-field class="example-full-width">
                   <mat-select formControlName="jobGroup" placeholder="Kumpulan Pekerjaan" required
-                  (click)="checkReqValues2()">
+                  (change)="checkReqValues2()">
+                    <!-- <mat-option [value]="">Sila Pilih</mat-option> -->
                     <mat-option *ngFor="let listGpOcc of listGroupOcc" [value]="listGpOcc.id">
                       {{listGpOcc.text}}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>
-
-              <div class="col-md-4" *ngIf="selectedOccupation != 1">
-                <mat-form-field class="example-full-width">
-                  <mat-select formControlName="jobGroup" placeholder="Kumpulan Pekerjaan" required>
-                    <mat-option [value]="0">Sila Pilih</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-
             </div>
         
             <div class="row">
@@ -208,17 +200,27 @@
             <div class="row">
               <div class="col-md-4">
                 <mat-form-field  class="example-full-width displayInfo">
-                  <input matInput formControlName="poskodPemilik" placeholder="Poskod" required>
+                  <input matInput formControlName="poskodPemilik" placeholder="Poskod" required
+                  (change)="checkposkod(1,secondFormGroup.value)">
                 </mat-form-field>
               </div>
               <div class="col-md-4">
                 <mat-form-field  class="example-full-width displayInfo">
-                  <input matInput formControlName="daerahPemilik" placeholder="Daerah" required>
+                  <mat-select formControlName="daerahPemilik" placeholder="Daerah" required
+                  (change)="checkState(1,secondFormGroup.value)">
+                    <mat-option *ngFor="let lDaerah of listdaerahT" [value]="lDaerah.formValue">
+                      {{lDaerah.city}}
+                    </mat-option>
+                  </mat-select>
                 </mat-form-field>
               </div>
               <div class="col-md-4">
                 <mat-form-field  class="example-full-width displayInfo">
-                  <input matInput formControlName="negeriPemilik" placeholder="Negeri" required>
+                  <mat-select formControlName="negeriPemilik" placeholder="Negeri" required>
+                    <mat-option *ngFor="let listState of listState" [value]="listState.stateId">
+                      {{listState.stateName}}
+                    </mat-option>
+                  </mat-select>
                 </mat-form-field>
               </div>
             </div>
@@ -254,13 +256,13 @@
               <div class="col-md-4">
                 <mat-form-field  class="example-full-width displayInfo">
                   <input matInput formControlName="mailingPoskod" placeholder="Poskod" required
-                  (change)="checkposkod(1,thirdFormGroup.value)">
+                  (change)="checkposkod(2,thirdFormGroup.value)">
                 </mat-form-field>
               </div>
               <div class="col-md-4">
                 <mat-form-field  class="example-full-width">
                   <mat-select formControlName="mailingDaerah" placeholder="Daerah" required>
-                    <mat-option *ngFor="let lDaerah of listdaerah" [value]="lDaerah.postcode">
+                    <mat-option *ngFor="let lDaerah of listdaerahSurat" [value]="lDaerah.formValue">
                       {{lDaerah.city}}
                     </mat-option>
                   </mat-select>
@@ -269,7 +271,7 @@
               <div class="col-md-4">
                 <mat-form-field  class="example-full-width">
                   <mat-select formControlName="mailingNegeri" placeholder="Negeri" required>
-                    <mat-option *ngFor="let lDaerah of listdaerah" [value]="lDaerah.postcode">
+                    <mat-option *ngFor="let lDaerah of listdaerahSurat" [value]="lDaerah.postcode">
                       {{lDaerah.state}}
                     </mat-option>
                   </mat-select>
@@ -355,13 +357,13 @@
               <div class="col-md-4">
                 <mat-form-field  class="example-full-width displayInfo">
                   <input matInput formControlName="companyPoskod" placeholder="Poskod" required 
-                  (change)="checkposkod(2, fourthFormGroup.value)">
+                  (change)="checkposkodCompany(3, fourthFormGroup.value)">
                 </mat-form-field>
               </div>
               <div class="col-md-4">
                 <mat-form-field  class="example-full-width">
                   <mat-select formControlName="companyDaerah" placeholder="Daerah" required>
-                    <mat-option *ngFor="let lDaerah of listdaerah" [value]="lDaerah.postcode">
+                    <mat-option *ngFor="let lDaerah of listdaerahCompany" [value]="lDaerah.postcode">
                       {{lDaerah.city}}
                     </mat-option>
                   </mat-select>
@@ -370,7 +372,7 @@
               <div class="col-md-4">
                 <mat-form-field  class="example-full-width">
                   <mat-select formControlName="companyNegeri" placeholder="Negeri" required>
-                    <mat-option *ngFor="let lDaerah of listdaerah" [value]="lDaerah.postcode">
+                    <mat-option *ngFor="let lDaerah of listdaerahCompany" [value]="lDaerah.postcode">
                       {{lDaerah.state}}
                     </mat-option>
                   </mat-select>
