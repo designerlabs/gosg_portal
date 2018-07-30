@@ -34,11 +34,11 @@
             {{galleryService.galleries.mediaType}}
           </h4> -->
           <div *ngFor="let content of galleryService.galleries.leftMenu">
-            <mat-card style="margin-bottom: 1%; cursor: pointer;" (click)="clickSideMenu(content.id, content.active)">
-              <i *ngIf="content.name == 'documents'" class="fa fa-file-o"></i>
-              <i *ngIf="content.name == 'images'" class="fa fa-image"></i>
-              <i *ngIf="content.name == 'audios'" class="fa fa-file-audio-o"></i>
-              <i *ngIf="content.name == 'videos'" class="fa fa-file-video-o"></i>
+            <mat-card style="margin-bottom: 1%; cursor: pointer;" (click)="clickSideMenu(content.id, content.name, content.active)">
+              <i *ngIf="content.name == 'documents' || content.name == 'dokumen'" class="fa fa-file-o"></i>
+              <i *ngIf="content.name == 'images' || content.name == 'imej'" class="fa fa-image"></i>
+              <i *ngIf="content.name == 'audios' || content.name == 'audio'" class="fa fa-file-audio-o"></i>
+              <i *ngIf="content.name == 'videos' || content.name == 'video'" class="fa fa-file-video-o"></i>
               &nbsp;<a [routerLinkActive]="['active']" [style.font-weight]="content.active ? 'bold' : 'normal'" [style.color]="content.active ? getTheme() : '#333'">{{content.name}}</a>
             </mat-card>
           </div>
@@ -51,10 +51,10 @@
       <div class="row">
         <div class="col-md-9">
           <h2 class="titleWObg font-size-l capitalize">
-            <i *ngIf="galleryService.galleries.mediaType == 'documents'" class="fa fa-file-o"></i>
-            <i *ngIf="galleryService.galleries.mediaType == 'images'" class="fa fa-image"></i>
-            <i *ngIf="galleryService.galleries.mediaType == 'audios'" class="fa fa-file-audio-o"></i>
-            <i *ngIf="galleryService.galleries.mediaType == 'videos'" class="fa fa-file-video-o"></i>
+            <i *ngIf="galleryService.galleries.mediaType == 'documents' || galleryService.galleries.mediaType == 'dokumen'" class="fa fa-file-o"></i>
+            <i *ngIf="galleryService.galleries.mediaType == 'images' || galleryService.galleries.mediaType == 'imej'" class="fa fa-image"></i>
+            <i *ngIf="galleryService.galleries.mediaType == 'audios' || galleryService.galleries.mediaType == 'audio'" class="fa fa-file-audio-o"></i>
+            <i *ngIf="galleryService.galleries.mediaType == 'videos' || galleryService.galleries.mediaType == 'video'" class="fa fa-file-video-o"></i>
             &nbsp;{{galleryService.galleries.mediaType}}
           </h2>
         </div>
