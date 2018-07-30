@@ -264,7 +264,7 @@
       "alphabet":"A-Z"
     },
     "label": {
-      "latlong":"Latitud and Longitud ",
+      "latlong":"Latitud dan Longitud ",
       "agencyName":"Nama Agensi",
       "search":"Carian Agensi",
       "searchbyagcname":"Carian berdasarkan nama Agensi",
@@ -513,7 +513,8 @@
        "allusers": "Semua Pengguna",
        "newusers": "Pengguna Baru",
        "total": "Jumlah",
-       "dservice": "Statistik Transaksi Perkhidmatan Dalam Talian"
+       "dservice": "Statistik Transaksi Perkhidmatan Dalam Talian",
+       "pdservice": "Statistik Transaksi Perkhidmatan Dalam Talian Yang Tidak Selesai"
      },
       "months": {
         "short": {

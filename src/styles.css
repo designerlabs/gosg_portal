@@ -740,3 +740,6 @@ ngui-auto-complete .no-match-found {display: none};
   margin: 0 auto;
 }
 
+.capitalize {
+  text-transform: capitalize
+}

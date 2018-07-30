@@ -35,7 +35,7 @@
             Email address is required
           </mat-error> -->
           <mat-error *ngIf="!validateCtrlChk(txtEmail) && subscriptionForm.controls.txtEmail.errors?.required">
-              {{'subscription.err.email' | translate }}
+              {{'register.err.email' | translate }}
             </mat-error>
             <mat-error *ngIf="!validateCtrlChk(txtEmail) && subscriptionForm.controls.txtEmail.errors?.pattern">
               {{'register.pattern.email' | translate }}

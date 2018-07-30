@@ -40,6 +40,7 @@ export class GalleryComponent implements OnInit, OnDestroy {
   isDocument:boolean;
   isAudio:boolean;
   isVideo:boolean;
+  mediaTypeName: string;
 
   galleryData: any;
   @Output() langChange = new EventEmitter();
@@ -102,6 +103,7 @@ export class GalleryComponent implements OnInit, OnDestroy {
           this.isAudio = false;
           this.isDocument = false;
           this.isVideo = false;
+          
         }
 
     });
@@ -144,6 +146,7 @@ export class GalleryComponent implements OnInit, OnDestroy {
     }
 
     clickSideMenu(id){
+
       this.statusID = status;
       this.navService.triggerGalleries(localStorage.getItem('langID'), id);
       // this.router.navigate(['gallery']);
@@ -176,6 +179,35 @@ export class GalleryComponent implements OnInit, OnDestroy {
           }
         }
 
+    }
+
+    changeTypeName(name) {
+
+      let res;
+
+      console.log(name)
+
+      switch (name) {
+        case 'images':
+          res = 'imej'
+          break;
+
+        case 'documents':
+          res = 'dokumen'
+          break;
+
+        case 'audios':
+          res = 'audio'
+          break;
+
+        case 'videos':
+          res = 'video'
+          break;
+      
+        default:
+          break;
+      }
+      return res;
     }
 
     openDialog(mPath, mType, mTitle?, mDesc?) {
