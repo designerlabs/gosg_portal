@@ -101,7 +101,8 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
   public listdaerahT: any;
   public listdaerahSurat: any;
   public listdaerahCompany: any;
-  public listState: any;
+  public listStateT: any;
+  public listStateSurat: any;
   public listRegComp: any;
   public listbusiness: any;
   public listcatbuss: any;
@@ -113,6 +114,8 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
   public selectedPoskodT: any;
   public selectedPoskodSurat: any;
   public selectedOccupation: any;
+  public cityT: any;
+  public citySurat: any;
 
   flagHantar = true;
   flag2 = true;
@@ -545,20 +548,17 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
             this.selectedPoskodT = data.noKpResourceList[0].poskod;
             this.selectedPoskodSurat = data.noKpResourceList[0].poskodsurat;
             this.selectedOccupation = parseInt(data.noKpResourceList[0].pekerjaan);
-
-            if(this.selectedPoskodT){
-              this.checkposkod(1,'');
-            }          
-
+            this.cityT = data.noKpResourceList[0].daerah;
+            this.citySurat = data.noKpResourceList[0].daerahsurat;
+          
+            this.checkposkod(1, this.selectedPoskodT);
+            this.checkposkod(2, this.selectedPoskodSurat);
+            
             this.secondFormGroup.get('namaPemilik').disable();
             this.secondFormGroup.get('addPemilik').disable();
             this.secondFormGroup.get('poskodPemilik').disable();
             this.secondFormGroup.get('daerahPemilik').disable();
             this.secondFormGroup.get('negeriPemilik').disable();
-
-            if(this.selectedPoskodSurat){
-              this.checkposkod(2,'');
-            }
 
             this.flag2 = false;  
  
@@ -693,184 +693,86 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
     this.checkReqValues2();
   }
 
-  checkposkod(val, formValue: any){
+  checkposkod(val, valP){
 
-    this.listState = [];
-    console.log("checkposkod: "+val);
+    this.listStateT = [];
+    this.listStateSurat = [];
     let valPoskod: any;
     let valS: any;
+   
+    if(typeof(valP) == "object"){
+      if(val == 1)
+        valPoskod = valP.poskodPemilik;
 
-    if(val == 1){
-      if(formValue != ''){
-        valPoskod = formValue.poskodPemilik;
-      }
+      else
+       valPoskod = valP.mailingPoskod;
+    }
 
-      else {
+    else{
+      if(val == 1)
         valPoskod = this.selectedPoskodT;
-      }
-    }   
 
-    if(val == 2){
-      if(formValue != ''){
-        valPoskod = formValue.mailingPoskod;
-      }
-
-      else {
-        valPoskod = this.selectedPoskodSurat;
-      }
-    } 
+      else
+       valPoskod = this.selectedPoskodSurat;
+    }
+  
 
     this.protectedService.getProtected('perhilitan/poskod/'+valPoskod,this.langID).subscribe(
     data => {
 
       this.sharedService.errorHandling(data, (function(){
 
-        let arrDaerah: any;
-
         if(val == 1){
-          this.listdaerahT = data.postcodeResourceList;   
-          arrDaerah = this.listdaerahT;
-        }
+          this.listdaerahT = data.postcodeResourceList;
+          console.log(this.listdaerahT);   
 
-        else if(val == 2){
-          this.listdaerahSurat = data.postcodeResourceList;   
-          arrDaerah = this.listdaerahSurat;
-        }
+          if(this.listdaerahT.length == 1){
 
-        console.log("VALUE POSKOD TETAP");
-        console.log(valPoskod);
-        if(arrDaerah.length == 1){
-
-          if(val == 1){
             valS = this.listdaerahT[0].formValue;
-            this.secondFormGroup.get('daerahPemilik').setValue(valS);
-
-            console.log(valS);
-            // this.secondFormGroup.get('negeriPemilik').setValue(valPoskod);
+            this.secondFormGroup.get('daerahPemilik').setValue(valS);  
+            this.checkState(1,valS);
           }
 
-          this.checkState(val,valS);
-        }
-
-        else{ //when city more the one
-
-          let arrCity = [];
-          let objCity = {};
-          
-          for(let i = 0; i < arrDaerah.length; i++){
-
-            let temCity = arrDaerah;
-            let flagCity = false;
-          
-            let x = 0;
-            for(x = 0; x < arrCity.length; x++){
-
-              if(temCity[i].formValue == arrCity[x].formValue){
-                flagCity = true;
-              }              
-            }
-  
-            if(flagCity == false){
-              objCity = {
-                postcodeId: arrDaerah[i].postcodeId,
-                postcode: arrDaerah[i].postcode,
-                city: arrDaerah[i].city,
-                state: arrDaerah[i].state,
-                formValue: arrDaerah[i].formValue
+          else{ //when city more the one
+            for (let i = 0; i < this.listdaerahSurat.length; i++) { 
+              if(this.citySurat.toLowerCase() == this.listdaerahT[i].city.toLowerCase()){
+                valS = this.listdaerahT[i].formValue;
+                this.secondFormGroup.get('daerahPemilik').setValue(valS);
               }
-
-              arrCity.push(objCity);
             }
-          }
 
-          if(val == 1){
-            arrDaerah = arrCity;
-            this.listdaerahT = arrDaerah;
+            this.checkState(1,valS);          
           }
-
-          else if(val == 2){
-            arrDaerah = arrCity;
-            this.listdaerahSurat = arrDaerah;
-          }
-          
         }
 
-        this.checkReqValues5();
+        else{
+          this.listdaerahSurat = data.postcodeResourceList;   
+          console.log(this.listdaerahSurat);
+
+          if(this.listdaerahSurat.length == 1){
+
+            valS = this.listdaerahSurat[0].formValue;
+            this.thirdFormGroup.get('mailingDaerah').setValue(valS);
+      
+            this.checkState(2,valS);
+          }
+
+          else{ //when city more the one
+            for (let i = 0; i < this.listdaerahSurat.length; i++) { 
+              if(this.citySurat.toLowerCase() == this.listdaerahSurat[i].city.toLowerCase()){
+                valS = this.listdaerahSurat[i].formValue;
+                this.thirdFormGroup.get('mailingDaerah').setValue(valS);
+              }
+            }
+
+            this.checkState(2,valS);
+          }
+        }
 
       }).bind(this));
     },
     error => {            
     });    
-  }
-
-  checkposkodMail(val, formValue: any){
-
-    console.log("checkposkodMail: "+val);
-    let valPoskod: any;
- 
-    if(formValue != ''){
-      valPoskod = formValue.mailingPoskod;
-    }
-
-    else{
-      valPoskod = this.selectedPoskodSurat;
-    }
-
-    this.protectedService.getProtected('perhilitan/poskod/'+valPoskod,this.langID).subscribe(
-    data => {
-
-      this.sharedService.errorHandling(data, (function(){
-        this.listdaerahSurat = data.postcodeResourceList;   
-
-        console.log("VALUE POSKOD SURAT");
-        console.log(valPoskod);
-        if(this.listdaerahSurat.length == 1){
-            
-          this.thirdFormGroup.get('mailingDaerah').setValue(valPoskod);
-          this.thirdFormGroup.get('mailingNegeri').setValue(valPoskod);  
-        }
-
-        else{ //when city more the one
-
-          let arrCity = [];
-          let objCity = {};
-          
-          for(let i = 0; i < this.listdaerahSurat.length; i++){
-
-            let temCity = this.listdaerahSurat;
-            let flagCity = false;
-          
-            let x = 0;
-            for(x = 0; x < arrCity.length; x++){
-
-              if(temCity[i].formValue == arrCity[x].formValue){
-                flagCity = true;
-              }              
-            }
-  
-            if(flagCity == false){
-              objCity = {
-                postcodeId: this.listdaerahSurat[i].postcodeId,
-                postcode: this.listdaerahSurat[i].postcode,
-                city: this.listdaerahSurat[i].city,
-                state: this.listdaerahSurat[i].state,
-                formValue: this.listdaerahSurat[i].formValue
-              }
-
-              arrCity.push(objCity);
-            }
-          }
-
-          this.listdaerahSurat = arrCity;
-        }
-
-        this.checkReqValues5();
-
-      }).bind(this));
-    },
-    error => {            
-    }); 
-    
   }
 
   checkposkodCompany(val, formValue: any){
@@ -943,30 +845,45 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
   }
 
   checkState(val, formValue){
-    console.log(typeof(formValue));
-    console.log(formValue);
 
-    if(val == 1){
-      if (typeof(formValue) == "object"){
+    if (typeof(formValue) == "object"){
+     
+      if(val == 1){
         formValue = formValue.daerahPemilik;
+      } 
+      
+      else{
+        formValue = formValue.mailingDaerah;
+      }
+    }
+
+    else{
+      if(val == 1){
+        formValue = this.secondFormGroup.get('daerahPemilik').value;
       }
 
       else{
-        formValue = formValue;
+        formValue = this.thirdFormGroup.get('mailingDaerah').value;
       }
     }
+
     this.protectedService.getProtected('perhilitan/state/'+formValue,this.langID).subscribe(
     data => {
-      this.listState = [];
+      
       this.sharedService.errorHandling(data, (function(){
-
-        this.listState.push(data.perhilitanStateResource); 
-        console.log("State");
-        console.log(this.listState);
-
+        
         if(val == 1){
+          this.listStateT = [];
+          this.listStateT.push(data.perhilitanStateResource); 
           console.log("STATE PEMILIK")
           this.secondFormGroup.get('negeriPemilik').setValue(formValue);
+        }
+
+        else{
+          this.listStateSurat = [];
+          this.listStateSurat.push(data.perhilitanStateResource); 
+          console.log("STATE SURAT")
+          this.thirdFormGroup.get('mailingNegeri').setValue(formValue);
         }
        
       }).bind(this));
