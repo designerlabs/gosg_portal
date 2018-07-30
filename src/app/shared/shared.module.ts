@@ -140,7 +140,7 @@ import { GalleryService } from '../gallery/gallery.service';
 import { GalleryComponent, DialogDataExampleDialog } from '../gallery/gallery.component';
 import { SchoolsearchComponent } from '../schoolsearch/schoolsearch.component';
 import { TrafficinfoComponent } from '../trafficinfo/trafficinfo.component';
-import { LeftmenuComponent } from '../article/leftmenu/leftmenu.component';
+
 // import { LifeeventComponent } from '../lifeevent/lifeevent.component';
 //import { GalleryService } from '../gallery/gallery.service';
 // import { SearchResultComponent } from '../search/search-result/search-result.component';
@@ -231,8 +231,7 @@ export function HttpLoaderFactory(http: Http) {
     GalleryComponent,
     DialogDataExampleDialog,
     SchoolsearchComponent,
-    TrafficinfoComponent,
-    LeftmenuComponent
+    TrafficinfoComponent
     // SearchResultComponent
   ],
 
@@ -244,7 +243,6 @@ export function HttpLoaderFactory(http: Http) {
     TopnavComponent,
     RouterModule,
     AboutusComponent,
-    LeftmenuComponent,
     AnnouncementComponent,
     AnnouncementlistComponent,
     AnnouncementdetailsComponent,
