@@ -1,6 +1,5 @@
 import { Component, Output, Input, EventEmitter, OnInit, AfterViewChecked, AfterViewInit, OnDestroy, Inject } from '@angular/core';
 import { ArticleService } from '../article.service';
-
 import { NavService } from '../../header/nav/nav.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
@@ -124,6 +123,12 @@ export class SubarticleComponent implements OnInit, OnDestroy {
 
   getTheme() {
     return localStorage.getItem('themeColor');
+  }
+
+
+  clickTopMenu(e){
+    this.router.navigate(['/category', e.categoryCode]);
+    event.preventDefault();
   }
 
 

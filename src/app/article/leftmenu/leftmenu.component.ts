@@ -7,6 +7,47 @@ import { ContentComponent } from '../../article/content/content.component';
 @Component({
   selector: 'gosg-leftmenu',
   template: `
+  <div *ngIf="templateName !== 'lifeevent'" >
+  <mat-expansion-panel *ngFor="let content of sessions; let i = index"  multi="false" displayMode="flat" [hideToggle]="content?.contents?.length==0 ? true: null"  [expanded]="content.activeMenu  || (i == statusID) || sessions.length <= 1" class="specific-class">
+    <mat-expansion-panel-header>
+      <mat-panel-title class="pointer" (click)="clickSideMenu(content, i, $event)">
+        <a class="warna_font sideBarMenu--link font-size-s" [routerLinkActive]="['active']"  [style.font-weight]="content?.activeMenu ? 'bold' : 'normal'"  [style.color]="content?.activeMenu ? getTheme() : '#333'" >
+          {{content.categoryName}}
+        </a>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div *ngFor="let getContent of content?.contents" class="submenu" (click)="clickContentFromMenu(content.parentCode, getContent.contentCode, i, $event)">
+     <a class="warna_font sideBarMenu--link font-size-s" #subContent [style.font-weight]="getContent?.activeMenu ? 'bold' : 'normal'"  [style.color]="getContent?.activeMenu ? getTheme() : '#333'">{{getContent?.contentTitle}}</a>
+    </div>
+
+
+    <mat-expansion-panel *ngFor="let subcontent of content?.subCategories; let j = index" multi="false" displayMode="flat" [hideToggle]="subcontent?.contents?.length==0 ? true: null"  [expanded]="subcontent.activeMenu  || (j == statusID) || subcontent.length <= 1"  class="submenu" >
+      <mat-expansion-panel-header>
+        <mat-panel-title class="pointer" (click)="clickSideMenu(subcontent, j, $event)">
+          <a class="warna_font sideBarMenu--link font-size-s" #subContent [style.font-weight]="subcontent?.activeMenu ? 'bold' : 'normal'"  [style.color]="subcontent?.activeMenu ? getTheme() : '#333'">
+            {{subcontent.categoryName}}
+          </a>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div *ngFor="let getContent of subcontent?.contents" class="submenu" (click)="clickContentFromMenu(content.parentCode, getContent.contentCode, j, $event)">
+        <a class="warna_font sideBarMenu--link font-size-s" #subContent [style.font-weight]="getContent?.activeMenu ? 'bold' : 'normal'"  [style.color]="getContent?.activeMenu ? getTheme() : '#333'">
+          {{getContent?.contentTitle}}
+        </a>
+      </div>
+
+      <gosg-leftmenu [sessions]="subcontent?.subCategories"></gosg-leftmenu>
+
+    </mat-expansion-panel>
+
+
+
+
+    </mat-expansion-panel>
+  </div>
+
+
+  <div *ngIf="templateName === 'lifeevent'" >
     <mat-expansion-panel *ngFor="let content of sessions; let i = index"  multi="false" displayMode="flat" [hideToggle]="content?.contents?.length==0 ? true: null"  [expanded]="content.activeMenu  || (i == statusID) || sessions.length <= 1" class="specific-class">
       <mat-expansion-panel-header>
         <mat-panel-title class="pointer" (click)="clickSideMenu(content, i, $event)">
@@ -29,12 +70,6 @@ import { ContentComponent } from '../../article/content/content.component';
           </mat-panel-title>
         </mat-expansion-panel-header>
 
-        <div *ngFor="let getContent of subcontent?.contents" class="submenu" (click)="clickContentFromMenu(content.parentCode, getContent.contentCode, j, $event)">
-          <a class="warna_font sideBarMenu--link font-size-s" #subContent [style.font-weight]="getContent?.activeMenu ? 'bold' : 'normal'"  [style.color]="getContent?.activeMenu ? getTheme() : '#333'">
-            {{getContent?.contentTitle}}
-          </a>
-        </div>
-
         <gosg-leftmenu [sessions]="subcontent?.subCategories"></gosg-leftmenu>
 
       </mat-expansion-panel>
@@ -42,7 +77,8 @@ import { ContentComponent } from '../../article/content/content.component';
 
 
 
-    </mat-expansion-panel>
+      </mat-expansion-panel>
+    </div>
 
     <mat-expansion-panel hideToggle="true" *ngIf="templateName === 'publication'" multi="true" displayMode="flat">
       <mat-expansion-panel-header>
