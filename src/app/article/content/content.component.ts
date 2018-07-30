@@ -169,18 +169,18 @@ export class ContentComponent implements OnInit, OnDestroy {
     body.score = parseInt(formValues.score);
     body.remarks = formValues.remarks;
 
-    let datasend = JSON.stringify(body);
+    // let datasend = JSON.stringify(body);
 
-      this.portalService.submitScore(datasend).subscribe(
+      this.portalService.submitScore(body).subscribe(
         data => {
 
           this.sharedService.errorHandling(data, (function(){
             this.getRateReset();
-            this.toastr.success(this.translate.instant('feedback.msgsubmit'), '');
+            this.toastr.success(this.translate.instant('rating.msgsubmit'), '');
         }).bind(this));
       },
       error => {
-        this.toastr.error(JSON.parse(error._body).statusDesc, '');
+        //this.toastr.error((error._body.statusDesc), '');
 
       });
 

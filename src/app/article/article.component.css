@@ -16,6 +16,53 @@
           cursor: pointer;
         }
 
+        .scrollmenu div {
+          display: inline-block;
+          color: #000;
+          text-align: center;
+          padding: 0px 10px;
+          text-decoration: none;
+        }
+
+        /* width */
+        .scrollmenu::-webkit-scrollbar {
+          height: 4px;
+        }
+
+        /* Track */
+        .scrollmenu::-webkit-scrollbar-track {
+          background: #f1f1f1;
+        }
+
+        /* Handle */
+        .scrollmenu::-webkit-scrollbar-thumb {
+          background: #888;
+        }
+
+        /* Handle on hover */
+        .scrollmenu::-webkit-scrollbar-thumb:hover {
+          background: #555;
+        }
+
+        .activeBar{
+          height: 2px;
+          width: 100%;
+          background: #1ebebc;
+          padding: 0px !important;
+          margin: 5px 0px !important;
+          display: block !important;
+          position: relative;
+          top: 0px;
+        }
+
+        .scrollmenu {
+          background-color: #efefef;
+          overflow: auto;
+          border-bottom: 2px solid #e7436d;
+          height: 110px;
+          white-space: nowrap;
+        }
+
         .mat-expansion-panel-header{
           padding: 0 10px !important;
         }
