@@ -513,7 +513,8 @@
        "allusers": "All Users",
        "newusers": "New Users",
        "total": "Total",
-       "dservice": "Statistics of Online Services Transaction"
+       "dservice": "Statistics of Online Services Transaction",
+       "pdservice": "Statistics of Incomplete Online Services Transaction"
      },
       "months": {
         "short": {

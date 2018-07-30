@@ -19,12 +19,15 @@ export class StatisticComponent implements OnInit {
   StatByYearAll: any = [["01", "0"], ["02", "0"], ["03", "0"], ["04", "0"], ["05", "0"], ["06", "0"], ["07", "0"], ["08", "0"], ["09", "0"], ["10", "0"], ["11", "0"], ["12", "0"]]
   StatByYearNew: any = [["01", "0"], ["02", "0"], ["03", "0"], ["04", "0"], ["05", "0"], ["06", "0"], ["07", "0"], ["08", "0"], ["09", "0"], ["10", "0"], ["11", "0"], ["12", "0"]]
   StatByYearDservice: any = [{"name":"01","val":0},{"name":"02","val":0},{"name":"03","val":0},{"name":"04","val":0},{"name":"05","val":0},{"name":"06","val":0},{"name":"07","val":0},{"name":"08","val":0},{"name":"09","val":0},{"name":"10","val":0},{"name":"11","val":0},{"name":"12","val":0}];
+  StatByYearPendingDservice: any = [{"name":"01","val":0},{"name":"02","val":0},{"name":"03","val":0},{"name":"04","val":0},{"name":"05","val":0},{"name":"06","val":0},{"name":"07","val":0},{"name":"08","val":0},{"name":"09","val":0},{"name":"10","val":0},{"name":"11","val":0},{"name":"12","val":0}];
   allUsersByYear: any;
   newUsersByYear: any;
   dserviceByYear: any;
+  pdserviceByYear: any;
   allUsersData: any = [];
   newUsersData: any = [];
   dServiceData: any = [];
+  dServicePendingData: any = [];
   dserviceRpt: any;
   totalUsers: any;
   totalNewUsers: any;
@@ -75,6 +78,7 @@ export class StatisticComponent implements OnInit {
     this.getUsersStatData(1);
     this.getUsersStatData(2);
     this.getDserviceReport(this.languageId);
+    this.getPendingDserviceReport(this.languageId);
     // console.log(this.generateStatByYearFor('dservice'));
   }
 
@@ -123,6 +127,60 @@ export class StatisticComponent implements OnInit {
           } else {
             dsvc.report = this.StatByYearDservice;
             dsvc.rptTotal = 0;
+          }
+
+        });
+
+    });
+  }
+
+  getPendingDserviceReport(lng) {
+
+    let aryObj: any;
+    let retn = [];
+    let newArrObj:any;
+    let sum: any;
+
+    aryObj = {
+      mName: "",
+      mVal: ""
+    };
+
+    this.portalservice.getPendingDserviceRptData(lng).subscribe(data => {
+      this.dServicePendingData = data.list;
+      // console.log(this.dServicePendingData)
+      // this.pdserviceByYear = this.StatByYearPendingDservice;
+
+      this.dServicePendingData.forEach(pdsvc => {
+
+        if(pdsvc.report) {
+          
+          // if(pdsvc.title == "Registration Form 1") {
+            // console.log(pdsvc.title)
+
+            Object.keys(pdsvc.report).map(function (inx) {
+              aryObj = new Object;
+              
+              aryObj.name = inx;
+              aryObj.val = pdsvc.report[inx];
+              
+              retn.push(aryObj);
+            });
+
+            retn.forEach(el => {
+              el.name = this.convertMonthName(el.name);
+            });
+
+            pdsvc.report = retn;
+            sum = retn.reduce((sum, item) => sum + item.val, 0);
+            retn = [];
+            
+            // }
+            
+            pdsvc.rptTotal = sum;
+          } else {
+            pdsvc.report = this.StatByYearPendingDservice;
+            pdsvc.rptTotal = 0;
           }
 
         });

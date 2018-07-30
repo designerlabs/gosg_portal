@@ -85,8 +85,11 @@
                             <mat-error *ngIf="!validateCtrlChk(email) && feedbackFormgrp.controls.email.errors?.required">
                                 {{'register.err.email' | translate }}
                             </mat-error>
-                            <mat-error *ngIf="!validateCtrlChk(email) &&  (feedbackFormgrp.controls.email.errors?.required? !feedbackFormgrp.controls.email.errors?.email : feedbackFormgrp.controls.email.errors?.email)">
+                            <!-- <mat-error *ngIf="!validateCtrlChk(email) &&  (feedbackFormgrp.controls.email.errors?.required? !feedbackFormgrp.controls.email.errors?.email : feedbackFormgrp.controls.email.errors?.email)">
                                 {{'register.pattern.email' | translate }}
+                            </mat-error> -->
+                            <mat-error *ngIf="!validateCtrlChk(email) && feedbackFormgrp.controls.email.errors?.pattern">
+                              {{'register.pattern.email' | translate }}
                             </mat-error>
                         </mat-form-field>
                         <div *ngIf="isAdmin" class="">
