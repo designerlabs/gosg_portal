@@ -42,6 +42,7 @@ import { DigitalservicesprodComponent } from './digitalservices/digitalservicesp
 import { ContentProdComponent } from './article/content/contentprod.component';
 import { PerhilitanComponent } from './perhilitan/perhilitan.component';
 import { ReplacementmycardComponent } from './replacementmycard/replacementmycard.component';
+import { LeftmenuProdComponent } from './article/leftmenu/leftmenuprod.component';
 
 export function HttpLoaderFactory(http: Http) {
    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -71,7 +72,8 @@ export function HttpLoaderFactory(http: Http) {
     SummontrafficComponent,
     ContentProdComponent,
     PerhilitanComponent,
-    ReplacementmycardComponent
+    ReplacementmycardComponent,
+    LeftmenuProdComponent
   ],
   imports: [
     SharedModule,
@@ -99,7 +101,7 @@ export function HttpLoaderFactory(http: Http) {
     CUSTOM_ELEMENTS_SCHEMA
   ],
 
-  providers: [ ProtectedService],
+  providers: [ ProtectedService, ContentProdComponent],
   bootstrap: [ProtectedComponent]
 })
 

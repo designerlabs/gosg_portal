@@ -169,9 +169,9 @@ export class ContentProdComponent implements OnInit, OnDestroy {
     body.score = parseInt(formValues.score);
     body.remarks = formValues.remarks;
 
-    let datasend = JSON.stringify(body);
+    // let datasend = JSON.stringify(body);
 
-      this.portalService.submitScore(datasend).subscribe(
+      this.portalService.submitScore(body).subscribe(
         data => {
 
           this.sharedService.errorHandling(data, (function(){
@@ -180,7 +180,7 @@ export class ContentProdComponent implements OnInit, OnDestroy {
         }).bind(this));
       },
       error => {
-        this.toastr.error(JSON.parse(error._body).statusDesc, '');
+        // this.toastr.error(JSON.parse(error._body).statusDesc, '');
 
       });
 

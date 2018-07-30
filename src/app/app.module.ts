@@ -30,7 +30,7 @@ import { LifeeventComponent } from './lifeevent/lifeevent.component';
 import { HomeComponent } from './home/home.component';
 import { DigitalservicesComponent, DigitalServiceDialog } from './digitalservices/digitalservices.component';
 import { ContentComponent } from './article/content/content.component';
-
+import { LeftmenuComponent } from './article/leftmenu/leftmenu.component';
 
 // import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule } from "@angular/material";
 
@@ -80,6 +80,7 @@ imports: [
     HomeComponent,
     DigitalServiceDialog,
     ContentComponent,
+    LeftmenuComponent
 
   ],
 
