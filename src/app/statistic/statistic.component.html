@@ -64,4 +64,21 @@
       </tr>
     </tbody>
   </table>
+
+  <table class="table table-striped" style="border: 1px solid rgb(0, 189, 187);">
+    <thead style="background: #1ebebc; color: #fafafa;">
+      <tr style="vertical-align: middle">
+        <th>{{'statistic.label.pdservice' | translate}}</th>
+        <th style="text-align: center; padding: 5px" *ngFor="let mon of allUsersByYear">{{ 'statistic.months.short.'+mon[0] | translate }}</th>
+        <th style="text-align: center">{{'statistic.label.total' | translate}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pdsvc of dServicePendingData">
+        <td>{{ pdsvc.title }}</td>
+        <td style="text-align: center" *ngFor="let monVal of pdsvc.report">{{ monVal['val'] }}</td>
+        <td style="text-align: center; font-weight: bold">{{ pdsvc.rptTotal }}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>

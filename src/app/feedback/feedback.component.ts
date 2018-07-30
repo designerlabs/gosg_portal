@@ -146,7 +146,7 @@ export class FeedbackComponent implements OnInit, OnDestroy {
     formCtrl(){
       if(this.isAdmin == false){
         this.nama_penuh = new FormControl('', [Validators.required, Validators.pattern(this.validateService.getPattern(2,60).name)]),            
-        this.email = new FormControl('', [Validators.required, Validators.email])
+        this.email = new FormControl('', [Validators.required, Validators.pattern(this.validateService.getPattern().email)])
       }
       if(this.isAdmin == true){
         this.nama_penuh = new FormControl(),                  
