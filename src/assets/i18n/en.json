@@ -514,7 +514,9 @@
        "newusers": "New Users",
        "total": "Total",
        "dservice": "Statistics of Online Services Transaction",
-       "pdservice": "Statistics of Incomplete Online Services Transaction"
+       "pdservice": "Statistics of Incomplete Online Services Transaction",
+       "counter": "Selection of counter services",
+       "none": "None"
      },
       "months": {
         "short": {

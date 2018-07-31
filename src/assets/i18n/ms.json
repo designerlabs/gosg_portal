@@ -514,7 +514,9 @@
        "newusers": "Pengguna Baru",
        "total": "Jumlah",
        "dservice": "Statistik Transaksi Perkhidmatan Dalam Talian",
-       "pdservice": "Statistik Transaksi Perkhidmatan Dalam Talian Yang Tidak Selesai"
+       "pdservice": "Statistik Transaksi Perkhidmatan Dalam Talian Yang Tidak Selesai",
+       "counter": "Statistik Perkhidmatan Kaunter Terpilih",
+       "none": "Tiada"
      },
       "months": {
         "short": {
