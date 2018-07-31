@@ -319,7 +319,7 @@
 
               <div class="col-md-6">
                 <mat-form-field class="example-full-width">
-                  <mat-select formControlName="jenisMilikan" placeholder="Jenis Pemilikan" required
+                  <mat-select formControlName="jenisMilikan" placeholder="Jenis Pemilikan" 
                   (change)="checkReqValues4()">
                     <mat-option *ngFor="let lmilik of listJenisMilikan" [value]="lmilik.idPemilikan">
                       {{lmilik.pemilikanDescription}}
@@ -502,6 +502,20 @@
               </div>
             </div>
 
+            <div class="row" style="display: none;">
+              <div class="col-md-6">
+                <mat-form-field class="example-full-width displayInfo">
+                  <textarea matInput formControlName="dispBase641" placeholder=""></textarea>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-6">
+                <mat-form-field class="example-full-width displayInfo">
+                  <textarea matInput formControlName="dispBase642" placeholder=""></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+
             <div class="row">
               <br><br><br>
               <div class="col-md-12">
@@ -537,74 +551,6 @@
     </mat-horizontal-stepper><br>
   </div>
 
-  <!-- <div class="col-md-9">
-
-    <div>
-      <form [formGroup]="pemohonForm" role="form" novalidate="novalidate">
-        <div class="row">
-          <div class="col-md-12">
-            <mat-form-field  class="example-full-width">
-              <input matInput formControlName="namaPemohon" placeholder="Nama Pemohon" required>
-            </mat-form-field>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-3">
-            <mat-form-field  class="example-full-width">
-              <input matInput formControlName="icPemohon" placeholder="No.IC/Pasport" required>
-            </mat-form-field>
-          </div>
-          <div class="col-md-3">
-            <mat-form-field  class="example-full-width">
-              <input matInput formControlName="phonePemohon" placeholder="No. Telefon" required>
-            </mat-form-field>
-          </div>
-          <div class="col-md-6">
-            <mat-form-field  class="example-full-width">
-              <input matInput formControlName="emailPemohon" placeholder="Emel" required>
-            </mat-form-field>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-12">
-            <mat-form-field class="example-full-width">
-              <textarea matInput formControlName="add1" placeholder="Alamat Tetap" required></textarea>
-            </mat-form-field>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-3">
-            <mat-form-field  class="example-full-width">
-              <input matInput formControlName="poskodPemohon" placeholder="Poskod" required>
-            </mat-form-field>
-          </div>
-          <div class="col-md-3">
-            <mat-form-field  class="example-full-width">
-              <input matInput formControlName="daerahPemohon" placeholder="Daerah" required>
-            </mat-form-field>
-          </div>
-          <div class="col-md-6">
-            <mat-form-field  class="example-full-width">
-              <input matInput formControlName="negeriPemohon" placeholder="Negeri" required>
-            </mat-form-field>
-          </div>
-        </div>
-      </form>
-    </div>
-
-    <form [formGroup]="pemilik1Form" role="form" novalidate="novalidate">
-        <div class="col-md-12">
-          <mat-panel-title>
-            <mat-form-field>
-              <input matInput formControlName="namaPemilik" placeholder="Nama Pemilik" required>
-            </mat-form-field>
-          </mat-panel-title>
-        </div>
-    </form>
-  </div> -->
 </div>
 
 

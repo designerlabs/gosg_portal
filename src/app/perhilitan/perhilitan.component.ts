@@ -27,6 +27,7 @@ import {
 import { environment } from '../../environments/environment';
 import { setConstantValue } from '../../../node_modules/typescript';
 import { stringify } from 'querystring';
+import { ValidateService } from '../common/validate.service';
 
 @Component({
   selector: 'gosg-perhilitan',
@@ -93,6 +94,8 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
   businessCat: FormControl;
   file1: FormControl;
   file2: FormControl;
+  dispBase641: FormControl;
+  dispBase642: FormControl;
   agreement: FormControl;
 
   public nationality: any;
@@ -125,6 +128,9 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
   public selectedFile1: any;
   public selectedFile2: any;
 
+  public maskPostcode: any;
+  public maskIC: any;
+
   flagHantar = true;
   flag2 = true;
   flag3 = true;
@@ -143,6 +149,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
     private sharedService: SharedService,
     private _formBuilder: FormBuilder,
     private topnavservice: TopnavService,
+    private validateService:ValidateService,
     private ng4FilesService: Ng4FilesService, 
   ) { 
 
@@ -184,6 +191,9 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
     }else{
       this.langID = 1;
     }
+   
+    this.maskPostcode = this.validateService.getMask().postcode;
+   
 
     // this.firstFormGroup = this._formBuilder.group({
     //   namaPemohon: [''],
@@ -253,7 +263,9 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       businessCat: new FormControl(),
       file1: new FormControl(),
       file2: new FormControl(),
-      agreement: new FormControl()
+      agreement: new FormControl(),
+      dispBase641: new FormControl(),
+      dispBase642: new FormControl()
     });
 
     this.getNationality(this.langID);
@@ -657,7 +669,6 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
     let reqVal: any;
 
     reqVal = ["companyType",
-              "jenisMilikan",
               "registerType",
               "registerNo",
               "companyName",
@@ -914,10 +925,8 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
     this.selectedFile1 = [];
     this.selectedFile1.push(selectedFiles);
     this.fifthFormGroup.controls.file1.setValue(nameFile1);
-    this.checkReqValues5();
-    
-
-    
+    this.changeBase641(this.selectedFile1);
+    this.checkReqValues5();    
   
     // let mFileSize = this.chkUploadFile.maxSize;
     
@@ -948,11 +957,46 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
     this.selectedFile2 = [];
     this.selectedFile2.push(selectedFiles);
     this.fifthFormGroup.controls.file2.setValue(nameFile1);
+    this.changeBase642(this.selectedFile2);
     this.checkReqValues5();
+  }
+
+  changeBase641(inputValue: any): void {
+    var file:File = inputValue[0].files[0];
+    var myReader:FileReader = new FileReader();
+  
+    myReader.onloadend = (e) => {
+      let base641 = myReader.result;
+      let splitB64 = base641.split('data:application/pdf;base64,')[1];          
+      this.fifthFormGroup.get('dispBase641').setValue(splitB64);
+    }
+    myReader.readAsDataURL(file);
+  }
+
+  changeBase642(inputValue: any): void {
+    var file:File = inputValue[0].files[0];
+    var myReader:FileReader = new FileReader();
+  
+    myReader.onloadend = (e) => {
+      let base642 = myReader.result;
+      let splitB64 = base642.split('data:application/pdf;base64,')[1];          
+      this.fifthFormGroup.get('dispBase642').setValue(splitB64);
+    }
+    myReader.readAsDataURL(file);
   }
 
   draft(){
 
+    
+
+    let formData: FormData = new FormData();
+    for (let file of this.selectedFile1) {
+      formData.append('roc', file.files[0], file.files[0].name);
+    }
+    for (let file of this.selectedFile2) {
+      formData.append('pbt', file.files[0], file.files[0].name);
+    }
+  
     let body = {
       "licensePasscode": "",
       "licenseNo": "",
@@ -1043,9 +1087,9 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
     body.userCompanyFaxNo = this.fourthFormGroup.get('companyFax').value;
     body.userCompanyRegNo = this.fourthFormGroup.get('registerNo').value;
     body.userCompanyDistrict = this.fourthFormGroup.get('companyDaerah').value; 
-    body.attachFileRoc = "";
+    body.attachFileRoc = this.fifthFormGroup.get('dispBase641').value;
     body.extFileRoc = this.selectedFile1[0].files[0].name.split('.')[1];
-    body.attachFilePbt = "";
+    body.attachFilePbt = this.fifthFormGroup.get('dispBase642').value;
     body.extFilePbt = this.selectedFile2[0].files[0].name.split('.')[1];;
     body.attachFileIc = "";  
     body.extFileIc = "";
@@ -1068,29 +1112,24 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
     body.cronStatus = false;
     
     // Add Media file upload Service
-    let formData: FormData = new FormData();
-    for (let file of this.selectedFile1) {
-      formData.append('mediaFiles', file.files[0], file.files[0].name);
-    }
-    for (let file of this.selectedFile2) {
-      formData.append('mediaFiles', file.files[0], file.files[0].name);
-    }
-    formData.append('strMedias', JSON.stringify(body));
-
-    console.log(formData);
     
-    // this.protectedService.create(formData,'media',this.langID).subscribe(
-    // data => {
-    //   this.sharedService.errorHandling(data, (function () {
-    //     this.toastr.success(this.translate.instant('common.success.added'), '');
-    //     //this.router.navigate(['media/upload']);
-    //   }).bind(this));
-    //   //this.loading = false;
-    // },
-    // error => {
-    //   //this.loading = false;
-    //   this.toastr.error(JSON.parse(error._body).statusDesc, '');
-    // });
+    formData.append('draftDoc', JSON.stringify(body));    
+    console.log(JSON.stringify(body));
+    
+    this.protectedService.create(body,'perhilitan/draft/save',this.langID).subscribe(
+    data => {
+      this.sharedService.errorHandling(data, (function () {
+        this.toastr.success(this.translate.instant('common.success.added'), '');
+        console.log("SUBMITTED");
+        console.log(data);
+        //this.router.navigate(['media/upload']);
+      }).bind(this));
+      //this.loading = false;
+    },
+    error => {
+      //this.loading = false;
+      this.toastr.error(JSON.parse(error._body).statusDesc, '');
+    });
     
   }
 
