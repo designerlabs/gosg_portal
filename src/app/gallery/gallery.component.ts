@@ -139,7 +139,6 @@ export class GalleryComponent implements OnInit, OnDestroy {
     this.isDocument = false;
     this.isVideo = false;
 
-      console.log(this.galleryService.galleries.mediaType)
     }
 
    getTheme(){

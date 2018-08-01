@@ -46,6 +46,7 @@
         </div>
       </div>
     </div>
+    <div class="col-md-9">&nbsp;</div>
 
     <div class="col-sm-9" style="color: #333; border: 0px solid #000">
       <div class="row">
@@ -70,8 +71,7 @@
                   <mat-card-header>
                     <mat-card-title>{{ content.title }}</mat-card-title>
                   </mat-card-header> -->
-                    <img style="cursor: pointer; border: 1px solid" (click)="openDialog(config.externalMediaURL +content.name,galleryService.galleries.mediaType, content.title, content.description)" src="{{ config.externalMediaURL }}/{{ content.name }}"
-                    width="150px" height="auto">
+                    <img class="galImg" (click)="openDialog(config.externalMediaURL +content.name,galleryService.galleries.mediaType, content.title, content.description)" src="{{ config.externalMediaURL }}/{{ content.name }}">
               <!-- </mat-card> -->
             </div>
 
