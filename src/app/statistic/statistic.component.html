@@ -26,6 +26,8 @@
 <br />
 <div class="container">
   <!-- {{ 'statistic.months.short.01' | translate }} -->
+
+  <!-- USERS -->
   <table class="table table-striped" style="border: 1px solid rgb(0, 189, 187);">
     <thead style="background: #1ebebc; color: #fafafa;">
       <tr style="vertical-align: middle">
@@ -48,6 +50,7 @@
     </tbody>
   </table>
 
+  <!-- TRANSACTIONS -->
   <table class="table table-striped" style="border: 1px solid rgb(0, 189, 187);">
     <thead style="background: #1ebebc; color: #fafafa;">
       <tr style="vertical-align: middle">
@@ -65,6 +68,25 @@
     </tbody>
   </table>
 
+  <!-- COUNTER -->
+  <table class="table table-striped" style="border: 1px solid rgb(0, 189, 187);">
+    <thead style="background: #1ebebc; color: #fafafa;">
+      <tr style="vertical-align: middle">
+        <th style="width: 35%">{{'statistic.label.counter' | translate}}</th>
+        <th style="text-align: center; padding: 5px" *ngFor="let mon of allUsersByYear">{{ 'statistic.months.short.'+mon[0] | translate }}</th>
+        <th style="text-align: center">{{'statistic.label.total' | translate}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ 'statistic.label.none' | translate }}</td>
+        <td style="text-align: center" *ngFor="let cdsvc of dServiceCounterData">{{ cdsvc.val }}</td>
+        <td style="text-align: center; font-weight: bold">{{ dServiceCounterData.rptTotal }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- PENDING -->
   <table class="table table-striped" style="border: 1px solid rgb(0, 189, 187);">
     <thead style="background: #1ebebc; color: #fafafa;">
       <tr style="vertical-align: middle">
@@ -81,4 +103,5 @@
       </tr>
     </tbody>
   </table>
+
 </div>

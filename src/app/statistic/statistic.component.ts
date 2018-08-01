@@ -20,14 +20,17 @@ export class StatisticComponent implements OnInit {
   StatByYearNew: any = [["01", "0"], ["02", "0"], ["03", "0"], ["04", "0"], ["05", "0"], ["06", "0"], ["07", "0"], ["08", "0"], ["09", "0"], ["10", "0"], ["11", "0"], ["12", "0"]]
   StatByYearDservice: any = [{"name":"01","val":0},{"name":"02","val":0},{"name":"03","val":0},{"name":"04","val":0},{"name":"05","val":0},{"name":"06","val":0},{"name":"07","val":0},{"name":"08","val":0},{"name":"09","val":0},{"name":"10","val":0},{"name":"11","val":0},{"name":"12","val":0}];
   StatByYearPendingDservice: any = [{"name":"01","val":0},{"name":"02","val":0},{"name":"03","val":0},{"name":"04","val":0},{"name":"05","val":0},{"name":"06","val":0},{"name":"07","val":0},{"name":"08","val":0},{"name":"09","val":0},{"name":"10","val":0},{"name":"11","val":0},{"name":"12","val":0}];
+  StatByYearCounterDservice: any = [{"name":"01","val":0},{"name":"02","val":0},{"name":"03","val":0},{"name":"04","val":0},{"name":"05","val":0},{"name":"06","val":0},{"name":"07","val":0},{"name":"08","val":0},{"name":"09","val":0},{"name":"10","val":0},{"name":"11","val":0},{"name":"12","val":0}];
   allUsersByYear: any;
   newUsersByYear: any;
   dserviceByYear: any;
   pdserviceByYear: any;
+  dserviceCounterByYear: any;
   allUsersData: any = [];
   newUsersData: any = [];
   dServiceData: any = [];
   dServicePendingData: any = [];
+  dServiceCounterData: any = [];
   dserviceRpt: any;
   totalUsers: any;
   totalNewUsers: any;
@@ -79,7 +82,29 @@ export class StatisticComponent implements OnInit {
     this.getUsersStatData(2);
     this.getDserviceReport(this.languageId);
     this.getPendingDserviceReport(this.languageId);
+    this.getDserviceCounterReport(this.languageId);
     // console.log(this.generateStatByYearFor('dservice'));
+  }
+
+  getDserviceCounterReport(lng) {
+
+    let aryObj: any;
+    let retn = [];
+    let sum: any;
+
+    aryObj = {
+      mName: "",
+      mVal: ""
+    };
+
+    this.dServiceCounterData = this.StatByYearCounterDservice;
+
+    sum = this.dServiceCounterData.reduce((sum, item) => sum + item.val, 0);
+    this.dServiceCounterData.rptTotal = sum;
+
+    // dsvcc.report = retn;
+    // retn = [];
+
   }
 
   getDserviceReport(lng) {
