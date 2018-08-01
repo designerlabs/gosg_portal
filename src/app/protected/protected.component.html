@@ -3,7 +3,7 @@
 
     <app-topnav [state]='getUserName' [getMail]='getEmail' [getName]='getFullname' class="top-nav-style" (showProfile)="showProfile($event)" (topNavClick)="getExpand($event)"
       [style.background]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" [style.z-index]="this.zIndex" [style.height]="this.bHeight"></app-topnav>
-    <app-nav [state]='getUserName' class="nav-bar-style" [style.top]="this.bTop" [style.z-index]="this.zIndex2"></app-nav>
+    <app-nav [validMyIdentity]='validMyIdentity' [state]='getUserName' class="nav-bar-style" [style.top]="this.bTop" [style.z-index]="this.zIndex2"></app-nav>
     <app-breadcrumb></app-breadcrumb>
     <router-outlet [state]='getUserName' [getMail]='getEmail' [getName]='getFullname'></router-outlet>
     <div style="height: 200px"></div>

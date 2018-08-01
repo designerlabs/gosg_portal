@@ -27,7 +27,7 @@
                         </div>
                     </li>
                     <li>
-                        <button type="button" class="btn btn-md online_service_btn" [routerLink]="['/digitalservices']">{{state}}{{'home.menu.onlineservice' | translate}}</button>
+                        <button type="button" class="btn btn-md online_service_btn" [disabled]="!!state && !validMyIdentity" [routerLink]="['/digitalservices']">{{'home.menu.onlineservice' | translate}}</button>
                     </li>
                     <li>
                         <a href="#" class="dropdown-toggle" data-toggle="searchDDown" (mouseenter)="dropdownDisplay('show')" class="h_search_btn"><i class="fa fa-search"></i></a>
