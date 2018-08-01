@@ -51,7 +51,7 @@
             </mat-form-field>
           </div>
           <div class="col-md-6">
-            <mat-form-field class="example-full-width" *ngIf="!keyword">
+            <mat-form-field class="example-full-width">
               <mat-select placeholder="{{ 'agencydir.label.searchbyalpha' | translate }}" [(ngModel)]="letter" (change)="applyFilter('letter',$event.value)">
                 <mat-option [value]="0">{{ 'agencydir.filterby.all' | translate }}</mat-option>
                 <mat-option *ngFor="let l of dataAlpha" [value]="l" style="text-transform: capitalize">{{ l }}</mat-option>
