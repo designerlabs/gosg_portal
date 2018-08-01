@@ -65,7 +65,7 @@
                           <div style="color:#333;" class="font-size-m boldText">{{dt | date:'dd/MM/yyyy' }}</div>
                           <input style="display:none;" placeholder="{{ dateFormatExample }}" matInput formControlName="dob" [matDatepicker]="dateOfBirth" (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)" [max]="maxDate"  required />
                           <mat-datepicker-toggle matSuffix [for]="dateOfBirth" style="color:#333;"></mat-datepicker-toggle>
-                          <mat-datepicker #dateOfBirth [disabled]="initialBtn"></mat-datepicker>
+                          <mat-datepicker [touchUi]="true" #dateOfBirth [disabled]="initialBtn"></mat-datepicker>
 
                           <mat-error *ngIf="!!dt">
                             {{'profile.err.dob' | translate }}
