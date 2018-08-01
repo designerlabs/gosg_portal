@@ -22,6 +22,7 @@ export class NavComponent implements OnInit, AfterViewInit, OnDestroy {
 
     mobile: boolean;
     @Output() menuClick = new EventEmitter();
+    @Input() state:string;
     languageId: any;
     imgSrc: string;
     menus: IMenu[];
