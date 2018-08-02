@@ -43,6 +43,9 @@ import { ContentProdComponent } from './article/content/contentprod.component';
 import { PerhilitanComponent } from './perhilitan/perhilitan.component';
 import { ReplacementmycardComponent } from './replacementmycard/replacementmycard.component';
 import { LeftmenuProdComponent } from './article/leftmenu/leftmenuprod.component';
+import { ArchivecategoryProdComponent } from './archive/archivecategory/archivecategoryprod.component';
+import { ArchivesubcategoryProdComponent } from './archive/archivesubcategory/archivesubcategoryprod.component';
+import { ArchivecontentProdComponent } from './archive/archivecontent/archivecontentprod.component';
 
 export function HttpLoaderFactory(http: Http) {
    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -73,7 +76,10 @@ export function HttpLoaderFactory(http: Http) {
     ContentProdComponent,
     PerhilitanComponent,
     ReplacementmycardComponent,
-    LeftmenuProdComponent
+    LeftmenuProdComponent,
+    ArchivecategoryProdComponent,
+    ArchivesubcategoryProdComponent,
+    ArchivecontentProdComponent
   ],
   imports: [
     SharedModule,

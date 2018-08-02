@@ -133,9 +133,6 @@ import { RssComponent } from '../article/rss/rss.component';
 import { EparticipationComponent } from '../eparticipation/eparticipation.component';
 import { StatisticComponent } from '../statistic/statistic.component';
 import { SitemapComponent } from '../sitemap/sitemap.component';
-import { ArchivecategoryComponent } from '../archive/archivecategory/archivecategory.component';
-import { ArchivesubcategoryComponent } from '../archive/archivesubcategory/archivesubcategory.component';
-import { ArchivecontentComponent } from '../archive/archivecontent/archivecontent.component';
 import { GalleryService } from '../gallery/gallery.service';
 import { GalleryComponent, DialogDataExampleDialog } from '../gallery/gallery.component';
 import { SchoolsearchComponent } from '../schoolsearch/schoolsearch.component';
@@ -225,9 +222,6 @@ export function HttpLoaderFactory(http: Http) {
     EparticipationComponent,
     StatisticComponent,
     SitemapComponent,
-    ArchivecategoryComponent,
-    ArchivesubcategoryComponent,
-    ArchivecontentComponent,
     GalleryComponent,
     DialogDataExampleDialog,
     SchoolsearchComponent,

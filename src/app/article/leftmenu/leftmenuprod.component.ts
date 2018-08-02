@@ -48,7 +48,7 @@ import { ContentProdComponent } from '../../article/content/contentprod.componen
 
 
     <div *ngIf="templateName === 'lifeevent'" >
-    <mat-expansion-panel *ngFor="let content of sessions; let i = index"  multi="false" displayMode="flat" [hideToggle]="content?.contents?.length==0 ? true: null"  [expanded]="content.activeMenu  || (i == statusID) || sessions.length <= 1" class="specific-class">
+    <mat-expansion-panel *ngFor="let content of sessions; let i = index"  multi="false" displayMode="flat" [hideToggle]="content?.contents?.length==0 ? true: null" [disabled]="true" [expanded]="content.activeMenu  || (i == statusID) || sessions.length <= 1" class="specific-class">
       <mat-expansion-panel-header>
         <mat-panel-title class="pointer" (click)="clickSideMenu(content, i, $event)">
           <a class="warna_font sideBarMenu--link font-size-s" [routerLinkActive]="['active']"  [style.font-weight]="content?.activeMenu ? 'bold' : 'normal'"  [style.color]="content?.activeMenu ? getTheme() : '#333'" >
@@ -95,6 +95,7 @@ export class LeftmenuProdComponent {
   agencyActive: boolean = false;
   statusID: any;
   paramURL: any;
+  paramURL_Next: any;
   @Input() sessions: any;
   @Input() menuType: any;
   @Input() templateName: any;
@@ -102,6 +103,7 @@ export class LeftmenuProdComponent {
   constructor(private router:Router, private navService: NavService, private activatedRoute: ActivatedRoute, private content:ContentProdComponent){
     this.activatedRoute.queryParams.subscribe(params => {
       this.paramURL = this.activatedRoute.snapshot.url[0].path;
+      this.paramURL_Next = this.paramURL + '/' +this.activatedRoute.snapshot.url[1].path;
     });
   }
 
@@ -113,13 +115,25 @@ export class LeftmenuProdComponent {
   clickSideMenu(e, status, event) {
     this.statusID = status;
     this.agencyActive = false;
-    if(this.paramURL == 'category'){
+    if(this.paramURL_Next == 'archive/category'){
+      this.router.navigate(['/archive/subcategory', e.categoryCode]);
+    }else if(this.paramURL == 'category'){
       this.router.navigate(['/subcategory', e.categoryCode]);
     }else if(this.paramURL == 'subcategory'){
 
       this.navService.getSubArticleUrl(e.categoryId, localStorage.getItem('langID'));
       this.navService.triggerSubArticle(e.categoryCode, localStorage.getItem('langID'));
       this.router.navigate(['/subcategory', e.categoryCode]);
+    }else if(this.paramURL_Next == 'archive/subcategory'){
+
+      this.navService.getSubArticleUrlOthers(e.categoryId, localStorage.getItem('langID'),'archive');
+      this.navService.triggerSubArticleOther(e.categoryCode, localStorage.getItem('langID'),'archive');
+      this.router.navigate(['/archive/subcategory', e.categoryCode]);
+    }else if(this.paramURL_Next == 'archive/content'){
+
+      this.navService.getSubArticleUrlOthers(e.categoryId, localStorage.getItem('langID'),'archive');
+      this.navService.triggerSubArticleOther(e.categoryCode, localStorage.getItem('langID'),'archive');
+      this.router.navigate(['/archive/subcategory', e.categoryCode]);
     }else{
       this.router.navigate(['/subcategory', e.categoryCode]);
     }
@@ -130,8 +144,18 @@ export class LeftmenuProdComponent {
     this.statusID = status;
     if(this.paramURL == 'category'){
       this.router.navigate(['/content', aId]);
+    }else if(this.paramURL_Next == 'archive/category'){
+      this.router.navigate(['/archive/content', aId]);
     }else if(this.paramURL == 'subcategory'){
       this.router.navigate(['/content', aId]);
+      // this.content.getRateReset();
+    }else if(this.paramURL_Next == 'archive/subcategory'){
+      this.router.navigate(['/archive/content', aId]);
+      // this.content.getRateReset();
+    }else if(this.paramURL_Next == 'archive/content'){
+      this.navService.triggerContentOther(aId, localStorage.getItem('langID'),'archive');
+      this.navService.getContentUrlOther(aId, localStorage.getItem('langID'), 'archive');
+      this.router.navigate(['/archive/content', aId]);
       // this.content.getRateReset();
     }else{
       this.navService.triggerContent(aId, localStorage.getItem('langID'));
@@ -140,9 +164,6 @@ export class LeftmenuProdComponent {
       this.router.navigate(['/content',  aId]);
       this.content.getRateReset();
     }
-
-
-
     event.preventDefault();
   }
 
