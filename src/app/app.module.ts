@@ -32,6 +32,7 @@ import { DigitalservicesComponent, DigitalServiceDialog } from './digitalservice
 import { ContentComponent } from './article/content/content.component';
 import { LeftmenuComponent } from './article/leftmenu/leftmenu.component';
 
+
 // import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule } from "@angular/material";
 
 export function HttpLoaderFactory(http: Http) {
@@ -81,6 +82,7 @@ imports: [
     DigitalServiceDialog,
     ContentComponent,
     LeftmenuComponent
+   
 
   ],
 
