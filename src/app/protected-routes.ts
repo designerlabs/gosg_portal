@@ -54,6 +54,7 @@ import { GalleryComponent } from './gallery/gallery.component';
 import { TrafficinfoComponent } from './trafficinfo/trafficinfo.component';
 import { PerhilitanComponent } from './perhilitan/perhilitan.component';
 import { ReplacementmycardComponent } from './replacementmycard/replacementmycard.component';
+import { PerhilitanrenewComponent } from './perhilitanrenew/perhilitanrenew.component';
 
 //import { GalleryComponent } from './gallery/gallery.component';
 // import { NavRouterActivator } from './header/nav/nav-router-activator.service'
@@ -115,6 +116,7 @@ export const protectedRoutes: Routes = [
     {path: 'school-search', component: SchoolsearchComponent},
     {path: 'trafficinfo', component: TrafficinfoComponent },
     {path: 'perhilitan', component: PerhilitanComponent},
+    {path: 'perhilitan_renew', component: PerhilitanrenewComponent},
     {path: 'get_user_approval', component: ReplacementmycardComponent},
     {path: '**', component: ErrorComponent}
     //{path: 'user', loadChildren: 'app/user/user.module#UserModule'}

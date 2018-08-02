@@ -68,19 +68,19 @@
                       <div class="radio">
                         <input type="radio" class="like"  formControlName="score" value=1 (click)="getRate(1)">
                         <label><i class="fa fa-smile-o"></i>
-                          <span>Like</span>
+                          <span>{{ 'rating.like' | translate }}</span>
                         </label>
                       </div>
                       <div class="radio">
                         <input type="radio" class="neutral" formControlName="score" value=0 (click)="getRate(0)">
                         <label><i class="fa fa-meh-o"></i>
-                          <span>Neutral</span>
+                          <span>{{ 'rating.neutral' | translate }}</span>
                         </label>
                       </div>
                       <div class="radio">
                         <input type="radio" class="dislike" formControlName="score"  value=-1 (click)="getRate(-1)">
                         <label><i class="fa fa-frown-o"></i>
-                          <span>Dislike</span>
+                          <span>{{ 'rating.dislike' | translate }}</span>
                         </label>
 
                       </div>
