@@ -250,11 +250,11 @@
   },
   "rating":{
     "title":"title",
-    "like":"Like",
+    "like":"Suka",
     "neutral":"Neutral",
-    "dislike":"Dislike",
+    "dislike":"Tidak suka",
     "remarks":"Remarks",
-    "msgsubmit":"Thank you. Your message has been successfully submitted."
+    "msgsubmit":"Terima kasih.Mesej anda telah berjaya dihantar."
   },
   "agencydir": {
     "title":"Direktori Agensi",
