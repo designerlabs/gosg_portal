@@ -29,7 +29,7 @@
 
   <div *ngIf="article.template === 'lifeevent'" class="row">
     <div class="scrollmenu">
-      <div *ngFor="let menuT of article.menuTop; let index = index;" >
+      <div *ngFor="let menuT of article.menuTop; let index = index;" (click)="clickTopMenu(menuT)" >
         <div style="display: block;"><img [src]="config.externalMediaURL + '/images/'+ menuT.image?.mediaFile" width="40"></div>
         <div style="display: inline;">{{menuT.categoryName}}</div>
         <div *ngIf="menuT.activeMenu" class="activeBar"></div>

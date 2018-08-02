@@ -30,11 +30,11 @@ import { stringify } from 'querystring';
 import { ValidateService } from '../common/validate.service';
 
 @Component({
-  selector: 'gosg-perhilitan',
-  templateUrl: './perhilitan.component.html',
-  styleUrls: ['./perhilitan.component.css']
+  selector: 'gosg-perhilitanrenew',
+  templateUrl: './perhilitanrenew.component.html',
+  styleUrls: ['./perhilitanrenew.component.css']
 })
-export class PerhilitanComponent implements OnInit, OnDestroy {
+export class PerhilitanrenewComponent implements OnInit, OnDestroy {
 
   uid: any;
   lang = this.lang;

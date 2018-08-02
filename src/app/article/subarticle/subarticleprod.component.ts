@@ -1,14 +1,17 @@
-import { Component, Output, Input, EventEmitter, OnInit, AfterViewChecked, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, Output, Input, EventEmitter, OnInit, AfterViewChecked, AfterViewInit, OnDestroy, Inject } from '@angular/core';
 import { ArticleService } from '../article.service';
-
 import { NavService } from '../../header/nav/nav.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { BreadcrumbService } from '../../header/breadcrumb/breadcrumb.service';
-
+import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/switchMap';
 import { ISubscription } from 'rxjs/Subscription';
 import { TopnavService } from '../../header/topnav/topnav.service';
+import { SharedService } from '../../common/shared.service';
+import { APP_CONFIG, AppConfig } from '../../config/app.config.module';
+import { Observable } from 'rxjs/Observable';
+
 
 
 @Component({
@@ -37,7 +40,7 @@ export class SubarticleprodComponent implements OnInit, OnDestroy {
   private subscription: ISubscription;
   private subscriptionLang: ISubscription;
 
-  constructor(public articleService: ArticleService, private topnavservice: TopnavService, private route: ActivatedRoute, private navService: NavService, private translate: TranslateService, private router: Router, private breadcrumbService: BreadcrumbService) {
+  constructor(private http: HttpClient, public articleService: ArticleService,private sharedservice: SharedService, @Inject(APP_CONFIG) private config: AppConfig, private topnavservice: TopnavService, private route: ActivatedRoute, private navService: NavService, private translate: TranslateService, private router: Router, private breadcrumbService: BreadcrumbService) {
     this.lang = translate.currentLang;
     this.langId = 1;
 
@@ -124,6 +127,13 @@ export class SubarticleprodComponent implements OnInit, OnDestroy {
   }
 
 
+
+  clickTopMenu(e){
+    this.router.navigate(['/category', e.categoryCode]);
+    event.preventDefault();
+  }
+
+
   clickSideMenu(e, status, event) {
     this.agencyActive = false;
     this.statusID = status;
@@ -152,6 +162,20 @@ export class SubarticleprodComponent implements OnInit, OnDestroy {
     return a[2];
   }
 
+  appTracking(refCode){
+    const readUrl = `${this.config.registerationUrl}agencyapplication/tracking?refCode=${refCode}&source=life-event`;
+    const req = this.http.post(readUrl,'')
+      .subscribe(
+        res => {
+          console.log(res);
+        },
+        err => {
+          console.log("Error occured");
+        }
+      );
+  }
+
+
   clickContentFromMenu(pId, aId, event) {
     // this.navService.triggerContent(aId, localStorage.getItem('langID'));
     // this.navService.getContentUrl(aId, localStorage.getItem('langID'));
@@ -168,5 +192,4 @@ export class SubarticleprodComponent implements OnInit, OnDestroy {
       return false;
     }
   }
-
 }

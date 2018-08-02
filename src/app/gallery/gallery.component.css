@@ -148,6 +148,7 @@
       column-count: 4;
       column-gap: 0;
       position: relative;
+      text-align: center;
     }
 
     .galleryBtn {
@@ -165,6 +166,12 @@
     }
     
     /* MASONRY CSS */
+    .galImg {
+      cursor: pointer; border: 1px solid;
+      width: 150px;
+      height: auto;
+    }
+
     .ml {
       box-sizing: border-box;
       column-count: 1;
@@ -174,12 +181,51 @@
     .ml * {
       box-sizing: border-box;
     }
-    @media (min-width: 768px) {
+    @media (max-width: 320px) {
+
+      .galImg {
+        cursor: pointer; border: 1px solid;
+        width: 100px;
+        height: auto;
+      }
+
+      .galleryTbl {
+        column-count: 1;
+        column-gap: 0;
+        position: relative;
+        text-align: center;
+      }
+
       .ml {
         column-count: 2;
       }
     }
-    @media (min-width: 1200px) {
+    @media (min-width: 569px) {
+
+      .galImg {
+        cursor: pointer; 
+        border: 1px solid;
+        width: 100px;
+        height: auto;
+      }
+
+      .galleryTbl {
+        column-count: 4;
+        column-gap: 0;
+        position: relative;
+        text-align: center;
+      }
+
+      .ml {
+        column-count: 2;
+      }
+    }
+    @media (max-width: 768px) {
+      .ml {
+        column-count: 2;
+      }
+    }
+    @media (max-width: 1200px) {
       .ml {
         column-count: 5;
       }
@@ -189,7 +235,7 @@
       padding: 5px;
     }
 
-    @media (min-width: 768px) {
+    @media (max-width: 768px) {
       .ml-pnl {
         break-inside: avoid;
       }
@@ -250,7 +296,7 @@
     .ml-clstr--vrt {
       flex-direction: column;
     }
-    @media (min-width: 768px) {
+    @media (max-width: 768px) {
       .ml-clstr--vrt {
         flex-direction: row;
       }
@@ -267,7 +313,7 @@
       display: flex;
       flex-direction: column;
     }
-    @media (min-width: 768px) {
+    @media (max-width: 768px) {
       .ml-clstr__sgmnt--rw {
         flex-direction: row;
       }

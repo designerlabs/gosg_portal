@@ -22,6 +22,7 @@
           text-align: center;
           padding: 0px 10px;
           text-decoration: none;
+          cursor: pointer;
         }
 
         /* width */
@@ -44,6 +45,14 @@
           background: #555;
         }
 
+        .scrollmenu {
+          background-color: #efefef;
+          overflow: auto;
+          border-bottom: 2px solid #e7436d;
+          height: 110px;
+          white-space: nowrap;
+        }
+
         .activeBar{
           height: 2px;
           width: 100%;
@@ -55,13 +64,7 @@
           top: 0px;
         }
 
-        .scrollmenu {
-          background-color: #efefef;
-          overflow: auto;
-          border-bottom: 2px solid #e7436d;
-          height: 110px;
-          white-space: nowrap;
-        }
+
 
         .mat-expansion-panel-header{
           padding: 0 10px !important;

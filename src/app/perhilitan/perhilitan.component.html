@@ -31,7 +31,7 @@
   </div>
 
   <div class="col-md-12 padding-left-0">
-    <mat-horizontal-stepper [linear]="isLinear" #stepper (click)="step1($event)">
+    <mat-horizontal-stepper [linear]="isLinear" #stepper>
       <mat-step [stepControl]="firstFormGroup">
         <form [formGroup]="firstFormGroup">
           <ng-template matStepLabel><span class="stepperTitle">Maklumat Pemohon</span></ng-template>
@@ -126,7 +126,8 @@
 
               <div class="col-md-4" *ngIf="selectedWarganegara == 1">
                 <mat-form-field class="example-full-width">
-                  <mat-select formControlName="typeIC" placeholder="Jenis IC" required>
+                  <mat-select formControlName="typeIC" placeholder="Jenis IC" required
+                  (change)="checkTypeIc(secondFormGroup.value)">
                     <mat-option *ngFor="let listIC of listjic" [value]="listIC.id">
                       {{listIC.text}}
                     </mat-option>
@@ -134,7 +135,7 @@
                 </mat-form-field>
               </div>
 
-              <div class="col-md-4" *ngIf="selectedWarganegara == 0">
+              <div class="col-md-4" *ngIf="selectedWarganegara == 0"> 
                 <mat-form-field class="example-full-width">
                   <mat-select formControlName="typeIC" placeholder="Jenis IC" required readonly>
                     <mat-option [value]="0">Passport</mat-option>
@@ -142,10 +143,17 @@
                 </mat-form-field>
               </div>             
 
-              <div class="col-md-4">
+              <div class="col-md-4" *ngIf="selectedTypeIC == 1">
                 <mat-form-field  class="example-full-width displayInfo">
-                  <input matInput formControlName="icpassport" placeholder="No.IC/Passport" required maxlength="12"
-                  (keyup)="getDetailIC(langID, secondFormGroup.value)">
+                  <input matInput formControlName="icpassport" placeholder="No.IC/Passport" required
+                  (change)="getDetailIC(langID, secondFormGroup.value)" [textMask]="{mask: maskIC}">
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-4" *ngIf="selectedTypeIC == 0">
+                <mat-form-field  class="example-full-width displayInfo">
+                  <input matInput formControlName="icpassport" placeholder="No.IC/Passport" required
+                  (change)="getDetailIC(langID, secondFormGroup.value)" maxlength="12">
                 </mat-form-field>
               </div>
             </div>
@@ -161,7 +169,7 @@
             <div class="row">
               <div class="col-md-4">
                 <mat-form-field  class="example-full-width displayInfo">
-                  <input matInput formControlName="phonePemilik" placeholder="No. Telefon" required>
+                  <input matInput formControlName="phonePemilik" placeholder="No. Telefon" required [textMask]="{mask: maskPhone}">
                 </mat-form-field>
               </div>
 
@@ -201,27 +209,30 @@
               <div class="col-md-4">
                 <mat-form-field  class="example-full-width displayInfo">
                   <input matInput formControlName="poskodPemilik" placeholder="Poskod" required
-                  (change)="checkposkod(1, secondFormGroup.value)">
+                  (change)="checkposkod(1, secondFormGroup.value)" [textMask]="{mask: maskPostcode}">
                 </mat-form-field>
               </div>
               <div class="col-md-4">
                 <mat-form-field  class="example-full-width displayInfo">
                   <mat-select formControlName="daerahPemilik" placeholder="Daerah" required
                   (change)="checkState(1,secondFormGroup.value)">
-                    <mat-option *ngFor="let lDaerah of listdaerahT" [value]="lDaerah.formValue">
-                      {{lDaerah.city}}
+                    <mat-option *ngFor="let lDaerah of listdaerahT" [value]="lDaerah.postcodeId">
+                      {{lDaerah.city}} - {{lDaerah.state}}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>
               <div class="col-md-4">
                 <mat-form-field  class="example-full-width displayInfo">
+                  <input matInput formControlName="negeriPemilik" placeholder="Negeri" required>
+                </mat-form-field>
+                <!-- <mat-form-field  class="example-full-width displayInfo">
                   <mat-select formControlName="negeriPemilik" placeholder="Negeri" required>
                     <mat-option *ngFor="let listState of listStateT" [value]="listState.stateId">
                       {{listState.stateName}}
                     </mat-option>
                   </mat-select>
-                </mat-form-field>
+                </mat-form-field> -->
               </div>
             </div>
           </div>
@@ -245,9 +256,12 @@
             </div>
 
             <div class="row">
-              <div class="col-md-12">
+              <div class="col-md-12">                
                 <mat-form-field class="example-full-width displayInfo">
-                  <textarea matInput formControlName="mailingAdd" placeholder="Alamat Surat Menyurat" required></textarea>
+                  <span>Alamat Surat-Menyurat * </span> 
+                  <mat-checkbox formControlName="copyAdd" id="copyAdd" (change)="clickCopyAdd()"></mat-checkbox>
+                  Salin Alamat Tetap
+                  <textarea matInput formControlName="mailingAdd" placeholder="" (keyup)="checkReqValues3()"></textarea>
                 </mat-form-field>
               </div>
             </div>
@@ -256,33 +270,37 @@
               <div class="col-md-4">
                 <mat-form-field  class="example-full-width displayInfo">
                   <input matInput formControlName="mailingPoskod" placeholder="Poskod" required
-                  (change)="checkposkod(2, thirdFormGroup.value)">
+                  (change)="checkposkod(2, thirdFormGroup.value)" [textMask]="{mask: maskPostcode}">
                 </mat-form-field>
               </div>
               <div class="col-md-4">
                 <mat-form-field  class="example-full-width">
                   <mat-select formControlName="mailingDaerah" placeholder="Daerah" required
                   (change)="checkState(2,thirdFormGroup.value)">
-                    <mat-option *ngFor="let lDaerah of listdaerahSurat" [value]="lDaerah.formValue">
-                      {{lDaerah.city}}
+                    <mat-option *ngFor="let lDaerah of listdaerahSurat" [value]="lDaerah.postcodeId">
+                      {{lDaerah.city}} - {{lDaerah.state}}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>
               <div class="col-md-4">
-                <mat-form-field  class="example-full-width">
+                <mat-form-field  class="example-full-width displayInfo">
+                  <input matInput formControlName="mailingNegeri" placeholder="Negeri" required>
+                </mat-form-field>
+                <!-- <mat-form-field  class="example-full-width">
                   <mat-select formControlName="mailingNegeri" placeholder="Negeri" required>
                     <mat-option *ngFor="let listState of listStateSurat" [value]="listState.stateId">
                       {{listState.stateName}}
                     </mat-option>
                   </mat-select>
-                </mat-form-field>
+                </mat-form-field> -->
               </div>
             </div>
           </div>
           <div class="pull-right">
             <button mat-raised-button matStepperPrevious color="primary" class="btn btn-md btn-success font-size-s">Sebelum</button>
-            <button mat-raised-button matStepperNext color="primary" class="btn btn-md btn-success font-size-s">Seterusnya</button>
+            <button mat-raised-button matStepperNext color="primary" class="btn btn-md btn-success font-size-s"
+            [disabled]="flag3">Seterusnya</button>
           </div>
         </form>
       </mat-step>
@@ -301,9 +319,10 @@
             <div class="row">
               <div class="col-md-6">
                 <mat-form-field class="example-full-width">
-                  <mat-select formControlName="companyType" placeholder="Jenis Syarikat" required>
-                    <mat-option [value]="1">
-                      1
+                  <mat-select formControlName="companyType" placeholder="Jenis Syarikat" required readonly
+                  (change)="checkReqValues4()">
+                    <mat-option [value]="3">
+                      Swasta
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
@@ -311,9 +330,10 @@
 
               <div class="col-md-6">
                 <mat-form-field class="example-full-width">
-                  <mat-select formControlName="jenisMilikan" placeholder="Jenis Pemilikan" required>
-                    <mat-option [value]="1">
-                      1
+                  <mat-select formControlName="jenisMilikan" placeholder="Jenis Pemilikan" 
+                  (change)="checkReqValues4()">
+                    <mat-option *ngFor="let lmilik of listJenisMilikan" [value]="lmilik.idPemilikan">
+                      {{lmilik.pemilikanDescription}}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
@@ -323,7 +343,8 @@
             <div class="row">
               <div class="col-md-6">
                 <mat-form-field  class="example-full-width">
-                  <mat-select formControlName="registerType" placeholder="Jenis Pendaftaran Syarikat" required>
+                  <mat-select formControlName="registerType" placeholder="Jenis Pendaftaran Syarikat" required
+                  (change)="checkReqValues4()">
                     <mat-option *ngFor="let lRegComp of listRegComp" [value]="lRegComp.registerTypeId">
                       {{lRegComp.registerTypeDescription}}
                     </mat-option>
@@ -333,7 +354,8 @@
 
               <div class="col-md-6">
                 <mat-form-field  class="example-full-width displayInfo">
-                  <input matInput formControlName="registerNo" placeholder="No. Pendaftaran Syarikat" required>
+                  <input matInput formControlName="registerNo" placeholder="No. Pendaftaran Syarikat" required
+                  (keyup)="checkReqValues4()">
                 </mat-form-field>
               </div>
             </div>
@@ -341,7 +363,7 @@
             <div class="row">
               <div class="col-md-12">
                 <mat-form-field  class="example-full-width displayInfo">
-                  <input matInput formControlName="companyName" placeholder="Nama Syarikat" required>
+                  <input matInput formControlName="companyName" placeholder="Nama Syarikat" required (change)="checkReqValues4()">
                 </mat-form-field>
               </div>
             </div>
@@ -349,7 +371,10 @@
             <div class="row">
               <div class="col-md-12">
                 <mat-form-field class="example-full-width displayInfo">
-                  <textarea matInput formControlName="companyAdd" placeholder="Alamat" required></textarea>
+                  <span>Alamat * </span> 
+                  <mat-checkbox formControlName="copyAddPemilik" id="copyAddPemilik" (change)="clickCopyAddPemilik()"></mat-checkbox>
+                  Salin Alamat Pemilik
+                  <textarea matInput formControlName="companyAdd" placeholder=""  (change)="checkReqValues4()"></textarea>
                 </mat-form-field>
               </div>
             </div>
@@ -358,46 +383,53 @@
               <div class="col-md-4">
                 <mat-form-field  class="example-full-width displayInfo">
                   <input matInput formControlName="companyPoskod" placeholder="Poskod" required 
-                  (change)="checkposkodCompany(3, fourthFormGroup.value)">
+                  (change)="checkposkod(3, fourthFormGroup.value)" [textMask]="{mask: maskPostcode}">
                 </mat-form-field>
               </div>
               <div class="col-md-4">
                 <mat-form-field  class="example-full-width">
-                  <mat-select formControlName="companyDaerah" placeholder="Daerah" required>
-                    <mat-option *ngFor="let lDaerah of listdaerahCompany" [value]="lDaerah.postcode">
-                      {{lDaerah.city}}
+                  <mat-select formControlName="companyDaerah" placeholder="Daerah" required
+                  (change)="checkState(3,fourthFormGroup.value)">
+                    <mat-option *ngFor="let lDaerah of listdaerahCompany" [value]="lDaerah.postcodeId">
+                      {{lDaerah.city}} - {{lDaerah.state}}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>
               <div class="col-md-4">
-                <mat-form-field  class="example-full-width">
-                  <mat-select formControlName="companyNegeri" placeholder="Negeri" required>
-                    <mat-option *ngFor="let lDaerah of listdaerahCompany" [value]="lDaerah.postcode">
-                      {{lDaerah.state}}
+                <mat-form-field  class="example-full-width displayInfo">
+                  <input matInput formControlName="companyNegeri" placeholder="Negeri" required>
+                </mat-form-field>
+                <!-- <mat-form-field  class="example-full-width">                  
+                  <mat-select formControlName="companyNegeri" placeholder="Negeri" required
+                  (change)="checkReqValues4()">
+                    <mat-option *ngFor="let lDaerah of listStateComp" [value]="lDaerah.stateId">
+                      {{lDaerah.stateName}}
                     </mat-option>
                   </mat-select>
-                </mat-form-field>
+                </mat-form-field> -->
               </div>
             </div>
 
             <div class="row">
               <div class="col-md-4">
                 <mat-form-field  class="example-full-width displayInfo">
-                  <input matInput formControlName="companyPhone" placeholder="No. Telefon" required>
+                  <input matInput formControlName="companyPhone" placeholder="No. Telefon" required
+                  (keyup)="checkReqValues4()" [textMask]="{mask: maskPhone}">
                 </mat-form-field>
               </div>
 
               <div class="col-md-4">
                 <mat-form-field  class="example-full-width displayInfo">
-                  <input matInput formControlName="companyFax" placeholder="No. Faks">
+                  <input matInput formControlName="companyFax" placeholder="No. Faks" [textMask]="{mask: maskPhone}">
                 </mat-form-field>
               </div>
             </div>
           </div>
           <div class="pull-right">
             <button mat-raised-button matStepperPrevious color="primary" class="btn btn-md btn-success font-size-s">Sebelum</button>
-            <button mat-raised-button matStepperNext color="primary" class="btn btn-md btn-success font-size-s">Seterusnya</button>
+            <button mat-raised-button matStepperNext color="primary" class="btn btn-md btn-success font-size-s"
+            [disabled]="flag4">Seterusnya</button>
           </div>
         </form>
       </mat-step>
@@ -457,7 +489,7 @@
               </div>
 
               <div class="col-md-2">
-                <ng4-files-click (filesSelect)="uploadFile1($event)">
+                <ng4-files-click (filesSelect)="uploadFile1($event)" accept="image/*">
                   <span role="button" class="btn btn-success btn-md"><i class="fa fa-search"></i> Muat Naik Fail</span>
                 </ng4-files-click>
                 <!-- <div *ngIf="selectedFilesEn">
@@ -485,6 +517,20 @@
               </div>
             </div>
 
+            <div class="row" style="display: none;">
+              <div class="col-md-6">
+                <mat-form-field class="example-full-width displayInfo">
+                  <textarea matInput formControlName="dispBase641" placeholder=""></textarea>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-6">
+                <mat-form-field class="example-full-width displayInfo">
+                  <textarea matInput formControlName="dispBase642" placeholder=""></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+
             <div class="row">
               <br><br><br>
               <div class="col-md-12">
@@ -504,7 +550,8 @@
           <div class="pull-right">
             <button mat-raised-button matStepperPrevious color="primary"  class="btn btn-md btn-success font-size-s">Sebelum</button>
             <button mat-raised-button color="primary" class="btn btn-md btn-success font-size-s" 
-              [disabled]="flag5 || flagHantar">Hantar</button>
+              [disabled]="flag5 || flagHantar" (click)="submit()">Hantar</button>
+            <button mat-raised-button color="primary" class="btn btn-md btn-success font-size-s" (click)="draft()">Draf</button>
           </div>
         </form>
       </mat-step><br>
@@ -519,74 +566,6 @@
     </mat-horizontal-stepper><br>
   </div>
 
-  <!-- <div class="col-md-9">
-
-    <div>
-      <form [formGroup]="pemohonForm" role="form" novalidate="novalidate">
-        <div class="row">
-          <div class="col-md-12">
-            <mat-form-field  class="example-full-width">
-              <input matInput formControlName="namaPemohon" placeholder="Nama Pemohon" required>
-            </mat-form-field>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-3">
-            <mat-form-field  class="example-full-width">
-              <input matInput formControlName="icPemohon" placeholder="No.IC/Pasport" required>
-            </mat-form-field>
-          </div>
-          <div class="col-md-3">
-            <mat-form-field  class="example-full-width">
-              <input matInput formControlName="phonePemohon" placeholder="No. Telefon" required>
-            </mat-form-field>
-          </div>
-          <div class="col-md-6">
-            <mat-form-field  class="example-full-width">
-              <input matInput formControlName="emailPemohon" placeholder="Emel" required>
-            </mat-form-field>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-12">
-            <mat-form-field class="example-full-width">
-              <textarea matInput formControlName="add1" placeholder="Alamat Tetap" required></textarea>
-            </mat-form-field>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-3">
-            <mat-form-field  class="example-full-width">
-              <input matInput formControlName="poskodPemohon" placeholder="Poskod" required>
-            </mat-form-field>
-          </div>
-          <div class="col-md-3">
-            <mat-form-field  class="example-full-width">
-              <input matInput formControlName="daerahPemohon" placeholder="Daerah" required>
-            </mat-form-field>
-          </div>
-          <div class="col-md-6">
-            <mat-form-field  class="example-full-width">
-              <input matInput formControlName="negeriPemohon" placeholder="Negeri" required>
-            </mat-form-field>
-          </div>
-        </div>
-      </form>
-    </div>
-
-    <form [formGroup]="pemilik1Form" role="form" novalidate="novalidate">
-        <div class="col-md-12">
-          <mat-panel-title>
-            <mat-form-field>
-              <input matInput formControlName="namaPemilik" placeholder="Nama Pemilik" required>
-            </mat-form-field>
-          </mat-panel-title>
-        </div>
-    </form>
-  </div> -->
 </div>
 
 

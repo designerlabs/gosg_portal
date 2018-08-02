@@ -111,6 +111,11 @@ export class ArticleComponent implements OnInit, OnDestroy {
     return localStorage.getItem('themeColor');
   }
 
+  clickTopMenu(e){
+    this.router.navigate(['/category', e.categoryCode]);
+    event.preventDefault();
+  }
+
   clickSideMenu(e, status, event) {
     this.statusID = status;
     // this.navService.getSubArticleUrl(e.categoryCode, localStorage.getItem('langID'));

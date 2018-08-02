@@ -43,6 +43,7 @@ import { ContentProdComponent } from './article/content/contentprod.component';
 import { PerhilitanComponent } from './perhilitan/perhilitan.component';
 import { ReplacementmycardComponent } from './replacementmycard/replacementmycard.component';
 import { LeftmenuProdComponent } from './article/leftmenu/leftmenuprod.component';
+import { PerhilitanrenewComponent } from './perhilitanrenew/perhilitanrenew.component';
 
 export function HttpLoaderFactory(http: Http) {
    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -73,7 +74,8 @@ export function HttpLoaderFactory(http: Http) {
     ContentProdComponent,
     PerhilitanComponent,
     ReplacementmycardComponent,
-    LeftmenuProdComponent
+    LeftmenuProdComponent,
+    PerhilitanrenewComponent
   ],
   imports: [
     SharedModule,

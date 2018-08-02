@@ -23,7 +23,8 @@ export class ValidateService {
 			'numberOnly': '^[0-9]{'+min+','+max+'}$',
 			'alphaOnly':'^[a-zA-Z]{'+min+','+max+'}$',
 			'alphaNumeric':'^[a-zA-Z0-9]{'+min+','+max+'}$',
-			'email': '^[a-z0-9]+@([a-z0-9]{5,})+\.[a-z]{2,}$'
+			'email': '[a-zA-Z0-9._]+[@]+[a-zA-Z0-9]+[.]+[a-zA-Z]{2,6}'
+			// 'email': '^[a-z0-9]+@([a-z0-9]{5,})+\.[a-z]{2,}$'
 			};
 	} 
 	
@@ -33,7 +34,8 @@ export class ValidateService {
 			'telephonef': ['+', /[0-9]/, /\d/, '-', /\d/, '-',/\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/],
 			'icno': [ /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],
 			'postcode':[/\d/, /\d/, /\d/, /\d/, /\d/],
-			'dateFormat':[/\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
+			'dateFormat':[/\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],
+			'icno2': [ /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/]
 		}
 	}
 	

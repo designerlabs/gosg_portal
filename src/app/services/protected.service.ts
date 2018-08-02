@@ -212,7 +212,16 @@ export class ProtectedService {
   getProtected(modules, lang){
     
     return this.http
-    .get(this.urlPerhilitan + modules + '?language='+lang).map((response: Response) => response.json())
+    .get(this.urlPerhilitan + modules + '?language='+lang)
+    .map((response: Response) => response.json())
+    .retry(5)
+    .catch(this.handleError);
+  }
+
+  create(data, moduleName, lang) {
+    let createUrl = this.urlPerhilitan   + moduleName + '?language='+lang;
+    return this.http.post(createUrl, data)
+    .map((response: Response) => response.json())
     .catch(this.handleError);
   }
 }
