@@ -264,16 +264,69 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     this.getNationality(this.langID);
     this.getJIC(this.langID);
     this.getOccupation(this.langID);
-    this.getGroupOcc(this.langID);
+    //this.getGroupOcc(this.langID);
     this.getJenisMilikan(this.langID);
     this.getListRegComp(this.langID);
     this.getListBusiness(this.langID);
     this.getUserData();
 
+    this.disabled();
+
     // this.secondFormGroup.get('warganegara').setValue(1);
     // this.secondFormGroup.get('typeIC').setValue(1);
     // this.fourthFormGroup.get('companyType').setValue(3);
     // this.fifthFormGroup.get('agreement').setValue(false);
+  }
+
+  disabled(){
+    this.firstFormGroup.get('namaPemohon').disable();
+    this.firstFormGroup.get('icPemohon').disable();
+    this.firstFormGroup.get('phonePemohon').disable();
+    this.firstFormGroup.get('emailPemohon').disable();
+    this.firstFormGroup.get('add1').disable();
+    this.firstFormGroup.get('poskodPemohon').disable();
+    this.firstFormGroup.get('daerahPemohon').disable();
+    this.firstFormGroup.get('negeriPemohon').disable();
+
+    this.secondFormGroup.get('warganegara').disable();
+    this.secondFormGroup.get('typeIC').disable();
+    this.secondFormGroup.get('icpassport').disable();
+    this.secondFormGroup.get('namaPemilik').disable();
+    this.secondFormGroup.get('phonePemilik').disable();
+    this.secondFormGroup.get('jobType').disable();
+    this.secondFormGroup.get('jobGroup').disable();
+    this.secondFormGroup.get('addPemilik').disable();
+    this.secondFormGroup.get('poskodPemilik').disable();
+    this.secondFormGroup.get('daerahPemilik').disable();
+    this.secondFormGroup.get('negeriPemilik').disable();
+
+    this.thirdFormGroup.get('mailingAdd').disable();
+    this.thirdFormGroup.get('mailingPoskod').disable();
+    this.thirdFormGroup.get('mailingDaerah').disable();
+    this.thirdFormGroup.get('mailingNegeri').disable();
+    this.thirdFormGroup.get('copyAdd').disable();
+
+    this.fourthFormGroup.get('companyType').disable();
+    this.fourthFormGroup.get('jenisMilikan').disable();
+    this.fourthFormGroup.get('registerType').disable();
+    this.fourthFormGroup.get('registerNo').disable();
+    this.fourthFormGroup.get('companyName').disable();
+    this.fourthFormGroup.get('companyAdd').disable();
+    this.fourthFormGroup.get('companyPoskod').disable();
+    this.fourthFormGroup.get('companyDaerah').disable();
+    this.fourthFormGroup.get('companyNegeri').disable();
+    this.fourthFormGroup.get('companyPhone').disable();
+    this.fourthFormGroup.get('companyFax').disable();
+    this.fourthFormGroup.get('copyAddPemilik').disable();
+
+    this.fifthFormGroup.get('lsnActivity').disable();
+    this.fifthFormGroup.get('businessCat').disable();
+    this.fifthFormGroup.get('file1').disable();
+    this.fifthFormGroup.get('file2').disable();
+    this.fifthFormGroup.get('agreement').disable();
+    this.fifthFormGroup.get('dispBase641').disable();
+    this.fifthFormGroup.get('dispBase642').disable();
+
   }
 
   getUserData(){
@@ -452,9 +505,9 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     });
   }
 
-  getGroupOcc(lang){
+  getGroupOcc(val, lang){
 
-    this.protectedService.getProtected('perhilitan/dropdown/job/workgroup/1',lang).subscribe(
+    this.protectedService.getProtected('perhilitan/dropdown/job/workgroup/'+val,lang).subscribe(
     data => {
 
       this.sharedService.errorHandling(data, (function(){
@@ -589,6 +642,10 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
 
   checkReqValues2() {
     let reqVal: any;
+
+    console.log(this.selectedOccupation);
+    console.log(this.secondFormGroup.get('jobType').value);
+
 
     if(this.selectedOccupation == 1 || this.secondFormGroup.get('jobType').value == 1){
       reqVal = ["icpassport", 
@@ -731,6 +788,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
   checkOccupation(formValue: any){
     this.selectedOccupation = formValue.jobType;
 
+    this.getGroupOcc(formValue.jobType, this.langID)
     if(formValue.jobType != 1){
       this.secondFormGroup.get('jobGroup').setValue(null);
       this.secondFormGroup.get('jobGroup').disable();
