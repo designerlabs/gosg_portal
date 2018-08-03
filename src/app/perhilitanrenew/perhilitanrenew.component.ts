@@ -121,9 +121,10 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
   public selectedPoskodT: any;
   public selectedPoskodSurat: any;
   public selectedPoskodComp: any;
-  public selectedOccupation: any;
   public cityT: any;
   public citySurat: any;
+  public cityCompany: any;
+  public cityCompany2: any;
   public poskodIdT: any;
   public poskodIdMailing: any;
   public stateCompany: any;
@@ -313,7 +314,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     this.fourthFormGroup.get('companyName').disable();
     this.fourthFormGroup.get('companyAdd').disable();
     this.fourthFormGroup.get('companyPoskod').disable();
-    this.fourthFormGroup.get('companyDaerah').disable();
+    // this.fourthFormGroup.get('companyDaerah').disable();
     this.fourthFormGroup.get('companyNegeri').disable();
     this.fourthFormGroup.get('companyPhone').disable();
     this.fourthFormGroup.get('companyFax').disable();
@@ -354,14 +355,6 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
             this.dbdaerah = data.user.address.permanentAddressCity.cityId;
             this.dbnegeri = data.user.address.permanentAddressState.stateId;
 
-            // this.protectedService.getProfile(data.user.pid).subscribe(
-            // data => {
-            //   this.sharedService.errorHandling(data, (function(){
-                                
-            //   }).bind(this));
-            // },
-            // error => {
-            // });
           }else{
           }
         }).bind(this));
@@ -373,8 +366,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
       });
     }
 
-    else{ //need to be deleted Noraini for local only
-      
+    else{ //need to be deleted Noraini for local only      
 
       let data = {
         "user": {
@@ -559,95 +551,10 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     });
   }
 
-  getDetailIC(lang, formValue: any){
-
-    if(formValue.icpassport.length > 5){
-
-      this.flag2 = true; 
-      this.flag3 = true; 
-
-      this.protectedService.getProtected('perhilitan/searchnokp/'+formValue.icpassport,lang).subscribe(
-      data => {
-
-        this.sharedService.errorHandling(data, (function(){
-          console.log(data);    
-          if(data.noKpResourceList[0].nama != ""){
-            this.secondFormGroup.get('namaPemilik').setValue(data.noKpResourceList[0].nama);
-            this.secondFormGroup.get('phonePemilik').setValue(data.noKpResourceList[0].notel);
-            this.secondFormGroup.get('jobType').setValue(parseInt(data.noKpResourceList[0].pekerjaan));
-            this.secondFormGroup.get('jobGroup').setValue(parseInt(data.noKpResourceList[0].kumpulanpekerjaan));
-            this.secondFormGroup.get('addPemilik').setValue(data.noKpResourceList[0].alamat);
-            this.secondFormGroup.get('poskodPemilik').setValue(data.noKpResourceList[0].poskod);
-            
-            this.thirdFormGroup.get('mailingAdd').setValue(data.noKpResourceList[0].alamatsurat);
-            this.thirdFormGroup.get('mailingPoskod').setValue(data.noKpResourceList[0].poskodsurat);        
-            
-            this.selectedPoskodT = data.noKpResourceList[0].poskod;
-            this.selectedPoskodSurat = data.noKpResourceList[0].poskodsurat;
-            this.selectedOccupation = parseInt(data.noKpResourceList[0].pekerjaan);
-            this.cityT = data.noKpResourceList[0].postcodeid;
-            this.citySurat = data.noKpResourceList[0].postcodeidsurat;
-          
-            this.checkposkod(1, this.selectedPoskodT);
-            this.checkposkod(2, this.selectedPoskodSurat);
-            
-            this.secondFormGroup.get('namaPemilik').disable();
-            this.secondFormGroup.get('addPemilik').disable();
-            this.secondFormGroup.get('poskodPemilik').disable();
-            this.secondFormGroup.get('daerahPemilik').disable();
-            this.secondFormGroup.get('negeriPemilik').disable();
-
-          }
-
-          else{
-            this.resetForm23();
-          }
-
-        }).bind(this));
-      },
-      error => {
-      });
-    }
-
-    else{
-      this.resetForm23();
-    }
-
-  }
-
-  resetForm23(){
-    
-    this.secondFormGroup.get('namaPemilik').setValue('');
-    this.secondFormGroup.get('phonePemilik').setValue('');
-    this.secondFormGroup.get('jobType').setValue(1);
-    this.secondFormGroup.get('jobGroup').setValue('');
-    this.secondFormGroup.get('addPemilik').setValue('');
-    this.secondFormGroup.get('poskodPemilik').setValue('');
-    this.secondFormGroup.get('daerahPemilik').setValue('');
-    this.secondFormGroup.get('negeriPemilik').setValue('');
-
-    this.thirdFormGroup.get('mailingAdd').setValue('');
-    this.thirdFormGroup.get('mailingPoskod').setValue('');        
-    this.thirdFormGroup.get('mailingDaerah').setValue('');
-    this.thirdFormGroup.get('mailingNegeri').setValue('');
-
-    this.secondFormGroup.get('namaPemilik').enable();
-    this.secondFormGroup.get('addPemilik').enable();
-    this.secondFormGroup.get('poskodPemilik').enable();
-    this.secondFormGroup.get('daerahPemilik').enable();
-    this.secondFormGroup.get('negeriPemilik').enable();
-
-    this.checkReqValues2();
-  }
-
   checkReqValues2() {
     let reqVal: any;
 
-    console.log(this.selectedOccupation);
-    console.log(this.secondFormGroup.get('jobType').value);
-
-
-    if(this.selectedOccupation == 1 || this.secondFormGroup.get('jobType').value == 1){
+    if(this.secondFormGroup.get('jobType').value == 1){
       reqVal = ["icpassport", 
                 "namaPemilik", 
                 "phonePemilik", 
@@ -786,7 +693,6 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
   }
 
   checkOccupation(formValue: any){
-    this.selectedOccupation = formValue.jobType;
 
     this.getGroupOcc(formValue.jobType, this.langID)
     if(formValue.jobType != 1){
@@ -902,7 +808,14 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
           }
 
           else{ //when city more than one
-         
+            for (let i = 0; i < this.listdaerahCompany.length; i++) { 
+
+              if(this.cityCompany == this.listdaerahCompany[i].city.toLowerCase() && this.citySurat2 == this.listdaerahCompany[i].formValue){               
+              
+                this.fourthFormGroup.get('companyDaerah').setValue(this.listdaerahCompany[i].postcodeId);     
+                this.fourthFormGroup.get('companyNegeri').setValue(this.listdaerahCompany[i].state); 
+              }
+            }  
           }
 
           this.checkReqValues4();
@@ -1140,7 +1053,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
           this.thirdFormGroup.get('mailingAdd').setValue(dataLisence[0].alamatsurat);
           let splitPoskodMail = dataLisence[0].poskodsurat;
           splitPoskodMail = splitPoskodMail.substring(0,5);
-          this.thirdFormGroup.get('mailingPoskod').setValue(splitPoskodMail);     
+          this.thirdFormGroup.get('mailingPoskod').setValue(splitPoskodMail);               
 
           this.fourthFormGroup.get('companyType').setValue(parseInt(dataLisence[0].companytype));
           this.fourthFormGroup.get('jenisMilikan').setValue(parseInt(dataLisence[0].pemilikan));
@@ -1157,9 +1070,11 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
           this.selectedPoskodT = splitPoskod;
           this.selectedPoskodSurat = splitPoskodMail;
           this.selectedPoskodComp = splitPoskodComp;
-          // this.cityT = data.noKpResourceList[0].postcodeid;
-          // this.citySurat = data.noKpResourceList[0].postcodeidsurat;
-          console.log(this.selectedPoskodComp)
+          this.cityT = dataLisence[0].alamatposkodid;
+          this.citySurat = dataLisence[0].alamatsuratposkodid;
+          this.cityCompany = dataLisence[0].companydaerah.toLowerCase();
+          this.cityCompany2 = dataLisence[0].companynegeri;
+
           this.checkposkod(1, this.selectedPoskodT);
           this.checkposkod(2, this.selectedPoskodSurat);
           this.checkposkod(3, this.selectedPoskodComp);

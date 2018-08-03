@@ -156,8 +156,7 @@
   
                 <div class="col-md-4">
                   <mat-form-field  class="example-full-width displayInfo">
-                    <input matInput formControlName="icpassport" placeholder="No.IC/Passport" required
-                    (change)="getDetailIC(langID, secondFormGroup.value)">
+                    <input matInput formControlName="icpassport" placeholder="No.IC/Passport" required>
                   </mat-form-field>
                 </div>
               </div>
@@ -230,13 +229,6 @@
                   <mat-form-field  class="example-full-width displayInfo">
                     <input matInput formControlName="negeriPemilik" placeholder="Negeri" required>
                   </mat-form-field>
-                  <!-- <mat-form-field  class="example-full-width displayInfo">
-                    <mat-select formControlName="negeriPemilik" placeholder="Negeri" required>
-                      <mat-option *ngFor="let listState of listStateT" [value]="listState.stateId">
-                        {{listState.stateName}}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field> -->
                 </div>
               </div>
             </div>
@@ -291,13 +283,6 @@
                   <mat-form-field  class="example-full-width displayInfo">
                     <input matInput formControlName="mailingNegeri" placeholder="Negeri" required>
                   </mat-form-field>
-                  <!-- <mat-form-field  class="example-full-width">
-                    <mat-select formControlName="mailingNegeri" placeholder="Negeri" required>
-                      <mat-option *ngFor="let listState of listStateSurat" [value]="listState.stateId">
-                        {{listState.stateName}}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field> -->
                 </div>
               </div>
             </div>
@@ -404,14 +389,6 @@
                   <mat-form-field  class="example-full-width displayInfo">
                     <input matInput formControlName="companyNegeri" placeholder="Negeri" required>
                   </mat-form-field>
-                  <!-- <mat-form-field  class="example-full-width">                  
-                    <mat-select formControlName="companyNegeri" placeholder="Negeri" required
-                    (change)="checkReqValues4()">
-                      <mat-option *ngFor="let lDaerah of listStateComp" [value]="lDaerah.stateId">
-                        {{lDaerah.stateName}}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field> -->
                 </div>
               </div>
   
@@ -495,10 +472,7 @@
                 <div class="col-md-2">
                   <ng4-files-click (filesSelect)="uploadFile1($event)" accept="image/*">
                     <span role="button" class="btn btn-success btn-md"><i class="fa fa-search"></i> Muat Naik Fail</span>
-                  </ng4-files-click>
-                  <!-- <div *ngIf="selectedFilesEn">
-                    <img *ngIf="showImgEn" [src]="appConfig.externalMediaURL +'/'+ mediaPath +'/'+ selectedFilesEn" style="width:200px">
-                  </div> -->                
+                  </ng4-files-click>                
                 </div>
   
                 <div class="col-md-4">
@@ -515,9 +489,6 @@
                   <ng4-files-click (filesSelect)="uploadFile2($event)">
                     <span role="button" class="btn btn-success btn-md"><i class="fa fa-search"></i> Muat Naik Fail</span>
                   </ng4-files-click>
-                  <!-- <div *ngIf="selectedFilesMy">
-                      <img *ngIf="showImgMy" [src]="appConfig.externalMediaURL+'/'+mediaPath+'/'+selectedFilesMy" style="width:200px">
-                  </div> -->
                 </div>
               </div>
   
