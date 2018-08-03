@@ -21,6 +21,7 @@
                         <div class="col-md-3 col-sm-12 col-xs-12 lifeEventBox">
                           <div class="innerBox">
                             <div class="lifeEventBox-title">
+                              <div><img [src]="config.externalMediaURL + '/images/'+ getContent.image.mediaFile" style="width:100px;"></div>
                               <h2 class="font-size-m"  style="border-top:3px solid;" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
                                 <a  class="lifeEventCategory" [style.color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" href="" [routerLink]="['/category', getContent.categoryCode]">{{getContent.categoryName}}</a>
                               </h2>
