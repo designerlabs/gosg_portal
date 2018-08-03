@@ -21,13 +21,16 @@
                         <div class="col-md-3 col-sm-12 col-xs-12 lifeEventBox">
                           <div class="innerBox">
                             <div class="lifeEventBox-title">
-                              <div><img [src]="config.externalMediaURL + '/images/'+ getContent.image.mediaFile" style="width:100px;"></div>
-                              <h2 class="font-size-m"  style="border-top:3px solid;" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
+                              <div style="padding-top: 10px;"><img [src]="config.externalMediaURL + '/images/'+ getContent.image.mediaFile" style="height:50px;"></div>
+                              <h2 class="font-size-m">
                                 <a  class="lifeEventCategory" [style.color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" href="" [routerLink]="['/category', getContent.categoryCode]">{{getContent.categoryName}}</a>
                               </h2>
                             </div>
 
                             <div class="lifeEventBox-description font-size-s">
+                              <div class="lifeEventBox-description font-size-s lefteventlist"  [innerHTML]="(getContent?.categoryDescription?.length > 100)? (getContent?.categoryDescription | slice:0:100)+'...':(getContent?.categoryDescription)">
+                              </div>
+
                               <a [routerLink]="['/subcategory', subData.categoryCode]" *ngFor="let subData of getContent.subCategoryList; let i = index; let lastItem = last">
                                       {{subData.categoryName}} <i class="{{lastItem ? '' : 'fa fa-angle-right'}}" style="font-weight: bold;"></i>
                               </a>
@@ -47,7 +50,8 @@
                     <div class="col-md-3 col-sm-12 col-xs-12 lifeEventBox" *ngFor="let getContent of leData.data">
                       <div class="innerBox">
                         <div class="lifeEventBox-title">
-                          <h2 class="font-size-m"  style="border-top:3px solid;" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
+                          <div style="padding-top: 10px;"><img [src]="config.externalMediaURL + '/images/'+ getContent.image.mediaFile" style="height:50px;"></div>
+                          <h2 class="font-size-m">
                             <a  class="lifeEventCategory" [style.color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" href="" [routerLink]="['/category', getContent.categoryCode]">{{getContent.categoryName}}</a>
                           </h2>
                         </div>
