@@ -146,8 +146,10 @@ export class FooterComponent implements OnInit, OnDestroy {
           secondSet = ele.substr(lastIndex),
           splitSet = secondSet.split('/');
       this.router.navigate(['/'+firstSet, splitSet[1]]);
-      this.navService.triggerContent(splitSet[1], localStorage.getItem('langID'));
-      this.navService.getContentUrl(splitSet[1], localStorage.getItem('langID'));
+      if(firstSet === 'content'){
+        this.navService.triggerContent(splitSet[1], localStorage.getItem('langID'));
+        this.navService.getContentUrl(splitSet[1], localStorage.getItem('langID'));
+      }
       window.scrollTo(0, 0);
 
     }else{
