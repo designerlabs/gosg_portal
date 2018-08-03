@@ -80,14 +80,6 @@ import { ContentComponent } from '../../article/content/content.component';
       </mat-expansion-panel>
     </div>
 
-    <mat-expansion-panel hideToggle="true" *ngIf="templateName === 'publication'" multi="true" displayMode="flat">
-      <mat-expansion-panel-header>
-          <mat-panel-title class="pointer" (click)="clickSideMenuByAgency(content, i, $event)">
-              <a class="warna_font sideBarMenu--link font-size-s" [style.font-weight]="agencyActive ? 'bold' : 'normal'" [style.color]="agencyActive ? getTheme() ? getTheme() : 'rgb(0, 189, 187)' : '#333'"
-                  [routerLinkActive]="['active']">{{'common.byagency' | translate}}</a>
-          </mat-panel-title>
-      </mat-expansion-panel-header>
-    </mat-expansion-panel>
 `,
 styleUrls:['./leftmenu.component.css']
 })
