@@ -7,6 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { Http, Response } from '@angular/http';
 import { TopnavService } from '../header/topnav/topnav.service';
+import { NavService } from '../header/nav/nav.service';
 
 @Component({
   selector: 'app-footer',
@@ -43,7 +44,7 @@ export class FooterComponent implements OnInit, OnDestroy {
   constructor(private translate: TranslateService,
     private router: Router, private http: Http,
     @Inject(APP_CONFIG) private config: AppConfig,
-    private topnavservice: TopnavService,) {
+    private topnavservice: TopnavService,private navService: NavService) {
     this.lang = translate.currentLang;
 
     this.subscriptionLang  = translate.onLangChange.subscribe((event: LangChangeEvent) => {
@@ -136,6 +137,7 @@ export class FooterComponent implements OnInit, OnDestroy {
   }
 
   getUrl(ele){
+
     let split_url = ele.split('/');
 
     if(ele.includes('/')){
@@ -144,6 +146,8 @@ export class FooterComponent implements OnInit, OnDestroy {
           secondSet = ele.substr(lastIndex),
           splitSet = secondSet.split('/');
       this.router.navigate(['/'+firstSet, splitSet[1]]);
+      this.navService.triggerContent(splitSet[1], localStorage.getItem('langID'));
+      this.navService.getContentUrl(splitSet[1], localStorage.getItem('langID'));
       window.scrollTo(0, 0);
 
     }else{
