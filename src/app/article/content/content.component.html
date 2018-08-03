@@ -59,6 +59,10 @@
                 <div class="defaultColor" [innerHTML]="article.content?.contentText"></div>
 
               </div>
+
+              <div class="padding-top-xl" style="text-align: right;" *ngIf="article.template === 'eparticipation'">
+                  <a [href]="article.content?.contentUrl" target="_blank" class="btn btn-md btn-success">{{'home.readmore'|translate}}</a>
+              </div>
             </div>
           </div>
           <div class="row">

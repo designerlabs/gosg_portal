@@ -184,6 +184,29 @@ export class NavService {
     }
   }
 
+  getArticleDataOther(moduleName, lang: string, ID: number, url): Observable<boolean[]> {
+
+    if (!isNaN(ID)) {
+
+      return this.http.get(this.config.urlPortal + moduleName + '/' +ID + '?language=' + lang+'&type='+url)
+        .take(1)
+        .map((response: Response) => response.json().contentCategoryResource.results)
+
+        // .catch((error:any) =>
+        // Observable.throw(error.json().error || 'Server error')
+        // );
+        .catch(
+        (err: Response, caught: Observable<any[]>) => {
+          if (err !== undefined) {
+            this.router.navigate(['/404']);
+            return Observable.throw('The Web server (running the Web site) is currently unable to handle the HTTP request due to a temporary overloading or maintenance of the server.');
+          }
+          return Observable.throw(caught); // <-----
+        }
+        );
+    }
+  }
+
   getSubArticleUrl(subID: number, lang) {
     if (!isNaN(subID)) {
       return this.http.get(this.config.urlPortal  + 'subcategory/'+subID + '?language=' + lang)
@@ -440,6 +463,24 @@ export class NavService {
          });
      }
    }
+
+
+   triggerArticleOthers(moduleName, lang, topicID, url) {
+    if (!isNaN(topicID)) {
+      this.articles = [''];
+      this.articleService.articles = [''];
+      return this.route.paramMap
+        .switchMap((params: ParamMap) =>
+          this.getArticleDataOther(moduleName, this.langId.toString(), topicID, url))
+        .subscribe(resSliderData => {
+          this.articleService.articles = resSliderData;
+          this.articles = resSliderData;
+          this.breadcrumb = this.breadcrumbService.getBreadcrumb();
+          this.isValid = this.breadcrumbService.isValid = true;
+          this.breadcrumb = this.breadcrumb.name = '';
+        });
+    }
+  }
 
    triggerGalleries(lang, galleryID?) {
     //  if (!isNaN(galleryID)) {

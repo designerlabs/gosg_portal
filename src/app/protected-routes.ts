@@ -42,9 +42,9 @@ import { ContentProdComponent } from './article/content/contentprod.component';
 import { EparticipationComponent } from './eparticipation/eparticipation.component';
 import { StatisticComponent } from './statistic/statistic.component';
 import { SitemapComponent } from './sitemap/sitemap.component';
-import { ArchivecategoryComponent } from './archive/archivecategory/archivecategory.component';
-import { ArchivesubcategoryComponent } from './archive/archivesubcategory/archivesubcategory.component';
-import { ArchivecontentComponent } from './archive/archivecontent/archivecontent.component';
+import { ArchivecategoryProdComponent } from './archive/archivecategory/archivecategoryprod.component';
+import { ArchivesubcategoryProdComponent } from './archive/archivesubcategory/archivesubcategoryprod.component';
+import { ArchivecontentProdComponent } from './archive/archivecontent/archivecontentprod.component';
 import { PolicereportComponent } from './pdrm/policereport/policereport.component';
 import { SummontrafficComponent } from './pdrm/summontraffic/summontraffic.component';
 import { StatuspositionComponent } from './pdrm/statusposition/statusposition.component';
@@ -80,9 +80,9 @@ export const protectedRoutes: Routes = [
     {path: 'rss/id/:id', component: RssComponent},
     {path: 'subcategory/:id1', component: SubarticleprodComponent },
     {path: 'content/:id1', component: ContentProdComponent},
-    {path: 'archive/category/:id', component:ArchivecategoryComponent},
-    {path: 'archive/subcategory/:id', component:ArchivesubcategoryComponent},
-    {path: 'archive/content/:id', component:ArchivecontentComponent},
+    {path: 'archive/category/:id', component:ArchivecategoryProdComponent},
+    {path: 'archive/subcategory/:id', component:ArchivesubcategoryProdComponent},
+    {path: 'archive/content/:id', component:ArchivecontentProdComponent},
     {path: 'announcement', component: AnnouncementComponent },
     {path: 'announcement/:id', component: AnnouncementlistComponent},
     {path: 'announcement/:id/:id', component: AnnouncementdetailsComponent},

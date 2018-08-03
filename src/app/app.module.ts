@@ -31,8 +31,9 @@ import { HomeComponent } from './home/home.component';
 import { DigitalservicesComponent, DigitalServiceDialog } from './digitalservices/digitalservices.component';
 import { ContentComponent } from './article/content/content.component';
 import { LeftmenuComponent } from './article/leftmenu/leftmenu.component';
-
-
+import { ArchivecategoryComponent } from './archive/archivecategory/archivecategory.component';
+import { ArchivesubcategoryComponent } from './archive/archivesubcategory/archivesubcategory.component';
+import { ArchivecontentComponent } from './archive/archivecontent/archivecontent.component';
 // import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule } from "@angular/material";
 
 export function HttpLoaderFactory(http: Http) {
@@ -81,8 +82,10 @@ imports: [
     HomeComponent,
     DigitalServiceDialog,
     ContentComponent,
-    LeftmenuComponent
-   
+    LeftmenuComponent,
+    ArchivecategoryComponent,
+    ArchivesubcategoryComponent,
+    ArchivecontentComponent
 
   ],
 
