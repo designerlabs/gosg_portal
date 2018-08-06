@@ -128,6 +128,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
   public stateCompany: any;
   public selectedFile1: any;
   public selectedFile2: any;
+  public getUrl: any;
 
   public maskPostcode: any;
   public maskIC: any;
@@ -197,21 +198,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
     this.maskPostcode = this.validateService.getMask().postcode;
     this.maskIC = this.validateService.getMask().icno2;
     this.maskPhone = this.validateService.getMask().telephone;
-   
-
-    // this.firstFormGroup = this._formBuilder.group({
-    //   namaPemohon: [''],
-    //   icPemohon: [''],
-    //   phonePemohon: [''],
-    //   emailPemohon: [''],
-    //   add1: [''],
-    //   add2: [''],
-    //   add3: [''],
-    //   poskodPemohon: [''],
-    //   daerahPemohon: [''],
-    //   negeriPemohon: ['']
-    // });
-
+  
     this.firstFormGroup = this._formBuilder.group({
       namaPemohon: new FormControl(),
       icPemohon: new FormControl(),
@@ -280,11 +267,19 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
     this.getListBusiness(this.langID);
     this.getUserData();
 
-    this.secondFormGroup.get('warganegara').setValue(1);
-    this.secondFormGroup.get('typeIC').setValue(1);
-    this.fourthFormGroup.get('companyType').setValue(3);
-    this.fifthFormGroup.get('agreement').setValue(false);
-    this.getJIC(1, this.langID);
+    this.getUrl = this.router.url.split('/')[2];
+
+    if(this.getUrl == undefined){
+      this.secondFormGroup.get('warganegara').setValue(1);
+      this.secondFormGroup.get('typeIC').setValue(1);
+      this.fourthFormGroup.get('companyType').setValue(3);
+      this.fifthFormGroup.get('agreement').setValue(false);
+      this.getJIC(1, this.langID);
+    }
+
+    else{
+      this.getDetailPerhilitan();
+    }
   }
 
   getUserData(){
@@ -423,6 +418,10 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       this.dbdaerah = data.user.address.permanentAddressCity.cityId;
       this.dbnegeri = data.user.address.permanentAddressState.stateId;
     }
+  }
+
+  getDetailPerhilitan(){
+
   }
 
   getNationality(lang){
@@ -1183,17 +1182,13 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
     body.isDraft = "True";
     body.cronStatus = false;
     
-    // Add Media file upload Service
-   
     console.log(JSON.stringify(body));
     
     this.protectedService.create(body,'perhilitan/draft/save',this.langID).subscribe(
     data => {
       this.sharedService.errorHandling(data, (function () {
         this.toastr.success(this.translate.instant('Permohonan Baru Lesen Peniaga/Taksidermi berjaya disimpan sebagai draft'), '');
-        console.log("SUBMITTED");
-        console.log(data);
-        //this.router.navigate(['media/upload']);
+        this.router.navigate(['dashboard']);
       }).bind(this));
       //this.loading = false;
     },
@@ -1320,15 +1315,12 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
     body.isDraft = "True";
     body.cronStatus = false;
     
-    // Add Media file upload Service
-   
-    console.log(JSON.stringify(body));
-    
+    console.log(JSON.stringify(body));    
     this.protectedService.create(body,'perhilitan/draft/save',this.langID).subscribe(
     data => {
       this.sharedService.errorHandling(data, (function () {
         this.toastr.success(this.translate.instant('Permohonan Baru Lesen Peniaga/Taksidermi berjaya dihantar'), '');
-        //this.router.navigate(['media/upload']);
+        this.router.navigate(['dashboard']);
       }).bind(this));
       //this.loading = false;
     },
