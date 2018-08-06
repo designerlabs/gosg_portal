@@ -1172,8 +1172,8 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
     body.nationality.nationalityId = this.secondFormGroup.get('warganegara').value; 
     body.icType.icTypeId = this.secondFormGroup.get('typeIC').value; 
     body.icType.nationality.nationalityId = this.secondFormGroup.get('warganegara').value; 
-    body.jobType.jobTypeId = this.secondFormGroup.get('jobGroup').value;
-    body.workgroup.workGroupId = this.secondFormGroup.get('jobType').value; 
+    body.jobType.jobTypeId = this.secondFormGroup.get('jobType').value;
+    body.workgroup.workGroupId = this.secondFormGroup.get('jobGroup').value; 
     body.workgroup.jobType.jobTypeId = this.secondFormGroup.get('jobType').value; 
     body.businessType.businessTypeId = this.fourthFormGroup.get('companyType').value; 
     body.registerType.registerTypeId = this.fourthFormGroup.get('registerType').value; 
@@ -1309,8 +1309,8 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
     body.nationality.nationalityId = this.secondFormGroup.get('warganegara').value; 
     body.icType.icTypeId = this.secondFormGroup.get('typeIC').value; 
     body.icType.nationality.nationalityId = this.secondFormGroup.get('warganegara').value; 
-    body.jobType.jobTypeId = this.secondFormGroup.get('jobGroup').value;
-    body.workgroup.workGroupId = this.secondFormGroup.get('jobType').value; 
+    body.jobType.jobTypeId = this.secondFormGroup.get('jobType').value;
+    body.workgroup.workGroupId = this.secondFormGroup.get('jobGroup').value; 
     body.workgroup.jobType.jobTypeId = this.secondFormGroup.get('jobType').value; 
     body.businessType.businessTypeId = this.fourthFormGroup.get('companyType').value; 
     body.registerType.registerTypeId = this.fourthFormGroup.get('registerType').value; 

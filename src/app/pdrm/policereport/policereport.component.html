@@ -36,8 +36,8 @@
                 <div class="row padding-15">
                     <div class="col-md-3">
                         <mat-form-field>
-                            <input matInput placeholder="No. Kad Pengenalan" formControlName="ic" (keydown)="isNumber($event)"
-                            maxlength="12" required tabindex="1" style="color: black">
+                            <input matInput placeholder="No. Kad Pengenalan" formControlName="ic" required 
+                            tabindex="1" style="color: black">
                             <mat-error *ngIf="searchForm.controls.ic.hasError('required')">
                                 No. Kad Pengenalan diperlukan.
                             </mat-error>

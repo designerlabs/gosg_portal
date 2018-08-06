@@ -130,6 +130,8 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
   public stateCompany: any;
   public selectedFile1: any;
   public selectedFile2: any;
+  public viewRoc: any;
+  public viewPbt: any;
 
   public maskPostcode: any;
   public maskIC: any;
@@ -314,17 +316,17 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     this.fourthFormGroup.get('companyName').disable();
     this.fourthFormGroup.get('companyAdd').disable();
     this.fourthFormGroup.get('companyPoskod').disable();
-    // this.fourthFormGroup.get('companyDaerah').disable();
+    this.fourthFormGroup.get('companyDaerah').disable();
     this.fourthFormGroup.get('companyNegeri').disable();
     this.fourthFormGroup.get('companyPhone').disable();
     this.fourthFormGroup.get('companyFax').disable();
     this.fourthFormGroup.get('copyAddPemilik').disable();
 
     this.fifthFormGroup.get('lsnActivity').disable();
-    this.fifthFormGroup.get('businessCat').disable();
+    //this.fifthFormGroup.get('businessCat').disable();
     this.fifthFormGroup.get('file1').disable();
     this.fifthFormGroup.get('file2').disable();
-    this.fifthFormGroup.get('agreement').disable();
+    //this.fifthFormGroup.get('agreement').disable();
     this.fifthFormGroup.get('dispBase641').disable();
     this.fifthFormGroup.get('dispBase642').disable();
 
@@ -810,7 +812,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
           else{ //when city more than one
             for (let i = 0; i < this.listdaerahCompany.length; i++) { 
 
-              if(this.cityCompany == this.listdaerahCompany[i].city.toLowerCase() && this.citySurat2 == this.listdaerahCompany[i].formValue){               
+              if(this.cityCompany == this.listdaerahCompany[i].city.toLowerCase() && this.cityCompany2 == this.listdaerahCompany[i].formValue){               
               
                 this.fourthFormGroup.get('companyDaerah').setValue(this.listdaerahCompany[i].postcodeId);     
                 this.fourthFormGroup.get('companyNegeri').setValue(this.listdaerahCompany[i].state); 
@@ -1075,6 +1077,9 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
           this.cityCompany = dataLisence[0].companydaerah.toLowerCase();
           this.cityCompany2 = dataLisence[0].companynegeri;
 
+          this.viewRoc = dataLisence[0].urlroc;
+          this.viewPbt = dataLisence[0].urlpbt;
+
           this.checkposkod(1, this.selectedPoskodT);
           this.checkposkod(2, this.selectedPoskodSurat);
           this.checkposkod(3, this.selectedPoskodComp);
@@ -1101,6 +1106,16 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     },
     error => {            
     });
+  }
+
+  openRoc(){
+
+    window.open(this.viewRoc,'_blank');
+  }
+
+  openPbt(){
+
+    window.open(this.viewPbt,'_blank');
   }
 
   draft(){
@@ -1175,7 +1190,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     }
 
     body.licensePasscode = "";
-    body.licenseNo = "";
+    body.licenseNo = this.firstFormGroup.get('noLesen').value;
     body.userFullname = this.secondFormGroup.get('namaPemilik').value;
     body.userAddress = this.secondFormGroup.get('addPemilik').value;
     body.userPostcode = this.secondFormGroup.get('poskodPemilik').value; 
@@ -1185,7 +1200,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     body.userMailingPostcode = this.thirdFormGroup.get('mailingPoskod').value;
     body.userIcNo = this.secondFormGroup.get('icpassport').value;
     body.userEmail = this.firstFormGroup.get('emailPemohon').value;
-    body.userApplicationType = "Draft";
+    body.userApplicationType = "isDraft";
     body.userPhoneNo = this.secondFormGroup.get('phonePemilik').value;
     body.userFaxNo = "";
     body.userCompanyName = this.fourthFormGroup.get('companyName').value;
@@ -1208,8 +1223,8 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     body.nationality.nationalityId = this.secondFormGroup.get('warganegara').value; 
     body.icType.icTypeId = this.secondFormGroup.get('typeIC').value; 
     body.icType.nationality.nationalityId = this.secondFormGroup.get('warganegara').value; 
-    body.jobType.jobTypeId = this.secondFormGroup.get('jobGroup').value;
-    body.workgroup.workGroupId = this.secondFormGroup.get('jobType').value; 
+    body.jobType.jobTypeId = this.secondFormGroup.get('jobType').value;
+    body.workgroup.workGroupId = this.secondFormGroup.get('jobGroup').value; 
     body.workgroup.jobType.jobTypeId = this.secondFormGroup.get('jobType').value; 
     body.businessType.businessTypeId = this.fourthFormGroup.get('companyType').value; 
     body.registerType.registerTypeId = this.fourthFormGroup.get('registerType').value; 
@@ -1226,7 +1241,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     this.protectedService.create(body,'perhilitan/draft/save',this.langID).subscribe(
     data => {
       this.sharedService.errorHandling(data, (function () {
-        this.toastr.success(this.translate.instant('Permohonan Baru Lesen Peniaga/Taksidermi berjaya disimpan sebagai draft'), '');
+        this.toastr.success(this.translate.instant('Pembaharuan Lesen Peniaga/Taksidermi berjaya disimpan sebagai draft'), '');
         console.log("SUBMITTED");
         console.log(data);
         //this.router.navigate(['media/upload']);
@@ -1243,135 +1258,129 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
   submit(){
 
     let body = {
-      "licensePasscode": "",
-      "licenseNo": "",
-      "userFullname": null,
-      "userAddress": "",
-      "userPostcode": "",
-      "userPostcodeId":"",
-      "userMailingPostcodeId":"",
-      "userMailingAddress": "",
-      "userMailingPostcode": "",
+      "licenseNo": null,
       "userIcNo": null,
       "userEmail": null,
-      "userApplicationType": "Apply",
-      "userPhoneNo": "",
+      "jobType": {
+        "jobTypeId": null
+      },
+      "workgroup": {
+        "workGroupId": null
+      },
+      "userPhoneNo": null,
       "userFaxNo": "",
-      "userCompanyName": "",
-      "userCompanyAddress": "",
-      "userCompanyPostcode": "",
-      "userCompanyPhoneNo": "",
+      "businessType": {
+        "businessTypeId": null
+      },
+      "userCompanyName": null,
+      "userCompanyRegNo": null,
+      "registerType": {
+        "registerTypeId": null
+      },
+      "userCompanyAddress": null,
+      "userCompanyPostcode": null,
+      "userCompanyPhoneNo": null,
       "userCompanyFaxNo": "",
-      "userCompanyRegNo": "",
-      "userCompanyDistrict": "",
-      "attachFileRoc": "",
-      "extFileRoc": "",
-      "attachFilePbt": "",
-      "extFilePbt": "",
+      "userCompanyDistrict": null,
+      "state": {
+        "stateId": null
+      },
+      "attachFileRoc": null,
+      "extFileRoc": null,
+      "attachFilePbt": null,
+      "extFilePbt": null,
       "attachFileIc": "",
       "extFileIc": "",
+      "userApplicationType": null,
       "userApplyStatus": "",
       "userLicenseNoStatus": "",
       "userLicenseRenewStatus": "",
       "userLicenseCronRenewStatus": "",
-      "nationality": {
-        "nationalityId": null
-      },
-      "icType": {
-        "icTypeId": null,
-        "nationality": {
-          "nationalityId": null,
-        }
-      },
-      "jobType": {
-        "jobTypeId": null,
-      },
-      "workgroup": {
-        "workGroupId": null,
-        "jobType": {
-          "jobTypeId": null
-        }
-      },
-      "businessType": {
-        "businessTypeId": null
-      },
-      "registerType": {
-        "registerTypeId": null
-      },
-      "state": {
-        "stateId": null
-      },
+      "licensePasscode": "",
       "activity": {
         "activityId": null
       },
       "businessCategory": {
         "businessCategoryId": null
       },
-      "isDraft": null,
-      "cronStatus": false
+      "nationality": {
+        "nationalityId": null
+      },
+      "icType": {
+        "icTypeId": null,
+        "nationality": {
+          "nationalityId": null
+        }
+      },
+      "userFullname": "",
+      "userAddress": "",
+      "userPostcode": "",
+      "userMailingAddress": "",
+      "userMailingPostcode": "",
     }
 
-    body.licensePasscode = "";
-    body.licenseNo = "";
-    body.userFullname = this.secondFormGroup.get('namaPemilik').value;
-    body.userAddress = this.secondFormGroup.get('addPemilik').value;
-    body.userPostcode = this.secondFormGroup.get('poskodPemilik').value; 
-    body.userPostcodeId = this.poskodIdT; 
-    body.userMailingPostcodeId = this.poskodIdMailing;    
-    body.userMailingAddress = this.thirdFormGroup.get('mailingAdd').value;
-    body.userMailingPostcode = this.thirdFormGroup.get('mailingPoskod').value;
+    body.licenseNo = this.firstFormGroup.get('noLesen').value;
     body.userIcNo = this.secondFormGroup.get('icpassport').value;
     body.userEmail = this.firstFormGroup.get('emailPemohon').value;
-    body.userApplicationType = "Apply";
+    body.jobType.jobTypeId = this.secondFormGroup.get('jobType').value;
+    body.workgroup.workGroupId = this.secondFormGroup.get('jobGroup').value; 
     body.userPhoneNo = this.secondFormGroup.get('phonePemilik').value;
     body.userFaxNo = "";
+    body.businessType.businessTypeId = this.fourthFormGroup.get('companyType').value; 
     body.userCompanyName = this.fourthFormGroup.get('companyName').value;
+    body.userCompanyRegNo = this.fourthFormGroup.get('registerNo').value;
+    body.registerType.registerTypeId = this.fourthFormGroup.get('registerType').value; 
     body.userCompanyAddress = this.fourthFormGroup.get('companyAdd').value;
     body.userCompanyPostcode = this.fourthFormGroup.get('companyPoskod').value;
     body.userCompanyPhoneNo = this.fourthFormGroup.get('companyPhone').value;
     body.userCompanyFaxNo = this.fourthFormGroup.get('companyFax').value;
-    body.userCompanyRegNo = this.fourthFormGroup.get('registerNo').value;
     body.userCompanyDistrict = this.fourthFormGroup.get('companyDaerah').value; 
+    body.state.stateId = this.stateCompany;
     body.attachFileRoc = this.fifthFormGroup.get('dispBase641').value;
     body.extFileRoc = this.selectedFile1[0].files[0].name.split('.')[1];
     body.attachFilePbt = this.fifthFormGroup.get('dispBase642').value;
     body.extFilePbt = this.selectedFile2[0].files[0].name.split('.')[1];
     body.attachFileIc = "";  
     body.extFileIc = "";
+    body.userApplicationType = "Renew";   
     body.userApplyStatus = "";
     body.userLicenseNoStatus = "";
     body.userLicenseRenewStatus = "";
     body.userLicenseCronRenewStatus = "";
+    body.licensePasscode = "";
+    body.activity.activityId = this.fifthFormGroup.get('lsnActivity').value; 
+    body.businessCategory.businessCategoryId = this.fifthFormGroup.get('businessCat').value;
     body.nationality.nationalityId = this.secondFormGroup.get('warganegara').value; 
     body.icType.icTypeId = this.secondFormGroup.get('typeIC').value; 
     body.icType.nationality.nationalityId = this.secondFormGroup.get('warganegara').value; 
-    body.jobType.jobTypeId = this.secondFormGroup.get('jobGroup').value;
-    body.workgroup.workGroupId = this.secondFormGroup.get('jobType').value; 
-    body.workgroup.jobType.jobTypeId = this.secondFormGroup.get('jobType').value; 
-    body.businessType.businessTypeId = this.fourthFormGroup.get('companyType').value; 
-    body.registerType.registerTypeId = this.fourthFormGroup.get('registerType').value; 
-    body.state.stateId = this.stateCompany;
-    body.activity.activityId = this.fifthFormGroup.get('lsnActivity').value; 
-    body.businessCategory.businessCategoryId = this.fifthFormGroup.get('businessCat').value;
-    body.isDraft = "True";
-    body.cronStatus = false;
+    body.userFullname = this.secondFormGroup.get('namaPemilik').value;
+    body.userAddress = this.secondFormGroup.get('addPemilik').value;
+    body.userPostcode = this.secondFormGroup.get('poskodPemilik').value;     
+    body.userMailingAddress = this.thirdFormGroup.get('mailingAdd').value;
+    body.userMailingPostcode = this.thirdFormGroup.get('mailingPoskod').value;
+
+    // body.userPostcodeId = this.poskodIdT; 
+    // body.userMailingPostcodeId = this.poskodIdMailing;    
+    // body.workgroup.jobType.jobTypeId = this.secondFormGroup.get('jobType').value;  
+    // body.isDraft = "True";
+    // body.cronStatus = false;
     
     // Add Media file upload Service
    
     console.log(JSON.stringify(body));
     
-    this.protectedService.create(body,'perhilitan/draft/save',this.langID).subscribe(
-    data => {
-      this.sharedService.errorHandling(data, (function () {
-        this.toastr.success(this.translate.instant('Permohonan Baru Lesen Peniaga/Taksidermi berjaya dihantar'), '');
-        //this.router.navigate(['media/upload']);
-      }).bind(this));
-      //this.loading = false;
-    },
-    error => {
-      //this.loading = false;
-      this.toastr.error(JSON.parse(error._body).statusDesc, '');
-    });
+    // this.protectedService.create(body,'perhilitan/renew',this.langID).subscribe(
+    // data => {
+    //   this.sharedService.errorHandling(data, (function () {
+    //     this.toastr.success(this.translate.instant('Permohonan Baru Lesen Peniaga/Taksidermi berjaya dihantar'), '');
+    //     //this.router.navigate(['media/upload']);
+    //   }).bind(this));
+    //   //this.loading = false;
+    // },
+    // error => {
+    //   //this.loading = false;
+    //   this.toastr.error(JSON.parse(error._body).statusDesc, '');
+    // });
   }
 
 }
