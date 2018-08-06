@@ -12,6 +12,7 @@ import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 import { Http } from '@angular/http';
 import * as moment from 'moment';
 import { TopnavService } from '../header/topnav/topnav.service';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'gosg-app-management',
@@ -58,6 +59,7 @@ export class AppManagementComponent implements OnInit, OnDestroy {
     private portalService:PortalService,
     private translate:TranslateService,
     private http: Http,
+    private router: Router,
     private _renderer: Renderer,
     private topnavservice: TopnavService,
     @Inject(APP_CONFIG) private config: AppConfig) {
@@ -204,6 +206,13 @@ export class AppManagementComponent implements OnInit, OnDestroy {
         });
       }
     });
+  }
+
+  viewData(agency, id){
+    if(agency == "PAP-07-09-00"){
+      this.router.navigate(['perhilitan/'+id]);
+    }
+
   }
 
   resetSearch(){
