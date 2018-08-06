@@ -38,6 +38,7 @@ export class PolicereportComponent implements OnInit, OnDestroy {
   public letter = [];
   public listYear = [];
   public showDetails = false;
+  public maskReportNo: any;
 
   searchForm: FormGroup;  
   public ic: FormControl;  
@@ -102,6 +103,7 @@ export class PolicereportComponent implements OnInit, OnDestroy {
       this.langID = 1;
     }
 
+    this.maskReportNo = this.validateService.getMask().policeReportNo;
     this.ic = new FormControl();
     this.noreport = new FormControl();
     this.yearreport = new FormControl();
