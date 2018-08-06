@@ -52,6 +52,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   maskForeigner: any;
   maskPostcode: any;
   getPerPostCodeFlag = false;
+  public loading = true;
   private subscriptionLang: ISubscription;
   private subscription: ISubscription;
 
@@ -307,13 +308,14 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   getUserData(){
     if(!environment.staging){
     this.getPerPostCodeFlag = false;
+    this.loading = true;
     this.protectedService.getUser().subscribe(
       data => {
         this.sharedService.errorHandling(data, (function(){
           if(data.user){
             // this.fullname = data.user.fullName;
             this.userTypeId = data.user.userType.userTypeId;
-
+            this.loading = true;
             this.protectedService.getProfile(data.user.pid).subscribe(
               data => {
                 this.sharedService.errorHandling(data, (function(){
@@ -491,20 +493,22 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                     }
                   }
                 }).bind(this));
+                this.loading = false;
               },
               error => {
-
+                this.loading = false;
               }
             )
           }else{
 
           }
         }).bind(this));
-
+        this.loading = false;
 
       },
     error => {
         location.href = this.config.urlUAP +'uapsso/Logout';
+        this.loading = false;
         //location.href = this.config.urlUAP+'portal/index';
       }
     )
@@ -616,42 +620,56 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   }
 
   getRace(lang){
+    this.loading = true;
     return this.sharedService.getRace(lang)
       .subscribe(raceData => {
-        this.getRaceData = raceData
+
+        this.getRaceData = raceData;
+        this.loading = false;
       },
       Error => {
        this.toastr.error(this.translate.instant('common.err.servicedown'), '');
+       this.loading = false;
      });
   }
 
   getGenderVal(lang) {
+    this.loading = true;
     return this.sharedService.getGender(lang)
       .subscribe(resGenderData => {
-        this.genderData = resGenderData
+        this.genderData = resGenderData;
+        this.loading = false;
       },
       Error => {
        this.toastr.error(this.translate.instant('common.err.servicedown'), '');
+       this.loading = false;
      });
   }
 
   getCountry(){
+    this.loading = true;
         return this.sharedService.getCountryData()
           .subscribe(resCountryData => {
             this.countries = resCountryData;
+            this.loading = false;
           },
           Error => {
             this.toastr.error(this.translate.instant('common.err.servicedown'), '');
+            this.loading = false;
+
           });
   }
 
   getCountryByCode(cntyCode){
+      this.loading = true;
       return this.sharedService.getCountrybyCode(cntyCode)
         .subscribe(resCountryData => {
           this.countryName = resCountryData;
+          this.loading = false;
         },
         Error => {
          this.toastr.error(this.translate.instant('common.err.servicedown'), '');
+         this.loading = false;
        });
   }
 
@@ -659,6 +677,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       this.isStateChanged();
       this.selectedState = e.value;
       this.perCityLocal.reset();
+      this.loading = true;
       return this.sharedService.getCitiesbyState(e.value)
         .subscribe(resCityData => {
           if(e.source.ngControl.name == "perStateLocal") {
@@ -666,9 +685,11 @@ export class ProfileComponent implements OnInit, AfterViewInit {
           } else {
             this.getCorrsCityData = resCityData;
           }
+          this.loading = false;
         },
         Error => {
          this.toastr.error(this.translate.instant('common.err.servicedown'), '');
+         this.loading = false;
        });
   }
 
@@ -676,6 +697,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.isStateChanged();
     this.selectedState = e.value;
     // this.perCityLocal.reset();
+    this.loading = true;
     return this.sharedService.getCitiesbyState(e.value)
       .subscribe(resCityData => {
         if(e.source.ngControl.name == "perStateLocal") {
@@ -683,34 +705,41 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         } else {
           this.getCorrsCityData = resCityData;
         }
+        this.loading = false;
       },
       Error => {
        this.toastr.error(this.translate.instant('common.err.servicedown'), '');
+       this.loading = false;
      });
 }
 
   getPostcodeByCity(e){
     this.isStateChanged();
     this.perPostcode.reset();
+    this.loading = true;
     return this.sharedService.getPostCodeData(e.value)
       .subscribe(resPostCodeData => {
         this.getPerPostData = resPostCodeData;
+        this.loading = false;
       },
       Error => {
        this.toastr.error(this.translate.instant('common.err.servicedown'), '');
+       this.loading = false;
      });
 }
 
 
 getPostcodeByCityCorrs(e){
   this.isStateChanged();
-
+  this.loading = true;
   return this.sharedService.getPostCodeData(e.value)
     .subscribe(resPostCodeData => {
       this.getCorrsPostData = resPostCodeData;
+      this.loading = false;
     },
     Error => {
      this.toastr.error(this.translate.instant('common.err.servicedown'), '');
+     this.loading = false;
    });
 }
 
@@ -719,13 +748,16 @@ getPostcodeByCityC(e){
       // let getCode = this.getCorrsCityData.filter(function(ele){
       //   return ele.cityId == e.value;
       // });
+      this.loading = true;
       return this.sharedService.getPostCodeData(e)
       .subscribe(resCityData => {
         this.getCorrsPostData = resCityData;
         // this.profileForm.get('corrsPostcode').setValue(this.postCodeObj2.value);
+        this.loading = false;
       },
       Error => {
        this.toastr.error(this.translate.instant('common.err.servicedown'), '');
+       this.loading = false;
      });
     }
   }
@@ -735,13 +767,16 @@ getPostcodeByCityC(e){
       // let getCode = this.getCorrsCityData.filter(function(ele){
       //   return ele.cityId == e.value;
       // });
+      this.loading = true;
       return this.sharedService.getPostCodeData(e)
       .subscribe(resCityData => {
         this.getPerPostData = resCityData;
         // this.profileForm.get('corrsPostcode').setValue(this.postCodeObj2.value);
+        this.loading = false;
       },
       Error => {
        this.toastr.error(this.translate.instant('common.err.servicedown'), '');
+       this.loading = false;
      });
     }
   }
@@ -750,53 +785,65 @@ getPostcodeByCityC(e){
 
   getCitiesByStateP(e){
     if(e){
+      this.loading = true;
       return this.sharedService.getCitiesbyState(e)
       .subscribe(resCityData => {
         this.getPerCityData = resCityData;
+        this.loading = false;
         // if (this.getPerPostCodeFlag){
         //   this.getPostCodeByCityId(this.getPerCityId);
         // }
       },
       Error => {
      this.toastr.error(this.translate.instant('common.err.servicedown'), '');
+     this.loading = false;
      });
     }
   }
 
   getCitiesByStateC(e){
     if(e){
+      this.loading = true;
       return this.sharedService.getCitiesbyState(e)
       .subscribe(resCityData => {
         this.getCorrsCityData = resCityData;
         // this.getPostcodeByCityC(this.postCodeObj2);
+        this.loading = false;
       },
       Error => {
        this.toastr.error(this.translate.instant('common.err.servicedown'), '');
+       this.loading = false;
      });
     }
   }
 
 
   getState(id?){
+    this.loading = true;
     return this.sharedService.getStateData()
      .subscribe(resStateData => {
         this.getStateData = resStateData;
         if(id){
           this.profileForm.get('perStateLocal').setValue(id);
         }
+        this.loading = false;
       },
       Error => {
        this.toastr.error(this.translate.instant('common.err.servicedown'), '');
+       this.loading = false;
      });
   }
 
   getReligion(lang){
+    this.loading = true;
     return this.sharedService.getReligion(lang)
     .subscribe(religionData => {
-      this.getReligionData = religionData
+      this.getReligionData = religionData;
+      this.loading = false;
     },
     Error => {
      this.toastr.error(this.translate.instant('common.err.servicedown'), '');
+     this.loading = false;
    });
   }
 
@@ -1232,7 +1279,7 @@ let bodyUpdate =
 
 
 
-
+    this.loading = true;
 
     this.protectedService.updateProfile(bodyUpdate)
     .subscribe(
@@ -1242,15 +1289,18 @@ let bodyUpdate =
         this.profileForm.invalid;
         this.toastr.success(this.translate.instant('profile.msg.updateSuccess'), '');
         this.profileForm.disable();
+        this.loading = false;
       },
 
       error => {
         this.toastr.error(this.translate.instant('profile.err.updateFail'), '');
+        this.loading = false;
       });
   }
 
 
   updateProfileEmail(formValues:any){
+    this.loading = true;
     this.protectedService.updateEmail(this.idno, formValues.emailaddressUpdate).subscribe(
       data => {
 
@@ -1267,12 +1317,14 @@ let bodyUpdate =
             this.infoModal.show();
         }
         }).bind(this));
+        this.loading = false;
 
 
       },
 
       error => {
         this.toastr.error(this.translate.instant('profile.err.updateFail'), '');
+        this.loading = false;
       });
   };
 
@@ -1280,6 +1332,7 @@ let bodyUpdate =
 
 
   updateProfilePhone(formValues:any){
+    this.loading = true;
     this.protectedService.updatePhone(this.idno, formValues.codeTelefonf + formValues.telefonf).subscribe(
       data => {
 
@@ -1296,11 +1349,13 @@ let bodyUpdate =
               this.infoModal.show();
           }
         }).bind(this));
+        this.loading = false;
 
       },
 
       error => {
         this.toastr.error(this.translate.instant('profile.err.updateFail'), '');
+        this.loading = false;
       });
   };
 
