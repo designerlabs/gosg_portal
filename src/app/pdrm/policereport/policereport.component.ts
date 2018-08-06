@@ -11,6 +11,11 @@ import {
     MatInputModule, MatPaginatorModule, MatProgressSpinnerModule,
     MatSortModule, MatTableModule, MatPaginator, MatSort
   } from '@angular/material';
+import { environment } from '../../../environments/environment';
+import { ValidateService } from '../../common/validate.service';
+import { SharedService } from '../../common/shared.service';
+import { ProtectedService } from '../../services/protected.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'gosg-policereport',
@@ -49,7 +54,12 @@ export class PolicereportComponent implements OnInit, OnDestroy {
     private router: Router,
     private http: Http,
     @Inject(APP_CONFIG) private config: AppConfig,
-    private topnavservice: TopnavService,) {
+    private topnavservice: TopnavService,
+    private sharedService: SharedService,
+    private validateService:ValidateService,
+    private toastr: ToastrService,
+    private protectedService: ProtectedService
+  ) {
 
     this.lang = translate.currentLang;
     this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
@@ -104,6 +114,7 @@ export class PolicereportComponent implements OnInit, OnDestroy {
     });
 
     this.getYear();
+    this.getUserData();
   }
 
   getYear(){
@@ -119,6 +130,28 @@ export class PolicereportComponent implements OnInit, OnDestroy {
   }
 
   searchApp(formValues: any){
+
+    let reportNo = formValues.noreport;
+    let y = formValues.yearreport;
+    let rn = reportNo + "/" + y;
+
+    this.protectedService.getPdrm('pdrm/checkPoliceReport',rn).subscribe(
+    data => {
+      this.sharedService.errorHandling(data, (function(){
+
+        console.log(data);
+        if(data.user){
+          
+          this.searchForm.get('ic').setValue(data.user.identificationNo);
+
+        }else{
+        }
+      }).bind(this));
+
+    },
+    error => {
+      this.toastr.error(JSON.parse(error._body).statusDesc, '');
+    });
 
     this.showDetails = true;
 
@@ -193,18 +226,50 @@ export class PolicereportComponent implements OnInit, OnDestroy {
     this.resetSearch();
   }
 
-  // getFaq(lang) {
+  getUserData(){
+    
+    this.searchForm.get('ic').disable();
 
-  //   return this.http.get(this.urlFaq + '?language=' + lang + '&page=1&size=99')
+    if(!environment.staging){
+      //this.getPerPostCodeFlag = false;
+      this.protectedService.getUser().subscribe(
+      data => {
+        this.sharedService.errorHandling(data, (function(){
 
-  //   .map((response: Response) => response.json())
-  //   .subscribe(resSliderData => {
-  //     this.faqData = resSliderData
-  //     this.faqList = this.faqData['faqList'];
-      
+          console.log(data);
+          if(data.user){
+            
+            this.searchForm.get('ic').setValue(data.user.identificationNo);
 
-  //   });
+          }else{
+          }
+        }).bind(this));
 
-  // }
+      },
+      error => {
+          location.href = this.config.urlUAP +'uapsso/Logout';
+          //location.href = this.config.urlUAP+'portal/index';
+      });
+    }
+
+    else{ //need to be deleted Noraini for local only      
+
+      let data = {
+        "user": {
+          "userId": 116,
+          "pid": "690521106312",
+          "identificationNo": "690521106312",
+          "passportNo": "",
+          "fullName": "ZAKARIA BIN MOHD NOR",
+          "email": "zakariatestgosg@yopmail.com"
+         
+        }
+      }
+
+    
+      this.searchForm.get('ic').setValue(data.user.identificationNo);
+
+    }
+  }
 
 }

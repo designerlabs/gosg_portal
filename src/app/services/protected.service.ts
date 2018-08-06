@@ -64,6 +64,7 @@ export class ProtectedService {
   private urlAgencyList: string = this.config.urlAgencyList;
   private dataAppUrl: string = this.config.dataAppUrl;
   private urlPerhilitan: string = this.config.urlPerhilitan;
+  private urlPdrm: string = this.config.urlPerhilitan;
 
 
   createProfile(user) {
@@ -213,6 +214,14 @@ export class ProtectedService {
     
     return this.http
     .get(this.urlPerhilitan + modules + '?language='+lang)
+    .map((response: Response) => response.json())
+    .retry(5)
+    .catch(this.handleError);
+  }
+
+  getPdrm(modules, val){
+    return this.http
+    .get(this.urlPdrm + modules + '?reportNo='+val)
     .map((response: Response) => response.json())
     .retry(5)
     .catch(this.handleError);
