@@ -116,7 +116,6 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
   public dbdaerah: any;
   public dbnegeri: any;
 
-  public selectedWarganegara: any;
   public selectedTypeIC = 1;
   public selectedPoskodT: any;
   public selectedPoskodSurat: any;
@@ -274,7 +273,6 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
     });
 
     this.getNationality(this.langID);
-    this.getJIC(this.langID);
     this.getOccupation(this.langID);
     this.getGroupOcc(this.langID);
     this.getJenisMilikan(this.langID);
@@ -283,10 +281,10 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
     this.getUserData();
 
     this.secondFormGroup.get('warganegara').setValue(1);
-    this.selectedWarganegara = 1;
     this.secondFormGroup.get('typeIC').setValue(1);
     this.fourthFormGroup.get('companyType').setValue(3);
     this.fifthFormGroup.get('agreement').setValue(false);
+    this.getJIC(1, this.langID);
   }
 
   getUserData(){
@@ -440,8 +438,8 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
     });
   }
 
-  getJIC(lang){
-    this.protectedService.getProtected('perhilitan/dropdown/ictype/1',lang).subscribe(
+  getJIC(val, lang){
+    this.protectedService.getProtected('perhilitan/dropdown/ictype/'+val,lang).subscribe(
     data => {
 
       this.sharedService.errorHandling(data, (function(){
@@ -719,15 +717,17 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
 
   checkWarganegara(formValue: any){
 
-    this.selectedWarganegara = formValue.warganegara;
+    this.getJIC(formValue.warganegara,this.langID)
 
     if(formValue.warganegara == 1){
       this.secondFormGroup.get('typeIC').setValue(1);
     }
 
     else{
-      this.secondFormGroup.get('typeIC').setValue(0);
+      this.secondFormGroup.get('typeIC').setValue(2);
     }
+
+    
   }
 
   checkTypeIc(formValue: any){
@@ -740,7 +740,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
 
     else{
       this.selectedTypeIC = 0;
-    }
+    }   
   }
 
   checkOccupation(formValue: any){

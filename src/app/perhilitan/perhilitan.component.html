@@ -124,7 +124,7 @@
                 </mat-form-field>
               </div>
 
-              <div class="col-md-4" *ngIf="selectedWarganegara == 1">
+              <div class="col-md-4">
                 <mat-form-field class="example-full-width">
                   <mat-select formControlName="typeIC" placeholder="Jenis IC" required
                   (change)="checkTypeIc(secondFormGroup.value)">
@@ -134,14 +134,6 @@
                   </mat-select>
                 </mat-form-field>
               </div>
-
-              <div class="col-md-4" *ngIf="selectedWarganegara == 0"> 
-                <mat-form-field class="example-full-width">
-                  <mat-select formControlName="typeIC" placeholder="Jenis IC" required readonly>
-                    <mat-option [value]="0">Passport</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>             
 
               <div class="col-md-4" *ngIf="selectedTypeIC == 1">
                 <mat-form-field  class="example-full-width displayInfo">
