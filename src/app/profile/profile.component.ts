@@ -52,7 +52,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   maskForeigner: any;
   maskPostcode: any;
   getPerPostCodeFlag = false;
-  public loading = true;
+  public loading = false;
   private subscriptionLang: ISubscription;
   private subscription: ISubscription;
 

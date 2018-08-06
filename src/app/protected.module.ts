@@ -47,6 +47,7 @@ import { ArchivecategoryProdComponent } from './archive/archivecategory/archivec
 import { ArchivesubcategoryProdComponent } from './archive/archivesubcategory/archivesubcategoryprod.component';
 import { ArchivecontentProdComponent } from './archive/archivecontent/archivecontentprod.component';
 import { PerhilitanrenewComponent } from './perhilitanrenew/perhilitanrenew.component';
+import { LoadingModule } from 'ngx-loading';
 
 export function HttpLoaderFactory(http: Http) {
    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -84,6 +85,7 @@ export function HttpLoaderFactory(http: Http) {
     PerhilitanrenewComponent
   ],
   imports: [
+    LoadingModule,
     SharedModule,
     BrowserModule,
     TextMaskModule,
