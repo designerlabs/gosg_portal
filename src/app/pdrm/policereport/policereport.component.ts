@@ -37,7 +37,7 @@ export class PolicereportComponent implements OnInit, OnDestroy {
   public pegawaiSiasat: any;
   public letter = [];
   public listYear = [];
-  public showDetails = false;
+  public showDetails: any;
   public maskReportNo: any;
 
   searchForm: FormGroup;  
@@ -141,13 +141,27 @@ export class PolicereportComponent implements OnInit, OnDestroy {
     data => {
       this.sharedService.errorHandling(data, (function(){
 
-        console.log(data);
-        if(data.user){
-          
-          this.searchForm.get('ic').setValue(data.user.identificationNo);
+        let dataReport = data.reportDetails;
 
-        }else{
+        if(dataReport.ipNo != null){
+          this.showDetails = true;
+
+          this.noRptPol = dataReport.reportNo;
+          this.dateRptPol = dataReport.reportDateTime;
+          this.statusRpt =  dataReport.reportStatus;
+
+          this.noKertasSiasat = dataReport.ipNo;
+          this.seksyenSiasat = dataReport.lawSection;
+          this.statusSiasat = dataReport.caseStatus;
+          this.pegawaiSiasat = dataReport.investigationOfficer;
+          this.letter = [dataReport.pem1Url,dataReport.pem2Url,dataReport.pem3Url];              
+          
         }
+
+        else{
+          this.showDetails = false;
+        }
+     
       }).bind(this));
 
     },
@@ -155,17 +169,7 @@ export class PolicereportComponent implements OnInit, OnDestroy {
       this.toastr.error(JSON.parse(error._body).statusDesc, '');
     });
 
-    this.showDetails = true;
-
-    this.noRptPol = "THSL/006026/11";
-    this.dateRptPol = "2011-02-18 17:44:40";
-    this.statusRpt =  "Buka Kertas Siasatan Baru";
-
-    this.noKertasSiasat = "DW/JSJ/KS/01114/11";
-    this.seksyenSiasat = "29 (1) AKTA KESALAHAN KECIL 1955,25 (1) (n) PERATURAN-PERATURAN PENDAFTARAN NEGARA 1990";
-    this.statusSiasat = "Dituduh";
-    this.pegawaiSiasat = "C/INSP NURUL HAFIDZ BIN MOHD DERUS";
-    this.letter = ["www.google.com","www.yahoo.com","www.google.com"];
+    
   }
 
   openLink(varUrl){
