@@ -26,6 +26,7 @@ export class SliderComponent implements OnInit, OnDestroy {
   slides: any[];
   languageId: any;
   urlSlider: any;
+  public loading = false;
 
   private subscription: ISubscription;
   private subscriptionLang: ISubscription;
@@ -89,16 +90,17 @@ export class SliderComponent implements OnInit, OnDestroy {
   }
 
   getSlide(lang:any) {
-
+    this.loading = true;
     this.sharedservice.readPortal('slider','','','',lang)
     .subscribe(resSliderData => {
           this.slides = resSliderData['sliderList'];
+          this.loading = false;
 
     });
   }
 
   getUrl(getUrlSlider){
-  
+
     if(getUrlSlider != undefined){
 
       let httpStr = getUrlSlider.substring(0, 4);

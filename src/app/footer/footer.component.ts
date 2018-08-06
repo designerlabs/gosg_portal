@@ -152,10 +152,9 @@ export class FooterComponent implements OnInit, OnDestroy {
       }
       window.scrollTo(0, 0);
 
-    }else{
+    } else{
       this.router.navigate(['/'+split_url[0]]);
       window.scrollTo(0, 0);
-
     }
 
   }
