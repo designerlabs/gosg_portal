@@ -116,6 +116,7 @@ export const protectedRoutes: Routes = [
     {path: 'school-search', component: SchoolsearchComponent},
     {path: 'trafficinfo', component: TrafficinfoComponent },
     {path: 'perhilitan', component: PerhilitanComponent},
+    {path: 'perhilitan/:id', component: PerhilitanComponent},
     {path: 'perhilitan_renew', component: PerhilitanrenewComponent},
     {path: 'get_user_approval', component: ReplacementmycardComponent},
     {path: '**', component: ErrorComponent}
