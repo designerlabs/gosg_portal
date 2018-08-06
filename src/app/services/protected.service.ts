@@ -220,8 +220,7 @@ export class ProtectedService {
   }
 
   getPdrm(modules, val){
-    return this.http
-    .get(this.urlPdrm + modules + '?reportNo='+val)
+    return this.http.post(this.urlPdrm + modules + '?reportNo='+val,null)
     .map((response: Response) => response.json())
     .retry(5)
     .catch(this.handleError);
