@@ -51,6 +51,7 @@ export class SubscriptionComponent implements OnInit,OnDestroy {
     private http: Http,
     @Inject(APP_CONFIG) private config: AppConfig,
   ) {
+    this.loading=true;
     this.lang = translate.currentLang;
     //this.languageId = 2;
     this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
@@ -69,6 +70,7 @@ export class SubscriptionComponent implements OnInit,OnDestroy {
       if(this.topnavservice.flagLang){
         this.getAllCategory(this.languageId);
       }
+      this.loading = false;
     });
 
   }
@@ -111,6 +113,7 @@ export class SubscriptionComponent implements OnInit,OnDestroy {
       },
         error => {
           this.toastr.error(this.translate.instant('common.err.servicedown'), '');
+          this.loading = false;
         });
   }
 
@@ -131,13 +134,14 @@ export class SubscriptionComponent implements OnInit,OnDestroy {
           this.showerr = true;
           this.errormsg = data.statusDesc;
         }
-
+        this.loading = false;
       },
       error => {
           this.toastr.error(this.translate.instant('common.err.servicedown'), '');
+          this.loading = false;
       });
 
-    this.loading = false;
+
   }
 
   createSubscriptions(emailval, subsval) {
@@ -165,7 +169,7 @@ export class SubscriptionComponent implements OnInit,OnDestroy {
     // return ctrl.valid || ctrl.untouched
     return this.validateService.validateCtrl(ctrl);
   }
-  
+
   private handleError(error: Response) {
     let msg = `Status code ${error.status} on url ${error.url}`;
     return Observable.throw(msg);

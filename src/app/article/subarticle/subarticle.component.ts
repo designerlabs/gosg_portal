@@ -160,6 +160,18 @@ export class SubarticleComponent implements OnInit, OnDestroy {
     return a[2];
   }
 
+  breadcrumLink(id1, id2, $event){
+
+    if(this.getModule(id1) === 'category'){
+      this.router.navigate(['/category', this.getID(id2)]);
+    }else if(this.getModule(id1) === 'subcategory'){
+      this.router.navigate(['/subcategory', this.getID(id2)]);
+      this.navService.getSubArticleUrl(this.getID(id2), localStorage.getItem('langID'));
+      this.navService.triggerSubArticle(this.getID(id2), localStorage.getItem('langID'));
+    }
+    $event.preventDefault();
+  }
+
   appTracking(refCode){
     const readUrl = `${this.config.registerationUrl}agencyapplication/tracking?refCode=${refCode}&source=life-event`;
     const req = this.http.post(readUrl,'')

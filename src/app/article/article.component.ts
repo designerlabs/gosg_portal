@@ -20,6 +20,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
   langIdVal: string;
   subID: number;
   moduleName: string;
+  public loading = true;
 
   @ViewChild('textarea') textarea: ElementRef;
   @Output() menuClick = new EventEmitter();
@@ -39,7 +40,6 @@ export class ArticleComponent implements OnInit, OnDestroy {
   constructor(private http:HttpClient, public articleService: ArticleService, private topnavservice: TopnavService, private route: ActivatedRoute, private navService: NavService, private translate: TranslateService, private router: Router, private breadcrumbService: BreadcrumbService, @Inject(APP_CONFIG) private config: AppConfig) {
     this.lang = translate.currentLang;
     this.langId = 1;
-
     this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
 
       const myLang = translate.currentLang;
@@ -157,19 +157,22 @@ export class ArticleComponent implements OnInit, OnDestroy {
   }
 
   appTracking(refCode){
+    this.loading = true;
     const readUrl = `${this.config.registerationUrl}agencyapplication/tracking?refCode=${refCode}&source=life-event`;
     const req = this.http.post(readUrl,'')
       .subscribe(
         res => {
-
+          this.loading = false;
         },
         err => {
           console.log("Error occured");
+          this.loading = false;
         }
       );
   }
 
   triggerArticle(moduleName, lang, topicID) {
+    this.loading = true;
     this.route.paramMap
       .switchMap((params: ParamMap) =>
         this.navService.getArticleData(moduleName, lang, topicID))
@@ -178,6 +181,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
         this.breadcrumb = this.breadcrumbService.getBreadcrumb();
         this.isValid = this.breadcrumbService.isValid = true;
         this.breadcrumb = this.breadcrumb.name = '';
+        this.loading = false;
       });
   }
 

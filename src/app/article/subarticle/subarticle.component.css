@@ -78,6 +78,12 @@
             color:#333;
         }
 
+        .content_description{
+          padding-bottom: 20px;
+          display: block;
+        }
+
+
         .list-unstyled {
             margin-top: -15px;
         }
@@ -112,25 +118,40 @@
             text-decoration: none;
         }
 
-        .intro-box:hover {
+        .intro-box-content{
+          background-color: #eaebed;
+          border-top: 3px solid #1ebebc;
+          margin-bottom: 20px;
+          padding: 0px 15px 15px 15px;
+          height: auto !important;
+          min-height: 115px;
+          display: inline-block;
+          width: 100%;
+          color:#333;
+          overflow: hidden;
+          float: left;
+          text-decoration: none;
+        }
+
+        .intro-box:hover, .intro-box-content:hover {
             text-decoration: none;
             border-top: 3px solid #e6436e;
             background: #eaeaea;
         }
 
-        .intro-box:hover h4 {
+        .intro-box:hover h4, .intro-box-content:hover h4 {
             color: #1ebebc !important;
         }
 
 
 
-        .intro-box h4 {
+        .intro-box h4, .intro-box-content h4 {
             color: #333;
             font-weight: 700;
             padding: 0px 0px 10px 0px;
         }
 
-        .intro-box p {
+        .intro-box p, .intro-box-content p {
             padding: 0px;
         }
 

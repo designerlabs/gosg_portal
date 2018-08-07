@@ -84,7 +84,7 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
     private toastr: ToastrService,
     @Inject(APP_CONFIG) private config: AppConfig
   ) {
-
+    this.loading = true;
     this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
       // this.sharedService.errorHandling(event, (function(){
       const myLang = this.translate.currentLang;
@@ -109,6 +109,7 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
       this.pageCount = 1;
       this.mymap.setView([3.141589, 101.674284], 13);
       this.popup.remove();
+      this.loading = false;
 
     }); }
 

@@ -15,7 +15,7 @@
                 <li>
                     <div *ngFor="let article of articleService.articles">
                      <div *ngFor="let breadCrum of article.breadcrum; let i = index; let lastItem = last" style="display: inline;">
-                       <a href="" [routerLink]="['/'+getModule(breadCrum.breadcrumUrl), getID(breadCrum.breadcrumUrl)]">{{breadCrum.breadcrumName}}</a>
+                       <a href="" (click)="breadcrumLink(breadCrum.breadcrumUrl, breadCrum.breadcrumUrl, $event)">{{breadCrum.breadcrumName}}</a>
                        <span>{{lastItem ? '' : '&nbsp;/&nbsp;'}}</span>
                      </div>
                     </div>
@@ -160,13 +160,14 @@
 
 
                       <div *ngIf="article.contentList"  class="row">
+                        <h2 *ngIf="article.contentList.length > 0" class="container font-size-m warna_font" [style.color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">{{'common.listofarticle' | translate}}</h2>
                           <div *ngFor="let rightContent of article.contentList; let index=index; let odd=odd; let even=even;">
                             <div class="col-sm-6">
                                 <div>
                                     <div style="width:100%; margin-right:10px; height:auto;" class="pointer"  (click)="clickContentFromMenu(article.categoryCode, rightContent.contentCode, $event)">
 
 
-                                        <a class="intro-box warna_border_color" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
+                                        <a class="intro-box-content warna_border_color" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
                                             <h4 class="font-size-m warna_font">
                                                 {{rightContent.contentTitle}}
                                             </h4>
