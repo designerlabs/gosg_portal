@@ -23,7 +23,7 @@ import { TopnavService } from '../header/topnav/topnav.service';
   styleUrls: ['./trafficinfo.component.css']
 })
 export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
-  
+
   private subscriptionLang: ISubscription;
 
   dataAlpha = [];
@@ -35,6 +35,7 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
   pageSize = 10;
   pageCount = 1;
   totalRec = 0;
+  loading = false;
   noPrevData = true;
   noNextData = false;
   allStreetNames:any;
@@ -117,12 +118,12 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
     // this.getStreetNamesData();
     this.getTrafficFlowData();
     this.id = setInterval(() => {
-      this.getTrafficFlowData(); 
+      this.getTrafficFlowData();
     }, 300000);
   }
 
   ngAfterViewInit() {
-    
+
   }
 
   ngOnDestroy() {
@@ -144,7 +145,7 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
 
     // this.rp = L.polyline(this.PLJlnMaarof, {color: 'red'}).addTo(this.mymap);
     // this.mymap.fitBounds(this.rp.getBounds());
-    
+
   }
 
   // getStreetNamesData() {
@@ -172,7 +173,7 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
   // }
 
   getTrafficFlowData() {
-      
+      this.loading = true;
       this.portalservice.getTrafficFlows().subscribe(
         data => {
           this.portalservice.errorHandling(data, (function () {
@@ -181,14 +182,14 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
             if (this.streetFlows.records.length > 0) {
 
               this.streetFlows.records.forEach(el => {
-                
+
                 // console.log(this.allStreetNames)
                 if(el.street) {
                   el.jam = this.str2arr(el.jam);
-                  
+
 
                   this.streetNames.push({ 'name': el.street, 'latlng': el.jam[0] });
-                  
+
                   this.rp = L.polyline(el.jam, {color: this.getLevelColor(el.level), weight: 5, opacity: 0.6 }).addTo(this.mymap);
 
                   this.rp.on('click', this.middleMan, this);
@@ -209,9 +210,9 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
               this.showNoData = true;
             }
           }).bind(this));
-          // this.loading = false;
+          this.loading = false;
         }, err => {
-          // this.loading = false;
+          this.loading = false;
         });
   }
 
@@ -225,13 +226,13 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
 
     if(sn != "undefined") {
       this.showNoData = false;
-
+      this.loading = true;
       this.portalservice.getTrafficPrediction(sn).subscribe(
         data => {
           this.portalservice.errorHandling(data, (function () {
             this.streetPrediction = data;
 
-            let trafficDetails = {  
+            let trafficDetails = {
               "status": null,
               "color": null
             };
@@ -243,7 +244,7 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
               this.gotPrediction = true;
               this.selStreetName = sn;
               this.predictionData = [];
-              
+
               trafficDetails.status = this.streetPrediction.current;
               trafficDetails.color = this.getLevelColorByName(this.streetPrediction.current);
               this.predictionData.push(trafficDetails);
@@ -252,23 +253,24 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
                   trafficDetails.status = el;
                   trafficDetails.color = this.getLevelColorByName(el);
                   this.predictionData.push(trafficDetails)
-                  trafficDetails = {  
+                  trafficDetails = {
                     "status": null,
                     "color": null
                   };
                 });
-                
+
               this.mymap.setView(ltlg, 15);
               this.popup = L.popup().setLatLng(ltlg)
                             .setContent(this.streetName)
                             .openOn(this.mymap);
-              } 
+              }
           }).bind(this));
-          
+          this.loading = false;
         }, err => {
           this.gotPrediction = false;
           this.showNoData = true;
-          
+          this.loading = false;
+
         });
       } else {
         this.gotPrediction = false;
@@ -276,7 +278,7 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
       }
 
   }
-  
+
   str2arr(obj) {
     obj = JSON.parse(obj);
     obj.forEach(elJam => {
@@ -301,7 +303,7 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
       case 4:
         color = "darkred"
         break;
-    
+
       default:
         break;
     }
@@ -326,7 +328,7 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
       case 'Unexpected Bumper to Bumper':
         color = "darkred"
         break;
-    
+
       default:
         break;
     }

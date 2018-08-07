@@ -17,7 +17,7 @@ export class UnsubscribeComponent implements OnInit {
   emailId: any;
   lang = this.lang;
   languageId = this.languageId;
-
+  loading = false;
   unsubcribeStat = true;
 
   constructor(
@@ -27,8 +27,9 @@ export class UnsubscribeComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private toastr: ToastrService,
     private http: Http,
+
     @Inject(APP_CONFIG) private config: AppConfig,
-  ) { 
+  ) {
     this.lang = translate.currentLang;
     this.languageId = 2;
     translate.onLangChange.subscribe((event: LangChangeEvent) => {
@@ -55,15 +56,15 @@ export class UnsubscribeComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe(params => {
       this.emailId = params['code'];
-      
+
   });
   }
 
   unsubs(){
-    
+    this.loading = true;
     return this.http.get(this.config.urlPortal + 'subscription/unsub?code='+this.emailId+ '&language='+ this.languageId).subscribe(
       data => {
-        
+
         let errMsg = "";
         errMsg = JSON.parse(data["_body"]).statusCode;
 
@@ -76,19 +77,21 @@ export class UnsubscribeComponent implements OnInit {
         }
 
         this.unsubcribeStat = false;
+        this.loading = false;
       }
-      // , error => {
-      //   this.toastr.error('Token is invalid');
-      // }
+      , error => {
+        this.loading = false;
+        // this.toastr.error('Token is invalid');
+      }
     )
     // http://10.1.70.148:8080//portal/unsubscribe?email=f41a5c939e5343b908d8fc447d0c2775effeb0879a982570f6e7dedb601745ef
 
     // this.http.post('','').subscribe(
     //   data => {
-       
+
     //   }
-    // )   
-    
+    // )
+
   }
 
   subs(){
