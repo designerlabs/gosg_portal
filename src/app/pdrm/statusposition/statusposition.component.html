@@ -10,10 +10,16 @@
                             {{'home.menu.home' | translate }}
                         </a>
                     </li>
-                    <!-- <li>/</li>
+                    <li>/</li>
                     <li>
-                        {{'home.breadcrumb.register' | translate}}
-                    </li> -->
+                        <a class="font-size-s" routerLink="/digitalservices">
+                            {{'home.menu.digitalsvc' | translate }}
+                        </a>
+                    </li>
+                    <li>/</li>
+                    <li>
+                        {{ 'home.menu.policeReport' | translate }}
+                    </li>
                 </ul>
             </div>
         </div>
@@ -42,10 +48,10 @@
                     </div>
 
                     <div class="col-md-3">
-                        <button tabindex="" mat-raised-button color="warn" type="button" id="btnreset" 
+                        <!-- <button tabindex="" mat-raised-button color="warn" type="button" id="btnreset" 
                             class="form-control btn btn-md btn-warning font-size-s pull-right bttnCustom"
                             (click)="resetModal.show()" style="margin-left: 5px;">
-                            <i class="fa fa-refresh"></i> {{'feedback.label.reset' | translate }}</button>
+                            <i class="fa fa-refresh"></i> {{'feedback.label.reset' | translate }}</button> -->
                         <button mat-raised-button type="button" color="primary" id="searchbtn" 
                             class="form-control btn btn-md btn-success font-size-s pull-right bttnCustom" [disabled]="!complete"
                             (click)="searchApp(searchForm.value)">
@@ -87,14 +93,17 @@
                 {{name}}<br>
                 {{date}}<br>
                 {{place}}<br>
-                <div (click)="openLink(kp)">
+                <div *ngIf="status != '-'" (click)="openLink(urlDoc)" style="cursor: pointer;">
                     <i class="fa fa-folder-o"></i>&nbsp;{{status}}<br>
+                </div>
+                <div *ngIf="status == '-'">
+                    {{status}}<br />
                 </div>
             </div>
         </div>
     </div>
 
-    <div *ngIf="showDetails">
+    <div *ngIf="showNoData">
         <div class="row container">
             <div class="col-md-12" style="color: black; font-weight: bold; text-align: center;">
                 ANDA TIADA PENGAMBILAN JAWATAN PDRM.<br>

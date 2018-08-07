@@ -238,10 +238,14 @@ export class ProtectedService {
         params = '?typeId='+type+'&vehicleNo=';
 
     } else if(svcName == 'checkPoliceReport') {
-      type = arrObj[0];
-      params = '?reportNo='+rptNo;
+
+        rptNo = arrObj[0];
+        params = '?reportNo='+rptNo;
+
     } else if(svcName == 'checkPoliceIntake') {
-      params = '';
+
+        params = '';
+        
     }
 
     return this.http.post(this.urlPdrm + modules + params,null)

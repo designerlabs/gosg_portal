@@ -10,10 +10,16 @@
                             {{'home.menu.home' | translate }}
                         </a>
                     </li>
-                    <!-- <li>/</li>
+                    <li>/</li>
                     <li>
-                        {{'home.breadcrumb.register' | translate}}
-                    </li> -->
+                        <a class="font-size-s" routerLink="/digitalservices">
+                            {{'home.menu.digitalsvc' | translate }}
+                        </a>
+                    </li>
+                    <li>/</li>
+                    <li>
+                        {{ 'home.menu.summonStatus' | translate }}
+                    </li>
                 </ul>
             </div>
         </div>
@@ -111,7 +117,7 @@
                     <th width="10%" class="mat-header-cell text-right">Amaun (RM)</th>
                     <th width="10%" class="mat-header-cell text-center">Imej</th>
                 </tr>
-                <tr class="mat-row" *ngFor="let data of dataSummons.summonResource.summonDetails; let i = index;" role="row">
+                <tr class="mat-row" *ngFor="let data of dataSummons.summonDetails; let i = index;" role="row">
                     <td class="mat-cell text-center">{{i+1}}</td>
                     <td class="mat-cell">{{data.vehicle_registration_number}}</td>
                     <td class="mat-cell">{{data.summons_id_key}}</td>
@@ -151,13 +157,13 @@
         </div>
     </div>
   
-    <!-- <div *ngIf="showDetails">
+    <div *ngIf="dataSummons">
         <div class="row container">
             <div class="col-md-12" style="color: black; font-weight: bold; text-align: center;">
                 ANDA TIADA SAMAN TRAFIK.<br>
             </div>
         </div>
-    </div> -->
+    </div>
 </div>
   
 <app-confirm-dialog #resetModal 
