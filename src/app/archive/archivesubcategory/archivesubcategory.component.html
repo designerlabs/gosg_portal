@@ -15,7 +15,7 @@
                 <li>
                     <div *ngFor="let article of articleService.articles">
                      <div *ngFor="let breadCrum of article.breadcrum; let i = index; let lastItem = last" style="display: inline;">
-                       <a href="" [routerLink]="['/'+getModule(breadCrum.breadcrumUrl), getID(breadCrum.breadcrumUrl)]">{{breadCrum.breadcrumName}}</a>
+                       <a href="" (click)="breadcrumLink(breadCrum.breadcrumUrl, breadCrum.breadcrumUrl, $event)">{{breadCrum.breadcrumName}}</a>
                        <span>{{lastItem ? '' : '&nbsp;/&nbsp;'}}</span>
                      </div>
                     </div>

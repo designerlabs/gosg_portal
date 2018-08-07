@@ -146,6 +146,18 @@ export class ArchivesubcategoryComponent implements OnInit, OnDestroy{
       return a[2];
     }
 
+    breadcrumLink(id1, id2, $event){
+
+      if(this.getModule(id1) === 'category'){
+        this.router.navigate(['/archive/category', this.getID(id2)]);
+      }else if(this.getModule(id1) === 'subcategory'){
+        this.router.navigate(['/archive/subcategory', this.getID(id2)]);
+        this.navService.getSubArticleUrlOthers(this.getID(id2), localStorage.getItem('langID'), 'archive');
+        this.navService.triggerSubArticleOther(this.getID(id2), localStorage.getItem('langID'), 'archive');
+      }
+      $event.preventDefault();
+    }
+
 
     checkImgData(e){
         const chkData = e.search('<img');

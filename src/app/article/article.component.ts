@@ -20,7 +20,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
   langIdVal: string;
   subID: number;
   moduleName: string;
-  public loading = true;
+  public loading = false;
 
   @ViewChild('textarea') textarea: ElementRef;
   @Output() menuClick = new EventEmitter();
