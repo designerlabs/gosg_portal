@@ -209,8 +209,16 @@ export class AppManagementComponent implements OnInit, OnDestroy {
   }
 
   viewData(agency, id){
-    if(agency == "PAP-07-09-00"){
-      this.router.navigate(['perhilitan/'+id]);
+
+    let test = "papar-89";
+    if(agency == "PAP-07-09-00"){ //perhilitan
+      let statusId =  id.split('-')[1];
+      let statusText =  id.split('-')[0];
+      
+      if(statusText == "Apply"){
+        
+        this.router.navigate(['perhilitan/'+statusId]);
+      }
     }
 
   }

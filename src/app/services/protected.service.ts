@@ -232,5 +232,12 @@ export class ProtectedService {
     .map((response: Response) => response.json())
     .catch(this.handleError);
   }
+
+  update(data, moduleName, lang) {
+    let createUrl = this.urlPerhilitan   + moduleName + '?language='+lang;
+    return this.http.put(createUrl, data)
+    .map((response: Response) => response.json())
+    .catch(this.handleError);
+  }
 }
 
