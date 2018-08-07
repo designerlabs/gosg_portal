@@ -192,7 +192,7 @@
             <div class="row">
               <div class="col-md-12">
                 <mat-form-field class="example-full-width displayInfo">
-                  <textarea matInput formControlName="addPemilik" placeholder="Alamat Tetap" required></textarea>
+                  <textarea matInput formControlName="addPemilik" placeholder="Alamat Tetap" required (keyup)="checkReqValues2()"></textarea>
                 </mat-form-field>
               </div>
             </div>
@@ -509,7 +509,7 @@
               </div>
             </div>
 
-            <div class="row" style="display: none;">
+            <div class="row" style="display: block;">
               <div class="col-md-6">
                 <mat-form-field class="example-full-width displayInfo">
                   <textarea matInput formControlName="dispBase641" placeholder=""></textarea>
@@ -520,6 +520,18 @@
                 <mat-form-field class="example-full-width displayInfo">
                   <textarea matInput formControlName="dispBase642" placeholder=""></textarea>
                 </mat-form-field>
+              </div>
+            </div>
+
+            <div class="row" *ngIf="getUrl">
+              <div class="col-md-6" *ngIf="dataApp?.attachFileRoc">
+                <button mat-raised-button color="primary" class="btn btn-md btn-success font-size-s" (click)="openRoc(dataApp.attachFileRoc)">
+                  <i class="fa fa-view"></i> Salinan Sijil Pendaftaran Syarikat (Sijil SSM)</button>
+              </div>
+
+              <div class="col-md-6" *ngIf="dataApp?.attachFilePbt"> 
+                <button mat-raised-button color="primary" class="btn btn-md btn-success font-size-s" (click)="openPbt(dataApp.attachFilePbt)">
+                    <i class="fa fa-view"></i> Salinan Surat Kelulusan PBT</button>
               </div>
             </div>
 

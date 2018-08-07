@@ -71,7 +71,7 @@ import { DatePipe } from '@angular/common';
 import { AgencydirectoryComponent } from '../agencydirectory/agencydirectory.component';
 
 import { SidenavmainComponent } from "../sidenavmain/sidenavmain.component";
-import { LoadingModule } from 'ngx-loading';
+// import { LoadingModule } from 'ngx-loading';
 
 import {
       MatButtonModule,
@@ -172,7 +172,7 @@ export function HttpLoaderFactory(http: Http) {
     MatCardModule,
 	  NgxPaginationModule,
     ModalModule.forRoot(),
-    LoadingModule,
+    // LoadingModule,
     LeafletModule.forRoot()
 
   ],
