@@ -13,6 +13,9 @@ import {
   } from '@angular/material';
 
 import { ProtectedService } from '../../services/protected.service';
+import { SharedService } from '../../common/shared.service';
+import { ToastrService } from '../../../../node_modules/ngx-toastr';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'gosg-summontraffic',
@@ -32,6 +35,7 @@ export class SummontrafficComponent implements OnInit {
   noPrevData = true;
   noNextData = false;
   showNoData = false;
+  dataSummons:any;
 
   public kp: any;
   public name: any;
@@ -56,6 +60,8 @@ export class SummontrafficComponent implements OnInit {
     private router: Router,
     private http: Http,
     @Inject(APP_CONFIG) private config: AppConfig,
+    private sharedService: SharedService,
+    private toastr: ToastrService,
     private topnavservice: TopnavService,) {
 
     this.lang = translate.currentLang;
@@ -110,10 +116,12 @@ export class SummontrafficComponent implements OnInit {
       noCar: this.noCar    
     });
     
-    this.searchForm.get('optSelect').setValue(1);
-    this.varSelect = 1;
+    this.searchForm.get('optSelect').setValue(0);
+    this.varSelect = 0;
 
     this.getDataAppList(this.pageCount, this.pageSize);
+    this.getUserData();
+    this.checkReqValues();
 
   }
 
@@ -152,12 +160,302 @@ export class SummontrafficComponent implements OnInit {
 
   searchApp(formValues: any){
 
-    this.showDetails = true;
+    this.showDetails = false;
 
-    this.kp = "971020085921";
-    this.name = "MUHAMMAD ISYRAF RAZIQ B YUSOF";
-    this.summon =  "1";
-    this.ammount = "300";
+    let type = this.optSelect.value;
+    let icno = this.searchForm.get('ic').value;
+    let plateNo = this.searchForm.get('noCar').value;
+    let arrObj = [];
+
+    if(type == 0) {
+      arrObj.push(type);
+      arrObj.push(icno);
+    } else {
+      arrObj.push(type);
+      arrObj.push(icno);
+      arrObj.push(plateNo);
+    }
+
+    if(!environment.staging) {
+
+    this.protectedService.getPdrm('pdrm/summon-traffic', arrObj).subscribe(
+    data => {
+      this.sharedService.errorHandling(data, (function(){
+
+        console.log(data)
+
+        this.dataSummons = data;
+
+        if(this.dataSummons.summonResource.summonDetails){
+          this.showDetails = true;
+        } else{
+          this.showDetails = false;
+        }
+     
+      }).bind(this));
+
+    },
+    error => {
+      this.toastr.error(JSON.parse(error._body).statusDesc, '');
+    });
+
+    } else {
+      this.showDetails = true;
+
+      if(type == 0) {
+      
+      this.dataSummons = {
+        "type": "RESPONSE",
+        "statusCode": "SUCCESS",
+        "summonResource": {
+            "status": "1",
+            "statusMessage": "Success",
+            "total_summons": null,
+            "summonDetails": [
+                {
+                    "compound_ind": "Y",
+                    "district_code": null,
+                    "enforcement_date": "20060330",
+                    "imageUrl": "?",
+                    "summons_id_key": "1810000200002AB895306",
+                    "vehicle_registration_number": "ADM310",
+                    "offence_date": "20060329",
+                    "offence_time": "0815",
+                    "law_code": "APJ1987",
+                    "section_code": "026(1)",
+                    "offence_ori_amt": "30000",
+                    "offence_amt": "30000",
+                    "law_code2": "APJ1987",
+                    "section_code2": "090",
+                    "offence_ori_amt2": "30000",
+                    "offence_amt2": "30000",
+                    "law_code3": " ",
+                    "section_code3": " ",
+                    "offence_ori_amt3": "000",
+                    "offence_amt3": "000",
+                    "offence_location": "JLN SUBANG",
+                    "summons_ori_amt": "60000",
+                    "summons_amt": "60000",
+                    "warrant_issue_date": "YNY",
+                    "offender_ic": "871222145031",
+                    "offender_name": "MOHD RAMZI BIN IBRAHIM"
+                },
+                {
+                    "compound_ind": "Y",
+                    "district_code": null,
+                    "enforcement_date": "20131003",
+                    "imageUrl": "?",
+                    "summons_id_key": "1812000200002AK469286",
+                    "vehicle_registration_number": "WPW7663",
+                    "offence_date": "20131001",
+                    "offence_time": "2125",
+                    "law_code": "APJ1987",
+                    "section_code": "020(1)",
+                    "offence_ori_amt": "30000",
+                    "offence_amt": "30000",
+                    "law_code2": " ",
+                    "section_code2": " ",
+                    "offence_ori_amt2": "000",
+                    "offence_amt2": "000",
+                    "law_code3": " ",
+                    "section_code3": " ",
+                    "offence_ori_amt3": "000",
+                    "offence_amt3": "000",
+                    "offence_location": "PERSIARAN KEWAJIPAN",
+                    "summons_ori_amt": "30000",
+                    "summons_amt": "30000",
+                    "warrant_issue_date": "YNY",
+                    "offender_ic": "871222145031",
+                    "offender_name": "MOHD RAMZI BIN IBRAHIM"
+                },
+                {
+                    "compound_ind": "Y",
+                    "district_code": null,
+                    "enforcement_date": "20161003",
+                    "imageUrl": "https://sso.rmp.gov.my/SM/LOADIMAGE_E.aspx?id=syTsQ+lvVo6ZOuuiZI66B9AZIsj+fmWcbvqOw7Caazsma31EKEh5DRXaXN598Hvsb78mtE5yfxW+lNI/4R0ljQ==",
+                    "summons_id_key": "181200010000116006C7733",
+                    "vehicle_registration_number": "WRH465",
+                    "offence_date": "20161002",
+                    "offence_time": "1448",
+                    "law_code": "APJ1987",
+                    "section_code": "079(2)M",
+                    "offence_ori_amt": "15000",
+                    "offence_amt": "15000",
+                    "law_code2": " ",
+                    "section_code2": " ",
+                    "offence_ori_amt2": "000",
+                    "offence_amt2": "000",
+                    "law_code3": " ",
+                    "section_code3": " ",
+                    "offence_ori_amt3": "000",
+                    "offence_amt3": "000",
+                    "offence_location": "KM 5.5 L/RAYA ELITE",
+                    "summons_ori_amt": "15000",
+                    "summons_amt": "15000",
+                    "warrant_issue_date": "NNNP",
+                    "offender_ic": "871222145031",
+                    "offender_name": "MOHD RAMZI BIN IBRAHIM"
+                },
+                {
+                    "compound_ind": "Y",
+                    "district_code": null,
+                    "enforcement_date": "20160912",
+                    "imageUrl": "https://sso.rmp.gov.my/SM/LOADIMAGE_E.aspx?id=syTsQ+lvVo6ZOuuiZI66B9AZIsj+fmWcbvqOw7Caazsma31EKEh5DRXaXN598HvsrjgEo6+6cB4FGrTOUsE/ng==",
+                    "summons_id_key": "18120001000011621016691",
+                    "vehicle_registration_number": "WRH465",
+                    "offence_date": "20160911",
+                    "offence_time": "1211",
+                    "law_code": "APJ1987",
+                    "section_code": "079(2)M",
+                    "offence_ori_amt": "15000",
+                    "offence_amt": "30000",
+                    "law_code2": " ",
+                    "section_code2": " ",
+                    "offence_ori_amt2": "000",
+                    "offence_amt2": "000",
+                    "law_code3": " ",
+                    "section_code3": " ",
+                    "offence_ori_amt3": "000",
+                    "offence_amt3": "000",
+                    "offence_location": "KM 38.7 L/RAYA KESAS",
+                    "summons_ori_amt": "15000",
+                    "summons_amt": "30000",
+                    "warrant_issue_date": "NNNP",
+                    "offender_ic": "871222145031",
+                    "offender_name": "MOHD RAMZI BIN IBRAHIM"
+                },
+                {
+                    "compound_ind": "Y",
+                    "district_code": null,
+                    "enforcement_date": "20180322",
+                    "imageUrl": "https://sso.rmp.gov.my/SM/LOADIMAGE_E.aspx?id=syTsQ+lvVo6ZOuuiZI66B9AZIsj+fmWcbvqOw7CaaztRK4U3gyGDvcJbL9yGYkjZA9k7SkL9SR07cirgjPVC+g==",
+                    "summons_id_key": "1805000200002C2317G000284",
+                    "vehicle_registration_number": "BPK82",
+                    "offence_date": "20180322",
+                    "offence_time": "0928",
+                    "law_code": "APJ1987",
+                    "section_code": "014(4)",
+                    "offence_ori_amt": "30000",
+                    "offence_amt": "30000",
+                    "law_code2": " ",
+                    "section_code2": " ",
+                    "offence_ori_amt2": "000",
+                    "offence_amt2": "000",
+                    "law_code3": " ",
+                    "section_code3": " ",
+                    "offence_ori_amt3": "000",
+                    "offence_amt3": "000",
+                    "offence_location": "LRAYA PERSEKUTUAAN 28.3",
+                    "summons_ori_amt": "30000",
+                    "summons_amt": "30000",
+                    "warrant_issue_date": "NNNP",
+                    "offender_ic": "871222145031",
+                    "offender_name": "MOHD RAMZI BIN IBRAHIM"
+                }
+            ]
+        }
+    };
+  } else {
+    this.dataSummons = {
+      "type": "RESPONSE",
+      "statusCode": "SUCCESS",
+      "summonResource": {
+          "status": "1",
+          "statusMessage": "Success",
+          "total_summons": null,
+          "summonDetails": [
+              {
+                  "compound_ind": "Y",
+                  "district_code": null,
+                  "enforcement_date": "20131003",
+                  "imageUrl": "?",
+                  "summons_id_key": "1812000200002AK469286",
+                  "vehicle_registration_number": "WPW7663",
+                  "offence_date": "20131001",
+                  "offence_time": "2125",
+                  "law_code": "APJ1987",
+                  "section_code": "020(1)",
+                  "offence_ori_amt": "30000",
+                  "offence_amt": "30000",
+                  "law_code2": " ",
+                  "section_code2": " ",
+                  "offence_ori_amt2": "000",
+                  "offence_amt2": "000",
+                  "law_code3": " ",
+                  "section_code3": " ",
+                  "offence_ori_amt3": "000",
+                  "offence_amt3": "000",
+                  "offence_location": "PERSIARAN KEWAJIPAN",
+                  "summons_ori_amt": "30000",
+                  "summons_amt": "30000",
+                  "warrant_issue_date": "YNY",
+                  "offender_ic": "871222145031",
+                  "offender_name": "MOHD RAMZI BIN IBRAHIM"
+              },
+              {
+                  "compound_ind": "Y",
+                  "district_code": null,
+                  "enforcement_date": "20150601",
+                  "imageUrl": "?",
+                  "summons_id_key": "1812000200002AR594398",
+                  "vehicle_registration_number": "WPW7663",
+                  "offence_date": "20150530",
+                  "offence_time": "2330",
+                  "law_code": "APJ1987",
+                  "section_code": "026(1)",
+                  "offence_ori_amt": "30000",
+                  "offence_amt": "30000",
+                  "law_code2": "APJ1987",
+                  "section_code2": "015(1)A",
+                  "offence_ori_amt2": "30000",
+                  "offence_amt2": "30000",
+                  "law_code3": " ",
+                  "section_code3": " ",
+                  "offence_ori_amt3": "000",
+                  "offence_amt3": "000",
+                  "offence_location": "JLN SS 15/2A",
+                  "summons_ori_amt": "60000",
+                  "summons_amt": "60000",
+                  "warrant_issue_date": "NNY",
+                  "offender_ic": "05500430",
+                  "offender_name": "DINESH AMEDEMBE"
+              },
+              {
+                  "compound_ind": "Y",
+                  "district_code": null,
+                  "enforcement_date": "20150420",
+                  "imageUrl": "?",
+                  "summons_id_key": "1805000200002AR193569",
+                  "vehicle_registration_number": "WPW7663",
+                  "offence_date": "20150416",
+                  "offence_time": "2255",
+                  "law_code": "APJ1987",
+                  "section_code": "015(1)A",
+                  "offence_ori_amt": "30000",
+                  "offence_amt": "30000",
+                  "law_code2": " ",
+                  "section_code2": " ",
+                  "offence_ori_amt2": "000",
+                  "offence_amt2": "000",
+                  "law_code3": " ",
+                  "section_code3": " ",
+                  "offence_ori_amt3": "000",
+                  "offence_amt3": "000",
+                  "offence_location": "JLN AIRPORT SUBANG",
+                  "summons_ori_amt": "30000",
+                  "summons_amt": "30000",
+                  "warrant_issue_date": "NNN",
+                  "offender_ic": "940623146867",
+                  "offender_name": "MOHD ZALFIZ B IBRAHIM"
+              }
+          ]
+      }
+  };
+  }
+
+    console.log(this.dataSummons)
+
+    }
   }
 
   isNumber(evt) {
@@ -171,6 +469,51 @@ export class SummontrafficComponent implements OnInit {
 
   getSelection(e){ //when change selection
     this.varSelect = e.value;
+  }
+
+  getUserData(){
+    
+    this.searchForm.get('ic').disable();
+
+    if(!environment.staging){
+      //this.getPerPostCodeFlag = false;
+      this.protectedService.getUser().subscribe(
+      data => {
+        this.sharedService.errorHandling(data, (function(){
+
+          console.log(data);
+          if(data.user){
+            
+            this.searchForm.get('ic').setValue(data.user.identificationNo);
+
+          }else{
+          }
+        }).bind(this));
+
+      },
+      error => {
+          location.href = this.config.urlUAP +'uapsso/Logout';
+          //location.href = this.config.urlUAP+'portal/index';
+      });
+      
+    } else{ //need to be deleted Noraini for local only      
+
+      let data = {
+        "user": {
+          "userId": 1411,
+          "pid": "871222145031",
+          "identificationNo": "871222145031",
+          "passportNo": "",
+          "fullName": "Encik Saman Trafik2",
+          "email": "saman2@yopmail.com"
+         
+        }
+      }
+
+    
+      this.searchForm.get('ic').setValue(data.user.identificationNo);
+
+    }
   }
 
   checkReqValues() {
