@@ -165,13 +165,13 @@ export class AppManagementComponent implements OnInit, OnDestroy {
 
   getAgencyApp(lang){
     this.protectedService.getListAgency(lang).subscribe(data => {
-      this.dataAgency = data.list;
+      this.dataAgency = data.agencyList;
     });
   }
 
   getStatusApp(lang){
     this.protectedService.getListApp(lang).subscribe(data => {
-      this.dataStatus = data.list;
+      this.dataStatus = data.groupList;
 
     });
   }
