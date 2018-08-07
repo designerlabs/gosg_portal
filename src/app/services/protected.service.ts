@@ -230,7 +230,7 @@ export class ProtectedService {
     if(svcName == 'summon-traffic') {
 
       type = arrObj[0];
-      plateNo = arrObj[1];
+      plateNo = arrObj[2];
 
       if(type == 1)
         params = '?typeId='+type+'&vehicleNo='+plateNo;

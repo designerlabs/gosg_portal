@@ -188,8 +188,10 @@ export class SummontrafficComponent implements OnInit {
 
         if(this.dataSummons.summonResource.summonDetails){
           this.showDetails = true;
+          this.showNoData = false;
         } else{
           this.showDetails = false;
+          this.showNoData = true;
         }
      
       }).bind(this));
@@ -201,6 +203,7 @@ export class SummontrafficComponent implements OnInit {
 
     } else {
       this.showDetails = true;
+      this.showNoData = false;
 
       if(type == 0) {
       
