@@ -32,6 +32,7 @@ export class UnsubscribeComponent implements OnInit {
   ) {
     this.lang = translate.currentLang;
     this.languageId = 2;
+    this.loading = true;
     translate.onLangChange.subscribe((event: LangChangeEvent) => {
 
       const myLang = translate.currentLang;
@@ -50,13 +51,15 @@ export class UnsubscribeComponent implements OnInit {
         });
       }
       // Some Functions goes here;
+      this.loading = false;
     });
   }
 
   ngOnInit() {
+    this.loading = true;
     this.activatedRoute.queryParams.subscribe(params => {
       this.emailId = params['code'];
-
+      this.loading = false;
   });
   }
 

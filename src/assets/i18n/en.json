@@ -382,6 +382,7 @@
     "email":"Email",
     "selectcat":"Select Category",
     "open":"Open",
+    "listofarticle": "List of Articles",
     "close":"Close",
     "placeholder": {
       "keyword":"Keyword"
