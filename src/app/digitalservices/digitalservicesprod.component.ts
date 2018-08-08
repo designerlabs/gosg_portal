@@ -67,6 +67,7 @@ export class DigitalservicesprodComponent implements OnInit, OnDestroy {
     this.mediaUrl = this.config.externalMediaURL + '/documents/';
     this.getDServices(this.languageId);
     this.getUserData();
+
   }
 
   ngOnDestroy() {
@@ -96,7 +97,9 @@ export class DigitalservicesprodComponent implements OnInit, OnDestroy {
       data => {
         this.isLogin = true;
       });
-  }
+    } else {
+      this.isLogin = true;
+    }
 }
 
 openDialog() {
