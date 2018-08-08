@@ -46,7 +46,7 @@ import { LeftmenuProdComponent } from './article/leftmenu/leftmenuprod.component
 import { ArchivecategoryProdComponent } from './archive/archivecategory/archivecategoryprod.component';
 import { ArchivesubcategoryProdComponent } from './archive/archivesubcategory/archivesubcategoryprod.component';
 import { ArchivecontentProdComponent } from './archive/archivecontent/archivecontentprod.component';
-import { PerhilitanrenewComponent } from './perhilitanrenew/perhilitanrenew.component';
+import { PerhilitanrenewComponent, PopupServiceDialog } from './perhilitanrenew/perhilitanrenew.component';
 import { LoadingModule } from 'ngx-loading';
 
 export function HttpLoaderFactory(http: Http) {
@@ -82,7 +82,8 @@ export function HttpLoaderFactory(http: Http) {
     ArchivecategoryProdComponent,
     ArchivesubcategoryProdComponent,
     ArchivecontentProdComponent,
-    PerhilitanrenewComponent
+    PerhilitanrenewComponent,
+    PopupServiceDialog
   ],
   imports: [
     LoadingModule,
@@ -112,6 +113,7 @@ export function HttpLoaderFactory(http: Http) {
   ],
 
   providers: [ ProtectedService, ContentProdComponent],
+  entryComponents: [PopupServiceDialog],
   bootstrap: [ProtectedComponent]
 })
 

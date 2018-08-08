@@ -118,6 +118,7 @@ export const protectedRoutes: Routes = [
     {path: 'perhilitan', component: PerhilitanComponent},
     {path: 'perhilitan/:id', component: PerhilitanComponent},
     {path: 'perhilitan_renew', component: PerhilitanrenewComponent},
+    {path: 'perhilitan_renew/:id', component: PerhilitanrenewComponent},
     {path: 'get_user_approval', component: ReplacementmycardComponent},
     {path: '**', component: ErrorComponent}
     //{path: 'user', loadChildren: 'app/user/user.module#UserModule'}
