@@ -173,7 +173,8 @@ export function HttpLoaderFactory(http: Http) {
 	  NgxPaginationModule,
     ModalModule.forRoot(),
     // LoadingModule,
-    LeafletModule.forRoot()
+    LeafletModule.forRoot(),
+    LoadingModule
 
   ],
 
