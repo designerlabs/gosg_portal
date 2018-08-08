@@ -19,7 +19,7 @@
       </div>
   </div>
 </div>
-<div class="container ds-style">
+<div class="container ds-style" *ngIf="!isLogin || isLogin && validMyIdentity">
   <div class="row container">
     <div *ngIf="!isLogin" class="col-md-12 textCenter">
       <h3 class="">{{ 'digitalservices.msg.beforeLogin' | translate }}</h3>
@@ -30,8 +30,6 @@
     <div class="col-md-12">&nbsp;</div>
     <div class="col-md-12">
       <p>{{ 'digitalservices.msg.instruction' | translate }}</p>
-      <p>State: {{state}}</p>
-      <p>Valid Status: {{validMyIdentity}}</p>
     </div>
   </div>
   <div class="row">
@@ -53,4 +51,8 @@
       </div>
   </div>
   <div class="col-md-12">&nbsp;</div>
+</div>
+
+<div *ngIf=" isLogin && !validMyIdentity">
+  <p>{{ 'digitalservices.msg.access' | translate }}</p>
 </div>

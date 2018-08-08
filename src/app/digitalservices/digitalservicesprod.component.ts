@@ -22,8 +22,7 @@ export class DigitalservicesprodComponent implements OnInit, OnDestroy {
   languageId = this.languageId;
   mediaUrl: any;
   isLogin: boolean;
-  @Input() state:string;
-  @Input() validMyIdentity: string;
+  validMyIdentity:string;
 
   lang = this.lang;
   private subscription: ISubscription;
@@ -97,6 +96,7 @@ export class DigitalservicesprodComponent implements OnInit, OnDestroy {
     if(!environment.staging){
     this.protectedService.getUser().subscribe(
       data => {
+        this.validMyIdentity = data.user.isMyIdentityVerified;
         this.isLogin = true;
       });
     } else {
