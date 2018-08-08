@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
+import { Component, OnInit, Inject, OnDestroy, Input } from '@angular/core';
 import { Http } from '@angular/http';
 import { PortalService } from '../services/portal.service';
 import { DialogsService } from '../dialogs/dialogs.service';
@@ -22,6 +22,8 @@ export class DigitalservicesprodComponent implements OnInit, OnDestroy {
   languageId = this.languageId;
   mediaUrl: any;
   isLogin: boolean;
+  @Input() state:string;
+  @Input() validMyIdentity: string;
 
   lang = this.lang;
   private subscription: ISubscription;
