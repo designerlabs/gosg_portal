@@ -21,8 +21,7 @@ export class AppComponent {
     zIndex2 = '9999';
     bHeight = '70px';
     bTop = '35px';
-
-    loading: any;
+    public loading = false;
 
     constructor() {
         this.clientHeight = window.innerHeight - 200;
@@ -43,10 +42,10 @@ export class AppComponent {
     }
 
     showsidenav(data){
-        
+
         document.getElementById("mySidenav").style.width = "250px";
         this.isSideNav = data;
-        
+
         if(localStorage.getItem('customFontType')){
             $('#fontOptSideMenu2').val(localStorage.getItem('customFontType'));
         }
@@ -56,14 +55,14 @@ export class AppComponent {
             $('#confBar1 .settingBtm input:nth('+localStorage.getItem('themeIndex')+')').addClass('colorPaletteActive');
             localStorage.setItem('themeIndex', localStorage.getItem('themeIndex'));
           }
-        
+
       }
 
     getTheme() {
         return localStorage.getItem('themeColor');
     }
     OnInit() {
-        
+
     }
 
 }

@@ -27,6 +27,7 @@ export class ProtectedComponent implements OnInit {
   getUserName:string;
   validMyIdentity:any;
   getEmail:string;
+  public loading = false;
   getFullname:string;
   translatedText: string;
   supportedLanguages: any[];

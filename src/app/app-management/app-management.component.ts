@@ -12,6 +12,7 @@ import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 import { Http } from '@angular/http';
 import * as moment from 'moment';
 import { TopnavService } from '../header/topnav/topnav.service';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'gosg-app-management',
@@ -58,6 +59,7 @@ export class AppManagementComponent implements OnInit, OnDestroy {
     private portalService:PortalService,
     private translate:TranslateService,
     private http: Http,
+    private router: Router,
     private _renderer: Renderer,
     private topnavservice: TopnavService,
     @Inject(APP_CONFIG) private config: AppConfig) {
@@ -163,13 +165,13 @@ export class AppManagementComponent implements OnInit, OnDestroy {
 
   getAgencyApp(lang){
     this.protectedService.getListAgency(lang).subscribe(data => {
-      this.dataAgency = data.list;
+      this.dataAgency = data.agencyList;
     });
   }
 
   getStatusApp(lang){
     this.protectedService.getListApp(lang).subscribe(data => {
-      this.dataStatus = data.list;
+      this.dataStatus = data.groupList;
 
     });
   }
@@ -204,6 +206,21 @@ export class AppManagementComponent implements OnInit, OnDestroy {
         });
       }
     });
+  }
+
+  viewData(agency, id){
+
+    let test = "papar-89";
+    if(agency == "PAP-07-09-00"){ //perhilitan
+      let statusId =  id.split('-')[1];
+      let statusText =  id.split('-')[0];
+      
+      if(statusText == "Apply"){
+        
+        this.router.navigate(['perhilitan/'+statusId]);
+      }
+    }
+
   }
 
   resetSearch(){

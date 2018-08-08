@@ -24,6 +24,7 @@
       "statistic": "Statistik Atas Talian",
       "search": "Carian",
       "policeReport": "Semakan Status Laporan Polis",
+      "summonStatus": "Semakan Status Saman Trafik PDRM",
       "mykadapproval": "Kelulusan Pengguna"
     },
     "search": {
@@ -382,6 +383,7 @@
     "email":"Emel",
     "selectcat":"Pilih Kategori",
     "open":"Buka",
+    "listofarticle": "Senarai Artikel",
     "close":"Tutup",
     "placeholder": {
       "keyword":"Kata Kunci"

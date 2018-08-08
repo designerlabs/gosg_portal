@@ -15,7 +15,7 @@
               <li>
                   <div *ngFor="let article of articleService.articles">
                    <div *ngFor="let breadCrum of article.breadcrum; let i = index; let lastItem = last" style="display: inline;">
-                     <a *ngIf="breadCrum.breadcrumUrl" href="" [routerLink]="['/'+getModule(breadCrum.breadcrumUrl), getID(breadCrum.breadcrumUrl)]">{{breadCrum.breadcrumName}}</a>
+                     <a *ngIf="breadCrum.breadcrumUrl" href="" [routerLink]="['/archive/'+getModule(breadCrum.breadcrumUrl), getID(breadCrum.breadcrumUrl)]">{{breadCrum.breadcrumName}}</a>
                      <a *ngIf="!breadCrum.breadcrumUrl">{{breadCrum.breadcrumName}}</a>
                      <span>{{lastItem ? '' : '&nbsp;/&nbsp;'}}</span>
                    </div>
@@ -37,24 +37,10 @@
 
                   </h4>
 
+
                   <mat-accordion>
-                          <mat-expansion-panel  *ngFor="let content of article.menuLeft; let i = index" multi="false" displayMode="flat" [hideToggle]="content.subMenuLeft.length==0 ? true: null"  [expanded]="statusID ? (i == statusID) : content?.activeMenu">
-
-                              <mat-expansion-panel-header>
-                                <mat-panel-title  (click)="clickSideMenu(content, i, 'archive')">
-                                  <a class="warna_font sideBarMenu--link font-size-s" [routerLinkActive]="['active']"  [style.font-weight]="content.activeMenu ? 'bold' : 'normal'"  [style.color]="content.activeMenu ? getTheme() : '#333'" >{{content.categoryName}}</a>
-                                </mat-panel-title>
-                              </mat-expansion-panel-header>
-                              <div *ngFor="let subcontent of content.subMenuLeft" class="submenu" >
-                                <div (click)="clickSideMenuSubCategory(subcontent.contentCode, i, 'archive')">
-
-                                  <a class="warna_font sideBarMenu--link font-size-s" #subContent [style.font-weight]="subcontent.activeMenu ? 'bold' : 'normal'"  [style.color]="subcontent.activeMenu ? getTheme() : '#333'">
-                                  {{subcontent.contentTitle}}
-                                  </a>
-                                </div>
-                              </div>
-                          </mat-expansion-panel>
-                      </mat-accordion>
+                      <gosg-leftmenu [sessions]="article.menuLeft"  [menuType]="moduleName" [templateName]="article.template"></gosg-leftmenu>
+                    </mat-accordion>
 
               </div>
           </div>

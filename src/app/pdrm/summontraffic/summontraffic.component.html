@@ -2,7 +2,7 @@
     <div class="container">
          <div class="row">
             <div class="col-md-12">
-                <h1 style="margin-top: 10px;" class="font-size-l"> {{ 'home.menu.policeReport' | translate }}</h1>
+                <h1 style="margin-top: 10px;" class="font-size-l"> {{ 'home.menu.summonStatus' | translate }}</h1>
                 <hr class="hr-custom2"><br>
                 <ul class="list-inline" style="clear:both;">
                     <li>
@@ -10,10 +10,16 @@
                             {{'home.menu.home' | translate }}
                         </a>
                     </li>
-                    <!-- <li>/</li>
+                    <li>/</li>
                     <li>
-                        {{'home.breadcrumb.register' | translate}}
-                    </li> -->
+                        <a class="font-size-s" routerLink="/digitalservices">
+                            {{'home.menu.digitalsvc' | translate }}
+                        </a>
+                    </li>
+                    <li>/</li>
+                    <li>
+                        {{ 'home.menu.summonStatus' | translate }}
+                    </li>
                 </ul>
             </div>
         </div>
@@ -33,13 +39,13 @@
                     <div class="col-md-3">
                         <mat-form-field>
                             <mat-select formControlName="optSelect" placeholder="" (change)="getSelection($event)">
-                                <mat-option [value]=1>NO. KAD PENGENALAN</mat-option>
-                                <mat-option [value]=2>NO. KENDERAAN</mat-option>                   
+                                <mat-option [value]=0>NO. KAD PENGENALAN</mat-option>
+                                <mat-option [value]=1>NO. KENDERAAN</mat-option>                   
                             </mat-select>
                         </mat-form-field>
                     </div>
 
-                    <div class="col-md-3" *ngIf="varSelect==1">
+                    <div class="col-md-3" *ngIf="varSelect==0">
                         <mat-form-field>
                             <input matInput placeholder="No. Kad Pengenalan" formControlName="ic" (keyup)="checkReqValues()"
                             (keydown)="isNumber($event)" maxlength="12" required tabindex="2" style="color: black">
@@ -49,7 +55,7 @@
                         </mat-form-field>
                     </div>
 
-                    <div class="col-md-3" *ngIf="varSelect==2">
+                    <div class="col-md-3" *ngIf="varSelect==1">
                         <mat-form-field>
                             <input matInput placeholder="No. Kenderaan" formControlName="noCar" (keyup)="checkReqValues()"
                             required tabindex="3"  style="color: black">
@@ -84,7 +90,7 @@
             </div>
         </div>
 
-        <div class="row container">
+        <!-- <div class="row container">
             <div class="col-md-3" style="color: black">
                 No. Kad Pengenalan Baru<br>
                 Nama<br>
@@ -98,26 +104,26 @@
                 {{summon}}<br>
                 {{ammount}}
             </div>
-        </div> 
+        </div>  -->
 
         <div class="row container" style="padding-left: 30px;">
             <table class="mat-table" style="width:100%; z-index: 9999;">
                 <tr class="mat-header-row" style="height:45px; font-weight: bold;">
-                    <th width="5%" class="mat-header-cell">{{'appmngt.tableHeader.num' | translate}}</th>
+                    <th width="5%" class="mat-header-cell text-center">{{'appmngt.tableHeader.num' | translate}}</th>
                     <th width="15%" class="mat-header-cell">No. Kenderaan</th>
                     <th class="mat-header-cell">No. Saman</th>
-                    <th width="15%" class="mat-header-cell">Tarikh & Masa Kesalahan</th>
+                    <th width="15%" class="mat-header-cell text-center">Tarikh & Masa Kesalahan</th>
                     <th width="15%" class="mat-header-cell">Tempat Kesalahan</th>
-                    <th width="10%" class="mat-header-cell text-center">Amaun (RM)</th>
+                    <th width="10%" class="mat-header-cell text-right">Amaun (RM)</th>
                     <th width="10%" class="mat-header-cell text-center">Imej</th>
                 </tr>
-                <tr class="mat-row" *ngFor="let data of dataApp; let i = index;" role="row">
+                <tr class="mat-row" *ngFor="let data of dataSummons.summonDetails; let i = index;" role="row">
                     <td class="mat-cell text-center">{{i+1}}</td>
-                    <td class="mat-cell">{{data.submissionRefno}}</td>
-                    <td class="mat-cell">{{data.submissionName}}</td>
-                    <td class="mat-cell text-center">kk</td>
-                    <td class="mat-cell">tt</td>
-                    <td class="mat-cell text-right">300</td>
+                    <td class="mat-cell">{{data.vehicle_registration_number}}</td>
+                    <td class="mat-cell">{{data.summons_id_key}}</td>
+                    <td class="mat-cell text-center">{{data.offence_date}} & {{data.offence_time}}</td>
+                    <td class="mat-cell">{{data.offence_location}}</td>
+                    <td class="mat-cell text-right">{{data.summons_amt}}</td>
                     <td class="mat-cell text-center">-</td>
                 </tr>
                 <tr *ngIf="showNoData">
@@ -151,7 +157,7 @@
         </div>
     </div>
   
-    <div *ngIf="showDetails">
+    <div *ngIf="dataSummons">
         <div class="row container">
             <div class="col-md-12" style="color: black; font-weight: bold; text-align: center;">
                 ANDA TIADA SAMAN TRAFIK.<br>

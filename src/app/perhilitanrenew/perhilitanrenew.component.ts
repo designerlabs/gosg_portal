@@ -48,6 +48,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
   fourthFormGroup: FormGroup;
   fifthFormGroup: FormGroup;
 
+  noLesen: FormControl;
   namaPemohon: FormControl;
   icPemohon: FormControl;
   phonePemohon: FormControl;
@@ -116,25 +117,28 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
   public dbdaerah: any;
   public dbnegeri: any;
 
-  public selectedWarganegara: any;
   public selectedTypeIC = 1;
   public selectedPoskodT: any;
   public selectedPoskodSurat: any;
   public selectedPoskodComp: any;
-  public selectedOccupation: any;
   public cityT: any;
   public citySurat: any;
+  public cityCompany: any;
+  public cityCompany2: any;
   public poskodIdT: any;
   public poskodIdMailing: any;
   public stateCompany: any;
   public selectedFile1: any;
   public selectedFile2: any;
+  public viewRoc: any;
+  public viewPbt: any;
 
   public maskPostcode: any;
   public maskIC: any;
   public maskPhone: any;
 
   flagHantar = true;
+  flag1 = true;
   flag2 = true;
   flag3 = true;
   flag4 = true;
@@ -199,21 +203,8 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     this.maskIC = this.validateService.getMask().icno2;
     this.maskPhone = this.validateService.getMask().telephone;
    
-
-    // this.firstFormGroup = this._formBuilder.group({
-    //   namaPemohon: [''],
-    //   icPemohon: [''],
-    //   phonePemohon: [''],
-    //   emailPemohon: [''],
-    //   add1: [''],
-    //   add2: [''],
-    //   add3: [''],
-    //   poskodPemohon: [''],
-    //   daerahPemohon: [''],
-    //   negeriPemohon: ['']
-    // });
-
     this.firstFormGroup = this._formBuilder.group({
+      noLesen: new FormControl(),
       namaPemohon: new FormControl(),
       icPemohon: new FormControl(),
       phonePemohon: new FormControl(),
@@ -276,17 +267,69 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     this.getNationality(this.langID);
     this.getJIC(this.langID);
     this.getOccupation(this.langID);
-    this.getGroupOcc(this.langID);
+    //this.getGroupOcc(this.langID);
     this.getJenisMilikan(this.langID);
     this.getListRegComp(this.langID);
     this.getListBusiness(this.langID);
     this.getUserData();
 
-    this.secondFormGroup.get('warganegara').setValue(1);
-    this.selectedWarganegara = 1;
-    this.secondFormGroup.get('typeIC').setValue(1);
-    this.fourthFormGroup.get('companyType').setValue(3);
-    this.fifthFormGroup.get('agreement').setValue(false);
+    this.disabled();
+
+    // this.secondFormGroup.get('warganegara').setValue(1);
+    // this.secondFormGroup.get('typeIC').setValue(1);
+    // this.fourthFormGroup.get('companyType').setValue(3);
+    // this.fifthFormGroup.get('agreement').setValue(false);
+  }
+
+  disabled(){
+    this.firstFormGroup.get('namaPemohon').disable();
+    this.firstFormGroup.get('icPemohon').disable();
+    this.firstFormGroup.get('phonePemohon').disable();
+    this.firstFormGroup.get('emailPemohon').disable();
+    this.firstFormGroup.get('add1').disable();
+    this.firstFormGroup.get('poskodPemohon').disable();
+    this.firstFormGroup.get('daerahPemohon').disable();
+    this.firstFormGroup.get('negeriPemohon').disable();
+
+    this.secondFormGroup.get('warganegara').disable();
+    this.secondFormGroup.get('typeIC').disable();
+    this.secondFormGroup.get('icpassport').disable();
+    this.secondFormGroup.get('namaPemilik').disable();
+    this.secondFormGroup.get('phonePemilik').disable();
+    this.secondFormGroup.get('jobType').disable();
+    this.secondFormGroup.get('jobGroup').disable();
+    this.secondFormGroup.get('addPemilik').disable();
+    this.secondFormGroup.get('poskodPemilik').disable();
+    this.secondFormGroup.get('daerahPemilik').disable();
+    this.secondFormGroup.get('negeriPemilik').disable();
+
+    this.thirdFormGroup.get('mailingAdd').disable();
+    this.thirdFormGroup.get('mailingPoskod').disable();
+    this.thirdFormGroup.get('mailingDaerah').disable();
+    this.thirdFormGroup.get('mailingNegeri').disable();
+    this.thirdFormGroup.get('copyAdd').disable();
+
+    this.fourthFormGroup.get('companyType').disable();
+    this.fourthFormGroup.get('jenisMilikan').disable();
+    this.fourthFormGroup.get('registerType').disable();
+    this.fourthFormGroup.get('registerNo').disable();
+    this.fourthFormGroup.get('companyName').disable();
+    this.fourthFormGroup.get('companyAdd').disable();
+    this.fourthFormGroup.get('companyPoskod').disable();
+    this.fourthFormGroup.get('companyDaerah').disable();
+    this.fourthFormGroup.get('companyNegeri').disable();
+    this.fourthFormGroup.get('companyPhone').disable();
+    this.fourthFormGroup.get('companyFax').disable();
+    this.fourthFormGroup.get('copyAddPemilik').disable();
+
+    this.fifthFormGroup.get('lsnActivity').disable();
+    //this.fifthFormGroup.get('businessCat').disable();
+    this.fifthFormGroup.get('file1').disable();
+    this.fifthFormGroup.get('file2').disable();
+    //this.fifthFormGroup.get('agreement').disable();
+    this.fifthFormGroup.get('dispBase641').disable();
+    this.fifthFormGroup.get('dispBase642').disable();
+
   }
 
   getUserData(){
@@ -314,14 +357,6 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
             this.dbdaerah = data.user.address.permanentAddressCity.cityId;
             this.dbnegeri = data.user.address.permanentAddressState.stateId;
 
-            // this.protectedService.getProfile(data.user.pid).subscribe(
-            // data => {
-            //   this.sharedService.errorHandling(data, (function(){
-                                
-            //   }).bind(this));
-            // },
-            // error => {
-            // });
           }else{
           }
         }).bind(this));
@@ -333,8 +368,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
       });
     }
 
-    else{ //need to be deleted Noraini for local only
-      
+    else{ //need to be deleted Noraini for local only      
 
       let data = {
         "user": {
@@ -465,9 +499,9 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     });
   }
 
-  getGroupOcc(lang){
+  getGroupOcc(val, lang){
 
-    this.protectedService.getProtected('perhilitan/dropdown/job/workgroup/1',lang).subscribe(
+    this.protectedService.getProtected('perhilitan/dropdown/job/workgroup/'+val,lang).subscribe(
     data => {
 
       this.sharedService.errorHandling(data, (function(){
@@ -519,91 +553,10 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     });
   }
 
-  getDetailIC(lang, formValue: any){
-
-    if(formValue.icpassport.length > 5){
-
-      this.flag2 = true; 
-      this.flag3 = true; 
-
-      this.protectedService.getProtected('perhilitan/searchnokp/'+formValue.icpassport,lang).subscribe(
-      data => {
-
-        this.sharedService.errorHandling(data, (function(){
-          console.log(data);    
-          if(data.noKpResourceList[0].nama != ""){
-            this.secondFormGroup.get('namaPemilik').setValue(data.noKpResourceList[0].nama);
-            this.secondFormGroup.get('phonePemilik').setValue(data.noKpResourceList[0].notel);
-            this.secondFormGroup.get('jobType').setValue(parseInt(data.noKpResourceList[0].pekerjaan));
-            this.secondFormGroup.get('jobGroup').setValue(parseInt(data.noKpResourceList[0].kumpulanpekerjaan));
-            this.secondFormGroup.get('addPemilik').setValue(data.noKpResourceList[0].alamat);
-            this.secondFormGroup.get('poskodPemilik').setValue(data.noKpResourceList[0].poskod);
-            
-            this.thirdFormGroup.get('mailingAdd').setValue(data.noKpResourceList[0].alamatsurat);
-            this.thirdFormGroup.get('mailingPoskod').setValue(data.noKpResourceList[0].poskodsurat);        
-            
-            this.selectedPoskodT = data.noKpResourceList[0].poskod;
-            this.selectedPoskodSurat = data.noKpResourceList[0].poskodsurat;
-            this.selectedOccupation = parseInt(data.noKpResourceList[0].pekerjaan);
-            this.cityT = data.noKpResourceList[0].postcodeid;
-            this.citySurat = data.noKpResourceList[0].postcodeidsurat;
-          
-            this.checkposkod(1, this.selectedPoskodT);
-            this.checkposkod(2, this.selectedPoskodSurat);
-            
-            this.secondFormGroup.get('namaPemilik').disable();
-            this.secondFormGroup.get('addPemilik').disable();
-            this.secondFormGroup.get('poskodPemilik').disable();
-            this.secondFormGroup.get('daerahPemilik').disable();
-            this.secondFormGroup.get('negeriPemilik').disable();
-
-          }
-
-          else{
-            this.resetForm23();
-          }
-
-        }).bind(this));
-      },
-      error => {
-      });
-    }
-
-    else{
-      this.resetForm23();
-    }
-
-  }
-
-  resetForm23(){
-    
-    this.secondFormGroup.get('namaPemilik').setValue('');
-    this.secondFormGroup.get('phonePemilik').setValue('');
-    this.secondFormGroup.get('jobType').setValue(1);
-    this.secondFormGroup.get('jobGroup').setValue('');
-    this.secondFormGroup.get('addPemilik').setValue('');
-    this.secondFormGroup.get('poskodPemilik').setValue('');
-    this.secondFormGroup.get('daerahPemilik').setValue('');
-    this.secondFormGroup.get('negeriPemilik').setValue('');
-
-    this.thirdFormGroup.get('mailingAdd').setValue('');
-    this.thirdFormGroup.get('mailingPoskod').setValue('');        
-    this.thirdFormGroup.get('mailingDaerah').setValue('');
-    this.thirdFormGroup.get('mailingNegeri').setValue('');
-
-    this.secondFormGroup.get('namaPemilik').enable();
-    this.secondFormGroup.get('addPemilik').enable();
-    this.secondFormGroup.get('poskodPemilik').enable();
-    this.secondFormGroup.get('daerahPemilik').enable();
-    this.secondFormGroup.get('negeriPemilik').enable();
-
-    this.checkReqValues2();
-  }
-
   checkReqValues2() {
     let reqVal: any;
 
-    if(this.selectedOccupation == 1 || this.secondFormGroup.get('jobType').value == 1){
+    if(this.secondFormGroup.get('jobType').value == 1){
       reqVal = ["icpassport", 
                 "namaPemilik", 
                 "phonePemilik", 
@@ -719,14 +672,12 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
 
   checkWarganegara(formValue: any){
 
-    this.selectedWarganegara = formValue.warganegara;
-
     if(formValue.warganegara == 1){
       this.secondFormGroup.get('typeIC').setValue(1);
     }
 
     else{
-      this.secondFormGroup.get('typeIC').setValue(0);
+      this.secondFormGroup.get('typeIC').setValue(2);
     }
   }
 
@@ -744,8 +695,8 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
   }
 
   checkOccupation(formValue: any){
-    this.selectedOccupation = formValue.jobType;
 
+    this.getGroupOcc(formValue.jobType, this.langID)
     if(formValue.jobType != 1){
       this.secondFormGroup.get('jobGroup').setValue(null);
       this.secondFormGroup.get('jobGroup').disable();
@@ -859,7 +810,14 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
           }
 
           else{ //when city more than one
-         
+            for (let i = 0; i < this.listdaerahCompany.length; i++) { 
+
+              if(this.cityCompany == this.listdaerahCompany[i].city.toLowerCase() && this.cityCompany2 == this.listdaerahCompany[i].formValue){               
+              
+                this.fourthFormGroup.get('companyDaerah').setValue(this.listdaerahCompany[i].postcodeId);     
+                this.fourthFormGroup.get('companyNegeri').setValue(this.listdaerahCompany[i].state); 
+              }
+            }  
           }
 
           this.checkReqValues4();
@@ -909,7 +867,9 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
   }
 
   changeBuss(formValue: any){
-    this.protectedService.getProtected('perhilitan/activity/catbusiness/ref/'+formValue.lsnActivity,this.langID).subscribe(
+
+    console.log(formValue);
+    this.protectedService.getProtected('perhilitan/activity/catbusiness/ref/'+formValue,this.langID).subscribe(
     data => {
 
       this.sharedService.errorHandling(data, (function(){
@@ -1059,16 +1019,107 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     }
   }
 
+  checkLisence(val){
+    console.log(val);
+    this.protectedService.getProtected('perhilitan/searchnolic/'+val.noLesen,this.langID).subscribe(
+    data => {
+
+      this.sharedService.errorHandling(data, (function(){
+
+        let dataLisence = data;           
+        let getObjKeys = Object.keys(dataLisence);
+        let valObj = getObjKeys.filter(fmt => fmt === "noLicenceCanRenewResourceList");
+
+        if(valObj.length == 1){
+          this.flag1 = false;
+          dataLisence = data.noLicenceCanRenewResourceList
+                  
+          if(dataLisence[0].ictype == 1){ 
+            this.selectedTypeIC = 1; //1
+          }else{
+            this.selectedTypeIC = 0; //0
+          }
+
+          this.secondFormGroup.get('warganegara').setValue(parseInt(dataLisence[0].warganegara));
+          this.secondFormGroup.get('typeIC').setValue(parseInt(dataLisence[0].ictype));
+          this.secondFormGroup.get('icpassport').setValue(dataLisence[0].icno);          
+          this.secondFormGroup.get('namaPemilik').setValue(dataLisence[0].nama);
+          this.secondFormGroup.get('phonePemilik').setValue(dataLisence[0].notel);
+          this.secondFormGroup.get('jobType').setValue(parseInt(dataLisence[0].pekerjaan));
+          this.secondFormGroup.get('jobGroup').setValue(dataLisence[0].kumpulankerja);
+          this.secondFormGroup.get('addPemilik').setValue(dataLisence[0].alamat);
+          let splitPoskod = dataLisence[0].poskod;
+          splitPoskod = splitPoskod.substring(0,5);
+          this.secondFormGroup.get('poskodPemilik').setValue(splitPoskod);    
+
+          this.thirdFormGroup.get('mailingAdd').setValue(dataLisence[0].alamatsurat);
+          let splitPoskodMail = dataLisence[0].poskodsurat;
+          splitPoskodMail = splitPoskodMail.substring(0,5);
+          this.thirdFormGroup.get('mailingPoskod').setValue(splitPoskodMail);               
+
+          this.fourthFormGroup.get('companyType').setValue(parseInt(dataLisence[0].companytype));
+          this.fourthFormGroup.get('jenisMilikan').setValue(parseInt(dataLisence[0].pemilikan));
+          this.fourthFormGroup.get('registerType').setValue(parseInt(dataLisence[0].regtype));
+          this.fourthFormGroup.get('companyName').setValue(dataLisence[0].companyname);
+          this.fourthFormGroup.get('companyAdd').setValue(dataLisence[0].companyaddress);
+          this.fourthFormGroup.get('registerNo').setValue(dataLisence[0].roc);
+          let splitPoskodComp= dataLisence[0].companypostcode;
+          splitPoskodComp = splitPoskodComp.substring(0,5);
+          this.fourthFormGroup.get('companyPoskod').setValue(splitPoskodComp);   
+          this.fourthFormGroup.get('companyPhone').setValue(dataLisence[0].companynotel);
+          this.fourthFormGroup.get('companyFax').setValue(dataLisence[0].companynofax);
+          
+          this.selectedPoskodT = splitPoskod;
+          this.selectedPoskodSurat = splitPoskodMail;
+          this.selectedPoskodComp = splitPoskodComp;
+          this.cityT = dataLisence[0].alamatposkodid;
+          this.citySurat = dataLisence[0].alamatsuratposkodid;
+          this.cityCompany = dataLisence[0].companydaerah.toLowerCase();
+          this.cityCompany2 = dataLisence[0].companynegeri;
+
+          this.viewRoc = dataLisence[0].urlroc;
+          this.viewPbt = dataLisence[0].urlpbt;
+
+          this.checkposkod(1, this.selectedPoskodT);
+          this.checkposkod(2, this.selectedPoskodSurat);
+          this.checkposkod(3, this.selectedPoskodComp);
+         
+          this.changeBuss(dataLisence[0].lesen);
+
+          this.fifthFormGroup.get('lsnActivity').setValue(parseInt(dataLisence[0].lesen));
+          this.fifthFormGroup.get('businessCat').setValue(parseInt(dataLisence[0].catbisness));
+
+        }
+
+        else{
+          this.flag1 = true;
+          dataLisence = data.noLicenceResourceList;
+
+          if(dataLisence[0].status == "Pembaharuan Lesen Telah Dibuat"){
+
+          }else{
+            this.toastr.error(dataLisence[0].status, '');
+          }
+        }
+       
+      }).bind(this));
+    },
+    error => {            
+    });
+  }
+
+  openRoc(){
+
+    window.open(this.viewRoc,'_blank');
+  }
+
+  openPbt(){
+
+    window.open(this.viewPbt,'_blank');
+  }
+
   draft(){
-   
-    // let formData: FormData = new FormData();
-    // for (let file of this.selectedFile1) {
-    //   formData.append('roc', file.files[0], file.files[0].name);
-    // }
-    // for (let file of this.selectedFile2) {
-    //   formData.append('pbt', file.files[0], file.files[0].name);
-    // }
-  
+    
     let body = {
       "licensePasscode": "",
       "licenseNo": "",
@@ -1139,7 +1190,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     }
 
     body.licensePasscode = "";
-    body.licenseNo = "";
+    body.licenseNo = this.firstFormGroup.get('noLesen').value;
     body.userFullname = this.secondFormGroup.get('namaPemilik').value;
     body.userAddress = this.secondFormGroup.get('addPemilik').value;
     body.userPostcode = this.secondFormGroup.get('poskodPemilik').value; 
@@ -1149,7 +1200,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     body.userMailingPostcode = this.thirdFormGroup.get('mailingPoskod').value;
     body.userIcNo = this.secondFormGroup.get('icpassport').value;
     body.userEmail = this.firstFormGroup.get('emailPemohon').value;
-    body.userApplicationType = "Draft";
+    body.userApplicationType = "isDraft";
     body.userPhoneNo = this.secondFormGroup.get('phonePemilik').value;
     body.userFaxNo = "";
     body.userCompanyName = this.fourthFormGroup.get('companyName').value;
@@ -1172,8 +1223,8 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     body.nationality.nationalityId = this.secondFormGroup.get('warganegara').value; 
     body.icType.icTypeId = this.secondFormGroup.get('typeIC').value; 
     body.icType.nationality.nationalityId = this.secondFormGroup.get('warganegara').value; 
-    body.jobType.jobTypeId = this.secondFormGroup.get('jobGroup').value;
-    body.workgroup.workGroupId = this.secondFormGroup.get('jobType').value; 
+    body.jobType.jobTypeId = this.secondFormGroup.get('jobType').value;
+    body.workgroup.workGroupId = this.secondFormGroup.get('jobGroup').value; 
     body.workgroup.jobType.jobTypeId = this.secondFormGroup.get('jobType').value; 
     body.businessType.businessTypeId = this.fourthFormGroup.get('companyType').value; 
     body.registerType.registerTypeId = this.fourthFormGroup.get('registerType').value; 
@@ -1190,7 +1241,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     this.protectedService.create(body,'perhilitan/draft/save',this.langID).subscribe(
     data => {
       this.sharedService.errorHandling(data, (function () {
-        this.toastr.success(this.translate.instant('Permohonan Baru Lesen Peniaga/Taksidermi berjaya disimpan sebagai draft'), '');
+        this.toastr.success(this.translate.instant('Pembaharuan Lesen Peniaga/Taksidermi berjaya disimpan sebagai draft'), '');
         console.log("SUBMITTED");
         console.log(data);
         //this.router.navigate(['media/upload']);
@@ -1207,135 +1258,129 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
   submit(){
 
     let body = {
-      "licensePasscode": "",
-      "licenseNo": "",
-      "userFullname": null,
-      "userAddress": "",
-      "userPostcode": "",
-      "userPostcodeId":"",
-      "userMailingPostcodeId":"",
-      "userMailingAddress": "",
-      "userMailingPostcode": "",
+      "licenseNo": null,
       "userIcNo": null,
       "userEmail": null,
-      "userApplicationType": "Apply",
-      "userPhoneNo": "",
+      "jobType": {
+        "jobTypeId": null
+      },
+      "workgroup": {
+        "workGroupId": null
+      },
+      "userPhoneNo": null,
       "userFaxNo": "",
-      "userCompanyName": "",
-      "userCompanyAddress": "",
-      "userCompanyPostcode": "",
-      "userCompanyPhoneNo": "",
+      "businessType": {
+        "businessTypeId": null
+      },
+      "userCompanyName": null,
+      "userCompanyRegNo": null,
+      "registerType": {
+        "registerTypeId": null
+      },
+      "userCompanyAddress": null,
+      "userCompanyPostcode": null,
+      "userCompanyPhoneNo": null,
       "userCompanyFaxNo": "",
-      "userCompanyRegNo": "",
-      "userCompanyDistrict": "",
-      "attachFileRoc": "",
-      "extFileRoc": "",
-      "attachFilePbt": "",
-      "extFilePbt": "",
+      "userCompanyDistrict": null,
+      "state": {
+        "stateId": null
+      },
+      "attachFileRoc": null,
+      "extFileRoc": null,
+      "attachFilePbt": null,
+      "extFilePbt": null,
       "attachFileIc": "",
       "extFileIc": "",
+      "userApplicationType": null,
       "userApplyStatus": "",
       "userLicenseNoStatus": "",
       "userLicenseRenewStatus": "",
       "userLicenseCronRenewStatus": "",
-      "nationality": {
-        "nationalityId": null
-      },
-      "icType": {
-        "icTypeId": null,
-        "nationality": {
-          "nationalityId": null,
-        }
-      },
-      "jobType": {
-        "jobTypeId": null,
-      },
-      "workgroup": {
-        "workGroupId": null,
-        "jobType": {
-          "jobTypeId": null
-        }
-      },
-      "businessType": {
-        "businessTypeId": null
-      },
-      "registerType": {
-        "registerTypeId": null
-      },
-      "state": {
-        "stateId": null
-      },
+      "licensePasscode": "",
       "activity": {
         "activityId": null
       },
       "businessCategory": {
         "businessCategoryId": null
       },
-      "isDraft": null,
-      "cronStatus": false
+      "nationality": {
+        "nationalityId": null
+      },
+      "icType": {
+        "icTypeId": null,
+        "nationality": {
+          "nationalityId": null
+        }
+      },
+      "userFullname": "",
+      "userAddress": "",
+      "userPostcode": "",
+      "userMailingAddress": "",
+      "userMailingPostcode": "",
     }
 
-    body.licensePasscode = "";
-    body.licenseNo = "";
-    body.userFullname = this.secondFormGroup.get('namaPemilik').value;
-    body.userAddress = this.secondFormGroup.get('addPemilik').value;
-    body.userPostcode = this.secondFormGroup.get('poskodPemilik').value; 
-    body.userPostcodeId = this.poskodIdT; 
-    body.userMailingPostcodeId = this.poskodIdMailing;    
-    body.userMailingAddress = this.thirdFormGroup.get('mailingAdd').value;
-    body.userMailingPostcode = this.thirdFormGroup.get('mailingPoskod').value;
+    body.licenseNo = this.firstFormGroup.get('noLesen').value;
     body.userIcNo = this.secondFormGroup.get('icpassport').value;
     body.userEmail = this.firstFormGroup.get('emailPemohon').value;
-    body.userApplicationType = "Apply";
+    body.jobType.jobTypeId = this.secondFormGroup.get('jobType').value;
+    body.workgroup.workGroupId = this.secondFormGroup.get('jobGroup').value; 
     body.userPhoneNo = this.secondFormGroup.get('phonePemilik').value;
     body.userFaxNo = "";
+    body.businessType.businessTypeId = this.fourthFormGroup.get('companyType').value; 
     body.userCompanyName = this.fourthFormGroup.get('companyName').value;
+    body.userCompanyRegNo = this.fourthFormGroup.get('registerNo').value;
+    body.registerType.registerTypeId = this.fourthFormGroup.get('registerType').value; 
     body.userCompanyAddress = this.fourthFormGroup.get('companyAdd').value;
     body.userCompanyPostcode = this.fourthFormGroup.get('companyPoskod').value;
     body.userCompanyPhoneNo = this.fourthFormGroup.get('companyPhone').value;
     body.userCompanyFaxNo = this.fourthFormGroup.get('companyFax').value;
-    body.userCompanyRegNo = this.fourthFormGroup.get('registerNo').value;
     body.userCompanyDistrict = this.fourthFormGroup.get('companyDaerah').value; 
+    body.state.stateId = this.stateCompany;
     body.attachFileRoc = this.fifthFormGroup.get('dispBase641').value;
     body.extFileRoc = this.selectedFile1[0].files[0].name.split('.')[1];
     body.attachFilePbt = this.fifthFormGroup.get('dispBase642').value;
     body.extFilePbt = this.selectedFile2[0].files[0].name.split('.')[1];
     body.attachFileIc = "";  
     body.extFileIc = "";
+    body.userApplicationType = "Renew";   
     body.userApplyStatus = "";
     body.userLicenseNoStatus = "";
     body.userLicenseRenewStatus = "";
     body.userLicenseCronRenewStatus = "";
+    body.licensePasscode = "";
+    body.activity.activityId = this.fifthFormGroup.get('lsnActivity').value; 
+    body.businessCategory.businessCategoryId = this.fifthFormGroup.get('businessCat').value;
     body.nationality.nationalityId = this.secondFormGroup.get('warganegara').value; 
     body.icType.icTypeId = this.secondFormGroup.get('typeIC').value; 
     body.icType.nationality.nationalityId = this.secondFormGroup.get('warganegara').value; 
-    body.jobType.jobTypeId = this.secondFormGroup.get('jobGroup').value;
-    body.workgroup.workGroupId = this.secondFormGroup.get('jobType').value; 
-    body.workgroup.jobType.jobTypeId = this.secondFormGroup.get('jobType').value; 
-    body.businessType.businessTypeId = this.fourthFormGroup.get('companyType').value; 
-    body.registerType.registerTypeId = this.fourthFormGroup.get('registerType').value; 
-    body.state.stateId = this.stateCompany;
-    body.activity.activityId = this.fifthFormGroup.get('lsnActivity').value; 
-    body.businessCategory.businessCategoryId = this.fifthFormGroup.get('businessCat').value;
-    body.isDraft = "True";
-    body.cronStatus = false;
+    body.userFullname = this.secondFormGroup.get('namaPemilik').value;
+    body.userAddress = this.secondFormGroup.get('addPemilik').value;
+    body.userPostcode = this.secondFormGroup.get('poskodPemilik').value;     
+    body.userMailingAddress = this.thirdFormGroup.get('mailingAdd').value;
+    body.userMailingPostcode = this.thirdFormGroup.get('mailingPoskod').value;
+
+    // body.userPostcodeId = this.poskodIdT; 
+    // body.userMailingPostcodeId = this.poskodIdMailing;    
+    // body.workgroup.jobType.jobTypeId = this.secondFormGroup.get('jobType').value;  
+    // body.isDraft = "True";
+    // body.cronStatus = false;
     
     // Add Media file upload Service
    
     console.log(JSON.stringify(body));
     
-    this.protectedService.create(body,'perhilitan/draft/save',this.langID).subscribe(
-    data => {
-      this.sharedService.errorHandling(data, (function () {
-        this.toastr.success(this.translate.instant('Permohonan Baru Lesen Peniaga/Taksidermi berjaya dihantar'), '');
-        //this.router.navigate(['media/upload']);
-      }).bind(this));
-      //this.loading = false;
-    },
-    error => {
-      //this.loading = false;
-      this.toastr.error(JSON.parse(error._body).statusDesc, '');
-    });
+    // this.protectedService.create(body,'perhilitan/renew',this.langID).subscribe(
+    // data => {
+    //   this.sharedService.errorHandling(data, (function () {
+    //     this.toastr.success(this.translate.instant('Permohonan Baru Lesen Peniaga/Taksidermi berjaya dihantar'), '');
+    //     //this.router.navigate(['media/upload']);
+    //   }).bind(this));
+    //   //this.loading = false;
+    // },
+    // error => {
+    //   //this.loading = false;
+    //   this.toastr.error(JSON.parse(error._body).statusDesc, '');
+    // });
   }
 
 }

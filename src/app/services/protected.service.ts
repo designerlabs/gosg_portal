@@ -63,7 +63,8 @@ export class ProtectedService {
   private statusAppUrl: string = this.config.statusAppUrl;
   private urlAgencyList: string = this.config.urlAgencyList;
   private dataAppUrl: string = this.config.dataAppUrl;
-  private urlPerhilitan: string = this.config.urlPerhilitan;
+  private urlPerhilitan: string = this.config.urlAgencyDservice;
+  private urlPdrm: string = this.config.urlAgencyDservice;
 
 
   createProfile(user) {
@@ -218,9 +219,51 @@ export class ProtectedService {
     .catch(this.handleError);
   }
 
+  getPdrm(modules, arrObj){
+    
+    let svcName = modules.split('/')[1];
+    let type;
+    let plateNo;
+    let rptNo;
+    let params;
+
+    if(svcName == 'summon-traffic') {
+
+      type = arrObj[0];
+      plateNo = arrObj[2];
+
+      if(type == 1)
+        params = '?typeId='+type+'&vehicleNo='+plateNo;
+      else
+        params = '?typeId='+type+'&vehicleNo=';
+
+    } else if(svcName == 'checkPoliceReport') {
+
+        rptNo = arrObj[0];
+        params = '?reportNo='+rptNo;
+
+    } else if(svcName == 'checkPoliceIntake') {
+
+        params = '';
+        
+    }
+
+    return this.http.post(this.urlPdrm + modules + params,null)
+    .map((response: Response) => response.json())
+    .retry(5)
+    .catch(this.handleError);
+  }
+
   create(data, moduleName, lang) {
     let createUrl = this.urlPerhilitan   + moduleName + '?language='+lang;
     return this.http.post(createUrl, data)
+    .map((response: Response) => response.json())
+    .catch(this.handleError);
+  }
+
+  update(data, moduleName, lang) {
+    let createUrl = this.urlPerhilitan   + moduleName + '?language='+lang;
+    return this.http.put(createUrl, data)
     .map((response: Response) => response.json())
     .catch(this.handleError);
   }

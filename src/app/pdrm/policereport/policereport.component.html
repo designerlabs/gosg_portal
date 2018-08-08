@@ -10,10 +10,16 @@
                           {{'home.menu.home' | translate }}
                       </a>
                   </li>
-                  <!-- <li>/</li>
+                  <li>/</li>
                   <li>
-                      {{'home.breadcrumb.register' | translate}}
-                  </li> -->
+                      <a class="font-size-s" routerLink="/digitalservices">
+                          {{'home.menu.digitalsvc' | translate }}
+                      </a>
+                  </li>
+                  <li>/</li>
+                  <li>
+                      {{ 'home.menu.policeReport' | translate }}
+                  </li>
               </ul>
           </div>
       </div>
@@ -36,8 +42,8 @@
                 <div class="row padding-15">
                     <div class="col-md-3">
                         <mat-form-field>
-                            <input matInput placeholder="No. Kad Pengenalan" formControlName="ic" (keydown)="isNumber($event)"
-                            maxlength="12" required tabindex="1" style="color: black">
+                            <input matInput placeholder="No. Kad Pengenalan" formControlName="ic" required 
+                            tabindex="1" style="color: black">
                             <mat-error *ngIf="searchForm.controls.ic.hasError('required')">
                                 No. Kad Pengenalan diperlukan.
                             </mat-error>
@@ -46,8 +52,8 @@
 
                     <div class="col-md-6">
                         <mat-form-field>
-                            <input matInput placeholder="No. Repot Polis" formControlName="noreport" (keyup)="checkReqValues()" (keydown)="isNumber($event)"
-                            maxlength="6" required tabindex="2"  style="color: black">
+                            <input matInput placeholder="No. Repot Polis" formControlName="noreport" (keyup)="checkReqValues()"
+                            required tabindex="2"  style="color: black" [textMask]="{mask: maskReportNo}">
                             <mat-error *ngIf="searchForm.controls.noreport.hasError('required')">
                                 No. Repot Polis diperlukan.
                             </mat-error>
@@ -82,7 +88,7 @@
         </form>
     </div><br>
 
-    <div *ngIf="showDetails">
+    <div *ngIf="showDetails == true">
         <div class="row container">
             <div class="col-md-12" style="color: black; font-weight: bold;">
                 STATUS REPOT POLIS<br>
@@ -133,7 +139,7 @@
         </div>
     </div>
 
-    <div *ngIf="showDetails">
+    <div *ngIf="showDetails == false">
         <div class="row container">
             <div class="col-md-12" style="color: black; font-weight: bold; text-align: center;">
                 ANDA TIADA REPOT POLIS.<br>

@@ -5,7 +5,7 @@ import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { BreadcrumbService } from '../header/breadcrumb/breadcrumb.service';
-
+import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/switchMap';
 import { ISubscription } from 'rxjs/Subscription';
 import { TopnavService } from '../header/topnav/topnav.service';
@@ -28,6 +28,7 @@ export class ArticleprodComponent implements OnInit, OnDestroy {
   isValid: any;
   topicID: number;
   articles: any[];
+  public loading = false;
 
   articleData: any;
   @Output() langChange = new EventEmitter();
@@ -35,7 +36,7 @@ export class ArticleprodComponent implements OnInit, OnDestroy {
   private subscription: ISubscription;
   private subscriptionLang: ISubscription;
 
-  constructor(public articleService: ArticleService, private topnavservice: TopnavService, private route: ActivatedRoute, private navService: NavService, private translate: TranslateService, private router: Router, private breadcrumbService: BreadcrumbService, @Inject(APP_CONFIG) private config: AppConfig) {
+  constructor(private http:HttpClient, public articleService: ArticleService, private topnavservice: TopnavService, private route: ActivatedRoute, private navService: NavService, private translate: TranslateService, private router: Router, private breadcrumbService: BreadcrumbService, @Inject(APP_CONFIG) private config: AppConfig) {
     this.lang = translate.currentLang;
     this.langId = 1;
 
@@ -75,6 +76,7 @@ export class ArticleprodComponent implements OnInit, OnDestroy {
           this.navService.triggerArticle(this.moduleName, this.langId, this.topicID);
         }
       }
+
 
     });
 
@@ -151,7 +153,24 @@ export class ArticleprodComponent implements OnInit, OnDestroy {
   }
 
 
+  appTracking(refCode){
+    this.loading = true;
+    const readUrl = `${this.config.registerationUrl}agencyapplication/tracking?refCode=${refCode}&source=life-event`;
+    const req = this.http.post(readUrl,'')
+      .subscribe(
+        res => {
+          this.loading = false;
+        },
+        err => {
+          console.log("Error occured");
+          this.loading = false;
+        }
+      );
+  }
+
+
   triggerArticle(moduleName, lang, topicID) {
+    this.loading = true;
     this.route.paramMap
       .switchMap((params: ParamMap) =>
         this.navService.getArticleData(moduleName, lang, topicID))
@@ -160,6 +179,7 @@ export class ArticleprodComponent implements OnInit, OnDestroy {
         this.breadcrumb = this.breadcrumbService.getBreadcrumb();
         this.isValid = this.breadcrumbService.isValid = true;
         this.breadcrumb = this.breadcrumb.name = '';
+        this.loading = false;
       });
   }
 

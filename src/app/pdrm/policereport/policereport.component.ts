@@ -11,6 +11,11 @@ import {
     MatInputModule, MatPaginatorModule, MatProgressSpinnerModule,
     MatSortModule, MatTableModule, MatPaginator, MatSort
   } from '@angular/material';
+import { environment } from '../../../environments/environment';
+import { ValidateService } from '../../common/validate.service';
+import { SharedService } from '../../common/shared.service';
+import { ProtectedService } from '../../services/protected.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'gosg-policereport',
@@ -32,7 +37,8 @@ export class PolicereportComponent implements OnInit, OnDestroy {
   public pegawaiSiasat: any;
   public letter = [];
   public listYear = [];
-  public showDetails = false;
+  public showDetails: any;
+  public maskReportNo: any;
 
   searchForm: FormGroup;  
   public ic: FormControl;  
@@ -49,7 +55,12 @@ export class PolicereportComponent implements OnInit, OnDestroy {
     private router: Router,
     private http: Http,
     @Inject(APP_CONFIG) private config: AppConfig,
-    private topnavservice: TopnavService,) {
+    private topnavservice: TopnavService,
+    private sharedService: SharedService,
+    private validateService:ValidateService,
+    private toastr: ToastrService,
+    private protectedService: ProtectedService
+  ) {
 
     this.lang = translate.currentLang;
     this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
@@ -92,6 +103,7 @@ export class PolicereportComponent implements OnInit, OnDestroy {
       this.langID = 1;
     }
 
+    this.maskReportNo = this.validateService.getMask().policeReportNo;
     this.ic = new FormControl();
     this.noreport = new FormControl();
     this.yearreport = new FormControl();
@@ -104,6 +116,7 @@ export class PolicereportComponent implements OnInit, OnDestroy {
     });
 
     this.getYear();
+    this.getUserData();
   }
 
   getYear(){
@@ -120,17 +133,44 @@ export class PolicereportComponent implements OnInit, OnDestroy {
 
   searchApp(formValues: any){
 
-    this.showDetails = true;
+    let reportNo = formValues.noreport;
+    let y = formValues.yearreport;
+    let rn = reportNo + "/" + y;
+    let arrObj = [rn];
 
-    this.noRptPol = "THSL/006026/11";
-    this.dateRptPol = "2011-02-18 17:44:40";
-    this.statusRpt =  "Buka Kertas Siasatan Baru";
+    this.protectedService.getPdrm('pdrm/checkPoliceReport',arrObj).subscribe(
+    data => {
+      this.sharedService.errorHandling(data, (function(){
 
-    this.noKertasSiasat = "DW/JSJ/KS/01114/11";
-    this.seksyenSiasat = "29 (1) AKTA KESALAHAN KECIL 1955,25 (1) (n) PERATURAN-PERATURAN PENDAFTARAN NEGARA 1990";
-    this.statusSiasat = "Dituduh";
-    this.pegawaiSiasat = "C/INSP NURUL HAFIDZ BIN MOHD DERUS";
-    this.letter = ["www.google.com","www.yahoo.com","www.google.com"];
+        let dataReport = data.reportDetails;
+
+        if(dataReport.ipNo != null){
+          this.showDetails = true;
+
+          this.noRptPol = dataReport.reportNo;
+          this.dateRptPol = dataReport.reportDateTime;
+          this.statusRpt =  dataReport.reportStatus;
+
+          this.noKertasSiasat = dataReport.ipNo;
+          this.seksyenSiasat = dataReport.lawSection;
+          this.statusSiasat = dataReport.caseStatus;
+          this.pegawaiSiasat = dataReport.investigationOfficer;
+          this.letter = [dataReport.pem1Url,dataReport.pem2Url,dataReport.pem3Url];              
+          
+        }
+
+        else{
+          this.showDetails = false;
+        }
+     
+      }).bind(this));
+
+    },
+    error => {
+      this.toastr.error(JSON.parse(error._body).statusDesc, '');
+    });
+
+    
   }
 
   openLink(varUrl){
@@ -193,18 +233,50 @@ export class PolicereportComponent implements OnInit, OnDestroy {
     this.resetSearch();
   }
 
-  // getFaq(lang) {
+  getUserData(){
+    
+    this.searchForm.get('ic').disable();
 
-  //   return this.http.get(this.urlFaq + '?language=' + lang + '&page=1&size=99')
+    if(!environment.staging){
+      //this.getPerPostCodeFlag = false;
+      this.protectedService.getUser().subscribe(
+      data => {
+        this.sharedService.errorHandling(data, (function(){
 
-  //   .map((response: Response) => response.json())
-  //   .subscribe(resSliderData => {
-  //     this.faqData = resSliderData
-  //     this.faqList = this.faqData['faqList'];
-      
+          console.log(data);
+          if(data.user){
+            
+            this.searchForm.get('ic').setValue(data.user.identificationNo);
 
-  //   });
+          }else{
+          }
+        }).bind(this));
 
-  // }
+      },
+      error => {
+          location.href = this.config.urlUAP +'uapsso/Logout';
+          //location.href = this.config.urlUAP+'portal/index';
+      });
+    }
+
+    else{ //need to be deleted Noraini for local only      
+
+      let data = {
+        "user": {
+          "userId": 116,
+          "pid": "690521106312",
+          "identificationNo": "690521106312",
+          "passportNo": "",
+          "fullName": "ZAKARIA BIN MOHD NOR",
+          "email": "zakariatestgosg@yopmail.com"
+         
+        }
+      }
+
+    
+      this.searchForm.get('ic').setValue(data.user.identificationNo);
+
+    }
+  }
 
 }

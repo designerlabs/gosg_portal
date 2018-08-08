@@ -14,7 +14,7 @@ import 'rxjs/add/operator/switchMap';
   templateUrl: './archivecontent.component.html',
   styleUrls: ['./archivecontent.component.css']
 })
-export class ArchivecontentComponent implements OnInit, OnDestroy {
+export class ArchivecontentProdComponent implements OnInit, OnDestroy {
   statusID: any;
   @Output() menuClick = new EventEmitter();
   breadcrumb: any;

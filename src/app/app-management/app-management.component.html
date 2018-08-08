@@ -132,13 +132,16 @@
         <td class="mat-cell text-center">{{dateSubmission[i]}}</td>
         <td class="mat-cell text-center">{{statusDesc[i]}}</td>
         <td *ngIf="langID == 1" class="mat-cell text-center">
-            {{data.messageEN}}
-          <!-- <button class="btn btn-sm btn-warning">
-            <i class="fa fa-eye font-size-s"></i>
-          </button> -->
+            <!-- {{data.messageEN}} -->
+            <button class="btn btn-sm btn-warning" (click)="viewData(data.agencyCode,data.messageEN)">
+              <i class="fa fa-eye font-size-s"></i>
+            </button>
         </td>
         <td *ngIf="langID == 2" class="mat-cell text-center">
-            {{data.messageBM}}
+            <!-- {{data.messageBM}} -->
+            <button class="btn btn-sm btn-warning" (click)="viewData(data.agencyCode,data.messageBM)">
+              <i class="fa fa-eye font-size-s"></i>
+            </button>
         </td>
       </tr>
       <tr *ngIf="showNoData">

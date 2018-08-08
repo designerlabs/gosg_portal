@@ -103,6 +103,9 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
   }
 
   applyFilter(type, filter?) {
+    console.log(type)
+    console.log(filter)
+
     if (type != 'letter') {
       this.loadAlpha(filter);
     };
@@ -143,7 +146,7 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
         this.keyword = '';
         this.getSearchData(this.pageCount, this.pageSize);
       } else {
-        this.letter = '';
+        this.letter = 0
         this.keyword = '';
         this.mymap.setView([5.8142568, 108.5806004], 5.2);
         this.popup.remove();
@@ -222,6 +225,7 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
     this.loadAlpha();
     this.getMinistry();
     this.getAllAgenciesMarkers()
+
   }
 
   ngOnDestroy() {

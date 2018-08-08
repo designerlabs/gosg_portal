@@ -98,7 +98,7 @@ export class AppConfig {
     UrlStreetNameAPI: string;
     UrlTrafficPolylines: string;
     UrlTrafficPredictionAPI: string;
-    urlPerhilitan: string;
+    urlAgencyDservice: string;
     urlRating: string;
 
 }
@@ -177,13 +177,13 @@ export const APP_DI_CONFIG: AppConfig = {
     urlDserviceRpt: commonURL + 'dservice/report',
     // urlFaq: commonURL + 'faq',
     urlDashboardData: protectedBaseURL + 'dservice/dashboard',
-    statusAppUrl: protectedBaseURL + 'dservice/group',
-    urlAgencyList: protectedBaseURL + 'dservice/agencylist',
-    dataAppUrl: protectedBaseURL + 'dservice',
+    statusAppUrl: agencyURL + 'dservice/group',
+    urlAgencyList: agencyURL + 'dservice/agencylist',
+    dataAppUrl: agencyURL + 'dservice',
     UrlStreetNameAPI: trafficInfoURL+"street?rows=100",
     UrlTrafficPolylines: trafficInfoURL+"kl",
     UrlTrafficPredictionAPI: trafficInfoURL+"traffic?streetName=",
-    urlPerhilitan: agencyURL
+    urlAgencyDservice: agencyURL
 };
 
 @NgModule({

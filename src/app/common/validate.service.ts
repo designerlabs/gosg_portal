@@ -35,7 +35,8 @@ export class ValidateService {
 			'icno': [ /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],
 			'postcode':[/\d/, /\d/, /\d/, /\d/, /\d/],
 			'dateFormat':[/\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],
-			'icno2': [ /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/]
+			'icno2': [ /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/],
+			'policeReportNo': [ /\d/, /\d/, /\d/, /\d/, /\d/, /\d/]
 		}
 	}
 	

@@ -15,7 +15,7 @@ import { TopnavService } from '../../header/topnav/topnav.service';
   templateUrl: './archivesubcategory.component.html',
   styleUrls: ['./archivesubcategory.component.css'],
 })
-export class ArchivesubcategoryComponent implements OnInit, OnDestroy{
+export class ArchivesubcategoryProdComponent implements OnInit, OnDestroy{
   lang = this.lang;
   langId = this.langId;
   statusID: any;
