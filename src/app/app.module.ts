@@ -34,7 +34,6 @@ import { LeftmenuComponent } from './article/leftmenu/leftmenu.component';
 import { ArchivecategoryComponent } from './archive/archivecategory/archivecategory.component';
 import { ArchivesubcategoryComponent } from './archive/archivesubcategory/archivesubcategory.component';
 import { ArchivecontentComponent } from './archive/archivecontent/archivecontent.component';
-import { LoadingModule } from 'ngx-loading';
 // import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule } from "@angular/material";
 
 export function HttpLoaderFactory(http: Http) {
@@ -43,7 +42,6 @@ export function HttpLoaderFactory(http: Http) {
 
 @NgModule({
 imports: [
-    LoadingModule,
     SharedModule,
     BrowserModule,
     FormsModule,
@@ -65,7 +63,6 @@ imports: [
     AccordionModule.forRoot(),
     ModalModule.forRoot(),
     OwlModule
-
     // MatButtonModule,
     // MatCheckboxModule,
     // MatFormFieldModule,

@@ -104,7 +104,6 @@ export class StatuspositionComponent implements OnInit, OnDestroy {
     });
 
     this.getUserData();
-    this.checkReqValues();
 
   }
 
