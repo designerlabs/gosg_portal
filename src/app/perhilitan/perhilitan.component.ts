@@ -423,9 +423,6 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
 
       this.sharedService.errorHandling(data, (function(){
 
-        console.log("DATA no lisence");
-        console.log(data);
-
         if(data.statusCode != "ERROR"){
           this.flagAfterSubmit = false;
           this.dataApp = data.perhilitanElesenResource;
