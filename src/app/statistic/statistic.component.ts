@@ -36,6 +36,7 @@ export class StatisticComponent implements OnInit {
   totalNewUsers: any;
   languageId = this.languageId;
   sum = (total, currentValue) => total + currentValue;
+  loading:boolean = false;
 
   constructor(
     private http: Http,
@@ -119,6 +120,8 @@ export class StatisticComponent implements OnInit {
       mVal: ""
     };
 
+    this.loading = true;
+
     this.portalservice.getDserviceRptData(lng).subscribe(data => {
       this.dServiceData = data.list;
       this.dserviceByYear = this.StatByYearDservice;
@@ -156,6 +159,8 @@ export class StatisticComponent implements OnInit {
 
         });
 
+        this.loading = false;
+
     });
   }
 
@@ -170,6 +175,8 @@ export class StatisticComponent implements OnInit {
       mName: "",
       mVal: ""
     };
+
+    this.loading = true;
 
     this.portalservice.getPendingDserviceRptData(lng).subscribe(data => {
       this.dServicePendingData = data.list;
@@ -210,10 +217,14 @@ export class StatisticComponent implements OnInit {
 
         });
 
+        this.loading = false;
+
     });
   }
 
   getUsersStatData(type) {
+
+    this.loading = true;
     
     this.portalservice.getStatisticData(type).subscribe(data => {
       
@@ -245,6 +256,8 @@ export class StatisticComponent implements OnInit {
             });
         });
       }
+
+      this.loading = false;
 
     });
   }

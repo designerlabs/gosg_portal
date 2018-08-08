@@ -1,3 +1,4 @@
+<ngx-loading [show]="loading" [config]="{ fullScreenBackdrop: true }"></ngx-loading>
 <div class="container-fluid animated slideInDown" style="background: #a7a495;">
     <div class="container">
          <div class="row">
@@ -135,7 +136,7 @@
         </div>
     </div>
   
-    <div *ngIf="!dataSummons">
+    <div *ngIf="showNoData">
         <div class="row container">
             <div class="col-md-12" style="color: black; font-weight: bold; text-align: center;">
                 ANDA TIADA SAMAN TRAFIK.<br>

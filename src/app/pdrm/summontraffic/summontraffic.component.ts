@@ -36,6 +36,7 @@ export class SummontrafficComponent implements OnInit {
   noNextData = false;
   showNoData = false;
   dataSummons: any;
+  loading = false;
 
   public kp: any;
   public name: any;
@@ -121,6 +122,8 @@ export class SummontrafficComponent implements OnInit {
 
     this.getUserData();
     this.checkReqValues();
+
+    this.showNoData = false;
 
   }
 
@@ -421,9 +424,12 @@ export class SummontrafficComponent implements OnInit {
 
   getSelection(e) { //when change selection
     this.varSelect = e.value;
+    this.showDetails = false;
   }
 
   getUserData() {
+
+    this.loading = true;
 
     this.searchForm.get('ic').disable();
 
@@ -433,12 +439,15 @@ export class SummontrafficComponent implements OnInit {
         data => {
           this.sharedService.errorHandling(data, (function () {
 
-            console.log(data);
             if (data.user) {
 
               this.searchForm.get('ic').setValue(data.user.identificationNo);
 
+              this.loading = false;
+
             } else {
+
+              this.loading = false;
             }
           }).bind(this));
 
@@ -449,6 +458,8 @@ export class SummontrafficComponent implements OnInit {
         });
 
     } else { //need to be deleted Noraini for local only      
+
+      this.loading = false;
 
       let data = {
         "user": {

@@ -41,6 +41,7 @@ export class GalleryComponent implements OnInit, OnDestroy {
   isAudio:boolean;
   isVideo:boolean;
   mediaTypeName: string;
+  loading: boolean = false;
 
   galleryData: any;
   @Output() langChange = new EventEmitter();

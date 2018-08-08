@@ -21,6 +21,7 @@ export class SitemapComponent implements OnInit, OnDestroy {
   languageId = this.languageId;
   private subscription: ISubscription;
   private subscriptionLang: ISubscription;
+  loading: boolean = false;
 
   constructor(
     private http: Http,
@@ -69,10 +70,13 @@ export class SitemapComponent implements OnInit, OnDestroy {
 
   getCategories(lang: String) {
 
+    this.loading = true;
+    
     this.portalservice.getSitemapData(lang).subscribe(data => {
 
       this.catData = data.list;
       
+      this.loading = false;
     });
   }
 
