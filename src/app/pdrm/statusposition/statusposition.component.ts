@@ -11,6 +11,10 @@ import {
     MatInputModule, MatPaginatorModule, MatProgressSpinnerModule,
     MatSortModule, MatTableModule, MatPaginator, MatSort
   } from '@angular/material';
+import { SharedService } from '../../common/shared.service';
+import { ToastrService } from '../../../../node_modules/ngx-toastr';
+import { environment } from '../../../environments/environment';
+import { ProtectedService } from '../../services/protected.service';
 
 @Component({
   selector: 'gosg-statusposition',
@@ -22,6 +26,8 @@ export class StatuspositionComponent implements OnInit, OnDestroy {
   lang = this.lang;
   langID: any;
   complete: boolean;
+  dataIntake;
+  urlDoc;
 
   public kp: any;
   public name: any;
@@ -29,6 +35,7 @@ export class StatuspositionComponent implements OnInit, OnDestroy {
   public place: any;
   public status: any;
   public showDetails = false;
+  public showNoData = false;
 
   searchForm: FormGroup;  
   public ic: FormControl;  
@@ -39,10 +46,13 @@ export class StatuspositionComponent implements OnInit, OnDestroy {
   private urlFaq: string = this.config.urlFaq;
 
   constructor(
+    private protectedService: ProtectedService,
     private translate: TranslateService,
     private router: Router,
     private http: Http,
     @Inject(APP_CONFIG) private config: AppConfig,
+    private sharedService: SharedService,
+    private toastr: ToastrService,
     private topnavservice: TopnavService,) {
 
     this.lang = translate.currentLang;
@@ -93,29 +103,119 @@ export class StatuspositionComponent implements OnInit, OnDestroy {
       ic: this.ic   
     });
 
+    this.getUserData();
+    this.checkReqValues();
+
+  }
+
+  getUserData(){
+    
+    this.searchForm.get('ic').disable();
+
+    if(!environment.staging){
+      //this.getPerPostCodeFlag = false;
+      this.protectedService.getUser().subscribe(
+      data => {
+        this.sharedService.errorHandling(data, (function(){
+
+          console.log(data);
+          if(data.user){
+            
+            this.searchForm.get('ic').setValue(data.user.identificationNo);
+
+          }else{
+          }
+        }).bind(this));
+
+      },
+      error => {
+          location.href = this.config.urlUAP +'uapsso/Logout';
+          //location.href = this.config.urlUAP+'portal/index';
+      });
+      
+    } else{ //need to be deleted Noraini for local only      
+
+      let data = {
+        "user": {
+          "userId": 1411,
+          "pid": "871222145031",
+          "identificationNo": "871222145031",
+          "passportNo": "",
+          "fullName": "Encik Saman Trafik2",
+          "email": "saman2@yopmail.com"
+         
+        }
+      }
+
+    
+      this.searchForm.get('ic').setValue(data.user.identificationNo);
+
+    }
   }
 
   searchApp(formValues: any){
 
     this.showDetails = true;
+    this.showNoData = false;
 
-    this.kp = "940911025242";
-    this.name = "NUR IZZATY BINTI MAHD SUPON";
+    let icno = this.searchForm.get('ic').value;
+    let arrObj = [];
+
+    if(!environment.staging) {
+
+    this.protectedService.getPdrm('pdrm/checkPoliceIntake', arrObj).subscribe(
+    data => {
+      this.sharedService.errorHandling(data, (function(){
+
+        this.dataIntake = data.policeIntakeResource;
+
+        if(this.dataIntake){
+          this.showDetails = true;
+          this.showNoData = false;
+
+          this.kp = this.dataIntake.newIcNo;
+          this.name = this.dataIntake.personnelName;
+          this.date =  this.dataIntake.startDate;
+          this.place = this.dataIntake.location;
+          this.urlDoc = this.dataIntake.docUrl;
+          
+          if(this.dataIntake.status == 1)
+          this.status = "PAPAR/CETAK";
+          else
+          this.status = "-";
+          
+        } else{
+          this.showDetails = false;
+          this.showNoData = true;
+        }
+        
+      }).bind(this));
+      
+    },
+    error => {
+      this.toastr.error(JSON.parse(error._body).statusDesc, '');
+    });
+    
+  } else {
+    this.showDetails = true;
+    this.showNoData = false;
+    
+    this.kp = "930319095074";
+    this.name = "FARZANA NUR YUSRA BINTI SAKRI";
     this.date =  "2018-04-12";
     this.place = "PULAPOL DUNGUN";
     this.status = "PAPAR/CETAK";
-
+    this.urlDoc = "http://sso.rmp.gov.my/AP_E/AP_LETTER_EXTENSION.aspx?id=Y1P0FzQmQC6C9/7nGjjnsK6RIY59dq2UUIUrQXJYzIiTm+45KsQfIQ==";
+    }
   }
 
   openLink(varUrl){
     if(varUrl != undefined){
       let httpStr = varUrl.substring(0, 4);
 
-      if(httpStr.toLowerCase() == 'http'){
+      if(httpStr.toLowerCase() == 'https'){
         window.open(varUrl,'_blank');
-      }
-
-      else{
+      } else {
         let newUrl = "http://";
         window.open(newUrl+varUrl,'_blank');
       }
