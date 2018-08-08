@@ -337,7 +337,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                     this.regemail = data.user.email;
                     this.regdate = data.user.registrationDate;
                     this.isOKU = data.user.isOku;
-                    this.OKUNumber = data.user.okuRegistrationNumber;
+                    this.OKUNumber = data.user.okuRegistrationNo;
                     this.isStaff = data.user.isStaff;
                     this.isMyIdentityVerfied = data.user.isMyIdentityVerified;
                     this.isMyIdentityValid = data.user.isMyIdentityValid;
@@ -1158,7 +1158,7 @@ let bodyUpdate =
       "email": null,
       "mobilePhoneNo": null,
       "isOku": null,
-      "okuRegistrationNumber":null,
+      "okuRegistrationNo":null,
       "registrationDate": null,
 
       "accountStatus":{
@@ -1236,7 +1236,7 @@ let bodyUpdate =
     bodyUpdate.mobilePhoneNo = formValues.mobilecodeTelefon + '*' + formValues.corrsMobile;
     bodyUpdate.registrationDate = this.regdate;
     bodyUpdate.isOku = this.isOKU;
-    bodyUpdate.okuRegistrationNumber = this.OKUNumber;
+    bodyUpdate.okuRegistrationNo = this.OKUNumber;
     bodyUpdate.address.addressId = this.addressId;
     bodyUpdate.address.permanentAddress1 = formValues.perAddress1;
     bodyUpdate.address.permanentAddress2 = formValues.perAddress2;
