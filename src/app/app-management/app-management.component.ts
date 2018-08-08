@@ -221,7 +221,7 @@ export class AppManagementComponent implements OnInit, OnDestroy {
       }
 
       else{
-  
+        this.router.navigate(['perhilitan_renew/'+statusId]);
       }
     }
   }
