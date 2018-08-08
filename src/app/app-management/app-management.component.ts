@@ -219,8 +219,11 @@ export class AppManagementComponent implements OnInit, OnDestroy {
         
         this.router.navigate(['perhilitan/'+statusId]);
       }
-    }
 
+      else{
+  
+      }
+    }
   }
 
   resetSearch(){
