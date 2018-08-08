@@ -140,6 +140,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   userId:any;
   mobileNo: any;
   regemail:string;
+  isOKU:any;
+  OKUNumber:any;
   regdate:string;
   lang = this.lang;
   languageId = this.languageId;
@@ -334,6 +336,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                     this.idno = data.user.pid;
                     this.regemail = data.user.email;
                     this.regdate = data.user.registrationDate;
+                    this.isOKU = data.user.isOku;
+                    this.OKUNumber = data.user.okuRegistrationNo;
                     this.isStaff = data.user.isStaff;
                     this.isMyIdentityVerfied = data.user.isMyIdentityVerified;
                     this.isMyIdentityValid = data.user.isMyIdentityValid;
@@ -1153,6 +1157,8 @@ let bodyUpdate =
       },
       "email": null,
       "mobilePhoneNo": null,
+      "isOku": null,
+      "okuRegistrationNo":null,
       "registrationDate": null,
 
       "accountStatus":{
@@ -1229,6 +1235,8 @@ let bodyUpdate =
     bodyUpdate.email = this.regemail;
     bodyUpdate.mobilePhoneNo = formValues.mobilecodeTelefon + '*' + formValues.corrsMobile;
     bodyUpdate.registrationDate = this.regdate;
+    bodyUpdate.isOku = this.isOKU;
+    bodyUpdate.okuRegistrationNo = this.OKUNumber;
     bodyUpdate.address.addressId = this.addressId;
     bodyUpdate.address.permanentAddress1 = formValues.perAddress1;
     bodyUpdate.address.permanentAddress2 = formValues.perAddress2;

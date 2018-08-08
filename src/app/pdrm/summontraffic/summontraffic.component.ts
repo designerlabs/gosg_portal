@@ -119,43 +119,9 @@ export class SummontrafficComponent implements OnInit {
     this.searchForm.get('optSelect').setValue(0);
     this.varSelect = 0;
 
-    this.getDataAppList(this.pageCount, this.pageSize);
     this.getUserData();
     this.checkReqValues();
 
-  }
-
-  getDataAppList(page, size) {
-
-    this.protectedService.getDataApp(page, size, this.param).subscribe(
-      data => {
-        this.dataApp = data.list;
-        this.dataAppPage = data;
-        this.noNextData = data.pageNumber === data.totalPages;
-        this.showNoData = false;
-
-        if (this.dataApp.length == 0) {
-          this.showNoData = true;
-        }
-      });
-  }
-
-  pageChange(event) {
-    this.getDataAppList(this.pageCount, event.value);
-    this.pageSize = event.value;
-  }
-
-  paginatorL(page) {
-    this.getDataAppList(page - 1, this.pageSize);
-    this.noPrevData = page <= 2 ? true : false;
-    this.noNextData = false;
-  }
-
-  paginatorR(page, totalPages) {
-    this.noPrevData = page >= 1 ? false : true;
-    let pageInc = page + 1;
-    this.noNextData = pageInc === totalPages;
-    this.getDataAppList(page + 1, this.pageSize);
   }
 
   searchApp(formValues: any) {
@@ -532,7 +498,6 @@ export class SummontrafficComponent implements OnInit {
   }
 
   resetSearch() {
-    this.searchForm.get('ic').setValue(null);
     this.searchForm.get('noCar').setValue(null);
     this.showDetails = false;
   }

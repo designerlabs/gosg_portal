@@ -66,7 +66,7 @@
                     </div>
 
                     <div class="col-md-6">
-                        <button tabindex="" mat-raised-button color="warn" type="button" id="btnreset" 
+                        <button *ngIf="varSelect==1" tabindex="" mat-raised-button color="warn" type="button" id="btnreset" 
                             class="form-control btn btn-md btn-warning font-size-s pull-right bttnCustom"
                             (click)="resetModal.show()" style="margin-left: 5px;">
                             <i class="fa fa-refresh"></i> {{'feedback.label.reset' | translate }}</button>
@@ -132,32 +132,10 @@
                 </tr>
             </table>
                   
-            <mat-form-field style="width:50px;">
-                <mat-select class="font-size-s" value="10" (change)="pageChange($event)">
-                    <mat-option value="5">5</mat-option>
-                    <mat-option value="10">10</mat-option>
-                    <mat-option value="25">25</mat-option>
-                    <mat-option value="50">50</mat-option>
-                </mat-select>
-            </mat-form-field>
-                  
-            <div style="float:right; margin-top: 10px;">
-                <span style="color:#000; padding-right:20px;">{{ 'appmngt.tablebottom.page' | translate }} 
-                    <strong>{{dataAppPage?.pageNumber}}</strong> {{ 'appmngt.tablebottom.of' | translate }} 
-                    <strong>{{dataAppPage?.totalPages}}</strong> 
-                    <!-- {{ 'appmngt.tablebottom.in' | translate }} 
-                    <strong>{{dataAppPage?.totalElements}}</strong> {{ 'appmngt.tablebottom.app' | translate }} -->
-                </span>
-                <button mat-mini-fab color="basic" [disabled]="noPrevData" (click)="paginatorL(dataAppPage?.pageNumber)">
-                    <i class="fa fa-angle-left" aria-hidden="true"></i></button>
-                <button mat-mini-fab color="basic" [disabled]="noNextData"  (click)="paginatorR(dataAppPage?.pageNumber, dataAppPage?.totalPages)">
-                    <i class="fa fa-angle-right" aria-hidden="true"></i></button>
-            </div>
-
         </div>
     </div>
   
-    <div *ngIf="dataSummons">
+    <div *ngIf="!dataSummons">
         <div class="row container">
             <div class="col-md-12" style="color: black; font-weight: bold; text-align: center;">
                 ANDA TIADA SAMAN TRAFIK.<br>

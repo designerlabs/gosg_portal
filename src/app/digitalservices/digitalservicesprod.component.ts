@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
+import { Component, OnInit, Inject, OnDestroy, Input } from '@angular/core';
 import { Http } from '@angular/http';
 import { PortalService } from '../services/portal.service';
 import { DialogsService } from '../dialogs/dialogs.service';
@@ -22,6 +22,7 @@ export class DigitalservicesprodComponent implements OnInit, OnDestroy {
   languageId = this.languageId;
   mediaUrl: any;
   isLogin: boolean;
+  validMyIdentity:string;
 
   lang = this.lang;
   private subscription: ISubscription;
@@ -67,6 +68,7 @@ export class DigitalservicesprodComponent implements OnInit, OnDestroy {
     this.mediaUrl = this.config.externalMediaURL + '/documents/';
     this.getDServices(this.languageId);
     this.getUserData();
+
   }
 
   ngOnDestroy() {
@@ -94,9 +96,12 @@ export class DigitalservicesprodComponent implements OnInit, OnDestroy {
     if(!environment.staging){
     this.protectedService.getUser().subscribe(
       data => {
+        this.validMyIdentity = data.user.isMyIdentityVerified;
         this.isLogin = true;
       });
-  }
+    } else {
+      this.isLogin = true;
+    }
 }
 
 openDialog() {

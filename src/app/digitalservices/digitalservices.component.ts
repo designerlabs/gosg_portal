@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
+import { Component, OnInit, Inject, OnDestroy, Input } from '@angular/core';
 import { Http } from '@angular/http';
 import { PortalService } from '../services/portal.service';
 import { DialogsService } from '../dialogs/dialogs.service';
@@ -27,6 +27,8 @@ export class DigitalservicesComponent implements OnInit, OnDestroy {
   languageId = this.languageId;
   mediaUrl: any;
   isLogin: boolean;
+  @Input() state:string;
+  @Input() validMyIdentity: string;
 
   lang = this.lang;
   private subscription: ISubscription;
@@ -85,14 +87,14 @@ export class DigitalservicesComponent implements OnInit, OnDestroy {
     this.portalservice.getDigitalServices(lang).subscribe(data => {
 
       this.dsData = data.list;
-      // 
+      //
       // for(var item of data.list) {
-      // 
+      //
       // if(data.list.details)
       //   this.dsData.push(data.list);
       // }
       // this.dsData = [''];
-      
+
     });
   }
 
@@ -114,7 +116,7 @@ export class DigitalservicesComponent implements OnInit, OnDestroy {
 
 
 export class DigitalServiceDialog {
-  
+
   constructor(
     public dialogRef: MatDialogRef<DigitalServiceDialog>,
     private translate: TranslateService,
