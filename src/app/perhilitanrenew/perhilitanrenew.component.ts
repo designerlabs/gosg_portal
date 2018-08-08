@@ -470,8 +470,12 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
 
       this.sharedService.errorHandling(data, (function(){
     
-          this.dataApp = data.perhilitanElesenResource;
+        this.dataApp = data.perhilitanElesenResource;
 
+        if(this.getUrl != undefined){
+          this.viewRoc = this.dataApp.attachFileRoc;
+          this.viewPbt = this.dataApp.attachFilePbt;
+        }
           
         
       }).bind(this));
