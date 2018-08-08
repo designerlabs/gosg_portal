@@ -28,7 +28,7 @@ export class ArticleprodComponent implements OnInit, OnDestroy {
   isValid: any;
   topicID: number;
   articles: any[];
-  public loading = true;
+  public loading = false;
 
   articleData: any;
   @Output() langChange = new EventEmitter();
