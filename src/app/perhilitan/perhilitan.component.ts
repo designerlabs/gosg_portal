@@ -123,6 +123,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
   public selectedOccupation: any;
   public cityT: any;
   public citySurat: any;
+  public cityCompany: any;
   public poskodIdT: any;
   public poskodIdMailing: any;
   public stateCompany: any;
@@ -973,8 +974,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
           else{ //when city more than one
             for (let i = 0; i < this.listdaerahSurat.length; i++) { 
 
-              if((this.citySurat != undefined && this.citySurat == this.listdaerahSurat[i].postcodeId) ||
-                this.cityT == this.listdaerahSurat[i].postcodeId){               
+              if((this.citySurat != undefined && this.citySurat == this.listdaerahSurat[i].postcodeId)){           
                 this.poskodIdMailing = this.listdaerahSurat[i].postcodeId;
                 this.thirdFormGroup.get('mailingDaerah').setValue(this.listdaerahSurat[i].postcodeId);     
                 this.thirdFormGroup.get('mailingNegeri').setValue(this.listdaerahSurat[i].state); 
@@ -997,8 +997,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
 
           else{ //when city more than one
             for (let i = 0; i < this.listdaerahCompany.length; i++) { 
-              if((this.cityCompany == this.listdaerahCompany[i].postcodeId) || 
-                  this.cityT == this.listdaerahCompany[i].postcodeId){    
+              if((this.cityCompany == this.listdaerahCompany[i].postcodeId)){
                 this.stateCompany = this.listdaerahCompany[i].formValue;
                 this.fourthFormGroup.get('companyDaerah').setValue(this.listdaerahCompany[i].postcodeId);     
                 this.fourthFormGroup.get('companyNegeri').setValue(this.listdaerahCompany[i].state); 
@@ -1087,6 +1086,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
 
     if(chkboxCopyAdd == true){
 
+      this.citySurat =  this.secondFormGroup.get('daerahPemilik').value;   
       this.selectedPoskodSurat = this.secondFormGroup.get('poskodPemilik').value;            
       this.thirdFormGroup.get('mailingAdd').setValue(this.secondFormGroup.get('addPemilik').value);     
       this.thirdFormGroup.get('mailingPoskod').setValue(this.secondFormGroup.get('poskodPemilik').value);   
@@ -1110,6 +1110,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
 
     if(chkboxCopyAdd == true){
       
+      this.cityCompany =  this.secondFormGroup.get('daerahPemilik').value;   
       this.selectedPoskodComp = this.secondFormGroup.get('poskodPemilik').value;   
       this.fourthFormGroup.get('companyAdd').setValue(this.secondFormGroup.get('addPemilik').value);     
       this.fourthFormGroup.get('companyPoskod').setValue(this.secondFormGroup.get('poskodPemilik').value);   
