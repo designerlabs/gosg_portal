@@ -57,6 +57,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
   fifthFormGroup: FormGroup;
 
   noLesen: FormControl;
+  textDisplay: FormControl;
   namaPemohon: FormControl;
   icPemohon: FormControl;
   phonePemohon: FormControl;
@@ -216,6 +217,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     this.maskPhone = this.validateService.getMask().telephone;
    
     this.firstFormGroup = this._formBuilder.group({
+      textDisplay: new FormControl(),
       noLesen: new FormControl(),
       namaPemohon: new FormControl(),
       icPemohon: new FormControl(),
@@ -482,6 +484,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
       this.sharedService.errorHandling(data, (function(){
     
         this.dataApp = data.perhilitanElesenResource;
+        this.firstFormGroup.get('textDisplay').setValue('proceed');
         
         this.firstFormGroup.get('noLesen').setValue(this.dataApp.licenseNo);
         this.firstFormGroup.get('noLesen').disable();
@@ -1245,6 +1248,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
 
           this.fifthFormGroup.get('lsnActivity').setValue(parseInt(dataLisence[0].lesen));
           this.fifthFormGroup.get('businessCat').setValue(parseInt(dataLisence[0].catbisness));
+          this.firstFormGroup.get('textDisplay').setValue('proceed');
 
         }
 
@@ -1253,6 +1257,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
           dataLisence = data.noLicenceResourceList;
 
           if(dataLisence[0].status == "Pembaharuan Lesen Telah Dibuat"){
+            this.firstFormGroup.get('textDisplay').setValue('');
 
             let sDate = dataLisence[0].tarikhluluslesenlama;
             let eDate = dataLisence[0].tarikhtamatlesenlama;
@@ -1262,6 +1267,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
 
             this.openDialog(dataLisence[0].nolesenlama,startD,endD);
           }else{
+            this.firstFormGroup.get('textDisplay').setValue('');
             this.toastr.error(dataLisence[0].status, '');
           }
         }
@@ -1274,12 +1280,54 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
 
   openRoc(val){
 
-    window.open(val,'_blank');
+    if(this.getUrl != undefined){
+      var blob;  
+      blob = this.converBase64toBlob(val, 'application/pdf'); 
+      /*Find the content types for different format of file at http://www.freeformatter.com/mime-types-list.html*/
+    
+      var blobURL = URL.createObjectURL(blob);
+      window.open(blobURL);          
+    }
+
+    else{
+      window.open(val,'_blank');
+    }
   }
 
   openPbt(val){
+    if(this.getUrl != undefined){
+      var blob;  
+      blob = this.converBase64toBlob(val, 'application/pdf'); 
+      /*Find the content types for different format of file at http://www.freeformatter.com/mime-types-list.html*/
+    
+      var blobURL = URL.createObjectURL(blob);
+      window.open(blobURL);
+    }
 
-    window.open(val,'_blank');
+    else{
+      window.open(val,'_blank');
+    }
+  }
+
+  converBase64toBlob(content, contentType) {
+    contentType = contentType || '';
+    var sliceSize = 512;
+    var byteCharacters = window.atob(content); //method which converts base64 to binary
+    var byteArrays = [
+    ];
+    for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+      var slice = byteCharacters.slice(offset, offset + sliceSize);
+      var byteNumbers = new Array(slice.length);
+      for (var i = 0; i < slice.length; i++) {
+        byteNumbers[i] = slice.charCodeAt(i);
+      }
+      var byteArray = new Uint8Array(byteNumbers);
+      byteArrays.push(byteArray);
+    }
+    var blob = new Blob(byteArrays, {
+      type: contentType
+    }); //statement which creates the blob
+    return blob;
   }
 
   openDialog(a,b,c) {
