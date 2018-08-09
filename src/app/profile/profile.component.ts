@@ -11,6 +11,7 @@ import { TextMaskModule } from 'angular2-text-mask';
 import { DialogsService } from '../dialogs/dialogs.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
+import { HttpClient } from '@angular/common/http';
 import { debounce } from 'rxjs/operators/debounce';
 //import { debug } from 'util';
 import { ToastrService } from "ngx-toastr";
@@ -149,6 +150,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   private uapstagingUrl: string = this.config.urlUapStagingProfile;
 
   constructor(
+    private http:HttpClient,
     private router: Router,
     textMask:TextMaskModule,
     private validateService:ValidateService,
@@ -880,10 +882,16 @@ getPostcodeByCityC(e){
   }
 
   isOKUStatus(event){
-    debugger;
-    // if(this.profileForm.get('OKUcheckbox').value == true) {
-    //   this.profileForm.get('OKUcheckbox').setValue(false);
-    // }
+    const readUrl = `${this.config.urlProtected}jkm/okustatus`;
+    return this.http.post(readUrl,'')
+      .subscribe(
+        res => {
+          debugger;
+        },
+        err => {
+          console.log("Error occured");
+        }
+      );
   }
 
   isStateChanged() {
