@@ -20,28 +20,33 @@
     </div>
 </div>
   
-<div class="container ds-style">
-    <div class="row container">
+<div class="container">
+    <div>
         <br>
         <form [formGroup]="searchForm" #adSearchForm="ngForm" id="adSearch-form" role="form" novalidate="novalidate">            
             <div class="example-container padding-right20" style="color: black; padding-bottom: 20px;">
                 KEMUDAHAN CARIAN SENARAI SEKOLAH - SEKOLAH DI BAWAH KEMENTERIAN PENDIDIKAN MALAYSIA SEHINGGA 30 APRIL 2018<br>
             </div>
   
-            <div class="example-container mat-elevation-z8 padding-right20">
+            <div class="mat-elevation-z8 padding-right20">
                 <div class="row padding-15">
-                    <div class="col-md-12" style="color: black">
-                      Carian berdasarkan kategori.
+                    <div class="col-md-12" style="color: black">                      
+                      <mat-form-field class="example-full-width">
+                        <mat-select formControlName="jenisCarian" placeholder="Jenis Carian" (change)="searchType(searchForm.value)" required>
+                            <mat-option [value]=1>Carian berdasarkan kategori.</mat-option>
+                            <mat-option [value]=2>Carian berdasarkan nama sekolah.</mat-option>           
+                        </mat-select>
+                    </mat-form-field>
                     </div>
                 </div>
 
-                <div class="row padding-15">
+                <div class="row padding-15" *ngIf="searchForm.controls.jenisCarian.value == 1">
                     <div class="col-md-4">
                         <mat-form-field class="example-full-width">
-                            <mat-select formControlName="optSelect" placeholder="Kategori Sekolah" (change)="checkReqValues()" required>
+                            <mat-select formControlName="optSelect" placeholder="Kategori Sekolah" (change)="getTypeSchool(searchForm.value)" required>
                                 <mat-option [value]=1>Prasekolah</mat-option>
                                 <mat-option [value]=2>Sekolah Rendah</mat-option>      
-                                <mat-option [value]=3>Sekolah Menengah</mat-option>               
+                                <mat-option [value]=3>Sekolah Menengah</mat-option>           
                             </mat-select>
                             <mat-error *ngIf="searchForm.controls.optSelect.hasError('required')">
                                 Kategori Sekolah diperlukan.
@@ -51,8 +56,8 @@
 
                     <div class="col-md-4">
                         <mat-form-field class="example-full-width">
-                            <mat-select formControlName="state" placeholder="Negeri" (change)="checkReqValues()" required>
-                                <mat-option [value]=1>Semua</mat-option>              
+                            <mat-select formControlName="state" placeholder="Negeri" (change)="getPPD(searchForm.value)" required>
+                                <mat-option *ngFor="let state of listState" [value]="state">{{state}}</mat-option>              
                             </mat-select>
                             <mat-error *ngIf="searchForm.controls.state.hasError('required')">
                                 Negeri diperlukan.
@@ -60,10 +65,10 @@
                         </mat-form-field>
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-md-4" *ngIf="valSchoolCat != 1">
                         <mat-form-field class="example-full-width">
                             <mat-select formControlName="typeSchool" placeholder="Jenis Sekolah" (change)="checkReqValues()" required>
-                                <mat-option [value]=1>Semua</mat-option>
+                                <mat-option [value]="all">Semua</mat-option>
                                 <mat-option [value]=2>Kebangsaan</mat-option>      
                                 <mat-option [value]=3>Jenis Kenangsaan (C)</mat-option> 
                                 <mat-option [value]=4>Jenis Kenangsaan (T)</mat-option>                
@@ -76,11 +81,11 @@
           
                 </div>
 
-                <div class="row padding-15">
+                <div class="row padding-15" *ngIf="searchForm.controls.jenisCarian.value == 1">
                     <div class="col-md-4">
                         <mat-form-field class="example-full-width">
                             <mat-select formControlName="ppd" placeholder="Pejabat Pendidikan Daerah (PPD)" (change)="checkReqValues()" required>
-                                <mat-option [value]=1>Semua</mat-option>             
+                                <mat-option *ngFor="let ppd of listPPD" [value]="ppd.id">{{ppd.text}}</mat-option>         
                             </mat-select>
                             <mat-error *ngIf="searchForm.controls.ppd.hasError('required')">
                                 Pejabat Pendidikan Daerah (PPD) diperlukan.
@@ -91,15 +96,29 @@
                     <div class="col-md-4">
                         <mat-form-field class="example-full-width">
                             <mat-select formControlName="speacialEd" placeholder="Pendidikan Khas" (change)="checkReqValues()" required>
-                                <mat-option [value]=1>Semua</mat-option>              
+                                <mat-option *ngFor="let khas of listKhas" [value]="khas.id">{{khas.text}}</mat-option> 
                             </mat-select>
                             <mat-error *ngIf="searchForm.controls.speacialEd.hasError('required')">
                                 Pendidikan Khas diperlukan.
                             </mat-error>
                         </mat-form-field>
                     </div>
+                </div>
 
-                    <div class="col-md-4">
+                <div class="row padding-15" *ngIf="searchForm.controls.jenisCarian.value == 2">
+                    <div class="col-md-12">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Nama Sekolah" formControlName="schoolname"
+                            required tabindex="1" style="color: black">
+                            <mat-error *ngIf="searchForm.controls.schoolname.hasError('required')">
+                                Nama Sekolah diperlukan.
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="row padding-15">
+                    <div class="col-md-12">
                         <button tabindex="" mat-raised-button color="warn" type="button" 
                             class="form-control btn btn-md btn-warning font-size-s pull-right bttnCustom"
                             (click)="resetModal.show()" style="margin-left: 5px;">
@@ -113,11 +132,11 @@
 
             </div>
 
-            <div style="color: black; text-align: center;">
+            <!-- <div style="color: black; text-align: center;">
               <h1>atau</h1>
             </div>
 
-            <div class="example-container mat-elevation-z8 padding-right20">
+            <div class="mat-elevation-z8 padding-right20">
                 <div class="row padding-15">
                     <div class="col-md-12" style="color: black">
                         Carian berdasarkan nama sekolah.
@@ -147,20 +166,20 @@
                     </div>
                 </div>
 
-            </div>
+            </div> -->
 
         </form>
     </div><br>
   
     <div *ngIf="showDetails">
-        <div class="row container">
+        <div class="row">
             <div class="col-md-12" style="color: black; font-weight: bold;">
                 HASIL CARIAN<br>
                 <hr class="lineHr" style="border-top: #9c9c9d 2px solid;">
             </div>
         </div>
 
-        <div class="row container">
+        <div class="row">
             <div class="col-md-3" style="color: black">
                 Jumlah hasil carian
             </div>
@@ -170,86 +189,47 @@
             </div>
         </div>
 
-        <div class="row container">
+        <div class="row">
             <div class="col-md-12" style="color: black">
                 Catatan: PPD - Pejabat Pendidikan Daerah, PK - Pendidikan Khas
             </div>
         </div><br>
 
-        <div class="row container" style="padding-left: 30px;">
-            <!-- <table class="mat-table" style="width:100%; z-index: 9999;">
-                <tr class="mat-header-row" style="height:45px; font-weight: bold;">
-                    <th width="5%" class="mat-header-cell">{{'appmngt.tableHeader.num' | translate}}</th>
-                    <th width="15%" class="mat-header-cell">Kod Sekolah</th>
-                    <th class="mat-header-cell">Nama Sekolah</th>
-                    <th width="15%" class="mat-header-cell">PDD</th>
-                    <th width="15%" class="mat-header-cell">PK</th>
-                    <th width="10%" class="mat-header-cell text-center">Alamat</th>
-                    <th width="10%" class="mat-header-cell text-center">No. Telefon</th>
+        <div class="mat-elevation-z8 padding-15" style="max-height: 500px; overflow: auto;">
+            
+            <table class="mat-table" style="width:100%;">
+                <tr class="mat-header-row tableHeader">
+                    <th class="" width="5%">&nbsp;{{'appmngt.tableHeader.num' | translate}}</th>
+                    <th class="" width="7%">Kod Sekolah</th>
+                    <th class="" >Nama Sekolah</th>
+                    <th class="" width="10%">PDD</th>
+                    <th class="" width="5%">PK</th>
+                    <th class="" width="10%">Jenis</th>
+                    <th class="" width="13%">Alamat</th>
+                    <th class="" width="10%">No. Telefon</th>
+                    <th class="" width="10%">No. Faksimili</th>
+                    <th class="" width="10%">Emel</th>
                 </tr>
-                <tr class="mat-row" *ngFor="let data of recordData; let i = index;" role="row">
+                <tr class="mat-row table_row table_row_height" *ngFor="let data of recordData; let i = index;" role="row">
                     <td class="mat-cell text-center">{{i+1}}</td>
-                    <td class="mat-cell">{{data.agencyName}}</td>
-                    <td class="mat-cell">{{data.agencyAddress}}</td>
-                    <td class="mat-cell text-center">{{data.agencyLatitude}}</td>
-                    <td class="mat-cell">{{data.agencyLongitude}}</td>
-                    <td class="mat-cell text-right">300</td>
-                    <td class="mat-cell text-center">-</td>
-                </tr>
-                <tr *ngIf="showNoData">
-                    <td colspan="8" class="showData">
-                    <hr><br>{{'common.showNoData' | translate}}</td>
-                </tr>
-            </table> -->
-
-            <table class="table getSearch" style="width:100%; z-index: 9999;">
-                <tr class="tableHeader">
-                    <th width="5%">{{'appmngt.tableHeader.num' | translate}}</th>
-                    <th width="15%">Kod Sekolah</th>
-                    <th >Nama Sekolah</th>
-                    <th width="15%">PDD</th>
-                    <th width="15%">PK</th>
-                    <th width="10%" class="text-center">Alamat</th>
-                    <th width="10%" class="text-center">No. Telefon</th>
-                </tr>
-                <tr *ngFor="let data of recordData; let i = index;" role="row">
-                    <td class="text-center">{{i+1}}</td>
-                    <td (click)="goToMarkerPoint(data.agencyLatitude,data.agencyLongitude,data.agencyName,data.agencyAddress,300,400,500)">{{data.agencyName}}</td>
-                    <td>{{data.agencyAddress}}</td>
-                    <td class="text-center">{{data.agencyLatitude}}</td>
-                    <td >{{data.agencyLongitude}}</td>
-                    <td class="text-right">300</td>
-                    <td class="text-center">-</td>
+                    <td class="mat-cell" (click)="goToMarkerPoint(data.latitude,data.longitude,data.namaSekolah,data.alamat,data.telNo, data.bandar, data.negeri)">{{data.kodSekolah}}</td>
+                    <td class="mat-cell">{{data.namaSekolah}}</td>
+                    <td class="mat-cell">{{data.daerahPPD}}</td>
+                    <td class="mat-cell">{{data.pendidikanKhas}}</td>
+                    <td class="mat-cell">{{data.jenisSekolah}}</td>
+                    <td class="mat-cell">{{data.alamat}}</td>
+                    <td class="mat-cell">{{data.telNo}}</td>
+                    <td class="mat-cell">{{data.faxNo}}</td>
+                    <td class="mat-cell">{{data.email}}</td>
                 </tr>
                 <tr *ngIf="showNoData">
                     <td colspan="8" class="showData">
                     <hr><br>{{'common.showNoData' | translate}}</td>
                 </tr>
             </table>
-                  
-            <mat-form-field style="width:50px;">
-                <mat-select class="font-size-s" value="10" (change)="pageChange($event)">
-                    <mat-option value="5">5</mat-option>
-                    <mat-option value="10">10</mat-option>
-                    <mat-option value="25">25</mat-option>
-                    <mat-option value="50">50</mat-option>
-                </mat-select>
-            </mat-form-field>
-                  
-            <div style="float:right; margin-top: 10px;">
-                <span style="color:#000; padding-right:20px;">{{ 'appmngt.tablebottom.page' | translate }} 
-                    <strong>{{dataAppPage?.pageNumber}}</strong> {{ 'appmngt.tablebottom.of' | translate }} 
-                    <strong>{{dataAppPage?.totalPages}}</strong> 
-                    <!-- {{ 'appmngt.tablebottom.in' | translate }} 
-                    <strong>{{dataAppPage?.totalElements}}</strong> {{ 'appmngt.tablebottom.app' | translate }} -->
-                </span>
-                <button mat-mini-fab color="basic" [disabled]="noPrevData" (click)="paginatorL(dataAppPage?.pageNumber)">
-                    <i class="fa fa-angle-left" aria-hidden="true"></i></button>
-                <button mat-mini-fab color="basic" [disabled]="noNextData"  (click)="paginatorR(dataAppPage?.pageNumber, dataAppPage?.totalPages)">
-                    <i class="fa fa-angle-right" aria-hidden="true"></i></button>
-            </div>
+            
         </div>
-    </div>
+    </div><br>
 
     <div class="row container" style="padding-bottom: 20px;">      
         <div class="col-md-12" id="dirmap"></div>

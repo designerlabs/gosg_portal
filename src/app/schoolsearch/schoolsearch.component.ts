@@ -1,4 +1,4 @@
-import { Component, OnInit, Injectable, Inject, OnDestroy } from '@angular/core';
+import { Component, OnInit, Injectable, Inject, OnDestroy, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef, MatDialogConfig, MAT_DIALOG_DATA, MatPaginator,
         MatSort } from '@angular/material';
 import { ISubscription } from "rxjs/Subscription";
@@ -9,11 +9,11 @@ import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Http } from '@angular/http';
 import * as $ from 'jquery';
-import { ProtectedService } from '../services/protected.service';
 import { tileLayer, latLng, circle, polygon, marker, icon, Layer } from 'leaflet';
 import * as L from 'leaflet';
 import { SharedService } from '../common/shared.service';
 import { PortalService } from '../services/portal.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'gosg-schoolsearch',
@@ -25,16 +25,19 @@ export class SchoolsearchComponent implements OnInit {
   lang = this.lang;
   langID: any;
   complete: boolean;
-  param = "";
-  dataApp = null;
+  dataAppSchool = null;
   recordData = null;
-  dataAppPage: any;
+  dataAppSchoolPage: any;
   pageSize = 10;
   pageCount = 1;
   noPrevData = true;
   noNextData = false;
   showNoData = false;
-
+  
+  public valSchoolCat: any;
+  public listState: any;
+  public listPPD: any;
+  public listKhas = [{id: "all", text: "Semua"},{id: "1", text: "Ada"},{id: "0", text: "Tiada"}]
   public showDetails = false;
 
   searchForm: FormGroup;
@@ -44,6 +47,7 @@ export class SchoolsearchComponent implements OnInit {
   public ppd: FormControl;
   public speacialEd: FormControl;
   public schoolname: FormControl;
+  public jenisCarian: FormControl;
 
   mymap;
   marker;
@@ -59,18 +63,17 @@ export class SchoolsearchComponent implements OnInit {
   });
 
   private subscriptionLang: ISubscription;
-  private subscription: ISubscription;
-
-  private urlFaq: string = this.config.urlFaq;
+  
   // dataSource = new MatTableDataSource<object>(this.recordData);
 
   constructor(
-    private protectedService: ProtectedService,
+
     private sharedService: SharedService,
     private portalservice: PortalService,
     private translate: TranslateService,
     private router: Router,
     private http: Http,
+    private toastr: ToastrService,
     @Inject(APP_CONFIG) private config: AppConfig,
     private topnavservice: TopnavService,) {
 
@@ -78,9 +81,7 @@ export class SchoolsearchComponent implements OnInit {
     this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
 
         const myLang = translate.currentLang;
-
         if (myLang == 'en') {
-
             translate.get('HOME').subscribe((res: any) => {
                 this.lang = 'en';
                 this.langID = 1;
@@ -88,7 +89,6 @@ export class SchoolsearchComponent implements OnInit {
         }
 
         if (myLang == 'ms') {
-
             translate.get('HOME').subscribe((res: any) => {
                 this.lang = 'ms';
                 this.langID = 2;
@@ -104,7 +104,6 @@ export class SchoolsearchComponent implements OnInit {
 
   ngOnDestroy() {
     this.subscriptionLang.unsubscribe();
-   // this.subscription.unsubscribe();
   }
 
   ngOnInit() {
@@ -121,6 +120,7 @@ export class SchoolsearchComponent implements OnInit {
     this.ppd = new FormControl();
     this.speacialEd = new FormControl();
     this.schoolname = new FormControl();
+    this.jenisCarian = new FormControl();
 
     this.searchForm = new FormGroup({
 
@@ -129,55 +129,111 @@ export class SchoolsearchComponent implements OnInit {
       typeSchool: this.typeSchool,
       ppd: this.ppd,
       speacialEd: this.speacialEd,
-      schoolname: this.schoolname
+      schoolname: this.schoolname,
+      jenisCarian: this.jenisCarian
     });
 
+    this.searchForm.get('optSelect').setValue(1);
+    this.searchForm.get('jenisCarian').setValue(1);
+    this.valSchoolCat = 1;
+    this.searchForm.get('ppd').disable();
+    this.searchForm.get('speacialEd').disable();
+    this.getListState();
     this.getDefaultMap();
   }
 
-  getDataAppList(page, size){
+  getDataSchool(page, size){
 
-    this.portalservice.readPortal('agency/language/' + this.langID, page, size).subscribe(
+    let valSchool = this.searchForm.get('optSelect').value;
+    let valState = this.searchForm.get('state').value;
+    let valPPD = this.searchForm.get('ppd').value;
+    let valKhas = this.searchForm.get('speacialEd').value;
+
+    this.sharedService.getListSchool('school/search/',valSchool,valState,valPPD,valKhas).subscribe(
     data => {
-      // this.dataApp = data;
-      // this.dataAppPage = data;
-      // this.noNextData = data.pageNumber === data.totalPages;
-      // this.showNoData = false;
 
-      this.dataApp = data;
-      this.recordData = this.dataApp.agencyList;
-      this.dataAppPage = this.dataApp;
-      this.noNextData = this.dataApp.pageNumber === this.dataApp.totalPages;
-      this.showNoData = false;
+      this.sharedService.errorHandling(data, (function () {
+       
+        this.dataAppSchool = data;
+        this.recordData = this.dataAppSchool.schoolResourceList;
+        // this.dataAppSchoolPage = this.dataAppSchool;
+        // this.noNextData = this.dataAppSchool.pageNumber === this.dataAppSchool.totalPages;
+        this.showNoData = false;
 
-      if(this.dataApp.length == 0){
-        this.showNoData = true;
-      }
+        for (let i = 0; i <= this.recordData.length - 1; i++) {
+          this.addMarker(
+            parseFloat(this.malformedDataHandler(this.recordData[i].latitude)),
+            parseFloat(this.malformedDataHandler(this.recordData[i].longitude)),
+            this.recordData[i].namaSekolah,
+            this.recordData[i].alamat,
+            this.recordData[i].telNo,
+            this.recordData[i].bandar,
+            this.recordData[i].negeri
+          );
+        }
+
+        if(this.dataAppSchool.length == 0){
+          this.showNoData = true;
+        }
+      }).bind(this));
+    },
+    error => {
+      this.toastr.error(JSON.parse(error._body).statusDesc, '');
+      // this.loading = false;
     });
-  }
-
-  pageChange(event){
-    this.getDataAppList(this.pageCount, event.value);
-    this.pageSize = event.value;
-  }
-
-  paginatorL(page){
-    this.getDataAppList(page-1, this.pageSize);
-    this.noPrevData = page <= 2 ? true : false;
-    this.noNextData = false;
-  }
-
-  paginatorR(page, totalPages){
-    this.noPrevData = page >= 1 ? false : true;
-    let pageInc = page+1;
-    this.noNextData = pageInc === totalPages;
-    this.getDataAppList(page+1, this.pageSize);
   }
 
   searchApp(formValues: any){
 
     this.showDetails = true;
-    this.getDataAppList(this.pageCount, this.pageSize);
+    this.getDataSchool(this.pageCount, this.pageSize);
+  }
+
+  getTypeSchool(val){
+    
+    this.valSchoolCat = val.optSelect;
+    this.checkReqValues();
+  }
+
+  getListState(){
+    this.sharedService.getSchoolApi('school/statelist','',this.langID).subscribe(
+    data => {
+
+      this.sharedService.errorHandling(data, (function(){
+        this.listState = data['stateList'];
+
+      }).bind(this));
+    },
+    error => {            
+    });
+  }
+
+  getPPD(val){
+    this.sharedService.getSchoolApi('school/ppd/'+val.state,'',this.langID).subscribe(
+    data => {
+
+      this.listPPD = [];
+      this.sharedService.errorHandling(data, (function(){
+        let arrayPPD = data['ppdList'];
+
+        let a = { id: "all", text: "Semua"};
+        this.listPPD.push(a);
+
+        for (let i = 0; i < arrayPPD.length; i++) { 
+          let b = { id: arrayPPD[i], text: arrayPPD[i]};
+          this.listPPD.push(b);
+        }
+
+        this.searchForm.get('ppd').enable();
+        this.searchForm.get('speacialEd').enable();
+        this.searchForm.get('ppd').setValue('all');
+        this.searchForm.get('speacialEd').setValue('all');
+        this.checkReqValues();
+
+      }).bind(this));
+    },
+    error => {            
+    });
   }
 
   getDefaultMap() {
@@ -190,22 +246,17 @@ export class SchoolsearchComponent implements OnInit {
     }).addTo(this.mymap);
   }
 
-  isNumber(evt) {
-    evt = (evt) ? evt : window.event;
-    var charCode = (evt.which) ? evt.which : evt.keyCode;
-    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-        return false;
-    }
-    return true;
-  }
-
   checkReqValues() {
 
     let reqVal = [];
     let nullPointers:any = [];
 
-    reqVal =  ["optSelect","state","ppd","speacialEd"];
-
+    if(this.valSchoolCat == 1){
+      reqVal =  ["optSelect","state","ppd","speacialEd"];
+    }
+    else{
+      reqVal =  ["optSelect","state","typeSchool", "ppd","speacialEd"];
+    }
 
     for (var reqData of reqVal) {
       let elem = this.searchForm.get(reqData);
@@ -238,47 +289,73 @@ export class SchoolsearchComponent implements OnInit {
     this.resetSearch();
   }
 
-  goToMarkerPoint(dLat, dLong, dName, dAddress, dEmail, dFax, dPhone) {
-    if (dLat && dLong) {
-      this.mymap.setView([dLat, dLong], 13);
+  addMarker(lat, long, nameS, addressS, phone, city, state) {
+
+    if (!isNaN(lat)) {
+      if (lat !== "NaN") {
+        this.mymap.setView([lat, long], 13);
+
+        this.marker = L.marker([lat, long], { icon: this.defaultIcon })
+        .bindPopup(`
+          <div class='row'>
+            <div class='col-md-12'>
+              <h5>${nameS}<h5>
+            </div>
+            <div class='col-md-2'>
+              <i class='fa fa-home' style='font-size: 1.2em; margin-top: 0px;'></i>
+            </div>
+            <div class='col-md-10'>
+              <p style='font-size: 1em; margin-top: 0px; margin-bottom: 0px;'>${addressS}, ${city}, ${state}</p>
+            </div>
+            <div class='col-md-2'>
+              <i class='fa fa-phone' style='font-size: 1.2em; margin-top: 0px;'></i>
+            </div>
+            <div class='col-md-10'>
+              <p style='margin-top: 0px; margin-bottom: 0px;'>${phone}</p>
+            </div>
+            <div class='col-md-2'>
+              <i class='fa fa-map-marker' style='font-size: 1.2em; margin-top: 0px;'></i>
+            </div>
+            <div class='col-md-10'>
+              <p style='font-size: 1em; margin-top: 0px; margin-bottom: 0px;'>Geolokasi: ${lat},${long}</p>
+            </div>
+          </div>`)
+          // .setLatLng([agcLat,agcLong])
+        .addTo(this.mymap);
+
+        //this.marker.on('click', this.onMapClick)
+      }
+    }
+  }
+
+  goToMarkerPoint(lat, long, nameS, addressS, phone, city, state) {
+    if (lat && long) {
+      this.mymap.setView([lat, long], 13);
 
       this.popup = L.popup()
-        .setLatLng([dLat, dLong])
+        .setLatLng([lat, long])
         .setContent(`
         <div class='row'>
           <div class='col-md-12'>
-            <h4>${dName}
-              <h4>
+            <h5>${nameS}<h5>
           </div>
           <div class='col-md-2'>
-            <i class='fa fa-home' style='font-size: 1.2em; margin-top: 90%'></i>
+            <i class='fa fa-home' style='font-size: 1.2em; margin-top: 0px;'></i>
           </div>
           <div class='col-md-10'>
-            <p style='font-size: 1em'>${dAddress}</p>
+            <p style='font-size: 1em; margin-top: 0px; margin-bottom: 0px;'>${addressS}, ${city}, ${state}</p>
           </div>
           <div class='col-md-2'>
-            <i class='fa fa-map-marker' style='font-size: 1.2em; margin-top: 85%'></i>
+            <i class='fa fa-phone' style='font-size: 1.2em; margin-top: 0:'></i>
           </div>
           <div class='col-md-10'>
-            <p>${dLat},${dLong}</p>
+            <p style='margin-top: 0px; margin-bottom: 0px;'>${phone}</p>
           </div>
           <div class='col-md-2'>
-            <i class='fa fa-phone' style='font-size: 1.2em; margin-top: 90%'></i>
+            <i class='fa fa-map-marker' style='font-size: 1.2em; margin-top: 0px;'></i>
           </div>
           <div class='col-md-10'>
-            <p style='font-size: 1em'>${dPhone}</p>
-          </div>
-          <div class='col-md-2'>
-            <i class='fa fa-fax' style='font-size: 1.2em; margin-top: 90%'></i>
-          </div>
-          <div class='col-md-10'>
-            <p style='font-size: 1em'>${dFax}</p>
-          </div>
-          <div class='col-md-2'>
-            <i class='fa fa-envelope' style='font-size: 1.2em; margin-top: 90%'></i>
-          </div>
-          <div class='col-md-10'>
-            <p style='font-size: 1em'>${dEmail}</p>
+            <p style='font-size: 1em; margin-top: 0px; margin-bottom: 0px;'>Geolokasi: ${lat},${long}</p>
           </div>
         </div>
         `)
@@ -287,6 +364,17 @@ export class SchoolsearchComponent implements OnInit {
     } else{
 
     }
+  }
+
+  malformedDataHandler(data) {
+    let tData;
+
+    if (!data || data === 'undefined' || data == "")
+      tData = "0.0"
+    else
+      tData = data;
+
+    return tData
   }
 
 }

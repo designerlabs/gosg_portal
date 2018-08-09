@@ -349,6 +349,8 @@ export class PortalService {
       .catch(this.handleError);
   }
 
+  
+
 
 // ONLINE SEARCH
 

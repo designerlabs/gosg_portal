@@ -55,6 +55,7 @@ import { GalleryComponent } from './gallery/gallery.component';
 import { SchoolsearchComponent } from './schoolsearch/schoolsearch.component';
 import { TrafficinfoComponent } from './trafficinfo/trafficinfo.component';
 
+
 export const appRoutes: Routes = [
 
     {path: '404', component: ErrorComponent },

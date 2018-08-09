@@ -57,6 +57,7 @@ export class SharedService {
   private fontUrl: string = this.config.urlFont;
   private religionUrl: string = this.config.urlReligion;
   private raceUrl: string = this.config.urlRace;
+  private sharedDS: string = this.config.urlSharedDS;
 
   icon = {
     update: 'fa fa-edit',
@@ -202,6 +203,22 @@ export class SharedService {
     return this.http.delete(deleteUrl, null)
     .map((response: Response) => response.json())
     .catch(this.handleError);
+  }
+
+  getSchoolApi(moduleName, id, lang): Observable<any[]> {
+    let readUrl = this.sharedDS + moduleName + id + '?language='+lang;
+    return this.http.get(readUrl)
+      .map((response: Response) => response.json())
+      .retry(5)
+      .catch(this.handleError);
+  }
+
+  getListSchool(moduleName, school, state, ppd, khas): Observable<any[]> {
+    let readUrl = this.sharedDS + moduleName + '/'+school+'/'+state+'?ppd='+ppd+ '&pendidikanKhas='+khas;
+    return this.http.get(readUrl)
+      .map((response: Response) => response.json())
+      .retry(5)
+      .catch(this.handleError);
   }
 
   // END NEW

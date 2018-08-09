@@ -17,6 +17,7 @@ let protectedBaseURL = uapURL+'service-protected/';
 let commonURL = uapURL+'service/';
 
 let agencyURL = uapURL+'service-dservice-protected/'
+let sharedDSURL = uapURL+'service-dservice/';
 
 // backend service
 let baseLocalURL = './app/apidata/';
@@ -100,6 +101,7 @@ export class AppConfig {
     UrlTrafficPredictionAPI: string;
     urlAgencyDservice: string;
     urlRating: string;
+    urlSharedDS: string;
 
 }
 
@@ -183,7 +185,8 @@ export const APP_DI_CONFIG: AppConfig = {
     UrlStreetNameAPI: trafficInfoURL+"street?rows=100",
     UrlTrafficPolylines: trafficInfoURL+"kl",
     UrlTrafficPredictionAPI: trafficInfoURL+"traffic?streetName=",
-    urlAgencyDservice: agencyURL
+    urlAgencyDservice: agencyURL,
+    urlSharedDS: sharedDSURL,
 };
 
 @NgModule({
