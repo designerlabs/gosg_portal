@@ -126,6 +126,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   public corrsCityLocal: FormControl
   public corrsCityNotLocal: FormControl
   public checkboxValue: FormControl
+  public OKUcheckbox: FormControl
   public corrsCity: FormControl
   public corrsPostcode: FormControl
   public corrsPostcodeNotLocal: FormControl
@@ -250,6 +251,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.corrsCityLocal = new FormControl()
     this.corrsCityNotLocal = new FormControl()
     this.checkboxValue = new FormControl()
+    this.OKUcheckbox = new FormControl()
     this.corrsCity = new FormControl()
     this.corrsPostcode = new FormControl()
     this.corrsPostcodeNotLocal = new FormControl()
@@ -295,6 +297,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       corrsCityLocal: this.corrsCityLocal,
       corrsCityNotLocal: this.corrsCityNotLocal,
       checkboxValue: this.checkboxValue,
+      OKUcheckbox: this.OKUcheckbox,
       corrsCity: this.corrsCity,
       corrsPostcode: this.corrsPostcode,
       corrsPostcodeNotLocal: this.corrsPostcodeNotLocal,
@@ -345,6 +348,13 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                     this.roles = data.user.roles;
 
                     this.emailForm.get('emailaddressUpdate').setValue(data.user.email);
+
+
+                    if(data.user.isOku){
+                      this.profileForm.get('OKUcheckbox').setValue(data.user.isOku);
+
+                    }
+
                     if (data.user.mobilePhoneNo && (data.user.mobilePhoneNo).split('*').length > 1) {
                       const telenum = (data.user.mobilePhoneNo).split('*')[1];
                       this.phoneForm.get('telefonf').setValue(telenum);
@@ -867,6 +877,13 @@ getPostcodeByCityC(e){
       this.profileForm.get('checkboxValue').setValue(false);
       this.checkReqValues();
     }
+  }
+
+  isOKUStatus(event){
+    debugger;
+    // if(this.profileForm.get('OKUcheckbox').value == true) {
+    //   this.profileForm.get('OKUcheckbox').setValue(false);
+    // }
   }
 
   isStateChanged() {
