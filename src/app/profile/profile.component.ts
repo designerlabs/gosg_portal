@@ -9,7 +9,7 @@ import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { ProtectedService } from '../services/protected.service';
 import { TextMaskModule } from 'angular2-text-mask';
 import { DialogsService } from '../dialogs/dialogs.service';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatTabChangeEvent } from '@angular/material';
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 import { HttpClient } from '@angular/common/http';
 import { debounce } from 'rxjs/operators/debounce';
@@ -46,6 +46,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   accountStatus: any;
   countryId: any;
   userTypeId: any;
+  isEditActive: boolean = true;
   selectedCountry: any;
   selectedCity: any;
   selectedState: any;
@@ -878,6 +879,14 @@ getPostcodeByCityC(e){
     if(this.profileForm.get('checkboxValue').value == true) {
       this.profileForm.get('checkboxValue').setValue(false);
       this.checkReqValues();
+    }
+  }
+
+  onLinkClick(event: MatTabChangeEvent) {
+    if(event.index !== 0){
+      this.isEditActive = false;
+    }else{
+      this.isEditActive = true;
     }
   }
 

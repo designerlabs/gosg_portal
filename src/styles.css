@@ -684,6 +684,9 @@ span.highlightWord {
 .mat-datepicker-content-touch {
   margin: 5px !important;
   margin-top: 93px !important;
+  max-height: 80vh !important;
+  bottom: 0px !important;
+  margin-top: 200px !important;
 }
 
 
