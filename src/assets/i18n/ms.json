@@ -170,7 +170,8 @@
       "homeph":"No Telefon Rumah",
       "mobile":"No Telefon Bimbit",
       "codetel": "Kod",
-      "submit":"Kemaskini"
+      "submit":"Kemaskini",
+      "oku": "Memyemak OKU status"
     },
     "err": {
       "updateSuccess": "Kemaskini gagal!",

@@ -27,7 +27,7 @@
       <gosg-sidenav-dashboard></gosg-sidenav-dashboard>
   </div>
   <div class="col-md-9 formbg">
-      <span class="pull-right editBtn">
+      <span class="pull-right editBtn" *ngIf="isEditActive">
         <button type="button" mat-fab color="warn" (click)="edit()" [ngClass]="{ 'editBtn-active': isActive, 'editBtn': !isActive  }">&nbsp;<i class="fa fa-edit" style="font-size:18px;"></i></button>
       </span>
       <!-- <p>Status(isActive): {{isActive}}</p> -->
@@ -35,7 +35,7 @@
       <!-- <p>Status(isLocal): {{isLocal}}</p>
       <p>Status(isCorrsLocal): {{isCorrsLocal}}</p> -->
 
-      <mat-tab-group>
+      <mat-tab-group (selectedTabChange)="onLinkClick($event)">
           <mat-tab label="{{'profile.label.personalDetails' | translate}}" class="font-size-s">
             <div style="padding-top:10px;"></div>
             <form [formGroup]="profileForm" autocomplete="off" (ngSubmit)="updateProfile(profileForm.value)" role="form" novalidate>
@@ -92,6 +92,13 @@
                         <label class="font-size-m" for="email">{{'profile.label.email' | translate}}</label>
                         <div>
                           <div class="font-size-m boldText" for="email">{{ regemail }}</div>
+                        </div>
+                      </div>
+
+                      <div class="form-group col-md-4">
+                        <label class="font-size-m" for="email">{{'profile.label.oku' | translate}} <mat-checkbox formControlName="OKUcheckbox" (change)="isOKUStatus($event)"></mat-checkbox></label>
+                        <div>
+                          <div class="font-size-m boldText" for="email">{{ OKUNumber }}</div>
                         </div>
                       </div>
                   </div>

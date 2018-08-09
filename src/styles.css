@@ -238,6 +238,8 @@ p.font-size-s > strong {
 
         .mat-dialog-container{
           padding: 0 0 10px 0 !important;
+          position: relative !important;
+          top: 80px !important;
         }
 
         .mat-dialog-container app-confirm-dialog p:nth-child(1){
@@ -683,7 +685,8 @@ span.highlightWord {
 
 .mat-datepicker-content-touch {
   margin: 5px !important;
-  margin-top: 93px !important;
+  max-height: 80vh !important;
+  bottom: 0px !important;
 }
 
 

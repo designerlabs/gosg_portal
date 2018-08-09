@@ -9,8 +9,9 @@ import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { ProtectedService } from '../services/protected.service';
 import { TextMaskModule } from 'angular2-text-mask';
 import { DialogsService } from '../dialogs/dialogs.service';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatTabChangeEvent } from '@angular/material';
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
+import { HttpClient } from '@angular/common/http';
 import { debounce } from 'rxjs/operators/debounce';
 //import { debug } from 'util';
 import { ToastrService } from "ngx-toastr";
@@ -45,6 +46,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   accountStatus: any;
   countryId: any;
   userTypeId: any;
+  isEditActive: boolean = true;
   selectedCountry: any;
   selectedCity: any;
   selectedState: any;
@@ -126,6 +128,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   public corrsCityLocal: FormControl
   public corrsCityNotLocal: FormControl
   public checkboxValue: FormControl
+  public OKUcheckbox: FormControl
   public corrsCity: FormControl
   public corrsPostcode: FormControl
   public corrsPostcodeNotLocal: FormControl
@@ -148,6 +151,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   private uapstagingUrl: string = this.config.urlUapStagingProfile;
 
   constructor(
+    private http:HttpClient,
     private router: Router,
     textMask:TextMaskModule,
     private validateService:ValidateService,
@@ -250,6 +254,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.corrsCityLocal = new FormControl()
     this.corrsCityNotLocal = new FormControl()
     this.checkboxValue = new FormControl()
+    this.OKUcheckbox = new FormControl()
     this.corrsCity = new FormControl()
     this.corrsPostcode = new FormControl()
     this.corrsPostcodeNotLocal = new FormControl()
@@ -295,6 +300,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       corrsCityLocal: this.corrsCityLocal,
       corrsCityNotLocal: this.corrsCityNotLocal,
       checkboxValue: this.checkboxValue,
+      OKUcheckbox: this.OKUcheckbox,
       corrsCity: this.corrsCity,
       corrsPostcode: this.corrsPostcode,
       corrsPostcodeNotLocal: this.corrsPostcodeNotLocal,
@@ -345,6 +351,13 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                     this.roles = data.user.roles;
 
                     this.emailForm.get('emailaddressUpdate').setValue(data.user.email);
+
+
+                    if(data.user.isOku){
+                      this.profileForm.get('OKUcheckbox').setValue(data.user.isOku);
+
+                    }
+
                     if (data.user.mobilePhoneNo && (data.user.mobilePhoneNo).split('*').length > 1) {
                       const telenum = (data.user.mobilePhoneNo).split('*')[1];
                       this.phoneForm.get('telefonf').setValue(telenum);
@@ -867,6 +880,27 @@ getPostcodeByCityC(e){
       this.profileForm.get('checkboxValue').setValue(false);
       this.checkReqValues();
     }
+  }
+
+  onLinkClick(event: MatTabChangeEvent) {
+    if(event.index !== 0){
+      this.isEditActive = false;
+    }else{
+      this.isEditActive = true;
+    }
+  }
+
+  isOKUStatus(event){
+    const readUrl = `${this.config.urlProtected}jkm/okustatus`;
+    return this.http.post(readUrl,'')
+      .subscribe(
+        res => {
+          debugger;
+        },
+        err => {
+          console.log("Error occured");
+        }
+      );
   }
 
   isStateChanged() {

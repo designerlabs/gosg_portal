@@ -170,7 +170,8 @@
       "homeph":"Home Phone",
       "mobile":"Mobile Phone",
       "codetel": "Code",
-      "submit":"Update"
+      "submit":"Update",
+      "oku": "Check your OKU Status"
     },
     "err": {
       "updateFail": "Profile update failed!",
