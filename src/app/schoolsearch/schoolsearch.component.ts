@@ -171,8 +171,7 @@ export class SchoolsearchComponent implements OnInit {
           this.setLat = this.recordData[0].latitude;
           this.setLong = this.recordData[0].longitude;
           
-          this.markerGroup = L.layerGroup();
-          console.log(this.markerGroup);          
+          this.markerGroup = L.layerGroup();              
           
           for (let i = 0; i <= this.recordData.length - 1; i++) {
       
@@ -188,6 +187,7 @@ export class SchoolsearchComponent implements OnInit {
           }
 
           this.markerGroup.addTo(this.mymap);
+          
         }
 
         else{
@@ -384,7 +384,7 @@ export class SchoolsearchComponent implements OnInit {
   }
 
   resetSearch(){
-    this.markerGroup.clearLayers();
+    this.mymap.removeLayer(this.markerGroup);
     this.mymap.setView([4.8142568, 108.5806004], 6.2);
     this.searchForm.get('jenisCarian').setValue(1);
     this.valSchoolCat = 1;
