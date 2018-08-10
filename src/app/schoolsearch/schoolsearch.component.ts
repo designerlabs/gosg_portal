@@ -55,6 +55,7 @@ export class SchoolsearchComponent implements OnInit {
 
   mymap;
   marker;
+  markerGroup;
   popup = L.popup();
   defaultIcon = L.icon({
     iconUrl: 'assets/marker-icon.png',
@@ -165,12 +166,13 @@ export class SchoolsearchComponent implements OnInit {
         this.noOfSc = this.recordData.length;        
         this.showNoData = false;
 
-        console.log("ALL");
-        console.log(this.recordData.length);
+        if(this.recordData.length > 0){          
 
-        if(this.recordData.length > 0){
           this.setLat = this.recordData[0].latitude;
           this.setLong = this.recordData[0].longitude;
+          
+          this.markerGroup = L.layerGroup();
+          console.log(this.markerGroup);          
           
           for (let i = 0; i <= this.recordData.length - 1; i++) {
       
@@ -184,10 +186,12 @@ export class SchoolsearchComponent implements OnInit {
               this.recordData[i].negeri
             );
           }
+
+          this.markerGroup.addTo(this.mymap);
         }
 
         else{
-          //this.mymap.removeLater(this.marker);
+          this.markerGroup.clearLayers();
           this.mymap.setView([4.8142568, 108.5806004], 6.2);
           this.showNoData = true;
         }
@@ -212,12 +216,13 @@ export class SchoolsearchComponent implements OnInit {
         this.noOfSc = this.recordData.length;
         this.showNoData = false;
 
-        console.log("ByName");
-        console.log(this.recordData.length);
-
         if(this.recordData.length > 0){
+
           this.setLat = this.recordData[0].latitude;
           this.setLong = this.recordData[0].longitude;
+
+          this.markerGroup = L.layerGroup();
+          
           for (let i = 0; i <= this.recordData.length - 1; i++) {
       
             this.addMarker(
@@ -230,9 +235,12 @@ export class SchoolsearchComponent implements OnInit {
               this.recordData[i].negeri
             );
           }
+
+          this.markerGroup.addTo(this.mymap);
         }
 
         else{
+          this.markerGroup.clearLayers();
           this.mymap.setView([4.8142568, 108.5806004], 6.2);
           this.showNoData = true;
         }
@@ -244,7 +252,6 @@ export class SchoolsearchComponent implements OnInit {
       // this.loading = false;
     });
   }
-
 
   searchApp(formValues: any){
 
@@ -377,9 +384,11 @@ export class SchoolsearchComponent implements OnInit {
   }
 
   resetSearch(){
-
+    this.markerGroup.clearLayers();
     this.mymap.setView([4.8142568, 108.5806004], 6.2);
-    this.searchForm.get('optSelect').setValue(null);
+    this.searchForm.get('jenisCarian').setValue(1);
+    this.valSchoolCat = 1;
+    this.searchForm.get('optSelect').setValue(1);
     this.searchForm.get('state').setValue(null);
     this.searchForm.get('typeSchool').setValue(null);
     this.searchForm.get('ppd').setValue(null);
@@ -392,9 +401,7 @@ export class SchoolsearchComponent implements OnInit {
   }
 
   addMarker(lat, long, nameS, addressS, phone, city, state) {
-
-    console.log(lat);
-    
+   
     if (!isNaN(lat)) {
       if (lat !== "NaN") {
         this.mymap.setView([this.setLat, this.setLong], 8); // add y N
@@ -428,7 +435,8 @@ export class SchoolsearchComponent implements OnInit {
             </div>
           </div>`)
           // .setLatLng([agcLat,agcLong])
-        .addTo(this.mymap);
+        .addTo(this.markerGroup);
+   
       }
     }
   }
