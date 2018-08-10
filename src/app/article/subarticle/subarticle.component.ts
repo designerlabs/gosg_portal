@@ -31,9 +31,13 @@ export class SubarticleComponent implements OnInit, OnDestroy {
   moduleName: string;
   articleData: any;
   @Output() langChange = new EventEmitter();
+  loading = false;
 
   handleClickMe(e) {
 
+  }
+  boolCallback = (result: boolean) : void => {
+    this.loading = result;
   }
 
   private subscription: ISubscription;

@@ -47,7 +47,6 @@ import { ArchivecategoryProdComponent } from './archive/archivecategory/archivec
 import { ArchivesubcategoryProdComponent } from './archive/archivesubcategory/archivesubcategoryprod.component';
 import { ArchivecontentProdComponent } from './archive/archivecontent/archivecontentprod.component';
 import { PerhilitanrenewComponent, PopupServiceDialog } from './perhilitanrenew/perhilitanrenew.component';
-import { LoadingModule } from 'ngx-loading';
 import { ProtectedLoaderComponent } from './loader/protected-loader.component';
 
 export function HttpLoaderFactory(http: Http) {
@@ -88,7 +87,6 @@ export function HttpLoaderFactory(http: Http) {
     ProtectedLoaderComponent
   ],
   imports: [
-    LoadingModule,
     SharedModule,
     BrowserModule,
     TextMaskModule,

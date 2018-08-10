@@ -52,7 +52,7 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
     getUserData: any;
     maskICNo: any;
     state:string = 'small';
-
+    loading: boolean = false;
 
     nonCiti: boolean;
     citi: boolean;
@@ -205,12 +205,15 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
               }
 
     getUserType(lang){
+        this.loading = true;
         this.portalservice.getUserType(lang)
             .subscribe(
                 userData => {
                     this.getUserData = userData.userTypeList
+                    this.loading = false;
                 },Error => {
                     this.toastr.error(this.translate.instant('common.err.servicedown'), '');
+                    this.loading = false;
                 }
             );
     }

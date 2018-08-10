@@ -32,6 +32,7 @@ export class NavService {
   private subscriptionLang: ISubscription;
   lang: string;
   langId: number;
+  loading:boolean = false;
 
   // tslint:disable-next-line:max-line-length
   constructor(private http: Http, @Inject(APP_CONFIG) private config: AppConfig, private translate: TranslateService, private route: ActivatedRoute, private router: Router, private breadcrumbService: BreadcrumbService, private galleryService: GalleryService, private articleService: ArticleService, private announceService: AnnouncementlistService) {
@@ -335,6 +336,7 @@ export class NavService {
 
   triggerSubArticle(subID, lang) {
    // alert("Trigger sub acrticle");
+
     if (!isNaN(subID)) {
       this.articleService.articles = [''];
       this.articles = [''];
@@ -347,6 +349,7 @@ export class NavService {
           this.breadcrumb = this.breadcrumbService.getBreadcrumb();
           this.isValid = this.breadcrumbService.isValid = true;
           this.breadcrumb = this.breadcrumb.name = '';
+
 
         });
     }
@@ -389,8 +392,11 @@ export class NavService {
 
    }
 
-  triggerContent(subID, lang) {
+  triggerContent(subID, lang, callback?) {
     // alert("Trigger sub acrticle");
+
+    callback(true);
+
      if (!isNaN(subID)) {
        this.articleService.articles = [''];
        this.articles = [''];
@@ -403,6 +409,8 @@ export class NavService {
            this.breadcrumb = this.breadcrumbService.getBreadcrumb();
            this.isValid = this.breadcrumbService.isValid = true;
            this.breadcrumb = this.breadcrumb.name = '';
+
+           callback(false);
 
          });
      }
@@ -482,10 +490,14 @@ export class NavService {
     }
   }
 
-   triggerGalleries(lang, galleryID?) {
+   triggerGalleries(lang, galleryID?, callback?) {
+
+    callback(true);
+
     //  if (!isNaN(galleryID)) {
        this.galleries = [''];
        this.galleryService.galleries = [''];
+       
        return this.route.paramMap
          .switchMap((params: ParamMap) =>
            this.getGalleryData(lang, galleryID))
@@ -495,6 +507,8 @@ export class NavService {
            this.breadcrumb = this.breadcrumbService.getBreadcrumb();
            this.isValid = this.breadcrumbService.isValid = true;
            this.breadcrumb = this.breadcrumb.name = '';
+
+           callback(false);
          });
     //  }
    }
