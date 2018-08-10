@@ -212,8 +212,11 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
             }
           }).bind(this));
           this.loading = false;
-        }, err => {
+        },
+        error => {
+          this.toastr.error(JSON.parse(error._body).statusDesc, '');
           this.loading = false;
+    
         });
   }
 
@@ -271,6 +274,7 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
           this.gotPrediction = false;
           this.showNoData = true;
           this.loading = false;
+          this.toastr.error(JSON.parse(err._body).statusDesc, '');
 
         });
       } else {
