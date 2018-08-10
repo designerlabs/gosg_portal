@@ -32,7 +32,7 @@ export class SchoolsearchComponent implements OnInit {
   dataAppSchool = null;
   recordData = null;
   showNoData = false;
-  
+
   public valSchoolCat: any;
   public listState: any;
   public listPPD: any;
@@ -51,6 +51,7 @@ export class SchoolsearchComponent implements OnInit {
   public speacialEd: FormControl;
   public schoolname: FormControl;
   public jenisCarian: FormControl;
+  public searchString: string;
 
   mymap;
   marker;
@@ -66,7 +67,6 @@ export class SchoolsearchComponent implements OnInit {
   });
 
   private subscriptionLang: ISubscription;  
-  // dataSource = new MatTableDataSource<object>(this.recordData);
 
   constructor(
 
@@ -248,7 +248,7 @@ export class SchoolsearchComponent implements OnInit {
 
   searchApp(formValues: any){
 
-    this.showDetails = false;
+    this.showDetails = true;
     if(this.searchForm.controls.jenisCarian.value == 1){
       this.getDataSchool();
     }
@@ -259,7 +259,7 @@ export class SchoolsearchComponent implements OnInit {
   }
 
   getTypeSchool(val){
-    
+
     this.valSchoolCat = val.optSelect;
 
     if(this.searchForm.get('state').value == "" || this.searchForm.get('state').value == null){
@@ -280,7 +280,7 @@ export class SchoolsearchComponent implements OnInit {
 
       }).bind(this));
     },
-    error => {            
+    error => {
     });
   }
 
@@ -299,12 +299,12 @@ export class SchoolsearchComponent implements OnInit {
         this.listPPD.push(a);
         this.listTypeS.push(a);
 
-        for (let i = 0; i < arrayPPD.length; i++) { 
+        for (let i = 0; i < arrayPPD.length; i++) {
           let b = { id: arrayPPD[i], text: arrayPPD[i]};
           this.listPPD.push(b); //new list for ppd;
         }
 
-        for (let i = 0; i < arrayTyepeS.length; i++) { 
+        for (let i = 0; i < arrayTyepeS.length; i++) {
           let b = { id: arrayTyepeS[i], text: arrayTyepeS[i]};
           this.listTypeS.push(b); // new list for school type;
         }
@@ -319,7 +319,7 @@ export class SchoolsearchComponent implements OnInit {
 
       }).bind(this));
     },
-    error => {            
+    error => {
     });
   }
 
@@ -396,7 +396,7 @@ export class SchoolsearchComponent implements OnInit {
     console.log(lat);
     
     if (!isNaN(lat)) {
-      if (lat !== "NaN") { 
+      if (lat !== "NaN") {
         this.mymap.setView([this.setLat, this.setLong], 8); // add y N
 
         this.marker = L.marker([lat, long], { icon: this.defaultIcon })

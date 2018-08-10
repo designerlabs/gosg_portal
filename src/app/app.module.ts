@@ -34,6 +34,7 @@ import { LeftmenuComponent } from './article/leftmenu/leftmenu.component';
 import { ArchivecategoryComponent } from './archive/archivecategory/archivecategory.component';
 import { ArchivesubcategoryComponent } from './archive/archivesubcategory/archivesubcategory.component';
 import { ArchivecontentComponent } from './archive/archivecontent/archivecontent.component';
+import { PortalLoaderComponent } from './loader/portal-loader.component';
 
 // import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule } from "@angular/material";
 
@@ -86,7 +87,8 @@ imports: [
     LeftmenuComponent,
     ArchivecategoryComponent,
     ArchivesubcategoryComponent,
-    ArchivecontentComponent
+    ArchivecontentComponent,
+    PortalLoaderComponent
 
   ],
 

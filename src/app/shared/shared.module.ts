@@ -137,6 +137,8 @@ import { GalleryService } from '../gallery/gallery.service';
 import { GalleryComponent, DialogDataExampleDialog } from '../gallery/gallery.component';
 import { SchoolsearchComponent } from '../schoolsearch/schoolsearch.component';
 import { TrafficinfoComponent } from '../trafficinfo/trafficinfo.component';
+import { SearchPipe } from '../pipe/search.pipe';
+import { SharedLoaderComponent } from '../loader/shared-loader.component';
 
 // import { LifeeventComponent } from '../lifeevent/lifeevent.component';
 //import { GalleryService } from '../gallery/gallery.service';
@@ -226,7 +228,9 @@ export function HttpLoaderFactory(http: Http) {
     GalleryComponent,
     DialogDataExampleDialog,
     SchoolsearchComponent,
-    TrafficinfoComponent
+    TrafficinfoComponent,
+    SearchPipe,
+    SharedLoaderComponent
     // SearchResultComponent
   ],
 
@@ -318,7 +322,8 @@ export function HttpLoaderFactory(http: Http) {
      MatPaginatorModule,
      SharedPipe,
      EventCalendarComponent,
-     AgencydirectoryComponent
+     AgencydirectoryComponent,
+     SearchPipe
     //  SearchResultComponent
 
   ],
