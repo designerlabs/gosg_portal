@@ -48,6 +48,7 @@ import { ArchivesubcategoryProdComponent } from './archive/archivesubcategory/ar
 import { ArchivecontentProdComponent } from './archive/archivecontent/archivecontentprod.component';
 import { PerhilitanrenewComponent, PopupServiceDialog } from './perhilitanrenew/perhilitanrenew.component';
 import { LoadingModule } from 'ngx-loading';
+import { ProtectedLoaderComponent } from './loader/protected-loader.component';
 
 export function HttpLoaderFactory(http: Http) {
    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -83,7 +84,8 @@ export function HttpLoaderFactory(http: Http) {
     ArchivesubcategoryProdComponent,
     ArchivecontentProdComponent,
     PerhilitanrenewComponent,
-    PopupServiceDialog
+    PopupServiceDialog,
+    ProtectedLoaderComponent
   ],
   imports: [
     LoadingModule,

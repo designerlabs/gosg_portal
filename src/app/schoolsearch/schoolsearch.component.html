@@ -19,22 +19,22 @@
         </div>
     </div>
 </div>
-  
+
 <div class="container">
     <div>
         <br>
-        <form [formGroup]="searchForm" role="form" novalidate="novalidate">            
+        <form [formGroup]="searchForm" role="form" novalidate="novalidate">
             <div class="example-container padding-right20" style="color: black; padding-bottom: 20px;">
                 <h4>KEMUDAHAN CARIAN SENARAI SEKOLAH - SEKOLAH DI BAWAH KEMENTERIAN PENDIDIKAN MALAYSIA SEHINGGA 30 APRIL 2018</h4>
             </div>
-  
+
             <div class="mat-elevation-z8 padding-right20">
                 <div class="row padding-15">
-                    <div class="col-md-4" style="color: black">                      
+                    <div class="col-md-4" style="color: black">
                       <mat-form-field class="example-full-width">
                         <mat-select formControlName="jenisCarian" placeholder="Jenis Carian" (change)="searchType(searchForm.value)" required>
                             <mat-option [value]=1>Carian berdasarkan kategori.</mat-option>
-                            <mat-option [value]=2>Carian berdasarkan nama sekolah.</mat-option>           
+                            <mat-option [value]=2>Carian berdasarkan nama sekolah.</mat-option>
                         </mat-select>
                     </mat-form-field>
                     </div>
@@ -45,8 +45,8 @@
                         <mat-form-field class="example-full-width">
                             <mat-select formControlName="optSelect" placeholder="Kategori Sekolah" (change)="getTypeSchool(searchForm.value)" required>
                                 <mat-option [value]=1>Prasekolah</mat-option>
-                                <mat-option [value]=2>Sekolah Rendah</mat-option>      
-                                <mat-option [value]=3>Sekolah Menengah</mat-option>           
+                                <mat-option [value]=2>Sekolah Rendah</mat-option>
+                                <mat-option [value]=3>Sekolah Menengah</mat-option>
                             </mat-select>
                             <mat-error *ngIf="searchForm.controls.optSelect.hasError('required')">
                                 Kategori Sekolah diperlukan.
@@ -56,9 +56,9 @@
 
                     <div class="col-md-4">
                         <mat-form-field class="example-full-width">
-                            <mat-select formControlName="state" placeholder="Negeri" 
+                            <mat-select formControlName="state" placeholder="Negeri"
                                 (change)="getPPD(searchForm.controls.state.value,searchForm.controls.optSelect.value)" required>
-                                <mat-option *ngFor="let state of listState" [value]="state">{{state}}</mat-option>              
+                                <mat-option *ngFor="let state of listState" [value]="state">{{state}}</mat-option>
                             </mat-select>
                             <mat-error *ngIf="searchForm.controls.state.hasError('required')">
                                 Negeri diperlukan.
@@ -69,21 +69,21 @@
                     <div class="col-md-4" *ngIf="valSchoolCat != 1">
                         <mat-form-field class="example-full-width">
                             <mat-select formControlName="typeSchool" placeholder="Jenis Sekolah" (change)="checkReqValues()" required>
-                                <mat-option *ngFor="let ts of listTypeS" [value]="ts.id">{{ts.text}}</mat-option>                  
+                                <mat-option *ngFor="let ts of listTypeS" [value]="ts.id">{{ts.text}}</mat-option>
                             </mat-select>
                             <mat-error *ngIf="searchForm.controls.typeSchool.hasError('required')">
                                 Jenis Sekolah diperlukan.
                             </mat-error>
                         </mat-form-field>
                     </div>
-          
+
                 <!-- </div>
 
                 <div class="row padding-15" *ngIf="searchForm.controls.jenisCarian.value == 1"> -->
                     <div class="col-md-4">
                         <mat-form-field class="example-full-width">
                             <mat-select formControlName="ppd" placeholder="Pejabat Pendidikan Daerah (PPD)" (change)="checkReqValues()" required>
-                                <mat-option *ngFor="let ppd of listPPD" [value]="ppd.id">{{ppd.text}}</mat-option>         
+                                <mat-option *ngFor="let ppd of listPPD" [value]="ppd.id">{{ppd.text}}</mat-option>
                             </mat-select>
                             <mat-error *ngIf="searchForm.controls.ppd.hasError('required')">
                                 Pejabat Pendidikan Daerah (PPD) diperlukan.
@@ -94,7 +94,7 @@
                     <div class="col-md-4">
                         <mat-form-field class="example-full-width">
                             <mat-select formControlName="speacialEd" placeholder="Pendidikan Khas" (change)="checkReqValues()" required>
-                                <mat-option *ngFor="let khas of listKhas" [value]="khas.id">{{khas.text}}</mat-option> 
+                                <mat-option *ngFor="let khas of listKhas" [value]="khas.id">{{khas.text}}</mat-option>
                             </mat-select>
                             <mat-error *ngIf="searchForm.controls.speacialEd.hasError('required')">
                                 Pendidikan Khas diperlukan.
@@ -117,11 +117,11 @@
 
                 <div class="row padding-15">
                     <div class="col-md-12">
-                        <button tabindex="" mat-raised-button color="warn" type="button" 
+                        <button tabindex="" mat-raised-button color="warn" type="button"
                             class="form-control btn btn-md btn-warning font-size-s pull-right bttnCustom"
                             (click)="resetModal.show()" style="margin-left: 5px;">
                             <i class="fa fa-refresh"></i> {{'feedback.label.reset' | translate }}</button>
-                        <button mat-raised-button type="button" color="primary" 
+                        <button mat-raised-button type="button" color="primary"
                             class="form-control btn btn-md btn-success font-size-s pull-right bttnCustom" [disabled]="!complete"
                             (click)="searchApp(searchForm.value)">
                             <i class="fa fa-search"></i> {{'appmngt.setSearch.search' | translate}}</button>
@@ -131,7 +131,7 @@
             </div>
         </form>
     </div><br>
-  
+
     <div *ngIf="showDetails">
         <div class="row">
             <div class="col-md-12" style="color: black; font-weight: bold;">
@@ -141,14 +141,20 @@
         </div>
 
         <div class="row">
-            <div class="col-md-12" style="color: black">
-                <label>Catatan: PPD - Pejabat Pendidikan Daerah, PK - Pendidikan Khas</label>
-                <input type="text" class="form-control" name="searchString" placeholder="Type to search..." [(ngModel)]="searchString">
-            </div>
+          <div class="col-md-8">
+              <p  style="color: black; font-weight: bold;">Catatan: PPD - Pejabat Pendidikan Daerah, PK - Pendidikan Khas</p>
+          </div>
+          <div class="col-md-4">
+              <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Type to search..."  [(ngModel)]="query"
+                   style="color: black">
+              </mat-form-field>
+              <!-- <input type="text" class="form-control" name="query" placeholder="Type to search..." [(ngModel)]="query"> -->
+          </div>
         </div><br>
 
         <div class="mat-elevation-z8 padding-15" style="max-height: 500px; overflow: auto;">
-            
+
             <table class="mat-table" style="width:100%;">
                 <tr class="mat-header-row tableHeader">
                     <th class="" width="5%">&nbsp;{{'appmngt.tableHeader.num' | translate}}</th>
@@ -162,9 +168,9 @@
                     <th class="" width="10%">No. Faksimili</th>
                     <th class="" width="10%">Emel</th>
                 </tr>
-                <tr class="mat-row table_row table_row_height" *ngFor="let data of recordData; let i = index;" role="row">
+                <tr class="mat-row table_row table_row_height" *ngFor="let data of recordData | search : query; let i = index;" role="row">
                     <td class="mat-cell text-center">{{i+1}}</td>
-                    <td class="mat-cell" 
+                    <td class="mat-cell"
                         (click)="goTo(data.latitude,data.longitude,data.namaSekolah,data.alamat,data.telNo, data.bandar, data.negeri)">
                         {{data.kodSekolah}}</td>
                     <td class="mat-cell"
@@ -195,21 +201,20 @@
                     <hr><br>{{'common.showNoData' | translate}}</td>
                 </tr>
             </table>
-            
+
         </div>
     </div><br>
 
-    <div class="row container" style="padding-bottom: 20px;">      
+    <div class="row container" style="padding-bottom: 20px;">
         <div class="col-md-12" id="dirmap"></div>
-        <!-- <div style="height: 400px;" leaflet [leafletOptions]="options" [leafletLayers]="markers"></div> -->     
+        <!-- <div style="height: 400px;" leaflet [leafletOptions]="options" [leafletLayers]="markers"></div> -->
     </div>
 </div>
-  
-<app-confirm-dialog #resetModal 
-    [title]="'common.icon.warn'" 
-    [content]="'common.msg.reset'" 
+
+<app-confirm-dialog #resetModal
+    [title]="'common.icon.warn'"
+    [content]="'common.msg.reset'"
     [state]="'common.state.warn'"
-    [isReset]="'true'" 
+    [isReset]="'true'"
     (resetMethod)="resetMethod($event)">
 </app-confirm-dialog>
-  
