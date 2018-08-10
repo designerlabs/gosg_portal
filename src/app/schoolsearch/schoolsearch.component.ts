@@ -384,7 +384,10 @@ export class SchoolsearchComponent implements OnInit {
   }
 
   resetSearch(){
-    this.mymap.removeLayer(this.markerGroup);
+    this.mymap.eachLayer(function (layer) {
+      this.mymap.removeLayer(layer);
+    });
+
     this.mymap.setView([4.8142568, 108.5806004], 6.2);
     this.searchForm.get('jenisCarian').setValue(1);
     this.valSchoolCat = 1;
