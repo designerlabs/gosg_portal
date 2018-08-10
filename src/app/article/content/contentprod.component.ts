@@ -35,6 +35,7 @@ export class ContentProdComponent implements OnInit, OnDestroy {
 
   articleData: any;
   @Output() langChange = new EventEmitter();
+  loading: boolean;
 
   handleClickMe(e){
 
@@ -92,7 +93,7 @@ export class ContentProdComponent implements OnInit, OnDestroy {
           if(this.moduleName == 'subcategory'){
             this.navService.triggerSubArticle(this.subID, this.langId);
           }else if(this.moduleName == 'content'){
-            this.navService.triggerContent(this.subID, this.langId);
+            this.navService.triggerContent(this.subID, this.langId, this.boolCallback);
           }else{
             this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID);
           }
@@ -119,7 +120,7 @@ export class ContentProdComponent implements OnInit, OnDestroy {
     var tt = this.router.url.split('/');
     this.subID = parseInt(tt[tt.length-1]);
 
-    this.navService.triggerContent(this.subID, localStorage.getItem('langID'));
+    this.navService.triggerContent(this.subID, localStorage.getItem('langID'), this.boolCallback);
     this.score = new FormControl('', [Validators.required]);
     this.remarks = new FormControl('');
     this.scoreFormgrp = new FormGroup({
@@ -130,8 +131,9 @@ export class ContentProdComponent implements OnInit, OnDestroy {
 
   }
 
-
-
+  boolCallback = (result: boolean) : void => {
+   this.loading = result;
+  }
 
   ngOnDestroy() {
     this.subscriptionLang.unsubscribe();
@@ -207,7 +209,7 @@ export class ContentProdComponent implements OnInit, OnDestroy {
 
   clickContentFromMenu(pId, aId, status, event){
     this.statusID = status;
-    this.navService.triggerContent(aId, localStorage.getItem('langID'));
+    this.navService.triggerContent(aId, localStorage.getItem('langID'), this.boolCallback);
     this.navService.getContentUrl(aId, localStorage.getItem('langID'));
     this.router.navigate( ['/content', aId]);
     event.preventDefault();
