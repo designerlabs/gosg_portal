@@ -341,62 +341,6 @@ export class SearchResultComponent implements OnInit, OnDestroy {
     }
   }
 
-  // addKeySettings(keyVal){
-  //   let key_ary : any;
-  //   // key_ary = this.mainObj.keywordMap;
-  //   let inxall = $.inArray('all', Object.keys(key_ary));
-  //   let inxany = $.inArray('any', Object.keys(key_ary));
-  //   let inxexact = $.inArray('exact', Object.keys(key_ary));
-
-  //   if(keyVal === "1"){         // exact
-  //     if(inxall >= 0){
-  //       delete key_ary.all;
-  //     }
-  //     if(inxany >= 0){
-  //       delete key_ary.any;
-  //     }
-  //     if(inxexact < 0){
-  //       let ele = {'exact': []};
-  //       ele.exact = [this.ser_word];
-  //       jQuery.extend(key_ary, ele);
-  //     }else{
-  //       key_ary.exact = [this.ser_word];
-  //     }
-  //     key_ary.not = [this.inpExcWord];
-  //   }else if(keyVal === "2"){     //all
-  //     if(inxexact >= 0){
-  //       delete key_ary.exact;
-  //     }
-  //     if(inxany >= 0){
-  //       delete key_ary.any;
-  //     }
-  //     if(inxall < 0){
-  //       let ele = {'all': []};
-  //       ele.all = [this.ser_word];
-  //       jQuery.extend(key_ary, ele);
-  //     }else{
-  //       key_ary.all = [this.ser_word];
-  //     }
-  //     key_ary.not = [this.inpExcWord];
-  //   }else if(keyVal === "3"){     //any
-  //     if(inxexact >= 0){
-  //       delete key_ary.exact;
-  //     }
-  //     if(inxall >= 0){
-  //       delete key_ary.all;
-  //     }
-  //     if(inxany < 0){
-  //       let ele = {'any': []};
-  //       ele.any = [this.ser_word];
-  //       jQuery.extend(key_ary, ele);
-  //     }else{
-  //       key_ary.any = [this.ser_word];
-  //     }
-  //     key_ary.not = [this.inpExcWord];
-  //   }
-
-  // }
-
   addSpecFiltr(methodNm, field) {
     let key = field;
     // 

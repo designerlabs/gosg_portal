@@ -22,7 +22,8 @@ export class DigitalservicesprodComponent implements OnInit, OnDestroy {
   languageId = this.languageId;
   mediaUrl: any;
   isLogin: boolean;
-  validMyIdentity:string;
+  loading: boolean;
+  validMyIdentity:boolean;
 
   lang = this.lang;
   private subscription: ISubscription;
@@ -78,9 +79,11 @@ export class DigitalservicesprodComponent implements OnInit, OnDestroy {
 
   getDServices(lang) {
 
+    this.loading = true;
     this.portalservice.getDigitalServices(lang).subscribe(data => {
 
       this.dsData = data.list;
+      this.loading = false;
       //
       // for(var item of data.list) {
       //
@@ -98,8 +101,14 @@ export class DigitalservicesprodComponent implements OnInit, OnDestroy {
       data => {
         this.validMyIdentity = data.user.isMyIdentityVerified;
         this.isLogin = true;
+      },
+      error => {
+        this.toastr.error(JSON.parse(error._body).statusDesc, '');
+        this.loading = false;
+  
       });
     } else {
+      this.validMyIdentity = true;
       this.isLogin = true;
     }
 }

@@ -12,6 +12,7 @@ body, html {
   height: 100%;
   width: 100%;
   top: 0px;
+  background: rgba(10,10,10,0.5);
 }
 .app-loading .spinner {
   height: 100px;

@@ -33,6 +33,7 @@ export class DigitalservicesComponent implements OnInit, OnDestroy {
   lang = this.lang;
   private subscription: ISubscription;
   private subscriptionLang: ISubscription;
+  loading: boolean;
 
   constructor(
     private http: Http,
@@ -84,9 +85,12 @@ export class DigitalservicesComponent implements OnInit, OnDestroy {
 
   getDServices(lang) {
 
+    this.loading = true;
+
     this.portalservice.getDigitalServices(lang).subscribe(data => {
 
       this.dsData = data.list;
+      this.loading = false;
       //
       // for(var item of data.list) {
       //
@@ -94,6 +98,11 @@ export class DigitalservicesComponent implements OnInit, OnDestroy {
       //   this.dsData.push(data.list);
       // }
       // this.dsData = [''];
+
+    },
+    error => {
+      this.toastr.error(JSON.parse(error._body).statusDesc, '');
+      this.loading = false;
 
     });
   }

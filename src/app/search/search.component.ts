@@ -6,27 +6,28 @@ import { TranslateService } from '@ngx-translate/core';
 import { NavService } from '../header/nav/nav.service';
 
 @Component({
-  selector: 'app-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css']
+    selector: 'app-search',
+    templateUrl: './search.component.html',
+    styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
 
     keyword1: any;
     public popData: any = [];
+    loading: boolean = false;
 
     constructor(
         private translate: TranslateService,
         private router: Router,
-        private navService:NavService,
-        private searchService:SearchService,
+        private navService: NavService,
+        private searchService: SearchService,
         private toastr: ToastrService
     ) {
 
-        if(!this.languageId){
-        this.languageId = localStorage.getItem('langID');
-        }else{
-        this.languageId = 1;
+        if (!this.languageId) {
+            this.languageId = localStorage.getItem('langID');
+        } else {
+            this.languageId = 1;
         }
 
     }
@@ -38,12 +39,11 @@ export class SearchComponent implements OnInit {
     }
 
     mainSearch(key) {
-        console.log(key)
-        
-        if(key) {
+
+        if (key) {
             $('#searchDDown').css({ 'display': 'none' });
             localStorage.setItem('ser_word', key);
-            this.router.navigate(['search/searchResult/'+key]);
+            this.router.navigate(['search/searchResult/' + key]);
             this.internal(key);
         } else {
             this.toastr.error(this.translate.instant('common.msg.searchKeyword'), '');
@@ -56,16 +56,16 @@ export class SearchComponent implements OnInit {
     internal(key) {
 
         let body = {
-            "size":10,
-            "from":0,
+            "size": 10,
+            "from": 0,
             "keyword": key,
-            "filters":{
+            "filters": {
                 "ranges":
                 {
                     "end_date": [
                         {
                             "gte": "now/d",
-                            "time_zone":"+08:00"
+                            "time_zone": "+08:00"
                         }
                     ]
                 },
@@ -73,11 +73,12 @@ export class SearchComponent implements OnInit {
             }
         }
 
-
+        this.loading = true;
         this.searchService.getInternal(JSON.stringify(body)).subscribe(
             data => {
-            this.searchService.setIntData(data);
-        });
+                this.searchService.setIntData(data);
+                this.loading = false;
+            });
 
 
     }
@@ -95,10 +96,12 @@ export class SearchComponent implements OnInit {
             "filters": {
             }
         };
+        // this.loading = true;
         this.navService.getPopularData(body)
             .subscribe(resPopularData => {
                 this.popData = resPopularData;
                 this.autoCompleteArr = this.popData;
+                // this.loading = false;
             });
     }
 
