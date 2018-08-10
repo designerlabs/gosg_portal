@@ -65,8 +65,7 @@ export class SchoolsearchComponent implements OnInit {
     popupAnchor: [12, 0] // point from which the popup should open relative to the iconAnchor
   });
 
-  private subscriptionLang: ISubscription;
-  
+  private subscriptionLang: ISubscription;  
   // dataSource = new MatTableDataSource<object>(this.recordData);
 
   constructor(
@@ -160,45 +159,103 @@ export class SchoolsearchComponent implements OnInit {
     this.sharedService.getListSchool('school/search',valSchool,valState,valPPD,valKhas,valTypeS).subscribe(
     data => {
 
-      this.sharedService.errorHandling(data, (function () {
-       
+    //  this.sharedService.errorHandling(data, (function () {       
         this.dataAppSchool = data;
         this.recordData = this.dataAppSchool.schoolResourceList;
-        this.noOfSc = this.recordData.length;
-        this.setLat = this.recordData[0].latitude;
-        this.setLong = this.recordData[0].longitude;
-        // this.dataAppSchoolPage = this.dataAppSchool;
-        // this.noNextData = this.dataAppSchool.pageNumber === this.dataAppSchool.totalPages;
+        this.noOfSc = this.recordData.length;        
         this.showNoData = false;
 
-        for (let i = 0; i <= this.recordData.length - 1; i++) {
-    
-          this.addMarker(
-            parseFloat(this.malformedDataHandler(this.recordData[i].latitude)),
-            parseFloat(this.malformedDataHandler(this.recordData[i].longitude)),
-            this.recordData[i].namaSekolah,
-            this.recordData[i].alamat,
-            this.recordData[i].telNo,
-            this.recordData[i].bandar,
-            this.recordData[i].negeri
-          );
+        console.log("ALL");
+        console.log(this.recordData.length);
+
+        if(this.recordData.length > 0){
+          this.setLat = this.recordData[0].latitude;
+          this.setLong = this.recordData[0].longitude;
+          
+          for (let i = 0; i <= this.recordData.length - 1; i++) {
+      
+            this.addMarker(
+              parseFloat(this.malformedDataHandler(this.recordData[i].latitude)),
+              parseFloat(this.malformedDataHandler(this.recordData[i].longitude)),
+              this.recordData[i].namaSekolah,
+              this.recordData[i].alamat,
+              this.recordData[i].telNo,
+              this.recordData[i].bandar,
+              this.recordData[i].negeri
+            );
+          }
         }
 
-        if(this.dataAppSchool.length == 0){
+        else{
+          //this.mymap.removeLater(this.marker);
+          this.mymap.setView([4.8142568, 108.5806004], 6.2);
           this.showNoData = true;
         }
-      }).bind(this));
+    //  }).bind(this));
     },
     error => {
-      this.toastr.error(JSON.parse(error._body).statusDesc, '');
+      this.showNoData = true;
+      //this.toastr.error(JSON.parse(error._body).statusDesc, '');
       // this.loading = false;
     });
   }
 
+  getSchoolByName(){
+    let valSchoolName = this.searchForm.get('schoolname').value;
+    
+    this.sharedService.getListSchoolByName('school/search',valSchoolName).subscribe(
+    data => {
+
+      //this.sharedService.errorHandling(data, (function () {       
+        this.dataAppSchool = data;
+        this.recordData = this.dataAppSchool.schoolResourceList;
+        this.noOfSc = this.recordData.length;
+        this.showNoData = false;
+
+        console.log("ByName");
+        console.log(this.recordData.length);
+
+        if(this.recordData.length > 0){
+          this.setLat = this.recordData[0].latitude;
+          this.setLong = this.recordData[0].longitude;
+          for (let i = 0; i <= this.recordData.length - 1; i++) {
+      
+            this.addMarker(
+              parseFloat(this.malformedDataHandler(this.recordData[i].latitude)),
+              parseFloat(this.malformedDataHandler(this.recordData[i].longitude)),
+              this.recordData[i].namaSekolah,
+              this.recordData[i].alamat,
+              this.recordData[i].telNo,
+              this.recordData[i].bandar,
+              this.recordData[i].negeri
+            );
+          }
+        }
+
+        else{
+          this.mymap.setView([4.8142568, 108.5806004], 6.2);
+          this.showNoData = true;
+        }
+      //}).bind(this));
+    },
+    error => {
+      this.showNoData = true;
+      //this.toastr.error(JSON.parse(error._body).statusDesc, '');
+      // this.loading = false;
+    });
+  }
+
+
   searchApp(formValues: any){
 
-    this.showDetails = true;
-    this.getDataSchool();
+    this.showDetails = false;
+    if(this.searchForm.controls.jenisCarian.value == 1){
+      this.getDataSchool();
+    }
+
+    else{
+      this.getSchoolByName();
+    }
   }
 
   getTypeSchool(val){
@@ -290,11 +347,17 @@ export class SchoolsearchComponent implements OnInit {
     let reqVal = [];
     let nullPointers:any = [];
 
-    if(this.valSchoolCat == 1){
-      reqVal =  ["optSelect","state","ppd","speacialEd"];
+    if(this.searchForm.controls.jenisCarian.value == 1){
+      if(this.valSchoolCat == 1){
+        reqVal =  ["optSelect","state","ppd","speacialEd"];
+      }
+      else{
+        reqVal =  ["optSelect","state","typeSchool", "ppd","speacialEd"];
+      }
     }
+
     else{
-      reqVal =  ["optSelect","state","typeSchool", "ppd","speacialEd"];
+      reqVal =  ["schoolname"];
     }
 
     for (var reqData of reqVal) {
@@ -330,6 +393,8 @@ export class SchoolsearchComponent implements OnInit {
 
   addMarker(lat, long, nameS, addressS, phone, city, state) {
 
+    console.log(lat);
+    
     if (!isNaN(lat)) {
       if (lat !== "NaN") { 
         this.mymap.setView([this.setLat, this.setLong], 8); // add y N
@@ -356,20 +421,21 @@ export class SchoolsearchComponent implements OnInit {
               <i class='fa fa-map-marker' style='font-size: 1.2em; margin-top: 0px;'></i>
             </div>
             <div class='col-md-10'>
-              <p style='font-size: 1em; margin-top: 0px; margin-bottom: 0px;'>Geolokasi: ${lat},${long}</p>
+              <p style='font-size: 1em; margin-top: 0px; margin-bottom: 0px;'>Geolokasi: ${lat},${long} 
+              (dapatkan arah menggunakan <a href='https://www.google.com/maps/dir/?api=1&destination=${lat},${long}&hl=ms'
+              target='_blank'>Google Maps</a>
+              atau buka aplikasi <a href='https://hub.grab.com/ul/' target='_blank'>Grab</a>)</p>
             </div>
           </div>`)
           // .setLatLng([agcLat,agcLong])
         .addTo(this.mymap);
-
-        //this.marker.on('click', this.onMapClick)
       }
     }
   }
 
   goTo(lat, long, nameS, addressS, phone, city, state) {
     if (lat && long) {
-      this.mymap.setView([lat, long], 13);
+      this.mymap.setView([lat, long], 24);
 
       this.popup = L.popup()
         .setLatLng([lat, long])
@@ -394,7 +460,10 @@ export class SchoolsearchComponent implements OnInit {
             <i class='fa fa-map-marker' style='font-size: 1.2em; margin-top: 0px;'></i>
           </div>
           <div class='col-md-10'>
-            <p style='font-size: 1em; margin-top: 0px; margin-bottom: 0px;'>Geolokasi: ${lat},${long}</p>
+            <p style='font-size: 1em; margin-top: 0px; margin-bottom: 0px;'>Geolokasi: ${lat},${long} 
+            (dapatkan arah menggunakan <a href='https://www.google.com/maps/dir/?api=1&destination=${lat},${long}&hl=ms'
+            target='_blank'>Google Maps</a>
+             atau buka aplikasi <a href='https://hub.grab.com/ul/' target='_blank'>Grab</a>)</p>
           </div>
         </div>
         `)

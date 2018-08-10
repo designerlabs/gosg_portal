@@ -232,6 +232,17 @@ export class SharedService {
       .catch(this.handleError);
   }
 
+  getListSchoolByName(moduleName, schoolname): Observable<any[]> {
+
+    let readUrl: any;
+    readUrl = this.sharedDS + moduleName + '?keyword='+schoolname;
+        
+    return this.http.get(readUrl)
+      .map((response: Response) => response.json())
+      .retry(5)
+      .catch(this.handleError);
+  }
+
   // END NEW
 
 
