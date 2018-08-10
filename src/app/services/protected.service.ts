@@ -59,7 +59,7 @@ export class ProtectedService {
   private pollUrl: string = this.config.urlPollProtected;
   // private serviceUrl = 'https://jsonplaceholder.typicode.com/users';
   private inboxUrl = this.mailUrl;
-  private urlDashboardData: string = this.config.urlDashboardData;
+  private urlDashboardData: string = this.config.urlDashboardData; // urlDashboardData
   private statusAppUrl: string = this.config.statusAppUrl;
   private urlAgencyList: string = this.config.urlAgencyList;
   private dataAppUrl: string = this.config.dataAppUrl;

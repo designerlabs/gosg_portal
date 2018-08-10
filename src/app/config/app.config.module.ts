@@ -178,7 +178,7 @@ export const APP_DI_CONFIG: AppConfig = {
     urlStatistic: commonURL + 'statistics?year=2018',
     urlDserviceRpt: commonURL + 'dservice/report',
     // urlFaq: commonURL + 'faq',
-    urlDashboardData: protectedBaseURL + 'dservice/dashboard',
+    urlDashboardData: agencyURL + 'dservice/dashboard',
     statusAppUrl: agencyURL + 'dservice/group',
     urlAgencyList: agencyURL + 'dservice/agencylist',
     dataAppUrl: agencyURL + 'dservice',
