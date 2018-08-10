@@ -26,6 +26,14 @@
     max-height: 500px;
   }
 
+  .badge-success{
+    background-color: green !important;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 5px;
+    margin-left: 6px;
+  }
+
 .getSearch{
     border-collapse: separate!important;
     color: black;
@@ -37,6 +45,6 @@
     font-size: 14px !important;
     font-weight: bold !important;
     color: black !important;
-    /* background-color: #a7a495 !important; */
+    /* background-color: #a7a495 !important; 
     box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12) */
 }

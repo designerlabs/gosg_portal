@@ -213,8 +213,19 @@ export class SharedService {
       .catch(this.handleError);
   }
 
-  getListSchool(moduleName, school, state, ppd, khas): Observable<any[]> {
-    let readUrl = this.sharedDS + moduleName + '/'+school+'/'+state+'?ppd='+ppd+ '&pendidikanKhas='+khas;
+  getListSchool(moduleName, school, state, ppd, khas, typeS?): Observable<any[]> {
+
+    let readUrl: any;
+
+    if(typeS){
+      readUrl = this.sharedDS + moduleName + '/'+school+'/'+state+'?ppd='+ppd+ '&pendidikanKhas='+khas+'&type='+typeS;
+    }
+
+    else{
+      readUrl = this.sharedDS + moduleName + '/'+school+'/'+state+'?ppd='+ppd+ '&pendidikanKhas='+khas;
+    }
+
+    
     return this.http.get(readUrl)
       .map((response: Response) => response.json())
       .retry(5)

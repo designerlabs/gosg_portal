@@ -7,6 +7,10 @@ import { Router } from '@angular/router';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 import { FormControl, FormGroup } from '@angular/forms';
+import {
+  MatInputModule, MatPaginatorModule, MatProgressSpinnerModule,
+  MatSortModule, MatTableModule
+} from '@angular/material';
 import { Http } from '@angular/http';
 import * as $ from 'jquery';
 import { tileLayer, latLng, circle, polygon, marker, icon, Layer } from 'leaflet';
@@ -38,6 +42,8 @@ export class SchoolsearchComponent implements OnInit {
   public listState: any;
   public listPPD: any;
   public listKhas = [{id: "all", text: "Semua"},{id: "1", text: "Ada"},{id: "0", text: "Tiada"}]
+  public listTypeS: any;
+  public noOfSc = 0;
   public showDetails = false;
 
   searchForm: FormGroup;
@@ -148,14 +154,22 @@ export class SchoolsearchComponent implements OnInit {
     let valState = this.searchForm.get('state').value;
     let valPPD = this.searchForm.get('ppd').value;
     let valKhas = this.searchForm.get('speacialEd').value;
+    let valTypeS = this.searchForm.get('typeSchool').value;
 
-    this.sharedService.getListSchool('school/search/',valSchool,valState,valPPD,valKhas).subscribe(
+    if(valSchool == 1){
+      valTypeS = '';
+    }
+
+    console.log(valTypeS);
+
+    this.sharedService.getListSchool('school/search',valSchool,valState,valPPD,valKhas,valTypeS).subscribe(
     data => {
 
       this.sharedService.errorHandling(data, (function () {
        
         this.dataAppSchool = data;
         this.recordData = this.dataAppSchool.schoolResourceList;
+        this.noOfSc = this.recordData.length;
         // this.dataAppSchoolPage = this.dataAppSchool;
         // this.noNextData = this.dataAppSchool.pageNumber === this.dataAppSchool.totalPages;
         this.showNoData = false;
@@ -192,7 +206,15 @@ export class SchoolsearchComponent implements OnInit {
   getTypeSchool(val){
     
     this.valSchoolCat = val.optSelect;
-    this.checkReqValues();
+    console.log(this.searchForm.get('state').value);
+
+    if(this.searchForm.get('state').value == "" || this.searchForm.get('state').value == null){
+      this.searchForm.get('typeSchool').disable();
+    }
+
+    else{
+      this.getPPD(this.searchForm.get('state').value,this.searchForm.get('optSelect').value);
+    }
   }
 
   getListState(){
@@ -208,32 +230,52 @@ export class SchoolsearchComponent implements OnInit {
     });
   }
 
-  getPPD(val){
-    this.sharedService.getSchoolApi('school/ppd/'+val.state,'',this.langID).subscribe(
+  getPPD(valState,valOptSc){
+
+    this.sharedService.getSchoolApi('school/ppd/'+valOptSc+'/'+valState,'',this.langID).subscribe(
     data => {
 
       this.listPPD = [];
+      this.listTypeS = [];
       this.sharedService.errorHandling(data, (function(){
         let arrayPPD = data['ppdList'];
+        let arrayTyepeS = data['schoolTypeList'];
 
         let a = { id: "all", text: "Semua"};
         this.listPPD.push(a);
+        this.listTypeS.push(a);
 
         for (let i = 0; i < arrayPPD.length; i++) { 
           let b = { id: arrayPPD[i], text: arrayPPD[i]};
-          this.listPPD.push(b);
+          this.listPPD.push(b); //new list for ppd;
+        }
+
+        for (let i = 0; i < arrayTyepeS.length; i++) { 
+          let b = { id: arrayTyepeS[i], text: arrayTyepeS[i]};
+          this.listTypeS.push(b); // new list for school type;
         }
 
         this.searchForm.get('ppd').enable();
         this.searchForm.get('speacialEd').enable();
         this.searchForm.get('ppd').setValue('all');
         this.searchForm.get('speacialEd').setValue('all');
+        this.searchForm.get('typeSchool').enable();
+        this.searchForm.get('typeSchool').setValue('all');
         this.checkReqValues();
 
       }).bind(this));
     },
     error => {            
     });
+  }
+
+  convertPK(val){
+    if(val == true)
+      val = "Ada";
+    else
+      val = "Tiada";
+
+    return val;
   }
 
   getDefaultMap() {
@@ -292,8 +334,8 @@ export class SchoolsearchComponent implements OnInit {
   addMarker(lat, long, nameS, addressS, phone, city, state) {
 
     if (!isNaN(lat)) {
-      if (lat !== "NaN") {
-        this.mymap.setView([lat, long], 13);
+      if (lat !== "NaN") { 
+        this.mymap.setView([5.57857, 100.40231], 8); // add y N
 
         this.marker = L.marker([lat, long], { icon: this.defaultIcon })
         .bindPopup(`
@@ -328,7 +370,7 @@ export class SchoolsearchComponent implements OnInit {
     }
   }
 
-  goToMarkerPoint(lat, long, nameS, addressS, phone, city, state) {
+  goTo(lat, long, nameS, addressS, phone, city, state) {
     if (lat && long) {
       this.mymap.setView([lat, long], 13);
 
