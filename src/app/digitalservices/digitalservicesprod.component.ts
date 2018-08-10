@@ -92,6 +92,11 @@ export class DigitalservicesprodComponent implements OnInit, OnDestroy {
       // }
       // this.dsData = [''];
 
+    },
+    error => {
+      this.toastr.error(JSON.parse(error._body).statusDesc, '');
+      this.loading = false;
+
     });
   }
 

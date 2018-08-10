@@ -4,6 +4,7 @@ import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { Http } from '@angular/http';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 import { TopnavService } from '../header/topnav/topnav.service';
+import { ToastrService } from '../../../node_modules/ngx-toastr';
 
 @Component({
   selector: 'app-highlightbox',
@@ -26,8 +27,10 @@ export class HighlightboxComponent implements OnInit, OnDestroy {
     private subscriptionLang: ISubscription;
     lang = 'en';
     filter= false;
+  loading: boolean;
 
-    constructor(private translate: TranslateService, private topnavservice: TopnavService, private http: Http, @Inject(APP_CONFIG) private config: AppConfig){
+    constructor(
+      private toastr: ToastrService, private translate: TranslateService, private topnavservice: TopnavService, private http: Http, @Inject(APP_CONFIG) private config: AppConfig){
         this.lang = translate.currentLang;
         this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
           const myLang = translate.currentLang;
@@ -70,6 +73,11 @@ export class HighlightboxComponent implements OnInit, OnDestroy {
                 this.penyertaanButton = eventData[1].button;
                 this.statuslabel = eventData[2].label;
                 this.statusContent = eventData[2].content;
+            },
+            error => {
+              this.toastr.error(JSON.parse(error._body).statusDesc, '');
+              this.loading = false;
+        
             });
     }
 
