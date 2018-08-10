@@ -31,11 +31,6 @@ export class SchoolsearchComponent implements OnInit {
   complete: boolean;
   dataAppSchool = null;
   recordData = null;
-  dataAppSchoolPage: any;
-  pageSize = 10;
-  pageCount = 1;
-  noPrevData = true;
-  noNextData = false;
   showNoData = false;
 
   public valSchoolCat: any;
@@ -44,6 +39,8 @@ export class SchoolsearchComponent implements OnInit {
   public listKhas = [{id: "all", text: "Semua"},{id: "1", text: "Ada"},{id: "0", text: "Tiada"}]
   public listTypeS: any;
   public noOfSc = 0;
+  public setLat: any;
+  public setLong: any;
   public showDetails = false;
 
   searchForm: FormGroup;
@@ -149,7 +146,7 @@ export class SchoolsearchComponent implements OnInit {
     this.getDefaultMap();
   }
 
-  getDataSchool(page, size){
+  getDataSchool(){
 
     let valSchool = this.searchForm.get('optSelect').value;
     let valState = this.searchForm.get('state').value;
@@ -161,8 +158,6 @@ export class SchoolsearchComponent implements OnInit {
       valTypeS = '';
     }
 
-    console.log(valTypeS);
-
     this.sharedService.getListSchool('school/search',valSchool,valState,valPPD,valKhas,valTypeS).subscribe(
     data => {
 
@@ -171,11 +166,14 @@ export class SchoolsearchComponent implements OnInit {
         this.dataAppSchool = data;
         this.recordData = this.dataAppSchool.schoolResourceList;
         this.noOfSc = this.recordData.length;
+        this.setLat = this.recordData[0].latitude;
+        this.setLong = this.recordData[0].longitude;
         // this.dataAppSchoolPage = this.dataAppSchool;
         // this.noNextData = this.dataAppSchool.pageNumber === this.dataAppSchool.totalPages;
         this.showNoData = false;
 
         for (let i = 0; i <= this.recordData.length - 1; i++) {
+
           this.addMarker(
             parseFloat(this.malformedDataHandler(this.recordData[i].latitude)),
             parseFloat(this.malformedDataHandler(this.recordData[i].longitude)),
@@ -201,13 +199,12 @@ export class SchoolsearchComponent implements OnInit {
   searchApp(formValues: any){
 
     this.showDetails = true;
-    this.getDataSchool(this.pageCount, this.pageSize);
+    this.getDataSchool();
   }
 
   getTypeSchool(val){
 
     this.valSchoolCat = val.optSelect;
-    console.log(this.searchForm.get('state').value);
 
     if(this.searchForm.get('state').value == "" || this.searchForm.get('state').value == null){
       this.searchForm.get('typeSchool').disable();
@@ -336,7 +333,7 @@ export class SchoolsearchComponent implements OnInit {
 
     if (!isNaN(lat)) {
       if (lat !== "NaN") {
-        this.mymap.setView([5.57857, 100.40231], 8); // add y N
+        this.mymap.setView([this.setLat, this.setLong], 8); // add y N
 
         this.marker = L.marker([lat, long], { icon: this.defaultIcon })
         .bindPopup(`
