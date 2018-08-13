@@ -55,6 +55,7 @@ import { TrafficinfoComponent } from './trafficinfo/trafficinfo.component';
 import { PerhilitanComponent } from './perhilitan/perhilitan.component';
 import { ReplacementmycardComponent } from './replacementmycard/replacementmycard.component';
 import { PerhilitanrenewComponent } from './perhilitanrenew/perhilitanrenew.component';
+import { RssmainComponent } from './article/rss/rssmain/rssmain.component';
 
 //import { GalleryComponent } from './gallery/gallery.component';
 // import { NavRouterActivator } from './header/nav/nav-router-activator.service'
@@ -76,7 +77,7 @@ export const protectedRoutes: Routes = [
     {path: 'search/searchResult/:id', component: SearchResultProdComponent},
     {path: 'eparticipation', component: EparticipationComponent},
     {path: 'category/:id', component: ArticleprodComponent, canActivate: [NavRouterActivator]  },
-    {path: 'rss/:id', component: RssComponent},
+    {path: 'rss/:id', component: RssmainComponent},
     {path: 'rss/id/:id', component: RssComponent},
     {path: 'subcategory/:id1', component: SubarticleprodComponent },
     {path: 'content/:id1', component: ContentProdComponent},

@@ -54,6 +54,7 @@ import { ArchivecontentComponent } from './archive/archivecontent/archivecontent
 import { GalleryComponent } from './gallery/gallery.component';
 import { SchoolsearchComponent } from './schoolsearch/schoolsearch.component';
 import { TrafficinfoComponent } from './trafficinfo/trafficinfo.component';
+import { RssmainComponent } from './article/rss/rssmain/rssmain.component';
 
 
 export const appRoutes: Routes = [
@@ -65,7 +66,7 @@ export const appRoutes: Routes = [
     {path: 'digitalservices', component: DigitalservicesComponent},
     {path: 'search/searchResult/:id', component: SearchResultComponent},
     {path: 'category/:id', component: ArticleComponent, canActivate: [NavRouterActivator]  },
-    {path: 'rss/:id', component: RssComponent},
+    {path: 'rss/:id', component: RssmainComponent},
     {path: 'rss/id/:id', component: RssComponent},
     {path: 'announcement', component: AnnouncementComponent },
     {path: 'eparticipation', component: EparticipationComponent},
