@@ -69,11 +69,11 @@ export class ArticleprodComponent implements OnInit, OnDestroy {
 
       if (this.topnavservice.flagLang) {
         if (this.moduleName == 'subcategory') {
-          this.navService.triggerSubArticle(this.subID, this.langId);
+          this.navService.triggerSubArticle(this.subID, this.langId, this.boolCallback);
         } else if (this.moduleName == 'content') {
-          this.navService.triggerContent(this.subID, this.langId);
+          this.navService.triggerContent(this.subID, this.langId, this.boolCallback);
         } else {
-          this.navService.triggerArticle(this.moduleName, this.langId, this.topicID);
+          this.navService.triggerArticle(this.moduleName, this.langId, this.topicID, this.boolCallback);
         }
       }
 
@@ -84,6 +84,10 @@ export class ArticleprodComponent implements OnInit, OnDestroy {
 
   lang = this.lang;
   langId = this.langId;
+
+  boolCallback = (result: boolean) : void => {
+    this.loading = result;
+  }
 
   ngOnInit() {
 

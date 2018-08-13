@@ -9,6 +9,7 @@ export class NavRouterGuardService {
   lang = 'en';
   langId = 1;
   result;
+  loading: boolean = false;
   constructor(private navService: NavService, private router: Router, private translate: TranslateService) {
     translate.onLangChange.subscribe((event: LangChangeEvent) => {
                   let myLang = translate.currentLang;
@@ -27,9 +28,13 @@ export class NavRouterGuardService {
               });
    }
 
+   boolCallback = (result: boolean) : void => {
+     this.loading = result;
+   }
+
   guardRoute(moduleName, lang, id1, id2?) {
   // this.moduleName = this.router.url.split('/')[1];
-  return !!this.navService.triggerArticle(moduleName, lang, +id1);
+  return !!this.navService.triggerArticle(moduleName, lang, +id1, this.boolCallback);
   // if (this.moduleName !== 'announcement') {
   //   return !!this.navService.triggerArticle(moduleName, lang, +id1);
   // } else if (this.moduleName === 'announcement') {

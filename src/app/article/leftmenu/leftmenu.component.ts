@@ -91,6 +91,7 @@ export class LeftmenuComponent {
   @Input() sessions: any;
   @Input() menuType: any;
   @Input() templateName: any;
+  loading: boolean = false;
 
   constructor(private router:Router, private navService: NavService, private activatedRoute: ActivatedRoute, private content:ContentComponent){
     this.activatedRoute.queryParams.subscribe(params => {
@@ -99,6 +100,9 @@ export class LeftmenuComponent {
     });
   }
 
+  boolCallback = (result: boolean) : void => {
+    this.loading = result;
+  }
 
   getTheme() {
     return localStorage.getItem('themeColor');
@@ -114,7 +118,7 @@ export class LeftmenuComponent {
     }else if(this.paramURL == 'subcategory'){
 
       this.navService.getSubArticleUrl(e.categoryId, localStorage.getItem('langID'));
-      this.navService.triggerSubArticle(e.categoryCode, localStorage.getItem('langID'));
+      this.navService.triggerSubArticle(e.categoryCode, localStorage.getItem('langID'), this.boolCallback);
       this.router.navigate(['/subcategory', e.categoryCode]);
     }else if(this.paramURL_Next == 'archive/subcategory'){
 
@@ -150,7 +154,7 @@ export class LeftmenuComponent {
       this.router.navigate(['/archive/content', aId]);
       // this.content.getRateReset();
     }else{
-      this.navService.triggerContent(aId, localStorage.getItem('langID'));
+      this.navService.triggerContent(aId, localStorage.getItem('langID'), this.boolCallback);
       this.navService.getContentUrl(aId, localStorage.getItem('langID'));
 
       this.router.navigate(['/content',  aId]);

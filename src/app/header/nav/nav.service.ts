@@ -334,8 +334,10 @@ export class NavService {
      }
    }
 
-  triggerSubArticle(subID, lang) {
+  triggerSubArticle(subID, lang, callback?) {
    // alert("Trigger sub acrticle");
+
+    callback(true);
 
     if (!isNaN(subID)) {
       this.articleService.articles = [''];
@@ -350,6 +352,7 @@ export class NavService {
           this.isValid = this.breadcrumbService.isValid = true;
           this.breadcrumb = this.breadcrumb.name = '';
 
+          callback(false);
 
         });
     }
@@ -455,7 +458,10 @@ export class NavService {
      }
    }
 
-   triggerArticle(moduleName, lang, topicID) {
+   triggerArticle(moduleName, lang, topicID, callback?) {
+
+    callback(true);
+
      if (!isNaN(topicID)) {
        this.articles = [''];
        this.articleService.articles = [''];
@@ -468,6 +474,8 @@ export class NavService {
            this.breadcrumb = this.breadcrumbService.getBreadcrumb();
            this.isValid = this.breadcrumbService.isValid = true;
            this.breadcrumb = this.breadcrumb.name = '';
+
+            callback(true);
          });
      }
    }

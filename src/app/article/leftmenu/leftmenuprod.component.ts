@@ -91,12 +91,17 @@ export class LeftmenuProdComponent {
   @Input() sessions: any;
   @Input() menuType: any;
   @Input() templateName: any;
+  loading: boolean = false;
 
   constructor(private router:Router, private navService: NavService, private activatedRoute: ActivatedRoute, private content:ContentProdComponent){
     this.activatedRoute.queryParams.subscribe(params => {
       this.paramURL = this.activatedRoute.snapshot.url[0].path;
       this.paramURL_Next = this.paramURL + '/' +this.activatedRoute.snapshot.url[1].path;
     });
+  }
+
+  boolCallback = (result: boolean) : void => {
+    this.loading = result;
   }
 
 
@@ -114,7 +119,7 @@ export class LeftmenuProdComponent {
     }else if(this.paramURL == 'subcategory'){
 
       this.navService.getSubArticleUrl(e.categoryId, localStorage.getItem('langID'));
-      this.navService.triggerSubArticle(e.categoryCode, localStorage.getItem('langID'));
+      this.navService.triggerSubArticle(e.categoryCode, localStorage.getItem('langID'), this.boolCallback);
       this.router.navigate(['/subcategory', e.categoryCode]);
     }else if(this.paramURL_Next == 'archive/subcategory'){
 
@@ -150,7 +155,7 @@ export class LeftmenuProdComponent {
       this.router.navigate(['/archive/content', aId]);
       // this.content.getRateReset();
     }else{
-      this.navService.triggerContent(aId, localStorage.getItem('langID'));
+      this.navService.triggerContent(aId, localStorage.getItem('langID'), this.boolCallback);
       this.navService.getContentUrl(aId, localStorage.getItem('langID'));
 
       this.router.navigate(['/content',  aId]);
