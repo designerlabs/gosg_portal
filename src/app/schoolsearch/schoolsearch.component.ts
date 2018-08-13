@@ -43,6 +43,7 @@ export class SchoolsearchComponent implements OnInit {
   public setLat: any;
   public setLong: any;
   public showDetails = false;
+  public resultObject: any;
   public query = '';
 
   searchForm: FormGroup;
@@ -364,7 +365,7 @@ export class SchoolsearchComponent implements OnInit {
     else{
       this.getSchoolByName();
     }
-  }
+  }         
 
   getTypeSchool(val){
 
@@ -506,29 +507,46 @@ export class SchoolsearchComponent implements OnInit {
     this.resetSearch();
   }
 
-  newRecord(value){
+  isDataFilter(element, index, array) { 
 
-    console.log(this.popup.isPopupOpen);
-
-    if (this.popup.isPopupOpen)
-      this.popup.closePopup();
-
-    if(!value) this.searchApp(); //when nothing has typed
-    this.recordData = Object.assign([], this.recordData)
-
-    console.log(this.recordData);
+    return (element.alamat == "JALAN TEPI"); 
   }
 
-//   assignCopy(){
-//     this.recordData = Object.assign([], this.items);
-//  }
- filterItem(value){
-    if(!value) this.searchApp(); //when nothing has typed
-    this.recordData = Object.assign([], this.recordData).filter(
-       item => item.name.toLowerCase().indexOf(value.toLowerCase()) > -1
-    )
- }
- //this.assignCopy();//when you fetch collection from server.
+  search(nameKey, myArray){
+    for (var i=0; i < myArray.length; i++) {
+        // if (myArray[i].negeri === nameKey || myArray[i].daerahPPD === nameKey || myArray[i].peringkatSekolah === nameKey 
+        //   || myArray[i].jenisSekolah === nameKey || myArray[i].kodSekolah === nameKey || myArray[i].namaSekolah === nameKey
+        //   || myArray[i].bandar === nameKey || myArray[i].telNo === nameKey
+        //   || myArray[i].faxNo === nameKey || myArray[i].email === nameKey) {
+
+         if (myArray[i].name === nameKey || myArray[i].value === nameKey || myArray[i].ok === nameKey ) {
+            return myArray[i];
+
+            //myArray[i].alamat === nameKey
+        }
+    }
+  }
+
+  newRecord(value){
+
+    //console.log(this.popup.isPopupOpen);
+
+    var array = [
+      { name:"abc", value:"ok", other: "that" },
+      { name:"def", value:"tr", other: "that" }
+  ];
+  
+    this.resultObject = this.search(value, array);
+    console.log(this.resultObject);
+    console.log(this.resultObject.length);
+
+    // if (this.popup.isPopupOpen)
+    //   this.popup.closePopup();
+
+    // var passed = this.recordData.filter(this.isDataFilter); 
+    // console.log("Test Value : " + passed );   
+    // console.log(this.recordData);
+  }
   
   malformedDataHandler(data) {
     let tData;
