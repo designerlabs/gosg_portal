@@ -2,14 +2,15 @@ import { Injectable } from '@angular/core';
 import { NavService } from './nav.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {TranslateService, LangChangeEvent } from '@ngx-translate/core';
-
+import {ArticleService} from '../../article/article.service'
 @Injectable()
 export class NavRouterGuardService {
   moduleName: string;
   lang = 'en';
   langId = 1;
   result;
-  constructor(private navService: NavService, private router: Router, private translate: TranslateService) {
+  loading: boolean = false;
+  constructor(private navService: NavService, private articleService:ArticleService, private router: Router, private translate: TranslateService) {
     translate.onLangChange.subscribe((event: LangChangeEvent) => {
                   let myLang = translate.currentLang;
                   if (myLang === 'en') {
@@ -27,9 +28,13 @@ export class NavRouterGuardService {
               });
    }
 
+   boolCallback = (result: boolean) : void => {
+     this.loading = result;
+   }
+
   guardRoute(moduleName, lang, id1, id2?) {
   // this.moduleName = this.router.url.split('/')[1];
-  return !!this.navService.triggerArticle(moduleName, lang, +id1);
+  return !!this.navService.triggerArticle(moduleName, lang, +id1, this.boolCallback);
   // if (this.moduleName !== 'announcement') {
   //   return !!this.navService.triggerArticle(moduleName, lang, +id1);
   // } else if (this.moduleName === 'announcement') {

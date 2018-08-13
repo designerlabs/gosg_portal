@@ -40,6 +40,7 @@ export class FooterComponent implements OnInit, OnDestroy {
   dateOfUpdate=[];
   private subscriptionLang: ISubscription;
   private subscription: ISubscription;
+  loading: boolean = false;
 
   constructor(private translate: TranslateService,
     private router: Router, private http: Http,
@@ -81,6 +82,10 @@ export class FooterComponent implements OnInit, OnDestroy {
   showvisitor = true;
 
   private footerUrl: string = this.config.urlFooter;
+
+  boolCallback = (result: boolean) : void => {
+   this.loading = result;
+  }
 
   ngOnDestroy() {
     this.subscriptionLang.unsubscribe();
@@ -147,7 +152,7 @@ export class FooterComponent implements OnInit, OnDestroy {
           splitSet = secondSet.split('/');
       this.router.navigate(['/'+firstSet, splitSet[1]]);
       if(firstSet === 'content'){
-        this.navService.triggerContent(splitSet[1], localStorage.getItem('langID'));
+        this.navService.triggerContent(splitSet[1], localStorage.getItem('langID'),this.boolCallback);
         this.navService.getContentUrl(splitSet[1], localStorage.getItem('langID'));
       }
       window.scrollTo(0, 0);

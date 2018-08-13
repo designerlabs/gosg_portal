@@ -69,11 +69,11 @@ export class ArticleComponent implements OnInit, OnDestroy {
 
       if (this.topnavservice.flagLang) {
         if (this.moduleName == 'subcategory') {
-          this.navService.triggerSubArticle(this.subID, this.langId);
+          this.navService.triggerSubArticle(this.subID, this.langId, this.boolCallback);
         } else if (this.moduleName == 'content') {
-          this.navService.triggerContent(this.subID, this.langId);
+          this.navService.triggerContent(this.subID, this.langId, this.boolCallback);
         } else {
-          this.navService.triggerArticle(this.moduleName, this.langId, this.topicID);
+          this.navService.triggerArticle(this.moduleName, this.langId, this.topicID, this.boolCallback);
         }
       }
 
@@ -84,8 +84,13 @@ export class ArticleComponent implements OnInit, OnDestroy {
   lang = this.lang;
   langId = this.langId;
 
-  ngOnInit() {
+  boolCallback = (result: boolean) : void => {
+    this.loading = result;
+  }
 
+
+  ngOnInit() {
+    // this.loading = true;
     if(!this.langId){
       this.langId = localStorage.getItem('langID');
     }else{
@@ -94,7 +99,8 @@ export class ArticleComponent implements OnInit, OnDestroy {
     this.articleData = this.articleService.getArticle();
     this.moduleName = this.router.url.split('/')[1];
     this.topicID = parseInt(this.router.url.split('/')[2]);
-    // this.navService.triggerArticle(this.moduleName, this.langId, this.topicID);
+    // this.loading = this.articleService.loading.name;
+    // console.log(!!this.navService.triggerArticle(this.moduleName, this.langId, this.topicID, this.boolCallback));
 
   }
 
@@ -171,19 +177,19 @@ export class ArticleComponent implements OnInit, OnDestroy {
       );
   }
 
-  triggerArticle(moduleName, lang, topicID) {
-    this.loading = true;
-    this.route.paramMap
-      .switchMap((params: ParamMap) =>
-        this.navService.getArticleData(moduleName, lang, topicID))
-      .subscribe(resSliderData => {
-        this.articles = resSliderData;
-        this.breadcrumb = this.breadcrumbService.getBreadcrumb();
-        this.isValid = this.breadcrumbService.isValid = true;
-        this.breadcrumb = this.breadcrumb.name = '';
-        this.loading = false;
-      });
-  }
+  // triggerArticle(moduleName, lang, topicID) {
+  //   this.loading = true;
+  //   this.route.paramMap
+  //     .switchMap((params: ParamMap) =>
+  //       this.navService.getArticleData(moduleName, lang, topicID))
+  //     .subscribe(resSliderData => {
+  //       this.articles = resSliderData;
+  //       this.breadcrumb = this.breadcrumbService.getBreadcrumb();
+  //       this.isValid = this.breadcrumbService.isValid = true;
+  //       this.breadcrumb = this.breadcrumb.name = '';
+  //       this.loading = false;
+  //     });
+  // }
 
   checkImgData(e) {
     if (e) {

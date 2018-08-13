@@ -46,6 +46,7 @@ export class FeedbackComponent implements OnInit, OnDestroy {
   subjectFb = [];
   private subscriptionLang: ISubscription;
   private subscription: ISubscription;
+  loading:boolean = false;
   
   constructor(
     public snackBar: MatSnackBar,
@@ -176,24 +177,30 @@ export class FeedbackComponent implements OnInit, OnDestroy {
     }
 
     getTypenSubject(){
+      this.loading = true;
       this.portalService.feedbacktype(this.languageId)
         .subscribe(data => {
           this.sharedService.errorHandling(data, (function(){
             this.typeFb  = data;
           }).bind(this));  
+          this.loading = false;
         },
         error => {
-          this.toastr.error(JSON.parse(error._body).statusDesc, '');                 
+          this.toastr.error(JSON.parse(error._body).statusDesc, '');    
+          this.loading = false;             
         });
     
+      this.loading = true;
       this.portalService.feedbacksubject(this.languageId)
       .subscribe(data => {
         this.sharedService.errorHandling(data, (function(){
             this.subjectFb  = data;          
           }).bind(this));  
+          this.loading = false;
         },
         error => {
-          this.toastr.error(JSON.parse(error._body).statusDesc, '');                 
+          this.toastr.error(JSON.parse(error._body).statusDesc, '');
+          this.loading = false;           
         });
     }
    

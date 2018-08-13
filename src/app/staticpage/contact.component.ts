@@ -49,6 +49,7 @@ import { TopnavService } from '../header/topnav/topnav.service';
 })
 
 export class ContactComponent implements OnInit, OnDestroy{
+    loading: boolean = false;
        getTheme(){
         return localStorage.getItem('themeColor');
     }
@@ -142,6 +143,7 @@ export class ContactComponent implements OnInit, OnDestroy{
     }
 
     getContactUs(lang){
+        this.loading = true;
         return this.http.get(this.footerUrl + '?language=' + lang )
         .map((response: Response) => response.json())
         .subscribe(resSliderData => {
@@ -158,9 +160,6 @@ export class ContactComponent implements OnInit, OnDestroy{
             let latlong = this.dataContact[2].footerContentName;          
             var partsOfStr = latlong.split(',');
             
-            
-
-
             this.addMarker(
                 parseFloat(partsOfStr[0]),
                 parseFloat(partsOfStr[1]),                
@@ -170,8 +169,8 @@ export class ContactComponent implements OnInit, OnDestroy{
                 this.dataContact[4].footerContentName,
                 this.dataContact[3].footerContentName
             );
-            
 
+            this.loading = false;
             
         });
     }

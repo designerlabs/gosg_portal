@@ -1,3 +1,5 @@
+<gosg-portal-loader *ngIf="loading"></gosg-portal-loader>
+<gosg-protected-loader *ngIf="loading"></gosg-protected-loader>
 <div class="container-fluid animated slideInDown" style="background: #a7a495;">
     <div class="container" *ngFor="let article of articleService.articles">
      <div class="row">
