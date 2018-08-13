@@ -68,7 +68,9 @@ padding: 0 10px !important;
   color: #1ebebc !important;
 }
 
-
+.sideBarMenu--link{
+  cursor: pointer;
+}
 
 .intro-box h4 {
   color: #333;
