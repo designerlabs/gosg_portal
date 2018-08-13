@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { NavService } from './nav.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {TranslateService, LangChangeEvent } from '@ngx-translate/core';
-
+import {ArticleService} from '../../article/article.service'
 @Injectable()
 export class NavRouterGuardService {
   moduleName: string;
@@ -10,7 +10,7 @@ export class NavRouterGuardService {
   langId = 1;
   result;
   loading: boolean = false;
-  constructor(private navService: NavService, private router: Router, private translate: TranslateService) {
+  constructor(private navService: NavService, private articleService:ArticleService, private router: Router, private translate: TranslateService) {
     translate.onLangChange.subscribe((event: LangChangeEvent) => {
                   let myLang = translate.currentLang;
                   if (myLang === 'en') {

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { NavService } from './nav.service';
 import {TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { NavRouterGuardService } from './nav-router-guard.service';
-
+import {ArticleService} from '../../article/article.service'
 @Injectable()
 
 export class NavRouterActivator implements CanActivate {
@@ -12,7 +12,7 @@ export class NavRouterActivator implements CanActivate {
       langId = 1;
       eventExists;
     // tslint:disable-next-line:max-line-length
-    constructor(private navService: NavService, private router: Router, private translate: TranslateService, private navGuardService: NavRouterGuardService){
+    constructor(private navService: NavService, private articleService:ArticleService, private router: Router, private translate: TranslateService, private navGuardService: NavRouterGuardService){
         translate.onLangChange.subscribe((event: LangChangeEvent) => {
 
             let myLang = translate.currentLang;
@@ -51,9 +51,11 @@ export class NavRouterActivator implements CanActivate {
     }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+      // this.articleService.loading.name = true;
     //    const eventExists =  !!this.navService.triggerArticle('', this.lang, +route.params['id']); // Old code
     if (route.params['id']) {
         this.eventExists =  !!this.navGuardService.guardRoute(route.url[0].path, this.getLanguageValue(), route.params['id']);
+        // this.articleService.loading.name = false;
     }else {
         if (route.params['id1']) {
             this.eventExists =  !!this.navGuardService.guardRoute(route.url[0].path,  this.getLanguageValue(), route.params['id1'], route.params['id2']);

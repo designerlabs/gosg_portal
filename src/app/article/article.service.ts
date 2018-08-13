@@ -20,5 +20,9 @@ export class ArticleService {
         name: 'hello'
     };
 
+    public loading = {
+      name: false
+    }
+
     private articleUrl: string = this.config.urlArticle;
 }
