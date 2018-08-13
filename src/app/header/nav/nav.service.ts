@@ -185,6 +185,30 @@ export class NavService {
     }
   }
 
+
+  getRSSData(moduleName, lang: string, ID: number): Observable<boolean[]> {
+
+    if (!isNaN(ID)) {
+
+      return this.http.get(this.config.urlPortal + moduleName + '/' +ID + '?language=' + lang)
+        .take(1)
+        .map((response: Response) => response.json().results)
+
+        // .catch((error:any) =>
+        // Observable.throw(error.json().error || 'Server error')
+        // );
+        .catch(
+        (err: Response, caught: Observable<any[]>) => {
+          if (err !== undefined) {
+            this.router.navigate(['/404']);
+            return Observable.throw('The Web server (running the Web site) is currently unable to handle the HTTP request due to a temporary overloading or maintenance of the server.');
+          }
+          return Observable.throw(caught); // <-----
+        }
+        );
+    }
+  }
+
   getArticleDataOther(moduleName, lang: string, ID: number, url): Observable<boolean[]> {
 
     if (!isNaN(ID)) {
@@ -467,7 +491,7 @@ export class NavService {
        this.articleService.articles = [''];
        return this.route.paramMap
          .switchMap((params: ParamMap) =>
-           this.getArticleData(moduleName, this.langId.toString(), topicID))
+           this.getArticleData(moduleName, lang, topicID))
          .subscribe(resSliderData => {
            this.articleService.articles = resSliderData;
            this.articles = resSliderData;
@@ -479,6 +503,23 @@ export class NavService {
          });
      }
    }
+
+   triggerRSS(moduleName, lang, topicID) {
+    if (!isNaN(topicID)) {
+      this.articles = [''];
+      this.articleService.articles = [''];
+      return this.route.paramMap
+        .switchMap((params: ParamMap) =>
+          this.getRSSData(moduleName, lang, topicID))
+        .subscribe(resSliderData => {
+          this.articleService.articles = resSliderData;
+          this.articles = resSliderData;
+          this.breadcrumb = this.breadcrumbService.getBreadcrumb();
+          this.isValid = this.breadcrumbService.isValid = true;
+          this.breadcrumb = this.breadcrumb.name = '';
+        });
+    }
+  }
 
 
    triggerArticleOthers(moduleName, lang, topicID, url) {
@@ -505,7 +546,7 @@ export class NavService {
     //  if (!isNaN(galleryID)) {
        this.galleries = [''];
        this.galleryService.galleries = [''];
-       
+
        return this.route.paramMap
          .switchMap((params: ParamMap) =>
            this.getGalleryData(lang, galleryID))
