@@ -91,11 +91,11 @@ export class ContentComponent implements OnInit, OnDestroy {
         if(this.topnavservice.flagLang){
 
           if(this.moduleName == 'subcategory'){
-            this.navService.triggerSubArticle(this.subID, this.langId);
+            this.navService.triggerSubArticle(this.subID, this.langId, this.boolCallback);
           }else if(this.moduleName == 'content'){
             this.navService.triggerContent(this.subID, this.langId, this.boolCallback);
           }else{
-            this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID);
+            this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID, this.boolCallback);
           }
         }
 
