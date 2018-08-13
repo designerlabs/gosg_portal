@@ -84,7 +84,7 @@ export class SubarticleComponent implements OnInit, OnDestroy {
         } else if (this.moduleName == 'content') {
           this.navService.triggerContent(this.subID, this.langId, this.boolCallback);
         } else {
-          this.navService.triggerArticle(this.moduleName, this.langId, this.topicID);
+          this.navService.triggerArticle(this.moduleName, this.langId, this.topicID, this.boolCallback);
         }
       }
 

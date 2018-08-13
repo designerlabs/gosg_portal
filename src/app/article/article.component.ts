@@ -98,8 +98,8 @@ export class ArticleComponent implements OnInit, OnDestroy {
     this.articleData = this.articleService.getArticle();
     this.moduleName = this.router.url.split('/')[1];
     this.topicID = parseInt(this.router.url.split('/')[2]);
-    // this.navService.triggerArticle(this.moduleName, this.langId, this.topicID);
-
+    // this.navService.triggerArticle(this.moduleName, this.langId, this.topicID, this.boolCallback);
+    
   }
 
   ngOnDestroy() {
