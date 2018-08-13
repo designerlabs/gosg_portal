@@ -91,13 +91,6 @@ export class DigitalservicesComponent implements OnInit, OnDestroy {
 
       this.dsData = data.list;
       this.loading = false;
-      //
-      // for(var item of data.list) {
-      //
-      // if(data.list.details)
-      //   this.dsData.push(data.list);
-      // }
-      // this.dsData = [''];
 
     },
     error => {

@@ -165,9 +165,12 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
           }
         }).bind(this));
         this.loading = false;
-      },err => {
-        this.loading = false;
+      },
+      error => {
+        this.toastr.error(JSON.parse(error._body).statusDesc, '');
         this.isActiveList = false;
+        this.loading = false;
+  
       });
       this.loading = false;
     }, 2000);
@@ -353,6 +356,11 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
         this.loading = false;
 
       // });
+    },
+    error => {
+      this.toastr.error(JSON.parse(error._body).statusDesc, '');
+      this.loading = false;
+
     });
   }
 
