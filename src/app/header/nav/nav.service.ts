@@ -30,6 +30,8 @@ export class NavService {
   private myMethodSubject = new Subject<any>();
   announces: any[];
   private subscriptionLang: ISubscription;
+  private articleContent: ISubscription;
+
   lang: string;
   langId: number;
   loading:boolean = false;
@@ -364,7 +366,7 @@ export class NavService {
     callback(true);
 
     if (!isNaN(subID)) {
-      this.articleService.articles = [''];
+     this.articleService.articles = [''];
       this.articles = [''];
       return this.route.paramMap
         .switchMap((params: ParamMap) =>
@@ -375,7 +377,6 @@ export class NavService {
           this.breadcrumb = this.breadcrumbService.getBreadcrumb();
           this.isValid = this.breadcrumbService.isValid = true;
           this.breadcrumb = this.breadcrumb.name = '';
-
           callback(false);
 
         });
@@ -464,6 +465,7 @@ export class NavService {
 
 
   triggerSubRss(topicID, subID, lang) {
+    this.articleService.loading.name = true;
     // alert("Trigger sub acrticle");
      if (!isNaN(subID)) {
       this.articleService.articles = [''];
@@ -477,7 +479,7 @@ export class NavService {
            this.breadcrumb = this.breadcrumbService.getBreadcrumb();
            this.isValid = this.breadcrumbService.isValid = true;
            this.breadcrumb = this.breadcrumb.name = '';
-
+           this.articleService.loading.name = false;
          });
      }
    }
@@ -498,8 +500,7 @@ export class NavService {
            this.breadcrumb = this.breadcrumbService.getBreadcrumb();
            this.isValid = this.breadcrumbService.isValid = true;
            this.breadcrumb = this.breadcrumb.name = '';
-
-            callback(true);
+            callback(false);
          });
      }
    }

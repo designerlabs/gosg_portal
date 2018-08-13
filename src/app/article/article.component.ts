@@ -88,8 +88,9 @@ export class ArticleComponent implements OnInit, OnDestroy {
     this.loading = result;
   }
 
-  ngOnInit() {
 
+  ngOnInit() {
+    // this.loading = true;
     if(!this.langId){
       this.langId = localStorage.getItem('langID');
     }else{
@@ -98,8 +99,9 @@ export class ArticleComponent implements OnInit, OnDestroy {
     this.articleData = this.articleService.getArticle();
     this.moduleName = this.router.url.split('/')[1];
     this.topicID = parseInt(this.router.url.split('/')[2]);
-    // this.navService.triggerArticle(this.moduleName, this.langId, this.topicID, this.boolCallback);
-    
+    // this.loading = this.articleService.loading.name;
+    // console.log(!!this.navService.triggerArticle(this.moduleName, this.langId, this.topicID, this.boolCallback));
+
   }
 
   ngOnDestroy() {
