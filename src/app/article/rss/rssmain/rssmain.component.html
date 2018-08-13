@@ -12,14 +12,14 @@
                     </a>
                 </li>
                 <li>/</li>
-                <!-- <li>
+                <li>
                     <div *ngFor="let article of articleService.articles">
                      <div *ngFor="let breadCrum of article.breadcrum; let i = index; let lastItem = last" style="display: inline;">
                        <a href="" [routerLink]="['/archive/'+getModule(breadCrum.breadcrumUrl), getID(breadCrum.breadcrumUrl)]">{{breadCrum.breadcrumName}}</a>
                        <span>{{lastItem ? '' : '&nbsp;/&nbsp;'}}</span>
                      </div>
                     </div>
-                </li> -->
+                </li>
             </ul>
         </div>
     </div>
@@ -38,7 +38,7 @@
                 <ul class="list-unstyled">
                   <li class="liList" *ngFor="let content of article.leftMenu">
                       <div class="col-xs-12 col-md-12 col-sm-12">
-                          <a class="warna_font sideBarMenu--link font-size-s" [routerLinkActive]="['active']"  [style.font-weight]="content.active ? 'bold' : 'normal'"  [style.color]="content.active ? getTheme() : '#333'" (click)="clickSideMenu(content)">
+                          <a class="warna_font sideBarMenu--link font-size-s" [routerLinkActive]="['active']"  [style.font-weight]="content.active ? 'bold' : 'normal'"  [style.color]="content.active ? getTheme() : '#333'" (click)="clickSideMenu(content, '', 'rss')">
                             {{content.leftMenu_label}}
                           </a>
                       </div>

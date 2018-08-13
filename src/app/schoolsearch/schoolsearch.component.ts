@@ -32,6 +32,7 @@ export class SchoolsearchComponent implements OnInit {
   dataAppSchool = null;
   recordData = null;
   showNoData = false;
+  loading = false;
 
   public valSchoolCat: any;
   public listState: any;
@@ -42,6 +43,8 @@ export class SchoolsearchComponent implements OnInit {
   public setLat: any;
   public setLong: any;
   public showDetails = false;
+  public resultObject: any;
+  public query = '';
 
   searchForm: FormGroup;
   public optSelect: FormControl;
@@ -147,6 +150,7 @@ export class SchoolsearchComponent implements OnInit {
 
   getDataSchool(){
 
+    this.loading = true;
     let valSchool = this.searchForm.get('optSelect').value;
     let valState = this.searchForm.get('state').value;
     let valPPD = this.searchForm.get('ppd').value;
@@ -170,9 +174,13 @@ export class SchoolsearchComponent implements OnInit {
 
           this.setLat = this.recordData[0].latitude;
           this.setLong = this.recordData[0].longitude;
+
+          if(this.markerGroup){
+            this.mymap.removeLayer(this.markerGroup);   
+          }
           
-          this.markerGroup = L.layerGroup();              
-          
+          this.markerGroup = L.layerGroup();   
+  
           for (let i = 0; i <= this.recordData.length - 1; i++) {
       
             this.addMarker(
@@ -186,30 +194,34 @@ export class SchoolsearchComponent implements OnInit {
             );
           }
 
-          this.markerGroup.addTo(this.mymap);
-          
+          this.mymap.addLayer(this.markerGroup);
+          //this.markerGroup.addTo(this.mymap);  
+          this.loading = false;        
         }
 
         else{
-          this.markerGroup.clearLayers();
+          
+          this.mymap.removeLayer(this.markerGroup);   
           this.mymap.setView([4.8142568, 108.5806004], 6.2);
           this.showNoData = true;
+          this.loading = false;
         }
     //  }).bind(this));
     },
     error => {
       this.showNoData = true;
-      //this.toastr.error(JSON.parse(error._body).statusDesc, '');
-      // this.loading = false;
+      this.toastr.error(JSON.parse(error._body).statusDesc, '');
+      this.loading = false;
     });
   }
 
   getSchoolByName(){
     let valSchoolName = this.searchForm.get('schoolname').value;
-    
+    this.loading = true;
+
     this.sharedService.getListSchoolByName('school/search',valSchoolName).subscribe(
     data => {
-
+        
       //this.sharedService.errorHandling(data, (function () {       
         this.dataAppSchool = data;
         this.recordData = this.dataAppSchool.schoolResourceList;
@@ -221,7 +233,11 @@ export class SchoolsearchComponent implements OnInit {
           this.setLat = this.recordData[0].latitude;
           this.setLong = this.recordData[0].longitude;
 
-          this.markerGroup = L.layerGroup();
+          if(this.markerGroup){
+            this.mymap.removeLayer(this.markerGroup);   
+          }
+          
+          this.markerGroup = L.layerGroup();  
           
           for (let i = 0; i <= this.recordData.length - 1; i++) {
       
@@ -236,171 +252,25 @@ export class SchoolsearchComponent implements OnInit {
             );
           }
 
-          this.markerGroup.addTo(this.mymap);
+          this.mymap.addLayer(this.markerGroup);
+          //this.markerGroup.addTo(this.mymap);
+          this.loading = false;
         }
 
         else{
-          this.markerGroup.clearLayers();
+          
+          this.mymap.removeLayer(this.markerGroup);   
           this.mymap.setView([4.8142568, 108.5806004], 6.2);
           this.showNoData = true;
+          this.loading = false;
         }
       //}).bind(this));
     },
     error => {
       this.showNoData = true;
-      //this.toastr.error(JSON.parse(error._body).statusDesc, '');
-      // this.loading = false;
+      this.toastr.error(JSON.parse(error._body).statusDesc, '');
+      this.loading = false;
     });
-  }
-
-  searchApp(formValues: any){
-
-    this.showDetails = true;
-    if(this.searchForm.controls.jenisCarian.value == 1){
-      this.getDataSchool();
-    }
-
-    else{
-      this.getSchoolByName();
-    }
-  }
-
-  getTypeSchool(val){
-
-    this.valSchoolCat = val.optSelect;
-
-    if(this.searchForm.get('state').value == "" || this.searchForm.get('state').value == null){
-      this.searchForm.get('typeSchool').disable();
-    }
-
-    else{
-      this.getPPD(this.searchForm.get('state').value,this.searchForm.get('optSelect').value);
-    }
-  }
-
-  getListState(){
-    this.sharedService.getSchoolApi('school/statelist','',this.langID).subscribe(
-    data => {
-
-      this.sharedService.errorHandling(data, (function(){
-        this.listState = data['stateList'];
-
-      }).bind(this));
-    },
-    error => {
-    });
-  }
-
-  getPPD(valState,valOptSc){
-
-    this.sharedService.getSchoolApi('school/ppd/'+valOptSc+'/'+valState,'',this.langID).subscribe(
-    data => {
-
-      this.listPPD = [];
-      this.listTypeS = [];
-      this.sharedService.errorHandling(data, (function(){
-        let arrayPPD = data['ppdList'];
-        let arrayTyepeS = data['schoolTypeList'];
-
-        let a = { id: "all", text: "Semua"};
-        this.listPPD.push(a);
-        this.listTypeS.push(a);
-
-        for (let i = 0; i < arrayPPD.length; i++) {
-          let b = { id: arrayPPD[i], text: arrayPPD[i]};
-          this.listPPD.push(b); //new list for ppd;
-        }
-
-        for (let i = 0; i < arrayTyepeS.length; i++) {
-          let b = { id: arrayTyepeS[i], text: arrayTyepeS[i]};
-          this.listTypeS.push(b); // new list for school type;
-        }
-
-        this.searchForm.get('ppd').enable();
-        this.searchForm.get('speacialEd').enable();
-        this.searchForm.get('ppd').setValue('all');
-        this.searchForm.get('speacialEd').setValue('all');
-        this.searchForm.get('typeSchool').enable();
-        this.searchForm.get('typeSchool').setValue('all');
-        this.checkReqValues();
-
-      }).bind(this));
-    },
-    error => {
-    });
-  }
-
-  convertPK(val){
-    if(val == true)
-      val = "Ada";
-    else
-      val = "Tiada";
-
-    return val;
-  }
-
-  getDefaultMap() {
-    this.mymap = L.map('dirmap').setView([4.8142568, 108.5806004], 6.2);
-    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-      attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-      maxZoom: 15,
-      id: 'mapbox.streets',
-      accessToken: 'pk.eyJ1IjoicmVkemEiLCJhIjoiY2pmcGZxNzRrMjYzbzMwcG83bGRxY2FtZyJ9.uMHQpYc0Pvjl4us27nHH8w'
-    }).addTo(this.mymap);
-  }
-
-  checkReqValues() {
-
-    let reqVal = [];
-    let nullPointers:any = [];
-
-    if(this.searchForm.controls.jenisCarian.value == 1){
-      if(this.valSchoolCat == 1){
-        reqVal =  ["optSelect","state","ppd","speacialEd"];
-      }
-      else{
-        reqVal =  ["optSelect","state","typeSchool", "ppd","speacialEd"];
-      }
-    }
-
-    else{
-      reqVal =  ["schoolname"];
-    }
-
-    for (var reqData of reqVal) {
-      let elem = this.searchForm.get(reqData);
-
-      if (elem.value == "" || elem.value == null) {
-        elem.setValue(null)
-        nullPointers.push(null)
-      }
-    }
-
-    if(nullPointers.length > 0) {
-      this.complete = false;
-    } else {
-      this.complete = true;
-    }
-  }
-
-  resetSearch(){
-    // this.mymap.eachLayer(function (layer) {
-    //   this.mymap.removeLayer(layer);
-    // });
-
-    this.mymap.setView([4.8142568, 108.5806004], 6.2);
-    this.searchForm.get('jenisCarian').setValue(1);
-    this.valSchoolCat = 1;
-    this.searchForm.get('optSelect').setValue(1);
-    this.searchForm.get('state').setValue(null);
-    this.searchForm.get('typeSchool').setValue(null);
-    this.searchForm.get('ppd').setValue(null);
-    this.searchForm.get('speacialEd').setValue(null);
-    this.showDetails = false;
-  }
-
-  resetMethod(event) {
-    this.resetSearch();
   }
 
   addMarker(lat, long, nameS, addressS, phone, city, state) {
@@ -438,8 +308,8 @@ export class SchoolsearchComponent implements OnInit {
             </div>
           </div>`)
           // .setLatLng([agcLat,agcLong])
-        .addTo(this.markerGroup);
-   
+          // .addTo(this.markerGroup);
+       this.markerGroup.addLayer(this.marker);
       }
     }
   }
@@ -485,6 +355,199 @@ export class SchoolsearchComponent implements OnInit {
     }
   }
 
+  searchApp(){
+
+    this.showDetails = true;
+    if(this.searchForm.controls.jenisCarian.value == 1){
+      this.getDataSchool();
+    }
+
+    else{
+      this.getSchoolByName();
+    }
+  }         
+
+  getTypeSchool(val){
+
+    this.valSchoolCat = val.optSelect;
+
+    if(this.searchForm.get('state').value == "" || this.searchForm.get('state').value == null){
+      this.searchForm.get('typeSchool').disable();
+    }
+
+    else{
+      this.getPPD(this.searchForm.get('state').value,this.searchForm.get('optSelect').value);
+    }
+  }
+
+  getListState(){
+    this.sharedService.getSchoolApi('school/statelist','',this.langID).subscribe(
+    data => {
+
+      this.sharedService.errorHandling(data, (function(){
+        this.listState = data['stateList'];
+
+      }).bind(this));
+    },
+    error => {
+    });
+  }
+
+  getPPD(valState,valOptSc){
+
+    this.loading = true;
+    this.sharedService.getSchoolApi('school/ppd/'+valOptSc+'/'+valState,'',this.langID).subscribe(
+    data => {
+
+      this.listPPD = [];
+      this.listTypeS = [];
+      this.sharedService.errorHandling(data, (function(){
+        let arrayPPD = data['ppdList'];
+        let arrayTyepeS = data['schoolTypeList'];
+
+        let a = { id: "all", text: "Semua"};
+        this.listPPD.push(a);
+        this.listTypeS.push(a);
+
+        for (let i = 0; i < arrayPPD.length; i++) {
+          let b = { id: arrayPPD[i], text: arrayPPD[i]};
+          this.listPPD.push(b); //new list for ppd;
+        }
+
+        for (let i = 0; i < arrayTyepeS.length; i++) {
+          let b = { id: arrayTyepeS[i], text: arrayTyepeS[i]};
+          this.listTypeS.push(b); // new list for school type;
+        }
+
+        this.searchForm.get('ppd').enable();
+        this.searchForm.get('speacialEd').enable();
+        this.searchForm.get('ppd').setValue('all');
+        this.searchForm.get('speacialEd').setValue('all');
+        this.searchForm.get('typeSchool').enable();
+        this.searchForm.get('typeSchool').setValue('all');
+        this.checkReqValues();
+
+        this.loading = false;
+
+      }).bind(this));
+    },
+    error => {
+      this.loading = false;
+    });
+  }
+
+  convertPK(val){
+    if(val == true)
+      val = "Ada";
+    else
+      val = "Tiada";
+
+    return val;
+  }
+
+  getDefaultMap() {
+    this.mymap = L.map('dirmap').setView([4.8142568, 108.5806004], 6.2);
+    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+      attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+      maxZoom: 17,
+      id: 'mapbox.streets',
+      accessToken: 'pk.eyJ1IjoicmVkemEiLCJhIjoiY2pmcGZxNzRrMjYzbzMwcG83bGRxY2FtZyJ9.uMHQpYc0Pvjl4us27nHH8w'
+    }).addTo(this.mymap);
+  }
+
+  checkReqValues() {
+
+    let reqVal = [];
+    let nullPointers:any = [];
+
+    if(this.searchForm.controls.jenisCarian.value == 1){
+      if(this.valSchoolCat == 1){
+        reqVal =  ["optSelect","state","ppd","speacialEd"];
+      }
+      else{
+        reqVal =  ["optSelect","state","typeSchool", "ppd","speacialEd"];
+      }
+    }
+
+    else{
+      reqVal =  ["schoolname"];
+    }
+
+    for (var reqData of reqVal) {
+      let elem = this.searchForm.get(reqData);
+
+      if (elem.value == "" || elem.value == null) {
+        elem.setValue(null)
+        nullPointers.push(null)
+      }
+    }
+
+    if(nullPointers.length > 0) {
+      this.complete = false;
+    } else {
+      this.complete = true;
+    }
+  }
+
+  resetSearch(){
+    
+    this.mymap.removeLayer(this.markerGroup);  
+    this.mymap.setView([4.8142568, 108.5806004], 6.2);
+    this.searchForm.get('jenisCarian').setValue(1);
+    this.valSchoolCat = 1;
+    this.searchForm.get('optSelect').setValue(1);
+    this.searchForm.get('state').setValue(null);
+    this.searchForm.get('typeSchool').setValue(null);
+    this.searchForm.get('ppd').setValue(null);
+    this.searchForm.get('speacialEd').setValue(null);
+    this.showDetails = false;
+  }
+
+  resetMethod(event) {
+    this.resetSearch();
+  }
+
+  isDataFilter(element, index, array) { 
+
+    return (element.alamat == "JALAN TEPI"); 
+  }
+
+  search(nameKey, myArray){
+    for (var i=0; i < myArray.length; i++) {
+        // if (myArray[i].negeri === nameKey || myArray[i].daerahPPD === nameKey || myArray[i].peringkatSekolah === nameKey 
+        //   || myArray[i].jenisSekolah === nameKey || myArray[i].kodSekolah === nameKey || myArray[i].namaSekolah === nameKey
+        //   || myArray[i].bandar === nameKey || myArray[i].telNo === nameKey
+        //   || myArray[i].faxNo === nameKey || myArray[i].email === nameKey) {
+
+         if (myArray[i].name === nameKey || myArray[i].value === nameKey || myArray[i].ok === nameKey ) {
+            return myArray[i];
+
+            //myArray[i].alamat === nameKey
+        }
+    }
+  }
+
+  newRecord(value){
+
+    //console.log(this.popup.isPopupOpen);
+
+    var array = [
+      { name:"abc", value:"ok", other: "that" },
+      { name:"def", value:"tr", other: "that" }
+  ];
+  
+    this.resultObject = this.search(value, array);
+    console.log(this.resultObject);
+    console.log(this.resultObject.length);
+
+    // if (this.popup.isPopupOpen)
+    //   this.popup.closePopup();
+
+    // var passed = this.recordData.filter(this.isDataFilter); 
+    // console.log("Test Value : " + passed );   
+    // console.log(this.recordData);
+  }
+  
   malformedDataHandler(data) {
     let tData;
 

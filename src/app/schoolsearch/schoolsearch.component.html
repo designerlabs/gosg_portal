@@ -1,3 +1,4 @@
+<gosg-shared-loader *ngIf="loading"></gosg-shared-loader>
 <div class="container-fluid animated slideInDown" style="background: #a7a495;">
     <div class="container">
          <div class="row">
@@ -121,7 +122,7 @@
                             <i class="fa fa-refresh"></i> {{'feedback.label.reset' | translate }}</button>
                         <button mat-raised-button type="button" color="primary"
                             class="form-control btn btn-md btn-success font-size-s pull-right bttnCustom" [disabled]="!complete"
-                            (click)="searchApp(searchForm.value)">
+                            (click)="searchApp()">
                             <i class="fa fa-search"></i> {{'appmngt.setSearch.search' | translate}}</button>
                     </div>
                 </div>
@@ -144,14 +145,14 @@
           </div>
           <div class="col-md-4">
               <mat-form-field class="example-full-width">
-                  <input matInput placeholder="Carian berdasarkan kata kunci"  [(ngModel)]="query" style="color: black">
+                  <input matInput placeholder="Carian berdasarkan kata kunci" #myInput (keyup)="newRecord(myInput.value)" [(ngModel)]="query" style="color: black">
               </mat-form-field>
           </div>
         </div><br>
 
         <div class="mat-elevation-z8 padding-15" style="max-height: 500px; overflow: auto;">
 
-            <table class="mat-table" style="width:100%;">
+            <table class="mat-table table-hover" style="width:100%;">
                 <tr class="mat-header-row tableHeader">
                     <th class="" width="5%">&nbsp;{{'appmngt.tableHeader.num' | translate}}</th>
                     <th class="" width="7%">Kod Sekolah</th>
@@ -164,32 +165,18 @@
                     <th class="" width="10%">No. Faksimili</th>
                     <th class="" width="10%">Emel</th>
                 </tr>
-                <tr class="mat-row table_row table_row_height" *ngFor="let data of recordData | search : query; let i = index;" role="row">
+                <tr (click)="goTo(data.latitude,data.longitude,data.namaSekolah,data.alamat,data.telNo, data.bandar, data.negeri)" 
+                    class="mat-row table_row table_row_height" 
+                    *ngFor="let data of recordData | search : query; let i = index;" role="row">
                     <td class="mat-cell text-center">{{i+1}}</td>
-                    <td class="mat-cell"
-                        (click)="goTo(data.latitude,data.longitude,data.namaSekolah,data.alamat,data.telNo, data.bandar, data.negeri)">
-                        {{data.kodSekolah}}</td>
-                    <td class="mat-cell"
-                        (click)="goTo(data.latitude,data.longitude,data.namaSekolah,data.alamat,data.telNo, data.bandar, data.negeri)">
-                        {{data.namaSekolah}}</td>
-                    <td class="mat-cell"
-                        (click)="goTo(data.latitude,data.longitude,data.namaSekolah,data.alamat,data.telNo, data.bandar, data.negeri)">
-                        {{data.daerahPPD}}</td>
-                    <td class="mat-cell"
-                        (click)="goTo(data.latitude,data.longitude,data.namaSekolah,data.alamat,data.telNo, data.bandar, data.negeri)">
-                        {{convertPK(data.pendidikanKhas)}}</td>
-                    <td class="mat-cell"
-                        (click)="goTo(data.latitude,data.longitude,data.namaSekolah,data.alamat,data.telNo, data.bandar, data.negeri)">
-                        {{data.jenisSekolah}}</td>
-                    <td class="mat-cell"
-                        (click)="goTo(data.latitude,data.longitude,data.namaSekolah,data.alamat,data.telNo, data.bandar, data.negeri)">
-                        {{data.alamat}}</td>
-                    <td class="mat-cell"
-                        (click)="goTo(data.latitude,data.longitude,data.namaSekolah,data.alamat,data.telNo, data.bandar, data.negeri)">
-                        {{data.telNo}}</td>
-                    <td class="mat-cell"
-                        (click)="goTo(data.latitude,data.longitude,data.namaSekolah,data.alamat,data.telNo, data.bandar, data.negeri)">
-                        {{data.faxNo}}</td>
+                    <td class="mat-cell">{{data.kodSekolah}}</td>
+                    <td class="mat-cell">{{data.namaSekolah}}</td>
+                    <td class="mat-cell">{{data.daerahPPD}}</td>
+                    <td class="mat-cell">{{convertPK(data.pendidikanKhas)}}</td>
+                    <td class="mat-cell">{{data.jenisSekolah}}</td>
+                    <td class="mat-cell">{{data.alamat}}</td>
+                    <td class="mat-cell">{{data.telNo}}</td>
+                    <td class="mat-cell">{{data.faxNo}}</td>
                     <td class="mat-cell">{{data.email}}</td>
                 </tr>
                 <tr *ngIf="showNoData">

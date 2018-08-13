@@ -17,12 +17,12 @@ import { TopnavService } from '../../../header/topnav/topnav.service';
 })
 export class RssmainComponent implements OnInit, OnDestroy {
 
+  feedUrl: string;
   statusID: any;
   langIdVal: string;
   subID: number;
   moduleName: string;
-  private subscription: ISubscription;
-  private subscriptionLang: ISubscription;
+
 
   @ViewChild('textarea') textarea: ElementRef;
   @Output() menuClick = new EventEmitter();
@@ -31,60 +31,69 @@ export class RssmainComponent implements OnInit, OnDestroy {
   isValid: any;
   topicID: number;
   articles: any[];
+  loading = false;
 
   articleData: any;
   @Output() langChange = new EventEmitter();
+
+  boolCallback = (result: boolean) : void => {
+    this.loading = result;
+  }
+
+  private subscription: ISubscription;
+  private subscriptionLang: ISubscription;
+
+
   constructor(public articleService: ArticleService, private topnavservice: TopnavService, private route: ActivatedRoute, private navService: NavService, private translate: TranslateService, private router: Router, private breadcrumbService: BreadcrumbService, @Inject(APP_CONFIG) private config: AppConfig) {
-    this.lang = translate.currentLang;
+   this.lang = translate.currentLang;
     this.langId = 1;
 
-    this.subscriptionLang = this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
-      // this.sharedService.errorHandling(event, (function(){
-        const myLang = this.translate.currentLang;
+    this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
 
-        if (myLang == 'en') {
+      const myLang = translate.currentLang;
 
-          translate.get('HOME').subscribe((res: any) => {
-            this.lang = 'en';
-            this.langId = 1;
-            this.moduleName = this.router.url.split('/')[1];
-            var tt = this.router.url.split('/');
-            this.subID = parseInt(tt[tt.length - 1]);
-          });
+      if (myLang == 'en') {
 
-        }
-        if (myLang == 'ms') {
+        translate.get('HOME').subscribe((res: any) => {
+          this.lang = 'en';
+          this.langId = 1;
+          this.moduleName = this.router.url.split('/')[1];
+          this.topicID = parseInt(this.router.url.split('/')[2]);
+          var tt = this.router.url.split('/');
+          this.subID = parseInt(tt[tt.length - 1]);
+        });
 
-          translate.get('HOME').subscribe((res: any) => {
-            this.lang = 'ms';
-            this.langId = 2;
-            this.moduleName = this.router.url.split('/')[1];
-            this.topicID = parseInt(this.router.url.split('/')[2]);
-            var tt = this.router.url.split('/');
-            this.subID = parseInt(tt[tt.length - 1]);
-          });
-        }
+      }
+      if (myLang == 'ms') {
 
+        translate.get('HOME').subscribe((res: any) => {
+          this.lang = 'ms';
+          this.langId = 2;
+          this.moduleName = this.router.url.split('/')[1];
+          this.topicID = parseInt(this.router.url.split('/')[2]);
+          var tt = this.router.url.split('/');
+          this.subID = parseInt(tt[tt.length - 1]);
+        });
+      }
 
       if (this.topnavservice.flagLang) {
-        this.navService.triggerRSS(this.moduleName,  this.langId, this.topicID);
+        this.navService.triggerRSS(this.moduleName, this.langId, this.topicID);
       }
 
 
+      // this.navService.triggerSubArticle(this.topicID, this.subID, this.langId);
 
     });
-
   }
 
-  lang = this.lang;
-  langId = this.langId;
 
   ngOnDestroy() {
     this.subscriptionLang.unsubscribe();
   }
 
 
-
+  lang = this.lang;
+  langId = this.langId;
 
   ngOnInit() {
 
@@ -106,39 +115,18 @@ export class RssmainComponent implements OnInit, OnDestroy {
 
     clickSideMenu(e, status, url){
       this.statusID = status;
-      this.navService.getSubArticleUrlOthers(e.categoryCode, localStorage.getItem('langID'), url);
-      this.navService.triggerSubArticleOther(e.categoryCode, localStorage.getItem('langID'), url);
-      this.router.navigate(['/archive/subcategory', e.categoryCode]);
+      this.feedUrl = this.config.urlPortal+'rss/feeder/'+e.leftMenuId+'?language='+this.langId;
+      window.open(this.feedUrl, "_blank");
       event.preventDefault();
     }
 
     clickSideMenuOthers(e, status, url){
       this.statusID = status;
-      // this.navService.triggerArticle(this.moduleName, this.langId, e.categoryCode);
-      // this.navService.getSubArticleUrlOthers(e.categoryCode, localStorage.getItem('langID'), url);
-      // this.navService.triggerSubArticleOther(e.categoryCode, localStorage.getItem('langID'), url);
-      this.router.navigate(['/rss/id', e.categoryCode]);
+      this.feedUrl = this.config.urlPortal+'rss/feeder/'+e.categoryCode+'?language='+this.langId;
+      window.open(this.feedUrl, "_blank");
       event.preventDefault();
     }
 
-
-    clickSideMenuSubCategory(e, status, url){
-      this.statusID = status;
-      this.navService.getSubArticleUrlOthers(e, localStorage.getItem('langID'), url);
-      this.navService.triggerSubArticleOther(e, localStorage.getItem('langID'), url);
-      this.router.navigate(['/archive/subcategory', e]);
-      event.preventDefault();
-    }
-
-
-    clickContentFromMenu(pId, aId, status){
-
-      this.statusID = status;
-      this.navService.triggerContentOther(aId, localStorage.getItem('langID'), status);
-      this.navService.getContentUrlOther(aId, localStorage.getItem('langID'), status);
-      this.router.navigate(['/archive/content', aId]);
-      event.preventDefault();
-    }
 
 
     triggerRSS(moduleName, lang, topicID){
