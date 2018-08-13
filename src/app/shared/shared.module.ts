@@ -138,6 +138,7 @@ import { SchoolsearchComponent } from '../schoolsearch/schoolsearch.component';
 import { TrafficinfoComponent } from '../trafficinfo/trafficinfo.component';
 import { SearchPipe } from '../pipe/search.pipe';
 import { SharedLoaderComponent } from '../loader/shared-loader.component';
+import { RssmainComponent } from '../article/rss/rssmain/rssmain.component';
 
 // import { LifeeventComponent } from '../lifeevent/lifeevent.component';
 //import { GalleryService } from '../gallery/gallery.service';
@@ -228,7 +229,8 @@ export function HttpLoaderFactory(http: Http) {
     SchoolsearchComponent,
     TrafficinfoComponent,
     SearchPipe,
-    SharedLoaderComponent
+    SharedLoaderComponent,
+    RssmainComponent
     // SearchResultComponent
   ],
 
