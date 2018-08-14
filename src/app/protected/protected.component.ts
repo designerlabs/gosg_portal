@@ -8,6 +8,7 @@ import 'rxjs/add/operator/skip';
 import { PortalService } from '../services/portal.service';
 import { environment } from '../../environments/environment';
 import * as $ from 'jquery';
+import { NavService } from '../header/nav/nav.service';
 
 @Component({
   selector: 'gosg-protected',
@@ -43,7 +44,7 @@ export class ProtectedComponent implements OnInit {
   query;
   pageSize;
   entryService;
-  constructor(private activatedRoute:ActivatedRoute, @Inject(APP_CONFIG) private config: AppConfig, private protectedService:ProtectedService, router:Router, private portalService:PortalService) {
+  constructor(private navService: NavService, private activatedRoute:ActivatedRoute, @Inject(APP_CONFIG) private config: AppConfig, private protectedService:ProtectedService, router:Router, private portalService:PortalService) {
 
       this.clientHeight = window.innerHeight - 200;
   }

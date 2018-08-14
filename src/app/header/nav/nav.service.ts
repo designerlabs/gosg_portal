@@ -26,6 +26,7 @@ export class NavService {
   breadcrumb: any;
   isValid: any;
   topicStatus: any;
+  loader:boolean = false;
   dataT: any;
   private myMethodSubject = new Subject<any>();
   announces: any[];
@@ -47,12 +48,13 @@ export class NavService {
     this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
 
       const myLang = translate.currentLang;
-
+      this.loader = true;
       if (myLang == 'en') {
 
         translate.get('HOME').subscribe((res: any) => {
           this.lang = 'en';
           this.langId = 1;
+          this.loader = false;
           // this.moduleName = this.router.url.split('/')[1];
           // this.topicID = parseInt(this.router.url.split('/')[2]);
           // this.navService.triggerArticle(this.moduleName, this.langId, this.topicID);
@@ -64,6 +66,7 @@ export class NavService {
         translate.get('HOME').subscribe((res: any) => {
           this.lang = 'ms';
           this.langId = 2;
+          this.loader = false;
           // this.moduleName = this.router.url.split('/')[1];
           // this.topicID = parseInt(this.router.url.split('/')[2]);
           // this.subID = parseInt(this.router.url.split('/')[3]);
@@ -364,6 +367,7 @@ export class NavService {
    // alert("Trigger sub acrticle");
 
     callback(true);
+    this.loader = true;
 
     if (!isNaN(subID)) {
      this.articleService.articles = [''];
@@ -378,12 +382,14 @@ export class NavService {
           this.isValid = this.breadcrumbService.isValid = true;
           this.breadcrumb = this.breadcrumb.name = '';
           callback(false);
+          this.loader = false;
 
         });
     }
   }
 
   triggerSubArticleOther(subID, lang, url) {
+    this.loader = true;
     // alert("Trigger sub acrticle");
      if (!isNaN(subID)) {
        this.articleService.articles = [''];
@@ -397,12 +403,14 @@ export class NavService {
            this.breadcrumb = this.breadcrumbService.getBreadcrumb();
            this.isValid = this.breadcrumbService.isValid = true;
            this.breadcrumb = this.breadcrumb.name = '';
+           this.loader = false;
 
          });
      }
    }
 
    triggerSubArticleAgency(lang) {
+      this.loader = true;
     // alert("Trigger sub acrticle");
        this.articleService.articles = [''];
        this.articles = [''];
@@ -415,6 +423,7 @@ export class NavService {
            this.breadcrumb = this.breadcrumbService.getBreadcrumb();
            this.isValid = this.breadcrumbService.isValid = true;
            this.breadcrumb = this.breadcrumb.name = '';
+           this.loader = false;
 
          });
 
@@ -424,7 +433,7 @@ export class NavService {
     // alert("Trigger sub acrticle");
 
     callback(true);
-
+    this.loader = true;
      if (!isNaN(subID)) {
        this.articleService.articles = [''];
        this.articles = [''];
@@ -439,12 +448,14 @@ export class NavService {
            this.breadcrumb = this.breadcrumb.name = '';
 
            callback(false);
+           this.loader = false;
 
          });
      }
    }
 
    triggerContentOther( subID, lang, url) {
+    this.loader = true;
     // alert("Trigger sub acrticle");
      if (!isNaN(subID)) {
        this.articleService.articles = [''];
@@ -458,14 +469,14 @@ export class NavService {
            this.breadcrumb = this.breadcrumbService.getBreadcrumb();
            this.isValid = this.breadcrumbService.isValid = true;
            this.breadcrumb = this.breadcrumb.name = '';
-
+           this.loader = false;
          });
      }
    }
 
 
   triggerSubRss(topicID, subID, lang) {
-    this.articleService.loading.name = true;
+    this.loader = true;
     // alert("Trigger sub acrticle");
      if (!isNaN(subID)) {
       this.articleService.articles = [''];
@@ -479,13 +490,13 @@ export class NavService {
            this.breadcrumb = this.breadcrumbService.getBreadcrumb();
            this.isValid = this.breadcrumbService.isValid = true;
            this.breadcrumb = this.breadcrumb.name = '';
-           this.articleService.loading.name = false;
+           this.loader = false;
          });
      }
    }
 
    triggerArticle(moduleName, lang, topicID, callback?) {
-
+    this.loader = true;
     callback(true);
 
      if (!isNaN(topicID)) {
@@ -501,11 +512,13 @@ export class NavService {
            this.isValid = this.breadcrumbService.isValid = true;
            this.breadcrumb = this.breadcrumb.name = '';
             callback(false);
+            this.loader = false;
          });
      }
    }
 
    triggerRSS(moduleName, lang, topicID) {
+    this.loader = true;
     if (!isNaN(topicID)) {
       this.articles = [''];
       this.articleService.articles = [''];
@@ -518,12 +531,14 @@ export class NavService {
           this.breadcrumb = this.breadcrumbService.getBreadcrumb();
           this.isValid = this.breadcrumbService.isValid = true;
           this.breadcrumb = this.breadcrumb.name = '';
+          this.loader = false;
         });
     }
   }
 
 
    triggerArticleOthers(moduleName, lang, topicID, url) {
+    this.loader = true;
     if (!isNaN(topicID)) {
       this.articles = [''];
       this.articleService.articles = [''];
@@ -536,6 +551,7 @@ export class NavService {
           this.breadcrumb = this.breadcrumbService.getBreadcrumb();
           this.isValid = this.breadcrumbService.isValid = true;
           this.breadcrumb = this.breadcrumb.name = '';
+          this.loader = false;
         });
     }
   }
@@ -543,6 +559,7 @@ export class NavService {
    triggerGalleries(lang, galleryID?, callback?) {
 
     callback(true);
+    this.loader = true;
 
     //  if (!isNaN(galleryID)) {
        this.galleries = [''];
@@ -557,7 +574,7 @@ export class NavService {
            this.breadcrumb = this.breadcrumbService.getBreadcrumb();
            this.isValid = this.breadcrumbService.isValid = true;
            this.breadcrumb = this.breadcrumb.name = '';
-
+           this.loader = false;
            callback(false);
          });
     //  }
@@ -597,6 +614,7 @@ export class NavService {
   }
 
   triggerAnnouncementList(lang, id1) {
+    this.loader = true;
         if (lang === 'ms') {
             lang = 2;
         }
@@ -617,11 +635,13 @@ export class NavService {
             this.breadcrumb = this.breadcrumbService.getBreadcrumb();
             this.isValid = this.breadcrumbService.isValid = true;
             this.breadcrumb = this.breadcrumb.name = '';
+            this.loader = false;
         });
         }
     }
 
     triggerAnnouncementDetails(moduleName, lang, id1, id2) {
+      this.loader = true;
         if (lang === 'ms') {
             lang = 2;
         }
@@ -636,6 +656,7 @@ export class NavService {
             this.breadcrumb = this.breadcrumbService.getBreadcrumb();
             this.isValid = this.breadcrumbService.isValid = true;
             this.breadcrumb = this.breadcrumb.name = '';
+            this.loader = false;
         });
     }
 

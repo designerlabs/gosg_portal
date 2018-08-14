@@ -1,6 +1,8 @@
+<gosg-protected-loader [loader]="navService.loader"></gosg-protected-loader>
+<!-- <gosg-shared-loader [loader]="navService.loader"></gosg-shared-loader> -->
 <div *ngIf="!isFirstLogin">
   <div [ngStyle]="{'min-height': clientHeight + 'px', 'margin-bottom': '-200px'}">
-    
+
     <app-topnav [state]='getUserName' [getMail]='getEmail' [getName]='getFullname' class="top-nav-style" (showProfile)="showProfile($event)" (topNavClick)="getExpand($event)"
       [style.background]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" [style.z-index]="this.zIndex" [style.height]="this.bHeight"></app-topnav>
     <app-nav [validMyIdentity]='validMyIdentity' [state]='getUserName' class="nav-bar-style" [style.top]="this.bTop" [style.z-index]="this.zIndex2"></app-nav>
