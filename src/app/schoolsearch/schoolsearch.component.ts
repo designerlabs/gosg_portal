@@ -195,8 +195,7 @@ export class SchoolsearchComponent implements OnInit {
           }
 
           this.mymap.addLayer(this.markerGroup);
-          //this.markerGroup.addTo(this.mymap);  
-          this.loading = false;        
+          //this.markerGroup.addTo(this.mymap);      
         }
 
         else{
@@ -206,8 +205,8 @@ export class SchoolsearchComponent implements OnInit {
           }
           this.mymap.setView([4.8142568, 108.5806004], 6.2);
           this.showNoData = true;
-          this.loading = false;
         }
+        this.loading = false;
     //  }).bind(this));
     },
     error => {
@@ -256,7 +255,6 @@ export class SchoolsearchComponent implements OnInit {
 
           this.mymap.addLayer(this.markerGroup);
           //this.markerGroup.addTo(this.mymap);
-          this.loading = false;
         }
 
         else{
@@ -265,8 +263,8 @@ export class SchoolsearchComponent implements OnInit {
           }
           this.mymap.setView([4.8142568, 108.5806004], 6.2);
           this.showNoData = true;
-          this.loading = false;
         }
+        this.loading = false;
       //}).bind(this));
     },
     error => {
@@ -319,8 +317,8 @@ export class SchoolsearchComponent implements OnInit {
 
   goTo(lat, long, nameS, addressS, phone, city, state) {
     if (lat && long) {
-      this.mymap.setView([lat, long], 24);
 
+      this.mymap.setView([lat, long], 24);
       this.popup = L.popup()
         .setLatLng([lat, long])
         .setContent(`
@@ -360,6 +358,8 @@ export class SchoolsearchComponent implements OnInit {
 
   searchApp(){
 
+    this.popup.remove();
+    this.charCarian = undefined;
     this.showDetails = true;
     if(this.searchForm.controls.jenisCarian.value == 1){
       this.getDataSchool();
@@ -384,6 +384,7 @@ export class SchoolsearchComponent implements OnInit {
   }
 
   getListState(){
+    this.loading = true;
     this.sharedService.getSchoolApi('school/statelist','',this.langID).subscribe(
     data => {
 
@@ -391,8 +392,10 @@ export class SchoolsearchComponent implements OnInit {
         this.listState = data['stateList'];
 
       }).bind(this));
+      this.loading = false;
     },
     error => {
+      this.loading = false;
     });
   }
 
@@ -430,9 +433,8 @@ export class SchoolsearchComponent implements OnInit {
         this.searchForm.get('typeSchool').setValue('all');
         this.checkReqValues();
 
-        this.loading = false;
-
       }).bind(this));
+      this.loading = false;
     },
     error => {
       this.loading = false;
@@ -462,7 +464,7 @@ export class SchoolsearchComponent implements OnInit {
 
     let reqVal = [];
     let nullPointers:any = [];
-
+    
     if(this.searchForm.controls.jenisCarian.value == 1){
       if(this.valSchoolCat == 1){
         reqVal =  ["optSelect","state","ppd","speacialEd"];
