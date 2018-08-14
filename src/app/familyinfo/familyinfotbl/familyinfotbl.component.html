@@ -3,7 +3,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <h1 style="margin-top: 10px;" class="font-size-l">{{'home.breadcrumb.appmgmt' | translate}}</h1>
+        <h1 style="margin-top: 10px;" class="font-size-l">{{'home.breadcrumb.family' | translate}}</h1>
         <hr class="hr-custom2">
         <ul class="list-inline" style="clear:both;">
           <li>
@@ -13,13 +13,14 @@
           </li>
           <li>/</li>
           <li>
-            {{'home.breadcrumb.appmgmt' | translate}}
+            {{'home.breadcrumb.family' | translate}}
           </li>
         </ul>
       </div>
     </div>
   </div>
 </div>
+
 
 <div class="container">
   <div class="col-md-12">&nbsp;</div>
@@ -36,6 +37,12 @@
     <form [formGroup]="searchForm" (ngSubmit)="searchapp(searchForm.value)" #adSearchForm="ngForm" 
       id="adSearch-form" role="form" novalidate="novalidate">
       <br />
+
+      <span class="pull-right">
+        <button type="button" mat-fab color="warn" (click)="add()" >
+        <i class="fa fa-plus" class="font-size-m" style="color: fff; z-index: 99999;"></i> +</button>
+      </span>
+
       <mat-expansion-panel>
           <mat-expansion-panel-header style="padding-top: 0px; padding-left: 10px;">
             <div class="col-md-4">

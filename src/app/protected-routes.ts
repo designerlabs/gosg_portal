@@ -124,6 +124,7 @@ export const protectedRoutes: Routes = [
     {path: 'perhilitan_renew/:id', component: PerhilitanrenewComponent},
     {path: 'familyinfo', component: FamilyinfotblComponent},
     {path: 'familyinfo/:id', component: FamilyinfoComponent},
+    {path: 'familyinfo/add', component: FamilyinfoComponent},
     {path: 'get_user_approval', component: ReplacementmycardComponent},
     {path: '**', component: ErrorComponent}
     //{path: 'user', loadChildren: 'app/user/user.module#UserModule'}

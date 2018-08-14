@@ -281,4 +281,9 @@ export class FamilyinfotblComponent implements OnInit, OnDestroy {
 
   }
 
+  add() {
+    this.router.navigate(['familyinfo/add']);
+    //this.commonservice.pageModeChange(false);
+  }
+
 }
