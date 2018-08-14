@@ -1,3 +1,4 @@
+<gosg-protected-loader *ngIf="loading"></gosg-protected-loader>
 <div class="container-fluid animated slideInDown" style="background: #a7a495;">
     <div class="container">
       <div class="row">
@@ -437,8 +438,8 @@
                   <mat-form-field class="example-full-width">
                     <mat-select formControlName="lsnActivity" placeholder="Aktiviti Lesen" required 
                     (change)="changeBuss(fifthFormGroup.value)">
-                      <mat-option *ngFor="let listBuss of listbusiness" [value]="listBuss.activity.activityId">
-                        {{listBuss.activity.activityDescription}}
+                      <mat-option *ngFor="let listBuss of listbusiness" [value]="listBuss.activityId">
+                        {{listBuss.activityDescription}}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
@@ -450,8 +451,8 @@
                   <mat-form-field class="example-full-width">
                     <mat-select formControlName="businessCat" placeholder="Kategori Perniagaan" required
                     (change)="checkReqValues5()">
-                      <mat-option *ngFor="let listcat of listcatbuss" [value]="listcat.activity.activityId">
-                        {{listcat.activity.activityDescription}}
+                      <mat-option *ngFor="let listcat of listcatbuss" [value]="listcat.businessId">
+                        {{listcat.businessDescription}}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>

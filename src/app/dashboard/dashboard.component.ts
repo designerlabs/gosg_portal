@@ -34,6 +34,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   inProgress: any;
   approved: any;
   rejected: any;
+  loading = false;
   private subscription: ISubscription;
   private subscriptionLang: ISubscription;
 
@@ -107,7 +108,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   getNoApp(lang){
-   
+    this.loading = true;
     this.protectedService.getDashboardData(lang).subscribe(
       data => {
         this.dashboardData = data.dashboard;
@@ -116,8 +117,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.inProgress = this.dashboardData.pending;
         this.approved = this.dashboardData.success;
         this.rejected = this.dashboardData.failed;
+        this.loading = false;
       },
       error => {
+        this.loading = false;
         this.toastr.error(this.translate.instant('Sorry'), '');            
     });    
   }

@@ -684,11 +684,11 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
 
   getListBusiness(lang){
     this.loading = true;
-    this.protectedService.getProtected('perhilitan/business',lang).subscribe(
+    this.protectedService.getProtected('perhilitan/activity',lang).subscribe(
     data => {
 
       this.sharedService.errorHandling(data, (function(){
-        this.listbusiness = data.perhilitanBusinessCategoryResourceList;     
+        this.listbusiness = data.perhilitanActivityResourceList;     
 
       }).bind(this));
       this.loading = false;
@@ -1129,7 +1129,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
 
     this.loading = true;
 
-    this.protectedService.getProtected('perhilitan/activity/catbusiness/ref/'+formValue,this.langID).subscribe(
+    this.protectedService.getProtected('perhilitan/activity/catbusiness/'+formValue,this.langID).subscribe(
     data => {
 
       this.sharedService.errorHandling(data, (function(){
