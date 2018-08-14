@@ -133,8 +133,13 @@
 
     <div *ngIf="showDetails">
         <div class="row">
-            <div class="col-md-12" style="color: black; font-weight: bold;">
+            <div class="col-md-12" style="color: black; font-weight: bold;" *ngIf="charCarian == undefined">
                 HASIL CARIAN <span class="badge badge-pill badge-success">{{noOfSc}}</span><br>
+                <hr class="lineHr" style="border-top: #9c9c9d 1px solid;">
+            </div>
+
+            <div class="col-md-12" style="color: black; font-weight: bold;" *ngIf="charCarian != undefined">
+                HASIL CARIAN <span class="badge badge-pill badge-success">{{charCarian}} dari {{noOfSc}}</span><br>
                 <hr class="lineHr" style="border-top: #9c9c9d 1px solid;">
             </div>
         </div>
@@ -152,7 +157,7 @@
 
         <div class="mat-elevation-z8 padding-15" style="max-height: 500px; overflow: auto;">
 
-            <table class="mat-table table-hover" style="width:100%;">
+            <table class="mat-table table-hover" id="dataTable" style="width:100%;">
                 <tr class="mat-header-row tableHeader">
                     <th class="" width="5%">&nbsp;{{'appmngt.tableHeader.num' | translate}}</th>
                     <th class="" width="7%">Kod Sekolah</th>
@@ -164,6 +169,10 @@
                     <th class="" width="10%">No. Telefon</th>
                     <th class="" width="10%">No. Faksimili</th>
                     <th class="" width="10%">Emel</th>
+                    <th class="" style="display: none">Lat</th>
+                    <th class="" style="display: none">Long</th>
+                    <th class="" style="display: none">Bandar</th>
+                    <th class="" style="display: none">Negeri</th>
                 </tr>
                 <tr (click)="goTo(data.latitude,data.longitude,data.namaSekolah,data.alamat,data.telNo, data.bandar, data.negeri)" 
                     class="mat-row table_row table_row_height" 
@@ -178,8 +187,12 @@
                     <td class="mat-cell">{{data.telNo}}</td>
                     <td class="mat-cell">{{data.faxNo}}</td>
                     <td class="mat-cell">{{data.email}}</td>
+                    <td class="mat-cell" style="display: none">{{data.latitude}}</td>
+                    <td class="mat-cell" style="display: none">{{data.longitude}}</td>
+                    <td class="mat-cell" style="display: none">{{data.bandar}}</td>
+                    <td class="mat-cell" style="display: none">{{data.negeri}}</td>
                 </tr>
-                <tr *ngIf="showNoData">
+                <tr *ngIf="showNoData || charCarian == 0">
                     <td colspan="10" class="showData">
                     <hr><br>Data tidak dijumpai</td>
                 </tr>

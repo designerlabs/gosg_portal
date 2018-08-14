@@ -293,6 +293,4 @@ export class FeedbackComponent implements OnInit, OnDestroy {
   resetMethod(event) {
     this.resetForm();
   }
-
-
 }

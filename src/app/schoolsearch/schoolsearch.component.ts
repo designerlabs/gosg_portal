@@ -43,8 +43,8 @@ export class SchoolsearchComponent implements OnInit {
   public setLat: any;
   public setLong: any;
   public showDetails = false;
-  public resultObject: any;
-  public query = '';
+  public charCarian: any;
+  
 
   searchForm: FormGroup;
   public optSelect: FormControl;
@@ -201,7 +201,9 @@ export class SchoolsearchComponent implements OnInit {
 
         else{
           
-          this.mymap.removeLayer(this.markerGroup);   
+          if(this.markerGroup){
+            this.mymap.removeLayer(this.markerGroup);   
+          }
           this.mymap.setView([4.8142568, 108.5806004], 6.2);
           this.showNoData = true;
           this.loading = false;
@@ -258,8 +260,9 @@ export class SchoolsearchComponent implements OnInit {
         }
 
         else{
-          
-          this.mymap.removeLayer(this.markerGroup);   
+          if(this.markerGroup){
+            this.mymap.removeLayer(this.markerGroup);   
+          }
           this.mymap.setView([4.8142568, 108.5806004], 6.2);
           this.showNoData = true;
           this.loading = false;
@@ -491,7 +494,9 @@ export class SchoolsearchComponent implements OnInit {
 
   resetSearch(){
     
-    this.mymap.removeLayer(this.markerGroup);  
+    if(this.markerGroup){
+      this.mymap.removeLayer(this.markerGroup); 
+    } 
     this.mymap.setView([4.8142568, 108.5806004], 6.2);
     this.searchForm.get('jenisCarian').setValue(1);
     this.valSchoolCat = 1;
@@ -507,45 +512,50 @@ export class SchoolsearchComponent implements OnInit {
     this.resetSearch();
   }
 
-  isDataFilter(element, index, array) { 
-
-    return (element.alamat == "JALAN TEPI"); 
-  }
-
-  search(nameKey, myArray){
-    for (var i=0; i < myArray.length; i++) {
-        // if (myArray[i].negeri === nameKey || myArray[i].daerahPPD === nameKey || myArray[i].peringkatSekolah === nameKey 
-        //   || myArray[i].jenisSekolah === nameKey || myArray[i].kodSekolah === nameKey || myArray[i].namaSekolah === nameKey
-        //   || myArray[i].bandar === nameKey || myArray[i].telNo === nameKey
-        //   || myArray[i].faxNo === nameKey || myArray[i].email === nameKey) {
-
-         if (myArray[i].name === nameKey || myArray[i].value === nameKey || myArray[i].ok === nameKey ) {
-            return myArray[i];
-
-            //myArray[i].alamat === nameKey
-        }
-    }
-  }
-
   newRecord(value){
 
-    //console.log(this.popup.isPopupOpen);
+    this.popup.remove();
+    var array = [];
+    var headers = [];
+    $('#dataTable th').each(function(index, item) {
+        headers[index] = $(item).html();
+    });
+    $('#dataTable tr').has('td').each(function() {
+        var arrayItem = {};
+        $('td', $(this)).each(function(index, item) {
+            arrayItem[headers[index]] = $(item).html();
+        });
+        array.push(arrayItem);
+    });
 
-    var array = [
-      { name:"abc", value:"ok", other: "that" },
-      { name:"def", value:"tr", other: "that" }
-  ];
+    if(this.markerGroup){
+      this.mymap.removeLayer(this.markerGroup);   
+    }
+    
+    this.markerGroup = L.layerGroup();  
+
+    if(value.length == 0){
+      this.charCarian = 0;
+    }
+
+    else{
+      this.charCarian = array.length
+    }
+    
+    for (let i = 0; i <= array.length - 1; i++) {      
+      this.addMarker(
+        parseFloat(this.malformedDataHandler(array[i]['Lat'])),
+        parseFloat(this.malformedDataHandler(array[i]['Long'])),
+        array[i]['Nama Sekolah'],
+        array[i]['Alamat'],
+        array[i]['No. Telefon'],
+        array[i]['Bandar'],
+        array[i]['Negeri']
+      );
+    }
   
-    this.resultObject = this.search(value, array);
-    console.log(this.resultObject);
-    console.log(this.resultObject.length);
-
-    // if (this.popup.isPopupOpen)
-    //   this.popup.closePopup();
-
-    // var passed = this.recordData.filter(this.isDataFilter); 
-    // console.log("Test Value : " + passed );   
-    // console.log(this.recordData);
+    this.mymap.addLayer(this.markerGroup);
+    //console.log(JSON.stringify(array));
   }
   
   malformedDataHandler(data) {
