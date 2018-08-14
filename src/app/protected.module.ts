@@ -48,6 +48,8 @@ import { ArchivesubcategoryProdComponent } from './archive/archivesubcategory/ar
 import { ArchivecontentProdComponent } from './archive/archivecontent/archivecontentprod.component';
 import { PerhilitanrenewComponent, PopupServiceDialog } from './perhilitanrenew/perhilitanrenew.component';
 import { ProtectedLoaderComponent } from './loader/protected-loader.component';
+import { FamilyinfoComponent } from './familyinfo/familyinfo.component';
+import { FamilyinfotblComponent } from './familyinfo/familyinfotbl/familyinfotbl.component';
 
 export function HttpLoaderFactory(http: Http) {
    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -84,7 +86,9 @@ export function HttpLoaderFactory(http: Http) {
     ArchivecontentProdComponent,
     PerhilitanrenewComponent,
     PopupServiceDialog,
-    ProtectedLoaderComponent
+    ProtectedLoaderComponent,
+    FamilyinfoComponent,
+    FamilyinfotblComponent
   ],
   imports: [
     SharedModule,
