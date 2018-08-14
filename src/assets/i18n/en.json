@@ -210,6 +210,7 @@
     "sidenav": {
       "dashboard": "Dashboard",
       "profile": "Profile",
+      "family": "Family Profile",
       "inbox": "Inbox",
       "appmgmt": "Application Management",
       "companyprofile": "Company Profile"
@@ -466,6 +467,18 @@
       "of": "of",
       "in": "in",
       "app": "applications"
+    }
+  },
+  "family":{
+    "tableHeader":{
+      "num": "No.",
+      "icno": "IC No.",
+      "name": "Name",
+      "relation" : "Relationship",
+      "dob": "DOB",
+      "oku": "OKU Status",
+      "status": "Status",
+      "action": "Action"
     }
   },
   "poll": {
