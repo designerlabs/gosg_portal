@@ -891,7 +891,7 @@ getPostcodeByCityC(e){
   }
 
   isOKUStatus(event){
-    const readUrl = `${this.config.urlProtected}jkm/okustatus`;
+    const readUrl = `${this.config.urlProtected}jkmservice/okustatus`;
     return this.http.post(readUrl,'')
       .subscribe(
         res => {

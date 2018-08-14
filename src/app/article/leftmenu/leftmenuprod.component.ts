@@ -110,6 +110,7 @@ export class LeftmenuProdComponent {
   }
 
   clickSideMenu(e, status, event) {
+    this.navService.loader = true;
     this.statusID = status;
     this.agencyActive = false;
     if(this.paramURL_Next == 'archive/category'){
@@ -138,6 +139,7 @@ export class LeftmenuProdComponent {
   }
 
   clickContentFromMenu(pId, aId, status, event) {
+    this.navService.loader = true;
     this.statusID = status;
     if(this.paramURL == 'category'){
       this.router.navigate(['/content', aId]);
@@ -165,6 +167,7 @@ export class LeftmenuProdComponent {
   }
 
   clickSideMenuByAgency(e, status, event) {
+    this.navService.loader = true;
     this.agencyActive = true;
     if(this.paramURL == 'category'){
       this.router.navigate(['/subcategory', 'agency']);

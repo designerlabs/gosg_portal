@@ -98,7 +98,6 @@ export class SubarticleComponent implements OnInit, OnDestroy {
   langId = this.langId;
 
   ngOnInit() {
-
     if(!this.langId){
       this.langId = localStorage.getItem('langID');
     }else{
@@ -137,6 +136,7 @@ export class SubarticleComponent implements OnInit, OnDestroy {
 
 
   clickSideMenu(e, status, event) {
+    this.navService.loader = true;
     this.agencyActive = false;
     this.statusID = status;
     this.navService.getSubArticleUrl(e.categoryId, localStorage.getItem('langID'));
@@ -146,6 +146,7 @@ export class SubarticleComponent implements OnInit, OnDestroy {
   }
 
   clickSideMenuByAgency(e, status, event) {
+    this.navService.loader = true;
     this.agencyActive = true;
     this.navService.getSubArticleUrlByAgency(localStorage.getItem('langID'));
     this.navService.triggerSubArticleAgency(localStorage.getItem('langID'));
@@ -191,6 +192,7 @@ export class SubarticleComponent implements OnInit, OnDestroy {
 
 
   clickContentFromMenu(pId, aId, event) {
+    this.navService.loader = true;
     // this.navService.triggerContent(aId, localStorage.getItem('langID'));
     // this.navService.getContentUrl(aId, localStorage.getItem('langID'));
     this.router.navigate(['/content', aId]);
