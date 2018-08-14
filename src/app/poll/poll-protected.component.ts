@@ -40,10 +40,10 @@ export class PollProtectedComponent implements OnInit, OnDestroy {
   pollReference;
   private subscriptionLang: ISubscription;
   private subscription: ISubscription;
-  
+
   constructor(
     private translate: TranslateService,
-    private http: Http, 
+    private http: Http,
     @Inject(APP_CONFIG) private config: AppConfig,
     private toastr: ToastrService,
     private sharedService: SharedService,
@@ -91,15 +91,19 @@ export class PollProtectedComponent implements OnInit, OnDestroy {
       .map(res => res.json())
      .subscribe(eventData => {
       this.sharedService.errorHandling(eventData, (function(){
-        let resData = eventData.pollQuestionListDto[0];
-        this.pollDataQuestion = resData.questionTitle;
-        this.pollDataAnswer = resData.answer.filter(fData => fData.answer !== undefined);
-        this.pollDataQuestionID = resData.questionId;
-        this.pollReference = resData.pollReference;
-        // tslint:disable-next-line:radix
-        if (!this.latestResult) { // Check Latest Result Message while change lang
+        if(eventData.pollQuestionListDto > 0){
+          let resData = eventData.pollQuestionListDto[0];
+          this.pollDataQuestion = resData.questionTitle;
+          this.pollDataAnswer = resData.answer.filter(fData => fData.answer !== undefined);
+          this.pollDataQuestionID = resData.questionId;
+          this.pollReference = resData.pollReference;
+          if (!this.latestResult) { // Check Latest Result Message while change lang
             this.showResult = ((localStorage.getItem('polldone') === resData.pollReference.toString()));
+          }
         }
+
+        // tslint:disable-next-line:radix
+
         // this.pollDataComment = eventData[0].comment;
       }).bind(this));
     }, error => {
@@ -120,7 +124,7 @@ export class PollProtectedComponent implements OnInit, OnDestroy {
 
   submitPoll(event) {
     // this.getAnsData(this.lang);
-    
+
     const data = {
         'pollsComment': this.pollComment,
         'pollsAnswerId' : this.pollAnswer.id,
@@ -136,7 +140,7 @@ export class PollProtectedComponent implements OnInit, OnDestroy {
             this.pollDataQuestion = resData.questionTitle;
             this.pollDataQuestionID = resData.questionId;
             this.pollReference = resData.pollReference;
-            
+
           }).bind(this));
         }, Error => {
             this.toastr.error(this.translate.instant('common.err.servicedown'), '');
@@ -175,7 +179,7 @@ export class PollProtectedComponent implements OnInit, OnDestroy {
         this.pollPercent  = 0;
     }
     this.progressbarVal = Math.round(this.pollPercent);
-    // 
+    //
     return this.progressbarVal;
     }
   }
