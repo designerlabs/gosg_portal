@@ -40,6 +40,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
   lang = this.lang;
   langID: any;
   private subscriptionLang: ISubscription;
+  loading = false;
 
   isLinear = true;
   firstFormGroup: FormGroup;
@@ -288,8 +289,9 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
   }
 
   getUserData(){
+    this.loading = true;
+
     if(!environment.staging){
-      //this.getPerPostCodeFlag = false;
       this.protectedService.getUser().subscribe(
       data => {
         this.sharedService.errorHandling(data, (function(){
@@ -309,22 +311,23 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
 
             this.dbposkod = data.user.address.permanentAddressPostcode.postcodeId;
             this.dbdaerah = data.user.address.permanentAddressCity.cityId;
-            this.dbnegeri = data.user.address.permanentAddressState.stateId;
+            this.dbnegeri = data.user.address.permanentAddressState.stateId;           
 
           }else{
           }
         }).bind(this));
+        this.loading = false;
 
       },
       error => {
-          location.href = this.config.urlUAP +'uapsso/Logout';
-          //location.href = this.config.urlUAP+'portal/index';
+        this.loading = false;
+        location.href = this.config.urlUAP +'uapsso/Logout';
+        //location.href = this.config.urlUAP+'portal/index';
       });
     }
 
     else{ //need to be deleted Noraini for local only
       
-
       let data = {
         "user": {
           "userId": 116,
@@ -417,6 +420,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
   }
 
   getDetailPerhilitan(){
+    this.loading = true;
 
     this.protectedService.getProtected('perhilitan/draft/'+this.getUrl,this.langID).subscribe(
     data => {
@@ -524,13 +528,14 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
           }
 
           this.selectedOccupation = this.dataApp.jobType.jobTypeId;
-
         }else{
         }
         
       }).bind(this));
+      this.loading = false;
     },
     error => {       
+      this.loading = false;
       this.flagAfterSubmit = true;
       this.toastr.error('Rekod tidak dijumpai', '');    
     });
@@ -579,85 +584,106 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
   }
 
   getNationality(lang){
+    this.loading = true;
+
     this.protectedService.getProtected('perhilitan/dropdown/nationality',lang).subscribe(
     data => {
 
       this.sharedService.errorHandling(data, (function(){
-        this.nationality = data.perhilitanNationalityResourceList;     
+        this.nationality = data.perhilitanNationalityResourceList;    
 
       }).bind(this));
+      this.loading = false;
     },
     error => {            
+      this.loading = false;
     });
   }
 
   getJIC(val, lang){
+    this.loading = true;
+
     this.protectedService.getProtected('perhilitan/dropdown/ictype/'+val,lang).subscribe(
     data => {
 
       this.sharedService.errorHandling(data, (function(){
         this.listjic = data.dropdownResourceList;     
+
       }).bind(this));
+      this.loading = false;
     },
     error => {
+      this.loading = false;
     });
   }
 
   getOccupation(lang){
+    this.loading = true;
     this.protectedService.getProtected('perhilitan/dropdown/job',lang).subscribe(
     data => {
 
       this.sharedService.errorHandling(data, (function(){
-        this.listOccupation = data.perhilitanJobTypeResourceList;     
+        this.listOccupation = data.perhilitanJobTypeResourceList;   
+        this.loading = false;  
 
       }).bind(this));
     },
-    error => {            
+    error => {        
+      this.loading = false;    
     });
   }
 
   getGroupOcc(val,lang){
-
+    this.loading = true;
     this.protectedService.getProtected('perhilitan/dropdown/job/workgroup/'+val,lang).subscribe(
     data => {
 
       this.sharedService.errorHandling(data, (function(){
-        this.listGroupOcc = data.dropdownResourceList;     
+        this.listGroupOcc = data.dropdownResourceList;   
+        
 
       }).bind(this));
+      this.loading = false;
     },
-    error => {            
+    error => {      
+      this.loading = false;      
     });
   }
 
   getJenisMilikan(lang){
+    this.loading = true;    
     this.protectedService.getProtected('perhilitan/jenispemilikan',lang).subscribe(
     data => {
 
       this.sharedService.errorHandling(data, (function(){
-        this.listJenisMilikan = data.perhilitanJenisPemilikanResourceList;     
+        this.listJenisMilikan = data.perhilitanJenisPemilikanResourceList;   
 
       }).bind(this));
+      this.loading = false;
     },
-    error => {            
+    error => {        
+      this.loading = false;    
     });
   }
 
   getListRegComp(lang){
+    this.loading = true;
     this.protectedService.getProtected('perhilitan/dropdown/regtype',lang).subscribe(
     data => {
 
       this.sharedService.errorHandling(data, (function(){
-        this.listRegComp = data.perhilitanRegisterTypeResourceList;     
+        this.listRegComp = data.perhilitanRegisterTypeResourceList;   
 
       }).bind(this));
+      this.loading = false;
     },
-    error => {            
+    error => {     
+      this.loading = false;       
     });
   }
 
   getListBusiness(lang){
-
+    this.loading = true;
     this.protectedService.getProtected('perhilitan/business',lang).subscribe(
     data => {
 
@@ -665,8 +691,10 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
         this.listbusiness = data.perhilitanBusinessCategoryResourceList;     
 
       }).bind(this));
+      this.loading = false;
     },
-    error => {            
+    error => {      
+      this.loading = false;      
     });
   }
 
@@ -676,6 +704,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
 
       this.flag2 = true; 
       this.flag3 = true; 
+      this.loading = true;
 
       this.protectedService.getProtected('perhilitan/searchnokp/'+formValue.icpassport,lang).subscribe(
       data => {
@@ -715,8 +744,10 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
           }
 
         }).bind(this));
+        this.loading = false;
       },
       error => {
+        this.loading = false;
       });
     }
 
@@ -958,6 +989,8 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       else
         valPoskod = this.selectedPoskodComp;
     }
+
+    this.loading = true;
   
     this.protectedService.getProtected('perhilitan/poskod/'+valPoskod,this.langID).subscribe(
     data => {
@@ -1034,8 +1067,10 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
         }
 
       }).bind(this));
+      this.loading = false;
     },
-    error => {            
+    error => {     
+      this.loading = false;       
     });    
   }
 
@@ -1092,6 +1127,8 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       formValue = formValue;
     }
 
+    this.loading = true;
+
     this.protectedService.getProtected('perhilitan/activity/catbusiness/ref/'+formValue,this.langID).subscribe(
     data => {
 
@@ -1100,8 +1137,10 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
         this.checkReqValues5();
 
       }).bind(this));
+      this.loading = false;
     },
-    error => {            
+    error => {     
+      this.loading = false;       
     });
   }
 
@@ -1211,6 +1250,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
   }
 
   changeBase641(inputValue: any): void {
+    this.loading = true;
     var file:File = inputValue[0].files[0];
     var myReader:FileReader = new FileReader();
   
@@ -1220,9 +1260,11 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       this.fifthFormGroup.get('dispBase641').setValue(splitB64);
     }
     myReader.readAsDataURL(file);
+    this.loading = false;
   }
 
   changeBase642(inputValue: any): void {
+    this.loading = true;
     var file:File = inputValue[0].files[0];
     var myReader:FileReader = new FileReader();
   
@@ -1232,6 +1274,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       this.fifthFormGroup.get('dispBase642').setValue(splitB64);
     }
     myReader.readAsDataURL(file);
+    this.loading = false;
   }
 
   clickHantar(){
@@ -1362,6 +1405,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       body.cronStatus = false;
       
       console.log(JSON.stringify(body));
+      this.loading = true;
       
       this.protectedService.create(body,'perhilitan/draft/save',this.langID).subscribe(
       data => {
@@ -1369,10 +1413,10 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
           this.toastr.success(this.translate.instant('Permohonan Baru Lesen Peniaga/Taksidermi berjaya disimpan sebagai draft'), '');
           this.router.navigate(['appsmgmt']);
         }).bind(this));
-        //this.loading = false;
+        this.loading = false;
       },
       error => {
-        //this.loading = false;
+        this.loading = false;
         this.toastr.error(JSON.parse(error._body).statusDesc, '');
       });
     }
@@ -1500,7 +1544,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       body.cronStatus = false;
       
       console.log(JSON.stringify(body));
-      
+      this.loading = true;
       
       this.protectedService.update(body,'perhilitan/draft/update',this.langID).subscribe(
       data => {
@@ -1508,10 +1552,10 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
           this.toastr.success(this.translate.instant('Draft Permohonan Baru Lesen Peniaga/Taksidermi berjaya dikemaskini'), '');
           this.router.navigate(['appsmgmt']);
         }).bind(this));
-        //this.loading = false;
+        this.loading = false;
       },
       error => {
-        //this.loading = false;
+        this.loading = false;
         this.toastr.error(JSON.parse(error._body).statusDesc, '');
       });
 
@@ -1634,17 +1678,19 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
     body.isDraft = false;
     body.cronStatus = false;
     
-    console.log(JSON.stringify(body));    
+    console.log(JSON.stringify(body));
+    this.loading = true;
+
     this.protectedService.create(body,'perhilitan/apply',this.langID).subscribe(
     data => {
       this.sharedService.errorHandling(data, (function () {
         this.toastr.success(this.translate.instant('Permohonan Baru Lesen Peniaga/Taksidermi berjaya dihantar'), '');
         this.router.navigate(['appsmgmt']);
       }).bind(this));
-      //this.loading = false;
+      this.loading = false;
     },
     error => {
-      //this.loading = false;
+      this.loading = false;
       this.toastr.error(JSON.parse(error._body).statusDesc, '');
     });
     
