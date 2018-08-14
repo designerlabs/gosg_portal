@@ -193,6 +193,7 @@ export class ContentProdComponent implements OnInit, OnDestroy {
   }
 
   clickSideMenu(e, status, event){
+    this.navService.loader = true;
     this.statusID = status;
     // this.navService.getSubArticleUrl( e.categoryId, localStorage.getItem('langID'));
     // this.navService.triggerSubArticle(e.categoryCode, localStorage.getItem('langID'));
@@ -201,6 +202,7 @@ export class ContentProdComponent implements OnInit, OnDestroy {
   }
 
   clickSideMenuByAgency(e, status, event){
+    this.navService.loader = true;
     this.navService.getSubArticleUrlByAgency(localStorage.getItem('langID'));
     this.navService.triggerSubArticleAgency(localStorage.getItem('langID'));
     this.router.navigate(['/subcategory', 'agency']);
@@ -208,6 +210,7 @@ export class ContentProdComponent implements OnInit, OnDestroy {
   }
 
   clickContentFromMenu(pId, aId, status, event){
+    this.navService.loader = true;
     this.statusID = status;
     this.navService.triggerContent(aId, localStorage.getItem('langID'), this.boolCallback);
     this.navService.getContentUrl(aId, localStorage.getItem('langID'));

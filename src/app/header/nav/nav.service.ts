@@ -1,4 +1,4 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable, Inject  } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { Http, Response } from '@angular/http';
@@ -48,13 +48,13 @@ export class NavService {
     this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
 
       const myLang = translate.currentLang;
-      this.loader = true;
+      // this.loader = true;
       if (myLang == 'en') {
 
         translate.get('HOME').subscribe((res: any) => {
           this.lang = 'en';
           this.langId = 1;
-          this.loader = false;
+          // this.loader = false;
           // this.moduleName = this.router.url.split('/')[1];
           // this.topicID = parseInt(this.router.url.split('/')[2]);
           // this.navService.triggerArticle(this.moduleName, this.langId, this.topicID);
@@ -66,7 +66,7 @@ export class NavService {
         translate.get('HOME').subscribe((res: any) => {
           this.lang = 'ms';
           this.langId = 2;
-          this.loader = false;
+          // this.loader = false;
           // this.moduleName = this.router.url.split('/')[1];
           // this.topicID = parseInt(this.router.url.split('/')[2]);
           // this.subID = parseInt(this.router.url.split('/')[3]);
@@ -383,13 +383,12 @@ export class NavService {
           this.breadcrumb = this.breadcrumb.name = '';
           callback(false);
           this.loader = false;
-
         });
     }
   }
 
   triggerSubArticleOther(subID, lang, url) {
-    this.loader = true;
+    // this.loader = true;
     // alert("Trigger sub acrticle");
      if (!isNaN(subID)) {
        this.articleService.articles = [''];
@@ -410,7 +409,7 @@ export class NavService {
    }
 
    triggerSubArticleAgency(lang) {
-      this.loader = true;
+      // this.loader = true;
     // alert("Trigger sub acrticle");
        this.articleService.articles = [''];
        this.articles = [''];
@@ -433,7 +432,9 @@ export class NavService {
     // alert("Trigger sub acrticle");
 
     callback(true);
-    this.loader = true;
+
+      this.loader = true;
+
      if (!isNaN(subID)) {
        this.articleService.articles = [''];
        this.articles = [''];
@@ -496,6 +497,7 @@ export class NavService {
    }
 
    triggerArticle(moduleName, lang, topicID, callback?) {
+
     this.loader = true;
     callback(true);
 
@@ -518,7 +520,7 @@ export class NavService {
    }
 
    triggerRSS(moduleName, lang, topicID) {
-    this.loader = true;
+    // this.loader = true;
     if (!isNaN(topicID)) {
       this.articles = [''];
       this.articleService.articles = [''];
@@ -538,7 +540,7 @@ export class NavService {
 
 
    triggerArticleOthers(moduleName, lang, topicID, url) {
-    this.loader = true;
+    // this.loader = true;
     if (!isNaN(topicID)) {
       this.articles = [''];
       this.articleService.articles = [''];
@@ -559,7 +561,7 @@ export class NavService {
    triggerGalleries(lang, galleryID?, callback?) {
 
     callback(true);
-    this.loader = true;
+    // this.loader = true;
 
     //  if (!isNaN(galleryID)) {
        this.galleries = [''];
@@ -614,7 +616,7 @@ export class NavService {
   }
 
   triggerAnnouncementList(lang, id1) {
-    this.loader = true;
+    // this.loader = true;
         if (lang === 'ms') {
             lang = 2;
         }
@@ -641,7 +643,7 @@ export class NavService {
     }
 
     triggerAnnouncementDetails(moduleName, lang, id1, id2) {
-      this.loader = true;
+      // this.loader = true;
         if (lang === 'ms') {
             lang = 2;
         }
@@ -656,7 +658,7 @@ export class NavService {
             this.breadcrumb = this.breadcrumbService.getBreadcrumb();
             this.isValid = this.breadcrumbService.isValid = true;
             this.breadcrumb = this.breadcrumb.name = '';
-            this.loader = false;
+            this.loader = true;
         });
     }
 

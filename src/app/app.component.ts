@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy  } from '@angular/core';
 import * as $ from 'jquery';
 import { NavService } from './header/nav/nav.service';
 
@@ -66,7 +66,6 @@ export class AppComponent implements OnInit{
     ngOnInit() {
 
     }
-
 }
 
 

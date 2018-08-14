@@ -37,7 +37,7 @@ export class SubarticleprodComponent implements OnInit, OnDestroy {
   handleClickMe(e) {
 
   }
-  
+
   boolCallback = (result: boolean) : void => {
     this.loading = result;
   }
@@ -140,6 +140,7 @@ export class SubarticleprodComponent implements OnInit, OnDestroy {
 
 
   clickSideMenu(e, status, event) {
+    this.navService.loader = true;
     this.agencyActive = false;
     this.statusID = status;
     this.navService.getSubArticleUrl(e.categoryId, localStorage.getItem('langID'));
@@ -149,6 +150,7 @@ export class SubarticleprodComponent implements OnInit, OnDestroy {
   }
 
   clickSideMenuByAgency(e, status, event) {
+    this.navService.loader = true;
     this.agencyActive = true;
     this.navService.getSubArticleUrlByAgency(localStorage.getItem('langID'));
     this.navService.triggerSubArticleAgency(localStorage.getItem('langID'));
@@ -195,6 +197,7 @@ export class SubarticleprodComponent implements OnInit, OnDestroy {
 
 
   clickContentFromMenu(pId, aId, event) {
+    this.navService.loader = true;
     // this.navService.triggerContent(aId, localStorage.getItem('langID'));
     // this.navService.getContentUrl(aId, localStorage.getItem('langID'));
     this.router.navigate(['/content', aId]);
