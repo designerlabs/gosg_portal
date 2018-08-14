@@ -1,0 +1,196 @@
+<gosg-protected-loader *ngIf="loading"></gosg-protected-loader>
+<div class="container-fluid animated slideInDown" style="background: #a7a495;">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 style="margin-top: 10px;" class="font-size-l">{{'home.breadcrumb.family' | translate}}</h1>
+        <hr class="hr-custom2">
+        <ul class="list-inline" style="clear:both;">
+          <li>
+            <a class="font-size-s" routerLink="/">
+              {{'home.menu.home' | translate }}
+            </a>
+          </li>
+          <li>/</li>
+          <li>{{'home.breadcrumb.family' | translate}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="col-md-12">&nbsp;</div>
+  <div class="col-md-3 padding-left-0">
+    <gosg-sidenav-dashboard></gosg-sidenav-dashboard>
+  </div>
+
+  <div class="col-md-9 mat-elevation-z8">    
+    <form [formGroup]="searchForm" (ngSubmit)="searchapp(searchForm.value)" novalidate="novalidate">
+      <div class="row">
+          <div class="col-md-12"><h4>Maklumat Profil Keluarga</h4></div>
+      </div>
+
+      <div class="row">
+          <div class="col-md-4">
+            <mat-form-field class="example-full-width">
+              <mat-select formControlName="warganegara" placeholder="Taraf Kewarganegaraan">
+                  <mat-option [value]=1>Warganegara</mat-option>
+                  <mat-option [value]=2>Bukan Warganegara</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-4" *ngIf="searchForm.controls.warganegara.value == 1">
+            <mat-form-field class="example-full-width">
+                <input matInput formControlName="icno" placeholder="No. Kad Pengenalan"
+                required style="color: black" >
+                <mat-error *ngIf="searchForm.controls.icno.hasError('required')">
+                    No. IC diperlukan
+                </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-4" *ngIf="searchForm.controls.warganegara.value == 2">
+              <mat-form-field class="example-full-width">
+                  <input matInput formControlName="icno" placeholder="No. Passport"
+                  required style="color: black" >
+                  <mat-error *ngIf="searchForm.controls.icno.hasError('required')">
+                      No. Passport diperlukan
+                  </mat-error>
+              </mat-form-field>
+            </div>
+
+          <div class="col-md-4" *ngIf="searchForm.controls.warganegara.value == 2">
+            <mat-form-field class="example-full-width">
+              <mat-select formControlName="passportState" placeholder="Negara Pengeluar Passport">
+                  <mat-option [value]=1>England</mat-option>
+                  <mat-option [value]=2>Arab</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+      </div>
+      
+      <div class="row">
+          <div class="col-md-4">
+            <mat-form-field class="example-full-width">
+                <input matInput formControlName="name" placeholder="Nama Penuh"
+                required style="color: black" >
+                <mat-error *ngIf="searchForm.controls.name.hasError('required')">
+                    Nama diperlukan
+                </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-4">
+            <mat-form-field class="example-full-width">
+              <mat-select formControlName="relation" placeholder="Hubungan">
+                  <mat-option [value]=1>Bapa</mat-option>
+                  <mat-option [value]=2>Ibu</mat-option>
+                  <mat-option [value]=3>Anak</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+      </div>
+
+      <div class="row">
+          <div class="col-md-4">
+            <mat-form-field class="example-full-width">
+                <input matInput formControlName="dob" placeholder="Tarikh Lahir"
+                required style="color: black" >
+                <mat-error *ngIf="searchForm.controls.dob.hasError('required')">
+                    Tarikh Lahir diperlukan
+                </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-4">
+            <mat-form-field class="example-full-width">
+              <mat-select formControlName="sex" placeholder="Jantina">
+                  <mat-option [value]=1>Lelaki</mat-option>
+                  <mat-option [value]=2>Perempuan</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-4">
+            <mat-form-field class="example-full-width">
+                <input matInput formControlName="email" placeholder="Emel"
+                required style="color: black" >
+                <mat-error *ngIf="searchForm.controls.email.hasError('required')">
+                    Emel diperlukan
+                </mat-error>
+            </mat-form-field>
+          </div>
+      </div>
+
+      <div class="row">
+          <div class="col-md-4">
+            <mat-form-field class="example-full-width">
+              <mat-select formControlName="race" placeholder="Bangsa">
+                  <mat-option [value]=1>Melayu</mat-option>
+                  <mat-option [value]=2>Cina</mat-option>
+                  <mat-option [value]=3>India</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-4">
+            <mat-form-field class="example-full-width">
+              <mat-select formControlName="religion" placeholder="Agama">
+                  <mat-option [value]=1>Islam</mat-option>
+                  <mat-option [value]=2>Budha</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-4">
+            <mat-form-field class="example-full-width">
+                <input matInput formControlName="phone" placeholder="No. Telefon"
+                required style="color: black" >
+                <mat-error *ngIf="searchForm.controls.phone.hasError('required')">
+                    Emel diperlukan
+                </mat-error>
+            </mat-form-field>
+          </div>
+      </div>
+
+      <div class="row">
+          <div class="col-md-4">
+            <mat-form-field class="example-full-width">
+              <mat-select formControlName="profileStatus" placeholder="Status Profil">
+                  <mat-option [value]=1>Aktif</mat-option>
+                  <mat-option [value]=2>Tidak Aktif</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-4">
+            <mat-form-field class="example-full-width">
+              <mat-select formControlName="reasonStatus" placeholder="Sebab Tidak Aktif">
+                  <mat-option [value]=1>AA</mat-option>
+                  <mat-option [value]=2>BB</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+      </div>
+
+      <div class="row">
+          <div class="col-md-6">
+            <mat-form-field class="example-full-width">
+              <mat-select formControlName="addInfo" placeholder="Maklumat Tambahan (Sekiranya Ada)">
+                  <mat-option [value]=1>Aktif</mat-option>
+                  <mat-option [value]=2>Tidak Aktif</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+      </div>
+    </form>
+  
+  </div>
+</div>
+
+<app-confirm-dialog #resetModal [title]="'common.icon.warn'" [content]="'common.msg.reset'" [state]="'common.state.warn'"
+  [isReset]="'true'" (resetMethod)="resetMethod($event)">
+</app-confirm-dialog>

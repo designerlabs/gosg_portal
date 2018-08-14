@@ -119,6 +119,7 @@ export class SchoolsearchComponent implements OnInit {
     }else{
       this.langID = 1;
     }
+    window.scrollTo(0, 0);
 
     this.optSelect = new FormControl();
     this.state = new FormControl();
@@ -318,7 +319,14 @@ export class SchoolsearchComponent implements OnInit {
   goTo(lat, long, nameS, addressS, phone, city, state) {
     if (lat && long) {
 
-      this.mymap.setView([lat, long], 24);
+      // this.mymap.setZoom(20,{
+      //   "animate": true,
+      //   "pan": {
+      //     "duration": 1
+      //   }
+      // });
+      // this.mymap.panTo([lat, long], { animate: true, easeLinearity: .20, duration: 2 });
+      this.mymap.setView([lat, long], 24);      
       this.popup = L.popup()
         .setLatLng([lat, long])
         .setContent(`
@@ -455,9 +463,12 @@ export class SchoolsearchComponent implements OnInit {
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
       attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
       maxZoom: 17,
-      id: 'mapbox.streets',
+      id: 'mapbox.streets', 
       accessToken: 'pk.eyJ1IjoicmVkemEiLCJhIjoiY2pmcGZxNzRrMjYzbzMwcG83bGRxY2FtZyJ9.uMHQpYc0Pvjl4us27nHH8w'
     }).addTo(this.mymap);
+    // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    //   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    // }).addTo(this.mymap);
   }
 
   checkReqValues() {

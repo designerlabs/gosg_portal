@@ -73,7 +73,8 @@
       "unsubscribe": "Hentikan langganan",
       "gallery": "Galeri",
       "search": "Search",
-      "perhilitan": "Perhilitan"
+      "perhilitan": "Perhilitan",
+      "family": "Profil Keluarga"
     },
     "expandButton": {
       "less": "Lihat Ringkasan",
@@ -210,6 +211,7 @@
     "sidenav": {
       "dashboard": "Dashboard",
       "profile": "Profil",
+      "family": "Profil Keluarga",
       "inbox": "Peti Masuk",
       "appmgmt": "Pengurusan Aplikasi",
       "companyprofile": "Profil Syarikat"
@@ -466,6 +468,18 @@
       "of": "daripada",
       "in": "dalam",
       "app": "permohonan"
+    }
+  },
+  "family":{
+    "tableHeader":{
+      "num": "Bil.",
+      "icno": "No. IC",
+      "name": "Nama",
+      "relation" : "Hubungan",
+      "dob": "Tarikh Lahir",
+      "oku": "Status OKU",
+      "status": "Status",
+      "action": "Tindakan"
     }
   },
   "poll": {

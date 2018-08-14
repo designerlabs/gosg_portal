@@ -401,6 +401,15 @@ p.font-size-s > strong {
   color: #333;
 }
 
+.curdHeadingRight{
+  text-align: right;
+  padding-right: 0px !important;
+}
+
+.curdHeader{
+  padding-bottom:10px;
+  display: flex;
+}
 
 /* .owl-carousel .owl-item img {
   display: block;
