@@ -1,12 +1,14 @@
 import { Component, OnInit, Input } from '@angular/core';
 import * as $ from 'jquery';
+import { NavService } from './header/nav/nav.service';
 
 @Component({
     selector: 'gosg-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
+    loader: boolean;
     isSideNav = false;
     clientHeight: number;
     title = 'app';
@@ -23,7 +25,7 @@ export class AppComponent {
     bTop = '35px';
     public loading = false;
 
-    constructor() {
+    constructor(private navService: NavService) {
         this.clientHeight = window.innerHeight - 200;
     }
     getExpand(data) {
@@ -61,7 +63,7 @@ export class AppComponent {
     getTheme() {
         return localStorage.getItem('themeColor');
     }
-    OnInit() {
+    ngOnInit() {
 
     }
 

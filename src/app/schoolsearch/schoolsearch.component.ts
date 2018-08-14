@@ -119,6 +119,7 @@ export class SchoolsearchComponent implements OnInit {
     }else{
       this.langID = 1;
     }
+    window.scrollTo(0, 0);
 
     this.optSelect = new FormControl();
     this.state = new FormControl();
@@ -195,8 +196,7 @@ export class SchoolsearchComponent implements OnInit {
           }
 
           this.mymap.addLayer(this.markerGroup);
-          //this.markerGroup.addTo(this.mymap);  
-          this.loading = false;        
+          //this.markerGroup.addTo(this.mymap);      
         }
 
         else{
@@ -206,8 +206,8 @@ export class SchoolsearchComponent implements OnInit {
           }
           this.mymap.setView([4.8142568, 108.5806004], 6.2);
           this.showNoData = true;
-          this.loading = false;
         }
+        this.loading = false;
     //  }).bind(this));
     },
     error => {
@@ -256,7 +256,6 @@ export class SchoolsearchComponent implements OnInit {
 
           this.mymap.addLayer(this.markerGroup);
           //this.markerGroup.addTo(this.mymap);
-          this.loading = false;
         }
 
         else{
@@ -265,8 +264,8 @@ export class SchoolsearchComponent implements OnInit {
           }
           this.mymap.setView([4.8142568, 108.5806004], 6.2);
           this.showNoData = true;
-          this.loading = false;
         }
+        this.loading = false;
       //}).bind(this));
     },
     error => {
@@ -319,8 +318,15 @@ export class SchoolsearchComponent implements OnInit {
 
   goTo(lat, long, nameS, addressS, phone, city, state) {
     if (lat && long) {
-      this.mymap.setView([lat, long], 24);
 
+      // this.mymap.setZoom(20,{
+      //   "animate": true,
+      //   "pan": {
+      //     "duration": 1
+      //   }
+      // });
+      // this.mymap.panTo([lat, long], { animate: true, easeLinearity: .20, duration: 2 });
+      this.mymap.setView([lat, long], 24);      
       this.popup = L.popup()
         .setLatLng([lat, long])
         .setContent(`
@@ -360,6 +366,8 @@ export class SchoolsearchComponent implements OnInit {
 
   searchApp(){
 
+    this.popup.remove();
+    this.charCarian = undefined;
     this.showDetails = true;
     if(this.searchForm.controls.jenisCarian.value == 1){
       this.getDataSchool();
@@ -384,6 +392,7 @@ export class SchoolsearchComponent implements OnInit {
   }
 
   getListState(){
+    this.loading = true;
     this.sharedService.getSchoolApi('school/statelist','',this.langID).subscribe(
     data => {
 
@@ -391,8 +400,10 @@ export class SchoolsearchComponent implements OnInit {
         this.listState = data['stateList'];
 
       }).bind(this));
+      this.loading = false;
     },
     error => {
+      this.loading = false;
     });
   }
 
@@ -430,9 +441,8 @@ export class SchoolsearchComponent implements OnInit {
         this.searchForm.get('typeSchool').setValue('all');
         this.checkReqValues();
 
-        this.loading = false;
-
       }).bind(this));
+      this.loading = false;
     },
     error => {
       this.loading = false;
@@ -453,16 +463,19 @@ export class SchoolsearchComponent implements OnInit {
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
       attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
       maxZoom: 17,
-      id: 'mapbox.streets',
+      id: 'mapbox.streets', 
       accessToken: 'pk.eyJ1IjoicmVkemEiLCJhIjoiY2pmcGZxNzRrMjYzbzMwcG83bGRxY2FtZyJ9.uMHQpYc0Pvjl4us27nHH8w'
     }).addTo(this.mymap);
+    // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    //   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    // }).addTo(this.mymap);
   }
 
   checkReqValues() {
 
     let reqVal = [];
     let nullPointers:any = [];
-
+    
     if(this.searchForm.controls.jenisCarian.value == 1){
       if(this.valSchoolCat == 1){
         reqVal =  ["optSelect","state","ppd","speacialEd"];

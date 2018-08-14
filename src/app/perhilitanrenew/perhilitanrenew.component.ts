@@ -48,6 +48,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
   lang = this.lang;
   langID: any;
   private subscriptionLang: ISubscription;
+  loading = false;
 
   isLinear = true;
   firstFormGroup: FormGroup;
@@ -338,7 +339,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     this.fourthFormGroup.get('copyAddPemilik').disable();
 
     this.fifthFormGroup.get('lsnActivity').disable();
-    //this.fifthFormGroup.get('businessCat').disable();
+    this.fifthFormGroup.get('businessCat').disable();
     this.fifthFormGroup.get('file1').disable();
     this.fifthFormGroup.get('file2').disable();
     //this.fifthFormGroup.get('agreement').disable();
@@ -348,6 +349,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
   }
 
   getUserData(){
+    this.loading = true;
     if(!environment.staging){
       //this.getPerPostCodeFlag = false;
       this.protectedService.getUser().subscribe(
@@ -375,11 +377,12 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
           }else{
           }
         }).bind(this));
-
+        this.loading = false;
       },
       error => {
-          location.href = this.config.urlUAP +'uapsso/Logout';
-          //location.href = this.config.urlUAP+'portal/index';
+        this.loading = false;
+        location.href = this.config.urlUAP +'uapsso/Logout';
+        //location.href = this.config.urlUAP+'portal/index';
       });
     }
 
@@ -478,6 +481,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
 
   getDetailRenew(){
 
+    this.loading = true;
     this.protectedService.getProtected('perhilitan/draft/'+this.getUrl,this.langID).subscribe(
     data => {
       
@@ -592,9 +596,9 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
 
         this.selectedOccupation = this.dataApp.jobType.jobTypeId;
         this.flag1 = false;
-
         
       }).bind(this));
+      this.loading = false;
     },
     error => {       
       this.toastr.error('Rekod tidak dijumpai', '');    
@@ -603,6 +607,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
   }
 
   getNationality(lang){
+    this.loading = true;
     this.protectedService.getProtected('perhilitan/dropdown/nationality',lang).subscribe(
     data => {
 
@@ -610,24 +615,30 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
         this.nationality = data.perhilitanNationalityResourceList;     
 
       }).bind(this));
+      this.loading = false;
     },
-    error => {            
+    error => {       
+      this.loading = false;     
     });
   }
 
   getJIC(lang){
+    this.loading = true;
     this.protectedService.getProtected('perhilitan/dropdown/ictype/1',lang).subscribe(
     data => {
 
       this.sharedService.errorHandling(data, (function(){
         this.listjic = data.dropdownResourceList;     
       }).bind(this));
+      this.loading = false;
     },
     error => {
+      this.loading = false;
     });
   }
 
   getOccupation(lang){
+    this.loading = true;
     this.protectedService.getProtected('perhilitan/dropdown/job',lang).subscribe(
     data => {
 
@@ -635,13 +646,15 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
         this.listOccupation = data.perhilitanJobTypeResourceList;     
 
       }).bind(this));
+      this.loading = false;
     },
-    error => {            
+    error => {      
+      this.loading = false;      
     });
   }
 
   getGroupOcc(val, lang){
-
+    this.loading = true;
     this.protectedService.getProtected('perhilitan/dropdown/job/workgroup/'+val,lang).subscribe(
     data => {
 
@@ -649,12 +662,15 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
         this.listGroupOcc = data.dropdownResourceList;     
 
       }).bind(this));
+      this.loading = false;
     },
-    error => {            
+    error => {     
+      this.loading = false;       
     });
   }
 
   getJenisMilikan(lang){
+    this.loading = true;
     this.protectedService.getProtected('perhilitan/jenispemilikan',lang).subscribe(
     data => {
 
@@ -662,12 +678,15 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
         this.listJenisMilikan = data.perhilitanJenisPemilikanResourceList;     
 
       }).bind(this));
+      this.loading = false;
     },
-    error => {            
+    error => {   
+      this.loading = false;         
     });
   }
 
   getListRegComp(lang){
+    this.loading = true;
     this.protectedService.getProtected('perhilitan/dropdown/regtype',lang).subscribe(
     data => {
 
@@ -675,22 +694,26 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
         this.listRegComp = data.perhilitanRegisterTypeResourceList;     
 
       }).bind(this));
+      this.loading = false;
     },
-    error => {            
+    error => {       
+      this.loading = false;     
     });
   }
 
   getListBusiness(lang){
-
-    this.protectedService.getProtected('perhilitan/business',lang).subscribe(
+    this.loading = true;
+    this.protectedService.getProtected('perhilitan/activity',lang).subscribe(
     data => {
 
       this.sharedService.errorHandling(data, (function(){
-        this.listbusiness = data.perhilitanBusinessCategoryResourceList;     
+        this.listbusiness = data.perhilitanActivityResourceList;     
 
       }).bind(this));
+      this.loading = false;
     },
-    error => {            
+    error => {    
+      this.loading = false;        
     });
   }
 
@@ -897,6 +920,8 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
       else
         valPoskod = this.selectedPoskodComp;
     }
+
+    this.loading = true;
   
     this.protectedService.getProtected('perhilitan/poskod/'+valPoskod,this.langID).subscribe(
     data => {
@@ -976,8 +1001,10 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
         }
 
       }).bind(this));
+      this.loading = false;
     },
-    error => {            
+    error => {     
+      this.loading = false;       
     });    
   }
 
@@ -1020,8 +1047,8 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
 
   changeBuss(formValue: any){
 
-    console.log(formValue);
-    this.protectedService.getProtected('perhilitan/activity/catbusiness/ref/'+formValue,this.langID).subscribe(
+    this.loading = true;
+    this.protectedService.getProtected('perhilitan/activity/catbusiness/'+formValue,this.langID).subscribe(
     data => {
 
       this.sharedService.errorHandling(data, (function(){
@@ -1029,8 +1056,10 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
         this.checkReqValues5();
 
       }).bind(this));
+      this.loading = false;
     },
-    error => {            
+    error => {     
+      this.loading = false;       
     });
   }
 
@@ -1138,6 +1167,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
   }
 
   changeBase641(inputValue: any): void {
+    this.loading = true;
     var file:File = inputValue[0].files[0];
     var myReader:FileReader = new FileReader();
   
@@ -1147,9 +1177,11 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
       this.fifthFormGroup.get('dispBase641').setValue(splitB64);
     }
     myReader.readAsDataURL(file);
+    this.loading = false;
   }
 
   changeBase642(inputValue: any): void {
+    this.loading = true;
     var file:File = inputValue[0].files[0];
     var myReader:FileReader = new FileReader();
   
@@ -1159,6 +1191,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
       this.fifthFormGroup.get('dispBase642').setValue(splitB64);
     }
     myReader.readAsDataURL(file);
+    this.loading = false;
   }
 
   clickHantar(){
@@ -1179,6 +1212,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     else{
       val = val;
     }
+    this.loading = true;
     this.protectedService.getProtected('perhilitan/searchnolic/'+val,this.langID).subscribe(
     data => {
 
@@ -1273,8 +1307,10 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
         }
        
       }).bind(this));
+      this.loading = false;
     },
-    error => {            
+    error => {    
+      this.loading = false;        
     });
   }
 
@@ -1461,17 +1497,17 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
       body.cronStatus = false;
       
       console.log(JSON.stringify(body));
-      
+      this.loading = true;
       this.protectedService.create(body,'perhilitan/draft/save',this.langID).subscribe(
       data => {
         this.sharedService.errorHandling(data, (function () {
           this.toastr.success(this.translate.instant('Pembaharuan Lesen Peniaga/Taksidermi berjaya disimpan sebagai draft'), '');
           this.router.navigate(['appsmgmt']);
         }).bind(this));
-        //this.loading = false;
+        this.loading = false;
       },
       error => {
-        //this.loading = false;
+        this.loading = false;
         this.toastr.error(JSON.parse(error._body).statusDesc, '');
       });
 
@@ -1592,17 +1628,18 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
       body.isDraft = "True";
       body.cronStatus = false;
           
-      console.log(JSON.stringify(body));      
+      console.log(JSON.stringify(body));   
+      this.loading = true;   
       this.protectedService.create(body,'perhilitan/draft/save',this.langID).subscribe(
       data => {
         this.sharedService.errorHandling(data, (function () {
           this.toastr.success(this.translate.instant('Draf Pembaharuan Lesen Peniaga/Taksidermi berjaya dikemaskini'), '');
           this.router.navigate(['appsmgmt']);
         }).bind(this));
-        //this.loading = false;
+        this.loading = false;
       },
       error => {
-        //this.loading = false;
+        this.loading = false;
         this.toastr.error(JSON.parse(error._body).statusDesc, '');
       });
     }
@@ -1722,17 +1759,17 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     // body.cronStatus = false;
        
     console.log(JSON.stringify(body));
-    
+    this.loading = true;
     this.protectedService.create(body,'perhilitan/renew',this.langID).subscribe(
     data => {
       this.sharedService.errorHandling(data, (function () {
         this.toastr.success(this.translate.instant('Permohonan Baru Lesen Peniaga/Taksidermi berjaya dihantar'), '');
         this.router.navigate(['appsmgmt']);
       }).bind(this));
-      //this.loading = false;
+      this.loading = false;
     },
     error => {
-      //this.loading = false;
+      this.loading = false;
       this.toastr.error(JSON.parse(error._body).statusDesc, '');
     });
   }

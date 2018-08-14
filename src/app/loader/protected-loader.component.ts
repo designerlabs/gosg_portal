@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'gosg-protected-loader',
@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class ProtectedLoaderComponent implements OnInit {
 
   constructor() { }
-
+  @Input() loader:boolean;
   ngOnInit() {
   }
 

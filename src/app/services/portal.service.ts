@@ -14,18 +14,20 @@ import { ToastrService } from 'ngx-toastr';
 export class PortalService {
   lang = this.lang;
   langId = this.langId;
+  loader:boolean;
 
   constructor(private http: Http, @Inject(APP_CONFIG) private config: AppConfig,  private translate: TranslateService,
   private toastr: ToastrService,) {
 
     translate.onLangChange.subscribe((event: LangChangeEvent) => {
-
+                  this.loader = true;
                   const myLang = translate.currentLang;
 
                   if (myLang == 'en') {
                       translate.get('HOME').subscribe((res: any) => {
                           this.lang = 'en';
                           this.langId = 1;
+                          this.loader = false;
                       });
 
                   }
@@ -33,6 +35,7 @@ export class PortalService {
                       translate.get('HOME').subscribe((res: any) => {
                           this.lang = 'ms';
                           this.langId = 2;
+                          this.loader = false;
                       });
                   }
 
@@ -349,7 +352,7 @@ export class PortalService {
       .catch(this.handleError);
   }
 
-  
+
 
 
 // ONLINE SEARCH
