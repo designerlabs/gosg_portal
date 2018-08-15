@@ -34,7 +34,7 @@ export class NavRouterGuardService {
 
   guardRoute(moduleName, lang, id1, id2?) {
   // this.moduleName = this.router.url.split('/')[1];
-  return !!this.navService.triggerArticle(moduleName, lang, +id1, this.boolCallback);
+  return !!this.navService.triggerArticle(moduleName, lang, +id1);
   // if (this.moduleName !== 'announcement') {
   //   return !!this.navService.triggerArticle(moduleName, lang, +id1);
   // } else if (this.moduleName === 'announcement') {

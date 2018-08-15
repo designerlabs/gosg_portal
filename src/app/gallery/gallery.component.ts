@@ -96,14 +96,14 @@ export class GalleryComponent implements OnInit, OnDestroy {
         if(this.topnavservice.flagLang){
           this.galleryData = this.galleryService.getGallery();
           this.moduleName = this.router.url.split('/')[1];
-          this.navService.triggerGalleries(this.langId, '', this.boolCallback);
+          this.navService.triggerGalleries(this.langId, '');
 
           this.showPopup = false;
           this.isImages = false;
           this.isAudio = false;
           this.isDocument = false;
           this.isVideo = false;
-          
+
         }
 
     });
@@ -134,7 +134,7 @@ export class GalleryComponent implements OnInit, OnDestroy {
 
     this.galleryData = this.galleryService.getGallery();
     this.moduleName = this.router.url.split('/')[1];
-    this.navService.triggerGalleries(localStorage.getItem('langID'), '', this.boolCallback);
+    this.navService.triggerGalleries(localStorage.getItem('langID'), '');
     this.showPopup = false;
     this.isImages = false;
     this.isAudio = false;
@@ -150,7 +150,7 @@ export class GalleryComponent implements OnInit, OnDestroy {
     clickSideMenu(id){
 
       this.statusID = status;
-      this.navService.triggerGalleries(localStorage.getItem('langID'), id, this.boolCallback);
+      this.navService.triggerGalleries(localStorage.getItem('langID'), id);
       // this.router.navigate(['gallery']);
       event.preventDefault();
     }
@@ -205,7 +205,7 @@ export class GalleryComponent implements OnInit, OnDestroy {
         case 'videos':
           res = 'video'
           break;
-      
+
         default:
           break;
       }
