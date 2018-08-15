@@ -16,12 +16,9 @@ import { TopnavService } from '../header/topnav/topnav.service';
 })
 export class SitemapComponent implements OnInit, OnDestroy {
 
-  catData: any = [];
   lang = this.lang;
   languageId = this.languageId;
-  private subscription: ISubscription;
   private subscriptionLang: ISubscription;
-  loading: boolean = false;
 
   constructor(
     private http: Http,
@@ -46,7 +43,8 @@ export class SitemapComponent implements OnInit, OnDestroy {
           }
 
           if(this.topnavservice.flagLang){
-            this.getCategories(this.languageId);
+            this.portalservice.triggerSiteMap(this.languageId);
+            window.scrollTo(0,0);
           }
 
       });
@@ -60,24 +58,13 @@ export class SitemapComponent implements OnInit, OnDestroy {
       this.languageId = 1;
     }
 
-    this.getCategories(this.languageId);
+    this.portalservice.triggerSiteMap(this.languageId);
+    console.log(this.portalservice.loader)
     window.scrollTo(0,0);
   }
 
   ngOnDestroy() {
     this.subscriptionLang.unsubscribe();
-  }
-
-  getCategories(lang: String) {
-
-    this.loading = true;
-
-    this.portalservice.getSitemapData(lang).subscribe(data => {
-
-      this.catData = data.list;
-
-      this.loading = false;
-    });
   }
 
   scrollTop() {

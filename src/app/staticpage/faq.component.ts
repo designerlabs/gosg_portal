@@ -41,6 +41,7 @@ export class FaqComponent implements OnInit, OnDestroy{
   private subscription: ISubscription;
 
   private urlFaq: string = this.config.urlFaq;
+  loading: boolean = false;
 
   constructor(private translate: TranslateService,
       private router: Router,
@@ -103,6 +104,7 @@ export class FaqComponent implements OnInit, OnDestroy{
   }
 
   getFaq(lang) {
+    this.loading = true;
 
     return this.http.get(this.urlFaq + '?language=' + lang + '&page=1&size=99')
 
@@ -111,7 +113,7 @@ export class FaqComponent implements OnInit, OnDestroy{
       this.faqData = resSliderData
       this.faqList = this.faqData['faqList'];
       
-
+      this.loading = false;
     });
 
   }

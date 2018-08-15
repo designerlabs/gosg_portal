@@ -142,7 +142,12 @@ export class FooterComponent implements OnInit, OnDestroy {
   }
 
   getUrl(ele){
-    this.navService.loader = true;
+
+    if(ele === 'sitemap' || ele === 'statistic' || ele === 'calendar' || ele === 'subscription' || ele === 'feedback')
+      this.navService.loader = false;
+    else
+      this.navService.loader = true;
+
     let split_url = ele.split('/');
 
     if(ele.includes('/')){

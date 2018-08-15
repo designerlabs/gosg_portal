@@ -8,16 +8,18 @@ import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/retry';
 import { TranslateService, LangChangeEvent } from "@ngx-translate/core";
 import { ToastrService } from 'ngx-toastr';
+import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 
 
 @Injectable()
 export class PortalService {
   lang = this.lang;
   langId = this.langId;
-  loader:boolean;
+  loader:boolean = false;
+  catData: string[];
 
   constructor(private http: Http, @Inject(APP_CONFIG) private config: AppConfig,  private translate: TranslateService,
-  private toastr: ToastrService,) {
+  private toastr: ToastrService, private route: ActivatedRoute, private router: Router,) {
 
     translate.onLangChange.subscribe((event: LangChangeEvent) => {
                   this.loader = true;
@@ -181,6 +183,20 @@ export class PortalService {
     .map((response: Response) => response.json())
     .retry(5)
     .catch(this.handleError);
+  }
+
+  triggerSiteMap(lang) {
+
+    this.loader = true;
+    this.catData = [''];
+
+    return this.route.paramMap
+      .switchMap((params: ParamMap) =>
+        this.getSitemapData(lang))
+      .subscribe(resCatData => {
+        this.catData = resCatData;
+        this.loader = false;
+      });
   }
 
   // STATISTIC
