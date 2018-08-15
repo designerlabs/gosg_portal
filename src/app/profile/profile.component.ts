@@ -893,7 +893,8 @@ getPostcodeByCityC(e){
   }
 
   isOKUStatus(event){
-    const readUrl = `${this.config.urlAgencyDservice}jkmservice/okustatus`;
+    if(event.checked === true){
+      const readUrl = `${this.config.urlAgencyDservice}jkmservice/okustatus`;
     return this.http.post(readUrl,'')
       .subscribe(
         data => {
@@ -901,12 +902,12 @@ getPostcodeByCityC(e){
             this.isOKU = true;
             this.profileForm.get('OKUcheckbox').setValue(true);
             this.OKUNumber = data['resource'].okuRegistrationNumber;
-            this.toastr.success(this.translate.instant('profile.msg.editbtnE'), '');
+            this.toastr.success(this.translate.instant('profile.msg.OKUStatusSuccess'), '');
           }else{
             this.isOKU = false;
             this.profileForm.get('OKUcheckbox').setValue(false);
             this.OKUNumber = '';
-            this.toastr.error(this.translate.instant('profile.msg.editbtnE'), '');
+            this.toastr.error(this.translate.instant('profile.msg.OKUStatusFail'), '');
           }
         },
         err => {
@@ -916,6 +917,12 @@ getPostcodeByCityC(e){
           this.OKUNumber = '';
         }
       );
+    }else{
+      this.profileForm.get('OKUcheckbox').setValue(false);
+      this.isOKU = false;
+      this.OKUNumber = '';
+    }
+
   }
 
   isStateChanged() {
