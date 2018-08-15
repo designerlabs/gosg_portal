@@ -1,4 +1,4 @@
-<gosg-shared-loader *ngIf="loading"></gosg-shared-loader>
+<gosg-shared-loader [loader]="loading"></gosg-shared-loader>
 <div class="container-fluid animated slideInDown" style="background: #a7a495;">
     <div class="container">
          <div class="row">
@@ -201,7 +201,7 @@
         </div>
     </div><br>
 
-    <div class="row container" style="padding-bottom: 20px;">
+    <div class="row container" style="padding-bottom: 20px;" id="petaHasilCarian">
         <div class="col-md-12" id="dirmap"></div>
     </div>
 </div>

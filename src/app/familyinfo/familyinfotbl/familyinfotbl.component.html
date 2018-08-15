@@ -1,4 +1,4 @@
-<gosg-protected-loader *ngIf="loading"></gosg-protected-loader>
+<gosg-protected-loader [loader]="loading"></gosg-protected-loader>
 <div class="container-fluid animated slideInDown" style="background: #a7a495;">
   <div class="container">
     <div class="row">
@@ -28,19 +28,16 @@
     <gosg-sidenav-dashboard></gosg-sidenav-dashboard>
   </div>
   <div class="col-md-9 mat-elevation-z8">
-    <div class="moreSearchOptBtn">
-        <!-- (click)="changeShowStatus()" [ngClass]="{ 'editBtn-active': showHide, 'editBtn': !showHide  }" -->
-        <!-- <i class="fa fa-search font-size-l"></i> -->
-      <!-- <button type="button" mat-fab color="warn" class="ng-tns-c8-5 ng-trigger ng-trigger-indicatorRotate" style="transform: rotate(0deg);">&nbsp;
-      </button> -->
-    </div>
     <form [formGroup]="searchForm" (ngSubmit)="searchapp(searchForm.value)" #adSearchForm="ngForm" 
       id="adSearch-form" role="form" novalidate="novalidate">
       <br />
 
       <span class="pull-right">
-        <button type="button" mat-fab color="warn" (click)="add()" >
-        <i class="fa fa-plus" class="font-size-m" style="color: fff; z-index: 99999;"></i> +</button>
+        <!-- <button type="button" mat-fab color="warn" (click)="add()" >
+        <i class="fa fa-plus"></i></button> -->
+        <button class="btn btn-danger" (click)="add()">
+          <i class="fa fa-plus font-size-s" style="padding: 8px;"></i>
+        </button>
       </span>
 
       <mat-expansion-panel>

@@ -72,7 +72,6 @@ export class FamilyinfotblComponent implements OnInit, OnDestroy {
           const myLang = translate.currentLang;
 
           if (myLang == 'en') {
-
               translate.get('HOME').subscribe((res: any) => {
                   this.lang = 'en';
                   this.langID = 1;
@@ -80,14 +79,12 @@ export class FamilyinfotblComponent implements OnInit, OnDestroy {
           }
 
           if (myLang == 'ms') {
-
               translate.get('HOME').subscribe((res: any) => {
                   this.lang = 'ms';
                   this.langID = 2;
               });
           }
           if(this.topnavservice.flagLang){
-
           }
           this.getStatusApp(this.langID);
           this.getAgencyApp(this.langID);
@@ -183,33 +180,38 @@ export class FamilyinfotblComponent implements OnInit, OnDestroy {
     this.loading = true;
     this.protectedService.getDataApp(page, size, this.param).subscribe(
     data => {
-      this.dataApp = data.list;
-      this.dataAppPage = data;
-      this.noNextData = data.pageNumber === data.totalPages;
-      this.dateSubmission = [];
-      this.statusDesc = [];
-      this.showNoData = false;
+      this.sharedService.errorHandling(data, (function(){
+        this.dataApp = data.list;
+        this.dataAppPage = data;
+        this.noNextData = data.pageNumber === data.totalPages;
+        this.dateSubmission = [];
+        this.statusDesc = [];
+        this.showNoData = false;
 
-      if(this.dataApp.length == 0){
-        this.showNoData = true;
-      }
+        if(this.dataApp.length == 0){
+          this.showNoData = true;
+        }
 
-      for(let i=0; i<this.dataApp.length; i++){
+        for(let i=0; i<this.dataApp.length; i++){
 
-        let dateS = moment(new Date(this.dataApp[i].submissionDatetime)).format('DD-MM-YYYY hh:ss');
-        this.dateSubmission.push(dateS);
+          let dateS = moment(new Date(this.dataApp[i].submissionDatetime)).format('DD-MM-YYYY hh:ss');
+          this.dateSubmission.push(dateS);
 
-        let stat: any;
-        this.dataStatus.forEach(element => {
-          if(this.dataApp[i].status == element.statusCode){
-            stat = element.statusDescription;
-            this.statusDesc.push(stat);
-          }
+          let stat: any;
+          this.dataStatus.forEach(element => {
+            if(this.dataApp[i].status == element.statusCode){
+              stat = element.statusDescription;
+              this.statusDesc.push(stat);
+            }
 
-        });
-      }
+          });
+        }
 
+      }).bind(this));
       this.loading = false;
+    },
+    error => {      
+      this.loading = false;      
     });
   }
 

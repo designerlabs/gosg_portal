@@ -326,7 +326,8 @@ export class SchoolsearchComponent implements OnInit {
       //   }
       // });
       // this.mymap.panTo([lat, long], { animate: true, easeLinearity: .20, duration: 2 });
-      this.mymap.setView([lat, long], 24);      
+      // this.mymap.setView([lat, long], 24);    
+      this.mymap.flyTo([lat, long], 24);        
       this.popup = L.popup()
         .setLatLng([lat, long])
         .setContent(`
@@ -568,6 +569,7 @@ export class SchoolsearchComponent implements OnInit {
     }
   
     this.mymap.addLayer(this.markerGroup);
+    $('html, body').animate({scrollTop:$('#petaHasilCarian').position().top}, 'slow');
     //console.log(JSON.stringify(array));
   }
   
