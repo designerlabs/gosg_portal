@@ -82,9 +82,9 @@ export class SubarticleprodComponent implements OnInit, OnDestroy {
           this.navService.triggerSubArticleAgency(this.langId);
         }
         else if (this.moduleName == 'subcategory') {
-          this.navService.triggerSubArticle(this.subID, this.langId, this.boolCallback);
+          this.navService.triggerSubArticle(this.subID, this.langId);
         } else if (this.moduleName == 'content') {
-          this.navService.triggerContent(this.subID, this.langId, this.boolCallback);
+          this.navService.triggerContent(this.subID, this.langId);
         } else {
           this.navService.triggerArticle(this.moduleName, this.langId, this.topicID);
         }
@@ -118,7 +118,7 @@ export class SubarticleprodComponent implements OnInit, OnDestroy {
       this.navService.triggerSubArticleAgency(localStorage.getItem('langID'));
     } else {
       this.agencyActive = false;
-      this.navService.triggerSubArticle(this.subID, localStorage.getItem('langID'), this.boolCallback);
+      this.navService.triggerSubArticle(this.subID, localStorage.getItem('langID'));
     }
 
   }
@@ -144,7 +144,7 @@ export class SubarticleprodComponent implements OnInit, OnDestroy {
     this.agencyActive = false;
     this.statusID = status;
     this.navService.getSubArticleUrl(e.categoryId, localStorage.getItem('langID'));
-    this.navService.triggerSubArticle(e.categoryCode, localStorage.getItem('langID'), this.boolCallback);
+    this.navService.triggerSubArticle(e.categoryCode, localStorage.getItem('langID'));
     this.router.navigate(['/subcategory', e.categoryCode]);
     event.preventDefault();
   }
@@ -177,7 +177,7 @@ export class SubarticleprodComponent implements OnInit, OnDestroy {
     }else if(this.getModule(id1) === 'subcategory'){
       this.router.navigate(['/subcategory', this.getID(id2)]);
       this.navService.getSubArticleUrl(this.getID(id2), localStorage.getItem('langID'));
-      this.navService.triggerSubArticle(this.getID(id2), localStorage.getItem('langID'), this.boolCallback);
+      this.navService.triggerSubArticle(this.getID(id2), localStorage.getItem('langID'));
     }
     $event.preventDefault();
   }

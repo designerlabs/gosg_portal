@@ -142,7 +142,7 @@ export class FooterComponent implements OnInit, OnDestroy {
   }
 
   getUrl(ele){
-
+    this.navService.loader = true;
     let split_url = ele.split('/');
 
     if(ele.includes('/')){
@@ -152,7 +152,7 @@ export class FooterComponent implements OnInit, OnDestroy {
           splitSet = secondSet.split('/');
       this.router.navigate(['/'+firstSet, splitSet[1]]);
       if(firstSet === 'content'){
-        this.navService.triggerContent(splitSet[1], localStorage.getItem('langID'),this.boolCallback);
+        this.navService.triggerContent(splitSet[1], localStorage.getItem('langID'));
         this.navService.getContentUrl(splitSet[1], localStorage.getItem('langID'));
       }
       window.scrollTo(0, 0);

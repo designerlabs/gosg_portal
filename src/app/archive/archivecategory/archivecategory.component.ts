@@ -64,7 +64,7 @@ export class ArchivecategoryComponent implements OnInit, OnDestroy {
           }else if(this.moduleName == 'content'){
             this.navService.triggerContentOther(this.subID, this.langId,'archive');
           }else{
-            this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID, this.boolCallback);
+            this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID);
           }
         }
 

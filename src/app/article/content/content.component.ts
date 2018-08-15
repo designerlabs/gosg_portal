@@ -91,11 +91,11 @@ export class ContentComponent implements OnInit, OnDestroy {
         if(this.topnavservice.flagLang){
 
           if(this.moduleName == 'subcategory'){
-            this.navService.triggerSubArticle(this.subID, this.langId, this.boolCallback);
+            this.navService.triggerSubArticle(this.subID, this.langId);
           }else if(this.moduleName == 'content'){
-            this.navService.triggerContent(this.subID, this.langId, this.boolCallback);
+            this.navService.triggerContent(this.subID, this.langId);
           }else{
-            this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID, this.boolCallback);
+            this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID);
           }
         }
 
@@ -125,7 +125,7 @@ export class ContentComponent implements OnInit, OnDestroy {
 
     this.loading = true;
 
-    this.navService.triggerContent(this.subID, localStorage.getItem('langID'), this.boolCallback);
+    this.navService.triggerContent(this.subID, localStorage.getItem('langID'));
     this.score = new FormControl('', [Validators.required]);
     this.remarks = new FormControl('');
     this.scoreFormgrp = new FormGroup({
@@ -213,7 +213,7 @@ export class ContentComponent implements OnInit, OnDestroy {
   clickContentFromMenu(pId, aId, status, event){
     this.navService.loader = true;
     this.statusID = status;
-    this.navService.triggerContent(aId, localStorage.getItem('langID'), this.boolCallback);
+    this.navService.triggerContent(aId, localStorage.getItem('langID'));
     this.navService.getContentUrl(aId, localStorage.getItem('langID'));
     this.router.navigate( ['/content', aId]);
     event.preventDefault();

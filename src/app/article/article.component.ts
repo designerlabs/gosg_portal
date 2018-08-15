@@ -69,11 +69,11 @@ export class ArticleComponent implements OnInit, OnDestroy {
 
       if (this.topnavservice.flagLang) {
         if (this.moduleName == 'subcategory') {
-          this.navService.triggerSubArticle(this.subID, this.langId, this.boolCallback);
+          this.navService.triggerSubArticle(this.subID, this.langId);
         } else if (this.moduleName == 'content') {
-          this.navService.triggerContent(this.subID, this.langId, this.boolCallback);
+          this.navService.triggerContent(this.subID, this.langId);
         } else {
-          this.navService.triggerArticle(this.moduleName, this.langId, this.topicID, this.boolCallback);
+          this.navService.triggerArticle(this.moduleName, this.langId, this.topicID);
         }
       }
 
@@ -140,7 +140,6 @@ export class ArticleComponent implements OnInit, OnDestroy {
   }
 
   clickContentFromMenu(pId, aId, status, event) {
-    this.navService.loader = true;
     this.navService.loader = true;
     this.statusID = status;
     // this.navService.triggerContent(aId, localStorage.getItem('langID'));

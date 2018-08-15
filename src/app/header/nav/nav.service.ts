@@ -364,10 +364,8 @@ export class NavService {
      }
    }
 
-  triggerSubArticle(subID, lang, callback?) {
+  triggerSubArticle(subID, lang) {
    // alert("Trigger sub acrticle");
-
-    callback(true);
     this.loader = true;
 
     if (!isNaN(subID)) {
@@ -382,7 +380,6 @@ export class NavService {
           this.breadcrumb = this.breadcrumbService.getBreadcrumb();
           this.isValid = this.breadcrumbService.isValid = true;
           this.breadcrumb = this.breadcrumb.name = '';
-          callback(false);
           this.loader = false;
         });
     }
@@ -429,11 +426,8 @@ export class NavService {
 
    }
 
-  triggerContent(subID, lang, callback?) {
+  triggerContent(subID, lang) {
     // alert("Trigger sub acrticle");
-
-    callback(true);
-
       this.loader = true;
 
      if (!isNaN(subID)) {
@@ -448,8 +442,6 @@ export class NavService {
            this.breadcrumb = this.breadcrumbService.getBreadcrumb();
            this.isValid = this.breadcrumbService.isValid = true;
            this.breadcrumb = this.breadcrumb.name = '';
-
-           callback(false);
            this.loader = false;
 
          });
@@ -497,10 +489,10 @@ export class NavService {
      }
    }
 
-   triggerArticle(moduleName, lang, topicID, callback?) {
+   triggerArticle(moduleName, lang, topicID) {
 
     this.loader = true;
-    callback(true);
+
 
      if (!isNaN(topicID)) {
        this.articles = [''];
@@ -514,8 +506,8 @@ export class NavService {
            this.breadcrumb = this.breadcrumbService.getBreadcrumb();
            this.isValid = this.breadcrumbService.isValid = true;
            this.breadcrumb = this.breadcrumb.name = '';
-            callback(false);
-            this.loader = false;
+
+           this.loader = false;
          });
      }
    }
@@ -559,9 +551,8 @@ export class NavService {
     }
   }
 
-   triggerGalleries(lang, galleryID?, callback?) {
+   triggerGalleries(lang, galleryID?) {
 
-    callback(true);
     // this.loader = true;
 
     //  if (!isNaN(galleryID)) {
@@ -578,7 +569,6 @@ export class NavService {
            this.isValid = this.breadcrumbService.isValid = true;
            this.breadcrumb = this.breadcrumb.name = '';
            this.loader = false;
-           callback(false);
          });
     //  }
    }
