@@ -90,3 +90,8 @@ mat-table{
 input{
     color:#333;
 }
+
+.padding-bottom-20{
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}

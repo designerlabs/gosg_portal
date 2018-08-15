@@ -32,8 +32,7 @@ export class FamilyinfotblComponent implements OnInit, OnDestroy {
   appNumber: FormControl;
   agency: FormControl;
   appStatus: FormControl;
-  startData: FormControl;
-  endData: FormControl;
+  
   pageSize = 10;
   pageCount = 1;
   noPrevData = true;
@@ -42,9 +41,6 @@ export class FamilyinfotblComponent implements OnInit, OnDestroy {
   collapse:boolean = true;
   barClass: string = "container-fluid";
   param = "";
-  startDate:any;
-  dateSubmission = [];
-  statusDesc = [];
   showNoData = false;
   loading = false;
 
@@ -108,14 +104,10 @@ export class FamilyinfotblComponent implements OnInit, OnDestroy {
     this.appNumber = new FormControl(),
     this.agency = new FormControl(),
     this.appStatus = new FormControl(),
-    this.startData = new FormControl(),
-    this.endData = new FormControl(),
     this.searchForm = new FormGroup({
       appNumber : this.appNumber,
       agency :  this.agency,
-      appStatus : this.appStatus,
-      startData : this.startData,
-      endData : this.endData
+      appStatus : this.appStatus
     })
 
     this.getStatusApp(this.langID);
@@ -184,27 +176,10 @@ export class FamilyinfotblComponent implements OnInit, OnDestroy {
         this.dataApp = data.list;
         this.dataAppPage = data;
         this.noNextData = data.pageNumber === data.totalPages;
-        this.dateSubmission = [];
-        this.statusDesc = [];
         this.showNoData = false;
 
         if(this.dataApp.length == 0){
           this.showNoData = true;
-        }
-
-        for(let i=0; i<this.dataApp.length; i++){
-
-          let dateS = moment(new Date(this.dataApp[i].submissionDatetime)).format('DD-MM-YYYY hh:ss');
-          this.dateSubmission.push(dateS);
-
-          let stat: any;
-          this.dataStatus.forEach(element => {
-            if(this.dataApp[i].status == element.statusCode){
-              stat = element.statusDescription;
-              this.statusDesc.push(stat);
-            }
-
-          });
         }
 
       }).bind(this));
@@ -215,32 +190,10 @@ export class FamilyinfotblComponent implements OnInit, OnDestroy {
     });
   }
 
-  viewData(agency, id){
-
-    let test = "papar-89";
-    if(agency == "PAP-07-09-00"){ //perhilitan
-      let statusId =  id.split('-')[1];
-      let statusText =  id.split('-')[0];
-      
-      if(statusText == "Apply"){
-        
-        this.router.navigate(['perhilitan/'+statusId]);
-      }
-
-      else{
-        this.router.navigate(['perhilitan_renew/'+statusId]);
-      }
-    }
-  }
-
   resetSearch(){
     this.appNumber.reset();
     this.agency.reset();
     this.appStatus.reset();
-    this.endData = null;
-    this.startData = null;
-    this.searchForm.get('endData').setValue(null);
-    this.searchForm.get('startData').setValue(null);
     this.param = "";
   }
 
@@ -251,11 +204,6 @@ export class FamilyinfotblComponent implements OnInit, OnDestroy {
 
   searchapp(formValues: any){
 
-    let sDate = new Date(formValues.startData);
-    let eDate = new Date(formValues.endData);
-
-    let startD = moment(sDate).format('YYYY-MM-DD');
-    let endD = moment(eDate).format('YYYY-MM-DD');
     let strVar = "";
 
     if(formValues.appNumber != null){
@@ -269,17 +217,16 @@ export class FamilyinfotblComponent implements OnInit, OnDestroy {
     if(formValues.appStatus != null){
       strVar += '&status='+formValues.appStatus;
     }
-
-    if(formValues.startData != null){
-      strVar += '&start='+startD;
-    }
-
-    if(formValues.endData != null){
-      strVar += '&end='+endD;
-    }
-
     this.param = strVar;
     this.getDataAppList(this.pageCount,this.pageSize);
+
+  }
+
+  print(){
+
+  }
+
+  view(){
 
   }
 
