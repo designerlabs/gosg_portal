@@ -28,6 +28,7 @@ export class FamilyinfotblComponent implements OnInit, OnDestroy {
   dataAgency: any;
   dataStatus: any;
   showHide: boolean = false;
+  
   searchForm: FormGroup;
   appNumber: FormControl;
   agency: FormControl;
