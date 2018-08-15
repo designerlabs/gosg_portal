@@ -893,22 +893,22 @@ getPostcodeByCityC(e){
   }
 
   isOKUStatus(event){
-    let self = event;
     const readUrl = `${this.config.urlAgencyDservice}jkmservice/okustatus`;
     return this.http.post(readUrl,'')
       .subscribe(
         data => {
           if(data['resource'].isOku){
-            this.itemSelected = true;
-            this.OKUCheckBox = true;
+            this.profileForm.get('OKUcheckbox').setValue(true);
+            this.OKUNumber = data['resource'].okuRegistrationNumber;
           }else{
-            this.itemSelected = false;
-            this.OKUCheckBox = false;
+            this.profileForm.get('OKUcheckbox').setValue(false);
+            this.OKUNumber = '';
           }
         },
         err => {
           console.log("Error occured");
-          this.OKUCheckBox = false;
+          this.profileForm.get('OKUcheckbox').setValue(false);
+          this.OKUNumber = '';
         }
       );
   }
