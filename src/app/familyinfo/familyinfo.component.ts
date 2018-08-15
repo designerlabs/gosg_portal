@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewEncapsulation, ChangeDetectorRef, Inject, Renderer, OnDestroy } from '@angular/core';
 import { ISubscription } from "rxjs/Subscription";
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
+import { FormControl, FormGroup, Validators, FormBuilder  } from '@angular/forms';
 import { SharedService } from '../common/shared.service';
 import { ToastrService } from 'ngx-toastr';
 import { DialogsService } from '../dialogs/dialogs.service';
 import { ProtectedService } from '../services/protected.service';
-import { FormControl, FormGroup } from '@angular/forms';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 import { PortalService } from '../services/portal.service';
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
@@ -13,6 +13,7 @@ import { Http } from '@angular/http';
 import * as moment from 'moment';
 import { TopnavService } from '../header/topnav/topnav.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { ValidateService } from '../common/validate.service';
 
 @Component({
   selector: 'gosg-familyinfo',
@@ -40,6 +41,8 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
   reasonStatus: FormControl;
   addInfo: FormControl;
   
+  public maskIC: any;
+  public maskPhone: any;
   showNoData = false;
   loading = false;
 
@@ -58,6 +61,7 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
     private router: Router,
     private _renderer: Renderer,
     private topnavservice: TopnavService,
+    private validateService:ValidateService,
     @Inject(APP_CONFIG) private config: AppConfig) {
 
       this.lang = translate.currentLang;
@@ -96,6 +100,9 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
       this.langID = 1;
     }
 
+    this.maskIC = this.validateService.getMask().icno;
+    this.maskPhone = this.validateService.getMask().telephone;
+
     this.warganegara = new FormControl();
     this.icno = new FormControl();
     this.passportState = new FormControl();
@@ -103,7 +110,7 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
     this.relation = new FormControl();
     this.dob = new FormControl();
     this.sex = new FormControl();
-    this.email = new FormControl();
+    this.email = new FormControl('', [Validators.required, Validators.pattern(this.validateService.getPattern().email)]);
     this.race = new FormControl();
     this.religion = new FormControl();
     this.phone = new FormControl();
@@ -131,6 +138,18 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
 
     this.searchForm.get('warganegara').setValue(1);
     
+  }
+
+  validateCtrlChk(ctrl: FormControl) {
+    return this.validateService.validateCtrl(ctrl);
+  }
+
+  print(){
+    console.log("PRINT: ");
+  }
+
+  submit(){
+    console.log("SUBMIT: ");
   }
     
 }

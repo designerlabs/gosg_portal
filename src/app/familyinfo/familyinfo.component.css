@@ -90,3 +90,22 @@ mat-table{
 input{
     color:#333;
 }
+
+.example-full-width{
+    width: 100%;
+}
+
+.displayDesc{
+    color: #333; 
+    font-weight: bold;
+}
+
+.displayJustify{
+    color: black; 
+    text-align: justify
+}
+
+.padding-bottom-20{
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
