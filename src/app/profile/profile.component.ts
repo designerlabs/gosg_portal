@@ -54,6 +54,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   maskForeigner: any;
   maskPostcode: any;
   itemSelected: boolean = false;
+  OKUCheckBox: boolean = false;
   getPerPostCodeFlag = false;
   public loading = false;
   private subscriptionLang: ISubscription;
@@ -898,12 +899,15 @@ getPostcodeByCityC(e){
         data => {
           if(data['resource'].isOku){
             this.itemSelected = true;
+            this.OKUCheckBox = true;
           }else{
             this.itemSelected = false;
+            this.OKUCheckBox = false;
           }
         },
         err => {
           console.log("Error occured");
+          this.OKUCheckBox = false;
         }
       );
   }
