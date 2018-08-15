@@ -898,16 +898,21 @@ getPostcodeByCityC(e){
       .subscribe(
         data => {
           if(data['resource'].isOku){
+            this.isOKU = true;
             this.profileForm.get('OKUcheckbox').setValue(true);
             this.OKUNumber = data['resource'].okuRegistrationNumber;
+            this.toastr.success(this.translate.instant('profile.msg.editbtnE'), '');
           }else{
+            this.isOKU = false;
             this.profileForm.get('OKUcheckbox').setValue(false);
             this.OKUNumber = '';
+            this.toastr.error(this.translate.instant('profile.msg.editbtnE'), '');
           }
         },
         err => {
           console.log("Error occured");
           this.profileForm.get('OKUcheckbox').setValue(false);
+          this.isOKU = false;
           this.OKUNumber = '';
         }
       );

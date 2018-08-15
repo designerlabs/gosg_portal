@@ -143,7 +143,9 @@
       "updateSuccess": "Profil telah berjaya di kemaskini.",
       "updateFail": "Kemaskini gagal.",
       "editbtnE" : "Kemaskini diaktifkan.",
-      "editbtnD" : "Kemaskini tidak aktif."
+      "editbtnD" : "Kemaskini tidak aktif.",
+      "OKUStatusSuccess":"OKU has been found!",
+      "OKUStatusFail":"OKU has been not found!"
     },
     "label":{
       "name":"Nama",
