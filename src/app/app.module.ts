@@ -83,6 +83,7 @@ imports: [
     LifeeventComponent,
     DigitalservicesComponent,
     HomeComponent,
+    FeedbackComponent,
     DigitalServiceDialog,
     ContentComponent,
     LeftmenuComponent,

@@ -311,6 +311,7 @@ export class NavService {
         (err: Response, caught: Observable<any[]>) => {
           if (err !== undefined) {
             this.router.navigate(['/404']);
+            this.loader = false;
             return Observable.throw('The Web server (running the Web site) is currently unable to handle the HTTP request due to a temporary overloading or maintenance of the server.');
           }
           return Observable.throw(caught); // <-----
@@ -363,10 +364,8 @@ export class NavService {
      }
    }
 
-  triggerSubArticle(subID, lang, callback?) {
+  triggerSubArticle(subID, lang) {
    // alert("Trigger sub acrticle");
-
-    callback(true);
     this.loader = true;
 
     if (!isNaN(subID)) {
@@ -381,14 +380,13 @@ export class NavService {
           this.breadcrumb = this.breadcrumbService.getBreadcrumb();
           this.isValid = this.breadcrumbService.isValid = true;
           this.breadcrumb = this.breadcrumb.name = '';
-          callback(false);
           this.loader = false;
         });
     }
   }
 
   triggerSubArticleOther(subID, lang, url) {
-    // this.loader = true;
+    this.loader = true;
     // alert("Trigger sub acrticle");
      if (!isNaN(subID)) {
        this.articleService.articles = [''];
@@ -409,7 +407,7 @@ export class NavService {
    }
 
    triggerSubArticleAgency(lang) {
-      // this.loader = true;
+      this.loader = true;
     // alert("Trigger sub acrticle");
        this.articleService.articles = [''];
        this.articles = [''];
@@ -428,11 +426,8 @@ export class NavService {
 
    }
 
-  triggerContent(subID, lang, callback?) {
+  triggerContent(subID, lang) {
     // alert("Trigger sub acrticle");
-
-    callback(true);
-
       this.loader = true;
 
      if (!isNaN(subID)) {
@@ -447,8 +442,6 @@ export class NavService {
            this.breadcrumb = this.breadcrumbService.getBreadcrumb();
            this.isValid = this.breadcrumbService.isValid = true;
            this.breadcrumb = this.breadcrumb.name = '';
-
-           callback(false);
            this.loader = false;
 
          });
@@ -496,10 +489,10 @@ export class NavService {
      }
    }
 
-   triggerArticle(moduleName, lang, topicID, callback?) {
+   triggerArticle(moduleName, lang, topicID) {
 
     this.loader = true;
-    callback(true);
+
 
      if (!isNaN(topicID)) {
        this.articles = [''];
@@ -513,8 +506,8 @@ export class NavService {
            this.breadcrumb = this.breadcrumbService.getBreadcrumb();
            this.isValid = this.breadcrumbService.isValid = true;
            this.breadcrumb = this.breadcrumb.name = '';
-            callback(false);
-            this.loader = false;
+
+           this.loader = false;
          });
      }
    }
@@ -540,7 +533,7 @@ export class NavService {
 
 
    triggerArticleOthers(moduleName, lang, topicID, url) {
-    // this.loader = true;
+    this.loader = true;
     if (!isNaN(topicID)) {
       this.articles = [''];
       this.articleService.articles = [''];
@@ -558,9 +551,8 @@ export class NavService {
     }
   }
 
-   triggerGalleries(lang, galleryID?, callback?) {
+   triggerGalleries(lang, galleryID?) {
 
-    callback(true);
     // this.loader = true;
 
     //  if (!isNaN(galleryID)) {
@@ -577,7 +569,6 @@ export class NavService {
            this.isValid = this.breadcrumbService.isValid = true;
            this.breadcrumb = this.breadcrumb.name = '';
            this.loader = false;
-           callback(false);
          });
     //  }
    }

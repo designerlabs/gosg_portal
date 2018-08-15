@@ -35,6 +35,7 @@ export class ArchivecategoryComponent implements OnInit, OnDestroy {
 
   articleData: any;
   @Output() langChange = new EventEmitter();
+  loading: boolean;
   constructor(public articleService: ArticleService, private topnavservice: TopnavService, private route: ActivatedRoute, private navService: NavService, private translate: TranslateService, private router: Router, private breadcrumbService: BreadcrumbService, @Inject(APP_CONFIG) private config: AppConfig) {
     this.lang = translate.currentLang;
     this.langId = 1;
@@ -71,6 +72,9 @@ export class ArchivecategoryComponent implements OnInit, OnDestroy {
 
   }
 
+  boolCallback = (result: boolean) : void => {
+    this.loading = result;
+  }
 
   ngOnDestroy() {
     this.subscriptionLang.unsubscribe();
@@ -95,6 +99,7 @@ export class ArchivecategoryComponent implements OnInit, OnDestroy {
     }
 
     clickSideMenu(e, status, url){
+      this.navService.loader = true;
       this.statusID = status;
       this.navService.getSubArticleUrlOthers(e.categoryCode, localStorage.getItem('langID'), url);
       this.navService.triggerSubArticleOther(e.categoryCode, localStorage.getItem('langID'), url);
@@ -103,6 +108,7 @@ export class ArchivecategoryComponent implements OnInit, OnDestroy {
     }
 
     clickSideMenuOthers(e, status, url){
+      this.navService.loader = true;
       this.statusID = status;
       this.navService.getSubArticleUrlOthers(e.categoryCode, localStorage.getItem('langID'), url);
       this.navService.triggerSubArticleOther(e.categoryCode, localStorage.getItem('langID'), url);
@@ -112,6 +118,7 @@ export class ArchivecategoryComponent implements OnInit, OnDestroy {
 
 
     clickSideMenuSubCategory(e, status, url){
+      this.navService.loader = true;
       this.statusID = status;
       this.navService.getSubArticleUrlOthers(e, localStorage.getItem('langID'), url);
       this.navService.triggerSubArticleOther(e, localStorage.getItem('langID'), url);
@@ -121,6 +128,7 @@ export class ArchivecategoryComponent implements OnInit, OnDestroy {
 
 
     clickContentFromMenu(pId, aId, status){
+      this.navService.loader = true;
 
       this.statusID = status;
       this.navService.triggerContentOther(aId, localStorage.getItem('langID'), status);

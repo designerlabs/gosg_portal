@@ -11,6 +11,7 @@ export class NavRouterActivator implements CanActivate {
       lang = 'en';
       langId = 1;
       eventExists;
+    loading: boolean = true;
     // tslint:disable-next-line:max-line-length
     constructor(private navService: NavService, private articleService:ArticleService, private router: Router, private translate: TranslateService, private navGuardService: NavRouterGuardService){
         translate.onLangChange.subscribe((event: LangChangeEvent) => {
@@ -48,6 +49,10 @@ export class NavRouterActivator implements CanActivate {
       }else{
         return 1;
       }
+    }
+
+    boolCallback = (result: boolean) : void => {
+      this.loading = result;
     }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {

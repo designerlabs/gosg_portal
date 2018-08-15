@@ -71,11 +71,11 @@ export class SitemapComponent implements OnInit, OnDestroy {
   getCategories(lang: String) {
 
     this.loading = true;
-    
+
     this.portalservice.getSitemapData(lang).subscribe(data => {
 
       this.catData = data.list;
-      
+
       this.loading = false;
     });
   }

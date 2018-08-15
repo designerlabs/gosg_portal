@@ -29,6 +29,7 @@ export class ArchivesubcategoryComponent implements OnInit, OnDestroy{
   subID: number;
   step = 0;
   articles: any[];
+  public loading = false;
   moduleName: string;
   articleData: any;
   @Output() langChange = new EventEmitter();
@@ -100,6 +101,7 @@ export class ArchivesubcategoryComponent implements OnInit, OnDestroy{
 
 
     clickSideMenu(e, status){
+      this.navService.loader = true;
       this.statusID = status;
       this.navService.getSubArticleUrlOthers(e.catgoryId, localStorage.getItem('langID'), 'archive');
       this.navService.triggerSubArticleOther(e.categoryCode, localStorage.getItem('langID'), 'archive');
@@ -109,6 +111,7 @@ export class ArchivesubcategoryComponent implements OnInit, OnDestroy{
 
 
     clickSideMenuSubCategory(e, status, url){
+      this.navService.loader = true;
       this.statusID = status;
       this.navService.getSubArticleUrlOthers(e, localStorage.getItem('langID'), url);
       this.navService.triggerSubArticleOther(e, localStorage.getItem('langID'), url);
@@ -118,6 +121,7 @@ export class ArchivesubcategoryComponent implements OnInit, OnDestroy{
 
 
     clickContentFromMenu(pId, aId, url){
+      this.navService.loader = true;
       this.navService.triggerContentOther(aId, localStorage.getItem('langID'), url);
       this.navService.getContentUrlOther(aId, localStorage.getItem('langID'),  url);
       this.router.navigate( ['/archive/content', aId]);

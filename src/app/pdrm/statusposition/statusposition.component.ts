@@ -44,6 +44,7 @@ export class StatuspositionComponent implements OnInit, OnDestroy {
   private subscription: ISubscription;
 
   private urlFaq: string = this.config.urlFaq;
+  loading: boolean = false;
 
   constructor(
     private protectedService: ProtectedService,
@@ -109,6 +110,8 @@ export class StatuspositionComponent implements OnInit, OnDestroy {
 
   getUserData(){
     
+    this.loading = true;
+    
     this.searchForm.get('ic').disable();
 
     if(!environment.staging){
@@ -125,15 +128,18 @@ export class StatuspositionComponent implements OnInit, OnDestroy {
           }else{
           }
         }).bind(this));
-
+        this.loading = false;
+        
       },
       error => {
-          location.href = this.config.urlUAP +'uapsso/Logout';
+        location.href = this.config.urlUAP +'uapsso/Logout';
+        this.loading = false;
           //location.href = this.config.urlUAP+'portal/index';
       });
       
     } else{ //need to be deleted Noraini for local only      
 
+      this.loading = false;
       let data = {
         "user": {
           "userId": 1411,

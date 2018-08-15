@@ -53,6 +53,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   maskDateFormat: any;
   maskForeigner: any;
   maskPostcode: any;
+  itemSelected: boolean = false;
+  OKUCheckBox: boolean = false;
   getPerPostCodeFlag = false;
   public loading = false;
   private subscriptionLang: ISubscription;
@@ -891,14 +893,22 @@ getPostcodeByCityC(e){
   }
 
   isOKUStatus(event){
-    const readUrl = `${this.config.urlProtected}jkmservice/okustatus`;
+    let self = event;
+    const readUrl = `${this.config.urlAgencyDservice}jkmservice/okustatus`;
     return this.http.post(readUrl,'')
       .subscribe(
-        res => {
-          debugger;
+        data => {
+          if(data['resource'].isOku){
+            this.itemSelected = true;
+            this.OKUCheckBox = true;
+          }else{
+            this.itemSelected = false;
+            this.OKUCheckBox = false;
+          }
         },
         err => {
           console.log("Error occured");
+          this.OKUCheckBox = false;
         }
       );
   }

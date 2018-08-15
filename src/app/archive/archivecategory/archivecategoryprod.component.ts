@@ -95,6 +95,7 @@ export class ArchivecategoryProdComponent implements OnInit, OnDestroy {
     }
 
     clickSideMenu(e, status, url){
+      this.navService.loader = true;
       this.statusID = status;
       this.navService.getSubArticleUrlOthers(e.categoryCode, localStorage.getItem('langID'), url);
       this.navService.triggerSubArticleOther(e.categoryCode, localStorage.getItem('langID'), url);
@@ -103,6 +104,7 @@ export class ArchivecategoryProdComponent implements OnInit, OnDestroy {
     }
 
     clickSideMenuOthers(e, status, url){
+      this.navService.loader = true;
       this.statusID = status;
       this.navService.getSubArticleUrlOthers(e.categoryCode, localStorage.getItem('langID'), url);
       this.navService.triggerSubArticleOther(e.categoryCode, localStorage.getItem('langID'), url);
@@ -112,6 +114,7 @@ export class ArchivecategoryProdComponent implements OnInit, OnDestroy {
 
 
     clickSideMenuSubCategory(e, status, url){
+      this.navService.loader = true;
       this.statusID = status;
       this.navService.getSubArticleUrlOthers(e, localStorage.getItem('langID'), url);
       this.navService.triggerSubArticleOther(e, localStorage.getItem('langID'), url);
@@ -121,7 +124,7 @@ export class ArchivecategoryProdComponent implements OnInit, OnDestroy {
 
 
     clickContentFromMenu(pId, aId, status){
-
+      this.navService.loader = true;
       this.statusID = status;
       this.navService.triggerContentOther(aId, localStorage.getItem('langID'), status);
       this.navService.getContentUrlOther(aId, localStorage.getItem('langID'), status);

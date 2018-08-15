@@ -1,3 +1,4 @@
+<gosg-protected-loader [loader]="loading"></gosg-protected-loader>
 <div class="container-fluid animated slideInDown" style="background: #a7a495;">
   <div class="container">
     <div class="row">
@@ -21,7 +22,7 @@
 </div>
 
 <div class="container">
-  
+
   <div class="col-md-12">&nbsp;</div>
   <div class="col-md-3 padding-left-0">
       <gosg-sidenav-dashboard></gosg-sidenav-dashboard>
@@ -96,7 +97,7 @@
                       </div>
 
                       <div class="form-group col-md-4">
-                        <label class="font-size-m" for="email">{{'profile.label.oku' | translate}} <mat-checkbox formControlName="OKUcheckbox" (change)="isOKUStatus($event)"></mat-checkbox></label>
+                        <label class="font-size-m" for="email">{{'profile.label.oku' | translate}} <mat-checkbox formControlName="OKUcheckbox" #OKUCheckBox (change)="isOKUStatus($event)"></mat-checkbox></label>
                         <div>
                           <div class="font-size-m boldText" for="email">{{ OKUNumber }}</div>
                         </div>

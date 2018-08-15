@@ -119,7 +119,7 @@ export class LeftmenuComponent {
     }else if(this.paramURL == 'subcategory'){
 
       this.navService.getSubArticleUrl(e.categoryId, localStorage.getItem('langID'));
-      this.navService.triggerSubArticle(e.categoryCode, localStorage.getItem('langID'), this.boolCallback);
+      this.navService.triggerSubArticle(e.categoryCode, localStorage.getItem('langID'));
       this.router.navigate(['/subcategory', e.categoryCode]);
     }else if(this.paramURL_Next == 'archive/subcategory'){
 
@@ -156,7 +156,7 @@ export class LeftmenuComponent {
       this.router.navigate(['/archive/content', aId]);
       // this.content.getRateReset();
     }else{
-      this.navService.triggerContent(aId, localStorage.getItem('langID'), this.boolCallback);
+      this.navService.triggerContent(aId, localStorage.getItem('langID'));
       this.navService.getContentUrl(aId, localStorage.getItem('langID'));
 
       this.router.navigate(['/content',  aId]);
