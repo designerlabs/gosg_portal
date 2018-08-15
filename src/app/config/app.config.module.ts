@@ -138,7 +138,7 @@ export const APP_DI_CONFIG: AppConfig = {
     urlCalendar: commonURL + './calendar',
     urlEvent: './app/apidata/event',
     urlRegister: registrationUrl+'register',
-    urlRating: registrationUrl+'content/rating/post',
+    urlRating: commonURL+'content/rating/post',
     urlFeedbackType: commonURL+'feedback/type/lang/',
     urlFeedbackSubject: commonURL+'feedback/subject/lang/',
     urlFeedback: commonURL+'feedback',
