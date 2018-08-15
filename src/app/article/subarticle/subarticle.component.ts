@@ -113,7 +113,7 @@ export class SubarticleComponent implements OnInit, OnDestroy {
     if (location.pathname.indexOf('agency') !== -1) {
       this.agencyActive = true;
       this.navService.triggerSubArticleAgency(localStorage.getItem('langID'));
-    } else {
+    } else {``
       this.agencyActive = false;
       this.navService.triggerSubArticle(this.subID, localStorage.getItem('langID'), this.boolCallback);
     }

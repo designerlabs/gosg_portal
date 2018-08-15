@@ -140,17 +140,17 @@ export class PollComponent implements OnInit {
                   this.pollDataQuestion = resData.questionTitle;
                   this.pollDataQuestionID = resData.questionId;
                   this.pollReference = resData.pollReference;
+
+                  this.toastr.success(
+                      `<div><strong>${this.translate.instant('poll.respon')} :</strong> ${this.pollComment}</div>
+                      <div><strong>${this.translate.instant('poll.answer')} :</strong> ${this.pollAnswer.answer}</div>`,'',{closeButton:true, timeOut:4000, progressBar:true, enableHtml:true}
+                  )
                   
                 }).bind(this));
             }, Error => {
                 this.toastr.error(this.translate.instant('common.err.servicedown'), '');
             }
         );
-
-        this.toastr.success(
-            `<div><strong>${this.translate.instant('poll.respon')} :</strong> ${this.pollComment}</div>
-            <div><strong>${this.translate.instant('poll.answer')} :</strong> ${this.pollAnswer.answer}</div>`,'',{closeButton:true, timeOut:4000, progressBar:true, enableHtml:true}
-        )
 
       //  this.toastr.success('Recommendation is : ' + this.pollComment + ', Answer is ' + this.pollAnswer.answer);
         this.showResult = true;

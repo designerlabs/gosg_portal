@@ -49,6 +49,7 @@ export class PolicereportComponent implements OnInit, OnDestroy {
   private subscription: ISubscription;
 
   private urlFaq: string = this.config.urlFaq;
+  loading: boolean = false;
 
   constructor(
     private translate: TranslateService,
@@ -138,6 +139,7 @@ export class PolicereportComponent implements OnInit, OnDestroy {
     let rn = reportNo + "/" + y;
     let arrObj = [rn];
 
+    this.loading = true;
     this.protectedService.getPdrm('pdrm/checkPoliceReport',arrObj).subscribe(
     data => {
       this.sharedService.errorHandling(data, (function(){
@@ -164,10 +166,12 @@ export class PolicereportComponent implements OnInit, OnDestroy {
         }
      
       }).bind(this));
-
+      this.loading = false;
+      
     },
     error => {
       this.toastr.error(JSON.parse(error._body).statusDesc, '');
+      this.loading = false;
     });
 
     
@@ -237,13 +241,13 @@ export class PolicereportComponent implements OnInit, OnDestroy {
     
     this.searchForm.get('ic').disable();
 
+    this.loading = true;
     if(!environment.staging){
       //this.getPerPostCodeFlag = false;
       this.protectedService.getUser().subscribe(
       data => {
         this.sharedService.errorHandling(data, (function(){
 
-          console.log(data);
           if(data.user){
             
             this.searchForm.get('ic').setValue(data.user.identificationNo);
@@ -251,16 +255,19 @@ export class PolicereportComponent implements OnInit, OnDestroy {
           }else{
           }
         }).bind(this));
-
+        this.loading = false;
+        
       },
       error => {
-          location.href = this.config.urlUAP +'uapsso/Logout';
-          //location.href = this.config.urlUAP+'portal/index';
+        location.href = this.config.urlUAP +'uapsso/Logout';
+        this.loading = false;
+        //location.href = this.config.urlUAP+'portal/index';
       });
     }
-
+    
     else{ //need to be deleted Noraini for local only      
-
+      this.loading = false;
+      
       let data = {
         "user": {
           "userId": 116,

@@ -144,6 +144,7 @@ export class SummontrafficComponent implements OnInit {
       arrObj.push(icno);
       arrObj.push(plateNo);
     }
+    this.loading = true;
 
     if (!environment.staging) {
 
@@ -162,10 +163,12 @@ export class SummontrafficComponent implements OnInit {
             }
 
           }).bind(this));
-
+          this.loading = false;
+          
         },
         error => {
           this.toastr.error(JSON.parse(error._body).statusDesc, '');
+          this.loading = false;
         });
 
     } else {
@@ -443,17 +446,17 @@ export class SummontrafficComponent implements OnInit {
 
               this.searchForm.get('ic').setValue(data.user.identificationNo);
 
-              this.loading = false;
-
+              
             } else {
-
-              this.loading = false;
+              
             }
           }).bind(this));
-
+          this.loading = false;
+          
         },
         error => {
           location.href = this.config.urlUAP + 'uapsso/Logout';
+          this.loading = false;
           //location.href = this.config.urlUAP+'portal/index';
         });
 
