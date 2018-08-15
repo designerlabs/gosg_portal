@@ -256,30 +256,37 @@ submitForm(formValues:any){
     body.feedbackEmail = this.emaiL;
     datasend =JSON.stringify(body); 
 
+    this.loading = true;
     this.protectedService.feedback(datasend).subscribe(
       data => {
 
         this.sharedService.errorHandling(data, (function(){         
           this.resetForm();        
           this.toastr.success(this.translate.instant('feedback.msgsubmit'), '');     
-        }).bind(this));  
-      },
-      error => {
-        this.toastr.error(JSON.parse(error._body).statusDesc, ''); 
-                  
+        }).bind(this)); 
+        
+      this.loading = false; 
+    },
+    error => {
+      this.toastr.error(JSON.parse(error._body).statusDesc, ''); 
+      this.loading = false; 
+      
       });
   }
   else{
+    this.loading = true;
     this.protectedService.feedback(datasend).subscribe(
       data => {
 
         this.sharedService.errorHandling(data, (function(){
           this.resetForm();        
           this.toastr.success(this.translate.instant('feedback.msgsubmit'), '');            
-        }).bind(this));  
+        }).bind(this)); 
+        this.loading = false; 
       },
       error => {
         this.toastr.error(JSON.parse(error._body).statusDesc, ''); 
+        this.loading = false; 
       });
   }
 }

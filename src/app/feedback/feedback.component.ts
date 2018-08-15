@@ -237,6 +237,7 @@ export class FeedbackComponent implements OnInit, OnDestroy {
         datasend =JSON.stringify(body); 
 
         
+      this.loading = true;
       
         this.portalService.feedback(datasend).subscribe(
           data => {
@@ -245,15 +246,18 @@ export class FeedbackComponent implements OnInit, OnDestroy {
               this.resetForm();        
               this.toastr.success(this.translate.instant('feedback.msgsubmit'), '');     
             }).bind(this));  
+            this.loading = false;
           },
           error => {
             this.toastr.error(JSON.parse(error._body).statusDesc, ''); 
+            this.loading = false;
                       
           });
       }
       else{
 
         
+      this.loading = true;
 
         this.portalService.feedback(datasend).subscribe(
           data => {
@@ -262,9 +266,11 @@ export class FeedbackComponent implements OnInit, OnDestroy {
               this.resetForm();        
               this.toastr.success(this.translate.instant('feedback.msgsubmit'), '');            
           }).bind(this));  
+          this.loading = false;
         },
         error => {
           this.toastr.error(JSON.parse(error._body).statusDesc, ''); 
+          this.loading = false;
       
         });
       }

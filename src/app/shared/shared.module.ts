@@ -59,7 +59,6 @@ import { AnnouncementlistService } from "../announcementlist/announcementlist.se
 
 import { HomeComponent } from "../home/home.component";
 import { TransService } from '../services/trans.service';
-import { FeedbackComponent } from '../feedback/feedback.component';
 import { ConfirmComponent } from '../message/confirm.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
@@ -209,7 +208,6 @@ export function HttpLoaderFactory(http: Http) {
     ErrorComponent,
     PollComponent,
     BreadcrumbComponent,
-    FeedbackComponent,
     ConfirmComponent,
     SharedPipe,
     ConfirmDialogComponent,
@@ -264,7 +262,6 @@ export function HttpLoaderFactory(http: Http) {
     ErrorComponent,
     PollComponent,
     BreadcrumbComponent,
-    FeedbackComponent,
     ConfirmComponent,
     SetactiveComponent,
     BrowserAnimationsModule,

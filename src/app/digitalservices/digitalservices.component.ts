@@ -75,6 +75,7 @@ export class DigitalservicesComponent implements OnInit, OnDestroy {
     this.mediaUrl = this.config.externalMediaURL + '/documents/';
     this.getDServices(this.languageId);
     this.getUserData();
+    window.scrollTo(0,0);
 
   }
 
