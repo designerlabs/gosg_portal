@@ -823,14 +823,14 @@ export class SearchResultComponent implements OnInit, OnDestroy {
 
             //   this.serchService.searchResData = rData.data;
             this.showNoData = false;
-            this.loading = false;
-
+            
           } else {
             this.showNoData = true;
             this.sKeyword = false; //side menu
             this.sSpeci = false; //side menu
             this.sFilter = false; //side menu
           }
+          this.loading = false;
           rData = null;
         },
           error => {

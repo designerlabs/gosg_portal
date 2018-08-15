@@ -311,6 +311,7 @@ export class NavService {
         (err: Response, caught: Observable<any[]>) => {
           if (err !== undefined) {
             this.router.navigate(['/404']);
+            this.loader = false;
             return Observable.throw('The Web server (running the Web site) is currently unable to handle the HTTP request due to a temporary overloading or maintenance of the server.');
           }
           return Observable.throw(caught); // <-----
