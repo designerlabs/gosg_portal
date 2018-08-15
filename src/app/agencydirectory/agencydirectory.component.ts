@@ -284,7 +284,7 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
 
   goToMarkerPoint(dLat, dLong, dName, dAddress, dEmail, dFax, dPhone, fb, tw, web) {
     if (dLat && dLong) {
-      this.mymap.setView([dLat, dLong], 13);
+      this.mymap.flyTo([dLat, dLong], 13);
 
       let varWeb = "";
       let varfb = "";

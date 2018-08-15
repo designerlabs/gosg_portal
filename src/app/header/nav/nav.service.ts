@@ -389,7 +389,7 @@ export class NavService {
   }
 
   triggerSubArticleOther(subID, lang, url) {
-    // this.loader = true;
+    this.loader = true;
     // alert("Trigger sub acrticle");
      if (!isNaN(subID)) {
        this.articleService.articles = [''];
@@ -410,7 +410,7 @@ export class NavService {
    }
 
    triggerSubArticleAgency(lang) {
-      // this.loader = true;
+      this.loader = true;
     // alert("Trigger sub acrticle");
        this.articleService.articles = [''];
        this.articles = [''];
@@ -541,7 +541,7 @@ export class NavService {
 
 
    triggerArticleOthers(moduleName, lang, topicID, url) {
-    // this.loader = true;
+    this.loader = true;
     if (!isNaN(topicID)) {
       this.articles = [''];
       this.articleService.articles = [''];
