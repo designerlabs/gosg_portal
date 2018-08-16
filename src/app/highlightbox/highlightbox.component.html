@@ -55,7 +55,7 @@
                                   </button>
                               </div>
                             </form>
-                            <div *ngIf="result" style="display: block; padding: 2px; font-family: Roboto;" class="errMessage font-size-s"><strong>STATUS: </strong>{{ result }}</div>
+                            <div *ngIf="result" [ngClass]="{ 'errMessage font-size-s sbgc-red': !sbgcolor, 'errMessage font-size-s sbgc-green': sbgcolor }"><h5><strong>STATUS: </strong>{{ result }}</h5></div>
                     </div>
                 </span>
             </div>

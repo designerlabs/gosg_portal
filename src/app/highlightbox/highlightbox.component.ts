@@ -35,6 +35,7 @@ export class HighlightboxComponent implements OnInit, OnDestroy {
     updateForm: FormGroup
 
     noPermohonanCarian: FormControl
+    sbgcolor: boolean;
 
     constructor(
       private toastr: ToastrService, private translate: TranslateService, private topnavservice: TopnavService, private http: Http, @Inject(APP_CONFIG) private config: AppConfig, private portalservice: PortalService){
@@ -109,6 +110,11 @@ export class HighlightboxComponent implements OnInit, OnDestroy {
       this.loading = true;
       this.portalservice.getSubmissionStatus(formvalues.noPermohonanCarian, this.languageId).subscribe(
         data => {
+          if(data.statusCode == "ERROR")
+            this.sbgcolor = false;
+          else
+            this.sbgcolor = true;
+
         this.result = data.statusDesc;
         this.loading = false;
       },
