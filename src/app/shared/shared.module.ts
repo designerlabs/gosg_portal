@@ -138,6 +138,7 @@ import { TrafficinfoComponent } from '../trafficinfo/trafficinfo.component';
 import { SearchPipe } from '../pipe/search.pipe';
 import { SharedLoaderComponent } from '../loader/shared-loader.component';
 import { RssmainComponent } from '../article/rss/rssmain/rssmain.component';
+import { StatisticService } from '../statistic/statistic.service';
 
 // import { LifeeventComponent } from '../lifeevent/lifeevent.component';
 //import { GalleryService } from '../gallery/gallery.service';
@@ -338,7 +339,8 @@ export function HttpLoaderFactory(http: Http) {
     TransService, DialogsService,
     SearchService,
     NavRouterGuardService,
-    GalleryService
+    GalleryService,
+    StatisticService
   ],
   entryComponents: [DialogDataExampleDialog],
 })

@@ -6,6 +6,9 @@ import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
+import 'rxjs/add/observable/interval';
+import { Observable } from '../../../node_modules/rxjs';
+import { StatisticService } from './statistic.service';
 
 @Component({
   selector: 'gosg-statistic',
@@ -37,10 +40,15 @@ export class StatisticComponent implements OnInit {
   languageId = this.languageId;
   sum = (total, currentValue) => total + currentValue;
   loading:boolean = false;
+  sub: any;
+  newUsers: any;
+  allUsers: any;
+  statisticData: any;
 
   constructor(
     private http: Http,
     private portalservice: PortalService,
+    private statisticservice: StatisticService,
     private dialogsService: DialogsService,
     private translate: TranslateService,
     private router: Router,
@@ -79,12 +87,21 @@ export class StatisticComponent implements OnInit {
       this.languageId = 1;
     }
 
-    this.getUsersStatData(1);
-    this.getUsersStatData(2);
+    this.statisticData = this.statisticservice.getAllUserData();
+    this.statisticData = this.statisticservice.getNewUserData();
+    this.portalservice.triggerStatistic(1);
+    this.portalservice.triggerStatistic(2);
+
+    this.sub = Observable.interval(2000)
+    .subscribe((val) => {
+      this.getUsersStatData(1);
+      this.getUsersStatData(2);
+      this.sub.unsubscribe();
+    });
+    
     this.getDserviceReport(this.languageId);
     this.getPendingDserviceReport(this.languageId);
     this.getDserviceCounterReport(this.languageId);
-    // console.log(this.generateStatByYearFor('dservice'));
   }
 
   getDserviceCounterReport(lng) {
@@ -180,8 +197,6 @@ export class StatisticComponent implements OnInit {
 
     this.portalservice.getPendingDserviceRptData(lng).subscribe(data => {
       this.dServicePendingData = data.list;
-      // console.log(this.dServicePendingData)
-      // this.pdserviceByYear = this.StatByYearPendingDservice;
 
       this.dServicePendingData.forEach(pdsvc => {
 
@@ -224,42 +239,38 @@ export class StatisticComponent implements OnInit {
 
   getUsersStatData(type) {
 
-    this.loading = true;
-    
-    this.portalservice.getStatisticData(type).subscribe(data => {
+    // this.portalservice.triggerStatistic(type);
       
       if (type == 1) {
         
-        this.allUsersData = data.rows;
-        this.totalUsers = data.totalsForAllResults['ga:Users'];
         this.allUsersByYear = this.StatByYearAll;
 
-        this.allUsersByYear.forEach(el => {
-          this.allUsersData.forEach(api => {
+        this.StatByYearAll.forEach(el => {
+          this.statisticservice.allUser.forEach(api => {
             if (el[0] === api[0]) {
               el[1] = api[1]
+              console.log(el[1])
             }
           });
+          this.allUsers = this.allUsersByYear;
         });
+        // debugger;
 
       } else if (type == 2) {
         
-        this.newUsersData = data.rows;
-        this.totalNewUsers = data.totalsForAllResults['ga:newUsers'];
         this.newUsersByYear = this.StatByYearNew;
 
         this.newUsersByYear.forEach(el => {
-            this.newUsersData.forEach(api => {
+          this.statisticservice.newUser.forEach(api => {
               if (el[0] === api[0]) {
                 el[1] = api[1]
+                console.log(el[1])
               }
             });
-        });
+            this.newUsers = this.newUsersByYear;
+          });
       }
 
-      this.loading = false;
-
-    });
   }
 
   generateStatByYearFor(name:String) {

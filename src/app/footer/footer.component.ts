@@ -93,12 +93,6 @@ export class FooterComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    // this.langID = 0;
-    // if (this.lang === 'ms') {
-    //   this.langID = 2;
-    // }else {
-    //   this.langID = 1;
-    // }
 
     if(!this.langID){
       this.langID = localStorage.getItem('langID');
@@ -106,7 +100,6 @@ export class FooterComponent implements OnInit, OnDestroy {
       this.langID = 1;
     }
     this.subscription = this.getFooter(this.langID);
-    //this.getFooter(this.langID);
   }
 
   getFooter(lang) {
@@ -143,7 +136,7 @@ export class FooterComponent implements OnInit, OnDestroy {
 
   getUrl(ele){
 
-    if(ele === 'sitemap' || ele === 'statistic' || ele === 'calendar' || ele === 'subscription' || ele === 'feedback')
+    if(ele === 'sitemap' || ele === 'statistic' || ele === 'calendar' || ele === 'subscription' || ele === 'feedback' || ele === 'agencydir')
       this.navService.loader = false;
     else
       this.navService.loader = true;
