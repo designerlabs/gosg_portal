@@ -9,6 +9,7 @@ import 'rxjs/add/operator/retry';
 import { TranslateService, LangChangeEvent } from "@ngx-translate/core";
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
+import { StatisticService } from '../statistic/statistic.service';
 
 
 @Injectable()
@@ -17,9 +18,13 @@ export class PortalService {
   langId = this.langId;
   loader:boolean = false;
   catData: string[];
+  allUsersData: string[];
+  newUsersData: string[];
+  totalUsers: any;
+  totalNewUsers: any;
 
   constructor(private http: Http, @Inject(APP_CONFIG) private config: AppConfig,  private translate: TranslateService,
-  private toastr: ToastrService, private route: ActivatedRoute, private router: Router,) {
+  private toastr: ToastrService, private route: ActivatedRoute, private router: Router, private statisticservice: StatisticService) {
 
     translate.onLangChange.subscribe((event: LangChangeEvent) => {
                   this.loader = true;
@@ -76,6 +81,7 @@ export class PortalService {
   private trafficPredictionUrl: string = this.config.UrlTrafficPredictionAPI;
 
   private internalUrl: string = this.config.urlIntSearch;
+  private subStatusUrl: string = this.config.urlSubStatus;
 
   private portalUrl: string = this.config.urlPortal;
   private protected: string = this.config.urlProtected;
@@ -208,6 +214,31 @@ export class PortalService {
     .catch(this.handleError);
   }
 
+  triggerStatistic(type) {
+
+    this.loader = true;
+
+    return this.route.paramMap
+      .switchMap((params: ParamMap) =>
+        this.getStatisticData(type))
+      .subscribe(resStatData => {
+        
+        if (type == 1) {
+          this.allUsersData = [''];
+          this.statisticservice.allUser = resStatData.rows;
+          this.totalUsers = resStatData.totalsForAllResults['ga:Users'];
+  
+        } else if (type == 2) {
+          this.newUsersData = [''];
+          
+          this.statisticservice.newUser = resStatData.rows;
+          this.totalNewUsers = resStatData.totalsForAllResults['ga:newUsers'];
+        }
+  
+        this.loader = false;
+      });
+  }
+
   getDserviceRptData(lng) {
     //
     return this.http.get(this.dserviceptUrl+ '?language=' + lng)
@@ -294,6 +325,13 @@ export class PortalService {
 
     return this.http.get(this.trafficPredictionUrl+sn)
     .map((response: Response) => response.json())
+    .retry(5)
+    .catch(this.handleError);
+  }
+
+  getSubmissionStatus(refNo, lng) {
+    
+    return this.http.get(this.subStatusUrl+refNo+"?language="+lng, '').map((response:Response) => response.json())
     .retry(5)
     .catch(this.handleError);
   }

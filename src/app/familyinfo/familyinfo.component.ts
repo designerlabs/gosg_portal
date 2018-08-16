@@ -14,6 +14,7 @@ import * as moment from 'moment';
 import { TopnavService } from '../header/topnav/topnav.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ValidateService } from '../common/validate.service';
+//import { OwlDateTimeInputDirective } from 'ng-pick-datetime/date-time/date-time-picker-input.directive';
 
 @Component({
   selector: 'gosg-familyinfo',
@@ -28,6 +29,7 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
   searchForm: FormGroup;
   warganegara: FormControl;
   icno: FormControl;
+  passportno: FormControl;
   passportState: FormControl;
   name: FormControl;
   relation: FormControl;
@@ -43,6 +45,11 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
   
   public maskIC: any;
   public maskPhone: any;
+  public checkNation: boolean = false;
+  public complete: boolean;
+  public valDOB: any;
+  public getUrl: any;
+  public events: string[] = [];
   showNoData = false;
   loading = false;
 
@@ -65,7 +72,6 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
     @Inject(APP_CONFIG) private config: AppConfig) {
 
       this.lang = translate.currentLang;
-
       this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
 
           const myLang = translate.currentLang;
@@ -104,7 +110,8 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
     this.maskPhone = this.validateService.getMask().telephone;
 
     this.warganegara = new FormControl();
-    this.icno = new FormControl();
+    this.icno = new FormControl('', [Validators.required, Validators.pattern('^[0-9-]{14}$')]);
+    this.passportno = new FormControl();
     this.passportState = new FormControl();
     this.name = new FormControl();
     this.relation = new FormControl();
@@ -122,6 +129,7 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
 
       warganegara: this.warganegara,
       icno: this.icno,
+      passportno: this.passportno,
       passportState: this.passportState,
       name: this.name,
       relation: this.relation,
@@ -136,8 +144,85 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
       addInfo: this.addInfo
     });
 
-    this.searchForm.get('warganegara').setValue(1);
+    this.getUrl = this.router.url.split('/')[2];
+    this.checkReqValues();
+
+    if(this.getUrl == 'add'){
+
+      this.searchForm.get('warganegara').setValue(1);
+      
+    }
+
+    else{
+      //if(this.searchForm.controls.warganegara.value == 1){
+        this.searchForm.get('warganegara').disable();
+        //this.searchForm.get('noic').disable();
+        this.searchForm.get('name').disable();
+        this.searchForm.get('relation').disable();
+        this.searchForm.get('race').disable();
+        this.searchForm.get('religion').disable();
+      // }
+
+      // else{
+      //   this.searchForm.get('name').enable();
+      //   this.searchForm.get('relation').enable();
+      //   this.searchForm.get('race').enable();
+      //   this.searchForm.get('religion').enable();
+      // }
+    }
+
+  }
+  
+  checkNationalyty(){
+    this.checkNation = true;
+    this.complete = false;
+  }
+
+  changeNation(val){
+
+    if(val.warganegara == 2){
+      this.checkNation = true;
+    }
+
+    else{
+      this.checkNation = false;
+    }
+
+    this.checkReqValues();
+  }
+
+  checkReqValues() {
+
+    let reqVal = [];
+    let nullPointers:any = [];
     
+    if(this.searchForm.controls.warganegara.value == 1){
+      if(this.checkNation == false){
+        reqVal =  ["icno","name","relation","race","religion"];
+      }
+      else{
+        reqVal =  ["icno","name","relation","race","religion","profileStatus"];
+      }
+    }
+
+    else{
+      reqVal =  ["passportno","name","relation","race","religion","profileStatus"];
+    }
+
+    for (var reqData of reqVal) {
+      let elem = this.searchForm.get(reqData);
+
+      if (elem.value == "" || elem.value == null) {
+        elem.setValue(null)
+        nullPointers.push(null)
+      }
+    }
+
+    if(nullPointers.length > 0) {
+      this.complete = false;
+    } else {
+      this.complete = true;
+    }
   }
 
   validateCtrlChk(ctrl: FormControl) {
@@ -148,8 +233,97 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
     console.log("PRINT: ");
   }
 
-  submit(){
-    console.log("SUBMIT: ");
+  publishDOB(type: string, event) { 
+
+    let year, month, day;
+    this.events = [];
+    this.events.push(`${event.value}`);
+
+    this.valDOB = new Date(this.events[0]).getTime();
+    this.searchForm.get('dob').setValue(new Date(this.valDOB).toISOString());
+    console.log("date: ");
+    console.log(this.valDOB);
+  }
+
+  checkOKU(){
+    console.log("check OKU");
+  }
+
+  submit(val){
+
+    let icpassport: any;
+
+    let body = {
+      "nationality":{
+          "nationalityId": null
+       },
+      "icno": null,
+      "passportState":{
+        "passportStateId": null
+      },
+      "name": null,
+      "relation":{
+        "relationId": null
+      },
+      "dob": null,
+      "sex":{
+        "sexId": null
+      },
+      "email": null,
+      "race":{
+        "raceId": null
+      },
+      "religion":{
+        "religionId": null
+      },
+      "phone": null,
+      "profileStatus":{
+        "profileStatusId": null
+      },
+      "reasonStatus":{
+        "reasonStatusId": null
+      },
+      "addInfo": null
+    };
+
+    if(this.searchForm.controls.warganegara.value == 1){
+      icpassport = val.icno;
+    }
+
+    else{
+      icpassport = val.passportno;
+    }
+
+    body.nationality.nationalityId = val.warganegara;
+    body.icno = icpassport;
+    body.passportState.passportStateId = val.passportState;
+    body.name = val.name;
+    body.relation.relationId = val.relation;
+    body.dob = val.dob;
+    body.sex.sexId = val.sex;
+    body.email = val.email;
+    body.race.raceId = val.race;
+    body.religion.religionId = val.religion;
+    body.phone = val.phone;
+    body.profileStatus.profileStatusId = val.profileStatus;
+    body.reasonStatus.reasonStatusId = val.reasonStatus;
+    body.addInfo = val.addInfo;
+
+    console.log(JSON.stringify(body));
+    // this.loading = true;
+    
+    // this.protectedService.create(body,'perhilitan/draft/save',this.langID).subscribe(
+    // data => {
+    //   this.sharedService.errorHandling(data, (function () {
+    //     this.toastr.success(this.translate.instant('Permohonan Baru Lesen Peniaga/Taksidermi berjaya disimpan sebagai draft'), '');
+    //     this.router.navigate(['appsmgmt']);
+    //   }).bind(this));
+    //   this.loading = false;
+    // },
+    // error => {
+    //   this.loading = false;
+    //   this.toastr.error(JSON.parse(error._body).statusDesc, '');
+    // });
   }
     
 }

@@ -10,6 +10,8 @@ import 'rxjs/add/operator/switchMap';
 import { ISubscription } from 'rxjs/Subscription';
 import { NavService } from '../header/nav/nav.service';
 import { BreadcrumbService } from '../header/breadcrumb/breadcrumb.service';
+import { FormGroup, FormControl } from '../../../node_modules/@angular/forms';
+import { PortalService } from '../services/portal.service';
 
 @Component({
   selector: 'app-highlightbox',
@@ -33,30 +35,52 @@ export class HighlightboxComponent implements OnInit, OnDestroy {
     private subscriptionLang: ISubscription;
     private subscriptionHotTopic: ISubscription;
     lang = 'en';
+    languageId: any;
     filter= false;
+    loading: boolean = false;
+    result: any;
+    updateForm: FormGroup
+
+    noPermohonanCarian: FormControl
 
     constructor(
-     private route: ActivatedRoute, private navService: NavService, private router: Router, private breadcrumbService: BreadcrumbService, private toastr: ToastrService, private translate: TranslateService, private topnavservice: TopnavService, private http: Http, @Inject(APP_CONFIG) private config: AppConfig){
+      private toastr: ToastrService, private translate: TranslateService, private topnavservice: TopnavService, private portalService:PortalService, private navService: NavService, private http: Http, @Inject(APP_CONFIG) private config: AppConfig, private portalservice: PortalService){
         this.lang = translate.currentLang;
         this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
           const myLang = translate.currentLang;
           if (myLang === 'en') {
              this.lang = 'en';
+             this.languageId = 1;
           }
           if (myLang === 'ms') {
             this.lang = 'ms';
+            this.languageId = 2;
           }
 
-            if(this.topnavservice.flagLang){
-              this.subscription = this.getData(this.lang);
-              this.subscriptionHotTopic = this.getHotTopic(this.lang);
-            }
+          if(this.topnavservice.flagLang){
+            this.subscriptionHotTopic = this.getHotTopic(this.lang);
+            this.subscription = this.getData(this.lang);
+            this.updateForm.reset();
+            this.result = null;
+          }
         });
     }
 
     ngOnInit(){
+
+      if(!this.languageId){
+        this.languageId = localStorage.getItem('langID');
+      }else{
+        this.languageId = 1;
+      }
+
       this.subscription = this.getData(this.lang);
       this.subscriptionHotTopic = this.getHotTopic(this.lang);
+      this.noPermohonanCarian = new FormControl()
+
+      this.updateForm = new FormGroup({
+        noPermohonanCarian: this.noPermohonanCarian
+      });
     }
 
     ngOnDestroy() {
@@ -114,6 +138,18 @@ export class HighlightboxComponent implements OnInit, OnDestroy {
     getID(data){
       let a = data.split("/");
       return a[2];
+    }
+    checkRefNo(formvalues: any) {
+      this.loading = true;
+      this.portalservice.getSubmissionStatus(formvalues.noPermohonanCarian, this.languageId).subscribe(
+        data => {
+        this.result = data.statusDesc;
+        this.loading = false;
+      },
+      error => {
+        this.toastr.error(JSON.parse(error._body).statusDesc, '');
+        this.loading = false;
+      });
     }
 
     getUrl(){
