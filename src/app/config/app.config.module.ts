@@ -43,6 +43,7 @@ export class AppConfig {
     urlSubtopic: string;
     urlTopics: string;
     urlHighlights: string;
+    urlHotTopics: string;
     urlGender: string;
     urlPoll: string;
     urlAnnouncement: string;
@@ -130,6 +131,7 @@ export const APP_DI_CONFIG: AppConfig = {
     urlSubtopic: './app/apidata/subtopic',
     urlTopics: './app/apidata/articlemenu',
     urlHighlights: './app/apidata/highlightbox',
+    urlHotTopics: commonURL+'hottopic',
     urlGender: commonURL+'gender/lang/',
     urlAnnouncement : commonURL + 'highlight/tender',
     // urlAnnouncement : commonURL + 'announcement/date/publish',

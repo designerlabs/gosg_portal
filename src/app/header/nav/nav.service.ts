@@ -93,7 +93,7 @@ export class NavService {
   private urlAnnouncement: string = this.config.urlAnnouncementSub;
   private subUrl: string = this.config.urlSubtopic;
   private popularUrl: string = this.config.urlPopularSearch;
-
+  private highlightUrl: string = this.config.urlHighlights;
 
 
   getMenuData(lang): Observable<IMenu[]> {
@@ -103,6 +103,16 @@ export class NavService {
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
 
   }
+
+
+  getHotTopics(lang): Observable<IMenu[]> {
+
+    return this.http.get(this.highlightUrl + '?language=' + lang)
+      .map((response: Response) => response.json().list)
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+
+  }
+
 
 
   getFAQData(lang): Observable<IMenu[]> {
