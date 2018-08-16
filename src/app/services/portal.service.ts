@@ -81,6 +81,7 @@ export class PortalService {
   private trafficPredictionUrl: string = this.config.UrlTrafficPredictionAPI;
 
   private internalUrl: string = this.config.urlIntSearch;
+  private subStatusUrl: string = this.config.urlSubStatus;
 
   private portalUrl: string = this.config.urlPortal;
   private protected: string = this.config.urlProtected;
@@ -324,6 +325,13 @@ export class PortalService {
 
     return this.http.get(this.trafficPredictionUrl+sn)
     .map((response: Response) => response.json())
+    .retry(5)
+    .catch(this.handleError);
+  }
+
+  getSubmissionStatus(refNo, lng) {
+    
+    return this.http.get(this.subStatusUrl+refNo+"?language="+lng, '').map((response:Response) => response.json())
     .retry(5)
     .catch(this.handleError);
   }

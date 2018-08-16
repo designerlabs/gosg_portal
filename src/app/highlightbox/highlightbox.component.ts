@@ -5,6 +5,8 @@ import { Http } from '@angular/http';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 import { TopnavService } from '../header/topnav/topnav.service';
 import { ToastrService } from '../../../node_modules/ngx-toastr';
+import { FormGroup, FormControl } from '../../../node_modules/@angular/forms';
+import { PortalService } from '../services/portal.service';
 
 @Component({
   selector: 'app-highlightbox',
@@ -26,29 +28,50 @@ export class HighlightboxComponent implements OnInit, OnDestroy {
     private subscription: ISubscription;
     private subscriptionLang: ISubscription;
     lang = 'en';
+    languageId: any;
     filter= false;
-  loading: boolean;
+    loading: boolean = false;
+    result: any;
+    updateForm: FormGroup
+
+    noPermohonanCarian: FormControl
 
     constructor(
-      private toastr: ToastrService, private translate: TranslateService, private topnavservice: TopnavService, private http: Http, @Inject(APP_CONFIG) private config: AppConfig){
+      private toastr: ToastrService, private translate: TranslateService, private topnavservice: TopnavService, private http: Http, @Inject(APP_CONFIG) private config: AppConfig, private portalservice: PortalService){
         this.lang = translate.currentLang;
         this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
           const myLang = translate.currentLang;
           if (myLang === 'en') {
              this.lang = 'en';
+             this.languageId = 1;
           }
           if (myLang === 'ms') {
             this.lang = 'ms';
+            this.languageId = 2;
           }
 
-            if(this.topnavservice.flagLang){
-              this.subscription = this.getData(this.lang);
-            }
+          if(this.topnavservice.flagLang){
+            this.subscription = this.getData(this.lang);
+            this.updateForm.reset();
+            this.result = null;
+          }
         });
     }
 
     ngOnInit(){
+
+      if(!this.languageId){
+        this.languageId = localStorage.getItem('langID');
+      }else{
+        this.languageId = 1;
+      }
+
       this.subscription = this.getData(this.lang);
+      this.noPermohonanCarian = new FormControl()
+
+      this.updateForm = new FormGroup({
+        noPermohonanCarian: this.noPermohonanCarian
+      });
     }
 
     ngOnDestroy() {
@@ -58,6 +81,7 @@ export class HighlightboxComponent implements OnInit, OnDestroy {
 
 
    private highlightUrl: string = this.config.urlHighlights;
+
    getData(lang: string){
          return this.http.get(this.highlightUrl + '-' + lang + '.json')
            .map(res => res.json())
@@ -79,6 +103,19 @@ export class HighlightboxComponent implements OnInit, OnDestroy {
               this.loading = false;
         
             });
+    }
+
+    checkRefNo(formvalues: any) {
+      this.loading = true;
+      this.portalservice.getSubmissionStatus(formvalues.noPermohonanCarian, this.languageId).subscribe(
+        data => {
+        this.result = data.statusDesc;
+        this.loading = false;
+      },
+      error => {
+        this.toastr.error(JSON.parse(error._body).statusDesc, '');
+        this.loading = false;
+      });
     }
 
     getUrl(){
