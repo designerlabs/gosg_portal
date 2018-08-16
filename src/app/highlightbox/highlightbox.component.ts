@@ -76,7 +76,7 @@ export class HighlightboxComponent implements OnInit, OnDestroy {
       }
 
       this.subscription = this.getData(this.lang);
-      this.subscriptionHotTopic = this.getHotTopic(this.lang);
+      this.subscriptionHotTopic = this.getHotTopic(this.languageId);
       this.noPermohonanCarian = new FormControl()
 
       this.updateForm = new FormGroup({
@@ -118,7 +118,7 @@ export class HighlightboxComponent implements OnInit, OnDestroy {
 
     getHotTopic(lang: string){
 
-      return this.http.get(this.hottopicUrl+'?language=1')
+      return this.http.get(this.hottopicUrl+'?language='+this.languageId)
       .map(res => res.json().list)
       .subscribe(eventData => {
            this.hotTopicData = eventData;
