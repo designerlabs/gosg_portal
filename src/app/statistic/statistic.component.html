@@ -27,27 +27,26 @@
 <br />
 <div class="container">
   <!-- {{ 'statistic.months.short.01' | translate }} -->
-
   <!-- USERS -->
   <div class="table-responsive">
     <table class="table table-striped" style="border: 1px solid rgb(0, 189, 187);">
       <thead style="background: #1ebebc; color: #fafafa;">
         <tr style="vertical-align: middle">
           <th style="width: 35%">{{'statistic.label.users' | translate}}</th>
-          <th style="text-align: center; padding: 5px" *ngFor="let mon of allUsersByYear">{{ 'statistic.months.short.'+mon[0] | translate }}</th>
+          <th style="text-align: center; padding: 5px" *ngFor="let mon of allUsers">{{ 'statistic.months.short.'+mon[0] | translate }}</th>
           <th style="text-align: center">{{'statistic.label.total' | translate}}</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>{{'statistic.label.allusers' | translate}}</td>
-          <td style="text-align: center" *ngFor="let monAll of allUsersByYear">{{ monAll[1] }}</td>
-          <td style="text-align: center; font-weight: bold">{{ totalUsers }}</td>
+          <td style="text-align: center" *ngFor="let monAll of allUsers">{{ monAll[1] }}</td>
+          <td style="text-align: center; font-weight: bold">{{ portalservice.totalUsers }}</td>
         </tr>
         <tr>
           <td>{{'statistic.label.newusers' | translate}}</td>
-          <td style="text-align: center" *ngFor="let monNew of newUsersByYear">{{ monNew[1] }}</td>
-          <td style="text-align: center; font-weight: bold">{{ totalNewUsers }}</td>
+          <td style="text-align: center" *ngFor="let monNew of newUsers">{{ monNew[1] }}</td>
+          <td style="text-align: center; font-weight: bold">{{ portalservice.totalNewUsers }}</td>
         </tr>
       </tbody>
     </table>

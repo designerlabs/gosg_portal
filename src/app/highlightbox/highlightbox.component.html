@@ -1,3 +1,4 @@
+<gosg-shared-loader [loader]="loading"></gosg-shared-loader>
 <div class="container lifeEventContainer animated fadeIn" style="background:#dedede;">
     <div>
         <div class="row">
@@ -43,18 +44,18 @@
                           <p class="font-size-s" style="font-family: Roboto;">
                             {{statusContent}}
                             </p>
-                            <form class="search-permohonan">
+                            <form [formGroup]="updateForm" class="search-permohonan">
                               <div class="form-group">
                                 <label class="sr-only" for="noPermohonanCarian">{{'home.applicationNum' | translate}}</label>
-                                  <input type="text" class="form-control" id="noPermohonanCarian" placeholder="{{'home.applicationNum' | translate}}">
+                                  <input type="text" class="form-control" formControlName="noPermohonanCarian" id="noPermohonanCarian" placeholder="{{'home.applicationNum' | translate}}">
                               </div>
                               <div class="form-group">
-                                <button class="btn btn-secondary btn-block font-size-s warna_bg" style="font-family: Roboto; background-color: rgb(0, 189, 187);" [style.background-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
+                                <button (click)="checkRefNo(updateForm.value)" class="btn btn-secondary btn-block font-size-s warna_bg" style="font-family: Roboto; background-color: rgb(0, 189, 187);" [style.background-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
                                   {{'home.check' | translate}}
                                   </button>
                               </div>
                             </form>
-                            <div style="display: none; padding: 2px; font-family: Roboto;" class="errMessage font-size-s"></div>
+                            <div *ngIf="result" style="display: block; padding: 2px; font-family: Roboto;" class="errMessage font-size-s"><strong>STATUS: </strong>{{ result }}</div>
                     </div>
                 </span>
             </div>

@@ -101,6 +101,7 @@ export class AppConfig {
     urlAgencyDservice: string;
     urlRating: string;
     urlSharedDS: string;
+    urlSubStatus: string;
 
 }
 
@@ -176,6 +177,7 @@ export const APP_DI_CONFIG: AppConfig = {
     urlSiteMap: commonURL + 'sitemapdetails',
     urlStatistic: commonURL + 'statistics?year=2018',
     urlDserviceRpt: commonURL + 'dservice/report',
+    urlSubStatus: commonURL + 'application/status/',
     // urlFaq: commonURL + 'faq',
     urlDashboardData: agencyURL + 'dservice/dashboard',
     statusAppUrl: agencyURL + 'dservice/group',

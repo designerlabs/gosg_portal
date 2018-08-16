@@ -893,7 +893,9 @@ getPostcodeByCityC(e){
   }
 
   isOKUStatus(event){
+
     if(event.checked === true){
+      this.loading = true;
       const readUrl = `${this.config.urlAgencyDservice}jkmservice/okustatus`;
     return this.http.post(readUrl,'')
       .subscribe(
@@ -909,8 +911,10 @@ getPostcodeByCityC(e){
             this.OKUNumber = '';
             this.toastr.error(this.translate.instant('profile.msg.OKUStatusFail'), '');
           }
+          this.loading = false;
         },
         err => {
+          this.loading = false;
           console.log("Error occured");
           this.profileForm.get('OKUcheckbox').setValue(false);
           this.isOKU = false;
