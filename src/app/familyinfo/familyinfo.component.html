@@ -29,13 +29,17 @@
   <div class="col-md-9 mat-elevation-z8 padding-bottom-20">    
     <form [formGroup]="searchForm" novalidate="novalidate">
       <div class="row">
-          <div class="col-md-12"><h4>Maklumat Profil Keluarga</h4></div>
+          <div class="col-md-12 displayDesc">
+            <h4>Maklumat Profil Keluarga</h4>
+            <hr class="line">
+          </div>          
       </div>
 
       <div class="row">
           <div class="col-md-4">
             <mat-form-field class="example-full-width">
-              <mat-select formControlName="warganegara" placeholder="Taraf Kewarganegaraan">
+              <mat-select formControlName="warganegara" placeholder="Taraf Kewarganegaraan" required 
+                  (change)="changeNation(searchForm.value)">
                   <mat-option [value]=1>Warganegara</mat-option>
                   <mat-option [value]=2>Bukan Warganegara</mat-option>
               </mat-select>
@@ -44,26 +48,32 @@
 
           <div class="col-md-4" *ngIf="searchForm.controls.warganegara.value == 1">
             <mat-form-field class="example-full-width">
-                <input matInput formControlName="icno" placeholder="No. Kad Pengenalan" [textMask]="{mask: maskIC}">
-                <mat-error *ngIf="searchForm.controls.icno.hasError('required')">
+                <input matInput formControlName="icno" placeholder="No. Kad Pengenalan" [textMask]="{mask: maskIC}" required
+                (keyup)="checkReqValues()">
+                <!-- <mat-error *ngIf="searchForm.controls.icno.hasError('required')">
                     No. IC diperlukan
+                </mat-error> -->
+                <mat-error *ngIf="!validateCtrlChk(icno) && searchForm.controls.icno.errors.pattern">
+                    {{'register.pattern.ic' | translate }}
                 </mat-error>
             </mat-form-field>
           </div>
 
           <div class="col-md-4" *ngIf="searchForm.controls.warganegara.value == 2">
-              <mat-form-field class="example-full-width">
-                  <input matInput formControlName="icno" placeholder="No. Passport">
-                  <mat-error *ngIf="searchForm.controls.icno.hasError('required')">
-                      No. Passport diperlukan
-                  </mat-error>
-              </mat-form-field>
-            </div>
+            <mat-form-field class="example-full-width">
+                <input matInput formControlName="passportno" placeholder="No. Passport" required
+                (keyup)="checkReqValues()"> 
+                <mat-error *ngIf="searchForm.controls.passportno.hasError('required')">
+                    No. Passport diperlukan
+                </mat-error>
+            </mat-form-field>
+          </div>
 
           <div class="col-md-4" *ngIf="searchForm.controls.warganegara.value == 2">
             <mat-form-field class="example-full-width">
-              <mat-select formControlName="passportState" placeholder="Negara Pengeluar Passport">
-                  <mat-option [value]=1>England</mat-option>
+              <mat-select formControlName="passportState" placeholder="Negara Pengeluar Passport" required 
+                  (change)="checkReqValues()">
+                  <mat-option [value]=1>England</mat-option> 
                   <mat-option [value]=2>Arab</mat-option>
               </mat-select>
             </mat-form-field>
@@ -73,7 +83,8 @@
       <div class="row">
           <div class="col-md-4">
             <mat-form-field class="example-full-width">
-                <input matInput formControlName="name" placeholder="Nama Penuh">
+                <input matInput formControlName="name" placeholder="Nama Penuh" required 
+                (keyup)="checkReqValues()">
                 <mat-error *ngIf="searchForm.controls.name.hasError('required')">
                     Nama diperlukan
                 </mat-error>
@@ -82,7 +93,8 @@
 
           <div class="col-md-4">
             <mat-form-field class="example-full-width">
-              <mat-select formControlName="relation" placeholder="Hubungan">
+              <mat-select formControlName="relation" placeholder="Hubungan" required
+                  (change)="checkReqValues()">
                   <mat-option [value]=1>Bapa</mat-option>
                   <mat-option [value]=2>Ibu</mat-option>
                   <mat-option [value]=3>Anak</mat-option>
@@ -94,7 +106,50 @@
       <div class="row">
           <div class="col-md-4">
             <mat-form-field class="example-full-width">
-                <input matInput [matDatepicker]="dob" formControlName="dob" placeholder="Tarikh Lahir" readonly>
+              <mat-select formControlName="race" placeholder="Bangsa" required
+                  (change)="checkReqValues()">
+                  <mat-option [value]=1>Melayu</mat-option>
+                  <mat-option [value]=2>Cina</mat-option>
+                  <mat-option [value]=3>India</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-4">
+            <mat-form-field class="example-full-width">
+              <mat-select formControlName="religion" placeholder="Agama" required
+                  (change)="checkReqValues()">
+                  <mat-option [value]=1>Islam</mat-option>
+                  <mat-option [value]=2>Budha</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          
+          <div class="col-md-4" *ngIf="checkNation == true">
+            <mat-form-field class="example-full-width">
+                <input matInput formControlName="email" placeholder="Emel">
+                <!-- <mat-error *ngIf="searchForm.controls.email.hasError('required')">
+                    Emel diperlukan
+                </mat-error> -->
+                <mat-error *ngIf="!validateCtrlChk(email) && searchForm.controls.email.errors.pattern">
+                    {{'register.pattern.email' | translate }}
+                </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-4" *ngIf="checkNation == false">        
+              <button mat-raised-button color="primary" class="btn btn-md btn-success font-size-s pull-right" 
+                (click)="checkNationalyty()" 
+                [disabled]="!complete || (!validateCtrlChk(icno) && searchForm.controls.icno.errors.pattern)">Semak</button>
+                
+          </div>
+      </div>
+
+      <div class="row" *ngIf="checkNation == true">
+          <div class="col-md-4">
+            <mat-form-field class="example-full-width">
+                <input matInput [matDatepicker]="dob" formControlName="dob" placeholder="Tarikh Lahir" readonly
+                #dob (change)="publishDOB('input', $event)">
                 <mat-datepicker-toggle matSuffix [for]="dob" style="color:#333;"></mat-datepicker-toggle>
                 <mat-datepicker #dob startView="day"></mat-datepicker>
             </mat-form-field>
@@ -111,51 +166,16 @@
 
           <div class="col-md-4">
             <mat-form-field class="example-full-width">
-                <input matInput formControlName="email" placeholder="Emel" required>
-                <!-- <mat-error *ngIf="searchForm.controls.email.hasError('required')">
-                    Emel diperlukan
-                </mat-error> -->
-                <mat-error *ngIf="!validateCtrlChk(email) &&  searchForm.controls.email.errors.pattern">
-                    {{'register.pattern.email' | translate }}
-                </mat-error>
+                <input matInput formControlName="phone" placeholder="No. Telefon">
             </mat-form-field>
           </div>
       </div>
 
-      <div class="row">
+      <div class="row" *ngIf="checkNation == true">
           <div class="col-md-4">
             <mat-form-field class="example-full-width">
-              <mat-select formControlName="race" placeholder="Bangsa">
-                  <mat-option [value]=1>Melayu</mat-option>
-                  <mat-option [value]=2>Cina</mat-option>
-                  <mat-option [value]=3>India</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-
-          <div class="col-md-4">
-            <mat-form-field class="example-full-width">
-              <mat-select formControlName="religion" placeholder="Agama">
-                  <mat-option [value]=1>Islam</mat-option>
-                  <mat-option [value]=2>Budha</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-
-          <div class="col-md-4">
-            <mat-form-field class="example-full-width">
-                <input matInput formControlName="phone" placeholder="No. Telefon" required >
-                <mat-error *ngIf="searchForm.controls.phone.hasError('required')">
-                    Emel diperlukan
-                </mat-error>
-            </mat-form-field>
-          </div>
-      </div>
-
-      <div class="row">
-          <div class="col-md-4">
-            <mat-form-field class="example-full-width">
-              <mat-select formControlName="profileStatus" placeholder="Status Profil">
+              <mat-select formControlName="profileStatus" placeholder="Status Profil" required
+                  (change)="checkReqValues()">
                   <mat-option [value]=1>Aktif</mat-option>
                   <mat-option [value]=2>Tidak Aktif</mat-option>
               </mat-select>
@@ -172,17 +192,70 @@
           </div>
       </div>
 
-      <div class="row">
-          <div class="col-md-6">
+      <div class="row" *ngIf="checkNation == true">
+          <div class="col-md-8">
             <mat-form-field class="example-full-width displayInfo">
                 <textarea matInput formControlName="addInfo" placeholder="Tambahan (Sekiranya Ada)"></textarea>
             </mat-form-field>
           </div>
       </div>
 
-      <div class="pull-right">        
-        <button mat-raised-button color="primary" class="btn btn-md btn-success font-size-s" (click)="print()">Cetak</button>
-        <button mat-raised-button color="primary" class="btn btn-md btn-success font-size-s" (click)="submit()">Simpan</button>
+      <div class="row" *ngIf="checkNation == true">
+        <div class="col-md-2">
+          <span class="displayDesc">STATUS OKU</span>
+        </div>
+        <div class="col-md-1">
+          <button mat-raised-button color="primary" class="btn btn-md btn-success font-size-s pull-right" style="height: 30px;"
+          (click)="checkOKU()">SAHKAN</button>
+        </div>
+        <div class="col-md-5">
+          <span class="displayDesc">** Sila klik sekiranya berkenaan sahaja</span>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="checkNation == true">
+        <div class="col-md-2">&nbsp;
+        </div>
+        <div class="col-md-1">&nbsp;
+        </div>
+        <div class="col-md-7">
+          <div class="col-md-5">
+              <span class="displayDesc">
+                  No. Pendaftaran OKU</span>
+          </div>
+          <div class="col-md-7">
+              <span class="displayDesc">
+                  : PH 140013005643291</span>
+          </div>
+          <div class="col-md-5">
+              <span class="displayDesc">
+                  Jenis OKU</span>
+          </div>
+          <div class="col-md-7">
+              <span class="displayDesc">
+                  : Kurang Upaya Penglihatan</span>
+          </div>
+          <div class="col-md-5">
+              <span class="displayDesc">
+                  Jenis ID OKU</span>
+          </div>
+          <div class="col-md-7">
+              <span class="displayDesc">
+                  : BL</span>
+          </div>
+          <!-- <span class="displayDesc">
+            No. Pendaftaran OKU: <br>
+            Jenis OKU: <br>
+            Jenis ID OKU:</span> -->
+        </div>
+      </div>
+
+      <div class="pull-right" *ngIf="checkNation == true">        
+        <button mat-raised-button color="primary" class="btn btn-md btn-success font-size-s" (click)="print()"
+          [disabled]="!complete">Cetak</button>
+        <button mat-raised-button color="primary" class="btn btn-md btn-success font-size-s" (click)="submit(searchForm.value)"
+          [disabled]="!complete || (!validateCtrlChk(email) && searchForm.controls.email.errors.pattern) || 
+          (!validateCtrlChk(icno) && searchForm.controls.icno.errors.pattern)">Simpan</button>
       </div>
     </form>
   

@@ -109,3 +109,10 @@ input{
     padding-bottom: 20px;
     margin-bottom: 20px;
 }
+
+.line{
+    border: none !important;
+    height: 2px !important;
+    color: grey !important;
+    background-color: grey !important;
+}
