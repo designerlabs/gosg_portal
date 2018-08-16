@@ -103,7 +103,7 @@ export class ProtectedComponent implements OnInit {
   }
 
   getUserData(){
-
+    this.loading = true;
     if(!environment.staging){
       this.protectedService.getUser().subscribe(
         data => {
@@ -117,15 +117,17 @@ export class ProtectedComponent implements OnInit {
           }else{
 
           }
-
+          this.loading = false;
         },
         error => {
+          this.loading = false;
           //location.href = this.config.urlUAP +'uapsso/Logout';
           //location.href = this.config.urlUAP+'portal/index';
         })
     }
   }
   getProfileData(data){
+    this.loading = true;
     this.protectedService.getProfile(data).subscribe(
       data =>{
         if(data.length !=0){
@@ -138,8 +140,10 @@ export class ProtectedComponent implements OnInit {
         }else{
           //location.href = this.config.urlUAP+'portal/index';
         }
+        this.loading = false;
       },
       error => {
+        this.loading = true;
         //location.href = this.config.urlUAP+'portal/index';
       });
   }
