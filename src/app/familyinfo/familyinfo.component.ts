@@ -244,7 +244,7 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
   }
 
   publishDOB(type: string, event: MatDatepickerInputEvent<Date>) { 
-
+   
     this.adapter.setLocale('en-in');
     this.events = [];
     this.events.push(`${event.value}`);   
