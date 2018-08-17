@@ -17,6 +17,10 @@ import { ValidateService } from '../common/validate.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { environment } from '../../environments/environment';
 
+// export interface DialogData {
+//   typeErrMsg;
+// }
+
 @Component({
   selector: 'gosg-checkexamresult',
   templateUrl: './checkexamresult.component.html',
@@ -198,3 +202,21 @@ export class CheckexamresultComponent implements OnInit, OnDestroy {
   }
 
 }
+
+// @Component({
+//   selector: 'familyinfo-popup',
+//   templateUrl: './familyinfo-popup.html',
+// })
+
+// export class FamilyPopupDialog {
+
+//   constructor(
+//     public dialogRef: MatDialogRef<FamilyPopupDialog>,
+//     private translate: TranslateService,
+//     private router: Router,
+//     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+
+//     onNoClick() {
+//       this.dialogRef.close();
+//     }
+// }
