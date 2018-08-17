@@ -9,12 +9,18 @@ import { ProtectedService } from '../services/protected.service';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 import { PortalService } from '../services/portal.service';
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import { Http } from '@angular/http';
 import * as moment from 'moment';
 import { TopnavService } from '../header/topnav/topnav.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ValidateService } from '../common/validate.service';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 //import { OwlDateTimeInputDirective } from 'ng-pick-datetime/date-time/date-time-picker-input.directive';
+
+export interface DialogData {
+  typeErrMsg;
+}
 
 @Component({
   selector: 'gosg-familyinfo',
@@ -69,6 +75,8 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
     private _renderer: Renderer,
     private topnavservice: TopnavService,
     private validateService:ValidateService,
+    private adapter: DateAdapter<any>,
+    public dialog: MatDialog,
     @Inject(APP_CONFIG) private config: AppConfig) {
 
       this.lang = translate.currentLang;
@@ -176,6 +184,8 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
   checkNationalyty(){
     this.checkNation = true;
     this.complete = false;
+
+    this. openDialog(2);
   }
 
   changeNation(val){
@@ -233,20 +243,18 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
     console.log("PRINT: ");
   }
 
-  publishDOB(type: string, event) { 
+  publishDOB(type: string, event: MatDatepickerInputEvent<Date>) { 
 
-    let year, month, day;
+    this.adapter.setLocale('en-in');
     this.events = [];
-    this.events.push(`${event.value}`);
-
+    this.events.push(`${event.value}`);   
     this.valDOB = new Date(this.events[0]).getTime();
-    this.searchForm.get('dob').setValue(new Date(this.valDOB).toISOString());
-    console.log("date: ");
-    console.log(this.valDOB);
+    //this.searchForm.get('dob').setValue(new Date(this.valDOB).toISOString());
   }
 
   checkOKU(){
     console.log("check OKU");
+    this. openDialog(1);
   }
 
   submit(val){
@@ -299,7 +307,7 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
     body.passportState.passportStateId = val.passportState;
     body.name = val.name;
     body.relation.relationId = val.relation;
-    body.dob = val.dob;
+    body.dob = this.valDOB;
     body.sex.sexId = val.sex;
     body.email = val.email;
     body.race.raceId = val.race;
@@ -325,5 +333,51 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
     //   this.toastr.error(JSON.parse(error._body).statusDesc, '');
     // });
   }
+
+  openDialog(a) {
+
+    let errMsg = '';
+    if(a == 1){ // msg for oku
+      if(this.langID == 1){
+        errMsg = 'There is no information. Verification can not be done.';
+      }
+      else{
+        errMsg = 'Tiada Maklumat berkaitan. Pengesahan tidak dapat dilakukan.';
+      }      
+    }
+
+    else{
+      if(this.langID == 1){ // msg for indentification
+        errMsg = 'The information entered can not be verified. Please try again.';
+      }
+      else{
+        errMsg = 'Maklumat yang dimasukkan tidak dapat disemak. Sila cuba sekali lagi.';
+      }
+    }
+
+    this.dialog.open(FamilyPopupDialog, {
+      data: {
+        typeErrMsg: errMsg
+      }
+    });
+  }
     
+}
+
+@Component({
+  selector: 'familyinfo-popup',
+  templateUrl: './familyinfo-popup.html',
+})
+
+export class FamilyPopupDialog {
+
+  constructor(
+    public dialogRef: MatDialogRef<FamilyPopupDialog>,
+    private translate: TranslateService,
+    private router: Router,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+
+    onNoClick() {
+      this.dialogRef.close();
+    }
 }

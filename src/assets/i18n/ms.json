@@ -482,6 +482,37 @@
       "oku": "Status OKU",
       "status": "Status",
       "action": "Tindakan"
+    },
+    "label":{
+      "citizen": "Taraf Kewarganegaraan",
+      "ic": "Nombor Kad Pengenalan",
+      "passport": "Nombor Pasport",
+      "statepassport": "Negara Pengeluar Pasport",
+      "name": "Nama Penuh",
+      "relationship": "Hubungan",
+      "race": "Bangsa",
+      "religion": "Agama",
+      "dob": "Tarikh Lahir",
+      "sex": "Jantina",
+      "email": "Emel",
+      "phone": "Nombor Telepon",
+      "statusprofile": "Status Profil",
+      "reason": "Sebab Tidak Aktif",
+      "addinfo": "Maklumat Tambahan (Sekiranya Ada)",
+      "oku": "OKU Status",
+      "okuinfo": "** Sila klik sekiranya berkenaan sahaja",
+      "noregoku": "OKU Registration No.",
+      "typeoku": "OKU Type",
+      "typeidoku": "OKU ID Type",
+      "familyheader": "Maklumat Profil Keluarga"
+    },
+    "button":{
+      "confirm": "SAHKAN",
+      "print": "Cetak",
+      "save": "Simpan"
+    },
+    "err":{
+      "needed": "diperlukan"
     }
   },
   "poll": {

@@ -48,7 +48,7 @@ import { ArchivesubcategoryProdComponent } from './archive/archivesubcategory/ar
 import { ArchivecontentProdComponent } from './archive/archivecontent/archivecontentprod.component';
 import { PerhilitanrenewComponent, PopupServiceDialog } from './perhilitanrenew/perhilitanrenew.component';
 import { ProtectedLoaderComponent } from './loader/protected-loader.component';
-import { FamilyinfoComponent } from './familyinfo/familyinfo.component';
+import { FamilyinfoComponent, FamilyPopupDialog } from './familyinfo/familyinfo.component';
 import { FamilyinfotblComponent } from './familyinfo/familyinfotbl/familyinfotbl.component';
 
 export function HttpLoaderFactory(http: Http) {
@@ -88,6 +88,7 @@ export function HttpLoaderFactory(http: Http) {
     PopupServiceDialog,
     ProtectedLoaderComponent,
     FamilyinfoComponent,
+    FamilyPopupDialog,
     FamilyinfotblComponent
   ],
   imports: [
@@ -117,7 +118,7 @@ export function HttpLoaderFactory(http: Http) {
   ],
 
   providers: [ ProtectedService, ContentProdComponent],
-  entryComponents: [PopupServiceDialog],
+  entryComponents: [PopupServiceDialog, FamilyPopupDialog],
   bootstrap: [ProtectedComponent]
 })
 

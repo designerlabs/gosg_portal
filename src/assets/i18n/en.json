@@ -482,6 +482,37 @@
       "oku": "OKU Status",
       "status": "Status",
       "action": "Action"
+    },
+    "label":{
+      "citizen": "Citizenship",
+      "ic": "Indentification Card Number",
+      "passport": "Passport Number",
+      "statepassport": "Passport Manufacturer Country",
+      "name": "Full Name",
+      "relationship": "Relationship",
+      "race": "Race",
+      "religion": "Religion",
+      "dob": "Date of Birth",
+      "sex": "Sex",
+      "email": "Email",
+      "phone": "Telephone Number",
+      "statusprofile": "Profile Status",
+      "reason": "Reason Not Active",
+      "addinfo": "Additional Information (If Applicable)",
+      "oku": "OKU Status",
+      "okuinfo": "** Please click if applicable",
+      "noregoku": "OKU Registration No.",
+      "typeoku": "OKU Type",
+      "typeidoku": "OKU ID Type",
+      "familyheader": "Family Profile Information"
+    },
+    "button":{
+      "confirm": "VERIFY",
+      "print": "Print",
+      "save": "Save"
+    },
+    "err":{
+      "needed": "needed"
     }
   },
   "poll": {

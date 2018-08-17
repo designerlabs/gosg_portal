@@ -30,7 +30,7 @@
     <form [formGroup]="searchForm" novalidate="novalidate">
       <div class="row">
           <div class="col-md-12 displayDesc">
-            <h4>Maklumat Profil Keluarga</h4>
+            <h4>{{'family.label.familyheader' | translate}}</h4>
             <hr class="line">
           </div>          
       </div>
@@ -38,18 +38,21 @@
       <div class="row">
           <div class="col-md-4">
             <mat-form-field class="example-full-width">
-              <mat-select formControlName="warganegara" placeholder="Taraf Kewarganegaraan" required 
+              <mat-select formControlName="warganegara" placeholder="{{'family.label.citizen' | translate}}" required 
                   (change)="changeNation(searchForm.value)">
                   <mat-option [value]=1>Warganegara</mat-option>
                   <mat-option [value]=2>Bukan Warganegara</mat-option>
               </mat-select>
+              <mat-error *ngIf="searchForm.controls.warganegara.hasError('required')">
+                {{'family.label.citizen' | translate }} {{'family.err.needed' | translate }} 
+              </mat-error>
             </mat-form-field>
           </div>
 
           <div class="col-md-4" *ngIf="searchForm.controls.warganegara.value == 1">
             <mat-form-field class="example-full-width">
-                <input matInput formControlName="icno" placeholder="No. Kad Pengenalan" [textMask]="{mask: maskIC}" required
-                (keyup)="checkReqValues()">
+                <input matInput formControlName="icno" placeholder="{{'family.label.ic' | translate}}" [textMask]="{mask: maskIC}"
+                required (keyup)="checkReqValues()">
                 <!-- <mat-error *ngIf="searchForm.controls.icno.hasError('required')">
                     No. IC diperlukan
                 </mat-error> -->
@@ -61,21 +64,24 @@
 
           <div class="col-md-4" *ngIf="searchForm.controls.warganegara.value == 2">
             <mat-form-field class="example-full-width">
-                <input matInput formControlName="passportno" placeholder="No. Passport" required
+                <input matInput formControlName="passportno" placeholder="{{'family.label.passport' | translate}}" required
                 (keyup)="checkReqValues()"> 
                 <mat-error *ngIf="searchForm.controls.passportno.hasError('required')">
-                    No. Passport diperlukan
+                  {{'family.label.passport' | translate }} {{'family.err.needed' | translate }} 
                 </mat-error>
             </mat-form-field>
           </div>
 
           <div class="col-md-4" *ngIf="searchForm.controls.warganegara.value == 2">
             <mat-form-field class="example-full-width">
-              <mat-select formControlName="passportState" placeholder="Negara Pengeluar Passport" required 
+              <mat-select formControlName="passportState" placeholder="{{'family.label.statepassport' | translate}}" required 
                   (change)="checkReqValues()">
                   <mat-option [value]=1>England</mat-option> 
                   <mat-option [value]=2>Arab</mat-option>
               </mat-select>
+              <mat-error *ngIf="searchForm.controls.passportState.hasError('required')">
+                {{'family.label.statepassport' | translate }} {{'family.err.needed' | translate }} 
+              </mat-error>
             </mat-form-field>
           </div>
       </div>
@@ -83,22 +89,25 @@
       <div class="row">
           <div class="col-md-4">
             <mat-form-field class="example-full-width">
-                <input matInput formControlName="name" placeholder="Nama Penuh" required 
+                <input matInput formControlName="name" placeholder="{{'family.label.name' | translate}}" required 
                 (keyup)="checkReqValues()">
                 <mat-error *ngIf="searchForm.controls.name.hasError('required')">
-                    Nama diperlukan
+                  {{'family.label.name' | translate }} {{'family.err.needed' | translate }} 
                 </mat-error>
             </mat-form-field>
           </div>
 
           <div class="col-md-4">
             <mat-form-field class="example-full-width">
-              <mat-select formControlName="relation" placeholder="Hubungan" required
+              <mat-select formControlName="relation" placeholder="{{'family.label.relationship' | translate}}" required
                   (change)="checkReqValues()">
                   <mat-option [value]=1>Bapa</mat-option>
                   <mat-option [value]=2>Ibu</mat-option>
                   <mat-option [value]=3>Anak</mat-option>
               </mat-select>
+              <mat-error *ngIf="searchForm.controls.relation.hasError('required')">
+                {{'family.label.relationship' | translate }} {{'family.err.needed' | translate }} 
+              </mat-error>
             </mat-form-field>
           </div>
       </div>
@@ -106,28 +115,34 @@
       <div class="row">
           <div class="col-md-4">
             <mat-form-field class="example-full-width">
-              <mat-select formControlName="race" placeholder="Bangsa" required
+              <mat-select formControlName="race" placeholder="{{'family.label.race' | translate}}" required
                   (change)="checkReqValues()">
                   <mat-option [value]=1>Melayu</mat-option>
                   <mat-option [value]=2>Cina</mat-option>
                   <mat-option [value]=3>India</mat-option>
               </mat-select>
+              <mat-error *ngIf="searchForm.controls.race.hasError('required')">
+                {{'family.label.race' | translate }} {{'family.err.needed' | translate }} 
+              </mat-error>
             </mat-form-field>
           </div>
 
           <div class="col-md-4">
             <mat-form-field class="example-full-width">
-              <mat-select formControlName="religion" placeholder="Agama" required
+              <mat-select formControlName="religion" placeholder="{{'family.label.religion' | translate}}" required
                   (change)="checkReqValues()">
                   <mat-option [value]=1>Islam</mat-option>
                   <mat-option [value]=2>Budha</mat-option>
               </mat-select>
+              <mat-error *ngIf="searchForm.controls.religion.hasError('required')">
+                {{'family.label.religion' | translate }} {{'family.err.needed' | translate }} 
+              </mat-error>
             </mat-form-field>
           </div>
           
           <div class="col-md-4" *ngIf="checkNation == true">
             <mat-form-field class="example-full-width">
-                <input matInput formControlName="email" placeholder="Emel">
+                <input matInput formControlName="email" placeholder="{{'family.label.email' | translate}}">
                 <!-- <mat-error *ngIf="searchForm.controls.email.hasError('required')">
                     Emel diperlukan
                 </mat-error> -->
@@ -140,24 +155,27 @@
           <div class="col-md-4" *ngIf="checkNation == false">        
               <button mat-raised-button color="primary" class="btn btn-md btn-success font-size-s pull-right" 
                 (click)="checkNationalyty()" 
-                [disabled]="!complete || (!validateCtrlChk(icno) && searchForm.controls.icno.errors.pattern)">Semak</button>
-                
+                [disabled]="!complete || (!validateCtrlChk(icno) && searchForm.controls.icno.errors.pattern)">
+                {{'family.button.confirm' | translate}}</button>                
           </div>
       </div>
 
       <div class="row" *ngIf="checkNation == true">
           <div class="col-md-4">
             <mat-form-field class="example-full-width">
-                <input matInput [matDatepicker]="dob" formControlName="dob" placeholder="Tarikh Lahir" readonly
-                #dob (change)="publishDOB('input', $event)">
+                <input matInput [matDatepicker]="dob" formControlName="dob" placeholder="{{'family.label.dob' | translate}}" readonly
+                #dob (dateInput)="publishDOB('input', $event)" (dateChange)="publishDOB('change', $event)" required>
                 <mat-datepicker-toggle matSuffix [for]="dob" style="color:#333;"></mat-datepicker-toggle>
                 <mat-datepicker #dob startView="day"></mat-datepicker>
+                <mat-error *ngIf="searchForm.controls.dob.hasError('required')">
+                  {{'family.label.dob' | translate }} {{'family.err.needed' | translate }} 
+                </mat-error>
             </mat-form-field>
           </div>
 
           <div class="col-md-4">
             <mat-form-field class="example-full-width">
-              <mat-select formControlName="sex" placeholder="Jantina">
+              <mat-select formControlName="sex" placeholder="{{'family.label.sex' | translate}}">
                   <mat-option [value]=1>Lelaki</mat-option>
                   <mat-option [value]=2>Perempuan</mat-option>
               </mat-select>
@@ -166,7 +184,7 @@
 
           <div class="col-md-4">
             <mat-form-field class="example-full-width">
-                <input matInput formControlName="phone" placeholder="No. Telefon">
+                <input matInput formControlName="phone" placeholder="{{'family.label.phone' | translate}}">
             </mat-form-field>
           </div>
       </div>
@@ -174,17 +192,20 @@
       <div class="row" *ngIf="checkNation == true">
           <div class="col-md-4">
             <mat-form-field class="example-full-width">
-              <mat-select formControlName="profileStatus" placeholder="Status Profil" required
+              <mat-select formControlName="profileStatus" placeholder="{{'family.label.statusprofile' | translate}}" required
                   (change)="checkReqValues()">
                   <mat-option [value]=1>Aktif</mat-option>
                   <mat-option [value]=2>Tidak Aktif</mat-option>
               </mat-select>
+              <mat-error *ngIf="searchForm.controls.profileStatus.hasError('required')">
+                {{'family.label.statusprofile' | translate }} {{'family.err.needed' | translate }} 
+              </mat-error>
             </mat-form-field>
           </div>
 
           <div class="col-md-4">
             <mat-form-field class="example-full-width">
-              <mat-select formControlName="reasonStatus" placeholder="Sebab Tidak Aktif">
+              <mat-select formControlName="reasonStatus" placeholder="{{'family.label.reason' | translate}}">
                   <mat-option [value]=1>AA</mat-option>
                   <mat-option [value]=2>BB</mat-option>
               </mat-select>
@@ -195,21 +216,21 @@
       <div class="row" *ngIf="checkNation == true">
           <div class="col-md-8">
             <mat-form-field class="example-full-width displayInfo">
-                <textarea matInput formControlName="addInfo" placeholder="Tambahan (Sekiranya Ada)"></textarea>
+                <textarea matInput formControlName="addInfo" placeholder="{{'family.label.addinfo' | translate}}"></textarea>
             </mat-form-field>
           </div>
       </div>
 
       <div class="row" *ngIf="checkNation == true">
         <div class="col-md-2">
-          <span class="displayDesc">STATUS OKU</span>
+          <span class="displayDesc">{{'family.label.oku' | translate}}</span>
         </div>
         <div class="col-md-1">
           <button mat-raised-button color="primary" class="btn btn-md btn-success font-size-s pull-right" style="height: 30px;"
-          (click)="checkOKU()">SAHKAN</button>
+          (click)="checkOKU()">{{'family.button.confirm' | translate}}</button>
         </div>
         <div class="col-md-5">
-          <span class="displayDesc">** Sila klik sekiranya berkenaan sahaja</span>
+          <span class="displayDesc">{{'family.label.okuinfo' | translate}}</span>
         </div>
       </div>
 
@@ -221,7 +242,7 @@
         <div class="col-md-7">
           <div class="col-md-5">
               <span class="displayDesc">
-                  No. Pendaftaran OKU</span>
+                {{'family.label.noregoku' | translate}}</span>
           </div>
           <div class="col-md-7">
               <span class="displayDesc">
@@ -229,7 +250,7 @@
           </div>
           <div class="col-md-5">
               <span class="displayDesc">
-                  Jenis OKU</span>
+                {{'family.label.typeoku' | translate}}</span>
           </div>
           <div class="col-md-7">
               <span class="displayDesc">
@@ -237,7 +258,7 @@
           </div>
           <div class="col-md-5">
               <span class="displayDesc">
-                  Jenis ID OKU</span>
+                {{'family.label.typeidoku' | translate}}</span>
           </div>
           <div class="col-md-7">
               <span class="displayDesc">
@@ -248,14 +269,14 @@
             Jenis OKU: <br>
             Jenis ID OKU:</span> -->
         </div>
-      </div>
+      </div><br>
 
       <div class="pull-right" *ngIf="checkNation == true">        
-        <button mat-raised-button color="primary" class="btn btn-md btn-success font-size-s" (click)="print()"
-          [disabled]="!complete">Cetak</button>
+        <!-- <button mat-raised-button color="primary" class="btn btn-md btn-success font-size-s" (click)="print()"
+          [disabled]="!complete">{{'family.button.print' | translate}}</button> -->
         <button mat-raised-button color="primary" class="btn btn-md btn-success font-size-s" (click)="submit(searchForm.value)"
           [disabled]="!complete || (!validateCtrlChk(email) && searchForm.controls.email.errors.pattern) || 
-          (!validateCtrlChk(icno) && searchForm.controls.icno.errors.pattern)">Simpan</button>
+          (!validateCtrlChk(icno) && searchForm.controls.icno.errors.pattern)">{{'family.button.save' | translate}}</button>
       </div>
     </form>
   
