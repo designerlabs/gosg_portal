@@ -136,7 +136,7 @@ export class FooterComponent implements OnInit, OnDestroy {
 
   getUrl(ele){
 
-    if(ele === 'sitemap' || ele === 'statistic' || ele === 'calendar' || ele === 'subscription' || ele === 'feedback' || ele === 'agencydir')
+    if(ele === 'sitemap' || ele === 'statistic' || ele === 'calendar' || ele === 'subscription' || ele === 'feedback' || ele === 'agencydir' || ele == 'onlineservice')
       this.navService.loader = false;
     else
       this.navService.loader = true;
