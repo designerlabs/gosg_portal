@@ -116,7 +116,7 @@ export const protectedRoutes: Routes = [
     {path: 'pdrm/police-report', component: PolicereportComponent},
     {path: 'pdrm/summon-traffic', component: SummontrafficComponent},
     {path: 'pdrm/status-position', component: StatuspositionComponent},
-    {path: 'school-search', component: SchoolsearchComponent},
+    {path: 'education', component: SchoolsearchComponent},
     {path: 'trafficinfo', component: TrafficinfoComponent },
     {path: 'perhilitan', component: PerhilitanComponent},
     {path: 'perhilitan/:id', component: PerhilitanComponent},

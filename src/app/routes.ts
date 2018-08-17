@@ -101,7 +101,7 @@ export const appRoutes: Routes = [
     {path: 'unsubscribe', component: UnsubscribeComponent},
     {path: 'statistic', component: StatisticComponent},
     {path: 'sitemap', component: SitemapComponent},
-    {path: 'school-search', component: SchoolsearchComponent},
+    {path: 'education', component: SchoolsearchComponent},
     {path: 'trafficinfo', component: TrafficinfoComponent },
 
     {path: '', redirectTo: 'index', pathMatch: 'full'},
