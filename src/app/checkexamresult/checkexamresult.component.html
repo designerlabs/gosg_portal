@@ -1,0 +1,99 @@
+<gosg-protected-loader [loader]="loading"></gosg-protected-loader>
+<div class="container-fluid animated slideInDown" style="background: #a7a495;">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 style="margin-top: 10px;" class="font-size-l">{{'home.breadcrumb.exam' | translate}}</h1>
+        <hr class="hr-custom2">
+        <ul class="list-inline" style="clear:both;">
+          <li>
+            <a class="font-size-s" routerLink="/">
+              {{'home.menu.home' | translate }}
+            </a>
+          </li>
+          <li>/</li>
+          <li>{{'home.breadcrumb.exam' | translate}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="col-md-12">&nbsp;</div>
+  
+  <div class="col-md-12 mat-elevation-z8 padding-bottom-20">    
+    <form [formGroup]="searchForm" novalidate="novalidate">
+      <div class="row">
+          <div class="col-md-12 displayDesc">
+            <div class="col-md-3"><h4>{{'exam.label.name' | translate}}</h4></div>
+            <div class="col-md-3"><h4>{{'exam.label.year' | translate}}</h4></div>
+            <div class="col-md-3"><h4>{{'exam.label.examname' | translate}}</h4></div>
+            <div class="col-md-3"><h4>{{'exam.label.examtype' | translate}}</h4></div>            
+            <hr class="line">
+          </div>          
+      </div>
+
+      <div class="row">
+          <div class="col-md-3">
+            <mat-form-field class="example-full-width">
+              <mat-select formControlName="name" placeholder="{{'exam.label.name' | translate}}" required 
+                  (change)="checkReqValues()">
+                  <mat-option [value]=1>Warganegara</mat-option>
+                  <mat-option [value]=2>Bukan Warganegara</mat-option>
+              </mat-select>
+              <mat-error *ngIf="searchForm.controls.name.hasError('required')">
+                {{'exam.label.name' | translate }} {{'exam.err.needed' | translate }} 
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3">
+            <mat-form-field class="example-full-width">
+              <mat-select formControlName="examyear" placeholder="{{'exam.label.year' | translate}}" required 
+                  (change)="checkReqValues()">
+                  <mat-option [value]=1>2018</mat-option> 
+                  <mat-option [value]=2>2017</mat-option>
+              </mat-select>
+              <mat-error *ngIf="searchForm.controls.year.hasError('required')">
+                {{'family.label.year' | translate }} {{'exam.err.needed' | translate }} 
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3">
+            <mat-form-field class="example-full-width">
+              <mat-select formControlName="examname" placeholder="{{'exam.label.examname' | translate}}" required 
+                  (change)="checkReqValues()">
+                  <mat-option [value]=1>PEPERIKSAAN PENGGAL</mat-option> 
+                  <mat-option [value]=2>PEPERIKSAAN AKHIR</mat-option>
+              </mat-select>
+              <mat-error *ngIf="searchForm.controls.examname.hasError('required')">
+                {{'family.label.examname' | translate }} {{'exam.err.needed' | translate }} 
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3">
+            <mat-form-field class="example-full-width">
+              <mat-select formControlName="examtype" placeholder="{{'exam.label.examtype' | translate}}" required 
+                  (change)="checkReqValues()">
+                  <mat-option [value]=1>UJIAN 1</mat-option> 
+                  <mat-option [value]=2>UJIAN @</mat-option>
+              </mat-select>
+              <mat-error *ngIf="searchForm.controls.examtype.hasError('required')">
+                {{'family.label.examtype' | translate }} {{'exam.err.needed' | translate }} 
+              </mat-error>
+            </mat-form-field>
+          </div>
+      </div>
+      
+    </form>
+  
+  </div>
+</div>
+
+<app-confirm-dialog #resetModal [title]="'common.icon.warn'" [content]="'common.msg.reset'" [state]="'common.state.warn'"
+  [isReset]="'true'" (resetMethod)="resetMethod($event)">
+</app-confirm-dialog>

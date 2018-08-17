@@ -36,7 +36,6 @@ import { ArchivesubcategoryComponent } from './archive/archivesubcategory/archiv
 import { ArchivecontentComponent } from './archive/archivecontent/archivecontent.component';
 import { PortalLoaderComponent } from './loader/portal-loader.component';
 
-
 // import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule } from "@angular/material";
 
 export function HttpLoaderFactory(http: Http) {
@@ -90,7 +89,7 @@ imports: [
     ArchivecategoryComponent,
     ArchivesubcategoryComponent,
     ArchivecontentComponent,
-    PortalLoaderComponent   
+    PortalLoaderComponent 
 
   ],
 

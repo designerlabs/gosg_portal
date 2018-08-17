@@ -58,6 +58,7 @@ import { PerhilitanrenewComponent } from './perhilitanrenew/perhilitanrenew.comp
 import { RssmainComponent } from './article/rss/rssmain/rssmain.component';
 import { FamilyinfoComponent } from './familyinfo/familyinfo.component';
 import { FamilyinfotblComponent } from './familyinfo/familyinfotbl/familyinfotbl.component';
+import { CheckexamresultComponent } from './checkexamresult/checkexamresult.component';
 
 //import { GalleryComponent } from './gallery/gallery.component';
 // import { NavRouterActivator } from './header/nav/nav-router-activator.service'
@@ -126,6 +127,7 @@ export const protectedRoutes: Routes = [
     {path: 'familyinfo/:id', component: FamilyinfoComponent},
     {path: 'familyinfo/add', component: FamilyinfoComponent},
     {path: 'get_user_approval', component: ReplacementmycardComponent},
+    {path: 'exam_result', component: CheckexamresultComponent},
     {path: '**', component: ErrorComponent}
     //{path: 'user', loadChildren: 'app/user/user.module#UserModule'}
 ];

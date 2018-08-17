@@ -74,7 +74,8 @@
       "gallery": "Gallery",
       "search": "Search",
       "perhilitan": "Perhilitan",
-      "family": "Family Profile"
+      "family": "Family Profile",
+      "exam": "Exam Result"
     },
     "expandButton": {
       "less": "Show Less",
@@ -510,6 +511,18 @@
       "confirm": "VERIFY",
       "print": "Print",
       "save": "Save"
+    },
+    "err":{
+      "needed": "needed"
+    }
+  },
+  "exam":{
+    "label":{
+      "examheader": "Exam Result",
+      "name": "Name",
+      "year": "Exam Year",
+      "examname": "Exam Name",
+      "examtype": "Exam Type"
     },
     "err":{
       "needed": "needed"

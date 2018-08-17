@@ -16,7 +16,6 @@ import { TopnavService } from '../header/topnav/topnav.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ValidateService } from '../common/validate.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-//import { OwlDateTimeInputDirective } from 'ng-pick-datetime/date-time/date-time-picker-input.directive';
 
 export interface DialogData {
   typeErrMsg;

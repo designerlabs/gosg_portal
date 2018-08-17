@@ -74,7 +74,8 @@
       "gallery": "Galeri",
       "search": "Search",
       "perhilitan": "Perhilitan",
-      "family": "Profil Keluarga"
+      "family": "Profil Keluarga",
+      "exam": "Keputusan Peperiksaan"
     },
     "expandButton": {
       "less": "Lihat Ringkasan",
@@ -510,6 +511,18 @@
       "confirm": "SAHKAN",
       "print": "Cetak",
       "save": "Simpan"
+    },
+    "err":{
+      "needed": "diperlukan"
+    }
+  },
+  "exam":{
+    "label":{
+      "examheader": "Keputusan Peperiksaan",
+      "name": "Nama",
+      "year": "Tahun Peperiksaan",
+      "examname": "Nama Peperiksaan",
+      "examtype": "Jenis Peperiksaan"
     },
     "err":{
       "needed": "diperlukan"
