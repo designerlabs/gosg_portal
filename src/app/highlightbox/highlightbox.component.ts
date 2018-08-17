@@ -141,20 +141,21 @@ export class HighlightboxComponent implements OnInit, OnDestroy {
       return a[2];
     }
     checkRefNo(formvalues: any) {
-      this.loading = true;
+      this.getUrl();
+      
       this.portalservice.getSubmissionStatus(formvalues.noPermohonanCarian, this.languageId).subscribe(
         data => {
-          if(data.statusCode == "ERROR")
-            this.sbgcolor = false;
-          else
-            this.sbgcolor = true;
-
-        this.result = data.statusDesc;
-        this.loading = false;
+          this.result = data.statusDesc;
+          if(data.statusCode == "ERROR") {
+            this.toastr.error(' STATUS: '+this.result, '');
+          } else {
+            this.toastr.success(' STATUS: '+this.result, '');
+          }
+          this.navService.loader = false;
       },
       error => {
         this.toastr.error(JSON.parse(error._body).statusDesc, '');
-        this.loading = false;
+        this.navService.loader = false;
       });
     }
 
