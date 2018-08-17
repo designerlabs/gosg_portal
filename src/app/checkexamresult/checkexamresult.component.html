@@ -27,12 +27,26 @@
     <form [formGroup]="searchForm" novalidate="novalidate">
       <div class="row">
           <div class="col-md-12 displayDesc">
+              <h3>Semakan Keputusan Peperiksaan</h3>
+          </div>
+          <div class="col-md-12 displayDesc">
+              <span>Kemudahan semakan keputusan peperiksaan merangkumi peperiksaan PT3, STPM, Penggal Persekolahan 
+                untuk diri sendiri dan juga anak di bawah jagaan. Maklumat keputusan peperiksaan yang disemak bukanlah 
+                keputusan 'real time'.</span>
+          </div>
+          <div class="col-md-12 displayDesc">
+              <br>
+              <span>Sila pilih maklumat seperti di bawah:</span>
+          </div>
+      </div>
+      <div class="row">
+          <!-- <div class="col-md-12 displayDesc">
             <div class="col-md-3"><h4>{{'exam.label.name' | translate}}</h4></div>
             <div class="col-md-3"><h4>{{'exam.label.year' | translate}}</h4></div>
             <div class="col-md-3"><h4>{{'exam.label.examname' | translate}}</h4></div>
             <div class="col-md-3"><h4>{{'exam.label.examtype' | translate}}</h4></div>            
-            <hr class="line">
-          </div>          
+          </div><br> -->
+          <div class="padding-line"><hr class="line"></div> 
       </div>
 
       <div class="row">
@@ -40,8 +54,7 @@
             <mat-form-field class="example-full-width">
               <mat-select formControlName="name" placeholder="{{'exam.label.name' | translate}}" required 
                   (change)="checkReqValues()">
-                  <mat-option [value]=1>Warganegara</mat-option>
-                  <mat-option [value]=2>Bukan Warganegara</mat-option>
+                  <mat-option *ngFor="let user of listUser" [value]="user.ic">{{user.name}}</mat-option>
               </mat-select>
               <mat-error *ngIf="searchForm.controls.name.hasError('required')">
                 {{'exam.label.name' | translate }} {{'exam.err.needed' | translate }} 
@@ -49,7 +62,7 @@
             </mat-form-field>
           </div>
 
-          <div class="col-md-3">
+          <div class="col-md-2">
             <mat-form-field class="example-full-width">
               <mat-select formControlName="examyear" placeholder="{{'exam.label.year' | translate}}" required 
                   (change)="checkReqValues()">
@@ -75,7 +88,7 @@
             </mat-form-field>
           </div>
 
-          <div class="col-md-3">
+          <div class="col-md-2">
             <mat-form-field class="example-full-width">
               <mat-select formControlName="examtype" placeholder="{{'exam.label.examtype' | translate}}" required 
                   (change)="checkReqValues()">
@@ -86,6 +99,12 @@
                 {{'family.label.examtype' | translate }} {{'exam.err.needed' | translate }} 
               </mat-error>
             </mat-form-field>
+          </div>
+
+          <div class="col-md-2">        
+              <button mat-raised-button color="primary" class="btn btn-md btn-success font-size-s pull-right" 
+                (click)="checkExam()" [disabled]="!complete">
+                {{'family.button.confirm' | translate}}</button>                
           </div>
       </div>
       

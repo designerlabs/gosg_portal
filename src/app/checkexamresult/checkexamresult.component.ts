@@ -15,6 +15,7 @@ import { TopnavService } from '../header/topnav/topnav.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ValidateService } from '../common/validate.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'gosg-checkexamresult',
@@ -34,6 +35,7 @@ export class CheckexamresultComponent implements OnInit, OnDestroy {
   
   public complete: boolean; 
   public getUrl: any;
+  public listUser: any[] = [];
   showNoData = false;
   loading = false;
 
@@ -103,9 +105,73 @@ export class CheckexamresultComponent implements OnInit, OnDestroy {
       examtype: this.examtype
     });
 
+    this.getUserData();
     this.getUrl = this.router.url.split('/')[2];
     this.checkReqValues();
 
+  }
+
+  getUserData(){
+    this.loading = true;
+
+    if(!environment.staging){
+      this.protectedService.getUser().subscribe(
+      data => {
+        this.sharedService.errorHandling(data, (function(){
+
+          if(data.user){
+
+            let a = {
+              "ic" :data.user.identificationNo,
+              "name" : data.user.fullName
+            }
+            this.listUser.push(a);
+            
+            //this.searchForm.get('name').setValue(data.user.fullName);
+            this.searchForm.get('name').setValue(data.user.identificationNo);      
+
+
+          }else{
+          }
+        }).bind(this));
+        this.loading = false;
+
+      },
+      error => {
+        this.loading = false;
+        location.href = this.config.urlUAP +'uapsso/Logout';
+        //location.href = this.config.urlUAP+'portal/index';
+      });
+    }
+
+    else{ //need to be deleted Noraini for local only
+      this.loading = false;
+      let data = {
+        "user": {
+          "userId": 116,
+          "pid": "700101712555",
+          "identificationNo": "700101712555",
+          "passportNo": "",
+          "fullName": "ZAKARIA BIN MOHD NOR",
+          "email": "zakariatestgosg@yopmail.com",
+          "mobilePhoneNo": "1-684*123-1231 2312",
+        }
+      }
+
+      let a = {
+        "ic" :data.user.identificationNo,
+        "name" : data.user.fullName
+      }
+
+      this.listUser.push(a);
+
+      //this.searchForm.get('name').setValue(data.user.fullName);
+      this.searchForm.get('name').setValue(data.user.identificationNo);
+    }
+  }
+
+  checkExam(){
+    console.log("check exam");
   }
   
   checkReqValues() {
