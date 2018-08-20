@@ -39,25 +39,25 @@
                       </ul>
                     </mat-expansion-panel>
 
-                    <mat-expansion-panel class="btn btn-md online_service_btn" [hideToggle]="true" *ngIf="!!!state">
-                      <mat-expansion-panel-header [routerLink]="['/digitalservices']">
-                        <mat-panel-title>
+                    <mat-expansion-panel style="margin: 0px; padding: 0px;" class="btn btn-md online_service_btn" [hideToggle]="true" *ngIf="!!!state">
+                      <mat-expansion-panel-header [routerLink]="['/digitalservices']" style="height: 30px;">
+                        <mat-panel-title  style="color: #fff;">
                           {{'home.menu.onlineservice' | translate}}
                         </mat-panel-title>
                       </mat-expansion-panel-header>
                     </mat-expansion-panel>
 
-                    <mat-expansion-panel class="btn btn-md online_service_btn" [hideToggle]="true" *ngIf="!!state && validMyIdentity">
-                      <mat-expansion-panel-header [routerLink]="['/digitalservices']">
-                        <mat-panel-title>
+                    <mat-expansion-panel style="margin: 0px; padding: 0px;" class="btn btn-md online_service_btn" [hideToggle]="true" *ngIf="!!state && validMyIdentity">
+                      <mat-expansion-panel-header [routerLink]="['/digitalservices']" style="height: 30px;">
+                        <mat-panel-title  style="color: #fff;">
                           {{'home.menu.onlineservice' | translate}}
                         </mat-panel-title>
                       </mat-expansion-panel-header>
                     </mat-expansion-panel>
 
-                    <mat-expansion-panel class="btn btn-md online_service_btn" [hideToggle]="true" *ngIf="!!state && !validMyIdentity">
-                      <mat-expansion-panel-header (click)="serviceModal.show()">
-                        <mat-panel-title>
+                    <mat-expansion-panel style="margin: 0px; padding: 0px;" class="btn btn-md online_service_btn" [hideToggle]="true" *ngIf="!!state && !validMyIdentity">
+                      <mat-expansion-panel-header (click)="serviceModal.show()" style="height: 30px;">
+                        <mat-panel-title style="color: #fff;">
                           {{'home.menu.onlineservice' | translate}}
                         </mat-panel-title>
                       </mat-expansion-panel-header>
@@ -85,8 +85,8 @@
                       </div>
                     </div>
                   </mat-accordion>
-                  <button type="button" class="btn btn-danger btn-md" aria-label="Close" (click)="menuModal.hide()">
-                    <span aria-hidden="true">&times; {{'common.close' | translate}}</span>
+                  <button style="margin-top: 30px;" type="button" mat-fab color="warn" aria-label="Close" (click)="menuModal.hide()">
+                    <span aria-hidden="true" style="font-size: 30px; bottom: 3px; position: relative;"> <i class="fa fa-times" aria-hidden="true"></i> </span>
                   </button>
                 </div>
               </div>
