@@ -4,7 +4,8 @@
       <div class="container-fluid">
         <div class="navbar-header">
           <a [routerLink]="['/index']" class="navbar-brand">
-            <img src="assets/images/{{imgSrc }}.jpg" width="100%">
+            <img src="assets/images/{{imgSrc }}.jpg" class="visible-xs visible-sm" width="70%" style="top: 8px; position: relative;">
+            <img src="assets/images/{{imgSrc }}.jpg" class="hidden-xs hidden-sm" width="100%">
           </a>
           <button class="visible-xs visible-sm btn btn-sm" (click)="menuModal.show()" style="overflow: hidden;  border: none;
                 outline: none; position: absolute; right: 0px; margin-right: 10px;" mat-fab color="primary">
