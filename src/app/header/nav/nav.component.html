@@ -1,90 +1,189 @@
 <div class="container">
-    <div class="top-nav">
-        <div class="navbar navbar-default">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                <a [routerLink]="['/index']" class="navbar-brand" ><img src="assets/images/{{imgSrc }}.jpg" width="100%"></a>
-                <button class="visible-xs visible-sm">Test</button>
-                </div>
-                <div class="collapse navbar-collapse">
-               
-                <ul class="nav navbar-nav font-size-s hidden-xs hidden-sm" id="main-menu">
-                    <li [routerLinkActive]="['active']"  [routerLinkActiveOptions]="{exact:true}">
-                    <a [routerLink]="['/index']"><i class="fa fa-home"></i> {{ 'home.menu.home' | translate }}</a>
-                    </li>
-                    <!--<li><a [routerLink]="['public/new']" routerLinkActive="active">Create Event</a></li>-->
-                    <li *ngFor="let menu of menus" [routerLinkActive]="['active']"  [routerLinkActiveOptions]="{exact:true}">
-                        <a class="drop"  (mouseover)="changeStyle($event)" (mouseout)="changeStyle($event)">{{menu.title}}
-                            <span class="caret"></span>
-                        </a>
-                       <!-- Begin 5 columns container -->
-                        <div class="dropdown_5columns" [ngClass]="color">
-                            <div class="col_6">
-                                <ul>
-                                    <li class="col-md-4" *ngFor="let data of menu.data">
-                                        <a  class="font-size-s" href="" (click)="handleClickMe(data.categoryCode)" [routerLink]="['category', data.categoryCode]" ><i class="fa fa-arrow-circle-right"></i> {{data.categoryName}}</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                      <button type="button" class="btn btn-md online_service_btn" *ngIf="!!!state" [routerLink]="['/digitalservices']">{{'home.menu.onlineservice' | translate}}</button>
-                      <button type="button" class="btn btn-md online_service_btn" *ngIf="!!state && validMyIdentity" [routerLink]="['/digitalservices']">{{'home.menu.onlineservice' | translate}}</button>
-                      <button type="button" class="btn btn-md online_service_btn" *ngIf="!!state && !validMyIdentity"(click)="staticModal.show()">{{'home.menu.onlineservice' | translate}}</button>
+  <div class="top-nav">
+    <div class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a [routerLink]="['/index']" class="navbar-brand">
+            <img src="assets/images/{{imgSrc }}.jpg" width="100%">
+          </a>
+          <button class="visible-xs visible-sm btn btn-sm" (click)="menuModal.show()" style="overflow: hidden;  border: none;
+                outline: none;" mat-fab color="primary">
+            <i class="fa fa-bars" aria-hidden="true"></i>
+          </button>
+          <div class="modal fade" bsModal #menuModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+              <div class="modal-content">
+                <div class="modal-body">
 
-                      <div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}"
-                          tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-sm">
-                          <div class="modal-content">
-                            <div class="modal-header bg_header bg_warn_header">
-                                <h4 class="text-center">
-                                    <i style="font-size: 30px;" class="fa fa-exclamation-triangle"></i>
-                                </h4>
+                  <mat-accordion>
+                    <mat-expansion-panel [hideToggle]="true">
+                      <mat-expansion-panel-header [routerLink]="['/index']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+                        <mat-panel-title>
+                          {{ 'home.menu.home' | translate }}
+                        </mat-panel-title>
+                      </mat-expansion-panel-header>
+                    </mat-expansion-panel>
+
+                    <mat-expansion-panel *ngFor="let menu of menus">
+                      <mat-expansion-panel-header>
+                        <mat-panel-title>
+                          {{menu.title}}
+                        </mat-panel-title>
+                      </mat-expansion-panel-header>
+                      <ul class="nav navbar-nav font-size-s">
+                        <li class="col-md-4" *ngFor="let data of menu.data">
+                          <a class="font-size-s" href="" (click)="handleClickMe(data.categoryCode)" [routerLink]="['category', data.categoryCode]">
+                            <i class="fa fa-arrow-circle-right"></i> {{data.categoryName}}</a>
+                        </li>
+                      </ul>
+                    </mat-expansion-panel>
+
+                    <mat-expansion-panel class="btn btn-md online_service_btn" [hideToggle]="true" *ngIf="!!!state">
+                      <mat-expansion-panel-header [routerLink]="['/digitalservices']">
+                        <mat-panel-title>
+                          {{'home.menu.onlineservice' | translate}}
+                        </mat-panel-title>
+                      </mat-expansion-panel-header>
+                    </mat-expansion-panel>
+
+                    <mat-expansion-panel class="btn btn-md online_service_btn" [hideToggle]="true" *ngIf="!!state && validMyIdentity">
+                      <mat-expansion-panel-header [routerLink]="['/digitalservices']">
+                        <mat-panel-title>
+                          {{'home.menu.onlineservice' | translate}}
+                        </mat-panel-title>
+                      </mat-expansion-panel-header>
+                    </mat-expansion-panel>
+
+                    <mat-expansion-panel class="btn btn-md online_service_btn" [hideToggle]="true" *ngIf="!!state && !validMyIdentity">
+                      <mat-expansion-panel-header (click)="serviceModal.show()">
+                        <mat-panel-title>
+                          {{'home.menu.onlineservice' | translate}}
+                        </mat-panel-title>
+                      </mat-expansion-panel-header>
+                    </mat-expansion-panel>
+
+                    <div class="modal fade" bsModal #serviceModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+                      aria-hidden="true">
+                      <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                          <div class="modal-header bg_header bg_warn_header">
+                            <h4 class="text-center">
+                              <i style="font-size: 30px;" class="fa fa-exclamation-triangle"></i>
+                            </h4>
+                          </div>
+                          <div class="modal-body">
+                            {{ 'digitalservices.msg.access' | translate }}
+                            <div class="row">
+                              &nbsp;
                             </div>
-                            <div class="modal-body">
-                                {{ 'digitalservices.msg.access' | translate }}
-                                <div class="row">
-                                  &nbsp;
-                                </div>
-                                <button type="button" class="btn btn-danger btn-md" aria-label="Close" (click)="staticModal.hide()">
-                                    <span aria-hidden="true">&times; {{'common.close' | translate}}</span>
-                                  </button>
-                            </div>
+                            <button type="button" class="btn btn-danger btn-md" aria-label="Close" (click)="serviceModal.hide()">
+                              <span aria-hidden="true">&times; {{'common.close' | translate}}</span>
+                            </button>
                           </div>
                         </div>
                       </div>
-                    </li>
-                    <li>
-                        <a href="#" class="dropdown-toggle" data-toggle="searchDDown" (mouseenter)="dropdownDisplay('show')" class="h_search_btn"><i class="fa fa-search"></i></a>
-                    </li>
-                </ul>
-                <ul id="searchDDown" class="dropdown-menu mega-dropdown-menu search-dropdown" style="display: none;" (mouseenter)="dropdownDisplay('show')" (mouseleave)="dropdownDisplay('hide')">
-                    <li class="col-md-12">&nbsp;</li>
-                    <li class="col-md-12">
-                        <div id="search-expand">
-                            <div class="input-group">
-                                <input class="form-control" style="border: 1px inset #4e5d6c" type="text" [(ngModel)]="ser_word" placeholder="{{'home.search.label' | translate}}" id="input_keyword">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" id="submit_keyword" type="button" value="Submit" (click)="mainSearch(ser_word)"><span class="fa fa-search"></span><span class="sr-only">Search Keyword</span></button>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="col-md-12">&nbsp;</div>
-                        <div id="search-tag">
-                            <h6 class="font-size-s" style="font-family: Roboto; color: #222">
-                                {{'home.search.popSearch' | translate}}
-                            </h6>
-                            <button *ngFor="let key of popData" class="btn btn-primary btn-sm" style="margin-right: 1%; margin-bottom: 1%" type="button" (click)="mainSearch(key)" value="{{key}}">
-                                {{ key }}
-                            </button>
-                        </div>
-                    </li>
-                    <li class="col-md-12">&nbsp;</li>
-                </ul>
+                    </div>
+                  </mat-accordion>
+                  <button type="button" class="btn btn-danger btn-md" aria-label="Close" (click)="menuModal.hide()">
+                    <span aria-hidden="true">&times; {{'common.close' | translate}}</span>
+                  </button>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
+        <div class="collapse navbar-collapse">
+
+          <ul class="nav navbar-nav font-size-s hidden-xs hidden-sm" id="main-menu">
+            <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+              <a [routerLink]="['/index']">
+                <i class="fa fa-home"></i> {{ 'home.menu.home' | translate }}</a>
+            </li>
+            <!--<li><a [routerLink]="['public/new']" routerLinkActive="active">Create Event</a></li>-->
+            <li *ngFor="let menu of menus" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+              <a class="drop" (mouseover)="changeStyle($event)" (mouseout)="changeStyle($event)">{{menu.title}}
+                <span class="caret"></span>
+              </a>
+              <!-- Begin 5 columns container -->
+              <div class="dropdown_5columns" [ngClass]="color">
+                <div class="col_6">
+                  <ul>
+                    <li class="col-md-4" *ngFor="let data of menu.data">
+                      <a class="font-size-s" href="" (click)="handleClickMe(data.categoryCode)" [routerLink]="['category', data.categoryCode]">
+                        <i class="fa fa-arrow-circle-right"></i> {{data.categoryName}}</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </li>
+            <li>
+              <button type="button" class="btn btn-md online_service_btn" *ngIf="!!!state" [routerLink]="['/digitalservices']">{{'home.menu.onlineservice' | translate}}</button>
+              <button type="button" class="btn btn-md online_service_btn" *ngIf="!!state && validMyIdentity" [routerLink]="['/digitalservices']">{{'home.menu.onlineservice' | translate}}</button>
+              <button type="button" class="btn btn-md online_service_btn" *ngIf="!!state && !validMyIdentity" (click)="staticModal.show()">{{'home.menu.onlineservice' | translate}}</button>
+
+              <div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-sm">
+                  <div class="modal-content">
+                    <div class="modal-header bg_header bg_warn_header">
+                      <h4 class="text-center">
+                        <i style="font-size: 30px;" class="fa fa-exclamation-triangle"></i>
+                      </h4>
+                    </div>
+                    <div class="modal-body">
+                      {{ 'digitalservices.msg.access' | translate }}
+                      <div class="row">
+                        &nbsp;
+                      </div>
+                      <button type="button" class="btn btn-danger btn-md" aria-label="Close" (click)="staticModal.hide()">
+                        <span aria-hidden="true">&times; {{'common.close' | translate}}</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <a href="#" class="dropdown-toggle" data-toggle="searchDDown" (mouseenter)="dropdownDisplay('show')" class="h_search_btn">
+                <i class="fa fa-search"></i>
+              </a>
+            </li>
+          </ul>
+          <ul id="searchDDown" class="dropdown-menu mega-dropdown-menu search-dropdown" style="display: none;" (mouseenter)="dropdownDisplay('show')"
+            (mouseleave)="dropdownDisplay('hide')">
+            <li class="col-md-12">&nbsp;</li>
+            <li class="col-md-12">
+              <div id="search-expand">
+                <div class="input-group">
+                  <input class="form-control" style="border: 1px inset #4e5d6c" type="text" [(ngModel)]="ser_word" placeholder="{{'home.search.label' | translate}}"
+                    id="input_keyword">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" id="submit_keyword" type="button" value="Submit" (click)="mainSearch(ser_word)">
+                      <span class="fa fa-search"></span>
+                      <span class="sr-only">Search Keyword</span>
+                    </button>
+                  </span>
+                </div>
+              </div>
+              <div class="col-md-12">&nbsp;</div>
+              <div id="search-tag">
+                <h6 class="font-size-s" style="font-family: Roboto; color: #222">
+                  {{'home.search.popSearch' | translate}}
+                </h6>
+                <button *ngFor="let key of popData" class="btn btn-primary btn-sm" style="margin-right: 1%; margin-bottom: 1%" type="button"
+                  (click)="mainSearch(key)" value="{{key}}">
+                  {{ key }}
+                </button>
+              </div>
+            </li>
+            <li class="col-md-12">&nbsp;</li>
+          </ul>
+        </div>
+      </div>
     </div>
+  </div>
+
+  <!-- Modal -->
 </div>
 <gosg-sidenavmain></gosg-sidenavmain>

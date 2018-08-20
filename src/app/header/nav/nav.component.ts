@@ -175,6 +175,10 @@ export class NavComponent implements OnInit, AfterViewInit, OnDestroy {
         }
     }
 
+    mobileMainMenu(){
+      alert('hello')
+    }
+
     internal(key) {
 
         let body = {
