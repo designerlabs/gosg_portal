@@ -34,14 +34,14 @@
           <li>
           </li>
           <li>
-            <a class="hidden-xs visible-sm  visible-md visible-lg">{{state}}</a>     
+            <a class="hidden-xs visible-sm  visible-md visible-lg">{{state}}</a>
             <!-- <a class="visible-xs hidden-sm hidden-md hidden-lg" [routerLink]="['register']"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>      -->
           </li>
           <li>
             <button (click)="showProfileMenu()" class="btn btn-sm btn-default"><i style="font-size:16px;" class="fa fa-user-circle" aria-hidden="true"></i></button>
           </li>
       </ul>
-      
+
       <ul class="list-inline font-size-s" *ngIf="!state"  style="display:inline-block; float:right;">
           <li>
             <button (click)="toggle()" class="btn btn-xs btn-default font-size-s hidden-xs visible-sm  visible-md visible-lg"><i class="fa fa-language"></i> {{ currlang }}</button>
@@ -49,26 +49,23 @@
           </li>
           <li>|</li>
           <li>
-            <a class="hidden-xs visible-sm  visible-md visible-lg" [routerLink]="['register']">{{ 'home.menu.register' | translate }}</a>     
-            <a class="visible-xs hidden-sm hidden-md hidden-lg" [routerLink]="['register']"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>     
+            <a class="hidden-xs visible-sm  visible-md visible-lg" [routerLink]="['register']">{{ 'home.menu.register' | translate }}</a>
+            <a class="visible-xs hidden-sm hidden-md hidden-lg" [routerLink]="['register']"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
           </li>
-          <li>|</li>
-          <li>
+          <li class="hidden-xs visible-sm  visible-md visible-lg">|</li>
+          <li class="hidden-xs visible-sm  visible-md visible-lg">
               <a class="hidden-xs visible-sm  visible-md visible-lg" href="../portal-protected/">{{ 'home.menu.login' | translate }}</a>
               <!-- <a class="visible-xs hidden-sm hidden-md hidden-lg" *ngIf="!auth.isAuthenticated()" [routerLink]="['portal/login']"><i class="fa fa-sign-in" aria-hidden="true"></i></a>
               <a *ngIf="auth.isAuthenticated()" [routerLink]="['user/profile']">Welcome {{auth.currentUser.firstName}}</a> -->
           </li>
-          <li>
-            |
-          </li>
-          <li>
-            <button (click)="showSidenavMenu()" class="btn btn-sm btn-default"><i style="font-size:16px;" class="fa fa-cog" aria-hidden="true"></i></button>
+          <li class="visible-xs visible-sm">
+            <button (click)="showSidenavMenu()" class="btn btn-sm btn-default visible-xs visible-sm "><i style="font-size:16px;" class="fa fa-cog" aria-hidden="true"></i></button>
           </li>
       </ul>
 
     </div>
     <div class="col-xs-12 visible-xs visible-sm"><i class="fa fa-bars" aria-hidden="true"></i></div>
-    
+
     <div class="row menu_botm container menu_botm  hidden-xs hidden-sm" id="confBar">
       <div class="col-sm-12" id="themeContainer">
         <ul class="list-inline hidden-xs font-size-s">
@@ -81,8 +78,8 @@
                <!-- <input #colorPanel *ngFor="let color of colors; let i = index; let firstItem = first" (click)="setClickedColor(i, firstItem)"  [class.colorPaletteActive]="i == selectedRow ? true: false" type="button" name="bgColor" [(ngModel)]="bgColor" [ngStyle]="{'background': color.bgColor, 'border': '1px solid', 'border-color': color.bgColor}"  class="bgColorBtn bgColor" value="{{color.bgColor}}">
                 <span><div (click)="resetBgColor()" class="btn btn-xs btn-default"><i class="fa fa-refresh"></i></div></span> -->
           </li>
-          
-          
+
+
           <li class="fontResize" style="margin-left: 5px">
             {{ 'home.menu.fontsize' | translate }} :
           </li>
@@ -114,5 +111,5 @@
         </ul>
       </div>
     </div>
-  </div>  
+  </div>
 </div>
