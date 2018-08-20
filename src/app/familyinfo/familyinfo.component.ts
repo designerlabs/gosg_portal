@@ -282,63 +282,84 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
 
   submit(val){
 
-    let icpassport: any;
+    let valIc = '';
+    let valPassport = '';  
 
     let body = {
-      "nationality":{
-          "nationalityId": null
-       },
-      "icno": null,
-      "passportState":{
-        "passportStateId": null
-      },
-      "name": null,
-      "relation":{
-        "relationId": null
-      },
-      "dob": null,
-      "sex":{
-        "sexId": null
-      },
+      "identificationNo": null,
+      "passportNo": null,
+      "fullName": null,
+      "firstName": null,
+      "lastName": null,
+      "dateOfBirth": null,
       "email": null,
-      "race":{
-        "raceId": null
+      "mobilePhoneNo": null,
+      "isMyidentityVerified": false,
+      "isMyidentityActive": false,
+      "isMyidentityCitizen": false,
+      "isOku": false,
+      "okuStatus": "",
+      "okuRegistrationNo": "",
+      "additionalInfo": null,
+      "userType": {
+        "userTypeId": 1
       },
-      "religion":{
-        "religionId": null
+      "relationship": {
+        "relationshipId": 6
       },
-      "phone": null,
-      "profileStatus":{
-        "profileStatusId": null
+      "country": {
+        "countryId": 152
       },
-      "reasonStatus":{
-        "reasonStatusId": null
+      "gender": {
+        "genderId": 1
       },
-      "addInfo": null
-    };
+      "religion": {
+        "religionId": 1
+      },
+      "race": {
+        "raceId": 1
+      },
+      "accountStatus": {
+        "accountStatusId": 1
+      }
+    }
+    
 
     if(this.searchForm.controls.warganegara.value == 1){
-      icpassport = val.icno;
+      valIc = val.icno;
+      valPassport = null;
     }
 
     else{
-      icpassport = val.passportno;
+      valIc = null;
+      valPassport = val.passportno;
     }
 
-    body.nationality.nationalityId = val.warganegara;
-    body.icno = icpassport;
-    body.passportState.passportStateId = val.passportState;
-    body.name = val.name;
-    body.relation.relationId = val.relation;
-    body.dob = this.valDOB;
-    body.sex.sexId = val.sex;
+    //body.nationality.nationalityId = val.warganegara;
+    //body.passportState.passportStateId = val.passportState;
+
+    body.identificationNo = valIc;
+    body.passportNo = valPassport;
+    body.fullName = val.name;    
     body.email = val.email;
+    body.mobilePhoneNo = val.phone;
+    body.isMyidentityVerified = false;
+    body.isMyidentityActive = false
+    body.isMyidentityCitizen = false;
+    body.isOku = this.checkOku;
+    body.okuStatus = '';
+    body.okuRegistrationNo = '';
+    body.additionalInfo = val.addInfo;
+    body.userType.userTypeId = val.warganegara;
+    body.relationship.relationshipId = val.relation;
+    body.dateOfBirth = this.valDOB;
+    body.country.countryId = 7;
+    body.gender.genderId = val.sex;
     body.race.raceId = val.race;
-    body.religion.religionId = val.religion;
-    body.phone = val.phone;
-    body.profileStatus.profileStatusId = val.profileStatus;
-    body.reasonStatus.reasonStatusId = val.reasonStatus;
-    body.addInfo = val.addInfo;
+    body.religion.religionId = val.religion;    
+    body.accountStatus.accountStatusId = val.profileStatus;
+    //body.reasonStatus.reasonStatusId = val.reasonStatus;
+    
 
     console.log(JSON.stringify(body));
     // this.loading = true;
