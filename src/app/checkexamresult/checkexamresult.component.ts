@@ -48,6 +48,9 @@ export class CheckexamresultComponent implements OnInit, OnDestroy {
   public listYear: any[] = [];
   public listExam: any[] = [];
   public listTypeExam: any[] = [];
+  public listResult: any[] = [];
+  public showResult: boolean = false;
+
   showNoData = false;
   loading = false;
 
@@ -213,12 +216,32 @@ export class CheckexamresultComponent implements OnInit, OnDestroy {
                            {"id": 2, "name": "Peperiksaan Pertengahan Tahun"},
                            {"id": 3, "name": "Peperiksaan Akhir Tahun"}]
     }
+
     this.checkReqValues();
   }
 
   checkExam(){
-    //this.openDialog();
-    this.openResult();
+    this.listResult = [1];
+    if(this.listResult.length == 0){
+      this.openDialog();
+      //this.openResult();
+    }
+   
+    else{
+      this.listResult = [{"nama":"Bahasa Melayu", "gred": "A1", "desc": "Cemerlang", "markah": 80.00},
+                         {"nama":"Bahasa Inggeris", "gred": "A1", "desc": "Cemerlang", "markah": 90.00},
+                         {"nama":"Pendidikan Islam", "gred": "A1", "desc": "Cemerlang", "markah": 95.00},
+                         {"nama":"Pendidikan Islam", "gred": "A1", "desc": "Cemerlang", "markah": 95.00},
+                         {"nama":"Pendidikan Islam", "gred": "A1", "desc": "Cemerlang", "markah": 95.00},
+                         {"nama":"Pendidikan Islam", "gred": "A1", "desc": "Cemerlang", "markah": 95.00},
+                         {"nama":"Pendidikan Islam", "gred": "A1", "desc": "Cemerlang", "markah": 95.00},
+                         {"nama":"Pendidikan Islam", "gred": "A1", "desc": "Cemerlang", "markah": 95.00},
+                         {"nama":"Pendidikan Islam", "gred": "A1", "desc": "Cemerlang", "markah": 95.00},
+                         {"nama":"Pendidikan Islam", "gred": "A1", "desc": "Cemerlang", "markah": 95.00},
+                         {"nama":"Pendidikan Islam", "gred": "A1", "desc": "Cemerlang", "markah": 95.00},
+                         {"nama":"Pendidikan Islam", "gred": "A1", "desc": "Cemerlang", "markah": 95.00},]
+      this.showResult = true;
+    }
   }
   
   checkReqValues() {

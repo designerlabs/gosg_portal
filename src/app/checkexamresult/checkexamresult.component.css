@@ -96,8 +96,8 @@ input{
 }
 
 .displayDesc{
-    color: #333; 
-    font-weight: bold;
+    color: #333 !important; 
+    font-weight: bold !important;
 }
 
 .displayJustify{
@@ -118,7 +118,28 @@ input{
 }
 
 .padding-line{
-    padding-top: 8px;
+    padding-top: 0px;
     padding-left: 15px;
     padding-right: 15px;
 }
+
+.tableHeader{
+    height:40px !important; 
+    font-size: 14px !important;
+    font-weight: bold !important;
+    color: black !important;
+    /* background-color: #a7a495 !important; 
+    box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12) */
+}
+
+table.example-table { 
+    background: url("/assets/images/logo_ms.jpg"); /* image courtesy of subtlepatterns.com */ 
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 1000px 250px;;
+    opacity: 0.7;
+    
+    /* position: absolute;
+    z-index: -1; */
+}
+

@@ -526,6 +526,9 @@
     },
     "err":{
       "needed": "diperlukan"
+    },
+    "button": {
+      "check":"Semak"
     }
   },
   "poll": {
