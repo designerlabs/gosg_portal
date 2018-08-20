@@ -133,13 +133,9 @@ input{
 }
 
 table.example-table { 
-    background: url("/assets/images/logo_ms.jpg"); /* image courtesy of subtlepatterns.com */ 
+    background: url("/assets/images/watermark_GOSG.png"); /* image courtesy of subtlepatterns.com */ 
     background-repeat: no-repeat;
     background-position: center center;
-    background-size: 1000px 250px;;
-    opacity: 0.7;
-    
-    /* position: absolute;
-    z-index: -1; */
+    /* background-size: 1000px 250px; */
 }
 

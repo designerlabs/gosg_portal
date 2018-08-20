@@ -65,6 +65,7 @@ export class ProtectedService {
   private dataAppUrl: string = this.config.dataAppUrl;
   private urlPerhilitan: string = this.config.urlAgencyDservice;
   private urlPdrm: string = this.config.urlAgencyDservice;
+  private urlDS: string = this.config.urlAgencyDservice;
 
 
   createProfile(user) {
@@ -264,6 +265,13 @@ export class ProtectedService {
   update(data, moduleName, lang) {
     let createUrl = this.urlPerhilitan   + moduleName + '?language='+lang;
     return this.http.put(createUrl, data)
+    .map((response: Response) => response.json())
+    .catch(this.handleError);
+  }
+
+  postProtected(data, moduleName) {
+    let createUrl = this.urlDS   + moduleName;
+    return this.http.post(createUrl, data)
     .map((response: Response) => response.json())
     .catch(this.handleError);
   }
