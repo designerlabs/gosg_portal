@@ -7,7 +7,7 @@
             <img src="assets/images/{{imgSrc }}.jpg" width="100%">
           </a>
           <button class="visible-xs visible-sm btn btn-sm" (click)="menuModal.show()" style="overflow: hidden;  border: none;
-                outline: none;" mat-fab color="primary">
+                outline: none; position: absolute; right: 0px; margin-right: 10px;" mat-fab color="primary">
             <i class="fa fa-bars" aria-hidden="true"></i>
           </button>
           <div class="modal fade" bsModal #menuModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
@@ -31,7 +31,7 @@
                           {{menu.title}}
                         </mat-panel-title>
                       </mat-expansion-panel-header>
-                      <ul class="nav navbar-nav font-size-s">
+                      <ul class="nav navbar-nav font-size-s mobile-navbar">
                         <li class="col-md-4" *ngFor="let data of menu.data">
                           <a class="font-size-s" href="" (click)="handleClickMe(data.categoryCode)" [routerLink]="['category', data.categoryCode]">
                             <i class="fa fa-arrow-circle-right"></i> {{data.categoryName}}</a>
@@ -39,25 +39,25 @@
                       </ul>
                     </mat-expansion-panel>
 
-                    <mat-expansion-panel class="btn btn-md online_service_btn" [hideToggle]="true" *ngIf="!!!state">
-                      <mat-expansion-panel-header [routerLink]="['/digitalservices']">
-                        <mat-panel-title>
+                    <mat-expansion-panel style="margin: 0px; padding: 0px;" class="btn btn-md online_service_btn" [hideToggle]="true" *ngIf="!!!state">
+                      <mat-expansion-panel-header [routerLink]="['/digitalservices']" style="height: 30px;">
+                        <mat-panel-title  style="color: #fff;">
                           {{'home.menu.onlineservice' | translate}}
                         </mat-panel-title>
                       </mat-expansion-panel-header>
                     </mat-expansion-panel>
 
-                    <mat-expansion-panel class="btn btn-md online_service_btn" [hideToggle]="true" *ngIf="!!state && validMyIdentity">
-                      <mat-expansion-panel-header [routerLink]="['/digitalservices']">
-                        <mat-panel-title>
+                    <mat-expansion-panel style="margin: 0px; padding: 0px;" class="btn btn-md online_service_btn" [hideToggle]="true" *ngIf="!!state && validMyIdentity">
+                      <mat-expansion-panel-header [routerLink]="['/digitalservices']" style="height: 30px;">
+                        <mat-panel-title  style="color: #fff;">
                           {{'home.menu.onlineservice' | translate}}
                         </mat-panel-title>
                       </mat-expansion-panel-header>
                     </mat-expansion-panel>
 
-                    <mat-expansion-panel class="btn btn-md online_service_btn" [hideToggle]="true" *ngIf="!!state && !validMyIdentity">
-                      <mat-expansion-panel-header (click)="serviceModal.show()">
-                        <mat-panel-title>
+                    <mat-expansion-panel style="margin: 0px; padding: 0px;" class="btn btn-md online_service_btn" [hideToggle]="true" *ngIf="!!state && !validMyIdentity">
+                      <mat-expansion-panel-header (click)="serviceModal.show()" style="height: 30px;">
+                        <mat-panel-title style="color: #fff;">
                           {{'home.menu.onlineservice' | translate}}
                         </mat-panel-title>
                       </mat-expansion-panel-header>
@@ -85,8 +85,8 @@
                       </div>
                     </div>
                   </mat-accordion>
-                  <button type="button" class="btn btn-danger btn-md" aria-label="Close" (click)="menuModal.hide()">
-                    <span aria-hidden="true">&times; {{'common.close' | translate}}</span>
+                  <button style="margin-top: 30px;" type="button" mat-fab color="warn" aria-label="Close" (click)="menuModal.hide()">
+                    <span aria-hidden="true" style="font-size: 30px; bottom: 3px; position: relative;"> <i class="fa fa-times" aria-hidden="true"></i> </span>
                   </button>
                 </div>
               </div>

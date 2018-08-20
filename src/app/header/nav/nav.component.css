@@ -29,7 +29,7 @@ li.active > a {
   border-top: 1px inset #333;
   border-left: 1px inset #333;
   border-right: 1px inset #333;
-  border-bottom: 1px solid rgb(230, 67, 110); 
+  border-bottom: 1px solid rgb(230, 67, 110);
   box-shadow: rgb(0, 0, 0) 15px 30px 60px -38px;
   position: absolute;
   top: 100%;
@@ -129,16 +129,16 @@ li.active > a {
   box-shadow: 0px 7px 9px 0px #0000003d;
   background: -moz-linear-gradient(top, #ffffff, #d6d6d6);
   background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ffffff), to(#d6d6d6));
-  /* Rounded Corners  
-    -moz-border-radius: 0px 5px 5px 5px;  
-    -webkit-border-radius: 0px 5px 5px 5px;  
+  /* Rounded Corners
+    -moz-border-radius: 0px 5px 5px 5px;
+    -webkit-border-radius: 0px 5px 5px 5px;
     border-radius: 0px 5px 5px 5px; */ }
 
 #main-menu li:hover .dropdown_5columns {
   left: 0px;
   top: auto;
   width: 100%;
-  border-top: 1px #1ebebc solid; 
+  border-top: 1px #1ebebc solid;
 }
 
 .col_1,
@@ -173,8 +173,8 @@ li.active > a {
 
 #main-menu li .align_right {
   /* Rounded Corners */
-  /*-moz-border-radius: 5px 0px 5px 5px;  
-    -webkit-border-radius: 5px 0px 5px 5px;  
+  /*-moz-border-radius: 5px 0px 5px 5px;
+    -webkit-border-radius: 5px 0px 5px 5px;
     border-radius: 5px 0px 5px 5px;*/ }
 
 #main-menu li:hover .align_right {
@@ -347,3 +347,25 @@ button.bgColorBtn {
   font-size: 20px; }
   .h_search_btn:hover {
     color: #e9406c !important; }
+
+
+    /* mobile Menu */
+
+    .mobile-navbar{
+      display: block !important;
+      padding: 0px !important;
+
+    }
+
+    .mobile-navbar > li{
+      display: block !important;
+      margin-top: 0px !important;
+    }
+
+    .mobile-navbar > li > a{
+      padding: 10px 15px !important;
+      text-decoration: none !important;
+      height: auto !important;
+      line-height: 20px !important;
+      text-align: left !important;
+    }
