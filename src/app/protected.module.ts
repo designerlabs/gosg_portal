@@ -50,7 +50,7 @@ import { PerhilitanrenewComponent, PopupServiceDialog } from './perhilitanrenew/
 import { ProtectedLoaderComponent } from './loader/protected-loader.component';
 import { FamilyinfoComponent, FamilyPopupDialog } from './familyinfo/familyinfo.component';
 import { FamilyinfotblComponent } from './familyinfo/familyinfotbl/familyinfotbl.component';
-import { CheckexamresultComponent } from './checkexamresult/checkexamresult.component';
+import { CheckexamresultComponent, ExamPopupDialog,ExamResult } from './checkexamresult/checkexamresult.component';
 
 export function HttpLoaderFactory(http: Http) {
    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -91,7 +91,9 @@ export function HttpLoaderFactory(http: Http) {
     FamilyinfoComponent,
     FamilyPopupDialog,
     FamilyinfotblComponent,
-    CheckexamresultComponent
+    CheckexamresultComponent,
+    ExamPopupDialog,
+    ExamResult
   ],
   imports: [
     SharedModule,
@@ -120,7 +122,7 @@ export function HttpLoaderFactory(http: Http) {
   ],
 
   providers: [ ProtectedService, ContentProdComponent],
-  entryComponents: [PopupServiceDialog, FamilyPopupDialog],
+  entryComponents: [PopupServiceDialog, FamilyPopupDialog, ExamPopupDialog, ExamResult],
   bootstrap: [ProtectedComponent]
 })
 

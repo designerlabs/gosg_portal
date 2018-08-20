@@ -53,7 +53,7 @@
           <div class="col-md-3">
             <mat-form-field class="example-full-width">
               <mat-select formControlName="name" placeholder="{{'exam.label.name' | translate}}" required 
-                  (change)="checkReqValues()">
+                  (change)="getListYear()">
                   <mat-option *ngFor="let user of listUser" [value]="user.ic">{{user.name}}</mat-option>
               </mat-select>
               <mat-error *ngIf="searchForm.controls.name.hasError('required')">
@@ -65,12 +65,11 @@
           <div class="col-md-2">
             <mat-form-field class="example-full-width">
               <mat-select formControlName="examyear" placeholder="{{'exam.label.year' | translate}}" required 
-                  (change)="checkReqValues()">
-                  <mat-option [value]=1>2018</mat-option> 
-                  <mat-option [value]=2>2017</mat-option>
+                  (change)="getListExam()">
+                  <mat-option *ngFor="let year of listYear" [value]="year">{{year}}</mat-option> 
               </mat-select>
               <mat-error *ngIf="searchForm.controls.examyear.hasError('required')">
-                {{'family.label.year' | translate }} {{'exam.err.needed' | translate }} 
+                {{'exam.label.year' | translate }} {{'exam.err.needed' | translate }} 
               </mat-error>
             </mat-form-field>
           </div>
@@ -78,27 +77,28 @@
           <div class="col-md-3">
             <mat-form-field class="example-full-width">
               <mat-select formControlName="examname" placeholder="{{'exam.label.examname' | translate}}" required 
-                  (change)="checkReqValues()">
-                  <mat-option [value]=1>PEPERIKSAAN PENGGAL</mat-option> 
-                  <mat-option [value]=2>PEPERIKSAAN AKHIR</mat-option>
+                  (change)="getListTypeExam()">
+                  <mat-option *ngFor="let le of listExam" [value]="le.id">{{le.name}}</mat-option> 
               </mat-select>
               <mat-error *ngIf="searchForm.controls.examname.hasError('required')">
-                {{'family.label.examname' | translate }} {{'exam.err.needed' | translate }} 
+                {{'exam.label.examname' | translate }} {{'exam.err.needed' | translate }} 
               </mat-error>
             </mat-form-field>
           </div>
 
-          <div class="col-md-2">
+          <div class="col-md-2" *ngIf="searchForm.controls.examname.value == 5">
             <mat-form-field class="example-full-width">
               <mat-select formControlName="examtype" placeholder="{{'exam.label.examtype' | translate}}" required 
                   (change)="checkReqValues()">
-                  <mat-option [value]=1>UJIAN 1</mat-option> 
-                  <mat-option [value]=2>UJIAN @</mat-option>
+                  <mat-option *ngFor="let lte of listTypeExam" [value]="lte.id">{{lte.name}}</mat-option> 
               </mat-select>
               <mat-error *ngIf="searchForm.controls.examtype.hasError('required')">
-                {{'family.label.examtype' | translate }} {{'exam.err.needed' | translate }} 
+                {{'exam.label.examtype' | translate }} {{'exam.err.needed' | translate }} 
               </mat-error>
             </mat-form-field>
+          </div>
+
+          <div class="col-md-2" *ngIf="searchForm.controls.examname.value != 5">            
           </div>
 
           <div class="col-md-2">        
