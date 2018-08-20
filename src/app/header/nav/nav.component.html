@@ -31,7 +31,7 @@
                           {{menu.title}}
                         </mat-panel-title>
                       </mat-expansion-panel-header>
-                      <ul class="nav navbar-nav font-size-s">
+                      <ul class="nav navbar-nav font-size-s mobile-navbar">
                         <li class="col-md-4" *ngFor="let data of menu.data">
                           <a class="font-size-s" href="" (click)="handleClickMe(data.categoryCode)" [routerLink]="['category', data.categoryCode]">
                             <i class="fa fa-arrow-circle-right"></i> {{data.categoryName}}</a>
