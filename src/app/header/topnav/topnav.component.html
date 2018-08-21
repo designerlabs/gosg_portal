@@ -27,18 +27,17 @@
 
       <ul class="list-inline font-size-s" *ngIf="state"  style="display:inline-block; float:right;">
           <li>
-            <button (click)="toggle()" class="btn btn-xs btn-default font-size-s hidden-xs visible-sm  visible-md visible-lg"><i class="fa fa-language"></i> {{ currlang }}</button>
-            <button (click)="toggle()" class="btn btn-xs btn-default font-size-s visible-xs hidden-sm hidden-md hidden-lg"><i class="fa fa-language"></i> {{ currlangMOB }}</button>
+            <button (click)="toggle()" class="btn btn-xs btn-default font-size-s hidden-xs hidden-sm  visible-md visible-lg"><i class="fa fa-language"></i> {{ currlang }}</button>
+            <button (click)="toggle()" class="btn btn-xs btn-default font-size-s visible-xs visible-sm hidden-md hidden-lg"><i class="fa fa-language"></i> {{ currlangMOB }}</button>
           </li>
-          <li>|</li>
-          <li>
-          </li>
+          <li class="hidden-xs hidden-sm">|</li>
           <li>
             <a class="hidden-xs visible-sm  visible-md visible-lg">{{state}}</a>
             <!-- <a class="visible-xs hidden-sm hidden-md hidden-lg" [routerLink]="['register']"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>      -->
           </li>
+
           <li>
-            <button (click)="showProfileMenu()" class="btn btn-sm btn-default"><i style="font-size:16px;" class="fa fa-user-circle" aria-hidden="true"></i></button>
+            <button (click)="showProfileMenu()" class="btn btn-sm btn-default visible-xs visible-sm"><i style="font-size:16px;" class="fa fa-user-circle" aria-hidden="true"></i></button>
           </li>
       </ul>
 
@@ -47,20 +46,21 @@
             <button (click)="toggle()" class="btn btn-xs btn-default font-size-s hidden-xs hidden-sm  visible-md visible-lg"><i class="fa fa-language"></i> {{ currlang }}</button>
             <button (click)="toggle()" class="btn btn-xs btn-default font-size-s visible-xs visible-sm hidden-md hidden-lg"><i class="fa fa-language"></i> {{ currlangMOB }}</button>
           </li>
-          <li class="btn btn-xs btn-default font-size-s hidden-xs hidden-sm hidden-md hidden-lg">|</li>
+          <li class="hidden-xs hidden-sm">|</li>
           <li>
             <a class="hidden-xs hidden-sm  visible-md visible-lg" [routerLink]="['register']">{{ 'home.menu.register' | translate }}</a>
             <a class="btn btn-xs btn-default font-size-s visible-xs visible-sm hidden-md hidden-lg" [routerLink]="['register']"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
           </li>
-          <li class="btn btn-xs btn-default font-size-s hidden-xs hidden-sm hidden-md hidden-lg">|</li>
+          <li class="hidden-xs hidden-sm">|</li>
           <li>
               <a class="hidden-xs hidden-sm  visible-md visible-lg" href="../portal-protected/">{{ 'home.menu.login' | translate }}</a>
               <a class="btn btn-xs btn-default font-size-s visible-xs visible-sm hidden-md hidden-lg" href="../portal-protected/"><i class="fa fa-lock" aria-hidden="true"></i></a>
               <!-- <a class="btn btn-xs btn-default font-size-s visible-xs visible-sm hidden-md hidden-lg" *ngIf="!auth.isAuthenticated()" [routerLink]="['portal/login']"><i class="fa fa-sign-in" aria-hidden="true"></i></a> -->
               <!-- <a *ngIf="auth.isAuthenticated()" [routerLink]="['user/profile']">Welcome {{auth.currentUser.firstName}}</a> -->
           </li>
+
           <li>
-            <button (click)="showSidenavMenu()" class="btn btn-sm btn-default visible-xs visible-sm "><i style="font-size:16px;" class="fa fa-cog" aria-hidden="true"></i></button>
+            <button (click)="showSidenavMenu()" class="btn btn-sm btn-default visible-xs visible-sm"><i style="font-size:16px;" class="fa fa-cog" aria-hidden="true"></i></button>
           </li>
       </ul>
 
