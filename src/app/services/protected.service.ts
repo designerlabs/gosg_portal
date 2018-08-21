@@ -254,9 +254,25 @@ export class ProtectedService {
     .retry(5)
     .catch(this.handleError);
   }
-
+  
   create(data, moduleName, lang) {
     let createUrl = this.urlPerhilitan   + moduleName + '?language='+lang;
+    return this.http.post(createUrl, data)
+    .map((response: Response) => response.json())
+    .catch(this.handleError);
+  }
+
+  getDataProtected(modules, lang, page, size){
+    
+    return this.http
+    .get(this.config.protectedURL + modules + '?language='+lang+'&page='+page+'&size='+size)
+    .map((response: Response) => response.json())
+    .retry(5)
+    .catch(this.handleError);
+  }
+
+  createFamily(data, moduleName, lang) {
+    let createUrl = this.config.protectedURL   + moduleName + '?language='+lang;
     return this.http.post(createUrl, data)
     .map((response: Response) => response.json())
     .catch(this.handleError);

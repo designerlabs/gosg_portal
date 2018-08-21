@@ -51,12 +51,12 @@
       </tr>
       <tr class="mat-row" *ngFor="let data of dataApp; let i = index;" role="row">
         <td class="mat-cell text-center">{{i+1}}</td>
-        <td class="mat-cell">{{data.submissionRefno}}</td>
-        <td class="mat-cell">{{data.submissionName}}</td>
-        <td class="mat-cell">{{data.agencyName}}</td>
-        <td class="mat-cell text-center">{{data.agencyName}}</td>
-        <td class="mat-cell text-center">{{data.agencyName}}</td>
-        <td class="mat-cell text-center">{{data.messageEN}}</td>
+        <td class="mat-cell">{{data.identificationNo}}{{data.passportNo}} </td>
+        <td class="mat-cell">{{data.fullName}}</td>
+        <td class="mat-cell">{{data.relationship.relationshipName}}</td>
+        <td class="mat-cell text-center">{{changeDob(data.dateOfBirth)}}</td>
+        <td class="mat-cell text-center">{{data.isOku}}</td>
+        <td class="mat-cell text-center">{{data.accountStatus.accountStatusDescription}}</td>
         <td class="mat-cell text-center">
           <button class="btn btn-sm btn-success" (click)="print()">
             <i class="fa fa-print font-size-s"></i>
@@ -84,12 +84,12 @@
 
     <div style="float:right; margin-top: 10px;">
       <span style="color:#000; padding-right:20px;">{{ 'appmngt.tablebottom.page' | translate }} 
-        <strong>{{dataAppPage?.pageNumber}}</strong> {{ 'appmngt.tablebottom.of' | translate }} 
-        <strong>{{dataAppPage?.totalPages}}</strong> {{ 'appmngt.tablebottom.in' | translate }} 
-        <strong>{{dataAppPage?.totalElements}}</strong> {{ 'appmngt.tablebottom.app' | translate }}</span>
-      <button mat-mini-fab color="basic" [disabled]="noPrevData" (click)="paginatorL(dataAppPage?.pageNumber)">
+        <strong>{{dataListPage?.pageNumber}}</strong> {{ 'appmngt.tablebottom.of' | translate }} 
+        <strong>{{dataListPage?.totalPages}}</strong> {{ 'appmngt.tablebottom.in' | translate }} 
+        <strong>{{dataListPage?.totalElements}}</strong> {{ 'appmngt.tablebottom.app' | translate }}</span>
+      <button mat-mini-fab color="basic" [disabled]="noPrevData" (click)="paginatorL(dataListPage?.pageNumber)">
         <i class="fa fa-angle-left" aria-hidden="true"></i></button>
-      <button mat-mini-fab color="basic" [disabled]="noNextData"  (click)="paginatorR(dataAppPage?.pageNumber, dataAppPage?.totalPages)">
+      <button mat-mini-fab color="basic" [disabled]="noNextData"  (click)="paginatorR(dataListPage?.pageNumber, dataListPage?.totalPages)">
         <i class="fa fa-angle-right" aria-hidden="true"></i></button>
     </div>
     <br />
