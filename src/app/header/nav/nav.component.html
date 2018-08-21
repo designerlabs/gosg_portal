@@ -19,7 +19,7 @@
 
                   <mat-accordion>
                     <mat-expansion-panel [hideToggle]="true">
-                      <mat-expansion-panel-header [routerLink]="['/index']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+                      <mat-expansion-panel-header (click)="menuModal.hide()" [routerLink]="['/index']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
                         <mat-panel-title>
                           {{ 'home.menu.home' | translate }}
                         </mat-panel-title>
@@ -33,7 +33,7 @@
                         </mat-panel-title>
                       </mat-expansion-panel-header>
                       <ul class="nav navbar-nav font-size-s mobile-navbar">
-                        <li class="col-md-4" *ngFor="let data of menu.data">
+                        <li class="col-md-4" *ngFor="let data of menu.data" (click)="menuModal.hide()">
                           <a class="font-size-s" href="" (click)="handleClickMe(data.categoryCode)" [routerLink]="['category', data.categoryCode]">
                             <i class="fa fa-arrow-circle-right"></i> {{data.categoryName}}</a>
                         </li>
@@ -41,7 +41,7 @@
                     </mat-expansion-panel>
 
                     <mat-expansion-panel style="margin: 0px; padding: 0px;" class="btn btn-md online_service_btn" [hideToggle]="true" *ngIf="!!!state">
-                      <mat-expansion-panel-header [routerLink]="['/digitalservices']" style="height: 30px;">
+                      <mat-expansion-panel-header (click)="menuModal.hide()"  [routerLink]="['/digitalservices']" style="height: 30px;">
                         <mat-panel-title  style="color: #fff;">
                           {{'home.menu.onlineservice' | translate}}
                         </mat-panel-title>
@@ -49,7 +49,7 @@
                     </mat-expansion-panel>
 
                     <mat-expansion-panel style="margin: 0px; padding: 0px;" class="btn btn-md online_service_btn" [hideToggle]="true" *ngIf="!!state && validMyIdentity">
-                      <mat-expansion-panel-header [routerLink]="['/digitalservices']" style="height: 30px;">
+                      <mat-expansion-panel-header (click)="menuModal.hide()"  [routerLink]="['/digitalservices']" style="height: 30px;">
                         <mat-panel-title  style="color: #fff;">
                           {{'home.menu.onlineservice' | translate}}
                         </mat-panel-title>
