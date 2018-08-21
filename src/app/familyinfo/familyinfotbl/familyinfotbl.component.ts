@@ -122,7 +122,17 @@ export class FamilyinfotblComponent implements OnInit, OnDestroy {
   print(){
   }
 
-  view(){
+  view(strIC, strPass){
+    
+    let strIdentification = '';
+    console.log(strIC +''+strPass);
+
+    if(strIC == ''){
+      strIdentification = strPass;
+    }else{
+      strIdentification = strIC;
+    }
+    this.router.navigate(['familyinfo/'+strIdentification]);
   }
 
   add() {

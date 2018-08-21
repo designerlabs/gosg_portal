@@ -171,6 +171,8 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
     }
 
     else{
+
+      this.getDataFamily(this.getUrl);
       //if(this.searchForm.controls.warganegara.value == 1){
         this.searchForm.get('warganegara').disable();
         //this.searchForm.get('noic').disable();
@@ -188,6 +190,29 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
       // }
     }
 
+  }
+
+  getDataFamily(val){
+    this.loading = true;
+    this.protectedService.getDataProtectedById('user/family/profile/'+val, this.langID).subscribe(
+    data => {
+      this.sharedService.errorHandling(data, (function(){
+        let familyData = data.familyProfile;
+
+        if(familyData.identificationNo == ""){
+          this.searchForm.get('warganegara').setValue(2);
+          this.searchForm.get('passportno').setValue(familyData.passportNo);
+        }else{
+          this.searchForm.get('warganegara').setValue(1);
+          this.searchForm.get('icno').setValue(familyData.identificationNo);
+        }
+
+      }).bind(this));
+      this.loading = false;
+    },
+    error => {      
+      this.loading = false;      
+    });
   }
 
   getRace(lang){
@@ -350,21 +375,37 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
 
   checkOKU(){
     this.loading = true;
-    this.protectedService.postProtected('','jkmservice/okustatus').subscribe(
+
+    let ic = this.searchForm.controls.icno.value;
+    ic = ic.replace('-','');
+    let ic2 = ic.replace('-','');
+
+    let body = {
+      "icNumber":ic2,
+      "okuStatus":"",
+      "okuRegistrationNumber":"",
+      "okuType":"",
+      "okuTypeId":"",
+      "errorCode":"",
+      "errorDescription":"",
+      "isOku":false
+    } 
+
+    this.protectedService.postProtected(body,'jkmservice/okustatus').subscribe(
     data => {
 
       this.sharedService.errorHandling(data, (function(){
-        console.log();
+        console.log(data);
         this.okuInfo = data.resource;
         
-      if(this.okuInfo.isOku == true){
-        this.checkOku = true;
-      }
+      // if(this.okuInfo.isOku == true){
+      //   this.checkOku = true;
+      // }
 
-      else{
-        this.checkOku = false;
-        this. openDialog(1);
-      }
+      // else{
+      //   this.checkOku = false;
+      //   this. openDialog(1);
+      // }
 
       }).bind(this));
       this.loading = false;
