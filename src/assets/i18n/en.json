@@ -526,6 +526,9 @@
     },
     "err":{
       "needed": "needed"
+    },
+    "button": {
+      "check":"Check"
     }
   },
   "poll": {

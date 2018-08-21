@@ -234,7 +234,7 @@
         </div>
       </div>
 
-      <div class="row" *ngIf="checkNation == true">
+      <div class="row" *ngIf="checkOku == true">
         <div class="col-md-2">&nbsp;
         </div>
         <div class="col-md-1">&nbsp;
@@ -246,7 +246,7 @@
           </div>
           <div class="col-md-7">
               <span class="displayDesc">
-                  : PH 140013005643291</span>
+                  : {{okuInfo.okuRegistrationNumber}}</span>
           </div>
           <div class="col-md-5">
               <span class="displayDesc">
@@ -254,7 +254,7 @@
           </div>
           <div class="col-md-7">
               <span class="displayDesc">
-                  : Kurang Upaya Penglihatan</span>
+                  : {{okuInfo.okuType}}</span>
           </div>
           <div class="col-md-5">
               <span class="displayDesc">
@@ -262,7 +262,7 @@
           </div>
           <div class="col-md-7">
               <span class="displayDesc">
-                  : BL</span>
+                  : {{okuInfo.okuTypeId}}</span>
           </div>
           <!-- <span class="displayDesc">
             No. Pendaftaran OKU: <br>

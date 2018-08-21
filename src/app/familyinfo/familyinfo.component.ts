@@ -55,6 +55,8 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
   public valDOB: any;
   public getUrl: any;
   public events: string[] = [];
+  public okuInfo: any;
+  public checkOku = false;
   showNoData = false;
   loading = false;
 
@@ -252,8 +254,30 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
   }
 
   checkOKU(){
-    console.log("check OKU");
-    this. openDialog(1);
+    this.loading = true;
+    this.protectedService.postProtected('','jkmservice/okustatus').subscribe(
+    data => {
+
+      this.sharedService.errorHandling(data, (function(){
+        console.log();
+        this.okuInfo = data.resource;
+        
+      if(this.okuInfo.isOku == true){
+        this.checkOku = true;
+      }
+
+      else{
+        this.checkOku = false;
+        this. openDialog(1);
+      }
+
+      }).bind(this));
+      this.loading = false;
+    },
+    error => {      
+      this.loading = false;      
+    });
+
   }
 
   submit(val){

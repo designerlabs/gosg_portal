@@ -27,14 +27,14 @@
     <form [formGroup]="searchForm" novalidate="novalidate">
       <div class="row">
           <div class="col-md-12 displayDesc">
-              <h3>Semakan Keputusan Peperiksaan</h3>
+              <h4 style="font-weight: bold">Semakan Keputusan Peperiksaan</h4>
           </div>
-          <div class="col-md-12 displayDesc">
+          <div class="col-md-12 displayJustify">
               <span>Kemudahan semakan keputusan peperiksaan merangkumi peperiksaan PT3, STPM, Penggal Persekolahan 
                 untuk diri sendiri dan juga anak di bawah jagaan. Maklumat keputusan peperiksaan yang disemak bukanlah 
                 keputusan 'real time'.</span>
           </div>
-          <div class="col-md-12 displayDesc">
+          <div class="col-md-12 displayJustify">
               <br>
               <span>Sila pilih maklumat seperti di bawah:</span>
           </div>
@@ -104,13 +104,74 @@
           <div class="col-md-2">        
               <button mat-raised-button color="primary" class="btn btn-md btn-success font-size-s pull-right" 
                 (click)="checkExam()" [disabled]="!complete">
-                {{'family.button.confirm' | translate}}</button>                
+                {{'exam.button.check' | translate}}</button>                
           </div>
       </div>
       
     </form>
   
   </div>
+
+  <div class="col-md-12 mat-elevation-z8 padding-bottom-20" *ngIf="showResult">    
+      
+        <div class="row">
+            <div class="col-md-12 displayDesc text-center">
+                <h5 style="font-weight: bold">SLIP KEPUTUSAN - PEPERIKSAAN AKHIR TAHUN 2017</h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1 displayJustify">
+                <span>Nama</span>
+            </div>
+            <div class="col-md-5 displayJustify">
+                <span>: {{listUser.name}}NORAINI BINTI A. GHANI</span>
+            </div>
+            <div class="col-md-1 displayJustify">
+                <span>Darjah</span>
+            </div>
+            <div class="col-md-5 displayJustify">
+                <span>: 1</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1 displayJustify">
+                <span>No. KP</span>
+            </div>
+            <div class="col-md-5 displayJustify">
+                <span>: {{listUser.ic}}850302015558</span>
+            </div>
+            <div class="col-md-1 displayJustify">
+                <span>Jantina</span>
+            </div>
+            <div class="col-md-5 displayJustify">
+                <span>: PEREMPUAN</span>
+            </div>
+        </div><br>
+
+        <div class="row">
+            <table class="mat-table example-table" id="dataTable" style="width:100%;">
+                <tr class="mat-header-row tableHeader">
+                    <th class="mat-header-cell" width="5%">&nbsp;BIL</th>
+                    <th class="mat-header-cell" width="50%">MATA PELAJARAN</th>
+                    <th class="mat-header-cell" width="10%">GRED</th>
+                    <th class="mat-header-cell" width=""></th>
+                </tr>
+                <tr class="mat-row table_row" style="background: transparent;"
+                    *ngFor="let data of listResult; let i = index;" role="row">
+                    <td class="mat-cell text-center">{{i+1}}</td>
+                    <td class="mat-cell">{{data.nama}}</td>
+                    <td class="mat-cell">{{data.gred}}</td>
+                    <td class="mat-cell">{{data.desc}}</td>
+                </tr>
+            </table>
+        </div><br><br>    
+        
+        <div class="row">
+            <div class="col-md-12 displayJustify">
+                <span>*** Keputusan yang dipaparkan hanyalah bagi tujuan semakan sahaja dan tidak boleh digunakan bagi tujuan lain.</span>
+            </div>
+        </div>
+    </div>
 </div>
 
 <app-confirm-dialog #resetModal [title]="'common.icon.warn'" [content]="'common.msg.reset'" [state]="'common.state.warn'"
