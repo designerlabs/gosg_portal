@@ -20,6 +20,7 @@ import { TopnavService } from '../topnav/topnav.service';
 })
 export class NavComponent implements OnInit, AfterViewInit, OnDestroy {
 
+  menuModal: any;
     mobile: boolean;
     @Output() menuClick = new EventEmitter();
     @Input() state:string;
@@ -121,7 +122,7 @@ export class NavComponent implements OnInit, AfterViewInit, OnDestroy {
             $('#main-menu > li > a.active').css('background-color', localStorage.getItem('themeColor'));
         });
 
-    }
+      }
 
     dropdownDisplay(action) {
         $(function () {
