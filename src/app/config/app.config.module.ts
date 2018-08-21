@@ -104,6 +104,7 @@ export class AppConfig {
     urlRating: string;
     urlSharedDS: string;
     urlSubStatus: string;
+    urlDserviceValidation: string;
 
 }
 
@@ -192,6 +193,7 @@ export const APP_DI_CONFIG: AppConfig = {
     UrlTrafficPredictionAPI: trafficInfoURL+"traffic?streetName=",
     urlAgencyDservice: agencyURL,
     urlSharedDS: commonURL,
+    urlDserviceValidation: protectedBaseURL+'dservice/validate?code='
 };
 
 @NgModule({
