@@ -271,6 +271,15 @@ export class ProtectedService {
     .catch(this.handleError);
   }
 
+  getDataProtectedById(modules, lang){
+    
+    return this.http
+    .get(this.config.protectedURL + modules + '?language='+lang)
+    .map((response: Response) => response.json())
+    .retry(5)
+    .catch(this.handleError);
+  }
+
   createFamily(data, moduleName, lang) {
     let createUrl = this.config.protectedURL   + moduleName + '?language='+lang;
     return this.http.post(createUrl, data)
