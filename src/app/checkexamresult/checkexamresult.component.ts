@@ -17,8 +17,13 @@ import { ValidateService } from '../common/validate.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { environment } from '../../environments/environment';
 
+export interface DialogData {
+  typeErrMsg;
+  examInfo;
+}
+
 // export interface DialogData {
-//   typeErrMsg;
+//   examInfo;
 // }
 
 @Component({
@@ -40,10 +45,15 @@ export class CheckexamresultComponent implements OnInit, OnDestroy {
   public complete: boolean; 
   public getUrl: any;
   public listUser: any[] = [];
+  public listYear: any[] = [];
+  public listExam: any[] = [];
+  public listTypeExam: any[] = [];
+  public listResult: any[] = [];
+  public showResult: boolean = false;
+
   showNoData = false;
   loading = false;
 
-  private subscription: ISubscription;
   private subscriptionLang: ISubscription;
 
   constructor(
@@ -113,6 +123,9 @@ export class CheckexamresultComponent implements OnInit, OnDestroy {
     this.getUrl = this.router.url.split('/')[2];
     this.checkReqValues();
 
+    console.log("check length of user");
+    console.log(this.listUser.length);
+
   }
 
   getUserData(){
@@ -131,9 +144,11 @@ export class CheckexamresultComponent implements OnInit, OnDestroy {
             }
             this.listUser.push(a);
             
-            //this.searchForm.get('name').setValue(data.user.fullName);
-            this.searchForm.get('name').setValue(data.user.identificationNo);      
-
+            if(this.listUser.length == 1){
+              //this.searchForm.get('name').setValue(data.user.fullName);
+              this.searchForm.get('name').setValue(data.user.identificationNo);      
+              this.getListYear();
+            }
 
           }else{
           }
@@ -169,13 +184,64 @@ export class CheckexamresultComponent implements OnInit, OnDestroy {
 
       this.listUser.push(a);
 
-      //this.searchForm.get('name').setValue(data.user.fullName);
-      this.searchForm.get('name').setValue(data.user.identificationNo);
+      console.log("dalam get user");
+      console.log(this.listUser.length);
+
+      if(this.listUser.length == 1){
+        //this.searchForm.get('name').setValue(data.user.fullName);
+        this.searchForm.get('name').setValue(data.user.identificationNo);    
+        this.getListYear();  
+      }
     }
   }
 
+  getListYear(){
+    this.listYear = [2018,2017,2016,2015];
+    this.checkReqValues();
+  }
+
+  getListExam(){
+    this.listExam = [{"id":1,"name": "UPSR"},
+                     {"id":2,"name": "PT3"},
+                     {"id":3,"name": "SPM"},
+                     {"id":4,"name": "STPM"},
+                     {"id":5,"name": "Peperiksaan Penggal"}];
+    this.checkReqValues();
+  }
+
+  getListTypeExam(){
+    if(this.searchForm.controls.examname.value == 5){
+
+      this.listTypeExam = [{"id": 1, "name": "Ujian 1"},
+                           {"id": 2, "name": "Peperiksaan Pertengahan Tahun"},
+                           {"id": 3, "name": "Peperiksaan Akhir Tahun"}]
+    }
+
+    this.checkReqValues();
+  }
+
   checkExam(){
-    console.log("check exam");
+    this.listResult = [1];
+    if(this.listResult.length == 0){
+      this.openDialog();
+      //this.openResult();
+    }
+   
+    else{
+      this.listResult = [{"nama":"Bahasa Melayu", "gred": "A1", "desc": "Cemerlang", "markah": 80.00},
+                         {"nama":"Bahasa Inggeris", "gred": "A1", "desc": "Cemerlang", "markah": 90.00},
+                         {"nama":"Pendidikan Islam", "gred": "A1", "desc": "Cemerlang", "markah": 95.00},
+                         {"nama":"Pendidikan Islam", "gred": "A1", "desc": "Cemerlang", "markah": 95.00},
+                         {"nama":"Pendidikan Islam", "gred": "A1", "desc": "Cemerlang", "markah": 95.00},
+                         {"nama":"Pendidikan Islam", "gred": "A1", "desc": "Cemerlang", "markah": 95.00},
+                         {"nama":"Pendidikan Islam", "gred": "A1", "desc": "Cemerlang", "markah": 95.00},
+                         {"nama":"Pendidikan Islam", "gred": "A1", "desc": "Cemerlang", "markah": 95.00},
+                         {"nama":"Pendidikan Islam", "gred": "A1", "desc": "Cemerlang", "markah": 95.00},
+                         {"nama":"Pendidikan Islam", "gred": "A1", "desc": "Cemerlang", "markah": 95.00},
+                         {"nama":"Pendidikan Islam", "gred": "A1", "desc": "Cemerlang", "markah": 95.00},
+                         {"nama":"Pendidikan Islam", "gred": "A1", "desc": "Cemerlang", "markah": 95.00},]
+      this.showResult = true;
+    }
   }
   
   checkReqValues() {
@@ -201,22 +267,76 @@ export class CheckexamresultComponent implements OnInit, OnDestroy {
     }
   }
 
+  openDialog() {
+
+    let errMsg = '';
+
+    if(this.langID == 1){
+      errMsg = 'There is no information in the database. Please try again.';
+    }
+    else{
+      errMsg = 'Maklumat tiada di dalam pangkalan data. Sila cuba lagi.';
+    }      
+  
+    this.dialog.open(ExamPopupDialog, {
+      data: {
+        typeErrMsg: errMsg
+      }
+    });
+  }
+
+  openResult() {
+
+    let errMsg = '';
+
+    if(this.langID == 1){
+      errMsg = 'There is no information in the database. Please try again.';
+    }
+    else{
+      errMsg = 'Maklumat tiada di dalam pangkalan data. Sila cuba lagi.';
+    }      
+  
+    this.dialog.open(ExamResult, {
+      data: {
+        examInfo: errMsg
+      }
+    });
+  }
+
 }
 
-// @Component({
-//   selector: 'familyinfo-popup',
-//   templateUrl: './familyinfo-popup.html',
-// })
+@Component({
+  selector: 'checkexam-popup',
+  templateUrl: './checkexam-popup.html',
+})
 
-// export class FamilyPopupDialog {
+export class ExamPopupDialog {
 
-//   constructor(
-//     public dialogRef: MatDialogRef<FamilyPopupDialog>,
-//     private translate: TranslateService,
-//     private router: Router,
-//     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+  constructor(
+    public dialogRef: MatDialogRef<ExamPopupDialog>,
+    private translate: TranslateService,
+    private router: Router,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
-//     onNoClick() {
-//       this.dialogRef.close();
-//     }
-// }
+    onNoClick() {
+      this.dialogRef.close();
+    }
+}
+
+@Component({
+  selector: 'examresult',
+  templateUrl: './examresult.html',
+})
+
+export class ExamResult {
+
+  constructor(
+    public dialogRef: MatDialogRef<ExamResult>,
+    private translate: TranslateService,
+    private router: Router,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+
+    onNoClick() {
+      this.dialogRef.close();
+    }
+}

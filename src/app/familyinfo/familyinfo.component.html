@@ -76,8 +76,7 @@
             <mat-form-field class="example-full-width">
               <mat-select formControlName="passportState" placeholder="{{'family.label.statepassport' | translate}}" required 
                   (change)="checkReqValues()">
-                  <mat-option [value]=1>England</mat-option> 
-                  <mat-option [value]=2>Arab</mat-option>
+                  <mat-option *ngFor="let country of listCountryData" [value]="country.countryId">{{country.countryName}}</mat-option>
               </mat-select>
               <mat-error *ngIf="searchForm.controls.passportState.hasError('required')">
                 {{'family.label.statepassport' | translate }} {{'family.err.needed' | translate }} 
@@ -100,10 +99,8 @@
           <div class="col-md-4">
             <mat-form-field class="example-full-width">
               <mat-select formControlName="relation" placeholder="{{'family.label.relationship' | translate}}" required
-                  (change)="checkReqValues()">
-                  <mat-option [value]=1>Bapa</mat-option>
-                  <mat-option [value]=2>Ibu</mat-option>
-                  <mat-option [value]=3>Anak</mat-option>
+                (change)="checkReqValues()">
+                <mat-option *ngFor="let relation of listRelationData" [value]="relation.relationshipId">{{relation.relationshipName}}</mat-option>
               </mat-select>
               <mat-error *ngIf="searchForm.controls.relation.hasError('required')">
                 {{'family.label.relationship' | translate }} {{'family.err.needed' | translate }} 
@@ -116,10 +113,8 @@
           <div class="col-md-4">
             <mat-form-field class="example-full-width">
               <mat-select formControlName="race" placeholder="{{'family.label.race' | translate}}" required
-                  (change)="checkReqValues()">
-                  <mat-option [value]=1>Melayu</mat-option>
-                  <mat-option [value]=2>Cina</mat-option>
-                  <mat-option [value]=3>India</mat-option>
+                (change)="checkReqValues()">
+                <mat-option *ngFor="let race of listRaceData" [value]="race.raceId">{{race.race}}</mat-option>
               </mat-select>
               <mat-error *ngIf="searchForm.controls.race.hasError('required')">
                 {{'family.label.race' | translate }} {{'family.err.needed' | translate }} 
@@ -130,9 +125,8 @@
           <div class="col-md-4">
             <mat-form-field class="example-full-width">
               <mat-select formControlName="religion" placeholder="{{'family.label.religion' | translate}}" required
-                  (change)="checkReqValues()">
-                  <mat-option [value]=1>Islam</mat-option>
-                  <mat-option [value]=2>Budha</mat-option>
+                (change)="checkReqValues()">
+                <mat-option *ngFor="let religion of listReligionData" [value]="religion.religionId">{{religion.religion}}</mat-option>
               </mat-select>
               <mat-error *ngIf="searchForm.controls.religion.hasError('required')">
                 {{'family.label.religion' | translate }} {{'family.err.needed' | translate }} 
@@ -176,8 +170,7 @@
           <div class="col-md-4">
             <mat-form-field class="example-full-width">
               <mat-select formControlName="sex" placeholder="{{'family.label.sex' | translate}}">
-                  <mat-option [value]=1>Lelaki</mat-option>
-                  <mat-option [value]=2>Perempuan</mat-option>
+                  <mat-option *ngFor="let gender of listGenderData" [value]="gender.genderId">{{gender.gender}}</mat-option>
               </mat-select>
             </mat-form-field>
           </div>
@@ -234,7 +227,7 @@
         </div>
       </div>
 
-      <div class="row" *ngIf="checkNation == true">
+      <div class="row" *ngIf="checkOku == true">
         <div class="col-md-2">&nbsp;
         </div>
         <div class="col-md-1">&nbsp;
@@ -246,7 +239,7 @@
           </div>
           <div class="col-md-7">
               <span class="displayDesc">
-                  : PH 140013005643291</span>
+                  : {{okuInfo.okuRegistrationNumber}}</span>
           </div>
           <div class="col-md-5">
               <span class="displayDesc">
@@ -254,7 +247,7 @@
           </div>
           <div class="col-md-7">
               <span class="displayDesc">
-                  : Kurang Upaya Penglihatan</span>
+                  : {{okuInfo.okuType}}</span>
           </div>
           <div class="col-md-5">
               <span class="displayDesc">
@@ -262,12 +255,8 @@
           </div>
           <div class="col-md-7">
               <span class="displayDesc">
-                  : BL</span>
+                  : {{okuInfo.okuTypeId}}</span>
           </div>
-          <!-- <span class="displayDesc">
-            No. Pendaftaran OKU: <br>
-            Jenis OKU: <br>
-            Jenis ID OKU:</span> -->
         </div>
       </div><br>
 

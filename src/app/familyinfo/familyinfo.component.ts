@@ -55,6 +55,13 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
   public valDOB: any;
   public getUrl: any;
   public events: string[] = [];
+  public okuInfo: any;
+  public checkOku = false;
+  public listRaceData: any;
+  public listReligionData: any;
+  public listCountryData: any;
+  public listGenderData: any;
+  public listRelationData: any;
   showNoData = false;
   loading = false;
 
@@ -153,11 +160,14 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
 
     this.getUrl = this.router.url.split('/')[2];
     this.checkReqValues();
+    this.getRace(2);
+    this.getReligion(2);
+    this.getCountryPass(2);
+    this.getGender(2);
+    this.getRelation(2);
 
     if(this.getUrl == 'add'){
-
       this.searchForm.get('warganegara').setValue(1);
-      
     }
 
     else{
@@ -178,6 +188,91 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
       // }
     }
 
+  }
+
+  getRace(lang){
+    this.loading = true;
+    return this.sharedService.getRace(lang).subscribe(
+    data => {
+
+      this.sharedService.errorHandling(data, (function(){
+        this.listRaceData = data;
+        this.loading = false;
+      }).bind(this));
+      this.loading = false;
+    },
+    error => {      
+      this.loading = false;     
+      this.toastr.error(this.translate.instant('common.err.servicedown'), ''); 
+    });
+  }
+
+  getReligion(lang){
+    this.loading = true;
+    return this.sharedService.getReligion(lang).subscribe(
+    data => {
+
+      this.sharedService.errorHandling(data, (function(){
+        this.listReligionData = data;
+        this.loading = false;
+      }).bind(this));
+      this.loading = false;
+    },
+    error => {      
+      this.loading = false;     
+      this.toastr.error(this.translate.instant('common.err.servicedown'), ''); 
+    });
+  }
+
+  getCountryPass(lang){
+    this.loading = true;
+    return this.sharedService.getCountryData().subscribe(
+    data => {
+
+      this.sharedService.errorHandling(data, (function(){
+        this.listCountryData = data;
+        this.loading = false;
+      }).bind(this));
+      this.loading = false;
+    },
+    error => {      
+      this.loading = false;     
+      this.toastr.error(this.translate.instant('common.err.servicedown'), ''); 
+    });
+  }
+  
+  getGender(lang){
+    this.loading = true;
+    return this.sharedService.getGender(lang).subscribe(
+    data => {
+
+      this.sharedService.errorHandling(data, (function(){
+        this.listGenderData = data;
+        this.loading = false;
+      }).bind(this));
+      this.loading = false;
+    },
+    error => {      
+      this.loading = false;     
+      this.toastr.error(this.translate.instant('common.err.servicedown'), ''); 
+    });
+  }
+
+  getRelation(lang){
+    this.loading = true;
+    return this.sharedService.getRelationship(lang).subscribe(
+    data => {
+
+      this.sharedService.errorHandling(data, (function(){
+        this.listRelationData = data;
+        this.loading = false;
+      }).bind(this));
+      this.loading = false;
+    },
+    error => {      
+      this.loading = false;     
+      this.toastr.error(this.translate.instant('common.err.servicedown'), ''); 
+    });
   }
   
   checkNationalyty(){
@@ -210,12 +305,12 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
         reqVal =  ["icno","name","relation","race","religion"];
       }
       else{
-        reqVal =  ["icno","name","relation","race","religion","profileStatus"];
+        reqVal =  ["icno","name","relation","race","religion","profileStatus","dob"];
       }
     }
 
     else{
-      reqVal =  ["passportno","name","relation","race","religion","profileStatus"];
+      reqVal =  ["passportno","name","relation","race","religion","profileStatus","dob"];
     }
 
     for (var reqData of reqVal) {
@@ -248,89 +343,135 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
     this.events = [];
     this.events.push(`${event.value}`);   
     this.valDOB = new Date(this.events[0]).getTime();
+
+    this.checkReqValues();
     //this.searchForm.get('dob').setValue(new Date(this.valDOB).toISOString());
   }
 
   checkOKU(){
-    console.log("check OKU");
-    this. openDialog(1);
+    this.loading = true;
+    this.protectedService.postProtected('','jkmservice/okustatus').subscribe(
+    data => {
+
+      this.sharedService.errorHandling(data, (function(){
+        console.log();
+        this.okuInfo = data.resource;
+        
+      if(this.okuInfo.isOku == true){
+        this.checkOku = true;
+      }
+
+      else{
+        this.checkOku = false;
+        this. openDialog(1);
+      }
+
+      }).bind(this));
+      this.loading = false;
+    },
+    error => {      
+      this.loading = false;      
+    });
+
   }
 
   submit(val){
 
-    let icpassport: any;
+    let valIc = '';
+    let valPassport = '';  
 
     let body = {
-      "nationality":{
-          "nationalityId": null
-       },
-      "icno": null,
-      "passportState":{
-        "passportStateId": null
+      "identificationNo": '',
+      "passportNo": '',
+      "fullName": '',
+      "firstName": '',
+      "lastName": '',
+      "dateOfBirth": null,
+      "email": '',
+      "mobilePhoneNo": '',
+      "isMyidentityVerified": false,
+      "isMyidentityActive": false,
+      "isMyidentityCitizen": false,
+      "isOku": false,
+      "okuStatus": "",
+      "okuRegistrationNo": '',
+      "additionalInfo": '',
+      "userType": {
+        "userTypeId": null
       },
-      "name": null,
-      "relation":{
-        "relationId": null
+      "relationship": {
+        "relationshipId": null
       },
-      "dob": null,
-      "sex":{
-        "sexId": null
+      "passportCountryIssue": {
+        "countryId": null //152
       },
-      "email": null,
-      "race":{
-        "raceId": null
+      "gender": {
+        "genderId": null
       },
-      "religion":{
+      "religion": {
         "religionId": null
       },
-      "phone": null,
-      "profileStatus":{
-        "profileStatusId": null
+      "race": {
+        "raceId": null
       },
-      "reasonStatus":{
-        "reasonStatusId": null
-      },
-      "addInfo": null
-    };
-
+      "accountStatus": {
+        "accountStatusId": null
+      }
+    }
+    
     if(this.searchForm.controls.warganegara.value == 1){
-      icpassport = val.icno;
+      valIc = val.icno;
+      valPassport = '';
+      val.passportState = 152;
     }
 
     else{
-      icpassport = val.passportno;
+      valIc = '';
+      valPassport = val.passportno;
     }
 
-    body.nationality.nationalityId = val.warganegara;
-    body.icno = icpassport;
-    body.passportState.passportStateId = val.passportState;
-    body.name = val.name;
-    body.relation.relationId = val.relation;
-    body.dob = this.valDOB;
-    body.sex.sexId = val.sex;
+    if(val.addInfo == null){
+      val.addInfo = '';
+    }
+
+    body.identificationNo = valIc;
+    body.passportNo = valPassport;
+    body.fullName = val.name;    
     body.email = val.email;
+    body.mobilePhoneNo = val.phone;
+    body.isMyidentityVerified = false;
+    body.isMyidentityActive = false
+    body.isMyidentityCitizen = false;
+    body.isOku = this.checkOku;
+    body.okuStatus = '';
+    body.okuRegistrationNo = '';
+    body.additionalInfo = val.addInfo;
+    body.userType.userTypeId = val.warganegara;
+    body.relationship.relationshipId = val.relation;
+    body.dateOfBirth = this.valDOB;
+    body.passportCountryIssue.countryId = val.passportState;
+    body.gender.genderId = val.sex;
     body.race.raceId = val.race;
-    body.religion.religionId = val.religion;
-    body.phone = val.phone;
-    body.profileStatus.profileStatusId = val.profileStatus;
-    body.reasonStatus.reasonStatusId = val.reasonStatus;
-    body.addInfo = val.addInfo;
+    body.religion.religionId = val.religion;    
+    body.accountStatus.accountStatusId = val.profileStatus;
+    //body.reasonStatus.reasonStatusId = val.reasonStatus;
+    
 
     console.log(JSON.stringify(body));
     // this.loading = true;
     
-    // this.protectedService.create(body,'perhilitan/draft/save',this.langID).subscribe(
-    // data => {
-    //   this.sharedService.errorHandling(data, (function () {
-    //     this.toastr.success(this.translate.instant('Permohonan Baru Lesen Peniaga/Taksidermi berjaya disimpan sebagai draft'), '');
-    //     this.router.navigate(['appsmgmt']);
-    //   }).bind(this));
-    //   this.loading = false;
-    // },
-    // error => {
-    //   this.loading = false;
-    //   this.toastr.error(JSON.parse(error._body).statusDesc, '');
-    // });
+    this.protectedService.createFamily(body,'user/family/profile',this.langID).subscribe(
+    data => {
+      this.sharedService.errorHandling(data, (function () {
+        this.toastr.success(this.translate.instant('Maklumat berjaya disimpan.'), '');
+        this.router.navigate(['familyinfo']);
+      }).bind(this));
+      this.loading = false;
+    },
+    error => {
+      this.loading = false;
+      this.toastr.error(JSON.parse(error._body).statusDesc, '');
+    });
   }
 
   openDialog(a) {

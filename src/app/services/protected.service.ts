@@ -69,6 +69,7 @@ export class ProtectedService {
   private urlPdrm: string = this.config.urlAgencyDservice;
   private dserviceAgencyUrl: string = this.config.urlAgencyDservice;
   private dserviceValidationUrl: string = this.config.urlDserviceValidation;
+  private urlDS: string = this.config.urlAgencyDservice;
 
 
   createProfile(user) {
@@ -267,9 +268,25 @@ export class ProtectedService {
     .retry(5)
     .catch(this.handleError);
   }
-
+  
   create(data, moduleName, lang) {
     let createUrl = this.urlPerhilitan   + moduleName + '?language='+lang;
+    return this.http.post(createUrl, data)
+    .map((response: Response) => response.json())
+    .catch(this.handleError);
+  }
+
+  getDataProtected(modules, lang, page, size){
+    
+    return this.http
+    .get(this.config.protectedURL + modules + '?language='+lang+'&page='+page+'&size='+size)
+    .map((response: Response) => response.json())
+    .retry(5)
+    .catch(this.handleError);
+  }
+
+  createFamily(data, moduleName, lang) {
+    let createUrl = this.config.protectedURL   + moduleName + '?language='+lang;
     return this.http.post(createUrl, data)
     .map((response: Response) => response.json())
     .catch(this.handleError);
@@ -278,6 +295,13 @@ export class ProtectedService {
   update(data, moduleName, lang) {
     let createUrl = this.urlPerhilitan   + moduleName + '?language='+lang;
     return this.http.put(createUrl, data)
+    .map((response: Response) => response.json())
+    .catch(this.handleError);
+  }
+
+  postProtected(data, moduleName) {
+    let createUrl = this.urlDS   + moduleName;
+    return this.http.post(createUrl, data)
     .map((response: Response) => response.json())
     .catch(this.handleError);
   }

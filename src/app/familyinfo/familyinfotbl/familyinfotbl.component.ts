@@ -24,7 +24,7 @@ export class FamilyinfotblComponent implements OnInit, OnDestroy {
   lang = this.lang;
   langID: any;
   dataApp: any;
-  dataAppPage: any;
+  dataListPage: any;
   
   pageSize = 10;
   pageCount = 1;
@@ -72,7 +72,7 @@ export class FamilyinfotblComponent implements OnInit, OnDestroy {
           }
           if(this.topnavservice.flagLang){
           }
-          this.getDataAppList(this.pageCount, this.pageSize);
+          this.getDataList(this.pageCount, this.pageSize);
 
       });
     }
@@ -89,16 +89,16 @@ export class FamilyinfotblComponent implements OnInit, OnDestroy {
       this.langID = 1;
     }
 
-    this.getDataAppList(this.pageCount, this.pageSize);
+    this.getDataList(this.pageCount, this.pageSize);
   }
 
-  getDataAppList(page, size){
+  getDataList(page, size){
     this.loading = true;
-    this.protectedService.getDataApp(page, size, this.param).subscribe(
+    this.protectedService.getDataProtected('user/family/profile', this.langID, page, size).subscribe(
     data => {
       this.sharedService.errorHandling(data, (function(){
-        this.dataApp = data.list;
-        this.dataAppPage = data;
+        this.dataApp = data.familyProfileList;
+        this.dataListPage = data;
         this.noNextData = data.pageNumber === data.totalPages;
         this.showNoData = false;
 
@@ -114,14 +114,16 @@ export class FamilyinfotblComponent implements OnInit, OnDestroy {
     });
   }
 
-  print(){
+  changeDob(val){
+    let strdob = moment(new Date(val)).format('DD-MM-YYYY');
+    return strdob;
+  }
 
+  print(){
   }
 
   view(){
-
   }
-
 
   add() {
     this.router.navigate(['familyinfo/add']);
@@ -129,12 +131,12 @@ export class FamilyinfotblComponent implements OnInit, OnDestroy {
   }
 
   pageChange(event){
-    this.getDataAppList(this.pageCount, event.value);
+    this.getDataList(this.pageCount, event.value);
     this.pageSize = event.value;
   }
 
   paginatorL(page){
-    this.getDataAppList(page-1, this.pageSize);
+    this.getDataList(page-1, this.pageSize);
     this.noPrevData = page <= 2 ? true : false;
     this.noNextData = false;
   }
@@ -143,7 +145,7 @@ export class FamilyinfotblComponent implements OnInit, OnDestroy {
     this.noPrevData = page >= 1 ? false : true;
     let pageInc = page+1;
     this.noNextData = pageInc === totalPages;
-    this.getDataAppList(page+1, this.pageSize);
+    this.getDataList(page+1, this.pageSize);
   }
 
 }
