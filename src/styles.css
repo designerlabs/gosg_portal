@@ -479,7 +479,89 @@ p.font-size-s > strong {
 }
 
 
-@media screen and (max-width: 1920px) and (min-width: 481px){
+@media screen and (max-width:640px) and (min-width: 481px){
+  .owl-carousel .owl-item img {
+    display: block;
+    width: 140% !important;
+  }
+
+  .sliderBox {
+    top: 20% !important;
+    margin-right: 0px !important;
+    left: 5% !important;
+    min-height: 35%;
+    min-width: 100% !important;
+    margin: 0px 0px !important;
+  }
+
+  .lifeEventContainer{
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .lifeEventBox{
+    padding: 0px 25px !important;
+  }
+
+  .lifeEventContainer h2, .lifeEventContainer p{
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+  }
+
+  .articleBox {
+    padding: 10px 25px !important;
+  }
+
+  h2{
+    line-height: 35px !important;
+  }
+
+  .search_header{
+    font-size:18px !important;
+    padding: 15px 0px 0px !important;
+  }
+
+  .dashboard_l_menu{
+    display: none;
+  }
+
+  .dashboard_s_menu{
+    display: block;
+  }
+
+  .stepperTitle{
+    display: none;
+  }
+
+
+  .btn-right{
+    position: absolute;
+    bottom: 20px !important;
+    right: 15px;
+    font-size: 30px;
+    z-index: 999;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .btn-left{
+    position: absolute;
+    bottom: 20px !important;
+    left: 15px;
+    font-size: 30px;
+    z-index: 999;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .sliderContainer:after{
+    margin-top: 0% !important;
+  }
+
+}
+
+
+@media screen and (max-width: 1920px) and (min-width: 641px){
   .owl-carousel .owl-item img {
     display: block;
     width: auto !important;
@@ -491,6 +573,12 @@ p.font-size-s > strong {
 
   .dashboard_s_menu{
     display: none;
+  }
+
+  .sliderContainer:after{
+    background-image: linear-gradient(to right, transparent 30%, #a7a495 85%), linear-gradient(to left, transparent 80%, #a7a495 95%) !important;
+    background-image: -webkit-linear-gradient(to right, transparent 30%, #a7a495 85%), -webkit-linear-gradient(to left, transparent 80%, #a7a495 95%) !important;
+
   }
 
 
