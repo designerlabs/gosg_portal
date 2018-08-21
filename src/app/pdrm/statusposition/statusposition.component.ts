@@ -177,6 +177,10 @@ export class StatuspositionComponent implements OnInit, OnDestroy {
     let icno = this.searchForm.get('ic').value;
     let arrObj = [];
 
+    arrObj.push(this.langID);
+    arrObj.push(this.agcCode);
+    arrObj.push(this.dsvcCode);
+
     if(!environment.staging) {
 
     this.protectedService.getPdrm('pdrm/checkPoliceIntake', arrObj).subscribe(
