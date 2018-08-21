@@ -221,6 +221,9 @@ export class PolicereportComponent implements OnInit, OnDestroy {
           //   window.close();
           //   sub.unsubscribe();
           // });
+        } else {
+          localStorage.setItem('dserviceCode', dsvcCode);
+          this.loading = false;
         }
         this.loading = false;
       },

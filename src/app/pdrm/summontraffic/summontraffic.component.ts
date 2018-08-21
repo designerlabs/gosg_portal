@@ -434,7 +434,7 @@ export class SummontrafficComponent implements OnInit {
 
   triggerDserviceValidation(dsvcCode) {
     let sub;
-    // this.loader = true;
+    this.loading = true;
 
     return this.route.paramMap
       .switchMap((params: ParamMap) =>
@@ -449,8 +449,11 @@ export class SummontrafficComponent implements OnInit {
           //   window.close();
           //   sub.unsubscribe();
           // });
+          this.loading = false;
+        } else {
+          localStorage.setItem('dserviceCode', dsvcCode);
+          this.loading = false;
         }
-        // this.loader = false;
       },
       error => {
         this.toastr.error(JSON.parse(error._body).statusDesc, '');
