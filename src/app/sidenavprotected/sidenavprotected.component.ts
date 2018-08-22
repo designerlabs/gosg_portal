@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Inject } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Inject, Input } from '@angular/core';
 import { TopnavService } from '../header/topnav/topnav.service';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 import {SharedService } from '../common/shared.service';
@@ -33,6 +33,8 @@ export class SidenavprotectedComponent implements OnInit {
   @Output()
   openSlide:EventEmitter<string> = new EventEmitter();
   constructor( private topnavservice: TopnavService, @Inject(APP_CONFIG) private config: AppConfig, private sharedservice: SharedService) { }
+
+  @Input() state:string;
 
   ngOnInit() {
     this.colors = this.topnavservice.getColors();
