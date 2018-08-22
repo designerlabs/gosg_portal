@@ -215,6 +215,7 @@ export class PolicereportComponent implements OnInit, OnDestroy {
         
         if(!resValidation.valid) {
           this.toastr.error('Invalid Service!', '');
+          this.router.navigate(['404']);
           
           // sub = Observable.interval(2000)
           // .subscribe((val) => {

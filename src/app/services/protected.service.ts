@@ -47,9 +47,9 @@ export class ProtectedService {
               }
    }
 
-   private feedbackUrl: string = this.config.urlFeedbackProtected;
-   private feedbacktypeUrl: string = this.config.urlFeedbackType;
-   private fbsubjectUrl: string = this.config.urlFeedbackSubject;
+  private feedbackUrl: string = this.config.urlFeedbackProtected;
+  private feedbacktypeUrl: string = this.config.urlFeedbackType;
+  private fbsubjectUrl: string = this.config.urlFeedbackSubject;
   private profileUrl: string = this.config.urlGetProfile;
   private profileEmailUrl: string = this.config.urlGetProfileEmail;
   private profilePhoneUrl: string = this.config.urlGetProfilePhone;
@@ -82,9 +82,7 @@ export class ProtectedService {
     return this.http
     .get(this.profileUrl+"/"+userId+"?language="+this.languageId).map((response: Response) => response.json())
     .catch(this.handleError);
-
   }
-
 
   getUser(){
     return this.http

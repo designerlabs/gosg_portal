@@ -85,6 +85,7 @@ export class PortalService {
 
   private portalUrl: string = this.config.urlPortal;
   private protected: string = this.config.urlProtected;
+  private dserviceValidationUrl: string = this.config.urlDserviceValidation;
 
   getAgencyApp(){
     return this.http.get(this.AgencyAppUrl + '.json')
@@ -485,6 +486,16 @@ export class PortalService {
 
   submitScore(data) {
     return this.http.post(this.ratingUrl+"?language="+this.langId, data)
+    .map((response: Response) => response.json())
+    .retry(5)
+    .catch(this.handleError);
+  }
+
+  // Dservice validation by DService RefCode
+  validateDserviceByRefCode(dsvcCode){
+    
+    return this.http
+    .get(this.dserviceValidationUrl+dsvcCode)
     .map((response: Response) => response.json())
     .retry(5)
     .catch(this.handleError);
