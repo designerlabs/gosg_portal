@@ -398,14 +398,14 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
         console.log(data);
         this.okuInfo = data.resource;
         
-      // if(this.okuInfo.isOku == true){
-      //   this.checkOku = true;
-      // }
+      if(this.okuInfo.isOku == true){
+        this.checkOku = true;
+      }
 
-      // else{
-      //   this.checkOku = false;
-      //   this. openDialog(1);
-      // }
+      else{
+        this.checkOku = false;
+        this. openDialog(1);
+      }
 
       }).bind(this));
       this.loading = false;
