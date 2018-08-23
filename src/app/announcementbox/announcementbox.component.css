@@ -94,3 +94,16 @@ div {
 img{
     width:100px;
 }
+
+.articleBox {
+    padding: 10px 40px;
+    text-align: center;
+}
+
+.lifeEventBox, .articleBox span {
+    text-decoration: none;
+    display: block;
+    height: 400px;
+    overflow: hidden;
+    color: #333;
+}
