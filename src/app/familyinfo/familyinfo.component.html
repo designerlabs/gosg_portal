@@ -40,8 +40,7 @@
             <mat-form-field class="example-full-width">
               <mat-select formControlName="warganegara" placeholder="{{'family.label.citizen' | translate}}" required 
                   (change)="changeNation(searchForm.value)">
-                  <mat-option [value]=1>Warganegara</mat-option>
-                  <mat-option [value]=2>Bukan Warganegara</mat-option>
+                  <mat-option *ngFor="let citizen of listCitizenData" [value]="citizen.userTypeId">{{citizen.userType}}</mat-option>
               </mat-select>
               <mat-error *ngIf="searchForm.controls.warganegara.hasError('required')">
                 {{'family.label.citizen' | translate }} {{'family.err.needed' | translate }} 
@@ -49,7 +48,7 @@
             </mat-form-field>
           </div>
 
-          <div class="col-md-4" *ngIf="searchForm.controls.warganegara.value == 1">
+          <div class="col-md-4" *ngIf="searchForm.controls.warganegara.value == 5">
             <mat-form-field class="example-full-width">
                 <input matInput formControlName="icno" placeholder="{{'family.label.ic' | translate}}" [textMask]="{mask: maskIC}"
                 required (keyup)="checkReqValues()">
@@ -62,7 +61,7 @@
             </mat-form-field>
           </div>
 
-          <div class="col-md-4" *ngIf="searchForm.controls.warganegara.value == 2">
+          <div class="col-md-4" *ngIf="searchForm.controls.warganegara.value == 6">
             <mat-form-field class="example-full-width">
                 <input matInput formControlName="passportno" placeholder="{{'family.label.passport' | translate}}" required
                 (keyup)="checkReqValues()"> 
@@ -72,7 +71,7 @@
             </mat-form-field>
           </div>
 
-          <div class="col-md-4" *ngIf="searchForm.controls.warganegara.value == 2">
+          <div class="col-md-4" *ngIf="searchForm.controls.warganegara.value == 6">
             <mat-form-field class="example-full-width">
               <mat-select formControlName="passportState" placeholder="{{'family.label.statepassport' | translate}}" required 
                   (change)="checkReqValues()">
@@ -146,7 +145,7 @@
             </mat-form-field>
           </div>
 
-          <div class="col-md-4" *ngIf="checkNation == false">        
+          <div class="col-md-4" *ngIf="checkNation == false && getUrl == 'add'">        
               <button mat-raised-button color="primary" class="btn btn-md btn-success font-size-s pull-right" 
                 (click)="checkNationalyty()" 
                 [disabled]="!complete || (!validateCtrlChk(icno) && searchForm.controls.icno.errors.pattern)">
@@ -154,7 +153,7 @@
           </div>
       </div>
 
-      <div class="row" *ngIf="checkNation == true">
+      <div class="row" *ngIf="checkNation == true || getUrl != 'add'">
           <div class="col-md-4">
             <mat-form-field class="example-full-width">
                 <input matInput [matDatepicker]="dob" formControlName="dob" placeholder="{{'family.label.dob' | translate}}" readonly
@@ -182,7 +181,7 @@
           </div>
       </div>
 
-      <div class="row" *ngIf="checkNation == true">
+      <div class="row" *ngIf="checkNation == true || getUrl != 'add'">
           <div class="col-md-4">
             <mat-form-field class="example-full-width">
               <mat-select formControlName="profileStatus" placeholder="{{'family.label.statusprofile' | translate}}" required
@@ -206,7 +205,7 @@
           </div>
       </div>
 
-      <div class="row" *ngIf="checkNation == true">
+      <div class="row" *ngIf="checkNation == true || getUrl != 'add'">
           <div class="col-md-8">
             <mat-form-field class="example-full-width displayInfo">
                 <textarea matInput formControlName="addInfo" placeholder="{{'family.label.addinfo' | translate}}"></textarea>
@@ -214,7 +213,7 @@
           </div>
       </div>
 
-      <div class="row" *ngIf="checkNation == true && searchForm.controls.warganegara.value == 1">
+      <div class="row" *ngIf="checkNation == true && searchForm.controls.warganegara.value == 5">
         <div class="col-md-2">
           <span class="displayDesc">{{'family.label.oku' | translate}}</span>
         </div>

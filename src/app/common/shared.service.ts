@@ -57,6 +57,7 @@ export class SharedService {
   private fontUrl: string = this.config.urlFont;
   private religionUrl: string = this.config.urlReligion;
   private raceUrl: string = this.config.urlRace;
+  private citizenUrl: string = this.config.urlCitizenship;
   private sharedDS: string = this.config.urlSharedDS;
   private relationUrl: string = this.config.urlRelationship;
 
@@ -286,6 +287,13 @@ export class SharedService {
   getRace(langId): Observable<any[]> {
     return this.http.get(this.raceUrl + langId)
       .map((response: Response) => response.json().raceList)
+      .retry(5)
+      .catch(this.handleError);
+  }
+
+  getCitizenship(langId): Observable<any[]> {
+    return this.http.get(this.citizenUrl+"?language="+langId)
+      .map((response: Response) => response.json().userTypeList)
       .retry(5)
       .catch(this.handleError);
   }
