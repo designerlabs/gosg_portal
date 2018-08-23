@@ -192,11 +192,11 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
         let familyData = data.familyProfile;
 
         if(familyData.identificationNo == ""){
-          this.searchForm.get('warganegara').setValue(2);
+          this.searchForm.get('warganegara').setValue(6);
           this.searchForm.get('passportno').setValue(familyData.passportNo);
           this.searchForm.get('passportState').setValue(familyData.passportCountryIssue.countryId);
         }else{
-          this.searchForm.get('warganegara').setValue(1);
+          this.searchForm.get('warganegara').setValue(5);
           this.searchForm.get('icno').setValue(familyData.identificationNo);
         }
 
