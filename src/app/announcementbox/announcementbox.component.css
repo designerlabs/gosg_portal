@@ -107,3 +107,7 @@ img{
     overflow: hidden;
     color: #333;
 }
+
+.marginTop--4 {
+    margin-top: -4%;
+}
