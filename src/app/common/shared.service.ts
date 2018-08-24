@@ -60,6 +60,7 @@ export class SharedService {
   private citizenUrl: string = this.config.urlCitizenship;
   private sharedDS: string = this.config.urlSharedDS;
   private relationUrl: string = this.config.urlRelationship;
+  private reasonUrl: string = this.config.urlReason;
 
   icon = {
     update: 'fa fa-edit',
@@ -301,6 +302,13 @@ export class SharedService {
   getRelationship(langId): Observable<any[]> {
     return this.http.get(this.relationUrl + '?language='+langId + '&page=1&size=99')
       .map((response: Response) => response.json().userRelationshipList)
+      .retry(5)
+      .catch(this.handleError);
+  }
+
+  getReason(langId): Observable<any[]> {
+    return this.http.get(this.reasonUrl + '?language='+langId + '&page=1&size=99')
+      .map((response: Response) => response.json().accountStatusReasonList)
       .retry(5)
       .catch(this.handleError);
   }

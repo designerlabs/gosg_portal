@@ -37,6 +37,7 @@ export class AppConfig {
     urlPostcode:string;
     // urlStaurlPostcodete:string;
     urlRelationship: string;
+    urlReason: string;
     urlRace:string;
     urlCitizenship: string;
     urlCity:string;
@@ -131,6 +132,7 @@ export const APP_DI_CONFIG: AppConfig = {
     urlRace: commonURL+'race/lang/',
     urlCitizenship: commonURL+'user/type/citizenship',
     urlRelationship: commonURL+'relationship',
+    urlReason: commonURL+'accountstatusreason',
     urlCity: commonURL+'city/state/',
     urlReligion: commonURL+'religion/lang/',
     urlLifeevent: commonURL+'life/event',

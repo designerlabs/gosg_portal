@@ -63,6 +63,7 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
   public listCountryData: any;
   public listGenderData: any;
   public listRelationData: any;
+  public listReason: any;
   public valProfileID: any;
   public okuRegNo = '';
   public okuType = '';
@@ -172,6 +173,7 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
     this.getGender(2);
     this.getRelation(2);
     this.getCitizen(2);
+    this.getReason(2)
 
     if(this.getUrl == 'add'){
       this.searchForm.get('warganegara').setValue(5);
@@ -202,7 +204,6 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
         }else{
           this.searchForm.get('warganegara').setValue(5);
           this.searchForm.get('icno').setValue(familyData.identificationNo);
-          //this.checkOKU();
         }
 
         this.searchForm.get('name').setValue(familyData.fullName);
@@ -214,10 +215,20 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
         this.searchForm.get('sex').setValue(familyData.gender.genderId);
         this.searchForm.get('phone').setValue(familyData.mobilePhoneNo);
         this.searchForm.get('profileStatus').setValue(familyData.accountStatus.accountStatusId);
-        this.searchForm.get('reasonStatus').setValue(familyData.accountStatus.accountStatusId);
         this.searchForm.get('addInfo').setValue(familyData.additionalInfo);
         this.valProfileID = familyData.profileId;
         this.valDOB = familyData.dateOfBirth;
+        this.checkOku = familyData.isOku;
+        this.okuRegNo = familyData.okuRegistrationNo;
+        this.okuType = familyData.okuType;
+        this.okuTypeId = familyData.okuTypeId;
+        this.okuStatus = familyData.okuStatus;
+
+        let getObjKeys = Object.keys(familyData);
+        let valObj = getObjKeys.filter(fmt => fmt === "accountStatusReason");
+        if(valObj.length == 1){
+          this.searchForm.get('reasonStatus').setValue(familyData.accountStatusReason.accountStatusReasonId);
+        }
 
         if(this.searchForm.get('warganegara').value == 5){        
           this.searchForm.get('icno').disable();
@@ -344,17 +355,35 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
       this.toastr.error(this.translate.instant('common.err.servicedown'), ''); 
     });
   }
+
+  getReason(lang){
+    this.loading = true;
+    return this.sharedService.getReason(lang).subscribe(
+    data => {
+
+      this.sharedService.errorHandling(data, (function(){
+        this.listReason = data;
+        this.loading = false;
+      }).bind(this));
+      this.loading = false;
+    },
+    error => {      
+      this.loading = false;     
+      this.toastr.error(this.translate.instant('common.err.servicedown'), ''); 
+    });
+  }
   
   checkNationalyty(){
-    this.checkNation = true;
+    
+    this.checkNation = false; // if connot varify
     this.complete = false;
-
     this. openDialog(2);
+
   }
 
   changeNation(val){
 
-    if(val.warganegara == 2){
+    if(val.warganegara == 6){
       this.checkNation = true;
     }
 
@@ -446,9 +475,9 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
       if(this.okuInfo.isOku == true){
         this.checkOku = true;
         this.okuRegNo = this.okuInfo.okuRegistrationNumber;
-        this.okuType = this.okuInfo.okuRegistrationNumber;
+        this.okuType = this.okuInfo.okuType;
         this.okuTypeId = this.okuInfo.okuTypeId;
-        this.okuStatus = this.okuInfo.okuTypeId;
+        this.okuStatus = this.okuInfo.okuStatus;
       }
 
       else{
@@ -474,7 +503,6 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
     let valIc = '';
     let valPassport = '';  
     let validentification: any;
-
     let body: any;
 
     if(this.searchForm.controls.warganegara.value == 5){
@@ -510,6 +538,8 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
         "isOku": false,
         "okuStatus": this.okuStatus,
         "okuRegistrationNo": this.okuRegNo,
+        "okuType": this.okuType,
+        "okuTypeId": this.okuTypeId,
         "additionalInfo": '',
         "userType": {
           "userTypeId": null
@@ -531,6 +561,9 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
         },
         "accountStatus": {
           "accountStatusId": null
+        },
+        "accountStatusReason":{
+          "accountStatusReasonId": null
         }
       }
 
@@ -543,8 +576,6 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
       body.isMyidentityActive = false
       body.isMyidentityCitizen = false;
       body.isOku = this.checkOku;
-      body.okuStatus = '';
-      body.okuRegistrationNo = '';
       body.additionalInfo = val.addInfo;
       body.userType.userTypeId = val.warganegara;
       body.relationship.relationshipId = val.relation;
@@ -554,7 +585,7 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
       body.race.raceId = val.race;
       body.religion.religionId = val.religion;    
       body.accountStatus.accountStatusId = val.profileStatus;
-      //body.reasonStatus.reasonStatusId = val.reasonStatus;      
+      body.accountStatusReason.accountStatusReasonId = val.reasonStatus;       
 
       console.log(JSON.stringify(body));
       this.loading = true;    
@@ -573,6 +604,8 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
     }
 
     else{
+      console.log(this.okuStatus + "HAHHA" + this.okuRegNo);
+
       body = {
         "profileId": null,
         "identificationNo": '',
@@ -589,6 +622,8 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
         "isOku": false,
         "okuStatus": this.okuStatus,
         "okuRegistrationNo": this.okuRegNo,
+        "okuType": this.okuType,
+        "okuTypeId": this.okuTypeId,
         "additionalInfo": '',
         "userType": {
           "userTypeId": null
@@ -610,6 +645,9 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
         },
         "accountStatus": {
           "accountStatusId": null
+        },
+        "accountStatusReason":{
+          "accountStatusReasonId": null
         }
       }
 
@@ -623,8 +661,6 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
       body.isMyidentityActive = false
       body.isMyidentityCitizen = false;
       body.isOku = this.checkOku;
-      body.okuStatus = '';
-      body.okuRegistrationNo = '';
       body.additionalInfo = val.addInfo;
       body.userType.userTypeId = this.searchForm.controls.warganegara.value;
       body.relationship.relationshipId = this.searchForm.controls.relation.value;
@@ -634,7 +670,7 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
       body.race.raceId = this.searchForm.controls.race.value;
       body.religion.religionId = this.searchForm.controls.religion.value;    
       body.accountStatus.accountStatusId = val.profileStatus;
-      //body.reasonStatus.reasonStatusId = val.reasonStatus;      
+      body.accountStatusReason.accountStatusReasonId = val.reasonStatus;      
 
       console.log(JSON.stringify(body));
       this.loading = true;    

@@ -187,7 +187,7 @@
               <mat-select formControlName="profileStatus" placeholder="{{'family.label.statusprofile' | translate}}" required
                   (change)="checkReqValues()">
                   <mat-option [value]=1>Aktif</mat-option>
-                  <mat-option [value]=2>Tidak Aktif</mat-option>
+                  <mat-option [value]=3>Tidak Aktif</mat-option>
               </mat-select>
               <mat-error *ngIf="searchForm.controls.profileStatus.hasError('required')">
                 {{'family.label.statusprofile' | translate }} {{'family.err.needed' | translate }} 
@@ -198,8 +198,7 @@
           <div class="col-md-4">
             <mat-form-field class="example-full-width">
               <mat-select formControlName="reasonStatus" placeholder="{{'family.label.reason' | translate}}">
-                  <mat-option [value]=1>AA</mat-option>
-                  <mat-option [value]=2>BB</mat-option>
+                  <mat-option *ngFor="let reason of listReason" [value]="reason.accountStatusReasonId">{{reason.accountStatusReasonDescription}}</mat-option>
               </mat-select>
             </mat-form-field>
           </div>
