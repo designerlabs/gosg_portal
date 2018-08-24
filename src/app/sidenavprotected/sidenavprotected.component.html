@@ -4,7 +4,7 @@
 
 
     <ul>
-      <li *ngIf="state"><h3>{{state}}</h3></li>
+      <li *ngIf="state"><h4 style="padding: 10px;">{{state}}</h4></li>
       <li>
           <a routerLinkActive="topactive" class="font-size-s"  href="" [routerLink]="['/dashboard']"><i class="fa fa-dashboard"></i> {{ 'dashboard.sidenav.dashboard' | translate }}</a>
         </li>
