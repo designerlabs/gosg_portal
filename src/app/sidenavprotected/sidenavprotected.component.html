@@ -9,36 +9,36 @@
           <a routerLinkActive="topactive" class="font-size-s"  href="" [routerLink]="['/dashboard']"><i class="fa fa-dashboard"></i> {{ 'dashboard.sidenav.dashboard' | translate }}</a>
         </li>
         <li>
-            <a routerLinkActive="topactive" href="" [routerLink]="['/profile']"><i class="fa fa-user-circle"></i> {{ 'dashboard.sidenav.profile' | translate }}</a>
+            <a routerLinkActive="topactive" class="font-size-s" href="" [routerLink]="['/profile']"><i class="fa fa-user-circle"></i> {{ 'dashboard.sidenav.profile' | translate }}</a>
         </li>
         <li>
-            <a routerLinkActive="topactive" href="" [routerLink]="['/mailbox']"><i class="fa fa-envelope"></i> {{ 'dashboard.sidenav.inbox' | translate }}</a>
+            <a routerLinkActive="topactive" class="font-size-s" href="" [routerLink]="['/mailbox']"><i class="fa fa-envelope"></i> {{ 'dashboard.sidenav.inbox' | translate }}</a>
         </li>
         <li>
-            <a routerLinkActive="topactive" href="" [routerLink]="['/appsmgmt']"><i class="fa fa-file"></i> {{ 'dashboard.sidenav.appmgmt' | translate }}</a>
+            <a routerLinkActive="topactive" class="font-size-s" href="" [routerLink]="['/appsmgmt']"><i class="fa fa-file"></i> {{ 'dashboard.sidenav.appmgmt' | translate }}</a>
         </li>
         <li>
-            <a routerLinkActive="topactive" href=""><i class="fa fa-building"></i> {{ 'dashboard.sidenav.companyprofile' | translate }}</a>
+            <a routerLinkActive="topactive" class="font-size-s" href=""><i class="fa fa-building"></i> {{ 'dashboard.sidenav.companyprofile' | translate }}</a>
         </li>
 
         <li>
-          <a routerLinkActive="topactive" [routerLink]="['contact']"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ 'home.menu.contact' | translate }}</a> </li>
+          <a routerLinkActive="topactive" class="font-size-s" [routerLink]="['contact']"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ 'home.menu.contact' | translate }}</a> </li>
         <li>
-          <a routerLinkActive="topactive" [routerLink]="['faq']"><i class="fa fa-question-circle" aria-hidden="true"></i> {{ 'home.menu.faq' | translate }}</a>
+          <a routerLinkActive="topactive" class="font-size-s" [routerLink]="['faq']"><i class="fa fa-question-circle" aria-hidden="true"></i> {{ 'home.menu.faq' | translate }}</a>
         </li>
         <li>
-          <a routerLinkActive="topactive" [routerLink]="['manual']"><i class="fa fa-book" aria-hidden="true"></i> {{ 'home.menu.manual' | translate }}</a>
+          <a routerLinkActive="topactive" class="font-size-s" [routerLink]="['manual']"><i class="fa fa-book" aria-hidden="true"></i> {{ 'home.menu.manual' | translate }}</a>
         </li>
         <li>
-          <a routerLinkActive="topactive" [routerLink]="['aboutus']"><i class="fa fa-globe" aria-hidden="true"></i> {{ 'home.menu.aboutus' | translate }}</a>
+          <a routerLinkActive="topactive" class="font-size-s" [routerLink]="['aboutus']"><i class="fa fa-globe" aria-hidden="true"></i> {{ 'home.menu.aboutus' | translate }}</a>
         </li>
         <li>
-            <a href="../uapsso/Logout" (click)="logout($event)"><i class="fa fa-sign-out" aria-hidden="true"></i> {{ 'home.menu.logout' | translate }}</a>
+            <a href="../uapsso/Logout" class="font-size-s" (click)="logout($event)"><i class="fa fa-sign-out" aria-hidden="true"></i> {{ 'home.menu.logout' | translate }}</a>
         </li>
         <li>
             <mat-expansion-panel (opened)="callApiProtected()">
-                <mat-expansion-panel-header>
-                  <mat-panel-title class="font-size-m">
+                <mat-expansion-panel-header style="padding: 0px !important;">
+                  <mat-panel-title class="font-size-s"  routerLinkActive="topactive">
                       <i class="fa fa-cog" aria-hidden="true"></i>&nbsp;{{ 'home.menu.setting' | translate }}
                   </mat-panel-title>
                 </mat-expansion-panel-header>
@@ -46,14 +46,14 @@
                 <div class="menu_botm" id="confBar2">
                     <div  id="themeContainer1">
 
-                      <div  class="settingLbl font-size-m">
+                      <div  class="settingLbl font-size-s">
                         {{ 'home.menu.themecolor' | translate }}:
                       </div>
                       <div class="settingBtm">
-                            <input #colorPanel *ngFor="let color of getThemeColors; let i = index; let firstItem = first" (click)="setClickedColor(i, color.colorCode)" data-selected-id="color.colorId"  [class.colorPaletteActive]="color.defaultColor" type="button" name="bgColor" [(ngModel)]="bgColor" [ngStyle]="{'background': color.colorCode, 'border': '1px solid', 'border-color': color.colorCode}"  class="bgColorBtn bgColor" value="{{color.colorCode}}">
-                            <span><div (click)="resetBgColor()" class="btn btn-xs btn-default"><i class="fa fa-refresh"></i></div></span>
-                        </div>
-                      <div  class="settingLbl font-size-m">
+                          <input #colorPanel *ngFor="let color of getThemeColors; let i = index; let firstItem = first" (click)="setClickedColor(i, color.colorCode)" data-selected-id="color.colorId"  [class.colorPaletteActive]="color.defaultColor" type="button" name="bgColor" [(ngModel)]="bgColor" [ngStyle]="{'background': color.colorCode, 'border': '1px solid', 'border-color': color.colorCode}"  class="bgColorBtn bgColor" value="{{color.colorCode}}">
+                          <span><div (click)="resetBgColor()" class="btn btn-xs btn-default"><i class="fa fa-refresh"></i></div></span>
+                      </div>
+                      <div  class="settingLbl font-size-s">
                         {{ 'home.menu.fontsize' | translate }} :
                       </div>
                       <div class="settingBtm">
@@ -61,20 +61,17 @@
                           <button  [disabled]="plusBtn" class="fontplus btn btn-default"  (click)="fontplus()" style="border:1px solid white;padding: 3px; height: 25px; width: 28px; font-size:14px;"><i class="fa fa-plus"></i>A</button>
                           <span><div class="fontreset btn btn-xs btn-default" (click)="fontreset()"><i class="fa fa-refresh"></i></div></span>
                       </div>
-                      <div class="settingLbl font-size-m">
+                      <div class="settingLbl font-size-s">
                         {{ 'home.menu.fonttype' | translate }} :
                       </div>
                       <div class="settingBtm">
-
-                            <select #fontTy (change)="onChange($event, fontTy.value)" id="fontOptSideMenu3" class="form-control fontOption">
-                                <option *ngFor="let font of getThemeFonts;" [value]="font.fontName"  [selected]="font.defaultFont" >
-                                    {{font.fontName}}
-                                </option>
-                            </select>
-
-                              <span style="clear:both;"><div (click)="resetFontStyle()" id="resetFontStyle" class="btn btn-xs btn-default" style="padding:10px;"><i class="fa fa-refresh"></i></div></span>
-                          </div>
-
+                        <select #fontTy (change)="onChange($event, fontTy.value)" id="fontOptSideMenu3" class="form-control fontOption">
+                          <option *ngFor="let font of getThemeFonts;" [value]="font.fontName"  [selected]="font.defaultFont" >
+                              {{font.fontName}}
+                          </option>
+                        </select>
+                        <span style="clear:both;"><div (click)="resetFontStyle()" id="resetFontStyle" class="btn btn-xs btn-default" style="padding:10px;"><i class="fa fa-refresh"></i></div></span>
+                      </div>
                     </div>
                   </div>
 
