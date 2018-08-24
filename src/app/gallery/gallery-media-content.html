@@ -1,15 +1,15 @@
-<div mat-dialog-content style="text-align: center; margin-right: auto; margin-left: auto; padding-left: 15px; padding-right: 15px; padding-top: 15px">
+<div class="gal-popup" mat-dialog-content>
 
     <!-- IMAGES -->
     <div *ngIf="data.type=='images'">
         <h4 mat-dialog-title><strong>{{ data.title }}</strong></h4>
-        <img src="{{ data.path }}" width="auto" height="auto">
+        <img src="{{ data.path }}" width="100%" height="auto">
         <h5>{{ data.desc }}</h5>
     </div>
 
     <!-- AUDIOS -->
     <div *ngIf="data.type=='audios'">
-      <audio controls>
+      <audio controls class="audio-player">
           <source src="{{ data.path }}" type="audio/mp3">
         Your browser does not support the audio element.
         </audio>
@@ -18,7 +18,7 @@
 
     <!-- VIDEOS -->
     <div *ngIf="data.type=='videos'">
-      <video width="320" height="240" controls>
+      <video width="100%" height="auto" controls>
           <source src="{{ data.path }}" type="video/mp4">
         Your browser does not support the video tag.
         </video>

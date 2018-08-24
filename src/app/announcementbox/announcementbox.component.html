@@ -1,8 +1,9 @@
-<div class="container" style="margin-top: 20px; margin-bottom: 0px; padding-bottom:20px;">
+<div class="lifeEventContainer">
+<div class="container"> <!-- style="margin-top: 20px; margin-bottom: 0px; padding-bottom:20px;" -->
     <div class="row">
-        <div class="col-sm-4">
-            <div class="row">
-                <div class="col-md-12 card effect__hover ">
+        <div class="col-md-4 col-sm-6 articleBox">
+            <!-- <div class="row"> -->
+                <div class="card effect__hover ">
                     <div class="annoucement card__front">
                         <img src="https://www.malaysia.gov.my/public/static/images/pengumuman-01.svg" alt="pengumuman">
                         <h4 class="font-size-m" style="text-align: center; font-family: Roboto;">{{'home.highlights'|translate|uppercase}}</h4>
@@ -21,11 +22,11 @@
                         <p class="font-size-s" style="font-family: Roboto;"><i class="fa fa-caret-right"></i>{{'home.readmore'|translate}}</p></a>
                     </div>
                 </div>
-            </div>
+            <!-- </div> -->
         </div>
-        <div class="col-sm-4">
-            <div class="row">
-                <div class="col-md-12">
+        <div class="col-md-4 col-sm-6 articleBox">
+            <!-- <div class="row"> -->
+                <!-- <div class="col-md-12"> -->
                     <div class="calendar warna_bg" style="padding: 1px; background-color: rgb(0, 189, 187);" [style.background-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
                         <a routerLink="/calendar" style="color:#fff;" >
                             <h4 class="mainCalen font-size-m" style="text-align: center; font-family: Roboto;">{{'home.calendarTitle'|translate | uppercase}}</h4>
@@ -45,18 +46,21 @@
                             </div>
                         </a>
                     </div>
-                </div>
-            </div>
+                <!-- </div> -->
+            <!-- </div> -->
         </div>
-        <div class="col-sm-4">
-            <div class="row">
-                <div class="col-md-12">
+    <!-- </div>
+    <div class="row"> -->
+        <div class="col-md-4 col-sm-6 articleBox">
+            <!-- <div class="row"> -->
+                <!-- <div class="col-md-12"> -->
                     <div class="tender">
                         <a href="./category/2"><img src="https://www.malaysia.gov.my/public/static/images/tender-01.svg" alt="tender"></a>
                         <h4 class="font-size-m" style="text-align: center; font-family: Roboto;">TENDER</h4>
                     </div>
-                </div>
-            </div>
+                <!-- </div> -->
+            <!-- </div> -->
         </div>
     </div>
+</div>
 </div>

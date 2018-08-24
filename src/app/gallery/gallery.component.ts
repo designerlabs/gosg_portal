@@ -233,6 +233,7 @@ export class GalleryComponent implements OnInit, OnDestroy {
 @Component({
   selector: 'gallery-media-content',
   templateUrl: './gallery-media-content.html',
+  styleUrls: ['./gallery.component.css']
 })
 export class DialogDataExampleDialog {
   constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) {}
