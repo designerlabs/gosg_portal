@@ -421,6 +421,7 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
     let ic = this.searchForm.controls.icno.value;
     ic = ic.replace('-','');
     let ic2 = ic.replace('-','');
+    console.log(ic2);
 
     let body = {
       "icNumber":ic2,
@@ -432,6 +433,8 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
       "errorDescription":"",
       "isOku":false
     } 
+
+    console.log(JSON.stringify(body));
 
     this.protectedService.postProtected(body,'jkmservice/okustatus').subscribe(
     data => {
@@ -469,7 +472,7 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
     if(this.searchForm.controls.warganegara.value == 5){
       valIc = this.searchForm.controls.icno.value;
       valPassport = '';
-      val.passportState = 152; //
+      val.passportState = null; //
       validentification = this.searchForm.controls.icno.value;
     }
 
