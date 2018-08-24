@@ -7,7 +7,6 @@ let baseURL =  environment.mockApiURL;
 let uapURL = environment.uapURL;
 let mediaURL = environment.mediaURL;
 let searchURL = environment.miaugeoURL;
-let trafficInfoURL = environment.trafficInfoURL;
 let registrationUrl = uapURL+'registration/';
 
 
@@ -15,6 +14,7 @@ let registrationUrl = uapURL+'registration/';
 let portalBaseURL = 'http://localhost:8020/portal/';
 let protectedBaseURL = uapURL+'service-protected/';
 let commonURL = uapURL+'service/';
+let trafficInfoURL = commonURL+'digitalservice/trafficinfokl';
 
 let agencyURL = uapURL+'service-dservice-protected/'
 
@@ -190,9 +190,9 @@ export const APP_DI_CONFIG: AppConfig = {
     statusAppUrl: agencyURL + 'dservice/group',
     urlAgencyList: agencyURL + 'dservice/agencylist',
     dataAppUrl: agencyURL + 'dservice',
-    UrlStreetNameAPI: trafficInfoURL+"street?rows=100",
-    UrlTrafficPolylines: trafficInfoURL+"kl",
-    UrlTrafficPredictionAPI: trafficInfoURL+"traffic?streetName=",
+    UrlStreetNameAPI: trafficInfoURL+"/street?rows=100",
+    UrlTrafficPolylines: trafficInfoURL,
+    UrlTrafficPredictionAPI: trafficInfoURL+"/street?streetName=",
     urlAgencyDservice: agencyURL,
     urlSharedDS: commonURL,
     urlDserviceValidation: protectedBaseURL+'dservice/validate?code='

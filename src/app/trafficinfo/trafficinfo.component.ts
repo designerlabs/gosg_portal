@@ -110,7 +110,7 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
 
       this.keyword = '';
       this.pageCount = 1;
-      this.mymap.setView([3.141589, 101.674284], 13);
+      this.mymap.flyTo([3.141589, 101.674284], 13);
       this.popup.remove();
       this.loading = false;
 
@@ -119,12 +119,12 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit() {
 
     // AGENCY & DSERVICE CODE FOR VALIDATION
-    let sub = this.route.queryParams.subscribe((params: Params) => {
-      this.dsvcCode = parseInt(params.service);
-      this.agcCode = parseInt(params.agency);
-    });
+    // let sub = this.route.queryParams.subscribe((params: Params) => {
+    //   this.dsvcCode = parseInt(params.service);
+    //   this.agcCode = parseInt(params.agency);
+    // });
 
-    this.triggerDserviceValidation(this.dsvcCode);
+    // this.triggerDserviceValidation(this.dsvcCode);
     
     this.gotPrediction = false;
     this.getDefaultMap();
@@ -275,7 +275,7 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
                   };
                 });
 
-              this.mymap.setView(ltlg, 15);
+              this.mymap.flyTo(ltlg, 15);
               this.popup = L.popup().setLatLng(ltlg)
                             .setContent(this.streetName)
                             .openOn(this.mymap);
