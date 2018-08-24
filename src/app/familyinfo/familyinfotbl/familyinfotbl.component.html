@@ -1,4 +1,4 @@
-<gosg-protected-loader *ngIf="loading"></gosg-protected-loader>
+<gosg-protected-loader [loader]="loading"></gosg-protected-loader>
 <div class="container-fluid animated slideInDown" style="background: #a7a495;">
   <div class="container">
     <div class="row">
@@ -27,20 +27,16 @@
   <div class="col-md-3 padding-left-0">
     <gosg-sidenav-dashboard></gosg-sidenav-dashboard>
   </div>
-  <div class="col-md-9 mat-elevation-z8">
-    <div class="moreSearchOptBtn">
-        <!-- (click)="changeShowStatus()" [ngClass]="{ 'editBtn-active': showHide, 'editBtn': !showHide  }" -->
-        <!-- <i class="fa fa-search font-size-l"></i> -->
-      <!-- <button type="button" mat-fab color="warn" class="ng-tns-c8-5 ng-trigger ng-trigger-indicatorRotate" style="transform: rotate(0deg);">&nbsp;
-      </button> -->
-    </div>
-    <form [formGroup]="searchForm" (ngSubmit)="searchapp(searchForm.value)" #adSearchForm="ngForm" 
-      id="adSearch-form" role="form" novalidate="novalidate">
+  <div class="col-md-9 mat-elevation-z8 padding-bottom-20">
+    <form [formGroup]="searchForm" id="adSearch-form" role="form" novalidate="novalidate">
       <br />
 
       <span class="pull-right">
-        <button type="button" mat-fab color="warn" (click)="add()" >
-        <i class="fa fa-plus" class="font-size-m" style="color: fff; z-index: 99999;"></i> +</button>
+        <!-- <button type="button" mat-fab color="warn" (click)="add()" >
+        <i class="fa fa-plus"></i></button> -->
+        <button class="btn btn-danger" (click)="add()">
+          <i class="fa fa-plus font-size-s" style="padding: 8px;"></i>
+        </button>
       </span>
 
       <mat-expansion-panel>
@@ -82,26 +78,7 @@
                   </mat-select>
                 </mat-form-field>
               </div>
-            </div>
 
-            <div class="row">
-              <div class="col-md-4">
-                <mat-form-field>
-                  <!-- <div>{{startData | date:'dd/MM/yyyy' }}</div> -->
-                  <input matInput [matDatepicker]="startData" formControlName="startData" placeholder="{{'appmngt.setSearch.startDate' | translate}}"
-                    name="startDate" id="startDate" readonly>
-                  <mat-datepicker-toggle matSuffix [for]="startData" style="color:#333;"></mat-datepicker-toggle>
-                  <mat-datepicker #startData startView="day" [startAt]="startDate"></mat-datepicker>
-                </mat-form-field>
-              </div>
-              <div class="col-md-4">
-                <mat-form-field>
-                  <input matInput [matDatepicker]="endData" formControlName="endData" placeholder="{{'appmngt.setSearch.endDate' | translate}}"
-                    name="endDate" id="endDate" readonly>
-                  <mat-datepicker-toggle matSuffix [for]="endData" style="color:#333;"></mat-datepicker-toggle>
-                  <mat-datepicker #endData startView="day" [startAt]="startDate"></mat-datepicker>
-                </mat-form-field>
-              </div>
               <div class="col-md-4">
                 
                 <button tabindex="" mat-raised-button color="warn" type="button" id="btnreset" 
@@ -111,9 +88,16 @@
                 <button mat-raised-button type="button" color="primary" id="searchbtn" 
                   class="form-control btn btn-md btn-success font-size-s pull-right bttnCustom"
                   (click)="searchapp(searchForm.value)">
-                  <i class="fa fa-search"></i> {{'appmngt.setSearch.search' | translate}}</button>
-                
+                  <i class="fa fa-search"></i> {{'appmngt.setSearch.search' | translate}}</button>                
               </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4">
+              </div>
+              <div class="col-md-4">
+              </div>
+              
             </div>
           </div>
           <br />
@@ -138,10 +122,18 @@
         <td class="mat-cell">{{data.submissionRefno}}</td>
         <td class="mat-cell">{{data.submissionName}}</td>
         <td class="mat-cell">{{data.agencyName}}</td>
-        <td class="mat-cell text-center">{{dateSubmission[i]}}</td>
-        <td class="mat-cell text-center">{{statusDesc[i]}}</td>
+        <td class="mat-cell text-center">{{data.agencyName}}</td>
+        <td class="mat-cell text-center">{{data.agencyName}}</td>
         <td class="mat-cell text-center">{{data.messageEN}}</td>
-        <td class="mat-cell text-center">{{data.messageEN}}</td>
+        <td class="mat-cell text-center">
+          <button class="btn btn-sm btn-success" (click)="print()">
+            <i class="fa fa-print font-size-s"></i>
+          </button>
+          <button class="btn btn-sm btn-warning" (click)="view()">
+            <i class="fa fa-eye font-size-s"></i>
+          </button>
+          
+        </td>
       </tr>
       <tr *ngIf="showNoData">
         <td colspan="8" class="showData">
@@ -170,7 +162,7 @@
     </div>
     <br />
   </div>
-  <br />
+  <br><br>
 </div>
 
 <app-confirm-dialog #resetModal [title]="'common.icon.warn'" [content]="'common.msg.reset'" [state]="'common.state.warn'"
