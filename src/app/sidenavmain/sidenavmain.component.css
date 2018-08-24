@@ -8,11 +8,11 @@
   .mat-expansion-panel {
     background:none;
   }
-  
+
   .mat-expansion-panel-header {
     font-size: 16px;
   }
-  
+
   .mat-expansion-panel-header-title {
     color: rgb(129, 129, 129);
   }
@@ -20,7 +20,7 @@
   #themeContainer1 {
     bottom: 5px; }
 
-  
+
   .mat-expansion-panel:not([class*=mat-elevation-z]) {
     box-shadow:none !important;
   }
@@ -40,7 +40,7 @@
 }
 
 .settingLbl{
-    color:rgb(129, 129, 129);
+    color:#fff;
     padding: 0px 0px 10px 0px;
 }
 
