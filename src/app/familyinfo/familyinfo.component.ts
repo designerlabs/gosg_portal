@@ -64,6 +64,10 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
   public listGenderData: any;
   public listRelationData: any;
   public valProfileID: any;
+  public okuRegNo = '';
+  public okuType = '';
+  public okuTypeId = '';
+  public okuStatus = '';
   showNoData = false;
   loading = false;
 
@@ -198,7 +202,7 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
         }else{
           this.searchForm.get('warganegara').setValue(5);
           this.searchForm.get('icno').setValue(familyData.identificationNo);
-          this.checkOKU();
+          //this.checkOKU();
         }
 
         this.searchForm.get('name').setValue(familyData.fullName);
@@ -433,7 +437,7 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
 
     console.log(JSON.stringify(body));
 
-    this.protectedService.postProtected(body,'jkmservice/okustatus').subscribe(
+    this.protectedService.postProtected(body,'jkmservice/okustatus/family').subscribe(
     data => {
 
       this.sharedService.errorHandling(data, (function(){
@@ -441,10 +445,18 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
         
       if(this.okuInfo.isOku == true){
         this.checkOku = true;
+        this.okuRegNo = this.okuInfo.okuRegistrationNumber;
+        this.okuType = this.okuInfo.okuRegistrationNumber;
+        this.okuTypeId = this.okuInfo.okuTypeId;
+        this.okuStatus = this.okuInfo.okuTypeId;
       }
 
       else{
         this.checkOku = false;
+        this.okuRegNo = "";
+        this.okuType = "";
+        this.okuTypeId = "";
+        this.okuStatus = "";
         this. openDialog(1);
       }
 
@@ -496,8 +508,8 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
         "isMyidentityActive": false,
         "isMyidentityCitizen": false,
         "isOku": false,
-        "okuStatus": "",
-        "okuRegistrationNo": '',
+        "okuStatus": this.okuStatus,
+        "okuRegistrationNo": this.okuRegNo,
         "additionalInfo": '',
         "userType": {
           "userTypeId": null
@@ -575,8 +587,8 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
         "isMyidentityActive": false,
         "isMyidentityCitizen": false,
         "isOku": false,
-        "okuStatus": "",
-        "okuRegistrationNo": '',
+        "okuStatus": this.okuStatus,
+        "okuRegistrationNo": this.okuRegNo,
         "additionalInfo": '',
         "userType": {
           "userTypeId": null
