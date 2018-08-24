@@ -147,6 +147,8 @@ export class SchoolsearchComponent implements OnInit {
     this.searchForm.get('speacialEd').disable();
     this.getListState();
     this.getDefaultMap();
+
+    document.getElementById("boxCarian").focus();
   }
 
   getDataSchool(){
@@ -360,6 +362,8 @@ export class SchoolsearchComponent implements OnInit {
         `)
         .openOn(this.mymap);
 
+        document.getElementById("dataTable").focus();
+
     } else{
 
     }
@@ -377,6 +381,7 @@ export class SchoolsearchComponent implements OnInit {
     else{
       this.getSchoolByName();
     }
+    document.getElementById("boxHasil").focus();
   }         
 
   getTypeSchool(val){
@@ -519,6 +524,7 @@ export class SchoolsearchComponent implements OnInit {
     this.searchForm.get('typeSchool').setValue(null);
     this.searchForm.get('ppd').setValue(null);
     this.searchForm.get('speacialEd').setValue(null);
+    this.searchForm.get('schoolname').setValue('');
     this.showDetails = false;
   }
 
@@ -569,7 +575,8 @@ export class SchoolsearchComponent implements OnInit {
     }
   
     this.mymap.addLayer(this.markerGroup);
-    $('html, body').animate({scrollTop:$('#petaHasilCarian').position().top}, 'slow');
+    //$('html, body').animate({scrollTop:$('#petaHasilCarian').position().top}, 'slow');
+    document.getElementById("myInput").focus();
     //console.log(JSON.stringify(array));
   }
   
