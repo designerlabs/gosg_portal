@@ -675,6 +675,11 @@ table a:not(.btn), .table a:not(.btn) {
     color: #fff;
     text-decoration: none;
 }
+
+.marginTop-10 {
+  margin-top: 10px;
+}
+
 .paddingTop-15 {
   padding-top: 15px;
 }
