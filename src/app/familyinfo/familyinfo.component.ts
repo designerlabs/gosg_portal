@@ -64,6 +64,10 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
   public listGenderData: any;
   public listRelationData: any;
   public valProfileID: any;
+  public okuRegNo = '';
+  public okuType = '';
+  public okuTypeId = '';
+  public okuStatus = '';
   showNoData = false;
   loading = false;
 
@@ -184,7 +188,7 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
   }
 
   getDataFamily(val){
-    console.log(val);
+
     this.loading = true;
     this.protectedService.getDataProtectedById('user/family/profile/'+val, this.langID).subscribe(
     data => {
@@ -198,7 +202,7 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
         }else{
           this.searchForm.get('warganegara').setValue(5);
           this.searchForm.get('icno').setValue(familyData.identificationNo);
-          this.checkOKU();
+          //this.checkOKU();
         }
 
         this.searchForm.get('name').setValue(familyData.fullName);
@@ -213,8 +217,7 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
         this.searchForm.get('reasonStatus').setValue(familyData.accountStatus.accountStatusId);
         this.searchForm.get('addInfo').setValue(familyData.additionalInfo);
         this.valProfileID = familyData.profileId;
-
-        console.log(this.searchForm.get('warganegara').value);
+        this.valDOB = familyData.dateOfBirth;
 
         if(this.searchForm.get('warganegara').value == 5){        
           this.searchForm.get('icno').disable();
@@ -401,7 +404,6 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
   }
 
   print(){
-    console.log("PRINT: ");
   }
 
   publishDOB(type: string, event: MatDatepickerInputEvent<Date>) { 
@@ -433,19 +435,28 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
       "isOku":false
     } 
 
-    this.protectedService.postProtected(body,'jkmservice/okustatus').subscribe(
+    console.log(JSON.stringify(body));
+
+    this.protectedService.postProtected(body,'jkmservice/okustatus/family').subscribe(
     data => {
 
       this.sharedService.errorHandling(data, (function(){
-        console.log(data);
         this.okuInfo = data.resource;
         
       if(this.okuInfo.isOku == true){
         this.checkOku = true;
+        this.okuRegNo = this.okuInfo.okuRegistrationNumber;
+        this.okuType = this.okuInfo.okuRegistrationNumber;
+        this.okuTypeId = this.okuInfo.okuTypeId;
+        this.okuStatus = this.okuInfo.okuTypeId;
       }
 
       else{
         this.checkOku = false;
+        this.okuRegNo = "";
+        this.okuType = "";
+        this.okuTypeId = "";
+        this.okuStatus = "";
         this. openDialog(1);
       }
 
@@ -469,7 +480,7 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
     if(this.searchForm.controls.warganegara.value == 5){
       valIc = this.searchForm.controls.icno.value;
       valPassport = '';
-      val.passportState = 152; //
+      val.passportState = null; //
       validentification = this.searchForm.controls.icno.value;
     }
 
@@ -497,8 +508,8 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
         "isMyidentityActive": false,
         "isMyidentityCitizen": false,
         "isOku": false,
-        "okuStatus": "",
-        "okuRegistrationNo": '',
+        "okuStatus": this.okuStatus,
+        "okuRegistrationNo": this.okuRegNo,
         "additionalInfo": '',
         "userType": {
           "userTypeId": null
@@ -576,8 +587,8 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
         "isMyidentityActive": false,
         "isMyidentityCitizen": false,
         "isOku": false,
-        "okuStatus": "",
-        "okuRegistrationNo": '',
+        "okuStatus": this.okuStatus,
+        "okuRegistrationNo": this.okuRegNo,
         "additionalInfo": '',
         "userType": {
           "userTypeId": null
@@ -630,7 +641,7 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
       this.protectedService.updateFamily(body,'user/family/profile/'+validentification,this.langID).subscribe(
       data => {
         this.sharedService.errorHandling(data, (function () {
-          this.toastr.success(this.translate.instant('Maklumat berjaya disimpan.'), '');
+          this.toastr.success(this.translate.instant('Maklumat berjaya dikemaskini.'), '');
           this.router.navigate(['familyinfo']);
         }).bind(this));
         this.loading = false;

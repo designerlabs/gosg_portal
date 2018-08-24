@@ -314,23 +314,27 @@ p.font-size-s > strong {
   z-index: 100001;
   top: 0;
   right: 0;
-  background-color: #041716;
+  background-color: rgba(0, 0, 0, 0.85);
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 40px;
 }
 
-.sidenav a {
+.sidenav a, .sidenav mat-panel-title {
   padding: 8px 8px 8px 10px;
   text-decoration: none;
-  font-size: 16px;
   text-align: left;
-  color: #818181;
+  color: #fff !important;
   display: block;
   transition: 0.3s;
 }
 
-.sidenav a:hover {
+.sidenav  a > i, .sidenav mat-panel-title > i {
+  margin: 3px 9px 0px 0px;
+}
+
+
+.sidenav a:hover, .sidenav mat-panel-title:hover {
   color: #f1f1f1;
   border-left: 2px solid;
 }
@@ -339,7 +343,7 @@ p.font-size-s > strong {
   position: absolute;
   top: 0;
   right: 0px;
-  font-size: 30px;
+  font-size: 20px;
   margin-left: 50px;
 }
 
@@ -359,7 +363,7 @@ p.font-size-s > strong {
   padding: 0px;
 }
 
-.sidenav ul li a.topactive{
+.sidenav ul li a.topactive, .sidenav mat-panel-title.topactive{
   color: #fff;
   font-weight: bold;
   border-left: 2px solid;
@@ -390,6 +394,10 @@ p.font-size-s > strong {
 .titleDescStepper{
   margin-left: 5px;
   font-size: 16px;
+}
+
+.sidenav .mat-content{
+  flex: none !important;
 }
 
 .mainTitleStepper{
