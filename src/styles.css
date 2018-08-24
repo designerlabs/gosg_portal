@@ -320,17 +320,21 @@ p.font-size-s > strong {
   padding-top: 40px;
 }
 
-.sidenav a {
+.sidenav a, .sidenav mat-panel-title {
   padding: 8px 8px 8px 10px;
   text-decoration: none;
-  font-size: 16px;
   text-align: left;
-  color: #818181;
+  color: #fff;
   display: block;
   transition: 0.3s;
 }
 
-.sidenav a:hover {
+.sidenav  a > i, .sidenav mat-panel-title > i {
+  margin: 3px 9px 0px 0px;
+}
+
+
+.sidenav a:hover, .sidenav mat-panel-title:hover {
   color: #f1f1f1;
   border-left: 2px solid;
 }

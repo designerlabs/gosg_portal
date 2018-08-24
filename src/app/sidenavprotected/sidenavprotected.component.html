@@ -6,7 +6,7 @@
     <ul>
       <li *ngIf="state"><h3>{{state}}</h3></li>
       <li>
-          <a routerLinkActive="topactive"  href="" [routerLink]="['/dashboard']"><i class="fa fa-dashboard"></i> {{ 'dashboard.sidenav.dashboard' | translate }}</a>
+          <a routerLinkActive="topactive" class="font-size-s"  href="" [routerLink]="['/dashboard']"><i class="fa fa-dashboard"></i> {{ 'dashboard.sidenav.dashboard' | translate }}</a>
         </li>
         <li>
             <a routerLinkActive="topactive" href="" [routerLink]="['/profile']"><i class="fa fa-user-circle"></i> {{ 'dashboard.sidenav.profile' | translate }}</a>
