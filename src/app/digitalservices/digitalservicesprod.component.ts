@@ -119,6 +119,12 @@ export class DigitalservicesprodComponent implements OnInit, OnDestroy {
     }
 }
 
+toValidate(dserviceCode, dUrl, agcCode) {
+  // localStorage.setItem('referral',this.router.url.split('/')[1]);
+  // localStorage.setItem('dserviceCode',dserviceCode);
+  window.open(dUrl+'?service='+dserviceCode+'&agency='+agcCode, '_blank');
+}
+
 openDialog() {
 
 }

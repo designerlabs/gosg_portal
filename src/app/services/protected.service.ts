@@ -6,13 +6,15 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import { TranslateService, LangChangeEvent } from "@ngx-translate/core";
+import { ParamMap, ActivatedRoute, Router } from '@angular/router';
 
 @Injectable()
 export class ProtectedService {
   languageId: any;
   lang = this.lang;
   langId = this.langId;
-  constructor(private http: Http, @Inject(APP_CONFIG) private config: AppConfig, private translate: TranslateService) {
+  validationRes: string[];
+  constructor(private http: Http, @Inject(APP_CONFIG) private config: AppConfig, private translate: TranslateService, private route: ActivatedRoute, private router: Router) {
 
     translate.onLangChange.subscribe((event: LangChangeEvent) => {
 
@@ -45,9 +47,9 @@ export class ProtectedService {
               }
    }
 
-   private feedbackUrl: string = this.config.urlFeedbackProtected;
-   private feedbacktypeUrl: string = this.config.urlFeedbackType;
-   private fbsubjectUrl: string = this.config.urlFeedbackSubject;
+  private feedbackUrl: string = this.config.urlFeedbackProtected;
+  private feedbacktypeUrl: string = this.config.urlFeedbackType;
+  private fbsubjectUrl: string = this.config.urlFeedbackSubject;
   private profileUrl: string = this.config.urlGetProfile;
   private profileEmailUrl: string = this.config.urlGetProfileEmail;
   private profilePhoneUrl: string = this.config.urlGetProfilePhone;
@@ -65,6 +67,8 @@ export class ProtectedService {
   private dataAppUrl: string = this.config.dataAppUrl;
   private urlPerhilitan: string = this.config.urlAgencyDservice;
   private urlPdrm: string = this.config.urlAgencyDservice;
+  private dserviceAgencyUrl: string = this.config.urlAgencyDservice;
+  private dserviceValidationUrl: string = this.config.urlDserviceValidation;
   private urlDS: string = this.config.urlAgencyDservice;
 
 
@@ -78,9 +82,7 @@ export class ProtectedService {
     return this.http
     .get(this.profileUrl+"/"+userId+"?language="+this.languageId).map((response: Response) => response.json())
     .catch(this.handleError);
-
   }
-
 
   getUser(){
     return this.http
@@ -214,7 +216,7 @@ export class ProtectedService {
   getProtected(modules, lang){
     
     return this.http
-    .get(this.urlPerhilitan + modules + '?language='+lang)
+    .get(this.dserviceAgencyUrl + modules + '?language='+lang)
     .map((response: Response) => response.json())
     .retry(5)
     .catch(this.handleError);
@@ -226,37 +228,72 @@ export class ProtectedService {
     let type;
     let plateNo;
     let rptNo;
+    let agcCode;
+    let dsvcCode;
     let params;
+    let langId;
+
+    langId = arrObj[0];
+    agcCode = arrObj[1];
+    dsvcCode = arrObj[2];
+
+    let svcParams = 'agency='+agcCode+'&service='+dsvcCode+'&language='+langId;
 
     if(svcName == 'summon-traffic') {
 
-      type = arrObj[0];
-      plateNo = arrObj[2];
-
-      if(type == 1)
-        params = '?typeId='+type+'&vehicleNo='+plateNo;
-      else
-        params = '?typeId='+type+'&vehicleNo=';
+      type = arrObj[3];
+      
+      if(type == 1) {
+        plateNo = arrObj[5];
+        params = '?typeId='+type+'&vehicleNo='+plateNo+'&'+svcParams;
+      } else {
+        params = '?typeId='+type+'&vehicleNo='+'&'+svcParams;
+      }
 
     } else if(svcName == 'checkPoliceReport') {
 
         rptNo = arrObj[0];
-        params = '?reportNo='+rptNo;
+        params = '?reportNo='+rptNo+'&'+svcParams;
 
     } else if(svcName == 'checkPoliceIntake') {
 
-        params = '';
+        params = '?'+svcParams;
         
     }
 
-    return this.http.post(this.urlPdrm + modules + params,null)
+    return this.http.post(this.dserviceAgencyUrl + modules + params,null)
+    .map((response: Response) => response.json())
+    .retry(5)
+    .catch(this.handleError);
+  }
+  
+  create(data, moduleName, lang) {
+    let createUrl = this.urlPerhilitan   + moduleName + '?language='+lang;
+    return this.http.post(createUrl, data)
+    .map((response: Response) => response.json())
+    .catch(this.handleError);
+  }
+
+  getDataProtected(modules, lang, page, size){
+    
+    return this.http
+    .get(this.config.protectedURL + modules + '?language='+lang+'&page='+page+'&size='+size)
     .map((response: Response) => response.json())
     .retry(5)
     .catch(this.handleError);
   }
 
-  create(data, moduleName, lang) {
-    let createUrl = this.urlPerhilitan   + moduleName + '?language='+lang;
+  getDataProtectedById(modules, lang){
+    
+    return this.http
+    .get(this.config.protectedURL + modules + '?language='+lang)
+    .map((response: Response) => response.json())
+    .retry(5)
+    .catch(this.handleError);
+  }
+
+  createFamily(data, moduleName, lang) {
+    let createUrl = this.config.protectedURL   + moduleName + '?language='+lang;
     return this.http.post(createUrl, data)
     .map((response: Response) => response.json())
     .catch(this.handleError);
@@ -275,5 +312,15 @@ export class ProtectedService {
     .map((response: Response) => response.json())
     .catch(this.handleError);
   }
-}
 
+  // Dservice validation by DService RefCode
+  validateDserviceByRefCode(dsvcCode){
+    
+    return this.http
+    .get(this.dserviceValidationUrl+dsvcCode)
+    .map((response: Response) => response.json())
+    .retry(5)
+    .catch(this.handleError);
+  }
+
+}

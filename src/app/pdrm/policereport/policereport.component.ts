@@ -1,7 +1,7 @@
 import { Component, OnInit, Injectable, Inject, OnDestroy } from '@angular/core';
 import { ISubscription } from "rxjs/Subscription";
 import { TopnavService } from '../../header/topnav/topnav.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap, Params } from '@angular/router';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { APP_CONFIG, AppConfig } from '../../config/app.config.module';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -39,6 +39,8 @@ export class PolicereportComponent implements OnInit, OnDestroy {
   public listYear = [];
   public showDetails: any;
   public maskReportNo: any;
+  dsvcCode:any;
+  agcCode:any;
 
   searchForm: FormGroup;  
   public ic: FormControl;  
@@ -60,6 +62,7 @@ export class PolicereportComponent implements OnInit, OnDestroy {
     private sharedService: SharedService,
     private validateService:ValidateService,
     private toastr: ToastrService,
+    private route: ActivatedRoute,
     private protectedService: ProtectedService
   ) {
 
@@ -97,6 +100,14 @@ export class PolicereportComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+
+    // AGENCY & DSERVICE CODE FOR VALIDATION
+    let sub = this.route.queryParams.subscribe((params: Params) => {
+      this.dsvcCode = parseInt(params.service);
+      this.agcCode = parseInt(params.agency);
+    });
+
+    this.triggerDserviceValidation(this.dsvcCode);
 
     if(!this.langID){
       this.langID = localStorage.getItem('langID');
@@ -191,6 +202,37 @@ export class PolicereportComponent implements OnInit, OnDestroy {
       }
 
     }
+  }
+
+  triggerDserviceValidation(dsvcCode) {
+    let sub;
+    this.loading = true;
+
+    return this.route.paramMap
+      .switchMap((params: ParamMap) =>
+        this.protectedService.validateDserviceByRefCode(dsvcCode))
+      .subscribe(resValidation => {
+        
+        if(!resValidation.valid) {
+          this.toastr.error('Invalid Service!', '');
+          this.router.navigate(['404']);
+          
+          // sub = Observable.interval(2000)
+          // .subscribe((val) => {
+          //   window.close();
+          //   sub.unsubscribe();
+          // });
+        } else {
+          localStorage.setItem('dserviceCode', dsvcCode);
+          this.loading = false;
+        }
+        this.loading = false;
+      },
+      error => {
+        this.toastr.error(JSON.parse(error._body).statusDesc, '');
+        this.loading = false;
+  
+      });
   }
 
   isNumber(evt) {

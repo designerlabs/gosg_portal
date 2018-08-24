@@ -57,6 +57,11 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
   public events: string[] = [];
   public okuInfo: any;
   public checkOku = false;
+  public listRaceData: any;
+  public listReligionData: any;
+  public listCountryData: any;
+  public listGenderData: any;
+  public listRelationData: any;
   showNoData = false;
   loading = false;
 
@@ -155,14 +160,19 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
 
     this.getUrl = this.router.url.split('/')[2];
     this.checkReqValues();
+    this.getRace(2);
+    this.getReligion(2);
+    this.getCountryPass(2);
+    this.getGender(2);
+    this.getRelation(2);
 
     if(this.getUrl == 'add'){
-
       this.searchForm.get('warganegara').setValue(1);
-      
     }
 
     else{
+
+      this.getDataFamily(this.getUrl);
       //if(this.searchForm.controls.warganegara.value == 1){
         this.searchForm.get('warganegara').disable();
         //this.searchForm.get('noic').disable();
@@ -180,6 +190,114 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
       // }
     }
 
+  }
+
+  getDataFamily(val){
+    this.loading = true;
+    this.protectedService.getDataProtectedById('user/family/profile/'+val, this.langID).subscribe(
+    data => {
+      this.sharedService.errorHandling(data, (function(){
+        let familyData = data.familyProfile;
+
+        if(familyData.identificationNo == ""){
+          this.searchForm.get('warganegara').setValue(2);
+          this.searchForm.get('passportno').setValue(familyData.passportNo);
+        }else{
+          this.searchForm.get('warganegara').setValue(1);
+          this.searchForm.get('icno').setValue(familyData.identificationNo);
+        }
+
+      }).bind(this));
+      this.loading = false;
+    },
+    error => {      
+      this.loading = false;      
+    });
+  }
+
+  getRace(lang){
+    this.loading = true;
+    return this.sharedService.getRace(lang).subscribe(
+    data => {
+
+      this.sharedService.errorHandling(data, (function(){
+        this.listRaceData = data;
+        this.loading = false;
+      }).bind(this));
+      this.loading = false;
+    },
+    error => {      
+      this.loading = false;     
+      this.toastr.error(this.translate.instant('common.err.servicedown'), ''); 
+    });
+  }
+
+  getReligion(lang){
+    this.loading = true;
+    return this.sharedService.getReligion(lang).subscribe(
+    data => {
+
+      this.sharedService.errorHandling(data, (function(){
+        this.listReligionData = data;
+        this.loading = false;
+      }).bind(this));
+      this.loading = false;
+    },
+    error => {      
+      this.loading = false;     
+      this.toastr.error(this.translate.instant('common.err.servicedown'), ''); 
+    });
+  }
+
+  getCountryPass(lang){
+    this.loading = true;
+    return this.sharedService.getCountryData().subscribe(
+    data => {
+
+      this.sharedService.errorHandling(data, (function(){
+        this.listCountryData = data;
+        this.loading = false;
+      }).bind(this));
+      this.loading = false;
+    },
+    error => {      
+      this.loading = false;     
+      this.toastr.error(this.translate.instant('common.err.servicedown'), ''); 
+    });
+  }
+  
+  getGender(lang){
+    this.loading = true;
+    return this.sharedService.getGender(lang).subscribe(
+    data => {
+
+      this.sharedService.errorHandling(data, (function(){
+        this.listGenderData = data;
+        this.loading = false;
+      }).bind(this));
+      this.loading = false;
+    },
+    error => {      
+      this.loading = false;     
+      this.toastr.error(this.translate.instant('common.err.servicedown'), ''); 
+    });
+  }
+
+  getRelation(lang){
+    this.loading = true;
+    return this.sharedService.getRelationship(lang).subscribe(
+    data => {
+
+      this.sharedService.errorHandling(data, (function(){
+        this.listRelationData = data;
+        this.loading = false;
+      }).bind(this));
+      this.loading = false;
+    },
+    error => {      
+      this.loading = false;     
+      this.toastr.error(this.translate.instant('common.err.servicedown'), ''); 
+    });
   }
   
   checkNationalyty(){
@@ -212,12 +330,12 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
         reqVal =  ["icno","name","relation","race","religion"];
       }
       else{
-        reqVal =  ["icno","name","relation","race","religion","profileStatus"];
+        reqVal =  ["icno","name","relation","race","religion","profileStatus","dob"];
       }
     }
 
     else{
-      reqVal =  ["passportno","name","relation","race","religion","profileStatus"];
+      reqVal =  ["passportno","name","relation","race","religion","profileStatus","dob"];
     }
 
     for (var reqData of reqVal) {
@@ -250,16 +368,34 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
     this.events = [];
     this.events.push(`${event.value}`);   
     this.valDOB = new Date(this.events[0]).getTime();
+
+    this.checkReqValues();
     //this.searchForm.get('dob').setValue(new Date(this.valDOB).toISOString());
   }
 
   checkOKU(){
     this.loading = true;
-    this.protectedService.postProtected('','jkmservice/okustatus').subscribe(
+
+    let ic = this.searchForm.controls.icno.value;
+    ic = ic.replace('-','');
+    let ic2 = ic.replace('-','');
+
+    let body = {
+      "icNumber":ic2,
+      "okuStatus":"",
+      "okuRegistrationNumber":"",
+      "okuType":"",
+      "okuTypeId":"",
+      "errorCode":"",
+      "errorDescription":"",
+      "isOku":false
+    } 
+
+    this.protectedService.postProtected(body,'jkmservice/okustatus').subscribe(
     data => {
 
       this.sharedService.errorHandling(data, (function(){
-        console.log();
+        console.log(data);
         this.okuInfo = data.resource;
         
       if(this.okuInfo.isOku == true){
@@ -286,57 +422,58 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
     let valPassport = '';  
 
     let body = {
-      "identificationNo": null,
-      "passportNo": null,
-      "fullName": null,
-      "firstName": null,
-      "lastName": null,
+      "identificationNo": '',
+      "passportNo": '',
+      "fullName": '',
+      "firstName": '',
+      "lastName": '',
       "dateOfBirth": null,
-      "email": null,
-      "mobilePhoneNo": null,
+      "email": '',
+      "mobilePhoneNo": '',
       "isMyidentityVerified": false,
       "isMyidentityActive": false,
       "isMyidentityCitizen": false,
       "isOku": false,
       "okuStatus": "",
-      "okuRegistrationNo": "",
-      "additionalInfo": null,
+      "okuRegistrationNo": '',
+      "additionalInfo": '',
       "userType": {
-        "userTypeId": 1
+        "userTypeId": null
       },
       "relationship": {
-        "relationshipId": 6
+        "relationshipId": null
       },
-      "country": {
-        "countryId": 152
+      "passportCountryIssue": {
+        "countryId": null //152
       },
       "gender": {
-        "genderId": 1
+        "genderId": null
       },
       "religion": {
-        "religionId": 1
+        "religionId": null
       },
       "race": {
-        "raceId": 1
+        "raceId": null
       },
       "accountStatus": {
-        "accountStatusId": 1
+        "accountStatusId": null
       }
     }
     
-
     if(this.searchForm.controls.warganegara.value == 1){
       valIc = val.icno;
-      valPassport = null;
+      valPassport = '';
+      val.passportState = 152;
     }
 
     else{
-      valIc = null;
+      valIc = '';
       valPassport = val.passportno;
     }
 
-    //body.nationality.nationalityId = val.warganegara;
-    //body.passportState.passportStateId = val.passportState;
+    if(val.addInfo == null){
+      val.addInfo = '';
+    }
 
     body.identificationNo = valIc;
     body.passportNo = valPassport;
@@ -353,7 +490,7 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
     body.userType.userTypeId = val.warganegara;
     body.relationship.relationshipId = val.relation;
     body.dateOfBirth = this.valDOB;
-    body.country.countryId = 7;
+    body.passportCountryIssue.countryId = val.passportState;
     body.gender.genderId = val.sex;
     body.race.raceId = val.race;
     body.religion.religionId = val.religion;    
@@ -364,18 +501,18 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
     console.log(JSON.stringify(body));
     // this.loading = true;
     
-    // this.protectedService.create(body,'perhilitan/draft/save',this.langID).subscribe(
-    // data => {
-    //   this.sharedService.errorHandling(data, (function () {
-    //     this.toastr.success(this.translate.instant('Permohonan Baru Lesen Peniaga/Taksidermi berjaya disimpan sebagai draft'), '');
-    //     this.router.navigate(['appsmgmt']);
-    //   }).bind(this));
-    //   this.loading = false;
-    // },
-    // error => {
-    //   this.loading = false;
-    //   this.toastr.error(JSON.parse(error._body).statusDesc, '');
-    // });
+    this.protectedService.createFamily(body,'user/family/profile',this.langID).subscribe(
+    data => {
+      this.sharedService.errorHandling(data, (function () {
+        this.toastr.success(this.translate.instant('Maklumat berjaya disimpan.'), '');
+        this.router.navigate(['familyinfo']);
+      }).bind(this));
+      this.loading = false;
+    },
+    error => {
+      this.loading = false;
+      this.toastr.error(JSON.parse(error._body).statusDesc, '');
+    });
   }
 
   openDialog(a) {

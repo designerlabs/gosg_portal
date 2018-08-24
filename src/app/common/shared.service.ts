@@ -58,6 +58,7 @@ export class SharedService {
   private religionUrl: string = this.config.urlReligion;
   private raceUrl: string = this.config.urlRace;
   private sharedDS: string = this.config.urlSharedDS;
+  private relationUrl: string = this.config.urlRelationship;
 
   icon = {
     update: 'fa fa-edit',
@@ -273,16 +274,13 @@ export class SharedService {
       .map((response: Response) => response.json().cityList)
       .retry(5)
       .catch(this.handleError);
-
   }
-
 
   getReligion(langId): Observable<any[]> {
     return this.http.get(this.religionUrl + langId)
       .map((response: Response) => response.json().religionList)
       .retry(5)
       .catch(this.handleError);
-
   }
 
   getRace(langId): Observable<any[]> {
@@ -290,7 +288,13 @@ export class SharedService {
       .map((response: Response) => response.json().raceList)
       .retry(5)
       .catch(this.handleError);
+  }
 
+  getRelationship(langId): Observable<any[]> {
+    return this.http.get(this.relationUrl + '?language='+langId + '&page=1&size=99')
+      .map((response: Response) => response.json().userRelationshipList)
+      .retry(5)
+      .catch(this.handleError);
   }
 
   getGender(langId): Observable<any[]> {
