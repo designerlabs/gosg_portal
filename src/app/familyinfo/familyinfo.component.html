@@ -213,7 +213,7 @@
           </div>
       </div>
 
-      <div class="row" *ngIf="checkNation == true && searchForm.controls.warganegara.value == 5 && getUrl == 'add'">
+      <div class="row" *ngIf="checkNation == true && searchForm.controls.warganegara.value == 5">
         <div class="col-md-2">
           <span class="displayDesc">{{'family.label.oku' | translate}}</span>
         </div>
@@ -238,7 +238,7 @@
           </div>
           <div class="col-md-7">
               <span class="displayDesc">
-                  : {{okuInfo.okuRegistrationNumber}}</span>
+                  : {{okuRegNo}}</span>
           </div>
           <div class="col-md-5">
               <span class="displayDesc">
@@ -246,7 +246,7 @@
           </div>
           <div class="col-md-7">
               <span class="displayDesc">
-                  : {{okuInfo.okuType}}</span>
+                  : {{okuType}}</span>
           </div>
           <div class="col-md-5">
               <span class="displayDesc">
@@ -254,7 +254,7 @@
           </div>
           <div class="col-md-7">
               <span class="displayDesc">
-                  : {{okuInfo.okuTypeId}}</span>
+                  : {{okuTypeId}}</span>
           </div>
         </div>
       </div><br>
