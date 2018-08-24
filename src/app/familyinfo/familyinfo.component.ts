@@ -198,6 +198,7 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
         }else{
           this.searchForm.get('warganegara').setValue(5);
           this.searchForm.get('icno').setValue(familyData.identificationNo);
+          this.checkOKU();
         }
 
         this.searchForm.get('name').setValue(familyData.fullName);
@@ -468,16 +469,14 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
     if(this.searchForm.controls.warganegara.value == 5){
       valIc = this.searchForm.controls.icno.value;
       valPassport = '';
-      val.passportState = null; //
+      val.passportState = 152; //
       validentification = this.searchForm.controls.icno.value;
-      console.log("IC: "+ validentification);
     }
 
     else{
       valIc = '';
       valPassport = this.searchForm.controls.passportno.value;
       validentification = this.searchForm.controls.passportno.value;
-      console.log("Pass: "+ validentification);
     }
 
     if(val.addInfo == null){
