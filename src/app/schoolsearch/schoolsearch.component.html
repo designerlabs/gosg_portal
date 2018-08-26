@@ -25,7 +25,7 @@
                 <h4>KEMUDAHAN CARIAN SENARAI SEKOLAH - SEKOLAH DI BAWAH KEMENTERIAN PENDIDIKAN MALAYSIA SEHINGGA 30 APRIL 2018</h4>
             </div>
 
-            <div class="mat-elevation-z8 padding-right20">
+            <div class="mat-elevation-z8 padding-right20" id="boxCarian">
                 <div class="row padding-15">
                     <div class="col-md-4" style="color: black">
                       <mat-form-field class="example-full-width">
@@ -127,7 +127,7 @@
         </form>
     </div><br>
 
-    <div *ngIf="showDetails">
+    <div *ngIf="showDetails" id="boxHasil">
         <div class="row">
             <div class="col-md-12" style="color: black; font-weight: bold;" *ngIf="charCarian == undefined">
                 HASIL CARIAN <span class="badge badge-pill badge-success">{{noOfSc}}</span><br>
@@ -146,7 +146,7 @@
           </div>
           <div class="col-md-4">
               <mat-form-field class="example-full-width">
-                  <input matInput placeholder="Carian berdasarkan kata kunci" #myInput (keyup)="newRecord(myInput.value)" [(ngModel)]="query" style="color: black">
+                  <input matInput placeholder="Carian berdasarkan kata kunci" #myInput id="myInput" (keyup)="newRecord(myInput.value)" [(ngModel)]="query" style="color: black">
               </mat-form-field>
           </div>
         </div><br>
@@ -188,7 +188,7 @@
                     <td class="mat-cell" style="display: none">{{data.bandar}}</td>
                     <td class="mat-cell" style="display: none">{{data.negeri}}</td>
                 </tr>
-                <tr *ngIf="showNoData || charCarian == 0">
+                <tr *ngIf="showNoData && charCarian == 0">
                     <td colspan="10" class="showData">
                     <hr><br>Data tidak dijumpai</td>
                 </tr>
