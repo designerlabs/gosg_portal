@@ -39,7 +39,7 @@
                             <p class="font-size-m align-top" style="margin-top: -20%">{{item.month}}</p>
                         </div>
                         <div class="col-xs-8" *ngIf="calendarData.length != 0">
-                            <p class="col-xs-12 font-size-s text-left" style="padding-top: 5px">{{item.title}}</p> <!-- style="margin-top: -10px" -->
+                            <p class="col-xs-12 font-size-s text-left" title="item.title" tyle="padding-top: 5px">{{item.title | slice:0:30}}...</p> <!-- style="margin-top: -10px" -->
                         </div>
                     </div>
                     <div *ngIf="!calendarData">

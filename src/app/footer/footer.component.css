@@ -18,10 +18,37 @@
     color: #7aeae9;
   }
 
-@media screen and (max-width: 760px) and (min-width: 320px) {
+@media screen and (max-width: 1024px) and (min-width: 320px) {
   .loop1 {
     margin-top: 20px;
-    position: relative; } }
+    position: relative; } 
+  
+  .footer-heading {
+    color: #00bdbb;
+    font-weight: 700;
+    font-size: 15px;
+    text-align: left;
+    margin-left: -40px; }
+  
+  .footer-title-underline {
+    margin-top: 6%;
+    margin-bottom: 0%;
+    border: 0;
+    border-top: 2px solid #00bdbb;
+    width: 15%;
+    left: 9.5%;
+    position: absolute; }
+
+    .info-box {
+      background-color: #9d9d9d;
+      border-radius: 5px;
+      text-align: center;
+      padding: 5px;
+      color: #fff;
+      margin: 0 15px 5px 0px;
+      height: 260px;
+      width: 60px; }
+  }
 
 .address p {
   position: relative;
@@ -65,4 +92,10 @@ a {
     background-color: #4d5454;
     color: #fff;
     text-decoration: none;
+}
+
+/* ACCORDIAN */
+mat-accordion, mat-expansion-panel, mat-expansion-panel-header, mat-panel-title {
+  background: #333;
+  color: #fafafa;
 }
