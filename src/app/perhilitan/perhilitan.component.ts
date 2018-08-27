@@ -196,14 +196,6 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
   
   ngOnInit() {
 
-     // AGENCY & DSERVICE CODE FOR VALIDATION
-     let sub = this.route.queryParams.subscribe((params: Params) => {
-      this.dsvcCode = parseInt(params.service);
-      this.agcCode = parseInt(params.agency);
-    });
-
-    this.triggerDserviceValidation(this.dsvcCode);
-
     if(!this.langID){
       this.langID = localStorage.getItem('langID');
     }else{
@@ -285,6 +277,14 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
     this.getUrl = this.router.url.split('/')[2];
 
     if(this.getUrl == undefined){// for add
+      // AGENCY & DSERVICE CODE FOR VALIDATION
+      let sub = this.route.queryParams.subscribe((params: Params) => {
+        this.dsvcCode = parseInt(params.service);
+        this.agcCode = parseInt(params.agency);
+      });
+
+      this.triggerDserviceValidation(this.dsvcCode);      
+    
       this.checkOccupation(1);
       this.secondFormGroup.get('warganegara').setValue(1);
       this.secondFormGroup.get('typeIC').setValue(1);
@@ -296,6 +296,8 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
 
     else{// for delete
       this.getDetailPerhilitan();
+      this.dsvcCode = localStorage.getItem('dserviceCode');
+      this.agcCode = localStorage.getItem('agencyCode');
     }
   }
 
@@ -1418,7 +1420,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       console.log(JSON.stringify(body));
       this.loading = true;
       
-      this.protectedService.create(body,'perhilitan/draft/save',this.langID).subscribe(
+      this.protectedService.create(body,'perhilitan/draft/save',this.langID, this.dsvcCode, this.agcCode).subscribe(
       data => {
         this.sharedService.errorHandling(data, (function () {
           this.toastr.success(this.translate.instant('Permohonan Baru Lesen Peniaga/Taksidermi berjaya disimpan sebagai draft'), '');
@@ -1557,7 +1559,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       console.log(JSON.stringify(body));
       this.loading = true;
       
-      this.protectedService.update(body,'perhilitan/draft/update',this.langID).subscribe(
+      this.protectedService.update(body,'perhilitan/draft/update',this.langID, this.dsvcCode, this.agcCode).subscribe(
       data => {
         this.sharedService.errorHandling(data, (function () {
           this.toastr.success(this.translate.instant('Draft Permohonan Baru Lesen Peniaga/Taksidermi berjaya dikemaskini'), '');
@@ -1692,7 +1694,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
     console.log(JSON.stringify(body));
     this.loading = true;
 
-    this.protectedService.create(body,'perhilitan/apply',this.langID).subscribe(
+    this.protectedService.create(body,'perhilitan/apply',this.langID, this.dsvcCode, this.agcCode).subscribe(
     data => {
       this.sharedService.errorHandling(data, (function () {
         this.toastr.success(this.translate.instant('Permohonan Baru Lesen Peniaga/Taksidermi berjaya dihantar'), '');
@@ -1727,6 +1729,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
           // });
         } else {
           localStorage.setItem('dserviceCode', dsvcCode);
+          localStorage.setItem('agencyCode', this.agcCode);
           this.loading = false;
         }
         this.loading = false;

@@ -265,8 +265,8 @@ export class ProtectedService {
     .catch(this.handleError);
   }
   
-  create(data, moduleName, lang) {
-    let createUrl = this.urlPerhilitan   + moduleName + '?language='+lang;
+  create(data, moduleName, lang, servicesC, agencyC) {
+    let createUrl = this.urlPerhilitan   + moduleName + '?language='+lang+'&agency='+agencyC+'&service='+servicesC;
     return this.http.post(createUrl, data)
     .map((response: Response) => response.json())
     .catch(this.handleError);
@@ -313,8 +313,8 @@ export class ProtectedService {
     .catch(this.handleError);
   }
 
-  update(data, moduleName, lang) {
-    let createUrl = this.urlPerhilitan   + moduleName + '?language='+lang;
+  update(data, moduleName, lang, servicesC, agencyC) {
+    let createUrl = this.urlPerhilitan   + moduleName + '?language='+lang+'&agency='+agencyC+'&service='+servicesC;
     return this.http.put(createUrl, data)
     .map((response: Response) => response.json())
     .catch(this.handleError);
