@@ -124,6 +124,7 @@ p.font-size-s > strong {
 .panel-body {
   color: #fff; }
 
+
 .ngui-auto-complete > ul li {
   padding: 2px 18px !important;
   border-bottom: none !important;
@@ -144,7 +145,7 @@ p.font-size-s > strong {
         display: block;
       }
     }
-    
+
         .primary {
             background-color: #1ebebc;
             color: #fff;
@@ -493,6 +494,10 @@ p.font-size-s > strong {
     display: none;
   }
 
+  input[type='radio'] + label{
+    padding: 6px !important;
+  }
+
 }
 
 
@@ -575,10 +580,19 @@ p.font-size-s > strong {
     margin-top: 0% !important;
   }
 
+  input[type='radio'] + label{
+    padding: 6px !important;
+  }
+
 }
 
 
 @media screen and (max-width: 1920px) and (min-width: 641px){
+
+  input[type='radio'] + label{
+    padding: 6px !important;
+  }
+
   .owl-carousel .owl-item img {
     display: block;
     width: auto !important;

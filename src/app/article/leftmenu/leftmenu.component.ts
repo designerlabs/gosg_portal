@@ -57,32 +57,33 @@ import { ContentComponent } from '../../article/content/content.component';
     </div>
 
 
-    <div  class="hidden-xs hidden-sm" *ngIf="templateName === 'lifeevent'" >
-      <mat-expansion-panel *ngFor="let content of sessions; let i = index"  multi="false" displayMode="flat" [hideToggle]="content?.contents?.length==0 ? true: null" [disabled]="true" [expanded]="content.activeMenu  || (i == statusID) || sessions.length <= 1" class="specific-class">
+
+    <div class="hidden-xs hidden-sm" *ngIf="templateName === 'lifeevent'" >
+    <mat-expansion-panel *ngFor="let content of sessions; let i = index"  multi="false" displayMode="flat" [hideToggle]="content?.contents?.length==0 ? true: null" [disabled]="true" [expanded]="content.activeMenu  || (i == statusID) || sessions.length <= 1" class="specific-class">
+      <mat-expansion-panel-header>
+        <mat-panel-title class="pointer" (click)="clickSideMenu(content, i, $event)">
+          <a class="warna_font sideBarMenu--link font-size-s" [routerLinkActive]="['active']"  [style.font-weight]="content?.activeMenu ? 'bold' : 'normal'"  [style.color]="content?.activeMenu ? getTheme() ? getTheme() : 'rgb(0, 189, 187)' : '#333'" >
+            {{content.categoryName}}
+          </a>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+
+
+      <mat-expansion-panel *ngFor="let subcontent of content?.subCategories; let j = index" multi="false" displayMode="flat" [hideToggle]="subcontent?.contents?.length==0 ? true: null"  [expanded]="subcontent.activeMenu  || (j == statusID) || subcontent.length <= 1"  class="submenu" >
         <mat-expansion-panel-header>
-          <mat-panel-title class="pointer" (click)="clickSideMenu(content, i, $event)">
-            <a class="warna_font sideBarMenu--link font-size-s" [routerLinkActive]="['active']"  [style.font-weight]="content?.activeMenu ? 'bold' : 'normal'"  [style.color]="content?.activeMenu ? getTheme() ? getTheme() : 'rgb(0, 189, 187)' : '#333'" >
-              {{content.categoryName}}
+          <mat-panel-title class="pointer" (click)="clickSideMenu(subcontent, j, $event)">
+            <a class="warna_font sideBarMenu--link font-size-s" #subContent [style.font-weight]="subcontent?.activeMenu ? 'bold' : 'normal'"  [style.color]="subcontent?.activeMenu ? getTheme() ? getTheme() : 'rgb(0, 189, 187)' : '#333'">
+              {{subcontent.categoryName}}
             </a>
           </mat-panel-title>
         </mat-expansion-panel-header>
 
 
 
-        <mat-expansion-panel *ngFor="let subcontent of content?.subCategories; let j = index" multi="false" displayMode="flat" [hideToggle]="subcontent?.contents?.length==0 ? true: null"  [expanded]="subcontent.activeMenu  || (j == statusID) || subcontent.length <= 1"  class="submenu" >
-          <mat-expansion-panel-header>
-            <mat-panel-title class="pointer" (click)="clickSideMenu(subcontent, j, $event)">
-              <a class="warna_font sideBarMenu--link font-size-s" #subContent [style.font-weight]="subcontent?.activeMenu ? 'bold' : 'normal'"  [style.color]="subcontent?.activeMenu ? getTheme() ? getTheme() : 'rgb(0, 189, 187)' : '#333'">
-                {{subcontent.categoryName}}
-              </a>
-            </mat-panel-title>
-          </mat-expansion-panel-header>
+        <gosg-leftmenu [sessions]="subcontent?.subCategories"></gosg-leftmenu>
 
-
-
-          <gosg-leftmenu [sessions]="subcontent?.subCategories"></gosg-leftmenu>
-
-        </mat-expansion-panel>
+      </mat-expansion-panel>
 
 
 
@@ -92,7 +93,7 @@ import { ContentComponent } from '../../article/content/content.component';
 
     <div class="modal fade" bsModal #menuModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
     aria-hidden="true">
-      <div class="modal-dialog modal-sm">
+      <div class="modal-dialog modal-sm" style="top: 100px;">
         <div class="modal-content">
           <div class="modal-body">
 
@@ -138,38 +139,39 @@ import { ContentComponent } from '../../article/content/content.component';
           </div>
 
 
-          <div *ngIf="templateName === 'lifeevent'" >
-            <mat-expansion-panel *ngFor="let content of sessions; let i = index"  multi="false" displayMode="flat" [hideToggle]="content?.contents?.length==0 ? true: null" [disabled]="true" [expanded]="content.activeMenu  || (i == statusID) || sessions.length <= 1" class="specific-class">
-              <mat-expansion-panel-header>
-                <mat-panel-title class="pointer" (click)="clickSideMenu(content, i, $event)">
-                  <a class="warna_font sideBarMenu--link font-size-s" [routerLinkActive]="['active']"  [style.font-weight]="content?.activeMenu ? 'bold' : 'normal'"  [style.color]="content?.activeMenu ? getTheme() ? getTheme() : 'rgb(0, 189, 187)' : '#333'" >
-                    {{content.categoryName}}
-                  </a>
-                </mat-panel-title>
-              </mat-expansion-panel-header>
+
+    <div *ngIf="templateName === 'lifeevent'" >
+    <mat-expansion-panel *ngFor="let content of sessions; let i = index"  multi="false" displayMode="flat" [hideToggle]="content?.contents?.length==0 ? true: null" [disabled]="true" [expanded]="content.activeMenu  || (i == statusID) || sessions.length <= 1" class="specific-class">
+      <mat-expansion-panel-header>
+        <mat-panel-title class="pointer" (click)="clickSideMenu(content, i, $event)">
+          <a class="warna_font sideBarMenu--link font-size-s" [routerLinkActive]="['active']"  [style.font-weight]="content?.activeMenu ? 'bold' : 'normal'"  [style.color]="content?.activeMenu ? getTheme() ? getTheme() : 'rgb(0, 189, 187)' : '#333'" >
+            {{content.categoryName}}
+          </a>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
 
 
 
-              <mat-expansion-panel *ngFor="let subcontent of content?.subCategories; let j = index" multi="false" displayMode="flat" [hideToggle]="subcontent?.contents?.length==0 ? true: null"  [expanded]="subcontent.activeMenu  || (j == statusID) || subcontent.length <= 1"  class="submenu" >
-                <mat-expansion-panel-header>
-                  <mat-panel-title class="pointer" (click)="clickSideMenu(subcontent, j, $event)">
-                    <a class="warna_font sideBarMenu--link font-size-s" #subContent [style.font-weight]="subcontent?.activeMenu ? 'bold' : 'normal'"  [style.color]="subcontent?.activeMenu ? getTheme() ? getTheme() : 'rgb(0, 189, 187)' : '#333'">
-                      {{subcontent.categoryName}}
-                    </a>
-                  </mat-panel-title>
-                </mat-expansion-panel-header>
+      <mat-expansion-panel *ngFor="let subcontent of content?.subCategories; let j = index" multi="false" displayMode="flat" [hideToggle]="subcontent?.contents?.length==0 ? true: null"  [expanded]="subcontent.activeMenu  || (j == statusID) || subcontent.length <= 1"  class="submenu" >
+        <mat-expansion-panel-header>
+          <mat-panel-title class="pointer" (click)="clickSideMenu(subcontent, j, $event)">
+            <a class="warna_font sideBarMenu--link font-size-s" #subContent [style.font-weight]="subcontent?.activeMenu ? 'bold' : 'normal'"  [style.color]="subcontent?.activeMenu ? getTheme() ? getTheme() : 'rgb(0, 189, 187)' : '#333'">
+              {{subcontent.categoryName}}
+            </a>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
 
 
 
-                <gosg-leftmenu [sessions]="subcontent?.subCategories"></gosg-leftmenu>
+        <gosg-leftmenu [sessions]="subcontent?.subCategories"></gosg-leftmenu>
 
-              </mat-expansion-panel>
-
-
+      </mat-expansion-panel>
 
 
-            </mat-expansion-panel>
-          </div>
+
+
+      </mat-expansion-panel>
+    </div>
 
 
 
