@@ -19,6 +19,10 @@ import { SharedService } from '../common/shared.service';
 import { PortalService } from '../services/portal.service';
 import { ToastrService } from 'ngx-toastr';
 
+export interface DialogData {
+  familyinfo;
+}
+
 @Component({
   selector: 'gosg-schoolsearch',
   templateUrl: './schoolsearch.component.html',
@@ -33,6 +37,7 @@ export class SchoolsearchComponent implements OnInit {
   recordData = null;
   showNoData = false;
   loading = false;
+  isheader:boolean = false;
 
   public valSchoolCat: any;
   public listState: any;
@@ -81,6 +86,7 @@ export class SchoolsearchComponent implements OnInit {
     private http: Http,
     private toastr: ToastrService,
     @Inject(APP_CONFIG) private config: AppConfig,
+    public dialog: MatDialog,
     private topnavservice: TopnavService,) {
 
     this.lang = translate.currentLang;
@@ -327,9 +333,9 @@ export class SchoolsearchComponent implements OnInit {
       //     "duration": 1
       //   }
       // });
-      // this.mymap.panTo([lat, long], { animate: true, easeLinearity: .20, duration: 2 });
-      // this.mymap.setView([lat, long], 24);    
-      this.mymap.flyTo([lat, long], 24);        
+      // this.mymap.panTo([lat, long], { animate: true, easeLinearity: .20, duration: 2 });   
+      this.mymap.flyTo([lat, long], 24);       
+      this.mymap.setView([lat, long], 24);  
       this.popup = L.popup()
         .setLatLng([lat, long])
         .setContent(`
@@ -381,7 +387,7 @@ export class SchoolsearchComponent implements OnInit {
     else{
       this.getSchoolByName();
     }
-    document.getElementById("boxHasil").focus();
+    //document.getElementById("boxHasil").focus();
   }         
 
   getTypeSchool(val){
@@ -591,4 +597,31 @@ export class SchoolsearchComponent implements OnInit {
     return tData
   }
 
+  view(val){     
+  
+    this.dialog.open(SchoolPopupDialog, {
+      data: {
+        familyinfo: val
+      }
+    });
+  }
+
+}
+
+@Component({
+  selector: 'school-addinfo',
+  templateUrl: './school-addinfo.html',
+})
+
+export class SchoolPopupDialog {
+
+  constructor(
+    public dialogRef: MatDialogRef<SchoolPopupDialog>,
+    private translate: TranslateService,
+    private router: Router,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+
+    onNoClick() {
+      this.dialogRef.close();
+    }
 }

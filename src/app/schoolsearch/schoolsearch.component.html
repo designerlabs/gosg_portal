@@ -162,9 +162,10 @@
                     <th class="" width="5%">PK</th>
                     <th class="" width="10%">Jenis</th>
                     <th class="" width="13%">Alamat</th>
-                    <th class="" width="10%">No. Telefon</th>
-                    <th class="" width="10%">No. Faksimili</th>
-                    <th class="" width="10%">Emel</th>
+                    <th class="" width="7%">No. Telefon</th>
+                    <th class="" width="7%">No. Faksimili</th>
+                    <th class="" width="8%">Emel</th>
+                    <th class="" width="7%">Maklumat Lanjut</th>
                     <th class="" style="display: none">Lat</th>
                     <th class="" style="display: none">Long</th>
                     <th class="" style="display: none">Bandar</th>
@@ -183,6 +184,10 @@
                     <td class="mat-cell">{{data.telNo}}</td>
                     <td class="mat-cell">{{data.faxNo}}</td>
                     <td class="mat-cell">{{data.email}}</td>
+                    <td class="mat-cell text-center">
+                      <button class="btn btn-sm btn-warning" (click)="view(data.kodSekolah)">
+                        <i class="fa fa-eye font-size-s"></i>
+                      </button></td>
                     <td class="mat-cell" style="display: none">{{data.latitude}}</td>
                     <td class="mat-cell" style="display: none">{{data.longitude}}</td>
                     <td class="mat-cell" style="display: none">{{data.bandar}}</td>
