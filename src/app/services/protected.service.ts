@@ -232,12 +232,11 @@ export class ProtectedService {
     let dsvcCode;
     let params;
     let langId;
-
-    langId = arrObj[0];
+ 
     agcCode = arrObj[1];
     dsvcCode = arrObj[2];
 
-    let svcParams = 'agency='+agcCode+'&service='+dsvcCode+'&language='+langId;
+    let svcParams = 'agency='+agcCode+'&service='+dsvcCode+'&language='+this.langId;
 
     if(svcName == 'summon-traffic') {
 
@@ -258,7 +257,6 @@ export class ProtectedService {
     } else if(svcName == 'checkPoliceIntake') {
 
         params = '?'+svcParams;
-        
     }
 
     return this.http.post(this.dserviceAgencyUrl + modules + params,null)

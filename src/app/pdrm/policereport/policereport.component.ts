@@ -148,7 +148,11 @@ export class PolicereportComponent implements OnInit, OnDestroy {
     let reportNo = formValues.noreport;
     let y = formValues.yearreport;
     let rn = reportNo + "/" + y;
-    let arrObj = [rn];
+    let arrObj = [];
+
+    arrObj.push(rn);
+    arrObj.push(this.agcCode);
+    arrObj.push(this.dsvcCode);
 
     this.loading = true;
     this.protectedService.getPdrm('pdrm/checkPoliceReport',arrObj).subscribe(
