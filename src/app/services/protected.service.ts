@@ -331,7 +331,8 @@ export class ProtectedService {
 
   // Dservice validation by DService RefCode
   validateDserviceByRefCode(dsvcCode){
-    
+    console.log(dsvcCode);
+    console.log(this.dserviceValidationUrl+dsvcCode);
     return this.http
     .get(this.dserviceValidationUrl+dsvcCode)
     .map((response: Response) => response.json())
