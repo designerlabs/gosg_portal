@@ -449,24 +449,7 @@ export class FamilyinfoComponent implements OnInit, OnDestroy {
   checkOKU(){
     this.loading = true;
 
-    let ic = this.searchForm.controls.icno.value;
-    ic = ic.replace('-','');
-    let ic2 = ic.replace('-','');
-
-    let body = {
-      "icNumber":ic2,
-      "okuStatus":"",
-      "okuRegistrationNumber":"",
-      "okuType":"",
-      "okuTypeId":"",
-      "errorCode":"",
-      "errorDescription":"",
-      "isOku":false
-    } 
-
-    console.log(JSON.stringify(body));
-
-    this.protectedService.postProtected(body,'jkmservice/okustatus/family').subscribe(
+    this.protectedService.getProtectedNopg('jkmservice/okustatus/'+this.valProfileID).subscribe(
     data => {
 
       this.sharedService.errorHandling(data, (function(){

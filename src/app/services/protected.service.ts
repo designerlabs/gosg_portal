@@ -292,6 +292,15 @@ export class ProtectedService {
     .catch(this.handleError);
   }
 
+  getProtectedNopg(modules){
+    
+    return this.http
+    .get(this.urlDS + modules)
+    .map((response: Response) => response.json())
+    .retry(5)
+    .catch(this.handleError);
+  }
+
   createFamily(data, moduleName, lang) {
     let createUrl = this.config.protectedURL   + moduleName + '?language='+lang;
     return this.http.post(createUrl, data)

@@ -181,7 +181,7 @@
           </div>
       </div>
 
-      <div class="row" *ngIf="checkNation == true && getUrl != 'add'">
+      <div class="row" *ngIf="checkNation == true || getUrl != 'add'">
           <div class="col-md-4">
             <mat-form-field class="example-full-width">
               <mat-select formControlName="profileStatus" placeholder="{{'family.label.statusprofile' | translate}}" required
@@ -212,7 +212,7 @@
           </div>
       </div>
 
-      <div class="row" *ngIf="checkNation == true && searchForm.controls.warganegara.value == 5">
+      <div class="row" *ngIf="checkNation == true && searchForm.controls.warganegara.value == 5 && getUrl != 'add'">
         <div class="col-md-2">
           <span class="displayDesc">{{'family.label.oku' | translate}}</span>
         </div>
