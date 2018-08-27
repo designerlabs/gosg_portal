@@ -41,7 +41,7 @@
                   <h4>{{ dsvc.title }}</h4>
                   <ul *ngFor="let d of dsvc.details" style="padding:10px 0px 5px 25px; ">
                       <li class="no-styles">
-                          <a *ngIf="isLogin || d.common" (click)="toValidate(dsvc.code,d.url, dsvc.agency.agencyCode)">{{ d.title }}</a> <!-- [href]="d.url" -->
+                          <a *ngIf="isLogin || d.common" (click)="toValidate(d.code,d.url, dsvc.agency.agencyCode)">{{ d.title }}</a> <!-- [href]="d.url" -->
                           <a *ngIf="!isLogin && !d.common" (click)="openDialog()" style="cursor: pointer;">{{ d.title }}</a>
                           &nbsp;
                           <a *ngIf="isLogin || d.common" [href]="mediaUrl + d.manual?.mediaFile" data-toggle="tooltip" target="_blank" title="{{ d.description }}"><span *ngIf="d.manual" class="fa fa-info-circle clickable-icons"></span> </a>
