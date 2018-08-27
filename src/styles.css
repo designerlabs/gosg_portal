@@ -136,6 +136,15 @@ p.font-size-s > strong {
         z-index: 9999999;
         display: block;
     }
+
+    @media only screen and (min-width: 320px) and (max-width: 1023px) {
+      app-footer{
+        background: #333;
+        z-index: 9999999;
+        display: block;
+      }
+    }
+    
         .primary {
             background-color: #1ebebc;
             color: #fff;
