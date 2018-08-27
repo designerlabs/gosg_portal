@@ -133,7 +133,7 @@ import { StatisticComponent } from '../statistic/statistic.component';
 import { SitemapComponent } from '../sitemap/sitemap.component';
 import { GalleryService } from '../gallery/gallery.service';
 import { GalleryComponent, DialogDataExampleDialog } from '../gallery/gallery.component';
-import { SchoolsearchComponent } from '../schoolsearch/schoolsearch.component';
+import { SchoolsearchComponent, SchoolPopupDialog } from '../schoolsearch/schoolsearch.component';
 import { TrafficinfoComponent } from '../trafficinfo/trafficinfo.component';
 import { SearchPipe } from '../pipe/search.pipe';
 import { SharedLoaderComponent } from '../loader/shared-loader.component';
@@ -231,7 +231,8 @@ export function HttpLoaderFactory(http: Http) {
     SearchPipe,
     SharedLoaderComponent,
     RssmainComponent,
-    TruncatePipe
+    TruncatePipe,
+    SchoolPopupDialog
     // SearchResultComponent
   ],
 
@@ -344,6 +345,6 @@ export function HttpLoaderFactory(http: Http) {
     GalleryService,
     StatisticService
   ],
-  entryComponents: [DialogDataExampleDialog],
+  entryComponents: [DialogDataExampleDialog, SchoolPopupDialog],
 })
 export class SharedModule { }

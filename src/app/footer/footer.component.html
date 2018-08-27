@@ -20,59 +20,61 @@
   <div class="container footer">
     <mat-accordion class="visible-xs visible-sm btn btn-sm">
 
+      <!-- CONTACT US -->
       <mat-expansion-panel *ngIf="showcontact && dataContact.length>0">
         <mat-expansion-panel-header>
           <mat-panel-title>
-            <h5 [style.color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" class="footer-heading font-size-m warna_title_color" style="padding-left: 40px;">{{tltContact.title}}
+            <h4 [style.color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" class="footer-heading font-size-m warna_title_color" style="padding-left: 40px;">{{tltContact.title}}
               <span [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" class="footer-title-underline warna_border_color"></span>
-            </h5>
+            </h4>
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <div *ngFor="let eachitm of dataContact" style="padding-left: 10px;">
-          <p class="text-left" style="overflow-wrap: break-word;" *ngIf="eachitm.enabled"><i ngClass="fa fa-{{eachitm.footerContentIcon}}"></i> {{ eachitm.footerContentName
-            }}</p>
+        <div *ngFor="let eachitm of dataContact" class="mpc-4">
+          <p class="font-size-s text-justify"><i *ngIf="eachitm.footerContentIcon !=''" ngClass="fa fa-{{eachitm.footerContentIcon}}"></i>&nbsp;<span class="text-left" style="overflow-wrap: break-word;" *ngIf="eachitm.enabled" [innerHtml]="eachitm.footerContentName"></span></p>
         </div>
       </mat-expansion-panel>
 
+      <!-- ACCESS -->
       <mat-expansion-panel *ngIf="showaccess && dataAccessPage.length>0">
         <mat-expansion-panel-header>
           <mat-panel-title>
-            <h5 [style.color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" class="footer-heading font-size-m warna_title_color" style="padding-left: 40px;">{{tltAccessPage.title}}
+            <h4 [style.color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" class="footer-heading font-size-m warna_title_color" style="padding-left: 40px;">{{tltAccessPage.title}}
               <span [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" class="footer-title-underline warna_border_color"></span>
-            </h5>
+            </h4>
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <div *ngFor="let eachitm of dataAccessPage">
-          <p *ngIf="eachitm.enabled" class="font-size-s"><i ngClass="fa fa-{{eachitm.footerContentIcon}}"></i> {{ eachitm.footerContentName
-            }}</p>
+        <div *ngFor="let eachitm of dataAccessPage" class="text-justify" style="padding-left: 10px;">
+          <p *ngIf="eachitm.enabled" class="font-size-s"><i ngClass="fa fa-{{eachitm.footerContentIcon}}"></i> {{ eachitm.footerContentName }}</p>
         </div>
       </mat-expansion-panel>
 
+      <!-- VISITORS -->
       <mat-expansion-panel *ngIf="showaccess && dataAccessPage.length>0">
         <mat-expansion-panel-header>
           <mat-panel-title>
-            <h5 [style.color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" class="footer-heading font-size-m warna_title_color" style="padding-left: 40px;">{{tltNoOfVisitor.title}}
+            <h4 [style.color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" class="footer-heading font-size-m warna_title_color" style="padding-left: 40px;">{{tltNoOfVisitor.title}}
               <span [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" class="footer-title-underline warna_border_color"></span>
-            </h5>
+            </h4>
           </mat-panel-title>
         </mat-expansion-panel-header>
         <div *ngFor="let eachitm of dataNoOfVisitor">
           <div class="col-xs-4" style="padding:0px 0px 0px 3px;">
             <div class="font-size-s">{{eachitm.footerContentName}}</div>
-            <h5 class="font-size-m">{{eachitm.footerSubContentValue}}</h5>
+            <h4 class="font-size-m">{{eachitm.footerSubContentValue}}</h4>
           </div>
         </div>
       </mat-expansion-panel>
 
+      <!-- EXTERNAL lINKS -->
       <mat-expansion-panel *ngIf="showaccess && dataAccessPage.length>0">
         <mat-expansion-panel-header>
           <mat-panel-title>
-            <h5 [style.color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" class="footer-heading font-size-m warna_title_color" style="padding-left: 40px;">{{tltExtLnk.title}}
+            <h4 [style.color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" class="footer-heading font-size-m warna_title_color" style="padding-left: 40px;">{{tltExtLnk.title}}
               <span [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" class="footer-title-underline warna_border_color"></span>
-            </h5>
+            </h4>
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <div *ngFor="let eachitm of dataNoOfVisitor" style="column-count: 3; padding-left: 8px;">
+        <div *ngFor="let eachitm of dataNoOfVisitor" class="el">
           <div class="sub-add" *ngIf="showextlinks && dataExtLnk.length>0">
               <div *ngFor="let eachitm of dataExtLnk" class="address footer hoverlnk">
                 <a [href]="eachitm.footerContentUrl" (mouseover)="changeStyle($event)" target="_blank" class="font-size-s"

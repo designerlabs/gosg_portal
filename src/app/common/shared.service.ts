@@ -14,6 +14,8 @@ import 'rxjs/add/observable/throw';
 
 export class SharedService {
 
+  //isheader:boolean = false;
+
   constructor(
     private http: Http,
     @Inject(APP_CONFIG) private config: AppConfig,
