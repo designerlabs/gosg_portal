@@ -345,35 +345,68 @@ mat-accordion, mat-expansion-panel, mat-expansion-panel-header, mat-panel-title 
     width: 60px; }
   }
 
-  @media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 960px) {
+
+  .loop1 {
+    margin-top: 20px;
+    position: relative; } 
   
-    .loop1 {
-      margin-top: 20px;
-      position: relative; } 
-    
-    .footer-heading {
-      color: #00bdbb;
-      font-weight: 700;
-      font-size: 15px;
-      text-align: left;
-      margin-left: -40px; }
-    
-    .footer-title-underline {
-      margin-top: 6%;
-      margin-bottom: 0%;
-      border: 0;
-      border-top: 2px solid #00bdbb;
-      width: 15%;
-      left: 5%;
-      position: absolute; }
+  .footer-heading {
+    color: #00bdbb;
+    font-weight: 700;
+    font-size: 15px;
+    text-align: left;
+    margin-left: -40px; }
   
-    .info-box {
-      background-color: #9d9d9d;
-      border-radius: 5px;
-      text-align: center;
-      padding: 5px;
-      color: #fff;
-      margin: 0 15px 5px 0px;
-      height: 60px;
-      width: 60px; }
-    }
+  .footer-title-underline {
+    margin-top: 2%;
+    margin-bottom: 0%;
+    border: 0;
+    border-top: 2px solid #00bdbb;
+    width: 6%;
+    left: 16.2%;
+    position: absolute; }
+
+  .info-box {
+    background-color: #9d9d9d;
+    border-radius: 5px;
+    text-align: center;
+    padding: 5px;
+    color: #fff;
+    margin: 0 15px 5px 0px;
+    height: 60px;
+    width: 60px; }
+  }
+
+@media only screen and (min-width: 1024px) {
+
+  .loop1 {
+    margin-top: 20px;
+    position: relative; } 
+  
+  .footer-heading {
+    color: #00bdbb;
+    font-weight: 700;
+    font-size: 15px;
+    text-align: left;
+    margin-left: -40px; }
+  
+  .footer-title-underline {
+    margin-top: 6%;
+    margin-bottom: 0%;
+    border: 0;
+    border-top: 2px solid #00bdbb;
+    width: 15%;
+    left: 5%;
+    position: absolute; }
+
+  .info-box {
+    background-color: #9d9d9d;
+    border-radius: 5px;
+    text-align: center;
+    padding: 5px;
+    color: #fff;
+    margin: 0 15px 5px 0px;
+    height: 60px;
+    width: 60px; }
+  }

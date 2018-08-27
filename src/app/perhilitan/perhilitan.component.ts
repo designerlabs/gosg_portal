@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, Output, Input, EventEmitter, OnDestroy } from '@angular/core';
 import { ISubscription } from "rxjs/Subscription";
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute, Params, ParamMap } from '@angular/router';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { Observable } from 'rxjs/Observable';
@@ -41,6 +41,8 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
   langID: any;
   private subscriptionLang: ISubscription;
   loading = false;
+  dsvcCode:any;
+  agcCode:any;
 
   isLinear = true;
   firstFormGroup: FormGroup;
@@ -148,6 +150,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
     private activatedRoute:ActivatedRoute,
     @Inject(APP_CONFIG) private config: AppConfig,
     private router: Router,
+    private route: ActivatedRoute,
     private http: Http, 
     private translate: TranslateService, 
     private protectedService: ProtectedService,
@@ -192,6 +195,14 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
   }
   
   ngOnInit() {
+
+     // AGENCY & DSERVICE CODE FOR VALIDATION
+     let sub = this.route.queryParams.subscribe((params: Params) => {
+      this.dsvcCode = parseInt(params.service);
+      this.agcCode = parseInt(params.agency);
+    });
+
+    this.triggerDserviceValidation(this.dsvcCode);
 
     if(!this.langID){
       this.langID = localStorage.getItem('langID');
@@ -1694,6 +1705,37 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       this.toastr.error(JSON.parse(error._body).statusDesc, '');
     });
     
+  }
+
+  triggerDserviceValidation(dsvcCode) {
+    let sub;
+    this.loading = true;
+
+    return this.route.paramMap
+      .switchMap((params: ParamMap) =>
+        this.protectedService.validateDserviceByRefCode(dsvcCode))
+      .subscribe(resValidation => {
+        
+        if(!resValidation.valid) {
+          this.toastr.error('Invalid Service!', '');
+          this.router.navigate(['404']);
+          
+          // sub = Observable.interval(2000)
+          // .subscribe((val) => {
+          //   window.close();
+          //   sub.unsubscribe();
+          // });
+        } else {
+          localStorage.setItem('dserviceCode', dsvcCode);
+          this.loading = false;
+        }
+        this.loading = false;
+      },
+      error => {
+        this.toastr.error(JSON.parse(error._body).statusDesc, '');
+        this.loading = false;
+  
+      });
   }
 
 }

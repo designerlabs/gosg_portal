@@ -171,3 +171,57 @@
             .titleWObg{
                 color:#333;
             }
+
+@media only screen and (min-width: 320px) {
+    .sideBarMenu--title {
+        font-size: 20px;
+        color: #333;
+        font-weight: 600;
+        margin-bottom: 20px;
+        margin-left: 6%;
+    }
+}
+
+@media only screen and (min-width: 360px) {
+
+}
+
+@media only screen and (min-width: 480px) {
+    .sideBarMenu--title {
+        font-size: 20px;
+        color: #333;
+        font-weight: 600;
+        margin-bottom: 20px;
+        margin-left: 4%;
+    }
+}
+
+@media only screen and (min-width: 540px) {
+    .sideBarMenu--title {
+        font-size: 20px;
+        color: #333;
+        font-weight: 600;
+        margin-bottom: 20px;
+        margin-left: 0;
+    }
+}
+
+@media only screen and (min-width: 640px) {
+
+}
+
+@media only screen and (min-width: 768px) {
+
+}
+
+@media only screen and (min-width: 854px) {
+
+}
+
+@media only screen and (min-width: 960px) {
+
+}
+
+@media only screen and (min-width: 1024px) {
+
+}
