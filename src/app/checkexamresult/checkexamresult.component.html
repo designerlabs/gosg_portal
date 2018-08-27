@@ -116,7 +116,7 @@
       
         <div class="row">
             <div class="col-md-12 displayDesc text-center">
-                <h5 style="font-weight: bold">SLIP KEPUTUSAN - PEPERIKSAAN AKHIR TAHUN 2017</h5>
+                <h5 style="font-weight: bold">SLIP KEPUTUSAN - {{resultInfo.courseName}}</h5>
             </div>
         </div>
         <div class="row">
@@ -124,13 +124,13 @@
                 <span>Nama</span>
             </div>
             <div class="col-md-5 displayJustify">
-                <span>: {{listUser.name}}NORAINI BINTI A. GHANI</span>
+                <span>: {{listUser.name}}ZAKARIA BIN MOHD NOR</span>
             </div>
             <div class="col-md-1 displayJustify">
-                <span>Darjah</span>
+                <span>INSTITUSI</span>
             </div>
             <div class="col-md-5 displayJustify">
-                <span>: 1</span>
+                <span>: {{resultInfo.instituteName}}</span>
             </div>
         </div>
         <div class="row">
@@ -138,13 +138,13 @@
                 <span>No. KP</span>
             </div>
             <div class="col-md-5 displayJustify">
-                <span>: {{listUser.ic}}850302015558</span>
+                <span>: {{listUser.ic}}700101712555</span>
             </div>
             <div class="col-md-1 displayJustify">
-                <span>Jantina</span>
+                <span>TAHUN PEPERIKSAAN</span>
             </div>
             <div class="col-md-5 displayJustify">
-                <span>: PEREMPUAN</span>
+                <span>: {{resultInfo.examYear}}</span>
             </div>
         </div><br>
 
@@ -159,13 +159,28 @@
                 <tr class="mat-row table_row" style="background: transparent;"
                     *ngFor="let data of listResult; let i = index;" role="row">
                     <td class="mat-cell text-center">{{i+1}}</td>
-                    <td class="mat-cell">{{data.nama}}</td>
-                    <td class="mat-cell">{{data.gred}}</td>
-                    <td class="mat-cell">{{data.desc}}</td>
+                    <td class="mat-cell">{{data.name}}</td>
+                    <td class="mat-cell">{{data.pass}}</td>
+                    <td class="mat-cell">{{data.code}}</td>
                 </tr>
             </table>
-        </div><br><br>    
+        </div><br> 
         
+        <div class="row">
+            <div class="col-md-1 displayJustify">
+                <span>CGPA</span>
+            </div>
+            <div class="col-md-5 displayJustify">
+                <span>: {{resultInfo.cgpa}}</span>
+            </div>
+            <div class="col-md-1 displayJustify">
+                <span></span>
+            </div>
+            <div class="col-md-5 displayJustify">
+                <span></span>
+            </div>
+        </div><br><br>
+    
         <div class="row">
             <div class="col-md-12 displayJustify">
                 <span>*** Keputusan yang dipaparkan hanyalah bagi tujuan semakan sahaja dan tidak boleh digunakan bagi tujuan lain.</span>

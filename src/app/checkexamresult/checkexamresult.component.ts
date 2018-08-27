@@ -50,6 +50,8 @@ export class CheckexamresultComponent implements OnInit, OnDestroy {
   public listTypeExam: any[] = [];
   public listResult: any[] = [];
   public showResult: boolean = false;
+  public profileId: any;
+  public resultInfo: any;
 
   showNoData = false;
   loading = false;
@@ -150,6 +152,8 @@ export class CheckexamresultComponent implements OnInit, OnDestroy {
               this.getListYear();
             }
 
+            this.profileId = data.user.userId;
+
           }else{
           }
         }).bind(this));
@@ -183,6 +187,7 @@ export class CheckexamresultComponent implements OnInit, OnDestroy {
       }
 
       this.listUser.push(a);
+      this.profileId = 1446;
 
       console.log("dalam get user");
       console.log(this.listUser.length);
@@ -220,28 +225,65 @@ export class CheckexamresultComponent implements OnInit, OnDestroy {
     this.checkReqValues();
   }
 
+  getSTPM(){
+    this.loading = true;
+
+    this.protectedService.getProtectedNopg('stpmservice/stpm/id/'+this.profileId+'?user=true').subscribe(
+    data => {
+
+      this.sharedService.errorHandling(data, (function(){
+
+        let getObjKeys = Object.keys(data.resource);
+        let valObj = getObjKeys.filter(fmt => fmt === "subject");
+        if(valObj.length == 1){
+          this.resultInfo = data.resource;
+          this.listResult = data.resource.subject;
+          this.showResult = true;
+        }
+        
+        else{
+          this.listResult = [];
+        }
+
+      }).bind(this));
+      this.loading = false;
+    },
+    error => {      
+      this.loading = false;      
+    });
+  }
+
   checkExam(){
     this.listResult = [1];
     if(this.listResult.length == 0){
       this.openDialog();
       //this.openResult();
     }
-   
-    else{
-      this.listResult = [{"nama":"Bahasa Melayu", "gred": "A1", "desc": "Cemerlang", "markah": 80.00},
-                         {"nama":"Bahasa Inggeris", "gred": "A1", "desc": "Cemerlang", "markah": 90.00},
-                         {"nama":"Pendidikan Islam", "gred": "A1", "desc": "Cemerlang", "markah": 95.00},
-                         {"nama":"Pendidikan Islam", "gred": "A1", "desc": "Cemerlang", "markah": 95.00},
-                         {"nama":"Pendidikan Islam", "gred": "A1", "desc": "Cemerlang", "markah": 95.00},
-                         {"nama":"Pendidikan Islam", "gred": "A1", "desc": "Cemerlang", "markah": 95.00},
-                         {"nama":"Pendidikan Islam", "gred": "A1", "desc": "Cemerlang", "markah": 95.00},
-                         {"nama":"Pendidikan Islam", "gred": "A1", "desc": "Cemerlang", "markah": 95.00},
-                         {"nama":"Pendidikan Islam", "gred": "A1", "desc": "Cemerlang", "markah": 95.00},
-                         {"nama":"Pendidikan Islam", "gred": "A1", "desc": "Cemerlang", "markah": 95.00},
-                         {"nama":"Pendidikan Islam", "gred": "A1", "desc": "Cemerlang", "markah": 95.00},
-                         {"nama":"Pendidikan Islam", "gred": "A1", "desc": "Cemerlang", "markah": 95.00},]
-      this.showResult = true;
+
+    if(this.searchForm.controls.examname.value == 4){
+
+      this.getSTPM();
     }
+
+    else{
+      this.openDialog();
+    }
+   
+    // else{
+    //   this.listResult = [{"nama":"Bahasa Melayu", "gred": "A1", "desc": "Cemerlang", "markah": 80.00},
+    //                      {"nama":"Bahasa Inggeris", "gred": "A1", "desc": "Cemerlang", "markah": 90.00},
+    //                      {"nama":"Pendidikan Islam", "gred": "A1", "desc": "Cemerlang", "markah": 95.00},
+    //                      {"nama":"Pendidikan Islam", "gred": "A1", "desc": "Cemerlang", "markah": 95.00},
+    //                      {"nama":"Pendidikan Islam", "gred": "A1", "desc": "Cemerlang", "markah": 95.00},
+    //                      {"nama":"Pendidikan Islam", "gred": "A1", "desc": "Cemerlang", "markah": 95.00},
+    //                      {"nama":"Pendidikan Islam", "gred": "A1", "desc": "Cemerlang", "markah": 95.00},
+    //                      {"nama":"Pendidikan Islam", "gred": "A1", "desc": "Cemerlang", "markah": 95.00},
+    //                      {"nama":"Pendidikan Islam", "gred": "A1", "desc": "Cemerlang", "markah": 95.00},
+    //                      {"nama":"Pendidikan Islam", "gred": "A1", "desc": "Cemerlang", "markah": 95.00},
+    //                      {"nama":"Pendidikan Islam", "gred": "A1", "desc": "Cemerlang", "markah": 95.00},
+    //                      {"nama":"Pendidikan Islam", "gred": "A1", "desc": "Cemerlang", "markah": 95.00},]
+    //   this.showResult = true;
+    // }
   }
   
   checkReqValues() {
