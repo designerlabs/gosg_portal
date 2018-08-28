@@ -275,7 +275,6 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
     this.getUserData();
 
     this.getUrl = this.router.url.split('/')[2];
-    console.log(this.getUrl);
 
     if(this.getUrl == undefined){// for add
       // AGENCY & DSERVICE CODE FOR VALIDATION
@@ -742,7 +741,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       data => {
 
         this.sharedService.errorHandling(data, (function(){
-          console.log(data);    
+          
           if(data.noKpResourceList[0].nama != ""){
             this.secondFormGroup.get('namaPemilik').setValue(data.noKpResourceList[0].nama);
             this.secondFormGroup.get('phonePemilik').setValue(data.noKpResourceList[0].notel);
@@ -1436,7 +1435,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       body.isDraft = "True";
       body.cronStatus = false;
       
-      console.log(JSON.stringify(body));
+      //console.log(JSON.stringify(body));
       this.loading = true;
       
       this.protectedService.create(body,'perhilitan/draft/save',this.langID, this.dsvcCode, this.agcCode).subscribe(
@@ -1575,7 +1574,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       body.isDraft = "True";
       body.cronStatus = false;
       
-      console.log(JSON.stringify(body));
+      //console.log(JSON.stringify(body));
       this.loading = true;
       
       this.protectedService.update(body,'perhilitan/draft/update',this.langID, this.dsvcCode, this.agcCode).subscribe(
@@ -1710,7 +1709,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
     body.isDraft = false;
     body.cronStatus = false;
     
-    console.log(JSON.stringify(body));
+    //console.log(JSON.stringify(body));
     this.loading = true;
 
     this.protectedService.create(body,'perhilitan/apply',this.langID, this.dsvcCode, this.agcCode).subscribe(
