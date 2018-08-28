@@ -294,7 +294,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       this.flagAfterSubmit = false;
     }
 
-    else{// for delete
+    else{// for edit
       this.getDetailPerhilitan();
       this.dsvcCode = localStorage.getItem('dserviceCode');
       this.agcCode = localStorage.getItem('agencyCode');

@@ -213,7 +213,7 @@ export class AppManagementComponent implements OnInit, OnDestroy {
     });
   }
 
-  viewData(agency, id){
+  viewData(agency, id, dsvcCode, agcCode){
 
     let test = "papar-89";
     if(agency == "PAP-07-09-00"){ //perhilitan
@@ -228,6 +228,9 @@ export class AppManagementComponent implements OnInit, OnDestroy {
       else{
         this.router.navigate(['perhilitan_renew/'+statusId]);
       }
+
+      localStorage.setItem('dserviceCode', dsvcCode);
+      localStorage.setItem('agencyCode', agcCode);
     }
   }
 
