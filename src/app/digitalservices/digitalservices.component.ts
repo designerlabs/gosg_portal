@@ -110,6 +110,19 @@ export class DigitalservicesComponent implements OnInit, OnDestroy {
     });
   }
 
+  toTrack(dserviceCode, dUrl, agcCode, common?) {
+    window.open(dUrl+'?service='+dserviceCode+'&agency='+agcCode, '_blank');
+    this.portalservice.sendTrackingCount(dserviceCode,agcCode).subscribe( 
+      data =>{
+      console.log(data);
+      console.log('Sent');
+    },
+    error => {
+      this.toastr.error(JSON.parse(error._body).statusDesc, '');
+      // this.loading = false;
+
+    });
+  }
 }
 
 @Component({
