@@ -275,6 +275,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
     this.getUserData();
 
     this.getUrl = this.router.url.split('/')[2];
+    console.log(this.getUrl);
 
     if(this.getUrl == undefined){// for add
       // AGENCY & DSERVICE CODE FOR VALIDATION
@@ -324,7 +325,16 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
 
             this.dbposkod = data.user.address.permanentAddressPostcode.postcodeId;
             this.dbdaerah = data.user.address.permanentAddressCity.cityId;
-            this.dbnegeri = data.user.address.permanentAddressState.stateId;           
+            this.dbnegeri = data.user.address.permanentAddressState.stateId;    
+            
+            this.firstFormGroup.get('namaPemohon').disable();
+            this.firstFormGroup.get('icPemohon').disable();
+            this.firstFormGroup.get('phonePemohon').disable();
+            this.firstFormGroup.get('emailPemohon').disable();
+            this.firstFormGroup.get('add1').disable();
+            this.firstFormGroup.get('poskodPemohon').disable();
+            this.firstFormGroup.get('daerahPemohon').disable();
+            this.firstFormGroup.get('negeriPemohon').disable();
 
           }else{
           }
@@ -429,6 +439,15 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       this.dbposkod = data.user.address.permanentAddressPostcode.postcodeId;
       this.dbdaerah = data.user.address.permanentAddressCity.cityId;
       this.dbnegeri = data.user.address.permanentAddressState.stateId;
+
+      this.firstFormGroup.get('namaPemohon').disable();
+      this.firstFormGroup.get('icPemohon').disable();
+      this.firstFormGroup.get('phonePemohon').disable();
+      this.firstFormGroup.get('emailPemohon').disable();
+      this.firstFormGroup.get('add1').disable();
+      this.firstFormGroup.get('poskodPemohon').disable();
+      this.firstFormGroup.get('daerahPemohon').disable();
+      this.firstFormGroup.get('negeriPemohon').disable();
     }
   }
 
