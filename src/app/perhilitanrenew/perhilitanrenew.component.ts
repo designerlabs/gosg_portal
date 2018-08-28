@@ -370,7 +370,6 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
       data => {
         this.sharedService.errorHandling(data, (function(){
 
-          console.log(data);
           if(data.user){
             
             let phone = data.user.address.permanentAddressHomePhoneNo.split('*')[1];
@@ -1509,7 +1508,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
       body.isDraft = "True";
       body.cronStatus = false;
       
-      console.log(JSON.stringify(body));
+      //console.log(JSON.stringify(body));
       this.loading = true;
       this.protectedService.create(body,'perhilitan/draft/save',this.langID, this.dsvcCode, this.agcCode).subscribe(
       data => {
@@ -1641,7 +1640,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
       body.isDraft = "True";
       body.cronStatus = false;
           
-      console.log(JSON.stringify(body));   
+      //console.log(JSON.stringify(body));   
       this.loading = true;   
       this.protectedService.create(body,'perhilitan/draft/save',this.langID, this.dsvcCode, this.agcCode).subscribe(
       data => {
@@ -1771,7 +1770,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     // body.isDraft = "True";
     // body.cronStatus = false;
        
-    console.log(JSON.stringify(body));
+    //console.log(JSON.stringify(body));
     this.loading = true;
     this.protectedService.create(body,'perhilitan/renew',this.langID, this.dsvcCode, this.agcCode).subscribe(
     data => {

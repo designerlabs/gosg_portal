@@ -324,7 +324,16 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
 
             this.dbposkod = data.user.address.permanentAddressPostcode.postcodeId;
             this.dbdaerah = data.user.address.permanentAddressCity.cityId;
-            this.dbnegeri = data.user.address.permanentAddressState.stateId;           
+            this.dbnegeri = data.user.address.permanentAddressState.stateId;    
+            
+            this.firstFormGroup.get('namaPemohon').disable();
+            this.firstFormGroup.get('icPemohon').disable();
+            this.firstFormGroup.get('phonePemohon').disable();
+            this.firstFormGroup.get('emailPemohon').disable();
+            this.firstFormGroup.get('add1').disable();
+            this.firstFormGroup.get('poskodPemohon').disable();
+            this.firstFormGroup.get('daerahPemohon').disable();
+            this.firstFormGroup.get('negeriPemohon').disable();
 
           }else{
           }
@@ -429,6 +438,15 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       this.dbposkod = data.user.address.permanentAddressPostcode.postcodeId;
       this.dbdaerah = data.user.address.permanentAddressCity.cityId;
       this.dbnegeri = data.user.address.permanentAddressState.stateId;
+
+      this.firstFormGroup.get('namaPemohon').disable();
+      this.firstFormGroup.get('icPemohon').disable();
+      this.firstFormGroup.get('phonePemohon').disable();
+      this.firstFormGroup.get('emailPemohon').disable();
+      this.firstFormGroup.get('add1').disable();
+      this.firstFormGroup.get('poskodPemohon').disable();
+      this.firstFormGroup.get('daerahPemohon').disable();
+      this.firstFormGroup.get('negeriPemohon').disable();
     }
   }
 
@@ -723,7 +741,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       data => {
 
         this.sharedService.errorHandling(data, (function(){
-          console.log(data);    
+          
           if(data.noKpResourceList[0].nama != ""){
             this.secondFormGroup.get('namaPemilik').setValue(data.noKpResourceList[0].nama);
             this.secondFormGroup.get('phonePemilik').setValue(data.noKpResourceList[0].notel);
@@ -1417,7 +1435,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       body.isDraft = "True";
       body.cronStatus = false;
       
-      console.log(JSON.stringify(body));
+      //console.log(JSON.stringify(body));
       this.loading = true;
       
       this.protectedService.create(body,'perhilitan/draft/save',this.langID, this.dsvcCode, this.agcCode).subscribe(
@@ -1556,7 +1574,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       body.isDraft = "True";
       body.cronStatus = false;
       
-      console.log(JSON.stringify(body));
+      //console.log(JSON.stringify(body));
       this.loading = true;
       
       this.protectedService.update(body,'perhilitan/draft/update',this.langID, this.dsvcCode, this.agcCode).subscribe(
@@ -1691,7 +1709,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
     body.isDraft = false;
     body.cronStatus = false;
     
-    console.log(JSON.stringify(body));
+    //console.log(JSON.stringify(body));
     this.loading = true;
 
     this.protectedService.create(body,'perhilitan/apply',this.langID, this.dsvcCode, this.agcCode).subscribe(

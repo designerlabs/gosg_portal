@@ -97,8 +97,10 @@
           </div>
 
           <div class="pull-right">
-            <button mat-raised-button matStepperNext color="primary" class="btn btn-md btn-success font-size-s" 
-            [disabled]="flagAfterSubmit">Seterusnya</button>
+            <button mat-raised-button matStepperNext color="primary" class="btn btn-md iconBtn" [disabled]="flagAfterSubmit">            
+              <i class="fa fa-arrow-circle-right"></i>
+              <span class="textDisplay">Seterusnya</span>
+            </button>
           </div>
         </form>
       </mat-step>
@@ -224,10 +226,18 @@
             </div>
           </div>
           <div class="pull-right">
-            <button mat-raised-button matStepperPrevious color="primary" class="btn btn-md btn-success font-size-s">Sebelum</button>
-            <button mat-raised-button matStepperNext color="primary" class="btn btn-md btn-success font-size-s"
-            [disabled]="flag2">Seterusnya</button>
-            <button mat-raised-button color="primary" class="btn btn-md btn-success font-size-s" (click)="draft()">Draf</button>
+            <button mat-raised-button matStepperPrevious color="primary" class="btn btn-md iconBtn">
+              <i class="fa fa-arrow-circle-left"></i>
+              <span class="textDisplay">Sebelum</span>
+            </button>
+            <button mat-raised-button matStepperNext color="primary" class="btn btn-md iconBtn" [disabled]="flag2">              
+              <i class="fa fa-arrow-circle-right"></i>
+              <span class="textDisplay">Seterusnya</span>
+            </button>
+            <button mat-raised-button color="primary" class="btn btn-md iconBtn" (click)="draft()">              
+              <i class="fa fa-floppy-o"></i>
+              <span class="textDisplay">Draf</span>
+            </button>
           </div>
         </form>
       </mat-step>
@@ -279,10 +289,18 @@
             </div>
           </div>
           <div class="pull-right">
-            <button mat-raised-button matStepperPrevious color="primary" class="btn btn-md btn-success font-size-s">Sebelum</button>
-            <button mat-raised-button matStepperNext color="primary" class="btn btn-md btn-success font-size-s"
-            [disabled]="flag3">Seterusnya</button>
-            <button mat-raised-button color="primary" class="btn btn-md btn-success font-size-s" (click)="draft()">Draf</button>
+            <button mat-raised-button matStepperPrevious color="primary" class="btn btn-md iconBtn">
+              <i class="fa fa-arrow-circle-left"></i>
+              <span class="textDisplay">Sebelum</span>
+            </button>
+            <button mat-raised-button matStepperNext color="primary" class="btn btn-md iconBtn" [disabled]="flag3">              
+              <i class="fa fa-arrow-circle-right"></i>
+              <span class="textDisplay">Seterusnya</span>
+            </button>
+            <button mat-raised-button color="primary" class="btn btn-md iconBtn" (click)="draft()">              
+              <i class="fa fa-floppy-o"></i>
+              <span class="textDisplay">Draf</span>
+            </button>
           </div>
         </form>
       </mat-step>
@@ -401,10 +419,18 @@
             </div>
           </div>
           <div class="pull-right">
-            <button mat-raised-button matStepperPrevious color="primary" class="btn btn-md btn-success font-size-s">Sebelum</button>
-            <button mat-raised-button matStepperNext color="primary" class="btn btn-md btn-success font-size-s"
-            [disabled]="flag4">Seterusnya</button>
-            <button mat-raised-button color="primary" class="btn btn-md btn-success font-size-s" (click)="draft()">Draf</button>
+            <button mat-raised-button matStepperPrevious color="primary" class="btn btn-md iconBtn">
+              <i class="fa fa-arrow-circle-left"></i>
+              <span class="textDisplay">Sebelum</span>
+            </button>
+            <button mat-raised-button matStepperNext color="primary" class="btn btn-md iconBtn" [disabled]="flag4">              
+              <i class="fa fa-arrow-circle-right"></i>
+              <span class="textDisplay">Seterusnya</span>
+            </button>
+            <button mat-raised-button color="primary" class="btn btn-md iconBtn" (click)="draft()">              
+              <i class="fa fa-floppy-o"></i>
+              <span class="textDisplay">Draf</span>
+            </button>
           </div>
         </form>
       </mat-step>
@@ -529,10 +555,18 @@
 
           </div>
           <div class="pull-right">
-            <button mat-raised-button matStepperPrevious color="primary"  class="btn btn-md btn-success font-size-s">Sebelum</button>
-            <button mat-raised-button color="primary" class="btn btn-md btn-success font-size-s" 
-              [disabled]="flag5 || flagHantar" (click)="submit()">Hantar</button>
-            <button mat-raised-button color="primary" class="btn btn-md btn-success font-size-s" (click)="draft()">Draf</button>
+            <button mat-raised-button matStepperPrevious color="primary"  class="btn btn-md iconBtn">
+              <i class="fa fa-arrow-circle-left"></i>
+              <span class="textDisplay">Sebelum</span>
+            </button>
+            <button mat-raised-button color="primary" class="btn btn-md iconBtn" [disabled]="flag5 || flagHantar" (click)="submit()">
+              <i class="fa fa-check"></i>
+              <span class="textDisplay">Hantar</span>
+            </button>
+            <button mat-raised-button color="primary" class="btn btn-md iconBtn" (click)="draft()">              
+              <i class="fa fa-floppy-o"></i>
+              <span class="textDisplay">Draf</span>
+            </button>
           </div>
         </form>
       </mat-step><br>
