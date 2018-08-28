@@ -232,12 +232,11 @@ export class ProtectedService {
     let dsvcCode;
     let params;
     let langId;
-
-    langId = arrObj[0];
+ 
     agcCode = arrObj[1];
     dsvcCode = arrObj[2];
 
-    let svcParams = 'agency='+agcCode+'&service='+dsvcCode+'&language='+langId;
+    let svcParams = 'agency='+agcCode+'&service='+dsvcCode+'&language='+this.langId;
 
     if(svcName == 'summon-traffic') {
 
@@ -258,7 +257,6 @@ export class ProtectedService {
     } else if(svcName == 'checkPoliceIntake') {
 
         params = '?'+svcParams;
-        
     }
 
     return this.http.post(this.dserviceAgencyUrl + modules + params,null)
@@ -267,8 +265,8 @@ export class ProtectedService {
     .catch(this.handleError);
   }
   
-  create(data, moduleName, lang) {
-    let createUrl = this.urlPerhilitan   + moduleName + '?language='+lang;
+  create(data, moduleName, lang, servicesC, agencyC) {
+    let createUrl = this.urlPerhilitan   + moduleName + '?language='+lang+'&agency='+agencyC+'&service='+servicesC;
     return this.http.post(createUrl, data)
     .map((response: Response) => response.json())
     .catch(this.handleError);
@@ -315,8 +313,8 @@ export class ProtectedService {
     .catch(this.handleError);
   }
 
-  update(data, moduleName, lang) {
-    let createUrl = this.urlPerhilitan   + moduleName + '?language='+lang;
+  update(data, moduleName, lang, servicesC, agencyC) {
+    let createUrl = this.urlPerhilitan   + moduleName + '?language='+lang+'&agency='+agencyC+'&service='+servicesC;
     return this.http.put(createUrl, data)
     .map((response: Response) => response.json())
     .catch(this.handleError);

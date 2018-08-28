@@ -188,7 +188,7 @@ export class StatuspositionComponent implements OnInit, OnDestroy {
       this.sharedService.errorHandling(data, (function(){
 
         this.dataIntake = data.policeIntakeResource;
-
+   
         if(this.dataIntake){
           this.showDetails = true;
           this.showNoData = false;

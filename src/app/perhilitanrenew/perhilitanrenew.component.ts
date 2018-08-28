@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, Output, Input, EventEmitter, OnDestroy } from '@angular/core';
 import { ISubscription } from "rxjs/Subscription";
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute, Params, ParamMap } from '@angular/router';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { Observable } from 'rxjs/Observable';
@@ -49,6 +49,8 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
   langID: any;
   private subscriptionLang: ISubscription;
   loading = false;
+  dsvcCode:any;
+  agcCode:any;
 
   isLinear = true;
   firstFormGroup: FormGroup;
@@ -161,6 +163,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     private activatedRoute:ActivatedRoute,
     @Inject(APP_CONFIG) private config: AppConfig,
     private router: Router,
+    private route: ActivatedRoute,
     private http: Http, 
     private translate: TranslateService, 
     private protectedService: ProtectedService,
@@ -291,7 +294,18 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
 
     if(this.getUrl != undefined){ //for edit
       this.flagCheckLsn = true;
+      this.dsvcCode = localStorage.getItem('dserviceCode');
+      this.agcCode = localStorage.getItem('agencyCode');
       this.getDetailRenew();
+    }
+
+    else{
+      let sub = this.route.queryParams.subscribe((params: Params) => {
+        this.dsvcCode = parseInt(params.service);
+        this.agcCode = parseInt(params.agency);
+      });
+
+      this.triggerDserviceValidation(this.dsvcCode);  
     }
 
     this.disabled();
@@ -1497,7 +1511,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
       
       console.log(JSON.stringify(body));
       this.loading = true;
-      this.protectedService.create(body,'perhilitan/draft/save',this.langID).subscribe(
+      this.protectedService.create(body,'perhilitan/draft/save',this.langID, this.dsvcCode, this.agcCode).subscribe(
       data => {
         this.sharedService.errorHandling(data, (function () {
           this.toastr.success(this.translate.instant('Pembaharuan Lesen Peniaga/Taksidermi berjaya disimpan sebagai draft'), '');
@@ -1629,7 +1643,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
           
       console.log(JSON.stringify(body));   
       this.loading = true;   
-      this.protectedService.create(body,'perhilitan/draft/save',this.langID).subscribe(
+      this.protectedService.create(body,'perhilitan/draft/save',this.langID, this.dsvcCode, this.agcCode).subscribe(
       data => {
         this.sharedService.errorHandling(data, (function () {
           this.toastr.success(this.translate.instant('Draf Pembaharuan Lesen Peniaga/Taksidermi berjaya dikemaskini'), '');
@@ -1759,7 +1773,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
        
     console.log(JSON.stringify(body));
     this.loading = true;
-    this.protectedService.create(body,'perhilitan/renew',this.langID).subscribe(
+    this.protectedService.create(body,'perhilitan/renew',this.langID, this.dsvcCode, this.agcCode).subscribe(
     data => {
       this.sharedService.errorHandling(data, (function () {
         this.toastr.success(this.translate.instant('Permohonan Baru Lesen Peniaga/Taksidermi berjaya dihantar'), '');
@@ -1771,6 +1785,38 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
       this.loading = false;
       this.toastr.error(JSON.parse(error._body).statusDesc, '');
     });
+  }
+
+  triggerDserviceValidation(dsvcCode) {
+    let sub;
+    this.loading = true;
+
+    return this.route.paramMap
+      .switchMap((params: ParamMap) =>
+        this.protectedService.validateDserviceByRefCode(dsvcCode))
+      .subscribe(resValidation => {
+        
+        if(!resValidation.valid) {
+          this.toastr.error('Invalid Service!', '');
+          this.router.navigate(['404']);
+          
+          // sub = Observable.interval(2000)
+          // .subscribe((val) => {
+          //   window.close();
+          //   sub.unsubscribe();
+          // });
+        } else {
+          localStorage.setItem('dserviceCode', dsvcCode);
+          localStorage.setItem('agencyCode', this.agcCode);
+          this.loading = false;
+        }
+        this.loading = false;
+      },
+      error => {
+        this.toastr.error(JSON.parse(error._body).statusDesc, '');
+        this.loading = false;
+  
+      });
   }
 
 }
