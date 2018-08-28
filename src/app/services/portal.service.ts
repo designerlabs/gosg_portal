@@ -86,6 +86,7 @@ export class PortalService {
   private portalUrl: string = this.config.urlPortal;
   private protected: string = this.config.urlProtected;
   private dserviceValidationUrl: string = this.config.urlDserviceValidation;
+  private dserviceTrackingUrl: string = this.config.urlDserviceTracking;
 
   getAgencyApp(){
     return this.http.get(this.AgencyAppUrl + '.json')
@@ -499,6 +500,19 @@ export class PortalService {
     .map((response: Response) => response.json())
     .retry(5)
     .catch(this.handleError);
+  }
+
+  sendTrackingCount(dserviceCode, agcCode) {
+
+    let body = {
+      "agencyCode": agcCode,
+      "serviceCode": dserviceCode
+
+    }
+    return this.http.post(this.dserviceTrackingUrl+"?language="+localStorage.getItem('langID'), body)
+      .map((response: Response) => response.json())
+      .retry(5)
+      .catch(this.handleError);
   }
 
 }
