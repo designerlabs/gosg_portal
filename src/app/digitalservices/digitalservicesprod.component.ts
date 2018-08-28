@@ -119,10 +119,23 @@ export class DigitalservicesprodComponent implements OnInit, OnDestroy {
     }
 }
 
-toValidate(dserviceCode, dUrl, agcCode) {
+toValidate(dserviceCode, dUrl, agcCode, common?) {
   // localStorage.setItem('referral',this.router.url.split('/')[1]);
   // localStorage.setItem('dserviceCode',dserviceCode);
   window.open(dUrl+'?service='+dserviceCode+'&agency='+agcCode, '_blank');
+
+  if(common) {
+    this.portalservice.sendTrackingCount(dserviceCode,agcCode).subscribe( 
+      data =>{
+      console.log(data);
+      console.log('Sent');
+    },
+    error => {
+      this.toastr.error(JSON.parse(error._body).statusDesc, '');
+      // this.loading = false;
+
+    });
+  }
 }
 
 openDialog() {
