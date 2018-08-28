@@ -36,7 +36,7 @@
 
                 <div class="row padding-15">
                     <div class="col-md-3">
-                        <mat-form-field>
+                        <mat-form-field class="example-full-width">
                             <input matInput placeholder="No. Kad Pengenalan" formControlName="ic" (keydown)="isNumber($event)"
                             maxlength="12" required tabindex="1" style="color: black">
                             <mat-error *ngIf="searchForm.controls.ic.hasError('required')">
@@ -45,8 +45,8 @@
                         </mat-form-field>
                     </div>
 
-                    <div class="col-md-6">
-                    </div>
+                    <!-- <div class="col-md-6">
+                    </div> -->
 
                     <div class="col-md-3">
                         <!-- <button tabindex="" mat-raised-button color="warn" type="button" id="btnreset" 
@@ -81,15 +81,43 @@
         </div>
 
         <div class="row container">
-            <div class="col-md-3" style="color: black">
-                NO. KP BARU<br>
-                NAMA PEMOHON<br>
-                TARIKH / MASA<br>
-                TEMPAT<br>
+            <div class="col-md-3" style="color: black;">
+                NO. KP BARU
+            </div>
+            <div class="col-md-9" style="color: black; font-weight: bold;">
+                {{kp}}
+            </div>
+            <div class="col-md-3" style="color: black;">
+                NAMA PEMOHON
+            </div>
+            <div class="col-md-9" style="color: black; font-weight: bold;">
+                {{name}}
+            </div>
+            <div class="col-md-3" style="color: black;">
+                TARIKH / MASA
+            </div>
+            <div class="col-md-9" style="color: black; font-weight: bold;">
+                {{date}}
+            </div>
+            <div class="col-md-3" style="color: black;">
+                TEMPAT
+            </div>
+            <div class="col-md-9" style="color: black; font-weight: bold;">
+                {{place}}
+            </div>
+            <div class="col-md-3" style="color: black;">
                 STATUS PANGGILAN
             </div>
-
             <div class="col-md-9" style="color: black; font-weight: bold;">
+                <div *ngIf="status != '-'" (click)="openLink(urlDoc)" style="cursor: pointer;">
+                    <i class="fa fa-folder-o"></i>&nbsp;{{status}}<br>
+                </div>
+                <div *ngIf="status == '-'">
+                    {{status}}<br />
+                </div>
+            </div>
+
+            <!-- <div class="col-md-9" style="color: black; font-weight: bold;">
                 {{kp}}<br>
                 {{name}}<br>
                 {{date}}<br>
@@ -100,9 +128,9 @@
                 <div *ngIf="status == '-'">
                     {{status}}<br />
                 </div>
-            </div>
+            </div> -->
         </div>
-    </div>
+    </div><br><br>
 
     <div *ngIf="showNoData">
         <div class="row container">
