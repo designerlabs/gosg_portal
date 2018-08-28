@@ -1,7 +1,7 @@
 <gosg-portal-loader [loader]="loader"></gosg-portal-loader>
 <gosg-protected-loader [loader]="loader"></gosg-protected-loader>
 <div class="container-fluid animated slideInDown" style="background: #a7a495;">
-  <div class="container" *ngFor="let article of articleService.articles">
+  <div class="container" *ngFor="let article of articleService.archives">
    <div class="row">
       <div class="col-md-12">
           <h1 style="margin-top: 10px;" class="font-size-l">{{article.categoryName}}</h1>
@@ -14,7 +14,7 @@
               </li>
               <li>/</li>
               <li>
-                  <div *ngFor="let article of articleService.articles">
+                  <div *ngFor="let article of articleService.archives">
                    <div *ngFor="let breadCrum of article.breadcrum; let i = index; let lastItem = last" style="display: inline;">
                      <a href="" [routerLink]="['/archive/'+getModule(breadCrum.breadcrumUrl), getID(breadCrum.breadcrumUrl)]">{{breadCrum.breadcrumName}}</a>
                      <span>{{lastItem ? '' : '&nbsp;/&nbsp;'}}</span>
@@ -27,7 +27,7 @@
   </div>
 </div>
 
-<div style="margin-top:10px;" class="container" *ngFor="let article of articleService.articles">
+<div style="margin-top:10px;" class="container" *ngFor="let article of articleService.archives">
 
   <div class="row">
       <div class="col-sm-3">

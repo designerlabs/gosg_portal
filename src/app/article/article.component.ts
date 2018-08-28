@@ -84,11 +84,6 @@ export class ArticleComponent implements OnInit, OnDestroy {
   lang = this.lang;
   langId = this.langId;
 
-  boolCallback = (result: boolean) : void => {
-    this.loading = result;
-  }
-
-
   ngOnInit() {
     // this.loading = true;
     if(!this.langId){

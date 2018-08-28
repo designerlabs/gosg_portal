@@ -5,9 +5,8 @@ import { APP_CONFIG, AppConfig } from '../../config/app.config.module';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { BreadcrumbService } from '../../header/breadcrumb/breadcrumb.service';
-
-import 'rxjs/add/operator/switchMap';
 import { ISubscription } from 'rxjs/Subscription';
+import 'rxjs/add/operator/switchMap';
 import { TopnavService } from '../../header/topnav/topnav.service';
 @Component({
   selector: 'gosg-archivecategory',
@@ -22,8 +21,7 @@ export class ArchivecategoryComponent implements OnInit, OnDestroy {
   langIdVal: string;
   subID: number;
   moduleName: string;
-  private subscription: ISubscription;
-  private subscriptionLang: ISubscription;
+  loading: boolean = false;
 
   @ViewChild('textarea') textarea: ElementRef;
   @Output() menuClick = new EventEmitter();
@@ -35,7 +33,10 @@ export class ArchivecategoryComponent implements OnInit, OnDestroy {
 
   articleData: any;
   @Output() langChange = new EventEmitter();
-  loading: boolean;
+  
+  private subscription: ISubscription;
+  private subscriptionLang: ISubscription;
+
   constructor(public articleService: ArticleService, private topnavservice: TopnavService, private route: ActivatedRoute, private navService: NavService, private translate: TranslateService, private router: Router, private breadcrumbService: BreadcrumbService, @Inject(APP_CONFIG) private config: AppConfig) {
     this.lang = translate.currentLang;
     this.langId = 1;
@@ -64,7 +65,7 @@ export class ArchivecategoryComponent implements OnInit, OnDestroy {
           }else if(this.moduleName == 'content'){
             this.navService.triggerContentOther(this.subID, this.langId,'archive');
           }else{
-            this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID);
+            this.navService.triggerArticleOthers(this.moduleName,  this.langId, this.topicID, 'archive');
           }
         }
 
@@ -81,11 +82,11 @@ export class ArchivecategoryComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
-    if(localStorage.getItem('langID')){
-      this.langIdVal = localStorage.getItem('langID');
+    
+    if(!this.langId){
+      this.langId = localStorage.getItem('langID');
     }else{
-      this.langIdVal = this.langId;
+      this.langId = 1;
     }
 
         this.articleData = this.articleService.getArticle();

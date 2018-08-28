@@ -36,6 +36,7 @@ export class NavService {
   lang: string;
   langId: number;
   loading:boolean = false;
+  archives: any[];
 
   // tslint:disable-next-line:max-line-length
   constructor(private http: Http, @Inject(APP_CONFIG) private config: AppConfig, private translate: TranslateService, private route: ActivatedRoute, private router: Router, private breadcrumbService: BreadcrumbService, private galleryService: GalleryService, private articleService: ArticleService, private announceService: AnnouncementlistService) {
@@ -543,16 +544,17 @@ export class NavService {
 
 
    triggerArticleOthers(moduleName, lang, topicID, url) {
-    this.loader = true;
+    // this.loader = true;
     if (!isNaN(topicID)) {
-      this.articles = [''];
-      this.articleService.articles = [''];
+      this.archives = [''];
+      this.articleService.archives = [''];
       return this.route.paramMap
         .switchMap((params: ParamMap) =>
-          this.getArticleDataOther(moduleName, this.langId.toString(), topicID, url))
+          this.getArticleDataOther(moduleName, lang, topicID, url))
         .subscribe(resSliderData => {
-          this.articleService.articles = resSliderData;
-          this.articles = resSliderData;
+          console.log(resSliderData)
+          this.articleService.archives = resSliderData;
+          this.archives = resSliderData;
           this.breadcrumb = this.breadcrumbService.getBreadcrumb();
           this.isValid = this.breadcrumbService.isValid = true;
           this.breadcrumb = this.breadcrumb.name = '';
