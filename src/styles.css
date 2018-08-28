@@ -440,7 +440,7 @@ p.font-size-s > strong {
  */
 
 @media screen and (max-width: 320px){
-  
+
 }
 
 
@@ -448,6 +448,10 @@ p.font-size-s > strong {
   .owl-carousel .owl-item img {
     display: block;
     width: 140% !important;
+  }
+
+  .modal-content{
+    top: 110px;
   }
 
   .sliderBox {
