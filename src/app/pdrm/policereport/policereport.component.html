@@ -51,8 +51,8 @@
                         </mat-form-field>
                     </div>
 
-                    <div class="col-md-6">
-                        <mat-form-field>
+                    <div class="col-md-3">
+                        <mat-form-field style="width:60%;">
                             <input matInput placeholder="No. Repot Polis" formControlName="noreport" (keyup)="checkReqValues()"
                             required tabindex="2"  style="color: black" [textMask]="{mask: maskReportNo}">
                             <mat-error *ngIf="searchForm.controls.noreport.hasError('required')">
@@ -60,7 +60,7 @@
                             </mat-error>
                         </mat-form-field>
                         <span style="color: black">/</span>
-                        <mat-form-field style="width:10%;">
+                        <mat-form-field style="width:40%;">
                             <mat-select formControlName="yearreport" placeholder="" (change)="checkReqValues()" required>
                                 <mat-option [value]=null></mat-option>
                                 <mat-option *ngFor="let year of listYear" [value]="year">{{year}}</mat-option>                      
@@ -68,8 +68,11 @@
                             <!-- <mat-error *ngIf="searchForm.controls.yearreport.hasError('required')">
                                 Tahun Repot Polis diperlukan.
                             </mat-error> -->
-                        </mat-form-field>&nbsp;
-                        <span style="color: black">Contoh No Repot Polis: 012345/18</span>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-3">                      
+                        <label style="color: black">Contoh No Repot Polis: 012345/18</label>
                     </div>
 
                     <div class="col-md-3">
