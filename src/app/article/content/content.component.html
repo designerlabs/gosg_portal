@@ -45,7 +45,7 @@
             </div>
         </div>
 
-        <div class="col-sm-6 col-md-6">
+        <div [ngClass]="article.template === 'lifeevent' ? 'col-sm-6 col-md-6' : 'col-sm-9 col-md-9'">
           <div class="row">
             <div class="col-md-12 col-sm-12 warna_font">
               <h2 class="titleWObg font-size-l">
