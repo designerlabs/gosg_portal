@@ -7,7 +7,7 @@ import { ContentComponent } from '../../article/content/content.component';
 @Component({
   selector: 'gosg-leftmenu',
   template: `
-  <button class="visible-xs visible-sm btn btn-sm" style="overflow: hidden;
+  <button class="visible-xs btn btn-sm" style="overflow: hidden;
   border: none;
   outline: none;
   position: absolute;
@@ -17,7 +17,7 @@ import { ContentComponent } from '../../article/content/content.component';
   mat-fab color="accent"  (click)="menuModal.show()">
     <i class="fa fa-bars" aria-hidden="true"></i>
   </button>
-  <div class="hidden-xs hidden-sm" *ngIf="templateName !== 'lifeevent'" >
+  <div class="hidden-xs" *ngIf="templateName !== 'lifeevent'" >
     <mat-expansion-panel *ngFor="let content of sessions; let i = index"  multi="false" displayMode="flat" [hideToggle]="content?.subCategories?.length==0 ? true: null"  [expanded]="content.activeMenu  || (i == statusID) || sessions.length <= 1" class="specific-class">
       <mat-expansion-panel-header>
         <mat-panel-title class="pointer" (click)="clickSideMenu(content, i, $event)">
@@ -58,7 +58,7 @@ import { ContentComponent } from '../../article/content/content.component';
 
 
 
-    <div class="hidden-xs hidden-sm" *ngIf="templateName === 'lifeevent'" >
+    <div class="hidden-xs" *ngIf="templateName === 'lifeevent'" >
     <mat-expansion-panel *ngFor="let content of sessions; let i = index"  multi="false" displayMode="flat" [hideToggle]="content?.contents?.length==0 ? true: null" [disabled]="true" [expanded]="content.activeMenu  || (i == statusID) || sessions.length <= 1" class="specific-class">
       <mat-expansion-panel-header>
         <mat-panel-title class="pointer" (click)="clickSideMenu(content, i, $event)">
