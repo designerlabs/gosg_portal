@@ -127,8 +127,6 @@ toValidate(dserviceCode, dUrl, agcCode, common?) {
   if(common) {
     this.portalservice.sendTrackingCount(dserviceCode,agcCode).subscribe( 
       data =>{
-      console.log(data);
-      console.log('Sent');
     },
     error => {
       this.toastr.error(JSON.parse(error._body).statusDesc, '');

@@ -114,8 +114,6 @@ export class DigitalservicesComponent implements OnInit, OnDestroy {
     window.open(dUrl+'?service='+dserviceCode+'&agency='+agcCode, '_blank');
     this.portalservice.sendTrackingCount(dserviceCode,agcCode).subscribe( 
       data =>{
-      console.log(data);
-      console.log('Sent');
     },
     error => {
       this.toastr.error(JSON.parse(error._body).statusDesc, '');
