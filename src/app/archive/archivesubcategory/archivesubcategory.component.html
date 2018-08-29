@@ -16,7 +16,7 @@
                 <li>
                     <div *ngFor="let article of articleService.articles">
                      <div *ngFor="let breadCrum of article.breadcrum; let i = index; let lastItem = last" style="display: inline;">
-                       <a href="" (click)="breadcrumLink(breadCrum.breadcrumUrl, breadCrum.breadcrumUrl, $event)">{{breadCrum.breadcrumName}}</a>
+                       <a href="" (click)="breadcrumLink(breadCrum.breadcrumUrl, breadCrum.breadcrumUrl, $event)" [innerHTML]="breadCrum.breadcrumName"></a>
                        <span>{{lastItem ? '' : '&nbsp;/&nbsp;'}}</span>
                      </div>
                     </div>
@@ -33,9 +33,7 @@
         <div class="col-sm-3">
             <div class="row">
                 <div class="col-md-12 sideBarMenu">
-                    <h4 class="sideBarMenu--title padding-bottom-l font-size-m warna_font">
-                        {{article.categoryName}}
-                    </h4>
+                    <h4 class="sideBarMenu--title padding-bottom-l font-size-m warna_font" [innerHTML]="article.categoryName"></h4>
 
                     <mat-accordion>
                       <gosg-leftmenu [sessions]="article.menuLeft"  [menuType]="moduleName" [templateName]="article.template"></gosg-leftmenu>
@@ -59,18 +57,14 @@
                                   <img [src]="config.externalMediaURL + '/images/'+ article.image.mediaFile" style="width:100%;">
                                   <div style="position:absolute; width:auto;">
                                       <h2 class="topic_bg_title font-size-l">
-                                          <span style="padding-left:10px;">
-                                              {{rightContent.categoryName}}
-                                          </span>
+                                          <span style="padding-left:10px;" [innerHTML]="rightContent.categoryName"></span>
                                       </h2>
                                   </div>
                               </div>
                           </div>
                           <div *ngIf="!article.image">
                               <div>
-                                  <h2 class="titleWObg font-size-l">
-                                      {{rightContent.categoryName}}
-                                  </h2>
+                                  <h2 class="titleWObg font-size-l" [innerHTML]="rightContent.categoryName"></h2>
                               </div>
                           </div>
                           <span class="font-size-s defaultColor" [innerHTML]="rightContent.categoryDescription"></span>
@@ -81,9 +75,7 @@
                                 <div>
                                   <div style="width:100%; margin-right:10px; height:auto;" class="pointer" (click)="clickContentFromMenu(article.categoryCode, agencyLst.contentCode, 'archive')">
                                       <a class="intro-box warna_border_color" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
-                                          <h4 class="font-size-m warna_font">
-                                              {{agencyLst.contentTitle}}
-                                          </h4>
+                                          <h4 class="font-size-m warna_font" [innerHTML]="agencyLst.contentTitle"></h4>
                                           <span class="warna_font article-size font-size-s" [innerHTML]="agencyLst.contentDescription"></span>
                                           <div class="font-size-s" style="text-align: right;"><i class="fa fa-caret-right"></i> {{'home.readmore' | translate }}</div>
                                       </a>
@@ -108,9 +100,7 @@
                                 <div>
                                   <div style="width:100%; margin-right:10px; height:auto;" class="pointer" (click)="clickContentFromMenu(article.categoryCode, tab.contentCode, 'archive')">
                                       <a class="intro-box warna_border_color" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
-                                          <h4 class="font-size-m warna_font">
-                                              {{tab.contentTitle}}
-                                          </h4>
+                                          <h4 class="font-size-m warna_font" [innerHTML]="tab.contentTitle"></h4>
                                           <span class="warna_font article-size font-size-s" [innerHTML]="tab.contentText"></span>
                                           <div class="font-size-s" style="text-align: right;"><i class="fa fa-caret-right"></i> {{'home.readmore' | translate }}</div>
                                       </a>
@@ -165,8 +155,7 @@
                             <img [src]="config.externalMediaURL + '/images/'+ article.image.mediaFile" style="width:100%;">
                             <div style="position:absolute; width:auto;">
                                 <h2 class="topic_bg_title font-size-l">
-                                    <span style="padding-left:10px;">
-                                        {{rightContent.categoryName}}
+                                    <span style="padding-left:10px;" [innerHTML]="rightContent.categoryName">
                                     </span>
                                 </h2>
                             </div>
@@ -176,9 +165,7 @@
 
                     <div *ngIf="!article.image">
                         <div>
-                            <h2 class="titleWObg font-size-l">
-                                {{rightContent.categoryName}}
-                            </h2>
+                            <h2 class="titleWObg font-size-l" [innerHTML]="rightContent.categoryName"></h2>
                         </div>
                     </div>
 
@@ -188,9 +175,7 @@
                           <div>
                             <div style="width:100%; margin-right:10px; height:auto;" class="pointer" (click)="clickContentFromMenu(article.categoryCode, rightContent2.contentCode, 'archive')">
                                 <a class="intro-box warna_border_color" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
-                                    <h4 class="font-size-m warna_font">
-                                        {{rightContent2.contentTitle}}
-                                    </h4>
+                                    <h4 class="font-size-m warna_font" [innerHTML]="rightContent2.contentTitle"></h4>
                                     <span class="warna_font article-size font-size-s" [innerHTML]="rightContent2.contentDescription"></span>
                                     <div class="font-size-s" style="text-align: right;"><i class="fa fa-caret-right"></i> {{'home.readmore' | translate }}</div>
                                 </a>
@@ -210,18 +195,14 @@
                                 <img [src]="config.externalMediaURL + '/images/'+ article.image.mediaFile" style="width:100%;">
                                 <div style="position:absolute; width:auto;">
                                     <h2 class="topic_bg_title font-size-l">
-                                        <span style="padding-left:10px;">
-                                            {{article.content.contentTitle}}
-                                        </span>
+                                        <span style="padding-left:10px;" [innerHTML]="article.content?.contentTitle"></span>
                                     </h2>
                                 </div>
                             </div>
                         </div>
 
                         <div *ngIf="!article.image">
-                          <h2 class="titleWObg font-size-l">
-                              {{article.content.contentTitle}}
-                          </h2>
+                          <h2 class="titleWObg font-size-l" [innerHTML]="article.content?.contentTitle"></h2>
                         </div>
 
                         <div class="padding-top-xl">

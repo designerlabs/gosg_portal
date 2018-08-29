@@ -2,7 +2,7 @@
     <div class="container" *ngFor="let article of articleService.articles">
         <div class="row">
             <div class="col-md-12">
-                <h1 style="margin-top: 10px;" class="font-size-l">{{article.categoryName}}</h1>
+                <h1 style="margin-top: 10px;" class="font-size-l" [innerHTML]="article.categoryName"></h1>
                 <hr class="hr-custom2">
                 <ul class="list-inline" style="clear:both;">
                     <li>
@@ -14,7 +14,7 @@
                     <li>
                         <div *ngFor="let article of articleService.articles">
                             <div *ngFor="let breadCrum of article.breadcrum; let i = index; let lastItem = last" style="display: inline;">
-                                <a href="" [routerLink]="['/'+getModule(breadCrum.breadcrumUrl), getID(breadCrum.breadcrumUrl)]">{{breadCrum.breadcrumName}}</a>
+                                <a href="" [routerLink]="['/'+getModule(breadCrum.breadcrumUrl), getID(breadCrum.breadcrumUrl)]" [innerHTML]="breadCrum.breadcrumName"></a>
                                 <span>{{lastItem ? '' : '&nbsp;/&nbsp;'}}</span>
                             </div>
                         </div>
@@ -41,14 +41,10 @@
         <div class="col-sm-3">
             <div class="row">
                 <div class="col-md-12 sideBarMenu">
-                    <h4 class="sideBarMenu--title padding-bottom-l font-size-m warna_font">
-                        {{article.categoryName}}
-                    </h4>
+                    <h4 class="sideBarMenu--title padding-bottom-l font-size-m warna_font" [innerHTML]="article.categoryName"></h4>
                     <mat-accordion>
                       <gosg-leftmenu [sessions]="article.menuLeft"  [menuType]="moduleName" [templateName]="article.template"></gosg-leftmenu>
                     </mat-accordion>
-
-
                 </div>
             </div>
         </div>
@@ -65,9 +61,7 @@
                                 <img [src]="config.externalMediaURL + '/images/'+ article.image.mediaFile" style="width:100%;">
                                 <div style="position:absolute; width:auto;">
                                     <h2 class="hidden-xs hidden-sm topic_bg_title font-size-l">
-                                        <span style="padding-left:10px;">
-                                            {{article.categoryName}}
-                                        </span>
+                                        <span style="padding-left:10px;" [innerHTML]="article.categoryName"></span>
                                     </h2>
                                 </div>
                             </div>
@@ -75,9 +69,7 @@
 
                         <div *ngIf="!article.image">
                             <div>
-                                <h2 class="titleWObg font-size-l">
-                                    {{article.categoryName}}
-                                </h2>
+                                <h2 class="titleWObg font-size-l" [innerHTML]="article.categoryName"></h2>
                             </div>
                         </div>
 
@@ -91,9 +83,7 @@
 
 
                                     <a class="intro-box warna_border_color" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
-                                        <h4 class="font-size-m warna_font">
-                                            {{rightContent.categoryName}}
-                                        </h4>
+                                        <h4 class="font-size-m warna_font" [innerHTML]="rightContent.categoryName"></h4>
                                         <span class="warna_font article-size font-size-s" [innerHTML]="rightContent.categoryDescription"></span>
                                         <div class="font-size-s" style="text-align: right;">
                                             <i class="fa fa-caret-right"></i> {{'home.readmore' | translate }}</div>
@@ -122,14 +112,11 @@
                                                         <img [src]="config.externalMediaURL +'/images/'+ tabContent.agency.agencyImage?.mediaFile" width="60" height="60">
                                                     </div>
                                                     <h5 class="font-size-m warna_font" (click)="clickContentFromMenu(article.categoryCode, tabContent.contentCode, '', $event)">
-                                                        <a [style.color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" style="cursor: pointer; font-weight: 600;">
-                                                            {{tabContent.contentTitle}}
-                                                        </a>
-
+                                                        <a [style.color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" style="cursor: pointer; font-weight: 600;" [innerHTML]="tabContent.contentTitle"></a>
                                                     </h5>
-                                                    <h3 class="font-size-s warna_font" style="padding-top: 0px; margin: 0px;">{{tabContent.agency.agencyDescription}}</h3>
+                                                    <h3 class="font-size-s warna_font" style="padding-top: 0px; margin: 0px;" [innerHTML]="tabContent.agency.agencyDescription"></h3>
                                                     <div style="padding:10px 0 10px 0px;">
-                                                        <span style="padding:5px; color:#fff;" [style.background]="tabContent.status === 'Tutup' || tabContent.status === 'Close' ? '#df2222' : '#29c615'">{{tabContent.status}}</span>
+                                                        <span style="padding:5px; color:#fff;" [style.background]="tabContent.status === 'Tutup' || tabContent.status === 'Close' ? '#df2222' : '#29c615'" [innerHTML]="tabContent.status"></span>
                                                     </div>
                                                     <div>
                                                         <div>
@@ -158,9 +145,7 @@
 
                                             <div *ngIf="!tabContent.agency" style="width:100%; margin-right:10px; height:auto;" class="pointer" (click)="clickContentFromMenu(article.categoryCode, tabContent.contentCode, '', $event)">
                                                 <a class="intro-box warna_border_color" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
-                                                    <h4 class="font-size-m warna_font">
-                                                        {{tabContent.contentTitle}}
-                                                    </h4>
+                                                    <h4 class="font-size-m warna_font" [innerHTML]="tabContent.contentTitle"></h4>
                                                     <span class="warna_font article-size font-size-s" [innerHTML]="tabContent.contentDescription"></span>
                                                     <div class="font-size-s" style="text-align: right;">
                                                         <i class="fa fa-caret-right"></i> {{'home.readmore' | translate }}</div>

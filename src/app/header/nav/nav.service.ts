@@ -544,7 +544,7 @@ export class NavService {
 
 
    triggerArticleOthers(moduleName, lang, topicID, url) {
-    // this.loader = true;
+    this.loader = true;
     if (!isNaN(topicID)) {
       this.archives = [''];
       this.articleService.archives = [''];
@@ -552,7 +552,6 @@ export class NavService {
         .switchMap((params: ParamMap) =>
           this.getArticleDataOther(moduleName, lang, topicID, url))
         .subscribe(resSliderData => {
-          console.log(resSliderData)
           this.articleService.archives = resSliderData;
           this.archives = resSliderData;
           this.breadcrumb = this.breadcrumbService.getBreadcrumb();
