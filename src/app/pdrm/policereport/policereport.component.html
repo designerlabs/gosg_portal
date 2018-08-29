@@ -95,31 +95,43 @@
 
     <div *ngIf="showDetails == true">
         <div class="row container">
-            <div class="col-md-12" style="color: black; font-weight: bold;">
+            <div class="col-md-12 boldInfo">
                 STATUS REPOT POLIS<br>
                 <hr class="lineHr" style="border-top: #9c9c9d 2px solid;">
             </div>
         </div>
 
-        <div class="row container">
-            <div class="col-md-3" style="color: black">
-                NO. REPOT POLIS<br>
-                TARIKH DAN MASA REPOT POLIS<br>
+        <div class="row container blackFont">
+            <div class="col-md-3">
+                NO. REPOT POLIS
+            </div>
+
+            <div class="col-md-9 boldInfo">
+                {{noRptPol}}
+            </div>
+
+            <div class="col-md-3">
+                TARIKH DAN MASA REPOT POLIS
+            </div>
+
+            <div class="col-md-9 boldInfo">
+                {{dateRptPol}}
+            </div>
+
+            <div class="col-md-3">
                 STATUS SIASATAN REPOT
             </div>
 
-            <div class="col-md-9" style="color: black; font-weight: bold;">
-                {{noRptPol}}<br>
-                {{dateRptPol}}<br>
+            <div class="col-md-9 boldInfo">
                 {{statusRpt}}
             </div>
         </div>
 
-        <div class="row container">
-            <div class="col-md-12" style="color: black"> 
+        <div class="row container blackFont">
+            <div class="col-md-12"> 
                 <hr class="lineHr" style="border-top: #9c9c9d 2px solid;">
             </div>
-            <div class="col-md-3" style="color: black">            
+            <div class="col-md-3">            
                 NO. KERTAS SIASATAN<br>
                 SEKSYEN SIASATAN<br>
                 STATUS SIASATAN<br>
@@ -127,7 +139,7 @@
                 SURAT PEMBERITAHUAN
             </div>
 
-            <div class="col-md-9" style="color: black; font-weight: bold;">
+            <div class="col-md-9 boldInfo">
                 {{noKertasSiasat}}<br>
                 {{seksyenSiasat}}<br>
                 {{statusSiasat}}<br>
@@ -138,7 +150,7 @@
                     </div>
                 </span>
             </div>
-            <div class="col-md-12" style="color: black"> 
+            <div class="col-md-12"> 
                 <hr class="lineHr" style="border-top: #9c9c9d 2px solid;">
             </div>
         </div>

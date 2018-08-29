@@ -21,3 +21,12 @@
 .padding20{
     padding: 20px;
 }
+
+.blackFont{
+    color: black;
+}
+
+.boldInfo{
+    color: black; 
+    font-weight: bold;
+}
