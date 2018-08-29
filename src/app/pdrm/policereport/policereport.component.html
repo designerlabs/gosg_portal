@@ -95,50 +95,83 @@
 
     <div *ngIf="showDetails == true">
         <div class="row container">
-            <div class="col-md-12" style="color: black; font-weight: bold;">
+            <div class="col-md-12 boldInfo">
                 STATUS REPOT POLIS<br>
                 <hr class="lineHr" style="border-top: #9c9c9d 2px solid;">
             </div>
         </div>
 
-        <div class="row container">
-            <div class="col-md-3" style="color: black">
-                NO. REPOT POLIS<br>
-                TARIKH DAN MASA REPOT POLIS<br>
+        <div class="row container blackFont">
+            <div class="col-md-3">
+                NO. REPOT POLIS
+            </div>
+
+            <div class="col-md-9 boldInfo">
+                {{noRptPol}}
+            </div>
+
+            <div class="col-md-3">
+                TARIKH DAN MASA REPOT POLIS
+            </div>
+
+            <div class="col-md-9 boldInfo">
+                {{dateRptPol}}
+            </div>
+
+            <div class="col-md-3">
                 STATUS SIASATAN REPOT
             </div>
 
-            <div class="col-md-9" style="color: black; font-weight: bold;">
-                {{noRptPol}}<br>
-                {{dateRptPol}}<br>
+            <div class="col-md-9 boldInfo">
                 {{statusRpt}}
             </div>
         </div>
 
-        <div class="row container">
-            <div class="col-md-12" style="color: black"> 
+        <div class="row container blackFont" style="overflow-x: auto;">
+            <div class="col-md-12"> 
                 <hr class="lineHr" style="border-top: #9c9c9d 2px solid;">
             </div>
-            <div class="col-md-3" style="color: black">            
-                NO. KERTAS SIASATAN<br>
-                SEKSYEN SIASATAN<br>
-                STATUS SIASATAN<br>
-                PEGAWAI PENYIASAT<br>
-                SURAT PEMBERITAHUAN
+
+            <div class="col-md-3">            
+                NO. KERTAS SIASATAN
+            </div>
+            <div class="col-md-9 boldInfo">
+                {{noKertasSiasat}}
             </div>
 
-            <div class="col-md-9" style="color: black; font-weight: bold;">
-                {{noKertasSiasat}}<br>
-                {{seksyenSiasat}}<br>
-                {{statusSiasat}}<br>
-                {{pegawaiSiasat}}<br>
+            <div class="col-md-3">      
+                SEKSYEN SIASATAN
+            </div>
+            <div class="col-md-9 boldInfo">
+                {{seksyenSiasat}}
+            </div>
+
+            <div class="col-md-3">     
+                STATUS SIASATAN
+            </div>
+            <div class="col-md-9 boldInfo">
+                {{statusSiasat}}
+            </div>
+
+            <div class="col-md-3">    
+                PEGAWAI PENYIASAT
+            </div>
+            <div class="col-md-9 boldInfo">
+                {{pegawaiSiasat}}
+            </div>
+
+            <div class="col-md-3">       
+                SURAT PEMBERITAHUAN
+            </div>
+            <div class="col-md-9 boldInfo">
                 <span *ngFor="let item of letter">
                     <div (click)="openLink(item)">
                         <i class="fa fa-folder-o"></i>&nbsp;{{item}}<br>
                     </div>
                 </span>
             </div>
-            <div class="col-md-12" style="color: black"> 
+            
+            <div class="col-md-12"> 
                 <hr class="lineHr" style="border-top: #9c9c9d 2px solid;">
             </div>
         </div>
@@ -146,7 +179,7 @@
 
     <div *ngIf="showDetails == false">
         <div class="row container">
-            <div class="col-md-12" style="color: black; font-weight: bold; text-align: center;">
+            <div class="col-md-12 boldCenterInfo">
                 ANDA TIADA REPOT POLIS.<br>
             </div>
         </div>

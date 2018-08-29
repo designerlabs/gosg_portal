@@ -39,8 +39,6 @@ export class SummontrafficComponent implements OnInit {
   dataSummons: any;
   loading = false;
 
-  public kp: any;
-  public name: any;
   public summon: any;
   public ammount: any;
   public showDetails = false;
@@ -473,8 +471,10 @@ export class SummontrafficComponent implements OnInit {
   }
 
   getSelection(e) { //when change selection
+    
     this.varSelect = e.value;
     this.showDetails = false;
+    this.checkReqValues();
   }
 
   getUserData() {
@@ -523,7 +523,6 @@ export class SummontrafficComponent implements OnInit {
         }
       }
 
-
       this.searchForm.get('ic').setValue(data.user.identificationNo);
 
     }
@@ -534,11 +533,11 @@ export class SummontrafficComponent implements OnInit {
     let reqVal = [];
     let nullPointers: any = [];
 
-    if (this.varSelect == 1) {
+    if (this.varSelect == 0) {
       reqVal = ["ic"];
     }
 
-    if (this.varSelect == 2) {
+    if (this.varSelect == 1) {
       reqVal = ["noCar"];
     }
 
