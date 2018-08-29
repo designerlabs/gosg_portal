@@ -30,3 +30,9 @@
     color: black; 
     font-weight: bold;
 }
+
+.boldCenterInfo{
+    color: black; 
+    font-weight: bold; 
+    text-align: center;
+}
