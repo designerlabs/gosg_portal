@@ -25,14 +25,7 @@ text-decoration: none;
 cursor: pointer;
 }
 
-    .scrollmenu div {
-display: inline-block;
-color: #000;
-text-align: center;
-padding: 14px 14px 5px;
-text-decoration: none;
-cursor: pointer;
-}
+
 
 /* width */
 .scrollmenu::-webkit-scrollbar {
