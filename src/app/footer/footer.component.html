@@ -44,7 +44,7 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
         <div *ngFor="let eachitm of dataAccessPage" class="text-justify" style="padding-left: 10px;">
-          <p *ngIf="eachitm.enabled" class="font-size-s"><i ngClass="fa fa-{{eachitm.footerContentIcon}}"></i> {{ eachitm.footerContentName }}</p>
+          <p *ngIf="eachitm.enabled" (click)="getUrl(eachitm.footerContentUrl)" class="font-size-s"><i ngClass="fa fa-{{eachitm.footerContentIcon}}"></i> {{ eachitm.footerContentName }}</p>
         </div>
       </mat-expansion-panel>
 

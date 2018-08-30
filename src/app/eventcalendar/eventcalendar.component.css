@@ -204,7 +204,6 @@ right: 0;
 .note {
     color: #666;
     font-weight: bold;
-    margin-right: -15%;
 }
 
 .internal {
@@ -213,4 +212,37 @@ right: 0;
 
 .external {
     text-align: center; background: #0aaaaa; color: #fafafa; width: 150px; height: 20px
+}
+
+
+@media only screen and (min-width: 320px) {
+
+    .event-title {
+        margin-top: -35%
+    }
+
+}
+
+@media only screen and (min-width: 360px) {
+
+    .fc-center {
+        font-size: 24px;
+    }
+
+}
+
+@media only screen and (min-width: 480px) {
+
+    .event-title {
+        margin-top: -20%
+    }
+
+}
+
+@media only screen and (min-width: 540px) {
+
+    .event-title {
+        margin-top: -18%
+    }
+
 }

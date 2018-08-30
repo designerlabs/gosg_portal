@@ -88,7 +88,7 @@ mat-accordion, mat-expansion-panel, mat-expansion-panel-header, mat-panel-title 
     border: 0;
     border-top: 2px solid #00bdbb;
     width: 15%;
-    left: 11%;
+    left: 12.5%;
     position: absolute; }
 
   .info-box {
@@ -128,7 +128,7 @@ mat-accordion, mat-expansion-panel, mat-expansion-panel-header, mat-panel-title 
     border: 0;
     border-top: 2px solid #00bdbb;
     width: 15%;
-    left: 9.5%;
+    left: 11%;
     position: absolute; }
 
     .info-box {
@@ -168,7 +168,7 @@ mat-accordion, mat-expansion-panel, mat-expansion-panel-header, mat-panel-title 
     border: 0;
     border-top: 2px solid #00bdbb;
     width: 15%;
-    left: 7%;
+    left: 8.5%;
     position: absolute; }
 
   .info-box {
