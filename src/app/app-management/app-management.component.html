@@ -153,7 +153,7 @@
       </table>
     </div>
 
-    <div style="float:right; margin-top: 10px;">
+    <div class="text-right" style="margin-top: 10px;">
       <mat-form-field style="width:50px;">
         <mat-select class="font-size-s" value="10" (change)="pageChange($event)">
           <mat-option value="5">5</mat-option>
@@ -172,9 +172,7 @@
       <button mat-mini-fab color="basic" [disabled]="noNextData" (click)="paginatorR(dataAppPage?.pageNumber, dataAppPage?.totalPages)">
         <i class="fa fa-angle-right" aria-hidden="true"></i></button>
     </div>
-    <br />
   </div>
-  <br />
 </div>
 
 <app-confirm-dialog #resetModal [title]="'common.icon.warn'" [content]="'common.msg.reset'" [state]="'common.state.warn'"
