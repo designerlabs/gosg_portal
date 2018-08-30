@@ -14,12 +14,47 @@
 .pmd-z-depth {
     box-shadow: 0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.24);
 }
+
+.listParent-w-scroll {
+    background: #f8f8f8;
+    position:absolute; left: 4%; top:70%; z-index: 2; overflow-y: scroll; height: 250px;
+    border-top: 0px;
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+    border-bottom: 1px solid #000;
+}
+
+.listParent {
+    position:absolute; left: 2.5%; top:70%; z-index: 2;
+}
+
+.pmd-card-list {
+    margin-bottom: 0;
+    background-color: #fff;
+    margin-top: 0;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+    width: 450px;
+}
+
+.pmd-z-depth {
+    box-shadow: 0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.24);
+}
 .list-group{
     padding-left: 0;
 }
 .pmd-list .list-group-item {
     padding: 0px;
     margin: 0px;
+}
+
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+    background-color: transparent;
+    border: 1px solid transparent;
 }
 
 .list-link{

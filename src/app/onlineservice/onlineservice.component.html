@@ -87,8 +87,8 @@
 
         <div *ngIf="showNoData" class="row text-align-Center padding-20"> {{ 'common.msg.nodata' | translate }} </div>
       </div>
-      <div class="float-right paddingTop-15">
-        <mat-form-field class="table_footer_pagecount" style="display: inline-block; position: relative; text-align: left;">
+      <div class="paddingTop-15 text-right">
+        <mat-form-field class="table_footer_pagecount text-center" style="display: inline-block; position: relative;; width: 50px; bottom: 8px;">
           <mat-select class="font-size-s text-align-Center" [(ngModel)]="sharedService.defaultPageSize" (change)="pageChange($event, dataPage?.totalPages)">
             <mat-option *ngFor="let pgcount of sharedService.pageSize" [value]="pgcount.size">{{pgcount.size}}</mat-option>
           </mat-select>
@@ -137,8 +137,8 @@
 
         <div *ngIf="showNoData" class="row text-align-Center padding-20"> {{ 'common.msg.nodata' | translate }} </div>
       </div>
-      <div class="float-right paddingTop-15">
-        <mat-form-field class="table_footer_pagecount" style="display: inline-block; position: relative; text-align: left;">
+      <div class="paddingTop-15 text-right">
+        <mat-form-field class="table_footer_pagecount text-center" style="display: inline-block; position: relative; width: 50px; bottom: 8px;">
           <mat-select class="font-size-s text-align-Center" [(ngModel)]="sharedService.defaultPageSize" (change)="pageChange($event, dataAgencyPage?.totalPages)">
             <mat-option *ngFor="let pgcount of sharedService.pageSize" [value]="pgcount.size">{{pgcount.size}}</mat-option>
           </mat-select>
