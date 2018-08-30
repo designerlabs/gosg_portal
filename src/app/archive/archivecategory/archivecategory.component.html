@@ -41,7 +41,7 @@
       </div>
     </div>
 
-    <div class="col-sm-6">
+    <div class="col-sm-9">
 
       <div class="row">
         <div class="col-md-12 warna_font">
@@ -73,7 +73,7 @@
               <span class="font-size-s defaultColor" [innerHTML]="article.categoryDescription"></span>
             </div>
             <div *ngFor="let rightContent of article.subCategoryList; let index=index; let odd=odd; let even=even;">
-              <div class="col-sm-6">
+              <div class="col-sm-4">
                 <div>
                   <div style="width:100%; margin-right:10px; height:auto;" (click)="clickSideMenuOthers(rightContent, '', 'archive')" class="pointer">
                     <a class="intro-box warna_border_color" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
@@ -88,7 +88,7 @@
                 </div>
               </div>
 
-              <div *ngIf="odd" class="clearfix"></div>
+              <div *ngIf="(index + 1) % 3 == 0" class="clearfix"></div>
             </div>
 
           </div>

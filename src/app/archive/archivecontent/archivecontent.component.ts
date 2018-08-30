@@ -115,8 +115,8 @@ export class ArchivecontentComponent implements OnInit, OnDestroy {
   clickSideMenu(e, status, url){
     this.navService.loader = true;
     this.statusID = status;
-    this.navService.getSubArticleUrlOthers( e.categoryId, localStorage.getItem('langID'), 'archive');
-    this.navService.triggerSubArticleOther(e.categoryCode, localStorage.getItem('langID'), 'archive');
+    // this.navService.getSubArticleUrlOthers( e.categoryId, localStorage.getItem('langID'), 'archive');
+    // this.navService.triggerSubArticleOther(e.categoryCode, localStorage.getItem('langID'), 'archive');
     this.router.navigate( ['/archive/subcategory', e.categoryCode]);
     event.preventDefault();
   }
@@ -125,8 +125,8 @@ export class ArchivecontentComponent implements OnInit, OnDestroy {
   clickSideMenuSubCategory(e, status, url){
     this.navService.loader = true;
     this.statusID = status;
-    this.navService.getSubArticleUrlOthers(e, localStorage.getItem('langID'), url);
-    this.navService.triggerSubArticleOther(e, localStorage.getItem('langID'), url);
+    // this.navService.getSubArticleUrlOthers(e, localStorage.getItem('langID'), url);
+    // this.navService.triggerSubArticleOther(e, localStorage.getItem('langID'), url);
     this.router.navigate(['/archive/subcategory', e]);
     event.preventDefault();
   }
@@ -135,8 +135,8 @@ export class ArchivecontentComponent implements OnInit, OnDestroy {
   clickContentFromMenu(pId, aId, status, url){
     this.navService.loader = true;
     this.statusID = status;
-    this.navService.triggerContentOther(aId, localStorage.getItem('langID'), url);
-    this.navService.getContentUrlOther( aId, localStorage.getItem('langID'), url);
+    // this.navService.triggerContentOther(aId, localStorage.getItem('langID'), url);
+    // this.navService.getContentUrlOther( aId, localStorage.getItem('langID'), url);
     this.router.navigate( ['/archive/content', aId]);
     event.preventDefault();
   }
@@ -157,8 +157,8 @@ export class ArchivecontentComponent implements OnInit, OnDestroy {
       this.router.navigate(['/archive/category', this.getID(id2)]);
     }else if(this.getModule(id1) === 'subcategory'){
       this.router.navigate(['/archive/subcategory', this.getID(id2)]);
-      this.navService.getSubArticleUrlOthers(this.getID(id2), localStorage.getItem('langID'), 'archive');
-      this.navService.triggerSubArticleOther(this.getID(id2), localStorage.getItem('langID'), 'archive');
+      // this.navService.getSubArticleUrlOthers(this.getID(id2), localStorage.getItem('langID'), 'archive');
+      // this.navService.triggerSubArticleOther(this.getID(id2), localStorage.getItem('langID'), 'archive');
     }
     $event.preventDefault();
   }

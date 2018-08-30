@@ -28,6 +28,12 @@ em{
   background-color: #d9534f;
 }
 
+.leftMenuPanel::after{
+  content: " - Remember this" !important;
+}
+
+
+
 .lifeevent_tab > .mat-tab-group > .mat-tab-header{
   margin: 0 auto !important;
 }

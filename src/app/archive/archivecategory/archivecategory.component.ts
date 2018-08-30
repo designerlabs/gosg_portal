@@ -97,8 +97,8 @@ export class ArchivecategoryComponent implements OnInit, OnDestroy {
     clickSideMenu(e, status, url){
       this.navService.loader = true;
       this.statusID = status;
-      this.navService.getSubArticleUrlOthers(e.categoryCode, localStorage.getItem('langID'), url);
-      this.navService.triggerSubArticleOther(e.categoryCode, localStorage.getItem('langID'), url);
+      // this.navService.getSubArticleUrlOthers(e.categoryCode, localStorage.getItem('langID'), url);
+      // this.navService.triggerSubArticleOther(e.categoryCode, localStorage.getItem('langID'), url);
       this.router.navigate(['/archive/subcategory', e.categoryCode]);
       event.preventDefault();
     }
@@ -106,8 +106,8 @@ export class ArchivecategoryComponent implements OnInit, OnDestroy {
     clickSideMenuOthers(e, status, url){
       this.navService.loader = true;
       this.statusID = status;
-      this.navService.getSubArticleUrlOthers(e.categoryCode, localStorage.getItem('langID'), url);
-      this.navService.triggerSubArticleOther(e.categoryCode, localStorage.getItem('langID'), url);
+      // this.navService.getSubArticleUrlOthers(e.categoryCode, localStorage.getItem('langID'), url);
+      // this.navService.triggerSubArticleOther(e.categoryCode, localStorage.getItem('langID'), url);
       this.router.navigate(['/archive/subcategory', e.categoryCode]);
       event.preventDefault();
     }
@@ -116,8 +116,8 @@ export class ArchivecategoryComponent implements OnInit, OnDestroy {
     clickSideMenuSubCategory(e, status, url){
       this.navService.loader = true;
       this.statusID = status;
-      this.navService.getSubArticleUrlOthers(e, localStorage.getItem('langID'), url);
-      this.navService.triggerSubArticleOther(e, localStorage.getItem('langID'), url);
+      // this.navService.getSubArticleUrlOthers(e, localStorage.getItem('langID'), url);
+      // this.navService.triggerSubArticleOther(e, localStorage.getItem('langID'), url);
       this.router.navigate(['/archive/subcategory', e]);
       event.preventDefault();
     }
@@ -127,8 +127,8 @@ export class ArchivecategoryComponent implements OnInit, OnDestroy {
       this.navService.loader = true;
 
       this.statusID = status;
-      this.navService.triggerContentOther(aId, localStorage.getItem('langID'), status);
-      this.navService.getContentUrlOther(aId, localStorage.getItem('langID'), status);
+      // this.navService.triggerContentOther(aId, localStorage.getItem('langID'), status);
+      // this.navService.getContentUrlOther(aId, localStorage.getItem('langID'), status);
       this.router.navigate(['/archive/content', aId]);
       event.preventDefault();
     }
