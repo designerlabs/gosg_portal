@@ -32,6 +32,10 @@ em{
   content: " - Remember this" !important;
 }
 
+.mat-tab-label {
+  height: 80px !important;
+}
+
 
 
 .lifeevent_tab > .mat-tab-group > .mat-tab-header{

@@ -267,8 +267,8 @@
                             <mat-tab *ngFor="let rightContent of article.contentList; let index=index; let odd=odd; let even=even;">
                               <ng-template mat-tab-label>
                                 <div>
-                                  <span style="display:block; margin: 0 auto; width:20px; height: 20px; border-radius: 20px; font-weight:bold; border: 1px solid #de476e;" [style.background-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">{{index + 1  }}</span>
-                                  <span>{{rightContent.contentTitle}}</span>
+                                  <span style="display:inline-block; margin: 0 auto; width:20px; height: 20px; border-radius: 20px; font-weight:bold; border: 1px solid rgb(28, 74, 73)" [style.background-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">{{index + 1  }}</span>
+                                  <span [innerHTML]="rightContent.contentTitle"></span>
                                 </div>
                               </ng-template>
                               <div style="color: #000; padding-top: 15px;" class="warna_font article-size font-size-s" [innerHTML]="rightContent.contentText"></div>>

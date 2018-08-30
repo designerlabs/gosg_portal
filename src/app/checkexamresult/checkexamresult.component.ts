@@ -41,8 +41,8 @@ export class CheckexamresultComponent implements OnInit, OnDestroy {
   examyear: FormControl;
   examname: FormControl;
   examtype: FormControl;
-  
-  public complete: boolean; 
+
+  public complete: boolean;
   public getUrl: any;
   public listUser: any[] = [];
   public listYear: any[] = [];
@@ -91,7 +91,7 @@ export class CheckexamresultComponent implements OnInit, OnDestroy {
               });
           }
           if(this.topnavservice.flagLang){
-          }        
+          }
       });
     }
 
@@ -107,7 +107,7 @@ export class CheckexamresultComponent implements OnInit, OnDestroy {
       this.langID = 1;
     }
 
-   
+
     this.name = new FormControl();
     this.examname = new FormControl();
     this.examyear = new FormControl();
@@ -145,10 +145,10 @@ export class CheckexamresultComponent implements OnInit, OnDestroy {
               "name" : data.user.fullName
             }
             this.listUser.push(a);
-            
+
             if(this.listUser.length == 1){
               //this.searchForm.get('name').setValue(data.user.fullName);
-              this.searchForm.get('name').setValue(data.user.identificationNo);      
+              this.searchForm.get('name').setValue(data.user.identificationNo);
               this.getListYear();
             }
 
@@ -162,7 +162,7 @@ export class CheckexamresultComponent implements OnInit, OnDestroy {
       },
       error => {
         this.loading = false;
-        location.href = this.config.urlUAP +'uapsso/Logout';
+        location.href = this.config.urlUAP +'uapsso/Logout?return='+this.config.urlUAP+'portal/index';
         //location.href = this.config.urlUAP+'portal/index';
       });
     }
@@ -194,8 +194,8 @@ export class CheckexamresultComponent implements OnInit, OnDestroy {
 
       if(this.listUser.length == 1){
         //this.searchForm.get('name').setValue(data.user.fullName);
-        this.searchForm.get('name').setValue(data.user.identificationNo);    
-        this.getListYear();  
+        this.searchForm.get('name').setValue(data.user.identificationNo);
+        this.getListYear();
       }
     }
   }
@@ -240,7 +240,7 @@ export class CheckexamresultComponent implements OnInit, OnDestroy {
           this.listResult = data.resource.subject;
           this.showResult = true;
         }
-        
+
         else{
           this.listResult = [];
         }
@@ -248,8 +248,8 @@ export class CheckexamresultComponent implements OnInit, OnDestroy {
       }).bind(this));
       this.loading = false;
     },
-    error => {      
-      this.loading = false;      
+    error => {
+      this.loading = false;
     });
   }
 
@@ -268,7 +268,7 @@ export class CheckexamresultComponent implements OnInit, OnDestroy {
     else{
       this.openDialog();
     }
-   
+
     // else{
     //   this.listResult = [{"nama":"Bahasa Melayu", "gred": "A1", "desc": "Cemerlang", "markah": 80.00},
     //                      {"nama":"Bahasa Inggeris", "gred": "A1", "desc": "Cemerlang", "markah": 90.00},
@@ -285,14 +285,14 @@ export class CheckexamresultComponent implements OnInit, OnDestroy {
     //   this.showResult = true;
     // }
   }
-  
+
   checkReqValues() {
 
     let reqVal = [];
     let nullPointers:any = [];
-       
+
     reqVal =  ["name","examname","examyear"];
-    
+
     for (var reqData of reqVal) {
       let elem = this.searchForm.get(reqData);
 
@@ -318,8 +318,8 @@ export class CheckexamresultComponent implements OnInit, OnDestroy {
     }
     else{
       errMsg = 'Maklumat tiada di dalam pangkalan data. Sila cuba lagi.';
-    }      
-  
+    }
+
     this.dialog.open(ExamPopupDialog, {
       data: {
         typeErrMsg: errMsg
@@ -336,8 +336,8 @@ export class CheckexamresultComponent implements OnInit, OnDestroy {
     }
     else{
       errMsg = 'Maklumat tiada di dalam pangkalan data. Sila cuba lagi.';
-    }      
-  
+    }
+
     this.dialog.open(ExamResult, {
       data: {
         examInfo: errMsg

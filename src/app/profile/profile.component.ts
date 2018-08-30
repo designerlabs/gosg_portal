@@ -262,8 +262,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.corrsPostcodeNotLocal = new FormControl()
     this.corrsTelephone = new FormControl()
     this.corrscodeTelefon = new FormControl()
-    this.corrsMobile = new FormControl()
-    this.mobilecodeTelefon = new FormControl()
+    this.corrsMobile = new FormControl({ value: '', disabled: true })
+    this.mobilecodeTelefon = new FormControl({ value: '', disabled: true })
 
     this.emailForm = new FormGroup({
       emailaddressUpdate: this.emailaddressUpdate

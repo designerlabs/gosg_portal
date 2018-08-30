@@ -73,7 +73,7 @@ export class SidenavprotectedComponent implements OnInit {
   logout(e)
   {
     e.preventDefault();
-    location.href=this.config.urlUAP+'uapsso/Logout';
+    location.href= this.config.urlUAP +'uapsso/Logout?return='+this.config.urlUAP+'portal/index';
   }
 
   ngAfterViewInit() {
