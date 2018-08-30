@@ -27,148 +27,149 @@
   </div>
   <div class="col-md-9 mat-elevation-z8 padding-bottom-20">
     <div class="moreSearchOptBtn">
-        <!-- (click)="changeShowStatus()" [ngClass]="{ 'editBtn-active': showHide, 'editBtn': !showHide  }" -->
-        <!-- <i class="fa fa-search font-size-l"></i> -->
+      <!-- (click)="changeShowStatus()" [ngClass]="{ 'editBtn-active': showHide, 'editBtn': !showHide  }" -->
+      <!-- <i class="fa fa-search font-size-l"></i> -->
       <!-- <button type="button" mat-fab color="warn" class="ng-tns-c8-5 ng-trigger ng-trigger-indicatorRotate" style="transform: rotate(0deg);">&nbsp;
       </button> -->
     </div>
-    <form [formGroup]="searchForm" (ngSubmit)="searchapp(searchForm.value)" #adSearchForm="ngForm" 
-      id="adSearch-form" role="form" novalidate="novalidate">
+    <form [formGroup]="searchForm" (ngSubmit)="searchapp(searchForm.value)" #adSearchForm="ngForm" id="adSearch-form" role="form"
+      novalidate="novalidate">
       <br />
       <mat-expansion-panel>
-          <mat-expansion-panel-header style="padding-top: 0px; padding-left: 10px;">
+        <mat-expansion-panel-header style="padding-top: 0px; padding-left: 10px;">
+          <div class="col-md-4">
+            <mat-panel-title>
+              <mat-form-field>
+                <input matInput formControlName="appNumber" placeholder="{{'appmngt.setSearch.appNumber' | translate}}" name="appNum" id="appNum">
+              </mat-form-field>
+            </mat-panel-title>
+          </div>
+
+          <div class="col-md-5">
+          </div>
+
+          <div class="col-md-3">
+            <br />
+            <mat-panel-description class="mat-expansion-panel-header-description hidden-xs">
+              {{ 'appmngt.setSearch.moreOpt' | translate }}
+            </mat-panel-description>
+          </div>
+        </mat-expansion-panel-header>
+
+        <div class="col-md-12">
+          <div class="row">
             <div class="col-md-4">
-              <mat-panel-title>
-                <mat-form-field>
-                  <input matInput formControlName="appNumber" placeholder="{{'appmngt.setSearch.appNumber' | translate}}" name="appNum" id="appNum">
-                </mat-form-field>
-              </mat-panel-title>
+              <mat-form-field>
+                <mat-select formControlName="agency" placeholder="{{'appmngt.setSearch.agency' | translate}}" name="agency" id="agency">
+                  <mat-option *ngFor="let data of dataAgency" [value]="data.agencyCode">{{data.agencyName}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
             </div>
-
-            <div class="col-md-5">
-            </div>
-            
-            <div class="col-md-3">
-              <br />
-              <mat-panel-description>
-                {{ 'appmngt.setSearch.moreOpt' | translate }}
-              </mat-panel-description>
-            </div>
-          </mat-expansion-panel-header>
-
-          <div class="col-md-12">
-            <div class="row">
-              <div class="col-md-4">
-                <mat-form-field>
-                  <mat-select formControlName="agency" placeholder="{{'appmngt.setSearch.agency' | translate}}" name="agency" id="agency">
-                    <mat-option *ngFor="let data of dataAgency" [value]="data.agencyCode">{{data.agencyName}}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-              <div class="col-md-4">
-                <mat-form-field>
-                  <mat-select formControlName="appStatus" placeholder="{{'appmngt.setSearch.appStatus' | translate}}" name="appStatus" id="appStatus">
-                    <mat-option *ngFor="let data of dataStatus" [value]="data.statusCode">{{data.statusDescription}}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-md-4">
-                <mat-form-field>
-                  <!-- <div>{{startData | date:'dd/MM/yyyy' }}</div> -->
-                  <input matInput [matDatepicker]="startData" formControlName="startData" placeholder="{{'appmngt.setSearch.startDate' | translate}}"
-                    name="startDate" id="startDate" readonly>
-                  <mat-datepicker-toggle matSuffix [for]="startData" style="color:#333;"></mat-datepicker-toggle>
-                  <mat-datepicker #startData startView="day" [startAt]="startDate"></mat-datepicker>
-                </mat-form-field>
-              </div>
-              <div class="col-md-4">
-                <mat-form-field>
-                  <input matInput [matDatepicker]="endData" formControlName="endData" placeholder="{{'appmngt.setSearch.endDate' | translate}}"
-                    name="endDate" id="endDate" readonly>
-                  <mat-datepicker-toggle matSuffix [for]="endData" style="color:#333;"></mat-datepicker-toggle>
-                  <mat-datepicker #endData startView="day" [startAt]="startDate"></mat-datepicker>
-                </mat-form-field>
-              </div>
-              <div class="col-md-4">
-                
-                <button tabindex="" mat-raised-button color="warn" type="button" id="btnreset" 
-                  class="form-control btn btn-md btn-warning font-size-s pull-right bttnCustom"
-                  (click)="resetModal.show()" style="margin-left: 5px;">
-                  <i class="fa fa-refresh"></i> {{'feedback.label.reset' | translate }}</button>
-                <button mat-raised-button type="button" color="primary" id="searchbtn" 
-                  class="form-control btn btn-md btn-success font-size-s pull-right bttnCustom"
-                  (click)="searchapp(searchForm.value)">
-                  <i class="fa fa-search"></i> {{'appmngt.setSearch.search' | translate}}</button>
-                
-              </div>
+            <div class="col-md-4">
+              <mat-form-field>
+                <mat-select formControlName="appStatus" placeholder="{{'appmngt.setSearch.appStatus' | translate}}" name="appStatus" id="appStatus">
+                  <mat-option *ngFor="let data of dataStatus" [value]="data.statusCode">{{data.statusDescription}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
             </div>
           </div>
-          <br />
+
+          <div class="row">
+            <div class="col-md-4">
+              <mat-form-field>
+                <!-- <div>{{startData | date:'dd/MM/yyyy' }}</div> -->
+                <input matInput [matDatepicker]="startData" formControlName="startData" placeholder="{{'appmngt.setSearch.startDate' | translate}}"
+                  name="startDate" id="startDate" readonly>
+                <mat-datepicker-toggle matSuffix [for]="startData" style="color:#333;"></mat-datepicker-toggle>
+                <mat-datepicker #startData startView="day" [startAt]="startDate"></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field>
+                <input matInput [matDatepicker]="endData" formControlName="endData" placeholder="{{'appmngt.setSearch.endDate' | translate}}"
+                  name="endDate" id="endDate" readonly>
+                <mat-datepicker-toggle matSuffix [for]="endData" style="color:#333;"></mat-datepicker-toggle>
+                <mat-datepicker #endData startView="day" [startAt]="startDate"></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+
+              <button tabindex="" mat-raised-button color="warn" type="button" id="btnreset" class="form-control btn btn-md btn-warning font-size-s pull-right bttnCustom"
+                (click)="resetModal.show()" style="margin-left: 5px;">
+                <i class="fa fa-refresh"></i> {{'feedback.label.reset' | translate }}</button>
+              <button mat-raised-button type="button" color="primary" id="searchbtn" class="form-control btn btn-md btn-success font-size-s pull-right bttnCustom"
+                (click)="searchapp(searchForm.value)">
+                <i class="fa fa-search"></i> {{'appmngt.setSearch.search' | translate}}</button>
+
+            </div>
+          </div>
+        </div>
+        <br />
       </mat-expansion-panel>
 
       <p>&nbsp;</p>
     </form>
-    
-    <table class="mat-table" style="width:100%; z-index: 9999;">
-      <tr class="mat-header-row" style="height:45px">
-        <th width="5%" class="mat-header-cell">{{'appmngt.tableHeader.num' | translate}}</th>
-        <th width="15%" class="mat-header-cell">{{'appmngt.tableHeader.appNo' | translate}}</th>
-        <th class="mat-header-cell">{{'appmngt.tableHeader.appName' | translate}}</th>
-        <th width="10%" class="mat-header-cell">{{'appmngt.setSearch.agency' | translate}}</th>
-        <th width="15%" class="mat-header-cell text-center">{{'appmngt.tableHeader.submit' | translate}}</th>
-        <th width="15%" class="mat-header-cell text-center">{{'appmngt.tableHeader.status' | translate}}</th>
-        <th width="15%" class="mat-header-cell text-center">{{'appmngt.tableHeader.action' | translate}}</th>
-      </tr>
-      <tr class="mat-row" *ngFor="let data of dataApp; let i = index;" role="row">
-        <td class="mat-cell text-center">{{i+1}}</td>
-        <td class="mat-cell">{{data.submissionRefno}}</td>
-        <td class="mat-cell">{{data.submissionName}}</td>
-        <td class="mat-cell">{{data.agencyName}}</td>
-        <td class="mat-cell text-center">{{dateSubmission[i]}}</td>
-        <td class="mat-cell text-center">{{statusDesc[i]}}</td>
-        <td *ngIf="langID == 1" class="mat-cell text-center">
-          
+
+
+    <div class="table-responsive">
+      <table class="mat-table" style="width:100%; z-index: 9999;">
+        <tr class="mat-header-row" style="height:45px">
+          <th width="5%" class="mat-header-cell">{{'appmngt.tableHeader.num' | translate}}</th>
+          <th width="15%" class="mat-header-cell">{{'appmngt.tableHeader.appNo' | translate}}</th>
+          <th class="mat-header-cell">{{'appmngt.tableHeader.appName' | translate}}</th>
+          <th width="10%" class="mat-header-cell">{{'appmngt.setSearch.agency' | translate}}</th>
+          <th width="15%" class="mat-header-cell text-center">{{'appmngt.tableHeader.submit' | translate}}</th>
+          <th width="15%" class="mat-header-cell text-center">{{'appmngt.tableHeader.status' | translate}}</th>
+          <th width="15%" class="mat-header-cell text-center">{{'appmngt.tableHeader.action' | translate}}</th>
+        </tr>
+        <tr class="mat-row" *ngFor="let data of dataApp; let i = index;" role="row">
+          <td class="mat-cell text-center">{{i+1}}</td>
+          <td class="mat-cell">{{data.submissionRefno}}</td>
+          <td class="mat-cell">{{data.submissionName}}</td>
+          <td class="mat-cell">{{data.agencyName}}</td>
+          <td class="mat-cell text-center">{{dateSubmission[i]}}</td>
+          <td class="mat-cell text-center">{{statusDesc[i]}}</td>
+          <td *ngIf="langID == 1" class="mat-cell text-center">
+
             <span *ngIf="data.status != 7">{{data.messageEN}}</span>
             <button *ngIf="data.status == 7" class="btn btn-sm btn-warning" (click)="viewData(data.agencyCode,data.messageEN, data.submissionType, data.agencyRefCode)">
               <i class="fa fa-eye font-size-s"></i>
             </button>
-          
-        </td>
-        <td *ngIf="langID == 2" class="mat-cell text-center">
+
+          </td>
+          <td *ngIf="langID == 2" class="mat-cell text-center">
             <span *ngIf="data.status != 7">{{data.messageBM}}</span>
             <button *ngIf="data.status == 7" class="btn btn-sm btn-warning" (click)="viewData(data.agencyCode,data.messageBM, data.submissionType, data.agencyRefCode)">
               <i class="fa fa-eye font-size-s"></i>
             </button>
-        </td>
-      </tr>
-      <tr *ngIf="showNoData">
-        <td colspan="8" class="showData">
-          <hr><br>{{'common.showNoData' | translate}}</td>
-      </tr>
-    </table>
-
-    <mat-form-field style="width:50px;">
-      <mat-select class="font-size-s" value="10" (change)="pageChange($event)">
-        <mat-option value="5">5</mat-option>
-        <mat-option value="10">10</mat-option>
-        <mat-option value="25">25</mat-option>
-        <mat-option value="50">50</mat-option>
-      </mat-select>
-    </mat-form-field>
+          </td>
+        </tr>
+        <tr *ngIf="showNoData">
+          <td colspan="8" class="showData">
+            <hr><br>{{'common.showNoData' | translate}}</td>
+        </tr>
+      </table>
+    </div>
 
     <div style="float:right; margin-top: 10px;">
-      <span style="color:#000; padding-right:20px;">{{ 'appmngt.tablebottom.page' | translate }} 
-        <strong>{{dataAppPage?.pageNumber}}</strong> {{ 'appmngt.tablebottom.of' | translate }} 
-        <strong>{{dataAppPage?.totalPages}}</strong> {{ 'appmngt.tablebottom.in' | translate }} 
+      <mat-form-field style="width:50px;">
+        <mat-select class="font-size-s" value="10" (change)="pageChange($event)">
+          <mat-option value="5">5</mat-option>
+          <mat-option value="10">10</mat-option>
+          <mat-option value="25">25</mat-option>
+          <mat-option value="50">50</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <span style="color:#000; padding-right:20px;">{{ 'appmngt.tablebottom.page' | translate }}
+        <strong>{{dataAppPage?.pageNumber}}</strong> {{ 'appmngt.tablebottom.of' | translate }}
+        <strong>{{dataAppPage?.totalPages}}</strong> {{ 'appmngt.tablebottom.in' | translate }}
         <strong>{{dataAppPage?.totalElements}}</strong> {{ 'appmngt.tablebottom.app' | translate }}</span>
       <button mat-mini-fab color="basic" [disabled]="noPrevData" (click)="paginatorL(dataAppPage?.pageNumber)">
         <i class="fa fa-angle-left" aria-hidden="true"></i></button>
-      <button mat-mini-fab color="basic" [disabled]="noNextData"  (click)="paginatorR(dataAppPage?.pageNumber, dataAppPage?.totalPages)">
+      <button mat-mini-fab color="basic" [disabled]="noNextData" (click)="paginatorR(dataAppPage?.pageNumber, dataAppPage?.totalPages)">
         <i class="fa fa-angle-right" aria-hidden="true"></i></button>
     </div>
     <br />
