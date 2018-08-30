@@ -1,5 +1,7 @@
 .mat-expansion-panel-header{
   padding: 0 10px !important;
+  height: auto !important;
+  min-height: 48px !important;
 }
 
 .sideBarMenu--title {
