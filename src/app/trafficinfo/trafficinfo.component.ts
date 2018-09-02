@@ -55,6 +55,7 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
   id;
   custom: any;
   rp;
+  isActiveList: boolean = false;
 
   showNoData = false
 
@@ -282,16 +283,19 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
               }
           }).bind(this));
           this.loading = false;
+          this.isActiveList = false;
         }, err => {
           this.gotPrediction = false;
           this.showNoData = true;
           this.loading = false;
           this.toastr.error(JSON.parse(err._body).statusDesc, '');
+          this.isActiveList = false;
 
         });
       } else {
         this.gotPrediction = false;
         this.showNoData = true;
+        this.isActiveList = false;
       }
 
   }
