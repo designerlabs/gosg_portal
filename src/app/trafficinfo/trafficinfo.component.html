@@ -31,10 +31,24 @@
     <div class="col-md-12">
       <div class="col-md-6">
       <mat-form-field class="example-full-width">
-        <mat-select placeholder="{{ 'trafficinfo.filterby.streetname' | translate }} ({{ totalRec }})" [(ngModel)]="streetName">
-          <mat-option *ngFor="let sn of streetNames" [value]="sn.name" [disabled]="sn.disabled" (click)="getTrafficPredictionData(sn.name, sn.latlng)">{{ sn.name }}</mat-option>
-        </mat-select>
+        <input matInput [(ngModel)]="streetName" [ngModelOptions]="{standalone: true}"
+          placeholder="{{ 'trafficinfo.filterby.streetname' | translate }}" (click)="isActiveList = true" autocomplete="off">
+        <button mat-button *ngIf="streetName" matSuffix mat-icon-button (click)="streetName='';">
+          <mat-icon>x</mat-icon>
+        </button>
+        <!-- <mat-select placeholder="{{ 'trafficinfo.filterby.streetname' | translate }} ({{ totalRec }})" [(ngModel)]="streetName">
+          <mat-option *ngFor="let sn of streetNames | search : street;" [value]="sn.name" [disabled]="sn.disabled" (click)="getTrafficPredictionData(sn.name, sn.latlng)">{{ sn.name }}</mat-option>
+        </mat-select> -->
       </mat-form-field>
+      
+      <div *ngIf="isActiveList" [ngClass]="{'listParent':(streetNames.length < 10),'listParent-w-scroll':(streetNames.length >= 10)}"
+          (scroll)="onScroll($event)">
+          <ul class="list-group pmd-z-depth pmd-list pmd-card-list pmd-list">
+              <li class="list-group-item" *ngFor="let data of streetNames | search : streetName;">
+                  <a class="list-link" (click)="getTrafficPredictionData(data.name, data.latlng)">{{data.name}}</a>
+              </li>
+          </ul>
+      </div>
       </div>
     </div>
     </div>
