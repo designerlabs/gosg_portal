@@ -1,5 +1,12 @@
 <gosg-protected-loader [loader]="navService.loader"></gosg-protected-loader>
 <gosg-shared-loader [loader]="navService.loader"></gosg-shared-loader>
+<div class="app-invalid" *ngIf="nonValidUser">
+  <div style="width: 35%; height: 20%; background: #212121;">
+      <h3 style="text-align: center; line-height: 35px">{{'common.invalidUser' | translate }}</h3>
+      <div  style="text-align: center;"><h3><code>{{config.adminEmail}}</code></h3></div>
+      <p style="text-align: center;">{{'common.seconds1' | translate }} {{countDown | async}} {{'common.seconds2' | translate }} </p>
+  </div>
+</div>
 <div *ngIf="!isFirstLogin">
   <div [ngStyle]="{'min-height': clientHeight + 'px', 'margin-bottom': '-200px'}">
 

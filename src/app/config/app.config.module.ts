@@ -108,6 +108,7 @@ export class AppConfig {
     urlSubStatus: string;
     urlDserviceValidation: string;
     urlDserviceTracking: string;
+    adminEmail: string;
 
 }
 
@@ -200,6 +201,7 @@ export const APP_DI_CONFIG: AppConfig = {
     urlSharedDS: commonURL,
     urlDserviceValidation: protectedBaseURL+'dservice/validate?code=',
     urlDserviceTracking: commonURL + 'digitalservicetracking',
+    adminEmail: 'gosg-admin@mampu.gov.my'
 };
 
 @NgModule({

@@ -392,6 +392,9 @@
     "open":"Buka",
     "listofarticle": "Senarai Artikel",
     "close":"Tutup",
+    "invalidUser":"Akun anda",
+    "seconds1":"log keluar dalam",
+    "seconds2": "saat",
     "placeholder": {
       "keyword":"Kata Kunci"
     },
