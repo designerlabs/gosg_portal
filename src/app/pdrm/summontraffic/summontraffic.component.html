@@ -122,22 +122,22 @@
         <div class="row container paddingLR">
             <table class="mat-table tableWidth">
                 <tr class="mat-header-row tableHeader">
-                    <th width="5%" class="mat-header-cell">{{'appmngt.tableHeader.num' | translate}}</th>
-                    <th width="10%" class="mat-header-cell">No. Kenderaan</th>
-                    <th width="20%"class="mat-header-cell">No. Saman</th>
-                    <th width="15%" class="mat-header-cell text-center">Tarikh & Masa Kesalahan</th>
-                    <th width="30%" class="mat-header-cell">Tempat Kesalahan</th>
-                    <th width="10%" class="mat-header-cell text-right">Amaun (RM)</th>
-                    <th width="10%" class="mat-header-cell text-center">Imej</th>
+                    <th width="5%" class="mat-header-cell paddingR">{{'appmngt.tableHeader.num' | translate}}</th>
+                    <th width="10%" class="mat-header-cell paddingR">No. Kenderaan</th>
+                    <th width="20%" class="mat-header-cell paddingR">No. Saman</th>
+                    <th width="15%" class="mat-header-cell paddingR">Tarikh & Masa Kesalahan</th>
+                    <th width="30%" class="mat-header-cell paddingR">Tempat Kesalahan</th>
+                    <th width="10%" class="mat-header-cell text-right paddingR">Amaun (RM)</th>
+                    <th width="10%" class="mat-header-cell text-center paddingR">Imej</th>
                 </tr>
                 <tr class="mat-row table_row table_row_height" *ngFor="let data of dataSummons.summonDetails; let i = index;" role="row">
-                    <td class="mat-cell text-center">{{i+1}}</td>
-                    <td class="mat-cell">{{data.vehicle_registration_number}}</td>
-                    <td class="mat-cell">{{data.summons_id_key}}</td>
-                    <td class="mat-cell text-center">{{data.offence_date}} & {{data.offence_time}}</td>
-                    <td class="mat-cell">{{data.offence_location}}</td>
-                    <td class="mat-cell text-right">{{data.summons_amt}}</td>
-                    <td class="mat-cell text-center">-</td>
+                    <td class="mat-cell text-center paddingR">{{i+1}}</td>
+                    <td class="mat-cell paddingR">{{data.vehicle_registration_number}}</td>
+                    <td class="mat-cell paddingR">{{data.summons_id_key}}</td>
+                    <td class="mat-cell paddingR">{{data.offence_date}} & {{data.offence_time}}</td>
+                    <td class="mat-cell paddingR">{{data.offence_location}}</td>
+                    <td class="mat-cell text-right paddingR">{{data.summons_amt}}</td>
+                    <td class="mat-cell text-center paddingR">-</td>
                 </tr>
                 <tr *ngIf="showNoData">
                     <td colspan="8" class="showData">
