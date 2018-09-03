@@ -125,20 +125,23 @@ export class ProtectedComponent implements OnInit {
             this.getFullname = data.user.fullName;
             localStorage.setItem('fullname',data.user.fullName);
             localStorage.setItem('email',data.user.email);
+            this.nonValidUser = false;
           }else{
             this.loading = false;
             this.nonValidUser = true;
             setTimeout(() => {
               this.logout();
             }, 5000);
-
-
           }
           this.loading = false;
 
         },
         error => {
           this.loading = false;
+          this.nonValidUser = true;
+            setTimeout(() => {
+              this.logout();
+            }, 5000);
 
           //location.href = this.config.urlUAP +'uapsso/Logout';
           //location.href = this.config.urlUAP+'portal/index';

@@ -1,6 +1,6 @@
 <gosg-protected-loader [loader]="navService.loader"></gosg-protected-loader>
 <gosg-shared-loader [loader]="navService.loader"></gosg-shared-loader>
-<div class="app-invalid" *ngIf="!nonValidUser">
+<div class="app-invalid" *ngIf="nonValidUser">
   <div style="width: 35%; height: auto; background: #212121;">
       <h3 style="text-align: center; line-height: 35px">{{'common.invalidUser' | translate }}</h3>
       <div  style="text-align: center;"><h4>{{config.adminEmail}}</h4></div>
