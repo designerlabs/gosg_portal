@@ -45,19 +45,19 @@
                   <div class="row">
                     <div class="form-group col-md-8">
                       <label class="font-size-m" for="fullname">{{'profile.label.name' | translate}}</label>
-                      <div class="staticLabel font-size-m boldText" for="fullname">{{ fullname }}</div>
+                      <div class="staticLabel font-size-m boldText" for="fullname" [innerHTML]="fullname"></div>
                     </div>
                     <div class="form-group col-md-4" *ngIf="!passport">
                       <label *ngIf="userTypeId == 1 || userTypeId == 5 || userTypeId == 3 || userTypeId == 4 || userTypeId == 7 || userTypeId == 8" class="font-size-s" for="icnumber">{{'profile.label.icnumber' | translate}}</label>
                       <label *ngIf="userTypeId == 2 || userTypeId == 6" class="font-size-s" for="icnumber">{{'profile.label.passport' | translate}}</label>
-                      <div class="staticLabel font-size-m boldText" for="icnumber">{{ idno }}</div>
+                      <div class="staticLabel font-size-m boldText" for="icnumber" [innerHTML]="idno"></div>
                     </div>
                   </div>
                   <div class="row">
 
                     <div class="form-group col-md-4">
                       <label class="font-size-m" for="nationality">{{'profile.label.nationality' | translate}}</label>
-                      <div class="staticLabel font-size-m boldText" for="nationality">{{nationality}}</div>
+                      <div class="staticLabel font-size-m boldText" for="nationality" [innerHTML]="nationality"></div>
                     </div>
 
 
@@ -86,20 +86,20 @@
                   <div class="row">
                       <div class="form-group col-md-4" *ngIf="passport">
                         <label class="font-size-m" for="nationality">{{'profile.label.passport' | translate}}</label>
-                        <div class="staticLabel font-size-m boldText" for="nationality">{{passport}}</div>
+                        <div class="staticLabel font-size-m boldText" for="nationality" [innerHTML]="passport"></div>
                       </div>
 
                       <div class="form-group col-md-4">
                         <label class="font-size-m" for="email">{{'profile.label.email' | translate}}</label>
                         <div>
-                          <div class="font-size-m boldText" for="email">{{ regemail }}</div>
+                          <div class="font-size-m boldText" for="email" [innerHTML]="regemail"></div>
                         </div>
                       </div>
 
                       <div class="form-group col-md-4">
                         <label class="font-size-m" for="oku">{{'profile.label.oku' | translate}} <mat-checkbox formControlName="OKUcheckbox" #OKUCheckBox (change)="isOKUStatus($event)"></mat-checkbox></label>
                         <div>
-                          <div class="font-size-m boldText" for="oku">{{ OKUNumber }}</div>
+                          <div class="font-size-m boldText" for="oku" [innerHTML]="OKUNumber"></div>
                         </div>
                       </div>
                   </div>
@@ -107,7 +107,7 @@
                     <div class="form-group col-md-4">
                       <mat-form-field class="example-full-width font-size-s">
                         <mat-select tabindex="1" formControlName="gender" placeholder="{{'profile.label.gender' | translate}}" required>
-                            <mat-option *ngFor="let gender of genderData" [value]="gender?.genderCode">{{ gender?.gender }}</mat-option>
+                            <mat-option *ngFor="let gender of genderData" [value]="gender?.genderCode" [innerHTML]="gender?.gender"></mat-option>
                         </mat-select>
                         <mat-error *ngIf="!validateCtrlChk(gender) && profileForm.controls.gender.errors?.required">
                             {{'profile.err.gender' | translate }}
@@ -117,7 +117,7 @@
                     <div class="form-group col-md-4">
                       <mat-form-field class="example-full-width font-size-s">
                         <mat-select tabindex="2" formControlName="race" placeholder="{{'profile.label.race' | translate}}" required>
-                            <mat-option *ngFor="let race of getRaceData" [value]="race?.raceCode">{{race?.race}}</mat-option>
+                            <mat-option *ngFor="let race of getRaceData" [value]="race?.raceCode" [innerHTML]="race?.race"></mat-option>
                         </mat-select>
                         <mat-error *ngIf="!validateCtrlChk(race) && profileForm.controls.race.errors?.required">
                             {{'profile.err.race' | translate }}
@@ -127,7 +127,7 @@
                     <div class="form-group col-md-4">
                       <mat-form-field class="example-full-width font-size-s">
                         <mat-select formControlName="religion" placeholder="{{'profile.label.religion' | translate}}">
-                            <mat-option *ngFor="let religion of getReligionData" [value]="religion?.religionCode">{{religion?.religion}}</mat-option>
+                            <mat-option *ngFor="let religion of getReligionData" [value]="religion?.religionCode" [innerHTML]="religion?.religion"></mat-option>
                         </mat-select>
                       </mat-form-field>
                     </div>
@@ -162,7 +162,7 @@
                     <div class="form-group col-md-4">
                       <mat-form-field class="example-full-width font-size-s">
                         <mat-select formControlName="perCountry" (change)="isMalaysian($event.value)" placeholder="{{'profile.label.country' | translate}}" required>
-                          <mat-option *ngFor="let country of countries" [value]="country?.countryId">{{country?.countryName}}</mat-option>
+                          <mat-option *ngFor="let country of countries" [value]="country?.countryId" [innerHTML]="country?.countryName"></mat-option>
                         </mat-select>
                         <mat-error *ngIf="!validateCtrlChk(perCountry) && profileForm.controls.perCountry.errors?.required">
                             {{'profile.err.country' | translate }}
@@ -172,7 +172,7 @@
                     <div class="form-group col-md-4">
                       <mat-form-field *ngIf="isLocal" class="example-full-width font-size-s">
                         <mat-select (change)="getCitiesByState($event)" formControlName="perStateLocal" placeholder="{{'profile.label.state' | translate}}" [required]="!!isLocal">
-                          <mat-option *ngFor="let state of getStateData" [value]="state?.stateId">{{ state?.stateName }}</mat-option>
+                          <mat-option *ngFor="let state of getStateData" [value]="state?.stateId" [innerHTML]="state?.stateName"></mat-option>
                         </mat-select>
                         <mat-error *ngIf="!validateCtrlChk(perStateLocal) && profileForm.controls.perStateLocal.errors?.required">
                           {{'profile.err.state' | translate }}
@@ -209,7 +209,7 @@
                       <div class="form-group col-md-4">
                           <mat-form-field *ngIf="isLocal" class="example-full-width font-size-s">
                             <mat-select (change)="isChanged()" #corsPost formControlName="perPostcode" placeholder="{{'profile.label.postcode' | translate}}"  [required]="!!isLocal">
-                                <mat-option *ngFor="let postcode of getPerPostData" [value]="postcode?.postcodeId">{{ postcode?.postCode }}</mat-option>
+                                <mat-option *ngFor="let postcode of getPerPostData" [value]="postcode?.postcodeId" [innerHTML]="postcode?.postCode"></mat-option>
                             </mat-select>
                             <mat-error *ngIf="!validateCtrlChk(perPostcode) && profileForm.controls.perPostcode.errors?.pattern">
                               {{'profile.pattern.postcode' | translate }}
@@ -233,7 +233,7 @@
                         </div>
 
                     <div class="form-group col-md-4 input-group" style="padding-left: 15px; padding-right: 15px;">
-                        <mat-form-field class="font-size-s" style="width:28%">
+                        <mat-form-field class="example-full-width font-size-s" style="width:28%">
                             <mat-select formControlName="percodeTele" #percodetele placeholder="{{'profile.label.codetel' | translate}}">
                               <mat-option *ngFor="let country of countries" [value]="country.countryDialCode">
                                 + {{ country.countryDialCode }} {{ country.countryCode }}
@@ -272,7 +272,7 @@
                     <div class="form-group col-md-4">
                       <mat-form-field class="example-full-width font-size-s">
                         <mat-select (change)="isMalaysianCorrs($event.value)" formControlName="corrsCountry" placeholder="{{'profile.label.country' | translate}}">
-                            <mat-option *ngFor="let country of countries" [value]="country.countryId">{{country.countryName}}</mat-option>
+                            <mat-option *ngFor="let country of countries" [value]="country.countryId" [innerHTML]="country.countryName"></mat-option>
                         </mat-select>
                       </mat-form-field>
                     </div>
