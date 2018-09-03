@@ -32,7 +32,7 @@
       <div class="col-md-6">
       <mat-form-field class="example-full-width">
         <input matInput [(ngModel)]="streetName" [ngModelOptions]="{standalone: true}"
-          placeholder="{{ 'trafficinfo.filterby.streetname' | translate }}" (click)="isActiveList = true" autocomplete="off">
+          placeholder="{{ 'trafficinfo.filterby.streetname' | translate }}" (click)="isActiveList = true" autocomplete="off" style="color: #333">
         <button mat-button *ngIf="streetName" matSuffix mat-icon-button (click)="streetName=''; getTrafficFlowData()">
           <mat-icon>x</mat-icon>
         </button>
@@ -42,7 +42,7 @@
       </mat-form-field>
       
       <div *ngIf="isActiveList" [ngClass]="{'listParent':(streetNames.length < 10),'listParent-w-scroll':(streetNames.length >= 10)}"
-          (scroll)="onScroll($event)" style="height: 300px;">
+          (scroll)="onScroll($event)" style="max-height: 300px; height: auto">
           <ul class="list-group pmd-z-depth pmd-list pmd-card-list pmd-list">
               <li class="list-group-item" *ngFor="let data of streetNames | search : streetName;">
                   <a class="list-link" (click)="getTrafficPredictionData(data.name, data.latlng)">{{data.name}}</a>
