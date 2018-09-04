@@ -6,7 +6,7 @@
       "calendar": "Calendar",
       "digitalsvc": "Digital Services",
       "agencycdir": "Agencies Directory",
-      "trafficinfo":"Traffic Information",
+      "trafficinfo":"TRAFFIC INFORMATION",
       "register": "Register",
       "setting": "Settings",
       "contact": "Contact Us",
@@ -620,7 +620,7 @@
       }
   },
   "trafficinfo": {
-    "title":"Traffic Information",
+    "title":"TRAFFIC INFORMATION",
     "title2":"Lembah Klang Traffic Information",
     "filterby": {
       "all":"All",

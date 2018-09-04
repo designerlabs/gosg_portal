@@ -66,6 +66,9 @@ export class AppComponent implements OnInit{
     }
     ngOnInit() {
 
+        //this.navService.restricted = true;
+        //console.log("app: "+this.navService.restricted);
+
     }
 }
 
