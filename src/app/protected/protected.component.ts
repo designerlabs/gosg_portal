@@ -130,7 +130,7 @@ export class ProtectedComponent implements OnInit {
             this.loading = false;
           }
           this.loading = false;
-
+          debugger;
           if(data.statusCode !== 'SUCCESS'){
             this.loading = false;
             this.nonValidUser = true;
