@@ -131,7 +131,7 @@ export class ProtectedComponent implements OnInit {
           }
           this.loading = false;
 
-          if(data.statusCode !== 'SUCCESS'){
+          if(data.statusCode !== 'SUCCESS' && !this.isFirstLogin){
             this.loading = false;
             this.nonValidUser = true;
               setTimeout(() => {
