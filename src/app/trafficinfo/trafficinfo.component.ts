@@ -16,6 +16,7 @@ import { tileLayer, latLng, circle, polygon, marker, icon, Layer, polyline } fro
 import * as L from 'leaflet';
 import { ISubscription } from 'rxjs/Subscription';
 import { TopnavService } from '../header/topnav/topnav.service';
+import { NavService } from '../header/nav/nav.service';
 
 @Component({
   selector: 'gosg-trafficinfo',
@@ -83,11 +84,13 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
     private dialogsService: DialogsService,
     private translate: TranslateService,
     private topnavservice: TopnavService,
+    private navService: NavService,
     private router: Router,
     private toastr: ToastrService,
     private route: ActivatedRoute,
     @Inject(APP_CONFIG) private config: AppConfig
   ) {
+    this.navService.restricted = false;
     this.loading = true;
     this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
       // this.sharedService.errorHandling(event, (function(){
