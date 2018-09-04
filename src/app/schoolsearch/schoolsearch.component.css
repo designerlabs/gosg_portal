@@ -52,6 +52,17 @@
     background-color: #cfc9c9;
 }
 
+/* .top-nav-style{
+    display: none !important;
+}
+
+.nav-bar-style{
+    display: none !important;
+}
+
+app-topnav{
+    display: none !important; } */
+
 @media screen and (max-width: 320px){
     
 }
@@ -68,6 +79,6 @@
 
 @media screen and (min-width: 480px){
     .mapheight{
-        height: 300px;
+        height: 500px;
     }
 }

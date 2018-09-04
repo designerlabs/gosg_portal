@@ -18,6 +18,7 @@ import * as L from 'leaflet';
 import { SharedService } from '../common/shared.service';
 import { PortalService } from '../services/portal.service';
 import { ToastrService } from 'ngx-toastr';
+import { NavService } from '../header/nav/nav.service';
 
 export interface DialogData {
   familyinfo;
@@ -37,7 +38,6 @@ export class SchoolsearchComponent implements OnInit {
   recordData = null;
   showNoData = false;
   loading = false;
-  isheader:boolean = false;
 
   public valSchoolCat: any;
   public listState: any;
@@ -49,7 +49,6 @@ export class SchoolsearchComponent implements OnInit {
   public setLong: any;
   public showDetails = false;
   public charCarian: any;
-  
 
   searchForm: FormGroup;
   public optSelect: FormControl;
@@ -81,6 +80,7 @@ export class SchoolsearchComponent implements OnInit {
 
     private sharedService: SharedService,
     private portalservice: PortalService,
+    private navService: NavService,
     private translate: TranslateService,
     private router: Router,
     private http: Http,
@@ -89,6 +89,8 @@ export class SchoolsearchComponent implements OnInit {
     public dialog: MatDialog,
     private topnavservice: TopnavService,) {
 
+      
+    this.navService.restricted = false;
     this.lang = translate.currentLang;
     this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
 
@@ -126,6 +128,8 @@ export class SchoolsearchComponent implements OnInit {
       this.langID = 1;
     }
     window.scrollTo(0, 0);
+
+    console.log("school: "+this.navService.restricted);
 
     this.optSelect = new FormControl();
     this.state = new FormControl();

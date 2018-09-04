@@ -103,6 +103,10 @@
        transition-duration: 1s;
    }
 
+   .nav-bar-style-common{
+    display: none;
+}
+
    .showProfile{
     position: fixed;
     z-index: 999999;
