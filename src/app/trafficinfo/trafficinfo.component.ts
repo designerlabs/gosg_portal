@@ -144,6 +144,10 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
 
   }
 
+  unfocus() {
+    this.isActiveList = false;
+  }
+
   ngOnDestroy() {
     this.subscriptionLang.unsubscribe();
     if (this.id) {
