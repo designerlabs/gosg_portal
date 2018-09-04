@@ -1286,7 +1286,8 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
     var myReader:FileReader = new FileReader();
   
     myReader.onloadend = (e) => {
-      let base641 = myReader.result;
+      let base641;
+      base641 = myReader.result;
       let splitB64 = base641.split('data:application/pdf;base64,')[1];          
       this.fifthFormGroup.get('dispBase641').setValue(splitB64);
     }
@@ -1300,7 +1301,8 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
     var myReader:FileReader = new FileReader();
   
     myReader.onloadend = (e) => {
-      let base642 = myReader.result;
+      let base642;
+      base642 = myReader.result;
       let splitB64 = base642.split('data:application/pdf;base64,')[1];          
       this.fifthFormGroup.get('dispBase642').setValue(splitB64);
     }
