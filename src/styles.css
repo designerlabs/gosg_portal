@@ -754,6 +754,10 @@ table a:not(.btn), .table a:not(.btn) {
 .paddingTop-15 {
   padding-top: 15px;
 }
+
+.paddingTop-20 {
+  padding-top: 20px;
+}
 .float-right{
   float: right;
 }

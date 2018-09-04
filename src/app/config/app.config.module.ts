@@ -21,7 +21,7 @@ let agencyURL = uapURL+'service-dservice-protected/'
 // backend service
 let baseLocalURL = './app/apidata/';
 let searchServiceURL = searchURL;
-let searchServicePublicURL = 'https://www.malaysia.gov.my/public/';
+let searchServicePublicURL = environment.miclipURL;
 let pollUrl = commonURL + "polls";
 
 export class AppConfig {

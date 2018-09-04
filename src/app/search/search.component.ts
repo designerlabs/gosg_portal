@@ -87,7 +87,6 @@ export class SearchComponent implements OnInit {
     public autoCompleteArr = this.popData;
 
     ngOnInit() {
-        this.getPop();
     }
 
     getPop() {

@@ -2,24 +2,14 @@
 <div class="container-fluid animated slideInDown" style="background: #a7a495;">
   <div class="container">
     <div class="row">
-      <div class="col-md-12"><br>
+      <div class="col-xs-9 col-md-12 col-lg-12"><br>
         <h1 style="margin-top: 10px;" class="font-size-l">{{'trafficinfo.title' | translate}}</h1>
         <!-- <hr class="hr-custom2"> -->
         <ul class="list-inline" style="clear:both;">
-          <li>
-            <!-- <a class="font-size-s" routerLink="/">
-              {{'home.menu.home' | translate }}
-            </a> -->
-          </li>
-          <!-- <li>/</li>
-          <li>
-              {{'trafficinfo.title' | translate}}
-          </li>
-          <li>/</li>
-          <li>
-              {{'trafficinfo.title2' | translate}}
-          </li> -->
         </ul>
+      </div>
+      <div class="col-xs-3 hidden-md hidden-lg paddingTop-20">
+          <button mat-fab color="warn" (click)="close()">X</button>
       </div>
     </div>
   </div>
@@ -32,8 +22,8 @@
       <div class="col-md-6">
       <mat-form-field class="example-full-width">
         <input matInput [(ngModel)]="streetName" [ngModelOptions]="{standalone: true}"
-          placeholder="{{ 'trafficinfo.filterby.streetname' | translate }}" (click)="isActiveList = true" autocomplete="off" style="color: #333">
-        <button mat-button *ngIf="streetName" matSuffix mat-icon-button (click)="streetName=''; getTrafficFlowData()">
+          placeholder="{{ 'trafficinfo.filterby.streetname' | translate }}" (focusout)="unfocus($event)" (click)="isActiveList = true" autocomplete="off" style="color: #333">
+        <button mat-button *ngIf="streetName" matSuffix mat-icon-button (click)="streetName=''; getTrafficFlowData();isActiveList = true">
           <mat-icon>x</mat-icon>
         </button>
         <!-- <mat-select placeholder="{{ 'trafficinfo.filterby.streetname' | translate }} ({{ totalRec }})" [(ngModel)]="streetName">
