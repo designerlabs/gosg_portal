@@ -140,6 +140,7 @@ export class ProtectedComponent implements OnInit {
           }
         },
         error => {
+          debugger;
           this.loading = false;
           this.nonValidUser = true;
             setTimeout(() => {
