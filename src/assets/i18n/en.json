@@ -392,6 +392,9 @@
     "open":"Open",
     "listofarticle": "List of Articles",
     "close":"Close",
+    "invalidUser":"Your account doesn't exist in the portal. For more details please contact portal administrator",
+    "seconds1":"logout in",
+    "seconds2": "seconds",
     "placeholder": {
       "keyword":"Keyword"
     },

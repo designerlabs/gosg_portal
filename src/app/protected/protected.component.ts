@@ -9,13 +9,18 @@ import { PortalService } from '../services/portal.service';
 import { environment } from '../../environments/environment';
 import * as $ from 'jquery';
 import { NavService } from '../header/nav/nav.service';
-
+import { timer } from 'rxjs/observable/timer';
+import { take, map } from 'rxjs/operators';
 @Component({
   selector: 'gosg-protected',
   templateUrl: './protected.component.html',
   styleUrls: ['./protected.component.css']
 })
 export class ProtectedComponent implements OnInit {
+  countDown;
+  count = 5;
+
+  currentSec: number = 5;
   isFirst: boolean;
   uid: any;
   clientHeight: number;
@@ -29,6 +34,7 @@ export class ProtectedComponent implements OnInit {
   validMyIdentity:any;
   getEmail:string;
   public loading = false;
+  public nonValidUser = false;
   getFullname:string;
   translatedText: string;
   supportedLanguages: any[];
@@ -45,6 +51,11 @@ export class ProtectedComponent implements OnInit {
   pageSize;
   entryService;
   constructor(private navService: NavService, private activatedRoute:ActivatedRoute, @Inject(APP_CONFIG) private config: AppConfig, private protectedService:ProtectedService, router:Router, private portalService:PortalService) {
+
+      this.countDown = timer(0,1000).pipe(
+          take(this.count),
+          map(()=> --this.count)
+       );
 
       this.clientHeight = window.innerHeight - 200;
   }
@@ -114,18 +125,31 @@ export class ProtectedComponent implements OnInit {
             this.getFullname = data.user.fullName;
             localStorage.setItem('fullname',data.user.fullName);
             localStorage.setItem('email',data.user.email);
+            this.nonValidUser = false;
           }else{
-
+            this.loading = false;
+            this.nonValidUser = true;
+            setTimeout(() => {
+              this.logout();
+            }, 5000);
           }
           this.loading = false;
+
         },
         error => {
           this.loading = false;
+          this.nonValidUser = true;
+            setTimeout(() => {
+              this.logout();
+            }, 5000);
+
           //location.href = this.config.urlUAP +'uapsso/Logout';
           //location.href = this.config.urlUAP+'portal/index';
         })
     }
   }
+
+
   getProfileData(data){
     this.loading = true;
     this.protectedService.getProfile(data).subscribe(
@@ -181,10 +205,10 @@ export class ProtectedComponent implements OnInit {
       this.getProfileData(getUsrID);
     }else{
 
-
     }
 
   }
+
 
 
 
