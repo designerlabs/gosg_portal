@@ -128,12 +128,9 @@ export class ProtectedComponent implements OnInit {
             this.nonValidUser = false;
           }else{
             this.loading = false;
-            this.nonValidUser = true;
-            setTimeout(() => {
-              this.logout();
-            }, 5000);
           }
           this.loading = false;
+          debugger;
 
         },
         error => {
