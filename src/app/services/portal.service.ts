@@ -17,9 +17,9 @@ export class PortalService {
   lang = this.lang;
   langId = this.langId;
   loader:boolean = false;
-  catData: string[];
-  allUsersData: string[];
-  newUsersData: string[];
+  catData: any;
+  allUsersData: any;
+  newUsersData: any;
   totalUsers: any;
   totalNewUsers: any;
 
@@ -224,19 +224,19 @@ export class PortalService {
       .switchMap((params: ParamMap) =>
         this.getStatisticData(type))
       .subscribe(resStatData => {
-        
+
         if (type == 1) {
           this.allUsersData = [''];
           this.statisticservice.allUser = resStatData.rows;
           this.totalUsers = resStatData.totalsForAllResults['ga:Users'];
-  
+
         } else if (type == 2) {
           this.newUsersData = [''];
-          
+
           this.statisticservice.newUser = resStatData.rows;
           this.totalNewUsers = resStatData.totalsForAllResults['ga:newUsers'];
         }
-  
+
         this.loader = false;
       });
   }
@@ -332,7 +332,7 @@ export class PortalService {
   }
 
   getSubmissionStatus(refNo, lng) {
-    
+
     return this.http.get(this.subStatusUrl+refNo+"?language="+lng, '').map((response:Response) => response.json())
     .retry(5)
     .catch(this.handleError);
@@ -494,7 +494,7 @@ export class PortalService {
 
   // Dservice validation by DService RefCode
   validateDserviceByRefCode(dsvcCode){
-    
+
     return this.http
     .get(this.dserviceValidationUrl+dsvcCode)
     .map((response: Response) => response.json())

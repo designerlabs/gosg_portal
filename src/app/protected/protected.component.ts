@@ -50,7 +50,7 @@ export class ProtectedComponent implements OnInit {
   query;
   pageSize;
   entryService;
-  constructor(private navService: NavService, private activatedRoute:ActivatedRoute, @Inject(APP_CONFIG) private config: AppConfig, private protectedService:ProtectedService, router:Router, private portalService:PortalService) {
+  constructor(public navService: NavService, private activatedRoute:ActivatedRoute, @Inject(APP_CONFIG) private config: AppConfig, private protectedService:ProtectedService, router:Router, private portalService:PortalService) {
 
       this.countDown = timer(0,1000).pipe(
           take(this.count),

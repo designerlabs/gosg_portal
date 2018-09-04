@@ -47,7 +47,7 @@ export class StatisticComponent implements OnInit {
 
   constructor(
     private http: Http,
-    private portalservice: PortalService,
+    public portalservice: PortalService,
     private statisticservice: StatisticService,
     private dialogsService: DialogsService,
     private translate: TranslateService,
@@ -98,7 +98,7 @@ export class StatisticComponent implements OnInit {
       this.getUsersStatData(2);
       this.sub.unsubscribe();
     });
-    
+
     this.getDserviceReport(this.languageId);
     this.getPendingDserviceReport(this.languageId);
     this.getDserviceCounterReport(this.languageId);
@@ -146,15 +146,15 @@ export class StatisticComponent implements OnInit {
       this.dServiceData.forEach(dsvc => {
 
         if(dsvc.report) {
-          
+
           // if(dsvc.title == "Registration Form 1") {
 
             Object.keys(dsvc.report).map(function (inx) {
               aryObj = new Object;
-              
+
               aryObj.name = inx;
               aryObj.val = dsvc.report[inx];
-              
+
               retn.push(aryObj);
             });
 
@@ -165,9 +165,9 @@ export class StatisticComponent implements OnInit {
             dsvc.report = retn;
             sum = retn.reduce((sum, item) => sum + item.val, 0);
             retn = [];
-            
+
             // }
-            
+
             dsvc.rptTotal = sum;
           } else {
             dsvc.report = this.StatByYearDservice;
@@ -201,16 +201,16 @@ export class StatisticComponent implements OnInit {
       this.dServicePendingData.forEach(pdsvc => {
 
         if(pdsvc.report) {
-          
+
           // if(pdsvc.title == "Registration Form 1") {
             // console.log(pdsvc.title)
 
             Object.keys(pdsvc.report).map(function (inx) {
               aryObj = new Object;
-              
+
               aryObj.name = inx;
               aryObj.val = pdsvc.report[inx];
-              
+
               retn.push(aryObj);
             });
 
@@ -221,9 +221,9 @@ export class StatisticComponent implements OnInit {
             pdsvc.report = retn;
             sum = retn.reduce((sum, item) => sum + item.val, 0);
             retn = [];
-            
+
             // }
-            
+
             pdsvc.rptTotal = sum;
           } else {
             pdsvc.report = this.StatByYearPendingDservice;
@@ -240,9 +240,9 @@ export class StatisticComponent implements OnInit {
   getUsersStatData(type) {
 
     // this.portalservice.triggerStatistic(type);
-      
+
       if (type == 1) {
-        
+
         this.allUsersByYear = this.StatByYearAll;
 
         this.StatByYearAll.forEach(el => {
@@ -257,7 +257,7 @@ export class StatisticComponent implements OnInit {
         // debugger;
 
       } else if (type == 2) {
-        
+
         this.newUsersByYear = this.StatByYearNew;
 
         this.newUsersByYear.forEach(el => {

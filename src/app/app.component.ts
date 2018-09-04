@@ -10,6 +10,7 @@ import { NavService } from './header/nav/nav.service';
 export class AppComponent implements OnInit{
     loader: boolean;
     isSideNav = false;
+    isheader:any;
     clientHeight: number;
     title = 'app';
     showLoader: boolean;
@@ -25,7 +26,7 @@ export class AppComponent implements OnInit{
     bTop = '35px';
     public loading = false;
 
-    constructor(private navService: NavService) {
+    constructor(public navService: NavService) {
         this.clientHeight = window.innerHeight - 200;
     }
     getExpand(data) {

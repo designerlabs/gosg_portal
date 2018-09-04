@@ -22,7 +22,7 @@ export class SitemapComponent implements OnInit, OnDestroy {
 
   constructor(
     private http: Http,
-    private portalservice: PortalService,
+    public portalservice: PortalService,
     private dialogsService: DialogsService,
     private translate: TranslateService,
     private router: Router,

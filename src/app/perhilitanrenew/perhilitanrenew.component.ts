@@ -1122,7 +1122,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     this.checkReqValues3();
   }
 
-  uploadFile1(selectedFiles: Ng4FilesSelected, lan): void {    
+  uploadFile1(selectedFiles: Ng4FilesSelected): void {    
    
     let nameFile1 = selectedFiles.files[0].name;  
     let sizeFile = selectedFiles.files[0].size;
@@ -1151,7 +1151,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
   
   }
 
-  uploadFile2(selectedFiles: Ng4FilesSelected, lan): void {    
+  uploadFile2(selectedFiles: Ng4FilesSelected): void {    
 
     let nameFile1 = selectedFiles.files[0].name;
     let sizeFile = selectedFiles.files[0].size;

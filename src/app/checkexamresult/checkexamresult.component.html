@@ -22,16 +22,16 @@
 
 <div class="container">
   <div class="col-md-12">&nbsp;</div>
-  
-  <div class="col-md-12 mat-elevation-z8 padding-bottom-20">    
+
+  <div class="col-md-12 mat-elevation-z8 padding-bottom-20">
     <form [formGroup]="searchForm" novalidate="novalidate">
       <div class="row">
           <div class="col-md-12 displayDesc">
               <h4 style="font-weight: bold">Semakan Keputusan Peperiksaan</h4>
           </div>
           <div class="col-md-12 displayJustify">
-              <span>Kemudahan semakan keputusan peperiksaan merangkumi peperiksaan PT3, STPM, Penggal Persekolahan 
-                untuk diri sendiri dan juga anak di bawah jagaan. Maklumat keputusan peperiksaan yang disemak bukanlah 
+              <span>Kemudahan semakan keputusan peperiksaan merangkumi peperiksaan PT3, STPM, Penggal Persekolahan
+                untuk diri sendiri dan juga anak di bawah jagaan. Maklumat keputusan peperiksaan yang disemak bukanlah
                 keputusan 'real time'.</span>
           </div>
           <div class="col-md-12 displayJustify">
@@ -44,76 +44,76 @@
             <div class="col-md-3"><h4>{{'exam.label.name' | translate}}</h4></div>
             <div class="col-md-3"><h4>{{'exam.label.year' | translate}}</h4></div>
             <div class="col-md-3"><h4>{{'exam.label.examname' | translate}}</h4></div>
-            <div class="col-md-3"><h4>{{'exam.label.examtype' | translate}}</h4></div>            
+            <div class="col-md-3"><h4>{{'exam.label.examtype' | translate}}</h4></div>
           </div><br> -->
-          <div class="padding-line"><hr class="line"></div> 
+          <div class="padding-line"><hr class="line"></div>
       </div>
 
       <div class="row">
           <div class="col-md-3">
             <mat-form-field class="example-full-width">
-              <mat-select formControlName="name" placeholder="{{'exam.label.name' | translate}}" required 
+              <mat-select formControlName="name" placeholder="{{'exam.label.name' | translate}}" required
                   (change)="getListYear()">
                   <mat-option *ngFor="let user of listUser" [value]="user.ic">{{user.name}}</mat-option>
               </mat-select>
               <mat-error *ngIf="searchForm.controls.name.hasError('required')">
-                {{'exam.label.name' | translate }} {{'exam.err.needed' | translate }} 
+                {{'exam.label.name' | translate }} {{'exam.err.needed' | translate }}
               </mat-error>
             </mat-form-field>
           </div>
 
           <div class="col-md-2">
             <mat-form-field class="example-full-width">
-              <mat-select formControlName="examyear" placeholder="{{'exam.label.year' | translate}}" required 
+              <mat-select formControlName="examyear" placeholder="{{'exam.label.year' | translate}}" required
                   (change)="getListExam()">
-                  <mat-option *ngFor="let year of listYear" [value]="year">{{year}}</mat-option> 
+                  <mat-option *ngFor="let year of listYear" [value]="year">{{year}}</mat-option>
               </mat-select>
               <mat-error *ngIf="searchForm.controls.examyear.hasError('required')">
-                {{'exam.label.year' | translate }} {{'exam.err.needed' | translate }} 
+                {{'exam.label.year' | translate }} {{'exam.err.needed' | translate }}
               </mat-error>
             </mat-form-field>
           </div>
 
           <div class="col-md-3">
             <mat-form-field class="example-full-width">
-              <mat-select formControlName="examname" placeholder="{{'exam.label.examname' | translate}}" required 
+              <mat-select formControlName="examname" placeholder="{{'exam.label.examname' | translate}}" required
                   (change)="getListTypeExam()">
-                  <mat-option *ngFor="let le of listExam" [value]="le.id">{{le.name}}</mat-option> 
+                  <mat-option *ngFor="let le of listExam" [value]="le.id">{{le.name}}</mat-option>
               </mat-select>
               <mat-error *ngIf="searchForm.controls.examname.hasError('required')">
-                {{'exam.label.examname' | translate }} {{'exam.err.needed' | translate }} 
+                {{'exam.label.examname' | translate }} {{'exam.err.needed' | translate }}
               </mat-error>
             </mat-form-field>
           </div>
 
           <div class="col-md-2" *ngIf="searchForm.controls.examname.value == 5">
             <mat-form-field class="example-full-width">
-              <mat-select formControlName="examtype" placeholder="{{'exam.label.examtype' | translate}}" required 
+              <mat-select formControlName="examtype" placeholder="{{'exam.label.examtype' | translate}}" required
                   (change)="checkReqValues()">
-                  <mat-option *ngFor="let lte of listTypeExam" [value]="lte.id">{{lte.name}}</mat-option> 
+                  <mat-option *ngFor="let lte of listTypeExam" [value]="lte.id">{{lte.name}}</mat-option>
               </mat-select>
               <mat-error *ngIf="searchForm.controls.examtype.hasError('required')">
-                {{'exam.label.examtype' | translate }} {{'exam.err.needed' | translate }} 
+                {{'exam.label.examtype' | translate }} {{'exam.err.needed' | translate }}
               </mat-error>
             </mat-form-field>
           </div>
 
-          <div class="col-md-2" *ngIf="searchForm.controls.examname.value != 5">            
+          <div class="col-md-2" *ngIf="searchForm.controls.examname.value != 5">
           </div>
 
-          <div class="col-md-2">        
-              <button mat-raised-button color="primary" class="btn btn-md btn-success font-size-s pull-right" 
+          <div class="col-md-2">
+              <button mat-raised-button color="primary" class="btn btn-md btn-success font-size-s pull-right"
                 (click)="checkExam()" [disabled]="!complete">
-                {{'exam.button.check' | translate}}</button>                
+                {{'exam.button.check' | translate}}</button>
           </div>
       </div>
-      
+
     </form>
-  
+
   </div>
 
-  <div class="col-md-12 mat-elevation-z8 padding-bottom-20" *ngIf="showResult">    
-      
+  <div class="col-md-12 mat-elevation-z8 padding-bottom-20" *ngIf="showResult">
+
         <div class="row">
             <div class="col-md-12 displayDesc text-center">
                 <h5 style="font-weight: bold">SLIP KEPUTUSAN - {{resultInfo.courseName}}</h5>
@@ -164,8 +164,8 @@
                     <td class="mat-cell">{{data.code}}</td>
                 </tr>
             </table>
-        </div><br> 
-        
+        </div><br>
+
         <div class="row">
             <div class="col-md-1 displayJustify">
                 <span>CGPA</span>
@@ -180,7 +180,7 @@
                 <span></span>
             </div>
         </div><br><br>
-    
+
         <div class="row">
             <div class="col-md-12 displayJustify">
                 <span>*** Keputusan yang dipaparkan hanyalah bagi tujuan semakan sahaja dan tidak boleh digunakan bagi tujuan lain.</span>
@@ -188,7 +188,3 @@
         </div>
     </div>
 </div>
-
-<app-confirm-dialog #resetModal [title]="'common.icon.warn'" [content]="'common.msg.reset'" [state]="'common.state.warn'"
-  [isReset]="'true'" (resetMethod)="resetMethod($event)">
-</app-confirm-dialog>

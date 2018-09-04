@@ -28,7 +28,7 @@ export class DigitalservicesComponent implements OnInit, OnDestroy {
   mediaUrl: any;
   isLogin: boolean;
   @Input() state:string;
-  @Input() validMyIdentity: string;
+  @Input() validMyIdentity: any;
 
   lang = this.lang;
   private subscription: ISubscription;
@@ -112,7 +112,7 @@ export class DigitalservicesComponent implements OnInit, OnDestroy {
 
   toTrack(dserviceCode, dUrl, agcCode, common?) {
     window.open(dUrl+'?service='+dserviceCode+'&agency='+agcCode, '_blank');
-    this.portalservice.sendTrackingCount(dserviceCode,agcCode).subscribe( 
+    this.portalservice.sendTrackingCount(dserviceCode,agcCode).subscribe(
       data =>{
     },
     error => {
