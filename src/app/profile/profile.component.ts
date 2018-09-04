@@ -22,6 +22,7 @@ import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 import { environment } from '../../environments/environment';
 //import { debug } from 'util';
 import { ModalDirective } from 'ngx-bootstrap/modal';
+
 @Component({
   templateUrl: './profile.component.html',
   selector: 'myprofile',

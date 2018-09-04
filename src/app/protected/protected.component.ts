@@ -128,20 +128,26 @@ export class ProtectedComponent implements OnInit {
             this.nonValidUser = false;
           }else{
             this.loading = false;
-            this.nonValidUser = true;
-            setTimeout(() => {
-              this.logout();
-            }, 5000);
           }
           this.loading = false;
 
+          if(data.statusCode !== 'SUCCESS' && !this.isFirstLogin){
+            this.loading = false;
+            this.nonValidUser = true;
+              setTimeout(() => {
+                this.logout();
+              }, 5000);
+          }
         },
         error => {
-          this.loading = false;
-          this.nonValidUser = true;
-            setTimeout(() => {
-              this.logout();
-            }, 5000);
+
+         // if(data.statusCode !== 'SUCCESS'){
+          //   this.loading = false;
+          //   this.nonValidUser = true;
+          //     setTimeout(() => {
+          //       this.logout();
+          //     }, 5000);
+          // }
 
           //location.href = this.config.urlUAP +'uapsso/Logout';
           //location.href = this.config.urlUAP+'portal/index';
