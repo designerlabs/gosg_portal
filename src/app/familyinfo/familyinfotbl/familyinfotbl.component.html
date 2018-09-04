@@ -37,7 +37,7 @@
         <i class="fa fa-plus font-size-s" style="padding: 8px;"></i>
       </button>
     </span>
-    
+
     <table class="mat-table" style="width:100%; z-index: 9999;">
       <tr class="mat-header-row" style="height:45px">
         <th width="5%" class="mat-header-cell">{{'family.tableHeader.num' | translate}}</th>
@@ -64,7 +64,7 @@
           <button class="btn btn-sm btn-warning" (click)="view(data.identificationNo,data.passportNo)">
             <i class="fa fa-eye font-size-s"></i>
           </button>
-          
+
         </td>
       </tr>
       <tr *ngIf="showNoData">
@@ -83,9 +83,9 @@
     </mat-form-field>
 
     <div style="float:right; margin-top: 10px;">
-      <span style="color:#000; padding-right:20px;">{{ 'appmngt.tablebottom.page' | translate }} 
-        <strong>{{dataListPage?.pageNumber}}</strong> {{ 'appmngt.tablebottom.of' | translate }} 
-        <strong>{{dataListPage?.totalPages}}</strong> {{ 'appmngt.tablebottom.in' | translate }} 
+      <span style="color:#000; padding-right:20px;">{{ 'appmngt.tablebottom.page' | translate }}
+        <strong>{{dataListPage?.pageNumber}}</strong> {{ 'appmngt.tablebottom.of' | translate }}
+        <strong>{{dataListPage?.totalPages}}</strong> {{ 'appmngt.tablebottom.in' | translate }}
         <strong>{{dataListPage?.totalElements}}</strong> {{ 'appmngt.tablebottom.app' | translate }}</span>
       <button mat-mini-fab color="basic" [disabled]="noPrevData" (click)="paginatorL(dataListPage?.pageNumber)">
         <i class="fa fa-angle-left" aria-hidden="true"></i></button>
@@ -96,7 +96,3 @@
   </div>
   <br><br>
 </div>
-
-<app-confirm-dialog #resetModal [title]="'common.icon.warn'" [content]="'common.msg.reset'" [state]="'common.state.warn'"
-  [isReset]="'true'" (resetMethod)="resetMethod($event)">
-</app-confirm-dialog>

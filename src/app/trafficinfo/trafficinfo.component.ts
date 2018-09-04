@@ -39,6 +39,7 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
   noPrevData = true;
   noNextData = false;
   allStreetNames:any;
+  streetName:any;
   streetNames = [];
   streetFlows = null;
   gotPrediction:boolean;
@@ -126,7 +127,7 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
     // });
 
     // this.triggerDserviceValidation(this.dsvcCode);
-    
+
     this.gotPrediction = false;
     this.getDefaultMap();
     // this.getStreetNamesData();
@@ -229,7 +230,7 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
         error => {
           this.toastr.error(JSON.parse(error._body).statusDesc, '');
           this.loading = false;
-    
+
         });
   }
 
@@ -364,11 +365,11 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
       .switchMap((params: ParamMap) =>
         this.portalservice.validateDserviceByRefCode(dsvcCode))
       .subscribe(resValidation => {
-        
+
         if(!resValidation.valid) {
           this.toastr.error('Invalid Service!', '');
           this.router.navigate(['404']);
-          
+
           this.loading = false;
         } else {
           localStorage.setItem('dserviceCode', dsvcCode);
@@ -378,7 +379,7 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
       error => {
         this.toastr.error(JSON.parse(error._body).statusDesc, '');
         this.loading = false;
-  
+
       });
   }
 

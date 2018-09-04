@@ -26,24 +26,24 @@
     <gosg-sidenav-dashboard></gosg-sidenav-dashboard>
   </div>
 
-  <div class="col-md-9 mat-elevation-z8 padding-bottom-20">    
+  <div class="col-md-9 mat-elevation-z8 padding-bottom-20">
     <form [formGroup]="searchForm" novalidate="novalidate">
       <div class="row">
           <div class="col-md-12 displayDesc">
             <h4>{{'family.label.familyheader' | translate}}</h4>
             <hr class="line">
-          </div>          
+          </div>
       </div>
 
       <div class="row">
           <div class="col-md-4">
             <mat-form-field class="example-full-width">
-              <mat-select formControlName="warganegara" placeholder="{{'family.label.citizen' | translate}}" required 
+              <mat-select formControlName="warganegara" placeholder="{{'family.label.citizen' | translate}}" required
                   (change)="changeNation(searchForm.value)">
                   <mat-option *ngFor="let citizen of listCitizenData" [value]="citizen.userTypeId">{{citizen.userType}}</mat-option>
               </mat-select>
               <mat-error *ngIf="searchForm.controls.warganegara.hasError('required')">
-                {{'family.label.citizen' | translate }} {{'family.err.needed' | translate }} 
+                {{'family.label.citizen' | translate }} {{'family.err.needed' | translate }}
               </mat-error>
             </mat-form-field>
           </div>
@@ -64,33 +64,33 @@
           <div class="col-md-4" *ngIf="searchForm.controls.warganegara.value == 6">
             <mat-form-field class="example-full-width">
                 <input matInput formControlName="passportno" placeholder="{{'family.label.passport' | translate}}" required
-                (keyup)="checkReqValues()"> 
+                (keyup)="checkReqValues()">
                 <mat-error *ngIf="searchForm.controls.passportno.hasError('required')">
-                  {{'family.label.passport' | translate }} {{'family.err.needed' | translate }} 
+                  {{'family.label.passport' | translate }} {{'family.err.needed' | translate }}
                 </mat-error>
             </mat-form-field>
           </div>
 
           <div class="col-md-4" *ngIf="searchForm.controls.warganegara.value == 6">
             <mat-form-field class="example-full-width">
-              <mat-select formControlName="passportState" placeholder="{{'family.label.statepassport' | translate}}" required 
+              <mat-select formControlName="passportState" placeholder="{{'family.label.statepassport' | translate}}" required
                   (change)="checkReqValues()">
                   <mat-option *ngFor="let country of listCountryData" [value]="country.countryId">{{country.countryName}}</mat-option>
               </mat-select>
               <mat-error *ngIf="searchForm.controls.passportState.hasError('required')">
-                {{'family.label.statepassport' | translate }} {{'family.err.needed' | translate }} 
+                {{'family.label.statepassport' | translate }} {{'family.err.needed' | translate }}
               </mat-error>
             </mat-form-field>
           </div>
       </div>
-      
+
       <div class="row">
           <div class="col-md-4">
             <mat-form-field class="example-full-width">
-                <input matInput formControlName="name" placeholder="{{'family.label.name' | translate}}" required 
+                <input matInput formControlName="name" placeholder="{{'family.label.name' | translate}}" required
                 (keyup)="checkReqValues()">
                 <mat-error *ngIf="searchForm.controls.name.hasError('required')">
-                  {{'family.label.name' | translate }} {{'family.err.needed' | translate }} 
+                  {{'family.label.name' | translate }} {{'family.err.needed' | translate }}
                 </mat-error>
             </mat-form-field>
           </div>
@@ -102,7 +102,7 @@
                 <mat-option *ngFor="let relation of listRelationData" [value]="relation.relationshipId">{{relation.relationshipName}}</mat-option>
               </mat-select>
               <mat-error *ngIf="searchForm.controls.relation.hasError('required')">
-                {{'family.label.relationship' | translate }} {{'family.err.needed' | translate }} 
+                {{'family.label.relationship' | translate }} {{'family.err.needed' | translate }}
               </mat-error>
             </mat-form-field>
           </div>
@@ -116,7 +116,7 @@
                 <mat-option *ngFor="let race of listRaceData" [value]="race.raceId">{{race.race}}</mat-option>
               </mat-select>
               <mat-error *ngIf="searchForm.controls.race.hasError('required')">
-                {{'family.label.race' | translate }} {{'family.err.needed' | translate }} 
+                {{'family.label.race' | translate }} {{'family.err.needed' | translate }}
               </mat-error>
             </mat-form-field>
           </div>
@@ -128,11 +128,11 @@
                 <mat-option *ngFor="let religion of listReligionData" [value]="religion.religionId">{{religion.religion}}</mat-option>
               </mat-select>
               <mat-error *ngIf="searchForm.controls.religion.hasError('required')">
-                {{'family.label.religion' | translate }} {{'family.err.needed' | translate }} 
+                {{'family.label.religion' | translate }} {{'family.err.needed' | translate }}
               </mat-error>
             </mat-form-field>
           </div>
-          
+
           <div class="col-md-4" *ngIf="checkNation == true">
             <mat-form-field class="example-full-width">
                 <input matInput formControlName="email" placeholder="{{'family.label.email' | translate}}">
@@ -145,11 +145,11 @@
             </mat-form-field>
           </div>
 
-          <div class="col-md-4" *ngIf="checkNation == false && getUrl == 'add'">        
-              <button mat-raised-button color="primary" class="btn btn-md btn-success font-size-s pull-right" 
-                (click)="checkNationalyty()" 
+          <div class="col-md-4" *ngIf="checkNation == false && getUrl == 'add'">
+              <button mat-raised-button color="primary" class="btn btn-md btn-success font-size-s pull-right"
+                (click)="checkNationalyty()"
                 [disabled]="!complete || (!validateCtrlChk(icno) && searchForm.controls.icno.errors.pattern)">
-                {{'family.button.confirm' | translate}}</button>                
+                {{'family.button.confirm' | translate}}</button>
           </div>
       </div>
 
@@ -161,7 +161,7 @@
                 <mat-datepicker-toggle matSuffix [for]="dob" style="color:#333;"></mat-datepicker-toggle>
                 <mat-datepicker #dob startView="day"></mat-datepicker>
                 <mat-error *ngIf="searchForm.controls.dob.hasError('required')">
-                  {{'family.label.dob' | translate }} {{'family.err.needed' | translate }} 
+                  {{'family.label.dob' | translate }} {{'family.err.needed' | translate }}
                 </mat-error>
             </mat-form-field>
           </div>
@@ -190,7 +190,7 @@
                   <mat-option [value]=3>Tidak Aktif</mat-option>
               </mat-select>
               <mat-error *ngIf="searchForm.controls.profileStatus.hasError('required')">
-                {{'family.label.statusprofile' | translate }} {{'family.err.needed' | translate }} 
+                {{'family.label.statusprofile' | translate }} {{'family.err.needed' | translate }}
               </mat-error>
             </mat-form-field>
           </div>
@@ -258,18 +258,14 @@
         </div>
       </div><br>
 
-      <div class="pull-right" *ngIf="checkNation == true">        
+      <div class="pull-right" *ngIf="checkNation == true">
         <!-- <button mat-raised-button color="primary" class="btn btn-md btn-success font-size-s" (click)="print()"
           [disabled]="!complete">{{'family.button.print' | translate}}</button> -->
         <button mat-raised-button color="primary" class="btn btn-md btn-success font-size-s" (click)="submit(searchForm.value)"
-          [disabled]="!complete || (!validateCtrlChk(email) && searchForm.controls.email.errors.pattern) || 
+          [disabled]="!complete || (!validateCtrlChk(email) && searchForm.controls.email.errors.pattern) ||
           (!validateCtrlChk(icno) && searchForm.controls.icno.errors.pattern)">{{'family.button.save' | translate}}</button>
       </div>
     </form>
-  
+
   </div>
 </div>
-
-<app-confirm-dialog #resetModal [title]="'common.icon.warn'" [content]="'common.msg.reset'" [state]="'common.state.warn'"
-  [isReset]="'true'" (resetMethod)="resetMethod($event)">
-</app-confirm-dialog>
