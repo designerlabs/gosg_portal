@@ -155,43 +155,43 @@
 
             <table class="mat-table table-hover" id="dataTable" style="width:100%;">
                 <tr class="mat-header-row tableHeader">
-                    <th class="" width="5%">&nbsp;{{'appmngt.tableHeader.num' | translate}}</th>
-                    <th class="" width="7%">Kod Sekolah</th>
-                    <th class="" >Nama Sekolah</th>
-                    <th class="" width="10%">PDD</th>
-                    <th class="" width="5%">PK</th>
-                    <th class="" width="10%">Jenis</th>
-                    <th class="" width="13%">Alamat</th>
-                    <th class="" width="7%">No. Telefon</th>
-                    <th class="" width="7%">No. Faksimili</th>
-                    <th class="" width="8%">Emel</th>
-                    <th class="" width="7%">Maklumat Lanjut</th>
-                    <th class="" style="display: none">Lat</th>
-                    <th class="" style="display: none">Long</th>
-                    <th class="" style="display: none">Bandar</th>
-                    <th class="" style="display: none">Negeri</th>
+                    <th class="paddingR" width="5%">&nbsp;{{'appmngt.tableHeader.num' | translate}}</th>
+                    <th class="paddingR" width="7%">Kod Sekolah</th>
+                    <th class="paddingR" >Nama Sekolah</th>
+                    <th class="paddingR" width="10%">PDD</th>
+                    <th class="paddingR" width="5%">PK</th>
+                    <th class="paddingR" width="10%">Jenis</th>
+                    <th class="paddingR" width="13%">Alamat</th>
+                    <th class="paddingR" width="7%">No. Telefon</th>
+                    <th class="paddingR" width="7%">No. Faksimili</th>
+                    <th class="paddingR" width="8%">Emel</th>
+                    <th class="paddingR" width="7%">Maklumat Lanjut</th>
+                    <th class="paddingR" style="display: none">Lat</th>
+                    <th class="paddingR" style="display: none">Long</th>
+                    <th class="paddingR" style="display: none">Bandar</th>
+                    <th class="paddingR" style="display: none">Negeri</th>
                 </tr>
                 <tr (click)="goTo(data.latitude,data.longitude,data.namaSekolah,data.alamat,data.telNo, data.bandar, data.negeri)" 
                     class="mat-row table_row table_row_height" 
                     *ngFor="let data of recordData | search : query; let i = index;" role="row">
-                    <td class="mat-cell text-center">{{i+1}}</td>
-                    <td class="mat-cell">{{data.kodSekolah}}</td>
-                    <td class="mat-cell">{{data.namaSekolah}}</td>
-                    <td class="mat-cell">{{data.daerahPPD}}</td>
-                    <td class="mat-cell">{{convertPK(data.pendidikanKhas)}}</td>
-                    <td class="mat-cell">{{data.jenisSekolah}}</td>
-                    <td class="mat-cell">{{data.alamat}}</td>
-                    <td class="mat-cell">{{data.telNo}}</td>
-                    <td class="mat-cell">{{data.faxNo}}</td>
-                    <td class="mat-cell">{{data.email}}</td>
-                    <td class="mat-cell text-center">
+                    <td class="mat-cell text-center paddingR">{{i+1}}</td>
+                    <td class="mat-cell paddingR">{{data.kodSekolah}}</td>
+                    <td class="mat-cell paddingR">{{data.namaSekolah}}</td>
+                    <td class="mat-cell paddingR">{{data.daerahPPD}}</td>
+                    <td class="mat-cell paddingR">{{convertPK(data.pendidikanKhas)}}</td>
+                    <td class="mat-cell paddingR">{{data.jenisSekolah}}</td>
+                    <td class="mat-cell paddingR">{{data.alamat}}</td>
+                    <td class="mat-cell paddingR">{{data.telNo}}</td>
+                    <td class="mat-cell paddingR">{{data.faxNo}}</td>
+                    <td class="mat-cell paddingR">{{data.email}}</td>
+                    <td class="mat-cell text-center paddingR">
                       <button class="btn btn-sm btn-warning" (click)="view(data.kodSekolah)">
                         <i class="fa fa-eye font-size-s"></i>
                       </button></td>
-                    <td class="mat-cell" style="display: none">{{data.latitude}}</td>
-                    <td class="mat-cell" style="display: none">{{data.longitude}}</td>
-                    <td class="mat-cell" style="display: none">{{data.bandar}}</td>
-                    <td class="mat-cell" style="display: none">{{data.negeri}}</td>
+                    <td class="mat-cell paddingR" style="display: none">{{data.latitude}}</td>
+                    <td class="mat-cell paddingR" style="display: none">{{data.longitude}}</td>
+                    <td class="mat-cell paddingR" style="display: none">{{data.bandar}}</td>
+                    <td class="mat-cell paddingR" style="display: none">{{data.negeri}}</td>
                 </tr>
                 <tr *ngIf="showNoData && charCarian == 0">
                     <td colspan="10" class="showData">
@@ -203,7 +203,7 @@
     </div><br>
 
     <div class="row container" style="padding-bottom: 20px;" id="petaHasilCarian">
-        <div class="col-md-12" id="dirmap"></div>
+        <div class="col-md-12 mapheight" id="dirmap" ></div>
     </div>
 </div>
 
