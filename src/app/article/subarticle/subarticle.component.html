@@ -262,8 +262,25 @@
                       </div>
 
                       <div *ngIf="article.contentList" class="row col-sm-12 lifeEvent" style="padding-top: 20px;">
+                        <ul style="padding: 5px 0px;">
+                          <li  *ngFor="let rightContent of article.contentList; let index=index; let odd=odd; let even=even;" style=" width: 120px; float: left; text-align: center; margin: 0px 0px 17px 0px; list-style: none; padding: 0px 5px; cursor: pointer;">
+                            <!-- <span [style.background-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" style="display:block;
+                            width: 50px;
+                            height: 50px;
+                            margin: auto;
+                            color: #fff;
+                            border-radius: 50px;
+                            border: 2px #4c4c4c dashed;
+                            padding: 8px 0px;
+                            font-size: 25px;">{{index + 1  }}</span> -->
+                            <a class="warna_font sideBarMenu--link font-size-s"  [style.color]="!!le_content && (le_code == rightContent.contentCode) ?  getTheme(): '#333333'"  (click)="clickContent(rightContent, '', $event)" [innerHTML]="rightContent.contentTitle" style="font-weight: bold; display: table-cell; text-align: center; vertical-align: middle; background: #efefef; padding: 10px; height: 120px; min-height: 120px;"></a>
+                          </li>
 
-                          <mat-tab-group>
+                        </ul>
+                        <div class="defaultColor" style="clear: both; padding-top: 20px;" [innerHTML]="le_content">
+
+                        </div>
+                          <!-- <mat-tab-group style="clear: both;">
                             <mat-tab *ngFor="let rightContent of article.contentList; let index=index; let odd=odd; let even=even;">
                               <ng-template mat-tab-label>
                                 <div>
@@ -273,7 +290,7 @@
                               </ng-template>
                               <div style="color: #000; padding-top: 15px;" class="warna_font article-size font-size-s" [innerHTML]="rightContent.contentText"></div>>
                             </mat-tab>
-                          </mat-tab-group>
+                          </mat-tab-group> -->
 
                     </div>
 
