@@ -918,7 +918,7 @@ lineHr{
         1px 1px 0 #000;
 }
 
-ngui-auto-complete .no-match-found {display: none};
+ngui-auto-complete .no-match-found {display: none}
 
 .center-icon-container {
   height: auto; /*Set line-height to this value*/

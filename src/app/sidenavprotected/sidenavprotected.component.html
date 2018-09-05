@@ -33,7 +33,10 @@
           <a routerLinkActive="topactive" class="font-size-s" [routerLink]="['/content', 15019]"><i class="fa fa-globe" aria-hidden="true"></i> {{ 'home.menu.aboutus' | translate }}</a>
         </li>
         <li>
-            <a href="../uapsso/Logout" class="font-size-s" (click)="logout($event)"><i class="fa fa-sign-out" aria-hidden="true"></i> {{ 'home.menu.logout' | translate }}</a>
+            <a routerLinkActive="topactive" href="../uapsso/Logout" class="font-size-s" target="_self"><i class="fa fa-key" aria-hidden="true"></i> {{ 'home.menu.changePass' | translate }}</a>
+        </li>
+        <li>
+            <a href="https://uapstaging.malaysia.gov.my/myprofile/change/password.jsp" class="font-size-s" (click)="logout($event)"><i class="fa fa-sign-out" aria-hidden="true"></i> {{ 'home.menu.logout' | translate }}</a>
         </li>
         <li>
             <mat-expansion-panel (opened)="callApiProtected()">
