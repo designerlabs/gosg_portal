@@ -93,17 +93,21 @@
   },
   "pdrm":{
     "reportPolice":"Enter Police Report No.",
-    "recruitment":"Review is valid based on user IC No.",
-    "example": "Eg. Police Report No.: 012345/18",
+    "recruitment":"Review is valid based on user 'IC No.'",
+    "summon": "Please enter the information as below:",
+    "example": "IE. Police Report No.: 012345/18",
     "attention": "ATTENTION:",
     "announcement": "ANNOUNCEMENT",
     "announce1": "1. SEMAKAN KEMPUTUSAN TEMU DUGA BAGI CALON - CALON INSPEKTOR 2017 DAN 2018.",
     "announce2": "2. BAGI CALON - CALON YANG TIDAK DISENARAIKAN, PROSES DOKUMENTASI MASIH DALAM SEMAKAN UNIT PENGAMBILAN DAN AKAN DIMAKLUMKAN DARI MASA KE SEMASA.",
     "placeholder":{
       "noic": "Indentification Card No.",
-      "noreport": "Police Report No."
+      "noreport": "Police Report No.",
+      "typeInfo": "Info. Type",
+      "noCar": "Car Reg. No."
     },
     "titlerecruitment":"PDRM RECRUITMENT POSITION STATUS",
+    "titlepoliceR":"POLICE REPORT STATUS",
     "err":{
       "needed": "needed",
       "showData": "YOU DONT HAVE ANY POLICE REPORT.",
@@ -114,7 +118,15 @@
       "applicantname": "APPLICANT NAME",
       "date": "DATE / TIME",
       "location": "LOCATION",
-      "status": "RECRUIMENT STATUS"
+      "status": "RECRUIMENT STATUS",
+      "noreport": "POLICE REPORT NO.",
+      "dateRP": "DATE AND TIME POLICE REPORT",
+      "statusRP": "REPORT INVESTIGATION STATUS",
+      "noPaper": "INVESTIGATION PAPER NO.",
+      "sectionInvestigation": "INVESTIGATION SECTION",
+      "statusInvestigate": "INVESTIGATION STATUS",
+      "insOfficer": "INVESTIGATING OFFICER",
+      "infoLetter": "NOTICE"
     }
   },
   "register": {
