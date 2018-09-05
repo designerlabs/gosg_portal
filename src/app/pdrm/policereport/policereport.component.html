@@ -163,14 +163,14 @@
     <div *ngIf="showDetails == true">
         <div class="row container">
             <div class="col-md-12 boldInfo">
-                STATUS REPOT POLIS<br>
+                <span>{{ 'pdrm.titlepoliceR' | translate }}</span><br>
                 <hr class="lineHr" style="border-top: #9c9c9d 2px solid;">
             </div>
         </div>
 
         <div class="row container blackFont">
             <div class="col-md-3">
-                NO. REPOT POLIS
+                {{ 'pdrm.title.noreport' | translate }}
             </div>
 
             <div class="col-md-9 boldInfo">
@@ -178,7 +178,7 @@
             </div>
 
             <div class="col-md-3">
-                TARIKH DAN MASA REPOT POLIS
+                {{ 'pdrm.title.dateRP' | translate }}
             </div>
 
             <div class="col-md-9 boldInfo">
@@ -186,7 +186,7 @@
             </div>
 
             <div class="col-md-3">
-                STATUS SIASATAN REPOT
+                {{ 'pdrm.title.statusRP' | translate }}
             </div>
 
             <div class="col-md-9 boldInfo">
@@ -200,35 +200,35 @@
             </div>
 
             <div class="col-md-3">            
-                NO. KERTAS SIASATAN
+                {{ 'pdrm.title.noPaper' | translate }}
             </div>
             <div class="col-md-9 boldInfo">
                 {{noKertasSiasat}}
             </div>
 
             <div class="col-md-3">      
-                SEKSYEN SIASATAN
+                {{ 'pdrm.title.sectionInvestigation' | translate }}
             </div>
             <div class="col-md-9 boldInfo">
                 {{seksyenSiasat}}
             </div>
 
             <div class="col-md-3">     
-                STATUS SIASATAN
+                {{ 'pdrm.title.statusInvestigate' | translate }}
             </div>
             <div class="col-md-9 boldInfo">
                 {{statusSiasat}}
             </div>
 
             <div class="col-md-3">    
-                PEGAWAI PENYIASAT
+                {{ 'pdrm.title.insOfficer' | translate }}
             </div>
             <div class="col-md-9 boldInfo">
                 {{pegawaiSiasat}}
             </div>
 
             <div class="col-md-3">       
-                SURAT PEMBERITAHUAN
+                {{ 'pdrm.title.infoLetter' | translate }}
             </div>
             <div class="col-md-9 boldInfo">
                 <span *ngFor="let item of letter">

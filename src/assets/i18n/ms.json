@@ -92,7 +92,8 @@
   },
   "pdrm":{
     "reportPolice":"Masukkan No. Repot Polis.",
-    "recruitment":"Semakan dibuat berdasarkan 'No. KP pengguna sendiri'.",
+    "recruitment":"Semakan dibuat berdasarkan 'No. KP' pengguna sendiri.",
+    "summon": "Sila masukan makluamat seperti di bawah:",
     "example": "Contoh No. Repot Polis: 012345/18",
     "attention": "PERHATIAN:",
     "announcement": "PENGUMUMAN",
@@ -100,9 +101,12 @@
     "announce2": "2. BAGI CALON - CALON YANG TIDAK DISENARAIKAN, PROSES DOKUMENTASI MASIH DALAM SEMAKAN UNIT PENGAMBILAN DAN AKAN DIMAKLUMKAN DARI MASA KE SEMASA.",
     "placeholder":{
       "noic": "No. Kad Pengenalan",
-      "noreport": "No. Repot Polis"
+      "noreport": "No. Repot Polis",
+      "typeInfo": "Jenis Maklumat",
+      "noCar": "No. Kenderaan"
     },
     "titlerecruitment":"STATUS PENGAMBILAN JAWATAN PDRM",
+    "titlepoliceR":"STATUS REPOT POLIS",
     "err":{
       "needed": "diperlukan",
       "showData": "ANDA TIADA REPOT POLIS.",
@@ -113,7 +117,15 @@
       "applicantname": "NAMA PEMOHON",
       "date": "TARIKH / MASA",
       "location": "TEMPAT",
-      "status": "STATUS PANGGILAN"
+      "status": "STATUS PANGGILAN",
+      "noreport": "NO. REPOT POLIS",
+      "dateRP": "TARIKH DAN MASA REPOT POLIS",
+      "statusRP": "STATUS SIASATAN REPOT",
+      "noPaper": "NO. KERTAS SIASATAN",
+      "sectionInvestigation": " SEKSYEN SIASATAN",
+      "statusInvestigate": "STATUS SIASATAN",
+      "insOfficer": "PEGAWAI PENYIASAT",
+      "infoLetter": "SURAT PEMBERITAHUAN"
     }
   },
   "register": {

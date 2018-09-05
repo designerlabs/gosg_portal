@@ -32,8 +32,85 @@
         <br>
         <form [formGroup]="searchForm" #adSearchForm="ngForm" id="adSearch-form" role="form" novalidate="novalidate">
 
-            <div class="example-container mat-elevation-z8 padding-right20" >
+            <div class="example-container">
 
+                <div class="row marginRow">
+                    <div class="col-md-4 text-center paddingT">
+                        <img src="assets/images/semak_saman_trafik.jpg">
+                    </div>
+
+                    <div class="col-md-8 infoPDRM blackFont borderDiv">
+                        <div class="col-md-12 boldInfo"><br>
+                            {{ 'pdrm.attention' | translate }}<br>
+                            {{ 'pdrm.summon' | translate}}
+                        </div>
+
+                        <div class="col-md-4">                      
+                            <label class="labelInfo">{{ 'pdrm.placeholder.typeInfo' | translate }}</label>
+                        </div>
+
+                        <div class="col-md-8" *ngIf="langID==1">
+                            <mat-form-field class="example-full-width">
+                                <mat-select formControlName="optSelect" placeholder="" (change)="getSelection($event)">
+                                    <mat-option [value]=0>IDENTIFICATION CARD NO.</mat-option>
+                                    <mat-option [value]=1>CAR REG. NO.</mat-option>                   
+                                </mat-select>
+                            </mat-form-field>
+                        </div>  
+                        
+                        <div class="col-md-8" *ngIf="langID==2">
+                            <mat-form-field class="example-full-width">
+                                <mat-select formControlName="optSelect" placeholder="" (change)="getSelection($event)">
+                                    <mat-option [value]=0>NO. KAD PENGENALAN</mat-option>
+                                    <mat-option [value]=1>NO. KENDERAAN</mat-option>                   
+                                </mat-select>
+                            </mat-form-field>
+                        </div>  
+
+                        <div class="col-md-4">                      
+                            <label class="labelInfo">{{ 'pdrm.placeholder.noic' | translate }}</label>
+                        </div>
+
+                        <div class="col-md-8">
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="" formControlName="ic" (keyup)="checkReqValues()" required tabindex="2" style="color: black">
+                                <mat-error *ngIf="searchForm.controls.ic.hasError('required')">
+                                    {{ 'pdrm.placeholder.noic' | translate }} {{ 'pdrm.err.needed' | translate }}
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-4" *ngIf="varSelect==1">                      
+                                <label class="labelInfo">{{ 'pdrm.placeholder.noCar' | translate }}</label>
+                            </div>
+
+                        <div class="col-md-8" *ngIf="varSelect==1">
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="" formControlName="noCar" (keyup)="checkReqValues()"
+                                required tabindex="3"  style="color: black">
+                                <mat-error *ngIf="searchForm.controls.noCar.hasError('required')">
+                                    {{ 'pdrm.placeholder.noCar' | translate }} {{ 'pdrm.err.needed' | translate }}
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-12 paddingB">
+                            <button *ngIf="varSelect==1" tabindex="" mat-raised-button color="warn" type="button" id="btnreset" 
+                                class="form-control btn btn-md btn-warning font-size-s pull-right bttnCustom"
+                                (click)="resetModal.show()" style="margin-left: 5px;">
+                                <i class="fa fa-refresh"></i> {{'feedback.label.reset' | translate }}</button>
+                            <button mat-raised-button type="button" color="primary" id="searchbtn" 
+                                class="form-control btn btn-md btn-success font-size-s pull-right bttnCustom" [disabled]="!complete"
+                                (click)="searchApp(searchForm.value)">
+                                <i class="fa fa-search"></i> {{'appmngt.setSearch.search' | translate}}</button>
+                        </div>
+                        
+                    </div>
+                </div>
+            
+            </div>
+
+            <!-- <div class="example-container mat-elevation-z8 padding-right20" >
                 
                 <div class="row padding-15">
 
@@ -78,7 +155,7 @@
                     </div>
                 </div>
 
-            </div>
+            </div> -->
 
         </form>
     </div><br>
