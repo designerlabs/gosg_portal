@@ -71,7 +71,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
   poskodPemohon: FormControl;
   daerahPemohon: FormControl;
   negeriPemohon: FormControl;
-    
+
   warganegara: FormControl;
   typeIC: FormControl;
   icpassport: FormControl;
@@ -164,8 +164,8 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     @Inject(APP_CONFIG) private config: AppConfig,
     private router: Router,
     private route: ActivatedRoute,
-    private http: Http, 
-    private translate: TranslateService, 
+    private http: Http,
+    private translate: TranslateService,
     private protectedService: ProtectedService,
     private dialogsService: DialogsService,
     private toastr: ToastrService,
@@ -174,23 +174,23 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     private topnavservice: TopnavService,
     private validateService:ValidateService,
     public dialog: MatDialog,
-    private ng4FilesService: Ng4FilesService, 
-  ) { 
+    private ng4FilesService: Ng4FilesService,
+  ) {
 
     this.lang = translate.currentLang;
 
     this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
 
         const myLang = translate.currentLang;
-    
-        if (myLang == 'en') {    
+
+        if (myLang == 'en') {
             translate.get('HOME').subscribe((res: any) => {
                 this.lang = 'en';
                 this.langID = 1;
             });
         }
 
-        if (myLang == 'ms') {    
+        if (myLang == 'ms') {
             translate.get('HOME').subscribe((res: any) => {
                 this.lang = 'ms';
                 this.langID = 2;
@@ -202,12 +202,12 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
 
     });
 
-  }   
-  
+  }
+
   ngOnDestroy() {
     this.subscriptionLang.unsubscribe();
   }
-  
+
   ngOnInit() {
 
     if(!this.langID){
@@ -215,11 +215,11 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     }else{
       this.langID = 1;
     }
-   
+
     this.maskPostcode = this.validateService.getMask().postcode;
     this.maskIC = this.validateService.getMask().icno2;
     this.maskPhone = this.validateService.getMask().telephone;
-   
+
     this.firstFormGroup = this._formBuilder.group({
       textDisplay: new FormControl(),
       noLesen: new FormControl(),
@@ -305,7 +305,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
         this.agcCode = parseInt(params.agency);
       });
 
-      this.triggerDserviceValidation(this.dsvcCode);  
+      this.triggerDserviceValidation(this.dsvcCode);
     }
 
     this.disabled();
@@ -371,7 +371,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
         this.sharedService.errorHandling(data, (function(){
 
           if(data.user){
-            
+
             let phone = data.user.address.permanentAddressHomePhoneNo.split('*')[1];
 
             this.firstFormGroup.get('namaPemohon').setValue(data.user.fullName);
@@ -399,7 +399,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
       });
     }
 
-    else{ //need to be deleted Noraini for local only      
+    else{ //need to be deleted Noraini for local only
 
       let data = {
         "user": {
@@ -497,21 +497,21 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     this.loading = true;
     this.protectedService.getProtected('perhilitan/draft/'+this.getUrl,this.langID).subscribe(
     data => {
-      
+
       this.sharedService.errorHandling(data, (function(){
-    
+
         this.dataApp = data.perhilitanElesenResource;
         this.firstFormGroup.get('textDisplay').setValue('proceed');
-        
+
         this.firstFormGroup.get('noLesen').setValue(this.dataApp.licenseNo);
         this.firstFormGroup.get('noLesen').disable();
         //this.checkLisence(this.dataApp.licenseNo);
 
         this.viewRoc = this.dataApp.attachFileRoc;
         this.viewPbt = this.dataApp.attachFilePbt;
-        
 
-        if(this.dataApp.ictype == 1){ 
+
+        if(this.dataApp.ictype == 1){
           this.selectedTypeIC = 1; //1
         }else{
           this.selectedTypeIC = 0; //0
@@ -521,11 +521,11 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
 
         this.secondFormGroup.get('warganegara').setValue(this.dataApp.nationality.nationalityId);
         this.secondFormGroup.get('typeIC').setValue(this.dataApp.icType.icTypeId);
-        this.secondFormGroup.get('icpassport').setValue(this.dataApp.userIcNo);          
+        this.secondFormGroup.get('icpassport').setValue(this.dataApp.userIcNo);
         this.secondFormGroup.get('namaPemilik').setValue(this.dataApp.userFullname);
         this.secondFormGroup.get('phonePemilik').setValue(this.dataApp.userPhoneNo);
         this.secondFormGroup.get('jobType').setValue(this.dataApp.jobType.jobTypeId);
-        
+
         let getObjKeys = Object.keys(this.dataApp);
         let valObj = getObjKeys.filter(fmt => fmt === "workgroup");
 
@@ -534,19 +534,19 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
         }
 
         this.checkOccupation(this.dataApp.jobType.jobTypeId);
-        
+
         this.secondFormGroup.get('addPemilik').setValue(this.dataApp.userAddress);
-        this.secondFormGroup.get('poskodPemilik').setValue(this.dataApp.userPostcode);    
+        this.secondFormGroup.get('poskodPemilik').setValue(this.dataApp.userPostcode);
 
         this.thirdFormGroup.get('mailingAdd').setValue(this.dataApp.userMailingAddress);
-        this.thirdFormGroup.get('mailingPoskod').setValue(this.dataApp.userMailingPostcode);               
+        this.thirdFormGroup.get('mailingPoskod').setValue(this.dataApp.userMailingPostcode);
 
         this.fourthFormGroup.get('companyType').setValue(this.dataApp.businessType.businessTypeId);
         //this.fourthFormGroup.get('jenisMilikan').setValue(this.dataApp.pemilikan);
 
         let getObjKeysRegType = Object.keys(this.dataApp);
         let valObjRegType = getObjKeysRegType.filter(fmt => fmt === "registerType");
-        
+
         if(valObjRegType.length == 1){
           this.fourthFormGroup.get('registerType').setValue(this.dataApp.registerType.registerTypeId);
         }
@@ -554,10 +554,10 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
         this.fourthFormGroup.get('companyName').setValue(this.dataApp.userCompanyName);
         this.fourthFormGroup.get('companyAdd').setValue(this.dataApp.userCompanyAddress);
         this.fourthFormGroup.get('registerNo').setValue(this.dataApp.userCompanyRegNo);
-        this.fourthFormGroup.get('companyPoskod').setValue(this.dataApp.userCompanyPostcode);   
+        this.fourthFormGroup.get('companyPoskod').setValue(this.dataApp.userCompanyPostcode);
         this.fourthFormGroup.get('companyPhone').setValue(this.dataApp.userCompanyPhoneNo);
         this.fourthFormGroup.get('companyFax').setValue(this.dataApp.userFaxNo);
-        
+
         let getObjKeysUserPostcode = Object.keys(this.dataApp);
         let valObjUserPostcode = getObjKeysUserPostcode.filter(fmt => fmt === "userPostcode");
         if(valObjUserPostcode.length == 1){
@@ -577,21 +577,21 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
         let getObjKeysUserCompanyPostcode = Object.keys(this.dataApp);
         let valObjUserCompanyPostcode = getObjKeysUserCompanyPostcode.filter(fmt => fmt === "userCompanyPostcode");
         if(valObjUserCompanyPostcode.length == 1){
-          this.selectedPoskodComp = this.dataApp.userCompanyPostcode;         
+          this.selectedPoskodComp = this.dataApp.userCompanyPostcode;
           this.cityCompany = this.dataApp.userCompanyDistrict;
           //this.cityCompany2 = this.dataApp.state.stateId;
           this.checkposkod(3, this.selectedPoskodComp);
         }
 
         let getObjKeysXtvt = Object.keys(this.dataApp);
-        let valObjXtvt = getObjKeysXtvt.filter(fmt => fmt === "activity");          
+        let valObjXtvt = getObjKeysXtvt.filter(fmt => fmt === "activity");
         if(valObjXtvt.length == 1){
           this.changeBuss(this.dataApp.activity.activityId);
           this.fifthFormGroup.get('lsnActivity').setValue(this.dataApp.activity.activityId);
         }
-        
+
         let getObjKeysBusinessCategory = Object.keys(this.dataApp);
-        let valObjBusinessCategory = getObjKeysBusinessCategory.filter(fmt => fmt === "businessCategory");          
+        let valObjBusinessCategory = getObjKeysBusinessCategory.filter(fmt => fmt === "businessCategory");
         if(valObjBusinessCategory.length == 1){
           this.fifthFormGroup.get('businessCat').setValue(this.dataApp.businessCategory.businessCategoryId);
         }
@@ -602,19 +602,19 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
         if(this.dataApp.attachFileRoc){
           this.fifthFormGroup.get('file1').setValue('ROC.pdf');
         }
-        
+
         if(this.dataApp.attachFilePbt){
           this.fifthFormGroup.get('file2').setValue('PBT.pdf');
         }
 
         this.selectedOccupation = this.dataApp.jobType.jobTypeId;
         this.flag1 = false;
-        
+
       }).bind(this));
       this.loading = false;
     },
-    error => {       
-      this.toastr.error('Rekod tidak dijumpai', '');    
+    error => {
+      this.toastr.error('Rekod tidak dijumpai', '');
     });
 
   }
@@ -625,13 +625,13 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     data => {
 
       this.sharedService.errorHandling(data, (function(){
-        this.nationality = data.perhilitanNationalityResourceList;     
+        this.nationality = data.perhilitanNationalityResourceList;
 
       }).bind(this));
       this.loading = false;
     },
-    error => {       
-      this.loading = false;     
+    error => {
+      this.loading = false;
     });
   }
 
@@ -641,7 +641,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     data => {
 
       this.sharedService.errorHandling(data, (function(){
-        this.listjic = data.dropdownResourceList;     
+        this.listjic = data.dropdownResourceList;
       }).bind(this));
       this.loading = false;
     },
@@ -656,13 +656,13 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     data => {
 
       this.sharedService.errorHandling(data, (function(){
-        this.listOccupation = data.perhilitanJobTypeResourceList;     
+        this.listOccupation = data.perhilitanJobTypeResourceList;
 
       }).bind(this));
       this.loading = false;
     },
-    error => {      
-      this.loading = false;      
+    error => {
+      this.loading = false;
     });
   }
 
@@ -672,13 +672,13 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     data => {
 
       this.sharedService.errorHandling(data, (function(){
-        this.listGroupOcc = data.dropdownResourceList;     
+        this.listGroupOcc = data.dropdownResourceList;
 
       }).bind(this));
       this.loading = false;
     },
-    error => {     
-      this.loading = false;       
+    error => {
+      this.loading = false;
     });
   }
 
@@ -688,13 +688,13 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     data => {
 
       this.sharedService.errorHandling(data, (function(){
-        this.listJenisMilikan = data.perhilitanJenisPemilikanResourceList;     
+        this.listJenisMilikan = data.perhilitanJenisPemilikanResourceList;
 
       }).bind(this));
       this.loading = false;
     },
-    error => {   
-      this.loading = false;         
+    error => {
+      this.loading = false;
     });
   }
 
@@ -704,13 +704,13 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     data => {
 
       this.sharedService.errorHandling(data, (function(){
-        this.listRegComp = data.perhilitanRegisterTypeResourceList;     
+        this.listRegComp = data.perhilitanRegisterTypeResourceList;
 
       }).bind(this));
       this.loading = false;
     },
-    error => {       
-      this.loading = false;     
+    error => {
+      this.loading = false;
     });
   }
 
@@ -720,13 +720,13 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     data => {
 
       this.sharedService.errorHandling(data, (function(){
-        this.listbusiness = data.perhilitanActivityResourceList;     
+        this.listbusiness = data.perhilitanActivityResourceList;
 
       }).bind(this));
       this.loading = false;
     },
-    error => {    
-      this.loading = false;        
+    error => {
+      this.loading = false;
     });
   }
 
@@ -734,18 +734,18 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     let reqVal: any;
 
     if(this.secondFormGroup.get('jobType').value == 1){
-      reqVal = ["icpassport", 
-                "namaPemilik", 
-                "phonePemilik", 
-                "jobType", 
+      reqVal = ["icpassport",
+                "namaPemilik",
+                "phonePemilik",
+                "jobType",
                 "jobGroup",
                 "addPemilik","poskodPemilik","daerahPemilik","negeriPemilik"];
     }
     else{
-      reqVal = ["icpassport", 
-                "namaPemilik", 
-                "phonePemilik", 
-                "jobType", 
+      reqVal = ["icpassport",
+                "namaPemilik",
+                "phonePemilik",
+                "jobType",
                 "addPemilik","poskodPemilik","daerahPemilik","negeriPemilik"];
     }
 
@@ -775,7 +775,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
               "mailingPoskod",
               "mailingDaerah",
               "mailingNegeri"];
-    
+
 
     let nullPointers: any = [];
 
@@ -807,7 +807,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
               "companyDaerah",
               "companyNegeri",
               "companyPhone"];
-    
+
     let nullPointers: any = [];
 
     for (var reqData of reqVal) {
@@ -891,7 +891,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     else{
       this.secondFormGroup.get('jobGroup').enable();
     }
-   
+
     this.checkReqValues2();
   }
 
@@ -902,23 +902,23 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     this.secondFormGroup.get('negeriPemilik').disable();
     this.thirdFormGroup.get('mailingNegeri').disable();
     this.fourthFormGroup.get('companyNegeri').disable();
-   
+
     if(typeof(valP) == "object"){
       if(val == 1){
-        this.secondFormGroup.get('daerahPemilik').setValue('');  
-        this.secondFormGroup.get('negeriPemilik').setValue('');  
+        this.secondFormGroup.get('daerahPemilik').setValue('');
+        this.secondFormGroup.get('negeriPemilik').setValue('');
         valPoskod = valP.poskodPemilik;
       }
 
       else if (val == 2){
-        this.thirdFormGroup.get('mailingDaerah').setValue('');     
-        this.thirdFormGroup.get('mailingNegeri').setValue('');              
+        this.thirdFormGroup.get('mailingDaerah').setValue('');
+        this.thirdFormGroup.get('mailingNegeri').setValue('');
         valPoskod = valP.mailingPoskod;
       }
 
       else{
-        this.fourthFormGroup.get('companyDaerah').setValue('');     
-        this.fourthFormGroup.get('companyNegeri').setValue('');    
+        this.fourthFormGroup.get('companyDaerah').setValue('');
+        this.fourthFormGroup.get('companyNegeri').setValue('');
         valPoskod = valP.companyPoskod;
       }
     }
@@ -935,79 +935,79 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     }
 
     this.loading = true;
-  
+
     this.protectedService.getProtected('perhilitan/poskod/'+valPoskod,this.langID).subscribe(
     data => {
 
       this.sharedService.errorHandling(data, (function(){
 
         if(val == 1){ // alamat tetap
-          this.listdaerahT = data.postcodeResourceList;  
+          this.listdaerahT = data.postcodeResourceList;
 
-          if(this.listdaerahT.length == 1){      
+          if(this.listdaerahT.length == 1){
             this.poskodIdT = this.listdaerahT[0].postcodeId;
-            this.secondFormGroup.get('daerahPemilik').setValue(this.listdaerahT[0].postcodeId);  
-            this.secondFormGroup.get('negeriPemilik').setValue(this.listdaerahT[0].state);          
+            this.secondFormGroup.get('daerahPemilik').setValue(this.listdaerahT[0].postcodeId);
+            this.secondFormGroup.get('negeriPemilik').setValue(this.listdaerahT[0].state);
           }
 
           else{ //when city more than one
-            for (let i = 0; i < this.listdaerahT.length; i++) { 
+            for (let i = 0; i < this.listdaerahT.length; i++) {
 
-              if(this.cityT != undefined && this.cityT == this.listdaerahT[i].postcodeId){                
+              if(this.cityT != undefined && this.cityT == this.listdaerahT[i].postcodeId){
                 this.poskodIdT = this.listdaerahT[i].postcodeId;
                 this.secondFormGroup.get('daerahPemilik').setValue(this.listdaerahT[i].postcodeId);
-                this.secondFormGroup.get('negeriPemilik').setValue(this.listdaerahT[i].state);              
+                this.secondFormGroup.get('negeriPemilik').setValue(this.listdaerahT[i].state);
               }
-            }                   
+            }
           }
 
           this.checkReqValues2();
         }
 
         else if(val == 2){ // surat menyurat
-          this.listdaerahSurat = data.postcodeResourceList;   
+          this.listdaerahSurat = data.postcodeResourceList;
 
           if(this.listdaerahSurat.length == 1){
             this.poskodIdMailing = this.listdaerahSurat[0].postcodeId;
-            this.thirdFormGroup.get('mailingDaerah').setValue(this.listdaerahSurat[0].postcodeId);     
-            this.thirdFormGroup.get('mailingNegeri').setValue(this.listdaerahSurat[0].state); 
+            this.thirdFormGroup.get('mailingDaerah').setValue(this.listdaerahSurat[0].postcodeId);
+            this.thirdFormGroup.get('mailingNegeri').setValue(this.listdaerahSurat[0].state);
           }
 
           else{ //when city more than one
-            for (let i = 0; i < this.listdaerahSurat.length; i++) { 
+            for (let i = 0; i < this.listdaerahSurat.length; i++) {
 
-              if(this.citySurat != undefined && this.citySurat == this.listdaerahSurat[i].postcodeId){               
+              if(this.citySurat != undefined && this.citySurat == this.listdaerahSurat[i].postcodeId){
                 this.poskodIdMailing = this.listdaerahSurat[i].postcodeId;
-                this.thirdFormGroup.get('mailingDaerah').setValue(this.listdaerahSurat[i].postcodeId);     
-                this.thirdFormGroup.get('mailingNegeri').setValue(this.listdaerahSurat[i].state); 
+                this.thirdFormGroup.get('mailingDaerah').setValue(this.listdaerahSurat[i].postcodeId);
+                this.thirdFormGroup.get('mailingNegeri').setValue(this.listdaerahSurat[i].state);
               }
-            }  
+            }
           }
 
           this.checkReqValues3();
         }
 
         else{ // company
-          this.listdaerahCompany = data.postcodeResourceList;   
+          this.listdaerahCompany = data.postcodeResourceList;
 
           if(this.listdaerahCompany.length == 1){
 
             this.stateCompany = this.listdaerahCompany[0].formValue;
-            this.fourthFormGroup.get('companyDaerah').setValue(this.listdaerahCompany[0].postcodeId);     
-            this.fourthFormGroup.get('companyNegeri').setValue(this.listdaerahCompany[0].state);       
+            this.fourthFormGroup.get('companyDaerah').setValue(this.listdaerahCompany[0].postcodeId);
+            this.fourthFormGroup.get('companyNegeri').setValue(this.listdaerahCompany[0].state);
           }
 
           else{ //when city more than one
-            for (let i = 0; i < this.listdaerahCompany.length; i++) { 
+            for (let i = 0; i < this.listdaerahCompany.length; i++) {
 
               if((this.cityCompany == this.listdaerahCompany[i].city.toLowerCase() && this.cityCompany2 == this.listdaerahCompany[i].formValue)
-                || this.cityCompany == this.listdaerahCompany[i].postcodeId){               
-              
+                || this.cityCompany == this.listdaerahCompany[i].postcodeId){
+
                 this.stateCompany = this.listdaerahCompany[i].formValue;
-                this.fourthFormGroup.get('companyDaerah').setValue(this.listdaerahCompany[i].postcodeId);     
-                this.fourthFormGroup.get('companyNegeri').setValue(this.listdaerahCompany[i].state); 
+                this.fourthFormGroup.get('companyDaerah').setValue(this.listdaerahCompany[i].postcodeId);
+                this.fourthFormGroup.get('companyNegeri').setValue(this.listdaerahCompany[i].state);
               }
-            }  
+            }
           }
 
           this.checkReqValues4();
@@ -1016,46 +1016,46 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
       }).bind(this));
       this.loading = false;
     },
-    error => {     
-      this.loading = false;       
-    });    
+    error => {
+      this.loading = false;
+    });
   }
 
   checkState(val, formValues){
-     
+
     if(val == 1){
       formValues = formValues.daerahPemilik;
-  
-      for (let i = 0; i < this.listdaerahT.length; i++) { 
+
+      for (let i = 0; i < this.listdaerahT.length; i++) {
         if(formValues == this.listdaerahT[i].postcodeId){
           this.poskodIdT = this.listdaerahT[i].postcodeId;
-          this.secondFormGroup.get('negeriPemilik').setValue(this.listdaerahT[i].state); 
+          this.secondFormGroup.get('negeriPemilik').setValue(this.listdaerahT[i].state);
         }
-      } 
-    } 
-    
+      }
+    }
+
     else if(val == 2){
       formValues = formValues.mailingDaerah;
 
-      for (let i = 0; i < this.listdaerahSurat.length; i++) { 
+      for (let i = 0; i < this.listdaerahSurat.length; i++) {
         if(formValues == this.listdaerahSurat[i].postcodeId){
           this.poskodIdMailing = this.listdaerahSurat[i].postcodeId;
-          this.thirdFormGroup.get('mailingNegeri').setValue(this.listdaerahSurat[i].state); 
+          this.thirdFormGroup.get('mailingNegeri').setValue(this.listdaerahSurat[i].state);
         }
-      } 
+      }
     }
 
     else{
       formValues = formValues.companyDaerah;
 
-      for (let i = 0; i < this.listdaerahCompany.length; i++) { 
+      for (let i = 0; i < this.listdaerahCompany.length; i++) {
         if(formValues == this.listdaerahCompany[i].postcodeId){
           this.stateCompany = this.listdaerahCompany[i].formValue;
-          this.fourthFormGroup.get('companyNegeri').setValue(this.listdaerahCompany[i].state); 
+          this.fourthFormGroup.get('companyNegeri').setValue(this.listdaerahCompany[i].state);
         }
-      } 
+      }
     }
-    
+
   }
 
   changeBuss(formValue: any){
@@ -1065,14 +1065,14 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     data => {
 
       this.sharedService.errorHandling(data, (function(){
-        this.listcatbuss = data.perhilitanBusinessCategoryResourceList;     
+        this.listcatbuss = data.perhilitanBusinessCategoryResourceList;
         this.checkReqValues5();
 
       }).bind(this));
       this.loading = false;
     },
-    error => {     
-      this.loading = false;       
+    error => {
+      this.loading = false;
     });
   }
 
@@ -1082,18 +1082,18 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
 
     if(chkboxCopyAdd == true){
 
-      this.selectedPoskodSurat = this.secondFormGroup.get('poskodPemilik').value;            
-      this.thirdFormGroup.get('mailingAdd').setValue(this.secondFormGroup.get('addPemilik').value);     
-      this.thirdFormGroup.get('mailingPoskod').setValue(this.secondFormGroup.get('poskodPemilik').value);   
-      this.checkposkod(2, this.secondFormGroup.get('poskodPemilik').value);       
+      this.selectedPoskodSurat = this.secondFormGroup.get('poskodPemilik').value;
+      this.thirdFormGroup.get('mailingAdd').setValue(this.secondFormGroup.get('addPemilik').value);
+      this.thirdFormGroup.get('mailingPoskod').setValue(this.secondFormGroup.get('poskodPemilik').value);
+      this.checkposkod(2, this.secondFormGroup.get('poskodPemilik').value);
     }
 
     else{
 
-      this.thirdFormGroup.get('mailingAdd').setValue('');     
-      this.thirdFormGroup.get('mailingPoskod').setValue('');     
-      this.thirdFormGroup.get('mailingDaerah').setValue('');  
-      this.thirdFormGroup.get('mailingNegeri').setValue('');        
+      this.thirdFormGroup.get('mailingAdd').setValue('');
+      this.thirdFormGroup.get('mailingPoskod').setValue('');
+      this.thirdFormGroup.get('mailingDaerah').setValue('');
+      this.thirdFormGroup.get('mailingNegeri').setValue('');
     }
 
     this.checkReqValues3();
@@ -1104,30 +1104,30 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     let chkboxCopyAdd = this.fourthFormGroup.get('copyAddPemilik').value;
 
     if(chkboxCopyAdd == true){
-      
-      this.selectedPoskodComp = this.secondFormGroup.get('poskodPemilik').value;   
-      this.fourthFormGroup.get('companyAdd').setValue(this.secondFormGroup.get('addPemilik').value);     
-      this.fourthFormGroup.get('companyPoskod').setValue(this.secondFormGroup.get('poskodPemilik').value);   
-      this.checkposkod(3, this.secondFormGroup.get('poskodPemilik').value);       
+
+      this.selectedPoskodComp = this.secondFormGroup.get('poskodPemilik').value;
+      this.fourthFormGroup.get('companyAdd').setValue(this.secondFormGroup.get('addPemilik').value);
+      this.fourthFormGroup.get('companyPoskod').setValue(this.secondFormGroup.get('poskodPemilik').value);
+      this.checkposkod(3, this.secondFormGroup.get('poskodPemilik').value);
     }
 
     else{
 
-      this.fourthFormGroup.get('companyAdd').setValue('');     
-      this.fourthFormGroup.get('companyPoskod').setValue('');     
-      this.fourthFormGroup.get('companyDaerah').setValue('');  
-      this.fourthFormGroup.get('companyNegeri').setValue('');        
+      this.fourthFormGroup.get('companyAdd').setValue('');
+      this.fourthFormGroup.get('companyPoskod').setValue('');
+      this.fourthFormGroup.get('companyDaerah').setValue('');
+      this.fourthFormGroup.get('companyNegeri').setValue('');
     }
 
     this.checkReqValues3();
   }
 
-  uploadFile1(selectedFiles: Ng4FilesSelected): void {    
-   
-    let nameFile1 = selectedFiles.files[0].name;  
+  uploadFile1(selectedFiles: Ng4FilesSelected): void {
+
+    let nameFile1 = selectedFiles.files[0].name;
     let sizeFile = selectedFiles.files[0].size;
     let extFile = selectedFiles.files[0].name.split('.')[1];
-  
+
     this.selectedFile1 = [];
     this.selectedFile1.push(selectedFiles);
     this.fifthFormGroup.controls.file1.setValue(nameFile1);
@@ -1146,12 +1146,12 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
       }
     }
 
-    this.changeBase641(this.selectedFile1);         
-    this.checkReqValues5(); 
-  
+    this.changeBase641(this.selectedFile1);
+    this.checkReqValues5();
+
   }
 
-  uploadFile2(selectedFiles: Ng4FilesSelected): void {    
+  uploadFile2(selectedFiles: Ng4FilesSelected): void {
 
     let nameFile1 = selectedFiles.files[0].name;
     let sizeFile = selectedFiles.files[0].size;
@@ -1183,11 +1183,11 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     this.loading = true;
     var file:File = inputValue[0].files[0];
     var myReader:FileReader = new FileReader();
-  
+
     myReader.onloadend = (e) => {
       let base641;
       base641 = myReader.result;
-      let splitB64 = base641.split('data:application/pdf;base64,')[1];          
+      let splitB64 = base641.split('data:application/pdf;base64,')[1];
       this.fifthFormGroup.get('dispBase641').setValue(splitB64);
     }
     myReader.readAsDataURL(file);
@@ -1198,11 +1198,11 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     this.loading = true;
     var file:File = inputValue[0].files[0];
     var myReader:FileReader = new FileReader();
-  
+
     myReader.onloadend = (e) => {
       let base642;
       base642 = myReader.result;
-      let splitB64 = base642.split('data:application/pdf;base64,')[1];          
+      let splitB64 = base642.split('data:application/pdf;base64,')[1];
       this.fifthFormGroup.get('dispBase642').setValue(splitB64);
     }
     myReader.readAsDataURL(file);
@@ -1233,15 +1233,15 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
 
       this.sharedService.errorHandling(data, (function(){
 
-        let dataLisence = data;           
+        let dataLisence = data;
         let getObjKeys = Object.keys(dataLisence);
         let valObj = getObjKeys.filter(fmt => fmt === "noLicenceCanRenewResourceList");
 
         if(valObj.length == 1){
           this.flag1 = false;
           dataLisence = data.noLicenceCanRenewResourceList
-                  
-          if(dataLisence[0].ictype == 1){ 
+
+          if(dataLisence[0].ictype == 1){
             this.selectedTypeIC = 1; //1
           }else{
             this.selectedTypeIC = 0; //0
@@ -1249,7 +1249,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
 
           this.secondFormGroup.get('warganegara').setValue(parseInt(dataLisence[0].warganegara));
           this.secondFormGroup.get('typeIC').setValue(parseInt(dataLisence[0].ictype));
-          this.secondFormGroup.get('icpassport').setValue(dataLisence[0].icno);          
+          this.secondFormGroup.get('icpassport').setValue(dataLisence[0].icno);
           this.secondFormGroup.get('namaPemilik').setValue(dataLisence[0].nama);
           this.secondFormGroup.get('phonePemilik').setValue(dataLisence[0].notel);
           this.secondFormGroup.get('jobType').setValue(parseInt(dataLisence[0].pekerjaan));
@@ -1257,12 +1257,12 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
           this.secondFormGroup.get('addPemilik').setValue(dataLisence[0].alamat);
           let splitPoskod = dataLisence[0].poskod;
           splitPoskod = splitPoskod.substring(0,5);
-          this.secondFormGroup.get('poskodPemilik').setValue(splitPoskod);    
+          this.secondFormGroup.get('poskodPemilik').setValue(splitPoskod);
 
           this.thirdFormGroup.get('mailingAdd').setValue(dataLisence[0].alamatsurat);
           let splitPoskodMail = dataLisence[0].poskodsurat;
           splitPoskodMail = splitPoskodMail.substring(0,5);
-          this.thirdFormGroup.get('mailingPoskod').setValue(splitPoskodMail);               
+          this.thirdFormGroup.get('mailingPoskod').setValue(splitPoskodMail);
 
           this.fourthFormGroup.get('companyType').setValue(parseInt(dataLisence[0].companytype));
           this.fourthFormGroup.get('jenisMilikan').setValue(parseInt(dataLisence[0].pemilikan));
@@ -1272,10 +1272,10 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
           this.fourthFormGroup.get('registerNo').setValue(dataLisence[0].roc);
           let splitPoskodComp= dataLisence[0].companypostcode;
           splitPoskodComp = splitPoskodComp.substring(0,5);
-          this.fourthFormGroup.get('companyPoskod').setValue(splitPoskodComp);   
+          this.fourthFormGroup.get('companyPoskod').setValue(splitPoskodComp);
           this.fourthFormGroup.get('companyPhone').setValue(dataLisence[0].companynotel);
           this.fourthFormGroup.get('companyFax').setValue(dataLisence[0].companynofax);
-          
+
           this.selectedPoskodT = splitPoskod;
           this.selectedPoskodSurat = splitPoskodMail;
           this.selectedPoskodComp = splitPoskodComp;
@@ -1288,11 +1288,11 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
             this.viewRoc = dataLisence[0].urlroc;
             this.viewPbt = dataLisence[0].urlpbt;
           }
-          
+
           this.checkposkod(1, this.selectedPoskodT);
           this.checkposkod(2, this.selectedPoskodSurat);
           this.checkposkod(3, this.selectedPoskodComp);
-         
+
           this.changeBuss(dataLisence[0].lesen);
 
           this.fifthFormGroup.get('lsnActivity').setValue(parseInt(dataLisence[0].lesen));
@@ -1320,24 +1320,24 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
             this.toastr.error(dataLisence[0].status, '');
           }
         }
-       
+
       }).bind(this));
       this.loading = false;
     },
-    error => {    
-      this.loading = false;        
+    error => {
+      this.loading = false;
     });
   }
 
   openRoc(val){
 
     if(this.getUrl != undefined){
-      var blob;  
-      blob = this.converBase64toBlob(val, 'application/pdf'); 
+      var blob;
+      blob = this.converBase64toBlob(val, 'application/pdf');
       /*Find the content types for different format of file at http://www.freeformatter.com/mime-types-list.html*/
-    
+
       var blobURL = URL.createObjectURL(blob);
-      window.open(blobURL);          
+      window.open(blobURL);
     }
 
     else{
@@ -1347,10 +1347,10 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
 
   openPbt(val){
     if(this.getUrl != undefined){
-      var blob;  
-      blob = this.converBase64toBlob(val, 'application/pdf'); 
+      var blob;
+      blob = this.converBase64toBlob(val, 'application/pdf');
       /*Find the content types for different format of file at http://www.freeformatter.com/mime-types-list.html*/
-    
+
       var blobURL = URL.createObjectURL(blob);
       window.open(blobURL);
     }
@@ -1382,7 +1382,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
   }
 
   openDialog(a,b,c) {
-    
+
     this.dialog.open(PopupServiceDialog, {
       data: {
         lesen: a,
@@ -1395,7 +1395,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
   draft(){
 
     if(this.getUrl == undefined){
-    
+
       let body = {
         "licensePasscode": "",
         "licenseNo": "",
@@ -1469,9 +1469,9 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
       body.licenseNo = this.firstFormGroup.get('noLesen').value;
       body.userFullname = this.secondFormGroup.get('namaPemilik').value;
       body.userAddress = this.secondFormGroup.get('addPemilik').value;
-      body.userPostcode = this.secondFormGroup.get('poskodPemilik').value; 
-      body.userPostcodeId = this.poskodIdT; 
-      body.userMailingPostcodeId = this.poskodIdMailing;    
+      body.userPostcode = this.secondFormGroup.get('poskodPemilik').value;
+      body.userPostcodeId = this.poskodIdT;
+      body.userMailingPostcodeId = this.poskodIdMailing;
       body.userMailingAddress = this.thirdFormGroup.get('mailingAdd').value;
       body.userMailingPostcode = this.thirdFormGroup.get('mailingPoskod').value;
       body.userIcNo = this.secondFormGroup.get('icpassport').value;
@@ -1485,31 +1485,31 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
       body.userCompanyPhoneNo = this.fourthFormGroup.get('companyPhone').value;
       body.userCompanyFaxNo = this.fourthFormGroup.get('companyFax').value;
       body.userCompanyRegNo = this.fourthFormGroup.get('registerNo').value;
-      body.userCompanyDistrict = this.fourthFormGroup.get('companyDaerah').value; 
+      body.userCompanyDistrict = this.fourthFormGroup.get('companyDaerah').value;
       body.attachFileRoc = this.fifthFormGroup.get('dispBase641').value;
       body.extFileRoc = "pdf";
       body.attachFilePbt = this.fifthFormGroup.get('dispBase642').value;
       body.extFilePbt = "pdf";
-      body.attachFileIc = "";  
+      body.attachFileIc = "";
       body.extFileIc = "";
       body.userApplyStatus = "";
       body.userLicenseNoStatus = "";
       body.userLicenseRenewStatus = "";
       body.userLicenseCronRenewStatus = "";
-      body.nationality.nationalityId = this.secondFormGroup.get('warganegara').value; 
-      body.icType.icTypeId = this.secondFormGroup.get('typeIC').value; 
-      body.icType.nationality.nationalityId = this.secondFormGroup.get('warganegara').value; 
+      body.nationality.nationalityId = this.secondFormGroup.get('warganegara').value;
+      body.icType.icTypeId = this.secondFormGroup.get('typeIC').value;
+      body.icType.nationality.nationalityId = this.secondFormGroup.get('warganegara').value;
       body.jobType.jobTypeId = this.secondFormGroup.get('jobType').value;
-      body.workgroup.workGroupId = this.secondFormGroup.get('jobGroup').value; 
-      body.workgroup.jobType.jobTypeId = this.secondFormGroup.get('jobType').value; 
-      body.businessType.businessTypeId = this.fourthFormGroup.get('companyType').value; 
-      body.registerType.registerTypeId = this.fourthFormGroup.get('registerType').value; 
+      body.workgroup.workGroupId = this.secondFormGroup.get('jobGroup').value;
+      body.workgroup.jobType.jobTypeId = this.secondFormGroup.get('jobType').value;
+      body.businessType.businessTypeId = this.fourthFormGroup.get('companyType').value;
+      body.registerType.registerTypeId = this.fourthFormGroup.get('registerType').value;
       body.state.stateId = this.stateCompany;
-      body.activity.activityId = this.fifthFormGroup.get('lsnActivity').value; 
+      body.activity.activityId = this.fifthFormGroup.get('lsnActivity').value;
       body.businessCategory.businessCategoryId = this.fifthFormGroup.get('businessCat').value;
       body.isDraft = "True";
       body.cronStatus = false;
-      
+
       //console.log(JSON.stringify(body));
       this.loading = true;
       this.protectedService.create(body,'perhilitan/draft/save',this.langID, this.dsvcCode, this.agcCode).subscribe(
@@ -1601,9 +1601,9 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
       body.licenseNo = this.firstFormGroup.get('noLesen').value;
       body.userFullname = this.secondFormGroup.get('namaPemilik').value;
       body.userAddress = this.secondFormGroup.get('addPemilik').value;
-      body.userPostcode = this.secondFormGroup.get('poskodPemilik').value; 
-      body.userPostcodeId = this.poskodIdT; 
-      body.userMailingPostcodeId = this.poskodIdMailing;    
+      body.userPostcode = this.secondFormGroup.get('poskodPemilik').value;
+      body.userPostcodeId = this.poskodIdT;
+      body.userMailingPostcodeId = this.poskodIdMailing;
       body.userMailingAddress = this.thirdFormGroup.get('mailingAdd').value;
       body.userMailingPostcode = this.thirdFormGroup.get('mailingPoskod').value;
       body.userIcNo = this.secondFormGroup.get('icpassport').value;
@@ -1617,33 +1617,33 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
       body.userCompanyPhoneNo = this.fourthFormGroup.get('companyPhone').value;
       body.userCompanyFaxNo = this.fourthFormGroup.get('companyFax').value;
       body.userCompanyRegNo = this.fourthFormGroup.get('registerNo').value;
-      body.userCompanyDistrict = this.fourthFormGroup.get('companyDaerah').value; 
+      body.userCompanyDistrict = this.fourthFormGroup.get('companyDaerah').value;
       body.attachFileRoc = this.fifthFormGroup.get('dispBase641').value;
       body.extFileRoc = "pdf";
       body.attachFilePbt = this.fifthFormGroup.get('dispBase642').value;
       body.extFilePbt = "pdf";
-      body.attachFileIc = "";  
+      body.attachFileIc = "";
       body.extFileIc = "";
       body.userApplyStatus = "";
       body.userLicenseNoStatus = "";
       body.userLicenseRenewStatus = "";
       body.userLicenseCronRenewStatus = "";
-      body.nationality.nationalityId = this.secondFormGroup.get('warganegara').value; 
-      body.icType.icTypeId = this.secondFormGroup.get('typeIC').value; 
-      body.icType.nationality.nationalityId = this.secondFormGroup.get('warganegara').value; 
+      body.nationality.nationalityId = this.secondFormGroup.get('warganegara').value;
+      body.icType.icTypeId = this.secondFormGroup.get('typeIC').value;
+      body.icType.nationality.nationalityId = this.secondFormGroup.get('warganegara').value;
       body.jobType.jobTypeId = this.secondFormGroup.get('jobType').value;
-      body.workgroup.workGroupId = this.secondFormGroup.get('jobGroup').value; 
-      body.workgroup.jobType.jobTypeId = this.secondFormGroup.get('jobType').value; 
-      body.businessType.businessTypeId = this.fourthFormGroup.get('companyType').value; 
-      body.registerType.registerTypeId = this.fourthFormGroup.get('registerType').value; 
+      body.workgroup.workGroupId = this.secondFormGroup.get('jobGroup').value;
+      body.workgroup.jobType.jobTypeId = this.secondFormGroup.get('jobType').value;
+      body.businessType.businessTypeId = this.fourthFormGroup.get('companyType').value;
+      body.registerType.registerTypeId = this.fourthFormGroup.get('registerType').value;
       body.state.stateId = this.stateCompany;
-      body.activity.activityId = this.fifthFormGroup.get('lsnActivity').value; 
+      body.activity.activityId = this.fifthFormGroup.get('lsnActivity').value;
       body.businessCategory.businessCategoryId = this.fifthFormGroup.get('businessCat').value;
       body.isDraft = "True";
       body.cronStatus = false;
-          
-      //console.log(JSON.stringify(body));   
-      this.loading = true;   
+
+      //console.log(JSON.stringify(body));
+      this.loading = true;
       this.protectedService.create(body,'perhilitan/draft/save',this.langID, this.dsvcCode, this.agcCode).subscribe(
       data => {
         this.sharedService.errorHandling(data, (function () {
@@ -1657,8 +1657,8 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
         this.toastr.error(JSON.parse(error._body).statusDesc, '');
       });
     }
-    
-  }  
+
+  }
 
   submit(){
 
@@ -1729,49 +1729,49 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     body.userIcNo = this.secondFormGroup.get('icpassport').value;
     body.userEmail = this.firstFormGroup.get('emailPemohon').value;
     body.jobType.jobTypeId = this.secondFormGroup.get('jobType').value;
-    body.workgroup.workGroupId = this.secondFormGroup.get('jobGroup').value; 
+    body.workgroup.workGroupId = this.secondFormGroup.get('jobGroup').value;
     body.userPhoneNo = this.secondFormGroup.get('phonePemilik').value;
     body.userFaxNo = "";
-    body.businessType.businessTypeId = this.fourthFormGroup.get('companyType').value; 
+    body.businessType.businessTypeId = this.fourthFormGroup.get('companyType').value;
     body.userCompanyName = this.fourthFormGroup.get('companyName').value;
     body.userCompanyRegNo = this.fourthFormGroup.get('registerNo').value;
-    body.registerType.registerTypeId = this.fourthFormGroup.get('registerType').value; 
+    body.registerType.registerTypeId = this.fourthFormGroup.get('registerType').value;
     body.userCompanyAddress = this.fourthFormGroup.get('companyAdd').value;
     body.userCompanyPostcode = this.fourthFormGroup.get('companyPoskod').value;
     body.userCompanyPhoneNo = this.fourthFormGroup.get('companyPhone').value;
     body.userCompanyFaxNo = this.fourthFormGroup.get('companyFax').value;
-    body.userCompanyDistrict = this.fourthFormGroup.get('companyDaerah').value; 
+    body.userCompanyDistrict = this.fourthFormGroup.get('companyDaerah').value;
     body.state.stateId = this.stateCompany;
     body.attachFileRoc = this.fifthFormGroup.get('dispBase641').value;
     body.extFileRoc = "pdf";
     body.attachFilePbt = this.fifthFormGroup.get('dispBase642').value;
     body.extFilePbt = "pdf";
-    body.attachFileIc = "";  
+    body.attachFileIc = "";
     body.extFileIc = "";
-    body.userApplicationType = "Renew";   
+    body.userApplicationType = "Renew";
     body.userApplyStatus = "";
     body.userLicenseNoStatus = "";
     body.userLicenseRenewStatus = "";
     body.userLicenseCronRenewStatus = "";
     body.licensePasscode = "";
-    body.activity.activityId = this.fifthFormGroup.get('lsnActivity').value; 
+    body.activity.activityId = this.fifthFormGroup.get('lsnActivity').value;
     body.businessCategory.businessCategoryId = this.fifthFormGroup.get('businessCat').value;
-    body.nationality.nationalityId = this.secondFormGroup.get('warganegara').value; 
-    body.icType.icTypeId = this.secondFormGroup.get('typeIC').value; 
-    body.icType.nationality.nationalityId = this.secondFormGroup.get('warganegara').value; 
+    body.nationality.nationalityId = this.secondFormGroup.get('warganegara').value;
+    body.icType.icTypeId = this.secondFormGroup.get('typeIC').value;
+    body.icType.nationality.nationalityId = this.secondFormGroup.get('warganegara').value;
     body.userFullname = this.secondFormGroup.get('namaPemilik').value;
     body.userAddress = this.secondFormGroup.get('addPemilik').value;
-    body.userPostcode = this.secondFormGroup.get('poskodPemilik').value;     
+    body.userPostcode = this.secondFormGroup.get('poskodPemilik').value;
     body.userMailingAddress = this.thirdFormGroup.get('mailingAdd').value;
     body.userMailingPostcode = this.thirdFormGroup.get('mailingPoskod').value;
     body.isDraft = false;
 
-    // body.userPostcodeId = this.poskodIdT; 
-    // body.userMailingPostcodeId = this.poskodIdMailing;    
-    // body.workgroup.jobType.jobTypeId = this.secondFormGroup.get('jobType').value;  
+    // body.userPostcodeId = this.poskodIdT;
+    // body.userMailingPostcodeId = this.poskodIdMailing;
+    // body.workgroup.jobType.jobTypeId = this.secondFormGroup.get('jobType').value;
     // body.isDraft = "True";
     // body.cronStatus = false;
-       
+
     //console.log(JSON.stringify(body));
     this.loading = true;
     this.protectedService.create(body,'perhilitan/renew',this.langID, this.dsvcCode, this.agcCode).subscribe(
@@ -1796,11 +1796,11 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
       .switchMap((params: ParamMap) =>
         this.protectedService.validateDserviceByRefCode(dsvcCode))
       .subscribe(resValidation => {
-        
+
         if(!resValidation.valid) {
           this.toastr.error('Invalid Service!', '');
           this.router.navigate(['404']);
-          
+          this.loading = false;
           // sub = Observable.interval(2000)
           // .subscribe((val) => {
           //   window.close();
@@ -1816,7 +1816,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
       error => {
         this.toastr.error(JSON.parse(error._body).statusDesc, '');
         this.loading = false;
-  
+
       });
   }
 
@@ -1829,7 +1829,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
 
 
 export class PopupServiceDialog {
- 
+
   constructor(
     public dialogRef: MatDialogRef<PopupServiceDialog>,
     private translate: TranslateService,

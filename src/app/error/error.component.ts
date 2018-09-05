@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ErrorComponent implements OnInit {
 
+  loading: boolean;
   constructor() { }
 
   ngOnInit() {
+    this.loading = false;
   }
 
 }

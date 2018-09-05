@@ -18,7 +18,10 @@ import { Observable } from 'rxjs/Observable';
   templateUrl: './subarticle.component.html',
   styleUrls: ['./subarticle.component.css']
 })
-export class SubarticleComponent implements OnInit, OnDestroy {
+export class SubarticleComponent implements OnInit, OnDestroy, AfterViewChecked {
+  le_menu_code: any;
+  le_code: any;
+  le_content: any;
   agencyActive: boolean = false;
   statusID: any;
   @Output() menuClick = new EventEmitter();
@@ -120,6 +123,10 @@ export class SubarticleComponent implements OnInit, OnDestroy {
 
   }
 
+  ngAfterViewChecked(){
+    this.le_content="";
+  }
+
   ngOnDestroy() {
     this.subscriptionLang.unsubscribe();
   }
@@ -145,7 +152,24 @@ export class SubarticleComponent implements OnInit, OnDestroy {
     event.preventDefault();
   }
 
+  clickContent(e, status, event){
+    event.preventDefault();
+    this.le_content="";
+    this.navService.loader = true;
+    return this.http.get(this.config.urlPortal + 'content/' + e.contentCode + '?language=' + localStorage.getItem('langID')+'&type=lifeevent').subscribe(data => {
+      this.navService.loader = false;
+      this.le_menu_code = e.contentCode;
+      this.le_content = data['contentCategoryResource']['results'][0]['content']['contentText'];
+      this.le_code = data['contentCategoryResource']['results'][0]['content']['contentCode'];
+    },
+    error => {
+      this.navService.loader = false;
+    });
+
+  }
+
   clickSideMenuByAgency(e, status, event) {
+    this.le_content="";
     this.navService.loader = true;
     this.agencyActive = true;
     this.navService.getSubArticleUrlByAgency(localStorage.getItem('langID'));

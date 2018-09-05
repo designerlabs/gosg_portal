@@ -42,23 +42,23 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private activatedRoute:ActivatedRoute,
     @Inject(APP_CONFIG) private config: AppConfig,
     private router: Router,
-    private http: Http, 
-    private translate: TranslateService, 
+    private http: Http,
+    private translate: TranslateService,
     private protectedService: ProtectedService,
     private dialogsService: DialogsService,
     private toastr: ToastrService,
     private sharedService: SharedService,
     private topnavservice: TopnavService,
-  ) { 
+  ) {
 
     this.lang = translate.currentLang;
 
     this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
 
         const myLang = translate.currentLang;
-    
+
         if (myLang == 'en') {
-    
+
             translate.get('HOME').subscribe((res: any) => {
                 this.lang = 'en';
                 this.langID = 1;
@@ -66,7 +66,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         }
 
         if (myLang == 'ms') {
-    
+
             translate.get('HOME').subscribe((res: any) => {
                 this.lang = 'ms';
                 this.langID = 2;
@@ -80,13 +80,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     });
 
-  }   
-  
+  }
+
   ngOnDestroy() {
     this.subscriptionLang.unsubscribe();
     //this.subscription.unsubscribe();
   }
-  
+
   ngOnInit() {
 
     if(!this.langID){
@@ -112,7 +112,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.protectedService.getDashboardData(lang).subscribe(
       data => {
         this.dashboardData = data.dashboard;
-        
+
         this.totalApp = this.dashboardData.total;
         this.inProgress = this.dashboardData.pending;
         this.approved = this.dashboardData.success;
@@ -121,9 +121,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
       },
       error => {
         this.loading = false;
-        this.toastr.error(this.translate.instant('Sorry'), '');            
-    });    
+        // this.toastr.error(this.translate.instant('common.err.servicedown'), '');
+    });
   }
-  
+
 }
-  
