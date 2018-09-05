@@ -92,15 +92,28 @@
   },
   "pdrm":{
     "reportPolice":"Enter Police Report No.",
+    "recruitment":"Review is valid based on user IC No.",
     "example": "Eg. Police Report No.: 012345/18",
-    "attention": "Attention: ",
+    "attention": "ATTENTION:",
+    "announcement": "ANNOUNCEMENT",
+    "announce1": "1. SEMAKAN KEMPUTUSAN TEMU DUGA BAGI CALON - CALON INSPEKTOR 2017 DAN 2018.",
+    "announce2": "2. BAGI CALON - CALON YANG TIDAK DISENARAIKAN, PROSES DOKUMENTASI MASIH DALAM SEMAKAN UNIT PENGAMBILAN DAN AKAN DIMAKLUMKAN DARI MASA KE SEMASA.",
     "placeholder":{
       "noic": "Indentification Card No.",
       "noreport": "Police Report No."
     },
+    "titlerecruitment":"PDRM RECRUITMENT POSITION STATUS",
     "err":{
       "needed": "needed",
-      "showData": "YOU DONT HAVE ANY POLICE REPORT."
+      "showData": "YOU DONT HAVE ANY POLICE REPORT.",
+      "msgrecruitment": "ANY QUESTIONS PLEASE CONTACT THE APPLICATION UNIT, BUKIT AMAN INLINE 03-2266 8350 / 8351 / 8349"
+    },
+    "title":{
+      "icno": "NEW IC NO.",
+      "applicantname": "APPLICANT NAME",
+      "date": "DATE / TIME",
+      "location": "LOCATION",
+      "status": "RECRUIMENT STATUS"
     }
   },
   "register": {

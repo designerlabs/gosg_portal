@@ -17,3 +17,83 @@
 .example-full-width {
     width: 100%;
 }
+
+.padding20{
+    padding: 20px;
+}
+
+.blackFont{
+    color: black;
+}
+
+.boldInfo{
+    color: black; 
+    font-weight: bold;
+}
+
+.boldCenterInfo{
+    color: black; 
+    font-weight: bold; 
+    text-align: center;
+}
+
+.infoPDRM{
+    background-color:#cdedfd;
+}
+
+.labelInfo{
+    font-size: 15px;
+    padding-top: 15px;
+}
+
+.paddingB{
+    padding-bottom: 10px;
+}
+
+.paddingT{
+    padding-top: 25px;
+}
+
+.borderDiv{
+    border: 1px solid black;
+}
+
+.marginRow{
+    margin-left: 0px;
+    margin-right: 0px; 
+}
+
+@media screen and (max-width: 320px){
+    
+}
+
+@media screen and (max-width: 480px) and (min-width: 320px){
+    .sizeNoR{
+        width: 60%;
+    }
+
+    .sizeY{
+        width: 35%;
+    }
+
+    .sizeIC{
+        width: 100%;
+    }
+
+    .paddingB{
+        padding-bottom: 50px;
+    }
+}
+
+@media screen and (min-width: 481px) {
+    .sizeNoR{
+        width: 30%;
+    }
+
+    .sizeY{
+        width: 17%;    }
+
+    .sizeIC{
+        width: 50%;
+    }
+}
