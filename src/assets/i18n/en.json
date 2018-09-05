@@ -23,9 +23,9 @@
       "gallery": "Gallery",
       "statistic": "Online Statistics",
       "search": "Search",
-      "policeReport": "Semakan Status Laporan Polis",
-      "summonStatus": "Semakan Status Saman Trafik PDRM",
-      "statusposition": "Semakan Status Jawatan Pengambilan",
+      "policeReport": "Check Police Report Status",
+      "summonStatus": "Check PDRM Traffic Summons Status",
+      "statusposition": "Check Recruitment Status",
       "mykadapproval": "User Approval"
     },
     "search": {
@@ -89,6 +89,17 @@
     "highlights": "Highlights",
     "currentHighlights": "Highlights",
     "calendarTitle": "Activities for this month"
+  },
+  "pdrm":{
+    "reportPolice":"Enter Police Report No.",
+    "example": "Eg. Police Report No.: 012345/18",
+    "placeholder":{
+      "noic": "Indentification Card No.",
+      "noreport": "Police Report No."
+    },
+    "err":{
+      "needed": "needed"
+    }
   },
   "register": {
     "label": {

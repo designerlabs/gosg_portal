@@ -90,6 +90,17 @@
     "currentHighlights": "Sorotan Terkini",
     "calendarTitle": "Aktiviti Bulan Ini"
   },
+  "pdrm":{
+    "reportPolice":"Masukkan No. Repot Polis.",
+    "example": "Contoh No. Repot Polis: 012345/18",
+    "placeholder":{
+      "noic": "No. Kad Pengenalan",
+      "noreport": "No. Repot Polis"
+    },
+    "err":{
+      "needed": "diperlukan"
+    }
+  },
   "register": {
     "label": {
       "citistatus": "Status Kewarganegaraan",
