@@ -93,12 +93,14 @@
   "pdrm":{
     "reportPolice":"Enter Police Report No.",
     "example": "Eg. Police Report No.: 012345/18",
+    "attention": "Attention: ",
     "placeholder":{
       "noic": "Indentification Card No.",
       "noreport": "Police Report No."
     },
     "err":{
-      "needed": "needed"
+      "needed": "needed",
+      "showData": "YOU DONT HAVE ANY POLICE REPORT."
     }
   },
   "register": {

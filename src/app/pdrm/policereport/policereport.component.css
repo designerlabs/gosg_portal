@@ -38,7 +38,7 @@
 }
 
 .infoPDRM{
-    background-color: lightblue;
+    background-color:#cdedfd;
 }
 
 .labelInfo{
@@ -52,6 +52,15 @@
 
 .paddingT{
     padding-top: 25px;
+}
+
+.borderDiv{
+    border: 1px solid black;
+}
+
+.marginRow{
+    margin-left: 0px;
+    margin-right: 0px; 
 }
 
 @media screen and (max-width: 320px){
@@ -76,7 +85,7 @@
     }
 }
 
-@media screen and (min-width: 481px){
+@media screen and (min-width: 481px) {
     .sizeNoR{
         width: 30%;
     }
