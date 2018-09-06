@@ -5,6 +5,5 @@ export const environment = {
   mediaURL: '/',
   mockApiURL :'/',
   baseURL: '/',
-  miaugeoURL:  '/gosg/',
-  miclipURL: 'https://www.malaysia.gov.my/public/query/1/'
+  miaugeoURL:  '/gosg/'
 };
