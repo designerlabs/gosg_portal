@@ -81,8 +81,8 @@
                         </div>
 
                         <div class="col-md-4" *ngIf="varSelect==1">                      
-                                <label class="labelInfo">{{ 'pdrm.placeholder.noCar' | translate }}</label>
-                            </div>
+                            <label class="labelInfo">{{ 'pdrm.placeholder.noCar' | translate }} <span class="redFont">*</span></label>
+                        </div>
 
                         <div class="col-md-8" *ngIf="varSelect==1">
                             <mat-form-field class="example-full-width">
@@ -163,14 +163,14 @@
     <div *ngIf="showDetails">
         <div class="row container">
             <div class="col-md-12 boldInfo">
-                STATUS SAMAN TRAFIK PDRM<br>
+                <span>{{ 'pdrm.titleSummon' | translate }}</span><br>
                 <hr class="lineHr" style="border-top: #9c9c9d 2px solid;">
             </div>
         </div>
 
         <div class="row container blackFont">
             <div class="col-md-3">
-                No. Kad Pengenalan Baru
+                {{ 'pdrm.title.icno' | translate }}
             </div>
 
             <div class="col-md-9 boldInfo">
@@ -178,7 +178,7 @@
             </div>
 
             <div class="col-md-3">
-                Nama
+                {{ 'pdrm.title.name' | translate }}
             </div>
 
             <div class="col-md-9 boldInfo">
@@ -186,7 +186,7 @@
             </div>
 
             <div class="col-md-3">
-                Jumlah Saman
+                {{ 'pdrm.title.total_summon' | translate }}
                 <!-- Jumlah Amaun (RM) -->
             </div>
 
@@ -199,13 +199,16 @@
         <div class="row container paddingLR">
             <table class="mat-table tableWidth">
                 <tr class="mat-header-row tableHeader">
-                    <th width="5%" class="mat-header-cell paddingR">{{'appmngt.tableHeader.num' | translate}}</th>
-                    <th width="10%" class="mat-header-cell paddingR">No. Kenderaan</th>
-                    <th width="20%" class="mat-header-cell paddingR">No. Saman</th>
-                    <th width="15%" class="mat-header-cell paddingR">Tarikh & Masa Kesalahan</th>
-                    <th width="30%" class="mat-header-cell paddingR">Tempat Kesalahan</th>
-                    <th width="10%" class="mat-header-cell text-right paddingR">Amaun (RM)</th>
-                    <th width="10%" class="mat-header-cell text-center paddingR">Imej</th>
+                    <th width="5%" class="mat-header-cell paddingR">&nbsp;&nbsp;{{'appmngt.tableHeader.num' | translate}}</th>
+                    <th width="10%" class="mat-header-cell paddingR">{{'pdrm.title.car' | translate}}</th>
+                    <th width="20%" class="mat-header-cell paddingR">{{'pdrm.title.summon_no' | translate}}</th>
+                    <th width="15%" class="mat-header-cell paddingR">{{'pdrm.title.dateTime' | translate}}</th>
+                    <th width="10%" class="mat-header-cell paddingR">{{'pdrm.title.location2' | translate}}</th>
+                    <th width="10%" class="mat-header-cell paddingR">{{'pdrm.title.info' | translate}}</th>
+                    <th width="10%" class="mat-header-cell text-right paddingR">{{'pdrm.title.amount' | translate}}</th>
+                    <th width="5%" class="mat-header-cell text-center paddingR">SH</th>
+                    <th width="5%" class="mat-header-cell text-center paddingR">OP</th>
+                    <th width="10%" class="mat-header-cell text-center paddingR">{{'pdrm.title.image' | translate}}</th>
                 </tr>
                 <tr class="mat-row table_row table_row_height" *ngFor="let data of dataSummons.summonDetails; let i = index;" role="row">
                     <td class="mat-cell text-center paddingR">{{i+1}}</td>
@@ -213,24 +216,28 @@
                     <td class="mat-cell paddingR">{{data.summons_id_key}}</td>
                     <td class="mat-cell paddingR">{{data.offence_date}} & {{data.offence_time}}</td>
                     <td class="mat-cell paddingR">{{data.offence_location}}</td>
+                    <td class="mat-cell paddingR">{{data.offence_location}}</td>
                     <td class="mat-cell text-right paddingR">{{data.summons_amt}}</td>
                     <td class="mat-cell text-center paddingR">-</td>
+                    <td class="mat-cell text-center paddingR">-</td>
+                    <td class="mat-cell text-center paddingR">-</td>
                 </tr>
-                <tr *ngIf="showNoData">
-                    <td colspan="8" class="showData">
-                    <hr><br>{{'common.showNoData' | translate}}</td>
+                <tr class="mat-row table_row table_row_height">
+                     <!-- *ngIf="showNoData" -->
+                    <td colspan="10" class="mat-cell paddingR">
+                    <span class="redFont">{{'pdrm.err.summon' | translate}}</span></td>
                 </tr>
             </table>                  
         </div>
     </div><br>
   
-    <div *ngIf="showNoData">
+    <!-- <div *ngIf="showNoData">
         <div class="row container">
             <div class="col-md-12 boldCenterInfo">
                 ANDA TIADA SAMAN TRAFIK.<br>
             </div>
         </div>
-    </div><br>
+    </div><br> -->
 </div>
   
 <app-confirm-dialog #resetModal 
