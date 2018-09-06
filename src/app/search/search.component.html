@@ -9,14 +9,14 @@
             </div>
             <div class="col-md-7 text-center">
                 <div class="input-group" style="margin: 13px 0px;">
-                    <input class="form-control" type="text" [(ngModel)]="keyword1" (keyup.enter)="mainSearch(keyword1)"
+                    <input class="form-control" type="text" [(ngModel)]="keyword1" (keydown.enter)="mainSearch(keyword1, $event)"
                            ngui-auto-complete
                            [source]="autoCompleteArr"
                            placeholder="{{ 'home.search.instruction' | translate }}"
                            no-match-found-text=" ">
                     <span class="input-group-btn">
                         <button class="btn btn-secondary" [style.background]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" type="button"
-                                (click)="mainSearch(keyword1)">
+                                (click)="mainSearch(keyword1, $event)">
                             <i class="fa fa-search"></i> <span class="hidden-xs">{{ 'home.search.find' | translate }}</span>
                         </button>
                     </span>
