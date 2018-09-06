@@ -12,4 +12,5 @@ export const environment = {
   baseURL: '/',
   miaugeoURL:  '/gosg/',
   miclipURL: 'http://10.29.56.159/isearch4me/web_data_gosg.php'
+
 };
