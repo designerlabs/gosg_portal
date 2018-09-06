@@ -164,7 +164,7 @@ export const APP_DI_CONFIG: AppConfig = {
     urlPopularSearch: searchServiceURL + 'popular',
     urlIntSearch: searchServiceURL + 'content',
     urlOsSearch: searchServiceURL + 'agency',
-    urlGlobalSearch: searchServicePublicURL + 'query/1/',
+    urlGlobalSearch: searchServicePublicURL,
     urlUserType:uapURL+'service/user/type/lang/',
     urlMail: protectedBaseURL+'inbox/',
     urlUAP: uapURL,

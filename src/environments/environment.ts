@@ -11,5 +11,5 @@ export const environment = {
   mockApiURL :'/',
   baseURL: '/',
   miaugeoURL:  '/gosg/',
-  miclipURL: 'http://10.1.71.181/'
+  miclipURL: 'http://10.29.56.159/isearch4me/web_data_gosg.php'
 };

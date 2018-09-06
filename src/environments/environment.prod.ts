@@ -6,5 +6,5 @@ export const environment = {
   mockApiURL :'/',
   baseURL: '/',
   miaugeoURL:  '/gosg/',
-  miclipURL: 'https://www.malaysia.gov.my/public/'
+  miclipURL: 'https://www.malaysia.gov.my/public/query/1/'
 };
