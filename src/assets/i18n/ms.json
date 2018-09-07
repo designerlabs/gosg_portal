@@ -108,10 +108,12 @@
     },
     "titlerecruitment":"STATUS PENGAMBILAN JAWATAN PDRM",
     "titlepoliceR":"STATUS REPOT POLIS",
+    "titleSummon":"STATUS SAMAN TRAFIK PDRM",
     "err":{
       "needed": "diperlukan",
       "showData": "ANDA TIADA REPOT POLIS.",
-      "msgrecruitment": "SEBARANG PERTANYAAN SILA HUBUNGI UNIT PENGAMBILAN, BUKIT AMAN DI TALIAN 03-2266 8350 / 8351 / 8349"
+      "msgrecruitment": "SEBARANG PERTANYAAN SILA HUBUNGI UNIT PENGAMBILAN, BUKIT AMAN DI TALIAN 03-2266 8350 / 8351 / 8349",
+      "summon": "TIADA SAMAN TRAFIK TERTUNGGAK"
     },
     "title":{
       "icno": "NO. KP BARU",
@@ -126,7 +128,16 @@
       "sectionInvestigation": " SEKSYEN SIASATAN",
       "statusInvestigate": "STATUS SIASATAN",
       "insOfficer": "PEGAWAI PENYIASAT",
-      "infoLetter": "SURAT PEMBERITAHUAN"
+      "infoLetter": "SURAT PEMBERITAHUAN",
+      "name": "NAMA",
+      "total_summon": "JUMLAH SAMAN",
+      "car": "No. Kenderaan",
+      "summon_no":"No. Saman",
+      "dateTime":"Tarikh & Masa Kesalahan",
+      "location2":"Tempat Kesalahan",
+      "amount": "Amaun (RM)",
+      "image": "Imej",
+      "info": "Maklumat Kesalahan"
     }
   },
   "register": {

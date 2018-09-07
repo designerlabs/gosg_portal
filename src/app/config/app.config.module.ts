@@ -21,7 +21,7 @@ let agencyURL = uapURL+'service-dservice-protected/'
 // backend service
 let baseLocalURL = './app/apidata/';
 let searchServiceURL = searchURL;
-let searchServicePublicURL = environment.miclipURL;
+let searchServicePublicURL = commonURL+'search/api/globalsearch';
 let pollUrl = commonURL + "polls";
 
 export class AppConfig {

@@ -108,10 +108,12 @@
     },
     "titlerecruitment":"PDRM RECRUITMENT POSITION STATUS",
     "titlepoliceR":"POLICE REPORT STATUS",
+    "titleSummon":"PDRM SUMMON TRAFIC STATUS",
     "err":{
       "needed": "needed",
       "showData": "YOU DONT HAVE ANY POLICE REPORT.",
-      "msgrecruitment": "ANY QUESTIONS PLEASE CONTACT THE APPLICATION UNIT, BUKIT AMAN INLINE 03-2266 8350 / 8351 / 8349"
+      "msgrecruitment": "ANY QUESTIONS PLEASE CONTACT THE APPLICATION UNIT, BUKIT AMAN INLINE 03-2266 8350 / 8351 / 8349",
+      "summon": "NO SUMMON TRAFIC"
     },
     "title":{
       "icno": "NEW IC NO.",
@@ -126,7 +128,16 @@
       "sectionInvestigation": "INVESTIGATION SECTION",
       "statusInvestigate": "INVESTIGATION STATUS",
       "insOfficer": "INVESTIGATING OFFICER",
-      "infoLetter": "NOTICE"
+      "infoLetter": "NOTICE",
+      "name": "NAME",
+      "total_summon": "TOTAL SUMMON",
+      "car": "Car No.",
+      "summon_no":"Summon No.",
+      "dateTime":"Date & Time",
+      "location2":"Location",
+      "amount": "Amount (RM)",
+      "image": "Image",
+      "info": "Info"
     }
   },
   "register": {
