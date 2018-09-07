@@ -157,7 +157,7 @@
             <li class="col-md-12">
               <div id="search-expand">
                 <div class="input-group">
-                  <input class="form-control" style="border: 1px inset #4e5d6c" type="text" [(ngModel)]="ser_word" placeholder="{{'home.search.label' | translate}}"
+                  <input class="form-control" style="border: 1px inset #4e5d6c" type="text" [(ngModel)]="ser_word" (keyup.enter)="mainSearch(ser_word)" placeholder="{{'home.search.label' | translate}}"
                     id="input_keyword">
                   <span class="input-group-btn">
                     <button class="btn btn-default" id="submit_keyword" type="button" value="Submit" (click)="mainSearch(ser_word)">

@@ -38,9 +38,7 @@ export class SearchComponent implements OnInit {
         return localStorage.getItem('themeColor');
     }
 
-    mainSearch(key, e?) {
-
-        console.log(e);
+    mainSearch(key) {
 
         if (key) {
             $('#searchDDown').css({ 'display': 'none' });
