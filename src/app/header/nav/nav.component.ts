@@ -130,7 +130,6 @@ export class NavComponent implements OnInit, AfterViewInit, OnDestroy {
       }
 
     dropdownDisplay(action) {
-        event.preventDefault();
         $(function () {
 
             if (action == 'show')
