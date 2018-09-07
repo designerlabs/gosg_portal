@@ -315,7 +315,11 @@
           </mat-select>
         </mat-form-field>
         <span class="float-right">
-          <span class="table_footer_pagination">{{ 'common.pagination.pages' | translate }}
+          <span *ngIf="totalElements < 10" class="table_footer_pagination">{{ 'common.pagination.pages' | translate }}
+            <strong>{{pageNumber}}</strong> {{ 'common.pagination.of' | translate }}
+            <strong>{{totalPages}}</strong> {{ 'common.pagination.in' | translate }}
+            <strong>{{totalElements }}</strong> {{'home.search.result' | translate}} </span>
+          <span *ngIf="totalElements >= 10" class="table_footer_pagination">{{ 'common.pagination.pages' | translate }}
             <strong>{{pageNumber}}</strong> {{ 'common.pagination.of' | translate }}
             <strong>{{totalPages}}</strong> {{ 'common.pagination.in' | translate }}
             <strong>{{totalElements | number:'2.0'}}</strong> {{'home.search.result' | translate}} </span>
