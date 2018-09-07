@@ -25,7 +25,7 @@
     </div>
 </div>
 
-<div style="margin-top:10px;" class="container" *ngFor="let article of articleService.articles">
+<div style="margin-top:10px; min-height:500px;" class="container" *ngFor="let article of articleService.articles">
   <div *ngIf="article.template === 'lifeevent'" class="row">
       <div class="scrollmenu">
         <div *ngFor="let menuT of article.menuTop; let index = index;" (click)="clickTopMenu(menuT)" >

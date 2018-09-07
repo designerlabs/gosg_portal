@@ -163,7 +163,7 @@ p.font-size-s > strong {
 
     @media only screen and (min-width: 320px) and (max-width: 1023px) {
       app-footer{
-        background: #333;
+        background: #666666;
         z-index: 9999999;
         display: block;
       }

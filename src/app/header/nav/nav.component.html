@@ -13,7 +13,7 @@
           </button>
           <div class="modal fade" bsModal #menuModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
             aria-hidden="true">
-            <div class="modal-dialog modal-sm">
+            <div class="modal-dialog modal-md">
               <div class="modal-content">
                 <div class="modal-body">
 
@@ -33,7 +33,7 @@
                         </mat-panel-title>
                       </mat-expansion-panel-header>
                       <ul class="nav navbar-nav font-size-s mobile-navbar">
-                        <li class="col-md-4" *ngFor="let data of menu.data" (click)="menuModal.hide()">
+                        <li class="col-md-12 col-sm-12 col-xs-12" *ngFor="let data of menu.data" (click)="menuModal.hide()">
                           <a class="font-size-s" href="" (click)="handleClickMe(data.categoryCode)" [routerLink]="['category', data.categoryCode]">
                             <i class="fa fa-arrow-circle-right"></i> {{data.categoryName}}</a>
                         </li>
