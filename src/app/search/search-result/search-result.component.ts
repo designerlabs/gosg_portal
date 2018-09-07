@@ -301,6 +301,8 @@ export class SearchResultComponent implements OnInit, OnDestroy {
       this.languageId = 1;
     }
 
+    this.getSearchUrl();
+
     this.date = moment();
 
     this.ser_word = localStorage.getItem('ser_word');
@@ -541,9 +543,10 @@ export class SearchResultComponent implements OnInit, OnDestroy {
     let env = window.location.hostname;
     let envOrigin = window.location.origin;
     let localURL = envOrigin+'/gosg/';
-
-    // 
-    // 
+          
+    this.totalElements = 0;
+    let num;
+    let dataLength = 0;
 
     if (localStorage.getItem('ser_word').length === 0) {
       localStorage.setItem('ser_word', valkeyword);
@@ -568,7 +571,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
 
       // 
       // 
-      if (this.inpExcWord)
+      // if (this.inpExcWord)
         // 
 
       // 
@@ -698,46 +701,26 @@ export class SearchResultComponent implements OnInit, OnDestroy {
       } else if (this.tabIndex == 2) { // GLOBAL SEARCH
 
         dataUrl = this.globalUrl + "?keywords=" + this.ser_word + "&site=" + this.chkGlobValue + "&pagecount=" + this.pageNumber;
-
+        
         payloadObj = nullObj;
       }
 
-      
-      
-      // 
-      // 
-
-      
-
       this.loading = true;
       // this.arymonth = [];
+
+      if (this.tabIndex == 0 || this.tabIndex == 1) { // INTERNAL & ONLINE SERVICES SEARCH
+
       return this.http.post(dataUrl, payloadObj)
         .map(res => res.json())
         .subscribe(rData => {
-          
-          this.totalElements = 0;
 
-          let num;
-          let dataLength = 0;
-
-          if (this.tabIndex == 0 || this.tabIndex == 1) {
-            if(rData.stats.hits) {
-              this.totalElements = rData.stats.hits;
-              num = (rData.stats.hits) / (this.pagesize);
-              dataLength = rData.data.length;
-            }
-            this.millisec = rData.stats.tookMillis;
-            this.intData = rData.data;
-          } else {
-            this.totalElements = rData.data.countinfo;
-            num = (rData.data.countinfo) / (this.pagesize);
-            delete rData.data.countinfo;
-            dataLength = Object.keys(rData.data).length;
-            // this.millisec = rData.data.tookMillis;
-
-            this.intData = this.changeAryVal(rData.data,'global')
-
+          if(rData.stats.hits) {
+            this.totalElements = rData.stats.hits;
+            num = (rData.stats.hits) / (this.pagesize);
+            dataLength = rData.data.length;
           }
+          this.millisec = rData.stats.tookMillis;
+          this.intData = rData.data;
 
           this.selMonPubDisp = '';
           this.selAuthDisp = '';
@@ -819,9 +802,6 @@ export class SearchResultComponent implements OnInit, OnDestroy {
             if(num && num > 999)
               this.totalPages = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-            // this.totalElements.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-
-            //   this.serchService.searchResData = rData.data;
             this.showNoData = false;
             
           } else {
@@ -833,14 +813,98 @@ export class SearchResultComponent implements OnInit, OnDestroy {
           this.loading = false;
           rData = null;
         },
+        error => {
+          this.loading = false;
+          this.toastr.error(this.translate.instant('common.err.servicedown'), '');
+        });
+
+      } else { // GLOBAL SEARCH
+
+        return this.http.get(dataUrl, payloadObj)
+          .map(res => res.json())
+          .subscribe(rData => {
+          
+            this.totalElements = rData.data.countinfo;
+            num = (rData.data.countinfo) / (this.pagesize);
+            delete rData.data.countinfo;
+            dataLength = Object.keys(rData.data).length;
+            // this.millisec = rData.data.tookMillis;
+
+            this.intData = this.changeAryVal(rData.data,'global')
+  
+            console.log(this.intData)
+  
+            this.selMonPubDisp = '';
+            this.selAuthDisp = '';
+            this.selTopicDisp = '';
+            this.selSubTopicDisp = '';
+            this.selMinisDisp = '';
+            this.selAgencyDisp = '';
+            this.ddauthor = [];
+            this.ddtopics = [];
+            this.ddmonthPub = [];
+            this.ddsubTopics = [];
+            this.ddministry = [];
+            this.ddagency = [];
+  
+            this.valMonPub = [];
+            this.valAuthor = [];
+            this.valTopic = [];
+            this.valSubTopic = [];
+            this.valMinistry = [];
+            this.valAgency = [];
+  
+            if (dataLength > 0) {
+  
+              if (this.totalElements % this.pagesize > 0) {
+                this.totalPages = Math.floor(num) + 1;
+              } else {
+                this.totalPages = num;
+              }
+  
+              if (this.totalPages > 0) {
+                this.noNextData = this.pageNumber === this.totalPages;
+              } else {
+                this.noNextData = true;
+              }
+  
+              if(num && num > 999)
+                this.totalPages = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  
+              // this.totalElements.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+  
+              //   this.serchService.searchResData = rData.data;
+              this.showNoData = false;
+              
+            } else {
+              this.showNoData = true;
+              this.sKeyword = false; //side menu
+              this.sSpeci = false; //side menu
+              this.sFilter = false; //side menu
+            }
+            this.loading = false;
+            rData = null;
+          },
           error => {
             this.loading = false;
             this.toastr.error(this.translate.instant('common.err.servicedown'), '');
           });
+
+      }
+
     } else {
       this.toastr.error(this.translate.instant('common.msg.searchKeyword'), '');
     }
 
+  }
+
+  getSearchUrl() {
+
+    return this.http.get(this.config.urlGlobalSearch)
+    .map(res => res.json())
+    .subscribe(data => {
+        this.globalUrl = data.resource.searchUrl;
+    });
   }
 
   changeGlob(eve, val) {
