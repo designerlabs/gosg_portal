@@ -9,13 +9,14 @@
 .dserviceList > ul li.a {
     display: inline-block;
     vertical-align: top;
-    margin-bottom: 5%;
+    /* margin-bottom: 5%; */
     /* width: 45%!important; */
     width: 100%!important;
     border-top: #00bdbb 2px solid;
     margin-right: 20px!important;
     margin-left: -5%;
     background: #f3f3f3;
+    padding-bottom: 10px;
 }
 
 .dserviceList h4 {

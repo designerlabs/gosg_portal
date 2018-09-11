@@ -38,7 +38,8 @@
                       <li class="no-styles">
                           <a [href]="d.url">{{ d.title }}</a>
                           &nbsp;
-                          <a [href]="mediaUrl + d.manual?.mediaFile" data-toggle="tooltip" target="_blank" title="{{ d.description }}"><span class="fa fa-info-circle clickable-icons"></span> </a>
+                          <a *ngIf="!isLogin" [href]="mediaUrl + d.manual?.mediaFile" data-toggle="tooltip" target="_blank" title="{{ d.description }}"><span class="fa fa-info-circle clickable-icons"></span> </a>
+                          <a *ngIf="isLogin" (click)="openDialog()" title="{{ d.description }}"><span class="fa fa-info-circle clickable-icons"></span> </a>
                       </li>
                     </ul>
                 </li>
