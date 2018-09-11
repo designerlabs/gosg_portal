@@ -63,7 +63,7 @@ export class ArchivesubcategoryComponent implements OnInit, OnDestroy{
           if(this.moduleName == 'subcategory'){
             this.navService.triggerSubArticleOther(this.topicID, this.langId,'archive');
           }else if(this.moduleName == 'content'){
-            this.navService.triggerContent(this.subID, this.langId);
+            this.navService.triggerContentOther(this.subID, this.langId, 'archive');
           }else{
             this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID);
           }

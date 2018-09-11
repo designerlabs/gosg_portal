@@ -59,9 +59,9 @@ export class ArchivecategoryComponent implements OnInit, OnDestroy {
         if(this.topnavservice.flagLang){
 
           if(this.moduleName == 'subcategory'){
-            this.navService.triggerSubArticle(this.subID, this.langId);
+            this.navService.triggerSubArticleOther(this.subID, this.langId,'archive');
           }else if(this.moduleName == 'content'){
-            this.navService.triggerContent(this.subID, this.langId);
+            this.navService.triggerContentOther(this.subID, this.langId,'archive');
           }else{
             this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID);
           }
@@ -123,8 +123,8 @@ export class ArchivecategoryComponent implements OnInit, OnDestroy {
     clickContentFromMenu(pId, aId, status){
 
       this.statusID = status;
-      this.navService.triggerContent(aId, localStorage.getItem('langID'));
-      this.navService.getContentUrl(aId, localStorage.getItem('langID'));
+      this.navService.triggerContentOther(aId, localStorage.getItem('langID'), status);
+      this.navService.getContentUrlOther(aId, localStorage.getItem('langID'), status);
       this.router.navigate(['/archive/content', aId]);
       event.preventDefault();
     }

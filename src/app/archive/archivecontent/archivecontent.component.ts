@@ -27,7 +27,7 @@ export class ArchivecontentComponent implements OnInit {
   @Output() langChange = new EventEmitter();
 
   handleClickMe(e){
-    
+
   }
 
   constructor(public articleService: ArticleService,  private route: ActivatedRoute, private navService: NavService, private translate: TranslateService, private router: Router, private breadcrumbService: BreadcrumbService) {
@@ -43,10 +43,11 @@ export class ArchivecontentComponent implements OnInit {
             translate.get('HOME').subscribe((res: any) => {
                 this.lang = 'en';
                 this.langId = 1;
-                this.moduleName = this.router.url.split('/')[1];
-                this.topicID = parseInt(this.router.url.split('/')[2]);
+                this.moduleName = this.router.url.split('/')[2];
+                this.topicID = parseInt(this.router.url.split('/')[3]);
                 var tt = this.router.url.split('/');
-                this.subID = parseInt(tt[tt.length-1]);
+                // this.subID = parseInt(tt[tt.length-1]);
+                this.subID = parseInt(this.router.url.split('/')[4]);
             });
 
         }
@@ -55,18 +56,19 @@ export class ArchivecontentComponent implements OnInit {
             translate.get('HOME').subscribe((res: any) => {
                 this.lang = 'ms';
                 this.langId = 2;
-                this.moduleName = this.router.url.split('/')[1];
-                this.topicID = parseInt(this.router.url.split('/')[2]);
+                this.moduleName = this.router.url.split('/')[2];
+                this.topicID = parseInt(this.router.url.split('/')[3]);
                 var tt = this.router.url.split('/');
-                this.subID = parseInt(tt[tt.length-1]);
+                // this.subID = parseInt(tt[tt.length-1]);
+                this.subID = parseInt(this.router.url.split('/')[4]);
             });
         }
 
 
         if(this.moduleName == 'subcategory'){
-          this.navService.triggerSubArticle(this.subID, this.langId);
+          this.navService.triggerSubArticleOther(this.subID, this.langId, 'archive');
         }else if(this.moduleName == 'content'){
-          this.navService.triggerContent(this.subID, this.langId);
+          this.navService.triggerContentOther(this.topicID, this.langId, 'archive');
         }else{
           this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID);
         }
@@ -80,10 +82,10 @@ export class ArchivecontentComponent implements OnInit {
 
   ngOnInit() {
     this.articleData = this.articleService.getArticle();
-    this.topicID = parseInt(this.router.url.split('/')[2]);
+    this.topicID = parseInt(this.router.url.split('/')[3]);
     var tt = this.router.url.split('/');
     this.subID = parseInt(tt[tt.length-1]);
-    this.navService.triggerContentOther(this.subID, localStorage.getItem('langID'), 'archive');
+    this.navService.triggerContentOther(this.topicID, localStorage.getItem('langID'), 'archive');
   }
 
 
