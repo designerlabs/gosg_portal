@@ -259,9 +259,14 @@
       <!-- <button class="btn btn-md" mat-raised-button (click)="checkCurrObj()">CHECK</button> -->
     </div>
     <div class="col-md-9">
+      <div class="col-md-9">
       <h3 class="font-size-l">
         <b>{{'home.search.searchresult' | translate}}</b>
       </h3>
+      </div>
+      <div class="col-md-3 paddingTop-15 text-right">
+          <button mat-raised-button color="basic" (click)="searchByKeyword(ser_word, true)">{{ curr_data_lang }}</button>
+      </div>
       <div class="example-full-width">
         <mat-form-field class="example-full-width">
           <input type="text" class="inputser example-full-width" matInput placeholder="{{'home.search.searchkey' | translate }}" [(ngModel)]="ser_word" (keyup.enter)="resetPage();searchByKeyword(ser_word)">

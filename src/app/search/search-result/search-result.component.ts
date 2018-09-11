@@ -101,7 +101,6 @@ export class SearchResultComponent implements OnInit, OnDestroy {
   category_sub_topic: String = "category_sub_topic";
   ref_language_id: String = "ref_language_id";
 
-
   private internalUrl: string = this.config.urlIntSearch;
   private osUrl: string = this.config.urlOsSearch;
   private globalUrl: string = this.config.urlGlobalSearch;
@@ -110,6 +109,8 @@ export class SearchResultComponent implements OnInit, OnDestroy {
   totalElements = 0; noPrevData = true; noNextData = false; pagefrom = 0; pageNumber = 1; totalPages = 0; pagesize = 10;
   millisec = 0;
   showNoData = false;
+
+  curr_data_lang: string = "EN";
 
   private subscription: ISubscription;
   private subscriptionLang: ISubscription;
@@ -317,6 +318,17 @@ export class SearchResultComponent implements OnInit, OnDestroy {
 
   btnSubmit() {
     this.searchByKeyword(this.ser_word);
+  }
+
+  changeCurrDataLang() {
+    if(this.mainObj.filters.ref_language_id == "1") {
+      this.mainObj.filters.ref_language_id = "2"
+      this.curr_data_lang = "MY";
+    } else if(this.mainObj.filters.ref_language_id == "2") {
+      this.mainObj.filters.ref_language_id = "1"
+      this.curr_data_lang = "EN";
+    }
+    console.log(this.mainObj.filters);
   }
 
   addFilterAry(ary, resObj, type?) {
@@ -532,8 +544,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
     return res;
   }
 
-  searchByKeyword(valkeyword) {
-    // 
+  searchByKeyword(valkeyword, opt?) {
 
     let arrKeyword: any = [];
     let arrKeywordeySetting: any = [];
@@ -559,10 +570,15 @@ export class SearchResultComponent implements OnInit, OnDestroy {
         this.mainObj.from = this.pagefrom;
         this.mainObj.size = this.pagesize;
 
-        if(this.languageId)
-          this.mainObj.filters.ref_language_id = this.languageId.toString();
-        else
-          this.mainObj.filters.ref_language_id = "1"
+        if(opt) {
+          this.changeCurrDataLang();
+        } else {
+
+          if(this.languageId)
+            this.mainObj.filters.ref_language_id = this.languageId.toString();
+          else
+            this.mainObj.filters.ref_language_id = "1"
+        }
 
       }
       let dataUrl = '';
