@@ -178,6 +178,10 @@
                                                                 target="_blank">{{getJson(agencyContent.agencyEparticipationPolicyUrl, 1)}}</a>
                                                             <a *ngIf="getJson(agencyContent.agencyEparticipationUrl, 0) !== 'nourl'" class="badge" [href]="getJson(agencyContent.agencyEparticipationUrl, 0)"
                                                                 target="_blank">{{getJson(agencyContent.agencyEparticipationUrl, 1)}}</a>
+                                                            <a *ngIf="getJson(agencyContent.agencyRss, 0) !== 'nourl'" class="badge" [href]="getJson(agencyContent.agencyRss, 0)"
+                                                                target="_blank">RSS</a>
+                                                            <a *ngIf="getJson(agencyContent.agencyEmailFeedUrl, 0) !== 'nourl'" class="badge" [href]="getJson(agencyContent.agencyEmailFeedUrl, 0)"
+                                                                target="_blank">{{getJson(agencyContent.agencyEmailFeedUrl, 1)}}</a>
                                                         </div>
                                                     </div>
                                                 </div>
