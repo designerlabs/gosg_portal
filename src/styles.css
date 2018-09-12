@@ -70,7 +70,7 @@ em{
     color: #fff;
 }
 
-ul.rightMenu li a {
+ul.rightMenu > li > a {
   color: #fff;
 }
 
