@@ -11,6 +11,7 @@ import {
     MatInputModule, MatPaginatorModule, MatProgressSpinnerModule,
     MatSortModule, MatTableModule, MatPaginator, MatSort
   } from '@angular/material';
+import { NavService } from '../header/nav/nav.service';
 
 @Component({
   selector: 'gosg-replacementmycard',
@@ -22,15 +23,18 @@ export class ReplacementmycardComponent implements OnInit {
   lang = this.lang;
   langID: any;
   redirect_url: any;
+  new_redirect_url: any;
   private subscriptionLang: ISubscription;
 
   constructor(
     private translate: TranslateService,
     private router: Router,
     private http: Http,
+    private navService: NavService,
     @Inject(APP_CONFIG) private config: AppConfig,
     private topnavservice: TopnavService,) {
 
+    this.navService.restricted = false;
     this.lang = translate.currentLang;
     this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
 
@@ -68,17 +72,21 @@ export class ReplacementmycardComponent implements OnInit {
       this.langID = 1;
     }  
 
-    let newPage = 'http://www.google.com';
+    let newPage = '';
+    //newPage = 'http://www.google.com'; // for test only;
     this.redirect_url = document.URL + '?redirect_url='+newPage;
-    let o = this.redirect_url.split('redirect_url=')[1];
+    this.new_redirect_url = this.redirect_url.split('redirect_url=')[1];
+    
     console.log(this.redirect_url);
-    console.log(o);
+    console.log(this.new_redirect_url);
   }
 
   clickYes(){
-    let newUrl = "";
-    window.open("https://www.w3schools.com?status=ya");
-    console.log();
+    
+    if(this.new_redirect_url){      
+      window.open(this.new_redirect_url+"?status=ya");
+      console.log(this.new_redirect_url+"?status=ya");
+    }
   }
 
   clickNo(){
