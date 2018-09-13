@@ -49,6 +49,7 @@ export class ProtectedComponent implements OnInit {
   isProfileHide = false;
   query;
   pageSize;
+  msgInvalidUser: any;
   entryService;
   constructor(public navService: NavService, private activatedRoute:ActivatedRoute, @Inject(APP_CONFIG) private config: AppConfig, private protectedService:ProtectedService, router:Router, private portalService:PortalService) {
 
@@ -118,6 +119,8 @@ export class ProtectedComponent implements OnInit {
     if(!environment.staging){
     this.protectedService.getErrorMsg().subscribe(
       data => {
+        this.msgInvalidUser = data.resource.messagesDescription;
+        console.log(this.msgInvalidUser);
       }
     )
     }
