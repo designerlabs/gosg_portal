@@ -131,13 +131,13 @@ export class ProtectedComponent implements OnInit {
           }
           this.loading = false;
 
-          // if(data.statusCode !== 'SUCCESS'){
-          //   this.loading = false;
-          //   this.nonValidUser = true;
-          //     setTimeout(() => {
-          //       this.logout();
-          //     }, 5000);
-          // }
+          if(data.statusCode !== 'SUCCESS'){
+            this.loading = false;
+            this.nonValidUser = true;
+              setTimeout(() => {
+                this.logout();
+              }, 5000);
+          }
         },
         error => {
 
