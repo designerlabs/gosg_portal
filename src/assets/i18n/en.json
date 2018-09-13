@@ -423,6 +423,7 @@
     }
   },
   "common":{
+    "titleMsg":"MyGOV - The Government of Malaysia's Official Portal",
     "copyrightnotice": "Copyright Notice",
     "clientcharter": "Client Charter",
     "help": "Help",

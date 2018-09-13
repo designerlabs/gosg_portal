@@ -423,6 +423,7 @@
     }
   },
   "common":{
+    "titleMsg":"MyGOV - Portal Rasmi Kerajaan Malaysia",
     "copyrightnotice": "Notis Hakcipta",
     "clientcharter": "Piagam Pelanggan",
     "help": "Bantuan",
