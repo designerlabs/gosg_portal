@@ -111,6 +111,8 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
   millisec = 0;
   showNoData = false;
 
+  curr_data_lang: string = "EN";
+
   private subscription: ISubscription;
   private subscriptionLang: ISubscription;
 
@@ -317,15 +319,27 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
     this.searchByKeyword(this.ser_word);
   }
 
+
+  changeCurrDataLang() {
+    if(this.mainObj.filters.ref_language_id == "1") {
+      this.mainObj.filters.ref_language_id = "2"
+      this.curr_data_lang = "MY";
+    } else if(this.mainObj.filters.ref_language_id == "2") {
+      this.mainObj.filters.ref_language_id = "1"
+      this.curr_data_lang = "EN";
+    }
+    console.log(this.mainObj.filters);
+  }
+
   addFilterAry(ary, resObj, type?) {
 
-    // 
+    //
 
     if (ary.length > 0) {
 
       let res = [];
       ary.forEach(ele => {
-        // 
+        //
         if (ele.name) {
           res.push(ele.name);
         } else {
@@ -343,11 +357,11 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
 
   addSpecFiltr(methodNm, field) {
     let key = field;
-    // 
+    //
 
     let res_ary = this.mainObj.filters;
-    // 
-    // 
+    //
+    //
 
     // let inx = jQuery.inArray(field, res_ary);
     if (methodNm === 'add') {
@@ -383,7 +397,7 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
 
   changeAryVal(objs, type) {
 
-    // 
+    //
 
     let aryObj: any;
     let retn = [];
@@ -418,7 +432,7 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
       // do something with person
       retn.push(aryObj);
     });
-    // 
+    //
     return retn;
   }
 
@@ -446,10 +460,10 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
 
       delete this.mainObj.aggregations;
       this.mainObj.aggregations = this.locAggregations;
-      // 
-      // 
+      //
+      //
       // this.mainObj.aggregations = {};
-      // 
+      //
 
       this.resetPage();
       this.searchByKeyword(k_word);
@@ -467,10 +481,10 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
       delete this.mainObj.aggregations;
       delete this.mainObj.filters.category;
       this.mainObj.aggregations = this.osAggregations;
-      // 
-      // 
+      //
+      //
       // this.mainObj.aggregations = {};
-      // 
+      //
 
       // jQuery.extend(this.mainObj.filters, this.agencyDefaultFilterObj);
       // this.mainObj.keywordMap.fields = this.osFields.slice();
@@ -517,21 +531,21 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
   }
 
   keywordSplitter(str) {
-    // 
+    //
     let res: any = [];
 
     str = str.split(" ");
     str.forEach(el => {
-      // 
+      //
       res.push(el);
     });
     // res = str;
-    // 
+    //
     return res;
   }
 
   searchByKeyword(valkeyword) {
-    // 
+    //
 
     let arrKeyword: any = [];
     let arrKeywordeySetting: any = [];
@@ -542,8 +556,8 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
     let envOrigin = window.location.origin;
     let localURL = envOrigin+'/gosg/';
 
-    // 
-    // 
+    //
+    //
 
     if (localStorage.getItem('ser_word').length === 0) {
       localStorage.setItem('ser_word', valkeyword);
@@ -566,12 +580,12 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
 
       // KEYWORD MAP AREA
 
-      // 
-      // 
+      //
+      //
       if (this.inpExcWord)
-        // 
+        //
 
-      // 
+      //
 
       if (this.tabIndex == 0)
         this.keywordMap.fields = this.locFields;
@@ -586,7 +600,7 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
         this.keywordMap.not = arrKeywordeySetting;
         delete this.keywordMap.all;
         delete this.keywordMap.any;
-        // 
+        //
         this.mainObj.keywordMap = this.keywordMap;
       } else if (this.chkKeyValue == "2" && this.inpExcWord) {
         arrKeywordeySetting = this.keywordSplitter(this.inpExcWord);
@@ -594,7 +608,7 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
         this.keywordMap.not = arrKeywordeySetting;
         delete this.keywordMap.exact;
         delete this.keywordMap.any;
-        // 
+        //
         this.mainObj.keywordMap = this.keywordMap;
       } else if (this.chkKeyValue == "3" && this.inpExcWord) {
         arrKeywordeySetting = this.keywordSplitter(this.inpExcWord)
@@ -602,7 +616,7 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
         this.keywordMap.not = arrKeywordeySetting;
         delete this.keywordMap.all;
         delete this.keywordMap.exact;
-        // 
+        //
         this.mainObj.keywordMap = this.keywordMap;
       }
 
@@ -614,7 +628,7 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
         // delete this.mainObj.filters.category;
 
         this.mainObj.aggregations = this.locAggregations;
-        // 
+        //
 
         if(env == 'localhost')
           dataUrl = this.internalUrl;
@@ -673,7 +687,7 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
         jQuery.extend(this.mainObj.filters, this.lifeEventFiltersObj);
         payloadObj = this.mainObj;
 
-        // 
+        //
 
       } else if (this.tabIndex === 1) { // ONLINE SERVICE SEARCH
 
@@ -702,19 +716,19 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
         payloadObj = nullObj;
       }
 
-      
-      
-      // 
-      // 
 
-      
+
+      //
+      //
+
+
 
       this.loading = true;
       // this.arymonth = [];
       return this.http.post(dataUrl, payloadObj)
         .map(res => res.json())
         .subscribe(rData => {
-          
+
           this.totalElements = 0;
 
           let num;
@@ -769,7 +783,7 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
                 this.ddmonthPub = this.changeAryVal(rData.aggregations.histogram[0],'generic');
               }
 
-              // 
+              //
               rData.aggregations['filter_topic.category'][0].active_cat.forEach(item => {
                 item = this.changeAryVal(item,'generic')
                 topic = { "name": item[0].name, "val": item[0].val }
@@ -781,8 +795,8 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
                 this.ddsubTopics.push(topic)
               });
 
-              // 
-              // 
+              //
+              //
 
             } else if (this.tabIndex == 1) { // ONLINE SERVICES
               let ministry: any = {};
@@ -790,14 +804,14 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
 
               rData.aggregations.ministryAgg.forEach(item => {
                 item = this.changeAryVal(item,'generic');
-                // 
+                //
                 ministry = { "name": item[0].name, "val": item[0].val }
                 this.ddministry.push(ministry);
               });
 
               rData.aggregations.agencyAgg.forEach(item => {
                 item = this.changeAryVal(item,'generic');
-                // 
+                //
                 agency = { "name": item[0].name, "val": item[0].val }
                 this.ddagency.push(agency);
               });
@@ -823,7 +837,7 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
 
             //   this.serchService.searchResData = rData.data;
             this.showNoData = false;
-            
+
           } else {
             this.showNoData = true;
             this.sKeyword = false; //side menu
@@ -846,20 +860,20 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
   changeGlob(eve, val) {
     this.chkGlobValue = val;
     this.searchByKeyword(this.ser_word);
-    // 
+    //
   }
 
   chkKeyword(eve, id) {
-    // 
-    // 
+    //
+    //
     // this.inpExcWord = '';
     // this.toastr.success(id);
   }
 
 
   chkSpeci(e, type, elemName) {
-    // 
-    // 
+    //
+    //
 
     switch (type) {
 
@@ -961,15 +975,15 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
     }
     this.chkSpec(type, e.source);
 
-    // 
-    // 
+    //
+    //
     // this.toastr.success(id);
   }
 
   chkSpec(type, src) {
     let found, foundIndex, tot;
 
-    // 
+    //
     if (this.tabIndex == 0) {
       found = this.locFields.find(k => k == type);
       foundIndex = this.locFields.findIndex(k => k == type);
@@ -1025,7 +1039,7 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
   }
 
   pageChange(evt) {
-    // 
+    //
     this.resetPage();
     this.pagesize = evt.value;
     this.searchByKeyword(this.ser_word);
@@ -1069,7 +1083,7 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
         delete this.mainObj.filters.category_topic;
 
         delete this.mainObj.filters.ranges;
-        
+
     } else if (this.tabIndex == 1) {
       delete this.mainObj.filters.agency_name;
       delete this.mainObj.filters.ministry_name;
@@ -1096,8 +1110,8 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
       this.mainObj.aggregations = this.osAggregations;
     }
 
-    // 
-    // 
+    //
+    //
     this.searchByKeyword(this.ser_word);
   }
 }
