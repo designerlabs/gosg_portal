@@ -111,7 +111,7 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
   millisec = 0;
   showNoData = false;
 
-  curr_data_lang: string = "EN";
+  curr_data_lang: string = "English";
 
   private subscription: ISubscription;
   private subscriptionLang: ISubscription;
@@ -322,12 +322,11 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
   changeCurrDataLang() {
     if(this.mainObj.filters.ref_language_id == "1") {
       this.mainObj.filters.ref_language_id = "2"
-      this.curr_data_lang = "MY";
+      this.curr_data_lang = "Bahasa Malaysia";
     } else if(this.mainObj.filters.ref_language_id == "2") {
       this.mainObj.filters.ref_language_id = "1"
-      this.curr_data_lang = "EN";
+      this.curr_data_lang = "English";
     }
-    console.log(this.mainObj.filters);
   }
 
   addFilterAry(ary, resObj, type?) {
