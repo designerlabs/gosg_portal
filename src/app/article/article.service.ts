@@ -29,6 +29,8 @@ export class ArticleService {
       name: false
     }
 
+    public leContent = "";
+
     public archive = {};
 
     private articleUrl: string = this.config.urlArticle;

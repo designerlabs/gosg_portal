@@ -18,7 +18,7 @@ import { Observable } from 'rxjs/Observable';
   templateUrl: './subarticle.component.html',
   styleUrls: ['./subarticle.component.css']
 })
-export class SubarticleComponent implements OnInit, OnDestroy, AfterViewChecked {
+export class SubarticleComponent implements OnInit, OnDestroy {
   le_menu_code: any;
   le_code: any;
   le_content: any;
@@ -116,16 +116,14 @@ export class SubarticleComponent implements OnInit, OnDestroy, AfterViewChecked 
     if (location.pathname.indexOf('agency') !== -1) {
       this.agencyActive = true;
       this.navService.triggerSubArticleAgency(localStorage.getItem('langID'));
-    } else {``
+    } else {
       this.agencyActive = false;
       this.navService.triggerSubArticle(this.subID, localStorage.getItem('langID'));
     }
 
   }
 
-  ngAfterViewChecked(){
-    this.le_content="";
-  }
+
 
   ngOnDestroy() {
     this.subscriptionLang.unsubscribe();
@@ -137,12 +135,14 @@ export class SubarticleComponent implements OnInit, OnDestroy, AfterViewChecked 
 
 
   clickTopMenu(e){
+    this.articleService.leContent = "";
     this.router.navigate(['/category', e.categoryCode]);
     event.preventDefault();
   }
 
 
   clickSideMenu(e, status, event) {
+    this.articleService.leContent = "";
     this.navService.loader = true;
     this.agencyActive = false;
     this.statusID = status;
@@ -154,12 +154,12 @@ export class SubarticleComponent implements OnInit, OnDestroy, AfterViewChecked 
 
   clickContent(e, status, event){
     event.preventDefault();
-    this.le_content="";
+    this.articleService.leContent = "";
     this.navService.loader = true;
     return this.http.get(this.config.urlPortal + 'content/' + e.contentCode + '?language=' + localStorage.getItem('langID')+'&type=lifeevent').subscribe(data => {
       this.navService.loader = false;
       this.le_menu_code = e.contentCode;
-      this.le_content = data['contentCategoryResource']['results'][0]['content']['contentText'];
+      this.articleService.leContent = data['contentCategoryResource']['results'][0]['content']['contentText'];
       this.le_code = data['contentCategoryResource']['results'][0]['content']['contentCode'];
     },
     error => {
@@ -169,7 +169,7 @@ export class SubarticleComponent implements OnInit, OnDestroy, AfterViewChecked 
   }
 
   clickSideMenuByAgency(e, status, event) {
-    this.le_content="";
+    this.articleService.leContent = "";
     this.navService.loader = true;
     this.agencyActive = true;
     this.navService.getSubArticleUrlByAgency(localStorage.getItem('langID'));
@@ -217,6 +217,7 @@ export class SubarticleComponent implements OnInit, OnDestroy, AfterViewChecked 
 
   clickContentFromMenu(pId, aId, event) {
     this.navService.loader = true;
+    this.articleService.leContent = "";
     // this.navService.triggerContent(aId, localStorage.getItem('langID'));
     // this.navService.getContentUrl(aId, localStorage.getItem('langID'));
     this.router.navigate(['/content', aId]);

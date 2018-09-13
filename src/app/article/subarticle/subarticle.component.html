@@ -273,11 +273,11 @@
                             border: 2px #4c4c4c dashed;
                             padding: 8px 0px;
                             font-size: 25px;">{{index + 1  }}</span> -->
-                            <a class="warna_font sideBarMenu--link font-size-s"  [style.color]="!!le_content && (le_code == rightContent.contentCode) ?  getTheme(): '#333333'"  (click)="clickContent(rightContent, '', $event)" [innerHTML]="rightContent.contentTitle" style="font-weight: bold; display: table-cell; text-align: center; vertical-align: middle; background: #efefef; padding: 10px; height: 120px; min-height: 120px;"></a>
+                            <a class="warna_font sideBarMenu--link font-size-s"  [style.color]="!!articleService.leContent && (le_code == rightContent.contentCode) ?  getTheme(): '#333333'"  (click)="clickContent(rightContent, '', $event)" [innerHTML]="rightContent.contentTitle" style="font-weight: bold; display: table-cell; text-align: center; vertical-align: middle; background: #efefef; padding: 10px; height: 120px; min-height: 120px;"></a>
                           </li>
 
                         </ul>
-                        <div class="defaultColor" style="clear: both; padding-top: 20px;" [innerHTML]="le_content">
+                        <div class="defaultColor" style="clear: both; padding-top: 20px;" [innerHTML]="articleService.leContent">
 
                         </div>
                           <!-- <mat-tab-group style="clear: both;">
