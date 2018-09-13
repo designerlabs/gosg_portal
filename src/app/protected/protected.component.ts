@@ -113,6 +113,16 @@ export class ProtectedComponent implements OnInit {
     }
   }
 
+
+  getErorMsg(){
+    if(!environment.staging){
+    this.protectedService.getErrorMsg().subscribe(
+      data => {
+      }
+    )
+    }
+  }
+
   getUserData(){
     this.loading = true;
     if(!environment.staging){
@@ -199,6 +209,7 @@ export class ProtectedComponent implements OnInit {
     let getUserCountry = localStorage.getItem('userNationality');
 
     this.getUserData();
+    this.getErorMsg();
     this.activatedRoute.queryParamMap.skip(1).subscribe((queryParams: Params) => {
       this.userId = queryParams.get('id');
       if(this.userId){
