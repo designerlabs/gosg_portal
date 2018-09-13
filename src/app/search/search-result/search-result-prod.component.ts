@@ -319,7 +319,6 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
     this.searchByKeyword(this.ser_word);
   }
 
-
   changeCurrDataLang() {
     if(this.mainObj.filters.ref_language_id == "1") {
       this.mainObj.filters.ref_language_id = "2"
@@ -544,7 +543,7 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
     return res;
   }
 
-  searchByKeyword(valkeyword) {
+  searchByKeyword(valkeyword, opt?) {
     //
 
     let arrKeyword: any = [];
@@ -570,10 +569,15 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
         this.mainObj.from = this.pagefrom;
         this.mainObj.size = this.pagesize;
 
-        if(this.languageId)
-          this.mainObj.filters.ref_language_id = this.languageId.toString();
-        else
-          this.mainObj.filters.ref_language_id = "1"
+        if(opt) {
+          this.changeCurrDataLang();
+        } else {
+
+          if(this.languageId)
+            this.mainObj.filters.ref_language_id = this.languageId.toString();
+          else
+            this.mainObj.filters.ref_language_id = "1"
+        }
 
       }
       let dataUrl = '';

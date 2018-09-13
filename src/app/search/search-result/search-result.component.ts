@@ -1,18 +1,12 @@
-import { Component, OnInit, Input, Inject, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { SharedService } from '../../common/shared.service';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router } from '@angular/router';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
-
-import { MatPaginator, MatSort, MatTabChangeEvent } from '@angular/material';
-import { MatTableModule } from '@angular/material/table';
+import { Location } from '@angular/common';
 import { ToastrService } from "ngx-toastr";
 import { APP_CONFIG, AppConfig } from '../../config/app.config.module';
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { Http, Response } from '@angular/http';
+import { Http } from '@angular/http';
 import { SearchService } from '../../search/search.service';
-// import * as moment_ from 'moment';
 import * as moment from 'moment';
 import { ISubscription } from 'rxjs/Subscription';
 import { TopnavService } from '../../header/topnav/topnav.service';
@@ -124,7 +118,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
     private http: Http,
     @Inject(APP_CONFIG) private config: AppConfig,
     private serchService: SearchService,
-    // private moment : Moment
+    private location : Location
   ) {
     this.subscriptionLang = this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       // this.sharedService.errorHandling(event, (function(){
@@ -545,6 +539,8 @@ export class SearchResultComponent implements OnInit, OnDestroy {
   }
 
   searchByKeyword(valkeyword, opt?) {
+    // this.router.navigate(['search/searchResult/' + valkeyword]);
+    // console.log(location)
 
     let arrKeyword: any = [];
     let arrKeywordeySetting: any = [];

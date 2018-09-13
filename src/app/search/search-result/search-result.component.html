@@ -279,7 +279,10 @@
 
       <mat-tab-group #tabGroup (selectedTabChange)="changeTab($event)">
         <mat-tab label="{{'home.search.local' | translate}}">
-          <div style="padding-top:5px;" *ngIf="totalElements>0">
+          <div style="padding-top:5px;" *ngIf="totalElements < 10">
+            {{totalElements}} {{'home.search.resultsfound' | translate}} {{millisec}} ms
+          </div>
+          <div style="padding-top:5px;" *ngIf="totalElements >= 10">
             {{totalElements | number:'2.0'}} {{'home.search.resultsfound' | translate}} {{millisec}} ms
           </div>
           <ul class="intSearch" *ngIf="tabIndex==0">
