@@ -11,6 +11,7 @@ import { SearchService } from '../../search/search.service';
 import { ToastrService } from 'ngx-toastr';
 import { ISubscription } from 'rxjs/Subscription';
 import { TopnavService } from '../topnav/topnav.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-nav',
@@ -47,6 +48,7 @@ export class NavComponent implements OnInit, AfterViewInit, OnDestroy {
 
     constructor(
         private translate: TranslateService,
+        private titleService: Title,
         private toastr: ToastrService,
         @Inject(APP_CONFIG) private config: AppConfig,
         private http: Http,
@@ -65,6 +67,7 @@ export class NavComponent implements OnInit, AfterViewInit, OnDestroy {
                     this.lang = 'en';
                     this.langId = 1;
                     this.languageId = 1;
+                    this.titleService.setTitle("MyGOV - The Government of Malaysia's Official Portal");
                     this.imgSrc = 'logo_en';
                 });
 
@@ -75,6 +78,7 @@ export class NavComponent implements OnInit, AfterViewInit, OnDestroy {
                     this.lang = 'ms';
                     this.langId = 2;
                     this.languageId = 2;
+                    this.titleService.setTitle("MyGOV - Portal Rasmi Kerajaan Malaysia");
                     this.imgSrc = 'logo_ms';
                 });
             }
@@ -86,6 +90,8 @@ export class NavComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     ngOnInit() {
+
+
 
         if (!this.languageId) {
             this.languageId = localStorage.getItem('langID');
