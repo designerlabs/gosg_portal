@@ -173,7 +173,7 @@ export const APP_DI_CONFIG: AppConfig = {
     urlCompleteEmail: protectedBaseURL+'user/complete/email/updated',
     urlCompletePhone: protectedBaseURL+'user/complete/phone/updated',
     urlGetUser: protectedBaseURL+'user/detail',
-    urlErr: commonURL+'/errormessage/151',
+    urlErr: commonURL+'/errormessage/invaliduser',
     urlGetProfile: protectedBaseURL+'user/profile',
     urlGetProfileEmail: protectedBaseURL+'user/profile/email',
     urlGetProfilePhone: protectedBaseURL+'user/profile/phone',
