@@ -58,6 +58,7 @@ export class ProtectedService {
   private completeUrlEmail: string = this.config.urlCompleteEmail;
   private completeUrlPhone: string = this.config.urlCompletePhone;
   private getUserUrl: string = this.config.urlGetUser;
+  private getErrUrl: string = this.config.urlErr;
   private pollUrl: string = this.config.urlPollProtected;
   // private serviceUrl = 'https://jsonplaceholder.typicode.com/users';
   private inboxUrl = this.mailUrl;
@@ -87,6 +88,13 @@ export class ProtectedService {
   getUser(){
     return this.http
     .get(this.getUserUrl+"?language="+localStorage.getItem('langID')).map((response: Response) => response.json())
+    .catch(this.handleError);
+  }
+
+
+  getErrorMsg(){
+    return this.http
+    .get(this.getErrUrl+"?language="+localStorage.getItem('langID')).map((response: Response) => response.json())
     .catch(this.handleError);
   }
 
@@ -214,7 +222,7 @@ export class ProtectedService {
   }
 
   getProtected(modules, lang){
-    
+
     return this.http
     .get(this.dserviceAgencyUrl + modules + '?language='+lang)
     .map((response: Response) => response.json())
@@ -223,7 +231,7 @@ export class ProtectedService {
   }
 
   getPdrm(modules, arrObj){
-    
+
     let svcName = modules.split('/')[1];
     let type;
     let plateNo;
@@ -232,7 +240,7 @@ export class ProtectedService {
     let dsvcCode;
     let params;
     let langId;
- 
+
     agcCode = arrObj[1];
     dsvcCode = arrObj[2];
 
@@ -241,7 +249,7 @@ export class ProtectedService {
     if(svcName == 'summon-traffic') {
 
       type = arrObj[3];
-      
+
       if(type == 1) {
         plateNo = arrObj[5];
         params = '?typeId='+type+'&vehicleNo='+plateNo+'&'+svcParams;
@@ -264,7 +272,7 @@ export class ProtectedService {
     .retry(5)
     .catch(this.handleError);
   }
-  
+
   create(data, moduleName, lang, servicesC, agencyC) {
     let createUrl = this.urlPerhilitan   + moduleName + '?language='+lang+'&agency='+agencyC+'&service='+servicesC;
     return this.http.post(createUrl, data)
@@ -273,7 +281,7 @@ export class ProtectedService {
   }
 
   getDataProtected(modules, lang, page, size){
-    
+
     return this.http
     .get(this.config.protectedURL + modules + '?language='+lang+'&page='+page+'&size='+size)
     .map((response: Response) => response.json())
@@ -282,7 +290,7 @@ export class ProtectedService {
   }
 
   getDataProtectedById(modules, lang){
-    
+
     return this.http
     .get(this.config.protectedURL + modules + '?language='+lang)
     .map((response: Response) => response.json())
@@ -291,7 +299,7 @@ export class ProtectedService {
   }
 
   getProtectedNopg(modules){
-    
+
     return this.http
     .get(this.urlDS + modules)
     .map((response: Response) => response.json())
