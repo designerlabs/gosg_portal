@@ -206,7 +206,7 @@ export function HttpLoaderFactory(http: Http) {
 
     TopicFeatureComponent,
     FooterComponent,
-    HighlightboxComponent,
+    // HighlightboxComponent,
     ErrorComponent,
     PollComponent,
     BreadcrumbComponent,
@@ -231,7 +231,7 @@ export function HttpLoaderFactory(http: Http) {
     SearchPipe,
     SharedLoaderComponent,
     RssmainComponent,
-    TruncatePipe,
+    // TruncatePipe,
     SchoolPopupDialog
     // SearchResultComponent
   ],
@@ -262,7 +262,7 @@ export function HttpLoaderFactory(http: Http) {
     DataprotectionComponent,
     TopicFeatureComponent,
     FooterComponent,
-    HighlightboxComponent,
+    // HighlightboxComponent,
     ErrorComponent,
     PollComponent,
     BreadcrumbComponent,

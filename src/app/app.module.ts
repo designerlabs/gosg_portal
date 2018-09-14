@@ -12,7 +12,7 @@ import { DatepickerModule } from 'ngx-bootstrap/datepicker';
 import {HttpClientModule} from '@angular/common/http';
 import { AppConfigModule } from './config/app.config.module';
 import { ModalModule } from 'ngx-bootstrap/modal';
-
+import { TruncatePipe } from './pipe/truncate.pipe';
 import { AppComponent } from './app.component';
 import { appRoutes } from './routes';
 import { OwlModule } from 'ng2-owl-carousel';
@@ -35,6 +35,7 @@ import { ArchivecategoryComponent } from './archive/archivecategory/archivecateg
 import { ArchivesubcategoryComponent } from './archive/archivesubcategory/archivesubcategory.component';
 import { ArchivecontentComponent } from './archive/archivecontent/archivecontent.component';
 import { PortalLoaderComponent } from './loader/portal-loader.component';
+import { HighlightboxComponent } from './highlightbox/highlightbox.component';
 
 // import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule } from "@angular/material";
 
@@ -82,6 +83,7 @@ imports: [
     LifeeventComponent,
     DigitalservicesComponent,
     HomeComponent,
+    HighlightboxComponent,
     FeedbackComponent,
     DigitalServiceDialog,
     ContentComponent,
@@ -89,7 +91,8 @@ imports: [
     ArchivecategoryComponent,
     ArchivesubcategoryComponent,
     ArchivecontentComponent,
-    PortalLoaderComponent 
+    PortalLoaderComponent,
+    TruncatePipe
 
   ],
 

@@ -10,7 +10,7 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { DatepickerModule } from 'ngx-bootstrap/datepicker';
 import { Ng4FilesModule } from './ng4-files';
-
+import { TruncatePipe } from './pipe/truncate.pipe';
 import { AppConfigModule } from './config/app.config.module';
 // import { AppComponent } from './app.component';
 import { protectedRoutes } from './protected-routes';
@@ -51,6 +51,7 @@ import { ProtectedLoaderComponent } from './loader/protected-loader.component';
 import { FamilyinfoComponent, FamilyPopupDialog } from './familyinfo/familyinfo.component';
 import { FamilyinfotblComponent } from './familyinfo/familyinfotbl/familyinfotbl.component';
 import { CheckexamresultComponent, ExamPopupDialog,ExamResult } from './checkexamresult/checkexamresult.component';
+import { HighlightboxComponent } from './highlightbox/highlightbox.component';
 
 export function HttpLoaderFactory(http: Http) {
    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -93,7 +94,9 @@ export function HttpLoaderFactory(http: Http) {
     FamilyinfotblComponent,
     CheckexamresultComponent,
     ExamPopupDialog,
-    ExamResult
+    HighlightboxComponent,
+    ExamResult,
+    TruncatePipe
   ],
   imports: [
     SharedModule,
