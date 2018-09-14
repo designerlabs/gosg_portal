@@ -77,7 +77,7 @@ export const protectedRoutes: Routes = [
     {path: 'appsmgmt', component: AppManagementComponent},
     {path: 'index', component: HomeProtectedComponent},
     {path: 'firsttime', component: FirsttimeloginComponent},
-    {path: 'search/searchResult/:id', component: SearchResultProdComponent},
+    {path: 'search/:id', component: SearchResultProdComponent},
     {path: 'eparticipation', component: EparticipationComponent},
     {path: 'category/:id', component: ArticleprodComponent, canActivate: [NavRouterActivator]  },
     {path: 'rss/:id', component: RssmainComponent},

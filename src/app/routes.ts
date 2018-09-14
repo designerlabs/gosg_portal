@@ -64,7 +64,7 @@ export const appRoutes: Routes = [
     {path: 'agencydir', component: AgencydirectoryComponent},
     {path: 'calendar', component: EventCalendarComponent},
     {path: 'digitalservices', component: DigitalservicesComponent},
-    {path: 'search/searchResult/:id', component: SearchResultComponent},
+    {path: 'search/:id', component: SearchResultComponent},
     {path: 'category/:id', component: ArticleComponent, canActivate: [NavRouterActivator]  },
     {path: 'rss/:id', component: RssmainComponent},
     {path: 'rss/id/:id', component: RssComponent},

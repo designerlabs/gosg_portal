@@ -540,6 +540,20 @@ export class SearchResultComponent implements OnInit, OnDestroy {
   searchByKeyword(valkeyword, opt?) {
     // this.router.navigate(['search/searchResult/' + valkeyword]);
     // console.log(location)
+    let locStrgKword = localStorage.getItem('ser_word');
+    let navKword = this.router.url.split("/")[2];
+
+    if(navKword != locStrgKword) {
+      localStorage.setItem('ser_word', navKword);
+      this.loading = true;
+      location.href = window.location.origin+'/'+'search/'+navKword;
+      this.mainObj.keyword(navKword);
+    } else if(valkeyword != locStrgKword) {
+      localStorage.setItem('ser_word', valkeyword);
+      this.loading = true;
+      location.href = window.location.origin+'/'+'search/'+valkeyword;
+      this.mainObj.keyword(valkeyword);
+    }
 
     let arrKeyword: any = [];
     let arrKeywordeySetting: any = [];
@@ -842,8 +856,6 @@ export class SearchResultComponent implements OnInit, OnDestroy {
             // this.millisec = rData.data.tookMillis;
 
             this.intData = this.changeAryVal(rData.data,'global')
-  
-            console.log(this.intData)
   
             this.selMonPubDisp = '';
             this.selAuthDisp = '';
