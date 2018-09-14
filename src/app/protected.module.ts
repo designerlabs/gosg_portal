@@ -51,7 +51,7 @@ import { ProtectedLoaderComponent } from './loader/protected-loader.component';
 import { FamilyinfoComponent, FamilyPopupDialog } from './familyinfo/familyinfo.component';
 import { FamilyinfotblComponent } from './familyinfo/familyinfotbl/familyinfotbl.component';
 import { CheckexamresultComponent, ExamPopupDialog,ExamResult } from './checkexamresult/checkexamresult.component';
-import { HighlightboxComponent } from './highlightbox/highlightbox.component';
+import { HighlightboxProdComponent } from './highlightbox/highlightboxprod.component';
 
 export function HttpLoaderFactory(http: Http) {
    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -94,7 +94,7 @@ export function HttpLoaderFactory(http: Http) {
     FamilyinfotblComponent,
     CheckexamresultComponent,
     ExamPopupDialog,
-    HighlightboxComponent,
+    HighlightboxProdComponent,
     ExamResult,
     TruncatePipe
   ],
