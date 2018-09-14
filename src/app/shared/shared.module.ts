@@ -42,7 +42,7 @@ import { SearchService } from '../search/search.service';
 
 import { TopicFeatureComponent } from '../topic-feature/topic-feature.component';
 import { FooterComponent } from '../footer/footer.component';
-import { HighlightboxComponent } from '../highlightbox/highlightbox.component';
+// import { HighlightboxComponent } from '../highlightbox/highlightbox.component';
 
 import { ErrorComponent } from "../error/error.component";
 
