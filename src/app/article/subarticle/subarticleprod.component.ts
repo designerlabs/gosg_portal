@@ -20,6 +20,8 @@ import { Observable } from 'rxjs/Observable';
   styleUrls: ['./subarticle.component.css']
 })
 export class SubarticleprodComponent implements OnInit, OnDestroy {
+  le_menu_code: any;
+  le_code: any;
   agencyActive: boolean = false;
   statusID: any;
   @Output() menuClick = new EventEmitter();
@@ -193,6 +195,22 @@ export class SubarticleprodComponent implements OnInit, OnDestroy {
           console.log("Error occured");
         }
       );
+  }
+
+  clickContent(e, status, event){
+    event.preventDefault();
+    this.articleService.leContent = "";
+    this.navService.loader = true;
+    return this.http.get(this.config.urlPortal + 'content/' + e.contentCode + '?language=' + localStorage.getItem('langID')+'&type=lifeevent').subscribe(data => {
+      this.navService.loader = false;
+      this.le_menu_code = e.contentCode;
+      this.articleService.leContent = data['contentCategoryResource']['results'][0]['content']['contentText'];
+      this.le_code = data['contentCategoryResource']['results'][0]['content']['contentCode'];
+    },
+    error => {
+      this.navService.loader = false;
+    });
+
   }
 
 
