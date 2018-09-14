@@ -423,6 +423,9 @@
     }
   },
   "common":{
+    "profileEmailMsg":"Your Profile Email has been updated successfully!",
+    "profilePhoneMsg":"Your Profile Phone number has been updated successfully!",
+    "profileBtn":"Click here to go to Profile",
     "titleMsg":"MyGOV - The Government of Malaysia's Official Portal",
     "copyrightnotice": "Copyright Notice",
     "clientcharter": "Client Charter",

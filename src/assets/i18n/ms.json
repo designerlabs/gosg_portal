@@ -423,6 +423,9 @@
     }
   },
   "common":{
+    "profileEmailMsg":"E-mel Profil anda telah berjaya dikemas kini!",
+    "profilePhoneMsg":"Profil Nombor telefon anda berjaya dikemas kini!",
+    "profileBtn":"Klik di sini untuk pergi ke Profil",
     "titleMsg":"MyGOV - Portal Rasmi Kerajaan Malaysia",
     "copyrightnotice": "Notis Hakcipta",
     "clientcharter": "Piagam Pelanggan",
