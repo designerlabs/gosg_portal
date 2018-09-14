@@ -113,6 +113,21 @@
             text-decoration: none;
         }
 
+        .intro-box-content{
+          background-color: #eaebed;
+          border-top: 3px solid #1ebebc;
+          margin-bottom: 20px;
+          padding: 0px 15px 15px 15px;
+          height: auto !important;
+          min-height: 115px;
+          display: inline-block;
+          width: 100%;
+          color:#333;
+          overflow: hidden;
+          float: left;
+          text-decoration: none;
+          }
+
         .intro-box:hover {
             text-decoration: none;
             border-top: 3px solid #e6436e;

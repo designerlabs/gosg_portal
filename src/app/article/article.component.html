@@ -363,6 +363,30 @@
 
                         </div>
 
+                        <div *ngIf="article.contentList"  class="row">
+                          <h2 *ngIf="article.contentList.length > 0" class="container font-size-m warna_font" [style.color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">{{'common.listofarticle' | translate}}</h2>
+                            <div *ngFor="let rightContent of article.contentList; let index=index; let odd=odd; let even=even;">
+                              <div class="col-sm-4">
+                                  <div>
+                                      <div style="width:100%; margin-right:10px; height:auto;" class="pointer"  (click)="clickContentFromMenu(article.categoryCode, rightContent.contentCode, $event)">
+
+
+                                          <a class="intro-box-content warna_border_color" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
+                                              <h4 class="font-size-m warna_font">
+                                                  {{rightContent.contentTitle}}
+                                              </h4>
+                                              <span class="warna_font article-size font-size-s" [innerHTML]="rightContent.contentDescription"></span>
+                                              <div class="font-size-s" style="text-align: right;">
+                                                  <i class="fa fa-caret-right"></i> {{'home.readmore' | translate }}</div>
+                                          </a>
+                                      </div>
+                                  </div>
+                              </div>
+
+                              <div *ngIf="(index + 1) % 3 == 0" class="clearfix"></div>
+                          </div>
+                        </div>
+
                         <div *ngIf="article.content">
                             <div>
                                 <div *ngIf="article.image">
@@ -436,9 +460,38 @@
                                             </a>
                                         </div>
                                     </div>
+
+
+
                                 </div>
 
                                 <div *ngIf="odd" class="clearfix"></div>
+                            </div>
+
+
+                            <div *ngIf="article.contentList">
+                              <div class="row">&nbsp;</div>
+                              <h2 *ngIf="article.contentList.length > 0" class="container font-size-m warna_font" [style.color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">{{'common.listofarticle' | translate}}</h2>
+                                <div *ngFor="let rightContent of article.contentList; let index=index; let odd=odd; let even=even;">
+                                  <div class="col-sm-6">
+                                      <div>
+                                          <div style="width:100%; margin-right:10px; height:auto;" class="pointer"  (click)="clickContentFromMenu(article.categoryCode, rightContent.contentCode, $event)">
+
+
+                                              <a class="intro-box-content warna_border_color" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
+                                                  <h4 class="font-size-m warna_font">
+                                                      {{rightContent.contentTitle}}
+                                                  </h4>
+                                                  <span class="warna_font article-size font-size-s" [innerHTML]="rightContent.contentDescription"></span>
+                                                  <div class="font-size-s" style="text-align: right;">
+                                                      <i class="fa fa-caret-right"></i> {{'home.readmore' | translate }}</div>
+                                              </a>
+                                          </div>
+                                      </div>
+                                  </div>
+
+                                  <div *ngIf="odd" class="clearfix"></div>
+                              </div>
                             </div>
 
                         </div>
