@@ -73,23 +73,39 @@ export class ReplacementmycardComponent implements OnInit {
     }  
 
     let newPage = '';
-    //newPage = 'http://www.google.com'; // for test only;
+    this.redirect_url = '';
+    //newPage = 'https://www.google.com'; // for test only;
     this.redirect_url = document.URL + '?redirect_url='+newPage;
-    this.new_redirect_url = this.redirect_url.split('redirect_url=')[1];
+    this.new_redirect_url = this.redirect_url.split('?redirect_url=')[1];
     
-    console.log(this.redirect_url);
-    console.log(this.new_redirect_url);
+    // console.log(this.redirect_url);
+    // console.log(this.new_redirect_url);
   }
 
   clickYes(){
     
-    if(this.new_redirect_url){      
-      window.open(this.new_redirect_url+"?status=ya");
-      console.log(this.new_redirect_url+"?status=ya");
+    if(this.new_redirect_url){     
+      let newUrl = "http://";
+      
+      let httpStr = this.new_redirect_url.substring(0, 4);
+
+      if(httpStr.toLowerCase() == 'http' || httpStr.toLowerCase() == 'https'){
+        
+        this.new_redirect_url = this.new_redirect_url.replace(/%2F/g, "/");
+       
+        window.open(this.new_redirect_url+"?status=ya", '_blank');
+
+      } else {
+        
+        window.open(newUrl+this.new_redirect_url+"?status=ya", '_blank');
+      }
+
     }
   }
 
   clickNo(){
-    
+    //open('', '_self').close();
+    window.open('', '_self', '');
+    window.close();   
   }
 }
