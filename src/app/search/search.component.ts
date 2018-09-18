@@ -43,7 +43,7 @@ export class SearchComponent implements OnInit {
         if (key) {
             $('#searchDDown').css({ 'display': 'none' });
             localStorage.setItem('ser_word', key);
-            this.router.navigate(['search/' + key]);
+            this.router.navigate(['./search/' + key]);
             this.internal(key);
         } else {
             this.toastr.error(this.translate.instant('common.msg.searchKeyword'), '');

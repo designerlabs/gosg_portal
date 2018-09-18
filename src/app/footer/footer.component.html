@@ -179,10 +179,10 @@
 
   <div class="copyright">
     <div class="container">
-      <div class="padding-m" *ngIf="copyright.footerContentName.length>0">
+      <div class="padding-m" *ngIf="copyright?.footerContentName?.length>0">
           <div class="col-md-4">
             <p class="font-size-s" style="margin-top: 4%;">
-              {{copyright.footerContentName}}
+              {{copyright?.footerContentName}}
             </p>
           </div>
           <div class="col-md-8 text-right hidden-xs">
@@ -190,7 +190,7 @@
               {{dateOfUpdate.footerContentDescription}}
             </p>
             <p class="font-size-s" style="margin-top: -10px;">
-              {{copyright.footerContentDescription}}
+              {{copyright?.footerContentDescription}}
             </p>
           </div>
       </div>
