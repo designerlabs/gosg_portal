@@ -10,7 +10,7 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { DatepickerModule } from 'ngx-bootstrap/datepicker';
 import { Ng4FilesModule } from './ng4-files';
-import { TruncatePipe } from './pipe/truncate.pipe';
+import { TruncateProdPipe } from './pipe/truncateprod.pipe';
 import { AppConfigModule } from './config/app.config.module';
 // import { AppComponent } from './app.component';
 import { protectedRoutes } from './protected-routes';
@@ -96,7 +96,7 @@ export function HttpLoaderFactory(http: Http) {
     ExamPopupDialog,
     HighlightboxProdComponent,
     ExamResult,
-    TruncatePipe
+    TruncateProdPipe
   ],
   imports: [
     SharedModule,
