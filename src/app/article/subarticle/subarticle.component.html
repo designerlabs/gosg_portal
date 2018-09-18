@@ -54,7 +54,7 @@
         </div>
 
         <div *ngIf="article.template === 'publication' || article.template === 'eparticipation'">
-          <div  *ngIf="article.contentList">
+          <div  *ngIf="article.contentList && !article.agencyList">
               <div class="col-sm-6">
                   <mat-tab-group>
                     <mat-tab  *ngFor="let rightContent of article.contentList;" label="{{rightContent.tab}}">
@@ -80,7 +80,7 @@
                   </mat-tab-group>
               </div>
           </div>
-          <div *ngIf="!article.contentList">
+          <div *ngIf="article.contentList && article.agencyList">
               <div class="col-sm-6">
                   <div class="row">
                       <div class="col-md-12 warna_font">
