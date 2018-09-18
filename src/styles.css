@@ -747,6 +747,10 @@ table a:not(.btn), .table a:not(.btn) {
     text-decoration: none;
 }
 
+.table-responsive a{
+  color: #000 !important;
+}
+
 .marginTop-10 {
   margin-top: 10px;
 }
