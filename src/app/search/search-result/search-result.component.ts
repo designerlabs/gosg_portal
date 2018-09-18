@@ -539,8 +539,6 @@ export class SearchResultComponent implements OnInit, OnDestroy {
 
   searchByKeyword(valkeyword, opt?) {
     // this.router.navigate(['search/searchResult/' + valkeyword]);
-    console.log(location)
-    console.log(window.location)
     let locStrgKword = localStorage.getItem('ser_word');
     let navKword = this.router.url.split("/")[2];
 
