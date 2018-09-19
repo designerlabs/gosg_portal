@@ -172,13 +172,12 @@ export class NavComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     mainSearch(key) {
-        console.log(window.location);
         this.page = this.router.url.split('/')[1];
         if(key) {
             $('#searchDDown').css({ 'display': 'none' });
             localStorage.setItem('ser_word', key);
             // this.router.navigate([]);
-            location.href = window.location.origin+'/'+'search/'+key;
+            location.href = './search/'+key;
             this.internal(key);
 
             // if(this.page == 'search')
