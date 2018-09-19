@@ -488,7 +488,8 @@
       "success":"Successfully added!",
       "nodata": "No data found",
       "searchKeyword": "Please enter a word to search",
-      "mykad":"Do you agree to share your profile from MyGovernment Portal?"
+      "mykad":"Do you agree to share your profile from MyGovernment Portal?",
+      "thanks": "Thank You"
     },
     "state":{
       "success":"bg_header bg_success_header",

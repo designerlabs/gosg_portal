@@ -14,11 +14,11 @@ import {
 import { NavService } from '../header/nav/nav.service';
 
 @Component({
-  selector: 'gosg-replacementmycard',
-  templateUrl: './replacementmycard.component.html',
-  styleUrls: ['./replacementmycard.component.css']
+  selector: 'gosg-replacementmsg',
+  templateUrl: './replacementmsg.component.html',
+  styleUrls: ['./replacementmsg.component.css']
 })
-export class ReplacementmycardComponent implements OnInit {
+export class ReplacementmsgComponent implements OnInit {
 
   lang = this.lang;
   langID: any;
@@ -72,44 +72,6 @@ export class ReplacementmycardComponent implements OnInit {
       this.langID = 1;
     }  
 
-    let newPage = '';
-    this.redirect_url = '';
-    this.new_redirect_url = '';
-    //this.redirect_url = document.URL + '?redirect_url=';
-    this.redirect_url = document.URL;
-    this.redirect_url = this.redirect_url.replace(/%2F/g, "/");
-    history.pushState(null, null, this.redirect_url);
-    this.new_redirect_url = this.redirect_url.split('?redirect_url=')[1];
-    
-    console.log(this.redirect_url);
-  }
-
-  clickYes(){
-    
-    if(this.new_redirect_url){     
-      let newUrl = "http://";
-      
-      let httpStr = this.new_redirect_url.substring(0, 4);
-
-      if(httpStr.toLowerCase() == 'http' || httpStr.toLowerCase() == 'https'){
-        
-        this.new_redirect_url = this.new_redirect_url.replace(/%2F/g, "/");
-       
-        window.open(this.new_redirect_url+"?status=ya", '_blank');
-
-      } else {
-        
-        window.open(newUrl+this.new_redirect_url+"?status=ya", '_blank');
-      }
-
-    }
-  }
-
-  clickNo(){
-
-    //location.href = "thanks";
-    window.open('thanks', '_self');
-    //open('', '_self').close();
-    window.close();   
+    window.close();  
   }
 }

@@ -488,7 +488,8 @@
       "success":"Successfully added!",
       "nodata": "Tiada maklumat",
       "searchKeyword": "Sila masukkan kata kunci carian",
-      "mykad":"Adakah anda bersetuju untuk berkongsi profil dari MyGovernment Portal?"
+      "mykad":"Adakah anda bersetuju untuk berkongsi profil dari MyGovernment Portal?",
+      "thanks": "Terima Kasih"
     },
     "state":{
       "success":"bg_header bg_success_header",

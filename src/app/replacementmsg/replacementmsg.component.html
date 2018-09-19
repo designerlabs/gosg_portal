@@ -1,0 +1,51 @@
+<div class="container-fluid animated slideInDown" style="background: #a7a495;">
+  <div class="container">
+       <div class="row">
+          <div class="col-md-12"><br>
+              <h1 style="margin-top: 10px;" class="font-size-l"> {{ 'home.menu.mykadapproval' | translate }}</h1>
+              <!-- <hr class="hr-custom2"><br> -->
+              <ul class="list-inline" style="clear:both;">
+                  <li>
+                      <!-- <a class="font-size-s" style="color: #fff;" routerLink="/">
+                          {{'home.menu.home' | translate }}
+                      </a> -->
+                  </li>
+                  <!-- <li>/</li>
+                  <li>
+                      {{'home.breadcrumb.register' | translate}}
+                  </li> -->
+              </ul>
+          </div>
+      </div>
+  </div>
+</div>
+
+<div class="container ds-style">
+    <div class="row container">
+        <br>
+        <div class="example-container mat-elevation-z8 padding-right20" >
+
+            <div class="row padding-15">
+                <div class="col-md-12" style="color: black" *ngIf="langID == 1">
+                  <img _ngcontent-c2="" width="45%" src="assets/images/logo_en.jpg">
+                </div>
+                <div class="col-md-12" style="color: black" *ngIf="langID == 2">
+                  <img _ngcontent-c2="" width="45%" src="assets/images/logo_ms.jpg">
+                </div>
+                <div class="col-md-12 text-align-Center" style="color: black">
+
+                  <h2>{{'common.msg.thanks' | translate}}</h2>
+                </div>
+            </div>
+        </div> 
+    </div><br>
+</div>
+
+<!-- <app-confirm-dialog #resetModal 
+    [title]="'common.icon.warn'" 
+    [content]="'common.msg.reset'" 
+    [state]="'common.state.warn'"
+    [isReset]="'true'" 
+    (resetMethod)="resetMethod($event)">
+</app-confirm-dialog> -->
+

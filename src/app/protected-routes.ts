@@ -54,6 +54,7 @@ import { GalleryComponent } from './gallery/gallery.component';
 import { TrafficinfoComponent } from './trafficinfo/trafficinfo.component';
 import { PerhilitanComponent } from './perhilitan/perhilitan.component';
 import { ReplacementmycardComponent } from './replacementmycard/replacementmycard.component';
+import { ReplacementmsgComponent } from './replacementmsg/replacementmsg.component';
 import { PerhilitanrenewComponent } from './perhilitanrenew/perhilitanrenew.component';
 import { RssmainComponent } from './article/rss/rssmain/rssmain.component';
 import { FamilyinfoComponent } from './familyinfo/familyinfo.component';
@@ -127,6 +128,7 @@ export const protectedRoutes: Routes = [
     {path: 'familyinfo/:id', component: FamilyinfoComponent},
     {path: 'familyinfo/add', component: FamilyinfoComponent},
     {path: 'get_user_approval', component: ReplacementmycardComponent},
+    {path: 'thanks', component: ReplacementmsgComponent},
     {path: 'exam_result', component: CheckexamresultComponent},
     {path: '**', component: ErrorComponent}
     //{path: 'user', loadChildren: 'app/user/user.module#UserModule'}

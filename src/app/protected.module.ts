@@ -42,6 +42,7 @@ import { DigitalservicesprodComponent } from './digitalservices/digitalservicesp
 import { ContentProdComponent } from './article/content/contentprod.component';
 import { PerhilitanComponent } from './perhilitan/perhilitan.component';
 import { ReplacementmycardComponent } from './replacementmycard/replacementmycard.component';
+import { ReplacementmsgComponent } from './replacementmsg/replacementmsg.component';
 import { LeftmenuProdComponent } from './article/leftmenu/leftmenuprod.component';
 import { ArchivecategoryProdComponent } from './archive/archivecategory/archivecategoryprod.component';
 import { ArchivesubcategoryProdComponent } from './archive/archivesubcategory/archivesubcategoryprod.component';
@@ -82,6 +83,7 @@ export function HttpLoaderFactory(http: Http) {
     ContentProdComponent,
     PerhilitanComponent,
     ReplacementmycardComponent,
+    ReplacementmsgComponent,
     LeftmenuProdComponent,
     ArchivecategoryProdComponent,
     ArchivesubcategoryProdComponent,
