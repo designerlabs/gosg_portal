@@ -21,7 +21,7 @@
                         <div class="col-md-4 col-sm-6 col-xs-12 lifeEventBox">
                           <div class="innerBox">
                             <div class="lifeEventBox-title">
-                              <div style="padding-top: 10px;"><img [src]="config.externalMediaURL + '/images/'+ getContent.image.mediaFile" style="height:50px;"></div>
+                              <div style="padding-top: 10px;"><img [src]="config.externalMediaURL + '/images/'+ getContent.image?.mediaFile" style="height:50px;"></div>
                               <h2 class="font-size-m">
                                 <a  class="lifeEventCategory" [style.color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" href="" [routerLink]="['/category', getContent.categoryCode]">{{getContent.categoryName}}</a>
                               </h2>
@@ -56,7 +56,7 @@
                     <div class="col-md-4 col-sm-6 col-xs-12 lifeEventBox" *ngFor="let getContent of leData.data; let index=index; let odd=odd; let even=even;">
                       <div class="innerBox">
                         <div class="lifeEventBox-title">
-                          <div style="padding-top: 10px;"><img [src]="config.externalMediaURL + '/images/'+ getContent.image.mediaFile" style="height:50px;"></div>
+                          <div style="padding-top: 10px;"><img [src]="config.externalMediaURL + '/images/'+ getContent.image?.mediaFile" style="height:50px;"></div>
                           <h2 class="font-size-m">
                             <a  class="lifeEventCategory" [style.color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" href="" [routerLink]="['/category', getContent.categoryCode]">{{getContent.categoryName}}</a>
                           </h2>
