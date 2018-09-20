@@ -1384,6 +1384,7 @@ let bodyUpdate =
         }else{
             this.errMsg = data.statusDesc;
             this.infoModal.show();
+            console.log(this.errMsg);
         }
         }).bind(this));
         this.loading = false;
