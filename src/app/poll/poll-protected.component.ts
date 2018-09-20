@@ -91,16 +91,18 @@ export class PollProtectedComponent implements OnInit, OnDestroy {
       .map(res => res.json())
      .subscribe(eventData => {
       this.sharedService.errorHandling(eventData, (function(){
-        if(eventData.pollQuestionListDto > 0){
+        console.log(eventData)
+       // if(eventData.pollQuestionListDto > 0){
           let resData = eventData.pollQuestionListDto[0];
           this.pollDataQuestion = resData.questionTitle;
+          //console.log("POLL Protected: "+ this.pollDataQuestion);
           this.pollDataAnswer = resData.answer.filter(fData => fData.answer !== undefined);
           this.pollDataQuestionID = resData.questionId;
           this.pollReference = resData.pollReference;
           if (!this.latestResult) { // Check Latest Result Message while change lang
             this.showResult = ((localStorage.getItem('polldone') === resData.pollReference.toString()));
           }
-        }
+       // }
 
         // tslint:disable-next-line:radix
 
