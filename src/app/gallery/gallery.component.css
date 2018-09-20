@@ -158,6 +158,10 @@
     .mediaContent {
       text-align:  center; justify-content: space-between
     }
+
+    .vContent {
+      text-align:  left; justify-content: space-between
+    }
     
     .example-card {
       max-width: 150px;
