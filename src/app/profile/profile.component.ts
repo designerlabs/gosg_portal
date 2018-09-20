@@ -1382,8 +1382,9 @@ let bodyUpdate =
           if(!!data.user){
             window.location.href = this.uapstagingUrl+data.user.tag;
         }else{
-            this.errMsg = data.statusDesc;
-            this.infoModal.hide();
+          //data.statusDesc
+            this.errMsg = "PLLL";
+            this.infoModal.show();
             console.log(this.errMsg);
         }
         }).bind(this));
