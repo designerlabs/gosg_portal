@@ -31,6 +31,7 @@ export class ProtectedComponent implements OnInit {
   isFirstLogin: boolean;
   childData: string;
   getUserName:string;
+  getPassport:string;
   validMyIdentity:any;
   getEmail:string;
   public loading = false;
@@ -133,6 +134,7 @@ export class ProtectedComponent implements OnInit {
         data => {
           if(data.user){
             this.getUserName = data.user.fullName;
+            this.getPassport = data.user.passportNo;
             this.validMyIdentity = data.user.isMyIdentityVerified;
             this.getEmail = data.user.email;
             this.getFullname = data.user.fullName;
