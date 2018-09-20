@@ -152,8 +152,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   lang = this.lang;
   languageId = this.languageId;
   private uapstagingUrl: string = this.config.urlUapStagingProfile;
-  msgEr = '';
-
+  
   constructor(
     private http:HttpClient,
     private router: Router,
@@ -1383,10 +1382,8 @@ let bodyUpdate =
           if(!!data.user){
             window.location.href = this.uapstagingUrl+data.user.tag;
         }else{
-          //data.statusDesc
             this.errMsg = data.statusDesc;
             this.infoModal.show();
-            console.log(this.errMsg);
         }
         }).bind(this));
         this.loading = false;
@@ -1395,7 +1392,7 @@ let bodyUpdate =
       },
 
       error => {
-        this.toastr.error(this.translate.instant('profile.err.updateFail'), this.msgEr);
+        this.toastr.error(this.translate.instant('profile.err.updateFail'), '');
         this.loading = false;
       });
   };
@@ -1423,7 +1420,7 @@ let bodyUpdate =
       },
 
       error => {
-        this.toastr.error(this.translate.instant('profile.err.updateFail'), this.msgEr);
+        this.toastr.error(this.translate.instant('profile.err.updateFail'), '');
         this.loading = false;
       });
   };
