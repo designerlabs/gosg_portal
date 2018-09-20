@@ -133,8 +133,12 @@
                       </h4>
                     </div>
                     <div class="modal-body">
-                      {{!!getPassPort}}
-                      {{ 'digitalservices.msg.access' | translate }}
+                      <span *ngIf="getPassPort">
+                          {{ 'digitalservices.msg.accessNonCiti' | translate }}
+                      </span>
+                      <span *ngIf="!getPassPort">
+                          {{ 'digitalservices.msg.access' | translate }}
+                      </span>
                       <div class="row">
                         &nbsp;
                       </div>
