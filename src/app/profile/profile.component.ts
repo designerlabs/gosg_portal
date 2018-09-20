@@ -1383,7 +1383,7 @@ let bodyUpdate =
             window.location.href = this.uapstagingUrl+data.user.tag;
         }else{
             this.errMsg = data.statusDesc;
-            this.infoModal.show();
+            this.infoModal.hide();
             console.log(this.errMsg);
         }
         }).bind(this));
