@@ -21,7 +21,7 @@
                         <div class="col-md-4 col-sm-6 col-xs-12 lifeEventBox">
                           <div class="innerBox">
                             <div class="lifeEventBox-title">
-                              <div style="padding-top: 10px;"><img [src]="config.externalMediaURL + '/images/'+ getContent.image?.mediaFile" style="height:50px;"></div>
+                              <div style="padding-top: 10px;"><img *ngIf="getContent.image" [src]="config.externalMediaURL + '/images/'+ getContent.image?.mediaFile" style="height:50px;"></div>
                               <h2 class="font-size-m">
                                 <a  class="lifeEventCategory" [style.color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" href="" [routerLink]="['/category', getContent.categoryCode]">{{getContent.categoryName}}</a>
                               </h2>
@@ -31,9 +31,9 @@
                               <div style="text-align: center !important; font-weight: bold !important;" class="lifeEventBox-description font-size-s lefteventlist"  [innerHTML]="(getContent?.categoryDescription?.length > 100)? (getContent?.categoryDescription | slice:0:100)+'...':(getContent?.categoryDescription)">
                               </div>
                               <ul style="list-style:none; padding: 5px 0px; margin: 0px;">
-                                <li *ngFor="let getSubCat of getContent?.subCategoryList">
-                                    <a  class="lifeEventCategory" href="" [routerLink]="['/subcategory', getSubCat.categoryCode]">&lt; {{getSubCat.categoryName}}</a>
-
+                                <li *ngFor="let getSubCat of getContent?.subCategoryList; let i = index;">
+                                    <a class="lifeEventCategory" href="" [routerLink]="['/subcategory', getSubCat.categoryCode]">&lt; {{getSubCat.categoryName}}</a>
+                                    <!-- *ngIf="i < 5" -->
                                 </li>
                               </ul>
 
@@ -56,15 +56,22 @@
                     <div class="col-md-4 col-sm-6 col-xs-12 lifeEventBox" *ngFor="let getContent of leData.data; let index=index; let odd=odd; let even=even;">
                       <div class="innerBox">
                         <div class="lifeEventBox-title">
-                          <div style="padding-top: 10px;"><img [src]="config.externalMediaURL + '/images/'+ getContent.image?.mediaFile" style="height:50px;"></div>
+                          <div style="padding-top: 10px;"><img *ngIf="getContent.image" [src]="config.externalMediaURL + '/images/'+ getContent.image?.mediaFile" style="height:50px;"></div>
                           <h2 class="font-size-m">
                             <a  class="lifeEventCategory" [style.color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" href="" [routerLink]="['/category', getContent.categoryCode]">{{getContent.categoryName}}</a>
                           </h2>
                         </div>
 
                         <div class="lifeEventBox-description font-size-s">
-                          <div  style="text-align: center !important;"  class="lifeEventBox-description font-size-s lefteventlist"  [innerHTML]="(getContent?.categoryDescription?.length > 100)? (getContent?.categoryDescription | slice:0:100)+'...':(getContent?.categoryDescription)">
+                          <div  style="text-align: center !important; font-weight: bold !important;"  class="lifeEventBox-description font-size-s lefteventlist"  [innerHTML]="(getContent?.categoryDescription?.length > 100)? (getContent?.categoryDescription | slice:0:100)+'...':(getContent?.categoryDescription)">
                           </div>
+
+                          <ul style="list-style:none; padding: 5px 0px; margin: 0px;">
+                              <li *ngFor="let getSubCat of getContent?.subCategoryList; let i = index;">
+                                  <a class="lifeEventCategory" href="" [routerLink]="['/subcategory', getSubCat.categoryCode]">&lt; {{getSubCat.categoryName}}</a>
+                                  <!-- *ngIf="i < 5" -->
+                              </li>
+                            </ul>
                           <!-- <a [routerLink]="['/subcategory', subData.categoryCode]" *ngFor="let subData of getContent.subCategoryList; let i = index; let lastItem = last">
                                   {{subData.categoryName}} <i class="{{lastItem ? '' : 'fa fa-angle-right'}}" style="font-weight: bold;"></i>
                           </a> -->
