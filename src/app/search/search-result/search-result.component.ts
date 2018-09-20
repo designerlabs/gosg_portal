@@ -542,16 +542,16 @@ export class SearchResultComponent implements OnInit, OnDestroy {
     let locStrgKword = localStorage.getItem('ser_word');
     let navKword = this.router.url.split("/")[2];
 
-    if(navKword != locStrgKword) {
-      localStorage.setItem('ser_word', navKword);
+    if(decodeURI(navKword) != locStrgKword) {
+      localStorage.setItem('ser_word', decodeURI(navKword));
       this.loading = true;
       location.href = './search/'+navKword;
-      this.mainObj.keyword(navKword);
+      this.mainObj.keyword(decodeURI(navKword));
     } else if(valkeyword != locStrgKword) {
-      localStorage.setItem('ser_word', valkeyword);
+      localStorage.setItem('ser_word', decodeURI(valkeyword));
       this.loading = true;
       location.href = './search/'+valkeyword;
-      this.mainObj.keyword(valkeyword);
+      this.mainObj.keyword(decodeURI(valkeyword));
     }
 
     let arrKeyword: any = [];
