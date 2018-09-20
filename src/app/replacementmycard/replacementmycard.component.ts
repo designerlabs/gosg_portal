@@ -24,6 +24,7 @@ export class ReplacementmycardComponent implements OnInit {
   langID: any;
   redirect_url: any;
   new_redirect_url: any;
+  thankMsg = false;
   private subscriptionLang: ISubscription;
 
   constructor(
@@ -106,10 +107,11 @@ export class ReplacementmycardComponent implements OnInit {
   }
 
   clickNo(){
+    history.pushState(null, null, 'get_user_approval');
+    this.thankMsg = true;
 
-    //location.href = "thanks";
-    window.open('thanks', '_self');
-    //open('', '_self').close();
-    window.close();   
+    // location.href = "thanks";
+    // window.open('thanks', '_self');
+    // window.close();   
   }
 }
