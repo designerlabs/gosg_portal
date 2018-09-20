@@ -229,7 +229,7 @@
       "oku": "Memyemak OKU status"
     },
     "err": {
-      "updateSuccess": "Kemaskini gagal!",
+      "updateFail": "Kemaskini gagal!",
       "ic": "Nombor Kad Pengenalan wajib diisi",
       "name": "Nama penuh wajib diisi",
       "dob": "Tarikh Lahir wajib diisi",

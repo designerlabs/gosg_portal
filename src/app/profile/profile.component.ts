@@ -152,6 +152,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   lang = this.lang;
   languageId = this.languageId;
   private uapstagingUrl: string = this.config.urlUapStagingProfile;
+  msgEr = '';
 
   constructor(
     private http:HttpClient,
@@ -1383,7 +1384,7 @@ let bodyUpdate =
             window.location.href = this.uapstagingUrl+data.user.tag;
         }else{
           //data.statusDesc
-            this.errMsg = "PLLL";
+            this.errMsg = data.statusDesc;
             this.infoModal.show();
             console.log(this.errMsg);
         }
@@ -1394,13 +1395,10 @@ let bodyUpdate =
       },
 
       error => {
-        this.toastr.error(this.translate.instant('profile.err.updateFail'), '');
+        this.toastr.error(this.translate.instant('profile.err.updateFail'), this.msgEr);
         this.loading = false;
       });
   };
-
-
-
 
   updateProfilePhone(formValues:any){
     this.loading = true;
@@ -1425,7 +1423,7 @@ let bodyUpdate =
       },
 
       error => {
-        this.toastr.error(this.translate.instant('profile.err.updateFail'), '');
+        this.toastr.error(this.translate.instant('profile.err.updateFail'), this.msgEr);
         this.loading = false;
       });
   };
