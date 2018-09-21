@@ -46,6 +46,7 @@ export class AppManagementComponent implements OnInit, OnDestroy {
   dateSubmission = [];
   statusDesc = [];
   showNoData = false;
+  loading = false;
 
   private subscription: ISubscription;
   private subscriptionLang: ISubscription;
@@ -97,7 +98,6 @@ export class AppManagementComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscriptionLang.unsubscribe();
-    //this.subscription.unsubscribe();
   }
 
   ngOnInit() {
@@ -164,20 +164,23 @@ export class AppManagementComponent implements OnInit, OnDestroy {
   }
 
   getAgencyApp(lang){
+    this.loading = true;
     this.protectedService.getListAgency(lang).subscribe(data => {
       this.dataAgency = data.agencyList;
+      this.loading = false;
     });
   }
 
   getStatusApp(lang){
+    this.loading = true;
     this.protectedService.getListApp(lang).subscribe(data => {
       this.dataStatus = data.groupList;
-
+      this.loading = false;
     });
   }
 
   getDataAppList(page, size){
-
+    this.loading = true;
     this.protectedService.getDataApp(page, size, this.param).subscribe(
     data => {
       this.dataApp = data.list;
@@ -205,10 +208,12 @@ export class AppManagementComponent implements OnInit, OnDestroy {
 
         });
       }
+
+      this.loading = false;
     });
   }
 
-  viewData(agency, id){
+  viewData(agency, id, dsvcCode, agcCode){
 
     let test = "papar-89";
     if(agency == "PAP-07-09-00"){ //perhilitan
@@ -219,8 +224,14 @@ export class AppManagementComponent implements OnInit, OnDestroy {
         
         this.router.navigate(['perhilitan/'+statusId]);
       }
-    }
 
+      else{
+        this.router.navigate(['perhilitan_renew/'+statusId]);
+      }
+
+      localStorage.setItem('dserviceCode', dsvcCode);
+      localStorage.setItem('agencyCode', agcCode);
+    }
   }
 
   resetSearch(){

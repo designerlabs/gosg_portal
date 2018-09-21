@@ -6,6 +6,9 @@ import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
+import 'rxjs/add/observable/interval';
+import { Observable } from '../../../node_modules/rxjs';
+import { StatisticService } from './statistic.service';
 
 @Component({
   selector: 'gosg-statistic',
@@ -36,10 +39,16 @@ export class StatisticComponent implements OnInit {
   totalNewUsers: any;
   languageId = this.languageId;
   sum = (total, currentValue) => total + currentValue;
+  loading:boolean = false;
+  sub: any;
+  newUsers: any;
+  allUsers: any;
+  statisticData: any;
 
   constructor(
     private http: Http,
-    private portalservice: PortalService,
+    public portalservice: PortalService,
+    private statisticservice: StatisticService,
     private dialogsService: DialogsService,
     private translate: TranslateService,
     private router: Router,
@@ -78,12 +87,21 @@ export class StatisticComponent implements OnInit {
       this.languageId = 1;
     }
 
-    this.getUsersStatData(1);
-    this.getUsersStatData(2);
+    this.statisticData = this.statisticservice.getAllUserData();
+    this.statisticData = this.statisticservice.getNewUserData();
+    this.portalservice.triggerStatistic(1);
+    this.portalservice.triggerStatistic(2);
+
+    this.sub = Observable.interval(2000)
+    .subscribe((val) => {
+      this.getUsersStatData(1);
+      this.getUsersStatData(2);
+      this.sub.unsubscribe();
+    });
+
     this.getDserviceReport(this.languageId);
     this.getPendingDserviceReport(this.languageId);
     this.getDserviceCounterReport(this.languageId);
-    // console.log(this.generateStatByYearFor('dservice'));
   }
 
   getDserviceCounterReport(lng) {
@@ -119,6 +137,8 @@ export class StatisticComponent implements OnInit {
       mVal: ""
     };
 
+    this.loading = true;
+
     this.portalservice.getDserviceRptData(lng).subscribe(data => {
       this.dServiceData = data.list;
       this.dserviceByYear = this.StatByYearDservice;
@@ -126,15 +146,15 @@ export class StatisticComponent implements OnInit {
       this.dServiceData.forEach(dsvc => {
 
         if(dsvc.report) {
-          
+
           // if(dsvc.title == "Registration Form 1") {
 
             Object.keys(dsvc.report).map(function (inx) {
               aryObj = new Object;
-              
+
               aryObj.name = inx;
               aryObj.val = dsvc.report[inx];
-              
+
               retn.push(aryObj);
             });
 
@@ -145,9 +165,9 @@ export class StatisticComponent implements OnInit {
             dsvc.report = retn;
             sum = retn.reduce((sum, item) => sum + item.val, 0);
             retn = [];
-            
+
             // }
-            
+
             dsvc.rptTotal = sum;
           } else {
             dsvc.report = this.StatByYearDservice;
@@ -155,6 +175,8 @@ export class StatisticComponent implements OnInit {
           }
 
         });
+
+        this.loading = false;
 
     });
   }
@@ -171,24 +193,24 @@ export class StatisticComponent implements OnInit {
       mVal: ""
     };
 
+    this.loading = true;
+
     this.portalservice.getPendingDserviceRptData(lng).subscribe(data => {
       this.dServicePendingData = data.list;
-      // console.log(this.dServicePendingData)
-      // this.pdserviceByYear = this.StatByYearPendingDservice;
 
       this.dServicePendingData.forEach(pdsvc => {
 
         if(pdsvc.report) {
-          
+
           // if(pdsvc.title == "Registration Form 1") {
             // console.log(pdsvc.title)
 
             Object.keys(pdsvc.report).map(function (inx) {
               aryObj = new Object;
-              
+
               aryObj.name = inx;
               aryObj.val = pdsvc.report[inx];
-              
+
               retn.push(aryObj);
             });
 
@@ -199,9 +221,9 @@ export class StatisticComponent implements OnInit {
             pdsvc.report = retn;
             sum = retn.reduce((sum, item) => sum + item.val, 0);
             retn = [];
-            
+
             // }
-            
+
             pdsvc.rptTotal = sum;
           } else {
             pdsvc.report = this.StatByYearPendingDservice;
@@ -210,43 +232,45 @@ export class StatisticComponent implements OnInit {
 
         });
 
+        this.loading = false;
+
     });
   }
 
   getUsersStatData(type) {
-    
-    this.portalservice.getStatisticData(type).subscribe(data => {
-      
+
+    // this.portalservice.triggerStatistic(type);
+
       if (type == 1) {
-        
-        this.allUsersData = data.rows;
-        this.totalUsers = data.totalsForAllResults['ga:Users'];
+
         this.allUsersByYear = this.StatByYearAll;
 
-        this.allUsersByYear.forEach(el => {
-          this.allUsersData.forEach(api => {
+        this.StatByYearAll.forEach(el => {
+          this.statisticservice.allUser.forEach(api => {
             if (el[0] === api[0]) {
               el[1] = api[1]
+              console.log(el[1])
             }
           });
+          this.allUsers = this.allUsersByYear;
         });
+        // debugger;
 
       } else if (type == 2) {
-        
-        this.newUsersData = data.rows;
-        this.totalNewUsers = data.totalsForAllResults['ga:newUsers'];
+
         this.newUsersByYear = this.StatByYearNew;
 
         this.newUsersByYear.forEach(el => {
-            this.newUsersData.forEach(api => {
+          this.statisticservice.newUser.forEach(api => {
               if (el[0] === api[0]) {
                 el[1] = api[1]
+                console.log(el[1])
               }
             });
-        });
+            this.newUsers = this.newUsersByYear;
+          });
       }
 
-    });
   }
 
   generateStatByYearFor(name:String) {

@@ -19,6 +19,9 @@ import { Observable } from 'rxjs/Observable';
   styleUrls: ['./subarticle.component.css']
 })
 export class SubarticleComponent implements OnInit, OnDestroy {
+  le_menu_code: any;
+  le_code: any;
+  le_content: any;
   agencyActive: boolean = false;
   statusID: any;
   @Output() menuClick = new EventEmitter();
@@ -31,9 +34,13 @@ export class SubarticleComponent implements OnInit, OnDestroy {
   moduleName: string;
   articleData: any;
   @Output() langChange = new EventEmitter();
+  loading = false;
 
   handleClickMe(e) {
 
+  }
+  boolCallback = (result: boolean) : void => {
+    this.loading = result;
   }
 
   private subscription: ISubscription;
@@ -94,7 +101,6 @@ export class SubarticleComponent implements OnInit, OnDestroy {
   langId = this.langId;
 
   ngOnInit() {
-
     if(!this.langId){
       this.langId = localStorage.getItem('langID');
     }else{
@@ -117,6 +123,8 @@ export class SubarticleComponent implements OnInit, OnDestroy {
 
   }
 
+
+
   ngOnDestroy() {
     this.subscriptionLang.unsubscribe();
   }
@@ -127,12 +135,15 @@ export class SubarticleComponent implements OnInit, OnDestroy {
 
 
   clickTopMenu(e){
+    this.articleService.leContent = "";
     this.router.navigate(['/category', e.categoryCode]);
     event.preventDefault();
   }
 
 
   clickSideMenu(e, status, event) {
+    this.articleService.leContent = "";
+    this.navService.loader = true;
     this.agencyActive = false;
     this.statusID = status;
     this.navService.getSubArticleUrl(e.categoryId, localStorage.getItem('langID'));
@@ -141,7 +152,25 @@ export class SubarticleComponent implements OnInit, OnDestroy {
     event.preventDefault();
   }
 
+  clickContent(e, status, event){
+    event.preventDefault();
+    this.articleService.leContent = "";
+    this.navService.loader = true;
+    return this.http.get(this.config.urlPortal + 'content/' + e.contentCode + '?language=' + localStorage.getItem('langID')+'&type=lifeevent').subscribe(data => {
+      this.navService.loader = false;
+      this.le_menu_code = e.contentCode;
+      this.articleService.leContent = data['contentCategoryResource']['results'][0]['content']['contentText'];
+      this.le_code = data['contentCategoryResource']['results'][0]['content']['contentCode'];
+    },
+    error => {
+      this.navService.loader = false;
+    });
+
+  }
+
   clickSideMenuByAgency(e, status, event) {
+    this.articleService.leContent = "";
+    this.navService.loader = true;
     this.agencyActive = true;
     this.navService.getSubArticleUrlByAgency(localStorage.getItem('langID'));
     this.navService.triggerSubArticleAgency(localStorage.getItem('langID'));
@@ -187,6 +216,8 @@ export class SubarticleComponent implements OnInit, OnDestroy {
 
 
   clickContentFromMenu(pId, aId, event) {
+    this.navService.loader = true;
+    this.articleService.leContent = "";
     // this.navService.triggerContent(aId, localStorage.getItem('langID'));
     // this.navService.getContentUrl(aId, localStorage.getItem('langID'));
     this.router.navigate(['/content', aId]);

@@ -63,7 +63,7 @@ export class ArchivecategoryProdComponent implements OnInit, OnDestroy {
           }else if(this.moduleName == 'content'){
             this.navService.triggerContentOther(this.subID, this.langId,'archive');
           }else{
-            this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID);
+            this.navService.triggerArticleOthers(this.moduleName,  this.langId, this.topicID, 'archive');
           }
         }
 
@@ -95,36 +95,39 @@ export class ArchivecategoryProdComponent implements OnInit, OnDestroy {
     }
 
     clickSideMenu(e, status, url){
+      this.navService.loader = true;
       this.statusID = status;
-      this.navService.getSubArticleUrlOthers(e.categoryCode, localStorage.getItem('langID'), url);
-      this.navService.triggerSubArticleOther(e.categoryCode, localStorage.getItem('langID'), url);
+      // this.navService.getSubArticleUrlOthers(e.categoryCode, localStorage.getItem('langID'), url);
+      // this.navService.triggerSubArticleOther(e.categoryCode, localStorage.getItem('langID'), url);
       this.router.navigate(['/archive/subcategory', e.categoryCode]);
       event.preventDefault();
     }
 
     clickSideMenuOthers(e, status, url){
+      this.navService.loader = true;
       this.statusID = status;
-      this.navService.getSubArticleUrlOthers(e.categoryCode, localStorage.getItem('langID'), url);
-      this.navService.triggerSubArticleOther(e.categoryCode, localStorage.getItem('langID'), url);
+      // this.navService.getSubArticleUrlOthers(e.categoryCode, localStorage.getItem('langID'), url);
+      // this.navService.triggerSubArticleOther(e.categoryCode, localStorage.getItem('langID'), url);
       this.router.navigate(['/archive/subcategory', e.categoryCode]);
       event.preventDefault();
     }
 
 
     clickSideMenuSubCategory(e, status, url){
+      this.navService.loader = true;
       this.statusID = status;
-      this.navService.getSubArticleUrlOthers(e, localStorage.getItem('langID'), url);
-      this.navService.triggerSubArticleOther(e, localStorage.getItem('langID'), url);
+      // this.navService.getSubArticleUrlOthers(e, localStorage.getItem('langID'), url);
+      // this.navService.triggerSubArticleOther(e, localStorage.getItem('langID'), url);
       this.router.navigate(['/archive/subcategory', e]);
       event.preventDefault();
     }
 
 
     clickContentFromMenu(pId, aId, status){
-
+      this.navService.loader = true;
       this.statusID = status;
-      this.navService.triggerContentOther(aId, localStorage.getItem('langID'), status);
-      this.navService.getContentUrlOther(aId, localStorage.getItem('langID'), status);
+      // this.navService.triggerContentOther(aId, localStorage.getItem('langID'), status);
+      // this.navService.getContentUrlOther(aId, localStorage.getItem('langID'), status);
       this.router.navigate(['/archive/content', aId]);
       event.preventDefault();
     }

@@ -35,6 +35,7 @@ export class ArchivecategoryComponent implements OnInit, OnDestroy {
 
   articleData: any;
   @Output() langChange = new EventEmitter();
+  public loading = false;
   constructor(public articleService: ArticleService, private topnavservice: TopnavService, private route: ActivatedRoute, private navService: NavService, private translate: TranslateService, private router: Router, private breadcrumbService: BreadcrumbService, @Inject(APP_CONFIG) private config: AppConfig) {
     this.lang = translate.currentLang;
     this.langId = 1;
@@ -63,14 +64,13 @@ export class ArchivecategoryComponent implements OnInit, OnDestroy {
           }else if(this.moduleName == 'content'){
             this.navService.triggerContentOther(this.subID, this.langId,'archive');
           }else{
-            this.navService.triggerArticle(this.moduleName,  this.langId, this.topicID);
+            this.navService.triggerArticleOthers(this.moduleName,  this.langId, this.topicID, 'archive');
           }
         }
 
     });
 
   }
-
 
   ngOnDestroy() {
     this.subscriptionLang.unsubscribe();
@@ -84,7 +84,7 @@ export class ArchivecategoryComponent implements OnInit, OnDestroy {
       this.langIdVal = this.langId;
     }
 
-        this.articleData = this.articleService.getArticle();
+        this.articleData = this.articleService.getArchive();
         this.moduleName = this.router.url.split('/')[2];
         this.topicID = parseInt(this.router.url.split('/')[3]);
         this.navService.triggerArticleOthers(this.moduleName, localStorage.getItem('langID'), this.topicID, 'archive');
@@ -95,36 +95,40 @@ export class ArchivecategoryComponent implements OnInit, OnDestroy {
     }
 
     clickSideMenu(e, status, url){
+      this.navService.loader = true;
       this.statusID = status;
-      this.navService.getSubArticleUrlOthers(e.categoryCode, localStorage.getItem('langID'), url);
-      this.navService.triggerSubArticleOther(e.categoryCode, localStorage.getItem('langID'), url);
+      // this.navService.getSubArticleUrlOthers(e.categoryCode, localStorage.getItem('langID'), url);
+      // this.navService.triggerSubArticleOther(e.categoryCode, localStorage.getItem('langID'), url);
       this.router.navigate(['/archive/subcategory', e.categoryCode]);
       event.preventDefault();
     }
 
     clickSideMenuOthers(e, status, url){
+      this.navService.loader = true;
       this.statusID = status;
-      this.navService.getSubArticleUrlOthers(e.categoryCode, localStorage.getItem('langID'), url);
-      this.navService.triggerSubArticleOther(e.categoryCode, localStorage.getItem('langID'), url);
+      // this.navService.getSubArticleUrlOthers(e.categoryCode, localStorage.getItem('langID'), url);
+      // this.navService.triggerSubArticleOther(e.categoryCode, localStorage.getItem('langID'), url);
       this.router.navigate(['/archive/subcategory', e.categoryCode]);
       event.preventDefault();
     }
 
 
     clickSideMenuSubCategory(e, status, url){
+      this.navService.loader = true;
       this.statusID = status;
-      this.navService.getSubArticleUrlOthers(e, localStorage.getItem('langID'), url);
-      this.navService.triggerSubArticleOther(e, localStorage.getItem('langID'), url);
+      // this.navService.getSubArticleUrlOthers(e, localStorage.getItem('langID'), url);
+      // this.navService.triggerSubArticleOther(e, localStorage.getItem('langID'), url);
       this.router.navigate(['/archive/subcategory', e]);
       event.preventDefault();
     }
 
 
     clickContentFromMenu(pId, aId, status){
+      this.navService.loader = true;
 
       this.statusID = status;
-      this.navService.triggerContentOther(aId, localStorage.getItem('langID'), status);
-      this.navService.getContentUrlOther(aId, localStorage.getItem('langID'), status);
+      // this.navService.triggerContentOther(aId, localStorage.getItem('langID'), status);
+      // this.navService.getContentUrlOther(aId, localStorage.getItem('langID'), status);
       this.router.navigate(['/archive/content', aId]);
       event.preventDefault();
     }

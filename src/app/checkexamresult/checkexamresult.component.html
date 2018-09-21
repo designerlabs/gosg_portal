@@ -1,0 +1,190 @@
+<gosg-protected-loader [loader]="loading"></gosg-protected-loader>
+<div class="container-fluid animated slideInDown" style="background: #a7a495;">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 style="margin-top: 10px;" class="font-size-l">{{'home.breadcrumb.exam' | translate}}</h1>
+        <hr class="hr-custom2">
+        <ul class="list-inline" style="clear:both;">
+          <li>
+            <a class="font-size-s" routerLink="/">
+              {{'home.menu.home' | translate }}
+            </a>
+          </li>
+          <li>/</li>
+          <li>{{'home.breadcrumb.exam' | translate}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="col-md-12">&nbsp;</div>
+
+  <div class="col-md-12 mat-elevation-z8 padding-bottom-20">
+    <form [formGroup]="searchForm" novalidate="novalidate">
+      <div class="row">
+          <div class="col-md-12 displayDesc">
+              <h4 style="font-weight: bold">Semakan Keputusan Peperiksaan</h4>
+          </div>
+          <div class="col-md-12 displayJustify">
+              <span>Kemudahan semakan keputusan peperiksaan merangkumi peperiksaan PT3, STPM, Penggal Persekolahan
+                untuk diri sendiri dan juga anak di bawah jagaan. Maklumat keputusan peperiksaan yang disemak bukanlah
+                keputusan 'real time'.</span>
+          </div>
+          <div class="col-md-12 displayJustify">
+              <br>
+              <span>Sila pilih maklumat seperti di bawah:</span>
+          </div>
+      </div>
+      <div class="row">
+          <!-- <div class="col-md-12 displayDesc">
+            <div class="col-md-3"><h4>{{'exam.label.name' | translate}}</h4></div>
+            <div class="col-md-3"><h4>{{'exam.label.year' | translate}}</h4></div>
+            <div class="col-md-3"><h4>{{'exam.label.examname' | translate}}</h4></div>
+            <div class="col-md-3"><h4>{{'exam.label.examtype' | translate}}</h4></div>
+          </div><br> -->
+          <div class="padding-line"><hr class="line"></div>
+      </div>
+
+      <div class="row">
+          <div class="col-md-3">
+            <mat-form-field class="example-full-width">
+              <mat-select formControlName="name" placeholder="{{'exam.label.name' | translate}}" required
+                  (change)="getListYear()">
+                  <mat-option *ngFor="let user of listUser" [value]="user.ic">{{user.name}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="searchForm.controls.name.hasError('required')">
+                {{'exam.label.name' | translate }} {{'exam.err.needed' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-2">
+            <mat-form-field class="example-full-width">
+              <mat-select formControlName="examyear" placeholder="{{'exam.label.year' | translate}}" required
+                  (change)="getListExam()">
+                  <mat-option *ngFor="let year of listYear" [value]="year">{{year}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="searchForm.controls.examyear.hasError('required')">
+                {{'exam.label.year' | translate }} {{'exam.err.needed' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3">
+            <mat-form-field class="example-full-width">
+              <mat-select formControlName="examname" placeholder="{{'exam.label.examname' | translate}}" required
+                  (change)="getListTypeExam()">
+                  <mat-option *ngFor="let le of listExam" [value]="le.id">{{le.name}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="searchForm.controls.examname.hasError('required')">
+                {{'exam.label.examname' | translate }} {{'exam.err.needed' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-2" *ngIf="searchForm.controls.examname.value == 5">
+            <mat-form-field class="example-full-width">
+              <mat-select formControlName="examtype" placeholder="{{'exam.label.examtype' | translate}}" required
+                  (change)="checkReqValues()">
+                  <mat-option *ngFor="let lte of listTypeExam" [value]="lte.id">{{lte.name}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="searchForm.controls.examtype.hasError('required')">
+                {{'exam.label.examtype' | translate }} {{'exam.err.needed' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-2" *ngIf="searchForm.controls.examname.value != 5">
+          </div>
+
+          <div class="col-md-2">
+              <button mat-raised-button color="primary" class="btn btn-md btn-success font-size-s pull-right"
+                (click)="checkExam()" [disabled]="!complete">
+                {{'exam.button.check' | translate}}</button>
+          </div>
+      </div>
+
+    </form>
+
+  </div>
+
+  <div class="col-md-12 mat-elevation-z8 padding-bottom-20" *ngIf="showResult">
+
+        <div class="row">
+            <div class="col-md-12 displayDesc text-center">
+                <h5 style="font-weight: bold">SLIP KEPUTUSAN - {{resultInfo.courseName}}</h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1 displayJustify">
+                <span>Nama</span>
+            </div>
+            <div class="col-md-5 displayJustify">
+                <span>: {{listUser.name}}ZAKARIA BIN MOHD NOR</span>
+            </div>
+            <div class="col-md-1 displayJustify">
+                <span>INSTITUSI</span>
+            </div>
+            <div class="col-md-5 displayJustify">
+                <span>: {{resultInfo.instituteName}}</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1 displayJustify">
+                <span>No. KP</span>
+            </div>
+            <div class="col-md-5 displayJustify">
+                <span>: {{listUser.ic}}700101712555</span>
+            </div>
+            <div class="col-md-1 displayJustify">
+                <span>TAHUN PEPERIKSAAN</span>
+            </div>
+            <div class="col-md-5 displayJustify">
+                <span>: {{resultInfo.examYear}}</span>
+            </div>
+        </div><br>
+
+        <div class="row">
+            <table class="mat-table example-table" id="dataTable" style="width:100%;">
+                <tr class="mat-header-row tableHeader">
+                    <th class="mat-header-cell" width="5%">&nbsp;BIL</th>
+                    <th class="mat-header-cell" width="50%">MATA PELAJARAN</th>
+                    <th class="mat-header-cell" width="10%">GRED</th>
+                    <th class="mat-header-cell" width=""></th>
+                </tr>
+                <tr class="mat-row table_row" style="background: transparent;"
+                    *ngFor="let data of listResult; let i = index;" role="row">
+                    <td class="mat-cell text-center">{{i+1}}</td>
+                    <td class="mat-cell">{{data.name}}</td>
+                    <td class="mat-cell">{{data.pass}}</td>
+                    <td class="mat-cell">{{data.code}}</td>
+                </tr>
+            </table>
+        </div><br>
+
+        <div class="row">
+            <div class="col-md-1 displayJustify">
+                <span>CGPA</span>
+            </div>
+            <div class="col-md-5 displayJustify">
+                <span>: {{resultInfo.cgpa}}</span>
+            </div>
+            <div class="col-md-1 displayJustify">
+                <span></span>
+            </div>
+            <div class="col-md-5 displayJustify">
+                <span></span>
+            </div>
+        </div><br><br>
+
+        <div class="row">
+            <div class="col-md-12 displayJustify">
+                <span>*** Keputusan yang dipaparkan hanyalah bagi tujuan semakan sahaja dan tidak boleh digunakan bagi tujuan lain.</span>
+            </div>
+        </div>
+    </div>
+</div>

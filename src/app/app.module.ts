@@ -12,7 +12,7 @@ import { DatepickerModule } from 'ngx-bootstrap/datepicker';
 import {HttpClientModule} from '@angular/common/http';
 import { AppConfigModule } from './config/app.config.module';
 import { ModalModule } from 'ngx-bootstrap/modal';
-
+import { TruncatePipe } from './pipe/truncate.pipe';
 import { AppComponent } from './app.component';
 import { appRoutes } from './routes';
 import { OwlModule } from 'ng2-owl-carousel';
@@ -34,7 +34,9 @@ import { LeftmenuComponent } from './article/leftmenu/leftmenu.component';
 import { ArchivecategoryComponent } from './archive/archivecategory/archivecategory.component';
 import { ArchivesubcategoryComponent } from './archive/archivesubcategory/archivesubcategory.component';
 import { ArchivecontentComponent } from './archive/archivecontent/archivecontent.component';
-import { LoadingModule } from 'ngx-loading';
+import { PortalLoaderComponent } from './loader/portal-loader.component';
+import { HighlightboxComponent } from './highlightbox/highlightbox.component';
+
 // import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule } from "@angular/material";
 
 export function HttpLoaderFactory(http: Http) {
@@ -43,7 +45,6 @@ export function HttpLoaderFactory(http: Http) {
 
 @NgModule({
 imports: [
-    LoadingModule,
     SharedModule,
     BrowserModule,
     FormsModule,
@@ -65,7 +66,6 @@ imports: [
     AccordionModule.forRoot(),
     ModalModule.forRoot(),
     OwlModule
-
     // MatButtonModule,
     // MatCheckboxModule,
     // MatFormFieldModule,
@@ -83,12 +83,16 @@ imports: [
     LifeeventComponent,
     DigitalservicesComponent,
     HomeComponent,
+    HighlightboxComponent,
+    FeedbackComponent,
     DigitalServiceDialog,
     ContentComponent,
     LeftmenuComponent,
     ArchivecategoryComponent,
     ArchivesubcategoryComponent,
-    ArchivecontentComponent
+    ArchivecontentComponent,
+    PortalLoaderComponent,
+    TruncatePipe
 
   ],
 

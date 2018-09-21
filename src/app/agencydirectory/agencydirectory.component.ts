@@ -67,6 +67,7 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
   });
   private subscription: ISubscription;
   private subscriptionLang: ISubscription;
+  loading: boolean = false;
 
   genCharArray(charA, charZ) {
     let a = [], i = charA.charCodeAt(0), j = charZ.charCodeAt(0);
@@ -235,6 +236,7 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
 
   loadAlpha(ministryCode?, keyword?) {
     let dataUrl;
+    this.loading = true;
     if (keyword && (typeof ministryCode !== 'undefined')) {
       dataUrl = 'agency/search/alpha?keyword=' + keyword + '&ministryRefCode=' + ministryCode + '&language=' + this.languageId;
     } else if (typeof ministryCode !== 'undefined') {
@@ -253,7 +255,13 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
       .map(res => res.json())
       .subscribe(rData => {
         this.dataAlpha = rData.letters;
-      })
+        this.loading = false;
+      },
+      error => {
+        this.toastr.error(JSON.parse(error._body).statusDesc, '');
+        this.loading = false;
+  
+      });
   }
 
   getDefaultMap() {
@@ -276,7 +284,7 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
 
   goToMarkerPoint(dLat, dLong, dName, dAddress, dEmail, dFax, dPhone, fb, tw, web) {
     if (dLat && dLong) {
-      this.mymap.setView([dLat, dLong], 13);
+      this.mymap.flyTo([dLat, dLong], 13);
 
       let varWeb = "";
       let varfb = "";
@@ -425,19 +433,13 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
 
   getAllAgenciesMarkers() {
     let i;
+    this.loading = true;
     this.portalservice.readPortal('agency/map').subscribe(
       data => {
         this.portalservice.errorHandling(data, (function () {
           this.agencyList = data['agencyList'];
 
-
-
           for (i = 0; i <= this.agencyList.length - 1; i++) {
-
-
-
-
-
 
             this.addMarker(
               parseFloat(this.malformedDataHandler(this.agencyList[i].agencyLatitude)),
@@ -454,10 +456,11 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
           }
 
         }).bind(this));
+        this.loading = false;
       },
       error => {
         this.toastr.error(JSON.parse(error._body).statusDesc, '');
-        // this.loading = false;
+        this.loading = false;
       });
   }
 
@@ -514,6 +517,7 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
   getSearchData(count, size, keyword?, filter?) {
     let searchUrl;
     let wPaging = '&page=' + count + '&size=' + size;
+    this.loading = true;
 
     if (keyword != "" && keyword != null && keyword.length != null && keyword.length >= 3) {
 
@@ -537,10 +541,11 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
               this.showNoData = true;
             }
           }).bind(this));
+          this.loading = false;
         },
         error => {
           this.toastr.error(JSON.parse(error._body).statusDesc, '');
-          // this.loading = false;
+          this.loading = false;
         });
 
     } else if (this.letter || this.ministry || (this.letter && this.ministry)) {
@@ -582,10 +587,11 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
               this.showNoData = true;
             }
           }).bind(this));
+          this.loading = false;
         },
         error => {
           this.toastr.error(JSON.parse(error._body).statusDesc, '');
-          // this.loading = false;
+          this.loading = false;
 
         });
     }
@@ -654,6 +660,7 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
   // GET MINISTRY
   getMinistry() {
     let i;
+    this.loading = true;
     this.portalservice.readPortal('ministry/language/' + this.languageId)
       .subscribe(
         data => {
@@ -677,10 +684,11 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
             }
 
           }).bind(this));
+          this.loading = false;
         },
         error => {
           this.toastr.error(JSON.parse(error._body).statusDesc, '');
-          // this.loading = false;
+          this.loading = false;
         });
   }
 

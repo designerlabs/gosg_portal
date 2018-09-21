@@ -1,9 +1,17 @@
-import { Component, OnInit , Inject, OnDestroy} from '@angular/core';
-import { ISubscription } from "rxjs/Subscription";
-import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
+import { Component, Output, Input, EventEmitter, OnInit, AfterViewChecked, AfterViewInit,  ViewChild, ElementRef, Inject, AfterContentInit, OnDestroy } from '@angular/core';
+
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import {TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { Http } from '@angular/http';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 import { TopnavService } from '../header/topnav/topnav.service';
+import { ToastrService } from '../../../node_modules/ngx-toastr';
+import 'rxjs/add/operator/switchMap';
+import { ISubscription } from 'rxjs/Subscription';
+import { NavService } from '../header/nav/nav.service';
+import { BreadcrumbService } from '../header/breadcrumb/breadcrumb.service';
+import { FormGroup, FormControl } from '../../../node_modules/@angular/forms';
+import { PortalService } from '../services/portal.service';
 
 @Component({
   selector: 'app-highlightbox',
@@ -14,6 +22,7 @@ export class HighlightboxComponent implements OnInit, OnDestroy {
     highlightData: any;
     hotTopic: string;
     hotTopicContent: any[];
+    hotTopicData: any[];
     penyertaan: any[];
     penyertaanContent: any[];
     penyertaanButton: any[];
@@ -24,41 +33,72 @@ export class HighlightboxComponent implements OnInit, OnDestroy {
     permohonanImg: string;
     private subscription: ISubscription;
     private subscriptionLang: ISubscription;
+    private subscriptionHotTopic: ISubscription;
     lang = 'en';
+    languageId: any;
     filter= false;
+    loading: boolean = false;
+    result: any;
+    updateForm: FormGroup
 
-    constructor(private translate: TranslateService, private topnavservice: TopnavService, private http: Http, @Inject(APP_CONFIG) private config: AppConfig){
+    noPermohonanCarian: FormControl
+    sbgcolor: boolean;
+
+    constructor(
+      private toastr: ToastrService, private translate: TranslateService, private topnavservice: TopnavService, private portalService:PortalService, private navService: NavService, private http: Http, @Inject(APP_CONFIG) private config: AppConfig, private portalservice: PortalService){
         this.lang = translate.currentLang;
         this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
           const myLang = translate.currentLang;
           if (myLang === 'en') {
              this.lang = 'en';
+             this.languageId = 1;
           }
           if (myLang === 'ms') {
             this.lang = 'ms';
+            this.languageId = 2;
           }
 
-            if(this.topnavservice.flagLang){
-              this.subscription = this.getData(this.lang);
-            }
+          if(this.topnavservice.flagLang){
+            this.subscriptionHotTopic = this.getHotTopic(this.lang);
+            this.subscription = this.getData(this.lang);
+            this.updateForm.reset();
+            this.result = null;
+          }
         });
     }
 
     ngOnInit(){
+
+      if(!this.languageId){
+        this.languageId = localStorage.getItem('langID');
+      }else{
+        this.languageId = 1;
+      }
+
       this.subscription = this.getData(this.lang);
+      this.subscriptionHotTopic = this.getHotTopic(this.languageId);
+      this.noPermohonanCarian = new FormControl()
+
+      this.updateForm = new FormGroup({
+        noPermohonanCarian: this.noPermohonanCarian
+      });
     }
 
     ngOnDestroy() {
       this.subscriptionLang.unsubscribe();
       this.subscription.unsubscribe();
+      this.subscriptionHotTopic.unsubscribe();
     }
 
 
+
+
    private highlightUrl: string = this.config.urlHighlights;
+   private hottopicUrl: string = this.config.urlHotTopics;
    getData(lang: string){
          return this.http.get(this.highlightUrl + '-' + lang + '.json')
            .map(res => res.json())
-          .subscribe(eventData => {
+           .subscribe(eventData => {
                 this.highlightData = eventData;
                 this.hotTopic = eventData[0].label;
                 this.hotTopicContent = eventData[0].content;
@@ -70,11 +110,57 @@ export class HighlightboxComponent implements OnInit, OnDestroy {
                 this.penyertaanButton = eventData[1].button;
                 this.statuslabel = eventData[2].label;
                 this.statusContent = eventData[2].content;
+            },
+            error => {
+              this.toastr.error(JSON.parse(error._body).statusDesc, '');
             });
     }
 
+    getHotTopic(lang: string){
+
+      return this.http.get(this.hottopicUrl+'?language='+this.languageId)
+      .map(res => res.json().list)
+      .subscribe(eventData => {
+           this.hotTopicData = eventData;
+           this.navService.loader = false;
+       },
+       error => {
+        this.navService.loader = false;
+         this.toastr.error(JSON.parse(error._body).statusDesc, '');
+       });
+    }
+
+
+    getModule(data){
+      let a = data.split("/");
+      return a[1];
+    }
+
+    getID(data){
+      let a = data.split("/");
+      return a[2];
+    }
+    checkRefNo(formvalues: any) {
+      this.getUrl();
+      
+      this.portalservice.getSubmissionStatus(formvalues.noPermohonanCarian, this.languageId).subscribe(
+        data => {
+          this.result = data.statusDesc;
+          if(data.statusCode == "ERROR") {
+            this.toastr.error(' STATUS: '+this.result, '');
+          } else {
+            this.toastr.success(' STATUS: '+this.result, '');
+          }
+          this.navService.loader = false;
+      },
+      error => {
+        this.toastr.error(JSON.parse(error._body).statusDesc, '');
+        this.navService.loader = false;
+      });
+    }
+
     getUrl(){
-        return this.hotTopicImg;
+      this.navService.loader = true;
     }
 
     getTheme(){

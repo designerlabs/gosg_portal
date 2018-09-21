@@ -50,6 +50,7 @@ export class FeedbackProtectedComponent implements OnInit, OnDestroy {
   subjectFb = [];
   private subscriptionLang: ISubscription;
   private subscription: ISubscription;
+  loading:boolean = false;
 
   constructor(
     public snackBar: MatSnackBar,
@@ -120,6 +121,7 @@ export class FeedbackProtectedComponent implements OnInit, OnDestroy {
   }
 
   getUserData(){
+    this.loading = true;
     if(!environment.staging){
       this.protectedService.getUser().subscribe(
         data => {
@@ -138,6 +140,7 @@ export class FeedbackProtectedComponent implements OnInit, OnDestroy {
                     this.feedbackFormgrp.get('email').setValue(this.regemail);
                   }
                 }).bind(this)); 
+                this.loading = false;
               },
               error => {
                 this.toastr.error(JSON.parse(error._body).statusDesc, '');   
@@ -150,6 +153,7 @@ export class FeedbackProtectedComponent implements OnInit, OnDestroy {
   
         error => {
           location.href = this.config.urlUAP +'uapsso/Logout';
+          this.loading = false;
           //location.href = this.config.urlUAP+'portal/index';
         }
       )
@@ -194,24 +198,29 @@ getSubType(){
 }
 
 getTypenSubject(){
+  this.loading = true;
   this.protectedService.feedbacktype(this.languageId)
     .subscribe(data => {
       this.sharedService.errorHandling(data, (function(){
         this.typeFb  = data;
       }).bind(this));  
+      this.loading = false;
     },
     error => {
       this.toastr.error(JSON.parse(error._body).statusDesc, '');                 
     });
 
+  this.loading = true;
   this.protectedService.feedbacksubject(this.languageId)
   .subscribe(data => {
     this.sharedService.errorHandling(data, (function(){
         this.subjectFb  = data;          
       }).bind(this));  
+      this.loading = false;
     },
     error => {
-      this.toastr.error(JSON.parse(error._body).statusDesc, '');                 
+      this.toastr.error(JSON.parse(error._body).statusDesc, '');         
+      this.loading = false;        
     });
 }
 
@@ -247,30 +256,37 @@ submitForm(formValues:any){
     body.feedbackEmail = this.emaiL;
     datasend =JSON.stringify(body); 
 
+    this.loading = true;
     this.protectedService.feedback(datasend).subscribe(
       data => {
 
         this.sharedService.errorHandling(data, (function(){         
           this.resetForm();        
           this.toastr.success(this.translate.instant('feedback.msgsubmit'), '');     
-        }).bind(this));  
-      },
-      error => {
-        this.toastr.error(JSON.parse(error._body).statusDesc, ''); 
-                  
+        }).bind(this)); 
+        
+      this.loading = false; 
+    },
+    error => {
+      this.toastr.error(JSON.parse(error._body).statusDesc, ''); 
+      this.loading = false; 
+      
       });
   }
   else{
+    this.loading = true;
     this.protectedService.feedback(datasend).subscribe(
       data => {
 
         this.sharedService.errorHandling(data, (function(){
           this.resetForm();        
           this.toastr.success(this.translate.instant('feedback.msgsubmit'), '');            
-        }).bind(this));  
+        }).bind(this)); 
+        this.loading = false; 
       },
       error => {
         this.toastr.error(JSON.parse(error._body).statusDesc, ''); 
+        this.loading = false; 
       });
   }
 }

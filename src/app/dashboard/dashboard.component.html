@@ -1,3 +1,4 @@
+<gosg-protected-loader [loader]="loading"></gosg-protected-loader>
 <div class="container-fluid animated slideInDown" style="background: #a7a495;">
     <div class="container">
       <div class="row">
@@ -23,12 +24,12 @@
     <div class="col-md-12">&nbsp;</div>
 
     <!-- Menu for large screen -->
-    <div class="col-md-3 padding-left-0 dashboard_l_menu">
+    <div class="col-md-3 padding-left-0">
         <gosg-sidenav-dashboard></gosg-sidenav-dashboard>
     </div>
 
     <!-- Menu for small screen -->
-    <div class="col-md-3 padding-left-0 dashboard_s_menu">
+    <!-- <div class="col-md-3 padding-left-0">
       <div class="col-md-12">
         <mat-form-field class="example-full-width">
           <mat-select name="menuDash" id="menuDash" value=1>
@@ -40,54 +41,54 @@
           </mat-select>
         </mat-form-field>
       </div>
-    </div>
+    </div> -->
 
     <div class="col-md-9">
       <div class="row">
-        <div class="col-md-3 padding-5">
+        <div class="col-lg-3 col-md-4 col-sm-6 padding-5">
             <mat-card class="card">
               <h4 class="title-card">{{'dashboard.card.total' | translate}}</h4>
-              <div class="col-md-4" style="padding-top: 5px;">
+              <div class="col-md-4 col-sm-6  col-xs-6" style="padding-top: 5px;">
                 <span class="dot" [style.background-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'"style="padding-left: 15px; padding-top: 15px;">
                   <i class="fa fa-area-chart iconColor"></i></span>
               </div>
-              <div class="col-md-8">
+              <div class="col-md-8  col-sm-6  col-xs-6">
                 <h1 [style.font-family]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" class="noCard">{{totalApp}}</h1>
               </div>
             </mat-card>
         </div>
-        <div class="col-md-3 padding-5">
+        <div class="col-lg-3 col-md-4 col-sm-6 padding-5">
             <mat-card class="card">
               <h4 class="title-card">{{'dashboard.card.process' | translate}}</h4>
-              <div class="col-md-4" style="padding-top: 5px;">
+              <div class="col-md-4 col-sm-4  col-xs-6" style="padding-top: 5px;">
                   <span class="dot" [style.background-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" style="padding-left: 15px; padding-top: 15px;">
                     <i class="fa fa-spinner iconColor"></i></span>
               </div>
-              <div class="col-md-8">
+              <div class="col-md-8 col-sm-8  col-xs-6">
                 <h1 [style.font-family]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" class="noCard">{{inProgress}}</h1>
               </div>
             </mat-card>
         </div>
-        <div class="col-md-3 padding-5">
+        <div class="col-lg-3 col-md-4 col-sm-6 padding-5">
             <mat-card class="card">
               <h4 class="title-card">{{'dashboard.card.approved' | translate}}</h4>
-              <div class="col-md-4" style="padding-top: 5px;">
+              <div class="col-md-4 col-sm-4  col-xs-6" style="padding-top: 5px;">
                 <span class="dot" [style.background-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" style="padding-left: 16px; padding-top: 15px;">
                   <i class="fa fa-thumbs-up iconColor"></i></span>
               </div>
-              <div class="col-md-8">
+              <div class="col-md-8 col-sm-8  col-xs-6">
                 <h1 [style.font-family]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" class="noCard">{{approved}}</h1>
               </div>
             </mat-card>
         </div>
-        <div class="col-md-3 padding-5">
+        <div class="col-lg-3 col-md-4 col-sm-6 padding-5">
             <mat-card class="card">
               <h4 class="title-card">{{'dashboard.card.rejected' | translate}}</h4>
-              <div class="col-md-4" style="padding-top: 5px;">
+              <div class="col-md-4 col-sm-4  col-xs-6" style="padding-top: 5px;">
                 <span class="dot" [style.background-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" style="padding-left: 14px; padding-top: 15px;">&nbsp;
                   <i class="fa fa-times iconColor"></i></span>
               </div>
-              <div class="col-md-8">
+              <div class="col-md-8 col-sm-8  col-xs-6">
                 <h1 [style.font-family]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" class="noCard">{{rejected}}</h1>
               </div>
             </mat-card>

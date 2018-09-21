@@ -5,12 +5,13 @@
       "home": "Laman Utama",
       "calendar": "Kalendar",
       "agencycdir": "Direktori Agensi",
-      "trafficinfo":"Informasi Trafik",
+      "trafficinfo":"INFORMASI TRAFIK",
       "digitalsvc": "Perkhidmatan Digital",
       "register": "Daftar",
       "setting": "Tetapan",
       "contact": "Hubungi Kami",
       "faq": "Soalan Lazim",
+      "changePass":"Tukar Kata Laluan",
       "manual": "Manual",
       "aboutus": "Mengenai Kami",
       "onlineservice": "Perkhidmatan Digital",
@@ -25,6 +26,7 @@
       "search": "Carian",
       "policeReport": "Semakan Status Laporan Polis",
       "summonStatus": "Semakan Status Saman Trafik PDRM",
+      "statusposition": "Semakan Status Jawatan Pengambilan",
       "mykadapproval": "Kelulusan Pengguna"
     },
     "search": {
@@ -73,7 +75,9 @@
       "unsubscribe": "Hentikan langganan",
       "gallery": "Galeri",
       "search": "Search",
-      "perhilitan": "Perhilitan"
+      "perhilitan": "Perhilitan",
+      "family": "Profil Keluarga",
+      "exam": "Keputusan Peperiksaan"
     },
     "expandButton": {
       "less": "Lihat Ringkasan",
@@ -86,6 +90,55 @@
     "highlights": "Sorotan",
     "currentHighlights": "Sorotan Terkini",
     "calendarTitle": "Aktiviti Bulan Ini"
+  },
+  "pdrm":{
+    "reportPolice":"Masukkan No. Repot Polis.",
+    "recruitment":"Semakan dibuat berdasarkan 'No. KP' pengguna sendiri.",
+    "summon": "Sila masukan makluamat seperti di bawah:",
+    "example": "Contoh No. Repot Polis: 012345/18",
+    "attention": "PERHATIAN:",
+    "announcement": "PENGUMUMAN",
+    "announce1": "1. SEMAKAN KEMPUTUSAN TEMU DUGA BAGI CALON - CALON INSPEKTOR 2017 DAN 2018.",
+    "announce2": "2. BAGI CALON - CALON YANG TIDAK DISENARAIKAN, PROSES DOKUMENTASI MASIH DALAM SEMAKAN UNIT PENGAMBILAN DAN AKAN DIMAKLUMKAN DARI MASA KE SEMASA.",
+    "placeholder":{
+      "noic": "No. Kad Pengenalan",
+      "noreport": "No. Repot Polis",
+      "typeInfo": "Jenis Maklumat",
+      "noCar": "No. Kenderaan"
+    },
+    "titlerecruitment":"STATUS PENGAMBILAN JAWATAN PDRM",
+    "titlepoliceR":"STATUS REPOT POLIS",
+    "titleSummon":"STATUS SAMAN TRAFIK PDRM",
+    "err":{
+      "needed": "diperlukan",
+      "showData": "ANDA TIADA REPOT POLIS.",
+      "msgrecruitment": "SEBARANG PERTANYAAN SILA HUBUNGI UNIT PENGAMBILAN, BUKIT AMAN DI TALIAN 03-2266 8350 / 8351 / 8349",
+      "summon": "TIADA SAMAN TRAFIK TERTUNGGAK"
+    },
+    "title":{
+      "icno": "NO. KP BARU",
+      "applicantname": "NAMA PEMOHON",
+      "date": "TARIKH / MASA",
+      "location": "TEMPAT",
+      "status": "STATUS PANGGILAN",
+      "noreport": "NO. REPOT POLIS",
+      "dateRP": "TARIKH DAN MASA REPOT POLIS",
+      "statusRP": "STATUS SIASATAN REPOT",
+      "noPaper": "NO. KERTAS SIASATAN",
+      "sectionInvestigation": " SEKSYEN SIASATAN",
+      "statusInvestigate": "STATUS SIASATAN",
+      "insOfficer": "PEGAWAI PENYIASAT",
+      "infoLetter": "SURAT PEMBERITAHUAN",
+      "name": "NAMA",
+      "total_summon": "JUMLAH SAMAN",
+      "car": "No. Kenderaan",
+      "summon_no":"No. Saman",
+      "dateTime":"Tarikh & Masa Kesalahan",
+      "location2":"Tempat Kesalahan",
+      "amount": "Amaun (RM)",
+      "image": "Imej",
+      "info": "Maklumat Kesalahan"
+    }
   },
   "register": {
     "label": {
@@ -142,7 +195,9 @@
       "updateSuccess": "Profil telah berjaya di kemaskini.",
       "updateFail": "Kemaskini gagal.",
       "editbtnE" : "Kemaskini diaktifkan.",
-      "editbtnD" : "Kemaskini tidak aktif."
+      "editbtnD" : "Kemaskini tidak aktif.",
+      "OKUStatusSuccess":"OKU has been found!",
+      "OKUStatusFail":"OKU has been not found!"
     },
     "label":{
       "name":"Nama",
@@ -170,10 +225,11 @@
       "homeph":"No Telefon Rumah",
       "mobile":"No Telefon Bimbit",
       "codetel": "Kod",
-      "submit":"Kemaskini"
+      "submit":"Kemaskini",
+      "oku": "Memyemak OKU status"
     },
     "err": {
-      "updateSuccess": "Kemaskini gagal!",
+      "updateFail": "Kemaskini gagal!",
       "ic": "Nombor Kad Pengenalan wajib diisi",
       "name": "Nama penuh wajib diisi",
       "dob": "Tarikh Lahir wajib diisi",
@@ -209,8 +265,9 @@
     "sidenav": {
       "dashboard": "Dashboard",
       "profile": "Profil",
-      "inbox": "Peti Masuk",
-      "appmgmt": "Pengurusan Aplikasi",
+      "family": "Profil Keluarga",
+      "inbox": "Peti Pesanan",
+      "appmgmt": "Pengurusan Permohonan",
       "companyprofile": "Profil Syarikat"
     },
     "card":{
@@ -287,7 +344,8 @@
       "beforeLogin": "Sila Log Masuk / Daftar Untuk Mengakses PERKHIDMATAN Yang Disediakan",
       "afterLogin": "Senarai perkhidmatan yang ditawarkan oleh Gerbang MyGovernment",
       "instruction": "Perkhidmatan yang ditawarkan oleh Gerbang MyGovernment perlu menggunakan nombor kad pengenalan bagi warganegara Malaysia",
-      "access": "Maaf, Perkhidmatan Digital kami hanya ditawarkan kepada pengguna yang sah sahaja."
+      "access": "Maaf, Perkhidmatan Digital kami hanya ditawarkan kepada pengguna yang sah sahaja.",
+      "accessNonCiti":"Maaf, Perkhidmatan Digital terhad untuk Warganegara Malaysia"
     }
   },
   "calendar": {
@@ -366,6 +424,10 @@
     }
   },
   "common":{
+    "profileEmailMsg":"E-mel Profil anda telah berjaya dikemas kini!",
+    "profilePhoneMsg":"Profil Nombor telefon anda berjaya dikemas kini!",
+    "profileBtn":"Klik di sini untuk pergi ke Profil",
+    "titleMsg":"MyGOV - Portal Rasmi Kerajaan Malaysia",
     "copyrightnotice": "Notis Hakcipta",
     "clientcharter": "Piagam Pelanggan",
     "help": "Bantuan",
@@ -385,6 +447,9 @@
     "open":"Buka",
     "listofarticle": "Senarai Artikel",
     "close":"Tutup",
+    "invalidUser":"Akaun anda tidak wujud dalam portal. Sila hubungi admin portal unduk maklumat lanjut",
+    "seconds1":"log keluar dalam",
+    "seconds2": "saat",
     "placeholder": {
       "keyword":"Kata Kunci"
     },
@@ -424,7 +489,8 @@
       "success":"Successfully added!",
       "nodata": "Tiada maklumat",
       "searchKeyword": "Sila masukkan kata kunci carian",
-      "mykad":"Adakah anda bersetuju untuk berkongsi profil dari MyGovernment Portal?"
+      "mykad":"Adakah anda bersetuju untuk berkongsi profil dari MyGovernment Portal?",
+      "thanks": "Terima Kasih"
     },
     "state":{
       "success":"bg_header bg_success_header",
@@ -465,6 +531,64 @@
       "of": "daripada",
       "in": "dalam",
       "app": "permohonan"
+    }
+  },
+  "family":{
+    "tableHeader":{
+      "num": "Bil.",
+      "icno": "No. IC",
+      "name": "Nama",
+      "relation" : "Hubungan",
+      "dob": "Tarikh Lahir",
+      "oku": "Status OKU",
+      "status": "Status",
+      "action": "Tindakan"
+    },
+    "label":{
+      "citizen": "Taraf Kewarganegaraan",
+      "ic": "Nombor Kad Pengenalan",
+      "passport": "Nombor Pasport",
+      "statepassport": "Negara Pengeluar Pasport",
+      "name": "Nama Penuh",
+      "relationship": "Hubungan",
+      "race": "Bangsa",
+      "religion": "Agama",
+      "dob": "Tarikh Lahir",
+      "sex": "Jantina",
+      "email": "Emel",
+      "phone": "Nombor Telepon",
+      "statusprofile": "Status Profil",
+      "reason": "Sebab Tidak Aktif",
+      "addinfo": "Maklumat Tambahan (Sekiranya Ada)",
+      "oku": "OKU Status",
+      "okuinfo": "** Sila klik sekiranya berkenaan sahaja",
+      "noregoku": "OKU Registration No.",
+      "typeoku": "OKU Type",
+      "typeidoku": "OKU ID Type",
+      "familyheader": "Maklumat Profil Keluarga"
+    },
+    "button":{
+      "confirm": "SAHKAN",
+      "print": "Cetak",
+      "save": "Simpan"
+    },
+    "err":{
+      "needed": "diperlukan"
+    }
+  },
+  "exam":{
+    "label":{
+      "examheader": "Keputusan Peperiksaan",
+      "name": "Nama",
+      "year": "Tahun Peperiksaan",
+      "examname": "Nama Peperiksaan",
+      "examtype": "Jenis Peperiksaan"
+    },
+    "err":{
+      "needed": "diperlukan"
+    },
+    "button": {
+      "check":"Semak"
     }
   },
   "poll": {
@@ -552,7 +676,7 @@
       }
   },
   "trafficinfo": {
-    "title":"Informasi Trafik",
+    "title":"INFORMASI TRAFIK",
     "title2":"Informasi Trafik Lembah Klang",
     "filterby": {
       "all":"All",

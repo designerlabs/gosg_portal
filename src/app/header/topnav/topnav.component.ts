@@ -30,6 +30,7 @@ export class TopnavComponent implements OnInit, AfterViewInit, OnDestroy {
   defaultFonts: any;
   private subscriptionLang: ISubscription;
   private subscription: ISubscription;
+  loading: boolean = false;
   fontTy(arg0: any): any {
     throw new Error("Method not implemented.");
   }
@@ -324,6 +325,10 @@ export class TopnavComponent implements OnInit, AfterViewInit, OnDestroy {
       }, err => {
 
       })
+  }
+
+  boolCallback = (result: boolean) : void => {
+    this.loading = result;
   }
 
   clickManual(){

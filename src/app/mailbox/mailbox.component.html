@@ -1,3 +1,4 @@
+<gosg-protected-loader [loader]="loading"></gosg-protected-loader>
 <div class="container-fluid animated slideInDown" style="background: #a7a495;">
     <div class="container">
       <div class="row">
@@ -33,13 +34,13 @@
         <div class="row mailContainer" *ngIf="mailContent?.object?.fromUser.email" [style.display]="isMailContainerShow">
           <span class="pull-right" (click)="isMailContainerShow='none'" style="cursor: pointer;"><i class="fa fa-times"></i></span>
               <p class="font-size-s">
-                From: {{mailContent?.object?.fromUser.email}}
+                {{'mailbox.header.from' | translate}} : {{mailContent?.object?.fromUser.email}}
               </p>
               <p class="font-size-s">
-                Date: {{mailContent?.object?.submissionDate | date}}
+                {{'mailbox.header.date' | translate}}: {{mailContent?.object?.submissionDate | date}}
               </p>
               <p class="font-size-s">
-                Subject: {{mailContent?.object?.subject}}
+                {{'mailbox.header.subject' | translate}}: {{mailContent?.object?.subject}}
               </p>
               <div class="font-size-m" [innerHtml]="mailContent?.object?.content">
               </div>

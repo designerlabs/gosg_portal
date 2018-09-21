@@ -65,16 +65,17 @@ h1, h2, h3{
     }
 }
 
+
 .top-nav-style{
-    width: 100% !important;
-    height:70px;
-    background: #1ebebc;
-    position: fixed  !important;
-    z-index: 10000;
-    -webkit-transition-property: height; /* Safari */
-    -webkit-transition-duration: 1s; /* Safari */
-    transition-property: height;
-    transition-duration: 1s;
+  width: 100% !important;
+  height:70px;
+  background: #1ebebc;
+  position: fixed  !important;
+  z-index: 10000;
+  -webkit-transition-property: height; /* Safari */
+  -webkit-transition-duration: 1s; /* Safari */
+  transition-property: height;
+  transition-duration: 1s;
 }
 footer{
     background:#666666;
@@ -88,6 +89,10 @@ footer{
     -webkit-transition-duration: 1s; /* Safari */
     transition-property: top;
     transition-duration: 1s;
+}
+
+.nav-bar-style-common{
+  display: none;
 }
 
 @media only screen and (max-width: 500px) {

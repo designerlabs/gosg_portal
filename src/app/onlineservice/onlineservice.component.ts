@@ -195,7 +195,7 @@ export class OnlineserviceComponent implements OnInit, OnDestroy {
 
 
   appTracking(refCode){
-    const readUrl = `${this.config.registerationUrl}agencyapplication/tracking?refCode=${refCode}&source=online-service`;
+    const readUrl = `${this.config.urlPortal}agencyapplication/tracking?refCode=${refCode}&source=online-service`;
     const req = this.http.post(readUrl,'')
       .subscribe(
         res => {

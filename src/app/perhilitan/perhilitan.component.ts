@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, Output, Input, EventEmitter, OnDestroy } from '@angular/core';
 import { ISubscription } from "rxjs/Subscription";
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute, Params, ParamMap } from '@angular/router';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { Observable } from 'rxjs/Observable';
@@ -40,6 +40,9 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
   lang = this.lang;
   langID: any;
   private subscriptionLang: ISubscription;
+  loading = false;
+  dsvcCode:any;
+  agcCode:any;
 
   isLinear = true;
   firstFormGroup: FormGroup;
@@ -123,6 +126,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
   public selectedOccupation: any;
   public cityT: any;
   public citySurat: any;
+  public cityCompany: any;
   public poskodIdT: any;
   public poskodIdMailing: any;
   public stateCompany: any;
@@ -135,6 +139,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
   public maskIC: any;
   public maskPhone: any;
 
+  flagAfterSubmit = true;
   flagHantar = true;
   flag2 = true;
   flag3 = true;
@@ -145,6 +150,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
     private activatedRoute:ActivatedRoute,
     @Inject(APP_CONFIG) private config: AppConfig,
     private router: Router,
+    private route: ActivatedRoute,
     private http: Http, 
     private translate: TranslateService, 
     private protectedService: ProtectedService,
@@ -270,28 +276,39 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
 
     this.getUrl = this.router.url.split('/')[2];
 
-    if(this.getUrl == undefined){
+    if(this.getUrl == undefined){// for add
+      // AGENCY & DSERVICE CODE FOR VALIDATION
+      let sub = this.route.queryParams.subscribe((params: Params) => {
+        this.dsvcCode = parseInt(params.service);
+        this.agcCode = parseInt(params.agency);
+      });
+
+      this.triggerDserviceValidation(this.dsvcCode);      
+    
       this.checkOccupation(1);
       this.secondFormGroup.get('warganegara').setValue(1);
       this.secondFormGroup.get('typeIC').setValue(1);
       this.fourthFormGroup.get('companyType').setValue(3);
       this.fifthFormGroup.get('agreement').setValue(false);
       this.getJIC(1, this.langID);
+      this.flagAfterSubmit = false;
     }
 
-    else{
+    else{// for edit
       this.getDetailPerhilitan();
+      this.dsvcCode = localStorage.getItem('dserviceCode');
+      this.agcCode = localStorage.getItem('agencyCode');
     }
   }
 
   getUserData(){
+    this.loading = true;
+
     if(!environment.staging){
-      //this.getPerPostCodeFlag = false;
       this.protectedService.getUser().subscribe(
       data => {
         this.sharedService.errorHandling(data, (function(){
 
-          console.log(data);
           if(data.user){
             
             let phone = data.user.address.permanentAddressHomePhoneNo.split('*')[1];
@@ -307,22 +324,32 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
 
             this.dbposkod = data.user.address.permanentAddressPostcode.postcodeId;
             this.dbdaerah = data.user.address.permanentAddressCity.cityId;
-            this.dbnegeri = data.user.address.permanentAddressState.stateId;
+            this.dbnegeri = data.user.address.permanentAddressState.stateId;    
+            
+            this.firstFormGroup.get('namaPemohon').disable();
+            this.firstFormGroup.get('icPemohon').disable();
+            this.firstFormGroup.get('phonePemohon').disable();
+            this.firstFormGroup.get('emailPemohon').disable();
+            this.firstFormGroup.get('add1').disable();
+            this.firstFormGroup.get('poskodPemohon').disable();
+            this.firstFormGroup.get('daerahPemohon').disable();
+            this.firstFormGroup.get('negeriPemohon').disable();
 
           }else{
           }
         }).bind(this));
+        this.loading = false;
 
       },
       error => {
-          location.href = this.config.urlUAP +'uapsso/Logout';
-          //location.href = this.config.urlUAP+'portal/index';
+        this.loading = false;
+        location.href = this.config.urlUAP +'uapsso/Logout';
+        //location.href = this.config.urlUAP+'portal/index';
       });
     }
 
     else{ //need to be deleted Noraini for local only
       
-
       let data = {
         "user": {
           "userId": 116,
@@ -411,10 +438,20 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       this.dbposkod = data.user.address.permanentAddressPostcode.postcodeId;
       this.dbdaerah = data.user.address.permanentAddressCity.cityId;
       this.dbnegeri = data.user.address.permanentAddressState.stateId;
+
+      this.firstFormGroup.get('namaPemohon').disable();
+      this.firstFormGroup.get('icPemohon').disable();
+      this.firstFormGroup.get('phonePemohon').disable();
+      this.firstFormGroup.get('emailPemohon').disable();
+      this.firstFormGroup.get('add1').disable();
+      this.firstFormGroup.get('poskodPemohon').disable();
+      this.firstFormGroup.get('daerahPemohon').disable();
+      this.firstFormGroup.get('negeriPemohon').disable();
     }
   }
 
   getDetailPerhilitan(){
+    this.loading = true;
 
     this.protectedService.getProtected('perhilitan/draft/'+this.getUrl,this.langID).subscribe(
     data => {
@@ -422,6 +459,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       this.sharedService.errorHandling(data, (function(){
 
         if(data.statusCode != "ERROR"){
+          this.flagAfterSubmit = false;
           this.dataApp = data.perhilitanElesenResource;
 
           if(this.dataApp.ictype == 1){ 
@@ -456,7 +494,14 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
 
           this.fourthFormGroup.get('companyType').setValue(this.dataApp.businessType.businessTypeId);
           //this.fourthFormGroup.get('jenisMilikan').setValue(this.dataApp.pemilikan);
-          this.fourthFormGroup.get('registerType').setValue(this.dataApp.registerType.registerTypeId);
+
+          let getObjKeysRegType = Object.keys(this.dataApp);
+          let valObjRegType = getObjKeysRegType.filter(fmt => fmt === "registerType");
+          
+          if(valObjRegType.length == 1){
+            this.fourthFormGroup.get('registerType').setValue(this.dataApp.registerType.registerTypeId);
+          }
+
           this.fourthFormGroup.get('companyName').setValue(this.dataApp.userCompanyName);
           this.fourthFormGroup.get('companyAdd').setValue(this.dataApp.userCompanyAddress);
           this.fourthFormGroup.get('registerNo').setValue(this.dataApp.userCompanyRegNo);
@@ -464,23 +509,44 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
           this.fourthFormGroup.get('companyPhone').setValue(this.dataApp.userCompanyPhoneNo);
           this.fourthFormGroup.get('companyFax').setValue(this.dataApp.userFaxNo);
           
-          this.selectedPoskodT = this.dataApp.userPostcode;
-          this.selectedPoskodSurat = this.dataApp.userMailingPostcode;
-          this.selectedPoskodComp = this.dataApp.userCompanyPostcode;
-          this.cityT = this.dataApp.userPostcodeId;
-          this.citySurat = this.dataApp.userMailingPostcodeId;
-          this.cityCompany = this.dataApp.userCompanyDistrict;
-          this.cityCompany2 = this.dataApp.state.stateId;
-          this.selectedOccupation = this.dataApp.jobType.jobTypeId;
+          let getObjKeysUserPostcode = Object.keys(this.dataApp);
+          let valObjUserPostcode = getObjKeysUserPostcode.filter(fmt => fmt === "userPostcode");
+          if(valObjUserPostcode.length == 1){
+            this.selectedPoskodT = this.dataApp.userPostcode;
+            this.cityT = this.dataApp.userPostcodeId;
+            this.checkposkod(1, this.selectedPoskodT);
+          }
 
-          this.checkposkod(1, this.selectedPoskodT);
-          this.checkposkod(2, this.selectedPoskodSurat);
-          this.checkposkod(3, this.selectedPoskodComp);
-        
-          this.changeBuss(this.dataApp.activity.activityId);
+          let getObjKeysUserMailingPostcode = Object.keys(this.dataApp);
+          let valObjUserMailingPostcode = getObjKeysUserMailingPostcode.filter(fmt => fmt === "userMailingPostcode");
+          if(valObjUserMailingPostcode.length == 1){
+            this.selectedPoskodSurat = this.dataApp.userMailingPostcode;
+            this.citySurat = this.dataApp.userMailingPostcodeId;
+            this.checkposkod(2, this.selectedPoskodSurat);
+          }
 
-          this.fifthFormGroup.get('lsnActivity').setValue(this.dataApp.activity.activityId);
-          this.fifthFormGroup.get('businessCat').setValue(this.dataApp.businessCategory.businessCategoryId);
+          let getObjKeysUserCompanyPostcode = Object.keys(this.dataApp);
+          let valObjUserCompanyPostcode = getObjKeysUserCompanyPostcode.filter(fmt => fmt === "userCompanyPostcode");
+          if(valObjUserCompanyPostcode.length == 1){
+            this.selectedPoskodComp = this.dataApp.userCompanyPostcode;         
+            this.cityCompany = this.dataApp.userCompanyDistrict;
+            this.cityCompany2 = this.dataApp.state.stateId;
+            this.checkposkod(3, this.selectedPoskodComp);
+          }
+
+          let getObjKeysXtvt = Object.keys(this.dataApp);
+          let valObjXtvt = getObjKeysXtvt.filter(fmt => fmt === "activity");          
+          if(valObjXtvt.length == 1){
+            this.changeBuss(this.dataApp.activity.activityId);
+            this.fifthFormGroup.get('lsnActivity').setValue(this.dataApp.activity.activityId);
+          }
+          
+          let getObjKeysBusinessCategory = Object.keys(this.dataApp);
+          let valObjBusinessCategory = getObjKeysBusinessCategory.filter(fmt => fmt === "businessCategory");          
+          if(valObjBusinessCategory.length == 1){
+            this.fifthFormGroup.get('businessCat').setValue(this.dataApp.businessCategory.businessCategoryId);
+          }
+
           this.fifthFormGroup.get('dispBase641').setValue(this.dataApp.attachFileRoc);
           this.fifthFormGroup.get('dispBase642').setValue(this.dataApp.attachFilePbt);
 
@@ -491,119 +557,175 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
           if(this.dataApp.attachFilePbt){
             this.fifthFormGroup.get('file2').setValue('PBT.pdf');
           }
+
+          this.selectedOccupation = this.dataApp.jobType.jobTypeId;
         }else{
         }
         
       }).bind(this));
+      this.loading = false;
     },
-    error => {        
-      this.toastr.error(JSON.parse(error._body).statusDesc, '');    
+    error => {       
+      this.loading = false;
+      this.flagAfterSubmit = true;
+      this.toastr.error('Rekod tidak dijumpai', '');    
     });
 
   }
 
   openRoc(val){
-
-    console.log(val);
-    window.open('data:application/pdf;base64,'+val,'_blank');
+    
+    var blob;  
+    blob = this.converBase64toBlob(val, 'application/pdf'); 
+    /*Find the content types for different format of file at http://www.freeformatter.com/mime-types-list.html*/
+  
+    var blobURL = URL.createObjectURL(blob);
+    window.open(blobURL);
   }
 
   openPbt(val){
+    
+    var blob;  
+    blob = this.converBase64toBlob(val, 'application/pdf'); 
+    /*Find the content types for different format of file at http://www.freeformatter.com/mime-types-list.html*/
+  
+    var blobURL = URL.createObjectURL(blob);
+    window.open(blobURL);
+  }
 
-    console.log(val);
-    // window.open(val);
-    window.open("data:application/octet-stream;charset=utf-16le;base64,"+val,'_blank');
+  converBase64toBlob(content, contentType) {
+    contentType = contentType || '';
+    var sliceSize = 512;
+    var byteCharacters = window.atob(content); //method which converts base64 to binary
+    var byteArrays = [
+    ];
+    for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+      var slice = byteCharacters.slice(offset, offset + sliceSize);
+      var byteNumbers = new Array(slice.length);
+      for (var i = 0; i < slice.length; i++) {
+        byteNumbers[i] = slice.charCodeAt(i);
+      }
+      var byteArray = new Uint8Array(byteNumbers);
+      byteArrays.push(byteArray);
+    }
+    var blob = new Blob(byteArrays, {
+      type: contentType
+    }); //statement which creates the blob
+    return blob;
   }
 
   getNationality(lang){
+    this.loading = true;
+
     this.protectedService.getProtected('perhilitan/dropdown/nationality',lang).subscribe(
     data => {
 
       this.sharedService.errorHandling(data, (function(){
-        this.nationality = data.perhilitanNationalityResourceList;     
+        this.nationality = data.perhilitanNationalityResourceList;    
 
       }).bind(this));
+      this.loading = false;
     },
     error => {            
+      this.loading = false;
     });
   }
 
   getJIC(val, lang){
+    this.loading = true;
+
     this.protectedService.getProtected('perhilitan/dropdown/ictype/'+val,lang).subscribe(
     data => {
 
       this.sharedService.errorHandling(data, (function(){
         this.listjic = data.dropdownResourceList;     
+
       }).bind(this));
+      this.loading = false;
     },
     error => {
+      this.loading = false;
     });
   }
 
   getOccupation(lang){
+    this.loading = true;
     this.protectedService.getProtected('perhilitan/dropdown/job',lang).subscribe(
     data => {
 
       this.sharedService.errorHandling(data, (function(){
-        this.listOccupation = data.perhilitanJobTypeResourceList;     
+        this.listOccupation = data.perhilitanJobTypeResourceList;   
+        this.loading = false;  
 
       }).bind(this));
     },
-    error => {            
+    error => {        
+      this.loading = false;    
     });
   }
 
   getGroupOcc(val,lang){
-
+    this.loading = true;
     this.protectedService.getProtected('perhilitan/dropdown/job/workgroup/'+val,lang).subscribe(
     data => {
 
       this.sharedService.errorHandling(data, (function(){
-        this.listGroupOcc = data.dropdownResourceList;     
+        this.listGroupOcc = data.dropdownResourceList;   
+        
 
       }).bind(this));
+      this.loading = false;
     },
-    error => {            
+    error => {      
+      this.loading = false;      
     });
   }
 
   getJenisMilikan(lang){
+    this.loading = true;    
     this.protectedService.getProtected('perhilitan/jenispemilikan',lang).subscribe(
     data => {
 
       this.sharedService.errorHandling(data, (function(){
-        this.listJenisMilikan = data.perhilitanJenisPemilikanResourceList;     
+        this.listJenisMilikan = data.perhilitanJenisPemilikanResourceList;   
 
       }).bind(this));
+      this.loading = false;
     },
-    error => {            
+    error => {        
+      this.loading = false;    
     });
   }
 
   getListRegComp(lang){
+    this.loading = true;
     this.protectedService.getProtected('perhilitan/dropdown/regtype',lang).subscribe(
     data => {
 
       this.sharedService.errorHandling(data, (function(){
-        this.listRegComp = data.perhilitanRegisterTypeResourceList;     
+        this.listRegComp = data.perhilitanRegisterTypeResourceList;   
 
       }).bind(this));
+      this.loading = false;
     },
-    error => {            
+    error => {     
+      this.loading = false;       
     });
   }
 
   getListBusiness(lang){
-
-    this.protectedService.getProtected('perhilitan/business',lang).subscribe(
+    this.loading = true;
+    this.protectedService.getProtected('perhilitan/activity',lang).subscribe(
     data => {
 
       this.sharedService.errorHandling(data, (function(){
-        this.listbusiness = data.perhilitanBusinessCategoryResourceList;     
+        this.listbusiness = data.perhilitanActivityResourceList;     
 
       }).bind(this));
+      this.loading = false;
     },
-    error => {            
+    error => {      
+      this.loading = false;      
     });
   }
 
@@ -613,12 +735,13 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
 
       this.flag2 = true; 
       this.flag3 = true; 
+      this.loading = true;
 
       this.protectedService.getProtected('perhilitan/searchnokp/'+formValue.icpassport,lang).subscribe(
       data => {
 
         this.sharedService.errorHandling(data, (function(){
-          console.log(data);    
+          
           if(data.noKpResourceList[0].nama != ""){
             this.secondFormGroup.get('namaPemilik').setValue(data.noKpResourceList[0].nama);
             this.secondFormGroup.get('phonePemilik').setValue(data.noKpResourceList[0].notel);
@@ -652,8 +775,10 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
           }
 
         }).bind(this));
+        this.loading = false;
       },
       error => {
+        this.loading = false;
       });
     }
 
@@ -895,6 +1020,8 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       else
         valPoskod = this.selectedPoskodComp;
     }
+
+    this.loading = true;
   
     this.protectedService.getProtected('perhilitan/poskod/'+valPoskod,this.langID).subscribe(
     data => {
@@ -936,8 +1063,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
           else{ //when city more than one
             for (let i = 0; i < this.listdaerahSurat.length; i++) { 
 
-              if((this.citySurat != undefined && this.citySurat == this.listdaerahSurat[i].postcodeId) ||
-                this.cityT == this.listdaerahSurat[i].postcodeId){               
+              if((this.citySurat != undefined && this.citySurat == this.listdaerahSurat[i].postcodeId)){           
                 this.poskodIdMailing = this.listdaerahSurat[i].postcodeId;
                 this.thirdFormGroup.get('mailingDaerah').setValue(this.listdaerahSurat[i].postcodeId);     
                 this.thirdFormGroup.get('mailingNegeri').setValue(this.listdaerahSurat[i].state); 
@@ -960,8 +1086,8 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
 
           else{ //when city more than one
             for (let i = 0; i < this.listdaerahCompany.length; i++) { 
-              if((this.cityCompany == this.listdaerahCompany[i].postcodeId) || 
-                  this.cityT == this.listdaerahCompany[i].postcodeId){    
+              if((this.cityCompany == this.listdaerahCompany[i].postcodeId)){
+                this.stateCompany = this.listdaerahCompany[i].formValue;
                 this.fourthFormGroup.get('companyDaerah').setValue(this.listdaerahCompany[i].postcodeId);     
                 this.fourthFormGroup.get('companyNegeri').setValue(this.listdaerahCompany[i].state); 
               }
@@ -972,8 +1098,10 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
         }
 
       }).bind(this));
+      this.loading = false;
     },
-    error => {            
+    error => {     
+      this.loading = false;       
     });    
   }
 
@@ -1030,7 +1158,9 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       formValue = formValue;
     }
 
-    this.protectedService.getProtected('perhilitan/activity/catbusiness/ref/'+formValue,this.langID).subscribe(
+    this.loading = true;
+
+    this.protectedService.getProtected('perhilitan/activity/catbusiness/'+formValue,this.langID).subscribe(
     data => {
 
       this.sharedService.errorHandling(data, (function(){
@@ -1038,8 +1168,10 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
         this.checkReqValues5();
 
       }).bind(this));
+      this.loading = false;
     },
-    error => {            
+    error => {     
+      this.loading = false;       
     });
   }
 
@@ -1049,6 +1181,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
 
     if(chkboxCopyAdd == true){
 
+      this.citySurat =  this.secondFormGroup.get('daerahPemilik').value;   
       this.selectedPoskodSurat = this.secondFormGroup.get('poskodPemilik').value;            
       this.thirdFormGroup.get('mailingAdd').setValue(this.secondFormGroup.get('addPemilik').value);     
       this.thirdFormGroup.get('mailingPoskod').setValue(this.secondFormGroup.get('poskodPemilik').value);   
@@ -1072,6 +1205,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
 
     if(chkboxCopyAdd == true){
       
+      this.cityCompany =  this.secondFormGroup.get('daerahPemilik').value;   
       this.selectedPoskodComp = this.secondFormGroup.get('poskodPemilik').value;   
       this.fourthFormGroup.get('companyAdd').setValue(this.secondFormGroup.get('addPemilik').value);     
       this.fourthFormGroup.get('companyPoskod').setValue(this.secondFormGroup.get('poskodPemilik').value);   
@@ -1089,7 +1223,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
     this.checkReqValues3();
   }
 
-  uploadFile1(selectedFiles: Ng4FilesSelected, lan): void {    
+  uploadFile1(selectedFiles: Ng4FilesSelected): void {    
    
     let nameFile1 = selectedFiles.files[0].name;  
     let sizeFile = selectedFiles.files[0].size;
@@ -1118,7 +1252,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
   
   }
 
-  uploadFile2(selectedFiles: Ng4FilesSelected, lan): void {    
+  uploadFile2(selectedFiles: Ng4FilesSelected): void {    
 
     let nameFile1 = selectedFiles.files[0].name;
     let sizeFile = selectedFiles.files[0].size;
@@ -1147,27 +1281,33 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
   }
 
   changeBase641(inputValue: any): void {
+    this.loading = true;
     var file:File = inputValue[0].files[0];
     var myReader:FileReader = new FileReader();
   
     myReader.onloadend = (e) => {
-      let base641 = myReader.result;
+      let base641;
+      base641 = myReader.result;
       let splitB64 = base641.split('data:application/pdf;base64,')[1];          
       this.fifthFormGroup.get('dispBase641').setValue(splitB64);
     }
     myReader.readAsDataURL(file);
+    this.loading = false;
   }
 
   changeBase642(inputValue: any): void {
+    this.loading = true;
     var file:File = inputValue[0].files[0];
     var myReader:FileReader = new FileReader();
   
     myReader.onloadend = (e) => {
-      let base642 = myReader.result;
+      let base642;
+      base642 = myReader.result;
       let splitB64 = base642.split('data:application/pdf;base64,')[1];          
       this.fifthFormGroup.get('dispBase642').setValue(splitB64);
     }
     myReader.readAsDataURL(file);
+    this.loading = false;
   }
 
   clickHantar(){
@@ -1297,23 +1437,29 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       body.isDraft = "True";
       body.cronStatus = false;
       
-      console.log(JSON.stringify(body));
+      //console.log(JSON.stringify(body));
+      this.loading = true;
       
-      this.protectedService.create(body,'perhilitan/draft/save',this.langID).subscribe(
+      this.protectedService.create(body,'perhilitan/draft/save',this.langID, this.dsvcCode, this.agcCode).subscribe(
       data => {
         this.sharedService.errorHandling(data, (function () {
           this.toastr.success(this.translate.instant('Permohonan Baru Lesen Peniaga/Taksidermi berjaya disimpan sebagai draft'), '');
           this.router.navigate(['appsmgmt']);
         }).bind(this));
-        //this.loading = false;
+        this.loading = false;
       },
       error => {
-        //this.loading = false;
+        this.loading = false;
         this.toastr.error(JSON.parse(error._body).statusDesc, '');
       });
     }
 
     else{ // when update
+
+      if(this.stateCompany == undefined){
+        this.stateCompany = null;
+      }
+
       let body = {
         "licenseId": null,
         "licensePasscode": "",
@@ -1430,18 +1576,19 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       body.isDraft = "True";
       body.cronStatus = false;
       
-      console.log(JSON.stringify(body));
+      //console.log(JSON.stringify(body));
+      this.loading = true;
       
-      this.protectedService.update(body,'perhilitan/draft/update',this.langID).subscribe(
+      this.protectedService.update(body,'perhilitan/draft/update',this.langID, this.dsvcCode, this.agcCode).subscribe(
       data => {
         this.sharedService.errorHandling(data, (function () {
           this.toastr.success(this.translate.instant('Draft Permohonan Baru Lesen Peniaga/Taksidermi berjaya dikemaskini'), '');
           this.router.navigate(['appsmgmt']);
         }).bind(this));
-        //this.loading = false;
+        this.loading = false;
       },
       error => {
-        //this.loading = false;
+        this.loading = false;
         this.toastr.error(JSON.parse(error._body).statusDesc, '');
       });
 
@@ -1564,20 +1711,54 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
     body.isDraft = false;
     body.cronStatus = false;
     
-    console.log(JSON.stringify(body));    
-    this.protectedService.create(body,'perhilitan/apply',this.langID).subscribe(
+    //console.log(JSON.stringify(body));
+    this.loading = true;
+
+    this.protectedService.create(body,'perhilitan/apply',this.langID, this.dsvcCode, this.agcCode).subscribe(
     data => {
       this.sharedService.errorHandling(data, (function () {
         this.toastr.success(this.translate.instant('Permohonan Baru Lesen Peniaga/Taksidermi berjaya dihantar'), '');
         this.router.navigate(['appsmgmt']);
       }).bind(this));
-      //this.loading = false;
+      this.loading = false;
     },
     error => {
-      //this.loading = false;
+      this.loading = false;
       this.toastr.error(JSON.parse(error._body).statusDesc, '');
     });
     
+  }
+
+  triggerDserviceValidation(dsvcCode) {
+    let sub;
+    this.loading = true;
+
+    return this.route.paramMap
+      .switchMap((params: ParamMap) =>
+        this.protectedService.validateDserviceByRefCode(dsvcCode))
+      .subscribe(resValidation => {
+        
+        if(!resValidation.valid) {
+          this.toastr.error('Invalid Service!', '');
+          this.router.navigate(['404']);
+          
+          // sub = Observable.interval(2000)
+          // .subscribe((val) => {
+          //   window.close();
+          //   sub.unsubscribe();
+          // });
+        } else {
+          localStorage.setItem('dserviceCode', dsvcCode);
+          localStorage.setItem('agencyCode', this.agcCode);
+          this.loading = false;
+        }
+        this.loading = false;
+      },
+      error => {
+        this.toastr.error(JSON.parse(error._body).statusDesc, '');
+        this.loading = false;
+  
+      });
   }
 
 }

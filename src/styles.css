@@ -28,6 +28,14 @@ em{
   background-color: #d9534f;
 }
 
+.leftMenuPanel::after{
+  content: " - Remember this" !important;
+}
+
+
+
+
+
 .lifeevent_tab > .mat-tab-group > .mat-tab-header{
   margin: 0 auto !important;
 }
@@ -41,6 +49,18 @@ em{
   background-color: #5cb85c;
 }
 
+.mat-expansion-panel-body > .submenu{
+  padding-bottom: 0px !important;
+}
+
+.mat-expansion-panel-header-title > a{
+  padding:5px 0px;
+}
+
+
+.lifeEvent  .mat-tab-label {
+  height: 80px !important;
+}
 
 .owl-stage-outer{
         height: 300px;
@@ -50,7 +70,7 @@ em{
     color: #fff;
 }
 
-ul.rightMenu li a {
+ul.rightMenu > li > a {
   color: #fff;
 }
 
@@ -81,6 +101,9 @@ ul.rightMenu {
 
 .font-size-xxl {
   font-size: 52px; }
+
+.font-size-xxxl {
+  font-size: 66px; }
 
 .themeColor {
   background: #00bdbb; }
@@ -124,6 +147,7 @@ p.font-size-s > strong {
 .panel-body {
   color: #fff; }
 
+
 .ngui-auto-complete > ul li {
   padding: 2px 18px !important;
   border-bottom: none !important;
@@ -136,6 +160,15 @@ p.font-size-s > strong {
         z-index: 9999999;
         display: block;
     }
+
+    @media only screen and (min-width: 320px) and (max-width: 1023px) {
+      app-footer{
+        background: #666666;
+        z-index: 9999999;
+        display: block;
+      }
+    }
+
         .primary {
             background-color: #1ebebc;
             color: #fff;
@@ -238,6 +271,8 @@ p.font-size-s > strong {
 
         .mat-dialog-container{
           padding: 0 0 10px 0 !important;
+          position: relative !important;
+          top: 80px !important;
         }
 
         .mat-dialog-container app-confirm-dialog p:nth-child(1){
@@ -312,23 +347,27 @@ p.font-size-s > strong {
   z-index: 100001;
   top: 0;
   right: 0;
-  background-color: #041716;
+  background-color: rgba(0, 0, 0, 0.85);
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 40px;
 }
 
-.sidenav a {
+.sidenav a, .sidenav mat-panel-title {
   padding: 8px 8px 8px 10px;
   text-decoration: none;
-  font-size: 16px;
   text-align: left;
-  color: #818181;
+  color: #fff !important;
   display: block;
   transition: 0.3s;
 }
 
-.sidenav a:hover {
+.sidenav  a > i, .sidenav mat-panel-title > i {
+  margin: 3px 9px 0px 0px;
+}
+
+
+.sidenav a:hover, .sidenav mat-panel-title:hover {
   color: #f1f1f1;
   border-left: 2px solid;
 }
@@ -337,7 +376,7 @@ p.font-size-s > strong {
   position: absolute;
   top: 0;
   right: 0px;
-  font-size: 30px;
+  font-size: 20px;
   margin-left: 50px;
 }
 
@@ -357,7 +396,7 @@ p.font-size-s > strong {
   padding: 0px;
 }
 
-.sidenav ul li a.topactive{
+.sidenav ul li a.topactive, .sidenav mat-panel-title.topactive{
   color: #fff;
   font-weight: bold;
   border-left: 2px solid;
@@ -390,6 +429,10 @@ p.font-size-s > strong {
   font-size: 16px;
 }
 
+.sidenav .mat-content{
+  flex: none !important;
+}
+
 .mainTitleStepper{
   color: #333;
   padding-left: 20px;
@@ -399,6 +442,19 @@ p.font-size-s > strong {
   color: #333;
 }
 
+.curdHeadingRight{
+  text-align: right;
+  padding-right: 0px !important;
+}
+
+.curdHeader{
+  padding-bottom:10px;
+  display: flex;
+}
+
+.iconBtn{
+  min-width: 10px !important;
+}
 
 /* .owl-carousel .owl-item img {
   display: block;
@@ -415,6 +471,10 @@ p.font-size-s > strong {
   .owl-carousel .owl-item img {
     display: block;
     width: 140% !important;
+  }
+
+  .modal-content{
+    top: 110px;
   }
 
   .sliderBox {
@@ -465,10 +525,109 @@ p.font-size-s > strong {
     display: none;
   }
 
+  input[type='radio'] + label{
+    padding: 6px !important;
+  }
+
+  .textDisplay{
+    display: none;
+  }
+
 }
 
 
-@media screen and (max-width: 1920px) and (min-width: 481px){
+@media screen and (max-width:640px) and (min-width: 481px){
+  .owl-carousel .owl-item img {
+    display: block;
+    width: 140% !important;
+  }
+
+  .sliderBox {
+    top: 20% !important;
+    margin-right: 0px !important;
+    left: 5% !important;
+    min-height: 35%;
+    min-width: 100% !important;
+    margin: 0px 0px !important;
+  }
+
+  .lifeEventContainer{
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .lifeEventBox{
+    padding: 0px 25px !important;
+  }
+
+  .lifeEventContainer h2, .lifeEventContainer p{
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+  }
+
+  .articleBox {
+    padding: 10px 25px !important;
+  }
+
+  h2{
+    line-height: 35px !important;
+  }
+
+  .search_header{
+    font-size:18px !important;
+    padding: 15px 0px 0px !important;
+  }
+
+  .dashboard_l_menu{
+    display: none;
+  }
+
+  .dashboard_s_menu{
+    display: block;
+  }
+
+  .stepperTitle{
+    display: none;
+  }
+
+
+  .btn-right{
+    position: absolute;
+    bottom: 20px !important;
+    right: 15px;
+    font-size: 30px;
+    z-index: 999;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .btn-left{
+    position: absolute;
+    bottom: 20px !important;
+    left: 15px;
+    font-size: 30px;
+    z-index: 999;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .sliderContainer:after{
+    margin-top: 0% !important;
+  }
+
+  input[type='radio'] + label{
+    padding: 6px !important;
+  }
+
+}
+
+
+@media screen and (max-width: 1920px) and (min-width: 641px){
+
+  input[type='radio'] + label{
+    padding: 6px !important;
+  }
+
   .owl-carousel .owl-item img {
     display: block;
     width: auto !important;
@@ -480,6 +639,12 @@ p.font-size-s > strong {
 
   .dashboard_s_menu{
     display: none;
+  }
+
+  .sliderContainer:after{
+    background-image: linear-gradient(to right, transparent 30%, #a7a495 85%), linear-gradient(to left, transparent 80%, #a7a495 95%) !important;
+    background-image: -webkit-linear-gradient(to right, transparent 30%, #a7a495 85%), -webkit-linear-gradient(to left, transparent 80%, #a7a495 95%) !important;
+
   }
 
 
@@ -506,7 +671,7 @@ p.font-size-s > strong {
 
 @media (max-width: 480px) {
   .container {
-    padding:0;
+    padding:5px;
     margin:0;
   }
 
@@ -541,6 +706,11 @@ p.font-size-s > strong {
     background-image: linear-gradient(to bottom, transparent 34%, #a7a495 47%) !important;
     background-image: -webkit-linear-gradient(to bottom, transparent 34%, #a7a495 47%) !important;
     height: 320px !important; }
+
+    .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+      padding-left: 7px;
+      padding-right: 7px;
+  }
 }
 
 
@@ -576,8 +746,21 @@ table a:not(.btn), .table a:not(.btn) {
     color: #fff;
     text-decoration: none;
 }
+
+.table-responsive a{
+  color: #000 !important;
+}
+
+.marginTop-10 {
+  margin-top: 10px;
+}
+
 .paddingTop-15 {
   padding-top: 15px;
+}
+
+.paddingTop-20 {
+  padding-top: 20px;
 }
 .float-right{
   float: right;
@@ -683,7 +866,8 @@ span.highlightWord {
 
 .mat-datepicker-content-touch {
   margin: 5px !important;
-  margin-top: 93px !important;
+  max-height: 80vh !important;
+  bottom: 0px !important;
 }
 
 
@@ -738,7 +922,7 @@ lineHr{
         1px 1px 0 #000;
 }
 
-ngui-auto-complete .no-match-found {display: none};
+ngui-auto-complete .no-match-found {display: none}
 
 .center-icon-container {
   height: auto; /*Set line-height to this value*/

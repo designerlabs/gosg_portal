@@ -10,7 +10,7 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { DatepickerModule } from 'ngx-bootstrap/datepicker';
 import { Ng4FilesModule } from './ng4-files';
-
+import { TruncateProdPipe } from './pipe/truncateprod.pipe';
 import { AppConfigModule } from './config/app.config.module';
 // import { AppComponent } from './app.component';
 import { protectedRoutes } from './protected-routes';
@@ -42,12 +42,17 @@ import { DigitalservicesprodComponent } from './digitalservices/digitalservicesp
 import { ContentProdComponent } from './article/content/contentprod.component';
 import { PerhilitanComponent } from './perhilitan/perhilitan.component';
 import { ReplacementmycardComponent } from './replacementmycard/replacementmycard.component';
+import { ReplacementmsgComponent } from './replacementmsg/replacementmsg.component';
 import { LeftmenuProdComponent } from './article/leftmenu/leftmenuprod.component';
 import { ArchivecategoryProdComponent } from './archive/archivecategory/archivecategoryprod.component';
 import { ArchivesubcategoryProdComponent } from './archive/archivesubcategory/archivesubcategoryprod.component';
 import { ArchivecontentProdComponent } from './archive/archivecontent/archivecontentprod.component';
-import { PerhilitanrenewComponent } from './perhilitanrenew/perhilitanrenew.component';
-import { LoadingModule } from 'ngx-loading';
+import { PerhilitanrenewComponent, PopupServiceDialog } from './perhilitanrenew/perhilitanrenew.component';
+import { ProtectedLoaderComponent } from './loader/protected-loader.component';
+import { FamilyinfoComponent, FamilyPopupDialog } from './familyinfo/familyinfo.component';
+import { FamilyinfotblComponent } from './familyinfo/familyinfotbl/familyinfotbl.component';
+import { CheckexamresultComponent, ExamPopupDialog,ExamResult } from './checkexamresult/checkexamresult.component';
+import { HighlightboxProdComponent } from './highlightbox/highlightboxprod.component';
 
 export function HttpLoaderFactory(http: Http) {
    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -78,14 +83,24 @@ export function HttpLoaderFactory(http: Http) {
     ContentProdComponent,
     PerhilitanComponent,
     ReplacementmycardComponent,
+    ReplacementmsgComponent,
     LeftmenuProdComponent,
     ArchivecategoryProdComponent,
     ArchivesubcategoryProdComponent,
     ArchivecontentProdComponent,
-    PerhilitanrenewComponent
+    PerhilitanrenewComponent,
+    PopupServiceDialog,
+    ProtectedLoaderComponent,
+    FamilyinfoComponent,
+    FamilyPopupDialog,
+    FamilyinfotblComponent,
+    CheckexamresultComponent,
+    ExamPopupDialog,
+    HighlightboxProdComponent,
+    ExamResult,
+    TruncateProdPipe
   ],
   imports: [
-    LoadingModule,
     SharedModule,
     BrowserModule,
     TextMaskModule,
@@ -112,6 +127,7 @@ export function HttpLoaderFactory(http: Http) {
   ],
 
   providers: [ ProtectedService, ContentProdComponent],
+  entryComponents: [PopupServiceDialog, FamilyPopupDialog, ExamPopupDialog, ExamResult],
   bootstrap: [ProtectedComponent]
 })
 

@@ -11,6 +11,7 @@ import { SearchService } from '../../search/search.service';
 import { ToastrService } from 'ngx-toastr';
 import { ISubscription } from 'rxjs/Subscription';
 import { TopnavService } from '../topnav/topnav.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-nav',
@@ -20,10 +21,12 @@ import { TopnavService } from '../topnav/topnav.service';
 })
 export class NavComponent implements OnInit, AfterViewInit, OnDestroy {
 
+  menuModal: any;
     mobile: boolean;
     @Output() menuClick = new EventEmitter();
     @Input() state:string;
-    @Input() validMyIdentity: string;
+    @Input() getPassPort: string;
+    @Input() validMyIdentity: any;
     languageId: any;
     imgSrc: string;
     menus: IMenu[];
@@ -46,6 +49,7 @@ export class NavComponent implements OnInit, AfterViewInit, OnDestroy {
 
     constructor(
         private translate: TranslateService,
+        private titleService: Title,
         private toastr: ToastrService,
         @Inject(APP_CONFIG) private config: AppConfig,
         private http: Http,
@@ -64,6 +68,7 @@ export class NavComponent implements OnInit, AfterViewInit, OnDestroy {
                     this.lang = 'en';
                     this.langId = 1;
                     this.languageId = 1;
+                    this.titleService.setTitle("MyGOV - The Government of Malaysia's Official Portal");
                     this.imgSrc = 'logo_en';
                 });
 
@@ -74,6 +79,7 @@ export class NavComponent implements OnInit, AfterViewInit, OnDestroy {
                     this.lang = 'ms';
                     this.langId = 2;
                     this.languageId = 2;
+                    this.titleService.setTitle("MyGOV - Portal Rasmi Kerajaan Malaysia");
                     this.imgSrc = 'logo_ms';
                 });
             }
@@ -85,6 +91,8 @@ export class NavComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     ngOnInit() {
+
+
 
         if (!this.languageId) {
             this.languageId = localStorage.getItem('langID');
@@ -121,7 +129,12 @@ export class NavComponent implements OnInit, AfterViewInit, OnDestroy {
             $('#main-menu > li > a.active').css('background-color', localStorage.getItem('themeColor'));
         });
 
-    }
+      }
+
+
+      clickPrevent(e){
+          e.preventDefault();
+      }
 
     dropdownDisplay(action) {
         $(function () {
@@ -164,15 +177,20 @@ export class NavComponent implements OnInit, AfterViewInit, OnDestroy {
         if(key) {
             $('#searchDDown').css({ 'display': 'none' });
             localStorage.setItem('ser_word', key);
-            this.router.navigate(['search/searchResult', key]);
+            // this.router.navigate([]);
+            location.href = './search/'+key;
             this.internal(key);
 
-            if(this.page == 'search')
-                window.location.reload();
+            // if(this.page == 'search')
+            //     window.location.reload();
 
         } else {
             this.toastr.error(this.translate.instant('common.msg.searchKeyword'), '');
         }
+    }
+
+    mobileMainMenu(){
+      alert('hello')
     }
 
     internal(key) {

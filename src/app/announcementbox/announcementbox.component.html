@@ -1,61 +1,62 @@
-<div class="container" style="margin-top: 20px; margin-bottom: 0px; padding-bottom:20px;">
+<div class="container lifeEventContainer">
+    <!-- style="margin-top: 20px; margin-bottom: 0px; padding-bottom:20px;" -->
     <div class="row">
-        <div class="col-sm-4">
-            <div class="row">
-                <div class="col-md-12 card effect__hover ">
-                    <div class="annoucement card__front">
-                        <img src="https://www.malaysia.gov.my/public/static/images/pengumuman-01.svg" alt="pengumuman">
-                        <h4 class="font-size-m" style="text-align: center; font-family: Roboto;">{{'home.highlights'|translate|uppercase}}</h4>
-                    </div>
-                    <div class="annoucement card__back warna_bg" style="height: 240px; background-color: rgb(0, 189, 187);">
+        <!-- <div class="col-md-12 col-sm-12 articleBox">&nbsp;</div> -->
+        <div class="col-md-4 col-sm-6 articleBox">
+            <div class="card effect__hover">
+                <div class="annoucement card__front">
+                    <img src="https://www.malaysia.gov.my/public/static/images/pengumuman-01.svg" alt="pengumuman">
+                    <h4 class="font-size-m" style="text-align: center; font-family: Roboto;">{{'home.highlights'|translate|uppercase}}</h4>
+                </div>
+                <div class="annoucement card__back warna_bg" style="height: 240px; background-color: rgb(0, 189, 187);">
                     <h4 class="mainCard font-size-m" style="font-family: Roboto;">{{'home.currentHighlights'|translate|uppercase}}</h4><br>
-                        <ul class="" style="list-style:none; padding:0px;text-align:left">
-                          <li style="padding:1px 0px 1px 0px;" *ngFor="let item of (announcementData ? announcementData.contentList.slice(0,3): []) ">
-                              <h4 class="font-size-s" style="font-family: Roboto;"><i class="fa fa-bullhorn" aria-hidden="true"></i>
-                            <!-- <a (click)="getDetailAnnounce(item.contentCode,announcementData.categoryCode)" style="color:#FFFFFF;">
+                    <ul class="" style="list-style:none; padding:0px;text-align:left">
+                        <li style="padding:1px 0px 1px 0px;" *ngFor="let item of (announcementData ? announcementData.contentList.slice(0,3): []) ">
+                            <h4 class="font-size-s" style="font-family: Roboto;"><i class="fa fa-bullhorn" aria-hidden="true"></i>
+                                <!-- <a (click)="getDetailAnnounce(item.contentCode,announcementData.categoryCode)" style="color:#FFFFFF;">
                                 &nbsp;{{item.contentTitle | slice:0:30}}...</a> -->
                                 {{item.contentTitle | slice:0:30}}...
-                            </h4></li>
-                        </ul>
-                        <a routerLink="/category/739" class="plain_tag">
+                            </h4>
+                        </li>
+                    </ul>
+                    <a routerLink="/category/739" class="plain_tag">
                         <p class="font-size-s" style="font-family: Roboto;"><i class="fa fa-caret-right"></i>{{'home.readmore'|translate}}</p></a>
-                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-sm-4">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="calendar warna_bg" style="padding: 1px; background-color: rgb(0, 189, 187);" [style.background-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
-                        <a routerLink="/calendar" style="color:#fff;" >
-                            <h4 class="mainCalen font-size-m" style="text-align: center; font-family: Roboto;">{{'home.calendarTitle'|translate | uppercase}}</h4>
-                            <div class="dynamicCalen" style="padding: 0px 10px;">
-                                <div class="row rwCalen" style="cursor: pointer;" data-attr="497148400637395" *ngFor="let item of calendarData">
-                                    <div *ngIf="calendarData" class="col-xs-3" style="padding-left: 30px;">
-                                        <h1>{{item.day}}</h1>
-                                    </div>
-                                    <div *ngIf="calendarData.length != 0" class="col-xs-9 text-left">
-                                        <h4>{{item.month}}</h4>
-                                        <p style="margin-top: -10px">{{item.title}}</p>
-                                    </div>
-                                </div>
-                                <div *ngIf="!calendarData" class="col-xs-12" style="padding-left: 30px; padding-top: 50px">
-                                    <p>{{'calendar.err.noactivitydata'|translate|uppercase}}</p>
-                                </div>
-                            </div>
-                        </a>
+        <div class="col-md-4 col-sm-6 articleBox">
+            <div class="calendar warna_bg" style="padding: 1px; background-color: rgb(0, 189, 187);" [style.background-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
+                <a routerLink="/calendar" style="color:#fff;">
+                    <div class="col-xs-12" style="margin-bottom: -2%">
+                        <h4 class="mainCalen font-size-m" style="text-align: center; font-family: Roboto;">{{'home.calendarTitle'|translate
+                            | uppercase}}</h4>
                     </div>
-                </div>
+                    <!-- <div> -->
+                    <!-- class="dynamicCalen" style="padding: 0px 10px;" -->
+                    <div class="col-xs-12" style="cursor: pointer;" data-attr="497148400637395" *ngFor="let item of calendarData">
+                        <div class="col-xs-4" *ngIf="calendarData">
+                            <p class="font-size-xxl">{{item.day}}</p>
+                            <p class="font-size-m align-top month event-title">{{item.month}}</p>
+                        </div>
+                        <div class="col-xs-8" *ngIf="calendarData.length != 0">
+                            <p *ngIf="item.title.length > 40" class="col-xs-12 font-size-s text-left" title="item.title" style="padding-top: 15px">{{ item.title | slice:0:40 }}...</p> <!-- style="margin-top: -10px" -->
+                            <p *ngIf="item.title.length <= 40" class="col-xs-12 font-size-s text-left" title="item.title" style="padding-top: 15px">{{ item.title }}</p> <!-- style="margin-top: -10px" -->
+                        </div>
+                    </div>
+                    <div *ngIf="!calendarData">
+                        <!-- class="col-xs-12" style="padding-left: 30px; padding-top: 50px" -->
+                        <p>{{'calendar.err.noactivitydata'|translate|uppercase}}</p>
+                    </div>
+                    <!-- </div> -->
+                    <div class="col-xs-12">&nbsp;</div>
+                </a>
             </div>
         </div>
-        <div class="col-sm-4">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="tender">
-                        <a href="./category/2"><img src="https://www.malaysia.gov.my/public/static/images/tender-01.svg" alt="tender"></a>
-                        <h4 class="font-size-m" style="text-align: center; font-family: Roboto;">TENDER</h4>
-                    </div>
-                </div>
+        <div class="col-md-4 col-sm-6 articleBox hidden-xs hidden-md hidden-lg" style="margin: -1%; padding: 0;">&nbsp;</div>
+        <div class="col-md-4 col-sm-6 articleBox">
+            <div class="tender">
+                <a href="./category/2"><img src="https://www.malaysia.gov.my/public/static/images/tender-01.svg" alt="tender"></a>
+                <h4 class="font-size-m" style="text-align: center; font-family: Roboto;">TENDER</h4>
             </div>
         </div>
     </div>

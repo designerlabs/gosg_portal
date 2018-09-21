@@ -41,6 +41,7 @@ export class GalleryComponent implements OnInit, OnDestroy {
   isAudio:boolean;
   isVideo:boolean;
   mediaTypeName: string;
+  loading = false;
 
   galleryData: any;
   @Output() langChange = new EventEmitter();
@@ -93,17 +94,16 @@ export class GalleryComponent implements OnInit, OnDestroy {
         }
 
         if(this.topnavservice.flagLang){
-
           this.galleryData = this.galleryService.getGallery();
           this.moduleName = this.router.url.split('/')[1];
-          this.navService.triggerGalleries(this.langId);
+          this.navService.triggerGalleries(this.langId, '');
 
           this.showPopup = false;
           this.isImages = false;
           this.isAudio = false;
           this.isDocument = false;
           this.isVideo = false;
-          
+
         }
 
     });
@@ -113,6 +113,9 @@ export class GalleryComponent implements OnInit, OnDestroy {
 
   lang = this.lang;
   langId = this.langId;
+  boolCallback = (result: boolean) : void => {
+    this.loading = result;
+  }
 
   ngOnDestroy() {
     this.subscriptionLang.unsubscribe();
@@ -131,8 +134,7 @@ export class GalleryComponent implements OnInit, OnDestroy {
 
     this.galleryData = this.galleryService.getGallery();
     this.moduleName = this.router.url.split('/')[1];
-    this.navService.triggerGalleries(localStorage.getItem('langID'));
-
+    this.navService.triggerGalleries(localStorage.getItem('langID'), '');
     this.showPopup = false;
     this.isImages = false;
     this.isAudio = false;
@@ -203,7 +205,7 @@ export class GalleryComponent implements OnInit, OnDestroy {
         case 'videos':
           res = 'video'
           break;
-      
+
         default:
           break;
       }
@@ -231,6 +233,7 @@ export class GalleryComponent implements OnInit, OnDestroy {
 @Component({
   selector: 'gallery-media-content',
   templateUrl: './gallery-media-content.html',
+  styleUrls: ['./gallery.component.css']
 })
 export class DialogDataExampleDialog {
   constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) {}

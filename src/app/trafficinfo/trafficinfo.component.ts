@@ -3,7 +3,7 @@ import * as $ from 'jquery';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 import { DialogsService } from '../dialogs/dialogs.service';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap, Params } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { PortalService } from '../services/portal.service';
 import { HttpClient } from '@angular/common/http';
@@ -16,6 +16,7 @@ import { tileLayer, latLng, circle, polygon, marker, icon, Layer, polyline } fro
 import * as L from 'leaflet';
 import { ISubscription } from 'rxjs/Subscription';
 import { TopnavService } from '../header/topnav/topnav.service';
+import { NavService } from '../header/nav/nav.service';
 
 @Component({
   selector: 'gosg-trafficinfo',
@@ -39,6 +40,7 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
   noPrevData = true;
   noNextData = false;
   allStreetNames:any;
+  streetName:any;
   streetNames = [];
   streetFlows = null;
   gotPrediction:boolean;
@@ -55,6 +57,7 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
   id;
   custom: any;
   rp;
+  isActiveList: boolean = false;
 
   showNoData = false
 
@@ -72,6 +75,8 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
     shadowAnchor: [0, 0],  // the same for the shadow
     popupAnchor: [12, 0] // point from which the popup should open relative to the iconAnchor
   });
+  dsvcCode: number;
+  agcCode: number;
   // route = L.polyline([[ 101.741834,3.081827],[ 101.741807,3.082012],[ 101.741794,3.08221],[ 101.741738,3.083809],[ 101.741723,3.084906],[ 101.741723,3.084907],[ 101.741711,3.085749],[ 101.741651,3.086318],[ 101.741521,3.086954],[ 101.741301,3.088004],[ 101.740145,3.091723],[ 101.739996,3.092204],[ 101.739529,3.093657],[ 101.738819,3.096002]], {color: 'red'}).addTo(this.mymap);
 
   constructor(
@@ -80,10 +85,13 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
     private dialogsService: DialogsService,
     private translate: TranslateService,
     private topnavservice: TopnavService,
+    private navService: NavService,
     private router: Router,
     private toastr: ToastrService,
+    private route: ActivatedRoute,
     @Inject(APP_CONFIG) private config: AppConfig
   ) {
+    this.navService.restricted = false;
     this.loading = true;
     this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
       // this.sharedService.errorHandling(event, (function(){
@@ -107,13 +115,22 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
 
       this.keyword = '';
       this.pageCount = 1;
-      this.mymap.setView([3.141589, 101.674284], 13);
+      this.mymap.flyTo([3.141589, 101.674284], 13);
       this.popup.remove();
       this.loading = false;
 
     }); }
 
   ngOnInit() {
+
+    // AGENCY & DSERVICE CODE FOR VALIDATION
+    // let sub = this.route.queryParams.subscribe((params: Params) => {
+    //   this.dsvcCode = parseInt(params.service);
+    //   this.agcCode = parseInt(params.agency);
+    // });
+
+    // this.triggerDserviceValidation(this.dsvcCode);
+
     this.gotPrediction = false;
     this.getDefaultMap();
     // this.getStreetNamesData();
@@ -212,8 +229,11 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
             }
           }).bind(this));
           this.loading = false;
-        }, err => {
+        },
+        error => {
+          this.toastr.error(JSON.parse(error._body).statusDesc, '');
           this.loading = false;
+
         });
   }
 
@@ -260,22 +280,26 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
                   };
                 });
 
-              this.mymap.setView(ltlg, 15);
+              this.mymap.flyTo(ltlg, 15);
               this.popup = L.popup().setLatLng(ltlg)
                             .setContent(this.streetName)
                             .openOn(this.mymap);
               }
           }).bind(this));
           this.loading = false;
+          this.isActiveList = false;
         }, err => {
           this.gotPrediction = false;
           this.showNoData = true;
           this.loading = false;
+          this.toastr.error(JSON.parse(err._body).statusDesc, '');
+          this.isActiveList = false;
 
         });
       } else {
         this.gotPrediction = false;
         this.showNoData = true;
+        this.isActiveList = false;
       }
 
   }
@@ -334,6 +358,32 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
         break;
     }
     return color;
+  }
+
+  triggerDserviceValidation(dsvcCode) {
+    let sub;
+    this.loading = true;
+
+    return this.route.paramMap
+      .switchMap((params: ParamMap) =>
+        this.portalservice.validateDserviceByRefCode(dsvcCode))
+      .subscribe(resValidation => {
+
+        if(!resValidation.valid) {
+          this.toastr.error('Invalid Service!', '');
+          this.router.navigate(['404']);
+
+          this.loading = false;
+        } else {
+          localStorage.setItem('dserviceCode', dsvcCode);
+          this.loading = false;
+        }
+      },
+      error => {
+        this.toastr.error(JSON.parse(error._body).statusDesc, '');
+        this.loading = false;
+
+      });
   }
 
 }

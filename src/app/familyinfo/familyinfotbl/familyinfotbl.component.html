@@ -1,0 +1,98 @@
+<gosg-protected-loader [loader]="loading"></gosg-protected-loader>
+<div class="container-fluid animated slideInDown" style="background: #a7a495;">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 style="margin-top: 10px;" class="font-size-l">{{'home.breadcrumb.family' | translate}}</h1>
+        <hr class="hr-custom2">
+        <ul class="list-inline" style="clear:both;">
+          <li>
+            <a class="font-size-s" routerLink="/">
+              {{'home.menu.home' | translate }}
+            </a>
+          </li>
+          <li>/</li>
+          <li>
+            {{'home.breadcrumb.family' | translate}}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="col-md-12">&nbsp;</div>
+  <div class="col-md-3 padding-left-0">
+    <gosg-sidenav-dashboard></gosg-sidenav-dashboard>
+  </div>
+  <div class="col-md-9 mat-elevation-z8 padding-bottom-20 scrollTable">
+    <br />
+
+    <span class="pull-right">
+      <!-- <button type="button" mat-fab color="warn" (click)="add()" >
+      <i class="fa fa-plus"></i></button> -->
+      <button class="btn btn-danger" (click)="add()">
+        <i class="fa fa-plus font-size-s" style="padding: 8px;"></i>
+      </button>
+    </span>
+
+    <table class="mat-table" style="width:100%; z-index: 9999;">
+      <tr class="mat-header-row" style="height:45px">
+        <th width="5%" class="mat-header-cell">{{'family.tableHeader.num' | translate}}</th>
+        <th width="15%" class="mat-header-cell">{{'family.tableHeader.icno' | translate}}</th>
+        <th class="mat-header-cell">{{'family.tableHeader.name' | translate}}</th>
+        <th width="10%" class="mat-header-cell">{{'family.tableHeader.relation' | translate}}</th>
+        <th width="15%" class="mat-header-cell text-center">{{'family.tableHeader.dob' | translate}}</th>
+        <th width="15%" class="mat-header-cell text-center">{{'family.tableHeader.oku' | translate}}</th>
+        <th width="15%" class="mat-header-cell text-center">{{'family.tableHeader.status' | translate}}</th>
+        <th width="15%" class="mat-header-cell text-center">{{'family.tableHeader.action' | translate}}</th>
+      </tr>
+      <tr class="mat-row" *ngFor="let data of dataApp; let i = index;" role="row">
+        <td class="mat-cell text-center">{{i+1}}</td>
+        <td class="mat-cell">{{data.identificationNo}}{{data.passportNo}} </td>
+        <td class="mat-cell">{{data.fullName}}</td>
+        <td class="mat-cell">{{data.relationship.relationshipName}}</td>
+        <td class="mat-cell text-center">{{changeDob(data.dateOfBirth)}}</td>
+        <td class="mat-cell text-center">{{data.isOku}}</td>
+        <td class="mat-cell text-center">{{data.accountStatus.accountStatusDescription}}</td>
+        <td class="mat-cell text-center">
+          <!-- <button class="btn btn-sm btn-success" (click)="print()">
+            <i class="fa fa-print font-size-s"></i>
+          </button> -->
+          <button class="btn btn-sm btn-warning" (click)="view(data.identificationNo,data.passportNo)">
+            <i class="fa fa-eye font-size-s"></i>
+          </button>
+
+        </td>
+      </tr>
+      <tr *ngIf="showNoData">
+        <td colspan="8" class="showData">
+          <hr><br>{{'common.showNoData' | translate}}</td>
+      </tr>
+    </table>
+
+    <mat-form-field style="width:50px;">
+      <mat-select class="font-size-s" value="10" (change)="pageChange($event)">
+        <mat-option value="5">5</mat-option>
+        <mat-option value="10">10</mat-option>
+        <mat-option value="25">25</mat-option>
+        <mat-option value="50">50</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div style="float:right; margin-top: 10px;">
+      <span style="color:#000; padding-right:20px;">{{ 'appmngt.tablebottom.page' | translate }}
+        <strong>{{dataListPage?.pageNumber}}</strong> {{ 'appmngt.tablebottom.of' | translate }}
+        <strong>{{dataListPage?.totalPages}}</strong> {{ 'appmngt.tablebottom.in' | translate }}
+        <strong>{{dataListPage?.totalElements}}</strong> {{ 'appmngt.tablebottom.app' | translate }}</span>
+      <button mat-mini-fab color="basic" [disabled]="noPrevData" (click)="paginatorL(dataListPage?.pageNumber)">
+        <i class="fa fa-angle-left" aria-hidden="true"></i></button>
+      <button mat-mini-fab color="basic" [disabled]="noNextData"  (click)="paginatorR(dataListPage?.pageNumber, dataListPage?.totalPages)">
+        <i class="fa fa-angle-right" aria-hidden="true"></i></button>
+    </div>
+    <br />
+  </div>
+  <br><br>
+</div>

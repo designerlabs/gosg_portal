@@ -1,3 +1,4 @@
+<gosg-protected-loader [loader]="loading"></gosg-protected-loader>
 <div class="container-fluid animated slideInDown" style="background: #a7a495;">
   <div class="container">
        <div class="row">
@@ -31,44 +32,115 @@
         <br>
         <form [formGroup]="searchForm" #adSearchForm="ngForm" id="adSearch-form" role="form" novalidate="novalidate">
 
-            <div class="example-container mat-elevation-z8 padding-right20" >
+            <div class="example-container">
+
+                <div class="row marginRow">
+                    <div class="col-md-4 text-center paddingT">
+                        <img src="assets/images/semak_repot_polis.jpg">
+                    </div>
+
+                    <div class="col-md-8 infoPDRM blackFont borderDiv">
+                        <div class="col-md-12"><br>
+                            {{ 'pdrm.reportPolice' | translate }}
+                        </div>
+
+                        <div class="col-md-4">                      
+                            <label class="labelInfo">{{ 'pdrm.placeholder.noic' | translate }}</label>
+                        </div>
+
+                        <div class="col-md-8">
+                            <mat-form-field class="sizeIC">
+                                <input matInput placeholder="" formControlName="ic" required tabindex="1">
+                                <mat-error *ngIf="searchForm.controls.ic.hasError('required')">
+                                    {{ 'pdrm.placeholder.noic' | translate }} {{ 'pdrm.err.needed' | translate }}
+                                </mat-error>
+                            </mat-form-field>
+                        </div>  
+                        
+                        <div class="col-md-4">                      
+                            <label class="labelInfo">{{ 'pdrm.placeholder.noreport' | translate }}</label>
+                        </div>
+
+                        <div class="col-md-8">
+                            <mat-form-field class="sizeNoR">
+                                <input matInput placeholder="" formControlName="noreport" (keyup)="checkReqValues()"
+                                required tabindex="2" [textMask]="{mask: maskReportNo}">
+                                <mat-error *ngIf="searchForm.controls.noreport.hasError('required')">
+                                    {{ 'pdrm.placeholder.noreport' | translate }} {{ 'pdrm.err.needed' | translate }}
+                                </mat-error>
+                            </mat-form-field>
+                            <span>/</span>
+                            <mat-form-field class="sizeY">
+                                <mat-select formControlName="yearreport" placeholder="" (change)="checkReqValues()" required>
+                                    <mat-option [value]=null></mat-option>
+                                    <mat-option *ngFor="let year of listYear" [value]="year">{{year}}</mat-option>                      
+                                </mat-select>
+                            </mat-form-field>
+                            <!-- <span style="color: black">{{'pdrm.example' | translate }}</span> -->
+                        </div>
+
+                        <div class="col-md-4">                      
+                            <label class="labelInfo"></label>
+                        </div>
+
+                        <div class="col-md-8">                      
+                            <label style="color: black">{{'pdrm.example' | translate }}</label>
+                        </div>
+
+                        <div class="col-md-12 paddingB">
+                            <button tabindex="" mat-raised-button color="warn" type="button" id="btnreset" 
+                                class="form-control btn btn-md btn-warning font-size-s pull-right bttnCustom"
+                                (click)="resetModal.show()" style="margin-left: 5px;">
+                                <i class="fa fa-refresh"></i> {{'feedback.label.reset' | translate }}</button>
+                            <button mat-raised-button type="button" color="primary" id="searchbtn" 
+                                class="form-control btn btn-md btn-success font-size-s pull-right bttnCustom" [disabled]="!complete"
+                                (click)="searchApp(searchForm.value)">
+                                <i class="fa fa-search"></i> {{'appmngt.setSearch.search' | translate}}</button>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="example-container mat-elevation-z8 padding-right20" >
 
                 <div class="row padding-15">
                     <div class="col-md-12" style="color: black">
-                        Masukkan No. Repot Polis.
+                        {{ 'pdrm.reportPolice' | translate }}
                     </div>
                 </div>
 
                 <div class="row padding-15">
                     <div class="col-md-3">
                         <mat-form-field>
-                            <input matInput placeholder="No. Kad Pengenalan" formControlName="ic" required 
+                            <input matInput placeholder="{{ 'pdrm.placeholder.noic' | translate }}" formControlName="ic" required 
                             tabindex="1" style="color: black">
                             <mat-error *ngIf="searchForm.controls.ic.hasError('required')">
-                                No. Kad Pengenalan diperlukan.
+                                {{ 'pdrm.placeholder.noic' | translate }} {{ 'pdrm.err.needed' | translate }}
                             </mat-error>
                         </mat-form-field>
                     </div>
 
-                    <div class="col-md-6">
-                        <mat-form-field>
-                            <input matInput placeholder="No. Repot Polis" formControlName="noreport" (keyup)="checkReqValues()"
+                    <div class="col-md-3">
+                        <mat-form-field style="width:60%;">
+                            <input matInput placeholder="{{ 'pdrm.placeholder.noreport' | translate }} " formControlName="noreport" 
+                            (keyup)="checkReqValues()"
                             required tabindex="2"  style="color: black" [textMask]="{mask: maskReportNo}">
                             <mat-error *ngIf="searchForm.controls.noreport.hasError('required')">
-                                No. Repot Polis diperlukan.
+                                {{ 'pdrm.placeholder.noreport' | translate }} {{ 'pdrm.err.needed' | translate }}
                             </mat-error>
                         </mat-form-field>
                         <span style="color: black">/</span>
-                        <mat-form-field style="width:10%;">
+                        <mat-form-field style="width:20%;">
                             <mat-select formControlName="yearreport" placeholder="" (change)="checkReqValues()" required>
                                 <mat-option [value]=null></mat-option>
                                 <mat-option *ngFor="let year of listYear" [value]="year">{{year}}</mat-option>                      
                             </mat-select>
-                            <!-- <mat-error *ngIf="searchForm.controls.yearreport.hasError('required')">
-                                Tahun Repot Polis diperlukan.
-                            </mat-error> -->
-                        </mat-form-field>&nbsp;
-                        <span style="color: black">Contoh No Repot Polis: 012345/18</span>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-3 padding20">                      
+                        <label style="color: black">{{'pdrm.example' | translate }}</label>
                     </div>
 
                     <div class="col-md-3">
@@ -83,57 +155,90 @@
                     </div>
                 </div>
 
-            </div>
+            </div> -->
 
         </form>
     </div><br>
 
     <div *ngIf="showDetails == true">
         <div class="row container">
-            <div class="col-md-12" style="color: black; font-weight: bold;">
-                STATUS REPOT POLIS<br>
+            <div class="col-md-12 boldInfo">
+                <span>{{ 'pdrm.titlepoliceR' | translate }}</span><br>
                 <hr class="lineHr" style="border-top: #9c9c9d 2px solid;">
             </div>
         </div>
 
-        <div class="row container">
-            <div class="col-md-3" style="color: black">
-                NO. REPOT POLIS<br>
-                TARIKH DAN MASA REPOT POLIS<br>
-                STATUS SIASATAN REPOT
+        <div class="row container blackFont">
+            <div class="col-md-3">
+                {{ 'pdrm.title.noreport' | translate }}
             </div>
 
-            <div class="col-md-9" style="color: black; font-weight: bold;">
-                {{noRptPol}}<br>
-                {{dateRptPol}}<br>
+            <div class="col-md-9 boldInfo">
+                {{noRptPol}}
+            </div>
+
+            <div class="col-md-3">
+                {{ 'pdrm.title.dateRP' | translate }}
+            </div>
+
+            <div class="col-md-9 boldInfo">
+                {{dateRptPol}}
+            </div>
+
+            <div class="col-md-3">
+                {{ 'pdrm.title.statusRP' | translate }}
+            </div>
+
+            <div class="col-md-9 boldInfo">
                 {{statusRpt}}
             </div>
         </div>
 
-        <div class="row container">
-            <div class="col-md-12" style="color: black"> 
+        <div class="row container blackFont" style="overflow-x: auto;">
+            <div class="col-md-12"> 
                 <hr class="lineHr" style="border-top: #9c9c9d 2px solid;">
             </div>
-            <div class="col-md-3" style="color: black">            
-                NO. KERTAS SIASATAN<br>
-                SEKSYEN SIASATAN<br>
-                STATUS SIASATAN<br>
-                PEGAWAI PENYIASAT<br>
-                SURAT PEMBERITAHUAN
+
+            <div class="col-md-3">            
+                {{ 'pdrm.title.noPaper' | translate }}
+            </div>
+            <div class="col-md-9 boldInfo">
+                {{noKertasSiasat}}
             </div>
 
-            <div class="col-md-9" style="color: black; font-weight: bold;">
-                {{noKertasSiasat}}<br>
-                {{seksyenSiasat}}<br>
-                {{statusSiasat}}<br>
-                {{pegawaiSiasat}}<br>
+            <div class="col-md-3">      
+                {{ 'pdrm.title.sectionInvestigation' | translate }}
+            </div>
+            <div class="col-md-9 boldInfo">
+                {{seksyenSiasat}}
+            </div>
+
+            <div class="col-md-3">     
+                {{ 'pdrm.title.statusInvestigate' | translate }}
+            </div>
+            <div class="col-md-9 boldInfo">
+                {{statusSiasat}}
+            </div>
+
+            <div class="col-md-3">    
+                {{ 'pdrm.title.insOfficer' | translate }}
+            </div>
+            <div class="col-md-9 boldInfo">
+                {{pegawaiSiasat}}
+            </div>
+
+            <div class="col-md-3">       
+                {{ 'pdrm.title.infoLetter' | translate }}
+            </div>
+            <div class="col-md-9 boldInfo">
                 <span *ngFor="let item of letter">
                     <div (click)="openLink(item)">
                         <i class="fa fa-folder-o"></i>&nbsp;{{item}}<br>
                     </div>
                 </span>
             </div>
-            <div class="col-md-12" style="color: black"> 
+            
+            <div class="col-md-12"> 
                 <hr class="lineHr" style="border-top: #9c9c9d 2px solid;">
             </div>
         </div>
@@ -141,17 +246,17 @@
 
     <div *ngIf="showDetails == false">
         <div class="row container">
-            <div class="col-md-12" style="color: black; font-weight: bold; text-align: center;">
-                ANDA TIADA REPOT POLIS.<br>
+            <div class="col-md-12 boldCenterInfo">
+                {{'pdrm.err.showData' | translate }}<br>
             </div>
         </div>
     </div>
 
     <div class="row container">
         <div class="col-md-12">
-            <span style="color:black;font-weight: bold;">Perhatian:</span><br><br>
+            <span class="boldInfo" style="text-decoration: underline">{{'pdrm.attention' | translate }}</span><br><br>
             <span style="text-align: justify; color: black">Semua jenis Repot Polis bertarikh dari 1 Ogos 2011 hingga kini (kecuali Repot Kemalangan Jalan Raya)
-                yang dibuat di kawasan Kontinjen Kuala Lumpur dan Selangor boleh disemak buat masa ini</span><br><br>
+                yang dibuat di kawasan Kontinjen Kuala Lumpur dan Selangor boleh disemak buat masa ini.</span><br><br>
         </div> 
     </div>
 </div>

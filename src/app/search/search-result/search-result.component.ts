@@ -1,18 +1,12 @@
-import { Component, OnInit, Input, Inject, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { SharedService } from '../../common/shared.service';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router } from '@angular/router';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
-
-import { MatPaginator, MatSort, MatTabChangeEvent } from '@angular/material';
-import { MatTableModule } from '@angular/material/table';
+import { Location } from '@angular/common';
 import { ToastrService } from "ngx-toastr";
 import { APP_CONFIG, AppConfig } from '../../config/app.config.module';
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { Http, Response } from '@angular/http';
+import { Http } from '@angular/http';
 import { SearchService } from '../../search/search.service';
-// import * as moment_ from 'moment';
 import * as moment from 'moment';
 import { ISubscription } from 'rxjs/Subscription';
 import { TopnavService } from '../../header/topnav/topnav.service';
@@ -101,7 +95,6 @@ export class SearchResultComponent implements OnInit, OnDestroy {
   category_sub_topic: String = "category_sub_topic";
   ref_language_id: String = "ref_language_id";
 
-
   private internalUrl: string = this.config.urlIntSearch;
   private osUrl: string = this.config.urlOsSearch;
   private globalUrl: string = this.config.urlGlobalSearch;
@@ -110,6 +103,8 @@ export class SearchResultComponent implements OnInit, OnDestroy {
   totalElements = 0; noPrevData = true; noNextData = false; pagefrom = 0; pageNumber = 1; totalPages = 0; pagesize = 10;
   millisec = 0;
   showNoData = false;
+
+  curr_data_lang: string = "English";
 
   private subscription: ISubscription;
   private subscriptionLang: ISubscription;
@@ -123,7 +118,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
     private http: Http,
     @Inject(APP_CONFIG) private config: AppConfig,
     private serchService: SearchService,
-    // private moment : Moment
+    private location : Location
   ) {
     this.subscriptionLang = this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       // this.sharedService.errorHandling(event, (function(){
@@ -301,6 +296,8 @@ export class SearchResultComponent implements OnInit, OnDestroy {
       this.languageId = 1;
     }
 
+    this.getSearchUrl();
+
     this.date = moment();
 
     this.ser_word = localStorage.getItem('ser_word');
@@ -315,6 +312,16 @@ export class SearchResultComponent implements OnInit, OnDestroy {
 
   btnSubmit() {
     this.searchByKeyword(this.ser_word);
+  }
+
+  changeCurrDataLang() {
+    if(this.mainObj.filters.ref_language_id == "1") {
+      this.mainObj.filters.ref_language_id = "2"
+      this.curr_data_lang = "Bahasa Malaysia";
+    } else if(this.mainObj.filters.ref_language_id == "2") {
+      this.mainObj.filters.ref_language_id = "1"
+      this.curr_data_lang = "English";
+    }
   }
 
   addFilterAry(ary, resObj, type?) {
@@ -340,62 +347,6 @@ export class SearchResultComponent implements OnInit, OnDestroy {
       }
     }
   }
-
-  // addKeySettings(keyVal){
-  //   let key_ary : any;
-  //   // key_ary = this.mainObj.keywordMap;
-  //   let inxall = $.inArray('all', Object.keys(key_ary));
-  //   let inxany = $.inArray('any', Object.keys(key_ary));
-  //   let inxexact = $.inArray('exact', Object.keys(key_ary));
-
-  //   if(keyVal === "1"){         // exact
-  //     if(inxall >= 0){
-  //       delete key_ary.all;
-  //     }
-  //     if(inxany >= 0){
-  //       delete key_ary.any;
-  //     }
-  //     if(inxexact < 0){
-  //       let ele = {'exact': []};
-  //       ele.exact = [this.ser_word];
-  //       jQuery.extend(key_ary, ele);
-  //     }else{
-  //       key_ary.exact = [this.ser_word];
-  //     }
-  //     key_ary.not = [this.inpExcWord];
-  //   }else if(keyVal === "2"){     //all
-  //     if(inxexact >= 0){
-  //       delete key_ary.exact;
-  //     }
-  //     if(inxany >= 0){
-  //       delete key_ary.any;
-  //     }
-  //     if(inxall < 0){
-  //       let ele = {'all': []};
-  //       ele.all = [this.ser_word];
-  //       jQuery.extend(key_ary, ele);
-  //     }else{
-  //       key_ary.all = [this.ser_word];
-  //     }
-  //     key_ary.not = [this.inpExcWord];
-  //   }else if(keyVal === "3"){     //any
-  //     if(inxexact >= 0){
-  //       delete key_ary.exact;
-  //     }
-  //     if(inxall >= 0){
-  //       delete key_ary.all;
-  //     }
-  //     if(inxany < 0){
-  //       let ele = {'any': []};
-  //       ele.any = [this.ser_word];
-  //       jQuery.extend(key_ary, ele);
-  //     }else{
-  //       key_ary.any = [this.ser_word];
-  //     }
-  //     key_ary.not = [this.inpExcWord];
-  //   }
-
-  // }
 
   addSpecFiltr(methodNm, field) {
     let key = field;
@@ -586,8 +537,22 @@ export class SearchResultComponent implements OnInit, OnDestroy {
     return res;
   }
 
-  searchByKeyword(valkeyword) {
-    // 
+  searchByKeyword(valkeyword, opt?) {
+    // this.router.navigate(['search/searchResult/' + valkeyword]);
+    let locStrgKword = localStorage.getItem('ser_word');
+    let navKword = this.router.url.split("/")[2];
+
+    if(decodeURI(navKword) != locStrgKword) {
+      localStorage.setItem('ser_word', decodeURI(navKword));
+      this.loading = true;
+      location.href = './search/'+navKword;
+      this.mainObj.keyword(decodeURI(navKword));
+    } else if(valkeyword != locStrgKword) {
+      localStorage.setItem('ser_word', decodeURI(valkeyword));
+      this.loading = true;
+      location.href = './search/'+valkeyword;
+      this.mainObj.keyword(decodeURI(valkeyword));
+    }
 
     let arrKeyword: any = [];
     let arrKeywordeySetting: any = [];
@@ -597,9 +562,10 @@ export class SearchResultComponent implements OnInit, OnDestroy {
     let env = window.location.hostname;
     let envOrigin = window.location.origin;
     let localURL = envOrigin+'/gosg/';
-
-    // 
-    // 
+          
+    this.totalElements = 0;
+    let num;
+    let dataLength = 0;
 
     if (localStorage.getItem('ser_word').length === 0) {
       localStorage.setItem('ser_word', valkeyword);
@@ -612,10 +578,15 @@ export class SearchResultComponent implements OnInit, OnDestroy {
         this.mainObj.from = this.pagefrom;
         this.mainObj.size = this.pagesize;
 
-        if(this.languageId)
-          this.mainObj.filters.ref_language_id = this.languageId.toString();
-        else
-          this.mainObj.filters.ref_language_id = "1"
+        if(opt) {
+          this.changeCurrDataLang();
+        } else {
+
+          if(this.languageId)
+            this.mainObj.filters.ref_language_id = this.languageId.toString();
+          else
+            this.mainObj.filters.ref_language_id = "1"
+        }
 
       }
       let dataUrl = '';
@@ -624,7 +595,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
 
       // 
       // 
-      if (this.inpExcWord)
+      // if (this.inpExcWord)
         // 
 
       // 
@@ -754,46 +725,26 @@ export class SearchResultComponent implements OnInit, OnDestroy {
       } else if (this.tabIndex == 2) { // GLOBAL SEARCH
 
         dataUrl = this.globalUrl + "?keywords=" + this.ser_word + "&site=" + this.chkGlobValue + "&pagecount=" + this.pageNumber;
-
+        
         payloadObj = nullObj;
       }
 
-      
-      
-      // 
-      // 
-
-      
-
       this.loading = true;
       // this.arymonth = [];
+
+      if (this.tabIndex == 0 || this.tabIndex == 1) { // INTERNAL & ONLINE SERVICES SEARCH
+
       return this.http.post(dataUrl, payloadObj)
         .map(res => res.json())
         .subscribe(rData => {
-          
-          this.totalElements = 0;
 
-          let num;
-          let dataLength = 0;
-
-          if (this.tabIndex == 0 || this.tabIndex == 1) {
-            if(rData.stats.hits) {
-              this.totalElements = rData.stats.hits;
-              num = (rData.stats.hits) / (this.pagesize);
-              dataLength = rData.data.length;
-            }
-            this.millisec = rData.stats.tookMillis;
-            this.intData = rData.data;
-          } else {
-            this.totalElements = rData.data.countinfo;
-            num = (rData.data.countinfo) / (this.pagesize);
-            delete rData.data.countinfo;
-            dataLength = Object.keys(rData.data).length;
-            // this.millisec = rData.data.tookMillis;
-
-            this.intData = this.changeAryVal(rData.data,'global')
-
+          if(rData.stats.hits) {
+            this.totalElements = rData.stats.hits;
+            num = (rData.stats.hits) / (this.pagesize);
+            dataLength = rData.data.length;
           }
+          this.millisec = rData.stats.tookMillis;
+          this.intData = rData.data;
 
           this.selMonPubDisp = '';
           this.selAuthDisp = '';
@@ -875,28 +826,107 @@ export class SearchResultComponent implements OnInit, OnDestroy {
             if(num && num > 999)
               this.totalPages = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-            // this.totalElements.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-
-            //   this.serchService.searchResData = rData.data;
             this.showNoData = false;
-            this.loading = false;
-
+            
           } else {
             this.showNoData = true;
             this.sKeyword = false; //side menu
             this.sSpeci = false; //side menu
             this.sFilter = false; //side menu
           }
+          this.loading = false;
           rData = null;
         },
+        error => {
+          this.loading = false;
+          this.toastr.error(this.translate.instant('common.err.servicedown'), '');
+        });
+
+      } else { // GLOBAL SEARCH
+
+        return this.http.get(dataUrl, payloadObj)
+          .map(res => res.json())
+          .subscribe(rData => {
+          
+            this.totalElements = rData.data.countinfo;
+            num = (rData.data.countinfo) / (this.pagesize);
+            delete rData.data.countinfo;
+            dataLength = Object.keys(rData.data).length;
+            // this.millisec = rData.data.tookMillis;
+
+            this.intData = this.changeAryVal(rData.data,'global')
+  
+            this.selMonPubDisp = '';
+            this.selAuthDisp = '';
+            this.selTopicDisp = '';
+            this.selSubTopicDisp = '';
+            this.selMinisDisp = '';
+            this.selAgencyDisp = '';
+            this.ddauthor = [];
+            this.ddtopics = [];
+            this.ddmonthPub = [];
+            this.ddsubTopics = [];
+            this.ddministry = [];
+            this.ddagency = [];
+  
+            this.valMonPub = [];
+            this.valAuthor = [];
+            this.valTopic = [];
+            this.valSubTopic = [];
+            this.valMinistry = [];
+            this.valAgency = [];
+  
+            if (dataLength > 0) {
+  
+              if (this.totalElements % this.pagesize > 0) {
+                this.totalPages = Math.floor(num) + 1;
+              } else {
+                this.totalPages = num;
+              }
+  
+              if (this.totalPages > 0) {
+                this.noNextData = this.pageNumber === this.totalPages;
+              } else {
+                this.noNextData = true;
+              }
+  
+              if(num && num > 999)
+                this.totalPages = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  
+              // this.totalElements.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+  
+              //   this.serchService.searchResData = rData.data;
+              this.showNoData = false;
+              
+            } else {
+              this.showNoData = true;
+              this.sKeyword = false; //side menu
+              this.sSpeci = false; //side menu
+              this.sFilter = false; //side menu
+            }
+            this.loading = false;
+            rData = null;
+          },
           error => {
             this.loading = false;
             this.toastr.error(this.translate.instant('common.err.servicedown'), '');
           });
+
+      }
+
     } else {
       this.toastr.error(this.translate.instant('common.msg.searchKeyword'), '');
     }
 
+  }
+
+  getSearchUrl() {
+
+    return this.http.get(this.config.urlGlobalSearch)
+    .map(res => res.json())
+    .subscribe(data => {
+        this.globalUrl = data.resource.searchUrl;
+    });
   }
 
   changeGlob(eve, val) {

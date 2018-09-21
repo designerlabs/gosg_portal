@@ -11,6 +11,7 @@ import {
     MatInputModule, MatPaginatorModule, MatProgressSpinnerModule,
     MatSortModule, MatTableModule, MatPaginator, MatSort
   } from '@angular/material';
+import { NavService } from '../header/nav/nav.service';
 
 @Component({
   selector: 'gosg-replacementmycard',
@@ -22,15 +23,19 @@ export class ReplacementmycardComponent implements OnInit {
   lang = this.lang;
   langID: any;
   redirect_url: any;
+  new_redirect_url: any;
+  thankMsg = false;
   private subscriptionLang: ISubscription;
 
   constructor(
     private translate: TranslateService,
     private router: Router,
     private http: Http,
+    private navService: NavService,
     @Inject(APP_CONFIG) private config: AppConfig,
     private topnavservice: TopnavService,) {
 
+    this.navService.restricted = false;
     this.lang = translate.currentLang;
     this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
 
@@ -68,20 +73,45 @@ export class ReplacementmycardComponent implements OnInit {
       this.langID = 1;
     }  
 
-    let newPage = 'http://www.google.com';
-    this.redirect_url = document.URL + '?redirect_url='+newPage;
-    let o = this.redirect_url.split('redirect_url=')[1];
+    let newPage = '';
+    this.redirect_url = '';
+    this.new_redirect_url = '';
+    //this.redirect_url = document.URL + '?redirect_url=';
+    this.redirect_url = document.URL;
+    this.redirect_url = this.redirect_url.replace(/%2F/g, "/");
+    history.pushState(null, null, this.redirect_url);
+    this.new_redirect_url = this.redirect_url.split('?redirect_url=')[1];
+    
     console.log(this.redirect_url);
-    console.log(o);
   }
 
   clickYes(){
-    let newUrl = "";
-    window.open("https://www.w3schools.com?status=ya");
-    console.log();
+    
+    if(this.new_redirect_url){     
+      let newUrl = "http://";
+      
+      let httpStr = this.new_redirect_url.substring(0, 4);
+
+      if(httpStr.toLowerCase() == 'http' || httpStr.toLowerCase() == 'https'){
+        
+        this.new_redirect_url = this.new_redirect_url.replace(/%2F/g, "/");
+       
+        window.open(this.new_redirect_url+"?status=ya", '_blank');
+
+      } else {
+        
+        window.open(newUrl+this.new_redirect_url+"?status=ya", '_blank');
+      }
+
+    }
   }
 
   clickNo(){
-    
+    history.pushState(null, null, 'get_user_approval');
+    this.thankMsg = true;
+
+    // location.href = "thanks";
+    // window.open('thanks', '_self');
+    // window.close();   
   }
 }

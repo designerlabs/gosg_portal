@@ -1,156 +1,130 @@
-
 <div class="container-fluid animated slideInDown" style="background: #a7a495;">
-  <div class="container" *ngFor="let article of articleService.articles">
-   <div class="row">
+  <div class="container" *ngFor="let article of articleService.archives">
+    <div class="row">
       <div class="col-md-12">
-          <h1 style="margin-top: 10px;" class="font-size-l">{{article.categoryName}}</h1>
-          <hr class="hr-custom2">
-          <ul class="list-inline" style="clear:both;">
-              <li>
-                  <a class="font-size-s" routerLink="/">
-                      {{'home.menu.home' | translate }}
-                  </a>
-              </li>
-              <li>/</li>
-              <li>
-                  <div *ngFor="let article of articleService.articles">
-                   <div *ngFor="let breadCrum of article.breadcrum; let i = index; let lastItem = last" style="display: inline;">
-                     <a href="" [routerLink]="['/archive/'+getModule(breadCrum.breadcrumUrl), getID(breadCrum.breadcrumUrl)]">{{breadCrum.breadcrumName}}</a>
-                     <span>{{lastItem ? '' : '&nbsp;/&nbsp;'}}</span>
-                   </div>
-                  </div>
-              </li>
-          </ul>
+        <h1 style="margin-top: 10px;" class="font-size-l">{{article.categoryName}}</h1>
+        <hr class="hr-custom2">
+        <ul class="list-inline" style="clear:both;">
+          <li>
+            <a class="font-size-s" routerLink="/">
+              {{'home.menu.home' | translate }}
+            </a>
+          </li>
+          <li>/</li>
+          <li>
+            <div *ngFor="let article of articleService.archives">
+              <div *ngFor="let breadCrum of article.breadcrum; let i = index; let lastItem = last" style="display: inline;">
+                <a href="" [routerLink]="['/archive/'+getModule(breadCrum.breadcrumUrl), getID(breadCrum.breadcrumUrl)]">{{breadCrum.breadcrumName}}</a>
+                <span>{{lastItem ? '' : '&nbsp;/&nbsp;'}}</span>
+              </div>
+            </div>
+          </li>
+        </ul>
       </div>
-  </div>
+    </div>
   </div>
 </div>
-
-<div style="margin-top:10px;" class="container" *ngFor="let article of articleService.articles">
-
+<div style="margin-top:10px;" class="container" *ngFor="let article of articleService.archives">
   <div class="row">
-      <div class="col-sm-3">
-          <div class="row">
-              <div class="col-md-12 sideBarMenu">
-                  <h4 class="sideBarMenu--title padding-bottom-l font-size-m warna_font">
+    <div class="col-sm-3">
+      <div class="row">
+        <div class="col-md-12 sideBarMenu">
+          <h4 class="sideBarMenu--title padding-bottom-l font-size-m warna_font">
+            {{article.categoryName}}
+          </h4>
+
+          <mat-accordion>
+            <gosg-leftmenu [sessions]="article.menuLeft"  [menuType]="moduleName" [templateName]="article.template"></gosg-leftmenu>
+          </mat-accordion>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-9">
+
+      <div class="row">
+        <div class="col-md-12 warna_font">
+
+
+
+          <div *ngIf="!article.content" class="row padding-top-xl">
+            <div *ngIf="article.image">
+              <div>
+                <img [src]="config.externalMediaURL + '/images/'+ article.image.mediaFile" style="width:100%;">
+                <div style="position:absolute; width:auto;">
+                  <h2 class="topic_bg_title font-size-l">
+                    <span style="padding-left:10px;">
+                      {{article.categoryName}}
+                    </span>
+                  </h2>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div *ngIf="!article.image">
+                <div>
+                  <h2 class="titleWObg font-size-l">
                     {{article.categoryName}}
-                  </h4>
-
-                  <mat-accordion>
-                    <gosg-leftmenu [sessions]="article.menuLeft"  [menuType]="moduleName" [templateName]="article.template"></gosg-leftmenu>
-                  </mat-accordion>
-
-
-
-                  <!-- <ul class="list-unstyled">
-                      <li class="liList" *ngFor="let content of article.menuLeft">
-                          <div class="col-xs-12 col-md-12 col-sm-12">
-                              <a class="warna_font sideBarMenu--link font-size-s" [routerLinkActive]="['active']"  [style.font-weight]="content.active ? 'bold' : 'normal'"  [style.color]="content.active ? getTheme() : '#333'" (click)="clickSideMenu(content)">
-                              {{content.categoryName}}
-
-                              </a>
-                          </div>
-                          <ul style="list-style: none; padding-left: 15px;">
-                              <li *ngFor="let subcontent of content.subMenuLeft">
-                                   <a class="warna_font sideBarMenu--link font-size-s" style="color:#333"  href="" (click)="clickContentFromMenu(content.parentCode, subcontent.contentCode)">
-                                      {{subcontent.contentTitle}}
-
-                                  </a>
-                              </li>
-                          </ul>
-
-
-                      </li>
-
-                  </ul> -->
+                  </h2>
+                </div>
               </div>
-          </div>
-      </div>
 
-      <div class="col-sm-6">
-
-          <div class="row">
-              <div class="col-md-12 warna_font">
-
-
-
-                  <div *ngIf="!article.content" class="row padding-top-xl">
-                    <div *ngIf="article.image">
-                      <div>
-                          <img [src]="config.externalMediaURL + '/images/'+ article.image.mediaFile" style="width:100%;">
-                          <div style="position:absolute; width:auto;">
-                              <h2 class="topic_bg_title font-size-l">
-                                  <span style="padding-left:10px;">
-                                      {{article.categoryName}}
-                                  </span>
-                              </h2>
-                          </div>
-                      </div>
+              <span class="font-size-s defaultColor" [innerHTML]="article.categoryDescription"></span>
+            </div>
+            <div *ngFor="let rightContent of article.subCategoryList; let index=index; let odd=odd; let even=even;">
+              <div class="col-sm-4">
+                <div>
+                  <div style="width:100%; margin-right:10px; height:auto;" (click)="clickSideMenuOthers(rightContent, '', 'archive')" class="pointer">
+                    <a class="intro-box warna_border_color" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
+                      <h4 class="font-size-m warna_font">
+                        {{rightContent.categoryName}}
+                      </h4>
+                      <span class="warna_font article-size font-size-s" [innerHTML]="rightContent.categoryDescription"></span>
+                      <div class="font-size-s" style="text-align: right;">
+                        <i class="fa fa-caret-right"></i> {{'home.readmore' | translate }}</div>
+                    </a>
                   </div>
-                  <div class="col-md-12">
-                    <div *ngIf="!article.image">
-                        <div>
-                            <h2 class="titleWObg font-size-l">
-                                {{article.categoryName}}
-                            </h2>
-                        </div>
-                    </div>
-
-                    <span class="font-size-s defaultColor" [innerHTML]="article.categoryDescription"></span>
-                  </div>
-                  <div  *ngFor="let rightContent of article.subCategoryList; let index=index; let odd=odd; let even=even;">
-                    <div class="col-sm-6">
-                        <div>
-                          <div style="width:100%; margin-right:10px; height:auto;" (click)="clickSideMenuOthers(rightContent, '', 'archive')" class="pointer">
-                              <a class="intro-box warna_border_color" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
-                                  <h4 class="font-size-m warna_font">
-                                      {{rightContent.categoryName}}
-                                  </h4>
-                                  <span class="warna_font article-size font-size-s" [innerHTML]="rightContent.categoryDescription"></span>
-                                  <div class="font-size-s" style="text-align: right;"><i class="fa fa-caret-right"></i> {{'home.readmore' | translate }}</div>
-                              </a>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div *ngIf="odd" class="clearfix"></div>
-                  </div>
-
-                  </div>
-
-                  <div *ngIf="article.content">
-                    <div>
-                      <div *ngIf="article.image">
-                          <div>
-                              <img [src]="config.externalMediaURL + '/images/'+ article.image.mediaFile" style="width:100%;">
-                              <div style="position:absolute; width:auto;">
-                                  <h2 class="topic_bg_title font-size-l">
-                                      <span style="padding-left:10px;">
-                                          {{article.content.contentTitle}}
-                                      </span>
-                                  </h2>
-                              </div>
-                          </div>
-                      </div>
-
-                      <div class="col-md-12" *ngIf="!article.image">
-                        <h2 class="titleWObg font-size-l">
-                            {{article.content.contentTitle}}
-                        </h2>
-                      </div>
-
-                      <div class="padding-top-xl">
-                        <div class="defaultColor" [innerHTML]="article.content?.contentText"></div>
-                      </div>
-                    </div>
-                  </div>
+                </div>
               </div>
+
+              <div *ngIf="(index + 1) % 3 == 0" class="clearfix"></div>
+            </div>
+
           </div>
+
+          <div *ngIf="article.content">
+            <div>
+              <div *ngIf="article.image">
+                <div>
+                  <img [src]="config.externalMediaURL + '/images/'+ article.image.mediaFile" style="width:100%;">
+                  <div style="position:absolute; width:auto;">
+                    <h2 class="topic_bg_title font-size-l">
+                      <span style="padding-left:10px;">
+                        {{article.content.contentTitle}}
+                      </span>
+                    </h2>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-12" *ngIf="!article.image">
+                <h2 class="titleWObg font-size-l">
+                  {{article.content.contentTitle}}
+                </h2>
+              </div>
+
+              <div class="padding-top-xl">
+                <div class="defaultColor" [innerHTML]="article.content?.contentText"></div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+    </div>
 
 
 
   </div>
 
 </div>
-

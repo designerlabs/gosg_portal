@@ -1,3 +1,4 @@
+<gosg-shared-loader [loader]="portalservice.loader"></gosg-shared-loader>
 <div class="container-fluid animated slideInDown" style="background: #a7a495;">
   <div class="container">
     <div class="row">
@@ -22,7 +23,7 @@
 <br />
 <div class="container">
   <mat-accordion>
-    <mat-expansion-panel *ngFor="let category of catData" style="margin-bottom: 1%">
+    <mat-expansion-panel *ngFor="let category of portalservice.catData?.list" style="margin-bottom: 1%">
       <mat-expansion-panel-header style="background: #f5f5f5">
         <mat-panel-title style="font-weight: bold;">
           <span class="module_title">{{ category.name }}</span>

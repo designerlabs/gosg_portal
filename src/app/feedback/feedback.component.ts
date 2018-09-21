@@ -46,6 +46,7 @@ export class FeedbackComponent implements OnInit, OnDestroy {
   subjectFb = [];
   private subscriptionLang: ISubscription;
   private subscription: ISubscription;
+  loading:boolean = false;
   
   constructor(
     public snackBar: MatSnackBar,
@@ -176,24 +177,30 @@ export class FeedbackComponent implements OnInit, OnDestroy {
     }
 
     getTypenSubject(){
+      this.loading = true;
       this.portalService.feedbacktype(this.languageId)
         .subscribe(data => {
           this.sharedService.errorHandling(data, (function(){
             this.typeFb  = data;
           }).bind(this));  
+          this.loading = false;
         },
         error => {
-          this.toastr.error(JSON.parse(error._body).statusDesc, '');                 
+          this.toastr.error(JSON.parse(error._body).statusDesc, '');    
+          this.loading = false;             
         });
     
+      this.loading = true;
       this.portalService.feedbacksubject(this.languageId)
       .subscribe(data => {
         this.sharedService.errorHandling(data, (function(){
             this.subjectFb  = data;          
           }).bind(this));  
+          this.loading = false;
         },
         error => {
-          this.toastr.error(JSON.parse(error._body).statusDesc, '');                 
+          this.toastr.error(JSON.parse(error._body).statusDesc, '');
+          this.loading = false;           
         });
     }
    
@@ -230,6 +237,7 @@ export class FeedbackComponent implements OnInit, OnDestroy {
         datasend =JSON.stringify(body); 
 
         
+      this.loading = true;
       
         this.portalService.feedback(datasend).subscribe(
           data => {
@@ -238,15 +246,18 @@ export class FeedbackComponent implements OnInit, OnDestroy {
               this.resetForm();        
               this.toastr.success(this.translate.instant('feedback.msgsubmit'), '');     
             }).bind(this));  
+            this.loading = false;
           },
           error => {
             this.toastr.error(JSON.parse(error._body).statusDesc, ''); 
+            this.loading = false;
                       
           });
       }
       else{
 
         
+      this.loading = true;
 
         this.portalService.feedback(datasend).subscribe(
           data => {
@@ -255,9 +266,11 @@ export class FeedbackComponent implements OnInit, OnDestroy {
               this.resetForm();        
               this.toastr.success(this.translate.instant('feedback.msgsubmit'), '');            
           }).bind(this));  
+          this.loading = false;
         },
         error => {
           this.toastr.error(JSON.parse(error._body).statusDesc, ''); 
+          this.loading = false;
       
         });
       }
@@ -286,6 +299,4 @@ export class FeedbackComponent implements OnInit, OnDestroy {
   resetMethod(event) {
     this.resetForm();
   }
-
-
 }

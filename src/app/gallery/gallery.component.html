@@ -1,3 +1,4 @@
+<gosg-shared-loader [loader]="loading"></gosg-shared-loader>
 <div class="container-fluid animated slideInDown" style="background: #a7a495;">
   <div class="container">
     <div class="row">
@@ -76,17 +77,17 @@
             </div>
 
             <!-- AUDIOS -->
-            <div *ngIf="galleryService.galleries.mediaType == 'audios'" class="mediaContent">
+            <div *ngIf="galleryService.galleries.mediaType == 'audios'" class="vContent">
               <button mat-button color="primary" (click)="openDialog(config.externalMediaURL +content.name,galleryService.galleries.mediaType, content.title)" title="{{ content.title }}"><i class="font-size-l fa fa-play-circle-o"></i>&nbsp;&nbsp;{{ content.title | slice:0:20 }}...</button>
             </div>
 
             <!-- VIDEOS -->
-            <div *ngIf="galleryService.galleries.mediaType == 'videos'" class="mediaContent">
+            <div *ngIf="galleryService.galleries.mediaType == 'videos'" class="vContent">
               <button mat-button color="warn" (click)="openDialog(config.externalMediaURL +content.name,galleryService.galleries.mediaType, content.title)"><i class="font-size-l fa fa-play-circle-o"></i>&nbsp;&nbsp;{{ content.title }}</button>
             </div>
 
             <!-- DOCUMENTS -->
-            <div *ngIf="galleryService.galleries.mediaType == 'documents'" class="mediaContent">
+            <div *ngIf="galleryService.galleries.mediaType == 'documents'" class="vContent">
                 <button class="galleryBtn" mat-button (click)="downloadFile(config.externalMediaURL +content.name)"><i class="font-size-l fa fa-download"></i>&nbsp;&nbsp;{{ content.title }}</button>
               <!-- <span *ngIf="content.title.length > 25" class="font-size-s" title="{{ content.title }}">{{ content.title | slice:0:25 }}...</span>&nbsp;
               <span *ngIf="content.title.length <= 25" class="font-size-s">{{ content.title }}</span>&nbsp;

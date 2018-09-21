@@ -9,6 +9,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class ArticleService {
   @Output() menuClick = new EventEmitter();
   articles: any[];
+  archives: any[];
 
   constructor(private http: Http, @Inject(APP_CONFIG) private config: AppConfig, route: ActivatedRoute, private router: Router) { }
 
@@ -16,9 +17,21 @@ export class ArticleService {
         return this.article;
     }
 
+  getArchive(){
+        return this.archives;
+    }
+
    public article = {
         name: 'hello'
     };
+
+    public loading = {
+      name: false
+    }
+
+    public leContent = "";
+
+    public archive = {};
 
     private articleUrl: string = this.config.urlArticle;
 }

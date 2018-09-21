@@ -1,14 +1,14 @@
 <div class="container-fluid animated slideInDown" style="background: #a7a495;">
   <div class="container">
        <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-12"><br>
               <h1 style="margin-top: 10px;" class="font-size-l"> {{ 'home.menu.mykadapproval' | translate }}</h1>
-              <hr class="hr-custom2"><br>
+              <!-- <hr class="hr-custom2"><br> -->
               <ul class="list-inline" style="clear:both;">
                   <li>
-                      <a class="font-size-s" style="color: #fff;" routerLink="/">
+                      <!-- <a class="font-size-s" style="color: #fff;" routerLink="/">
                           {{'home.menu.home' | translate }}
-                      </a>
+                      </a> -->
                   </li>
                   <!-- <li>/</li>
                   <li>
@@ -34,11 +34,12 @@
                 </div>
                 <div class="col-md-12 text-align-Center" style="color: black">
 
-                  <h2>{{'common.msg.mykad' | translate}}</h2>
+                  <h2 *ngIf="thankMsg == false">{{'common.msg.mykad' | translate}}</h2>
+                  <h2 *ngIf="thankMsg == true">{{'common.msg.thanks' | translate}}</h2>
                 </div>
             </div>
 
-            <div class="row padding-15">
+            <div class="row padding-15" *ngIf="thankMsg == false">
                 <div class="col-md-12 text-align-Center">
                     <button mat-raised-button type="button" color="primary" id="ya" 
                       class="form-control btn btn-md btn-success font-size-s bttnCustom" 
@@ -51,7 +52,7 @@
                       <i class="fa fa-times"></i> {{'common.buttons.no' | translate}} </button>
                 </div>
             </div>
-        </div>
+        </div> 
     </div><br>
 </div>
 

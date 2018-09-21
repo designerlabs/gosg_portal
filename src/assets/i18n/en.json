@@ -6,11 +6,12 @@
       "calendar": "Calendar",
       "digitalsvc": "Digital Services",
       "agencycdir": "Agencies Directory",
-      "trafficinfo":"Traffic Information",
+      "trafficinfo":"TRAFFIC INFORMATION",
       "register": "Register",
       "setting": "Settings",
       "contact": "Contact Us",
       "faq": "FAQ",
+      "changePass":"Change Password",
       "manual": "User Manual",
       "aboutus": "About Us",
       "onlineservice": "Digital Services",
@@ -23,8 +24,9 @@
       "gallery": "Gallery",
       "statistic": "Online Statistics",
       "search": "Search",
-      "policeReport": "Semakan Status Laporan Polis",
-      "summonStatus": "Semakan Status Saman Trafik PDRM",
+      "policeReport": "Check Police Report Status",
+      "summonStatus": "Check PDRM Traffic Summons Status",
+      "statusposition": "Check Recruitment Status",
       "mykadapproval": "User Approval"
     },
     "search": {
@@ -67,13 +69,15 @@
       "profile": "My Profile",
       "dashboard": "Dashboard",
       "appmgmt": "Application Management",
-      "mailbox": "Mail Box",
+      "mailbox": "Inbox",
       "onlineservice": "Online Services",
       "subscription": "Subscription",
       "unsubscribe": "Unsubscribe",
       "gallery": "Gallery",
       "search": "Search",
-      "perhilitan": "Perhilitan"
+      "perhilitan": "Perhilitan",
+      "family": "Family Profile",
+      "exam": "Exam Result"
     },
     "expandButton": {
       "less": "Show Less",
@@ -86,6 +90,55 @@
     "highlights": "Highlights",
     "currentHighlights": "Highlights",
     "calendarTitle": "Activities for this month"
+  },
+  "pdrm":{
+    "reportPolice":"Enter Police Report No.",
+    "recruitment":"Review is valid based on user 'IC No.'",
+    "summon": "Please enter the information as below:",
+    "example": "IE. Police Report No.: 012345/18",
+    "attention": "ATTENTION:",
+    "announcement": "ANNOUNCEMENT",
+    "announce1": "1. SEMAKAN KEMPUTUSAN TEMU DUGA BAGI CALON - CALON INSPEKTOR 2017 DAN 2018.",
+    "announce2": "2. BAGI CALON - CALON YANG TIDAK DISENARAIKAN, PROSES DOKUMENTASI MASIH DALAM SEMAKAN UNIT PENGAMBILAN DAN AKAN DIMAKLUMKAN DARI MASA KE SEMASA.",
+    "placeholder":{
+      "noic": "Indentification Card No.",
+      "noreport": "Police Report No.",
+      "typeInfo": "Info. Type",
+      "noCar": "Car Reg. No."
+    },
+    "titlerecruitment":"PDRM RECRUITMENT POSITION STATUS",
+    "titlepoliceR":"POLICE REPORT STATUS",
+    "titleSummon":"PDRM SUMMON TRAFIC STATUS",
+    "err":{
+      "needed": "needed",
+      "showData": "YOU DONT HAVE ANY POLICE REPORT.",
+      "msgrecruitment": "ANY QUESTIONS PLEASE CONTACT THE APPLICATION UNIT, BUKIT AMAN INLINE 03-2266 8350 / 8351 / 8349",
+      "summon": "NO SUMMON TRAFIC"
+    },
+    "title":{
+      "icno": "NEW IC NO.",
+      "applicantname": "APPLICANT NAME",
+      "date": "DATE / TIME",
+      "location": "LOCATION",
+      "status": "RECRUIMENT STATUS",
+      "noreport": "POLICE REPORT NO.",
+      "dateRP": "DATE AND TIME POLICE REPORT",
+      "statusRP": "REPORT INVESTIGATION STATUS",
+      "noPaper": "INVESTIGATION PAPER NO.",
+      "sectionInvestigation": "INVESTIGATION SECTION",
+      "statusInvestigate": "INVESTIGATION STATUS",
+      "insOfficer": "INVESTIGATING OFFICER",
+      "infoLetter": "NOTICE",
+      "name": "NAME",
+      "total_summon": "TOTAL SUMMON",
+      "car": "Car No.",
+      "summon_no":"Summon No.",
+      "dateTime":"Date & Time",
+      "location2":"Location",
+      "amount": "Amount (RM)",
+      "image": "Image",
+      "info": "Info"
+    }
   },
   "register": {
     "label": {
@@ -142,7 +195,9 @@
       "updateSuccess": "Profile has been updated successfully.",
       "updateFail": "Profile not updated.",
       "editbtnE" : "Edit activated.",
-      "editbtnD" : "Edit deactivated."
+      "editbtnD" : "Edit deactivated.",
+      "OKUStatusSuccess":"OKU has been found!",
+      "OKUStatusFail":"OKU has been not found!"
     },
     "label":{
       "name":"Name",
@@ -170,7 +225,8 @@
       "homeph":"Home Phone",
       "mobile":"Mobile Phone",
       "codetel": "Code",
-      "submit":"Update"
+      "submit":"Update",
+      "oku": "Check your OKU Status"
     },
     "err": {
       "updateFail": "Profile update failed!",
@@ -209,6 +265,7 @@
     "sidenav": {
       "dashboard": "Dashboard",
       "profile": "Profile",
+      "family": "Family Profile",
       "inbox": "Inbox",
       "appmgmt": "Application Management",
       "companyprofile": "Company Profile"
@@ -287,7 +344,8 @@
       "beforeLogin": "Please Login / Register To Access Services Provided",
       "afterLogin": "Here are the services available.",
       "instruction": "The services available in MyGovernment need to use the identification number for citizens",
-      "access": "Sorry, our Digital Services are available to authorized users only"
+      "access": "Sorry, our Digital Services are available to authorized users only",
+      "accessNonCiti":"Sorry, Digital Services limited for Malaysia's Citizen"
     }
   },
   "calendar": {
@@ -366,6 +424,10 @@
     }
   },
   "common":{
+    "profileEmailMsg":"Your Profile Email has been updated successfully!",
+    "profilePhoneMsg":"Your Profile Phone number has been updated successfully!",
+    "profileBtn":"Click here to go to Profile",
+    "titleMsg":"MyGOV - The Government of Malaysia's Official Portal",
     "copyrightnotice": "Copyright Notice",
     "clientcharter": "Client Charter",
     "help": "Help",
@@ -385,6 +447,9 @@
     "open":"Open",
     "listofarticle": "List of Articles",
     "close":"Close",
+    "invalidUser":"Your account doesn't exist in the portal. For more details please contact portal administrator",
+    "seconds1":"logout in",
+    "seconds2": "seconds",
     "placeholder": {
       "keyword":"Keyword"
     },
@@ -424,7 +489,8 @@
       "success":"Successfully added!",
       "nodata": "No data found",
       "searchKeyword": "Please enter a word to search",
-      "mykad":"Do you agree to share your profile from MyGovernment Portal?"
+      "mykad":"Do you agree to share your profile from MyGovernment Portal?",
+      "thanks": "Thank You"
     },
     "state":{
       "success":"bg_header bg_success_header",
@@ -465,6 +531,64 @@
       "of": "of",
       "in": "in",
       "app": "applications"
+    }
+  },
+  "family":{
+    "tableHeader":{
+      "num": "No.",
+      "icno": "IC No.",
+      "name": "Name",
+      "relation" : "Relationship",
+      "dob": "DOB",
+      "oku": "OKU Status",
+      "status": "Status",
+      "action": "Action"
+    },
+    "label":{
+      "citizen": "Citizenship",
+      "ic": "Indentification Card Number",
+      "passport": "Passport Number",
+      "statepassport": "Passport Manufacturer Country",
+      "name": "Full Name",
+      "relationship": "Relationship",
+      "race": "Race",
+      "religion": "Religion",
+      "dob": "Date of Birth",
+      "sex": "Gender",
+      "email": "Email",
+      "phone": "Telephone Number",
+      "statusprofile": "Profile Status",
+      "reason": "Reason Not Active",
+      "addinfo": "Additional Information (If Applicable)",
+      "oku": "OKU Status",
+      "okuinfo": "** Please click if applicable",
+      "noregoku": "OKU Registration No.",
+      "typeoku": "OKU Type",
+      "typeidoku": "OKU ID Type",
+      "familyheader": "Family Profile Information"
+    },
+    "button":{
+      "confirm": "VERIFY",
+      "print": "Print",
+      "save": "Save"
+    },
+    "err":{
+      "needed": "needed"
+    }
+  },
+  "exam":{
+    "label":{
+      "examheader": "Exam Result",
+      "name": "Name",
+      "year": "Exam Year",
+      "examname": "Exam Name",
+      "examtype": "Exam Type"
+    },
+    "err":{
+      "needed": "needed"
+    },
+    "button": {
+      "check":"Check"
     }
   },
   "poll": {
@@ -552,7 +676,7 @@
       }
   },
   "trafficinfo": {
-    "title":"Traffic Information",
+    "title":"TRAFFIC INFORMATION",
     "title2":"Lembah Klang Traffic Information",
     "filterby": {
       "all":"All",

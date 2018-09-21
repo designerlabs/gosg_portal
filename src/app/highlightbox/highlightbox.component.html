@@ -1,63 +1,62 @@
-<div class="container lifeEventContainer animated fadeIn" style="background:#dedede;">
-    <div>
+<div class="lifeEventContainer animated fadeIn" style="background:#dedede;">
+    <div class="container">
         <div class="row">
-            <div class="col-md-4 articleBox">
+            <div class="col-md-4 col-sm-6 col-xs-12 articleBox">
                 <span class="lifeEventBg warna_border_color" style="border-color: rgb(0, 189, 187);" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
-                    <img src="{{hotTopicImg}}" style="height: 100px; width:100%;background-size: cover;"/>
-                    <div class="lifeEventBox-title"><h2 class="font-size-l" style="font-family: Roboto;">
+                    <img src="{{hotTopicImg}}" style="height: auto; width:100%;background-size: cover;"/>
+                    <div class="lifeEventBox-title">
+                      <h2 class="font-size-l" style="font-family: Roboto;">
                           {{hotTopic}}
-							</h2></div>
-                            <div class="popular-article-box lifeEventBox-description">
-							<ul class="col-xs-12" *ngFor="let item of hotTopicContent">
-								<li style="border-bottom: 1px solid rgba(221, 221, 221, 0.58);">
-									<a class="pboxa font-size-s warna_font" href="https://www.malaysia.gov.my/public/cms/article/page/396/" style="font-family: Roboto; color: rgb(51, 51, 51);">
-									{{item.article_label}}
-									</a>
-									<p class="topic-textp font-size-s warna_title_color" style="cursor: pointer; font-family: Roboto; color: rgb(0, 189, 187);" onclick="window.location='https://www.malaysia.gov.my/public/cms/topic/9/sub_topic/118/'" [style.color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
-									{{item.topic_label}}
-									</p>
-								</li>
-							</ul>
-						</div>
+                      </h2>
+                    </div>
+                    <div class="popular-article-box lifeEventBox-description">
+                      <ul class="col-xs-12" *ngFor="let item of hotTopicData">
+                        <li style="border-bottom: 1px solid rgba(221, 221, 221, 0.58);">
+                          <a class="pboxa font-size-s warna_title_color" style="cursor: pointer; font-family: Roboto;" (click)="getUrl()" [routerLink]="['/'+getModule(item.trackModuleUrl), getID(item.trackModuleUrl)]" [style.color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
+                          {{item.contentTitle | truncate:[30, '...']}}
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
                 </span>
             </div>
-            <div class="col-md-4 articleBox">
-                <span class="lifeEventBg warna_border_color" style="border-color: rgb(0, 189, 187);" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
-                    <img src="{{peyertaanImg}}" style="height: 100px; width:100%;background-size: cover;"/>
+            <div class="col-md-4  col-sm-6 col-xs-12 articleBox">
+                <span class="epartiBg warna_border_color" style="border-color: rgb(0, 189, 187);" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
+                    <img src="{{peyertaanImg}}" style="height: auto; width:100%;background-size: cover;"/>
                     <div class="lifeEventBox-title"><h2 class="font-size-l" style="font-family: Roboto;">{{penyertaan}}</h2></div>
                     <div class="lifeEventBox-description-peyertaan font-size-s" style="font-family: Roboto;">
 						{{penyertaanContent}}
                         <div class="form-group">
-                                <button class="btn btn-secondary btn-block font-size-s warna_bg" style="font-family: Roboto; background-color: rgb(0, 189, 187);" [style.background-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
+                                <a [routerLink]="['/category', 658]"  class="btn btn-secondary btn-block font-size-s warna_bg" style="font-family: Roboto; background-color: rgb(0, 189, 187);" [style.background-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
                                   {{penyertaanButton}}
-                                  </button>
+                                </a>
                               </div>
 					</div>
                 </span>
             </div>
-            <div class="col-md-4 articleBox">
+            <div class="col-md-4  col-sm-6 col-xs-12 articleBox">
                 <span class="lifeEventBg warna_border_color" style="border-color: rgb(0, 189, 187);" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
-                      <img src="{{permohonanImg}}" style="height: 100px; width:100%;background-size: cover;"/>
+                      <img src="{{permohonanImg}}" style="height: auto; width:100%;background-size: cover;"/>
                     <div class="lifeEventBox-title"><h2 class="font-size-l" style="font-family: Roboto;">{{statuslabel}}</h2></div>
                     <div class="lifeEventBox-description-status">
                           <p class="font-size-s" style="font-family: Roboto;">
                             {{statusContent}}
                             </p>
-                            <form class="search-permohonan">
+                            <form [formGroup]="updateForm" class="search-permohonan">
                               <div class="form-group">
                                 <label class="sr-only" for="noPermohonanCarian">{{'home.applicationNum' | translate}}</label>
-                                  <input type="text" class="form-control" id="noPermohonanCarian" placeholder="{{'home.applicationNum' | translate}}">
+                                  <input type="text" class="form-control" formControlName="noPermohonanCarian" id="noPermohonanCarian" placeholder="{{'home.applicationNum' | translate}}">
                               </div>
                               <div class="form-group">
-                                <button class="btn btn-secondary btn-block font-size-s warna_bg" style="font-family: Roboto; background-color: rgb(0, 189, 187);" [style.background-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
+                                <button (click)="checkRefNo(updateForm.value)" class="btn btn-secondary btn-block font-size-s warna_bg" style="font-family: Roboto; background-color: rgb(0, 189, 187);" [style.background-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
                                   {{'home.check' | translate}}
                                   </button>
                               </div>
                             </form>
-                            <div style="display: none; padding: 2px; font-family: Roboto;" class="errMessage font-size-s"></div>
+                            <!-- <div *ngIf="result" [ngClass]="{ 'errMessage font-size-s sbgc-red': !sbgcolor, 'errMessage font-size-s sbgc-green': sbgcolor }"><h5><strong>STATUS: </strong>{{ result }}</h5></div> -->
                     </div>
                 </span>
             </div>
         </div>
     </div>
-</div>
+  </div>

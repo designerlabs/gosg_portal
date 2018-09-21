@@ -48,6 +48,10 @@
     margin-left: -5%;
 }
 
+.no-styles > a {
+    cursor: pointer;
+}
+
 .clickable-icons {
     font-size: 1em;
     color: rgb(0, 189, 187);

@@ -94,3 +94,80 @@ div {
 img{
     width:100px;
 }
+
+.articleBox {
+    padding: 15px;
+    text-align: center;
+}
+
+.lifeEventBox, .articleBox span {
+    text-decoration: none;
+    display: block;
+    height: 400px;
+    overflow: hidden;
+    color: #333;
+}
+
+.marginTop--4 {
+    margin-top: -4%;
+}
+
+@media only screen and (min-width: 320px) {
+
+    .event-title {
+        margin-top: -35%
+    }
+
+}
+
+@media only screen and (min-width: 360px) {
+
+}
+
+@media only screen and (min-width: 480px) {
+
+    .event-title {
+        margin-top: -20%
+    }
+
+}
+
+@media only screen and (min-width: 540px) {
+
+    .event-title {
+        margin-top: -18%
+    }
+
+}
+
+@media only screen and (min-width: 640px) {
+
+    .event-title {
+        margin-top: -15%
+    }
+
+}
+
+@media only screen and (min-width: 768px) {
+
+}
+
+@media only screen and (min-width: 854px) {
+
+    .event-title {
+        margin-top: -35%
+    }
+
+}
+
+@media only screen and (min-width: 960px) {
+
+}
+
+@media only screen and (min-width: 1024px) {
+
+    .event-title {
+        margin-top: -40%
+    }
+
+}

@@ -9,8 +9,9 @@ import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { ProtectedService } from '../services/protected.service';
 import { TextMaskModule } from 'angular2-text-mask';
 import { DialogsService } from '../dialogs/dialogs.service';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatTabChangeEvent } from '@angular/material';
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
+import { HttpClient } from '@angular/common/http';
 import { debounce } from 'rxjs/operators/debounce';
 //import { debug } from 'util';
 import { ToastrService } from "ngx-toastr";
@@ -21,6 +22,7 @@ import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 import { environment } from '../../environments/environment';
 //import { debug } from 'util';
 import { ModalDirective } from 'ngx-bootstrap/modal';
+
 @Component({
   templateUrl: './profile.component.html',
   selector: 'myprofile',
@@ -45,12 +47,15 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   accountStatus: any;
   countryId: any;
   userTypeId: any;
+  isEditActive: boolean = true;
   selectedCountry: any;
   selectedCity: any;
   selectedState: any;
   maskDateFormat: any;
   maskForeigner: any;
   maskPostcode: any;
+  itemSelected: boolean = false;
+  OKUCheckBox: boolean = false;
   getPerPostCodeFlag = false;
   public loading = false;
   private subscriptionLang: ISubscription;
@@ -126,6 +131,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   public corrsCityLocal: FormControl
   public corrsCityNotLocal: FormControl
   public checkboxValue: FormControl
+  public OKUcheckbox: FormControl
   public corrsCity: FormControl
   public corrsPostcode: FormControl
   public corrsPostcodeNotLocal: FormControl
@@ -140,12 +146,15 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   userId:any;
   mobileNo: any;
   regemail:string;
+  isOKU:any;
+  OKUNumber:any;
   regdate:string;
   lang = this.lang;
   languageId = this.languageId;
   private uapstagingUrl: string = this.config.urlUapStagingProfile;
-
+  
   constructor(
+    private http:HttpClient,
     private router: Router,
     textMask:TextMaskModule,
     private validateService:ValidateService,
@@ -248,13 +257,14 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.corrsCityLocal = new FormControl()
     this.corrsCityNotLocal = new FormControl()
     this.checkboxValue = new FormControl()
+    this.OKUcheckbox = new FormControl()
     this.corrsCity = new FormControl()
     this.corrsPostcode = new FormControl()
     this.corrsPostcodeNotLocal = new FormControl()
     this.corrsTelephone = new FormControl()
     this.corrscodeTelefon = new FormControl()
-    this.corrsMobile = new FormControl()
-    this.mobilecodeTelefon = new FormControl()
+    this.corrsMobile = new FormControl({ value: '', disabled: true })
+    this.mobilecodeTelefon = new FormControl({ value: '', disabled: true })
 
     this.emailForm = new FormGroup({
       emailaddressUpdate: this.emailaddressUpdate
@@ -293,6 +303,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       corrsCityLocal: this.corrsCityLocal,
       corrsCityNotLocal: this.corrsCityNotLocal,
       checkboxValue: this.checkboxValue,
+      OKUcheckbox: this.OKUcheckbox,
       corrsCity: this.corrsCity,
       corrsPostcode: this.corrsPostcode,
       corrsPostcodeNotLocal: this.corrsPostcodeNotLocal,
@@ -334,6 +345,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                     this.idno = data.user.pid;
                     this.regemail = data.user.email;
                     this.regdate = data.user.registrationDate;
+                    this.isOKU = data.user.isOku;
+                    this.OKUNumber = data.user.okuRegistrationNo;
                     this.isStaff = data.user.isStaff;
                     this.isMyIdentityVerfied = data.user.isMyIdentityVerified;
                     this.isMyIdentityValid = data.user.isMyIdentityValid;
@@ -341,6 +354,13 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                     this.roles = data.user.roles;
 
                     this.emailForm.get('emailaddressUpdate').setValue(data.user.email);
+
+
+                    if(data.user.isOku){
+                      this.profileForm.get('OKUcheckbox').setValue(data.user.isOku);
+
+                    }
+
                     if (data.user.mobilePhoneNo && (data.user.mobilePhoneNo).split('*').length > 1) {
                       const telenum = (data.user.mobilePhoneNo).split('*')[1];
                       this.phoneForm.get('telefonf').setValue(telenum);
@@ -865,6 +885,51 @@ getPostcodeByCityC(e){
     }
   }
 
+  onLinkClick(event: MatTabChangeEvent) {
+    if(event.index !== 0){
+      this.isEditActive = false;
+    }else{
+      this.isEditActive = true;
+    }
+  }
+
+  isOKUStatus(event){
+
+    if(event.checked === true){
+      this.loading = true;
+      const readUrl = `${this.config.urlAgencyDservice}jkmservice/okustatus`;
+    return this.http.post(readUrl,'')
+      .subscribe(
+        data => {
+          if(data['resource'].isOku){
+            this.isOKU = true;
+            this.profileForm.get('OKUcheckbox').setValue(true);
+            this.OKUNumber = data['resource'].okuRegistrationNumber;
+            this.toastr.success(this.translate.instant('profile.msg.OKUStatusSuccess'), '');
+          }else{
+            this.isOKU = false;
+            this.profileForm.get('OKUcheckbox').setValue(false);
+            this.OKUNumber = '';
+            this.toastr.error(this.translate.instant('profile.msg.OKUStatusFail'), '');
+          }
+          this.loading = false;
+        },
+        err => {
+          this.loading = false;
+          console.log("Error occured");
+          this.profileForm.get('OKUcheckbox').setValue(false);
+          this.isOKU = false;
+          this.OKUNumber = '';
+        }
+      );
+    }else{
+      this.profileForm.get('OKUcheckbox').setValue(false);
+      this.isOKU = false;
+      this.OKUNumber = '';
+    }
+
+  }
+
   isStateChanged() {
     this.isChanged();
     this.checkReqValues();
@@ -1153,6 +1218,8 @@ let bodyUpdate =
       },
       "email": null,
       "mobilePhoneNo": null,
+      "isOku": null,
+      "okuRegistrationNo":null,
       "registrationDate": null,
 
       "accountStatus":{
@@ -1229,6 +1296,8 @@ let bodyUpdate =
     bodyUpdate.email = this.regemail;
     bodyUpdate.mobilePhoneNo = formValues.mobilecodeTelefon + '*' + formValues.corrsMobile;
     bodyUpdate.registrationDate = this.regdate;
+    bodyUpdate.isOku = this.isOKU;
+    bodyUpdate.okuRegistrationNo = this.OKUNumber;
     bodyUpdate.address.addressId = this.addressId;
     bodyUpdate.address.permanentAddress1 = formValues.perAddress1;
     bodyUpdate.address.permanentAddress2 = formValues.perAddress2;
@@ -1327,9 +1396,6 @@ let bodyUpdate =
         this.loading = false;
       });
   };
-
-
-
 
   updateProfilePhone(formValues:any){
     this.loading = true;

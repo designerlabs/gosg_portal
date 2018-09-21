@@ -1,8 +1,9 @@
+<gosg-protected-loader [loader]="loading"></gosg-protected-loader>
 <div class="container-fluid animated slideInDown" style="background: #a7a495;">
     <div class="container">
          <div class="row">
             <div class="col-md-12">
-                <h1 style="margin-top: 10px;" class="font-size-l"> {{ 'home.menu.policeReport' | translate }}</h1>
+                <h1 style="margin-top: 10px;" class="font-size-l"> {{ 'home.menu.statusposition' | translate }}</h1>
                 <hr class="hr-custom2"><br>
                 <ul class="list-inline" style="clear:both;">
                     <li>
@@ -18,7 +19,7 @@
                     </li>
                     <li>/</li>
                     <li>
-                        {{ 'home.menu.policeReport' | translate }}
+                        {{ 'home.menu.statusposition' | translate }}
                     </li>
                 </ul>
             </div>
@@ -31,11 +32,48 @@
         <br>
         <form [formGroup]="searchForm" #adSearchForm="ngForm" id="adSearch-form" role="form" novalidate="novalidate">
 
-            <div class="example-container mat-elevation-z8 padding-right20" >
+            <div class="example-container">
+
+                <div class="row marginRow">
+                    <div class="col-md-4 text-center paddingT">
+                        <img src="assets/images/semak_pengambilan_pdrm.jpg">
+                    </div>
+
+                    <div class="col-md-8 infoPDRM blackFont borderDiv">
+                        <div class="col-md-12"><br>
+                            {{ 'pdrm.attention' | translate }}<br>
+                            {{ 'pdrm.recruitment' | translate}}
+                        </div>
+
+                        <div class="col-md-4">                      
+                            <label class="labelInfo">{{ 'pdrm.placeholder.noic' | translate }}</label>
+                        </div>
+
+                        <div class="col-md-8">
+                            <mat-form-field class="sizeIC">
+                                <input matInput placeholder="" formControlName="ic" required tabindex="1">
+                                <mat-error *ngIf="searchForm.controls.ic.hasError('required')">
+                                    {{ 'pdrm.placeholder.noic' | translate }} {{ 'pdrm.err.needed' | translate }}
+                                </mat-error>
+                            </mat-form-field>
+                        </div>  
+
+                        <div class="col-md-12 paddingB">
+                            <button mat-raised-button type="button" color="primary" id="searchbtn" 
+                            class="form-control btn btn-md btn-success font-size-s pull-right bttnCustom"
+                            (click)="searchApp(searchForm.value)">
+                            <i class="fa fa-search"></i> {{'appmngt.setSearch.search' | translate}}</button>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="example-container mat-elevation-z8 padding-right20" >
 
                 <div class="row padding-15">
                     <div class="col-md-3">
-                        <mat-form-field>
+                        <mat-form-field class="example-full-width">
                             <input matInput placeholder="No. Kad Pengenalan" formControlName="ic" (keydown)="isNumber($event)"
                             maxlength="12" required tabindex="1" style="color: black">
                             <mat-error *ngIf="searchForm.controls.ic.hasError('required')">
@@ -44,55 +82,68 @@
                         </mat-form-field>
                     </div>
 
-                    <div class="col-md-6">
-                    </div>
-
-                    <div class="col-md-3">
-                        <!-- <button tabindex="" mat-raised-button color="warn" type="button" id="btnreset" 
-                            class="form-control btn btn-md btn-warning font-size-s pull-right bttnCustom"
-                            (click)="resetModal.show()" style="margin-left: 5px;">
-                            <i class="fa fa-refresh"></i> {{'feedback.label.reset' | translate }}</button> -->
+                    <div class="col-md-3" style="padding-top: 7px;">
                         <button mat-raised-button type="button" color="primary" id="searchbtn" 
-                            class="form-control btn btn-md btn-success font-size-s pull-right bttnCustom" [disabled]="!complete"
+                            class="form-control btn btn-md btn-success font-size-s pull-right bttnCustom"
                             (click)="searchApp(searchForm.value)">
                             <i class="fa fa-search"></i> {{'appmngt.setSearch.search' | translate}}</button>
                     </div>
                 </div>
 
-            </div>
+            </div> -->
 
         </form>
     </div><br>
 
     <div class="row container">
         <div class="col-md-12">
-            <span style="text-align: justify; color: black; font-weight: bold;">PANGGILAN TEMUDUGA JAWATAN KONSTABEL SOKONGAN (LELAKI/WANITA) 
-            BAGI TAHUN 2017 (mulai 26/12/2017 sehingga 21/01/2018)</span><br><br>
+            <span class="boldInfo" style="text-decoration: underline">{{ 'pdrm.announcement' | translate }}</span><br><br>
+        </div> 
+        <div class="col-md-12">
+            <span class="blackFont">{{ 'pdrm.announce1' | translate }}</span><br><br>
+            <span class="blackFont">{{ 'pdrm.announce2' | translate }}</span><br><br>
+            <!-- <span class="boldInfo">PANGGILAN TEMUDUGA JAWATAN KONSTABEL SOKONGAN (LELAKI/WANITA) 
+                    BAGI TAHUN 2017 (mulai 26/12/2017 sehingga 21/01/2018)</span><br><br> -->
         </div> 
     </div>
 
     <div *ngIf="showDetails">
         <div class="row container">
-            <div class="col-md-12" style="color: black; font-weight: bold;">
-                STATUS PENGAMBILAN JAWATAN PDRM<br>
+            <div class="col-md-12 boldInfo">
+                <span>{{ 'pdrm.titlerecruitment' | translate }}</span><br>
                 <hr class="lineHr" style="border-top: #9c9c9d 2px solid;">
             </div>
         </div>
 
         <div class="row container">
-            <div class="col-md-3" style="color: black">
-                NO. KP BARU<br>
-                NAMA PEMOHON<br>
-                TARIKH / MASA<br>
-                TEMPAT<br>
-                STATUS PANGGILAN
+            <div class="col-md-3 blackFont">
+                {{ 'pdrm.title.icno' | translate }}
             </div>
-
+            <div class="col-md-9 boldInfo">
+                {{kp}}
+            </div>
+            <div class="col-md-3" style="color: black;">
+                {{ 'pdrm.title.applicantname' | translate }}
+            </div>
+            <div class="col-md-9 boldInfo">
+                {{name}}
+            </div>
+            <div class="col-md-3" style="color: black;">
+                {{ 'pdrm.title.date' | translate }}
+            </div>
             <div class="col-md-9" style="color: black; font-weight: bold;">
-                {{kp}}<br>
-                {{name}}<br>
-                {{date}}<br>
-                {{place}}<br>
+                {{date}}
+            </div>
+            <div class="col-md-3" style="color: black;">
+                {{ 'pdrm.title.location' | translate }}
+            </div>
+            <div class="col-md-9" style="color: black; font-weight: bold;">
+                {{place}}
+            </div>
+            <div class="col-md-3" style="color: black;">
+                {{ 'pdrm.title.status' | translate }}
+            </div>
+            <div class="col-md-9" style="color: black; font-weight: bold;">
                 <div *ngIf="status != '-'" (click)="openLink(urlDoc)" style="cursor: pointer;">
                     <i class="fa fa-folder-o"></i>&nbsp;{{status}}<br>
                 </div>
@@ -101,7 +152,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div><br><br>
 
     <div *ngIf="showNoData">
         <div class="row container">
@@ -112,12 +163,4 @@
     </div>
 
 </div>
-  
-  <app-confirm-dialog #resetModal 
-      [title]="'common.icon.warn'" 
-      [content]="'common.msg.reset'" 
-      [state]="'common.state.warn'"
-      [isReset]="'true'" 
-      (resetMethod)="resetMethod($event)">
-  </app-confirm-dialog>
   

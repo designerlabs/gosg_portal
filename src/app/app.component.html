@@ -1,20 +1,18 @@
-<!-- <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading> -->
+<gosg-portal-loader [loader]="navService.loader"></gosg-portal-loader>
+<gosg-shared-loader [loader]="navService.loader"></gosg-shared-loader>
 
 <div [ngStyle]="{'min-height': clientHeight + 'px', 'margin-bottom': '-200px'}">
-    <ngx-loading [show]="loading" [config]="{ fullScreenBackdrop: true }"></ngx-loading>
 
 
 
 
-<app-topnav class="top-nav-style" (showsidenav)="showsidenav($event)" (topNavClick)="getExpand($event)"  [style.background]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" [style.z-index]="this.zIndex" [style.height]="this.bHeight"></app-topnav>
+<app-topnav *ngIf="navService.restricted" class="top-nav-style" (showsidenav)="showsidenav($event)" (topNavClick)="getExpand($event)"  [style.background]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" [style.z-index]="this.zIndex" [style.height]="this.bHeight"></app-topnav>
 
 
-
-
-<app-nav class="nav-bar-style" [style.top]="this.bTop" [style.z-index]="this.zIndex2"></app-nav>
-<app-breadcrumb></app-breadcrumb>
+<!-- *ngIf="navService.restricted"  class="nav-bar-style" -->
+<app-nav [ngClass]="{'nav-bar-style': navService.restricted, 'nav-bar-style-common': !navService.restricted}" [style.top]="this.bTop" [style.z-index]="this.zIndex2"></app-nav>
+<app-breadcrumb *ngIf="navService.restricted" class="hideBC"></app-breadcrumb>
 <router-outlet></router-outlet>
 <div style="height: 200px"></div>
 </div>
-
-<app-footer></app-footer>
+<app-footer *ngIf="navService.restricted" ></app-footer>

@@ -29,6 +29,7 @@ export class MailboxComponent implements OnInit, OnDestroy {
   isMailContainerShow = 'block';
   languageId = this.languageId;
   showNoData = false;
+  loading = false;
   private subscriptionLang: ISubscription;
   private subscription: ISubscription;
   
@@ -67,6 +68,7 @@ export class MailboxComponent implements OnInit, OnDestroy {
 
 
   getMail(event, msgId){
+    this.loading = true;
     event.target.parentElement.parentElement.parentElement.removeAttribute('style')
     this.protectedService.getMail(msgId).
     subscribe(data => {
@@ -77,22 +79,25 @@ export class MailboxComponent implements OnInit, OnDestroy {
       // }else{
         // this.showNoData = true;
       // }
-      
+      this.loading = false;
     },
     Error => {
-     this.toastr.error(this.translate.instant('mailbox.err.failtoload'), '');            
+      this.loading = false;
+      this.toastr.error(this.translate.instant('mailbox.err.failtoload'), '');            
    });
   }
 
   getMails(page, size){
+    this.loading = true;
     this.protectedService.getMails(page, size).
     subscribe(data => {
       this.mailData  = data;
       this.noNextData = data.pageNumber === data.totalPages;
+      this.loading = false;
     },
     Error => {
-
-     this.toastr.error(this.translate.instant('mailbox.err.failtoload'), '');            
+      this.loading = false;
+      this.toastr.error(this.translate.instant('mailbox.err.failtoload'), '');            
    });
   }
 
@@ -131,16 +136,17 @@ export class MailboxComponent implements OnInit, OnDestroy {
 
 
   deleteMail(msgId){
-    
+    this.loading = true;
     this.protectedService.deleteMail(msgId).
     subscribe(
       success => {
         this.getMails(this.mailPageCount, this.mailPageSize);
         this.toastr.success(this.translate.instant('mailbox.success.deletesuccess'), '');     
+        this.loading = false;
       },
       Error => {
-
-       this.toastr.error(this.translate.instant('mailbox.err.failtodelete'), '');            
+        this.loading = false;
+        this.toastr.error(this.translate.instant('mailbox.err.failtodelete'), '');            
      });
   }
 
@@ -169,17 +175,18 @@ export class MailboxComponent implements OnInit, OnDestroy {
   }
 
   deleteMails(){
-    
+    this.loading = true;
     this.protectedService.deleteMails(this.mailboxId).
     subscribe(
       success => {
         this.getMails(this.mailPageCount, this.mailPageSize);
         this.mailboxId = [];
         this.toastr.success(this.translate.instant('mailbox.success.deletesuccess_multi'), '');     
+        this.loading = false;
       },
       Error => {
-
-       this.toastr.error(this.translate.instant('mailbox.err.failtodelete'), '');            
+        this.loading = false;
+        this.toastr.error(this.translate.instant('mailbox.err.failtodelete'), '');            
      });
   }
 }

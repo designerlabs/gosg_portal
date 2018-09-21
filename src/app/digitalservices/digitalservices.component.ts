@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
+import { Component, OnInit, Inject, OnDestroy, Input } from '@angular/core';
 import { Http } from '@angular/http';
 import { PortalService } from '../services/portal.service';
 import { DialogsService } from '../dialogs/dialogs.service';
@@ -27,10 +27,13 @@ export class DigitalservicesComponent implements OnInit, OnDestroy {
   languageId = this.languageId;
   mediaUrl: any;
   isLogin: boolean;
+  @Input() state:string;
+  @Input() validMyIdentity: any;
 
   lang = this.lang;
   private subscription: ISubscription;
   private subscriptionLang: ISubscription;
+  loading: boolean;
 
   constructor(
     private http: Http,
@@ -72,6 +75,7 @@ export class DigitalservicesComponent implements OnInit, OnDestroy {
     this.mediaUrl = this.config.externalMediaURL + '/documents/';
     this.getDServices(this.languageId);
     this.getUserData();
+    window.scrollTo(0,0);
 
   }
 
@@ -82,17 +86,18 @@ export class DigitalservicesComponent implements OnInit, OnDestroy {
 
   getDServices(lang) {
 
+    this.loading = true;
+
     this.portalservice.getDigitalServices(lang).subscribe(data => {
 
       this.dsData = data.list;
-      // 
-      // for(var item of data.list) {
-      // 
-      // if(data.list.details)
-      //   this.dsData.push(data.list);
-      // }
-      // this.dsData = [''];
-      
+      this.loading = false;
+
+    },
+    error => {
+      this.toastr.error(JSON.parse(error._body).statusDesc, '');
+      this.loading = false;
+
     });
   }
 
@@ -105,6 +110,17 @@ export class DigitalservicesComponent implements OnInit, OnDestroy {
     });
   }
 
+  toTrack(dserviceCode, dUrl, agcCode, common?) {
+    window.open(dUrl+'?service='+dserviceCode+'&agency='+agcCode, '_blank');
+    this.portalservice.sendTrackingCount(dserviceCode,agcCode).subscribe(
+      data =>{
+    },
+    error => {
+      this.toastr.error(JSON.parse(error._body).statusDesc, '');
+      // this.loading = false;
+
+    });
+  }
 }
 
 @Component({
@@ -114,7 +130,7 @@ export class DigitalservicesComponent implements OnInit, OnDestroy {
 
 
 export class DigitalServiceDialog {
-  
+
   constructor(
     public dialogRef: MatDialogRef<DigitalServiceDialog>,
     private translate: TranslateService,

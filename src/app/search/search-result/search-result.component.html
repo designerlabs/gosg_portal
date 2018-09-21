@@ -1,5 +1,7 @@
+<gosg-portal-loader [loader]="loading"></gosg-portal-loader>
+<gosg-protected-loader [loader]="loading"></gosg-protected-loader>
 <div class="container-fluid animated slideInDown" style="background: #a7a495;">
-  <!-- <ngx-loading [show]="loading" [config]="{ fullScreenBackdrop: true }"></ngx-loading> -->
+  <!--  -->
   <div class="container">
     <div class="row">
       <div class="col-md-12">
@@ -257,9 +259,14 @@
       <!-- <button class="btn btn-md" mat-raised-button (click)="checkCurrObj()">CHECK</button> -->
     </div>
     <div class="col-md-9">
+      <div class="col-md-9">
       <h3 class="font-size-l">
         <b>{{'home.search.searchresult' | translate}}</b>
       </h3>
+      </div>
+      <div class="col-md-3 paddingTop-15 text-right">
+          <button mat-raised-button color="basic" (click)="searchByKeyword(ser_word, true)">{{ curr_data_lang }}</button>
+      </div>
       <div class="example-full-width">
         <mat-form-field class="example-full-width">
           <input type="text" class="inputser example-full-width" matInput placeholder="{{'home.search.searchkey' | translate }}" [(ngModel)]="ser_word" (keyup.enter)="resetPage();searchByKeyword(ser_word)">
@@ -272,7 +279,10 @@
 
       <mat-tab-group #tabGroup (selectedTabChange)="changeTab($event)">
         <mat-tab label="{{'home.search.local' | translate}}">
-          <div style="padding-top:5px;" *ngIf="totalElements>0">
+          <div style="padding-top:5px;" *ngIf="totalElements < 10">
+            {{totalElements}} {{'home.search.resultsfound' | translate}} {{millisec}} ms
+          </div>
+          <div style="padding-top:5px;" *ngIf="totalElements >= 10">
             {{totalElements | number:'2.0'}} {{'home.search.resultsfound' | translate}} {{millisec}} ms
           </div>
           <ul class="intSearch" *ngIf="tabIndex==0">
@@ -313,7 +323,11 @@
           </mat-select>
         </mat-form-field>
         <span class="float-right">
-          <span class="table_footer_pagination">{{ 'common.pagination.pages' | translate }}
+          <span *ngIf="totalElements < 10" class="table_footer_pagination">{{ 'common.pagination.pages' | translate }}
+            <strong>{{pageNumber}}</strong> {{ 'common.pagination.of' | translate }}
+            <strong>{{totalPages}}</strong> {{ 'common.pagination.in' | translate }}
+            <strong>{{totalElements }}</strong> {{'home.search.result' | translate}} </span>
+          <span *ngIf="totalElements >= 10" class="table_footer_pagination">{{ 'common.pagination.pages' | translate }}
             <strong>{{pageNumber}}</strong> {{ 'common.pagination.of' | translate }}
             <strong>{{totalPages}}</strong> {{ 'common.pagination.in' | translate }}
             <strong>{{totalElements | number:'2.0'}}</strong> {{'home.search.result' | translate}} </span>

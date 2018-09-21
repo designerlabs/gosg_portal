@@ -54,6 +54,8 @@ import { ArchivecontentComponent } from './archive/archivecontent/archivecontent
 import { GalleryComponent } from './gallery/gallery.component';
 import { SchoolsearchComponent } from './schoolsearch/schoolsearch.component';
 import { TrafficinfoComponent } from './trafficinfo/trafficinfo.component';
+import { RssmainComponent } from './article/rss/rssmain/rssmain.component';
+
 
 export const appRoutes: Routes = [
 
@@ -62,9 +64,9 @@ export const appRoutes: Routes = [
     {path: 'agencydir', component: AgencydirectoryComponent},
     {path: 'calendar', component: EventCalendarComponent},
     {path: 'digitalservices', component: DigitalservicesComponent},
-    {path: 'search/searchResult/:id', component: SearchResultComponent},
+    {path: 'search/:id', component: SearchResultComponent},
     {path: 'category/:id', component: ArticleComponent, canActivate: [NavRouterActivator]  },
-    {path: 'rss/:id', component: RssComponent},
+    {path: 'rss/:id', component: RssmainComponent},
     {path: 'rss/id/:id', component: RssComponent},
     {path: 'announcement', component: AnnouncementComponent },
     {path: 'eparticipation', component: EparticipationComponent},
@@ -99,7 +101,7 @@ export const appRoutes: Routes = [
     {path: 'unsubscribe', component: UnsubscribeComponent},
     {path: 'statistic', component: StatisticComponent},
     {path: 'sitemap', component: SitemapComponent},
-    {path: 'school-search', component: SchoolsearchComponent},
+    {path: 'education', component: SchoolsearchComponent},
     {path: 'trafficinfo', component: TrafficinfoComponent },
 
     {path: '', redirectTo: 'index', pathMatch: 'full'},

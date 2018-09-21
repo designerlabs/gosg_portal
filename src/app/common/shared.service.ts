@@ -57,6 +57,10 @@ export class SharedService {
   private fontUrl: string = this.config.urlFont;
   private religionUrl: string = this.config.urlReligion;
   private raceUrl: string = this.config.urlRace;
+  private citizenUrl: string = this.config.urlCitizenship;
+  private sharedDS: string = this.config.urlSharedDS;
+  private relationUrl: string = this.config.urlRelationship;
+  private reasonUrl: string = this.config.urlReason;
 
   icon = {
     update: 'fa fa-edit',
@@ -204,6 +208,44 @@ export class SharedService {
     .catch(this.handleError);
   }
 
+  getSchoolApi(moduleName, id, lang): Observable<any[]> {
+    let readUrl = this.sharedDS + moduleName + id + '?language='+lang;
+    return this.http.get(readUrl)
+      .map((response: Response) => response.json())
+      .retry(5)
+      .catch(this.handleError);
+  }
+
+  getListSchool(moduleName, school, state, ppd, khas, typeS?): Observable<any[]> {
+
+    let readUrl: any;
+
+    if(typeS){
+      readUrl = this.sharedDS + moduleName + '/'+school+'/'+state+'?ppd='+ppd+ '&pendidikanKhas='+khas+'&type='+typeS;
+    }
+
+    else{
+      readUrl = this.sharedDS + moduleName + '/'+school+'/'+state+'?ppd='+ppd+ '&pendidikanKhas='+khas;
+    }
+
+    
+    return this.http.get(readUrl)
+      .map((response: Response) => response.json())
+      .retry(5)
+      .catch(this.handleError);
+  }
+
+  getListSchoolByName(moduleName, schoolname): Observable<any[]> {
+
+    let readUrl: any;
+    readUrl = this.sharedDS + moduleName + '?keyword='+schoolname;
+        
+    return this.http.get(readUrl)
+      .map((response: Response) => response.json())
+      .retry(5)
+      .catch(this.handleError);
+  }
+
   // END NEW
 
 
@@ -211,7 +253,7 @@ export class SharedService {
     if(err.statusCode){
       let statusCode = err.statusCode.toLowerCase();
       if(statusCode == 'error'){
-        this.toastr.error(err.statusDesc, 'Error');
+        this.toastr.error(err.statusDesc, '');
       }else{
         callback()
       }
@@ -234,16 +276,13 @@ export class SharedService {
       .map((response: Response) => response.json().cityList)
       .retry(5)
       .catch(this.handleError);
-
   }
-
 
   getReligion(langId): Observable<any[]> {
     return this.http.get(this.religionUrl + langId)
       .map((response: Response) => response.json().religionList)
       .retry(5)
       .catch(this.handleError);
-
   }
 
   getRace(langId): Observable<any[]> {
@@ -251,7 +290,27 @@ export class SharedService {
       .map((response: Response) => response.json().raceList)
       .retry(5)
       .catch(this.handleError);
+  }
 
+  getCitizenship(langId): Observable<any[]> {
+    return this.http.get(this.citizenUrl+"?language="+langId)
+      .map((response: Response) => response.json().userTypeList)
+      .retry(5)
+      .catch(this.handleError);
+  }
+
+  getRelationship(langId): Observable<any[]> {
+    return this.http.get(this.relationUrl + '?language='+langId + '&page=1&size=99')
+      .map((response: Response) => response.json().userRelationshipList)
+      .retry(5)
+      .catch(this.handleError);
+  }
+
+  getReason(langId): Observable<any[]> {
+    return this.http.get(this.reasonUrl + '?language='+langId + '&page=1&size=99')
+      .map((response: Response) => response.json().accountStatusReasonList)
+      .retry(5)
+      .catch(this.handleError);
   }
 
   getGender(langId): Observable<any[]> {

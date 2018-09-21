@@ -7,7 +7,6 @@ let baseURL =  environment.mockApiURL;
 let uapURL = environment.uapURL;
 let mediaURL = environment.mediaURL;
 let searchURL = environment.miaugeoURL;
-let trafficInfoURL = environment.trafficInfoURL;
 let registrationUrl = uapURL+'registration/';
 
 
@@ -15,13 +14,14 @@ let registrationUrl = uapURL+'registration/';
 let portalBaseURL = 'http://localhost:8020/portal/';
 let protectedBaseURL = uapURL+'service-protected/';
 let commonURL = uapURL+'service/';
+let trafficInfoURL = commonURL+'digitalservice/trafficinfokl';
 
 let agencyURL = uapURL+'service-dservice-protected/'
 
 // backend service
 let baseLocalURL = './app/apidata/';
 let searchServiceURL = searchURL;
-let searchServicePublicURL = 'https://www.malaysia.gov.my/public/';
+let searchServicePublicURL = commonURL+'search/api/globalsearch';
 let pollUrl = commonURL + "polls";
 
 export class AppConfig {
@@ -36,13 +36,17 @@ export class AppConfig {
     urlState:string;
     urlPostcode:string;
     // urlStaurlPostcodete:string;
+    urlRelationship: string;
+    urlReason: string;
     urlRace:string;
+    urlCitizenship: string;
     urlCity:string;
     urlReligion: string;
     urlLifeevent: string;
     urlSubtopic: string;
     urlTopics: string;
     urlHighlights: string;
+    urlHotTopics: string;
     urlGender: string;
     urlPoll: string;
     urlAnnouncement: string;
@@ -100,6 +104,12 @@ export class AppConfig {
     UrlTrafficPredictionAPI: string;
     urlAgencyDservice: string;
     urlRating: string;
+    urlSharedDS: string;
+    urlSubStatus: string;
+    urlDserviceValidation: string;
+    urlDserviceTracking: string;
+    adminEmail: string;
+    urlErr: string;
 
 }
 
@@ -123,12 +133,16 @@ export const APP_DI_CONFIG: AppConfig = {
     urlFont: commonURL+ 'font/active',
     urlPostcode: commonURL+'postcode/city/',
     urlRace: commonURL+'race/lang/',
+    urlCitizenship: commonURL+'user/type/citizenship',
+    urlRelationship: commonURL+'relationship',
+    urlReason: commonURL+'accountstatusreason',
     urlCity: commonURL+'city/state/',
     urlReligion: commonURL+'religion/lang/',
     urlLifeevent: commonURL+'life/event',
     urlSubtopic: './app/apidata/subtopic',
     urlTopics: './app/apidata/articlemenu',
     urlHighlights: './app/apidata/highlightbox',
+    urlHotTopics: commonURL+'hottopic',
     urlGender: commonURL+'gender/lang/',
     urlAnnouncement : commonURL + 'highlight/tender',
     // urlAnnouncement : commonURL + 'announcement/date/publish',
@@ -136,7 +150,7 @@ export const APP_DI_CONFIG: AppConfig = {
     urlCalendar: commonURL + './calendar',
     urlEvent: './app/apidata/event',
     urlRegister: registrationUrl+'register',
-    urlRating: registrationUrl+'content/rating/post',
+    urlRating: commonURL+'content/rating/post',
     urlFeedbackType: commonURL+'feedback/type/lang/',
     urlFeedbackSubject: commonURL+'feedback/subject/lang/',
     urlFeedback: commonURL+'feedback',
@@ -151,7 +165,7 @@ export const APP_DI_CONFIG: AppConfig = {
     urlPopularSearch: searchServiceURL + 'popular',
     urlIntSearch: searchServiceURL + 'content',
     urlOsSearch: searchServiceURL + 'agency',
-    urlGlobalSearch: searchServicePublicURL + 'query/1/',
+    urlGlobalSearch: searchServicePublicURL,
     urlUserType:uapURL+'service/user/type/lang/',
     urlMail: protectedBaseURL+'inbox/',
     urlUAP: uapURL,
@@ -159,6 +173,7 @@ export const APP_DI_CONFIG: AppConfig = {
     urlCompleteEmail: protectedBaseURL+'user/complete/email/updated',
     urlCompletePhone: protectedBaseURL+'user/complete/phone/updated',
     urlGetUser: protectedBaseURL+'user/detail',
+    urlErr: commonURL+'/errormessage/invaliduser',
     urlGetProfile: protectedBaseURL+'user/profile',
     urlGetProfileEmail: protectedBaseURL+'user/profile/email',
     urlGetProfilePhone: protectedBaseURL+'user/profile/phone',
@@ -175,15 +190,20 @@ export const APP_DI_CONFIG: AppConfig = {
     urlSiteMap: commonURL + 'sitemapdetails',
     urlStatistic: commonURL + 'statistics?year=2018',
     urlDserviceRpt: commonURL + 'dservice/report',
+    urlSubStatus: commonURL + 'application/status/',
     // urlFaq: commonURL + 'faq',
-    urlDashboardData: protectedBaseURL + 'dservice/dashboard',
+    urlDashboardData: agencyURL + 'dservice/dashboard',
     statusAppUrl: agencyURL + 'dservice/group',
     urlAgencyList: agencyURL + 'dservice/agencylist',
     dataAppUrl: agencyURL + 'dservice',
-    UrlStreetNameAPI: trafficInfoURL+"street?rows=100",
-    UrlTrafficPolylines: trafficInfoURL+"kl",
-    UrlTrafficPredictionAPI: trafficInfoURL+"traffic?streetName=",
-    urlAgencyDservice: agencyURL
+    UrlStreetNameAPI: trafficInfoURL+"/street?rows=100",
+    UrlTrafficPolylines: trafficInfoURL,
+    UrlTrafficPredictionAPI: trafficInfoURL+"/street?streetName=",
+    urlAgencyDservice: agencyURL,
+    urlSharedDS: commonURL,
+    urlDserviceValidation: protectedBaseURL+'dservice/validate?code=',
+    urlDserviceTracking: commonURL + 'digitalservicetracking',
+    adminEmail: 'gosg-admin@mampu.gov.my'
 };
 
 @NgModule({

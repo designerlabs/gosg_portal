@@ -6,82 +6,8 @@ import { ContentComponent } from '../../article/content/content.component';
 
 @Component({
   selector: 'gosg-leftmenu',
-  template: `
-  <div *ngIf="templateName !== 'lifeevent'" >
-    <mat-expansion-panel *ngFor="let content of sessions; let i = index"  multi="false" displayMode="flat" [hideToggle]="content?.subCategories?.length==0 ? true: null"  [expanded]="content.activeMenu  || (i == statusID) || sessions.length <= 1" class="specific-class">
-      <mat-expansion-panel-header>
-        <mat-panel-title class="pointer" (click)="clickSideMenu(content, i, $event)">
-        <a class="warna_font sideBarMenu--link font-size-s" [routerLinkActive]="['active']"  [style.font-weight]="content?.activeMenu ? 'bold' : 'normal'"  [style.color]="content?.activeMenu ? getTheme() ? getTheme() : 'rgb(0, 189, 187)' : '#333'" >
-            {{content.categoryName}}
-          </a>
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <div *ngFor="let getContent of content?.contents" class="submenu" (click)="clickContentFromMenu(content.parentCode, getContent.contentCode, i, $event)">
-       <a class="warna_font sideBarMenu--link font-size-s" #subContent [style.font-weight]="getContent?.activeMenu ? 'bold' : 'normal'"  [style.color]="getContent?.activeMenu ? getTheme() ? getTheme() : 'rgb(0, 189, 187)' : '#333'">{{getContent?.contentTitle}}</a>
-      </div>
-
-
-      <mat-expansion-panel *ngFor="let subcontent of content?.subCategories; let j = index" multi="false" displayMode="flat" [hideToggle]="subcontent?.subCategories?.length==0 ? true: null"  [expanded]="subcontent.activeMenu  || (j == statusID) || subcontent.length <= 1"  class="submenu" >
-        <mat-expansion-panel-header>
-          <mat-panel-title class="pointer" (click)="clickSideMenu(subcontent, j, $event)">
-            <a class="warna_font sideBarMenu--link font-size-s" #subContent [style.font-weight]="subcontent?.activeMenu ? 'bold' : 'normal'"  [style.color]="subcontent?.activeMenu ? getTheme() ? getTheme() : 'rgb(0, 189, 187)' : '#333'">
-              {{subcontent.categoryName}}
-            </a>
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-
-        <div *ngFor="let getContent of subcontent?.contents" class="submenu" (click)="clickContentFromMenu(content.parentCode, getContent.contentCode, j, $event)">
-          <a class="warna_font sideBarMenu--link font-size-s" #subContent [style.font-weight]="getContent?.activeMenu ? 'bold' : 'normal'"  [style.color]="getContent?.activeMenu ? getTheme() ? getTheme() : 'rgb(0, 189, 187)' : '#333'">
-            {{getContent?.contentTitle}}
-          </a>
-        </div>
-
-        <gosg-leftmenu [sessions]="subcontent?.subCategories"></gosg-leftmenu>
-
-      </mat-expansion-panel>
-
-
-
-
-      </mat-expansion-panel>
-    </div>
-
-
-    <div *ngIf="templateName === 'lifeevent'" >
-    <mat-expansion-panel *ngFor="let content of sessions; let i = index"  multi="false" displayMode="flat" [hideToggle]="content?.contents?.length==0 ? true: null" [disabled]="true" [expanded]="content.activeMenu  || (i == statusID) || sessions.length <= 1" class="specific-class">
-      <mat-expansion-panel-header>
-        <mat-panel-title class="pointer" (click)="clickSideMenu(content, i, $event)">
-          <a class="warna_font sideBarMenu--link font-size-s" [routerLinkActive]="['active']"  [style.font-weight]="content?.activeMenu ? 'bold' : 'normal'"  [style.color]="content?.activeMenu ? getTheme() ? getTheme() : 'rgb(0, 189, 187)' : '#333'" >
-            {{content.categoryName}}
-          </a>
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-
-
-
-      <mat-expansion-panel *ngFor="let subcontent of content?.subCategories; let j = index" multi="false" displayMode="flat" [hideToggle]="subcontent?.contents?.length==0 ? true: null"  [expanded]="subcontent.activeMenu  || (j == statusID) || subcontent.length <= 1"  class="submenu" >
-        <mat-expansion-panel-header>
-          <mat-panel-title class="pointer" (click)="clickSideMenu(subcontent, j, $event)">
-            <a class="warna_font sideBarMenu--link font-size-s" #subContent [style.font-weight]="subcontent?.activeMenu ? 'bold' : 'normal'"  [style.color]="subcontent?.activeMenu ? getTheme() ? getTheme() : 'rgb(0, 189, 187)' : '#333'">
-              {{subcontent.categoryName}}
-            </a>
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-
-
-
-        <gosg-leftmenu [sessions]="subcontent?.subCategories"></gosg-leftmenu>
-
-      </mat-expansion-panel>
-
-
-
-
-      </mat-expansion-panel>
-    </div>
-
-`,
-styleUrls:['./leftmenu.component.css']
+  templateUrl: './leftmenu.component.html',
+  styleUrls:['./leftmenu.component.css']
 })
 export class LeftmenuComponent {
   agencyActive: boolean = false;
@@ -91,20 +17,26 @@ export class LeftmenuComponent {
   @Input() sessions: any;
   @Input() menuType: any;
   @Input() templateName: any;
+  loading: boolean = false;
 
-  constructor(private router:Router, private navService: NavService, private activatedRoute: ActivatedRoute, private content:ContentComponent){
+  constructor(private router:Router,  public articleService: ArticleService, private navService: NavService, private activatedRoute: ActivatedRoute, private content:ContentComponent){
     this.activatedRoute.queryParams.subscribe(params => {
       this.paramURL = this.activatedRoute.snapshot.url[0].path;
       this.paramURL_Next = this.paramURL + '/' +this.activatedRoute.snapshot.url[1].path;
     });
   }
 
+  boolCallback = (result: boolean) : void => {
+    this.loading = result;
+  }
 
   getTheme() {
     return localStorage.getItem('themeColor');
   }
 
   clickSideMenu(e, status, event) {
+    this.articleService.leContent = "";
+    this.navService.loader = true;
     this.statusID = status;
     this.agencyActive = false;
     if(this.paramURL_Next == 'archive/category'){
@@ -133,6 +65,8 @@ export class LeftmenuComponent {
   }
 
   clickContentFromMenu(pId, aId, status, event) {
+    this.articleService.leContent = "";
+    this.navService.loader = true;
     this.statusID = status;
     if(this.paramURL == 'category'){
       this.router.navigate(['/content', aId]);
@@ -160,6 +94,8 @@ export class LeftmenuComponent {
   }
 
   clickSideMenuByAgency(e, status, event) {
+    this.articleService.leContent = "";
+    this.navService.loader = true;
     this.agencyActive = true;
     if(this.paramURL == 'category'){
       this.router.navigate(['/subcategory', 'agency']);

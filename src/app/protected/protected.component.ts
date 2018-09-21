@@ -8,13 +8,19 @@ import 'rxjs/add/operator/skip';
 import { PortalService } from '../services/portal.service';
 import { environment } from '../../environments/environment';
 import * as $ from 'jquery';
-
+import { NavService } from '../header/nav/nav.service';
+import { timer } from 'rxjs/observable/timer';
+import { take, map } from 'rxjs/operators';
 @Component({
   selector: 'gosg-protected',
   templateUrl: './protected.component.html',
   styleUrls: ['./protected.component.css']
 })
 export class ProtectedComponent implements OnInit {
+  countDown;
+  count = 5;
+
+  currentSec: number = 5;
   isFirst: boolean;
   uid: any;
   clientHeight: number;
@@ -25,9 +31,11 @@ export class ProtectedComponent implements OnInit {
   isFirstLogin: boolean;
   childData: string;
   getUserName:string;
+  getPassport:string;
   validMyIdentity:any;
   getEmail:string;
   public loading = false;
+  public nonValidUser = false;
   getFullname:string;
   translatedText: string;
   supportedLanguages: any[];
@@ -42,8 +50,14 @@ export class ProtectedComponent implements OnInit {
   isProfileHide = false;
   query;
   pageSize;
+  msgInvalidUser: any;
   entryService;
-  constructor(private activatedRoute:ActivatedRoute, @Inject(APP_CONFIG) private config: AppConfig, private protectedService:ProtectedService, router:Router, private portalService:PortalService) {
+  constructor(public navService: NavService, private activatedRoute:ActivatedRoute, @Inject(APP_CONFIG) private config: AppConfig, private protectedService:ProtectedService, router:Router, private portalService:PortalService) {
+
+      this.countDown = timer(0,1000).pipe(
+          take(this.count),
+          map(()=> --this.count)
+       );
 
       this.clientHeight = window.innerHeight - 200;
   }
@@ -65,7 +79,7 @@ export class ProtectedComponent implements OnInit {
 
   logout(){
     localStorage.removeItem('usrID');
-    location.href=this.config.urlUAP+'uapsso/Logout';
+    location.href= this.config.urlUAP +'uapsso/Logout?return='+this.config.urlUAP+'portal/index';
   }
 
   getUserRegData(name){
@@ -101,30 +115,64 @@ export class ProtectedComponent implements OnInit {
     }
   }
 
-  getUserData(){
 
+  getErorMsg(){
+    if(!environment.staging){
+    this.protectedService.getErrorMsg().subscribe(
+      data => {
+        this.msgInvalidUser = data.resource.messagesDescription;
+        console.log(this.msgInvalidUser);
+      }
+    )
+    }
+  }
+
+  getUserData(){
+    this.loading = true;
     if(!environment.staging){
       this.protectedService.getUser().subscribe(
         data => {
           if(data.user){
             this.getUserName = data.user.fullName;
+            this.getPassport = data.user.passportNo;
             this.validMyIdentity = data.user.isMyIdentityVerified;
             this.getEmail = data.user.email;
             this.getFullname = data.user.fullName;
             localStorage.setItem('fullname',data.user.fullName);
             localStorage.setItem('email',data.user.email);
+            this.nonValidUser = false;
           }else{
-
+            this.loading = false;
           }
+          this.loading = false;
 
+          if(data.statusCode !== 'SUCCESS' && !this.isFirstLogin){
+            this.loading = false;
+            this.nonValidUser = true;
+              setTimeout(() => {
+                this.logout();
+              }, 5000);
+          }
         },
         error => {
+
+         // if(data.statusCode !== 'SUCCESS'){
+          //   this.loading = false;
+          //   this.nonValidUser = true;
+          //     setTimeout(() => {
+          //       this.logout();
+          //     }, 5000);
+          // }
+
           //location.href = this.config.urlUAP +'uapsso/Logout';
           //location.href = this.config.urlUAP+'portal/index';
         })
     }
   }
+
+
   getProfileData(data){
+    this.loading = true;
     this.protectedService.getProfile(data).subscribe(
       data =>{
         if(data.length !=0){
@@ -137,8 +185,10 @@ export class ProtectedComponent implements OnInit {
         }else{
           //location.href = this.config.urlUAP+'portal/index';
         }
+        this.loading = false;
       },
       error => {
+        this.loading = true;
         //location.href = this.config.urlUAP+'portal/index';
       });
   }
@@ -164,6 +214,7 @@ export class ProtectedComponent implements OnInit {
     let getUserCountry = localStorage.getItem('userNationality');
 
     this.getUserData();
+    this.getErorMsg();
     this.activatedRoute.queryParamMap.skip(1).subscribe((queryParams: Params) => {
       this.userId = queryParams.get('id');
       if(this.userId){
@@ -176,10 +227,10 @@ export class ProtectedComponent implements OnInit {
       this.getProfileData(getUsrID);
     }else{
 
-
     }
 
   }
+
 
 
 

@@ -23,12 +23,12 @@
                   </div>
               <div class="row padding">
                   <h4 class="font-size-m warna_font" style="margin-top: 2%; text-align: center; font-family: Roboto; color: rgb(51, 51, 51);">{{'poll.recommend' | translate}}</h4>
-                  <div class="col-md-3"></div>
-                  <div class="col-md-6">
+
+                  <div class="col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3  col-sm-12 col-xs-12">
                       <label for="comment" class="sr-only">Comment</label>
-                      <textarea class="col-md-12" style="height:50px; border-color: rgb(0, 189, 187);" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" [(ngModel)]="pollComment" id="comment"></textarea>
+                      <textarea class="col-md-12 col-sm-12 col-xs-12" style="height:100px; border-color: rgb(0, 189, 187);" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" [(ngModel)]="pollComment" id="comment"></textarea>
                   </div>
-                  <div class="col-md-3"></div>
+
               </div>
               <!-- <input type="hidden" name="csrfmiddlewaretoken" value="OHddydhq179vB8WObdhVsshzzi7mkJUOHTfRPKGPvEjgAb0mk0N3HVk1r0jlLO8f"> -->
               <div class="row padding">
@@ -49,8 +49,7 @@
                       <a (click)="closeResult()" style="cursor:pointer;"><i class="fa fa-times"></i></a>
                   </div>
 
-                  <section class="example-section" style="padding-left: 200px;width: 75%;padding-bottom: 20px;
-                  ">
+                  <section class="example-section col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 col-sm-12 col-xs-12" >
                       <div *ngFor="let pollAnswer of pollDataAnswer">
                           <div *ngIf="pollAnswer.answer">
                                   <div *ngIf="pollAnswer.selans" style="text-align: left; font-family: Roboto; color: rgb(51, 51, 51);">

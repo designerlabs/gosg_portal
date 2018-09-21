@@ -16,8 +16,79 @@
       </div>
     </div>
   </div>
-  <div class="container footer form-group">
-    <!--  *ngIf="data.titleCode==1 || data.titleCode==2 || data.titleCode==3 || data.titleCode==7" -->
+
+  <div class="container footer">
+    <mat-accordion class="visible-xs visible-sm btn btn-sm">
+
+      <!-- CONTACT US -->
+      <mat-expansion-panel *ngIf="showcontact && dataContact.length>0">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <h4 [style.color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" class="footer-heading font-size-m warna_title_color" style="padding-left: 40px;">{{tltContact.title}}
+              <span [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" class="footer-title-underline warna_border_color"></span>
+            </h4>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div *ngFor="let eachitm of dataContact" class="mpc-4">
+          <p class="font-size-s text-justify"><i *ngIf="eachitm.footerContentIcon !=''" ngClass="fa fa-{{eachitm.footerContentIcon}}"></i>&nbsp;<span class="text-left" style="overflow-wrap: break-word;" *ngIf="eachitm.enabled" [innerHtml]="eachitm.footerContentName"></span></p>
+        </div>
+      </mat-expansion-panel>
+
+      <!-- ACCESS -->
+      <mat-expansion-panel *ngIf="showaccess && dataAccessPage.length>0">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <h4 [style.color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" class="footer-heading font-size-m warna_title_color" style="padding-left: 40px;">{{tltAccessPage.title}}
+              <span [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" class="footer-title-underline warna_border_color"></span>
+            </h4>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div *ngFor="let eachitm of dataAccessPage" class="text-justify" style="padding-left: 10px;">
+          <p *ngIf="eachitm.enabled" (click)="getUrl(eachitm.footerContentUrl)" class="font-size-s"><i ngClass="fa fa-{{eachitm.footerContentIcon}}"></i> {{ eachitm.footerContentName }}</p>
+        </div>
+      </mat-expansion-panel>
+
+      <!-- VISITORS -->
+      <mat-expansion-panel *ngIf="showaccess && dataAccessPage.length>0">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <h4 [style.color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" class="footer-heading font-size-m warna_title_color" style="padding-left: 40px;">{{tltNoOfVisitor.title}}
+              <span [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" class="footer-title-underline warna_border_color"></span>
+            </h4>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div *ngFor="let eachitm of dataNoOfVisitor">
+          <div class="col-xs-4" style="padding:0px 0px 0px 3px;">
+            <div class="font-size-s">{{eachitm.footerContentName}}</div>
+            <h4 class="font-size-m">{{eachitm.footerSubContentValue}}</h4>
+          </div>
+        </div>
+      </mat-expansion-panel>
+
+      <!-- EXTERNAL lINKS -->
+      <mat-expansion-panel *ngIf="showaccess && dataAccessPage.length>0">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <h4 [style.color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" class="footer-heading font-size-m warna_title_color" style="padding-left: 40px;">{{tltExtLnk.title}}
+              <span [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" class="footer-title-underline warna_border_color"></span>
+            </h4>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div *ngFor="let eachitm of dataNoOfVisitor" class="el">
+          <div class="sub-add" *ngIf="showextlinks && dataExtLnk.length>0">
+              <div *ngFor="let eachitm of dataExtLnk" class="address footer hoverlnk">
+                <a [href]="eachitm.footerContentUrl" (mouseover)="changeStyle($event)" target="_blank" class="font-size-s"
+                  data-toggle="tooltip" [title]="eachitm.footerContentName">
+                  <img [src]="config.externalMediaURL + '/images/' + eachitm.footerContentImage" [alt]="eachitm.footerContentName" style="max-width:100%;">
+                </a><!--<span>{{eachitm.footerContentName}}</span>-->
+              </div>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+    </div>
+
+    <div class="container footer form-group hidden-xs hidden-sm">
     <div class="footer-left">
       <div class="col-md-4" style="min-height:200px">
         <button [style.background-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" class="btn btn-sm footer-toggle fa fa-angle-down pull-right visible-xs" (click)="showFooter('contact')">
@@ -28,7 +99,7 @@
           <span [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" class="footer-title-underline warna_border_color"></span>
         </h4>
         <!--CONTACT US-->
-        <div *ngIf="showcontact && dataContact.length>0" class="address footer" style="margin-top: 0%; position:relative;">
+    <div *ngIf="showcontact && dataContact.length>0" class="address footer" style="margin-top: 0%; position:relative;">
           <div *ngFor="let eachitm of dataContact">
             <div *ngIf="eachitm.footerContentIcon" style="margin-left:30px;">
               <p class="font-size-s">
@@ -52,7 +123,7 @@
           <span [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" class="footer-title-underline warna_border_color"></span>
         </h4>
         <!--CAPAIAN/ ACCESS PAGE-->
-        <div *ngIf="showaccess && dataAccessPage.length>0">
+    <div *ngIf="showaccess && dataAccessPage.length>0">
           <div class="address footer" style="margin-top: 0%;">
             <div class="sub-add">
               <ul class="hoverlnk" style="columns: 2; list-style-type: none; padding-left: 3px;">
@@ -74,7 +145,7 @@
           <span [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" class="footer-title-underline warna_border_color"></span>
         </h4>
         <!--JUMLAH PELAWAT/ Visitor count-->
-        <div class="address footer" *ngIf="showvisitor && dataNoOfVisitor.length>0" style="margin-top: 0%;">
+    <div class="address footer" *ngIf="showvisitor && dataNoOfVisitor.length>0" style="margin-top: 0%;">
           <div *ngFor="let eachitm of dataNoOfVisitor">
             <div class="col-xs-4" style="padding:0px 0px 0px 3px;">
               <div class="font-size-s">{{eachitm.footerContentName}}</div>
@@ -92,10 +163,10 @@
           <span [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" class="footer-title-underline warna_border_color"></span>
         </h4>
         <!--Pautan luar/ External links-->
-        <div class="sub-add" *ngIf="showextlinks && dataExtLnk.length>0">
+    <div class="sub-add" *ngIf="showextlinks && dataExtLnk.length>0">
           <div *ngFor="let eachitm of dataExtLnk">
             <!-- <h1>{{eachitm.footerContentName}}</h1>  [routerLink]="[eachitm.footerContentUrl]" -->
-            <div class="address footer hoverlnk" style="margin-top: 0%;">
+    <div class="address footer hoverlnk" style="margin-top: 0%;">
               <a [href]="eachitm.footerContentUrl" (mouseover)="changeStyle($event)" target="_blank" class="font-size-s col-xs-3 info-box" data-toggle="tooltip" [title]="eachitm.footerContentName">
                 <img [src]="config.externalMediaURL + '/images/' + eachitm.footerContentImage" [alt]="eachitm.footerContentName" style="max-width:100%;">
               </a>
@@ -108,10 +179,10 @@
 
   <div class="copyright">
     <div class="container">
-      <div class="padding-m" *ngIf="copyright.footerContentName.length>0">
+      <div class="padding-m" *ngIf="copyright?.footerContentName?.length>0">
           <div class="col-md-4">
             <p class="font-size-s" style="margin-top: 4%;">
-              {{copyright.footerContentName}}
+              {{copyright?.footerContentName}}
             </p>
           </div>
           <div class="col-md-8 text-right hidden-xs">
@@ -119,7 +190,7 @@
               {{dateOfUpdate.footerContentDescription}}
             </p>
             <p class="font-size-s" style="margin-top: -10px;">
-              {{copyright.footerContentDescription}}
+              {{copyright?.footerContentDescription}}
             </p>
           </div>
       </div>

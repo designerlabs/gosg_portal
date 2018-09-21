@@ -12,12 +12,12 @@
         }
 
         .popularArticle_bg {
-            
+
             height: 100px;
             background-size: cover;
         }
 
-        .lifeEventBg {
+        .lifeEventBg, .epartiBg {
             background: #f1f1f1;
             border-top: 3px solid #00bdbb;
         }
@@ -26,7 +26,8 @@
         .lifeEventBox-title {
             text-transform: uppercase;
         }
-        
+
+
         .lifeEventBox-description {
             padding: 0px 15px;
             line-height: 24px;
@@ -50,6 +51,12 @@
             text-decoration: none;
         }
 
+
+        .epartiBg a:hover{
+          color: #fff !important;
+          text-decoration: none;
+        }
+
         a:hover {
             color: #fff !important;
         }
@@ -69,7 +76,7 @@
             width: auto;
         }
 
-        .lifeEventBg a {
+        .lifeEventBg a, .epartiBg a {
             color: #333;
             text-decoration: none;
         }
@@ -87,4 +94,19 @@
 
         a btn:hover {
             color: white;
+        }
+
+        .sbgc-red {
+            display: block;
+            padding: 2px;
+            font-family: Roboto;
+            background: rgba(255, 3, 3, 1);
+            color: #f8f8f8;
+        }
+
+        .sbgc-green {
+            display: block;
+            padding: 2px;
+            font-family: Roboto;
+            background: rgba(0, 230, 88, 0.3);
         }

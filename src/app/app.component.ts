@@ -1,13 +1,16 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy  } from '@angular/core';
 import * as $ from 'jquery';
+import { NavService } from './header/nav/nav.service';
 
 @Component({
     selector: 'gosg-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
+    loader: boolean;
     isSideNav = false;
+    isheader:any;
     clientHeight: number;
     title = 'app';
     showLoader: boolean;
@@ -23,7 +26,7 @@ export class AppComponent {
     bTop = '35px';
     public loading = false;
 
-    constructor() {
+    constructor(public navService: NavService) {
         this.clientHeight = window.innerHeight - 200;
     }
     getExpand(data) {
@@ -61,10 +64,12 @@ export class AppComponent {
     getTheme() {
         return localStorage.getItem('themeColor');
     }
-    OnInit() {
+    ngOnInit() {
+
+        //this.navService.restricted = true;
+        //console.log("app: "+this.navService.restricted);
 
     }
-
 }
 
 

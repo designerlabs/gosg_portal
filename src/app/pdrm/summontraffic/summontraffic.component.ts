@@ -1,7 +1,7 @@
 import { Component, OnInit, Injectable, Inject, OnDestroy } from '@angular/core';
 import { ISubscription } from "rxjs/Subscription";
 import { TopnavService } from '../../header/topnav/topnav.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params, ParamMap } from '@angular/router';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { APP_CONFIG, AppConfig } from '../../config/app.config.module';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -16,6 +16,7 @@ import { ProtectedService } from '../../services/protected.service';
 import { SharedService } from '../../common/shared.service';
 import { ToastrService } from '../../../../node_modules/ngx-toastr';
 import { environment } from '../../../environments/environment';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'gosg-summontraffic',
@@ -36,13 +37,14 @@ export class SummontrafficComponent implements OnInit {
   noNextData = false;
   showNoData = false;
   dataSummons: any;
+  loading = false;
 
-  public kp: any;
-  public name: any;
   public summon: any;
   public ammount: any;
   public showDetails = false;
   public varSelect: any;
+  dsvcCode:any;
+  agcCode:any;
 
   searchForm: FormGroup;
   public optSelect: FormControl;
@@ -53,6 +55,7 @@ export class SummontrafficComponent implements OnInit {
   private subscription: ISubscription;
 
   private urlFaq: string = this.config.urlFaq;
+  validationRes: string[];
 
   constructor(
     private protectedService: ProtectedService,
@@ -62,6 +65,7 @@ export class SummontrafficComponent implements OnInit {
     @Inject(APP_CONFIG) private config: AppConfig,
     private sharedService: SharedService,
     private toastr: ToastrService,
+    private route: ActivatedRoute,
     private topnavservice: TopnavService, ) {
 
     this.lang = translate.currentLang;
@@ -99,6 +103,14 @@ export class SummontrafficComponent implements OnInit {
 
   ngOnInit() {
 
+    // AGENCY & DSERVICE CODE FOR VALIDATION
+    let sub = this.route.queryParams.subscribe((params: Params) => {
+      this.dsvcCode = parseInt(params.service);
+      this.agcCode = parseInt(params.agency);
+    });
+
+    this.triggerDserviceValidation(this.dsvcCode);
+
     if (!this.langID) {
       this.langID = localStorage.getItem('langID');
     } else {
@@ -119,43 +131,11 @@ export class SummontrafficComponent implements OnInit {
     this.searchForm.get('optSelect').setValue(0);
     this.varSelect = 0;
 
-    this.getDataAppList(this.pageCount, this.pageSize);
     this.getUserData();
     this.checkReqValues();
 
-  }
+    this.showNoData = false;
 
-  getDataAppList(page, size) {
-
-    this.protectedService.getDataApp(page, size, this.param).subscribe(
-      data => {
-        this.dataApp = data.list;
-        this.dataAppPage = data;
-        this.noNextData = data.pageNumber === data.totalPages;
-        this.showNoData = false;
-
-        if (this.dataApp.length == 0) {
-          this.showNoData = true;
-        }
-      });
-  }
-
-  pageChange(event) {
-    this.getDataAppList(this.pageCount, event.value);
-    this.pageSize = event.value;
-  }
-
-  paginatorL(page) {
-    this.getDataAppList(page - 1, this.pageSize);
-    this.noPrevData = page <= 2 ? true : false;
-    this.noNextData = false;
-  }
-
-  paginatorR(page, totalPages) {
-    this.noPrevData = page >= 1 ? false : true;
-    let pageInc = page + 1;
-    this.noNextData = pageInc === totalPages;
-    this.getDataAppList(page + 1, this.pageSize);
   }
 
   searchApp(formValues: any) {
@@ -167,14 +147,16 @@ export class SummontrafficComponent implements OnInit {
     let plateNo = this.searchForm.get('noCar').value;
     let arrObj = [];
 
-    if (type == 0) {
-      arrObj.push(type);
-      arrObj.push(icno);
-    } else {
-      arrObj.push(type);
-      arrObj.push(icno);
+    arrObj.push(this.langID);
+    arrObj.push(this.agcCode);
+    arrObj.push(this.dsvcCode);
+    arrObj.push(type);
+    arrObj.push(icno);
+    if (type == 1) {
       arrObj.push(plateNo);
     }
+
+    // this.loading = true;
 
     if (!environment.staging) {
 
@@ -193,15 +175,18 @@ export class SummontrafficComponent implements OnInit {
             }
 
           }).bind(this));
-
+          this.loading = false;
+          
         },
         error => {
           this.toastr.error(JSON.parse(error._body).statusDesc, '');
+          this.loading = false;
         });
 
     } else {
       this.showDetails = true;
       this.showNoData = false;
+      this.loading = false;
 
       if (type == 0) {
 
@@ -351,6 +336,7 @@ export class SummontrafficComponent implements OnInit {
           ]
         };
       } else {
+        this.loading = false;
         this.dataSummons = {
             "summonDetails": [
               {
@@ -444,6 +430,37 @@ export class SummontrafficComponent implements OnInit {
     }
   }
 
+  triggerDserviceValidation(dsvcCode) {
+    let sub;
+    this.loading = true;
+
+    return this.route.paramMap
+      .switchMap((params: ParamMap) =>
+        this.protectedService.validateDserviceByRefCode(dsvcCode))
+      .subscribe(resValidation => {
+        
+        if(!resValidation.valid) {
+          this.toastr.error('Invalid Service!', '');
+          this.router.navigate(['404']);
+          
+          // sub = Observable.interval(2000)
+          // .subscribe((val) => {
+          //   window.close();
+          //   sub.unsubscribe();
+          // });
+          this.loading = false;
+        } else {
+          localStorage.setItem('dserviceCode', dsvcCode);
+          this.loading = false;
+        }
+      },
+      error => {
+        this.toastr.error(JSON.parse(error._body).statusDesc, '');
+        this.loading = false;
+  
+      });
+  }
+
   isNumber(evt) {
     evt = (evt) ? evt : window.event;
     var charCode = (evt.which) ? evt.which : evt.keyCode;
@@ -454,10 +471,15 @@ export class SummontrafficComponent implements OnInit {
   }
 
   getSelection(e) { //when change selection
+    
     this.varSelect = e.value;
+    this.showDetails = false;
+    this.checkReqValues();
   }
 
   getUserData() {
+
+    this.loading = true;
 
     this.searchForm.get('ic').disable();
 
@@ -467,22 +489,27 @@ export class SummontrafficComponent implements OnInit {
         data => {
           this.sharedService.errorHandling(data, (function () {
 
-            console.log(data);
             if (data.user) {
 
               this.searchForm.get('ic').setValue(data.user.identificationNo);
 
+              
             } else {
+              
             }
           }).bind(this));
-
+          this.loading = false;
+          
         },
         error => {
           location.href = this.config.urlUAP + 'uapsso/Logout';
+          this.loading = false;
           //location.href = this.config.urlUAP+'portal/index';
         });
 
     } else { //need to be deleted Noraini for local only      
+
+      this.loading = false;
 
       let data = {
         "user": {
@@ -496,7 +523,6 @@ export class SummontrafficComponent implements OnInit {
         }
       }
 
-
       this.searchForm.get('ic').setValue(data.user.identificationNo);
 
     }
@@ -507,11 +533,11 @@ export class SummontrafficComponent implements OnInit {
     let reqVal = [];
     let nullPointers: any = [];
 
-    if (this.varSelect == 1) {
+    if (this.varSelect == 0) {
       reqVal = ["ic"];
     }
 
-    if (this.varSelect == 2) {
+    if (this.varSelect == 1) {
       reqVal = ["noCar"];
     }
 
@@ -532,7 +558,6 @@ export class SummontrafficComponent implements OnInit {
   }
 
   resetSearch() {
-    this.searchForm.get('ic').setValue(null);
     this.searchForm.get('noCar').setValue(null);
     this.showDetails = false;
   }

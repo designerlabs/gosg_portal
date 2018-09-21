@@ -67,7 +67,7 @@ export class PollComponent implements OnInit {
 
       if(!this.languageId){
         this.languageId = localStorage.getItem('langID');
-        //this.getData();
+
       }else{
         this.languageId = 1;
       }
@@ -86,8 +86,10 @@ export class PollComponent implements OnInit {
            .map(res => res.json())
           .subscribe(eventData => {
             this.sharedService.errorHandling(eventData, (function(){
+                //console.log(eventData)
               let resData = eventData.pollQuestionListDto[0];
                 this.pollDataQuestion = resData.questionTitle;
+                //console.log("POLL Non: "+ this.pollDataQuestion);
                 this.pollDataAnswer = resData.answer.filter(fData => fData.answer !== undefined);
                 this.pollDataQuestionID = resData.questionId;
                 this.pollReference = resData.pollReference;
@@ -140,17 +142,17 @@ export class PollComponent implements OnInit {
                   this.pollDataQuestion = resData.questionTitle;
                   this.pollDataQuestionID = resData.questionId;
                   this.pollReference = resData.pollReference;
+
+                  this.toastr.success(
+                      `<div><strong>${this.translate.instant('poll.respon')} :</strong> ${this.pollComment}</div>
+                      <div><strong>${this.translate.instant('poll.answer')} :</strong> ${this.pollAnswer.answer}</div>`,'',{closeButton:true, timeOut:4000, progressBar:true, enableHtml:true}
+                  )
                   
                 }).bind(this));
             }, Error => {
                 this.toastr.error(this.translate.instant('common.err.servicedown'), '');
             }
         );
-
-        this.toastr.success(
-            `<div><strong>${this.translate.instant('poll.respon')} :</strong> ${this.pollComment}</div>
-            <div><strong>${this.translate.instant('poll.answer')} :</strong> ${this.pollAnswer.answer}</div>`,'',{closeButton:true, timeOut:4000, progressBar:true, enableHtml:true}
-        )
 
       //  this.toastr.success('Recommendation is : ' + this.pollComment + ', Answer is ' + this.pollAnswer.answer);
         this.showResult = true;

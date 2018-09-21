@@ -24,7 +24,7 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
   @Input()
   agencySel: String
 
-  loading: boolean;
+  loading: boolean = false;
   searchAgencyResult(arg0: any): any {
     throw new Error("Method not implemented.");
   }
@@ -165,10 +165,14 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
           }
         }).bind(this));
         this.loading = false;
-      },err => {
-        this.loading = false;
+      },
+      error => {
+        this.toastr.error(JSON.parse(error._body).statusDesc, '');
         this.isActiveList = false;
+        this.loading = false;
+  
       });
+      this.loading = false;
     }, 2000);
     // } else {
     //   this.isActiveListEn = false;
@@ -198,6 +202,7 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
     let eDate;
     let sT;
     let eT;
+    this.loading = true;
 
     this.portalService.getCalendarEvents().subscribe(data => {
 
@@ -267,7 +272,7 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
         }
         //
         this.event = [];
-
+        this.loading = false;
 
       // });
     });
@@ -279,6 +284,7 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
     let eDate;
     let sT;
     let eT;
+    this.loading = true;
 
     this.portalService.getCalendarEventsByAgencyID(aId).subscribe(data => {
 
@@ -347,18 +353,20 @@ export class EventCalendarComponent implements OnInit, AfterViewInit, AfterConte
         }
         //
         this.event = [];
+        this.loading = false;
 
       // });
+    },
+    error => {
+      this.toastr.error(JSON.parse(error._body).statusDesc, '');
+      this.loading = false;
+
     });
   }
 
   getOptions(calEvent, mediaPath) {
 
     setTimeout(()=>{
-      // this.getEvents();
-
-      //
-      //
 
       this.options = {
         locale: this.localeVal?this.localeVal: this.lang,

@@ -54,7 +54,12 @@ import { GalleryComponent } from './gallery/gallery.component';
 import { TrafficinfoComponent } from './trafficinfo/trafficinfo.component';
 import { PerhilitanComponent } from './perhilitan/perhilitan.component';
 import { ReplacementmycardComponent } from './replacementmycard/replacementmycard.component';
+import { ReplacementmsgComponent } from './replacementmsg/replacementmsg.component';
 import { PerhilitanrenewComponent } from './perhilitanrenew/perhilitanrenew.component';
+import { RssmainComponent } from './article/rss/rssmain/rssmain.component';
+import { FamilyinfoComponent } from './familyinfo/familyinfo.component';
+import { FamilyinfotblComponent } from './familyinfo/familyinfotbl/familyinfotbl.component';
+import { CheckexamresultComponent } from './checkexamresult/checkexamresult.component';
 
 //import { GalleryComponent } from './gallery/gallery.component';
 // import { NavRouterActivator } from './header/nav/nav-router-activator.service'
@@ -73,10 +78,10 @@ export const protectedRoutes: Routes = [
     {path: 'appsmgmt', component: AppManagementComponent},
     {path: 'index', component: HomeProtectedComponent},
     {path: 'firsttime', component: FirsttimeloginComponent},
-    {path: 'search/searchResult/:id', component: SearchResultProdComponent},
+    {path: 'search/:id', component: SearchResultProdComponent},
     {path: 'eparticipation', component: EparticipationComponent},
     {path: 'category/:id', component: ArticleprodComponent, canActivate: [NavRouterActivator]  },
-    {path: 'rss/:id', component: RssComponent},
+    {path: 'rss/:id', component: RssmainComponent},
     {path: 'rss/id/:id', component: RssComponent},
     {path: 'subcategory/:id1', component: SubarticleprodComponent },
     {path: 'content/:id1', component: ContentProdComponent},
@@ -113,12 +118,18 @@ export const protectedRoutes: Routes = [
     {path: 'pdrm/police-report', component: PolicereportComponent},
     {path: 'pdrm/summon-traffic', component: SummontrafficComponent},
     {path: 'pdrm/status-position', component: StatuspositionComponent},
-    {path: 'school-search', component: SchoolsearchComponent},
+    {path: 'education', component: SchoolsearchComponent},
     {path: 'trafficinfo', component: TrafficinfoComponent },
     {path: 'perhilitan', component: PerhilitanComponent},
     {path: 'perhilitan/:id', component: PerhilitanComponent},
     {path: 'perhilitan_renew', component: PerhilitanrenewComponent},
+    {path: 'perhilitan_renew/:id', component: PerhilitanrenewComponent},
+    {path: 'familyinfo', component: FamilyinfotblComponent},
+    {path: 'familyinfo/:id', component: FamilyinfoComponent},
+    {path: 'familyinfo/add', component: FamilyinfoComponent},
     {path: 'get_user_approval', component: ReplacementmycardComponent},
+    {path: 'thanks', component: ReplacementmsgComponent},
+    {path: 'exam_result', component: CheckexamresultComponent},
     {path: '**', component: ErrorComponent}
     //{path: 'user', loadChildren: 'app/user/user.module#UserModule'}
 ];

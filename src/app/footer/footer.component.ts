@@ -40,6 +40,7 @@ export class FooterComponent implements OnInit, OnDestroy {
   dateOfUpdate=[];
   private subscriptionLang: ISubscription;
   private subscription: ISubscription;
+  loading: boolean = false;
 
   constructor(private translate: TranslateService,
     private router: Router, private http: Http,
@@ -82,18 +83,16 @@ export class FooterComponent implements OnInit, OnDestroy {
 
   private footerUrl: string = this.config.urlFooter;
 
+  boolCallback = (result: boolean) : void => {
+   this.loading = result;
+  }
+
   ngOnDestroy() {
     this.subscriptionLang.unsubscribe();
     this.subscription.unsubscribe();
   }
 
   ngOnInit() {
-    // this.langID = 0;
-    // if (this.lang === 'ms') {
-    //   this.langID = 2;
-    // }else {
-    //   this.langID = 1;
-    // }
 
     if(!this.langID){
       this.langID = localStorage.getItem('langID');
@@ -101,7 +100,6 @@ export class FooterComponent implements OnInit, OnDestroy {
       this.langID = 1;
     }
     this.subscription = this.getFooter(this.langID);
-    //this.getFooter(this.langID);
   }
 
   getFooter(lang) {
@@ -137,6 +135,11 @@ export class FooterComponent implements OnInit, OnDestroy {
   }
 
   getUrl(ele){
+
+    if(ele === 'sitemap' || ele === 'statistic' || ele === 'calendar' || ele === 'subscription' || ele === 'feedback' || ele === 'agencydir' || ele == 'onlineservice')
+      this.navService.loader = false;
+    else
+      this.navService.loader = true;
 
     let split_url = ele.split('/');
 

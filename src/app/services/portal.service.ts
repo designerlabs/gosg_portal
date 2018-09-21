@@ -8,24 +8,33 @@ import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/retry';
 import { TranslateService, LangChangeEvent } from "@ngx-translate/core";
 import { ToastrService } from 'ngx-toastr';
+import { ActivatedRoute, Router, ParamMap } from '@angular/router';
+import { StatisticService } from '../statistic/statistic.service';
 
 
 @Injectable()
 export class PortalService {
   lang = this.lang;
   langId = this.langId;
+  loader:boolean = false;
+  catData: any;
+  allUsersData: any;
+  newUsersData: any;
+  totalUsers: any;
+  totalNewUsers: any;
 
   constructor(private http: Http, @Inject(APP_CONFIG) private config: AppConfig,  private translate: TranslateService,
-  private toastr: ToastrService,) {
+  private toastr: ToastrService, private route: ActivatedRoute, private router: Router, private statisticservice: StatisticService) {
 
     translate.onLangChange.subscribe((event: LangChangeEvent) => {
-
+                  this.loader = true;
                   const myLang = translate.currentLang;
 
                   if (myLang == 'en') {
                       translate.get('HOME').subscribe((res: any) => {
                           this.lang = 'en';
                           this.langId = 1;
+                          this.loader = false;
                       });
 
                   }
@@ -33,6 +42,7 @@ export class PortalService {
                       translate.get('HOME').subscribe((res: any) => {
                           this.lang = 'ms';
                           this.langId = 2;
+                          this.loader = false;
                       });
                   }
 
@@ -71,9 +81,12 @@ export class PortalService {
   private trafficPredictionUrl: string = this.config.UrlTrafficPredictionAPI;
 
   private internalUrl: string = this.config.urlIntSearch;
+  private subStatusUrl: string = this.config.urlSubStatus;
 
   private portalUrl: string = this.config.urlPortal;
   private protected: string = this.config.urlProtected;
+  private dserviceValidationUrl: string = this.config.urlDserviceValidation;
+  private dserviceTrackingUrl: string = this.config.urlDserviceTracking;
 
   getAgencyApp(){
     return this.http.get(this.AgencyAppUrl + '.json')
@@ -180,6 +193,20 @@ export class PortalService {
     .catch(this.handleError);
   }
 
+  triggerSiteMap(lang) {
+
+    this.loader = true;
+    this.catData = [''];
+
+    return this.route.paramMap
+      .switchMap((params: ParamMap) =>
+        this.getSitemapData(lang))
+      .subscribe(resCatData => {
+        this.catData = resCatData;
+        this.loader = false;
+      });
+  }
+
   // STATISTIC
   getStatisticData(type) {
     //
@@ -187,6 +214,31 @@ export class PortalService {
     .map((response: Response) => response.json())
     .retry(5)
     .catch(this.handleError);
+  }
+
+  triggerStatistic(type) {
+
+    this.loader = true;
+
+    return this.route.paramMap
+      .switchMap((params: ParamMap) =>
+        this.getStatisticData(type))
+      .subscribe(resStatData => {
+
+        if (type == 1) {
+          this.allUsersData = [''];
+          this.statisticservice.allUser = resStatData.rows;
+          this.totalUsers = resStatData.totalsForAllResults['ga:Users'];
+
+        } else if (type == 2) {
+          this.newUsersData = [''];
+
+          this.statisticservice.newUser = resStatData.rows;
+          this.totalNewUsers = resStatData.totalsForAllResults['ga:newUsers'];
+        }
+
+        this.loader = false;
+      });
   }
 
   getDserviceRptData(lng) {
@@ -279,6 +331,13 @@ export class PortalService {
     .catch(this.handleError);
   }
 
+  getSubmissionStatus(refNo, lng) {
+
+    return this.http.get(this.subStatusUrl+refNo+"?language="+lng, '').map((response:Response) => response.json())
+    .retry(5)
+    .catch(this.handleError);
+  }
+
   // END AGENCIES DIRECTORY
 
   // NEW
@@ -348,6 +407,8 @@ export class PortalService {
       .retry(5)
       .catch(this.handleError);
   }
+
+
 
 
 // ONLINE SEARCH
@@ -429,6 +490,29 @@ export class PortalService {
     .map((response: Response) => response.json())
     .retry(5)
     .catch(this.handleError);
+  }
+
+  // Dservice validation by DService RefCode
+  validateDserviceByRefCode(dsvcCode){
+
+    return this.http
+    .get(this.dserviceValidationUrl+dsvcCode)
+    .map((response: Response) => response.json())
+    .retry(5)
+    .catch(this.handleError);
+  }
+
+  sendTrackingCount(dserviceCode, agcCode) {
+
+    let body = {
+      "agencyCode": agcCode,
+      "serviceCode": dserviceCode
+
+    }
+    return this.http.post(this.dserviceTrackingUrl+"?language="+localStorage.getItem('langID'), body)
+      .map((response: Response) => response.json())
+      .retry(5)
+      .catch(this.handleError);
   }
 
 }

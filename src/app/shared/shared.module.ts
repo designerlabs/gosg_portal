@@ -42,7 +42,7 @@ import { SearchService } from '../search/search.service';
 
 import { TopicFeatureComponent } from '../topic-feature/topic-feature.component';
 import { FooterComponent } from '../footer/footer.component';
-import { HighlightboxComponent } from '../highlightbox/highlightbox.component';
+// import { HighlightboxComponent } from '../highlightbox/highlightbox.component';
 
 import { ErrorComponent } from "../error/error.component";
 
@@ -59,7 +59,6 @@ import { AnnouncementlistService } from "../announcementlist/announcementlist.se
 
 import { HomeComponent } from "../home/home.component";
 import { TransService } from '../services/trans.service';
-import { FeedbackComponent } from '../feedback/feedback.component';
 import { ConfirmComponent } from '../message/confirm.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
@@ -71,7 +70,6 @@ import { DatePipe } from '@angular/common';
 import { AgencydirectoryComponent } from '../agencydirectory/agencydirectory.component';
 
 import { SidenavmainComponent } from "../sidenavmain/sidenavmain.component";
-// import { LoadingModule } from 'ngx-loading';
 
 import {
       MatButtonModule,
@@ -135,8 +133,13 @@ import { StatisticComponent } from '../statistic/statistic.component';
 import { SitemapComponent } from '../sitemap/sitemap.component';
 import { GalleryService } from '../gallery/gallery.service';
 import { GalleryComponent, DialogDataExampleDialog } from '../gallery/gallery.component';
-import { SchoolsearchComponent } from '../schoolsearch/schoolsearch.component';
+import { SchoolsearchComponent, SchoolPopupDialog } from '../schoolsearch/schoolsearch.component';
 import { TrafficinfoComponent } from '../trafficinfo/trafficinfo.component';
+import { SearchPipe } from '../pipe/search.pipe';
+import { SharedLoaderComponent } from '../loader/shared-loader.component';
+import { RssmainComponent } from '../article/rss/rssmain/rssmain.component';
+import { TruncatePipe } from '../pipe/truncate.pipe';
+import { StatisticService } from '../statistic/statistic.service';
 
 // import { LifeeventComponent } from '../lifeevent/lifeevent.component';
 //import { GalleryService } from '../gallery/gallery.service';
@@ -173,7 +176,7 @@ export function HttpLoaderFactory(http: Http) {
 	  NgxPaginationModule,
     ModalModule.forRoot(),
     // LoadingModule,
-    LeafletModule.forRoot()
+    LeafletModule.forRoot(),
 
   ],
 
@@ -203,11 +206,10 @@ export function HttpLoaderFactory(http: Http) {
 
     TopicFeatureComponent,
     FooterComponent,
-    HighlightboxComponent,
+    // HighlightboxComponent,
     ErrorComponent,
     PollComponent,
     BreadcrumbComponent,
-    FeedbackComponent,
     ConfirmComponent,
     SharedPipe,
     ConfirmDialogComponent,
@@ -225,7 +227,12 @@ export function HttpLoaderFactory(http: Http) {
     GalleryComponent,
     DialogDataExampleDialog,
     SchoolsearchComponent,
-    TrafficinfoComponent
+    TrafficinfoComponent,
+    SearchPipe,
+    SharedLoaderComponent,
+    RssmainComponent,
+    // TruncatePipe,
+    SchoolPopupDialog
     // SearchResultComponent
   ],
 
@@ -255,11 +262,10 @@ export function HttpLoaderFactory(http: Http) {
     DataprotectionComponent,
     TopicFeatureComponent,
     FooterComponent,
-    HighlightboxComponent,
+    // HighlightboxComponent,
     ErrorComponent,
     PollComponent,
     BreadcrumbComponent,
-    FeedbackComponent,
     ConfirmComponent,
     SetactiveComponent,
     BrowserAnimationsModule,
@@ -317,7 +323,8 @@ export function HttpLoaderFactory(http: Http) {
      MatPaginatorModule,
      SharedPipe,
      EventCalendarComponent,
-     AgencydirectoryComponent
+     AgencydirectoryComponent,
+     SearchPipe
     //  SearchResultComponent
 
   ],
@@ -335,8 +342,9 @@ export function HttpLoaderFactory(http: Http) {
     TransService, DialogsService,
     SearchService,
     NavRouterGuardService,
-    GalleryService
+    GalleryService,
+    StatisticService
   ],
-  entryComponents: [DialogDataExampleDialog],
+  entryComponents: [DialogDataExampleDialog, SchoolPopupDialog],
 })
 export class SharedModule { }

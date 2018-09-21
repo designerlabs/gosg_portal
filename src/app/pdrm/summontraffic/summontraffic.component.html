@@ -1,3 +1,4 @@
+<gosg-protected-loader [loader]="loading"></gosg-protected-loader>
 <div class="container-fluid animated slideInDown" style="background: #a7a495;">
     <div class="container">
          <div class="row">
@@ -31,13 +32,90 @@
         <br>
         <form [formGroup]="searchForm" #adSearchForm="ngForm" id="adSearch-form" role="form" novalidate="novalidate">
 
-            <div class="example-container mat-elevation-z8 padding-right20" >
+            <div class="example-container">
 
+                <div class="row marginRow">
+                    <div class="col-md-4 text-center paddingT">
+                        <img src="assets/images/semak_saman_trafik.jpg">
+                    </div>
+
+                    <div class="col-md-8 infoPDRM blackFont borderDiv">
+                        <div class="col-md-12 boldInfo"><br>
+                            {{ 'pdrm.attention' | translate }}<br>
+                            {{ 'pdrm.summon' | translate}}
+                        </div>
+
+                        <div class="col-md-4">                      
+                            <label class="labelInfo">{{ 'pdrm.placeholder.typeInfo' | translate }}</label>
+                        </div>
+
+                        <div class="col-md-8" *ngIf="langID==1">
+                            <mat-form-field class="example-full-width">
+                                <mat-select formControlName="optSelect" placeholder="" (change)="getSelection($event)">
+                                    <mat-option [value]=0>IDENTIFICATION CARD NO.</mat-option>
+                                    <mat-option [value]=1>CAR REG. NO.</mat-option>                   
+                                </mat-select>
+                            </mat-form-field>
+                        </div>  
+                        
+                        <div class="col-md-8" *ngIf="langID==2">
+                            <mat-form-field class="example-full-width">
+                                <mat-select formControlName="optSelect" placeholder="" (change)="getSelection($event)">
+                                    <mat-option [value]=0>NO. KAD PENGENALAN</mat-option>
+                                    <mat-option [value]=1>NO. KENDERAAN</mat-option>                   
+                                </mat-select>
+                            </mat-form-field>
+                        </div>  
+
+                        <div class="col-md-4">                      
+                            <label class="labelInfo">{{ 'pdrm.placeholder.noic' | translate }}</label>
+                        </div>
+
+                        <div class="col-md-8">
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="" formControlName="ic" (keyup)="checkReqValues()" required tabindex="2" style="color: black">
+                                <mat-error *ngIf="searchForm.controls.ic.hasError('required')">
+                                    {{ 'pdrm.placeholder.noic' | translate }} {{ 'pdrm.err.needed' | translate }}
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-4" *ngIf="varSelect==1">                      
+                            <label class="labelInfo">{{ 'pdrm.placeholder.noCar' | translate }} <span class="redFont">*</span></label>
+                        </div>
+
+                        <div class="col-md-8" *ngIf="varSelect==1">
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="" formControlName="noCar" (keyup)="checkReqValues()"
+                                required tabindex="3"  style="color: black">
+                                <mat-error *ngIf="searchForm.controls.noCar.hasError('required')">
+                                    {{ 'pdrm.placeholder.noCar' | translate }} {{ 'pdrm.err.needed' | translate }}
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-12 paddingB">
+                            <button *ngIf="varSelect==1" tabindex="" mat-raised-button color="warn" type="button" id="btnreset" 
+                                class="form-control btn btn-md btn-warning font-size-s pull-right bttnCustom"
+                                (click)="resetModal.show()" style="margin-left: 5px;">
+                                <i class="fa fa-refresh"></i> {{'feedback.label.reset' | translate }}</button>
+                            <button mat-raised-button type="button" color="primary" id="searchbtn" 
+                                class="form-control btn btn-md btn-success font-size-s pull-right bttnCustom" [disabled]="!complete"
+                                (click)="searchApp(searchForm.value)">
+                                <i class="fa fa-search"></i> {{'appmngt.setSearch.search' | translate}}</button>
+                        </div>
+                        
+                    </div>
+                </div>
+            
+            </div>
+
+            <!-- <div class="example-container mat-elevation-z8 padding-right20" >
                 
                 <div class="row padding-15">
 
                     <div class="col-md-3">
-                        <mat-form-field>
+                        <mat-form-field class="example-full-width">
                             <mat-select formControlName="optSelect" placeholder="" (change)="getSelection($event)">
                                 <mat-option [value]=0>NO. KAD PENGENALAN</mat-option>
                                 <mat-option [value]=1>NO. KENDERAAN</mat-option>                   
@@ -46,7 +124,7 @@
                     </div>
 
                     <div class="col-md-3" *ngIf="varSelect==0">
-                        <mat-form-field>
+                        <mat-form-field class="example-full-width">
                             <input matInput placeholder="No. Kad Pengenalan" formControlName="ic" (keyup)="checkReqValues()"
                             (keydown)="isNumber($event)" maxlength="12" required tabindex="2" style="color: black">
                             <mat-error *ngIf="searchForm.controls.ic.hasError('required')">
@@ -56,7 +134,7 @@
                     </div>
 
                     <div class="col-md-3" *ngIf="varSelect==1">
-                        <mat-form-field>
+                        <mat-form-field class="example-full-width">
                             <input matInput placeholder="No. Kenderaan" formControlName="noCar" (keyup)="checkReqValues()"
                             required tabindex="3"  style="color: black">
                             <mat-error *ngIf="searchForm.controls.noCar.hasError('required')">
@@ -65,8 +143,8 @@
                         </mat-form-field>
                     </div>
 
-                    <div class="col-md-6">
-                        <button tabindex="" mat-raised-button color="warn" type="button" id="btnreset" 
+                    <div class="col-md-3 pull-right" style="padding-top: 7px;">
+                        <button *ngIf="varSelect==1" tabindex="" mat-raised-button color="warn" type="button" id="btnreset" 
                             class="form-control btn btn-md btn-warning font-size-s pull-right bttnCustom"
                             (click)="resetModal.show()" style="margin-left: 5px;">
                             <i class="fa fa-refresh"></i> {{'feedback.label.reset' | translate }}</button>
@@ -77,93 +155,104 @@
                     </div>
                 </div>
 
-            </div>
+            </div> -->
 
         </form>
     </div><br>
   
     <div *ngIf="showDetails">
         <div class="row container">
-            <div class="col-md-12" style="color: black; font-weight: bold;">
-                STATUS SAMAN TRAFIK PDRM<br>
+            <div class="col-md-12 boldInfo">
+                <span>{{ 'pdrm.titleSummon' | translate }}</span><br>
                 <hr class="lineHr" style="border-top: #9c9c9d 2px solid;">
             </div>
         </div>
 
-        <!-- <div class="row container">
-            <div class="col-md-3" style="color: black">
-                No. Kad Pengenalan Baru<br>
-                Nama<br>
-                Jumlah Saman<br>
-                Jumlah Amaun (RM)
+        <div class="row container blackFont">
+            <div class="col-md-3">
+                {{ 'pdrm.title.icno' | translate }}
             </div>
 
-            <div class="col-md-9" style="color: black; font-weight: bold;">
-                {{kp}}<br>
-                {{name}}<br>
-                {{summon}}<br>
-                {{ammount}}
-            </div>
-        </div>  -->
-
-        <div class="row container" style="padding-left: 30px;">
-            <table class="mat-table" style="width:100%; z-index: 9999;">
-                <tr class="mat-header-row" style="height:45px; font-weight: bold;">
-                    <th width="5%" class="mat-header-cell text-center">{{'appmngt.tableHeader.num' | translate}}</th>
-                    <th width="15%" class="mat-header-cell">No. Kenderaan</th>
-                    <th class="mat-header-cell">No. Saman</th>
-                    <th width="15%" class="mat-header-cell text-center">Tarikh & Masa Kesalahan</th>
-                    <th width="15%" class="mat-header-cell">Tempat Kesalahan</th>
-                    <th width="10%" class="mat-header-cell text-right">Amaun (RM)</th>
-                    <th width="10%" class="mat-header-cell text-center">Imej</th>
-                </tr>
-                <tr class="mat-row" *ngFor="let data of dataSummons.summonDetails; let i = index;" role="row">
-                    <td class="mat-cell text-center">{{i+1}}</td>
-                    <td class="mat-cell">{{data.vehicle_registration_number}}</td>
-                    <td class="mat-cell">{{data.summons_id_key}}</td>
-                    <td class="mat-cell text-center">{{data.offence_date}} & {{data.offence_time}}</td>
-                    <td class="mat-cell">{{data.offence_location}}</td>
-                    <td class="mat-cell text-right">{{data.summons_amt}}</td>
-                    <td class="mat-cell text-center">-</td>
-                </tr>
-                <tr *ngIf="showNoData">
-                    <td colspan="8" class="showData">
-                    <hr><br>{{'common.showNoData' | translate}}</td>
-                </tr>
-            </table>
-                  
-            <mat-form-field style="width:50px;">
-                <mat-select class="font-size-s" value="10" (change)="pageChange($event)">
-                    <mat-option value="5">5</mat-option>
-                    <mat-option value="10">10</mat-option>
-                    <mat-option value="25">25</mat-option>
-                    <mat-option value="50">50</mat-option>
-                </mat-select>
-            </mat-form-field>
-                  
-            <div style="float:right; margin-top: 10px;">
-                <span style="color:#000; padding-right:20px;">{{ 'appmngt.tablebottom.page' | translate }} 
-                    <strong>{{dataAppPage?.pageNumber}}</strong> {{ 'appmngt.tablebottom.of' | translate }} 
-                    <strong>{{dataAppPage?.totalPages}}</strong> 
-                    <!-- {{ 'appmngt.tablebottom.in' | translate }} 
-                    <strong>{{dataAppPage?.totalElements}}</strong> {{ 'appmngt.tablebottom.app' | translate }} -->
-                </span>
-                <button mat-mini-fab color="basic" [disabled]="noPrevData" (click)="paginatorL(dataAppPage?.pageNumber)">
-                    <i class="fa fa-angle-left" aria-hidden="true"></i></button>
-                <button mat-mini-fab color="basic" [disabled]="noNextData"  (click)="paginatorR(dataAppPage?.pageNumber, dataAppPage?.totalPages)">
-                    <i class="fa fa-angle-right" aria-hidden="true"></i></button>
+            <div class="col-md-9 boldInfo">
+                {{this.dataSummons.summonDetails[0].offender_ic}}
             </div>
 
+            <div class="col-md-3">
+                {{ 'pdrm.title.name' | translate }}
+            </div>
+
+            <div class="col-md-9 boldInfo">
+                {{this.dataSummons.summonDetails[0].offender_name}}
+            </div>
+
+            <div class="col-md-3">
+                {{ 'pdrm.title.total_summon' | translate }}
+                <!-- Jumlah Amaun (RM) -->
+            </div>
+
+            <div class="col-md-9 boldInfo">
+                {{this.dataSummons.summonDetails.length}}
+                <!-- {{ammount}} -->
+            </div>
+        </div><br>
+
+        <div class="row container paddingLR">
+            <table class="mat-table tableWidth">
+                <tr class="mat-header-row tableHeader">
+                    <th width="5%" class="mat-header-cell paddingR">&nbsp;&nbsp;{{'appmngt.tableHeader.num' | translate}}</th>
+                    <th width="10%" class="mat-header-cell paddingR">{{'pdrm.title.car' | translate}}</th>
+                    <th width="20%" class="mat-header-cell paddingR">{{'pdrm.title.summon_no' | translate}}</th>
+                    <th width="15%" class="mat-header-cell paddingR">{{'pdrm.title.dateTime' | translate}}</th>
+                    <th width="10%" class="mat-header-cell paddingR">{{'pdrm.title.location2' | translate}}</th>
+                    <th width="10%" class="mat-header-cell paddingR">{{'pdrm.title.info' | translate}}</th>
+                    <th width="10%" class="mat-header-cell text-right paddingR">{{'pdrm.title.amount' | translate}}</th>
+                    <th width="5%" class="mat-header-cell text-center paddingR">SH</th>
+                    <th width="5%" class="mat-header-cell text-center paddingR">OP</th>
+                    <th width="10%" class="mat-header-cell text-center paddingR">{{'pdrm.title.image' | translate}}</th>
+                </tr>
+                <tr class="mat-row table_row table_row_height" *ngFor="let data of dataSummons.summonDetails; let i = index;" role="row">
+                    <td class="mat-cell text-center paddingR">{{i+1}}</td>
+                    <td class="mat-cell paddingR">{{data.vehicle_registration_number}}</td>
+                    <td class="mat-cell paddingR">{{data.summons_id_key}}</td>
+                    <td class="mat-cell paddingR">{{data.offence_date}} & {{data.offence_time}}</td>
+                    <td class="mat-cell paddingR">{{data.offence_location}}</td>
+                    <td class="mat-cell paddingR">{{data.offence_location}}</td>
+                    <td class="mat-cell text-right paddingR">{{data.summons_amt}}</td>
+                    <td class="mat-cell text-center paddingR">-</td>
+                    <td class="mat-cell text-center paddingR">-</td>
+                    <td class="mat-cell text-center paddingR">-</td>
+                </tr>
+                <tr class="mat-row table_row table_row_height" *ngIf="showNoData">
+                    <td colspan="10" class="mat-cell paddingR">
+                    <span class="redFont">{{'pdrm.err.summon' | translate}}</span></td>
+                </tr>
+            </table>                  
+        </div><br>
+
+        <div class="row container paddingLR30">
+            <div class="col-md-12 boldInfo borderDiv">
+                <label class="">Petunjuk:</label><br>
+                <label class="">SH - Saman Senarai Hitam</label><br>
+                <label class="">OP - Kesalahan Trafik Dilakukan Semasa Operasi Berkuatkuasa</label><br>
+            </div>
         </div>
-    </div>
-  
-    <div *ngIf="dataSummons">
+
         <div class="row container">
-            <div class="col-md-12" style="color: black; font-weight: bold; text-align: center;">
+            <div class="col-md-12 boldInfo"><br>
+                <label class="redFont">Kadar kompaun saman berdasarkan prinsip "The More You Delay, The More You Pay". Sila buat bayaran saman secepat mungkin. 
+                    Lesen memandu & lesen kenderaan motor tidak boleh diperbaharui setelah no kad pengenalan disenarai
+                    hitamkan dalam sistem mySIKAP, Jabatan pengankutan jalan.</label><br>
+            </div>
+        </div>
+    </div><br>
+  
+    <!-- <div *ngIf="showNoData">
+        <div class="row container">
+            <div class="col-md-12 boldCenterInfo">
                 ANDA TIADA SAMAN TRAFIK.<br>
             </div>
         </div>
-    </div>
+    </div><br> -->
 </div>
   
 <app-confirm-dialog #resetModal 

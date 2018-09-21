@@ -1,3 +1,5 @@
+<gosg-portal-loader [loader]="loading"></gosg-portal-loader>
+<gosg-protected-loader [loader]="loading"></gosg-protected-loader>
 <div class="container-fluid animated slideInDown" style="background: #a7a495;">
   <div class="container">
       <div class="row">
@@ -19,7 +21,7 @@
       </div>
   </div>
 </div>
-<div class="container ds-style">
+<div class="container ds-style" *ngIf="!isLogin || isLogin && validMyIdentity">
   <div class="row container">
     <div *ngIf="!isLogin" class="col-md-12 textCenter">
       <h3 class="">{{ 'digitalservices.msg.beforeLogin' | translate }}</h3>
@@ -39,11 +41,12 @@
                   <h4>{{ dsvc.title }}</h4>
                   <ul *ngFor="let d of dsvc.details" style="padding:10px 0px 5px 25px; ">
                       <li class="no-styles">
-                          <a *ngIf="isLogin" [href]="d.url">{{ d.title }}</a>
-                          <a *ngIf="!isLogin" (click)="openDialog()" style="cursor: pointer;">{{ d.title }}</a>
+                          <a *ngIf="isLogin" (click)="toValidate(d.code,d.url, dsvc.agency.agencyCode, d.common)">{{ d.title }}</a> <!-- [href]="d.url" -->
+                          <a *ngIf="!isLogin && d.common" (click)="toTrack(d.code,d.url, dsvc.agency.agencyCode, d.common)">{{ d.title }}</a> <!-- [href]="d.url" -->
+                          <a *ngIf="!isLogin && !d.common" (click)="openDialog()" style="cursor: pointer;">{{ d.title }}</a>
                           &nbsp;
-                          <a *ngIf="isLogin" [href]="mediaUrl + d.manual?.mediaFile" data-toggle="tooltip" target="_blank" title="{{ d.description }}"><span *ngIf="d.manual" class="fa fa-info-circle clickable-icons"></span> </a>
-                          <a *ngIf="!isLogin" (click)="openDialog()" title="{{ d.description }}" style="cursor: pointer;"><span *ngIf="d.manual" class="fa fa-info-circle clickable-icons"></span> </a>
+                          <a *ngIf="isLogin || d.common" [href]="mediaUrl + d.manual?.mediaFile" data-toggle="tooltip" target="_blank" title="{{ d.description }}"><span *ngIf="d.manual" class="fa fa-info-circle clickable-icons"></span> </a>
+                          <a *ngIf="!isLogin && !d.common" (click)="openDialog()" title="{{ d.description }}" style="cursor: pointer;"><span *ngIf="d.manual" class="fa fa-info-circle clickable-icons"></span> </a>
                       </li>
                     </ul>
                 </li>
@@ -51,4 +54,8 @@
       </div>
   </div>
   <div class="col-md-12">&nbsp;</div>
+</div>
+
+<div class="container ds-style" *ngIf=" isLogin && !validMyIdentity">
+  <h3>{{ 'digitalservices.msg.access' | translate }}</h3>
 </div>

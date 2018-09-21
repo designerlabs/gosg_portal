@@ -1,4 +1,4 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable, Inject  } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { Http, Response } from '@angular/http';
@@ -26,12 +26,18 @@ export class NavService {
   breadcrumb: any;
   isValid: any;
   topicStatus: any;
+  loader:boolean = false;
   dataT: any;
   private myMethodSubject = new Subject<any>();
   announces: any[];
   private subscriptionLang: ISubscription;
+  private articleContent: ISubscription;
+
   lang: string;
   langId: number;
+  loading:boolean = false;
+  archives: any[];
+  restricted = true;
 
   // tslint:disable-next-line:max-line-length
   constructor(private http: Http, @Inject(APP_CONFIG) private config: AppConfig, private translate: TranslateService, private route: ActivatedRoute, private router: Router, private breadcrumbService: BreadcrumbService, private galleryService: GalleryService, private articleService: ArticleService, private announceService: AnnouncementlistService) {
@@ -44,12 +50,13 @@ export class NavService {
     this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
 
       const myLang = translate.currentLang;
-
+      // this.loader = true;
       if (myLang == 'en') {
 
         translate.get('HOME').subscribe((res: any) => {
           this.lang = 'en';
           this.langId = 1;
+          // this.loader = false;
           // this.moduleName = this.router.url.split('/')[1];
           // this.topicID = parseInt(this.router.url.split('/')[2]);
           // this.navService.triggerArticle(this.moduleName, this.langId, this.topicID);
@@ -61,6 +68,7 @@ export class NavService {
         translate.get('HOME').subscribe((res: any) => {
           this.lang = 'ms';
           this.langId = 2;
+          // this.loader = false;
           // this.moduleName = this.router.url.split('/')[1];
           // this.topicID = parseInt(this.router.url.split('/')[2]);
           // this.subID = parseInt(this.router.url.split('/')[3]);
@@ -87,7 +95,7 @@ export class NavService {
   private urlAnnouncement: string = this.config.urlAnnouncementSub;
   private subUrl: string = this.config.urlSubtopic;
   private popularUrl: string = this.config.urlPopularSearch;
-
+  private highlightUrl: string = this.config.urlHighlights;
 
 
   getMenuData(lang): Observable<IMenu[]> {
@@ -97,6 +105,16 @@ export class NavService {
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
 
   }
+
+
+  getHotTopics(lang): Observable<IMenu[]> {
+
+    return this.http.get(this.highlightUrl + '?language=' + lang)
+      .map((response: Response) => response.json().list)
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+
+  }
+
 
 
   getFAQData(lang): Observable<IMenu[]> {
@@ -168,6 +186,30 @@ export class NavService {
       return this.http.get(this.config.urlPortal + moduleName + '/' +ID + '?language=' + lang)
         .take(1)
         .map((response: Response) => response.json().contentCategoryResource.results)
+
+        // .catch((error:any) =>
+        // Observable.throw(error.json().error || 'Server error')
+        // );
+        .catch(
+        (err: Response, caught: Observable<any[]>) => {
+          if (err !== undefined) {
+            this.router.navigate(['/404']);
+            return Observable.throw('The Web server (running the Web site) is currently unable to handle the HTTP request due to a temporary overloading or maintenance of the server.');
+          }
+          return Observable.throw(caught); // <-----
+        }
+        );
+    }
+  }
+
+
+  getRSSData(moduleName, lang: string, ID: number): Observable<boolean[]> {
+
+    if (!isNaN(ID)) {
+
+      return this.http.get(this.config.urlPortal + moduleName + '/' +ID + '?language=' + lang)
+        .take(1)
+        .map((response: Response) => response.json().results)
 
         // .catch((error:any) =>
         // Observable.throw(error.json().error || 'Server error')
@@ -281,6 +323,7 @@ export class NavService {
         (err: Response, caught: Observable<any[]>) => {
           if (err !== undefined) {
             this.router.navigate(['/404']);
+            this.loader = false;
             return Observable.throw('The Web server (running the Web site) is currently unable to handle the HTTP request due to a temporary overloading or maintenance of the server.');
           }
           return Observable.throw(caught); // <-----
@@ -335,8 +378,10 @@ export class NavService {
 
   triggerSubArticle(subID, lang) {
    // alert("Trigger sub acrticle");
+    this.loader = true;
+
     if (!isNaN(subID)) {
-      this.articleService.articles = [''];
+     this.articleService.articles = [''];
       this.articles = [''];
       return this.route.paramMap
         .switchMap((params: ParamMap) =>
@@ -347,12 +392,13 @@ export class NavService {
           this.breadcrumb = this.breadcrumbService.getBreadcrumb();
           this.isValid = this.breadcrumbService.isValid = true;
           this.breadcrumb = this.breadcrumb.name = '';
-
+          this.loader = false;
         });
     }
   }
 
   triggerSubArticleOther(subID, lang, url) {
+    this.loader = true;
     // alert("Trigger sub acrticle");
      if (!isNaN(subID)) {
        this.articleService.articles = [''];
@@ -366,12 +412,14 @@ export class NavService {
            this.breadcrumb = this.breadcrumbService.getBreadcrumb();
            this.isValid = this.breadcrumbService.isValid = true;
            this.breadcrumb = this.breadcrumb.name = '';
+           this.loader = false;
 
          });
      }
    }
 
    triggerSubArticleAgency(lang) {
+      this.loader = true;
     // alert("Trigger sub acrticle");
        this.articleService.articles = [''];
        this.articles = [''];
@@ -384,6 +432,7 @@ export class NavService {
            this.breadcrumb = this.breadcrumbService.getBreadcrumb();
            this.isValid = this.breadcrumbService.isValid = true;
            this.breadcrumb = this.breadcrumb.name = '';
+           this.loader = false;
 
          });
 
@@ -391,6 +440,8 @@ export class NavService {
 
   triggerContent(subID, lang) {
     // alert("Trigger sub acrticle");
+      this.loader = true;
+
      if (!isNaN(subID)) {
        this.articleService.articles = [''];
        this.articles = [''];
@@ -403,12 +454,14 @@ export class NavService {
            this.breadcrumb = this.breadcrumbService.getBreadcrumb();
            this.isValid = this.breadcrumbService.isValid = true;
            this.breadcrumb = this.breadcrumb.name = '';
+           this.loader = false;
 
          });
      }
    }
 
    triggerContentOther( subID, lang, url) {
+    this.loader = true;
     // alert("Trigger sub acrticle");
      if (!isNaN(subID)) {
        this.articleService.articles = [''];
@@ -422,13 +475,14 @@ export class NavService {
            this.breadcrumb = this.breadcrumbService.getBreadcrumb();
            this.isValid = this.breadcrumbService.isValid = true;
            this.breadcrumb = this.breadcrumb.name = '';
-
+           this.loader = false;
          });
      }
    }
 
 
   triggerSubRss(topicID, subID, lang) {
+    this.loader = true;
     // alert("Trigger sub acrticle");
      if (!isNaN(subID)) {
       this.articleService.articles = [''];
@@ -442,50 +496,81 @@ export class NavService {
            this.breadcrumb = this.breadcrumbService.getBreadcrumb();
            this.isValid = this.breadcrumbService.isValid = true;
            this.breadcrumb = this.breadcrumb.name = '';
-
+           this.loader = false;
          });
      }
    }
 
    triggerArticle(moduleName, lang, topicID) {
+
+    this.loader = true;
+
+
      if (!isNaN(topicID)) {
        this.articles = [''];
        this.articleService.articles = [''];
        return this.route.paramMap
          .switchMap((params: ParamMap) =>
-           this.getArticleData(moduleName, this.langId.toString(), topicID))
+           this.getArticleData(moduleName, lang, topicID))
          .subscribe(resSliderData => {
            this.articleService.articles = resSliderData;
            this.articles = resSliderData;
            this.breadcrumb = this.breadcrumbService.getBreadcrumb();
            this.isValid = this.breadcrumbService.isValid = true;
            this.breadcrumb = this.breadcrumb.name = '';
+
+           this.loader = false;
          });
      }
    }
 
-
-   triggerArticleOthers(moduleName, lang, topicID, url) {
+   triggerRSS(moduleName, lang, topicID) {
+    // this.loader = true;
     if (!isNaN(topicID)) {
       this.articles = [''];
       this.articleService.articles = [''];
       return this.route.paramMap
         .switchMap((params: ParamMap) =>
-          this.getArticleDataOther(moduleName, this.langId.toString(), topicID, url))
+          this.getRSSData(moduleName, lang, topicID))
         .subscribe(resSliderData => {
           this.articleService.articles = resSliderData;
           this.articles = resSliderData;
           this.breadcrumb = this.breadcrumbService.getBreadcrumb();
           this.isValid = this.breadcrumbService.isValid = true;
           this.breadcrumb = this.breadcrumb.name = '';
+          this.loader = false;
+        });
+    }
+  }
+
+
+   triggerArticleOthers(moduleName, lang, topicID, url) {
+    this.loader = true;
+    if (!isNaN(topicID)) {
+      this.archives = [''];
+      this.articleService.archives = [''];
+      return this.route.paramMap
+        .switchMap((params: ParamMap) =>
+          this.getArticleDataOther(moduleName, lang, topicID, url))
+        .subscribe(resSliderData => {
+          this.articleService.archives = resSliderData;
+          this.archives = resSliderData;
+          this.breadcrumb = this.breadcrumbService.getBreadcrumb();
+          this.isValid = this.breadcrumbService.isValid = true;
+          this.breadcrumb = this.breadcrumb.name = '';
+          this.loader = false;
         });
     }
   }
 
    triggerGalleries(lang, galleryID?) {
+
+    // this.loader = true;
+
     //  if (!isNaN(galleryID)) {
        this.galleries = [''];
        this.galleryService.galleries = [''];
+
        return this.route.paramMap
          .switchMap((params: ParamMap) =>
            this.getGalleryData(lang, galleryID))
@@ -495,6 +580,7 @@ export class NavService {
            this.breadcrumb = this.breadcrumbService.getBreadcrumb();
            this.isValid = this.breadcrumbService.isValid = true;
            this.breadcrumb = this.breadcrumb.name = '';
+           this.loader = false;
          });
     //  }
    }
@@ -533,6 +619,7 @@ export class NavService {
   }
 
   triggerAnnouncementList(lang, id1) {
+    // this.loader = true;
         if (lang === 'ms') {
             lang = 2;
         }
@@ -553,11 +640,13 @@ export class NavService {
             this.breadcrumb = this.breadcrumbService.getBreadcrumb();
             this.isValid = this.breadcrumbService.isValid = true;
             this.breadcrumb = this.breadcrumb.name = '';
+            this.loader = false;
         });
         }
     }
 
     triggerAnnouncementDetails(moduleName, lang, id1, id2) {
+      // this.loader = true;
         if (lang === 'ms') {
             lang = 2;
         }
@@ -572,6 +661,7 @@ export class NavService {
             this.breadcrumb = this.breadcrumbService.getBreadcrumb();
             this.isValid = this.breadcrumbService.isValid = true;
             this.breadcrumb = this.breadcrumb.name = '';
+            this.loader = true;
         });
     }
 

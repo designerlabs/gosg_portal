@@ -35,6 +35,7 @@ export class ContentComponent implements OnInit, OnDestroy {
 
   articleData: any;
   @Output() langChange = new EventEmitter();
+  loading: boolean;
 
   handleClickMe(e){
 
@@ -104,6 +105,9 @@ export class ContentComponent implements OnInit, OnDestroy {
    lang = this.lang;
    langId = this.langId;
 
+   boolCallback = (result: boolean) : void => {
+    this.loading = result;
+   }
 
   ngOnInit() {
 
@@ -119,6 +123,8 @@ export class ContentComponent implements OnInit, OnDestroy {
     var tt = this.router.url.split('/');
     this.subID = parseInt(tt[tt.length-1]);
 
+    this.loading = true;
+
     this.navService.triggerContent(this.subID, localStorage.getItem('langID'));
     this.score = new FormControl('', [Validators.required]);
     this.remarks = new FormControl('');
@@ -129,9 +135,6 @@ export class ContentComponent implements OnInit, OnDestroy {
     });
 
   }
-
-
-
 
   ngOnDestroy() {
     this.subscriptionLang.unsubscribe();
@@ -191,6 +194,7 @@ export class ContentComponent implements OnInit, OnDestroy {
   }
 
   clickSideMenu(e, status, event){
+    this.navService.loader = true;
     this.statusID = status;
     // this.navService.getSubArticleUrl( e.categoryId, localStorage.getItem('langID'));
     // this.navService.triggerSubArticle(e.categoryCode, localStorage.getItem('langID'));
@@ -199,6 +203,7 @@ export class ContentComponent implements OnInit, OnDestroy {
   }
 
   clickSideMenuByAgency(e, status, event){
+    this.navService.loader = true;
     this.navService.getSubArticleUrlByAgency(localStorage.getItem('langID'));
     this.navService.triggerSubArticleAgency(localStorage.getItem('langID'));
     this.router.navigate(['/subcategory', 'agency']);
@@ -206,6 +211,7 @@ export class ContentComponent implements OnInit, OnDestroy {
   }
 
   clickContentFromMenu(pId, aId, status, event){
+    this.navService.loader = true;
     this.statusID = status;
     this.navService.triggerContent(aId, localStorage.getItem('langID'));
     this.navService.getContentUrl(aId, localStorage.getItem('langID'));

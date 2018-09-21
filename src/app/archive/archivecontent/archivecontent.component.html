@@ -1,9 +1,8 @@
-
 <div class="container-fluid animated slideInDown" style="background: #a7a495;">
   <div class="container" *ngFor="let article of articleService.articles">
    <div class="row">
       <div class="col-md-12">
-          <h1 style="margin-top: 10px;" class="font-size-l">{{article.categoryName}}</h1>
+          <h1 style="margin-top: 10px;" class="font-size-l" [innerHTML]="article.categoryName"></h1>
           <hr class="hr-custom2">
           <ul class="list-inline" style="clear:both;">
               <li>
@@ -15,8 +14,8 @@
               <li>
                   <div *ngFor="let article of articleService.articles">
                    <div *ngFor="let breadCrum of article.breadcrum; let i = index; let lastItem = last" style="display: inline;">
-                     <a *ngIf="breadCrum.breadcrumUrl" href="" [routerLink]="['/archive/'+getModule(breadCrum.breadcrumUrl), getID(breadCrum.breadcrumUrl)]">{{breadCrum.breadcrumName}}</a>
-                     <a *ngIf="!breadCrum.breadcrumUrl">{{breadCrum.breadcrumName}}</a>
+                     <a *ngIf="breadCrum.breadcrumUrl" href="" [routerLink]="['/archive/'+getModule(breadCrum.breadcrumUrl), getID(breadCrum.breadcrumUrl)]" [innerHTML]="breadCrum.breadcrumName"></a>
+                     <a *ngIf="!breadCrum.breadcrumUrl" [innerHTML]="breadCrum.breadcrumName"></a>
                      <span>{{lastItem ? '' : '&nbsp;/&nbsp;'}}</span>
                    </div>
                   </div>
@@ -32,12 +31,7 @@
       <div class="col-sm-3">
           <div class="row">
               <div class="col-md-12 sideBarMenu">
-                  <h4 class="sideBarMenu--title padding-bottom-l font-size-m warna_font">
-                      {{article.categoryName}}
-
-                  </h4>
-
-
+                  <h4 class="sideBarMenu--title padding-bottom-l font-size-m warna_font" [innerHTML]="article?.categoryName"></h4>
                   <mat-accordion>
                       <gosg-leftmenu [sessions]="article.menuLeft"  [menuType]="moduleName" [templateName]="article.template"></gosg-leftmenu>
                     </mat-accordion>
@@ -49,9 +43,7 @@
       <div class="col-sm-6">
         <div class="row">
           <div class="col-md-12 warna_font">
-            <h2 class="titleWObg font-size-l">
-                {{article.content?.contentTitle}}
-            </h2>
+            <h2 class="titleWObg font-size-l" [innerHTML]="article.content?.contentTitle"></h2>
 
             <span *ngIf="article.content?.contentDescription !== '-'" class="font-size-s defaultColor" [innerHTML]="article.content?.contentDescription"></span>
 

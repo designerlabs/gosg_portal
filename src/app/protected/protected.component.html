@@ -1,16 +1,25 @@
+<gosg-protected-loader [loader]="navService.loader"></gosg-protected-loader>
+<gosg-shared-loader [loader]="navService.loader"></gosg-shared-loader>
+<div class="app-invalid" *ngIf="nonValidUser && !isFirstLogin">
+  <div style="width: 35%; height: auto; background: #212121;">
+      <h3 style="text-align: center; line-height: 35px">{{msgInvalidUser}}</h3>
+      <div  style="text-align: center;"><h4>{{config.adminEmail}}</h4></div>
+      <p style="text-align: center;">{{'common.seconds1' | translate }} {{countDown | async}} {{'common.seconds2' | translate }} </p>
+  </div>
+</div>
 <div *ngIf="!isFirstLogin">
   <div [ngStyle]="{'min-height': clientHeight + 'px', 'margin-bottom': '-200px'}">
-    <ngx-loading [show]="loading" [config]="{ fullScreenBackdrop: true }"></ngx-loading>
-    <app-topnav [state]='getUserName' [getMail]='getEmail' [getName]='getFullname' class="top-nav-style" (showProfile)="showProfile($event)" (topNavClick)="getExpand($event)"
+
+    <app-topnav *ngIf="navService.restricted" [state]='getUserName' [getMail]='getEmail' [getName]='getFullname' class="top-nav-style" (showProfile)="showProfile($event)" (topNavClick)="getExpand($event)"
       [style.background]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'" [style.z-index]="this.zIndex" [style.height]="this.bHeight"></app-topnav>
-    <app-nav [validMyIdentity]='validMyIdentity' [state]='getUserName' class="nav-bar-style" [style.top]="this.bTop" [style.z-index]="this.zIndex2"></app-nav>
-    <app-breadcrumb></app-breadcrumb>
+    <app-nav [validMyIdentity]='validMyIdentity' [getPassPort]="getPassport" [state]='getUserName' [ngClass]="{'nav-bar-style': navService.restricted, 'nav-bar-style-common': !navService.restricted}" [style.top]="this.bTop" [style.z-index]="this.zIndex2"></app-nav>
+    <app-breadcrumb *ngIf="navService.restricted"></app-breadcrumb>
     <router-outlet [state]='getUserName' [getMail]='getEmail' [getName]='getFullname'></router-outlet>
     <div style="height: 200px"></div>
   </div>
   <!-- <gosg-sidenavmain></gosg-sidenavmain> -->
-  <gosg-sidenavprotected></gosg-sidenavprotected>
-  <app-footer></app-footer>
+  <gosg-sidenavprotected [state]='getUserName'></gosg-sidenavprotected>
+  <app-footer *ngIf="navService.restricted"></app-footer>
 </div>
 
 <gosg-firsttimelogin *ngIf="isFirstLogin" [loginfirst]='isFirstLogin'></gosg-firsttimelogin>

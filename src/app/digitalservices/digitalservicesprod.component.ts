@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
+import { Component, OnInit, Inject, OnDestroy, Input } from '@angular/core';
 import { Http } from '@angular/http';
 import { PortalService } from '../services/portal.service';
 import { DialogsService } from '../dialogs/dialogs.service';
@@ -22,6 +22,8 @@ export class DigitalservicesprodComponent implements OnInit, OnDestroy {
   languageId = this.languageId;
   mediaUrl: any;
   isLogin: boolean;
+  loading: boolean;
+  validMyIdentity:boolean;
 
   lang = this.lang;
   private subscription: ISubscription;
@@ -67,6 +69,8 @@ export class DigitalservicesprodComponent implements OnInit, OnDestroy {
     this.mediaUrl = this.config.externalMediaURL + '/documents/';
     this.getDServices(this.languageId);
     this.getUserData();
+    window.scrollTo(0,0);
+
   }
 
   ngOnDestroy() {
@@ -76,9 +80,11 @@ export class DigitalservicesprodComponent implements OnInit, OnDestroy {
 
   getDServices(lang) {
 
+    this.loading = true;
     this.portalservice.getDigitalServices(lang).subscribe(data => {
 
       this.dsData = data.list;
+      this.loading = false;
       //
       // for(var item of data.list) {
       //
@@ -87,6 +93,11 @@ export class DigitalservicesprodComponent implements OnInit, OnDestroy {
       // }
       // this.dsData = [''];
 
+    },
+    error => {
+      this.toastr.error(JSON.parse(error._body).statusDesc, '');
+      this.loading = false;
+
     });
   }
 
@@ -94,8 +105,34 @@ export class DigitalservicesprodComponent implements OnInit, OnDestroy {
     if(!environment.staging){
     this.protectedService.getUser().subscribe(
       data => {
+        this.validMyIdentity = data.user.isMyIdentityVerified;
         this.isLogin = true;
+      },
+      error => {
+        this.toastr.error(JSON.parse(error._body).statusDesc, '');
+        this.loading = false;
+  
       });
+    } else {
+      this.validMyIdentity = true;
+      this.isLogin = true;
+    }
+}
+
+toValidate(dserviceCode, dUrl, agcCode, common?) {
+  // localStorage.setItem('referral',this.router.url.split('/')[1]);
+  // localStorage.setItem('dserviceCode',dserviceCode);
+  window.open(dUrl+'?service='+dserviceCode+'&agency='+agcCode, '_blank');
+
+  if(common) {
+    this.portalservice.sendTrackingCount(dserviceCode,agcCode).subscribe( 
+      data =>{
+    },
+    error => {
+      this.toastr.error(JSON.parse(error._body).statusDesc, '');
+      // this.loading = false;
+
+    });
   }
 }
 

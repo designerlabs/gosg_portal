@@ -58,7 +58,7 @@
           width: 100%;
           /* background: #1ebebc; */
           padding: 0px !important;
-          margin: 5px 0px !important;
+          margin: 0px 0px !important;
           display: block !important;
           position: relative;
           top: 0px;
@@ -112,6 +112,21 @@
             float: left;
             text-decoration: none;
         }
+
+        .intro-box-content{
+          background-color: #eaebed;
+          border-top: 3px solid #1ebebc;
+          margin-bottom: 20px;
+          padding: 0px 15px 15px 15px;
+          height: auto !important;
+          min-height: 115px;
+          display: inline-block;
+          width: 100%;
+          color:#333;
+          overflow: hidden;
+          float: left;
+          text-decoration: none;
+          }
 
         .intro-box:hover {
             text-decoration: none;
@@ -171,3 +186,69 @@
             .titleWObg{
                 color:#333;
             }
+
+            .pl-1 {
+                padding-left: 25px !important;
+            }
+
+@media only screen and (min-width: 320px) {
+    .sideBarMenu--title {
+        font-size: 20px;
+        color: #333;
+        font-weight: 600;
+        margin-bottom: 20px;
+        margin-left: 3%;
+    }
+
+    .pl-1 {
+        padding-left: 15px !important;
+    }
+}
+
+@media only screen and (min-width: 360px) {
+
+}
+
+@media only screen and (min-width: 480px) {
+    .sideBarMenu--title {
+        font-size: 20px;
+        color: #333;
+        font-weight: 600;
+        margin-bottom: 20px;
+        margin-left: 2%;
+    }
+}
+
+@media only screen and (min-width: 540px) {
+    .sideBarMenu--title {
+        font-size: 20px;
+        color: #333;
+        font-weight: 600;
+        margin-bottom: 20px;
+        margin-left: 0;
+    }
+
+    .pl-1 {
+        padding-left: 15px !important;
+    }
+}
+
+@media only screen and (min-width: 640px) {
+
+}
+
+@media only screen and (min-width: 768px) {
+
+}
+
+@media only screen and (min-width: 854px) {
+
+}
+
+@media only screen and (min-width: 960px) {
+
+}
+
+@media only screen and (min-width: 1024px) {
+
+}

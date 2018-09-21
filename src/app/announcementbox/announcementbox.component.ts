@@ -8,6 +8,7 @@ import { BreadcrumbService } from '../header/breadcrumb/breadcrumb.service';
 import { ISubscription } from 'rxjs/Subscription';
 import { TopnavService } from '../header/topnav/topnav.service';
 import { DatePipe } from '@angular/common';
+import { ToastrService } from '../../../node_modules/ngx-toastr';
 
 @Component({
   selector: 'app-announcementbox',
@@ -28,8 +29,9 @@ export class AnnouncementboxComponent implements OnInit, OnDestroy {
    private calendarUrl: string = this.config.urlCalendar;
    private subscription: ISubscription;
    private subscriptionLang: ISubscription;
+    loading: boolean = false;
 
-    constructor(private translate: TranslateService,
+    constructor(private toastr: ToastrService, private translate: TranslateService,
         private http: Http,
         @Inject(APP_CONFIG) private config: AppConfig,
         private route: ActivatedRoute,
@@ -90,6 +92,11 @@ export class AnnouncementboxComponent implements OnInit, OnDestroy {
             //
                 this.announcementData = data.contentCategoryResource.results[0];
                 //
+            },
+            error => {
+              this.toastr.error(JSON.parse(error._body).statusDesc, '');
+              this.loading = false;
+        
             });
     }
 
@@ -124,6 +131,11 @@ export class AnnouncementboxComponent implements OnInit, OnDestroy {
 
                 this.calendarData = calArr;
             }
+        },
+        error => {
+          this.toastr.error(JSON.parse(error._body).statusDesc, '');
+          this.loading = false;
+    
         });
     }
 
@@ -154,6 +166,11 @@ export class AnnouncementboxComponent implements OnInit, OnDestroy {
             this.breadcrumb = this.breadcrumbService.getBreadcrumb();
             this.isValid = this.breadcrumbService.isValid = true;
             this.breadcrumb = this.breadcrumb.name = '';
+        },
+        error => {
+          this.toastr.error(JSON.parse(error._body).statusDesc, '');
+          this.loading = false;
+    
         });
     }
 
