@@ -33,7 +33,12 @@ em{
 }
 
 
-
+@media all and (-ms-high-contrast:none)
+     {
+      .lifeevent_tab > .mat-tab-group > .mat-tab-header{
+        width:30%;
+      }
+     }
 
 
 .lifeevent_tab > .mat-tab-group > .mat-tab-header{
