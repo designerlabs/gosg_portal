@@ -104,7 +104,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
   millisec = 0;
   showNoData = false;
 
-  curr_data_lang: string = "English";
+  curr_data_lang: string = "Bahasa Malaysia";
 
   private subscription: ISubscription;
   private subscriptionLang: ISubscription;
@@ -317,10 +317,10 @@ export class SearchResultComponent implements OnInit, OnDestroy {
   changeCurrDataLang() {
     if(this.mainObj.filters.ref_language_id == "1") {
       this.mainObj.filters.ref_language_id = "2"
-      this.curr_data_lang = "Bahasa Malaysia";
+      this.curr_data_lang = "English";
     } else if(this.mainObj.filters.ref_language_id == "2") {
       this.mainObj.filters.ref_language_id = "1"
-      this.curr_data_lang = "English";
+      this.curr_data_lang = "Bahasa Malaysia";
     }
   }
 
