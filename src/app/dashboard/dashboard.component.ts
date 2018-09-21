@@ -121,7 +121,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       },
       error => {
         this.loading = false;
-        this.toastr.error(this.translate.instant('common.err.servicedown'), '');
+        // this.toastr.error(this.translate.instant('common.err.servicedown'), '');
     });
   }
 
