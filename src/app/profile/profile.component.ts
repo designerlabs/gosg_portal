@@ -152,7 +152,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   lang = this.lang;
   languageId = this.languageId;
   private uapstagingUrl: string = this.config.urlUapStagingProfile;
-
+  
   constructor(
     private http:HttpClient,
     private router: Router,
@@ -1382,10 +1382,8 @@ let bodyUpdate =
           if(!!data.user){
             window.location.href = this.uapstagingUrl+data.user.tag;
         }else{
-          //data.statusDesc
-            this.errMsg = "PLLL";
+            this.errMsg = data.statusDesc;
             this.infoModal.show();
-            console.log(this.errMsg);
         }
         }).bind(this));
         this.loading = false;
@@ -1398,9 +1396,6 @@ let bodyUpdate =
         this.loading = false;
       });
   };
-
-
-
 
   updateProfilePhone(formValues:any){
     this.loading = true;

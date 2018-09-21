@@ -341,11 +341,11 @@
                       style="width: 115px; font-family: Roboto;" (click)="showResetMsg()">
                       <i class="fa fa-refresh"></i> {{'feedback.label.reset' | translate }}</button> -->
                       <button *ngIf="isLocal" mat-raised-button type="button" color="primary" #updateBtn id="btnsubmit" class="form-control btn btn-md btn-success font-size-s"
-                      (click)="updateProfile(profileForm.value);false" style="width: 100px; font-family: Roboto; margin-left: 5px;" [disabled]="((gender.invalid || race.invalid || perAddress1.invalid || perStateLocal.invalid || perCityLocal.invalid || perPostcode.invalid || !!!dt) || initialBtn)">
+                      (click)="updateProfile(profileForm.value);false" [disabled]="((gender.invalid || race.invalid || perAddress1.invalid || perStateLocal.invalid || perCityLocal.invalid || perPostcode.invalid || !!!dt) || initialBtn)">
                       <i class="fa fa-check"></i> {{'profile.label.submit' | translate }}
                     </button>
                     <button *ngIf="!isLocal" mat-raised-button type="button" color="primary" #updateBtn id="btnsubmit" class="form-control btn btn-md btn-success font-size-s"
-                      (click)="updateProfile(profileForm.value);false" style="width: 100px; font-family: Roboto; margin-left: 5px;" [disabled]="((gender.invalid || race.invalid || perAddress1.invalid || perStateNotLocal.invalid || perCityNotLocal.invalid || perPostcodeNotLocal.invalid || !!!dt ) || initialBtn)">
+                      (click)="updateProfile(profileForm.value);false" [disabled]="((gender.invalid || race.invalid || perAddress1.invalid || perStateNotLocal.invalid || perCityNotLocal.invalid || perPostcodeNotLocal.invalid || !!!dt ) || initialBtn)">
                       <i class="fa fa-check"></i> {{'profile.label.submit' | translate }}
                     </button>
                   </div>
@@ -367,7 +367,7 @@
               </mat-error>
               <div class="form-group" style="float: right;">
                   <button mat-raised-button type="button" color="primary" class="form-control btn btn-md btn-success font-size-s"
-                  (click)="updateProfileEmail(emailForm.value);false" style="width: 100px; font-family: Roboto; margin-left: 5px;" [disabled]="emailaddressUpdate.invalid">
+                  (click)="updateProfileEmail(emailForm.value);false" [disabled]="emailaddressUpdate.invalid">
                   <i class="fa fa-check"></i> {{'profile.label.submit' | translate }}</button>
               </div>
             </form>
@@ -402,7 +402,7 @@
 
                 <div class="form-group" style="float: right;">
                     <button mat-raised-button type="button" color="primary" class="form-control btn btn-md btn-success font-size-s"
-                    (click)="updateProfilePhone(phoneForm.value);false" style="width: 100px; font-family: Roboto; margin-left: 5px;" [disabled]="telefonf.invalid || codeTelefonf.invalid">
+                    (click)="updateProfilePhone(phoneForm.value);false"  [disabled]="telefonf.invalid || codeTelefonf.invalid">
                     <i class="fa fa-check"></i> {{'profile.label.submit' | translate }}</button>
                 </div>
               </form>

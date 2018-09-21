@@ -253,7 +253,7 @@ export class SharedService {
     if(err.statusCode){
       let statusCode = err.statusCode.toLowerCase();
       if(statusCode == 'error'){
-        this.toastr.error(err.statusDesc, 'Error');
+        this.toastr.error(err.statusDesc, '');
       }else{
         callback()
       }
