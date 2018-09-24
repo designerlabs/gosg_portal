@@ -33,6 +33,6 @@
     {
         "url_image": "https://www.malaysia.gov.my/public/static/images/status-permohonan.jpg",
         "label": "CHECK APPLICATION STATUS",
-        "content": "Please insert application number to review status: Application Number REVIEW "
+        "content": "Please insert application number to review status: "
     }
 ]
