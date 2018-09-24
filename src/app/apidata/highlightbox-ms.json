@@ -35,6 +35,6 @@
     {
         "url_image": "https://www.malaysia.gov.my/public/static/images/status-permohonan.jpg",
         "label": "SEMAK PERMOHONAN",
-        "content": "Sila masukkan nombor permohonan untuk melakukan semakan: "
+        "content": "Sila masukkan <b>nombor permohonan</b> untuk melakukan semakan: "
     }
 ]

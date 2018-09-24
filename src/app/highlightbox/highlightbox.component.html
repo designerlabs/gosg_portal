@@ -39,8 +39,8 @@
                       <img src="{{permohonanImg}}" style="height: auto; width:100%;background-size: cover;"/>
                     <div class="lifeEventBox-title"><h2 class="font-size-l" style="font-family: Roboto;">{{statuslabel}}</h2></div>
                     <div class="lifeEventBox-description-status">
-                          <p class="font-size-s" style="font-family: Roboto;">
-                            {{statusContent}}
+                          <p class="font-size-s" style="font-family: Roboto;" [innerHTML]="statusContent">
+                            
                             </p>
                             <form [formGroup]="updateForm" class="search-permohonan">
                               <div class="form-group">
