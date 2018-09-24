@@ -5,10 +5,9 @@ export let APP_CONFIG = new InjectionToken<AppConfig>('app.config');
 
 let baseURL =  environment.mockApiURL;
 let uapURL = environment.uapURL;
-let regURL = environment.regURL;
 let mediaURL = environment.mediaURL;
 let searchURL = environment.miaugeoURL;
-let registrationUrl = regURL+'registration/';
+let registrationUrl = uapURL+'registration/';
 
 
 // common service
