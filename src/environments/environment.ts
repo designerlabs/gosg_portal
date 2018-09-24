@@ -7,6 +7,7 @@ export const environment = {
   production: false,
   staging: false,
   uapURL : '/',
+  regURL: 'http://10.29.56.158:8080/',
   mediaURL: '/',
   mockApiURL :'/',
   baseURL: '/',
