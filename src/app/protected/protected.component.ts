@@ -132,6 +132,7 @@ export class ProtectedComponent implements OnInit {
     if(!environment.staging){
       this.protectedService.getUser().subscribe(
         data => {
+          debugger;
           if(data.user){
             this.getUserName = data.user.fullName;
             this.getPassport = data.user.passportNo;
