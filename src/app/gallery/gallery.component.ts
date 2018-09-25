@@ -9,6 +9,8 @@ import { SharedService } from '../common/shared.service';
 import { ISubscription } from 'rxjs/Subscription';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 import { TopnavService } from '../header/topnav/topnav.service';
+import { PortalService } from '../services/portal.service';
+import { ToastrService } from 'ngx-toastr';
 
 export interface DialogData {
   type;
@@ -23,6 +25,8 @@ export interface DialogData {
   styleUrls: ['./gallery.component.css']
 })
 export class GalleryComponent implements OnInit, OnDestroy {
+  @Input()
+  agencySel: String
   statusID: any;
   subID: number;
   moduleName: string;
@@ -42,6 +46,8 @@ export class GalleryComponent implements OnInit, OnDestroy {
   isVideo:boolean;
   mediaTypeName: string;
   loading = false;
+  agencyData: any;
+  isActiveList: boolean = false;
 
   galleryData: any;
   @Output() langChange = new EventEmitter();
@@ -58,9 +64,11 @@ export class GalleryComponent implements OnInit, OnDestroy {
     private translate: TranslateService,
     private router: Router,
     private breadcrumbService: BreadcrumbService,
+    private toastr: ToastrService,
     private sharedService: SharedService,
     @Inject(APP_CONFIG) private config: AppConfig,
     private topnavservice: TopnavService,
+    private portalService:PortalService,
     public dialog: MatDialog
   ) {
 
@@ -116,6 +124,9 @@ export class GalleryComponent implements OnInit, OnDestroy {
   boolCallback = (result: boolean) : void => {
     this.loading = result;
   }
+  searchAgencyResult(arg0: any): any {
+    throw new Error("Method not implemented.");
+  }
 
   ngOnDestroy() {
     this.subscriptionLang.unsubscribe();
@@ -150,7 +161,7 @@ export class GalleryComponent implements OnInit, OnDestroy {
     clickSideMenu(id){
 
       this.statusID = status;
-      this.navService.triggerGalleries(localStorage.getItem('langID'), id);
+      this.navService.triggerGalleries(localStorage.getItem('langID'), id, null);
       // this.router.navigate(['gallery']);
       event.preventDefault();
     }
@@ -227,6 +238,48 @@ export class GalleryComponent implements OnInit, OnDestroy {
     downloadFile(filePath) {
       window.open(filePath);
     }
+
+    onScroll(event){
+  
+      //
+      if(event.target.scrollTop >= (event.target.scrollHeight - 250)) {
+        //
+        //
+  
+        let keywordVal;
+  
+        this.getSearchData(keywordVal, this.langId, 1, this.searchAgencyResult.length+10)
+        //
+      }
+    }
+
+    getSearchData(keyword, langId?, count?, page?){
+  
+      console.log(keyword.length)
+      if(keyword.length >= 3) {
+        this.loading = true;
+
+        this.navService.triggerGalleries(localStorage.getItem('langID'), 5, keyword);
+        this.loading = false;
+      } else if(keyword == '') {
+        this.resetSearch();
+        this.loading = false;
+      }
+    }
+
+    resetSearch() {
+      this.navService.triggerGalleries(localStorage.getItem('langID'), 5);
+    }
+  
+    // getValue(aId,aName,mName, refCode){
+  
+    //   //
+    //   this.agencySel = aName;
+    //   this.isActiveList = false;
+  
+    //   this.getEventByAgency(aId);
+  
+    // }
 
 }
 

@@ -148,14 +148,18 @@ export class NavService {
   }
 
 
-  getGalleryData(lang: string, ID?: number): Observable<boolean[]> {
+  getGalleryData(lang: string, ID?: number, keyword?: string): Observable<boolean[]> {
 
     let getApi;
 
-    if(ID)
-      getApi = this.config.urlGallery + '?language=' + lang+ '&id=' +ID;
-    else
+    if(ID) {
+      if(ID == 5 && keyword)
+        getApi = this.config.urlGallery + '?language=' + lang+ '&id=' +ID+'&agency='+keyword;
+      else
+        getApi = this.config.urlGallery + '?language=' + lang+ '&id=' +ID;
+    } else {
       getApi = this.config.urlGallery + '?language=' + lang;
+    }
 
     // if (!isNaN(ID)) {
 
@@ -563,9 +567,11 @@ export class NavService {
     }
   }
 
-   triggerGalleries(lang, galleryID?) {
+   triggerGalleries(lang, galleryID?, keyword?) {
 
     // this.loader = true;
+    if(galleryID == 5 && !keyword)
+      keyword = '';
 
     //  if (!isNaN(galleryID)) {
        this.galleries = [''];
@@ -573,7 +579,7 @@ export class NavService {
 
        return this.route.paramMap
          .switchMap((params: ParamMap) =>
-           this.getGalleryData(lang, galleryID))
+           this.getGalleryData(lang, galleryID, keyword))
          .subscribe(resGalleryData => {
            this.galleryService.galleries = resGalleryData;
            this.galleries = resGalleryData;
