@@ -34,7 +34,7 @@ export class FirsttimeloginComponent implements OnInit {
 
     if(!environment.staging){
       this.rndNo =  location.search.split('rnd=')[1];
-      
+
       this.interval = setInterval(() => {
         this.getConfirmation();
       }, 5000);
@@ -61,6 +61,7 @@ export class FirsttimeloginComponent implements OnInit {
       this.protectedservice.completeTran(this.rndNo)
         .subscribe(
             userData => {
+              debugger;
               if(userData.statusCode === 'Success'){
                 if(userData.statusDesc === 'Success'){
                   window.location.href = this.config.urlDashboard;
@@ -68,9 +69,9 @@ export class FirsttimeloginComponent implements OnInit {
                   window.location.href = userData.statusDesc;
                 }
               }else{
-                
+
                 clearInterval(this.interval);
-                
+
               }
               this.getUserData = userData.userTypeList;
 
