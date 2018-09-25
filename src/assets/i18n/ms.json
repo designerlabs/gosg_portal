@@ -344,7 +344,7 @@
       "beforeLogin": "Sila Log Masuk / Daftar Untuk Mengakses PERKHIDMATAN Yang Disediakan",
       "afterLogin": "Senarai perkhidmatan yang ditawarkan oleh Gerbang MyGovernment",
       "instruction": "Perkhidmatan yang ditawarkan oleh Gerbang MyGovernment perlu menggunakan nombor kad pengenalan bagi warganegara Malaysia",
-      "accessBeforeLogin":"Capaian kepada Perkhidmatan Digital adalah terhad kepada pengguna berdaftar sahaja. Bagi pengguna Portal MyGovernment sedia ada, sila buat pendaftaran semula dengan klik butang <b>Daftar</b>.",
+      "accessBeforeLogin":"Capaian kepada Perkhidmatan Digital adalah terhad kepada pengguna berdaftar sahaja.<br/> Bagi pengguna Portal MyGovernment sedia ada, sila buat pendaftaran semula dengan klik butang <b>Daftar</b>.",
       "access": "Maaf, Perkhidmatan Digital kami hanya ditawarkan kepada pengguna yang sah sahaja.",
       "accessNonCiti":"Maaf, Perkhidmatan Digital terhad untuk Warganegara Malaysia"
     }

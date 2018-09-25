@@ -344,7 +344,7 @@
       "beforeLogin": "Please Login / Register To Access Services Provided",
       "afterLogin": "Here are the services available.",
       "instruction": "The services available in MyGovernment need to use the identification number for citizens",
-      "accessBeforeLogin":"Access to Digital Services is intended to registered users only. For the existing MyGovernment Portal user, please re-register by clicking <b>Register</b> button",
+      "accessBeforeLogin":"Access to Digital Services is intended to registered users only.<br/> For the existing MyGovernment Portal user, please re-register by clicking <b>Register</b> button",
       "access": "Sorry, our Digital Services are available to authorized users only",
       "accessNonCiti":"Sorry, Digital Services limited for Malaysia's Citizen"
     }
