@@ -152,7 +152,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   lang = this.lang;
   languageId = this.languageId;
   private uapstagingUrl: string = this.config.urlUapStagingProfile;
-  
+
   constructor(
     private http:HttpClient,
     private router: Router,
@@ -898,7 +898,7 @@ getPostcodeByCityC(e){
     if(event.checked === true){
       this.loading = true;
       const readUrl = `${this.config.urlAgencyDservice}jkmservice/okustatus`;
-    return this.http.post(readUrl,'')
+    return this.http.get(readUrl)
       .subscribe(
         data => {
           if(data['resource'].isOku){
