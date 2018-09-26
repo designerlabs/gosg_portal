@@ -49,8 +49,7 @@
       </div>
     </div>
     <div class="col-md-9">
-      <div *ngIf="galleryService.galleries.mediaType == 'media by agency'" class="col-md 6 text-right">
-
+      <div *ngIf="galleryService.galleries.mediaType == 'media by agency'" class="text-right">
         <mat-form-field class="example-full-width">
           <input autocomplete="off" matInput tabindex="1" placeholder="{{ 'calendar.details.agency' | translate }}" [(ngModel)]="agencySel"
             (keyup)="getSearchData(agencySel)">
@@ -58,15 +57,6 @@
             <mat-icon style="color: #000">X</mat-icon>
           </button>
         </mat-form-field>
-
-        <!-- <div *ngIf="isActiveList" [ngClass]="{'listParent':(searchAgencyResult.length < 10),'listParent-w-scroll':(searchAgencyResult.length >= 10)}"
-          (scroll)="onScroll($event)">
-          <ul class="list-group pmd-z-depth pmd-list pmd-card-list pmd-list">
-            <li class="list-group-item" *ngFor="let data of searchAgencyResult">
-              <a class="list-link" (click)="getValue(data.agencyId, data.agencyName, data.agencyMinistry.ministryName, data.agencyCode)">{{data.agencyName}}</a>
-            </li>
-          </ul>
-        </div> -->
       </div>
     </div>
 
