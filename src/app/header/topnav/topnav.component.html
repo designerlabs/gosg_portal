@@ -73,7 +73,7 @@
           <li class="settingBtm">
               {{ 'home.menu.themecolor' | translate }}:
 
-              <input #colorPanel *ngFor="let color of getThemeColors; let i = index; let firstItem = first" (click)="setClickedColor(i, color.colorCode)" data-selected-id="color.colorId"  [class.colorPaletteActive]="color.defaultColor" type="button" name="bgColor" [(ngModel)]="bgColor" [ngStyle]="{'background': color.colorCode, 'border': '1px solid', 'border-color': color.colorCode}"  class="bgColorBtn bgColor" value="{{color.colorCode}}">
+              <input #colorPanel *ngFor="let color of getThemeColors; let i = index; let firstItem = first" splwpk-w3c="splwpk-w3c" (click)="setClickedColor(i, color.colorCode)" data-selected-id="color.colorId"  [class.colorPaletteActive]="color.defaultColor" type="button" name="bgColor" [(ngModel)]="bgColor" [ngStyle]="{'background': color.colorCode, 'border': '1px solid', 'border-color': color.colorCode}"  class="bgColorBtn bgColor" value="{{color.colorCode}}">
               <span><div (click)="resetBgColor()" class="btn btn-xs btn-default"><i class="fa fa-refresh"></i></div></span>
 
                <!-- <input #colorPanel *ngFor="let color of colors; let i = index; let firstItem = first" (click)="setClickedColor(i, firstItem)"  [class.colorPaletteActive]="i == selectedRow ? true: false" type="button" name="bgColor" [(ngModel)]="bgColor" [ngStyle]="{'background': color.bgColor, 'border': '1px solid', 'border-color': color.bgColor}"  class="bgColorBtn bgColor" value="{{color.bgColor}}">
@@ -84,15 +84,15 @@
           <li class="fontResize" style="margin-left: 5px">
             {{ 'home.menu.fontsize' | translate }} :
           </li>
-          <li class="fontResize"><button  [disabled]="minusBtn" class="btn btn-default fontminus" (click)="fontminus()" style="border:1px solid white;padding: 3px; height: 25px; width: 28px; font-size:14px;"><i class="fa fa-minus"></i>A</button></li>
-          <li class="fontResize"><button  [disabled]="plusBtn" class="fontplus btn btn-default"  (click)="fontplus()" style="border:1px solid white;padding: 3px; height: 25px; width: 28px; font-size:14px;"><i class="fa fa-plus"></i>A</button></li>
+          <li class="fontResize"><button splwpk-w3c="splwpk-w3c" [disabled]="minusBtn" class="btn btn-default fontminus" (click)="fontminus()" style="border:1px solid white;padding: 3px; height: 25px; width: 28px; font-size:14px;"><i class="fa fa-minus"></i>A</button></li>
+          <li class="fontResize"><button splwpk-w3c="splwpk-w3c" [disabled]="plusBtn" class="fontplus btn btn-default"  (click)="fontplus()" style="border:1px solid white;padding: 3px; height: 25px; width: 28px; font-size:14px;"><i class="fa fa-plus"></i>A</button></li>
           <span><div class="fontreset btn btn-xs btn-default" (click)="fontreset()"><i class="fa fa-refresh"></i></div></span>
             <li style="margin-left: 5px">
                 {{ 'home.menu.fonttype' | translate }} :
             </li>
             <li>
                 <label class="sr-only" for="fontOpt">Font Type</label>
-                <select #fontTy (change)="onChange($event, fontTy.value)" id="fontOptSideMenu2" class="form-control">
+                <select #fontTy (change)="onChange($event, fontTy.value)" splwpk-w3c="splwpk-w3c" id="fontOptSideMenu2" class="form-control">
                     <option *ngFor="let font of getThemeFonts;" [value]="font.fontName"  [selected]="font.defaultFont" >
                         {{font.fontName}}
                     </option>
