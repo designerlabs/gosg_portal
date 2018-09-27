@@ -264,7 +264,7 @@
         <b>{{'home.search.searchresult' | translate}}</b>
       </h3>
       </div>
-      <div class="col-md-3 paddingTop-15 text-right">
+      <div *ngIf="currTab != 2" class="col-md-3 paddingTop-15 text-right">
           <button mat-raised-button color="basic" (click)="searchByKeyword(ser_word, true)">{{ curr_data_lang }}</button>
       </div>
       <div class="example-full-width">
@@ -277,8 +277,8 @@
         </mat-form-field>
       </div>
 
-      <mat-tab-group #tabGroup (selectedTabChange)="changeTab($event)">
-        <mat-tab label="{{'home.search.local' | translate}}">
+      <mat-tab-group #tabGroup (selectedTabChange)="changeTab($event)" [selectedIndex]="currTab">
+        <mat-tab  label="{{'home.search.local' | translate}}">
           <div style="padding-top:5px;" *ngIf="totalElements < 10">
             {{totalElements}} {{'home.search.resultsfound' | translate}} {{millisec}} ms
           </div>

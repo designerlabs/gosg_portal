@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
+import { Component, OnInit, Inject, OnDestroy, Input, AfterViewInit } from '@angular/core';
 import { SharedService } from '../../common/shared.service';
 import { Router } from '@angular/router';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
@@ -22,7 +22,10 @@ declare var $: any;
   styleUrls: ['./search-result.component.css'],
 })
 
-export class SearchResultComponent implements OnInit, OnDestroy {
+
+export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
+  @Input()
+  selectedIndex: any | null;
 
   errorMessage: any;
   observableGlobalItem: any;
@@ -74,6 +77,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
   chkostitle = true;
   chkosdes = true;
   chkGlobValue = 'gov.my';
+  currTab: any;
 
   locUnchecked:any = 0;
   osUnchecked:any = 0;
@@ -105,6 +109,8 @@ export class SearchResultComponent implements OnInit, OnDestroy {
   showNoData = false;
 
   curr_data_lang: string = "Bahasa Malaysia";
+
+  reff: String;
 
   private subscription: ISubscription;
   private subscriptionLang: ISubscription;
@@ -281,14 +287,6 @@ export class SearchResultComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    // this.searchByKeyword('malaysia');
-    // let q_word = this.router.url.split('=')[1];
-    // if(q_word){
-    //   this.searchByKeyword(q_word);
-    // }else {
-    //   // this.toastr.error("Please enter a word to search");
-    // }
-    // localStorage.setItem('ser_word', this.ser_word);
 
     if(!this.languageId){
       this.languageId = localStorage.getItem('langID');
@@ -296,14 +294,27 @@ export class SearchResultComponent implements OnInit, OnDestroy {
       this.languageId = 1;
     }
 
+    if(!this.currTab){
+      this.currTab = parseInt(localStorage.getItem('currSearchTab'));
+    }else{
+      localStorage.setItem("currSearchTab", "0");
+      this.currTab = 0;
+    }
+
     this.getSearchUrl();
 
     this.date = moment();
 
     this.ser_word = localStorage.getItem('ser_word');
+
     if(this.ser_word.length > 0) {
+      this.tabIndex = this.currTab;
       this.searchByKeyword(this.ser_word);
     }
+  }
+
+  ngAfterViewInit() {
+    // this.selectedIndex = 2;
   }
 
   ngOnDestroy() {
@@ -390,8 +401,6 @@ export class SearchResultComponent implements OnInit, OnDestroy {
 
   changeAryVal(objs, type) {
 
-    // 
-
     let aryObj: any;
     let retn = [];
 
@@ -430,9 +439,22 @@ export class SearchResultComponent implements OnInit, OnDestroy {
   }
 
   changeTab(e) {
+    // console.log(e.index);
 
     let tabInx = e.index;
     this.tabIndex = e.index;
+
+    localStorage.setItem("currSearchTab", e.index);
+    this.currTab = localStorage.getItem("currSearchTab");
+
+    // if(!this.currTab) {
+    //   this.currTab = localStorage.getItem('currSearchTab');
+    // } else {
+    //   this.currTab = 1;
+    // }
+    
+    // this.selectedIndex = this.currTab;
+
     let k_word = '';
     if (this.ser_word.trim().length > 0) {
       k_word = this.ser_word.trim()
@@ -440,6 +462,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
       k_word = this.router.url.split('=')[1];
     }
     this.inpExcWord = '';
+
     if (tabInx === 0) {
 
       this.intData = [];
@@ -538,6 +561,31 @@ export class SearchResultComponent implements OnInit, OnDestroy {
   }
 
   searchByKeyword(valkeyword, opt?) {
+
+    let arrKeyword: any = [];
+    let arrKeywordeySetting: any = [];
+    let nullObj = {};
+    let payloadObj: Object;
+
+    let env = window.location.hostname;
+    let envOrigin = window.location.origin;
+    let localURL = envOrigin+'/gosg/';
+          
+    this.totalElements = 0;
+    let num;
+    let dataLength = 0;
+    let dataUrl = '';
+
+    if(opt) {
+      this.changeCurrDataLang();
+    } else {
+
+      if(this.languageId)
+        this.mainObj.filters.ref_language_id = this.languageId.toString();
+      else
+        this.mainObj.filters.ref_language_id = "1"
+    }
+
     // this.router.navigate(['search/searchResult/' + valkeyword]);
     let locStrgKword = localStorage.getItem('ser_word');
     let navKword = this.router.url.split("/")[2];
@@ -554,19 +602,6 @@ export class SearchResultComponent implements OnInit, OnDestroy {
       this.mainObj.keyword(decodeURI(valkeyword));
     }
 
-    let arrKeyword: any = [];
-    let arrKeywordeySetting: any = [];
-    let nullObj = {};
-    let payloadObj: Object;
-
-    let env = window.location.hostname;
-    let envOrigin = window.location.origin;
-    let localURL = envOrigin+'/gosg/';
-          
-    this.totalElements = 0;
-    let num;
-    let dataLength = 0;
-
     if (localStorage.getItem('ser_word').length === 0) {
       localStorage.setItem('ser_word', valkeyword);
     }
@@ -578,27 +613,9 @@ export class SearchResultComponent implements OnInit, OnDestroy {
         this.mainObj.from = this.pagefrom;
         this.mainObj.size = this.pagesize;
 
-        if(opt) {
-          this.changeCurrDataLang();
-        } else {
-
-          if(this.languageId)
-            this.mainObj.filters.ref_language_id = this.languageId.toString();
-          else
-            this.mainObj.filters.ref_language_id = "1"
-        }
-
       }
-      let dataUrl = '';
 
       // KEYWORD MAP AREA
-
-      // 
-      // 
-      // if (this.inpExcWord)
-        // 
-
-      // 
 
       if (this.tabIndex == 0)
         this.keywordMap.fields = this.locFields;
@@ -643,10 +660,10 @@ export class SearchResultComponent implements OnInit, OnDestroy {
         this.mainObj.aggregations = this.locAggregations;
         // 
 
-        if(env == 'localhost')
+        // if(env == 'localhost')
           dataUrl = this.internalUrl;
-        else
-          dataUrl = localURL+'content';
+        // else
+          // dataUrl = localURL+'content';
 
         // Search Specification
         if ((this.valTopic && this.valTopic.length >= 1) && this.category_topic) {
@@ -707,10 +724,10 @@ export class SearchResultComponent implements OnInit, OnDestroy {
         delete this.mainObj.aggregations;
         this.mainObj.aggregations = this.osAggregations;
 
-        if(env == 'localhost')
+        // if(env == 'localhost')
           dataUrl = this.osUrl;
-        else
-          dataUrl = localURL+'agency';
+        // else
+          // dataUrl = localURL+'agency';
 
         // Ministry Filter
         if (this.valMinistry) {
@@ -730,9 +747,8 @@ export class SearchResultComponent implements OnInit, OnDestroy {
       }
 
       this.loading = true;
-      // this.arymonth = [];
 
-      if (this.tabIndex == 0 || this.tabIndex == 1) { // INTERNAL & ONLINE SERVICES SEARCH
+      if (this.tabIndex === 0 || this.tabIndex === 1) { // INTERNAL & ONLINE SERVICES SEARCH
 
       return this.http.post(dataUrl, payloadObj)
         .map(res => res.json())

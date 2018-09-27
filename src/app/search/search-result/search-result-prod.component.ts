@@ -74,6 +74,7 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
   chkostitle = true;
   chkosdes = true;
   chkGlobValue = 'gov.my';
+  currTab: any;
 
   locUnchecked:any = 0;
   osUnchecked:any = 0;
@@ -296,6 +297,12 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
       this.languageId = 1;
     }
 
+    if(!this.currTab) {
+      this.currTab = localStorage.getItem('currSearchTab')
+    } else {
+      this.currTab = 1;
+    }
+
     this.getSearchUrl();
 
     this.date = moment();
@@ -433,6 +440,10 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
 
     let tabInx = e.index;
     this.tabIndex = e.index;
+
+    localStorage.setItem("currSearchTab", e.index);
+    this.currTab = localStorage.getItem("currSearchTab");
+    
     let k_word = '';
     if (this.ser_word.trim().length > 0) {
       k_word = this.ser_word.trim()

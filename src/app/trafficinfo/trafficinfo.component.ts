@@ -154,7 +154,7 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
   getDefaultMap() {
     this.mymap = L.map('dirmap').setView([3.141589, 101.674284], 13);
 
-    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+    L.tileLayer('https://tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png?access_token={accessToken}', {
       attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
       maxZoom: 17,
       id: 'mapbox.streets',
