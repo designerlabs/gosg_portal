@@ -227,13 +227,12 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
   middleMan(e) {
     // console.log(e);
     let currColor = e.target.options.color;
-    console.log(currColor);
     let sName = e.target.popup._content;
     let sLatLng = [e.latlng.lat,e.latlng.lng ];
     this.getTrafficPredictionData(sName, currColor, sLatLng, this.languageId);
   }
 
-  getTrafficPredictionData(sn, currClr, ltlg?, lng?) {
+  getTrafficPredictionData(sn, ltlg?, currClr?, lng?) {
 
     let trafficDetails = {
       "status": null,
