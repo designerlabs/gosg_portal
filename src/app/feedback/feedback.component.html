@@ -31,7 +31,7 @@
                 </div>
             </div>
 
-            <form [formGroup]="feedbackFormgrp" #fbForm="ngForm" id="feedback-form" role="form" novalidate="novalidate">
+            <form [formGroup]="feedbackFormgrp" #fbForm="ngForm" id="feedback-form" role="form" novalidate="novalidate" splwpk-feedback-form="splwpk-feedback-form">
                 <div class="col-md-12">
                     <div class="col-sm-6">
                         <mat-form-field class="example-full-width" style="width:100%">
@@ -70,13 +70,13 @@
                         </mat-form-field>
                         <div *ngIf="isAdmin" class="">
                                 <label class="font-size-s" for="fullname">{{'feedback.label.nameplh' | translate }}</label>
-                                <p class=" font-size-l" for="fullname">{{fullName}}</p>                             
+                                <p class=" font-size-l" for="fullname">{{fullName}}</p>
                         </div>
                         <!-- <mat-form-field class="example-full-width" style="width:100%" *ngIf="isAdmin">
                             <input matInput placeholder="{{'feedback.label.nameplh' | translate }}"
                                 [value]="fullName" formControlName="nama_penuh" readonly >
                         </mat-form-field> -->
-                      
+
 
 
                     </div>
@@ -95,7 +95,7 @@
                         </mat-form-field>
                         <div *ngIf="isAdmin" class="">
                                 <label class="font-size-s" for="fullname">{{'register.label.email' | translate }}</label>
-                                <p class=" font-size-l" for="fullname">{{emaiL}}</p>                             
+                                <p class=" font-size-l" for="fullname">{{emaiL}}</p>
                         </div>
                         <!-- <mat-form-field class="example-full-width" style="width:100%" *ngIf="isAdmin">
                             <input matInput formControlName="email" placeholder="{{'register.label.email' | translate }}" [value]="emaiL" readonly>
@@ -129,8 +129,8 @@
         </div>
     </div>
 </div>
-<app-confirm-dialog  #resetModal 
-[title]="'common.icon.warn'" 
+<app-confirm-dialog  #resetModal
+[title]="'common.icon.warn'"
 [content]="'common.msg.reset'"
 [state]="'common.state.warn'"
 [isReset]="'true'"

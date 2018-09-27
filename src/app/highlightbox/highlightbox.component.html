@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4 col-sm-6 col-xs-12 articleBox">
-                <span class="lifeEventBg warna_border_color" style="border-color: rgb(0, 189, 187);" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
+                <span class="lifeEventBg warna_border_color" style="border-color: rgb(0, 189, 187);" splwpk-broadcast="splwpk-broadcast" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
                     <img src="{{hotTopicImg}}" style="height: auto; width:100%;background-size: cover;"/>
                     <div class="lifeEventBox-title">
                       <h2 class="font-size-l" style="font-family: Roboto;">
@@ -40,7 +40,7 @@
                     <div class="lifeEventBox-title"><h2 class="font-size-l" style="font-family: Roboto;">{{statuslabel}}</h2></div>
                     <div class="lifeEventBox-description-status">
                           <p class="font-size-s" style="font-family: Roboto;" [innerHTML]="statusContent">
-                            
+
                             </p>
                             <form [formGroup]="updateForm" class="search-permohonan">
                               <div class="form-group">

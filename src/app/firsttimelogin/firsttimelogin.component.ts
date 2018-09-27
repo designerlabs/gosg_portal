@@ -34,7 +34,7 @@ export class FirsttimeloginComponent implements OnInit {
 
     if(!environment.staging){
       this.rndNo =  location.search.split('rnd=')[1];
-      
+
       this.interval = setInterval(() => {
         this.getConfirmation();
       }, 5000);
@@ -68,9 +68,9 @@ export class FirsttimeloginComponent implements OnInit {
                   window.location.href = userData.statusDesc;
                 }
               }else{
-                
+
                 clearInterval(this.interval);
-                
+
               }
               this.getUserData = userData.userTypeList;
 

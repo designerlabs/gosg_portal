@@ -96,19 +96,36 @@ export class ReplacementmycardComponent implements OnInit {
         
         this.new_redirect_url = this.new_redirect_url.replace(/%2F/g, "/");
        
-        window.open(this.new_redirect_url+"?status=ya", '_blank');
+        window.open(this.new_redirect_url+"?status=ya", '_self');
 
       } else {
         
-        window.open(newUrl+this.new_redirect_url+"?status=ya", '_blank');
+        window.open(newUrl+this.new_redirect_url+"?status=ya", '_self');
       }
 
     }
   }
 
   clickNo(){
-    history.pushState(null, null, 'get_user_approval');
-    this.thankMsg = true;
+    if(this.new_redirect_url){     
+      let newUrl = "http://";
+      
+      let httpStr = this.new_redirect_url.substring(0, 4);
+
+      if(httpStr.toLowerCase() == 'http' || httpStr.toLowerCase() == 'https'){
+        
+        this.new_redirect_url = this.new_redirect_url.replace(/%2F/g, "/");
+       
+        window.open(this.new_redirect_url+"?status=tidak", '_self');
+
+      } else {
+        
+        window.open(newUrl+this.new_redirect_url+"?status=tidak", '_self');
+      }
+
+    }
+    // history.pushState(null, null, 'get_user_approval');
+    // this.thankMsg = true;
 
     // location.href = "thanks";
     // window.open('thanks', '_self');

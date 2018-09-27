@@ -11,6 +11,7 @@
                 <div class="input-group" style="margin: 13px 0px;">
                     <input class="form-control" type="text" [(ngModel)]="keyword1" (keyup.enter)="mainSearch(keyword1)"
                            ngui-auto-complete
+                           splwpk-search-function = "splwpk-search-function"
                            [source]="autoCompleteArr"
                            placeholder="{{ 'home.search.instruction' | translate }}"
                            no-match-found-text=" ">

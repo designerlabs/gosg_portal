@@ -50,7 +50,7 @@ export class PollProtectedComponent implements OnInit, OnDestroy {
     private protectedService: ProtectedService,
     private topnavservice: TopnavService,) {
       this.lang = translate.currentLang;
-      this.languageId = 2;
+      //this.languageId = 2;
       this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
         // this.sharedService.errorHandling(event, (function(){
         const myLang = translate.currentLang;
@@ -87,6 +87,7 @@ export class PollProtectedComponent implements OnInit, OnDestroy {
 
 
   getData(languageId) {
+    
     return this.http.get(this.config.urlPoll + '/question/lang/' + languageId + '/?active=true')
       .map(res => res.json())
      .subscribe(eventData => {
