@@ -28,7 +28,7 @@
       <mat-form-field class="example-full-width">
         <input matInput [(ngModel)]="streetName" [ngModelOptions]="{standalone: true}"
           placeholder="{{ 'trafficinfo.filterby.streetname' | translate }}" (click)="isActiveList = true" autocomplete="off" style="color: #333">
-        <button mat-button *ngIf="streetName" matSuffix mat-icon-button (click)="streetName=''; getTrafficFlowData();isActiveList = true">
+        <button mat-button *ngIf="streetName" matSuffix mat-icon-button (click)="streetName=''; getTrafficFlowData(languageId);isActiveList = true">
           <mat-icon>x</mat-icon>
         </button>
         <!-- <mat-select placeholder="{{ 'trafficinfo.filterby.streetname' | translate }} ({{ totalRec }})" [(ngModel)]="streetName">

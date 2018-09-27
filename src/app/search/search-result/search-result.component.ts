@@ -309,7 +309,8 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
 
     if(this.ser_word.length > 0) {
       this.tabIndex = this.currTab;
-      this.searchByKeyword(this.ser_word);
+      if(this.tabIndex != 2)
+        this.searchByKeyword(this.ser_word);
     }
   }
 
