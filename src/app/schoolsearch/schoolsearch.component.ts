@@ -339,8 +339,8 @@ export class SchoolsearchComponent implements OnInit {
       // });
       // this.mymap.panTo([lat, long], { animate: true, easeLinearity: .20, duration: 2 });   
       //this.mymap.flyTo([dLat, dLong], 13);
-      this.mymap.flyTo([lat, long], 24);       
-      this.mymap.setView([lat, long], 24);  
+      this.mymap.flyTo([lat, long], 16);       
+      //this.mymap.setView([lat, long], 24);  
       this.popup = L.popup()
         .setLatLng([lat, long])
         .setContent(`
@@ -476,10 +476,11 @@ export class SchoolsearchComponent implements OnInit {
   }
 
   getDefaultMap() {
-    this.mymap = L.map('dirmap').setView([4.8142568, 108.5806004], 6.2);
+    this.mymap = L.map('dirmap').setView([4.8142568, 108.5806004], 6);
+    // L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
       attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-      maxZoom: 17,
+      maxZoom: 16,
       id: 'mapbox.streets', 
       accessToken: 'pk.eyJ1IjoicmVkemEiLCJhIjoiY2pmcGZxNzRrMjYzbzMwcG83bGRxY2FtZyJ9.uMHQpYc0Pvjl4us27nHH8w'
     }).addTo(this.mymap);
