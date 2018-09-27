@@ -56,10 +56,10 @@
       <div class="row" style="color: #1d1d1d; min-height: 280px">
         <!-- Predictions -->
         <div class="col-md-12">
-        <h5>{{ 'trafficinfo.label.prediction' | translate }}</h5>
-        <h5 *ngIf="!gotPrediction || showNoData"> - </h5>
-        <h5 *ngIf="gotPrediction && selStreetName.length > 30 && !showNoData" title="{{ selStreetName }}">{{ selStreetName | slice:0:30}}...</h5>
-        <h5 *ngIf="gotPrediction && selStreetName.length < 30 && !showNoData">{{ selStreetName }}</h5>
+        <h5 class="boldText">{{ 'trafficinfo.label.prediction' | translate }}</h5>
+        <h5 class="boldText" *ngIf="!gotPrediction || showNoData"> - </h5>
+        <h5 class="boldText" *ngIf="gotPrediction && selStreetName.length > 30 && !showNoData" title="{{ selStreetName }}">{{ selStreetName | slice:0:30}}...</h5>
+        <h5 class="boldText" *ngIf="gotPrediction && selStreetName.length < 30 && !showNoData">{{ selStreetName }}</h5>
         <table *ngIf="gotPrediction && !showNoData" class="table">
           <tbody>
             <tr>
