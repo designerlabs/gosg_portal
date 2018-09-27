@@ -196,8 +196,8 @@
       "updateFail": "Profile not updated.",
       "editbtnE" : "Edit activated.",
       "editbtnD" : "Edit deactivated.",
-      "OKUStatusSuccess":"OKU has been found!",
-      "OKUStatusFail":"OKU has been not found!"
+      "OKUStatusSuccess":"OKU Status has been found.",
+      "OKUStatusFail":"OKU Status has been not found."
     },
     "label":{
       "name":"Name",
