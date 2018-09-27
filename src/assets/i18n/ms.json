@@ -196,8 +196,8 @@
       "updateFail": "Kemaskini gagal.",
       "editbtnE" : "Kemaskini diaktifkan.",
       "editbtnD" : "Kemaskini tidak aktif.",
-      "OKUStatusSuccess":"OKU has been found!",
-      "OKUStatusFail":"OKU has been not found!"
+      "OKUStatusSuccess":"Status OKU dijumpai.",
+      "OKUStatusFail":"Status OKU tidak dijumpai."
     },
     "label":{
       "name":"Nama",
@@ -226,7 +226,7 @@
       "mobile":"No Telefon Bimbit",
       "codetel": "Kod",
       "submit":"Kemaskini",
-      "oku": "Memyemak OKU status"
+      "oku": "Menyemak OKU status"
     },
     "err": {
       "updateFail": "Kemaskini gagal!",

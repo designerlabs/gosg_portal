@@ -288,15 +288,13 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit() {
 
-    this.reff = document.referrer.split("/")[1];
-
     if(!this.languageId){
       this.languageId = localStorage.getItem('langID');
     }else{
       this.languageId = 1;
     }
 
-    if(!this.currTab && this.reff == 'search'){
+    if(!this.currTab){
       this.currTab = parseInt(localStorage.getItem('currSearchTab'));
     }else{
       localStorage.setItem("currSearchTab", "0");
