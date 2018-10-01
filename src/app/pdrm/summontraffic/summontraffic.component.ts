@@ -492,7 +492,7 @@ export class SummontrafficComponent implements OnInit {
             if (data.user) {
 
               this.searchForm.get('ic').setValue(data.user.identificationNo);
-
+              this.checkReqValues();
               
             } else {
               
