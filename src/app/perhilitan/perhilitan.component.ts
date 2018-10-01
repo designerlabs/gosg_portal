@@ -315,8 +315,9 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
 
           if(data.user){
             
-            let getObjKeys = Object.keys(data.resource);
+            let getObjKeys = Object.keys(data.user);
             this.valObj = getObjKeys.filter(fmt => fmt === "address");
+            console.log(this.valObj);
 
             if(this.valObj.length > 0){
               let phone = data.user.address.permanentAddressHomePhoneNo.split('*')[1];              
@@ -1732,7 +1733,8 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
     this.protectedService.create(body,'perhilitan/apply',this.langID, this.dsvcCode, this.agcCode).subscribe(
     data => {
       this.sharedService.errorHandling(data, (function () {
-        this.toastr.success(this.translate.instant('Permohonan Baru Lesen Peniaga/Taksidermi berjaya dihantar'), '');
+        // this.translate.instant('Permohonan Baru Lesen Peniaga/Taksidermi berjaya dihantar')
+        this.toastr.success(data.statusDesc, '');
         this.router.navigate(['appsmgmt']);
       }).bind(this));
       this.loading = false;
