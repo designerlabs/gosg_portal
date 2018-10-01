@@ -143,6 +143,7 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
         }
 
     });
+    this.getSearchUrl();
   }
 
   public local = true;
@@ -300,7 +301,7 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
       localStorage.setItem("currSearchTab", "0");
       this.currTab = 0;
     }
-
+    // this.reff = document.referrer.split("/")[1];
     this.getSearchUrl();
 
     this.date = moment();
@@ -562,6 +563,8 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
 
   searchByKeyword(valkeyword, opt?) {
 
+    this.getSearchUrl();
+
     let arrKeyword: any = [];
     let arrKeywordeySetting: any = [];
     let nullObj = {};
@@ -594,12 +597,14 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
       localStorage.setItem('ser_word', decodeURI(navKword));
       this.loading = true;
       location.href = './search/'+navKword;
+        if(this.tabIndex != 2)
       this.mainObj.keyword(decodeURI(navKword));
-    } else if(valkeyword != locStrgKword) {
+    } else if(decodeURI(valkeyword) != locStrgKword) {
       localStorage.setItem('ser_word', decodeURI(valkeyword));
       this.loading = true;
       location.href = './search/'+valkeyword;
-      this.mainObj.keyword(decodeURI(valkeyword));
+      if(this.tabIndex != 2)
+        this.mainObj.keyword(decodeURI(valkeyword));
     }
 
     if (localStorage.getItem('ser_word').length === 0) {
@@ -864,65 +869,72 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
           .map(res => res.json())
           .subscribe(rData => {
           
-            this.totalElements = rData.data.countinfo;
-            num = (rData.data.countinfo) / (this.pagesize);
-            delete rData.data.countinfo;
-            dataLength = Object.keys(rData.data).length;
-            // this.millisec = rData.data.tookMillis;
-
-            this.intData = this.changeAryVal(rData.data,'global')
-  
-            this.selMonPubDisp = '';
-            this.selAuthDisp = '';
-            this.selTopicDisp = '';
-            this.selSubTopicDisp = '';
-            this.selMinisDisp = '';
-            this.selAgencyDisp = '';
-            this.ddauthor = [];
-            this.ddtopics = [];
-            this.ddmonthPub = [];
-            this.ddsubTopics = [];
-            this.ddministry = [];
-            this.ddagency = [];
-  
-            this.valMonPub = [];
-            this.valAuthor = [];
-            this.valTopic = [];
-            this.valSubTopic = [];
-            this.valMinistry = [];
-            this.valAgency = [];
-  
-            if (dataLength > 0) {
-  
-              if (this.totalElements % this.pagesize > 0) {
-                this.totalPages = Math.floor(num) + 1;
-              } else {
-                this.totalPages = num;
-              }
-  
-              if (this.totalPages > 0) {
-                this.noNextData = this.pageNumber === this.totalPages;
-              } else {
-                this.noNextData = true;
-              }
-  
-              if(num && num > 999)
-                this.totalPages = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  
-              // this.totalElements.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-  
-              //   this.serchService.searchResData = rData.data;
-              this.showNoData = false;
-              
+            // DEBUG MODE ONLY
+            if(!rData.data) {
+              localStorage.setItem("currSearchTab", "0");
+              this.toastr.error(this.translate.instant('common.err.servicedown'), '');
+              this.loading = false;
+              // location.href = './search/'+this.ser_word;
             } else {
-              this.showNoData = true;
-              this.sKeyword = false; //side menu
-              this.sSpeci = false; //side menu
-              this.sFilter = false; //side menu
-            }
-            this.loading = false;
-            rData = null;
-          },
+              this.totalElements = rData.data.countinfo;
+              num = (rData.data.countinfo) / (this.pagesize);
+              delete rData.data.countinfo;
+              dataLength = Object.keys(rData.data).length;
+              // this.millisec = rData.data.tookMillis;
+
+              this.intData = this.changeAryVal(rData.data,'global')
+    
+              this.selMonPubDisp = '';
+              this.selAuthDisp = '';
+              this.selTopicDisp = '';
+              this.selSubTopicDisp = '';
+              this.selMinisDisp = '';
+              this.selAgencyDisp = '';
+              this.ddauthor = [];
+              this.ddtopics = [];
+              this.ddmonthPub = [];
+              this.ddsubTopics = [];
+              this.ddministry = [];
+              this.ddagency = [];
+    
+              this.valMonPub = [];
+              this.valAuthor = [];
+              this.valTopic = [];
+              this.valSubTopic = [];
+              this.valMinistry = [];
+              this.valAgency = [];
+    
+              if (dataLength > 0) {
+    
+                if (this.totalElements % this.pagesize > 0) {
+                  this.totalPages = Math.floor(num) + 1;
+                } else {
+                  this.totalPages = num;
+                }
+    
+                if (this.totalPages > 0) {
+                  this.noNextData = this.pageNumber === this.totalPages;
+                } else {
+                  this.noNextData = true;
+                }
+    
+                if(num && num > 999)
+                  this.totalPages = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    
+                // this.totalElements.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    
+                //   this.serchService.searchResData = rData.data;
+                this.showNoData = false;
+                
+              } else {
+                this.showNoData = true;
+                this.sKeyword = false; //side menu
+                this.sSpeci = false; //side menu
+                this.sFilter = false; //side menu
+              }
+              this.loading = false;
+              rData = null;
+          }},
           error => {
             this.loading = false;
             this.toastr.error(this.translate.instant('common.err.servicedown'), '');

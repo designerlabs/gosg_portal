@@ -315,17 +315,17 @@ export class PortalService {
     .catch(this.handleError);
   }
 
-  getTrafficFlows(){
+  getTrafficFlows(lng){
 
-    return this.http.get(this.trafficFlowUrl)
+    return this.http.get(this.trafficFlowUrl+"?language="+lng)
     .map((response: Response) => response.json())
     .retry(5)
     .catch(this.handleError);
   }
 
-  getTrafficPrediction(sn){
+  getTrafficPrediction(sn,lng){
 
-    return this.http.get(this.trafficPredictionUrl+sn)
+    return this.http.get(this.trafficPredictionUrl+sn+"&language="+lng)
     .map((response: Response) => response.json())
     .retry(5)
     .catch(this.handleError);
