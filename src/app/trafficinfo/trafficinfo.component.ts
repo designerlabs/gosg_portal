@@ -173,6 +173,7 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   getTrafficFlowData(lng) {
+    var testRp;
       this.loading = true;
       this.portalservice.getTrafficFlows(lng).subscribe(
         data => {
@@ -183,25 +184,34 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
 
               this.streetFlows.records.forEach(el => {
 
-                // console.log(this.allStreetNames)
                 if(el.street) {
                   el.jam = this.str2arr(el.jam);
 
                   this.streetNames.push({ 'name': el.street, 'latlng': el.jam[0] });
 
                   this.rp = L.polyline(el.jam, {color: this.getLevelColor(el.level), weight: 5, opacity: 0.6 }).addTo(this.mymap);
-
+                  
                   this.rp.on('click', this.middleMan, this);
 
-                  this.rp.on('mouseover', function(e) {
-                    this.popup = L.popup().setLatLng(el.jam[0])
-                                  .setContent(`${el.street}`)
-                                  .openOn(this._map)
-                                  // .on('click', this.test, this);
-                  });
+                  this.rp.on('mouseover', function() {
+                    let content = this;
+                    // console.log(content)
 
-                  this.popup.on('click', this.test, this);
+                    this.popup = L.popup().setLatLng(el.jam[0])
+                  
+                    .setContent(`<a class="click" href="#">click</a>`)
+                    .openOn(this._map);
+                  });
+          
+
                 }
+              });
+
+
+              $("body").on('click','a.click', function(e){
+                testRp
+                e.preventDefault();
+               
               });
               this.totalRec = this.streetFlows.params.recordsFound;
 
@@ -218,6 +228,8 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
           this.loading = false;
 
         });
+
+       
   }
 
   test() {
@@ -225,7 +237,8 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   middleMan(e) {
-    // console.log(e);
+    console.log(e);
+    var testRp = this.rp;
     let currColor = e.target.options.color;
     let sName = e.target.popup._content;
     let sLatLng = [e.latlng.lat,e.latlng.lng ];
@@ -277,8 +290,10 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
               this.popup = L.popup().setLatLng(ltlg)
                             .setContent(this.streetName)
                             .openOn(this.mymap);
-                          }
-              this.popup.on('click', this.middleMan, this);
+              }
+              // this.popup.on('click', this.middleMan, this);
+              this.popup.on('click', this.test);
+
           }).bind(this));
           this.loading = false;
           this.isActiveList = false;
