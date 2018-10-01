@@ -292,7 +292,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       this.fourthFormGroup.get('companyType').setValue(3);
       this.fifthFormGroup.get('agreement').setValue(false);
       this.getJIC(1, this.langID);
-      this.flagAfterSubmit = false;
+      //this.flagAfterSubmit = false;
     }
 
     else{// for edit
@@ -461,6 +461,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       this.firstFormGroup.get('poskodPemohon').disable();
       this.firstFormGroup.get('daerahPemohon').disable();
       this.firstFormGroup.get('negeriPemohon').disable();
+      this.flagAfterSubmit = false;
     }
   }
 
