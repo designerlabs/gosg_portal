@@ -121,8 +121,6 @@ export class ProtectedComponent implements OnInit {
     this.protectedService.getErrorMsg().subscribe(
       data => {
         this.msgInvalidUser = data.resource.messagesDescription;
-        debugger;
-        console.log(this.msgInvalidUser);
       }
     )
     }
