@@ -166,7 +166,7 @@ export class SummontrafficComponent implements OnInit {
 
             this.dataSummons = data.summonResource;
 
-            if (this.dataSummons.summonDetails) {
+            if (this.dataSummons.summonDetails.length > 0) {
               this.showDetails = true;
               this.showNoData = false;
             } else {

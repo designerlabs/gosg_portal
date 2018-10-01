@@ -1443,7 +1443,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       this.protectedService.create(body,'perhilitan/draft/save',this.langID, this.dsvcCode, this.agcCode).subscribe(
       data => {
         this.sharedService.errorHandling(data, (function () {
-          this.toastr.success(this.translate.instant('Permohonan Baru Lesen Peniaga/Taksidermi berjaya disimpan sebagai draft'), '');
+          this.toastr.success(data.statusDesc, '');
           this.router.navigate(['appsmgmt']);
         }).bind(this));
         this.loading = false;
@@ -1582,7 +1582,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       this.protectedService.update(body,'perhilitan/draft/update',this.langID, this.dsvcCode, this.agcCode).subscribe(
       data => {
         this.sharedService.errorHandling(data, (function () {
-          this.toastr.success(this.translate.instant('Draft Permohonan Baru Lesen Peniaga/Taksidermi berjaya dikemaskini'), '');
+          this.toastr.success(data.statusDesc, '');
           this.router.navigate(['appsmgmt']);
         }).bind(this));
         this.loading = false;
