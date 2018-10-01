@@ -121,7 +121,6 @@ export class ProtectedComponent implements OnInit {
     this.protectedService.getErrorMsg().subscribe(
       data => {
         this.msgInvalidUser = data.resource.messagesDescription;
-        console.log(this.msgInvalidUser);
       }
     )
     }
@@ -148,6 +147,7 @@ export class ProtectedComponent implements OnInit {
 
           if(data.statusCode !== 'SUCCESS' && !this.isFirstLogin){
             this.loading = false;
+            this.getErorMsg();
             this.nonValidUser = true;
               setTimeout(() => {
                 this.logout();
