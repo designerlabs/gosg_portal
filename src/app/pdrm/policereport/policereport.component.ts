@@ -48,10 +48,8 @@ export class PolicereportComponent implements OnInit, OnDestroy {
   public yearreport: FormControl
 
   private subscriptionLang: ISubscription;
-  private subscription: ISubscription;
-
-  private urlFaq: string = this.config.urlFaq;
   loading: boolean = false;
+  dataAnnouncement: any;
 
   constructor(
     private translate: TranslateService,
@@ -96,7 +94,6 @@ export class PolicereportComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscriptionLang.unsubscribe();
-   // this.subscription.unsubscribe();
   }
 
   ngOnInit() {
@@ -198,7 +195,8 @@ export class PolicereportComponent implements OnInit, OnDestroy {
     data => {
       this.sharedService.errorHandling(data, (function(){
 
-        console.log(data);
+        this.dataAnnouncement = data.announcementResource.content;
+        console.log(this.dataAnnouncement);
      
       }).bind(this));
       this.loading = false;
