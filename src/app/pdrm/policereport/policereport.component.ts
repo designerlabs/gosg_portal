@@ -50,6 +50,7 @@ export class PolicereportComponent implements OnInit, OnDestroy {
   private subscriptionLang: ISubscription;
   loading: boolean = false;
   dataAnnouncement: any;
+  annouceConvert: any;
 
   constructor(
     private translate: TranslateService,
@@ -206,6 +207,11 @@ export class PolicereportComponent implements OnInit, OnDestroy {
       this.toastr.error(JSON.parse(error._body).statusDesc, '');
       this.loading = false;
     });
+  }
+
+  convert(data){
+    this.annouceConvert = data;
+    console.log(data);
   }
 
   openLink(varUrl){
