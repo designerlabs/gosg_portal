@@ -127,6 +127,7 @@ export class PolicereportComponent implements OnInit, OnDestroy {
       yearreport: this.yearreport      
     });
 
+    this.getAnnoucement();
     this.getYear();
     this.getUserData();
   }
@@ -188,8 +189,25 @@ export class PolicereportComponent implements OnInit, OnDestroy {
       this.toastr.error(JSON.parse(error._body).statusDesc, '');
       this.loading = false;
     });
-
     
+  }
+
+  getAnnoucement(){
+    this.loading = true;
+    this.protectedService.postProtected('','pdrm/getAnnoucement?type=2'+'&agency='+this.agcCode+'&service='+this.dsvcCode+'&language='+this.langID).subscribe(
+    data => {
+      this.sharedService.errorHandling(data, (function(){
+
+        console.log(data);
+     
+      }).bind(this));
+      this.loading = false;
+      
+    },
+    error => {
+      this.toastr.error(JSON.parse(error._body).statusDesc, '');
+      this.loading = false;
+    });
   }
 
   openLink(varUrl){
