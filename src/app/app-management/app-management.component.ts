@@ -10,7 +10,7 @@ import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 import { PortalService } from '../services/portal.service';
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 import { Http } from '@angular/http';
-import * as moment from 'moment';
+import * as moment from 'moment-timezone'
 import { TopnavService } from '../header/topnav/topnav.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
@@ -196,7 +196,7 @@ export class AppManagementComponent implements OnInit, OnDestroy {
 
       for(let i=0; i<this.dataApp.length; i++){
 
-        let dateS = moment(new Date(this.dataApp[i].submissionDatetime)).format('DD-MM-YYYY hh:ss');
+        let dateS = moment.tz(new Date(this.dataApp[i].submissionDatetime),'Asia/Singapore').format('DD-MM-YYYY hh:mm');
         this.dateSubmission.push(dateS);
 
         let stat: any;

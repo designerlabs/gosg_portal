@@ -15,6 +15,7 @@ import { Http } from '@angular/http';
 import * as $ from 'jquery';
 import { tileLayer, latLng, circle, polygon, marker, icon, Layer } from 'leaflet';
 import * as L from 'leaflet';
+//import 'esri-leaflet';
 import { SharedService } from '../common/shared.service';
 import { PortalService } from '../services/portal.service';
 import { ToastrService } from 'ngx-toastr';
@@ -29,6 +30,7 @@ export interface DialogData {
   templateUrl: './schoolsearch.component.html',
   styleUrls: ['./schoolsearch.component.css']
 })
+
 export class SchoolsearchComponent implements OnInit {
 
   lang = this.lang;
@@ -476,14 +478,23 @@ export class SchoolsearchComponent implements OnInit {
   }
 
   getDefaultMap() {
+    //var esri = require('esri-leaflet'); 
     this.mymap = L.map('dirmap').setView([4.8142568, 108.5806004], 6);
     // L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
       attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
       maxZoom: 16,
-      id: 'mapbox.streets', 
+      id: 'osm.streets', 
       accessToken: 'pk.eyJ1IjoicmVkemEiLCJhIjoiY2pmcGZxNzRrMjYzbzMwcG83bGRxY2FtZyJ9.uMHQpYc0Pvjl4us27nHH8w'
     }).addTo(this.mymap);
+
+    // let a = L.esri.basemapLayer('Imagery');
+		// //let a = esri.basemapLayer('Imagery', {maxZoom : 16});
+    // this.mymap.addLayer(a);
+
+    // const esriLayer = L.esri.basemapLayer('Streets');
+    // this.mymap.addLayer(esriLayer);
+    //L.esri.basemapLayer('Streets').addTo(this.mymap);
     // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     //   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     // }).addTo(this.mymap);
