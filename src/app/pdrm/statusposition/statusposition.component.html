@@ -115,31 +115,39 @@
             </div>
         </div>
 
-        <div class="row container">
+        <div class="row container" *ngIf="kp">
             <div class="col-md-3 blackFont">
                 {{ 'pdrm.title.icno' | translate }}
             </div>
             <div class="col-md-9 boldInfo">
                 {{kp}}
             </div>
+        </div>
+        <div class="row container" *ngIf="kp">
             <div class="col-md-3" style="color: black;">
                 {{ 'pdrm.title.applicantname' | translate }}
             </div>
             <div class="col-md-9 boldInfo">
                 {{name}}
             </div>
+        </div>
+        <div class="row container" *ngIf="kp">
             <div class="col-md-3" style="color: black;">
                 {{ 'pdrm.title.date' | translate }}
             </div>
             <div class="col-md-9" style="color: black; font-weight: bold;">
                 {{date}}
             </div>
+        </div>
+        <div class="row container" *ngIf="kp">
             <div class="col-md-3" style="color: black;">
                 {{ 'pdrm.title.location' | translate }}
             </div>
             <div class="col-md-9" style="color: black; font-weight: bold;">
                 {{place}}
             </div>
+        </div>
+        <div class="row container" *ngIf="kp">
             <div class="col-md-3" style="color: black;">
                 {{ 'pdrm.title.status' | translate }}
             </div>

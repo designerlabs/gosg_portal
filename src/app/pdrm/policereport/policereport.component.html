@@ -102,61 +102,6 @@
                 </div>
             </div>
 
-            <!-- <div class="example-container mat-elevation-z8 padding-right20" >
-
-                <div class="row padding-15">
-                    <div class="col-md-12" style="color: black">
-                        {{ 'pdrm.reportPolice' | translate }}
-                    </div>
-                </div>
-
-                <div class="row padding-15">
-                    <div class="col-md-3">
-                        <mat-form-field>
-                            <input matInput placeholder="{{ 'pdrm.placeholder.noic' | translate }}" formControlName="ic" required 
-                            tabindex="1" style="color: black">
-                            <mat-error *ngIf="searchForm.controls.ic.hasError('required')">
-                                {{ 'pdrm.placeholder.noic' | translate }} {{ 'pdrm.err.needed' | translate }}
-                            </mat-error>
-                        </mat-form-field>
-                    </div>
-
-                    <div class="col-md-3">
-                        <mat-form-field style="width:60%;">
-                            <input matInput placeholder="{{ 'pdrm.placeholder.noreport' | translate }} " formControlName="noreport" 
-                            (keyup)="checkReqValues()"
-                            required tabindex="2"  style="color: black" [textMask]="{mask: maskReportNo}">
-                            <mat-error *ngIf="searchForm.controls.noreport.hasError('required')">
-                                {{ 'pdrm.placeholder.noreport' | translate }} {{ 'pdrm.err.needed' | translate }}
-                            </mat-error>
-                        </mat-form-field>
-                        <span style="color: black">/</span>
-                        <mat-form-field style="width:20%;">
-                            <mat-select formControlName="yearreport" placeholder="" (change)="checkReqValues()" required>
-                                <mat-option [value]=null></mat-option>
-                                <mat-option *ngFor="let year of listYear" [value]="year">{{year}}</mat-option>                      
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
-
-                    <div class="col-md-3 padding20">                      
-                        <label style="color: black">{{'pdrm.example' | translate }}</label>
-                    </div>
-
-                    <div class="col-md-3">
-                        <button tabindex="" mat-raised-button color="warn" type="button" id="btnreset" 
-                            class="form-control btn btn-md btn-warning font-size-s pull-right bttnCustom"
-                            (click)="resetModal.show()" style="margin-left: 5px;">
-                            <i class="fa fa-refresh"></i> {{'feedback.label.reset' | translate }}</button>
-                        <button mat-raised-button type="button" color="primary" id="searchbtn" 
-                            class="form-control btn btn-md btn-success font-size-s pull-right bttnCustom" [disabled]="!complete"
-                            (click)="searchApp(searchForm.value)">
-                            <i class="fa fa-search"></i> {{'appmngt.setSearch.search' | translate}}</button>
-                    </div>
-                </div>
-
-            </div> -->
-
         </form>
     </div><br>
 
@@ -244,20 +189,20 @@
         </div>
     </div>
 
-    <div *ngIf="showDetails == false">
-        <div class="row container">
-            <div class="col-md-12 boldCenterInfo">
-                {{'pdrm.err.showData' | translate }}<br>
-            </div>
-        </div>
-    </div>
-
     <div class="row container">
         <div class="col-md-12">
             <span class="boldInfo" style="text-decoration: underline">{{'pdrm.attention' | translate }}</span><br><br>
             <span style="text-align: justify; color: black">Semua jenis Repot Polis bertarikh dari 1 Ogos 2011 hingga kini (kecuali Repot Kemalangan Jalan Raya)
                 yang dibuat di kawasan Kontinjen Kuala Lumpur dan Selangor boleh disemak buat masa ini.</span><br><br>
         </div> 
+    </div>
+
+    <div *ngIf="showDetails == false">
+        <div class="row container">
+            <div class="col-md-12 boldCenterInfo" style="color: red;">
+                {{'pdrm.err.showData' | translate }}<br>
+            </div>
+        </div>
     </div>
 </div>
 
