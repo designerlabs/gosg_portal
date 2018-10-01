@@ -168,7 +168,7 @@
             </div>
         </div>
 
-        <div class="row container blackFont">
+        <div class="row container blackFont" *ngIf="dataSummons.summonDetails.length > 0">
             <div class="col-md-3">
                 {{ 'pdrm.title.icno' | translate }}
             </div>
@@ -177,7 +177,7 @@
                 {{this.dataSummons.summonDetails[0]?.offender_ic}}
             </div>
         </div>
-        <div class="row container blackFont">
+        <div class="row container blackFont" *ngIf="dataSummons.summonDetails.length > 0">
             <div class="col-md-3">
                 {{ 'pdrm.title.name' | translate }}
             </div>
@@ -186,7 +186,7 @@
                 {{this.dataSummons.summonDetails[0]?.offender_name}}
             </div>
         </div>
-        <div class="row container blackFont">
+        <div class="row container blackFont" *ngIf="dataSummons.summonDetails.length > 0">
             <div class="col-md-3">
                 {{ 'pdrm.title.total_summon' | translate }}
                 <!-- Jumlah Amaun (RM) -->
