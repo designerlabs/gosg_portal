@@ -308,6 +308,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       this.protectedService.getUser().subscribe(
       data => {
         this.sharedService.errorHandling(data, (function(){
+          console.log(data.user);
 
           if(data.user){
             
