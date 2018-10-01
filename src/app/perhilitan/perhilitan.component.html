@@ -97,6 +97,8 @@
           </div>
 
           <div class="pull-right">
+            <span style="color: red;" *ngIf="flagAfterSubmit == true">
+              Profil anda tidak lengkap. Sila lengkapkan profil anda sebelum klik butang ini.</span>
             <button mat-raised-button matStepperNext color="primary" class="btn btn-md iconBtn" [disabled]="flagAfterSubmit">            
               <i class="fa fa-arrow-circle-right"></i>
               <span class="textDisplay">Seterusnya</span>

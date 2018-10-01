@@ -491,7 +491,8 @@
       "nodata": "Tiada maklumat",
       "searchKeyword": "Sila masukkan kata kunci carian",
       "mykad":"Adakah anda bersetuju untuk berkongsi profil dari MyGovernment Portal?",
-      "thanks": "Terima Kasih"
+      "thanks": "Terima Kasih",
+      "incompleteData":"Profil anda tidak lengkap. Sila lengkapkan profil anda sebelum klik butang ini."
     },
     "state":{
       "success":"bg_header bg_success_header",

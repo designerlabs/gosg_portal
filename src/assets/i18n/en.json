@@ -491,7 +491,8 @@
       "nodata": "No data found",
       "searchKeyword": "Please enter a word to search",
       "mykad":"Do you agree to share your profile from MyGovernment Portal?",
-      "thanks": "Thank You"
+      "thanks": "Thank You",
+      "incompleteData":"Your Profile is incomplete. Please complete your profile before click this button."
     },
     "state":{
       "success":"bg_header bg_success_header",
