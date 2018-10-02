@@ -448,6 +448,7 @@
     "open":"Buka",
     "listofarticle": "Senarai Artikel",
     "close":"Tutup",
+    "inactiveMsg":"Akauan anda tidak aktif. Sila hubungi pentadbir portal.",
     "invalidUser":"Akaun anda tidak wujud dalam portal. Sila hubungi admin portal unduk maklumat lanjut",
     "seconds1":"log keluar dalam",
     "seconds2": "saat",
