@@ -106,7 +106,7 @@ export class DigitalservicesprodComponent implements OnInit, OnDestroy {
     if(!environment.staging){
     this.protectedService.getUser().subscribe(
       data => {
-        this.validMyIdentity = data.user.isMyIdentityVerified;
+        this.validMyIdentity = data.user.isMyIdentityActive;
         this.isLogin = true;
         this.activeUser = data.user.accountStatus.accountStatusDescription;
       },
