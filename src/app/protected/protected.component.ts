@@ -52,6 +52,7 @@ export class ProtectedComponent implements OnInit {
   pageSize;
   msgInvalidUser: any;
   entryService;
+  accountStatusId: any;
   constructor(public navService: NavService, private activatedRoute:ActivatedRoute, @Inject(APP_CONFIG) private config: AppConfig, private protectedService:ProtectedService, router:Router, private portalService:PortalService) {
 
       this.countDown = timer(0,1000).pipe(
@@ -132,6 +133,7 @@ export class ProtectedComponent implements OnInit {
       this.protectedService.getUser().subscribe(
         data => {
           if(data.user){
+            this.accountStatusId= data.user.accountStatus.accountStatusId;
             this.getUserName = data.user.fullName;
             this.getPassport = data.user.passportNo;
             this.validMyIdentity = data.user.isMyIdentityVerified;
