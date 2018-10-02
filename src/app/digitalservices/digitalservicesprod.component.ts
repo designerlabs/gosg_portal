@@ -107,6 +107,7 @@ export class DigitalservicesprodComponent implements OnInit, OnDestroy {
       data => {
         this.validMyIdentity = data.user.isMyIdentityVerified;
         this.isLogin = true;
+        console.log(this.validMyIdentity);
       },
       error => {
         this.toastr.error(JSON.parse(error._body).statusDesc, '');
