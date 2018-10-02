@@ -65,7 +65,7 @@
     "breadcrumb": {
       "calendar": "Calendar",
       "register": "Register",
-      "feedback": "Complaints and Queries",
+      "feedback": "Complaints and Inquiries",
       "profile": "My Profile",
       "dashboard": "Dashboard",
       "appmgmt": "Application Management",
@@ -282,7 +282,7 @@
 
   },
   "feedback": {
-    "title": "COMPLAINTS AND QUERIES",
+    "title": "COMPLAINTS AND INQUIRIES",
     "desc": "Please limit your response to 500 characters and include your email address and we will respond to you within three (3) working days. We can respond in two languages, English and Bahasa Melayu.",
     "label": {
       "type": "Type of feedback",
