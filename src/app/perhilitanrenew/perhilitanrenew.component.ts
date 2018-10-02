@@ -158,7 +158,8 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
   flag3 = true;
   flag4 = true;
   flag5 = true;
-
+  valObj: any;
+  
   constructor(
     private activatedRoute:ActivatedRoute,
     @Inject(APP_CONFIG) private config: AppConfig,
@@ -372,7 +373,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
 
           if(data.user){
 
-            let phone = data.user.mobilePhoneNo.split('*')[1];
+            let phone = data.user.mobilePhoneNo;
 
             let getObjKeys = Object.keys(data.user);
             this.valObj = getObjKeys.filter(fmt => fmt === "address");
@@ -1526,7 +1527,8 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
       this.protectedService.create(body,'perhilitan/draft/save',this.langID, this.dsvcCode, this.agcCode).subscribe(
       data => {
         this.sharedService.errorHandling(data, (function () {
-          this.toastr.success(this.translate.instant('Pembaharuan Lesen Peniaga/Taksidermi berjaya disimpan sebagai draft'), '');
+          // this.translate.instant('Pembaharuan Lesen Peniaga/Taksidermi berjaya disimpan sebagai draft')
+          this.toastr.success(data.statusDesc, '');
           this.router.navigate(['appsmgmt']);
         }).bind(this));
         this.loading = false;
@@ -1658,7 +1660,8 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
       this.protectedService.create(body,'perhilitan/draft/save',this.langID, this.dsvcCode, this.agcCode).subscribe(
       data => {
         this.sharedService.errorHandling(data, (function () {
-          this.toastr.success(this.translate.instant('Draf Pembaharuan Lesen Peniaga/Taksidermi berjaya dikemaskini'), '');
+          // this.translate.instant('Draf Pembaharuan Lesen Peniaga/Taksidermi berjaya dikemaskini')
+          this.toastr.success(data.statusDesc, '');
           this.router.navigate(['appsmgmt']);
         }).bind(this));
         this.loading = false;
@@ -1788,7 +1791,8 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     this.protectedService.create(body,'perhilitan/renew',this.langID, this.dsvcCode, this.agcCode).subscribe(
     data => {
       this.sharedService.errorHandling(data, (function () {
-        this.toastr.success(this.translate.instant('Permohonan Baru Lesen Peniaga/Taksidermi berjaya dihantar'), '');
+        // this.translate.instant('Permohonan Baru Lesen Peniaga/Taksidermi berjaya dihantar')
+        this.toastr.success(data.statusDesc, '');
         this.router.navigate(['appsmgmt']);
       }).bind(this));
       this.loading = false;
