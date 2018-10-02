@@ -486,11 +486,12 @@
                     <input matInput placeholder="Salinan Sijil PendaftaranSyarikat (Sijil SSM)" formControlName="file1" class="displayDesc"
                     required readonly>
                     <mat-error *ngIf="fifthFormGroup.controls.file1.hasError('required')">
-                      Salinan Sijil PendaftaranSyarikat (Sijil SSM) diperlukan
+                      Salinan Sijil Pendaftaran Syarikat (Sijil SSM) diperlukan
                     </mat-error>
-                </mat-form-field>
+                </mat-form-field><br>
+                <div style="background: black; padding: 5px; text-align: center;"><span>Fail Format PDF sahaja yang dibenarkan</span></div>                
               </div>
-
+              
               <div class="col-md-2">
                 <ng4-files-click (filesSelect)="uploadFile1($event)" accept="image/*">
                   <span role="button" class="btn btn-success btn-md"><i class="fa fa-search"></i> Muat Naik Fail</span>
@@ -504,7 +505,8 @@
                     <mat-error *ngIf="fifthFormGroup.controls.file2.hasError('required')">
                       Salinan Surat Kelulusan PBT diperlukan
                     </mat-error>
-                </mat-form-field>
+                </mat-form-field><br>
+                <div style="background: black; padding: 5px; text-align: center;"><span>Fail Format PDF sahaja yang dibenarkan</span></div>   
               </div>
 
               <div class="col-md-2">
