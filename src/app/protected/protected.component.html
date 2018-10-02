@@ -2,7 +2,7 @@
 <gosg-shared-loader [loader]="navService.loader"></gosg-shared-loader>
 <div class="app-invalid" *ngIf="(accountStatusId == 3 || accountStatusId == 5) || nonValidUser && !isFirstLogin">
   <div style="width: 35%; height: auto; background: #212121;">
-      <h3  *ngIf="accountStatusId == 3 || accountStatusId == 5">
+      <h3 style="text-align: center; line-height: 35px" *ngIf="accountStatusId == 3 || accountStatusId == 5">
           {{'common.inactiveMsg' | translate }}
       </h3>
       <h3  *ngIf="!accountStatusId == 3 || !accountStatusId == 5" style="text-align: center; line-height: 35px">{{msgInvalidUser}}</h3>
