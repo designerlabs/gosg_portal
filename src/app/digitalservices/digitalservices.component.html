@@ -47,7 +47,6 @@
                           &nbsp;
                           <a *ngIf="isLogin || d.common" [href]="mediaUrl + d.manual?.mediaFile" data-toggle="tooltip" target="_blank" title="{{ d.description }}"><span *ngIf="d.manual" class="fa fa-info-circle clickable-icons"></span> </a>
                           <a *ngIf="!isLogin && !d.common" (click)="openDialog()" title="{{ d.description }}" style="cursor: pointer;"><span *ngIf="d.manual" class="fa fa-info-circle clickable-icons"></span> </a>
-                          <a *ngIf="isLogin && !d.common && (activeUser == 3 || activeUser == 5)" (click)="openDialog()" title="{{ d.description }}" style="cursor: pointer;"><span *ngIf="d.manual" class="fa fa-info-circle clickable-icons"></span> </a>
                       </li>
                     </ul>
                 </li>
