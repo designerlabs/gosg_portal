@@ -211,7 +211,6 @@ export class PolicereportComponent implements OnInit, OnDestroy {
 
   convert(data){
     this.annouceConvert = data;
-    console.log(data);
   }
 
   openLink(varUrl){
@@ -295,10 +294,10 @@ export class PolicereportComponent implements OnInit, OnDestroy {
 
   resetSearch(){
     //this.appNumber.reset();
-    this.searchForm.get('ic').setValue(null);
+    //this.searchForm.get('ic').setValue(null);
     this.searchForm.get('noreport').setValue(null);
     this.searchForm.get('yearreport').setValue(null);
-    this.showDetails = false;
+    this.showDetails = undefined;
   }
 
   resetMethod(event) {
