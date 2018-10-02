@@ -1154,7 +1154,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     }
 
     else{
-      if(sizeFile >  1048576){ //1048576
+      if(sizeFile >  2097152){ //1048576
         this.toastr.error('Fail tidak boleh melebihi 2MB');
         this.fifthFormGroup.controls.file1.setValue(null);
         this.fifthFormGroup.controls.dispBase641.setValue(null);
@@ -1183,7 +1183,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     }
 
     else{
-      if(sizeFile >  1048576){ //1048576
+      if(sizeFile >  2097152){ //1048576
         this.toastr.error('Fail tidak boleh melebihi 2MB');
         this.fifthFormGroup.controls.file2.setValue(null);
         this.fifthFormGroup.controls.dispBase642.setValue(null);

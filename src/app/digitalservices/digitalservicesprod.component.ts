@@ -109,6 +109,7 @@ export class DigitalservicesprodComponent implements OnInit, OnDestroy {
         this.validMyIdentity = data.user.isMyIdentityVerified;
         this.isLogin = true;
         this.activeUser = data.user.accountStatus.accountStatusDescription;
+        console.log("hahahhah");
         
       },
       error => {
@@ -119,6 +120,7 @@ export class DigitalservicesprodComponent implements OnInit, OnDestroy {
     } else {
       this.validMyIdentity = true;
       this.isLogin = true;
+      
       this.activeUser = '';
     }
 
