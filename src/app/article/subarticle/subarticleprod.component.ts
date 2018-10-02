@@ -136,12 +136,14 @@ export class SubarticleprodComponent implements OnInit, OnDestroy {
 
 
   clickTopMenu(e){
+    this.articleService.leContent = "";
     this.router.navigate(['/category', e.categoryCode]);
     event.preventDefault();
   }
 
 
   clickSideMenu(e, status, event) {
+    this.articleService.leContent = "";
     this.navService.loader = true;
     this.agencyActive = false;
     this.statusID = status;
@@ -152,6 +154,7 @@ export class SubarticleprodComponent implements OnInit, OnDestroy {
   }
 
   clickSideMenuByAgency(e, status, event) {
+    this.articleService.leContent = "";
     this.navService.loader = true;
     this.agencyActive = true;
     this.navService.getSubArticleUrlByAgency(localStorage.getItem('langID'));
