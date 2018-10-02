@@ -49,14 +49,14 @@
                     </mat-form-field>
                   </div>
 
-                  <div class="col-md-3">
+                  <div class="col-md-8">
                       <button mat-raised-button color="primary" class="btn btn-md btn-success font-size-s"
-                      (click)="checkLisence(firstFormGroup.value)" [disabled]="flagCheckLsn || flag1">Semak Nombor Lesen</button>
-                      <span style="color: red;" *ngIf="flag1 == true">
+                      (click)="checkLisence(firstFormGroup.value)" [disabled]="flagCheckLsn || flagCompleteData">Semak Nombor Lesen</button>
+                      <span style="color: red;" *ngIf="flagCompleteData == true">
                           Profil anda tidak lengkap. Sila lengkapkan profil anda sebelum klik butang ini.</span>
                   </div>
 
-                  <div class="col-md-3" style="display: none;">
+                  <div class="col-md-1" style="display: none;">
                     <mat-form-field  class="example-full-width displayInfo">
                       <input matInput formControlName="textDisplay" placeholder="Text Display" required>
                     </mat-form-field>
@@ -123,9 +123,9 @@
             </div>
   
             <div class="pull-right">
-              <span style="color: red;" *ngIf="flag1 == true">
+              <span style="color: red;" *ngIf="flagCompleteData == true">
                   Profil anda tidak lengkap. Sila lengkapkan profil anda sebelum klik butang ini.</span>
-              <button mat-raised-button matStepperNext color="primary" class="btn btn-md iconBtn" [disabled]="flag1">
+              <button mat-raised-button matStepperNext color="primary" class="btn btn-md iconBtn" [disabled]="flag1 || flagCompleteData">
                 <i class="fa fa-arrow-circle-right"></i>
                 <span class="textDisplay">Seterusnya</span>
               </button>

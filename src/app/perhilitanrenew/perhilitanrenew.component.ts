@@ -159,6 +159,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
   flag4 = true;
   flag5 = true;
   valObj: any;
+  flagCompleteData = true;
   
   constructor(
     private activatedRoute:ActivatedRoute,
@@ -388,10 +389,10 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
               this.dbposkod = data.user.address.permanentAddressPostcode.postcodeId;
               this.dbdaerah = data.user.address.permanentAddressCity.cityId;
               this.dbnegeri = data.user.address.permanentAddressState.stateId;
-              this.flag1 = false;
+              this.flagCompleteData = false;
             }
             else{
-              this.flag1 = true;
+              this.flagCompleteData = true;
             }            
 
             this.firstFormGroup.get('namaPemohon').setValue(data.user.fullName);
@@ -501,6 +502,8 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
       this.dbposkod = data.user.address.permanentAddressPostcode.postcodeId;
       this.dbdaerah = data.user.address.permanentAddressCity.cityId;
       this.dbnegeri = data.user.address.permanentAddressState.stateId;
+      //this.flag1 = false;
+      this.flagCompleteData = false;
     }
   }
 
