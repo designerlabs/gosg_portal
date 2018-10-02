@@ -147,6 +147,7 @@ import { StatisticService } from '../statistic/statistic.service';
 export function HttpLoaderFactory(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
+
 @NgModule({
   imports: [
     CommonModule,
@@ -176,7 +177,7 @@ export function HttpLoaderFactory(http: Http) {
 	  NgxPaginationModule,
     ModalModule.forRoot(),
     // LoadingModule,
-    LeafletModule.forRoot(),
+    LeafletModule.forRoot()
 
   ],
 
