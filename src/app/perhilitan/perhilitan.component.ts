@@ -315,12 +315,13 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
 
           if(data.user){
             
+            let phone = data.user.mobilePhoneNo.split('*')[1];
             let getObjKeys = Object.keys(data.user);
             this.valObj = getObjKeys.filter(fmt => fmt === "address");
             console.log(this.valObj);
 
             if(this.valObj.length > 0){
-              let phone = data.user.address.permanentAddressHomePhoneNo.split('*')[1];              
+              //let phone = data.user.address.permanentAddressHomePhoneNo.split('*')[1];              
               this.firstFormGroup.get('phonePemohon').setValue(phone);              
               this.firstFormGroup.get('add1').setValue(data.user.address.permanentAddress1);
               this.firstFormGroup.get('poskodPemohon').setValue(data.user.address.permanentAddressPostcode.postCode);

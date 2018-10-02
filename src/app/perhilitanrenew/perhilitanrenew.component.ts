@@ -372,20 +372,31 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
 
           if(data.user){
 
-            let phone = data.user.address.permanentAddressHomePhoneNo.split('*')[1];
+            let phone = data.user.mobilePhoneNo.split('*')[1];
+
+            let getObjKeys = Object.keys(data.user);
+            this.valObj = getObjKeys.filter(fmt => fmt === "address");
+            console.log(this.valObj);
+            if(this.valObj.length > 0){
+              //let phone = data.user.address.permanentAddressHomePhoneNo.split('*')[1];            
+              this.firstFormGroup.get('add1').setValue(data.user.address.permanentAddress1);
+              this.firstFormGroup.get('poskodPemohon').setValue(data.user.address.permanentAddressPostcode.postCode);
+              this.firstFormGroup.get('daerahPemohon').setValue(data.user.address.permanentAddressCity.cityName);
+              this.firstFormGroup.get('negeriPemohon').setValue(data.user.address.permanentAddressState.stateName);
+
+              this.dbposkod = data.user.address.permanentAddressPostcode.postcodeId;
+              this.dbdaerah = data.user.address.permanentAddressCity.cityId;
+              this.dbnegeri = data.user.address.permanentAddressState.stateId;
+              this.flag1 = false;
+            }
+            else{
+              this.flag1 = true;
+            }            
 
             this.firstFormGroup.get('namaPemohon').setValue(data.user.fullName);
             this.firstFormGroup.get('icPemohon').setValue(data.user.identificationNo);
             this.firstFormGroup.get('phonePemohon').setValue(phone);
             this.firstFormGroup.get('emailPemohon').setValue(data.user.email);
-            this.firstFormGroup.get('add1').setValue(data.user.address.permanentAddress1);
-            this.firstFormGroup.get('poskodPemohon').setValue(data.user.address.permanentAddressPostcode.postCode);
-            this.firstFormGroup.get('daerahPemohon').setValue(data.user.address.permanentAddressCity.cityName);
-            this.firstFormGroup.get('negeriPemohon').setValue(data.user.address.permanentAddressState.stateName);
-
-            this.dbposkod = data.user.address.permanentAddressPostcode.postcodeId;
-            this.dbdaerah = data.user.address.permanentAddressCity.cityId;
-            this.dbnegeri = data.user.address.permanentAddressState.stateId;
 
           }else{
           }
