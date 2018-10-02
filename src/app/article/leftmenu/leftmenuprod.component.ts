@@ -19,7 +19,7 @@ export class LeftmenuProdComponent {
   @Input() templateName: any;
   loading: boolean = false;
 
-  constructor(private router:Router, private navService: NavService, private activatedRoute: ActivatedRoute, private content:ContentProdComponent){
+  constructor(private router:Router,  public articleService: ArticleService, private navService: NavService, private activatedRoute: ActivatedRoute, private content:ContentProdComponent){
     this.activatedRoute.queryParams.subscribe(params => {
       this.paramURL = this.activatedRoute.snapshot.url[0].path;
       this.paramURL_Next = this.paramURL + '/' +this.activatedRoute.snapshot.url[1].path;
@@ -36,6 +36,7 @@ export class LeftmenuProdComponent {
   }
 
   clickSideMenu(e, status, event) {
+    this.articleService.leContent = "";
     this.navService.loader = true;
     this.statusID = status;
     this.agencyActive = false;
@@ -65,6 +66,7 @@ export class LeftmenuProdComponent {
   }
 
   clickContentFromMenu(pId, aId, status, event) {
+    this.articleService.leContent = "";
     this.navService.loader = true;
     this.statusID = status;
     if(this.paramURL == 'category'){
@@ -93,6 +95,7 @@ export class LeftmenuProdComponent {
   }
 
   clickSideMenuByAgency(e, status, event) {
+    this.articleService.leContent = "";
     this.navService.loader = true;
     this.agencyActive = true;
     if(this.paramURL == 'category'){
