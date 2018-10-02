@@ -24,6 +24,7 @@ export class DigitalservicesprodComponent implements OnInit, OnDestroy {
   isLogin: boolean;
   loading: boolean;
   validMyIdentity:boolean;
+  activeUser: any;
 
   lang = this.lang;
   private subscription: ISubscription;
@@ -107,7 +108,8 @@ export class DigitalservicesprodComponent implements OnInit, OnDestroy {
       data => {
         this.validMyIdentity = data.user.isMyIdentityVerified;
         this.isLogin = true;
-        console.log(this.validMyIdentity);
+        this.activeUser = data.user.accountStatus.accountStatusDescription;
+        
       },
       error => {
         this.toastr.error(JSON.parse(error._body).statusDesc, '');
@@ -117,25 +119,29 @@ export class DigitalservicesprodComponent implements OnInit, OnDestroy {
     } else {
       this.validMyIdentity = true;
       this.isLogin = true;
+      this.activeUser = '';
     }
-}
 
-toValidate(dserviceCode, dUrl, agcCode, common?) {
-  // localStorage.setItem('referral',this.router.url.split('/')[1]);
-  // localStorage.setItem('dserviceCode',dserviceCode);
-  window.open(dUrl+'?service='+dserviceCode+'&agency='+agcCode, '_blank');
+    console.log("okkkkkk: "+this.validMyIdentity);
+    console.log("ACTIVE: "+this.activeUser);
+  } 
 
-  if(common) {
-    this.portalservice.sendTrackingCount(dserviceCode,agcCode).subscribe( 
-      data =>{
-    },
-    error => {
-      this.toastr.error(JSON.parse(error._body).statusDesc, '');
-      // this.loading = false;
+  toValidate(dserviceCode, dUrl, agcCode, common?) {
+    // localStorage.setItem('referral',this.router.url.split('/')[1]);
+    // localStorage.setItem('dserviceCode',dserviceCode);
+    window.open(dUrl+'?service='+dserviceCode+'&agency='+agcCode, '_blank');
 
-    });
+    if(common) {
+      this.portalservice.sendTrackingCount(dserviceCode,agcCode).subscribe( 
+        data =>{
+      },
+      error => {
+        this.toastr.error(JSON.parse(error._body).statusDesc, '');
+        // this.loading = false;
+
+      });
+    }
   }
-}
 
 openDialog() {
 
