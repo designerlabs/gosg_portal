@@ -292,7 +292,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       this.fourthFormGroup.get('companyType').setValue(3);
       this.fifthFormGroup.get('agreement').setValue(false);
       this.getJIC(1, this.langID);
-      this.flagAfterSubmit = false;
+      //this.flagAfterSubmit = false;
     }
 
     else{// for edit
@@ -315,11 +315,13 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
 
           if(data.user){
             
-            let getObjKeys = Object.keys(data.resource);
+            let phone = data.user.mobilePhoneNo;
+            let getObjKeys = Object.keys(data.user);
             this.valObj = getObjKeys.filter(fmt => fmt === "address");
+            console.log(this.valObj);
 
             if(this.valObj.length > 0){
-              let phone = data.user.address.permanentAddressHomePhoneNo.split('*')[1];              
+              //let phone = data.user.address.permanentAddressHomePhoneNo.split('*')[1];              
               this.firstFormGroup.get('phonePemohon').setValue(phone);              
               this.firstFormGroup.get('add1').setValue(data.user.address.permanentAddress1);
               this.firstFormGroup.get('poskodPemohon').setValue(data.user.address.permanentAddressPostcode.postCode);
@@ -461,6 +463,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       this.firstFormGroup.get('poskodPemohon').disable();
       this.firstFormGroup.get('daerahPemohon').disable();
       this.firstFormGroup.get('negeriPemohon').disable();
+      this.flagAfterSubmit = false;
     }
   }
 
@@ -1254,7 +1257,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
     }
 
     else{
-      if(sizeFile >  1048576){ //1048576
+      if(sizeFile >  2097152){ //1048576
         this.toastr.error('Fail tidak boleh melebihi 2MB');
         this.fifthFormGroup.controls.file1.setValue(null);
         this.fifthFormGroup.controls.dispBase641.setValue(null);
@@ -1283,7 +1286,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
     }
 
     else{
-      if(sizeFile >  1048576){ //1048576
+      if(sizeFile >  2097152){ //1048576
         this.toastr.error('Fail tidak boleh melebihi 2MB');
         this.fifthFormGroup.controls.file2.setValue(null);
         this.fifthFormGroup.controls.dispBase642.setValue(null);
@@ -1731,7 +1734,8 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
     this.protectedService.create(body,'perhilitan/apply',this.langID, this.dsvcCode, this.agcCode).subscribe(
     data => {
       this.sharedService.errorHandling(data, (function () {
-        this.toastr.success(this.translate.instant('Permohonan Baru Lesen Peniaga/Taksidermi berjaya dihantar'), '');
+        // this.translate.instant('Permohonan Baru Lesen Peniaga/Taksidermi berjaya dihantar')
+        this.toastr.success(data.statusDesc, '');
         this.router.navigate(['appsmgmt']);
       }).bind(this));
       this.loading = false;

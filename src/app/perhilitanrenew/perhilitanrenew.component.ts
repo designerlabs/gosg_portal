@@ -158,7 +158,9 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
   flag3 = true;
   flag4 = true;
   flag5 = true;
-
+  valObj: any;
+  flagCompleteData = true;
+  
   constructor(
     private activatedRoute:ActivatedRoute,
     @Inject(APP_CONFIG) private config: AppConfig,
@@ -372,20 +374,31 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
 
           if(data.user){
 
-            let phone = data.user.address.permanentAddressHomePhoneNo.split('*')[1];
+            let phone = data.user.mobilePhoneNo;
+
+            let getObjKeys = Object.keys(data.user);
+            this.valObj = getObjKeys.filter(fmt => fmt === "address");
+            console.log(this.valObj);
+            if(this.valObj.length > 0){
+              //let phone = data.user.address.permanentAddressHomePhoneNo.split('*')[1];            
+              this.firstFormGroup.get('add1').setValue(data.user.address.permanentAddress1);
+              this.firstFormGroup.get('poskodPemohon').setValue(data.user.address.permanentAddressPostcode.postCode);
+              this.firstFormGroup.get('daerahPemohon').setValue(data.user.address.permanentAddressCity.cityName);
+              this.firstFormGroup.get('negeriPemohon').setValue(data.user.address.permanentAddressState.stateName);
+
+              this.dbposkod = data.user.address.permanentAddressPostcode.postcodeId;
+              this.dbdaerah = data.user.address.permanentAddressCity.cityId;
+              this.dbnegeri = data.user.address.permanentAddressState.stateId;
+              this.flagCompleteData = false;
+            }
+            else{
+              this.flagCompleteData = true;
+            }            
 
             this.firstFormGroup.get('namaPemohon').setValue(data.user.fullName);
             this.firstFormGroup.get('icPemohon').setValue(data.user.identificationNo);
             this.firstFormGroup.get('phonePemohon').setValue(phone);
             this.firstFormGroup.get('emailPemohon').setValue(data.user.email);
-            this.firstFormGroup.get('add1').setValue(data.user.address.permanentAddress1);
-            this.firstFormGroup.get('poskodPemohon').setValue(data.user.address.permanentAddressPostcode.postCode);
-            this.firstFormGroup.get('daerahPemohon').setValue(data.user.address.permanentAddressCity.cityName);
-            this.firstFormGroup.get('negeriPemohon').setValue(data.user.address.permanentAddressState.stateName);
-
-            this.dbposkod = data.user.address.permanentAddressPostcode.postcodeId;
-            this.dbdaerah = data.user.address.permanentAddressCity.cityId;
-            this.dbnegeri = data.user.address.permanentAddressState.stateId;
 
           }else{
           }
@@ -489,6 +502,8 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
       this.dbposkod = data.user.address.permanentAddressPostcode.postcodeId;
       this.dbdaerah = data.user.address.permanentAddressCity.cityId;
       this.dbnegeri = data.user.address.permanentAddressState.stateId;
+      //this.flag1 = false;
+      this.flagCompleteData = false;
     }
   }
 
@@ -1139,7 +1154,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     }
 
     else{
-      if(sizeFile >  1048576){ //1048576
+      if(sizeFile >  2097152){ //1048576
         this.toastr.error('Fail tidak boleh melebihi 2MB');
         this.fifthFormGroup.controls.file1.setValue(null);
         this.fifthFormGroup.controls.dispBase641.setValue(null);
@@ -1168,7 +1183,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     }
 
     else{
-      if(sizeFile >  1048576){ //1048576
+      if(sizeFile >  2097152){ //1048576
         this.toastr.error('Fail tidak boleh melebihi 2MB');
         this.fifthFormGroup.controls.file2.setValue(null);
         this.fifthFormGroup.controls.dispBase642.setValue(null);
@@ -1515,7 +1530,8 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
       this.protectedService.create(body,'perhilitan/draft/save',this.langID, this.dsvcCode, this.agcCode).subscribe(
       data => {
         this.sharedService.errorHandling(data, (function () {
-          this.toastr.success(this.translate.instant('Pembaharuan Lesen Peniaga/Taksidermi berjaya disimpan sebagai draft'), '');
+          // this.translate.instant('Pembaharuan Lesen Peniaga/Taksidermi berjaya disimpan sebagai draft')
+          this.toastr.success(data.statusDesc, '');
           this.router.navigate(['appsmgmt']);
         }).bind(this));
         this.loading = false;
@@ -1647,7 +1663,8 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
       this.protectedService.create(body,'perhilitan/draft/save',this.langID, this.dsvcCode, this.agcCode).subscribe(
       data => {
         this.sharedService.errorHandling(data, (function () {
-          this.toastr.success(this.translate.instant('Draf Pembaharuan Lesen Peniaga/Taksidermi berjaya dikemaskini'), '');
+          // this.translate.instant('Draf Pembaharuan Lesen Peniaga/Taksidermi berjaya dikemaskini')
+          this.toastr.success(data.statusDesc, '');
           this.router.navigate(['appsmgmt']);
         }).bind(this));
         this.loading = false;
@@ -1777,7 +1794,8 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     this.protectedService.create(body,'perhilitan/renew',this.langID, this.dsvcCode, this.agcCode).subscribe(
     data => {
       this.sharedService.errorHandling(data, (function () {
-        this.toastr.success(this.translate.instant('Permohonan Baru Lesen Peniaga/Taksidermi berjaya dihantar'), '');
+        // this.translate.instant('Permohonan Baru Lesen Peniaga/Taksidermi berjaya dihantar')
+        this.toastr.success(data.statusDesc, '');
         this.router.navigate(['appsmgmt']);
       }).bind(this));
       this.loading = false;
