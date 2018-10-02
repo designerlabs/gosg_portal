@@ -53,7 +53,7 @@
                       <button mat-raised-button color="primary" class="btn btn-md btn-success font-size-s"
                       (click)="checkLisence(firstFormGroup.value)" [disabled]="flagCheckLsn || flagCompleteData">Semak Nombor Lesen</button>
                       <span style="color: red;" *ngIf="flagCompleteData == true">
-                          Profil anda tidak lengkap. Sila lengkapkan profil anda sebelum klik butang ini.</span>
+                          Sila lengkapkan profil anda sebelum klik butang ini.</span>
                   </div>
 
                   <div class="col-md-1" style="display: none;">
@@ -124,7 +124,7 @@
   
             <div class="pull-right">
               <span style="color: red;" *ngIf="flagCompleteData == true">
-                  Profil anda tidak lengkap. Sila lengkapkan profil anda sebelum klik butang ini.</span>
+                  Sila lengkapkan profil anda sebelum klik butang ini.</span>
               <button mat-raised-button matStepperNext color="primary" class="btn btn-md iconBtn" [disabled]="flag1 || flagCompleteData">
                 <i class="fa fa-arrow-circle-right"></i>
                 <span class="textDisplay">Seterusnya</span>
