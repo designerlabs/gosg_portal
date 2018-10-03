@@ -671,6 +671,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         return this.sharedService.getCountryData()
           .subscribe(resCountryData => {
             this.countries = resCountryData;
+            this.phoneForm.get('codeTelefonf').setValue('60');
             this.loading = false;
           },
           Error => {
@@ -1396,9 +1397,26 @@ let bodyUpdate =
         this.loading = false;
       });
   };
+  
+  updateMyPhoneNumber(number) {
 
+      while(number.charAt(0) === '0'){
+        number = number.substr(1);
+      }
+
+    console.log(number);
+    return number;
+
+  }
   updateProfilePhone(formValues:any){
     this.loading = true;
+   
+
+    if (formValues.codeTelefonf === '60') {
+      formValues.telefonf = this.updateMyPhoneNumber(formValues.telefonf);
+      this.phoneForm.get('telefonf').setValue(this.updateMyPhoneNumber(formValues.telefonf));
+    }
+    
     this.protectedService.updatePhone(this.idno, formValues.codeTelefonf + formValues.telefonf).subscribe(
       data => {
 
