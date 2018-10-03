@@ -43,8 +43,7 @@ export class SearchComponent implements OnInit {
         if (key) {
             $('#searchDDown').css({ 'display': 'none' });
             localStorage.setItem('ser_word', key);
-            debugger;
-            // location.href = './search/'+key;
+            location.href = './search/'+key;
             this.internal(key);
         } else {
             this.toastr.error(this.translate.instant('common.msg.searchKeyword'), '');
