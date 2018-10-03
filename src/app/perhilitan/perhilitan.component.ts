@@ -490,12 +490,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
           this.flagAfterSubmit = false;
           this.dataApp = data.perhilitanElesenResource;
 
-          if(this.dataApp.ictype == 1){ 
-            this.selectedTypeIC = 1; //1
-          }else{
-            this.selectedTypeIC = 0; //0
-          }
-
+          this.selectedTypeIC = this.dataApp.icType.icTypeId;
           this.getJIC(this.dataApp.nationality.nationalityId, this.langID);
 
           this.secondFormGroup.get('warganegara').setValue(this.dataApp.nationality.nationalityId);
@@ -968,22 +963,13 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
 
     else{
       this.secondFormGroup.get('typeIC').setValue(2);
+      this.selectedTypeIC = 2;
     }
-
     
   }
 
   checkTypeIc(formValue: any){
-
     this.selectedTypeIC = formValue.typeIC;
-
-    if(this.selectedTypeIC == 1){
-      this.selectedTypeIC = 1;
-    }
-
-    else{
-      this.selectedTypeIC = 0;
-    }   
   }
 
   checkOccupation(formValue: any){
