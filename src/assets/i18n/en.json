@@ -448,6 +448,7 @@
     "open":"Open",
     "listofarticle": "List of Articles",
     "close":"Close",
+    "inactiveMsg":" Your account is inactive. Please contact portal administrator.",
     "invalidUser":"Your account doesn't exist in the portal. For more details please contact portal administrator",
     "seconds1":"logout in",
     "seconds2": "seconds",

@@ -189,6 +189,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
             translate.get('HOME').subscribe((res: any) => {
                 this.lang = 'en';
                 this.langID = 1;
+                this.openDialog('','','', 2);
             });
         }
 
@@ -1154,7 +1155,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     }
 
     else{
-      if(sizeFile >  1048576){ //1048576
+      if(sizeFile >  2097152){ //1048576
         this.toastr.error('Fail tidak boleh melebihi 2MB');
         this.fifthFormGroup.controls.file1.setValue(null);
         this.fifthFormGroup.controls.dispBase641.setValue(null);
@@ -1183,7 +1184,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     }
 
     else{
-      if(sizeFile >  1048576){ //1048576
+      if(sizeFile >  2097152){ //1048576
         this.toastr.error('Fail tidak boleh melebihi 2MB');
         this.fifthFormGroup.controls.file2.setValue(null);
         this.fifthFormGroup.controls.dispBase642.setValue(null);
@@ -1328,8 +1329,9 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
 
             let startD = sDate.substring(0,10)
             let endD = eDate.substring(0,10)
+            let err = 1;
 
-            this.openDialog(dataLisence[0].nolesenlama,startD,endD);
+            this.openDialog(dataLisence[0].nolesenlama,startD,endD, err);
           }else{
             this.firstFormGroup.get('textDisplay').setValue('');
             this.toastr.error(dataLisence[0].status, '');
@@ -1396,13 +1398,14 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     return blob;
   }
 
-  openDialog(a,b,c) {
+  openDialog(a,b,c,d) {
 
     this.dialog.open(PopupServiceDialog, {
       data: {
         lesen: a,
         dateL: b,
-        dateT: c
+        dateT: c,
+        err: d
       }
     });
   }

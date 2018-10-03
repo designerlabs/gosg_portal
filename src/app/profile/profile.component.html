@@ -372,6 +372,8 @@
               </div>
             </form>
           </mat-tab>
+
+          <!-- Change Mobile Tab-->
           <mat-tab label="{{'profile.label.changePhone' | translate}}" class="font-size-s">
               <div style="padding-top:10px;"></div>
               <form [formGroup]="phoneForm" autocomplete="off" (ngSubmit)="updateProfilePhone(phoneForm.value)" role="form" novalidate>
@@ -394,9 +396,6 @@
                             <mat-error *ngIf="!validateCtrlChk(telefonf) && phoneForm.controls.telefonf.errors?.required">
                               {{'register.err.tel' | translate }}
                             </mat-error>
-                            <!-- <mat-error *ngIf="!validateCtrlChk(telefonf) && phoneForm.controls.telefonf?.pattern">
-                              {{'register.pattern.tel' | translate }}
-                            </mat-error> -->
                           </mat-form-field>
                   </div>
 

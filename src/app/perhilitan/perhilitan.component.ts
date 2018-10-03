@@ -28,6 +28,11 @@ import { environment } from '../../environments/environment';
 import { setConstantValue } from '../../../node_modules/typescript';
 import { stringify } from 'querystring';
 import { ValidateService } from '../common/validate.service';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+
+export interface DialogData {
+  typeErrMsg;
+}
 
 @Component({
   selector: 'gosg-perhilitan',
@@ -162,6 +167,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
     private topnavservice: TopnavService,
     private validateService:ValidateService,
     private ng4FilesService: Ng4FilesService, 
+    public dialog: MatDialog,
   ) { 
 
     this.lang = translate.currentLang;
@@ -174,6 +180,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
             translate.get('HOME').subscribe((res: any) => {
                 this.lang = 'en';
                 this.langID = 1;
+                this.openDialog();
             });
         }
 
@@ -185,6 +192,10 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
         }
 
         if(this.topnavservice.flagLang){
+
+          if(this.langID == 1){
+            //this.openDialog();
+          }
         }
 
     });
@@ -479,12 +490,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
           this.flagAfterSubmit = false;
           this.dataApp = data.perhilitanElesenResource;
 
-          if(this.dataApp.ictype == 1){ 
-            this.selectedTypeIC = 1; //1
-          }else{
-            this.selectedTypeIC = 0; //0
-          }
-
+          this.selectedTypeIC = this.dataApp.icType.icTypeId;
           this.getJIC(this.dataApp.nationality.nationalityId, this.langID);
 
           this.secondFormGroup.get('warganegara').setValue(this.dataApp.nationality.nationalityId);
@@ -957,22 +963,13 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
 
     else{
       this.secondFormGroup.get('typeIC').setValue(2);
+      this.selectedTypeIC = 2;
     }
-
     
   }
 
   checkTypeIc(formValue: any){
-
     this.selectedTypeIC = formValue.typeIC;
-
-    if(this.selectedTypeIC == 1){
-      this.selectedTypeIC = 1;
-    }
-
-    else{
-      this.selectedTypeIC = 0;
-    }   
   }
 
   checkOccupation(formValue: any){
@@ -1257,7 +1254,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
     }
 
     else{
-      if(sizeFile >  1048576){ //1048576
+      if(sizeFile >  2097152){ //1048576
         this.toastr.error('Fail tidak boleh melebihi 2MB');
         this.fifthFormGroup.controls.file1.setValue(null);
         this.fifthFormGroup.controls.dispBase641.setValue(null);
@@ -1286,7 +1283,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
     }
 
     else{
-      if(sizeFile >  1048576){ //1048576
+      if(sizeFile >  2097152){ //1048576
         this.toastr.error('Fail tidak boleh melebihi 2MB');
         this.fifthFormGroup.controls.file2.setValue(null);
         this.fifthFormGroup.controls.dispBase642.setValue(null);
@@ -1779,4 +1776,34 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       });
   }
 
+  openDialog() {
+
+    let errMsg = '';
+    errMsg = 'This form is only available in Malay language.'
+
+    this.dialog.open(PopupPerhilitan, {
+      data: {
+        typeErrMsg: errMsg
+      }
+    });
+  }
+
+}
+
+@Component({
+  selector: 'popupperhilitan',
+  templateUrl: './popupperhilitan.html',
+})
+
+export class PopupPerhilitan {
+
+  constructor(
+    public dialogRef: MatDialogRef<PopupPerhilitan>,
+    private translate: TranslateService,
+    private router: Router,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+
+    onNoClick() {
+      this.dialogRef.close();
+    }
 }
