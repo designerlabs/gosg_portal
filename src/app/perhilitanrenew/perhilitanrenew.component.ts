@@ -35,6 +35,7 @@ export interface DialogData {
   lesen;
   dateL;
   dateT;
+  err;
 }
 
 @Component({
@@ -160,7 +161,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
   flag5 = true;
   valObj: any;
   flagCompleteData = true;
-  
+
   constructor(
     private activatedRoute:ActivatedRoute,
     @Inject(APP_CONFIG) private config: AppConfig,
@@ -381,7 +382,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
             this.valObj = getObjKeys.filter(fmt => fmt === "address");
             console.log(this.valObj);
             if(this.valObj.length > 0){
-              //let phone = data.user.address.permanentAddressHomePhoneNo.split('*')[1];            
+              //let phone = data.user.address.permanentAddressHomePhoneNo.split('*')[1];
               this.firstFormGroup.get('add1').setValue(data.user.address.permanentAddress1);
               this.firstFormGroup.get('poskodPemohon').setValue(data.user.address.permanentAddressPostcode.postCode);
               this.firstFormGroup.get('daerahPemohon').setValue(data.user.address.permanentAddressCity.cityName);
@@ -394,7 +395,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
             }
             else{
               this.flagCompleteData = true;
-            }            
+            }
 
             this.firstFormGroup.get('namaPemohon').setValue(data.user.fullName);
             this.firstFormGroup.get('icPemohon').setValue(data.user.identificationNo);
