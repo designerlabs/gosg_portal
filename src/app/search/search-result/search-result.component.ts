@@ -596,13 +596,13 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
     if(decodeURI(navKword) != locStrgKword) {
       localStorage.setItem('ser_word', decodeURI(navKword));
       this.loading = true;
-      location.href = './search/'+navKword;
+      // location.href = './search/'+navKword;
         if(this.tabIndex != 2)
       this.mainObj.keyword(decodeURI(navKword));
     } else if(decodeURI(valkeyword) != locStrgKword) {
       localStorage.setItem('ser_word', decodeURI(valkeyword));
       this.loading = true;
-      location.href = './search/'+valkeyword;
+      // location.href = './search/'+valkeyword;
       if(this.tabIndex != 2)
         this.mainObj.keyword(decodeURI(valkeyword));
     }
