@@ -589,7 +589,7 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
         this.mainObj.filters.ref_language_id = "1"
     }
 
-    this.router.navigate(['search/searchResult/' + valkeyword]);
+    this.router.navigate(['search/' + valkeyword]);
     let locStrgKword = localStorage.getItem('ser_word');
     let navKword = this.router.url.split("/")[2];
 
