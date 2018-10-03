@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import * as $ from 'jquery';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 import { DialogsService } from '../dialogs/dialogs.service';
@@ -6,13 +6,12 @@ import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { Router, ActivatedRoute, ParamMap, Params } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { PortalService } from '../services/portal.service';
-import { HttpClient } from '@angular/common/http';
-import { Http, Response } from '@angular/http';
+//import { HttpClient } from '@angular/common/http';
+import { Http } from '@angular/http';
 import {
-  MatInputModule, MatPaginatorModule, MatProgressSpinnerModule,
-  MatSortModule, MatTableModule, MatPaginator, MatSort
+   MatPaginator, MatSort
 } from '@angular/material';
-import { tileLayer, latLng, circle, polygon, marker, icon, Layer, polyline } from 'leaflet';
+//import { tileLayer, latLng, circle, polygon, marker, icon, Layer, polyline } from 'leaflet';
 import * as L from 'leaflet';
 import { ISubscription } from 'rxjs/Subscription';
 import { TopnavService } from '../header/topnav/topnav.service';
@@ -23,7 +22,7 @@ import { NavService } from '../header/nav/nav.service';
   templateUrl: './trafficinfo.component.html',
   styleUrls: ['./trafficinfo.component.css']
 })
-export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
+export class TrafficinfoComponent implements OnInit, OnDestroy {
 
   private subscriptionLang: ISubscription;
 
@@ -32,7 +31,7 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild('input') input: ElementRef;
-
+ 
   pageSize = 10;
   pageCount = 1;
   totalRec = 0;
@@ -146,10 +145,6 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
     }, 300000);
   }
 
-  ngAfterViewInit() {
-
-  }
-
   ngOnDestroy() {
     this.subscriptionLang.unsubscribe();
     if (this.id) {
@@ -166,14 +161,9 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
       id: 'mapbox.streets',
       accessToken: 'pk.eyJ1IjoicmVkemEiLCJhIjoiY2pmcGZxNzRrMjYzbzMwcG83bGRxY2FtZyJ9.uMHQpYc0Pvjl4us27nHH8w'
     }).addTo(this.mymap);
-
-    // this.rp = L.polyline(this.PLJlnMaarof, {color: 'red'}).addTo(this.mymap);
-    // this.mymap.fitBounds(this.rp.getBounds());
-
   }
 
   getTrafficFlowData(lng) {
-    var testRp;
       this.loading = true;
       this.portalservice.getTrafficFlows(lng).subscribe(
         data => {
@@ -190,32 +180,21 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
                   this.streetNames.push({ 'name': el.street, 'latlng': el.jam[0] });
 
                   this.rp = L.polyline(el.jam, {color: this.getLevelColor(el.level), weight: 5, opacity: 0.6 }).addTo(this.mymap);
-                  
+
                   this.rp.on('click', this.middleMan, this);
 
-                  this.rp.on('mouseover', function() {
-                    let content = this;
-                    // console.log(content)
-
+                  this.rp.on('mouseover', function(e) {
+                    let popEl = '<div style="cursor: pointer;" d-color="'+ e.target.options.color +'" d-street="'+ el.street+'" d-latlng="'+ el.jam[0] +'" class="clickmap">'+`${el.street}`+'</div>'
                     this.popup = L.popup().setLatLng(el.jam[0])
-                  
-                    .setContent(`<a class="click" href="#">click</a>`)
-                    .openOn(this._map);
+                                  .setContent(popEl)
+                                  .openOn(this._map)
                   });
-          
-
                 }
               });
 
-
-              $("body").on('click','a.click', function(e){
-                testRp
-                e.preventDefault();
-               
-              });
               this.totalRec = this.streetFlows.params.recordsFound;
-
               this.showNoData = false;
+              this.mapPopupClick(this.languageId);
             } else {
               this.recordTable = [];
               this.showNoData = true;
@@ -226,21 +205,26 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
         error => {
           this.toastr.error(JSON.parse(error._body).statusDesc, '');
           this.loading = false;
-
         });
-
-       
   }
 
-  test() {
-    alert('test');
+  
+
+  mapPopupClick(languageId) {
+    const scopeOject = this;
+    $("body").on('click','div.clickmap', function(e){
+      let name = $(this).attr('d-street');
+      let latlng = JSON.parse('['+$(this).attr('d-latlng')+']');
+      let color =  $(this).attr('d-color');
+      scopeOject.getTrafficPredictionData(name, latlng, color, scopeOject.languageId);
+      e.preventDefault();
+    })
   }
 
   middleMan(e) {
-    console.log(e);
-    var testRp = this.rp;
+    let element = $(e.target.popup._content);
+    let sName = $(element).attr('d-street');
     let currColor = e.target.options.color;
-    let sName = e.target.popup._content;
     let sLatLng = [e.latlng.lat,e.latlng.lng ];
     this.getTrafficPredictionData(sName, sLatLng, currColor, this.languageId);
   }
@@ -270,6 +254,7 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
 
               trafficDetails.status = this.streetPrediction.current;
               trafficDetails.color = currClr;
+              console.log(this.streetPrediction);
               this.predictionData.push(trafficDetails);
 
                 this.streetPrediction.traffic.forEach(el => {
@@ -287,13 +272,12 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
                 });
 
               this.mymap.flyTo(ltlg, 15);
+              let popEl = '<div style="cursor: pointer;" d-color="'+  trafficDetails.color +'" d-street="'+ this.streetName+'" d-latlng="'+ ltlg +'" class="clickmap">'+this.streetName+'</div>'
               this.popup = L.popup().setLatLng(ltlg)
-                            .setContent(this.streetName)
+                            .setContent(popEl)
                             .openOn(this.mymap);
-              }
-              // this.popup.on('click', this.middleMan, this);
-              this.popup.on('click', this.test);
-
+                          }
+              this.popup.on('click', this.middleMan, this);
           }).bind(this));
           this.loading = false;
           this.isActiveList = false;
