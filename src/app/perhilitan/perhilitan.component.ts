@@ -28,6 +28,11 @@ import { environment } from '../../environments/environment';
 import { setConstantValue } from '../../../node_modules/typescript';
 import { stringify } from 'querystring';
 import { ValidateService } from '../common/validate.service';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+
+export interface DialogData {
+  typeErrMsg;
+}
 
 @Component({
   selector: 'gosg-perhilitan',
@@ -162,6 +167,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
     private topnavservice: TopnavService,
     private validateService:ValidateService,
     private ng4FilesService: Ng4FilesService, 
+    public dialog: MatDialog,
   ) { 
 
     this.lang = translate.currentLang;
@@ -174,6 +180,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
             translate.get('HOME').subscribe((res: any) => {
                 this.lang = 'en';
                 this.langID = 1;
+                this.openDialog();
             });
         }
 
@@ -185,6 +192,10 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
         }
 
         if(this.topnavservice.flagLang){
+
+          if(this.langID == 1){
+            //this.openDialog();
+          }
         }
 
     });
@@ -1779,4 +1790,34 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       });
   }
 
+  openDialog() {
+
+    let errMsg = '';
+    errMsg = 'This form is only available in Malay language.'
+
+    this.dialog.open(PopupPerhilitan, {
+      data: {
+        typeErrMsg: errMsg
+      }
+    });
+  }
+
+}
+
+@Component({
+  selector: 'popupperhilitan',
+  templateUrl: './popupperhilitan.html',
+})
+
+export class PopupPerhilitan {
+
+  constructor(
+    public dialogRef: MatDialogRef<PopupPerhilitan>,
+    private translate: TranslateService,
+    private router: Router,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+
+    onNoClick() {
+      this.dialogRef.close();
+    }
 }
