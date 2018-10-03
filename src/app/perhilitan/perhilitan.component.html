@@ -143,11 +143,22 @@
 
               <div class="col-md-4" *ngIf="selectedTypeIC == 1">
                 <mat-form-field  class="example-full-width displayInfo">
-                  <input matInput formControlName="icpassport" placeholder="No.IC/Passport" required
-                  (change)="getDetailIC(langID, secondFormGroup.value)" [textMask]="{mask: maskIC}">
+                  <input matInput formControlName="icpassport" placeholder="No.IC/Passport" required [textMask]="{mask: maskIC}" >                  
+                  <mat-icon matPrefix *ngIf="checkIC != undefined" [ngClass]="(checkIC == true) ? 'iconRight' : 'iconWrong'">
+                      <i  [ngClass]="(checkIC == true) ? 'fa fa-check' : 'fa fa-exclamation-circle'"></i></mat-icon>                      
+                  <mat-icon matPrefix (click)="getDetailIC(langID, secondFormGroup.value)" class="iconSearch">
+                    <i class="fa fa-search"></i></mat-icon>
                 </mat-form-field>
-                <mat-error class="redErMsg" *ngIf="secondFormGroup.controls.icpassport.hasError('required')">
+                <!-- <mat-icon matPrefix [ngClass]="{'iconRight': checkIC == true, 'iconWrong': checkIC == false}">
+                  <i  [ngClass]="{'fa fa-check': checkIC == true, 'fa fa-exclamation-circle': checkIC == false}"></i></mat-icon>   -->
+                <!-- <mat-icon matPrefix class="iconRight" *ngIf="listdaerahTNo > 0"><i class="fa fa-check"></i></mat-icon>   
+                <mat-icon matPrefix class="iconWrong" *ngIf="checkIC == false"><i class="fa fa-exclamation-circle"></i></mat-icon>             -->
+                
+                <mat-error class="redErMsg" *ngIf="secondFormGroup.controls.icpassport.hasError('required') && checkIC != false">
                     No.IC/Passport diperlukan
+                </mat-error>
+                <mat-error class="redErMsg" *ngIf="checkIC == false">
+                    Kad Pengenalan tidak sah
                 </mat-error>
               </div>
 
@@ -195,8 +206,12 @@
 
             <div class="row">
               <div class="col-md-4">
-                <mat-form-field  class="example-full-width displayInfo">
-                  <input matInput formControlName="phonePemilik" placeholder="No. Telefon" required [textMask]="{mask: maskPhone}">
+                  <!-- (ngInit)="token = false" -->
+                <mat-form-field  class="example-full-width displayInfo" >
+                  <input matInput formControlName="phonePemilik" placeholder="No. Telefon" required [textMask]="{mask: maskPhone}" 
+                  (keyup)="checkPhone(secondFormGroup.value)">
+                  <!-- (keyup)="token = secondFormGroup.controls.phonePemilik.value != '' ? true : false"> -->
+                  <!-- (keyup)="token = ((secondFormGroup.controls.phonePemilik.value).replace('_', '')).length > 10 ? true : false"> -->
                 </mat-form-field>
                 <mat-error class="redErMsg" *ngIf="secondFormGroup.controls.phonePemilik.hasError('required')">
                     No. Telefon diperlukan
@@ -247,8 +262,10 @@
             <div class="row">
               <div class="col-md-4">
                 <mat-form-field  class="example-full-width displayInfo">
-                  <input matInput formControlName="poskodPemilik" placeholder="Poskod" required
-                  (change)="checkposkod(1, secondFormGroup.value)" [textMask]="{mask: maskPostcode}">
+                  <input matInput formControlName="poskodPemilik" placeholder="Poskod" required [textMask]="{mask: maskPostcode}">   
+                  <mat-icon matPrefix class="iconRight" *ngIf="listdaerahTNo > 0"><i class="fa fa-check"></i></mat-icon>   
+                  <mat-icon matPrefix class="iconWrong" *ngIf="listdaerahTNo == 0"><i class="fa fa-exclamation-circle"></i></mat-icon>            
+                  <mat-icon matPrefix class="iconSearch" (click)="checkposkod(1, secondFormGroup.value)"><i class="fa fa-search"></i></mat-icon>
                 </mat-form-field>
                 <mat-error class="redErMsg" *ngIf="secondFormGroup.controls.poskodPemilik.hasError('required')">
                     Poskod diperlukan
@@ -278,13 +295,17 @@
             </div>
           </div>
           <div class="pull-right">
+            <mat-form-field  class="displayInfo" style="display: block;">
+              <input matInput formControlName="flagData" placeholder="test" required>
+            </mat-form-field>
             <button mat-raised-button matStepperPrevious color="primary" class="btn btn-md iconBtn">
               <i class="fa fa-arrow-circle-left"></i>
               <span class="textDisplay">Sebelum</span>
             </button>
-            <button mat-raised-button matStepperNext color="primary" class="btn btn-md iconBtn" [disabled]="flag2">              
+            <button mat-raised-button matStepperNext color="primary" class="btn btn-md iconBtn" 
+            [disabled]="flag2 || tokenPhone || flagPoskodT || flagPoskodMailing || flagPoskodCompany">              
               <i class="fa fa-arrow-circle-right"></i>
-              <span class="textDisplay">Seterusnya</span>
+              <span class="textDisplay">Seterusnya {{flag2}} {{tokenPhone}} {{flagPoskodT}} {{flagPoskodMailing}} {{flagPoskodCompany}}</span>
             </button>
             <button mat-raised-button color="primary" class="btn btn-md iconBtn" (click)="draft()">              
               <i class="fa fa-floppy-o"></i>
@@ -322,8 +343,10 @@
             <div class="row">
               <div class="col-md-4">
                 <mat-form-field  class="example-full-width displayInfo">
-                  <input matInput formControlName="mailingPoskod" placeholder="Poskod" required
-                  (change)="checkposkod(2, thirdFormGroup.value)" [textMask]="{mask: maskPostcode}">
+                  <input matInput formControlName="mailingPoskod" placeholder="Poskod" required [textMask]="{mask: maskPostcode}">
+                  <mat-icon matPrefix class="iconRight" *ngIf="listdaerahSuratNo > 0"><i class="fa fa-check"></i></mat-icon>   
+                  <mat-icon matPrefix class="iconWrong" *ngIf="listdaerahSuratNo == 0"><i class="fa fa-exclamation-circle"></i></mat-icon>            
+                  <mat-icon matPrefix class="iconSearch" (click)="checkposkod(2, thirdFormGroup.value)"><i class="fa fa-search"></i></mat-icon>
                 </mat-form-field>
                 <mat-error class="redErMsg" *ngIf="thirdFormGroup.controls.mailingPoskod.hasError('required')">
                     Poskod diperlukan
@@ -458,8 +481,10 @@
             <div class="row">
               <div class="col-md-4">
                 <mat-form-field  class="example-full-width displayInfo">
-                  <input matInput formControlName="companyPoskod" placeholder="Poskod" required 
-                  (change)="checkposkod(3, fourthFormGroup.value)" [textMask]="{mask: maskPostcode}">
+                  <input matInput formControlName="companyPoskod" placeholder="Poskod" required [textMask]="{mask: maskPostcode}">
+                  <mat-icon matPrefix class="iconRight" *ngIf="listdaerahCompanyNo > 0"><i class="fa fa-check"></i></mat-icon>   
+                  <mat-icon matPrefix class="iconWrong" *ngIf="listdaerahCompanyNo == 0"><i class="fa fa-exclamation-circle"></i></mat-icon>            
+                  <mat-icon matPrefix class="iconSearch" (click)="checkposkod(3, fourthFormGroup.value)"><i class="fa fa-search"></i></mat-icon>
                 </mat-form-field>
                 <mat-error class="redErMsg" *ngIf="fourthFormGroup.controls.companyPoskod.hasError('required')">
                     Poskod diperlukan

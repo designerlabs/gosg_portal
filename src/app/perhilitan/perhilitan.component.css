@@ -17,5 +17,29 @@
     margin-top: -10px;
 }
 
+.iconSearch{
+    position: absolute; 
+    right: 0px; 
+    top: 0px;
+    z-index: 999;
+}
+
+.iconRight{
+    position: absolute;
+    right: 23px;
+    top: 0px;
+    z-index: 999;
+    color: green;
+}
+
+.iconWrong{
+    position: absolute;
+    right: 23px;
+    top: 0px;
+    z-index: 999;
+    color: red;
+}
+
+
 
 
