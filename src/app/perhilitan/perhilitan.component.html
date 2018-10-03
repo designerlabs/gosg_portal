@@ -146,13 +146,39 @@
                   <input matInput formControlName="icpassport" placeholder="No.IC/Passport" required
                   (change)="getDetailIC(langID, secondFormGroup.value)" [textMask]="{mask: maskIC}">
                 </mat-form-field>
+                <mat-error class="redErMsg" *ngIf="secondFormGroup.controls.icpassport.hasError('required')">
+                    No.IC/Passport diperlukan
+                </mat-error>
               </div>
 
-              <div class="col-md-4" *ngIf="selectedTypeIC == 0">
+              <div class="col-md-4" *ngIf="selectedTypeIC == 4">
                 <mat-form-field  class="example-full-width displayInfo">
-                  <input matInput formControlName="icpassport" placeholder="No.IC/Passport" required
+                  <input matInput formControlName="icpassport" placeholder="Kad Pengenalan Polis" required
+                  (change)="getDetailIC(langID, secondFormGroup.value)" [textMask]="{mask: maskIC}">
+                </mat-form-field>
+                <mat-error class="redErMsg" *ngIf="secondFormGroup.controls.icpassport.hasError('required')">
+                    Kad Pengenalan Polis diperlukan
+                </mat-error>
+              </div>
+
+              <div class="col-md-4" *ngIf="selectedTypeIC == 5">
+                <mat-form-field  class="example-full-width displayInfo">
+                  <input matInput formControlName="icpassport" placeholder="Kad Pengenalan Tentera" required
+                  (change)="getDetailIC(langID, secondFormGroup.value)" [textMask]="{mask: maskIC}">
+                </mat-form-field>
+                <mat-error class="redErMsg" *ngIf="secondFormGroup.controls.icpassport.hasError('required')">
+                    Kad Pengenalan Tentera diperlukan
+                </mat-error>
+              </div>
+
+              <div class="col-md-4" *ngIf="selectedTypeIC == 2">
+                <mat-form-field  class="example-full-width displayInfo">
+                  <input matInput formControlName="icpassport" placeholder="Passpot" required
                   (change)="getDetailIC(langID, secondFormGroup.value)" maxlength="12">
                 </mat-form-field>
+                <mat-error class="redErMsg" *ngIf="secondFormGroup.controls.icpassport.hasError('required')">
+                    Passpot diperlukan
+                </mat-error>
               </div>
             </div>
 
@@ -161,6 +187,9 @@
                 <mat-form-field  class="example-full-width displayInfo">
                   <input matInput formControlName="namaPemilik" placeholder="Nama Pemilik" required (keyup)="checkReqValues2()">
                 </mat-form-field>
+                <mat-error class="redErMsg" *ngIf="secondFormGroup.controls.namaPemilik.hasError('required')">
+                    Nama Pemilik diperlukan
+                </mat-error>
               </div>
             </div>
 
@@ -169,6 +198,9 @@
                 <mat-form-field  class="example-full-width displayInfo">
                   <input matInput formControlName="phonePemilik" placeholder="No. Telefon" required [textMask]="{mask: maskPhone}">
                 </mat-form-field>
+                <mat-error class="redErMsg" *ngIf="secondFormGroup.controls.phonePemilik.hasError('required')">
+                    No. Telefon diperlukan
+                </mat-error>
               </div>
 
               <div class="col-md-4">
@@ -180,6 +212,9 @@
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
+                <mat-error class="redErMsg" *ngIf="secondFormGroup.controls.jobType.hasError('required')">
+                    Jenis Pekerjaan diperlukan
+                </mat-error>
               </div>
 
               <div class="col-md-4">
@@ -192,6 +227,9 @@
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
+                <mat-error class="redErMsg" *ngIf="secondFormGroup.controls.jobGroup.hasError('required')">
+                    Kumpulan Pekerjaan diperlukan
+                </mat-error>
               </div>
             </div>
         
@@ -200,6 +238,9 @@
                 <mat-form-field class="example-full-width displayInfo">
                   <textarea matInput formControlName="addPemilik" placeholder="Alamat Tetap" required (keyup)="checkReqValues2()"></textarea>
                 </mat-form-field>
+                <mat-error class="redErMsg" *ngIf="secondFormGroup.controls.addPemilik.hasError('required')">
+                    Alamat Tetap diperlukan
+                </mat-error>
               </div>
             </div>
     
@@ -209,6 +250,9 @@
                   <input matInput formControlName="poskodPemilik" placeholder="Poskod" required
                   (change)="checkposkod(1, secondFormGroup.value)" [textMask]="{mask: maskPostcode}">
                 </mat-form-field>
+                <mat-error class="redErMsg" *ngIf="secondFormGroup.controls.poskodPemilik.hasError('required')">
+                    Poskod diperlukan
+                </mat-error>
               </div>
               <div class="col-md-4">
                 <mat-form-field  class="example-full-width displayInfo">
@@ -219,11 +263,17 @@
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
+                <mat-error class="redErMsg" *ngIf="secondFormGroup.controls.daerahPemilik.hasError('required')">
+                    Daerah diperlukan
+                </mat-error>
               </div>
               <div class="col-md-4">
                 <mat-form-field  class="example-full-width displayInfo">
                   <input matInput formControlName="negeriPemilik" placeholder="Negeri" required>
                 </mat-form-field>
+                <mat-error class="redErMsg" *ngIf="secondFormGroup.controls.negeriPemilik.hasError('required')">
+                    Negeri diperlukan
+                </mat-error>
               </div>
             </div>
           </div>
@@ -261,8 +311,11 @@
                   <span>Alamat Surat-Menyurat * </span> 
                   <mat-checkbox formControlName="copyAdd" id="copyAdd" (change)="clickCopyAdd()"></mat-checkbox>
                   Salin Alamat Tetap
-                  <textarea matInput formControlName="mailingAdd" placeholder="" (keyup)="checkReqValues3()"></textarea>
+                  <textarea matInput formControlName="mailingAdd" placeholder="" (keyup)="checkReqValues3()" required></textarea>
                 </mat-form-field>
+                <mat-error class="redErMsg" *ngIf="thirdFormGroup.controls.mailingAdd.hasError('required')">
+                    Alamat Surat-Menyurat diperlukan
+                </mat-error>
               </div>
             </div>
     
@@ -272,6 +325,9 @@
                   <input matInput formControlName="mailingPoskod" placeholder="Poskod" required
                   (change)="checkposkod(2, thirdFormGroup.value)" [textMask]="{mask: maskPostcode}">
                 </mat-form-field>
+                <mat-error class="redErMsg" *ngIf="thirdFormGroup.controls.mailingPoskod.hasError('required')">
+                    Poskod diperlukan
+                </mat-error>
               </div>
               <div class="col-md-4">
                 <mat-form-field  class="example-full-width">
@@ -282,11 +338,17 @@
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
+                <mat-error class="redErMsg" *ngIf="thirdFormGroup.controls.mailingDaerah.hasError('required')">
+                    Daerah diperlukan
+                </mat-error>
               </div>
               <div class="col-md-4">
                 <mat-form-field  class="example-full-width displayInfo">
                   <input matInput formControlName="mailingNegeri" placeholder="Negeri" required>
                 </mat-form-field>
+                <mat-error class="redErMsg" *ngIf="thirdFormGroup.controls.mailingNegeri.hasError('required')">
+                    Negeri diperlukan
+                </mat-error>
               </div>
             </div>
           </div>
@@ -352,6 +414,9 @@
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
+                <mat-error class="redErMsg" *ngIf="fourthFormGroup.controls.registerType.hasError('required')">
+                    Jenis Pendaftaran Syarikat diperlukan
+                </mat-error>
               </div>
 
               <div class="col-md-6">
@@ -359,6 +424,9 @@
                   <input matInput formControlName="registerNo" placeholder="No. Pendaftaran Syarikat" required
                   (keyup)="checkReqValues4()">
                 </mat-form-field>
+                <mat-error class="redErMsg" *ngIf="fourthFormGroup.controls.registerNo.hasError('required')">
+                    No. Pendaftaran Syarikat diperlukan
+                </mat-error>
               </div>
             </div>
 
@@ -367,6 +435,9 @@
                 <mat-form-field  class="example-full-width displayInfo">
                   <input matInput formControlName="companyName" placeholder="Nama Syarikat" required (change)="checkReqValues4()">
                 </mat-form-field>
+                <mat-error class="redErMsg" *ngIf="fourthFormGroup.controls.companyName.hasError('required')">
+                    Nama Syarikat diperlukan
+                </mat-error>
               </div>
             </div>
         
@@ -376,8 +447,11 @@
                   <span>Alamat * </span> 
                   <mat-checkbox formControlName="copyAddPemilik" id="copyAddPemilik" (change)="clickCopyAddPemilik()"></mat-checkbox>
                   Salin Alamat Pemilik
-                  <textarea matInput formControlName="companyAdd" placeholder=""  (change)="checkReqValues4()"></textarea>
+                  <textarea matInput formControlName="companyAdd" placeholder=""  (change)="checkReqValues4()" required></textarea>
                 </mat-form-field>
+                <mat-error class="redErMsg" *ngIf="fourthFormGroup.controls.companyAdd.hasError('required')">
+                    Alamat diperlukan
+                </mat-error>
               </div>
             </div>
     
@@ -387,6 +461,9 @@
                   <input matInput formControlName="companyPoskod" placeholder="Poskod" required 
                   (change)="checkposkod(3, fourthFormGroup.value)" [textMask]="{mask: maskPostcode}">
                 </mat-form-field>
+                <mat-error class="redErMsg" *ngIf="fourthFormGroup.controls.companyPoskod.hasError('required')">
+                    Poskod diperlukan
+                </mat-error>
               </div>
               <div class="col-md-4">
                 <mat-form-field  class="example-full-width">
@@ -397,11 +474,17 @@
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
+                <mat-error class="redErMsg" *ngIf="fourthFormGroup.controls.companyDaerah.hasError('required')">
+                    Daerah diperlukan
+                </mat-error>
               </div>
               <div class="col-md-4">
                 <mat-form-field  class="example-full-width displayInfo">
                   <input matInput formControlName="companyNegeri" placeholder="Negeri" required>
                 </mat-form-field>
+                <mat-error class="redErMsg" *ngIf="fourthFormGroup.controls.companyNegeri.hasError('required')">
+                    Negeri diperlukan
+                </mat-error>
               </div>
             </div>
 
@@ -411,6 +494,9 @@
                   <input matInput formControlName="companyPhone" placeholder="No. Telefon" required
                   (keyup)="checkReqValues4()" [textMask]="{mask: maskPhone}">
                 </mat-form-field>
+                <mat-error class="redErMsg" *ngIf="fourthFormGroup.controls.companyPhone.hasError('required')">
+                    No. Telefon diperlukan
+                </mat-error>
               </div>
 
               <div class="col-md-4">
@@ -458,6 +544,9 @@
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
+                <mat-error class="redErMsg" *ngIf="fifthFormGroup.controls.lsnActivity.hasError('required')">
+                    Aktiviti Lesen diperlukan
+                </mat-error>
               </div>
             </div>
 
@@ -471,6 +560,9 @@
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
+                <mat-error class="redErMsg" *ngIf="fifthFormGroup.controls.businessCat.hasError('required')">
+                    Kategori Perniagaan diperlukan
+                </mat-error>
               </div>
             </div>
 
@@ -486,11 +578,12 @@
                     <input matInput placeholder="Salinan Sijil PendaftaranSyarikat (Sijil SSM)" formControlName="file1" class="displayDesc"
                     required readonly>
                     <mat-error *ngIf="fifthFormGroup.controls.file1.hasError('required')">
-                      Salinan Sijil PendaftaranSyarikat (Sijil SSM) diperlukan
+                      Salinan Sijil Pendaftaran Syarikat (Sijil SSM) diperlukan
                     </mat-error>
-                </mat-form-field>
+                </mat-form-field><br>
+                <div style="background: black; padding: 5px; text-align: center;"><span>Fail Format PDF sahaja yang dibenarkan</span></div>                
               </div>
-
+              
               <div class="col-md-2">
                 <ng4-files-click (filesSelect)="uploadFile1($event)" accept="image/*">
                   <span role="button" class="btn btn-success btn-md"><i class="fa fa-search"></i> Muat Naik Fail</span>
@@ -504,7 +597,8 @@
                     <mat-error *ngIf="fifthFormGroup.controls.file2.hasError('required')">
                       Salinan Surat Kelulusan PBT diperlukan
                     </mat-error>
-                </mat-form-field>
+                </mat-form-field><br>
+                <div style="background: black; padding: 5px; text-align: center;"><span>Fail Format PDF sahaja yang dibenarkan</span></div>   
               </div>
 
               <div class="col-md-2">

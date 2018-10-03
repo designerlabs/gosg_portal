@@ -40,14 +40,14 @@ import { StatuspositionComponent } from './pdrm/statusposition/statusposition.co
 import { SummontrafficComponent } from './pdrm/summontraffic/summontraffic.component';
 import { DigitalservicesprodComponent } from './digitalservices/digitalservicesprod.component';
 import { ContentProdComponent } from './article/content/contentprod.component';
-import { PerhilitanComponent } from './perhilitan/perhilitan.component';
+import { PerhilitanComponent, PopupPerhilitan } from './perhilitan/perhilitan.component';
+import { PerhilitanrenewComponent, PopupServiceDialog } from './perhilitanrenew/perhilitanrenew.component';
 import { ReplacementmycardComponent } from './replacementmycard/replacementmycard.component';
 import { ReplacementmsgComponent } from './replacementmsg/replacementmsg.component';
 import { LeftmenuProdComponent } from './article/leftmenu/leftmenuprod.component';
 import { ArchivecategoryProdComponent } from './archive/archivecategory/archivecategoryprod.component';
 import { ArchivesubcategoryProdComponent } from './archive/archivesubcategory/archivesubcategoryprod.component';
 import { ArchivecontentProdComponent } from './archive/archivecontent/archivecontentprod.component';
-import { PerhilitanrenewComponent, PopupServiceDialog } from './perhilitanrenew/perhilitanrenew.component';
 import { ProtectedLoaderComponent } from './loader/protected-loader.component';
 import { FamilyinfoComponent, FamilyPopupDialog } from './familyinfo/familyinfo.component';
 import { FamilyinfotblComponent } from './familyinfo/familyinfotbl/familyinfotbl.component';
@@ -81,15 +81,16 @@ export function HttpLoaderFactory(http: Http) {
     DigitalservicesprodComponent,
     SummontrafficComponent,
     ContentProdComponent,
-    PerhilitanComponent,
     ReplacementmycardComponent,
     ReplacementmsgComponent,
     LeftmenuProdComponent,
     ArchivecategoryProdComponent,
     ArchivesubcategoryProdComponent,
-    ArchivecontentProdComponent,
+    ArchivecontentProdComponent,    
+    PerhilitanComponent,
     PerhilitanrenewComponent,
     PopupServiceDialog,
+    PopupPerhilitan,
     ProtectedLoaderComponent,
     FamilyinfoComponent,
     FamilyPopupDialog,
@@ -127,7 +128,7 @@ export function HttpLoaderFactory(http: Http) {
   ],
 
   providers: [ ProtectedService, ContentProdComponent],
-  entryComponents: [PopupServiceDialog, FamilyPopupDialog, ExamPopupDialog, ExamResult],
+  entryComponents: [PopupServiceDialog, FamilyPopupDialog, ExamPopupDialog, ExamResult, PopupPerhilitan],
   bootstrap: [ProtectedComponent]
 })
 

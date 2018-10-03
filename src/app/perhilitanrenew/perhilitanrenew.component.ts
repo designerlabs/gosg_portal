@@ -189,6 +189,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
             translate.get('HOME').subscribe((res: any) => {
                 this.lang = 'en';
                 this.langID = 1;
+                this.openDialog('','','', 2);
             });
         }
 
@@ -1328,8 +1329,9 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
 
             let startD = sDate.substring(0,10)
             let endD = eDate.substring(0,10)
+            let err = 1;
 
-            this.openDialog(dataLisence[0].nolesenlama,startD,endD);
+            this.openDialog(dataLisence[0].nolesenlama,startD,endD, err);
           }else{
             this.firstFormGroup.get('textDisplay').setValue('');
             this.toastr.error(dataLisence[0].status, '');
@@ -1396,13 +1398,14 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     return blob;
   }
 
-  openDialog(a,b,c) {
+  openDialog(a,b,c,d) {
 
     this.dialog.open(PopupServiceDialog, {
       data: {
         lesen: a,
         dateL: b,
-        dateT: c
+        dateT: c,
+        err: d
       }
     });
   }

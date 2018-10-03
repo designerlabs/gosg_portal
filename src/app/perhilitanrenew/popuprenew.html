@@ -4,10 +4,17 @@
             <i class="fa fa-exclamation-triangle"></i>
         </h2>
     </div>
-    <div class="modal-body">
-        <span>Permohonan Pembaharuan Lesen Telah Dibuat</span><br>
-        <span>Nombor Lesen: {{data.lesen}}</span><br>
-        <span>Tempoh Sah: {{data.dateL}} - {{data.dateT}}</span><br>
+    <div class="modal-body" *ngIf="data.err == 1">
+        <span *ngIf="data.err == 1">Permohonan Pembaharuan Lesen Telah Dibuat</span><br>
+        <span *ngIf="data.err == 1">Nombor Lesen: {{data.lesen}}</span><br>
+        <span *ngIf="data.err == 1">Tempoh Sah: {{data.dateL}} - {{data.dateT}}</span><br>
+        <div style="justify-content: center; margin-top: 3%">
+            <button class="btn btn-danger" type="button" (click)="onNoClick()">
+                <i class="fa fa-check"></i> OK</button>
+        </div>
+    </div>
+    <div class="modal-body" *ngIf="data.err == 2">
+        <span>This form is only available in Malay language.</span><br>
         <div style="justify-content: center; margin-top: 3%">
             <button class="btn btn-danger" type="button" (click)="onNoClick()">
                 <i class="fa fa-check"></i> OK</button>
