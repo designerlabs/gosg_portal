@@ -852,220 +852,6 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
 
   }
 
-  checkPhone(formValue: any){
-    let removeUndscr = (formValue.phonePemilik)?(formValue.phonePemilik).replace(/\_/g, ""): 0;
-    console.log(removeUndscr);
-    console.log(removeUndscr.length);
-    if(removeUndscr.length == 0 || removeUndscr.length == undefined){
-      this.tokenPhone = true;
-    }
-    else
-      this.tokenPhone = false;
-  }
-
-  validateIc(m,d){
-
-    let arrM = ['01','02','03','04','05','06','07','08','09','10','11','12'];
-    let arrD = ['01','02','03','04','05','06','07','08','09','10',
-                '11','12','13','14','15','16','17','18','19','20',
-                '21','22','23','24','25','26','27','28','29','30','31'];
-    let valM = arrM.includes(m);
-    let valD = arrD.includes(d);
-    let validIC: any;
-
-    if(valM == false || valD == false)
-      validIC = false;
-
-    else
-      validIC = true;
-    
-      return validIC;
-  }
-
-  resetForm23(){
-    
-    this.secondFormGroup.get('namaPemilik').setValue('');
-    this.secondFormGroup.get('phonePemilik').setValue('');
-    this.secondFormGroup.get('jobType').setValue(1);
-    this.secondFormGroup.get('jobGroup').setValue('');
-    this.secondFormGroup.get('addPemilik').setValue('');
-    this.secondFormGroup.get('poskodPemilik').setValue(null);
-    this.secondFormGroup.get('daerahPemilik').setValue('');
-    this.secondFormGroup.get('negeriPemilik').setValue('');
-
-    this.thirdFormGroup.get('mailingAdd').setValue('');
-    this.thirdFormGroup.get('mailingPoskod').setValue('');        
-    this.thirdFormGroup.get('mailingDaerah').setValue('');
-    this.thirdFormGroup.get('mailingNegeri').setValue('');
-
-    this.secondFormGroup.get('namaPemilik').enable();
-    this.secondFormGroup.get('addPemilik').enable();
-    this.secondFormGroup.get('poskodPemilik').enable();
-    this.secondFormGroup.get('daerahPemilik').enable();
-    this.secondFormGroup.get('negeriPemilik').enable();
-
-    this.checkReqValues2();
-  }
-
-  checkReqValues2() {
-    let reqVal: any;
-
-    if(this.selectedOccupation == 1 || this.secondFormGroup.get('jobType').value == 1){
-      reqVal = ["icpassport", 
-                "namaPemilik",  
-                "jobType", 
-                "jobGroup",
-                "addPemilik","poskodPemilik","daerahPemilik","negeriPemilik"];
-    }
-    else{
-      reqVal = ["icpassport", 
-                "namaPemilik", 
-                "jobType", 
-                "addPemilik","poskodPemilik","daerahPemilik","negeriPemilik"];
-    }
-
-    let nullPointers: any = [];
-
-    for (var reqData of reqVal) {
-      let elem = this.secondFormGroup.get(reqData);
-
-      if (elem.value == "" || elem.value == null) {
-        elem.setValue(null)
-        nullPointers.push(null)
-      }
-    }
-
-    if (nullPointers.length > 0) {
-      this.flag2 = true;
-    } else {
-      this.flag2 = false;
-    }
-
-  }
-
-  checkReqValues3(){
-    let reqVal: any;
-
-    reqVal = ["mailingAdd",
-              "mailingPoskod",
-              "mailingDaerah",
-              "mailingNegeri"];
-    
-
-    let nullPointers: any = [];
-
-    for (var reqData of reqVal) {
-      let elem = this.thirdFormGroup.get(reqData);
-
-      if (elem.value == "" || elem.value == null) {
-        elem.setValue(null)
-        nullPointers.push(null)
-      }
-    }
-
-    if (nullPointers.length > 0) {
-      this.flag3 = true;
-    } else {
-      this.flag3 = false;
-    }
-  }
-
-  checkReqValues4(){
-    let reqVal: any;
-
-    reqVal = ["companyType",
-              "registerType",
-              "registerNo",
-              "companyName",
-              "companyAdd",
-              "companyPoskod",
-              "companyDaerah",
-              "companyNegeri",
-              "companyPhone"];
-    
-    let nullPointers: any = [];
-
-    for (var reqData of reqVal) {
-      let elem = this.fourthFormGroup.get(reqData);
-
-      if (elem.value == "" || elem.value == null) {
-        elem.setValue(null)
-        nullPointers.push(null)
-      }
-    }
-
-    if (nullPointers.length > 0) {
-      this.flag4 = true;
-    } else {
-      this.flag4 = false;
-    }
-  }
-
-  checkReqValues5() {
-
-    let reqVal: any = ["lsnActivity", "businessCat", "file1", "file2"];
-    let nullPointers: any = [];
-
-    for (var reqData of reqVal) {
-      let elem = this.fifthFormGroup.get(reqData);
-
-      if (elem.value == "" || elem.value == null) {
-        elem.setValue(null)
-        nullPointers.push(null)
-      }
-    }
-
-    if (nullPointers.length > 0) {
-      this.flag5 = true;
-    } else {
-      this.flag5 = false;
-    }
-  }
-
-  checkWarganegara(formValue: any){
-
-    this.getJIC(formValue.warganegara,this.langID)
-
-    if(formValue.warganegara == 1){
-      this.secondFormGroup.get('typeIC').setValue(1);
-      this.selectedTypeIC = 1;
-    }
-
-    else{
-      this.secondFormGroup.get('typeIC').setValue(2);
-      this.selectedTypeIC = 2;
-    }
-    
-  }
-
-  checkTypeIc(formValue: any){
-    this.selectedTypeIC = formValue.typeIC;
-  }
-
-  checkOccupation(formValue: any){
-    this.selectedOccupation = formValue.jobType;
-
-    if(typeof(formValue) == "object"){
-      formValue = formValue.jobType;
-    }
-
-    else{
-      formValue = formValue;
-    }
-
-    this.getGroupOcc(formValue, this.langID)
-    if(formValue != 1){
-      this.secondFormGroup.get('jobGroup').setValue(null);
-      this.secondFormGroup.get('jobGroup').disable();
-    }
-
-    else{
-      this.secondFormGroup.get('jobGroup').enable();
-    }
-   
-    this.checkReqValues2();
-  }
-
   checkposkod(val, valP){
 
     // this.flagPoskodT = true;
@@ -1286,6 +1072,220 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       this.checkReqValues4();
     }
     
+  }
+
+  checkPhone(formValue: any){
+    let removeUndscr = (formValue.phonePemilik)?(formValue.phonePemilik).replace(/\_/g, ""): 0;
+    console.log(removeUndscr);
+    console.log(removeUndscr.length);
+    if(removeUndscr.length == 0 || removeUndscr.length == undefined){
+      this.tokenPhone = true;
+    }
+    else
+      this.tokenPhone = false;
+  }
+
+  validateIc(m,d){
+
+    let arrM = ['01','02','03','04','05','06','07','08','09','10','11','12'];
+    let arrD = ['01','02','03','04','05','06','07','08','09','10',
+                '11','12','13','14','15','16','17','18','19','20',
+                '21','22','23','24','25','26','27','28','29','30','31'];
+    let valM = arrM.includes(m);
+    let valD = arrD.includes(d);
+    let validIC: any;
+
+    if(valM == false || valD == false)
+      validIC = false;
+
+    else
+      validIC = true;
+    
+      return validIC;
+  }
+
+  resetForm23(){
+    
+    this.secondFormGroup.get('namaPemilik').setValue('');
+    this.secondFormGroup.get('phonePemilik').setValue('');
+    this.secondFormGroup.get('jobType').setValue(1);
+    this.secondFormGroup.get('jobGroup').setValue('');
+    this.secondFormGroup.get('addPemilik').setValue('');
+    this.secondFormGroup.get('poskodPemilik').setValue(null);
+    this.secondFormGroup.get('daerahPemilik').setValue('');
+    this.secondFormGroup.get('negeriPemilik').setValue('');
+
+    this.thirdFormGroup.get('mailingAdd').setValue('');
+    this.thirdFormGroup.get('mailingPoskod').setValue('');        
+    this.thirdFormGroup.get('mailingDaerah').setValue('');
+    this.thirdFormGroup.get('mailingNegeri').setValue('');
+
+    this.secondFormGroup.get('namaPemilik').enable();
+    this.secondFormGroup.get('addPemilik').enable();
+    this.secondFormGroup.get('poskodPemilik').enable();
+    this.secondFormGroup.get('daerahPemilik').enable();
+    this.secondFormGroup.get('negeriPemilik').enable();
+
+    this.checkReqValues2();
+  }
+
+  checkReqValues2() {
+    let reqVal: any;
+
+    if(this.selectedOccupation == 1 || this.secondFormGroup.get('jobType').value == 1){
+      reqVal = ["icpassport", 
+                "namaPemilik",  
+                "jobType", 
+                "jobGroup",
+                "addPemilik","poskodPemilik","daerahPemilik","negeriPemilik"];
+    }
+    else{
+      reqVal = ["icpassport", 
+                "namaPemilik", 
+                "jobType", 
+                "addPemilik","poskodPemilik","daerahPemilik","negeriPemilik"];
+    }
+
+    let nullPointers: any = [];
+
+    for (var reqData of reqVal) {
+      let elem = this.secondFormGroup.get(reqData);
+
+      if (elem.value == "" || elem.value == null) {
+        elem.setValue(null)
+        nullPointers.push(null)
+      }
+    }
+
+    if (nullPointers.length > 0) {
+      this.flag2 = true;
+    } else {
+      this.flag2 = false;
+    }
+
+  }
+
+  checkReqValues3(){
+    let reqVal: any;
+
+    reqVal = ["mailingAdd",
+              "mailingPoskod",
+              "mailingDaerah",
+              "mailingNegeri"];
+    
+
+    let nullPointers: any = [];
+
+    for (var reqData of reqVal) {
+      let elem = this.thirdFormGroup.get(reqData);
+
+      if (elem.value == "" || elem.value == null) {
+        elem.setValue(null)
+        nullPointers.push(null)
+      }
+    }
+
+    if (nullPointers.length > 0) {
+      this.flag3 = true;
+    } else {
+      this.flag3 = false;
+    }
+  }
+
+  checkReqValues4(){
+    let reqVal: any;
+
+    reqVal = ["companyType",
+              "registerType",
+              "registerNo",
+              "companyName",
+              "companyAdd",
+              "companyPoskod",
+              "companyDaerah",
+              "companyNegeri",
+              "companyPhone"];
+    
+    let nullPointers: any = [];
+
+    for (var reqData of reqVal) {
+      let elem = this.fourthFormGroup.get(reqData);
+
+      if (elem.value == "" || elem.value == null) {
+        elem.setValue(null)
+        nullPointers.push(null)
+      }
+    }
+
+    if (nullPointers.length > 0) {
+      this.flag4 = true;
+    } else {
+      this.flag4 = false;
+    }
+  }
+
+  checkReqValues5() {
+
+    let reqVal: any = ["lsnActivity", "businessCat", "file1", "file2"];
+    let nullPointers: any = [];
+
+    for (var reqData of reqVal) {
+      let elem = this.fifthFormGroup.get(reqData);
+
+      if (elem.value == "" || elem.value == null) {
+        elem.setValue(null)
+        nullPointers.push(null)
+      }
+    }
+
+    if (nullPointers.length > 0) {
+      this.flag5 = true;
+    } else {
+      this.flag5 = false;
+    }
+  }
+
+  checkWarganegara(formValue: any){
+
+    this.getJIC(formValue.warganegara,this.langID)
+
+    if(formValue.warganegara == 1){
+      this.secondFormGroup.get('typeIC').setValue(1);
+      this.selectedTypeIC = 1;
+    }
+
+    else{
+      this.secondFormGroup.get('typeIC').setValue(2);
+      this.selectedTypeIC = 2;
+    }
+    
+  }
+
+  checkTypeIc(formValue: any){
+    this.selectedTypeIC = formValue.typeIC;
+  }
+
+  checkOccupation(formValue: any){
+    this.selectedOccupation = formValue.jobType;
+
+    if(typeof(formValue) == "object"){
+      formValue = formValue.jobType;
+    }
+
+    else{
+      formValue = formValue;
+    }
+
+    this.getGroupOcc(formValue, this.langID)
+    if(formValue != 1){
+      this.secondFormGroup.get('jobGroup').setValue(null);
+      this.secondFormGroup.get('jobGroup').disable();
+    }
+
+    else{
+      this.secondFormGroup.get('jobGroup').enable();
+    }
+   
+    this.checkReqValues2();
   }
 
   changeBuss(formValue: any){
