@@ -371,6 +371,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                       this.profileForm.get('corrsMobile').setValue(telenum);
                     }else {
                       this.profileForm.get('corrsMobile').setValue((data.user.mobilePhoneNo));
+                      this.phoneForm.get('telefonf').setValue(data.user.mobilePhoneNo);
                     }
 
                     if(data.user.gender){
