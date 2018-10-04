@@ -1381,6 +1381,7 @@ let bodyUpdate =
           this.toastr.success(this.translate.instant('profile.msg.updateSuccess'), '');
           this.emailForm.disable();
           if(!!data.user){
+            debugger;
             window.location.href = this.uapstagingUrl+data.user.tag;
         }else{
             this.errMsg = data.statusDesc;
@@ -1397,7 +1398,7 @@ let bodyUpdate =
         this.loading = false;
       });
   };
-  
+
   updateMyPhoneNumber(number) {
 
       while(number.charAt(0) === '0'){
@@ -1410,13 +1411,13 @@ let bodyUpdate =
   }
   updateProfilePhone(formValues:any){
     this.loading = true;
-   
+
 
     if (formValues.codeTelefonf === '60') {
       formValues.telefonf = this.updateMyPhoneNumber(formValues.telefonf);
       this.phoneForm.get('telefonf').setValue(this.updateMyPhoneNumber(formValues.telefonf));
     }
-    
+
     this.protectedService.updatePhone(this.idno, formValues.codeTelefonf + formValues.telefonf).subscribe(
       data => {
 
@@ -1427,6 +1428,7 @@ let bodyUpdate =
           this.toastr.success(this.translate.instant('profile.msg.updateSuccess'), '');
           this.phoneForm.disable();
           if(!!data.user){
+            debugger;
             window.location.href = this.uapstagingUrl+data.user.tag;
           }else{
               this.errMsg = data.statusDesc;
