@@ -1306,6 +1306,10 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
             this.viewPbt = dataLisence[0].urlpbt;
           }
 
+          // setTimeout(function () {
+          //   alert("Test");
+          // }, 2000);
+
           this.checkposkod(1, this.selectedPoskodT);
           this.checkposkod(2, this.selectedPoskodSurat);
           this.checkposkod(3, this.selectedPoskodComp);
@@ -1328,12 +1332,25 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
             let sDate = dataLisence[0].tarikhluluslesenlama;
             let eDate = dataLisence[0].tarikhtamatlesenlama;
 
-            let startD = sDate.substring(0,10)
-            let endD = eDate.substring(0,10)
-            let err = 1;
+            let startD = sDate.substring(0,10);
+            let endD = eDate.substring(0,10);
 
-            this.openDialog(dataLisence[0].nolesenlama,startD,endD, err);
-          }else{
+            this.openDialog(dataLisence[0].nolesenlama,startD,endD, 1);
+          }
+          else if(dataLisence[0].status == "Dalam Tindakan Pendakwaan"){
+
+            let eDate = dataLisence[0].tarikhtamatlesenlama;
+            let endD = eDate.substring(0,10);            
+
+            this.openDialog(dataLisence[0].nolesenlama,'',endD, 3);
+          }
+
+          else if(dataLisence[0].status == "Tiada Rekod"){            
+
+            this.openDialog(this.firstFormGroup.get('noLesen').value,'','', 4);
+          }
+
+          else{
             this.firstFormGroup.get('textDisplay').setValue('');
             this.toastr.error(dataLisence[0].status, '');
           }

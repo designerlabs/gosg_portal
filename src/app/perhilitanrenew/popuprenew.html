@@ -20,4 +20,23 @@
                 <i class="fa fa-check"></i> OK</button>
         </div>
     </div>
+    <div class="modal-body" *ngIf="data?.err == 3">
+        <span>Tempoh pembaharuan telah tamat.</span><br>
+        <span>Tarikh Tamat: {{data.dateT}}</span><br>    
+        <span>Dalam Tindakan Pendakwaan</span><br>      
+        <span>Nombor Lesen: {{data.lesen}}</span><br>
+        <div style="justify-content: center; margin-top: 3%">
+            <button class="btn btn-danger" type="button" (click)="onNoClick()">
+                <i class="fa fa-check"></i> OK</button>
+        </div>
+    </div>
+
+    <div class="modal-body" *ngIf="data?.err == 4">
+        <span>Nombor lesen tidak sah.</span><br>  
+        <span>Nombor Lesen: {{data.lesen}}</span><br>
+        <div style="justify-content: center; margin-top: 3%">
+            <button class="btn btn-danger" type="button" (click)="onNoClick()">
+                <i class="fa fa-check"></i> OK</button>
+        </div>
+    </div>
 </div>
