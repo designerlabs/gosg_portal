@@ -185,7 +185,7 @@
               <div class="col-md-4" *ngIf="selectedTypeIC == 2">
                 <mat-form-field  class="example-full-width displayInfo">
                   <input matInput formControlName="icpassport" placeholder="Passpot" required
-                  (change)="getDetailIC(langID, secondFormGroup.value)" maxlength="12">
+                  (change)="getDetailIC(langID, secondFormGroup.value)" maxlength="10" pattern="[A-Za-z0-9-]+" (keyup)="checkPassport(secondFormGroup.value)">
                 </mat-form-field>
                 <mat-error class="redErMsg" *ngIf="secondFormGroup.controls.icpassport.hasError('required')">
                     Passpot diperlukan
@@ -262,10 +262,12 @@
             <div class="row">
               <div class="col-md-4">
                 <mat-form-field  class="example-full-width displayInfo">
-                  <input matInput formControlName="poskodPemilik" placeholder="Poskod" required [textMask]="{mask: maskPostcode}">   
+                  <input matInput formControlName="poskodPemilik" placeholder="Poskod" required [textMask]="{mask: maskPostcode}" 
+                    (keyup)="clearDaerahNegeri(secondFormGroup.value)">   
                   <mat-icon matPrefix class="iconRight" *ngIf="listdaerahTNo > 0"><i class="fa fa-check"></i></mat-icon>   
                   <mat-icon matPrefix class="iconWrong" *ngIf="listdaerahTNo == 0"><i class="fa fa-exclamation-circle"></i></mat-icon>            
-                  <mat-icon matPrefix class="iconSearch" (click)="checkposkod(1, secondFormGroup.value)"><i class="fa fa-search"></i></mat-icon>
+                  <mat-icon matPrefix class="iconSearch" (click)="checkDetailPoskod(secondFormGroup.value, 0)">
+                    <i class="fa fa-search"></i></mat-icon>
                 </mat-form-field>
                 <mat-error class="redErMsg" *ngIf="secondFormGroup.controls.poskodPemilik.hasError('required')">
                     Poskod diperlukan
@@ -302,10 +304,15 @@
               <i class="fa fa-arrow-circle-left"></i>
               <span class="textDisplay">Sebelum</span>
             </button>
-            <button mat-raised-button matStepperNext color="primary" class="btn btn-md iconBtn" 
-            [disabled]="flag2 || tokenPhone || flagPoskodT || flagPoskodMailing || flagPoskodCompany">              
+            <button *ngIf="getUrl != undefined" mat-raised-button matStepperNext color="primary" class="btn btn-md iconBtn" 
+              [disabled]="flag2 || tokenPhone || flagPoskodT">              
               <i class="fa fa-arrow-circle-right"></i>
-              <span class="textDisplay">Seterusnya {{flag2}} {{tokenPhone}} {{flagPoskodT}} {{flagPoskodMailing}} {{flagPoskodCompany}}</span>
+              <span class="textDisplay">Seterusnya {{flag2}} {{tokenPhone}} {{flagPoskodT}} {{flagPoskodMailing}} {{flagPoskodCompany}} {{getUrl}} Edit</span>
+            </button>
+            <button *ngIf="getUrl == undefined" mat-raised-button matStepperNext color="primary" class="btn btn-md iconBtn" 
+              [disabled]="flag2 || tokenPhone || flagPoskodT || flagPoskodMailing || flagPoskodCompany">              
+              <i class="fa fa-arrow-circle-right"></i>
+              <span class="textDisplay">Seterusnya {{flag2}} {{tokenPhone}} {{flagPoskodT}} {{flagPoskodMailing}} {{flagPoskodCompany}} {{getUrl}} Add</span>
             </button>
             <button mat-raised-button color="primary" class="btn btn-md iconBtn" (click)="draft()">              
               <i class="fa fa-floppy-o"></i>
@@ -343,10 +350,11 @@
             <div class="row">
               <div class="col-md-4">
                 <mat-form-field  class="example-full-width displayInfo">
-                  <input matInput formControlName="mailingPoskod" placeholder="Poskod" required [textMask]="{mask: maskPostcode}">
+                  <input matInput formControlName="mailingPoskod" placeholder="Poskod" required [textMask]="{mask: maskPostcode}"
+                    (keyup)="clearDaerahNegeri(thirdFormGroup.value)">
                   <mat-icon matPrefix class="iconRight" *ngIf="listdaerahSuratNo > 0"><i class="fa fa-check"></i></mat-icon>   
                   <mat-icon matPrefix class="iconWrong" *ngIf="listdaerahSuratNo == 0"><i class="fa fa-exclamation-circle"></i></mat-icon>            
-                  <mat-icon matPrefix class="iconSearch" (click)="checkposkod(2, thirdFormGroup.value)"><i class="fa fa-search"></i></mat-icon>
+                  <mat-icon matPrefix class="iconSearch" (click)="checkDetailPoskod(thirdFormGroup.value,1)"><i class="fa fa-search"></i></mat-icon>
                 </mat-form-field>
                 <mat-error class="redErMsg" *ngIf="thirdFormGroup.controls.mailingPoskod.hasError('required')">
                     Poskod diperlukan
@@ -481,10 +489,11 @@
             <div class="row">
               <div class="col-md-4">
                 <mat-form-field  class="example-full-width displayInfo">
-                  <input matInput formControlName="companyPoskod" placeholder="Poskod" required [textMask]="{mask: maskPostcode}">
+                  <input matInput formControlName="companyPoskod" placeholder="Poskod" required [textMask]="{mask: maskPostcode}"
+                    (keyup)="clearDaerahNegeri(fourthFormGroup.value)">
                   <mat-icon matPrefix class="iconRight" *ngIf="listdaerahCompanyNo > 0"><i class="fa fa-check"></i></mat-icon>   
                   <mat-icon matPrefix class="iconWrong" *ngIf="listdaerahCompanyNo == 0"><i class="fa fa-exclamation-circle"></i></mat-icon>            
-                  <mat-icon matPrefix class="iconSearch" (click)="checkposkod(3, fourthFormGroup.value)"><i class="fa fa-search"></i></mat-icon>
+                  <mat-icon matPrefix class="iconSearch" (click)="checkDetailPoskod(fourthFormGroup.value,2)"><i class="fa fa-search"></i></mat-icon>
                 </mat-form-field>
                 <mat-error class="redErMsg" *ngIf="fourthFormGroup.controls.companyPoskod.hasError('required')">
                     Poskod diperlukan

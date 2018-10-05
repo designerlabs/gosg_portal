@@ -148,7 +148,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
   public maskPostcode: any;
   public maskIC: any;
   public maskPhone: any;
-
+  
   flagAfterSubmit = true;
   flagHantar = true;
   flag2 = true;
@@ -333,15 +333,11 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       data => {
         this.sharedService.errorHandling(data, (function(){
 
-          console.log("OOOo");
-          console.log(data.user);
-
           if(data.user){
             
             let phone = data.user.mobilePhoneNo;
             let getObjKeys = Object.keys(data.user);
             this.valObj = getObjKeys.filter(fmt => fmt === "address");
-            console.log(this.valObj);
 
             if(this.valObj.length > 0){
               //let phone = data.user.address.permanentAddressHomePhoneNo.split('*')[1];              
@@ -511,6 +507,8 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
           this.secondFormGroup.get('namaPemilik').setValue(this.dataApp.userFullname);
           this.secondFormGroup.get('phonePemilik').setValue(this.dataApp.userPhoneNo);
           this.secondFormGroup.get('jobType').setValue(this.dataApp.jobType.jobTypeId);
+          this.tokenPhone = false;
+          //this.flagPoskodCompany = false;
           
           let getObjKeys = Object.keys(this.dataApp);
           let valObj = getObjKeys.filter(fmt => fmt === "workgroup");
@@ -543,21 +541,27 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
           this.fourthFormGroup.get('companyPoskod').setValue(this.dataApp.userCompanyPostcode);   
           this.fourthFormGroup.get('companyPhone').setValue(this.dataApp.userCompanyPhoneNo);
           this.fourthFormGroup.get('companyFax').setValue(this.dataApp.userFaxNo);
+
+          let a = '';
+          let b = '';
+          let c = '';
           
           let getObjKeysUserPostcode = Object.keys(this.dataApp);
           let valObjUserPostcode = getObjKeysUserPostcode.filter(fmt => fmt === "userPostcode");
           if(valObjUserPostcode.length == 1){
             this.selectedPoskodT = this.dataApp.userPostcode;
             this.cityT = this.dataApp.userPostcodeId;
-            this.checkposkod(1, this.selectedPoskodT);
+            a = this.selectedPoskodT;           
+            //this.checkposkod(1, this.selectedPoskodT);
           }
-
+          
           let getObjKeysUserMailingPostcode = Object.keys(this.dataApp);
           let valObjUserMailingPostcode = getObjKeysUserMailingPostcode.filter(fmt => fmt === "userMailingPostcode");
           if(valObjUserMailingPostcode.length == 1){
             this.selectedPoskodSurat = this.dataApp.userMailingPostcode;
             this.citySurat = this.dataApp.userMailingPostcodeId;
-            this.checkposkod(2, this.selectedPoskodSurat);
+            b = this.selectedPoskodSurat;
+            //this.checkposkod(2, this.selectedPoskodSurat);
           }
 
           let getObjKeysUserCompanyPostcode = Object.keys(this.dataApp);
@@ -565,8 +569,23 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
           if(valObjUserCompanyPostcode.length == 1){
             this.selectedPoskodComp = this.dataApp.userCompanyPostcode;         
             this.cityCompany = this.dataApp.userCompanyDistrict;
+            c = this.selectedPoskodComp;
+            //this.checkposkod(3, this.selectedPoskodComp);
+          }
+
+          let getObjKeysUserCompanyState = Object.keys(this.dataApp);
+          let valObjUserCompanyState = getObjKeysUserCompanyState.filter(fmt => fmt === "state");
+          if(valObjUserCompanyState.length == 1){
             this.cityCompany2 = this.dataApp.state.stateId;
-            this.checkposkod(3, this.selectedPoskodComp);
+          }
+
+          if(valObjUserPostcode.length == 1){
+            let dataPos = {
+              poskod1: a,
+              poskod2: b,
+              poskod3: c
+            }
+            this.checkDetailPoskod(dataPos,0);
           }
 
           let getObjKeysXtvt = Object.keys(this.dataApp);
@@ -818,8 +837,16 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
             this.cityT = data.noKpResourceList[0].postcodeid;
             this.citySurat = data.noKpResourceList[0].postcodeidsurat;
           
-            this.checkposkod(1, this.selectedPoskodT);
-            this.checkposkod(2, this.selectedPoskodSurat);
+            // this.checkposkod(1, this.selectedPoskodT);
+            // this.checkposkod(2, this.selectedPoskodSurat);     
+            let dataPkod = {
+              poskod1: this.selectedPoskodT,
+              poskod2: this.selectedPoskodSurat,
+              poskod3: this.selectedPoskodComp,
+
+            }       
+
+            this.checkDetailPoskod(dataPkod, 0);
             
             this.secondFormGroup.get('namaPemilik').disable();
             this.secondFormGroup.get('addPemilik').disable();
@@ -831,11 +858,15 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
 
           }
 
-          else{
+          else{ // bila tiada data
             this.resetForm23();
             this.listdaerahTNo = undefined;
             this.listdaerahCompanyNo = undefined;
             this.listdaerahSuratNo = undefined;
+            this.flagPoskodCompany = false;
+            this.flagPoskodMailing = false;
+            this.secondFormGroup.get('flagData').setValue(''); 
+
           }
 
         }).bind(this));
@@ -847,22 +878,18 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
     }
 
     else{
-      this.resetForm23();
+      this.resetForm23();      
+      this.secondFormGroup.get('flagData').setValue(''); 
     }
 
   }
 
   checkposkod(val, valP){
 
-    // this.flagPoskodT = true;
-    // this.flagPoskodMailing = true;
-    // this.flagPoskodCompany = true;    
-
     if(valP.poskodPemilik == ''){
       valP.poskodPemilik = null;
     }
 
-    console.log(valP.poskodPemilik);
     let valPoskod: any;
 
     this.secondFormGroup.get('negeriPemilik').disable();
@@ -1019,16 +1046,176 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
           this.secondFormGroup.get('flagData').setValue(''); 
         }
         
-        console.log("Poskod T: "+this.flagPoskodT);
-        console.log("Poskod Mailing: "+this.flagPoskodMailing);
-        console.log("Poskod Company: "+this.flagPoskodCompany);
-
       }).bind(this));
       this.loading = false;
     },
     error => {     
       this.loading = false;       
     });    
+  }
+
+  clearDaerahNegeri(form: any){
+    
+    let getObjKeys = Object.keys(form);
+    let valObj = getObjKeys.filter(fmt => fmt === "poskodPemilik");
+    let valObj2 = getObjKeys.filter(fmt => fmt === "mailingPoskod");
+    let valObj3 = getObjKeys.filter(fmt => fmt === "companyPoskod");
+    
+    if(valObj.length == 1){
+      this.secondFormGroup.get('daerahPemilik').setValue('');  
+      this.secondFormGroup.get('negeriPemilik').setValue('');  
+      this.checkReqValues2();
+    }
+    if(valObj2.length == 1){
+      this.thirdFormGroup.get('mailingDaerah').setValue('');     
+      this.thirdFormGroup.get('mailingNegeri').setValue('');  
+      this.checkReqValues3();
+    }
+
+    if (valObj3.length == 1){
+      this.fourthFormGroup.get('companyDaerah').setValue('');     
+      this.fourthFormGroup.get('companyNegeri').setValue(''); 
+      this.checkReqValues4();
+    }
+  }
+  
+
+  checkDetailPoskod(pkod, step){
+
+    let valPoscode = '', postcode, postcodeField, form, listdaerah, listdaerahNo, poscodeId, flagPoskod, checkReqValues, param, city, field=[] ;
+
+    switch(step){
+      case 0 :
+        postcode = 'poskod1';
+        postcodeField = 'poskodPemilik';
+        form = 'secondFormGroup';
+        field = ['daerahPemilik', 'negeriPemilik'];
+        listdaerah = 'listdaerahT';
+        listdaerahNo = 'listdaerahTNo';
+        poscodeId = 'poskodIdT';
+        flagPoskod = 'flagPoskodT';     
+        checkReqValues = 'checkReqValues2';   
+        param = 'postcodeId';
+        city = 'cityT';
+        break;
+      case 1 :
+        postcode = 'poskod2';
+        postcodeField = 'mailingPoskod';
+        form = 'thirdFormGroup';
+        field = ['mailingDaerah', 'mailingNegeri'];
+        listdaerah = 'listdaerahSurat';
+        listdaerahNo = 'listdaerahSuratNo';
+        poscodeId = 'poskodIdMailing';
+        flagPoskod = 'flagPoskodMailing';
+        checkReqValues = 'checkReqValues3';
+        param = 'postcodeId';
+        city = 'citySurat';
+        break;
+      case 2 :
+        postcode = 'poskod3';
+        postcodeField = 'companyPoskod';
+        form = 'fourthFormGroup';
+        field = ['companyDaerah', 'companyNegeri'];
+        listdaerah = 'listdaerahCompany';
+        listdaerahNo = 'listdaerahCompanyNo';
+        poscodeId = 'stateCompany';
+        flagPoskod = 'flagPoskodCompany';
+        checkReqValues = 'checkReqValues4';
+        param = 'formValue';
+        city = 'cityCompany';
+        break;      
+    }
+
+    if(pkod[postcode]){ // FROM GET DATA
+      valPoscode = pkod[postcode];
+    }
+
+    if(pkod[postcode] == undefined){ // ONCLICK
+      valPoscode = pkod[postcodeField];
+    }
+  
+    if(valPoscode != null && valPoscode != ""){
+      this.loading = true;
+      this.protectedService.getProtected('perhilitan/poskod/'+valPoscode,this.langID).subscribe(
+      data => {
+
+        this.sharedService.errorHandling(data, (function(){
+         
+          this[flagPoskod] = true;
+          this[listdaerah] = data.postcodeResourceList;  
+          this[listdaerahNo] = data.postcodeResourceList.length;
+          this[flagPoskod] = data.statusCode;
+
+          
+          if(this[flagPoskod] == 'SUCCESS'){
+            this[flagPoskod] = false;
+
+            if(this[listdaerah].length == 1){ // return 1 result   
+              this[poscodeId] = this[listdaerah][0][param];  
+              this[form].get(field[0]).setValue(this[listdaerah][0].postcodeId);  
+              this[form].get(field[1]).setValue(this[listdaerah][0].state);      
+            }
+  
+            else{ //when city more than one
+              for (let i = 0; i < this[listdaerah].length; i++) { 
+
+                console.log(this[listdaerah]);
+
+                console.log(this[city])
+                console.log(this[listdaerah][0].postcodeId);
+                console.log(this[listdaerah][1].postcodeId);
+  
+                if(this[city] == this[listdaerah][i].postcodeId){       
+                  console.log(this[poscodeId]);
+                  this[poscodeId] = this[listdaerah][i][param];
+                  this[form].get(field[0]).setValue(this[listdaerah][i].postcodeId);  
+                  this[form].get(field[1]).setValue(this[listdaerah][i].state);        
+                  console.log(this[poscodeId]);
+                  console.log( this[form].get(field[0]));
+                }
+              }                   
+            }
+          }
+
+          else{ //kosongkan bile cannot get api
+            this[flagPoskod] = true;  
+            this[form].get(field[0]).setValue('');  
+            this[form].get(field[1]).setValue('');  
+          }      
+          
+          if(this[listdaerahNo] == 0){ // array 0
+            this[flagPoskod] = true;
+            this[form].get(field[0]).setValue('');  
+            this[form].get(field[1]).setValue('');  
+          }
+
+          pkod['flag'+(step+1)] = this[flagPoskod];
+
+          if(step < 3 && pkod['poskod'+(step+1)] && (valPoscode != undefined || valPoscode != "")) {
+            this.checkDetailPoskod(pkod, step+1);
+          }
+
+          this[checkReqValues]();
+
+          if(this.flagPoskodT == false && this.flagPoskodMailing == false && this.flagPoskodCompany == false && this.getUrl == undefined){
+            this.secondFormGroup.get('flagData').setValue(false); 
+          }
+
+          else if(this.flagPoskodT == false && this.getUrl != undefined){
+            this.secondFormGroup.get('flagData').setValue(false); 
+          }
+  
+          else{
+            this.secondFormGroup.get('flagData').setValue(''); 
+          }
+          
+        }).bind(this));
+        this.loading = false;
+      },
+      error => {     
+        this.loading = false;       
+      });  
+    }
   }
 
   checkState(val, formValues){
@@ -1076,13 +1263,15 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
 
   checkPhone(formValue: any){
     let removeUndscr = (formValue.phonePemilik)?(formValue.phonePemilik).replace(/\_/g, ""): 0;
-    console.log(removeUndscr);
-    console.log(removeUndscr.length);
     if(removeUndscr.length == 0 || removeUndscr.length == undefined){
       this.tokenPhone = true;
     }
     else
       this.tokenPhone = false;
+  }
+
+  checkPassport(formValue: any){
+    let validPassport = (formValue.icpassport)?(formValue.icpassport).replace(/[^A-Z0-9]/ig, ""): 0;
   }
 
   validateIc(m,d){
@@ -1325,7 +1514,8 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       this.selectedPoskodSurat = this.secondFormGroup.get('poskodPemilik').value;            
       this.thirdFormGroup.get('mailingAdd').setValue(this.secondFormGroup.get('addPemilik').value);     
       this.thirdFormGroup.get('mailingPoskod').setValue(this.secondFormGroup.get('poskodPemilik').value);   
-      this.checkposkod(2, this.secondFormGroup.get('poskodPemilik').value);       
+      this.checkDetailPoskod({poskod2:this.secondFormGroup.get('poskodPemilik').value}, 1);
+      //this.checkposkod(2, this.secondFormGroup.get('poskodPemilik').value);       
     }
 
     else{
@@ -1349,7 +1539,8 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       this.selectedPoskodComp = this.secondFormGroup.get('poskodPemilik').value;   
       this.fourthFormGroup.get('companyAdd').setValue(this.secondFormGroup.get('addPemilik').value);     
       this.fourthFormGroup.get('companyPoskod').setValue(this.secondFormGroup.get('poskodPemilik').value);   
-      this.checkposkod(3, this.secondFormGroup.get('poskodPemilik').value);       
+      this.checkDetailPoskod({poskod3:this.secondFormGroup.get('poskodPemilik').value}, 2);
+      //this.checkposkod(3, this.secondFormGroup.get('poskodPemilik').value);       
     }
 
     else{
@@ -1577,7 +1768,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       body.isDraft = "True";
       body.cronStatus = false;
       
-      //console.log(JSON.stringify(body));
+      console.log(JSON.stringify(body));
       this.loading = true;
       
       this.protectedService.create(body,'perhilitan/draft/save',this.langID, this.dsvcCode, this.agcCode).subscribe(
@@ -1716,7 +1907,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       body.isDraft = "True";
       body.cronStatus = false;
       
-      //console.log(JSON.stringify(body));
+      console.log(JSON.stringify(body));
       this.loading = true;
       
       this.protectedService.update(body,'perhilitan/draft/update',this.langID, this.dsvcCode, this.agcCode).subscribe(
