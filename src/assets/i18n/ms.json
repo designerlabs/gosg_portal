@@ -193,6 +193,8 @@
   "profile":{
     "msg":{
       "updateSuccess": "Profil telah berjaya di kemaskini.",
+      "updateEmail": "Email telah berjaya di kemaskini.",
+      "updatePhone": "Nombor Telefon telah berjaya di kemaskini.",
       "updateFail": "Kemaskini gagal.",
       "editbtnE" : "Kemaskini diaktifkan.",
       "editbtnD" : "Kemaskini tidak aktif.",
@@ -229,7 +231,9 @@
       "oku": "Menyemak OKU status"
     },
     "err": {
-      "updateFail": "Kemaskini gagal!",
+      "updateFail": "Kemaskini profil gagal!",
+      "emailFail": "Kemaskini email gagal!",
+      "phoneFail": "Kemaskini nombor telefon gagal!",
       "ic": "Nombor Kad Pengenalan wajib diisi",
       "name": "Nama penuh wajib diisi",
       "dob": "Tarikh Lahir wajib diisi",
