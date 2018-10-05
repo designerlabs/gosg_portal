@@ -552,7 +552,6 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
             this.selectedPoskodT = this.dataApp.userPostcode;
             this.cityT = this.dataApp.userPostcodeId;
             a = this.selectedPoskodT;           
-            //this.checkposkod(1, this.selectedPoskodT);
           }
           
           let getObjKeysUserMailingPostcode = Object.keys(this.dataApp);
@@ -561,7 +560,6 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
             this.selectedPoskodSurat = this.dataApp.userMailingPostcode;
             this.citySurat = this.dataApp.userMailingPostcodeId;
             b = this.selectedPoskodSurat;
-            //this.checkposkod(2, this.selectedPoskodSurat);
           }
 
           let getObjKeysUserCompanyPostcode = Object.keys(this.dataApp);
@@ -570,7 +568,6 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
             this.selectedPoskodComp = this.dataApp.userCompanyPostcode;         
             this.cityCompany = this.dataApp.userCompanyDistrict;
             c = this.selectedPoskodComp;
-            //this.checkposkod(3, this.selectedPoskodComp);
           }
 
           let getObjKeysUserCompanyState = Object.keys(this.dataApp);
@@ -839,9 +836,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
             this.selectedOccupation = parseInt(data.noKpResourceList[0].pekerjaan);
             this.cityT = data.noKpResourceList[0].postcodeid;
             this.citySurat = data.noKpResourceList[0].postcodeidsurat;
-          
-            // this.checkposkod(1, this.selectedPoskodT);
-            // this.checkposkod(2, this.selectedPoskodSurat);     
+             
             let dataPkod = {
               poskod1: this.selectedPoskodT,
               poskod2: this.selectedPoskodSurat,
@@ -1570,8 +1565,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       this.selectedPoskodSurat = this.secondFormGroup.get('poskodPemilik').value;            
       this.thirdFormGroup.get('mailingAdd').setValue(this.secondFormGroup.get('addPemilik').value);     
       this.thirdFormGroup.get('mailingPoskod').setValue(this.secondFormGroup.get('poskodPemilik').value);   
-      this.checkDetailPoskod({poskod2:this.secondFormGroup.get('poskodPemilik').value}, 1);
-      //this.checkposkod(2, this.secondFormGroup.get('poskodPemilik').value);       
+      this.checkDetailPoskod({poskod2:this.secondFormGroup.get('poskodPemilik').value}, 1);     
     }
 
     else{
@@ -1595,8 +1589,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       this.selectedPoskodComp = this.secondFormGroup.get('poskodPemilik').value;   
       this.fourthFormGroup.get('companyAdd').setValue(this.secondFormGroup.get('addPemilik').value);     
       this.fourthFormGroup.get('companyPoskod').setValue(this.secondFormGroup.get('poskodPemilik').value);   
-      this.checkDetailPoskod({poskod3:this.secondFormGroup.get('poskodPemilik').value}, 2);
-      //this.checkposkod(3, this.secondFormGroup.get('poskodPemilik').value);       
+      this.checkDetailPoskod({poskod3:this.secondFormGroup.get('poskodPemilik').value}, 2);   
     }
 
     else{

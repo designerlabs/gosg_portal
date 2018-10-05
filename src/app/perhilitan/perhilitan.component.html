@@ -612,9 +612,9 @@
                     <input matInput placeholder="Salinan Sijil PendaftaranSyarikat (Sijil SSM)" formControlName="file1" class="displayDesc"
                     required readonly>                    
                     <mat-icon matPrefix class="deleteFile" (click)="clearFile(fifthFormGroup.value,1)"><i class="fa fa-trash"></i></mat-icon>
-                    <mat-error *ngIf="fifthFormGroup.controls.file1.hasError('required')">
+                    <!-- <mat-error *ngIf="fifthFormGroup.controls.file1.hasError('required')">
                       Salinan Sijil Pendaftaran Syarikat (Sijil SSM) diperlukan
-                    </mat-error>
+                    </mat-error> -->
                 </mat-form-field><br>
                 <div style="background: black; padding: 5px; text-align: center;"><span>Fail Format PDF sahaja yang dibenarkan</span></div>                
               </div>

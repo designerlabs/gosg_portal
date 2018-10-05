@@ -490,12 +490,13 @@
                 <div class="col-md-4">
                   <mat-form-field class="example-full-width" >
                       <input matInput placeholder="Salinan Sijil PendaftaranSyarikat (Sijil SSM)" formControlName="file1" class="displayDesc"
-                      required readonly>
-                      <mat-error *ngIf="fifthFormGroup.controls.file1.hasError('required')">
+                      readonly>
+                      <mat-icon matPrefix class="deleteFile" (click)="clearFile(fifthFormGroup.value,1)"><i class="fa fa-trash"></i></mat-icon>
+                      <!-- <mat-error *ngIf="fifthFormGroup.controls.file1.hasError('required')">
                         Salinan Sijil Pendaftaran Syarikat (Sijil SSM) diperlukan
-                      </mat-error><br>
-                      <div style="background: black; padding: 5px; text-align: center;"><span>Fail Format PDF sahaja yang dibenarkan</span></div> 
-                  </mat-form-field>
+                      </mat-error>  -->
+                  </mat-form-field><br>
+                  <div style="background: black; padding: 5px; text-align: center;"><span>Fail Format PDF sahaja yang dibenarkan</span></div>
                 </div>
   
                 <div class="col-md-2">
@@ -507,12 +508,13 @@
                 <div class="col-md-4">
                   <mat-form-field class="example-full-width" >
                       <input matInput placeholder="Salinan Surat Kelulusan PBT" formControlName="file2" class="displayDesc"
-                      required readonly>
-                      <mat-error *ngIf="fifthFormGroup.controls.file2.hasError('required')">
+                      readonly>
+                      <mat-icon matPrefix class="deleteFile" (click)="clearFile(fifthFormGroup.value,2)"><i class="fa fa-trash"></i></mat-icon>
+                      <!-- <mat-error *ngIf="fifthFormGroup.controls.file2.hasError('required')">
                         Salinan Surat Kelulusan PBT diperlukan
-                      </mat-error><br>
-                      <div style="background: black; padding: 5px; text-align: center;"><span>Fail Format PDF sahaja yang dibenarkan</span></div> 
-                  </mat-form-field>
+                      </mat-error>  -->
+                  </mat-form-field><br>
+                  <div style="background: black; padding: 5px; text-align: center;"><span>Fail Format PDF sahaja yang dibenarkan</span></div>
                 </div>
   
                 <div class="col-md-2">
@@ -536,7 +538,7 @@
                 </div>
               </div>
 
-              <div class="row">
+              <div class="row" *ngIf="viewRoc || viewPbt">
                 <br><br><br>
                 <div class="col-md-12">
                   <span class="displayDesc">Dokumen Dalam Simpanan</span>
@@ -544,12 +546,12 @@
               </div>
 
               <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6" *ngIf="viewRoc">
                   <button mat-raised-button color="primary" class="btn btn-md btn-success font-size-s" (click)="openRoc(viewRoc)">
                     <i class="fa fa-eye"></i> Salinan Sijil SSM</button>
                 </div>
   
-                <div class="col-md-6">
+                <div class="col-md-6" *ngIf="viewPbt">
                   <button mat-raised-button color="primary" class="btn btn-md btn-success font-size-s" (click)="openPbt(viewPbt)">
                       <i class="fa fa-eye"></i> Salinan Surat Kelulusan PBT</button>
                 </div>
