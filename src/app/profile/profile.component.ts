@@ -1379,11 +1379,11 @@ let bodyUpdate =
           this.isActive = false;
           this.initial = true;
           this.emailForm.invalid;
-          this.toastr.success(this.translate.instant('profile.msg.updateEmail'), '');
+        //  this.toastr.success(this.translate.instant('profile.msg.updateEmail'), '');
           this.emailForm.disable();
           if(!!data.user){
             if(data.user.tag.length <= 0){
-              this.toastr.success(this.translate.instant('profile.msg.updateSuccess'), '');
+              this.toastr.success(this.translate.instant('profile.msg.updateEmail'), '');
             }else{
               window.location.href = this.uapstagingUrl+data.user.tag;
             }
@@ -1430,11 +1430,11 @@ let bodyUpdate =
           this.isActive = false;
           this.initial = true;
           this.phoneForm.invalid;
-          this.toastr.success(this.translate.instant('profile.msg.updatePhone'), '');
+          //this.toastr.success(this.translate.instant('profile.msg.updatePhone'), '');
           this.phoneForm.disable();
           if(!!data.user){
             if(data.user.tag.length <= 0){
-              this.toastr.success(this.translate.instant('profile.msg.updateSuccess'), '');
+              this.toastr.success(this.translate.instant('profile.msg.updatePhone'), '');
             }else{
               window.location.href = this.uapstagingUrl+data.user.tag;
             }
