@@ -1423,7 +1423,7 @@ let bodyUpdate =
       this.phoneForm.get('telefonf').setValue(this.updateMyPhoneNumber(formValues.telefonf));
     }
 
-    this.protectedService.updatePhone(this.idno, formValues.codeTelefonf + formValues.telefonf).subscribe(
+    this.protectedService.updatePhone(this.idno, formValues.codeTelefonf + '*'+ formValues.telefonf).subscribe(
       data => {
 
         this.sharedService.errorHandling(data, (function(){
