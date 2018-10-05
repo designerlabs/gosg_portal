@@ -60,6 +60,7 @@ export class SubarticleprodComponent implements OnInit, OnDestroy {
     this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
 
       const myLang = translate.currentLang;
+      this.articleService.leContent = "";
 
       if (myLang == 'en') {
 
