@@ -1297,6 +1297,19 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
     this.checkReqValues4();
   }
 
+  clearFile(formValue: any, val){
+    if(val == 1){
+      this.fifthFormGroup.get('file1').setValue('');
+      this.fifthFormGroup.get('dispBase641').setValue('')
+    }
+
+    else{
+      this.fifthFormGroup.get('file2').setValue('');
+      this.fifthFormGroup.get('dispBase642').setValue('')
+    }
+    this.checkReqValues5();
+  }
+
   checkICLength(formValue: any){
     if(formValue.icpassport != null){
       if(formValue.icpassport.length<12){

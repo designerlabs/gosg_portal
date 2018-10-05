@@ -298,9 +298,9 @@
             </div>
           </div>
           <div class="pull-right">
-            <mat-form-field  class="displayInfo" style="display: block;">
+            <!-- <mat-form-field  class="displayInfo" style="display: block;">
               <input matInput formControlName="flagData" placeholder="test" required>
-            </mat-form-field>
+            </mat-form-field> -->
             <button mat-raised-button matStepperPrevious color="primary" class="btn btn-md iconBtn">
               <i class="fa fa-arrow-circle-left"></i>
               <span class="textDisplay">Sebelum</span>
@@ -308,12 +308,12 @@
             <button *ngIf="getUrl != undefined" mat-raised-button matStepperNext color="primary" class="btn btn-md iconBtn" 
               [disabled]="flag2 || tokenPhone || flagPoskodT">              
               <i class="fa fa-arrow-circle-right"></i>
-              <span class="textDisplay">Seterusnya {{flag2}} {{tokenPhone}} {{flagPoskodT}} {{flagPoskodMailing}} {{flagPoskodCompany}} {{getUrl}} Edit</span>
+              <span class="textDisplay">Seterusnya</span>
             </button>
             <button *ngIf="getUrl == undefined" mat-raised-button matStepperNext color="primary" class="btn btn-md iconBtn" 
               [disabled]="flag2 || tokenPhone || flagPoskodT || flagPoskodMailing || flagPoskodCompany">              
               <i class="fa fa-arrow-circle-right"></i>
-              <span class="textDisplay">Seterusnya {{flag2}} {{tokenPhone}} {{flagPoskodT}} {{flagPoskodMailing}} {{flagPoskodCompany}} {{getUrl}} Add</span>
+              <span class="textDisplay">Seterusnya</span>
             </button>
             <button mat-raised-button color="primary" class="btn btn-md iconBtn" (click)="draft()">              
               <i class="fa fa-floppy-o"></i>
@@ -322,7 +322,6 @@
           </div>
         </form>
       </mat-step>
-
 
       <mat-step [stepControl]="thirdFormGroup">
         <form [formGroup]="thirdFormGroup">
@@ -611,7 +610,8 @@
               <div class="col-md-4">
                 <mat-form-field class="example-full-width" >
                     <input matInput placeholder="Salinan Sijil PendaftaranSyarikat (Sijil SSM)" formControlName="file1" class="displayDesc"
-                    required readonly>
+                    required readonly>                    
+                    <mat-icon matPrefix class="deleteFile" (click)="clearFile(fifthFormGroup.value,1)"><i class="fa fa-trash"></i></mat-icon>
                     <mat-error *ngIf="fifthFormGroup.controls.file1.hasError('required')">
                       Salinan Sijil Pendaftaran Syarikat (Sijil SSM) diperlukan
                     </mat-error>
@@ -628,7 +628,8 @@
               <div class="col-md-4">
                 <mat-form-field class="example-full-width" >
                     <input matInput placeholder="Salinan Surat Kelulusan PBT" formControlName="file2" class="displayDesc"
-                    required readonly>
+                    required readonly>                               
+                    <mat-icon matPrefix class="deleteFile" (click)="clearFile(fifthFormGroup.value,2)"><i class="fa fa-trash"></i></mat-icon>
                     <mat-error *ngIf="fifthFormGroup.controls.file2.hasError('required')">
                       Salinan Surat Kelulusan PBT diperlukan
                     </mat-error>
