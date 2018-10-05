@@ -450,7 +450,9 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
             "userType":{
                 "userTypeId":null
              },
-             "passportNo":null
+             "passportNo":null,
+             "isEmail" : true,
+             "isMobilePhone" : false
         };
 
 
