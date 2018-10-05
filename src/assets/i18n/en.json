@@ -193,6 +193,8 @@
   "profile":{
     "msg":{
       "updateSuccess": "Profile has been updated successfully.",
+      "updateEmail": "Email has been updated successfully.",
+      "updatePhone": "Phone Number has been updated successfully.",
       "updateFail": "Profile not updated.",
       "editbtnE" : "Edit activated.",
       "editbtnD" : "Edit deactivated.",
@@ -230,6 +232,8 @@
     },
     "err": {
       "updateFail": "Profile update failed!",
+      "emailFail": "Email update failed!",
+      "phoneFail": "Phone Number update failed!",
       "ic": "IC Number is required",
       "name": "Full name is required",
       "dob": "Date of Birth is required",

@@ -1379,7 +1379,7 @@ let bodyUpdate =
           this.isActive = false;
           this.initial = true;
           this.emailForm.invalid;
-          this.toastr.success(this.translate.instant('profile.msg.updateSuccess'), '');
+          this.toastr.success(this.translate.instant('profile.msg.updateEmail'), '');
           this.emailForm.disable();
           if(!!data.user){
             if(data.user.tag.length <= 0){
@@ -1399,7 +1399,7 @@ let bodyUpdate =
       },
 
       error => {
-        this.toastr.error(this.translate.instant('profile.err.updateFail'), '');
+        this.toastr.error(this.translate.instant('profile.err.emailFail'), '');
         this.loading = false;
       });
   };
@@ -1423,14 +1423,14 @@ let bodyUpdate =
       this.phoneForm.get('telefonf').setValue(this.updateMyPhoneNumber(formValues.telefonf));
     }
 
-    this.protectedService.updatePhone(this.idno, formValues.codeTelefonf + formValues.telefonf).subscribe(
+    this.protectedService.updatePhone(this.idno, formValues.codeTelefonf + '*'+ formValues.telefonf).subscribe(
       data => {
 
         this.sharedService.errorHandling(data, (function(){
           this.isActive = false;
           this.initial = true;
           this.phoneForm.invalid;
-          this.toastr.success(this.translate.instant('profile.msg.updateSuccess'), '');
+          this.toastr.success(this.translate.instant('profile.msg.updatePhone'), '');
           this.phoneForm.disable();
           if(!!data.user){
             if(data.user.tag.length <= 0){
@@ -1449,7 +1449,7 @@ let bodyUpdate =
       },
 
       error => {
-        this.toastr.error(this.translate.instant('profile.err.updateFail'), '');
+        this.toastr.error(this.translate.instant('profile.err.phoneFail'), '');
         this.loading = false;
       });
   };
