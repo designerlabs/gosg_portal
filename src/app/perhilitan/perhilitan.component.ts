@@ -787,6 +787,9 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
 
     let month = (formValue.icpassport)?formValue.icpassport.substring(2,4) : 0;
     let day = (formValue.icpassport)?formValue.icpassport.substring(4,6) : 0;     
+
+    console.log("month: "+month);
+    console.log("day: "+day)
     let lengthIC = 0;
     let removeUndscr = (formValue.icpassport)?(formValue.icpassport).replace(/\_/g, ""): 0;
 
@@ -1158,20 +1161,11 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
   
             else{ //when city more than one
               for (let i = 0; i < this[listdaerah].length; i++) { 
-
-                console.log(this[listdaerah]);
-
-                console.log(this[city])
-                console.log(this[listdaerah][0].postcodeId);
-                console.log(this[listdaerah][1].postcodeId);
   
-                if(this[city] == this[listdaerah][i].postcodeId){       
-                  console.log(this[poscodeId]);
+                if(this[city] == this[listdaerah][i].postcodeId){    
                   this[poscodeId] = this[listdaerah][i][param];
                   this[form].get(field[0]).setValue(this[listdaerah][i].postcodeId);  
-                  this[form].get(field[1]).setValue(this[listdaerah][i].state);        
-                  console.log(this[poscodeId]);
-                  console.log( this[form].get(field[0]));
+                  this[form].get(field[1]).setValue(this[listdaerah][i].state);   
                 }
               }                   
             }
@@ -1270,8 +1264,46 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       this.tokenPhone = false;
   }
 
+  checkNamapemilik(formValue: any){
+    if(formValue.namaPemilik != null){
+      let validNamaPemilik = (formValue.namaPemilik)?(formValue.namaPemilik).replace(/[`~!#$%^&*()_|+\-=÷¿?;:'",.<>\{\}\[\]\\0-9]/gi, "") : '';
+      this.secondFormGroup.get('namaPemilik').setValue(validNamaPemilik);
+    }
+    this.checkReqValues4();
+  }
+
   checkPassport(formValue: any){
-    let validPassport = (formValue.icpassport)?(formValue.icpassport).replace(/[^A-Z0-9]/ig, ""): 0;
+    if(formValue.icpassport != null){
+      let validPassport = (formValue.icpassport)?(formValue.icpassport).replace(/[^A-Z0-9]/ig, "").toUpperCase() : '';
+      this.secondFormGroup.get('icpassport').setValue(validPassport);
+    }
+    
+    if(formValue.icpassport != null){
+
+      if(formValue.icpassport.length > 10){        
+        let subIC = (formValue.icpassport).substring(0,10);
+        this.secondFormGroup.get('icpassport').setValue(subIC);
+        console.log(subIC);
+      }
+    }
+    this.checkReqValues2();
+  }
+
+  checkNoCompany(formValue: any){
+    if(formValue.registerNo != null){
+      let validNoCompany = (formValue.registerNo)?(formValue.registerNo).replace(/[^A-Z0-9\-]/ig, "").toUpperCase() : '';
+      this.fourthFormGroup.get('registerNo').setValue(validNoCompany);
+    }
+    this.checkReqValues4();
+  }
+
+  checkICLength(formValue: any){
+    if(formValue.icpassport != null){
+      if(formValue.icpassport.length<12){
+        this.secondFormGroup.get('flagData').setValue(''); 
+      }
+    }     
+    this.checkReqValues2();
   }
 
   validateIc(m,d){
@@ -1445,13 +1477,24 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
     else{
       this.secondFormGroup.get('typeIC').setValue(2);
       this.selectedTypeIC = 2;
-    }
-    
+    }    
+    this.secondFormGroup.get('icpassport').setValue('');    
+    this.checkIC = undefined;
+    this.resetForm23();
+    this.listdaerahTNo = undefined;
+    this.listdaerahCompanyNo = undefined;
+    this.listdaerahSuratNo = undefined;
   }
 
   checkTypeIc(formValue: any){
     this.selectedTypeIC = formValue.typeIC;
-  }
+    this.secondFormGroup.get('icpassport').setValue('');
+    this.checkIC = undefined;
+    this.resetForm23();
+    this.listdaerahTNo = undefined;
+    this.listdaerahCompanyNo = undefined;
+    this.listdaerahSuratNo = undefined;
+  } 
 
   checkOccupation(formValue: any){
     this.selectedOccupation = formValue.jobType;
