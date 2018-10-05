@@ -143,6 +143,7 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
         }
 
     });
+    this.getSearchUrl();
   }
 
   public local = true;
@@ -288,21 +289,19 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit() {
 
-    this.reff = document.referrer.split("/")[1];
-
     if(!this.languageId){
       this.languageId = localStorage.getItem('langID');
     }else{
       this.languageId = 1;
     }
 
-    if(!this.currTab && this.reff == 'search'){
+    if(!this.currTab){
       this.currTab = parseInt(localStorage.getItem('currSearchTab'));
     }else{
       localStorage.setItem("currSearchTab", "0");
       this.currTab = 0;
     }
-
+    // this.reff = document.referrer.split("/")[1];
     this.getSearchUrl();
 
     this.date = moment();
@@ -339,13 +338,13 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
 
   addFilterAry(ary, resObj, type?) {
 
-    // 
+    //
 
     if (ary.length > 0) {
 
       let res = [];
       ary.forEach(ele => {
-        // 
+        //
         if (ele.name) {
           res.push(ele.name);
         } else {
@@ -363,11 +362,11 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
 
   addSpecFiltr(methodNm, field) {
     let key = field;
-    // 
+    //
 
     let res_ary = this.mainObj.filters;
-    // 
-    // 
+    //
+    //
 
     // let inx = jQuery.inArray(field, res_ary);
     if (methodNm === 'add') {
@@ -436,7 +435,7 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
       // do something with person
       retn.push(aryObj);
     });
-    // 
+    //
     return retn;
   }
 
@@ -454,7 +453,7 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
     // } else {
     //   this.currTab = 1;
     // }
-    
+
     // this.selectedIndex = this.currTab;
 
     let k_word = '';
@@ -478,10 +477,10 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
 
       delete this.mainObj.aggregations;
       this.mainObj.aggregations = this.locAggregations;
-      // 
-      // 
+      //
+      //
       // this.mainObj.aggregations = {};
-      // 
+      //
 
       this.resetPage();
       this.searchByKeyword(k_word);
@@ -499,10 +498,10 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
       delete this.mainObj.aggregations;
       delete this.mainObj.filters.category;
       this.mainObj.aggregations = this.osAggregations;
-      // 
-      // 
+      //
+      //
       // this.mainObj.aggregations = {};
-      // 
+      //
 
       // jQuery.extend(this.mainObj.filters, this.agencyDefaultFilterObj);
       // this.mainObj.keywordMap.fields = this.osFields.slice();
@@ -549,20 +548,22 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   keywordSplitter(str) {
-    // 
+    //
     let res: any = [];
 
     str = str.split(" ");
     str.forEach(el => {
-      // 
+      //
       res.push(el);
     });
     // res = str;
-    // 
+    //
     return res;
   }
 
   searchByKeyword(valkeyword, opt?) {
+
+    this.getSearchUrl();
 
     let arrKeyword: any = [];
     let arrKeywordeySetting: any = [];
@@ -572,7 +573,7 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
     let env = window.location.hostname;
     let envOrigin = window.location.origin;
     let localURL = envOrigin+'/gosg/';
-          
+
     this.totalElements = 0;
     let num;
     let dataLength = 0;
@@ -588,20 +589,26 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
         this.mainObj.filters.ref_language_id = "1"
     }
 
-    // this.router.navigate(['search/searchResult/' + valkeyword]);
+    this.router.navigate(['search/' + valkeyword]);
     let locStrgKword = localStorage.getItem('ser_word');
     let navKword = this.router.url.split("/")[2];
 
     if(decodeURI(navKword) != locStrgKword) {
       localStorage.setItem('ser_word', decodeURI(navKword));
       this.loading = true;
-      location.href = './search/'+navKword;
-      this.mainObj.keyword(decodeURI(navKword));
-    } else if(valkeyword != locStrgKword) {
+      // location.href = './search/'+navKword;
+        if(this.tabIndex != 2){
+          // this.mainObj.keyword(decodeURI(navKword));
+        }
+
+    } else if(decodeURI(valkeyword) != locStrgKword) {
       localStorage.setItem('ser_word', decodeURI(valkeyword));
       this.loading = true;
-      location.href = './search/'+valkeyword;
-      this.mainObj.keyword(decodeURI(valkeyword));
+      // location.href = './search/'+valkeyword;
+      if(this.tabIndex != 2){
+        // this.mainObj.keyword(decodeURI(valkeyword));
+      }
+
     }
 
     if (localStorage.getItem('ser_word').length === 0) {
@@ -632,7 +639,7 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
         this.keywordMap.not = arrKeywordeySetting;
         delete this.keywordMap.all;
         delete this.keywordMap.any;
-        // 
+        //
         this.mainObj.keywordMap = this.keywordMap;
       } else if (this.chkKeyValue == "2" && this.inpExcWord) {
         arrKeywordeySetting = this.keywordSplitter(this.inpExcWord);
@@ -640,7 +647,7 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
         this.keywordMap.not = arrKeywordeySetting;
         delete this.keywordMap.exact;
         delete this.keywordMap.any;
-        // 
+        //
         this.mainObj.keywordMap = this.keywordMap;
       } else if (this.chkKeyValue == "3" && this.inpExcWord) {
         arrKeywordeySetting = this.keywordSplitter(this.inpExcWord)
@@ -648,7 +655,7 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
         this.keywordMap.not = arrKeywordeySetting;
         delete this.keywordMap.all;
         delete this.keywordMap.exact;
-        // 
+        //
         this.mainObj.keywordMap = this.keywordMap;
       }
 
@@ -660,7 +667,7 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
         // delete this.mainObj.filters.category;
 
         this.mainObj.aggregations = this.locAggregations;
-        // 
+        //
 
         // if(env == 'localhost')
           dataUrl = this.internalUrl;
@@ -719,7 +726,7 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
         jQuery.extend(this.mainObj.filters, this.lifeEventFiltersObj);
         payloadObj = this.mainObj;
 
-        // 
+        //
 
       } else if (this.tabIndex === 1) { // ONLINE SERVICE SEARCH
 
@@ -744,7 +751,7 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
       } else if (this.tabIndex == 2) { // GLOBAL SEARCH
 
         dataUrl = this.globalUrl + "?keywords=" + this.ser_word + "&site=" + this.chkGlobValue + "&pagecount=" + this.pageNumber;
-        
+
         payloadObj = nullObj;
       }
 
@@ -794,7 +801,7 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
                 this.ddmonthPub = this.changeAryVal(rData.aggregations.histogram[0],'generic');
               }
 
-              // 
+              //
               rData.aggregations['filter_topic.category'][0].active_cat.forEach(item => {
                 item = this.changeAryVal(item,'generic')
                 topic = { "name": item[0].name, "val": item[0].val }
@@ -806,8 +813,8 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
                 this.ddsubTopics.push(topic)
               });
 
-              // 
-              // 
+              //
+              //
 
             } else if (this.tabIndex == 1) { // ONLINE SERVICES
               let ministry: any = {};
@@ -815,14 +822,14 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
 
               rData.aggregations.ministryAgg.forEach(item => {
                 item = this.changeAryVal(item,'generic');
-                // 
+                //
                 ministry = { "name": item[0].name, "val": item[0].val }
                 this.ddministry.push(ministry);
               });
 
               rData.aggregations.agencyAgg.forEach(item => {
                 item = this.changeAryVal(item,'generic');
-                // 
+                //
                 agency = { "name": item[0].name, "val": item[0].val }
                 this.ddagency.push(agency);
               });
@@ -845,7 +852,7 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
               this.totalPages = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
             this.showNoData = false;
-            
+
           } else {
             this.showNoData = true;
             this.sKeyword = false; //side menu
@@ -865,66 +872,73 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
         return this.http.get(dataUrl, payloadObj)
           .map(res => res.json())
           .subscribe(rData => {
-          
-            this.totalElements = rData.data.countinfo;
-            num = (rData.data.countinfo) / (this.pagesize);
-            delete rData.data.countinfo;
-            dataLength = Object.keys(rData.data).length;
-            // this.millisec = rData.data.tookMillis;
 
-            this.intData = this.changeAryVal(rData.data,'global')
-  
-            this.selMonPubDisp = '';
-            this.selAuthDisp = '';
-            this.selTopicDisp = '';
-            this.selSubTopicDisp = '';
-            this.selMinisDisp = '';
-            this.selAgencyDisp = '';
-            this.ddauthor = [];
-            this.ddtopics = [];
-            this.ddmonthPub = [];
-            this.ddsubTopics = [];
-            this.ddministry = [];
-            this.ddagency = [];
-  
-            this.valMonPub = [];
-            this.valAuthor = [];
-            this.valTopic = [];
-            this.valSubTopic = [];
-            this.valMinistry = [];
-            this.valAgency = [];
-  
-            if (dataLength > 0) {
-  
-              if (this.totalElements % this.pagesize > 0) {
-                this.totalPages = Math.floor(num) + 1;
-              } else {
-                this.totalPages = num;
-              }
-  
-              if (this.totalPages > 0) {
-                this.noNextData = this.pageNumber === this.totalPages;
-              } else {
-                this.noNextData = true;
-              }
-  
-              if(num && num > 999)
-                this.totalPages = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  
-              // this.totalElements.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-  
-              //   this.serchService.searchResData = rData.data;
-              this.showNoData = false;
-              
+            // DEBUG MODE ONLY
+            if(!rData.data) {
+              localStorage.setItem("currSearchTab", "0");
+              this.toastr.error(this.translate.instant('common.err.servicedown'), '');
+              this.loading = false;
+              // location.href = './search/'+this.ser_word;
             } else {
-              this.showNoData = true;
-              this.sKeyword = false; //side menu
-              this.sSpeci = false; //side menu
-              this.sFilter = false; //side menu
-            }
-            this.loading = false;
-            rData = null;
-          },
+              this.totalElements = rData.data.countinfo;
+              num = (rData.data.countinfo) / (this.pagesize);
+              delete rData.data.countinfo;
+              dataLength = Object.keys(rData.data).length;
+              // this.millisec = rData.data.tookMillis;
+
+              this.intData = this.changeAryVal(rData.data,'global')
+
+              this.selMonPubDisp = '';
+              this.selAuthDisp = '';
+              this.selTopicDisp = '';
+              this.selSubTopicDisp = '';
+              this.selMinisDisp = '';
+              this.selAgencyDisp = '';
+              this.ddauthor = [];
+              this.ddtopics = [];
+              this.ddmonthPub = [];
+              this.ddsubTopics = [];
+              this.ddministry = [];
+              this.ddagency = [];
+
+              this.valMonPub = [];
+              this.valAuthor = [];
+              this.valTopic = [];
+              this.valSubTopic = [];
+              this.valMinistry = [];
+              this.valAgency = [];
+
+              if (dataLength > 0) {
+
+                if (this.totalElements % this.pagesize > 0) {
+                  this.totalPages = Math.floor(num) + 1;
+                } else {
+                  this.totalPages = num;
+                }
+
+                if (this.totalPages > 0) {
+                  this.noNextData = this.pageNumber === this.totalPages;
+                } else {
+                  this.noNextData = true;
+                }
+
+                if(num && num > 999)
+                  this.totalPages = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+                // this.totalElements.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+
+                //   this.serchService.searchResData = rData.data;
+                this.showNoData = false;
+
+              } else {
+                this.showNoData = true;
+                this.sKeyword = false; //side menu
+                this.sSpeci = false; //side menu
+                this.sFilter = false; //side menu
+              }
+              this.loading = false;
+              rData = null;
+          }},
           error => {
             this.loading = false;
             this.toastr.error(this.translate.instant('common.err.servicedown'), '');
@@ -950,20 +964,20 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
   changeGlob(eve, val) {
     this.chkGlobValue = val;
     this.searchByKeyword(this.ser_word);
-    // 
+    //
   }
 
   chkKeyword(eve, id) {
-    // 
-    // 
+    //
+    //
     // this.inpExcWord = '';
     // this.toastr.success(id);
   }
 
 
   chkSpeci(e, type, elemName) {
-    // 
-    // 
+    //
+    //
 
     switch (type) {
 
@@ -1065,15 +1079,15 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
     }
     this.chkSpec(type, e.source);
 
-    // 
-    // 
+    //
+    //
     // this.toastr.success(id);
   }
 
   chkSpec(type, src) {
     let found, foundIndex, tot;
 
-    // 
+    //
     if (this.tabIndex == 0) {
       found = this.locFields.find(k => k == type);
       foundIndex = this.locFields.findIndex(k => k == type);
@@ -1129,7 +1143,7 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   pageChange(evt) {
-    // 
+    //
     this.resetPage();
     this.pagesize = evt.value;
     this.searchByKeyword(this.ser_word);
@@ -1173,7 +1187,7 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
         delete this.mainObj.filters.category_topic;
 
         delete this.mainObj.filters.ranges;
-        
+
     } else if (this.tabIndex == 1) {
       delete this.mainObj.filters.agency_name;
       delete this.mainObj.filters.ministry_name;
@@ -1200,8 +1214,8 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
       this.mainObj.aggregations = this.osAggregations;
     }
 
-    // 
-    // 
+    //
+    //
     this.searchByKeyword(this.ser_word);
   }
 }

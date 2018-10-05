@@ -7,7 +7,7 @@
                 <hr class="hr-custom2"><br>
                 <ul class="list-inline" style="clear:both;">
                     <li>
-                        <a class="font-size-s" style="color: #fff;" routerLink="/">
+                        <a class="font-size-s" style="color: #fff;" routerLink="/index">
                             {{'home.menu.home' | translate }}
                         </a>
                     </li>
@@ -115,31 +115,39 @@
             </div>
         </div>
 
-        <div class="row container">
+        <div class="row container" *ngIf="kp">
             <div class="col-md-3 blackFont">
                 {{ 'pdrm.title.icno' | translate }}
             </div>
             <div class="col-md-9 boldInfo">
                 {{kp}}
             </div>
+        </div>
+        <div class="row container" *ngIf="kp">
             <div class="col-md-3" style="color: black;">
                 {{ 'pdrm.title.applicantname' | translate }}
             </div>
             <div class="col-md-9 boldInfo">
                 {{name}}
             </div>
+        </div>
+        <div class="row container" *ngIf="kp">
             <div class="col-md-3" style="color: black;">
                 {{ 'pdrm.title.date' | translate }}
             </div>
             <div class="col-md-9" style="color: black; font-weight: bold;">
                 {{date}}
             </div>
+        </div>
+        <div class="row container" *ngIf="kp">
             <div class="col-md-3" style="color: black;">
                 {{ 'pdrm.title.location' | translate }}
             </div>
             <div class="col-md-9" style="color: black; font-weight: bold;">
                 {{place}}
             </div>
+        </div>
+        <div class="row container" *ngIf="kp">
             <div class="col-md-3" style="color: black;">
                 {{ 'pdrm.title.status' | translate }}
             </div>
@@ -156,11 +164,11 @@
 
     <div *ngIf="showNoData">
         <div class="row container">
-            <div class="col-md-12" style="color: black; font-weight: bold; text-align: center;">
+            <div class="col-md-12" style="color: red; font-weight: bold;">
                 ANDA TIADA PENGAMBILAN JAWATAN PDRM.<br>
             </div>
         </div>
-    </div>
+    </div><br>
 
 </div>
   

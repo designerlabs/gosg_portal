@@ -24,9 +24,9 @@
       "gallery": "Galeri",
       "statistic": "Statistik Atas Talian",
       "search": "Carian",
-      "policeReport": "Semakan Status Laporan Polis",
+      "policeReport": "Semakan Status Repot Polis",
       "summonStatus": "Semakan Status Saman Trafik PDRM",
-      "statusposition": "Semakan Status Jawatan Pengambilan",
+      "statusposition": "Semakan Status Pengambilan Jawatan PDRM",
       "mykadapproval": "Kelulusan Pengguna"
     },
     "search": {
@@ -452,6 +452,7 @@
     "open":"Buka",
     "listofarticle": "Senarai Artikel",
     "close":"Tutup",
+    "inactiveMsg":"Akauan anda tidak aktif. Sila hubungi pentadbir portal.",
     "invalidUser":"Akaun anda tidak wujud dalam portal. Sila hubungi admin portal unduk maklumat lanjut",
     "seconds1":"log keluar dalam",
     "seconds2": "saat",
@@ -495,7 +496,8 @@
       "nodata": "Tiada maklumat",
       "searchKeyword": "Sila masukkan kata kunci carian",
       "mykad":"Adakah anda bersetuju untuk berkongsi profil dari MyGovernment Portal?",
-      "thanks": "Terima Kasih"
+      "thanks": "Terima Kasih",
+      "incompleteData":"Profil anda tidak lengkap. Sila lengkapkan profil anda sebelum klik butang ini."
     },
     "state":{
       "success":"bg_header bg_success_header",

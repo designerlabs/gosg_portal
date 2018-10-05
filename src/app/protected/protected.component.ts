@@ -52,6 +52,7 @@ export class ProtectedComponent implements OnInit {
   pageSize;
   msgInvalidUser: any;
   entryService;
+  accountStatusId: any;
   constructor(public navService: NavService, private activatedRoute:ActivatedRoute, @Inject(APP_CONFIG) private config: AppConfig, private protectedService:ProtectedService, router:Router, private portalService:PortalService) {
 
       this.countDown = timer(0,1000).pipe(
@@ -121,7 +122,6 @@ export class ProtectedComponent implements OnInit {
     this.protectedService.getErrorMsg().subscribe(
       data => {
         this.msgInvalidUser = data.resource.messagesDescription;
-        console.log(this.msgInvalidUser);
       }
     )
     }
@@ -133,6 +133,7 @@ export class ProtectedComponent implements OnInit {
       this.protectedService.getUser().subscribe(
         data => {
           if(data.user){
+            this.accountStatusId= data.user.accountStatus.accountStatusId;
             this.getUserName = data.user.fullName;
             this.getPassport = data.user.passportNo;
             this.validMyIdentity = data.user.isMyIdentityVerified;
@@ -146,8 +147,9 @@ export class ProtectedComponent implements OnInit {
           }
           this.loading = false;
 
-          if(data.statusCode !== 'SUCCESS' && !this.isFirstLogin){
+          if((this.accountStatusId == 3 || this.accountStatusId == 5) || data.statusCode !== 'SUCCESS' && !this.isFirstLogin){
             this.loading = false;
+            this.getErorMsg();
             this.nonValidUser = true;
               setTimeout(() => {
                 this.logout();
@@ -214,7 +216,6 @@ export class ProtectedComponent implements OnInit {
     let getUserCountry = localStorage.getItem('userNationality');
 
     this.getUserData();
-    this.getErorMsg();
     this.activatedRoute.queryParamMap.skip(1).subscribe((queryParams: Params) => {
       this.userId = queryParams.get('id');
       if(this.userId){

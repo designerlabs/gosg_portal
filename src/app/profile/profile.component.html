@@ -7,7 +7,7 @@
         <hr class="hr-custom2">
         <ul class="list-inline" style="clear:both;">
           <li>
-            <a class="font-size-s" routerLink="/">
+            <a class="font-size-s" routerLink="/index">
                       {{'home.menu.home' | translate }}
                   </a>
           </li>
@@ -323,15 +323,15 @@
                       </mat-form-field>
                     </div>
                     <div class="form-group input-group col-md-4" style="padding-left: 15px; padding-right: 15px;">
-                        <mat-form-field class="font-size-s" style="width:28%">
+                        <!-- <mat-form-field class="font-size-s" style="width:28%">
                             <mat-select formControlName="mobilecodeTelefon" #mobilecodetele placeholder="{{'profile.label.codetel' | translate}}">
                               <mat-option *ngFor="let country of countries" [value]="country?.countryDialCode">
                                 + {{ country?.countryDialCode }} {{ country?.countryCode }}
                               </mat-option>
                             </mat-select>
-                          </mat-form-field>
-                      <mat-form-field class="example-full-width font-size-s" style="width:70%">
-                        <input matInput #corsmobile formControlName="corrsMobile" [textMask]="{mask: maskForeigner}" type="text"
+                          </mat-form-field> -->
+                      <mat-form-field class="example-full-width font-size-s" style="width:98%">
+                        <input matInput #corsmobile formControlName="corrsMobile" type="text"
                           placeholder="{{'profile.label.mobile' | translate}}"/>
                       </mat-form-field>
                     </div>
@@ -372,6 +372,8 @@
               </div>
             </form>
           </mat-tab>
+
+          <!-- Change Mobile Tab-->
           <mat-tab label="{{'profile.label.changePhone' | translate}}" class="font-size-s">
               <div style="padding-top:10px;"></div>
               <form [formGroup]="phoneForm" autocomplete="off" (ngSubmit)="updateProfilePhone(phoneForm.value)" role="form" novalidate>
@@ -394,9 +396,6 @@
                             <mat-error *ngIf="!validateCtrlChk(telefonf) && phoneForm.controls.telefonf.errors?.required">
                               {{'register.err.tel' | translate }}
                             </mat-error>
-                            <!-- <mat-error *ngIf="!validateCtrlChk(telefonf) && phoneForm.controls.telefonf?.pattern">
-                              {{'register.pattern.tel' | translate }}
-                            </mat-error> -->
                           </mat-form-field>
                   </div>
 

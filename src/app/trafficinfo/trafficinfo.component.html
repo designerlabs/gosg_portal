@@ -28,7 +28,7 @@
       <mat-form-field class="example-full-width">
         <input matInput [(ngModel)]="streetName" [ngModelOptions]="{standalone: true}"
           placeholder="{{ 'trafficinfo.filterby.streetname' | translate }}" (click)="isActiveList = true" autocomplete="off" style="color: #333">
-        <button mat-button *ngIf="streetName" matSuffix mat-icon-button (click)="streetName=''; getTrafficFlowData();isActiveList = true">
+        <button mat-button *ngIf="streetName" matSuffix mat-icon-button (click)="streetName=''; getTrafficFlowData(languageId);isActiveList = true">
           <mat-icon>x</mat-icon>
         </button>
         <!-- <mat-select placeholder="{{ 'trafficinfo.filterby.streetname' | translate }} ({{ totalRec }})" [(ngModel)]="streetName">
@@ -40,7 +40,7 @@
           (scroll)="onScroll($event)" style="max-height: 300px; height: auto">
           <ul class="list-group pmd-z-depth pmd-list pmd-card-list pmd-list">
               <li class="list-group-item" *ngFor="let data of streetNames | search : streetName;">
-                  <a class="list-link" (click)="getTrafficPredictionData(data.name, data.latlng)">{{data.name}}</a>
+                  <a class="list-link" (click)="getTrafficPredictionData(data.name, data.latlng, '', languageId)">{{data.name}}</a>
               </li>
           </ul>
       </div>
@@ -56,21 +56,21 @@
       <div class="row" style="color: #1d1d1d; min-height: 280px">
         <!-- Predictions -->
         <div class="col-md-12">
-        <h5>{{ 'trafficinfo.label.prediction' | translate }}</h5>
-        <h3 *ngIf="!gotPrediction || showNoData"> - </h3>
-        <h3 *ngIf="gotPrediction && selStreetName.length > 30 && !showNoData" title="{{ selStreetName }}">{{ selStreetName | slice:0:30}}...</h3>
-        <h3 *ngIf="gotPrediction && selStreetName.length < 30 && !showNoData">{{ selStreetName }}</h3>
+        <h5 class="boldText">{{ 'trafficinfo.label.prediction' | translate }}</h5>
+        <h5 class="boldText" *ngIf="!gotPrediction || showNoData"> - </h5>
+        <h5 class="boldText" *ngIf="gotPrediction && selStreetName.length > 30 && !showNoData" title="{{ selStreetName }}">{{ selStreetName | slice:0:30}}...</h5>
+        <h5 class="boldText" *ngIf="gotPrediction && selStreetName.length < 30 && !showNoData">{{ selStreetName }}</h5>
         <table *ngIf="gotPrediction && !showNoData" class="table">
           <tbody>
             <tr>
-              <td class="text-align-Center boldText" style="border: 1px solid #000000; width: 25%;">{{ 'trafficinfo.label.current' | translate }}</td>
-              <td class="text-align-Center boldText" style="border: 1px solid #000000; width: 25%;">{{ 'trafficinfo.label.1hr' | translate }}</td>
-              <td class="text-align-Center boldText" style="border: 1px solid #000000; width: 25%;">{{ 'trafficinfo.label.2hr' | translate }}</td>
-              <td class="text-align-Center boldText" style="border: 1px solid #000000; width: 25%;;">{{ 'trafficinfo.label.3hr' | translate }}</td>
+              <td class="text-align-Center boldText" style="background: #000; color: #fff; border: 1px solid #000000; width: 25%;">{{ 'trafficinfo.label.current' | translate }}</td>
+              <td class="text-align-Center boldText" style="background: #000; color: #fff; border: 1px solid #000000; width: 25%;">{{ 'trafficinfo.label.1hr' | translate }}</td>
+              <td class="text-align-Center boldText" style="background: #000; color: #fff; border: 1px solid #000000; width: 25%;">{{ 'trafficinfo.label.2hr' | translate }}</td>
+              <td class="text-align-Center boldText" style="background: #000; color: #fff; border: 1px solid #000000; width: 25%;;">{{ 'trafficinfo.label.3hr' | translate }}</td>
             </tr>
             <tr>
-              <td *ngFor="let pData of predictionData" class="car-icon" [ngStyle]="{'background': 'transparent', 'height': 'auto', 'border': '1px solid #000000', 'cursor':'help' }">
-                <i class="fa fa-car font-size-xl car-style" [ngStyle]="{ 'color':pData.color}"></i>
+              <td *ngFor="let pData of predictionData" class="car-icon" [ngStyle]="{'background': 'transparent', 'height': 'auto', 'border': '1px solid #000000' }">
+                <i class="fa fa-circle font-size-xl car-style" [ngStyle]="{ 'color':pData.color}"></i>
               </td>
             </tr>
           </tbody>

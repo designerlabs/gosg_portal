@@ -4,10 +4,36 @@
             <i class="fa fa-exclamation-triangle"></i>
         </h2>
     </div>
-    <div class="modal-body">
+    <div class="modal-body" *ngIf="data?.err == 1">
         <span>Permohonan Pembaharuan Lesen Telah Dibuat</span><br>
         <span>Nombor Lesen: {{data.lesen}}</span><br>
         <span>Tempoh Sah: {{data.dateL}} - {{data.dateT}}</span><br>
+        <div style="justify-content: center; margin-top: 3%">
+            <button class="btn btn-danger" type="button" (click)="onNoClick()">
+                <i class="fa fa-check"></i> OK</button>
+        </div>
+    </div>
+    <div class="modal-body" *ngIf="data?.err == 2">
+        <span>This form is only available in Malay language.</span><br>
+        <div style="justify-content: center; margin-top: 3%">
+            <button class="btn btn-danger" type="button" (click)="onNoClick()">
+                <i class="fa fa-check"></i> OK</button>
+        </div>
+    </div>
+    <div class="modal-body" *ngIf="data?.err == 3">
+        <span>Tempoh pembaharuan telah tamat.</span><br>
+        <span>Tarikh Tamat: {{data.dateT}}</span><br>    
+        <span>Dalam Tindakan Pendakwaan</span><br>      
+        <span>Nombor Lesen: {{data.lesen}}</span><br>
+        <div style="justify-content: center; margin-top: 3%">
+            <button class="btn btn-danger" type="button" (click)="onNoClick()">
+                <i class="fa fa-check"></i> OK</button>
+        </div>
+    </div>
+
+    <div class="modal-body" *ngIf="data?.err == 4">
+        <span>Nombor lesen tidak sah.</span><br>  
+        <span>Nombor Lesen: {{data.lesen}}</span><br>
         <div style="justify-content: center; margin-top: 3%">
             <button class="btn btn-danger" type="button" (click)="onNoClick()">
                 <i class="fa fa-check"></i> OK</button>

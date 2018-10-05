@@ -166,9 +166,12 @@ export class SummontrafficComponent implements OnInit {
 
             this.dataSummons = data.summonResource;
 
+            if(this.dataSummons.summonDetails.length == 0){              
+              this.showNoData = true;
+            }
+
             if (this.dataSummons.summonDetails) {
               this.showDetails = true;
-              this.showNoData = false;
             } else {
               this.showDetails = false;
               this.showNoData = true;
@@ -492,7 +495,7 @@ export class SummontrafficComponent implements OnInit {
             if (data.user) {
 
               this.searchForm.get('ic').setValue(data.user.identificationNo);
-
+              this.checkReqValues();
               
             } else {
               

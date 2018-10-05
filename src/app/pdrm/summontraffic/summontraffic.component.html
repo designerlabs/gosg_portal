@@ -7,7 +7,7 @@
                 <hr class="hr-custom2"><br>
                 <ul class="list-inline" style="clear:both;">
                     <li>
-                        <a class="font-size-s" style="color: #fff;" routerLink="/">
+                        <a class="font-size-s" style="color: #fff;" routerLink="/index">
                             {{'home.menu.home' | translate }}
                         </a>
                     </li>
@@ -168,30 +168,32 @@
             </div>
         </div>
 
-        <div class="row container blackFont">
+        <div class="row container blackFont" *ngIf="dataSummons.summonDetails.length > 0">
             <div class="col-md-3">
                 {{ 'pdrm.title.icno' | translate }}
             </div>
 
             <div class="col-md-9 boldInfo">
-                {{this.dataSummons.summonDetails[0].offender_ic}}
+                {{this.dataSummons.summonDetails[0]?.offender_ic}}
             </div>
-
+        </div>
+        <div class="row container blackFont" *ngIf="dataSummons.summonDetails.length > 0">
             <div class="col-md-3">
                 {{ 'pdrm.title.name' | translate }}
             </div>
 
             <div class="col-md-9 boldInfo">
-                {{this.dataSummons.summonDetails[0].offender_name}}
+                {{this.dataSummons.summonDetails[0]?.offender_name}}
             </div>
-
+        </div>
+        <div class="row container blackFont" *ngIf="dataSummons.summonDetails.length > 0">
             <div class="col-md-3">
                 {{ 'pdrm.title.total_summon' | translate }}
                 <!-- Jumlah Amaun (RM) -->
             </div>
 
             <div class="col-md-9 boldInfo">
-                {{this.dataSummons.summonDetails.length}}
+                {{this.dataSummons.summonDetails?.length}}
                 <!-- {{ammount}} -->
             </div>
         </div><br>
@@ -228,21 +230,21 @@
                 </tr>
             </table>                  
         </div><br>
+    </div><br>
 
-        <div class="row container paddingLR30">
-            <div class="col-md-12 boldInfo borderDiv">
-                <label class="">Petunjuk:</label><br>
-                <label class="">SH - Saman Senarai Hitam</label><br>
-                <label class="">OP - Kesalahan Trafik Dilakukan Semasa Operasi Berkuatkuasa</label><br>
-            </div>
+    <div class="row container paddingLR30">
+        <div class="col-md-12 boldInfo borderDiv">
+            <label class="">Petunjuk:</label><br>
+            <label class="">SH - Saman Senarai Hitam</label><br>
+            <label class="">OP - Kesalahan Trafik Dilakukan Semasa Operasi Berkuatkuasa</label><br>
         </div>
+    </div>
 
-        <div class="row container">
-            <div class="col-md-12 boldInfo"><br>
-                <label class="redFont">Kadar kompaun saman berdasarkan prinsip "The More You Delay, The More You Pay". Sila buat bayaran saman secepat mungkin. 
-                    Lesen memandu & lesen kenderaan motor tidak boleh diperbaharui setelah no kad pengenalan disenarai
-                    hitamkan dalam sistem mySIKAP, Jabatan pengankutan jalan.</label><br>
-            </div>
+    <div class="row container">
+        <div class="col-md-12 boldInfo"><br>
+            <label class="redFont">Kadar kompaun saman berdasarkan prinsip "The More You Delay, The More You Pay". Sila buat bayaran saman secepat mungkin. 
+                Lesen memandu & lesen kenderaan motor tidak boleh diperbaharui setelah no kad pengenalan disenarai
+                hitamkan dalam sistem mySIKAP, Jabatan pengankutan jalan.</label><br>
         </div>
     </div><br>
   

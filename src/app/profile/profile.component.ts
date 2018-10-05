@@ -371,6 +371,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
                       this.profileForm.get('corrsMobile').setValue(telenum);
                     }else {
                       this.profileForm.get('corrsMobile').setValue((data.user.mobilePhoneNo));
+                      this.phoneForm.get('telefonf').setValue(data.user.mobilePhoneNo);
                     }
 
                     if(data.user.gender){
@@ -671,6 +672,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
         return this.sharedService.getCountryData()
           .subscribe(resCountryData => {
             this.countries = resCountryData;
+            this.phoneForm.get('codeTelefonf').setValue('60');
             this.loading = false;
           },
           Error => {
@@ -1380,7 +1382,12 @@ let bodyUpdate =
           this.toastr.success(this.translate.instant('profile.msg.updateEmail'), '');
           this.emailForm.disable();
           if(!!data.user){
-            window.location.href = this.uapstagingUrl+data.user.tag;
+            if(data.user.tag.length <= 0){
+              this.toastr.success(this.translate.instant('profile.msg.updateSuccess'), '');
+            }else{
+              window.location.href = this.uapstagingUrl+data.user.tag;
+            }
+
         }else{
             this.errMsg = data.statusDesc;
             this.infoModal.show();
@@ -1397,8 +1404,25 @@ let bodyUpdate =
       });
   };
 
+  updateMyPhoneNumber(number) {
+
+      while(number.charAt(0) === '0'){
+        number = number.substr(1);
+      }
+
+    console.log(number);
+    return number;
+
+  }
   updateProfilePhone(formValues:any){
     this.loading = true;
+
+
+    if (formValues.codeTelefonf === '60') {
+      formValues.telefonf = this.updateMyPhoneNumber(formValues.telefonf);
+      this.phoneForm.get('telefonf').setValue(this.updateMyPhoneNumber(formValues.telefonf));
+    }
+
     this.protectedService.updatePhone(this.idno, formValues.codeTelefonf + formValues.telefonf).subscribe(
       data => {
 
@@ -1409,7 +1433,12 @@ let bodyUpdate =
           this.toastr.success(this.translate.instant('profile.msg.updatePhone'), '');
           this.phoneForm.disable();
           if(!!data.user){
-            window.location.href = this.uapstagingUrl+data.user.tag;
+            if(data.user.tag.length <= 0){
+              this.toastr.success(this.translate.instant('profile.msg.updateSuccess'), '');
+            }else{
+              window.location.href = this.uapstagingUrl+data.user.tag;
+            }
+
           }else{
               this.errMsg = data.statusDesc;
               this.infoModal.show();

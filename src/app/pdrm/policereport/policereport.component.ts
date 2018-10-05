@@ -48,10 +48,9 @@ export class PolicereportComponent implements OnInit, OnDestroy {
   public yearreport: FormControl
 
   private subscriptionLang: ISubscription;
-  private subscription: ISubscription;
-
-  private urlFaq: string = this.config.urlFaq;
   loading: boolean = false;
+  dataAnnouncement: any;
+  annouceConvert: any;
 
   constructor(
     private translate: TranslateService,
@@ -96,7 +95,6 @@ export class PolicereportComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscriptionLang.unsubscribe();
-   // this.subscription.unsubscribe();
   }
 
   ngOnInit() {
@@ -127,6 +125,7 @@ export class PolicereportComponent implements OnInit, OnDestroy {
       yearreport: this.yearreport      
     });
 
+    this.getAnnoucement();
     this.getYear();
     this.getUserData();
   }
@@ -188,8 +187,33 @@ export class PolicereportComponent implements OnInit, OnDestroy {
       this.toastr.error(JSON.parse(error._body).statusDesc, '');
       this.loading = false;
     });
-
     
+  }
+
+  getAnnoucement(){
+    // this.loading = true;
+    // this.protectedService.postProtected('','pdrm/getAnnoucement?type=2'+'&agency='+this.agcCode+'&service='+this.dsvcCode+'&language='+this.langID).subscribe(
+    // data => {
+    //   this.sharedService.errorHandling(data, (function(){
+
+    //     this.dataAnnouncement = data.announcementResource.content;
+    //     console.log(this.dataAnnouncement);
+     
+    //   }).bind(this));
+    //   this.loading = false;
+      
+    // },
+    // error => {
+    //   this.toastr.error(JSON.parse(error._body).statusDesc, '');
+    //   this.loading = false;
+    // });
+
+    this.dataAnnouncement = '<table> <tr> <td align="left"> <b>Perhatian: <br /> <i>Semua jenis Repot Polis bertarikh dari 1 Ogos 2011 hingga kini (kecuali Repot Kemalangan Jalan Raya) yang dibuat  di kawasan Kontinjen Kuala Lumpur dan Selangor boleh disemak buat masa ini. </i></b> </td> </tr> </table>';
+    console.log(this.dataAnnouncement);
+  }
+
+  convert(data){
+    this.annouceConvert = data;
   }
 
   openLink(varUrl){
@@ -273,10 +297,10 @@ export class PolicereportComponent implements OnInit, OnDestroy {
 
   resetSearch(){
     //this.appNumber.reset();
-    this.searchForm.get('ic').setValue(null);
+    //this.searchForm.get('ic').setValue(null);
     this.searchForm.get('noreport').setValue(null);
     this.searchForm.get('yearreport').setValue(null);
-    this.showDetails = false;
+    this.showDetails = undefined;
   }
 
   resetMethod(event) {

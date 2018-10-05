@@ -65,7 +65,7 @@
     "breadcrumb": {
       "calendar": "Calendar",
       "register": "Register",
-      "feedback": "Complaints and Queries",
+      "feedback": "Complaints and Inquiries",
       "profile": "My Profile",
       "dashboard": "Dashboard",
       "appmgmt": "Application Management",
@@ -286,7 +286,7 @@
 
   },
   "feedback": {
-    "title": "COMPLAINTS AND QUERIES",
+    "title": "COMPLAINTS AND INQUIRIES",
     "desc": "Please limit your response to 500 characters and include your email address and we will respond to you within three (3) working days. We can respond in two languages, English and Bahasa Melayu.",
     "label": {
       "type": "Type of feedback",
@@ -452,6 +452,7 @@
     "open":"Open",
     "listofarticle": "List of Articles",
     "close":"Close",
+    "inactiveMsg":" Your account is inactive. Please contact portal administrator.",
     "invalidUser":"Your account doesn't exist in the portal. For more details please contact portal administrator",
     "seconds1":"logout in",
     "seconds2": "seconds",
@@ -495,7 +496,8 @@
       "nodata": "No data found",
       "searchKeyword": "Please enter a word to search",
       "mykad":"Do you agree to share your profile from MyGovernment Portal?",
-      "thanks": "Thank You"
+      "thanks": "Thank You",
+      "incompleteData":"Your Profile is incomplete. Please complete your profile before click this button."
     },
     "state":{
       "success":"bg_header bg_success_header",

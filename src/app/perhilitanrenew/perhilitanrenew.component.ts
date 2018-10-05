@@ -35,6 +35,7 @@ export interface DialogData {
   lesen;
   dateL;
   dateT;
+  err;
 }
 
 @Component({
@@ -158,6 +159,8 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
   flag3 = true;
   flag4 = true;
   flag5 = true;
+  valObj: any;
+  flagCompleteData = true;
 
   constructor(
     private activatedRoute:ActivatedRoute,
@@ -187,6 +190,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
             translate.get('HOME').subscribe((res: any) => {
                 this.lang = 'en';
                 this.langID = 1;
+                this.openDialog('','','', 2);
             });
         }
 
@@ -372,20 +376,31 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
 
           if(data.user){
 
-            let phone = data.user.address.permanentAddressHomePhoneNo.split('*')[1];
+            let phone = data.user.mobilePhoneNo;
+
+            let getObjKeys = Object.keys(data.user);
+            this.valObj = getObjKeys.filter(fmt => fmt === "address");
+            console.log(this.valObj);
+            if(this.valObj.length > 0){
+              //let phone = data.user.address.permanentAddressHomePhoneNo.split('*')[1];
+              this.firstFormGroup.get('add1').setValue(data.user.address.permanentAddress1);
+              this.firstFormGroup.get('poskodPemohon').setValue(data.user.address.permanentAddressPostcode.postCode);
+              this.firstFormGroup.get('daerahPemohon').setValue(data.user.address.permanentAddressCity.cityName);
+              this.firstFormGroup.get('negeriPemohon').setValue(data.user.address.permanentAddressState.stateName);
+
+              this.dbposkod = data.user.address.permanentAddressPostcode.postcodeId;
+              this.dbdaerah = data.user.address.permanentAddressCity.cityId;
+              this.dbnegeri = data.user.address.permanentAddressState.stateId;
+              this.flagCompleteData = false;
+            }
+            else{
+              this.flagCompleteData = true;
+            }
 
             this.firstFormGroup.get('namaPemohon').setValue(data.user.fullName);
             this.firstFormGroup.get('icPemohon').setValue(data.user.identificationNo);
             this.firstFormGroup.get('phonePemohon').setValue(phone);
             this.firstFormGroup.get('emailPemohon').setValue(data.user.email);
-            this.firstFormGroup.get('add1').setValue(data.user.address.permanentAddress1);
-            this.firstFormGroup.get('poskodPemohon').setValue(data.user.address.permanentAddressPostcode.postCode);
-            this.firstFormGroup.get('daerahPemohon').setValue(data.user.address.permanentAddressCity.cityName);
-            this.firstFormGroup.get('negeriPemohon').setValue(data.user.address.permanentAddressState.stateName);
-
-            this.dbposkod = data.user.address.permanentAddressPostcode.postcodeId;
-            this.dbdaerah = data.user.address.permanentAddressCity.cityId;
-            this.dbnegeri = data.user.address.permanentAddressState.stateId;
 
           }else{
           }
@@ -489,6 +504,8 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
       this.dbposkod = data.user.address.permanentAddressPostcode.postcodeId;
       this.dbdaerah = data.user.address.permanentAddressCity.cityId;
       this.dbnegeri = data.user.address.permanentAddressState.stateId;
+      //this.flag1 = false;
+      this.flagCompleteData = false;
     }
   }
 
@@ -1139,7 +1156,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     }
 
     else{
-      if(sizeFile >  1048576){ //1048576
+      if(sizeFile >  2097152){ //1048576
         this.toastr.error('Fail tidak boleh melebihi 2MB');
         this.fifthFormGroup.controls.file1.setValue(null);
         this.fifthFormGroup.controls.dispBase641.setValue(null);
@@ -1168,7 +1185,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     }
 
     else{
-      if(sizeFile >  1048576){ //1048576
+      if(sizeFile >  2097152){ //1048576
         this.toastr.error('Fail tidak boleh melebihi 2MB');
         this.fifthFormGroup.controls.file2.setValue(null);
         this.fifthFormGroup.controls.dispBase642.setValue(null);
@@ -1289,6 +1306,10 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
             this.viewPbt = dataLisence[0].urlpbt;
           }
 
+          // setTimeout(function () {
+          //   alert("Test");
+          // }, 2000);
+
           this.checkposkod(1, this.selectedPoskodT);
           this.checkposkod(2, this.selectedPoskodSurat);
           this.checkposkod(3, this.selectedPoskodComp);
@@ -1311,11 +1332,25 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
             let sDate = dataLisence[0].tarikhluluslesenlama;
             let eDate = dataLisence[0].tarikhtamatlesenlama;
 
-            let startD = sDate.substring(0,10)
-            let endD = eDate.substring(0,10)
+            let startD = sDate.substring(0,10);
+            let endD = eDate.substring(0,10);
 
-            this.openDialog(dataLisence[0].nolesenlama,startD,endD);
-          }else{
+            this.openDialog(dataLisence[0].nolesenlama,startD,endD, 1);
+          }
+          else if(dataLisence[0].status == "Dalam Tindakan Pendakwaan"){
+
+            let eDate = dataLisence[0].tarikhtamatlesenlama;
+            let endD = eDate.substring(0,10);            
+
+            this.openDialog(dataLisence[0].nolesenlama,'',endD, 3);
+          }
+
+          else if(dataLisence[0].status == "Tiada Rekod"){            
+
+            this.openDialog(this.firstFormGroup.get('noLesen').value,'','', 4);
+          }
+
+          else{
             this.firstFormGroup.get('textDisplay').setValue('');
             this.toastr.error(dataLisence[0].status, '');
           }
@@ -1381,13 +1416,14 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     return blob;
   }
 
-  openDialog(a,b,c) {
+  openDialog(a,b,c,d) {
 
     this.dialog.open(PopupServiceDialog, {
       data: {
         lesen: a,
         dateL: b,
-        dateT: c
+        dateT: c,
+        err: d
       }
     });
   }
@@ -1515,7 +1551,8 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
       this.protectedService.create(body,'perhilitan/draft/save',this.langID, this.dsvcCode, this.agcCode).subscribe(
       data => {
         this.sharedService.errorHandling(data, (function () {
-          this.toastr.success(this.translate.instant('Pembaharuan Lesen Peniaga/Taksidermi berjaya disimpan sebagai draft'), '');
+          // this.translate.instant('Pembaharuan Lesen Peniaga/Taksidermi berjaya disimpan sebagai draft')
+          this.toastr.success(data.statusDesc, '');
           this.router.navigate(['appsmgmt']);
         }).bind(this));
         this.loading = false;
@@ -1647,7 +1684,8 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
       this.protectedService.create(body,'perhilitan/draft/save',this.langID, this.dsvcCode, this.agcCode).subscribe(
       data => {
         this.sharedService.errorHandling(data, (function () {
-          this.toastr.success(this.translate.instant('Draf Pembaharuan Lesen Peniaga/Taksidermi berjaya dikemaskini'), '');
+          // this.translate.instant('Draf Pembaharuan Lesen Peniaga/Taksidermi berjaya dikemaskini')
+          this.toastr.success(data.statusDesc, '');
           this.router.navigate(['appsmgmt']);
         }).bind(this));
         this.loading = false;
@@ -1777,7 +1815,8 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
     this.protectedService.create(body,'perhilitan/renew',this.langID, this.dsvcCode, this.agcCode).subscribe(
     data => {
       this.sharedService.errorHandling(data, (function () {
-        this.toastr.success(this.translate.instant('Permohonan Baru Lesen Peniaga/Taksidermi berjaya dihantar'), '');
+        // this.translate.instant('Permohonan Baru Lesen Peniaga/Taksidermi berjaya dihantar')
+        this.toastr.success(data.statusDesc, '');
         this.router.navigate(['appsmgmt']);
       }).bind(this));
       this.loading = false;

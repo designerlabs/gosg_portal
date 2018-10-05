@@ -208,7 +208,10 @@ export class StatuspositionComponent implements OnInit, OnDestroy {
           this.showDetails = false;
           this.showNoData = true;
         }
-        
+
+        if(this.kp == null)
+        this.showNoData = true;
+
       }).bind(this));
       
     },

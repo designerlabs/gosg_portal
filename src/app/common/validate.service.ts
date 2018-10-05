@@ -23,7 +23,9 @@ export class ValidateService {
 			'numberOnly': '^[0-9]{'+min+','+max+'}$',
 			'alphaOnly':'^[a-zA-Z]{'+min+','+max+'}$',
 			'alphaNumeric':'^[a-zA-Z0-9]{'+min+','+max+'}$',
-			'email': '[a-zA-Z0-9._]+[@]+[a-zA-Z0-9]+[.]+[a-zA-Z]{2,6}'
+			'email': '[a-zA-Z0-9._]+[@]+[a-zA-Z0-9]+[.]+[a-zA-Z]{2,6}',
+			'phoneNo':'^[0-9]{3}+[-]+^[0-9]{8,9}',
+			'ic':'^[0-9]{12,12}$'
 			// 'email': '^[a-z0-9]+@([a-z0-9]{5,})+\.[a-z]{2,}$'
 			};
 	} 

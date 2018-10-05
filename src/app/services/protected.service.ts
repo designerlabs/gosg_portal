@@ -226,7 +226,7 @@ export class ProtectedService {
     return this.http
     .get(this.dserviceAgencyUrl + modules + '?language='+lang)
     .map((response: Response) => response.json())
-    .retry(5)
+    //.retry(5)
     .catch(this.handleError);
   }
 

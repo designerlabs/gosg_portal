@@ -7,7 +7,7 @@
         <hr class="hr-custom2">
         <ul class="list-inline" style="clear:both;">
           <li>
-            <a class="font-size-s" routerLink="/">
+            <a class="font-size-s" routerLink="/index">
               {{'home.menu.home' | translate }}
             </a>
           </li>
@@ -40,6 +40,7 @@
               <i *ngIf="content.name == 'images' || content.name == 'imej'" class="fa fa-image"></i>
               <i *ngIf="content.name == 'audios' || content.name == 'audio'" class="fa fa-file-audio-o"></i>
               <i *ngIf="content.name == 'videos' || content.name == 'video'" class="fa fa-file-video-o"></i>
+              <i *ngIf="content.name == 'media by agency' || content.name == 'video'" class="fa fa-users"></i>
               &nbsp;<a [routerLinkActive]="['active']" [style.font-weight]="content.active ? 'bold' : 'normal'"
                 [style.color]="content.active ? getTheme() ? getTheme() : 'rgb(0, 189, 187)' : '#333'">{{content.name}}</a>
             </mat-card>

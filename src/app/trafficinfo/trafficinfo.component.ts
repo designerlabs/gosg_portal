@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import * as $ from 'jquery';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 import { DialogsService } from '../dialogs/dialogs.service';
@@ -6,13 +6,12 @@ import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { Router, ActivatedRoute, ParamMap, Params } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { PortalService } from '../services/portal.service';
-import { HttpClient } from '@angular/common/http';
-import { Http, Response } from '@angular/http';
+//import { HttpClient } from '@angular/common/http';
+import { Http } from '@angular/http';
 import {
-  MatInputModule, MatPaginatorModule, MatProgressSpinnerModule,
-  MatSortModule, MatTableModule, MatPaginator, MatSort
+   MatPaginator, MatSort
 } from '@angular/material';
-import { tileLayer, latLng, circle, polygon, marker, icon, Layer, polyline } from 'leaflet';
+//import { tileLayer, latLng, circle, polygon, marker, icon, Layer, polyline } from 'leaflet';
 import * as L from 'leaflet';
 import { ISubscription } from 'rxjs/Subscription';
 import { TopnavService } from '../header/topnav/topnav.service';
@@ -23,7 +22,7 @@ import { NavService } from '../header/nav/nav.service';
   templateUrl: './trafficinfo.component.html',
   styleUrls: ['./trafficinfo.component.css']
 })
-export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
+export class TrafficinfoComponent implements OnInit, OnDestroy {
 
   private subscriptionLang: ISubscription;
 
@@ -32,7 +31,7 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild('input') input: ElementRef;
-
+ 
   pageSize = 10;
   pageCount = 1;
   totalRec = 0;
@@ -110,7 +109,7 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
       }
 
       if (this.topnavservice.flagLang) {
-        this.getTrafficFlowData();
+        this.getTrafficFlowData(this.languageId);
       }
 
       this.keyword = '';
@@ -131,17 +130,19 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
 
     // this.triggerDserviceValidation(this.dsvcCode);
 
+    if(!this.languageId){
+      this.languageId = localStorage.getItem('langID');
+    }else{
+      this.languageId = 1;
+    }
+
     this.gotPrediction = false;
     this.getDefaultMap();
     // this.getStreetNamesData();
-    this.getTrafficFlowData();
+    this.getTrafficFlowData(this.languageId);
     this.id = setInterval(() => {
-      this.getTrafficFlowData();
+      this.getTrafficFlowData(this.languageId);
     }, 300000);
-  }
-
-  ngAfterViewInit() {
-
   }
 
   ngOnDestroy() {
@@ -154,45 +155,17 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
   getDefaultMap() {
     this.mymap = L.map('dirmap').setView([3.141589, 101.674284], 13);
 
-    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+    L.tileLayer('https://tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png?access_token={accessToken}', {
       attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
       maxZoom: 17,
       id: 'mapbox.streets',
       accessToken: 'pk.eyJ1IjoicmVkemEiLCJhIjoiY2pmcGZxNzRrMjYzbzMwcG83bGRxY2FtZyJ9.uMHQpYc0Pvjl4us27nHH8w'
     }).addTo(this.mymap);
-
-    // this.rp = L.polyline(this.PLJlnMaarof, {color: 'red'}).addTo(this.mymap);
-    // this.mymap.fitBounds(this.rp.getBounds());
-
   }
 
-  // getStreetNamesData() {
-  //   let res;
-  //     this.portalservice.getStreetNames().subscribe(
-  //       // this.http.get(this.dataUrl).subscribe(
-  //       data => {
-  //         this.portalservice.errorHandling(data, (function () {
-  //           this.allStreetNames = data;
-
-  //           if (this.allStreetNames.length > 0) {
-  //             // this.middleMan();
-  //             res = this.allStreetNames;
-  //             // this.showNoData = false;
-  //           } else {
-  //             res = null;
-  //             // this.showNoData = true;
-  //           }
-  //         }).bind(this));
-  //         // this.loading = false;
-  //       }, err => {
-  //         // this.loading = false;
-  //       });
-  //       return res;
-  // }
-
-  getTrafficFlowData() {
+  getTrafficFlowData(lng) {
       this.loading = true;
-      this.portalservice.getTrafficFlows().subscribe(
+      this.portalservice.getTrafficFlows(lng).subscribe(
         data => {
           this.portalservice.errorHandling(data, (function () {
             this.streetFlows = data;
@@ -201,10 +174,8 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
 
               this.streetFlows.records.forEach(el => {
 
-                // console.log(this.allStreetNames)
                 if(el.street) {
                   el.jam = this.str2arr(el.jam);
-
 
                   this.streetNames.push({ 'name': el.street, 'latlng': el.jam[0] });
 
@@ -213,16 +184,17 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
                   this.rp.on('click', this.middleMan, this);
 
                   this.rp.on('mouseover', function(e) {
-                  this.popup = L.popup().setLatLng(el.jam[0])
-                                .setContent(`${el.street}`)
-                                .openOn(this._map)
+                    let popEl = '<div style="cursor: pointer;" d-color="'+ e.target.options.color +'" d-street="'+ el.street+'" d-latlng="'+ el.jam[0] +'" class="clickmap">'+`${el.street}`+'</div>'
+                    this.popup = L.popup().setLatLng(el.jam[0])
+                                  .setContent(popEl)
+                                  .openOn(this._map)
                   });
-                  this.popup.on('click', this.getTrafficPredictionData, this);
                 }
               });
-              this.totalRec = this.streetFlows.params.recordsFound;
 
+              this.totalRec = this.streetFlows.params.recordsFound;
               this.showNoData = false;
+              this.mapPopupClick(this.languageId);
             } else {
               this.recordTable = [];
               this.showNoData = true;
@@ -233,30 +205,44 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
         error => {
           this.toastr.error(JSON.parse(error._body).statusDesc, '');
           this.loading = false;
-
         });
   }
 
-  middleMan(e) {
-    let sName = e.target.popup._content;
-    let sLatLng = [e.latlng.lat,e.latlng.lng ];
-    this.getTrafficPredictionData(sName, sLatLng);
+  
+
+  mapPopupClick(languageId) {
+    const scopeOject = this;
+    $("body").on('click','div.clickmap', function(e){
+      let name = $(this).attr('d-street');
+      let latlng = JSON.parse('['+$(this).attr('d-latlng')+']');
+      let color =  $(this).attr('d-color');
+      scopeOject.getTrafficPredictionData(name, latlng, color, scopeOject.languageId);
+      e.preventDefault();
+    })
   }
 
-  getTrafficPredictionData(sn, ltlg?) {
+  middleMan(e) {
+    let element = $(e.target.popup._content);
+    let sName = $(element).attr('d-street');
+    let currColor = e.target.options.color;
+    let sLatLng = [e.latlng.lat,e.latlng.lng ];
+    this.getTrafficPredictionData(sName, sLatLng, currColor, this.languageId);
+  }
 
+  getTrafficPredictionData(sn, ltlg?, currClr?, lng?) {
+
+    let trafficDetails = {
+      "status": null,
+      "color": null
+    };
+    
     if(sn != "undefined") {
       this.showNoData = false;
       this.loading = true;
-      this.portalservice.getTrafficPrediction(sn).subscribe(
+      this.portalservice.getTrafficPrediction(sn,lng).subscribe(
         data => {
           this.portalservice.errorHandling(data, (function () {
             this.streetPrediction = data;
-
-            let trafficDetails = {
-              "status": null,
-              "color": null
-            };
 
             if (this.streetPrediction) {
 
@@ -267,24 +253,31 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
               this.predictionData = [];
 
               trafficDetails.status = this.streetPrediction.current;
-              trafficDetails.color = this.getLevelColorByName(this.streetPrediction.current);
+              trafficDetails.color = currClr;
+              console.log(this.streetPrediction);
               this.predictionData.push(trafficDetails);
 
                 this.streetPrediction.traffic.forEach(el => {
-                  trafficDetails.status = el;
-                  trafficDetails.color = this.getLevelColorByName(el);
-                  this.predictionData.push(trafficDetails)
+
                   trafficDetails = {
                     "status": null,
                     "color": null
                   };
+
+                  trafficDetails.status = el;
+                  trafficDetails.color = this.getLevelColorByName(el);
+                  
+                  this.predictionData.push(trafficDetails)
+
                 });
 
               this.mymap.flyTo(ltlg, 15);
+              let popEl = '<div style="cursor: pointer;" d-color="'+  trafficDetails.color +'" d-street="'+ this.streetName+'" d-latlng="'+ ltlg +'" class="clickmap">'+this.streetName+'</div>'
               this.popup = L.popup().setLatLng(ltlg)
-                            .setContent(this.streetName)
+                            .setContent(popEl)
                             .openOn(this.mymap);
-              }
+                          }
+              this.popup.on('click', this.middleMan, this);
           }).bind(this));
           this.loading = false;
           this.isActiveList = false;
@@ -326,7 +319,7 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
         color = "red"
         break;
       case 4:
-        color = "darkred"
+        color = "black"
         break;
 
       default:
@@ -348,10 +341,10 @@ export class TrafficinfoComponent implements OnInit, AfterViewInit, OnDestroy {
         color = "red"
         break;
       case 'Bumper to Bumper':
-        color = "darkred"
+        color = "black"
         break;
       case 'Unexpected Bumper to Bumper':
-        color = "darkred"
+        color = "black"
         break;
 
       default:
