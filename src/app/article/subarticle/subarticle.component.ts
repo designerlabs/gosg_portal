@@ -59,15 +59,16 @@ export class SubarticleComponent implements OnInit, OnDestroy {
     this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
 
       const myLang = translate.currentLang;
+      this.articleService.leContent = "";
 
       if (myLang == 'en') {
-
         translate.get('HOME').subscribe((res: any) => {
           this.lang = 'en';
           this.langId = 1;
           this.moduleName = this.router.url.split('/')[1];
           var tt = this.router.url.split('/');
           this.subID = parseInt(tt[tt.length - 1]);
+
         });
 
       }
@@ -204,12 +205,13 @@ export class SubarticleComponent implements OnInit, OnDestroy {
   }
 
   clickContent(e, status, event){
+    localStorage.setItem('leCode',e);
     event.preventDefault();
     this.articleService.leContent = "";
     this.navService.loader = true;
-    return this.http.get(this.config.urlPortal + 'content/' + e.contentCode + '?language=' + localStorage.getItem('langID')+'&type=lifeevent').subscribe(data => {
+    return this.http.get(this.config.urlPortal + 'content/' + e + '?language=' + localStorage.getItem('langID')+'&type=lifeevent').subscribe(data => {
       this.navService.loader = false;
-      this.le_menu_code = e.contentCode;
+      this.le_menu_code = e;
       this.articleService.leContent = data['contentCategoryResource']['results'][0]['content']['contentText'];
       this.le_code = data['contentCategoryResource']['results'][0]['content']['contentCode'];
     },

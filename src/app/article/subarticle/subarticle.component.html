@@ -271,7 +271,7 @@
                             border: 2px #4c4c4c dashed;
                             padding: 8px 0px;
                             font-size: 25px;">{{index + 1  }}</span> -->
-                            <a class="warna_font sideBarMenu--link font-size-s"  [style.color]="!!articleService.leContent && (le_code == rightContent.contentCode) ?  getTheme(): '#333333'" [matTooltip]="rightContent.contentTitle.length >= 30 ? rightContent.contentTitle : ''"  (click)="clickContent(rightContent, '', $event)" [innerHTML]="rightContent.contentTitle | truncate:[30, '...']" style="font-weight: bold; display: table-cell; text-align: center; vertical-align: middle; background: #efefef; padding: 4px; height: 120px; width: 110px; max-width: 100px; min-width: 110px; overflow-x: auto !important; min-height: 120px;"></a>
+                            <a class="warna_font sideBarMenu--link font-size-s"  [style.color]="!!articleService.leContent && (le_code == rightContent.contentCode) ?  getTheme(): '#333333'" [matTooltip]="rightContent.contentTitle.length >= 30 ? rightContent.contentTitle : ''"  (click)="clickContent(rightContent.contentCode, '', $event)" [innerHTML]="rightContent.contentTitle | truncate:[30, '...']" style="font-weight: bold; display: table-cell; text-align: center; vertical-align: middle; background: #efefef; padding: 4px; height: 120px; width: 110px; max-width: 100px; min-width: 110px; overflow-x: auto !important; min-height: 120px;"></a>
                           </li>
 
                         </ul>
