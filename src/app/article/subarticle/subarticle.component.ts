@@ -3,6 +3,7 @@ import { ArticleService } from '../article.service';
 import { NavService } from '../../header/nav/nav.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
+import { FormControl, FormGroup, Validators} from '@angular/forms';
 import { BreadcrumbService } from '../../header/breadcrumb/breadcrumb.service';
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/switchMap';
@@ -10,7 +11,9 @@ import { ISubscription } from 'rxjs/Subscription';
 import { TopnavService } from '../../header/topnav/topnav.service';
 import { SharedService } from '../../common/shared.service';
 import { APP_CONFIG, AppConfig } from '../../config/app.config.module';
+import { PortalService } from '../../services/portal.service';
 import { Observable } from 'rxjs/Observable';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -27,6 +30,9 @@ export class SubarticleComponent implements OnInit, OnDestroy {
   @Output() menuClick = new EventEmitter();
   breadcrumb: any;
   isValid: any;
+  public scoreFormgrp: FormGroup;
+  score: FormControl;
+  remarks: FormControl;
   topicID: number;
   subID: number;
   step = 0;
@@ -46,7 +52,7 @@ export class SubarticleComponent implements OnInit, OnDestroy {
   private subscription: ISubscription;
   private subscriptionLang: ISubscription;
 
-  constructor(private http: HttpClient, public articleService: ArticleService,private sharedservice: SharedService, @Inject(APP_CONFIG) private config: AppConfig, private topnavservice: TopnavService, private route: ActivatedRoute, private navService: NavService, private translate: TranslateService, private router: Router, private breadcrumbService: BreadcrumbService) {
+  constructor(private http: HttpClient, private toastr: ToastrService,  private portalService:PortalService, public articleService: ArticleService,private sharedservice: SharedService, @Inject(APP_CONFIG) private config: AppConfig, private topnavservice: TopnavService, private route: ActivatedRoute, private navService: NavService, private translate: TranslateService, private router: Router, private breadcrumbService: BreadcrumbService) {
     this.lang = translate.currentLang;
     this.langId = 1;
 
@@ -113,6 +119,14 @@ export class SubarticleComponent implements OnInit, OnDestroy {
     var tt = this.router.url.split('/');
     this.subID = parseInt(tt[tt.length - 1]);
 
+    this.score = new FormControl('', [Validators.required]);
+    this.remarks = new FormControl('');
+    this.scoreFormgrp = new FormGroup({
+      score: this.score,
+      remarks: this.remarks
+
+    });
+
     if (location.pathname.indexOf('agency') !== -1) {
       this.agencyActive = true;
       this.navService.triggerSubArticleAgency(localStorage.getItem('langID'));
@@ -124,6 +138,43 @@ export class SubarticleComponent implements OnInit, OnDestroy {
   }
 
 
+
+  getRateReset(){
+    this.scoreFormgrp.reset();
+  }
+
+
+  submitForm(formValues:any){
+    let body = {
+        "contentCode": null,
+        "score": null,
+        "remarks": null
+    };
+
+    body.contentCode = this.subID;
+    body.score = parseInt(formValues.score);
+    body.remarks = formValues.remarks;
+
+    // let datasend = JSON.stringify(body);
+
+      this.portalService.submitScore(body).subscribe(
+        data => {
+
+          this.sharedservice.errorHandling(data, (function(){
+            this.getRateReset();
+            this.toastr.success(this.translate.instant('rating.msgsubmit'), '');
+        }).bind(this));
+      },
+      error => {
+        //this.toastr.error((error._body.statusDesc), '');
+
+      });
+
+  }
+
+  getRate(val){
+
+  }
 
   ngOnDestroy() {
     this.subscriptionLang.unsubscribe();
