@@ -161,6 +161,7 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
   flag5 = true;
   valObj: any;
   flagCompleteData = true;
+  lesenLength: any;
 
   constructor(
     private activatedRoute:ActivatedRoute,
@@ -1392,13 +1393,39 @@ export class PerhilitanrenewComponent implements OnInit, OnDestroy {
   }
 
   checkLisence(val){
-    if(typeof(val) == "object"){
-      val = val.noLesen;
-    }
 
-    else{
+    if(this.getUrl != undefined){
       val = val;
     }
+    else {
+      val = val.noLesen;
+      if(val != null){
+        if(val.length < 13 && val.length >0){
+          this.lesenLength = false;
+        }
+        else{
+          this.lesenLength = true;
+        }
+      }
+      else if(val == null){
+        this.lesenLength = true;
+      }
+    }
+
+    // if(val != null){
+    //   if(typeof(val) == "object"){
+    //     val = val.noLesen;
+    //   }
+
+    //   else{
+    //     val = val;
+    //   }
+
+    //   if(val.length < 13){
+    //     
+    //   }
+    // }
+
     this.loading = true;
     this.protectedService.getProtected('perhilitan/searchnolic/'+val,this.langID).subscribe(
     data => {
