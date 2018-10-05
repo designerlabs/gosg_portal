@@ -3,7 +3,8 @@
   <div class="container">
        <div class="row">
           <div class="col-md-12">
-              <h1 style="margin-top: 10px;" class="font-size-l"> {{ 'home.menu.policeReport' | translate }}</h1>
+              <!-- <h1 style="margin-top: 10px;" class="font-size-l"> {{ 'home.menu.policeReport' | translate }}</h1> -->
+              <h1 style="margin-top: 10px;" class="font-size-l"> aaa </h1>
               <hr class="hr-custom2"><br>
               <ul class="list-inline" style="clear:both;">
                   <li>
@@ -190,12 +191,13 @@
     </div>
 
     <div class="row container">
-        <div class="col-md-12 boldInfo" [innerHTML]="convert(dataAnnouncement)">
-            {{annouceConvert}}
-            <!-- <span class="boldInfo" style="text-decoration: underline">{{'pdrm.attention' | translate }}</span><br><br>
+ 
+        <div class="col-md-12 boldInfo" innerHTML="{{dataAnnouncement}}" >
+             <!-- <span class="boldInfo" style="text-decoration: underline">{{'pdrm.attention' | translate }}</span><br><br>
             <span style="text-align: justify; color: black">Semua jenis Repot Polis bertarikh dari 1 Ogos 2011 hingga kini (kecuali Repot Kemalangan Jalan Raya)
-                yang dibuat di kawasan Kontinjen Kuala Lumpur dan Selangor boleh disemak buat masa ini.</span><br><br> -->
-        </div> 
+                yang dibuat di kawasan Kontinjen Kuala Lumpur dan Selangor boleh disemak buat masa ini.</span><br><br>  -->
+
+        </div>
     </div>
 
     <div *ngIf="showDetails == false">
