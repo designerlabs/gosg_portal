@@ -785,8 +785,6 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
     let month = (formValue.icpassport)?formValue.icpassport.substring(2,4) : 0;
     let day = (formValue.icpassport)?formValue.icpassport.substring(4,6) : 0;     
 
-    console.log("month: "+month);
-    console.log("day: "+day)
     let lengthIC = 0;
     let removeUndscr = (formValue.icpassport)?(formValue.icpassport).replace(/\_/g, ""): 0;
 
@@ -1817,7 +1815,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       body.isDraft = "True";
       body.cronStatus = false;
       
-      console.log(JSON.stringify(body));
+      //console.log(JSON.stringify(body));
       this.loading = true;
       
       this.protectedService.create(body,'perhilitan/draft/save',this.langID, this.dsvcCode, this.agcCode).subscribe(
@@ -1956,7 +1954,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       body.isDraft = "True";
       body.cronStatus = false;
       
-      console.log(JSON.stringify(body));
+      //console.log(JSON.stringify(body));
       this.loading = true;
       
       this.protectedService.update(body,'perhilitan/draft/update',this.langID, this.dsvcCode, this.agcCode).subscribe(
