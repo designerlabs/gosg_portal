@@ -14,7 +14,7 @@ export class ValidateService {
 	validateCtrl(ctrl){
         return ctrl.valid || ctrl.untouched;
 	}
-	
+
 
 	getPattern(min?, max?){
 		return {
@@ -23,13 +23,14 @@ export class ValidateService {
 			'numberOnly': '^[0-9]{'+min+','+max+'}$',
 			'alphaOnly':'^[a-zA-Z]{'+min+','+max+'}$',
 			'alphaNumeric':'^[a-zA-Z0-9]{'+min+','+max+'}$',
-			'email': '[a-zA-Z0-9._]+[@]+[a-zA-Z0-9]+[.]+[a-zA-Z]{2,6}',
+      'email':'^[0-9a-zA-Z-_\.]+@([0-9a-zA-Z-_]+\.)+[0-9a-zA-Z-_]{2,4}$',
 			'phoneNo':'^[0-9]{3}+[-]+^[0-9]{8,9}',
 			'ic':'^[0-9]{12,12}$'
-			// 'email': '^[a-z0-9]+@([a-z0-9]{5,})+\.[a-z]{2,}$'
+      // 'email': '^[a-z0-9]+@([a-z0-9]{5,})+\.[a-z]{2,}$'
+      // 'email': '^[0-9a-zA-Z]+@([a-zA-Z0-9-_]+?\.)+?[0-9a-zA-Z]+$', OLD
 			};
-	} 
-	
+	}
+
 	getMask(){
 		return {
 			'telephone' : [ /[0-9]/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/],
@@ -41,6 +42,6 @@ export class ValidateService {
 			'policeReportNo': [ /\d/, /\d/, /\d/, /\d/, /\d/, /\d/]
 		}
 	}
-	
+
 
 }
