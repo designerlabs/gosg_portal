@@ -230,6 +230,44 @@
                 </tr>
             </table>                  
         </div><br>
+
+<!--  -->
+<!-- farid testt should put here starts  -->
+<!-- kene pakai common. sebab basic -->
+
+<div class="float-right paddingTop-15">
+        <mat-form-field class="table_footer_pagecount">
+                <mat-form-field style="width:50px;">
+                        <mat-select class="font-size-s" value="10" (change)="pageChange($event)">
+                          <mat-option value="5">5</mat-option>
+                          <mat-option value="10">10</mat-option>
+                          <mat-option value="25">25</mat-option>
+                          <mat-option value="50">50</mat-option>
+                        </mat-select>
+                </mat-form-field>
+        </mat-form-field>
+
+        <!-- <span class="float-right"> -->
+                <span style="color:#000; padding-right:20px;">{{ 'appmngt.tablebottom.page' | translate }}
+                        <strong>{{dataSummons?.pageNumber}}</strong> {{ 'appmngt.tablebottom.of' | translate }}
+                        <strong>{{dataSummons?.totalPages}}</strong> {{ 'appmngt.tablebottom.in' | translate }}
+                        <strong>{{dataSummons?.totalElements}}</strong> {{ 'appmngt.tablebottom.app' | translate }}
+                </span>
+                    <button mat-mini-fab color="basic" [disabled]="noPrevData" 
+                      (click)="paginatorL(dataSummons?.pageNumber)">
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                    </button>
+                      <button mat-mini-fab color="basic" [disabled]="noNextData" 
+                      (click)="paginatorR(dataSummons?.pageNumber, dataSummons?.totalPages)">
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </button>
+        <!-- </span> -->
+
+</div>
+
+<!-- farid testt should put here ends -->
+<!--  -->
+
     </div><br>
 
     <div class="row container paddingLR30">
@@ -241,12 +279,12 @@
     </div>
 
     <div class="row container"><br>
-        <div class="col-md-12 boldInfo" innerHTML="{{dataAnnouncement}}">
-        <!-- <label class="redFont">Kadar kompaun saman berdasarkan prinsip "The More You Delay, The More You Pay". Sila buat bayaran saman secepat mungkin. 
+        <label class="redFont">Kadar kompaun saman berdasarkan prinsip "The More You Delay, The More You Pay". Sila buat bayaran saman secepat mungkin. 
             Lesen memandu & lesen kenderaan motor tidak boleh diperbaharui setelah no kad pengenalan disenarai
             hitamkan dalam sistem mySIKAP, Jabatan pengankutan jalan.
-        </label> -->
-        </div>
+        </label>
+        <!-- <div class="col-md-12 boldInfo" innerHTML="{{dataAnnouncement}}"> -->
+        <!-- </div> -->
     </div><br>
   
     <!-- <div *ngIf="showNoData">
