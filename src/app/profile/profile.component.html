@@ -355,14 +355,14 @@
           </mat-tab>
           <mat-tab label="{{'profile.label.changeEmail' | translate}}" class="font-size-s">
             <div style="padding-top:10px;"></div>
-            <form [formGroup]="emailForm" autocomplete="off" (ngSubmit)="updateProfileEmail(emailForm.value)" role="form" novalidate>
+            <form [formGroup]="emailForm" autocomplete="off" role="form" novalidate>
               <mat-form-field class="font-size-s" style="width: 50%;">
                   <input matInput formControlName="emailaddressUpdate" type="text" placeholder="{{'profile.label.email' | translate}}"  required />
               </mat-form-field>
               <mat-error *ngIf="!validateCtrlChk(emailaddressUpdate) && emailForm.controls.emailaddressUpdate.errors?.required">
                   {{'register.err.email' | translate }}
               </mat-error>
-              <mat-error *ngIf="!validateCtrlChk(emailaddressUpdate) &&  (emailForm.controls.emailaddressUpdate.errors?.required? !emailForm.controls.emailaddressUpdate.errors?.email : emailForm.controls.emailaddressUpdate.errors?.email)">
+              <mat-error *ngIf="!validateCtrlChk(emailaddressUpdate) &&  emailForm.controls.emailaddressUpdate.errors?.pattern">
                   {{'register.pattern.email' | translate }}
               </mat-error>
               <div class="form-group" style="float: right;">
@@ -376,7 +376,7 @@
           <!-- Change Mobile Tab-->
           <mat-tab label="{{'profile.label.changePhone' | translate}}" class="font-size-s">
               <div style="padding-top:10px;"></div>
-              <form [formGroup]="phoneForm" autocomplete="off" (ngSubmit)="updateProfilePhone(phoneForm.value)" role="form" novalidate>
+              <form [formGroup]="phoneForm" autocomplete="off" role="form" novalidate>
 
                   <div class="example-full-width input-group">
                       <mat-form-field class="font-size-s" style="width:20%">
