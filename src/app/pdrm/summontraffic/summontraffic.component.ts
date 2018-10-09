@@ -200,7 +200,7 @@ export class SummontrafficComponent implements OnInit {
 
             this.dataSummons = data.summonResource;
 
-            if(this.dataSummons.summonDetails && this.dataSummons.summonDetails.length == 0){              
+            if(this.dataSummons.summonDetails == null && this.dataSummons.summonDetails.length == 0){              
               this.showNoData = true;
             }
 
