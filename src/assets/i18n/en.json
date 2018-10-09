@@ -173,7 +173,7 @@
       "vercode": "Verification code is required"
     },
     "pattern":{
-      "ic":"IC Number takes 12 digit only",
+      "ic":"IC Number only takes 12 digits",
       "email":"Please enter a valid email",
       "dob":"Please enter a valid date format. IE: XX-XX-XXXX",
       "tel":"Telephone No must be valid",
@@ -228,7 +228,7 @@
       "mobile":"Mobile Phone",
       "codetel": "Code",
       "submit":"Update",
-      "oku": "Check your OKU Status"
+      "oku": "OKU Status"
     },
     "err": {
       "updateFail": "Profile update failed!",
@@ -251,7 +251,7 @@
       "vercode": "Verification code is required"
     },
     "pattern":{
-      "ic":"IC Number takes 12 digit only",
+      "ic":"IC Number only takes 12 digits",
       "dob":"Tarikh mestilah sah. Contoh: XX-XX-XXXX",
       "email":"Please enter a valid email",
       "tel":"Telephone No must be valid",
