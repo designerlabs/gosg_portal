@@ -5,6 +5,8 @@ import { Router, ActivatedRoute, Params, ParamMap } from '@angular/router';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { APP_CONFIG, AppConfig } from '../../config/app.config.module';
 import { FormControl, FormGroup } from '@angular/forms';
+import * as moment from 'moment-timezone'
+// import { CommonService } from './../service/common.service';
 import { Http } from '@angular/http';
 import * as $ from 'jquery';
 import {
@@ -25,8 +27,14 @@ import { Observable } from 'rxjs';
 })
 export class SummontrafficComponent implements OnInit {
 
+  recordList = null; // pagination
+  updateForm: FormGroup; // pagination
+
   lang = this.lang;
   langID: any;
+  page: any;
+  size: any;
+  dataStatus: any;
   complete: boolean;
   param = "";
   dataApp: any;
@@ -38,6 +46,8 @@ export class SummontrafficComponent implements OnInit {
   showNoData = false;
   dataSummons: any;
   loading = false;
+  dateSubmission = [];
+  statusDesc = [];
 
   public summon: any;
   public ammount: any;
@@ -142,22 +152,22 @@ export class SummontrafficComponent implements OnInit {
   }
 
   getAnnoucement(){
-    this.loading = true;
-    this.protectedService.postProtected('','pdrm/getAnnoucement?type=1'+'&agency='+this.agcCode+'&service='+this.dsvcCode+'&language='+this.langID).subscribe(
-    data => {
-      this.sharedService.errorHandling(data, (function(){
+    // this.loading = true;
+    // this.protectedService.postProtected('','pdrm/getAnnoucement?type=1'+'&agency='+this.agcCode+'&service='+this.dsvcCode+'&language='+this.langID).subscribe(
+    // data => {
+    //   this.sharedService.errorHandling(data, (function(){
 
-        this.dataAnnouncement = data.announcementResource.content;
-        console.log(this.dataAnnouncement);
+    //     this.dataAnnouncement = data.announcementResource.content;
+    //     console.log(this.dataAnnouncement);
      
-      }).bind(this));
-      this.loading = false;
+    //   }).bind(this));
+    //   this.loading = false;
       
-    },
-    error => {
-      this.toastr.error(JSON.parse(error._body).statusDesc, '');
-      this.loading = false;
-    }); 
+    // },
+    // error => {
+    //   this.toastr.error(JSON.parse(error._body).statusDesc, '');
+    //   this.loading = false;
+    // }); 
   }
 
   searchApp(formValues: any) {
@@ -174,6 +184,8 @@ export class SummontrafficComponent implements OnInit {
     arrObj.push(this.dsvcCode);
     arrObj.push(type);
     arrObj.push(icno);
+    arrObj.push(this.page); // farid testt
+    arrObj.push(this.size); // farid testt
     if (type == 1) {
       arrObj.push(plateNo);
     }
@@ -217,6 +229,10 @@ export class SummontrafficComponent implements OnInit {
 
         this.dataSummons = {
 
+          
+          "status": "1",
+        "statusMessage": "Success",
+        "total_summons": "5",
           "summonDetails": [
             {
               "compound_ind": "Y",
@@ -358,7 +374,12 @@ export class SummontrafficComponent implements OnInit {
               "offender_ic": "871222145031",
               "offender_name": "MOHD RAMZI BIN IBRAHIM"
             }
-          ]
+          ],
+          "pageNumber": 1,
+        "pageSize": 5,
+        "numberOfElements": 5,
+        "totalPages": 1,
+        "totalElements": 5
         };
       } else {
         this.loading = false;
@@ -500,7 +521,7 @@ export class SummontrafficComponent implements OnInit {
     this.varSelect = e.value;
     this.showDetails = false;
     this.checkReqValues();
-  }
+  } 
 
   getUserData() {
 
@@ -590,5 +611,67 @@ export class SummontrafficComponent implements OnInit {
   resetMethod(event) {
     this.resetSearch();
   }
+
+
+  ///////////////////
+  //pagination starts
+  /////////////////// 
+
+  getDataAppList(page, size){
+    this.loading = true;
+    this.protectedService.getDataApp(page, size, this.param).subscribe(
+    data => {
+      this.dataApp = data.list;
+      this.dataAppPage = data;
+      this.noNextData = data.pageNumber === data.totalPages;
+      this.dateSubmission = [];
+      this.statusDesc = [];
+      this.showNoData = false;
+
+      if(this.dataApp.length == 0){
+        this.showNoData = true;
+      }
+
+      for(let i=0; i<this.dataApp.length; i++){
+
+        let dateS = moment.tz(new Date(this.dataApp[i].submissionDatetime),'Asia/Singapore').format('DD-MM-YYYY hh:mm');
+        this.dateSubmission.push(dateS);
+
+        let stat: any;
+        this.dataStatus.forEach(element => {
+          if(this.dataApp[i].status == element.statusCode){
+            stat = element.statusDescription;
+            this.statusDesc.push(stat);
+          }
+
+        });
+      }
+
+      this.loading = false;
+    });
+  }
+
+  pageChange(event){
+    this.getDataAppList(this.pageCount, event.value);
+    this.pageSize = event.value;
+  }
+  
+  paginatorL(page){
+    this.getDataAppList(page-1, this.pageSize);
+    this.noPrevData = page <= 2 ? true : false;
+    this.noNextData = false;
+  }
+
+  paginatorR(page, totalPages){
+    this.noPrevData = page >= 1 ? false : true;
+    let pageInc = page+1;
+    this.noNextData = pageInc === totalPages;
+    this.getDataAppList(page+1, this.pageSize);
+  }
+
+  ///////////////////
+  //pagination ends
+  ///////////////////
+
 
 }
