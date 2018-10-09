@@ -217,6 +217,7 @@ export class SummontrafficComponent implements OnInit {
 
         this.dataSummons = {
 
+          
           "summonDetails": [
             {
               "compound_ind": "Y",
