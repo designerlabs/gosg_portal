@@ -212,7 +212,7 @@ export class PolicereportComponent implements OnInit, OnDestroy {
         this.loading = false;
       });
     } else {
-      
+      this.dataAnnouncement = 'getAnnoucement';
     } 
   }
 

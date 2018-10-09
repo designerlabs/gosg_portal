@@ -171,7 +171,7 @@ export class SummontrafficComponent implements OnInit {
         this.loading = false;
       }); 
     } else {
-      
+      this.dataAnnouncement = 'getAnnoucement';
     }
   }
 
@@ -207,8 +207,14 @@ export class SummontrafficComponent implements OnInit {
 
             this.dataSummons = data.summonResource;
 
-            if(this.dataSummons.summonDetails == null && this.dataSummons.summonDetails.length == 0){              
-              this.showNoData = true;
+            if(this.dataSummons.summonDetails == null) {
+              this.showNoData = true;              
+            }
+
+            if (this.dataSummons.summonDetails != null) {
+              if (this.dataSummons.summonDetails.length == 0) {
+                this.showNoData = true;
+              }
             }
 
             if (this.dataSummons.summonDetails) {
