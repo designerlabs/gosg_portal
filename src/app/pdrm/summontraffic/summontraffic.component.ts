@@ -184,6 +184,8 @@ export class SummontrafficComponent implements OnInit {
     arrObj.push(icno);
     arrObj.push(this.pageCount); // farid testt
     arrObj.push(this.pageSize); // farid testt
+    console.log('this.pageCount: ',this.pageCount);
+    console.log('this.pageSize: ',this.pageSize);
     if (type == 1) {
       arrObj.push(plateNo);
     }
@@ -198,7 +200,7 @@ export class SummontrafficComponent implements OnInit {
 
             this.dataSummons = data.summonResource;
 
-            if(this.dataSummons.summonDetails.length == 0){              
+            if(this.dataSummons.summonDetails == null && this.dataSummons.summonDetails.length == 0){              
               this.showNoData = true;
             }
 
@@ -608,6 +610,18 @@ export class SummontrafficComponent implements OnInit {
 
   resetMethod(event) {
     this.resetSearch();
+  }   
+
+
+  isNumberAndAlphabet(evt) {
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57) && (charCode < 97 || charCode > 122) && (charCode < 65 || charCode > 90) ) {
+      /* 91-122 is a-z, 49-57 is 0-9 */
+      /* 65-90  is A-Z. */
+      return false;
+    }
+    return true;
   }
 
 

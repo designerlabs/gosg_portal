@@ -86,8 +86,15 @@
 
                         <div class="col-md-8" *ngIf="varSelect==1">
                             <mat-form-field class="example-full-width">
-                                <input matInput placeholder="" formControlName="noCar" (keyup)="checkReqValues()"
+
+                                <!-- original -->
+                                <!-- <input matInput placeholder="" formControlName="noCar" (keyup)="checkReqValues()"
+                                required tabindex="3"  style="color: black"> -->
+
+                                <!-- farid test -->
+                                <input matInput placeholder="" formControlName="noCar" maxlength="9" (keypress)="isNumberAndAlphabet(event)"
                                 required tabindex="3"  style="color: black">
+
                                 <mat-error *ngIf="searchForm.controls.noCar.hasError('required')">
                                     {{ 'pdrm.placeholder.noCar' | translate }} {{ 'pdrm.err.needed' | translate }}
                                 </mat-error>
