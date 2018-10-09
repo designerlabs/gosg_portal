@@ -115,20 +115,29 @@
                     {{ country.countryName }}
                   </mat-option>
                 </mat-select>
-                <mat-error *ngIf="!validateCtrlChk(country) && citizenFormGrp.controls.country.errors.required">
+                <mat-error *ngIf="!validateCtrlChk(country_pr) && citizenFormGrp.controls.country_pr.errors.required">
                   {{'register.err.country' | translate }}
                 </mat-error>
+                <!-- <mat-error *ngIf="!validateCtrlChk(country) && citizenFormGrp.controls.country.errors.required">
+                  {{'register.err.country' | translate }}
+                </mat-error> -->
               </mat-form-field>
 
               <mat-form-field class="example-full-width font-size-s">
                 <input matInput #psport formControlName="passport_pr" tabindex="7" minlength="6" maxlength="10" placeholder="{{'register.label.passport' | translate }}"
                   required="true ? citi : false">
-                <mat-error *ngIf="!validateCtrlChk(passport) && citizenFormGrp.controls.passport.errors.required">
+                <mat-error *ngIf="!validateCtrlChk(passport_pr) && citizenFormGrp.controls.passport_pr.errors.required">
+                  {{'register.err.passport' | translate }}
+                </mat-error>
+                <mat-error *ngIf="!validateCtrlChk(passport_pr) && citizenFormGrp.controls.passport_pr.errors.pattern">
+                  {{'register.pattern.passport' | translate }}
+                </mat-error>
+                <!-- <mat-error *ngIf="!validateCtrlChk(passport) && citizenFormGrp.controls.passport.errors.required">
                   {{'register.err.passport' | translate }}
                 </mat-error>
                 <mat-error *ngIf="!validateCtrlChk(passport) && citizenFormGrp.controls.passport.errors.pattern">
                   {{'register.pattern.passport' | translate }}
-                </mat-error>
+                </mat-error> -->
               </mat-form-field>
             </div>
 

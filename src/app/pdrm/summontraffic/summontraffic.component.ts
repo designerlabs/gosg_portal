@@ -226,6 +226,8 @@ export class SummontrafficComponent implements OnInit {
       if (type == 0) {
 
         this.dataSummons = {
+
+          
           "status": "1",
           "statusMessage": "Success",
           "total_summons": "5",
