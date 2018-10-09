@@ -258,10 +258,10 @@ export class ProtectedService {
         size = arrObj[7];
         
         // params = '?typeId='+type+'&vehicleNo='+plateNo+'&'+svcParams;
-        params = '?typeId='+type+'&vehicleNo='+plateNo+'&'+svcParams+'&'+page+'&'+size;
+        params = '?typeId='+type+'&vehicleNo='+plateNo+'&'+svcParams+'&page='+page+'&size='+size;
       } else {
         // params = '?typeId='+type+'&vehicleNo='+'&'+svcParams;
-        params = '?typeId='+type+'&vehicleNo='+'&'+svcParams+'&'+page+'&'+size;
+        params = '?typeId='+type+'&vehicleNo='+'&'+svcParams+'&page='+page+'&size='+size;
       }
 
     } else if(svcName == 'checkPoliceReport') {

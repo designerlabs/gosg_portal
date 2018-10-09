@@ -32,8 +32,6 @@ export class SummontrafficComponent implements OnInit {
 
   lang = this.lang;
   langID: any;
-  page: any;
-  size: any;
   dataStatus: any;
   complete: boolean;
   param = "";
@@ -184,8 +182,8 @@ export class SummontrafficComponent implements OnInit {
     arrObj.push(this.dsvcCode);
     arrObj.push(type);
     arrObj.push(icno);
-    arrObj.push(this.page); // farid testt
-    arrObj.push(this.size); // farid testt
+    arrObj.push(this.pageCount); // farid testt
+    arrObj.push(this.pageSize); // farid testt
     if (type == 1) {
       arrObj.push(plateNo);
     }
@@ -229,8 +227,8 @@ export class SummontrafficComponent implements OnInit {
 
         this.dataSummons = {
           "status": "1",
-        "statusMessage": "Success",
-        "total_summons": "5",
+          "statusMessage": "Success",
+          "total_summons": "5",
           "summonDetails": [
             {
               "compound_ind": "Y",
@@ -374,10 +372,10 @@ export class SummontrafficComponent implements OnInit {
             }
           ],
           "pageNumber": 1,
-        "pageSize": 5,
-        "numberOfElements": 5,
-        "totalPages": 1,
-        "totalElements": 5
+          "pageSize": 5,
+          "numberOfElements": 5,
+          "totalPages": 1,
+          "totalElements": 5
         };
       } else {
         this.loading = false;
