@@ -236,22 +236,22 @@ export class StatuspositionComponent implements OnInit, OnDestroy {
   }
 
   getAnnoucement(){
-    this.loading = true;
-    this.protectedService.postProtected('','pdrm/getAnnoucement?type=3'+'&agency='+this.agcCode+'&service='+this.dsvcCode+'&language='+this.langID).subscribe(
-    data => {
-      this.sharedService.errorHandling(data, (function(){
+    // this.loading = true;
+    // this.protectedService.postProtected('','pdrm/getAnnoucement?type=3'+'&agency='+this.agcCode+'&service='+this.dsvcCode+'&language='+this.langID).subscribe(
+    // data => {
+    //   this.sharedService.errorHandling(data, (function(){
 
-        this.dataAnnouncement = data.announcementResource.content;
-        console.log(this.dataAnnouncement);
+    //     this.dataAnnouncement = data.announcementResource.content;
+    //     console.log(this.dataAnnouncement);
      
-      }).bind(this));
-      this.loading = false;
+    //   }).bind(this));
+    //   this.loading = false;
       
-    },
-    error => {
-      this.toastr.error(JSON.parse(error._body).statusDesc, '');
-      this.loading = false;
-    }); 
+    // },
+    // error => {
+    //   this.toastr.error(JSON.parse(error._body).statusDesc, '');
+    //   this.loading = false;
+    // }); 
   }
 
   openLink(varUrl){

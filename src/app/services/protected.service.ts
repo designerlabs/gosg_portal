@@ -240,6 +240,8 @@ export class ProtectedService {
     let dsvcCode;
     let params;
     let langId;
+    let page;
+    let size;
 
     agcCode = arrObj[1];
     dsvcCode = arrObj[2];
@@ -251,10 +253,15 @@ export class ProtectedService {
       type = arrObj[3];
 
       if(type == 1) {
-        plateNo = arrObj[5];
-        params = '?typeId='+type+'&vehicleNo='+plateNo+'&'+svcParams;
+        plateNo  = arrObj[5];
+        page = arrObj[6];
+        size = arrObj[7];
+        
+        // params = '?typeId='+type+'&vehicleNo='+plateNo+'&'+svcParams;
+        params = '?typeId='+type+'&vehicleNo='+plateNo+'&'+svcParams+'&'+page+'&'+size;
       } else {
-        params = '?typeId='+type+'&vehicleNo='+'&'+svcParams;
+        // params = '?typeId='+type+'&vehicleNo='+'&'+svcParams;
+        params = '?typeId='+type+'&vehicleNo='+'&'+svcParams+'&'+page+'&'+size;
       }
 
     } else if(svcName == 'checkPoliceReport') {
