@@ -32,6 +32,7 @@ export class SummontrafficComponent implements OnInit {
 
   lang = this.lang;
   langID: any;
+  indicator: any;
   dataStatus: any;
   complete: boolean;
   param = "";
@@ -84,6 +85,8 @@ export class SummontrafficComponent implements OnInit {
 
       if (myLang == 'en') {
 
+        this.indicator = 'Indicator';
+
         translate.get('HOME').subscribe((res: any) => {
           this.lang = 'en';
           this.langID = 1;
@@ -91,6 +94,8 @@ export class SummontrafficComponent implements OnInit {
       }
 
       if (myLang == 'ms') {
+
+        this.indicator = 'Petunjuk';
 
         translate.get('HOME').subscribe((res: any) => {
           this.lang = 'ms';
@@ -102,6 +107,7 @@ export class SummontrafficComponent implements OnInit {
         //this.subscription = this.getFaq(this.langID);
       }
 
+      this.getStatusApp(this.langID); // farid testt
       this.getAnnoucement();
 
     });
@@ -141,6 +147,8 @@ export class SummontrafficComponent implements OnInit {
 
     this.searchForm.get('optSelect').setValue(0);
     this.varSelect = 0;
+
+    this.getStatusApp(this.langID);
 
     this.getUserData();
     this.checkReqValues();
@@ -707,6 +715,14 @@ export class SummontrafficComponent implements OnInit {
     let pageInc = page+1;
     this.noNextData = pageInc === totalPages;
     this.getDataAppList(page+1, this.pageSize);
+  }
+
+  getStatusApp(lang){
+    this.loading = true;
+    this.protectedService.getListApp(lang).subscribe(data => {
+      this.dataStatus = data.groupList;
+      this.loading = false;
+    });
   }
 
   ///////////////////
