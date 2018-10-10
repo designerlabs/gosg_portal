@@ -341,9 +341,9 @@ export class TopnavComponent implements OnInit, AfterViewInit, OnDestroy {
 
   clickAboutus(){
     //location.reload();
-    this.navService.triggerContent(15019, localStorage.getItem('langID'));
-    this.navService.getContentUrl(15019, localStorage.getItem('langID'));
-    this.router.navigate(['/content', 15019]);
+    this.navService.triggerContent(26566, localStorage.getItem('langID'));
+    this.navService.getContentUrl(26566, localStorage.getItem('langID'));
+    this.router.navigate(['/content', 26566]);
     event.preventDefault();
   }
 }
