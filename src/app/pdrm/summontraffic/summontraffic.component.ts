@@ -38,8 +38,8 @@ export class SummontrafficComponent implements OnInit {
   param = "";
   dataApp: any;
   dataAppPage: any;
-  pageSize = 2;
-  pageCount = 1;
+  pageSize = 1;
+  pageNumber = 1;
   noPrevData = true;
   noNextData = false;
   showNoData = false;
@@ -183,7 +183,7 @@ export class SummontrafficComponent implements OnInit {
     }
   }
 
-  searchApp(formValues: any) {
+  searchApp(formValues: any, paramPageNumber, paramPageSize) { 
 
     this.showDetails = false;
 
@@ -191,7 +191,12 @@ export class SummontrafficComponent implements OnInit {
     let icno = this.searchForm.get('ic').value;
     let plateNo = this.searchForm.get('noCar').value;
     let arrObj = [];
+    let page;
+    let size;
 
+    (paramPageNumber) ? page = paramPageNumber :  page = this.pageNumber;
+    (paramPageSize)   ? size = paramPageSize   :  size = this.pageSize;
+ 
     arrObj.push(this.langID);
     arrObj.push(this.agcCode);
     arrObj.push(this.dsvcCode);
@@ -200,12 +205,12 @@ export class SummontrafficComponent implements OnInit {
   // if (type == 1) { // farid testt
     arrObj.push(plateNo);
   // } // farid testt
-    arrObj.push(this.pageCount); // farid testt
-    arrObj.push(this.pageSize); // farid testt
+    arrObj.push(page); // farid testt
+    arrObj.push(size); // farid testt
 
     console.log('browser arrObj: ',arrObj);
-    console.log('browser  this.pageCount: ',this.pageCount);
-    console.log('browser  this.pageSize: ',this.pageSize); 
+    console.log('browser page: ',page);
+    console.log('browser size: ',size); 
     
 
     // this.loading = true;
@@ -218,17 +223,28 @@ export class SummontrafficComponent implements OnInit {
 
             this.dataSummons = data.summonResource;
 
+            // off kejap 
+            // if (this.dataSummons.summonDetails.length == 0) { //original
+            //   this.showNoData = true; //original 
+            // } //original 
+
+            /////////////////////
+            //farid tesst starts // nanti kena buang ni. currntly api error
+
             if(this.dataSummons.summonDetails == null || this.dataSummons.total_summons == null) {
               this.showNoData = true;       
-              alert(' Server connection lost, please try again. ');       
+              alert(' API is underconstruction ');       
             } 
 
             if (this.dataSummons.summonDetails != null) {
               if (this.dataSummons.summonDetails.length == 0) {
                 this.showNoData = true;
-                alert(' Zero data. ');
+                alert(' API is underconstruction ');   
               }
             }
+
+            //farid tesst ends // nanti kena buang ni. currntly api error
+            /////////////////////
 
             if (this.dataSummons.summonDetails) {
               this.showDetails = true;
@@ -401,12 +417,15 @@ export class SummontrafficComponent implements OnInit {
           "statusMessage": "Success",
           "total_summons": "5",
           "pageNumber": 1,
+
           // "pageSize": 5,
           // "numberOfElements": 5,
           // "totalPages": 1,
-          "pageSize": 2,
-          "numberOfElements": 2,
-          "totalPages": 3,
+
+          "pageSize": 1,
+          "numberOfElements": 1,
+          "totalPages": 5,
+
           "totalElements": 5
         };
       } else {
@@ -663,58 +682,26 @@ export class SummontrafficComponent implements OnInit {
 
   ///////////////////
   //pagination starts
-  /////////////////// 
+  ///////////////////
 
-  getDataAppList(page, size){
-    this.loading = true;
-    this.protectedService.getDataApp(page, size, this.param).subscribe(
-    data => {
-      this.dataApp = data.list;
-      this.dataAppPage = data;
-      this.noNextData = data.pageNumber === data.totalPages;
-      this.dateSubmission = [];
-      this.statusDesc = [];
-      this.showNoData = false;
-
-      if(this.dataApp.length == 0){
-        this.showNoData = true;
-      }
-
-      for(let i=0; i<this.dataApp.length; i++){
-
-        let dateS = moment.tz(new Date(this.dataApp[i].submissionDatetime),'Asia/Singapore').format('DD-MM-YYYY hh:mm');
-        this.dateSubmission.push(dateS);
-
-        let stat: any;
-        this.dataStatus.forEach(element => {
-          if(this.dataApp[i].status == element.statusCode){
-            stat = element.statusDescription;
-            this.statusDesc.push(stat);
-          }
-
-        });
-      }
-
-      this.loading = false;
-    });
-  }
-
-  pageChange(event){
-    this.getDataAppList(this.pageCount, event.value);
+  pageChange(event){ 
     this.pageSize = event.value;
   }
   
   paginatorL(page){
-    this.getDataAppList(page-1, this.pageSize);
+    console.log('paginatorL: ',page); 
     this.noPrevData = page <= 2 ? true : false;
     this.noNextData = false;
+    // this.searchApp(null, page, this.pageSize); // to be open soon when api ready
   }
 
   paginatorR(page, totalPages){
+    console.log('paginatorR page: ',page);
+    console.log('paginatorR totalPages: ',totalPages);
     this.noPrevData = page >= 1 ? false : true;
     let pageInc = page+1;
     this.noNextData = pageInc === totalPages;
-    this.getDataAppList(page+1, this.pageSize);
+    // this.searchApp(null, pageInc, this.pageSize); // to be open soon when api ready 
   }
 
   getStatusApp(lang){
