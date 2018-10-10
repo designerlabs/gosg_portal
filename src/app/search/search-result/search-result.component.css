@@ -160,3 +160,12 @@ a.titleSer {
   -ms-filter: blur(2px);
   filter: blur(2px);
 }
+
+.mat-expansion-panel {
+  background-color: transparent; 
+}
+
+.mat-expansion-panel-header {
+  padding-left: 0px;
+}
+

@@ -155,7 +155,12 @@ export function HttpLoaderFactory(http: Http) {
     HttpModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
-      preventDuplicates: true
+      preventDuplicates: true,
+      closeButton: true,
+      positionClass: 'toast-top-center',
+      tapToDismiss: false,
+      timeOut: 0, 
+      extendedTimeOut: 0
     }),
     FormsModule,
     HttpClientModule,
