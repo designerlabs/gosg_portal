@@ -189,15 +189,16 @@ export class SummontrafficComponent implements OnInit {
     arrObj.push(this.dsvcCode);
     arrObj.push(type);
     arrObj.push(icno);
+  // if (type == 1) { // farid testt
+    arrObj.push(plateNo);
+  // } // farid testt
     arrObj.push(this.pageCount); // farid testt
     arrObj.push(this.pageSize); // farid testt
 
-    console.log('this.pageCount: ',this.pageCount);
-    console.log('this.pageSize: ',this.pageSize);
-
-    if (type == 1) {
-      arrObj.push(plateNo);
-    }
+    console.log('browser arrObj: ',arrObj);
+    console.log('browser  this.pageCount: ',this.pageCount);
+    console.log('browser  this.pageSize: ',this.pageSize); 
+    
 
     // this.loading = true;
 
@@ -393,9 +394,11 @@ export class SummontrafficComponent implements OnInit {
           "total_summons": "5",
           "pageNumber": 1,
           // "pageSize": 5,
+          // "numberOfElements": 5,
+          // "totalPages": 1,
           "pageSize": 2,
-          "numberOfElements": 5,
-          "totalPages": 1,
+          "numberOfElements": 2,
+          "totalPages": 3,
           "totalElements": 5
         };
       } else {
