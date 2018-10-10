@@ -212,7 +212,7 @@ export class PolicereportComponent implements OnInit, OnDestroy {
         this.loading = false;
       });
     } else {
-      this.dataAnnouncement = 'getAnnoucement';
+      this.dataAnnouncement = '<table> <tr> <td align="left"> <b>Perhatian: <br /> <i>Semua jenis Repot Polis bertarikh dari 1 Ogos 2011 hingga kini (kecuali Repot Kemalangan Jalan Raya) yang dibuat di kawasan Kontinjen Kuala Lumpur dan Selangor boleh disemak buat masa ini. </i></b> </td> </tr> </table>';
     } 
   }
 

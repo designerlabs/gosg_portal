@@ -96,7 +96,7 @@
     </div><br>
 
     <div class="row container">
-        
+
         <!-- <div class="col-md-12">
             <span class="boldInfo" style="text-decoration: underline">{{ 'pdrm.announcement' | translate }}</span><br><br>
         </div>  -->
@@ -172,17 +172,19 @@
     <div *ngIf="showNoData">
         <div class="row container">
             <div class="col-md-12" style="color: red; font-weight: bold;">
-                ANDA TIADA PENGAMBILAN JAWATAN PDRM.<br>
+                {{responsePosition}}<br>
             </div>
         </div>
     </div><br>
 
 
-    <div class="row container">
-        <div class="col-md-12">
-            
+    <div class="row container" style="margin: 20px; border: 1px solid #ccc;">
+        <div class="col-md-12" style="padding: 15px; color: red; ">
+            {{enquiry}}
         </div>
     </div>
+
+    <br><br>
 
 
 </div>
