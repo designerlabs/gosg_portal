@@ -253,6 +253,10 @@ export class ProtectedService {
       type = arrObj[3];
       page = arrObj[6];
       size = arrObj[7];
+      
+      console.log('from service arrObj: '+arrObj);
+      console.log('from service page: '+page);
+      console.log('from service size: '+size);
 
       if(type == 1) {
         plateNo  = arrObj[5];

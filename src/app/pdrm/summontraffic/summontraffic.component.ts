@@ -37,7 +37,7 @@ export class SummontrafficComponent implements OnInit {
   param = "";
   dataApp: any;
   dataAppPage: any;
-  pageSize = 10;
+  pageSize = 2;
   pageCount = 1;
   noPrevData = true;
   noNextData = false;
@@ -171,7 +171,7 @@ export class SummontrafficComponent implements OnInit {
         this.loading = false;
       }); 
     } else {
-      this.dataAnnouncement = 'getAnnoucement';
+      this.dataAnnouncement = 'Kadar kompaun saman berdasarkan prinsip <i>“The More You Delay, The More You Pay”</i>. Sila buat bayaran saman secepat mungkin. Lesen memandu & lesen kenderaan motor tidak boleh diperbaharui setelah no kad pengenalan disenarai hitamkan dalam sistem mySIKAP, jabatan pengangkutan jalan.';
     }
   }
 
@@ -191,8 +191,10 @@ export class SummontrafficComponent implements OnInit {
     arrObj.push(icno);
     arrObj.push(this.pageCount); // farid testt
     arrObj.push(this.pageSize); // farid testt
+
     console.log('this.pageCount: ',this.pageCount);
     console.log('this.pageSize: ',this.pageSize);
+
     if (type == 1) {
       arrObj.push(plateNo);
     }
@@ -207,13 +209,15 @@ export class SummontrafficComponent implements OnInit {
 
             this.dataSummons = data.summonResource;
 
-            if(this.dataSummons.summonDetails == null) {
-              this.showNoData = true;              
-            }
+            if(this.dataSummons.summonDetails == null || this.dataSummons.total_summons == null) {
+              this.showNoData = true;       
+              alert(' Server connection lost, please try again. ');       
+            } 
 
             if (this.dataSummons.summonDetails != null) {
               if (this.dataSummons.summonDetails.length == 0) {
                 this.showNoData = true;
+                alert(' Zero data. ');
               }
             }
 
@@ -242,10 +246,6 @@ export class SummontrafficComponent implements OnInit {
 
         this.dataSummons = {
 
-          
-          "status": "1",
-          "statusMessage": "Success",
-          "total_summons": "5",
           "summonDetails": [
             {
               "compound_ind": "Y",
@@ -388,8 +388,12 @@ export class SummontrafficComponent implements OnInit {
               "offender_name": "MOHD RAMZI BIN IBRAHIM"
             }
           ],
+          "status": "1",
+          "statusMessage": "Success",
+          "total_summons": "5",
           "pageNumber": 1,
-          "pageSize": 5,
+          // "pageSize": 5,
+          "pageSize": 2,
           "numberOfElements": 5,
           "totalPages": 1,
           "totalElements": 5
@@ -482,7 +486,15 @@ export class SummontrafficComponent implements OnInit {
                 "offender_ic": "940623146867",
                 "offender_name": "MOHD ZALFIZ B IBRAHIM"
               }
-            ]
+            ],
+          "status": "1",
+          "statusMessage": "Success",
+          "total_summons": "3",
+          "pageNumber": 1,
+          "pageSize": 3,
+          "numberOfElements": 3,
+          "totalPages": 1,
+          "totalElements": 3
         };
       }
 

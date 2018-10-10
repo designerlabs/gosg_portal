@@ -86,14 +86,9 @@
 
                         <div class="col-md-8" *ngIf="varSelect==1">
                             <mat-form-field class="example-full-width">
-
-                                <!-- original -->
-                                <!-- <input matInput placeholder="" formControlName="noCar" (keyup)="checkReqValues()"
-                                required tabindex="3"  style="color: black"> -->
-
-                                <!-- farid test -->
-                                <input matInput placeholder="" formControlName="noCar" maxlength="9" (keypress)="isNumberAndAlphabet(event)"
-                                required tabindex="3"  style="color: black">
+ 
+                                <input matInput placeholder="" formControlName="noCar" (keyup)="checkReqValues()" maxlength="9"
+                                (keypress)="isNumberAndAlphabet(event)" required tabindex="3"  style="color: black">
 
                                 <mat-error *ngIf="searchForm.controls.noCar.hasError('required')">
                                     {{ 'pdrm.placeholder.noCar' | translate }} {{ 'pdrm.err.needed' | translate }}
@@ -245,10 +240,10 @@
 <div class="float-right paddingTop-15">
         <mat-form-field class="table_footer_pagecount">
                 <mat-form-field style="width:50px;">
-                        <mat-select class="font-size-s" value="10" (change)="pageChange($event)">
+                        <mat-select class="font-size-s" value="2" (change)="pageChange($event)">
+                          <mat-option value="2">2</mat-option>
+                          <mat-option value="4">4</mat-option>
                           <mat-option value="5">5</mat-option>
-                          <mat-option value="10">10</mat-option>
-                          <mat-option value="25">25</mat-option>
                           <mat-option value="50">50</mat-option>
                         </mat-select>
                 </mat-form-field>
