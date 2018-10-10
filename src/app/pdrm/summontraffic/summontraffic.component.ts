@@ -40,6 +40,7 @@ export class SummontrafficComponent implements OnInit {
   dataAppPage: any;
   pageSize = 1;
   pageNumber = 1;
+  summonTraffic: any;
   noPrevData = true;
   noNextData = false;
   showNoData = false;
@@ -85,6 +86,7 @@ export class SummontrafficComponent implements OnInit {
 
       if (myLang == 'en') {
 
+        this.summonTraffic = 'Summon Traffic';
         this.indicator = 'Indicator';
 
         translate.get('HOME').subscribe((res: any) => {
@@ -95,6 +97,7 @@ export class SummontrafficComponent implements OnInit {
 
       if (myLang == 'ms') {
 
+        this.summonTraffic = 'Saman Traffik';
         this.indicator = 'Petunjuk';
 
         translate.get('HOME').subscribe((res: any) => {
@@ -418,13 +421,13 @@ export class SummontrafficComponent implements OnInit {
           "total_summons": "5",
           "pageNumber": 1,
 
-          // "pageSize": 5,
-          // "numberOfElements": 5,
-          // "totalPages": 1,
+          "pageSize": 5, // original
+          "numberOfElements": 5, // original
+          "totalPages": 1, // original
 
-          "pageSize": 1,
-          "numberOfElements": 1,
-          "totalPages": 5,
+          // "pageSize": 1, //farid testt
+          // "numberOfElements": 1, //farid testt
+          // "totalPages": 5, //farid testt
 
           "totalElements": 5
         };
@@ -692,7 +695,9 @@ export class SummontrafficComponent implements OnInit {
     console.log('paginatorL: ',page); 
     this.noPrevData = page <= 2 ? true : false;
     this.noNextData = false;
-    // this.searchApp(null, page, this.pageSize); // to be open soon when api ready
+    if (page > 1) {
+      // this.searchApp(null, page, this.pageSize); // to be open soon when api ready
+    }
   }
 
   paginatorR(page, totalPages){
