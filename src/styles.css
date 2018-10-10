@@ -940,11 +940,15 @@ ngui-auto-complete .no-match-found {display: none}
   text-transform: capitalize
 }
 
-.toast-top-center {
+/*.toast-top-center {
   top: 12px !important;
   margin: auto;
   width: 100% !important;
-  }
+  } */
+
+.toast-top-right {
+  font-size: 18px !important; 
+} 
 
 .mat-checkbox-layout {
   white-space: normal !important;
