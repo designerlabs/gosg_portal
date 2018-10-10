@@ -251,17 +251,17 @@ export class ProtectedService {
     if(svcName == 'summon-traffic') {
 
       type = arrObj[3];
+      page = arrObj[6];
+      size = arrObj[7];
 
       if(type == 1) {
         plateNo  = arrObj[5];
-        page = arrObj[6];
-        size = arrObj[7];
         
         // params = '?typeId='+type+'&vehicleNo='+plateNo+'&'+svcParams;
-        params = '?typeId='+type+'&vehicleNo='+plateNo+'&'+svcParams+'&'+page+'&'+size;
+        params = '?typeId='+type+'&vehicleNo='+plateNo+'&'+svcParams+'&page='+page+'&size='+size;
       } else {
         // params = '?typeId='+type+'&vehicleNo='+'&'+svcParams;
-        params = '?typeId='+type+'&vehicleNo='+'&'+svcParams+'&'+page+'&'+size;
+        params = '?typeId='+type+'&vehicleNo='+'&'+svcParams+'&page='+page+'&size='+size;
       }
 
     } else if(svcName == 'checkPoliceReport') {

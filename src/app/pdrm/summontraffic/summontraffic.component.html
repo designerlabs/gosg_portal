@@ -86,8 +86,15 @@
 
                         <div class="col-md-8" *ngIf="varSelect==1">
                             <mat-form-field class="example-full-width">
-                                <input matInput placeholder="" formControlName="noCar" (keyup)="checkReqValues()"
+
+                                <!-- original -->
+                                <!-- <input matInput placeholder="" formControlName="noCar" (keyup)="checkReqValues()"
+                                required tabindex="3"  style="color: black"> -->
+
+                                <!-- farid test -->
+                                <input matInput placeholder="" formControlName="noCar" maxlength="9" (keypress)="isNumberAndAlphabet(event)"
                                 required tabindex="3"  style="color: black">
+
                                 <mat-error *ngIf="searchForm.controls.noCar.hasError('required')">
                                     {{ 'pdrm.placeholder.noCar' | translate }} {{ 'pdrm.err.needed' | translate }}
                                 </mat-error>
@@ -278,13 +285,14 @@
         </div>
     </div>
 
-    <div class="row container"><br>
-        <label class="redFont">Kadar kompaun saman berdasarkan prinsip "The More You Delay, The More You Pay". Sila buat bayaran saman secepat mungkin. 
+    <div class="row container" style="padding-left: 30px; padding-right: 30px"><br>
+        <!-- <label class="redFont">Kadar kompaun saman berdasarkan prinsip "The More You Delay, The More You Pay". Sila buat bayaran saman secepat mungkin. 
             Lesen memandu & lesen kenderaan motor tidak boleh diperbaharui setelah no kad pengenalan disenarai
             hitamkan dalam sistem mySIKAP, Jabatan pengankutan jalan.
-        </label>
-        <!-- <div class="col-md-12 boldInfo" innerHTML="{{dataAnnouncement}}"> -->
-        <!-- </div> -->
+        </label> -->
+        <div class="col-md-12 " style="color: red; font-weight: bold;" innerHTML="{{dataAnnouncement}}">
+        </div>
+
     </div><br>
   
     <!-- <div *ngIf="showNoData">

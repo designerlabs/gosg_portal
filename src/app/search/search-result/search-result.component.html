@@ -128,7 +128,21 @@
               </header>
               <ul class="side-menu-list" *ngIf="sFilter && tabIndex==0" style="margin-top: 10px;">
                 <li>
-                  <mat-form-field class="font-size-s" style="width:100%;">
+                    <mat-expansion-panel class="mat-elevation-z0">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                    {{'home.search.filmonth' | translate}}
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div *ngFor="let unit of ddmonthPub;let i=index" style="background-color: transparent; overflow-y: hidden;">
+                            <mat-checkbox [(ngModel)]="ddmonthPub[i].checked" [checked]="ddmonthPub[i].checked"                                                                        
+                            name="{{i}}-name"
+                            (change)="valueChangeMonthPub(ddmonthPub, i, $event)" >
+                            {{unit.name | date:'MMMM yyyy'}}<span class="pull-right">&nbsp;({{unit.val}})</span>
+                            </mat-checkbox> 
+                        </div>
+                    </mat-expansion-panel>
+                  <!--<mat-form-field class="font-size-s" style="width:100%;">
                     <mat-select placeholder="{{'home.search.filmonth' | translate}}" (change)="chkmonpub($event)" [(ngModel)]="valMonPub" multiple>
                       <mat-select-trigger>
                         {{selMonPubDisp}}
@@ -141,10 +155,24 @@
                         <span class="pull-right">({{i.val}})</span>
                       </mat-option>
                     </mat-select>
-                  </mat-form-field>
+                  </mat-form-field>-->
                 </li>
                 <li *ngIf="chktopic">
-                  <mat-form-field class="font-size-s example-full-width">
+                    <mat-expansion-panel class="mat-elevation-z0">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                    {{'home.search.filtop' | translate}}
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div *ngFor="let unit of ddtopics;let i=index" style="background-color: transparent; overflow-y: hidden;">
+                            <mat-checkbox [(ngModel)]="ddtopics[i].checked" [checked]="ddtopics[i].checked"                                                                        
+                            name="{{i}}-name"
+                            (change)="valueChangeTopic(ddtopics, i, $event)" >
+                                    {{unit.name}}<span class="pull-right">&nbsp;({{unit.val}})</span>
+                            </mat-checkbox> 
+                        </div>
+                    </mat-expansion-panel>
+                  <!--<mat-form-field class="font-size-s example-full-width">
                     <mat-select placeholder="{{'home.search.filtop' | translate}}" (change)="chkfiltrtopic($event)" [(ngModel)]="valTopic" multiple>
                       <mat-select-trigger>
                         {{selTopicDisp}}
@@ -157,10 +185,25 @@
                         <span class="pull-right">&nbsp;({{i.val}})</span>
                       </mat-option>
                     </mat-select>
-                  </mat-form-field>
+                  </mat-form-field>-->
                 </li>
                 <li *ngIf="chksubtopic">
-                  <mat-form-field class="font-size-s example-full-width">
+                        <mat-expansion-panel class="mat-elevation-z0">
+                                <mat-expansion-panel-header class="mat-elevation-z0">
+                                    <mat-panel-title class="mat-elevation-z0">
+                                            {{'home.search.filsubtopic' | translate}}
+                                    </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <div *ngFor="let unit of ddsubTopics;let i=index" class="mat-elevation-z0" style="background-color: transparent; overflow-y: hidden;">
+                                    <mat-checkbox [(ngModel)]="ddsubTopics[i].checked" [checked]="ddsubTopics[i].checked"                                                                        
+                                    name="{{i}}-name"
+                                    (change)="valueChangeSubTopic(ddsubTopics, i, $event)" >
+                                            {{unit.name}}<span class="pull-right">&nbsp;({{unit.val}})</span>
+                                    </mat-checkbox> 
+                
+                                </div>
+                            </mat-expansion-panel>
+                  <!--<mat-form-field class="font-size-s example-full-width">
                     <mat-select placeholder="{{'home.search.filsubtopic' | translate}}" (change)="chksubtop($event)" [(ngModel)]="valSubTopic"
                       multiple>
                       <mat-select-trigger>
@@ -174,8 +217,9 @@
                         <span class="pull-right">&nbsp;({{i.val}})</span>
                       </mat-option>
                     </mat-select>
-                  </mat-form-field>
+                  </mat-form-field>-->
                 </li>
+                <hr>
                 <li>
                   <mat-checkbox class="example-margin" (change)="chkSpeci($event,'citizen')" [(ngModel)]="chkcitizen">
                     <span class="font-size-s">
@@ -191,7 +235,23 @@
               </ul>
               <ul class="side-menu-list" *ngIf="sFilter && tabIndex==1" style="margin-top: 10px;">
                 <li *ngIf="chkosminis">
-                  <mat-form-field class="font-size-s" style="width:100%;">
+                        <mat-expansion-panel class="mat-elevation-z0">
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                            {{'home.search.specminis' | translate}}
+                                    </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <div *ngFor="let unit of ddministry;let i=index" class="mat-elevation-z0" style="background-color: transparent; overflow-y: hidden;">
+                                    <mat-checkbox   [(ngModel)]="ddministry[i].checked" 
+                                                    [checked]="ddministry[i].checked"                                                                        
+                                                    name="{{i}}-name"
+                                                    (change)="valueChangeMinistry(ddministry, i, $event)" >
+                                        {{unit.name}}<span class="pull-right">&nbsp;({{unit.val}})</span>
+                                    </mat-checkbox> 
+                
+                                </div>
+                        </mat-expansion-panel>
+                  <!--<mat-form-field class="font-size-s" style="width:100%;">
                     <mat-select placeholder="{{'home.search.specminis' | translate}}" (change)="chkministry($event)" [(ngModel)]="valMinistry"
                       multiple>
                       <mat-select-trigger>
@@ -205,10 +265,27 @@
                         <span class="pull-right">({{i.val}})</span>
                       </mat-option>
                     </mat-select>
-                  </mat-form-field>
+                  </mat-form-field>-->
                 </li>
                 <li *ngIf="chkosagency">
-                  <mat-form-field class="font-size-s" style="width:100%;">
+                    <mat-expansion-panel class="mat-elevation-z0">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                        {{'home.search.specagen' | translate}}
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <div *ngFor="let unit of ddagency;let i=index" class="mat-elevation-z0" style="background-color: transparent; overflow-y: hidden;">
+                                <mat-checkbox   [(ngModel)]="ddagency[i].checked" 
+                                                [checked]="ddagency[i].checked"                                                                        
+                                                name="{{i}}-name"
+                                                (change)="valueChangeAgency(ddagency, i, $event)" >
+                                    {{unit.name}}<span class="pull-right">&nbsp;({{unit.val}})</span>
+                                </mat-checkbox> 
+            
+                            </div>
+                    </mat-expansion-panel>
+
+                  <!--<mat-form-field class="font-size-s" style="width:100%;">
                     <mat-select placeholder="{{'home.search.specagen' | translate}}" (change)="chkagency($event)" [(ngModel)]="valAgency" multiple>
                       <mat-select-trigger>
                         {{selAgencyDisp}}
@@ -221,7 +298,7 @@
                         <span class="pull-right">({{i.val}})</span>
                       </mat-option>
                     </mat-select>
-                  </mat-form-field>
+                  </mat-form-field>-->
                 </li>
               </ul>
             </li>

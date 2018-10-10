@@ -90,6 +90,8 @@ export class PolicereportComponent implements OnInit, OnDestroy {
           //this.subscription = this.getFaq(this.langID);
         }
 
+        this.getAnnoucement();
+
     });
   }
 
@@ -191,22 +193,27 @@ export class PolicereportComponent implements OnInit, OnDestroy {
   }
 
   getAnnoucement(){
-    this.loading = true;
-    this.protectedService.postProtected('','pdrm/getAnnoucement?type=2'+'&agency='+this.agcCode+'&service='+this.dsvcCode+'&language='+this.langID).subscribe(
-    data => {
-      this.sharedService.errorHandling(data, (function(){
 
-        this.dataAnnouncement = data.announcementResource.content;
-        console.log(this.dataAnnouncement);
-     
-      }).bind(this));
-      this.loading = false;
+    if(!environment.staging){
+      this.loading = true;
+      this.protectedService.postProtected('','pdrm/getAnnoucement?type=2'+'&agency='+this.agcCode+'&service='+this.dsvcCode+'&language='+this.langID).subscribe(
+      data => {
+        this.sharedService.errorHandling(data, (function(){
+
+          this.dataAnnouncement = data.announcementResource.content;
+          console.log(this.dataAnnouncement);
       
-    },
-    error => {
-      this.toastr.error(JSON.parse(error._body).statusDesc, '');
-      this.loading = false;
-    }); 
+        }).bind(this));
+        this.loading = false;
+        
+      },
+      error => {
+        this.toastr.error(JSON.parse(error._body).statusDesc, '');
+        this.loading = false;
+      });
+    } else {
+      this.dataAnnouncement = 'getAnnoucement';
+    } 
   }
 
   openLink(varUrl){
