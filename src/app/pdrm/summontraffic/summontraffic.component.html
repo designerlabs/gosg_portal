@@ -163,11 +163,28 @@
     </div><br>
   
     <div *ngIf="showDetails">
+
+
+        <!-- farid testt start -->
+        <!-- <div class="row">
+                <div class="col-md-8">
+                    <p  style="color: black; font-weight: bold;"> axaxax </p>
+                </div>
+                <div class="col-md-4">
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Carian berdasarkan kata kunci" #myInput id="myInput" (keyup)="newRecord(myInput.value)" [(ngModel)]="query" style="color: black">
+                    </mat-form-field>
+                </div>
+        </div><br> -->
+        <!-- farid testt end -->
+
         <div class="row container">
+ 
             <div class="col-md-12 boldInfo">
                 <span>{{ 'pdrm.titleSummon' | translate }}</span><br>
                 <hr class="lineHr" style="border-top: #9c9c9d 2px solid;">
-            </div>
+            </div> 
+
         </div>
 
         <div class="row container blackFont" *ngIf="dataSummons.summonDetails.length > 0">
@@ -194,10 +211,23 @@
                 <!-- Jumlah Amaun (RM) -->
             </div>
 
-            <div class="col-md-9 boldInfo">
+            <!-- original -->
+            <!-- <div class="col-md-9 boldInfo">
                 {{this.dataSummons.summonDetails?.length}}
-                <!-- {{ammount}} -->
+            </div> -->
+
+            <!-- farid test starts -->
+            <div class="col-md-6 boldInfo">
+                    {{this.dataSummons.summonDetails?.length}}
             </div>
+            
+            <div class="col-md-3">
+                <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Carian berdasarkan kata kunci" #myInput id="myInput" (keyup)="newRecord(myInput.value)" [(ngModel)]="query" style="color: black">
+                </mat-form-field>
+            </div>
+            <!-- farid test ends -->
+
         </div><br>
 
         <div class="row container paddingLR">
@@ -214,7 +244,7 @@
                     <th width="5%" class="mat-header-cell text-center paddingR">OP</th>
                     <th width="10%" class="mat-header-cell text-center paddingR">{{'pdrm.title.image' | translate}}</th>
                 </tr>
-                <tr class="mat-row table_row table_row_height" *ngFor="let data of dataSummons.summonDetails; let i = index;" role="row">
+                <tr class="mat-row table_row table_row_height" *ngFor="let data of dataSummons.summonDetails | search : query; let i = index;" role="row">
                     <td class="mat-cell text-center paddingR">{{i+1}}</td>
                     <td class="mat-cell paddingR">{{data.vehicle_registration_number}}</td>
                     <td class="mat-cell paddingR">{{data.summons_id_key}}</td>
@@ -234,26 +264,25 @@
         </div><br>
 
 <!--  -->
-<!-- farid testt should put here starts  -->
-<!-- kene pakai common. sebab basic -->
+<!-- farid testt should put here starts  --> 
 
-<div class="float-right paddingTop-15">
+<div class="float-right ">
         <mat-form-field class="table_footer_pagecount">
-                <mat-form-field style="width:50px;">
-                        <mat-select class="font-size-s" value="2" (change)="pageChange($event)">
+                <!-- <mat-form-field > -->
+                        <mat-select class="font-size-s" value="1" (change)="pageChange($event)">
+                          <mat-option value="1">1</mat-option>
                           <mat-option value="2">2</mat-option>
+                          <mat-option value="3">3</mat-option>
                           <mat-option value="4">4</mat-option>
-                          <mat-option value="5">5</mat-option>
-                          <mat-option value="50">50</mat-option>
                         </mat-select>
-                </mat-form-field>
+                <!-- </mat-form-field> -->
         </mat-form-field>
 
         <!-- <span class="float-right"> -->
                 <span style="color:#000; padding-right:20px;">{{ 'appmngt.tablebottom.page' | translate }}
                         <strong>{{dataSummons?.pageNumber}}</strong> {{ 'appmngt.tablebottom.of' | translate }}
                         <strong>{{dataSummons?.totalPages}}</strong> {{ 'appmngt.tablebottom.in' | translate }}
-                        <strong>{{dataSummons?.totalElements}}</strong> {{ 'appmngt.tablebottom.app' | translate }}
+                        <strong>{{dataSummons?.totalElements}}</strong> {{summonTraffic}}
                 </span>
                     <button mat-mini-fab color="basic" [disabled]="noPrevData" 
                       (click)="paginatorL(dataSummons?.pageNumber)">
