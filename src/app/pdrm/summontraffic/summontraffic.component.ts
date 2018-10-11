@@ -86,7 +86,7 @@ export class SummontrafficComponent implements OnInit {
 
       if (myLang == 'en') {
 
-        this.summonTraffic = 'Summon Traffic';
+        this.summonTraffic = 'Traffic Summon';
         this.indicator = 'Indicator';
 
         translate.get('HOME').subscribe((res: any) => {
@@ -234,23 +234,22 @@ export class SummontrafficComponent implements OnInit {
             /////////////////////
             //farid tesst starts // nanti kena buang ni. currntly api error
 
-            if(this.dataSummons.summonDetails == null || this.dataSummons.total_summons == null) {
-              this.showNoData = true;       
-              alert(' API is underconstruction ');       
+            if(this.dataSummons.summonDetails == null && this.dataSummons.total_summons != null) {
+              this.showNoData = true;     
             } 
 
             if (this.dataSummons.summonDetails != null) {
               if (this.dataSummons.summonDetails.length == 0) {
                 this.showNoData = true;
-                alert(' API is underconstruction ');   
               }
             }
 
             //farid tesst ends // nanti kena buang ni. currntly api error
             /////////////////////
 
-            if (this.dataSummons.summonDetails) {
+            if (this.dataSummons.summonDetails != null && this.dataSummons.summonDetails.length > 0) {
               this.showDetails = true;
+              this.showNoData = false;
             } else {
               this.showDetails = false;
               this.showNoData = true;
