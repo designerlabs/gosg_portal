@@ -38,7 +38,7 @@ export class SummontrafficComponent implements OnInit {
   param = "";
   dataApp: any;
   dataAppPage: any;
-  pageSize = 1;
+  pageSize = 5;
   pageNumber = 1;
   summonTraffic: any;
   noPrevData = true;
@@ -186,7 +186,8 @@ export class SummontrafficComponent implements OnInit {
     }
   }
 
-  searchApp(formValues: any, paramPageNumber, paramPageSize) { 
+  //this is button carian.
+  searchApp(formValues: any, paramPageNumber, paramPageSize) {
 
     this.showDetails = false;
 
@@ -234,9 +235,9 @@ export class SummontrafficComponent implements OnInit {
             /////////////////////
             //farid tesst starts // nanti kena buang ni. currntly api error
 
-            if(this.dataSummons.summonDetails == null && this.dataSummons.total_summons != null) {
-              this.showNoData = true;     
-            } 
+            // if(this.dataSummons.summonDetails == null && this.dataSummons.total_summons != null) {
+            //   this.showNoData = true;     
+            // }
 
             if (this.dataSummons.summonDetails != null) {
               if (this.dataSummons.summonDetails.length == 0) {
@@ -244,10 +245,29 @@ export class SummontrafficComponent implements OnInit {
               }
             }
 
+            if (this.dataSummons.numberOfElements == this.dataSummons.totalElements) {
+              this.noPrevData = true;
+              this.noNextData = true;
+            } else {
+              this.noPrevData = false;
+              this.noNextData = false;
+            }
+
+            if (this.pageNumber == 1) {
+              this.noPrevData = true;
+            } else {
+              this.noPrevData = false;
+            }
+
             //farid tesst ends // nanti kena buang ni. currntly api error
             /////////////////////
 
+            //original
+            // if (this.dataSummons.summonDetails.length > 0) {
+
+            //test
             if (this.dataSummons.summonDetails != null && this.dataSummons.summonDetails.length > 0) {
+
               this.showDetails = true;
               this.showNoData = false;
             } else {
@@ -689,12 +709,22 @@ export class SummontrafficComponent implements OnInit {
   pageChange(event){  
     this.pageSize = event.value;
     this.pageNumber = 1;
+    this.noPrevData = true;
+
+    if (this.dataSummons.totalElements == this.dataSummons.numberOfElements) {
+      this.noNextData = true;
+    }
+
+    if (this.dataSummons.totalElements > this.dataSummons.numberOfElements) {
+      this.noNextData = false;
+    }
+
     console.log('pageChange this.pageSize: ',this.pageSize);
     console.log('pageChange this.pageNumber: ',this.pageNumber);
     this.searchApp(null, this.pageNumber, this.pageSize); // to be open soon when api ready
   }
   
-  paginatorL(page){ 
+  paginatorL(page){
 
     console.log('paginatorL this.pageSize: ',this.pageSize); 
     console.log('paginatorL this.pageNumber: ',this.pageNumber); 
