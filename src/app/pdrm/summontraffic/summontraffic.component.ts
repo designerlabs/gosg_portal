@@ -688,6 +688,7 @@ export class SummontrafficComponent implements OnInit {
 
   pageChange(event){  
     this.pageSize = event.value;
+    this.pageNumber = 1;
     console.log('pageChange this.pageSize: ',this.pageSize);
     console.log('pageChange this.pageNumber: ',this.pageNumber);
     this.searchApp(null, this.pageNumber, this.pageSize); // to be open soon when api ready
