@@ -687,26 +687,33 @@ export class SummontrafficComponent implements OnInit {
   //pagination starts
   ///////////////////
 
-  pageChange(event){ 
+  pageChange(event){  
     this.pageSize = event.value;
+    console.log('pageChange this.pageSize: ',this.pageSize);
+    console.log('pageChange this.pageNumber: ',this.pageNumber);
+    this.searchApp(null, this.pageNumber, this.pageSize); // to be open soon when api ready
   }
   
   paginatorL(page){
     console.log('paginatorL: ',page); 
+    console.log('paginatorL this.pageSize: ',this.pageSize); 
+    console.log('paginatorL this.pageNumber: ',this.pageNumber); 
     this.noPrevData = page <= 2 ? true : false;
     this.noNextData = false;
     if (page > 1) {
-      // this.searchApp(null, page, this.pageSize); // to be open soon when api ready
+      this.searchApp(null, page, this.pageSize); // to be open soon when api ready
     }
   }
 
   paginatorR(page, totalPages){
     console.log('paginatorR page: ',page);
     console.log('paginatorR totalPages: ',totalPages);
+    console.log('paginatorR this.pageSize: ',this.pageSize);
+    console.log('paginatorR this.pageNumber: ',this.pageNumber);
     this.noPrevData = page >= 1 ? false : true;
     let pageInc = page+1;
     this.noNextData = pageInc === totalPages;
-    // this.searchApp(null, pageInc, this.pageSize); // to be open soon when api ready 
+    this.searchApp(null, pageInc, this.pageSize); // to be open soon when api ready 
   }
 
   getStatusApp(lang){
