@@ -3,6 +3,7 @@ import { TopnavService } from '../header/topnav/topnav.service';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 import { Router } from '@angular/router';
 import {SharedService } from '../common/shared.service';
+import { NavService } from '../header/nav/nav.service';
 import * as $ from 'jquery';
 
 let num = 0;
@@ -35,6 +36,7 @@ export class SidenavprotectedComponent implements OnInit {
   openSlide:EventEmitter<string> = new EventEmitter();
   constructor( private topnavservice: TopnavService,
      @Inject(APP_CONFIG) private config: AppConfig,
+     private navService: NavService,
      private router: Router,
      private sharedservice: SharedService) { }
 
@@ -87,9 +89,10 @@ export class SidenavprotectedComponent implements OnInit {
 
   getUrl(ele){    
           
-      console.log("ooo: "+ele);
-      console.log("kkkk: "+ele);
-      this.router.navigate(['/content', ele]);
+    this.navService.triggerContent(ele, localStorage.getItem('langID'));
+    this.navService.getContentUrl(ele, localStorage.getItem('langID'));
+    this.router.navigate(['/content', ele]);
+    event.preventDefault();
   
   }
 
