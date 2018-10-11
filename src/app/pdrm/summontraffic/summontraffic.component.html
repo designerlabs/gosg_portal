@@ -282,12 +282,29 @@
                         <strong>{{dataSummons?.totalPages}}</strong> {{ 'appmngt.tablebottom.in' | translate }}
                         <strong>{{dataSummons?.totalElements}}</strong> {{summonTraffic}}
                 </span>
-                    <button mat-mini-fab color="basic" [disabled]="noPrevData" 
-                      (click)="paginatorL(dataSummons?.pageNumber)">
+
+                    <!-- original -->
+                    <!-- <button mat-mini-fab color="basic" [disabled]="noPrevData"  
+                      (click)="paginatorL(dataSummons?.pageNumber)"   
+                      > -->
+
+                    <!-- try testt farid -->
+                      <button mat-mini-fab color="basic" [disabled]="noPrevData"  
+                      (click)="paginatorL(1)"   
+                      >
+
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
                     </button>
+
+                    <!-- original -->
+                      <!-- <button mat-mini-fab color="basic" [disabled]="noNextData" 
+                      (click)="paginatorR(dataSummons?.pageNumber, dataSummons?.totalPages)"> -->
+
+                      <!-- farid try testt -->
                       <button mat-mini-fab color="basic" [disabled]="noNextData" 
-                      (click)="paginatorR(dataSummons?.pageNumber, dataSummons?.totalPages)">
+                      (click)="paginatorR(1, dataSummons?.totalPages)">
+
+
                         <i class="fa fa-angle-right" aria-hidden="true"></i>
                     </button>
         <!-- </span> -->
