@@ -67,7 +67,7 @@
                                       <h4 class="font-size-m warna_font">
                                           {{tabContent.contentTitle}}
                                       </h4>
-                                      <span class="warna_font article-size font-size-s" [innerHTML]="tabContent.contentDescription"></span>
+                                      <span class="warna_font article-size font-size-s" [innerHTML]="tabContent.contentDescription | truncate : [140, '...']"></span>
                                       <div class="font-size-s" style="text-align: right;"><i class="fa fa-caret-right"></i> {{'home.readmore' | translate }}</div>
                                   </a>
                               </div>
@@ -168,7 +168,7 @@
                                             <h4 class="font-size-m warna_font">
                                                 {{rightContent.contentTitle}}
                                             </h4>
-                                            <span class="warna_font article-size font-size-s" [innerHTML]="rightContent.contentDescription"></span>
+                                            <span class="warna_font article-size font-size-s" [innerHTML]="rightContent.contentDescription | truncate : [140, '...']"></span>
                                             <div class="font-size-s" style="text-align: right;">
                                                 <i class="fa fa-caret-right"></i> {{'home.readmore' | translate }}</div>
                                         </a>
@@ -235,7 +235,7 @@
                                   </div>
                               </div>
 
-                              <span class="font-size-s defaultColor content_description" [innerHTML]="article.categoryDescription"></span>
+                              <span class="font-size-s defaultColor content_description" [innerHTML]="article.categoryDescription "></span>
                           </div>
                           <div *ngFor="let rightContent of article.subCategoryList; let index=index; let odd=odd; let even=even;">
                               <div class="col-sm-6">
@@ -247,7 +247,7 @@
                                               <h4 class="font-size-m warna_font">
                                                   {{rightContent.categoryName}}
                                               </h4>
-                                              <span class="warna_font article-size font-size-s" [innerHTML]="rightContent.categoryDescription"></span>
+                                              <span class="warna_font article-size font-size-s" [innerHTML]="rightContent.categoryDescription | truncate : [140, '...']"></span>
                                               <div class="font-size-s" style="text-align: right;">
                                                   <i class="fa fa-caret-right"></i> {{'home.readmore' | translate }}</div>
                                           </a>
