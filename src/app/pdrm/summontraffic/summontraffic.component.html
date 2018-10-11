@@ -270,11 +270,11 @@
         <mat-form-field class="table_footer_pagecount">
 
                         <!-- original -->
-                        <!-- <mat-select class="font-size-s" value="2" (change)="pageChange($event)"> -->
+                        <mat-select class="font-size-s" value="1" (change)="pageChange($event)">
 
                         <!-- farid try -->
-                        <mat-select class="font-size-s" value="{{pageNumber}}" (change)="pageChange($event)">
-                               
+                        <!-- <mat-select class="font-size-s" value="{{pageNumber}}" (change)="pageChange($event)"> -->
+                          <mat-option value="1">1</mat-option>
                           <mat-option value="2">2</mat-option>
                           <mat-option value="3">3</mat-option>
                           <mat-option value="4">4</mat-option>
