@@ -716,7 +716,7 @@ export class SummontrafficComponent implements OnInit {
   ///////////////////
 
   pageChange(event){  
-    this.pageSize = event.value;
+    this.pageSize = event.value; 
     this.pageNumber = 1;
     this.noPrevData = true;
 
@@ -727,6 +727,7 @@ export class SummontrafficComponent implements OnInit {
     if (this.dataSummons.totalElements > this.dataSummons.numberOfElements) {
       this.noNextData = false;
     }
+
  
     this.searchApp(null, this.pageNumber, this.pageSize); // to be open soon when api ready
   }
