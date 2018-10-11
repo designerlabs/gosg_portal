@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Inject, Input } from '@angular/core';
 import { TopnavService } from '../header/topnav/topnav.service';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
+import { Router } from '@angular/router';
 import {SharedService } from '../common/shared.service';
 import * as $ from 'jquery';
 
@@ -32,7 +33,10 @@ export class SidenavprotectedComponent implements OnInit {
 
   @Output()
   openSlide:EventEmitter<string> = new EventEmitter();
-  constructor( private topnavservice: TopnavService, @Inject(APP_CONFIG) private config: AppConfig, private sharedservice: SharedService) { }
+  constructor( private topnavservice: TopnavService,
+     @Inject(APP_CONFIG) private config: AppConfig,
+     private router: Router,
+     private sharedservice: SharedService) { }
 
   @Input() state:string;
 
@@ -79,6 +83,14 @@ export class SidenavprotectedComponent implements OnInit {
   ngAfterViewInit() {
     this.loadCustomFontType();
 
+  }
+
+  getUrl(ele){    
+          
+      console.log("ooo: "+ele);
+      console.log("kkkk: "+ele);
+      this.router.navigate(['/content', ele]);
+  
   }
 
   loadCustomFontType(){
