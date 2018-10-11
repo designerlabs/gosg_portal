@@ -711,8 +711,12 @@ export class SummontrafficComponent implements OnInit {
     this.pageNumber = 1;
     this.noPrevData = true;
 
-    if (this.dataSummons.totalPages == this.dataSummons.numberOfElements) {
+    if (this.dataSummons.totalElements == this.dataSummons.numberOfElements) {
       this.noNextData = true;
+    }
+
+    if (this.dataSummons.totalElements > this.dataSummons.numberOfElements) {
+      this.noNextData = false;
     }
 
     console.log('pageChange this.pageSize: ',this.pageSize);
