@@ -48,6 +48,7 @@ export class SummontrafficComponent implements OnInit {
   loading = false;
   dateSubmission = [];
   statusDesc = [];
+  carianPlaceholder: any;
 
   public summon: any;
   public ammount: any;
@@ -88,6 +89,7 @@ export class SummontrafficComponent implements OnInit {
 
         this.summonTraffic = 'Traffic Summon';
         this.indicator = 'Indicator';
+        this.carianPlaceholder = "Searching based on column provided";
 
         translate.get('HOME').subscribe((res: any) => {
           this.lang = 'en';
@@ -99,6 +101,7 @@ export class SummontrafficComponent implements OnInit {
 
         this.summonTraffic = 'Saman Traffik';
         this.indicator = 'Petunjuk';
+        this.carianPlaceholder = "Carian berdasarkan kolum yang sedia ada";
 
         translate.get('HOME').subscribe((res: any) => {
           this.lang = 'ms';
@@ -257,6 +260,12 @@ export class SummontrafficComponent implements OnInit {
               this.noPrevData = true;
             } else {
               this.noPrevData = false;
+            }
+
+             // sekiranya ic yg dicari bukan berdasarkan kereta sendiri
+            if (this.dataSummons.totalElements == 0) {
+              this.showDetails = true;
+              this.showNoData = true;
             }
 
             //farid tesst ends // nanti kena buang ni. currntly api error
@@ -718,16 +727,11 @@ export class SummontrafficComponent implements OnInit {
     if (this.dataSummons.totalElements > this.dataSummons.numberOfElements) {
       this.noNextData = false;
     }
-
-    console.log('pageChange this.pageSize: ',this.pageSize);
-    console.log('pageChange this.pageNumber: ',this.pageNumber);
+ 
     this.searchApp(null, this.pageNumber, this.pageSize); // to be open soon when api ready
   }
   
-  paginatorL(page){
-
-    console.log('paginatorL this.pageSize: ',this.pageSize); 
-    console.log('paginatorL this.pageNumber: ',this.pageNumber); 
+  paginatorL(page){ 
 
      // original
     // this.noPrevData = page <= 2 ? true : false;
@@ -746,16 +750,10 @@ export class SummontrafficComponent implements OnInit {
 
       this.searchApp(null, this.pageNumber, this.pageSize);  
       //farid try test
-
-    console.log('this.noPrevData: ',this.noPrevData);
-    console.log('this.noNextData: ',this.noNextData);
+ 
   }
 
-  paginatorR(page, totalPages){
-    
-    console.log('paginatorR totalPages: ',totalPages);
-    console.log('paginatorR this.pageSize: ',this.pageSize);
-    console.log('paginatorR this.pageNumber: ',this.pageNumber);
+  paginatorR(page, totalPages){ 
 
     //original
     // this.noPrevData = page >= 1 ? false : true;
@@ -769,11 +767,13 @@ export class SummontrafficComponent implements OnInit {
       if (this.pageNumber == totalPages) {
         this.noNextData = true;
       }
-      this.searchApp(null, this.pageNumber, this.pageSize);
-    //farid try test
 
-    console.log('this.noPrevData: ',this.noPrevData);
-    console.log('this.noNextData: ',this.noNextData);
+      if (this.dataSummons.totalPages == this.dataSummons.pageNumber) {
+            this.noNextData = true;
+      }
+
+      this.searchApp(null, this.pageNumber, this.pageSize);
+    //farid try test 
   }
 
   getStatusApp(lang){
