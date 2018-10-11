@@ -688,31 +688,62 @@ export class SummontrafficComponent implements OnInit {
 
   pageChange(event){  
     this.pageSize = event.value;
+    this.pageNumber = 1;
     console.log('pageChange this.pageSize: ',this.pageSize);
     console.log('pageChange this.pageNumber: ',this.pageNumber);
     this.searchApp(null, this.pageNumber, this.pageSize); // to be open soon when api ready
   }
   
-  paginatorL(page){
-    console.log('paginatorL: ',page); 
+  paginatorL(page){ 
+
     console.log('paginatorL this.pageSize: ',this.pageSize); 
     console.log('paginatorL this.pageNumber: ',this.pageNumber); 
-    this.noPrevData = page <= 2 ? true : false;
+
+     // original
+    // this.noPrevData = page <= 2 ? true : false;
     this.noNextData = false;
-    if (page > 1) {
-      this.searchApp(null, page, this.pageSize); // to be open soon when api ready
-    }
+    // this.pageNumber = page;
+     // original
+ 
+      //farid try test
+      this.pageNumber = this.pageNumber - page;
+      if (this.pageNumber == 0) {
+       this.pageNumber = 1;
+       this.noPrevData = true ;
+      } else {
+        this.noPrevData = false; 
+      }
+
+      this.searchApp(null, this.pageNumber, this.pageSize);  
+      //farid try test
+
+    console.log('this.noPrevData: ',this.noPrevData);
+    console.log('this.noNextData: ',this.noNextData);
   }
 
   paginatorR(page, totalPages){
-    console.log('paginatorR page: ',page);
+    
     console.log('paginatorR totalPages: ',totalPages);
     console.log('paginatorR this.pageSize: ',this.pageSize);
     console.log('paginatorR this.pageNumber: ',this.pageNumber);
-    this.noPrevData = page >= 1 ? false : true;
-    let pageInc = page+1;
-    this.noNextData = pageInc === totalPages;
-    this.searchApp(null, pageInc, this.pageSize); // to be open soon when api ready 
+
+    //original
+    // this.noPrevData = page >= 1 ? false : true;
+    // let pageInc = page+1;
+    // this.noNextData = pageInc === totalPages;
+    //original
+
+    //farid try test
+      this.noPrevData = false;
+      this.pageNumber = this.pageNumber + page;
+      if (this.pageNumber == totalPages) {
+        this.noNextData = true;
+      }
+      this.searchApp(null, this.pageNumber, this.pageSize);
+    //farid try test
+
+    console.log('this.noPrevData: ',this.noPrevData);
+    console.log('this.noNextData: ',this.noNextData);
   }
 
   getStatusApp(lang){
