@@ -89,7 +89,7 @@ export class SummontrafficComponent implements OnInit {
 
         this.summonTraffic = 'Traffic Summon';
         this.indicator = 'Indicator';
-        this.carianPlaceholder = "Searching based on column provided";
+        this.carianPlaceholder = "Search";
 
         translate.get('HOME').subscribe((res: any) => {
           this.lang = 'en';
@@ -101,7 +101,7 @@ export class SummontrafficComponent implements OnInit {
 
         this.summonTraffic = 'Saman Traffik';
         this.indicator = 'Petunjuk';
-        this.carianPlaceholder = "Carian berdasarkan kolum yang sedia ada";
+        this.carianPlaceholder = "Cari";
 
         translate.get('HOME').subscribe((res: any) => {
           this.lang = 'ms';
@@ -240,6 +240,8 @@ export class SummontrafficComponent implements OnInit {
             /////////////////////
             //farid tesst starts // nanti kena buang ni. currntly api error
 
+            this.showDetails = true;
+
             // sekiranya nombor kereta yang dicari tidak ada pada ic dia sendiri...
             if(this.dataSummons.summonDetails == null && this.dataSummons.total_summons == 0) {
               this.showNoData = true;     
@@ -271,9 +273,10 @@ export class SummontrafficComponent implements OnInit {
 
              // sekiranya ic yg dicari bukan berdasarkan kereta sendiri
             if (this.dataSummons.totalElements == 0) {
-              this.showDetails = true;
               this.showNoData = true;
             }
+
+            // this.dataSummons.summonDetails[0].op   // template jer
 
             //farid tesst ends // nanti kena buang ni. currntly api error
             /////////////////////
@@ -281,13 +284,10 @@ export class SummontrafficComponent implements OnInit {
             //original
             // if (this.dataSummons.summonDetails.length > 0) {
 
-            //test // sekiranya ada data 
+            // try test // sekiranya ada data 
             if (this.dataSummons.summonDetails != null && this.dataSummons.summonDetails.length > 0) {
-
-              this.showDetails = true;
               this.showNoData = false;
-            } else {
-              // this.showDetails = false;
+            } else { 
               // this.showNoData = true;
             }
 
@@ -311,6 +311,8 @@ export class SummontrafficComponent implements OnInit {
 
           "summonDetails": [
             {
+              "op":"N",
+              "sh":"Y",
               "compound_ind": "Y",
               "district_code": null,
               "enforcement_date": "20060330",
@@ -339,6 +341,8 @@ export class SummontrafficComponent implements OnInit {
               "offender_name": "MOHD RAMZI BIN IBRAHIM"
             },
             {
+              "op":"Y",
+              "sh":"N",
               "compound_ind": "Y",
               "district_code": null,
               "enforcement_date": "20131003",
@@ -367,6 +371,8 @@ export class SummontrafficComponent implements OnInit {
               "offender_name": "MOHD RAMZI BIN IBRAHIM"
             },
             {
+              "op":"N",
+              "sh":"Y",
               "compound_ind": "Y",
               "district_code": null,
               "enforcement_date": "20161003",
@@ -395,6 +401,8 @@ export class SummontrafficComponent implements OnInit {
               "offender_name": "MOHD RAMZI BIN IBRAHIM"
             },
             {
+              "op":"N",
+              "sh":"Y",
               "compound_ind": "Y",
               "district_code": null,
               "enforcement_date": "20160912",
@@ -423,6 +431,8 @@ export class SummontrafficComponent implements OnInit {
               "offender_name": "MOHD RAMZI BIN IBRAHIM"
             },
             {
+              "op":"N",
+              "sh":"Y",
               "compound_ind": "Y",
               "district_code": null,
               "enforcement_date": "20180322",
@@ -471,6 +481,8 @@ export class SummontrafficComponent implements OnInit {
         this.dataSummons = {
             "summonDetails": [
               {
+                "op":"Y",
+                "sh":"Y",
                 "compound_ind": "Y",
                 "district_code": null,
                 "enforcement_date": "20131003",
@@ -499,6 +511,8 @@ export class SummontrafficComponent implements OnInit {
                 "offender_name": "MOHD RAMZI BIN IBRAHIM"
               },
               {
+                "op":"Y",
+                "sh":"N",
                 "compound_ind": "Y",
                 "district_code": null,
                 "enforcement_date": "20150601",
@@ -527,6 +541,8 @@ export class SummontrafficComponent implements OnInit {
                 "offender_name": "DINESH AMEDEMBE"
               },
               {
+                "op":"N",
+                "sh":"Y",  
                 "compound_ind": "Y",
                 "district_code": null,
                 "enforcement_date": "20150420",
