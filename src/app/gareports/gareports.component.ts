@@ -21,9 +21,9 @@ export class GareportsComponent implements OnInit {
     this.getGA();
   }
 
-  getGAReport(frmDt, endDt, opt, token, httpOpt){
+  getGAReport(frmDt, endDt, opt, token){
 
-    return this.http.post(`https://www.googleapis.com/analytics/v3/data/ga?ids=ga%3A173733410&start-date=${frmDt}&end-date=${endDt}&metrics=ga%3Ausers&dimensions=${opt}&access_token=${token}`, '', httpOpt)
+    return this.http.get(`https://www.googleapis.com/analytics/v3/data/ga?ids=ga%3A173733410&start-date=${frmDt}&end-date=${endDt}&metrics=ga%3Ausers&dimensions=${opt}&access_token=${token}`)
       .subscribe(
         data => {
           debugger;
@@ -45,7 +45,7 @@ export class GareportsComponent implements OnInit {
     .subscribe(
       data => {
         console.log(data);
-        this.getGAReport('2018-09-09', '2018-10-10', 'ga%3Acountry', data['access_token'], httpOptions);
+        this.getGAReport('2018-09-09', '2018-10-10', 'ga%3Acountry', data['access_token']);
       }, error => {
         console.log(error);
       }
