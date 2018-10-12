@@ -240,21 +240,31 @@ export class ProtectedService {
     let dsvcCode;
     let params;
     let langId;
+    let page;
+    let size;
 
-    agcCode = arrObj[1];
+    agcCode  = arrObj[1];
     dsvcCode = arrObj[2];
+    type     = arrObj[3];
+    plateNo  = arrObj[5]; // sebelum ni duk dlm type 1
+    page     = arrObj[6];
+    size     = arrObj[7];
+
+    console.log('from service arrObj: '+arrObj);
+    console.log('from service page: '+page);
+    console.log('from service size: '+size);
 
     let svcParams = 'agency='+agcCode+'&service='+dsvcCode+'&language='+this.langId;
 
     if(svcName == 'summon-traffic') {
 
-      type = arrObj[3];
-
-      if(type == 1) {
-        plateNo = arrObj[5];
-        params = '?typeId='+type+'&vehicleNo='+plateNo+'&'+svcParams;
-      } else {
-        params = '?typeId='+type+'&vehicleNo='+'&'+svcParams;
+      if(type == 1) { // 1 is vehicle.
+        
+        // params = '?typeId='+type+'&vehicleNo='+plateNo+'&'+svcParams; // original
+        params = '?typeId='+type+'&vehicleNo='+plateNo+'&'+svcParams+'&page='+page+'&size='+size;
+      } else {  // else is ic.
+        // params = '?typeId='+type+'&vehicleNo='+'&'+svcParams; // original
+        params = '?typeId='+type+'&vehicleNo='+'&'+svcParams+'&page='+page+'&size='+size;
       }
 
     } else if(svcName == 'checkPoliceReport') {

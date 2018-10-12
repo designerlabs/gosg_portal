@@ -46,6 +46,7 @@ import { DigitalservicesComponent } from './digitalservices/digitalservices.comp
 import { RssComponent } from './article/rss/rss.component';
 import { ContentComponent } from './article/content/content.component';
 import { EparticipationComponent } from './eparticipation/eparticipation.component';
+import { GareportsComponent } from './gareports/gareports.component';
 import { StatisticComponent } from './statistic/statistic.component';
 import { SitemapComponent } from './sitemap/sitemap.component';
 import { ArchivecategoryComponent } from './archive/archivecategory/archivecategory.component';
@@ -96,6 +97,7 @@ export const appRoutes: Routes = [
     {path: 'contact', component: ContactComponent},
     {path: 'feedback', component: FeedbackComponent},
     {path: 'onlineservice', component: OnlineserviceComponent},
+    {path: 'ga_reports', component: GareportsComponent},
     {path: 'subscription/set_active/:id', component: SetactiveComponent},
     {path: 'subscription', component: SubscriptionComponent},
     {path: 'unsubscribe', component: UnsubscribeComponent},

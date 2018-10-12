@@ -30,12 +30,13 @@
                             <div class="lifeEventBox-description font-size-s">
                               <div style="text-align: center !important; font-weight: bold !important;" class="lifeEventBox-description font-size-s lefteventlist"  [innerHTML]="(getContent?.categoryDescription?.length > 100)? (getContent?.categoryDescription | slice:0:100)+'...':(getContent?.categoryDescription)">
                               </div>
-                              <ul style="list-style:none; padding: 5px 0px; margin: 0px;">
-                                <li *ngFor="let getSubCat of getContent?.subCategoryList; let i = index;">
-                                    <a class="lifeEventCategory" href="" [routerLink]="['/subcategory', getSubCat.categoryCode]">&lt; {{getSubCat.categoryName}}</a>
+                              <ul style="list-style:none; padding: 5px 25px; margin: 0px; text-align: left;">
+                                <li *ngFor="let getSubCat of getContent?.subCategoryList; let i = index;" style="text-indent: -5px;">
+                                    <a *ngIf="i < 5" class="lifeEventCategory" href="" [routerLink]="['/subcategory', getSubCat.categoryCode]"><i style="font-size:5px;  position: relative; top: -3px;" class="fa fa-circle"></i> {{getSubCat.categoryName}}</a>
                                     <!-- *ngIf="i < 5" -->
                                 </li>
                               </ul>
+                              <div  class="font-size-s" style="text-align: right; cursor:pointer;"><a style="position: absolute; bottom: 0; padding: 16px 20px; left: 0; width: 95%;" [routerLink]="['/category', getContent.categoryCode]"><i class="fa fa-caret-right"></i> {{'home.readmore' | translate }}</a></div>
 
                               <!-- <a [routerLink]="['/subcategory', subData.categoryCode]" *ngFor="let subData of getContent.subCategoryList; let i = index; let lastItem = last">
                                       {{subData.categoryName}} <i class="{{lastItem ? '' : 'fa fa-angle-right'}}" style="font-weight: bold;"></i>
@@ -66,12 +67,13 @@
                           <div  style="text-align: center !important; font-weight: bold !important;"  class="lifeEventBox-description font-size-s lefteventlist"  [innerHTML]="(getContent?.categoryDescription?.length > 100)? (getContent?.categoryDescription | slice:0:100)+'...':(getContent?.categoryDescription)">
                           </div>
 
-                          <ul style="list-style:none; padding: 5px 0px; margin: 0px;">
-                              <li *ngFor="let getSubCat of getContent?.subCategoryList; let i = index;">
-                                  <a class="lifeEventCategory" href="" [routerLink]="['/subcategory', getSubCat.categoryCode]">&lt; {{getSubCat.categoryName}}</a>
+                          <ul style="list-style:none; padding: 5px 25px; margin: 0px; text-align: left;">
+                              <li *ngFor="let getSubCat of getContent?.subCategoryList; let i = index;" style="text-indent: -5px;">
+                                  <a *ngIf="i < 5" class="lifeEventCategory" href="" [routerLink]="['/subcategory', getSubCat.categoryCode]"><i style="font-size:5px;  position: relative; top: -3px;" class="fa fa-circle"></i> {{getSubCat.categoryName}}</a>
                                   <!-- *ngIf="i < 5" -->
                               </li>
                             </ul>
+                            <div  class="font-size-s" style="text-align: right; cursor:pointer;"><a style="position: absolute; bottom: 0; padding: 16px 20px; left: 0; width: 95%;" [routerLink]="['/category', getContent.categoryCode]"><i class="fa fa-caret-right"></i> {{'home.readmore' | translate }}</a></div>
                           <!-- <a [routerLink]="['/subcategory', subData.categoryCode]" *ngFor="let subData of getContent.subCategoryList; let i = index; let lastItem = last">
                                   {{subData.categoryName}} <i class="{{lastItem ? '' : 'fa fa-angle-right'}}" style="font-weight: bold;"></i>
                           </a> -->

@@ -2,7 +2,7 @@
   <div class="row poll" id="div_poll" style="background: #eee; margin-top: 20px; width: 100%">
       <h2 hidden>User IP is {{ ipData }}</h2>
 
-      <div class="col-md-12">
+      <div class="col-md-12" *ngIf="lengthPoll != 0">
           <!-- <div id="polls_result_on_submit" style="padding-bottom: 30px;">
           </div> -->
           <!-- Poll Questions and Answers with submit button -->

@@ -295,12 +295,12 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
       this.languageId = 1;
     }
 
-    if(!this.currTab){
-      this.currTab = parseInt(localStorage.getItem('currSearchTab'));
-    }else{
+    //if(!this.currTab){
+    //  this.currTab = parseInt(localStorage.getItem('currSearchTab'));
+    //}else{
       localStorage.setItem("currSearchTab", "0");
       this.currTab = 0;
-    }
+    //}
     // this.reff = document.referrer.split("/")[1];
     this.getSearchUrl();
 
@@ -309,13 +309,11 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
     this.ser_word = localStorage.getItem('ser_word');
 
     if(this.ser_word.length > 0) {
-      this.tabIndex = this.currTab;
       this.searchByKeyword(this.ser_word);
     }
   }
 
   ngAfterViewInit() {
-    // this.selectedIndex = 2;
   }
 
   ngOnDestroy() {
@@ -425,11 +423,13 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
       if(type != 'global') {
         aryObj.name = inx;
         aryObj.val = objs[inx];
+        aryObj.checked = true;
       } else {
         aryObj.title = objs[inx].title;
         aryObj.description = objs[inx].description;
         aryObj.url = objs[inx].url;
         aryObj.date = objs[inx].date;
+        aryObj.checked = true;
       }
 
       // do something with person
@@ -561,6 +561,7 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
     return res;
   }
 
+
   searchByKeyword(valkeyword, opt?) {
 
     this.getSearchUrl();
@@ -572,7 +573,7 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
 
     let env = window.location.hostname;
     let envOrigin = window.location.origin;
-    let localURL = envOrigin+'/gosg/';
+    //let localURL = envOrigin+'/gosg/';
 
     this.totalElements = 0;
     let num;
@@ -676,11 +677,13 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
 
         // Search Specification
         if ((this.valTopic && this.valTopic.length >= 1) && this.category_topic) {
+          //console.log(this.valTopic);
           this.checkCurrObj(this.category_topic);
           this.addFilterAry(this.valTopic, this.category_topic);
         }
 
         if ((this.valSubTopic && this.valSubTopic.length >= 1) && this.category_sub_topic) {
+          //console.log(this.valSubTopic);
           this.checkCurrObj(this.category_sub_topic);
           this.addFilterAry(this.valSubTopic, this.category_sub_topic);
         }
@@ -758,7 +761,7 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
       this.loading = true;
 
       if (this.tabIndex === 0 || this.tabIndex === 1) { // INTERNAL & ONLINE SERVICES SEARCH
-
+      //console.log(dataUrl); 
       return this.http.post(dataUrl, payloadObj)
         .map(res => res.json())
         .subscribe(rData => {
@@ -800,21 +803,21 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
               if (rData.aggregations.histogram) {
                 this.ddmonthPub = this.changeAryVal(rData.aggregations.histogram[0],'generic');
               }
-
+              
               //
               rData.aggregations['filter_topic.category'][0].active_cat.forEach(item => {
                 item = this.changeAryVal(item,'generic')
                 topic = { "name": item[0].name, "val": item[0].val }
                 this.ddtopics.push(topic)
               });
+              this.addCheckedProperty(this.ddtopics);
+            
               rData.aggregations['filter_sub_topic.category'][0].active_cat.forEach(item => {
                 item = this.changeAryVal(item,'generic')
                 topic = { "name": item[0].name, "val": item[0].val }
                 this.ddsubTopics.push(topic)
               });
-
-              //
-              //
+              this.addCheckedProperty(this.ddsubTopics);
 
             } else if (this.tabIndex == 1) { // ONLINE SERVICES
               let ministry: any = {};
@@ -826,6 +829,7 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
                 ministry = { "name": item[0].name, "val": item[0].val }
                 this.ddministry.push(ministry);
               });
+              this.addCheckedProperty(this.ddministry);
 
               rData.aggregations.agencyAgg.forEach(item => {
                 item = this.changeAryVal(item,'generic');
@@ -833,6 +837,7 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
                 agency = { "name": item[0].name, "val": item[0].val }
                 this.ddagency.push(agency);
               });
+              this.addCheckedProperty(this.ddagency);
 
             }
 
@@ -1217,5 +1222,68 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
     //
     //
     this.searchByKeyword(this.ser_word);
+  }
+
+  valueChangeTopic(model,index, $event) {
+    //set the two-way binding here for the specific unit with the event
+    model[index].checked = $event.checked;
+    this.valTopic = [];
+    for (let i in this.ddtopics) {
+      if (model[i].checked) {
+        this.valTopic.push(model[i].name);
+      }
+    }
+  }
+
+  valueChangeSubTopic(model,index, $event) {
+    //set the two-way binding here for the specific unit with the event
+    model[index].checked = $event.checked;
+    this.valSubTopic = [];
+    for (let i in this.ddsubTopics) {
+      if (model[i].checked) {
+        this.valSubTopic.push(model[i].name);
+      }
+    }
+  }
+
+  valueChangeMonthPub(model, index, $event) {
+    //set the two-way binding here for the specific unit with the event
+    model[index].checked = $event.checked;
+    this.valMonPub = [];
+    for (let i in this.ddmonthPub) {
+      if (model[i].checked) {
+        this.valMonPub.push(model[i].name);
+      }
+    }
+  }
+
+  valueChangeMinistry(model, index, $event) {
+    //set the two-way binding here for the specific unit with the event
+    model[index].checked = $event.checked;
+    this.valMinistry = [];
+    for (let i in this.ddministry) {
+      if (model[i].checked) {
+        this.valMinistry.push(model[i].name);
+      }
+    }
+  }
+
+  valueChangeAgency(model, index, $event) {
+    //set the two-way binding here for the specific unit with the event
+    model[index].checked = $event.checked;
+    this.valAgency = [];
+    for (let i in this.ddagency) {
+      if (model[i].checked) {
+        this.valAgency.push(model[i].name);
+      }
+    }
+  }
+
+  addCheckedProperty(model) {
+    model.forEach(item => {
+      if (!item.hasOwnProperty('checked')) {
+        item.checked = true; //change as per your requirement
+      }  
+    });
   }
 }

@@ -140,6 +140,7 @@ import { SharedLoaderComponent } from '../loader/shared-loader.component';
 import { RssmainComponent } from '../article/rss/rssmain/rssmain.component';
 import { TruncatePipe } from '../pipe/truncate.pipe';
 import { StatisticService } from '../statistic/statistic.service';
+import { GareportsComponent } from '../gareports/gareports.component';
 
 // import { LifeeventComponent } from '../lifeevent/lifeevent.component';
 //import { GalleryService } from '../gallery/gallery.service';
@@ -155,7 +156,12 @@ export function HttpLoaderFactory(http: Http) {
     HttpModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
-      preventDuplicates: true
+      preventDuplicates: true,
+      closeButton: true,
+      positionClass: 'toast-top-right',
+      tapToDismiss: false,
+      timeOut: 6000
+      //extendedTimeOut: 0
     }),
     FormsModule,
     HttpClientModule,
@@ -233,7 +239,8 @@ export function HttpLoaderFactory(http: Http) {
     SharedLoaderComponent,
     RssmainComponent,
     // TruncatePipe,
-    SchoolPopupDialog
+    SchoolPopupDialog,
+    GareportsComponent
     // SearchResultComponent
   ],
 

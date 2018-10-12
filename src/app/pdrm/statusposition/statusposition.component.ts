@@ -38,6 +38,8 @@ export class StatuspositionComponent implements OnInit, OnDestroy {
   public showNoData = false;
   dsvcCode:any;
   agcCode:any;
+  responsePosition: any;
+  enquiry: any;
 
   searchForm: FormGroup;  
   public ic: FormControl;  
@@ -68,6 +70,9 @@ export class StatuspositionComponent implements OnInit, OnDestroy {
 
         if (myLang == 'en') {
 
+          this.responsePosition = 'YOU HAVE NO INTAKE FOR PDRM POSITION.';
+          this.enquiry = 'ANY ENQUIRIES PLEASE CALL INTAKE UNIT, BUKIT AMAN AT ON LINE 03-2266 8350 / 8351 / 8349';
+
             translate.get('HOME').subscribe((res: any) => {
                 this.lang = 'en';
                 this.langID = 1;
@@ -75,6 +80,9 @@ export class StatuspositionComponent implements OnInit, OnDestroy {
         }
 
         if (myLang == 'ms') {
+          
+          this.responsePosition = 'ANDA TIADA PENGAMBILAN JAWATAN PDRM.';
+          this.enquiry = 'SEBARANG PERTANYAAN SILA HUBUNGI UNIT PENGAMBILAN, BUKIT AMAN DI TALIAN 03-2266 8350 / 8351 / 8349';
 
             translate.get('HOME').subscribe((res: any) => {
                 this.lang = 'ms';
@@ -85,6 +93,8 @@ export class StatuspositionComponent implements OnInit, OnDestroy {
         if(this.topnavservice.flagLang){
           //this.subscription = this.getFaq(this.langID);
         }
+
+        this.getAnnoucement();
 
     });
   }
@@ -155,15 +165,16 @@ export class StatuspositionComponent implements OnInit, OnDestroy {
 
       this.loading = false;
       let data = {
+
         "user": {
           "userId": 1411,
           "pid": "871222145031",
           "identificationNo": "871222145031",
           "passportNo": "",
           "fullName": "Encik Saman Trafik2",
-          "email": "saman2@yopmail.com"
-         
+          "email": "saman2@yopmail.com"         
         }
+        
       }
 
     
@@ -236,22 +247,27 @@ export class StatuspositionComponent implements OnInit, OnDestroy {
   }
 
   getAnnoucement(){
-    this.loading = true;
-    this.protectedService.postProtected('','pdrm/getAnnoucement?type=3'+'&agency='+this.agcCode+'&service='+this.dsvcCode+'&language='+this.langID).subscribe(
-    data => {
-      this.sharedService.errorHandling(data, (function(){
 
-        this.dataAnnouncement = data.announcementResource.content;
-        console.log(this.dataAnnouncement);
-     
-      }).bind(this));
-      this.loading = false;
-      
-    },
-    error => {
-      this.toastr.error(JSON.parse(error._body).statusDesc, '');
-      this.loading = false;
-    }); 
+      if(!environment.staging){
+        this.loading = true;
+        this.protectedService.postProtected('','pdrm/getAnnoucement?type=3'+'&agency='+this.agcCode+'&service='+this.dsvcCode+'&language='+this.langID).subscribe(
+        data => {
+          this.sharedService.errorHandling(data, (function(){
+
+            this.dataAnnouncement = data.announcementResource.content;
+            console.log(this.dataAnnouncement);
+        
+          }).bind(this));
+          this.loading = false;
+          
+        },
+        error => {
+          this.toastr.error(JSON.parse(error._body).statusDesc, '');
+          this.loading = false;
+        }); 
+    } else {
+      this.dataAnnouncement = '<P STYLE="TEXT-ALIGN: JUSTIFY;"><SPAN STYLE="TEXT-DECORATION: UNDERLINE;">PENGUMUMAN</SPAN></P> <TABLE WIDTH="100%"WIDTH="100%" STYLE="BORDER: CURRENTCOLOR; BORDER-IMAGE: NONE;" BORDER="0" CELLSPACING="0" CELLPADDING="0"> <TBODY> <TR> <TD VALIGN="TOP" STYLE="PADDING: 0CM 5.4PT; BORDER: #000000; BORDER-IMAGE: NONE; WIDTH: 16.4PT; TEXT-ALIGN: LEFT; BACKGROUND-COLOR: TRANSPARENT;"><SPAN STYLE="FONT-FAMILY: TIMES NEW ROMAN; FONT-SIZE: 16PX;"> </SPAN> <P><SPAN STYLE="FONT-FAMILY: CALIBRI; FONT-SIZE: 16PX;">1</SPAN></P> <SPAN STYLE="FONT-FAMILY: TIMES NEW ROMAN; FONT-SIZE: 16PX;"> </SPAN></TD> <TD VALIGN="TOP" STYLE="PADDING: 0CM 5.4PT; BORDER: #000000; BORDER-IMAGE: NONE; WIDTH: 451.1PT; TEXT-ALIGN: LEFT; BACKGROUND-COLOR: TRANSPARENT;"><SPAN STYLE="FONT-FAMILY: TIMES NEW ROMAN; FONT-SIZE: 16PX;"> </SPAN> <P STYLE="TEXT-ALIGN: JUSTIFY;"><SPAN STYLE="FONT-FAMILY: "TIMES NEW ROMAN",SERIF; FONT-SIZE: 12PT;">PANGGILAN EKSESAIS PEMERIKSAAN UJIAN FIZIKAL UNIT PENGAMBILAN POLIS DIRAJA MALAYSIA BAGI JAWATAN INSPEKTOR POLIS (YA13), KONSTABEL POLIS (YA1) DAN KONSTABEL POLIS (YT1) YANG TELAH BERDAFTAR DENGAN SURAHANJAYA PERKHIDMATAN AWAM (SPA) MELALUI SISTEM PENDAFTARAN PEKERJAAN DALAM PERKHIDMATAN AWAM (SPA8I).</SPAN></P> <SPAN STYLE="FONT-FAMILY: TIMES NEW ROMAN; FONT-SIZE: 16PX;"> </SPAN></TD> </TR> <TR> <TD VALIGN="TOP" STYLE="PADDING: 0CM 5.4PT; BORDER: #000000; BORDER-IMAGE: NONE; WIDTH: 16.4PT; TEXT-ALIGN: LEFT; BACKGROUND-COLOR: TRANSPARENT;"><SPAN STYLE="FONT-FAMILY: TIMES NEW ROMAN; FONT-SIZE: 16PX;"> </SPAN> <P><SPAN STYLE="FONT-FAMILY: CALIBRI; FONT-SIZE: 16PX;">2</SPAN></P> <SPAN STYLE="FONT-FAMILY: TIMES NEW ROMAN; FONT-SIZE: 16PX;"> </SPAN></TD> <TD VALIGN="TOP" STYLE="PADDING: 0CM 5.4PT; BORDER: #000000; BORDER-IMAGE: NONE; WIDTH: 451.1PT; TEXT-ALIGN: LEFT; BACKGROUND-COLOR: TRANSPARENT;"><SPAN STYLE="FONT-FAMILY: TIMES NEW ROMAN; FONT-SIZE: 16PX;"> </SPAN> <P STYLE="TEXT-ALIGN: JUSTIFY;"><SPAN STYLE="FONT-FAMILY: "TIMES NEW ROMAN",SERIF; FONT-SIZE: 12PT;">CALON – CALON YANG <SPAN STYLE="TEXT-DECORATION: UNDERLINE;">TIDAK DISENARAIKAN </SPAN>DI DALAM SISTEM ADALAH DIANGGAP <SPAN STYLE="TEXT-DECORATION: UNDERLINE;">TIDAK BERJAYA </SPAN>DAN DIKEHENDAKI MENGISI KEMBALI KE SISTEM PENDAFTARAN PEKERJAAN DALAM PERKHIDMATAN AWAM (SPA8I) BAGI SESI EKSESAIS YANG AKAN DATANG.</SPAN></P> <SPAN STYLE="FONT-FAMILY: TIMES NEW ROMAN; FONT-SIZE: 16PX;"> </SPAN></TD> </TR> <TR> <TD VALIGN="TOP" STYLE="PADDING: 0CM 5.4PT; BORDER: #000000; BORDER-IMAGE: NONE; WIDTH: 16.4PT; TEXT-ALIGN: LEFT; BACKGROUND-COLOR: TRANSPARENT;"><SPAN STYLE="FONT-FAMILY: TIMES NEW ROMAN; FONT-SIZE: 16PX;"> </SPAN> <P><SPAN STYLE="FONT-FAMILY: CALIBRI; FONT-SIZE: 16PX;">3</SPAN></P> <SPAN STYLE="FONT-FAMILY: TIMES NEW ROMAN; FONT-SIZE: 16PX;"> </SPAN></TD> <TD VALIGN="TOP" STYLE="PADDING: 0CM 5.4PT; BORDER: #000000; BORDER-IMAGE: NONE; WIDTH: 451.1PT; TEXT-ALIGN: LEFT; BACKGROUND-COLOR: TRANSPARENT;"><SPAN STYLE="FONT-FAMILY: TIMES NEW ROMAN; FONT-SIZE: 16PX;"> </SPAN> <P STYLE="TEXT-ALIGN: JUSTIFY;"><SPAN STYLE="FONT-FAMILY: "TIMES NEW ROMAN",SERIF; FONT-SIZE: 12PT;">CALON- CALON YANG BERJAYA <STRONG>DIWAJIBKAN </STRONG>MENCETAK SURAT TAWARAN EKSESAIS PEMERIKSAAN FIZIKAL DAN BORANG GANTI RUGI DAN DIBAWA PADA HARI PEMERIKSAAN UJIAN FIZIKAL DILAKSANAKAN.</SPAN></P> <SPAN STYLE="FONT-FAMILY: TIMES NEW ROMAN; FONT-SIZE: 16PX;"> </SPAN></TD> </TR> <TR> <TD VALIGN="TOP" STYLE="PADDING: 0CM 5.4PT; BORDER: #000000; BORDER-IMAGE: NONE; WIDTH: 16.4PT; TEXT-ALIGN: LEFT; BACKGROUND-COLOR: TRANSPARENT;"><SPAN STYLE="FONT-FAMILY: TIMES NEW ROMAN; FONT-SIZE: 16PX;"> </SPAN> <P><SPAN STYLE="FONT-FAMILY: CALIBRI; FONT-SIZE: 16PX;">4</SPAN></P> <SPAN STYLE="FONT-FAMILY: TIMES NEW ROMAN; FONT-SIZE: 16PX;"> </SPAN></TD> <TD VALIGN="TOP" STYLE="PADDING: 0CM 5.4PT; BORDER: #000000; BORDER-IMAGE: NONE; WIDTH: 451.1PT; TEXT-ALIGN: LEFT; BACKGROUND-COLOR: TRANSPARENT;"><SPAN STYLE="FONT-FAMILY: TIMES NEW ROMAN; FONT-SIZE: 16PX;"> </SPAN> <P STYLE="TEXT-ALIGN: JUSTIFY;"><SPAN STYLE="FONT-FAMILY: "TIMES NEW ROMAN",SERIF; FONT-SIZE: 12PT;">KEGAGALAN ANDA UNTUK MENCETAK SURAT TAWARAN DAN MEMENUHI SYARAT-SYARAT YANG DINYATAKAN DALAM SURAT TAWARAN TERSEBUT AKAN DIHALANG MENJALANI UJIAN PEMERIKSAAN FIZIKAL.</SPAN></P> <SPAN STYLE="FONT-FAMILY: TIMES NEW ROMAN; FONT-SIZE: 16PX;"> </SPAN></TD> </TR> <TR> <TD VALIGN="TOP" STYLE="PADDING: 0CM 5.4PT; BORDER: #000000; BORDER-IMAGE: NONE; WIDTH: 16.4PT; TEXT-ALIGN: LEFT; BACKGROUND-COLOR: TRANSPARENT;"><SPAN STYLE="FONT-FAMILY: TIMES NEW ROMAN; FONT-SIZE: 16PX;"> </SPAN> <P><SPAN STYLE="FONT-FAMILY: CALIBRI; FONT-SIZE: 16PX;">5</SPAN></P> <SPAN STYLE="FONT-FAMILY: TIMES NEW ROMAN; FONT-SIZE: 16PX;"> </SPAN></TD> <TD VALIGN="TOP" STYLE="PADDING: 0CM 5.4PT; BORDER: #000000; BORDER-IMAGE: NONE; WIDTH: 451.1PT; TEXT-ALIGN: LEFT; BACKGROUND-COLOR: TRANSPARENT;"><SPAN STYLE="FONT-FAMILY: TIMES NEW ROMAN; FONT-SIZE: 16PX;"> </SPAN> <P STYLE="TEXT-ALIGN: JUSTIFY;"><SPAN STYLE="FONT-FAMILY: "TIMES NEW ROMAN",SERIF; FONT-SIZE: 12PT;">SEGALA KEPUTUSAN ADALAH MUKTAMAD DAN RAYUAN TIDAK AKAN DITERIMA.</SPAN></P> <SPAN STYLE="FONT-FAMILY: TIMES NEW ROMAN; FONT-SIZE: 16PX;"> </SPAN></TD> </TR> </TBODY> </TABLE>';
+    }
   }
 
   openLink(varUrl){

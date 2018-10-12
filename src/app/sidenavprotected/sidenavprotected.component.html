@@ -19,15 +19,21 @@
         </li>
 
         <li>
-          <a routerLinkActive="topactive" class="font-size-s" [routerLink]="['contact']"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ 'home.menu.contact' | translate }}</a> </li>
+          <a routerLinkActive="topactive" class="font-size-s" href="" [routerLink]="['/contact']"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ 'home.menu.contact' | translate }}</a> </li>
         <li>
-          <a routerLinkActive="topactive" class="font-size-s" [routerLink]="['faq']"><i class="fa fa-question-circle" aria-hidden="true"></i> {{ 'home.menu.faq' | translate }}</a>
+          <a routerLinkActive="topactive" class="font-size-s" href="" [routerLink]="['/faq']"><i class="fa fa-question-circle" aria-hidden="true"></i> {{ 'home.menu.faq' | translate }}</a>
         </li>
-        <li>
+        <!-- <li>
           <a routerLinkActive="topactive" class="font-size-s" [routerLink]="['/content', 15021]"><i class="fa fa-book" aria-hidden="true"></i> {{ 'home.menu.manual' | translate }}</a>
         </li>
         <li>
-          <a routerLinkActive="topactive" class="font-size-s" [routerLink]="['/content', 15019]"><i class="fa fa-globe" aria-hidden="true"></i> {{ 'home.menu.aboutus' | translate }}</a>
+          <a routerLinkActive="topactive" class="font-size-s" [routerLink]="['/content', 26566]"><i class="fa fa-globe" aria-hidden="true"></i> {{ 'home.menu.aboutus' | translate }}</a>
+        </li> -->
+        <li>
+          <a routerLinkActive="topactive" class="font-size-s"  href="" style="cursor: pointer;" (click)="getUrl(15021)"><i class="fa fa-book" aria-hidden="true"></i> {{ 'home.menu.manual' | translate }}</a>
+        </li>
+        <li>
+          <a routerLinkActive="topactive" class="font-size-s"  href="" style="cursor: pointer;" (click)="getUrl(15019)"><i class="fa fa-globe" aria-hidden="true"></i> {{ 'home.menu.aboutus' | translate }}</a>
         </li>
         <li>
             <a routerLinkActive="topactive" href="https://uapstaging.malaysia.gov.my/myprofile/change/password.jsp" class="font-size-s" target="_self"><i class="fa fa-key" aria-hidden="true"></i> {{ 'home.menu.changePass' | translate }}</a>

@@ -38,6 +38,7 @@ export class PollProtectedComponent implements OnInit, OnDestroy {
   pollPercent;
   progressbarVal;
   pollReference;
+  lengthPoll = 0;
   private subscriptionLang: ISubscription;
   private subscription: ISubscription;
 
@@ -94,6 +95,9 @@ export class PollProtectedComponent implements OnInit, OnDestroy {
       this.sharedService.errorHandling(eventData, (function(){
         console.log(eventData)
        // if(eventData.pollQuestionListDto > 0){
+        this.lengthPoll = eventData.pollQuestionListDto.length;
+        console.log(this.lengthPoll);
+        if(this.lengthPoll != 0 ){
           let resData = eventData.pollQuestionListDto[0];
           this.pollDataQuestion = resData.questionTitle;
           //console.log("POLL Protected: "+ this.pollDataQuestion);
@@ -103,6 +107,7 @@ export class PollProtectedComponent implements OnInit, OnDestroy {
           if (!this.latestResult) { // Check Latest Result Message while change lang
             this.showResult = ((localStorage.getItem('polldone') === resData.pollReference.toString()));
           }
+        }
        // }
 
         // tslint:disable-next-line:radix

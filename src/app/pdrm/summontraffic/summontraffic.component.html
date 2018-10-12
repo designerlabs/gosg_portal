@@ -86,8 +86,10 @@
 
                         <div class="col-md-8" *ngIf="varSelect==1">
                             <mat-form-field class="example-full-width">
-                                <input matInput placeholder="" formControlName="noCar" (keyup)="checkReqValues()"
-                                required tabindex="3"  style="color: black">
+ 
+                                <input matInput placeholder="" formControlName="noCar" (keyup)="checkReqValues()" maxlength="9"
+                                (keypress)="isNumberAndAlphabet(event)" required tabindex="3"  style="color: black">
+
                                 <mat-error *ngIf="searchForm.controls.noCar.hasError('required')">
                                     {{ 'pdrm.placeholder.noCar' | translate }} {{ 'pdrm.err.needed' | translate }}
                                 </mat-error>
@@ -161,11 +163,28 @@
     </div><br>
   
     <div *ngIf="showDetails">
+
+
+        <!-- farid testt start -->
+        <!-- <div class="row">
+                <div class="col-md-8">
+                    <p  style="color: black; font-weight: bold;"> axaxax </p>
+                </div>
+                <div class="col-md-4">
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Carian berdasarkan kata kunci" #myInput id="myInput" (keyup)="newRecord(myInput.value)" [(ngModel)]="query" style="color: black">
+                    </mat-form-field>
+                </div>
+        </div><br> -->
+        <!-- farid testt end -->
+
         <div class="row container">
+ 
             <div class="col-md-12 boldInfo">
                 <span>{{ 'pdrm.titleSummon' | translate }}</span><br>
                 <hr class="lineHr" style="border-top: #9c9c9d 2px solid;">
-            </div>
+            </div> 
+
         </div>
 
         <div class="row container blackFont" *ngIf="dataSummons.summonDetails.length > 0">
@@ -192,10 +211,23 @@
                 <!-- Jumlah Amaun (RM) -->
             </div>
 
-            <div class="col-md-9 boldInfo">
+            <!-- original -->
+            <!-- <div class="col-md-9 boldInfo">
                 {{this.dataSummons.summonDetails?.length}}
-                <!-- {{ammount}} -->
+            </div> -->
+
+            <!-- farid test starts -->
+            <div class="col-md-6 boldInfo">
+                    {{this.dataSummons.summonDetails?.length}}
             </div>
+            
+            <div class="col-md-3">
+                <mat-form-field class="example-full-width">
+                        <input matInput placeholder={{carianPlaceholder}} #myInput id="myInput" (keyup)="newRecord(myInput.value)" [(ngModel)]="query" style="color: black">
+                </mat-form-field>
+            </div>
+            <!-- farid test ends -->
+
         </div><br>
 
         <div class="row container paddingLR">
@@ -212,7 +244,7 @@
                     <th width="5%" class="mat-header-cell text-center paddingR">OP</th>
                     <th width="10%" class="mat-header-cell text-center paddingR">{{'pdrm.title.image' | translate}}</th>
                 </tr>
-                <tr class="mat-row table_row table_row_height" *ngFor="let data of dataSummons.summonDetails; let i = index;" role="row">
+                <tr class="mat-row table_row table_row_height" *ngFor="let data of dataSummons.summonDetails | search : query; let i = index;" role="row">
                     <td class="mat-cell text-center paddingR">{{i+1}}</td>
                     <td class="mat-cell paddingR">{{data.vehicle_registration_number}}</td>
                     <td class="mat-cell paddingR">{{data.summons_id_key}}</td>
@@ -220,9 +252,22 @@
                     <td class="mat-cell paddingR">{{data.offence_location}}</td>
                     <td class="mat-cell paddingR">{{data.offence_location}}</td>
                     <td class="mat-cell text-right paddingR">{{data.summons_amt}}</td>
-                    <td class="mat-cell text-center paddingR">-</td>
-                    <td class="mat-cell text-center paddingR">-</td>
-                    <td class="mat-cell text-center paddingR">-</td>
+                    <td class="mat-cell text-center paddingR"
+                        translate="{{ (data.sh == 'Y' ? '&#9989;' : '-') }}">
+                        {{data.sh}}
+                    </td>
+                    <td class="mat-cell text-center paddingR" 
+                        translate="{{ (data.op == 'Y' ? '&#9989;' : '-') }}">
+                        {{data.op}}
+                    </td>
+
+                    <td class="mat-cell text-center paddingR"
+                        (click)="pageLink(data.imageUrl)"
+                        translate="{{ (data.imageUrl != '' ? '&#10063;' : '-') }}"
+                        style="cursor: pointer; color:blue;"
+                        > {{data.imageUrl}} </td>                    
+
+
                 </tr>
                 <tr class="mat-row table_row table_row_height" *ngIf="showNoData">
                     <td colspan="10" class="mat-cell paddingR">
@@ -230,23 +275,78 @@
                 </tr>
             </table>                  
         </div><br>
-    </div><br>
+
+<!--  -->
+<!-- farid testt should put here starts  --> 
+
+<div class="float-right ">
+        <mat-form-field class="table_footer_pagecount" style="width: 50px;">
+  
+            <!-- original -->
+            <mat-select class="font-size-s" value="5" (change)="pageChange($event)">
+                <mat-option value="5">5</mat-option>
+                <mat-option value="10">10</mat-option>
+                <mat-option value="20">20</mat-option>
+                <mat-option value="50">50</mat-option>
+            </mat-select>
+
+        </mat-form-field>
+
+        <!-- <span class="float-right"> -->
+            <span style="color:#000; padding-right:20px;">{{ 'appmngt.tablebottom.page' | translate }}
+                    <strong>{{dataSummons?.pageNumber}}</strong> {{ 'appmngt.tablebottom.of' | translate }}
+                    <strong>{{dataSummons?.totalPages}}</strong> {{ 'appmngt.tablebottom.in' | translate }}
+                    <strong>{{dataSummons?.totalElements}}</strong> {{summonTraffic}}
+            </span>
+
+            <!-- original -->
+            <!-- <button mat-mini-fab color="basic" [disabled]="noPrevData"  
+                (click)="paginatorL(dataSummons?.pageNumber)"   
+                > -->
+
+            <!-- try testt farid -->
+            <button mat-mini-fab color="basic" [disabled]="noPrevData"  
+            (click)="paginatorL(1)" >
+
+            <i class="fa fa-angle-left" aria-hidden="true"></i>
+            </button>
+
+            <!-- original -->
+            <!-- <button mat-mini-fab color="basic" [disabled]="noNextData" 
+            (click)="paginatorR(dataSummons?.pageNumber, dataSummons?.totalPages)"> -->
+
+            <!-- farid try testt -->
+            <button mat-mini-fab color="basic" [disabled]="noNextData" 
+            (click)="paginatorR(1, dataSummons?.totalPages)">
+
+
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+            </button>
+        <!-- </span> -->
+
+</div>
+
+<!-- farid testt should put here ends -->
+<!--  -->
+
+</div><br>
 
     <div class="row container paddingLR30">
         <div class="col-md-12 boldInfo borderDiv">
-            <label class="">Petunjuk:</label><br>
+            <label class="">{{indicator}}:</label><br>
             <label class="">SH - Saman Senarai Hitam</label><br>
             <label class="">OP - Kesalahan Trafik Dilakukan Semasa Operasi Berkuatkuasa</label><br>
         </div>
     </div>
 
-    <div class="row container"><br>
-        <div class="col-md-12 boldInfo" innerHTML="{{dataAnnouncement}}">
+    <div class="row container" style="padding-left: 30px; padding-right: 30px"><br>
         <!-- <label class="redFont">Kadar kompaun saman berdasarkan prinsip "The More You Delay, The More You Pay". Sila buat bayaran saman secepat mungkin. 
             Lesen memandu & lesen kenderaan motor tidak boleh diperbaharui setelah no kad pengenalan disenarai
             hitamkan dalam sistem mySIKAP, Jabatan pengankutan jalan.
         </label> -->
+        <div class="col-md-12 " style="color: red; font-weight: bold;" innerHTML="{{dataAnnouncement}}">
         </div>
+
     </div><br>
   
     <!-- <div *ngIf="showNoData">

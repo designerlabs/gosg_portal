@@ -67,8 +67,12 @@
                                       <h4 class="font-size-m warna_font">
                                           {{tabContent.contentTitle}}
                                       </h4>
-                                      <span class="warna_font article-size font-size-s" [innerHTML]="tabContent.contentDescription"></span>
-                                      <div class="font-size-s" style="text-align: right;"><i class="fa fa-caret-right"></i> {{'home.readmore' | translate }}</div>
+                                      <span class="warna_font article-size font-size-s" [innerHTML]="tabContent.contentDescription | truncate : [140, '...']"></span>
+                                      <div  class="font-size-s" style="text-align: right;">
+                                        <span style="position: absolute; bottom: 25px; padding: 0px 20px; left: 0; width: 95%;">
+                                          <i class="fa fa-caret-right"></i> {{'home.readmore' | translate }}
+                                        </span>
+                                      </div>
                                   </a>
                               </div>
                             </div>
@@ -145,9 +149,12 @@
                                               <h4 class="font-size-m warna_font">
                                                   {{rightContent.categoryName}}
                                               </h4>
-                                              <span class="warna_font article-size font-size-s" [innerHTML]="rightContent.categoryDescription"></span>
-                                              <div class="font-size-s" style="text-align: right;">
-                                                  <i class="fa fa-caret-right"></i> {{'home.readmore' | translate }}</div>
+                                              <span class="warna_font article-size font-size-s" [innerHTML]="rightContent.categoryDescription | truncate : [140, '...']"></span>
+                                              <div  class="font-size-s" style="text-align: right;">
+                                                <span style="position: absolute; bottom: 25px; padding: 0px 20px; left: 0; width: 95%;">
+                                                  <i class="fa fa-caret-right"></i> {{'home.readmore' | translate }}
+                                                </span>
+                                              </div>
                                           </a>
                                       </div>
                                   </div>
@@ -168,9 +175,12 @@
                                             <h4 class="font-size-m warna_font">
                                                 {{rightContent.contentTitle}}
                                             </h4>
-                                            <span class="warna_font article-size font-size-s" [innerHTML]="rightContent.contentDescription"></span>
-                                            <div class="font-size-s" style="text-align: right;">
-                                                <i class="fa fa-caret-right"></i> {{'home.readmore' | translate }}</div>
+                                            <span class="warna_font article-size font-size-s" [innerHTML]="rightContent.contentDescription | truncate : [140, '...']"></span>
+                                            <div  class="font-size-s" style="text-align: right;">
+                                              <span style="position: absolute; bottom: 25px; padding: 0px 20px; left: 0; width: 95%;">
+                                                <i class="fa fa-caret-right"></i> {{'home.readmore' | translate }}
+                                              </span>
+                                            </div>
                                         </a>
                                     </div>
                                 </div>
@@ -235,7 +245,7 @@
                                   </div>
                               </div>
 
-                              <span class="font-size-s defaultColor content_description" [innerHTML]="article.categoryDescription"></span>
+                              <span class="font-size-s defaultColor content_description" [innerHTML]="article.categoryDescription "></span>
                           </div>
                           <div *ngFor="let rightContent of article.subCategoryList; let index=index; let odd=odd; let even=even;">
                               <div class="col-sm-6">
@@ -247,9 +257,14 @@
                                               <h4 class="font-size-m warna_font">
                                                   {{rightContent.categoryName}}
                                               </h4>
-                                              <span class="warna_font article-size font-size-s" [innerHTML]="rightContent.categoryDescription"></span>
-                                              <div class="font-size-s" style="text-align: right;">
-                                                  <i class="fa fa-caret-right"></i> {{'home.readmore' | translate }}</div>
+                                              <span class="warna_font article-size font-size-s" [innerHTML]="rightContent.categoryDescription | truncate : [140, '...']"></span>
+
+                                              <div  class="font-size-s" style="text-align: right;">
+                                                <span style="position: absolute; bottom: 25px; padding: 0px 20px; left: 0; width: 95%;">
+                                                  <i class="fa fa-caret-right"></i> {{'home.readmore' | translate }}
+                                                </span>
+                                              </div>
+
                                           </a>
                                       </div>
                                   </div>
@@ -280,7 +295,7 @@
                         </div>
 
                         <div class="row" *ngIf="articleService.leContent">
-                          <div class="col-md-12 warna_font" style="text-align: center;">
+                          <div class="col-md-12 warna_font" style="text-align: left;">
                               <form [formGroup]="scoreFormgrp" #scoreForm="ngForm" id="score-form" role="form" novalidate="novalidate">
                                 <div class="form-group col-md-12">
                                   <div class="radio">
@@ -305,8 +320,8 @@
                                 </div>
                                 <div ng-app class="form-group col-md-12" style="padding: 0px 30px;">
                                   <mat-form-field class="example-full-width" style="width:100%">
-                                      <textarea matInput tabindex="5" matTextareaAutosize #fbmsg formControlName="remarks" maxLength="500" placeholder="{{'feedback.label.content' | translate }}"></textarea>
-                                      <mat-hint align="end">{{fbmsg.value?.length || 0}}/500</mat-hint>
+                                      <textarea matInput tabindex="5" matTextareaAutosize #fbmsg formControlName="remarks" maxLength="200" placeholder="{{'feedback.label.content' | translate }}"></textarea>
+                                      <mat-hint align="end">{{fbmsg.value?.length || 0}}/200</mat-hint>
                                   </mat-form-field>
 
                               </div>
