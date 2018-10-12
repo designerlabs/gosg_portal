@@ -331,7 +331,14 @@ export class TopnavComponent implements OnInit, AfterViewInit, OnDestroy {
     this.loading = result;
   }
 
-  clickManual(){
+  clickFaq(){
+    this.navService.triggerContent(29360, localStorage.getItem('langID'));
+    this.navService.getContentUrl(29360, localStorage.getItem('langID'));
+    this.router.navigate(['/content', 29360]);
+    event.preventDefault();
+  }
+
+  clickManual(){ 
     //location.reload();
     this.navService.triggerContent(15021, localStorage.getItem('langID'));
     this.navService.getContentUrl(15021, localStorage.getItem('langID'));
@@ -340,10 +347,10 @@ export class TopnavComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   clickAboutus(){
-    //location.reload();
-    this.navService.triggerContent(26566, localStorage.getItem('langID'));
-    this.navService.getContentUrl(26566, localStorage.getItem('langID'));
-    this.router.navigate(['/content', 26566]);
+    //location.reload();26566
+    this.navService.triggerContent(15019, localStorage.getItem('langID'));
+    this.navService.getContentUrl(15019, localStorage.getItem('langID'));
+    this.router.navigate(['/content', 15019]);
     event.preventDefault();
   }
 }
