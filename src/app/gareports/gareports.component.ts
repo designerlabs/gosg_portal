@@ -21,10 +21,13 @@ export class GareportsComponent implements OnInit {
     this.getGA();
   }
 
-  getGACode(){
-    return this.http.get('https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=https://gosgstag.malaysia.gov.my/portal/index&prompt=consent&response_type=code&client_id=416088092941-sfsmok024hga24lu058dp2qqq9a1bl70.apps.googleusercontent.com&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fanalytics&access_type=offline')
+  getGAReport(frmDt, endDt, opt, token){
+
+
+    return this.http.post(`https://www.googleapis.com/analytics/v3/data/ga?ids=ga%3A173733410&start-date=${frmDt}&end-date=${endDt}&metrics=ga%3Ausers&dimensions=${opt}&access_token=${token}`, '', httpOtions)
       .subscribe(
         data => {
+          debugger;
           console.log(data);
         }, error => {
           console.log(error);
@@ -43,6 +46,7 @@ export class GareportsComponent implements OnInit {
     .subscribe(
       data => {
         console.log(data);
+        this.getGAReport('2018-09-09', '2018-10-10', 'ga:country', data['access_token']);
       }, error => {
         console.log(error);
       }
