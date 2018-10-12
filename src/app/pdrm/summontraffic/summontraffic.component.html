@@ -259,8 +259,15 @@
                     <td class="mat-cell text-center paddingR" 
                         translate="{{ (data.op == 'Y' ? '&#9989;' : '-') }}">
                         {{data.op}}
-                    </td>                    
-                    <td class="mat-cell text-center paddingR">-</td>
+                    </td>
+
+                    <td class="mat-cell text-center paddingR"
+                        (click)="pageLink(data.imageUrl)"
+                        translate="{{ (data.imageUrl != '' ? '&#10063;' : '-') }}"
+                        style="cursor: pointer; color:blue;"
+                        > {{data.imageUrl}} </td>                    
+
+
                 </tr>
                 <tr class="mat-row table_row table_row_height" *ngIf="showNoData">
                     <td colspan="10" class="mat-cell paddingR">

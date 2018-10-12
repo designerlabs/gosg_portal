@@ -41,6 +41,8 @@ export class SummontrafficComponent implements OnInit {
   pageSize = 5;
   pageNumber = 1;
   summonTraffic: any;
+  have:any ;
+  dontHave: any;
   noPrevData = true;
   noNextData = false;
   showNoData = false;
@@ -90,6 +92,8 @@ export class SummontrafficComponent implements OnInit {
         this.summonTraffic = 'Traffic Summon';
         this.indicator = 'Indicator';
         this.carianPlaceholder = "Search";
+        this.have = "Havee";
+        this.dontHave = "Dont Havee";
 
         translate.get('HOME').subscribe((res: any) => {
           this.lang = 'en';
@@ -102,6 +106,8 @@ export class SummontrafficComponent implements OnInit {
         this.summonTraffic = 'Saman Traffik';
         this.indicator = 'Petunjuk';
         this.carianPlaceholder = "Cari";
+        this.have = "Adaa";
+        this.dontHave = "Tiadaa";
 
         translate.get('HOME').subscribe((res: any) => {
           this.lang = 'ms';
@@ -316,7 +322,7 @@ export class SummontrafficComponent implements OnInit {
               "compound_ind": "Y",
               "district_code": null,
               "enforcement_date": "20060330",
-              "imageUrl": "?",
+              "imageUrl": "https://sso.rmp.gov.my/SM/LOADIMAGE_E.aspx?id=FbhH6gFYja7sd0o9alLg/wgQHDc9AamOnJH1sj9lRvtlLYaR6HZcga8opFj4uXa03uxWb9Uz+uDB04XaFJhehA==",
               "summons_id_key": "1810000200002AB895306",
               "vehicle_registration_number": "ADM310",
               "offence_date": "20060329",
@@ -346,7 +352,7 @@ export class SummontrafficComponent implements OnInit {
               "compound_ind": "Y",
               "district_code": null,
               "enforcement_date": "20131003",
-              "imageUrl": "?",
+              "imageUrl": "https://sso.rmp.gov.my/SM/LOADIMAGE_E.aspx?id=FbhH6gFYja7sd0o9alLg/wgQHDc9AamOnJH1sj9lRvtlLYaR6HZcga8opFj4uXa03uxWb9Uz+uDB04XaFJhehA==",
               "summons_id_key": "1812000200002AK469286",
               "vehicle_registration_number": "WPW7663",
               "offence_date": "20131001",
@@ -477,6 +483,7 @@ export class SummontrafficComponent implements OnInit {
           "totalElements": 5
         };
       } else {
+
         this.loading = false;
         this.dataSummons = {
             "summonDetails": [
@@ -486,7 +493,7 @@ export class SummontrafficComponent implements OnInit {
                 "compound_ind": "Y",
                 "district_code": null,
                 "enforcement_date": "20131003",
-                "imageUrl": "?",
+                "imageUrl": "https://sso.rmp.gov.my/SM/LOADIMAGE_E.aspx?id=FbhH6gFYja7sd0o9alLg/wgQHDc9AamOnJH1sj9lRvtlLYaR6HZcga8opFj4uXa03uxWb9Uz+uDB04XaFJhehA==",
                 "summons_id_key": "1812000200002AK469286",
                 "vehicle_registration_number": "WPW7663",
                 "offence_date": "20131001",
@@ -814,6 +821,11 @@ export class SummontrafficComponent implements OnInit {
   ///////////////////
   //pagination ends
   ///////////////////
+
+  pageLink(param) {
+    window.open(param);
+    console.log('masok link param: ',param)
+  }
 
 
 }
