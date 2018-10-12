@@ -759,7 +759,7 @@ export class SummontrafficComponent implements OnInit {
     }
 
  
-    this.searchApp(null, this.pageNumber, this.pageSize); // to be open soon when api ready
+    this.searchApp(null, this.pageNumber, this.pageSize);
   }
   
   paginatorL(page){ 
