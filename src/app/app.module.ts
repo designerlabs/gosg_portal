@@ -36,7 +36,6 @@ import { ArchivesubcategoryComponent } from './archive/archivesubcategory/archiv
 import { ArchivecontentComponent } from './archive/archivecontent/archivecontent.component';
 import { PortalLoaderComponent } from './loader/portal-loader.component';
 import { HighlightboxComponent } from './highlightbox/highlightbox.component';
-import { GareportsComponent } from './gareports/gareports.component';
 // import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule } from "@angular/material";
 
 export function HttpLoaderFactory(http: Http) {
@@ -78,7 +77,6 @@ imports: [
     RegisterComponent,
     LoginComponent,
     SearchResultComponent,
-    GareportsComponent,
     SubarticleComponent,
     ArticleComponent,
     LifeeventComponent,

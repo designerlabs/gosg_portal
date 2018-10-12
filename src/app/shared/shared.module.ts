@@ -8,7 +8,6 @@ import { RouterModule, ActivatedRouteSnapshot } from '@angular/router';
 import { OwlModule } from "ng2-owl-carousel";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NguiAutoCompleteModule } from "@ngui/auto-complete/dist";
-import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 import { TopnavService } from '../header/topnav/topnav.service';
 import { ContactComponent } from "../staticpage/contact.component";
 import { SliderComponent } from '../slider/slider.component';
@@ -182,9 +181,7 @@ export function HttpLoaderFactory(http: Http) {
 	  NgxPaginationModule,
     ModalModule.forRoot(),
     // LoadingModule,
-    LeafletModule.forRoot(),
-    Ng2GoogleChartsModule
-
+    LeafletModule.forRoot()
   ],
 
   declarations: [
@@ -331,8 +328,7 @@ export function HttpLoaderFactory(http: Http) {
      SharedPipe,
      EventCalendarComponent,
      AgencydirectoryComponent,
-     SearchPipe,
-     Ng2GoogleChartsModule
+     SearchPipe
     //  SearchResultComponent
 
   ],
