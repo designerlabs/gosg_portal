@@ -1,0 +1,10 @@
+
+
+.detail-padding{
+    padding: 10px 20px;
+    overflow: auto;
+    height: 100%;
+}
+.detail-padding .margin-topBottom{
+    margin:5px 0;
+}
