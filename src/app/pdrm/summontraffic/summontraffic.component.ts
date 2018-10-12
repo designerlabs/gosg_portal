@@ -774,7 +774,7 @@ export class SummontrafficComponent implements OnInit {
       this.pageNumber = this.pageNumber + page;
       if (this.pageNumber == totalPages) {
         this.noNextData = true;
-      } 
+      }
 
       this.searchApp(null, this.pageNumber, this.pageSize);
 
