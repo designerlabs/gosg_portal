@@ -228,6 +228,8 @@ export class SummontrafficComponent implements OnInit {
         data => {
           this.sharedService.errorHandling(data, (function () {
 
+            console.log('data after service in browser: ', data);
+
             this.dataSummons = data.summonResource;
 
             // off kejap 
@@ -238,9 +240,10 @@ export class SummontrafficComponent implements OnInit {
             /////////////////////
             //farid tesst starts // nanti kena buang ni. currntly api error
 
-            // if(this.dataSummons.summonDetails == null && this.dataSummons.total_summons != null) {
-            //   this.showNoData = true;     
-            // }
+            // sekiranya nombor kereta yang dicari tidak ada pada ic dia sendiri...
+            if(this.dataSummons.summonDetails == null && this.dataSummons.total_summons == 0) {
+              this.showNoData = true;     
+            }
 
             if (this.dataSummons.summonDetails != null) {
               if (this.dataSummons.summonDetails.length == 0) {
@@ -252,14 +255,18 @@ export class SummontrafficComponent implements OnInit {
               this.noPrevData = true;
               this.noNextData = true;
             } else {
-              this.noPrevData = false;
-              this.noNextData = false;
+              // this.noPrevData = false;
+              // this.noNextData = false;
             }
 
             if (this.pageNumber == 1) {
               this.noPrevData = true;
             } else {
-              this.noPrevData = false;
+              // this.noPrevData = false;
+            }
+
+            if (this.dataSummons.totalPages == this.dataSummons.pageNumber) {
+              this.noNextData = true;
             }
 
              // sekiranya ic yg dicari bukan berdasarkan kereta sendiri
@@ -274,14 +281,14 @@ export class SummontrafficComponent implements OnInit {
             //original
             // if (this.dataSummons.summonDetails.length > 0) {
 
-            //test
+            //test // sekiranya ada data 
             if (this.dataSummons.summonDetails != null && this.dataSummons.summonDetails.length > 0) {
 
               this.showDetails = true;
               this.showNoData = false;
             } else {
-              this.showDetails = false;
-              this.showNoData = true;
+              // this.showDetails = false;
+              // this.showNoData = true;
             }
 
           }).bind(this));
@@ -754,7 +761,7 @@ export class SummontrafficComponent implements OnInit {
  
   }
 
-  paginatorR(page, totalPages){ 
+  paginatorR(page, totalPages){
 
     //original
     // this.noPrevData = page >= 1 ? false : true;
@@ -762,19 +769,22 @@ export class SummontrafficComponent implements OnInit {
     // this.noNextData = pageInc === totalPages;
     //original
 
-    //farid try test
+    //farid try test starts
       this.noPrevData = false;
       this.pageNumber = this.pageNumber + page;
       if (this.pageNumber == totalPages) {
         this.noNextData = true;
       }
 
-      if (this.dataSummons.totalPages == this.dataSummons.pageNumber) {
-            this.noNextData = true;
-      }
-
       this.searchApp(null, this.pageNumber, this.pageSize);
-    //farid try test 
+
+      //KAT SINI MACAM TAK BETUL LAGI. function ni mcm lambat nak baca sebelom search app settle.
+      // if (this.dataSummons.totalPages == this.dataSummons.pageNumber) {
+      //   this.noNextData = true;
+      // }
+
+    //farid try test end'
+
   }
 
   getStatusApp(lang){
