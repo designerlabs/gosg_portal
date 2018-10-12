@@ -108,6 +108,7 @@ export class SubarticleComponent implements OnInit, OnDestroy {
   langId = this.langId;
 
   ngOnInit() {
+    localStorage.setItem('leCode', '');
     if(!this.langId){
       this.langId = localStorage.getItem('langID');
     }else{
@@ -146,13 +147,14 @@ export class SubarticleComponent implements OnInit, OnDestroy {
 
 
   submitForm(formValues:any){
+
     let body = {
         "contentCode": null,
         "score": null,
         "remarks": null
     };
 
-    body.contentCode = this.subID;
+    body.contentCode = localStorage.getItem('leCode');
     body.score = parseInt(formValues.score);
     body.remarks = formValues.remarks;
 

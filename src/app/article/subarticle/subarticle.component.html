@@ -320,8 +320,8 @@
                                 </div>
                                 <div ng-app class="form-group col-md-12" style="padding: 0px 30px;">
                                   <mat-form-field class="example-full-width" style="width:100%">
-                                      <textarea matInput tabindex="5" matTextareaAutosize #fbmsg formControlName="remarks" maxLength="500" placeholder="{{'feedback.label.content' | translate }}"></textarea>
-                                      <mat-hint align="end">{{fbmsg.value?.length || 0}}/500</mat-hint>
+                                      <textarea matInput tabindex="5" matTextareaAutosize #fbmsg formControlName="remarks" maxLength="200" placeholder="{{'feedback.label.content' | translate }}"></textarea>
+                                      <mat-hint align="end">{{fbmsg.value?.length || 0}}/200</mat-hint>
                                   </mat-form-field>
 
                               </div>

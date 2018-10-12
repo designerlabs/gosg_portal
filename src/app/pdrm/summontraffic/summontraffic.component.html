@@ -269,6 +269,7 @@
 <div class="float-right ">
         <mat-form-field class="table_footer_pagecount">
 
+<<<<<<< HEAD
                         <!-- original -->
                         <mat-select class="font-size-s" value="2" (change)="pageChange($event)">
 
@@ -280,42 +281,54 @@
                           <mat-option value="4">4</mat-option>
                           <mat-option value="5">5</mat-option>
                         </mat-select> 
+=======
+            <!-- original -->
+            <mat-select class="font-size-s" value="1" (change)="pageChange($event)">
+
+            <!-- farid try -->
+            <!-- <mat-select class="font-size-s" value="{{pageNumber}}" (change)="pageChange($event)"> -->
+                <mat-option value="1">1</mat-option>
+                <mat-option value="2">2</mat-option>
+                <mat-option value="3">3</mat-option>
+                <mat-option value="4">4</mat-option>
+                <mat-option value="5">5</mat-option>
+            </mat-select> 
+>>>>>>> 640b549bf538527ddf636447f105d8a1225b9661
         </mat-form-field>
 
         <!-- <span class="float-right"> -->
-                <span style="color:#000; padding-right:20px;">{{ 'appmngt.tablebottom.page' | translate }}
-                        <strong>{{dataSummons?.pageNumber}}</strong> {{ 'appmngt.tablebottom.of' | translate }}
-                        <strong>{{dataSummons?.totalPages}}</strong> {{ 'appmngt.tablebottom.in' | translate }}
-                        <strong>{{dataSummons?.totalElements}}</strong> {{summonTraffic}}
-                </span>
+            <span style="color:#000; padding-right:20px;">{{ 'appmngt.tablebottom.page' | translate }}
+                    <strong>{{dataSummons?.pageNumber}}</strong> {{ 'appmngt.tablebottom.of' | translate }}
+                    <strong>{{dataSummons?.totalPages}}</strong> {{ 'appmngt.tablebottom.in' | translate }}
+                    <strong>{{dataSummons?.totalElements}}</strong> {{summonTraffic}}
+            </span>
 
-                    <!-- original -->
-                    <!-- <button mat-mini-fab color="basic" [disabled]="noPrevData"  
-                      (click)="paginatorL(dataSummons?.pageNumber)"   
-                      > -->
+            <!-- original -->
+            <!-- <button mat-mini-fab color="basic" [disabled]="noPrevData"  
+                (click)="paginatorL(dataSummons?.pageNumber)"   
+                > -->
 
-                    <!-- try testt farid -->
-                      <button mat-mini-fab color="basic" [disabled]="noPrevData"  
-                      (click)="paginatorL(1)"   
-                      >
+            <!-- try testt farid -->
+            <button mat-mini-fab color="basic" [disabled]="noPrevData"  
+            (click)="paginatorL(1)" >
 
-                        <i class="fa fa-angle-left" aria-hidden="true"></i>
-                    </button>
+            <i class="fa fa-angle-left" aria-hidden="true"></i>
+            </button>
 
-                    <!-- original -->
-                      <!-- <button mat-mini-fab color="basic" [disabled]="noNextData" 
-                      (click)="paginatorR(dataSummons?.pageNumber, dataSummons?.totalPages)"> -->
+            <!-- original -->
+            <!-- <button mat-mini-fab color="basic" [disabled]="noNextData" 
+            (click)="paginatorR(dataSummons?.pageNumber, dataSummons?.totalPages)"> -->
 
-                      <!-- farid try testt -->
-                      <button mat-mini-fab color="basic" [disabled]="noNextData" 
-                      (click)="paginatorR(1, dataSummons?.totalPages)">
+            <!-- farid try testt -->
+            <button mat-mini-fab color="basic" [disabled]="noNextData" 
+            (click)="paginatorR(1, dataSummons?.totalPages)">
 
 
-                        <i class="fa fa-angle-right" aria-hidden="true"></i>
-                    </button>
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+            </button>
         <!-- </span> -->
 
-    </div>
+</div>
 
 <!-- farid testt should put here ends -->
 <!--  -->
