@@ -1,11 +1,99 @@
-<div style="min-height: 500px; width: 1000px;">
+<div style="height: 500px; width: 1000px;">
     <div class="bg_header bg_success_header">
         <h2 class="modal-title text-center">
             <i class="fa fa-info-circle"></i> MAKLUMAT LANJUT
         </h2>
     </div>
-    <div class="text-left" style="padding-top: 10px;">
-        <div class="col-md-3">LOKASI</div>
+    <div class="text-left detail-padding" >
+        <div  class="margin-topBottom">
+            <div class="col-md-3">LOKASI</div>
+            <div class="col-md-9">: {{data.dataschool.lokasi || 'Tidak Berkenaan'}}</div>
+        </div>
+        <div class="margin-topBottom">
+            <div class="col-md-3">BANTUAN</div>
+            <div class="col-md-9">: {{data.dataschool.bantuan || 'Tidak Berkenaan'}}</div>
+        </div>
+        <div  class="margin-topBottom">
+            <div class="col-md-3">MURID</div>
+            <div class="col-md-9">: {{data.dataschool.murid || 'Tidak Berkenaan'}}</div>
+        </div>
+        <div  class="margin-topBottom">
+            <div class="col-md-3">GURU</div>
+            <div class="col-md-9">: {{data.dataschool.guru || 'Tidak Berkenaan'}}</div>
+        </div>
+        <div  class="margin-topBottom">
+            <div class="col-md-3">AGENSI PELAKSANA</div>
+            <div class="col-md-9">: {{data.dataschool.ejenp_desc || 'Tidak Berkenaan'}}</div>
+        </div>
+        <div  class="margin-topBottom">
+            <div class="col-md-3">JEN_PPROGKHAS</div>
+            <div class="col-md-9">: {{data.dataschool.jen_pprogkhas || 'Tidak Berkenaan'}}</div>
+        </div>
+        <div  class="margin-topBottom">
+            <div class="col-md-3">JEN_KECACATAN</div>
+            <div class="col-md-9">: {{data.dataschool.jen_kecacatan || 'Tidak Berkenaan'}}</div>
+        </div>
+        <div  class="margin-topBottom">
+            <div class="col-md-3">BAHASA PENGANTAR</div>
+            <div class="col-md-9">: {{data.dataschool.bahasa || 'Tidak Berkenaan'}}</div>
+        </div>
+        <div  class="margin-topBottom">
+            <div class="col-md-3">URL</div>
+            <div class="col-md-9">: {{data.dataschool.url || 'Tidak Berkenaan'}}</div>
+        </div>
+        <div  class="margin-topBottom">
+            <div class="col-md-3">SESI SEKOLAH</div>
+            <div class="col-md-9">: {{data.dataschool.sesi_sekolah || 'Tidak Berkenaan'}}</div>
+        </div>
+        <div  class="margin-topBottom">
+            <div class="col-md-3">KURIKULUM</div>
+            <div class="col-md-9">: {{data.dataschool.kurikulum || 'Tidak Berkenaan'}}</div>
+        </div>
+        <div  class="margin-topBottom">
+            <div class="col-md-3">ASRAMA</div>
+            <div class="col-md-9">: {{data.dataschool.asrama || 'Tidak Berkenaan'}}</div>
+        </div>
+        <div  class="margin-topBottom">
+            <div class="col-md-3">JANTINA</div>
+            <div class="col-md-9">: {{data.dataschool.jantina || 'Tidak Berkenaan'}}</div>
+        </div>
+        <div  class="margin-topBottom">
+            <div class="col-md-3">TINGATAN 6</div>
+            <div class="col-md-9">: {{data.dataschool.form6 || 'Tidak Berkenaan'}}</div>
+        </div>
+        <div  class="margin-topBottom">
+            <div class="col-md-3">PROGRAM ALIRAN</div>
+            <div class="col-md-9">: {{data.dataschool.program_aliran || 'Tidak Berkenaan'}}</div>
+        </div>
+        <div  class="margin-topBottom">
+            <div class="col-md-3">KATEGORI INSTITUSI</div>
+            <div class="col-md-9">: {{data.dataschool.peringkat_desc || 'Tidak Berkenaan'}}</div>
+        </div>
+        <div  class="margin-topBottom">
+            <div class="col-md-3">STATUS PROGRAM</div>
+            <div class="col-md-9">: {{data.dataschool.status_program || 'Tidak Berkenaan'}}</div>
+        </div>
+        <div  class="margin-topBottom">
+            <div class="col-md-3">PIC</div>
+            <div class="col-md-9">: {{data.dataschool.pic || 'Tidak Berkenaan'}}</div>
+        </div>
+        <div  class="margin-topBottom">
+            <div class="col-md-3">PIC_TEL</div>
+            <div class="col-md-9">: {{data.dataschool.pic_tel || 'Tidak Berkenaan'}}</div>
+        </div>
+        <div  class="margin-topBottom">
+            <div class="col-md-3">PIC_EMAIL</div>
+            <div class="col-md-9">: {{data.dataschool.pic_email || 'Tidak Berkenaan'}}</div>
+        </div>
+        <div  class="margin-topBottom">
+            <div class="col-md-3">TAHUN</div>
+            <div class="col-md-9">: {{data.dataschool.tahun || 'Tidak Berkenaan'}}</div>
+        </div>
+        <div  class="margin-topBottom">
+            <div class="col-md-3">STATUS</div>
+            <div class="col-md-9">: {{data.dataschool.status || 'Tidak Berkenaan'}}</div>
+        </div>
+        <!-- <div class="col-md-3">LOKASI</div>
         <div class="col-md-9">: {{data.familyinfo}}</div>
         <div class="col-md-3">BANTUAN</div>
         <div class="col-md-9">:</div>
@@ -48,7 +136,7 @@
         <div class="col-md-3">TAHUN</div>
         <div class="col-md-9">: {{data.familyinfo}}</div>
         <div class="col-md-3">STATUS</div>
-        <div class="col-md-9">:</div>
+        <div class="col-md-9">:</div> -->
         <br>        
     </div>
     <div style="justify-content: center; margin-top: 3%; padding-right: 20px;">

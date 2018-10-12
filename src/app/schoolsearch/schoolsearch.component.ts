@@ -15,14 +15,14 @@ import { Http } from '@angular/http';
 import * as $ from 'jquery';
 import { tileLayer, latLng, circle, polygon, marker, icon, Layer } from 'leaflet';
 import * as L from 'leaflet';
-//import 'esri-leaflet';
+// import 'esri-leaflet';
 import { SharedService } from '../common/shared.service';
 import { PortalService } from '../services/portal.service';
 import { ToastrService } from 'ngx-toastr';
 import { NavService } from '../header/nav/nav.service';
 
 export interface DialogData {
-  familyinfo;
+  dataschool;
 }
 
 @Component({
@@ -38,25 +38,33 @@ export class SchoolsearchComponent implements OnInit {
   complete: boolean;
   dataAppSchool = null;
   recordData = null;
+  recordData2 = null;
   showNoData = false;
   loading = false;
 
   public valSchoolCat: any;
+  public listLevel: any;
   public listState: any;
-  public listPPD: any;
-  public listKhas = [{id: "all", text: "Semua"},{id: "1", text: "Ada"},{id: "0", text: "Tiada"}]
+  // public listPPD: any; // to remove
+  public listAgent: any;
+  public listAgent2 = {};
+  public listKhas = [{id: "all", text: "Semua"},{id: "Y", text: "Ada"},{id: "N", text: "Tiada"}]
   public listTypeS: any;
+  public listTypeS2 = {};
   public noOfSc = 0;
   public setLat: any;
   public setLong: any;
   public showDetails = false;
   public charCarian: any;
+  public prevLvl = [];
+  public prevAgnt = [];
 
   searchForm: FormGroup;
   public optSelect: FormControl;
   public state: FormControl;
   public typeSchool: FormControl;
-  public ppd: FormControl;
+  // public ppd: FormControl; //to remove
+  public agent: FormControl;
   public speacialEd: FormControl;
   public schoolname: FormControl;
   public jenisCarian: FormControl;
@@ -136,7 +144,8 @@ export class SchoolsearchComponent implements OnInit {
     this.optSelect = new FormControl();
     this.state = new FormControl();
     this.typeSchool = new FormControl();
-    this.ppd = new FormControl();
+    // this.ppd = new FormControl(); //to remove
+    this.agent = new FormControl();
     this.speacialEd = new FormControl();
     this.schoolname = new FormControl();
     this.jenisCarian = new FormControl();
@@ -146,16 +155,20 @@ export class SchoolsearchComponent implements OnInit {
       optSelect: this.optSelect,
       state: this.state,
       typeSchool: this.typeSchool,
-      ppd: this.ppd,
+      // ppd: this.ppd,//to remove
+      agent: this.agent,
       speacialEd: this.speacialEd,
       schoolname: this.schoolname,
       jenisCarian: this.jenisCarian
     });
 
-    this.searchForm.get('optSelect').setValue(1);
+    this.getSchoolLevel();
+    // this.searchForm.get('optSelect').setValue(1);
     this.searchForm.get('jenisCarian').setValue(1);
-    this.valSchoolCat = 1;
-    this.searchForm.get('ppd').disable();
+    this.valSchoolCat = 4; //peringkat 4 : prasekolah;
+    // this.searchForm.get('ppd').disable(); //to remove
+    this.searchForm.get('agent').disable();
+    this.searchForm.get('typeSchool').disable();
     this.searchForm.get('speacialEd').disable();
     this.getListState();
     this.getDefaultMap();
@@ -163,28 +176,132 @@ export class SchoolsearchComponent implements OnInit {
     document.getElementById("boxCarian").focus();
   }
 
+  getSchoolLevel(){
+    this.loading = true;
+    this.sharedService.getSchoolLevel('school/level','').subscribe(
+    data => {
+
+      this.sharedService.errorHandling(data, (function(){
+        this.listLevel = data['list'];
+
+      }).bind(this));
+      this.loading = false;
+    },
+    error => {
+      this.loading = false;
+    });
+  }
+
+  getAgent(level){
+    this.valSchoolCat = level; 
+    this.loading = true;
+    this.sharedService.getSchoolAgent('school/agent',level).subscribe(
+    data => {
+
+      this.sharedService.errorHandling(data, (function(){
+          this.listAgent = data['list'];
+          this.searchForm.get('agent').enable();
+          if(level == 1 || level == 5){
+            this.searchForm.get('speacialEd').disable();
+          }else{
+            this.searchForm.get('speacialEd').enable();
+            this.searchForm.get('speacialEd').setValue('all');
+          }
+
+      }).bind(this));
+      this.loading = false;
+    },
+    error => {
+      this.loading = false;
+    });
+
+  }
+
+  getAgentNType(level, agent){
+    
+    if(!this.prevLvl.includes(level) && this.listAgent2[level] == undefined){
+      this.loading = true;
+      this.prevLvl.push(level);
+      this.sharedService.getSchoolAgent('school/agent',level).subscribe(
+      data => {
+
+        this.sharedService.errorHandling(data, (function(){
+            this.listAgent2[level] = data['list'];
+            for(let a = 0; a < this.listAgent2[level].length; a++){
+              if(!this.prevAgnt.includes(agent) && !this.listAgent2[level][a]['stype']){
+                this.prevAgnt.push(agent);
+                this.sharedService.getSchoolType('school/type',level, agent).subscribe(
+                data => {
+                  this.sharedService.errorHandling(data, (function(){
+                    this.listAgent2[level][a]['stype'] = data['list'];
+
+                    this.recordData2 = this.recordData; // start to populate result table
+                        
+                  }).bind(this));
+                  this.loading = false;
+                },
+                error => {
+                  this.loading = false;
+                });
+              }//end if
+            }//end for
+
+        }).bind(this));
+        this.loading = false;
+      },
+      error => {
+        this.loading = false;
+      });
+    }else if(this.listAgent2[level] != undefined) {
+      for(let a = 0; a < this.listAgent2[level].length; a++){
+        // if((this.listAgent2[level][a].ejenP == agent) && !this.listAgent2[level][a]['stype']){
+        if(!this.prevAgnt.includes(agent) && !this.listAgent2[level][a]['stype']){
+          this.prevAgnt.push(agent);
+          this.sharedService.getSchoolType('school/type',level, agent).subscribe(
+          data => {
+            this.sharedService.errorHandling(data, (function(){
+              this.listAgent2[level][a]['stype'] = data['list'];
+                  
+            }).bind(this));
+            this.loading = false;
+          },
+          error => {
+            this.loading = false;
+          });
+        }//end if
+      }//end for
+    }
+    
+  }
+
   getDataSchool(){
 
     this.loading = true;
-    let valSchool = this.searchForm.get('optSelect').value;
-    let valState = this.searchForm.get('state').value;
-    let valPPD = this.searchForm.get('ppd').value;
-    let valKhas = this.searchForm.get('speacialEd').value;
-    let valTypeS = this.searchForm.get('typeSchool').value;
+    let valSchool = this.searchForm.get('optSelect').value;//level
+    let valState = this.searchForm.get('state').value;//state
+    // let valPPD = this.searchForm.get('ppd').value; //to remove
+    let valAgent = this.searchForm.get('agent').value;//agent
+    let valKhas = this.searchForm.get('speacialEd').value;//pendidikan kahs
+    let valTypeS = this.searchForm.get('typeSchool').value;//jenis sekolah
 
     if(valSchool == 1){
       valTypeS = '';
     }
 
-    this.sharedService.getListSchool('school/search',valSchool,valState,valPPD,valKhas,valTypeS).subscribe(
+//     http://10.1.70.148:8080/service/school/list?level={level_id}&agent={ejenP}&type={jenis_id}&special=Y/N
+// http://10.1.70.148:8080/service/school/list?level=1&agent=18&type=48&special=Y/N
+
+
+    this.sharedService.getListSchool('school/list',valSchool,valState,valAgent,valKhas,valTypeS).subscribe(
     data => {
 
-    //  this.sharedService.errorHandling(data, (function () {       
+    //  this.sharedService.errorHandling(data, (function () { 
+      if(data['list']){  
         this.dataAppSchool = data;
-        this.recordData = this.dataAppSchool.schoolResourceList;
+        this.recordData = this.dataAppSchool.list;
         this.noOfSc = this.recordData.length;        
         this.showNoData = false;
-
+        
         if(this.recordData.length > 0){          
 
           this.setLat = this.recordData[0].latitude;
@@ -197,15 +314,17 @@ export class SchoolsearchComponent implements OnInit {
           this.markerGroup = L.layerGroup();   
   
           for (let i = 0; i <= this.recordData.length - 1; i++) {
+
+            this.getAgentNType(this.recordData[i].peringkat, this.recordData[i].ejenp);
       
             this.addMarker(
-              parseFloat(this.malformedDataHandler(this.recordData[i].latitude)),
-              parseFloat(this.malformedDataHandler(this.recordData[i].longitude)),
-              this.recordData[i].namaSekolah,
-              this.recordData[i].alamat,
-              this.recordData[i].telNo,
-              this.recordData[i].bandar,
-              this.recordData[i].negeri
+              parseFloat(this.malformedDataHandler(this.recordData[i].koordinat_xy)),
+              parseFloat(this.malformedDataHandler(this.recordData[i].koordinat_xx)),
+              this.recordData[i].nama_institusi,
+              this.recordData[i].alamat_surat1,
+              this.recordData[i].no_telefon,
+              this.recordData[i].bandar_surat,
+              this.recordData[i].state_desc
             );
           }
 
@@ -222,6 +341,11 @@ export class SchoolsearchComponent implements OnInit {
           this.showNoData = true;
         }
         this.loading = false;
+      }else{
+        this.showNoData = true;
+        this.charCarian = 0;
+        this.loading = false;
+      }
     //  }).bind(this));
     },
     error => {
@@ -238,16 +362,17 @@ export class SchoolsearchComponent implements OnInit {
     this.sharedService.getListSchoolByName('school/search',valSchoolName).subscribe(
     data => {
         
-      //this.sharedService.errorHandling(data, (function () {       
+      //this.sharedService.errorHandling(data, (function () {    
+      if(data['list']){   
         this.dataAppSchool = data;
-        this.recordData = this.dataAppSchool.schoolResourceList;
+        this.recordData = this.dataAppSchool.list;
         this.noOfSc = this.recordData.length;
         this.showNoData = false;
-
+        
         if(this.recordData.length > 0){
 
-          this.setLat = this.recordData[0].latitude;
-          this.setLong = this.recordData[0].longitude;
+          this.setLat = this.recordData[0].koordinat_xy;
+          this.setLong = this.recordData[0].koordinat_xx;
 
           if(this.markerGroup){
             this.mymap.removeLayer(this.markerGroup);   
@@ -256,15 +381,17 @@ export class SchoolsearchComponent implements OnInit {
           this.markerGroup = L.layerGroup();  
           
           for (let i = 0; i <= this.recordData.length - 1; i++) {
+
+            this.getAgentNType(this.recordData[i].peringkat, this.recordData[i].ejenp);
       
             this.addMarker(
-              parseFloat(this.malformedDataHandler(this.recordData[i].latitude)),
-              parseFloat(this.malformedDataHandler(this.recordData[i].longitude)),
-              this.recordData[i].namaSekolah,
-              this.recordData[i].alamat,
-              this.recordData[i].telNo,
-              this.recordData[i].bandar,
-              this.recordData[i].negeri
+              parseFloat(this.malformedDataHandler(this.recordData[i].koordinat_xy)),
+              parseFloat(this.malformedDataHandler(this.recordData[i].koordinat_xx)),
+              this.recordData[i].nama_institusi,
+              this.recordData[i].alamat_surat1,
+              this.recordData[i].no_telefon,
+              this.recordData[i].bandar_surat,
+              this.recordData[i].state_desc
             );
           }
 
@@ -280,6 +407,11 @@ export class SchoolsearchComponent implements OnInit {
           this.showNoData = true;
         }
         this.loading = false;
+      }else{
+        this.showNoData = true;
+        this.charCarian = 0;
+        this.loading = false;
+      }
       //}).bind(this));
     },
     error => {
@@ -401,22 +533,45 @@ export class SchoolsearchComponent implements OnInit {
 
     this.valSchoolCat = val.optSelect;
 
-    if(this.searchForm.get('state').value == "" || this.searchForm.get('state').value == null){
+    if(this.searchForm.get('agent').value == "" || this.searchForm.get('agent').value == null){
       this.searchForm.get('typeSchool').disable();
+    }else{
+      if(val.optSelect == 4){
+        this.searchForm.get('typeSchool').disable();
+      }else{
+        this.getSType(this.searchForm.get('optSelect').value, this.searchForm.get('agent').value);
+      }
     }
 
-    else{
-      this.getPPD(this.searchForm.get('state').value,this.searchForm.get('optSelect').value);
-    }
+  }
+
+  getSType(level, agent){ // to get school type
+    this.loading = true;
+    this.sharedService.getSchoolType('school/type',level, agent).subscribe(
+    data => {
+
+      this.sharedService.errorHandling(data, (function(){
+        
+        this.listTypeS = data['list'];
+        this.searchForm.get('typeSchool').enable();
+
+      }).bind(this));
+      this.loading = false;
+    },
+    error => {
+      this.loading = false;
+    });
+    
   }
 
   getListState(){
     this.loading = true;
-    this.sharedService.getSchoolApi('school/statelist','',this.langID).subscribe(
+    this.sharedService.getSchoolApi('school/state','',this.langID).subscribe(
     data => {
 
       this.sharedService.errorHandling(data, (function(){
-        this.listState = data['stateList'];
+        
+        this.listState = data['list'];
 
       }).bind(this));
       this.loading = false;
@@ -426,50 +581,50 @@ export class SchoolsearchComponent implements OnInit {
     });
   }
 
-  getPPD(valState,valOptSc){
+  // getPPD(valState,valOptSc){
 
-    this.loading = true;
-    this.sharedService.getSchoolApi('school/ppd/'+valOptSc+'/'+valState,'',this.langID).subscribe(
-    data => {
+  //   this.loading = true;
+  //   this.sharedService.getSchoolApi('school/ppd/'+valOptSc+'/'+valState,'',this.langID).subscribe(
+  //   data => {
 
-      this.listPPD = [];
-      this.listTypeS = [];
-      this.sharedService.errorHandling(data, (function(){
-        let arrayPPD = data['ppdList'];
-        let arrayTyepeS = data['schoolTypeList'];
+  //     this.listPPD = [];
+  //     this.listTypeS = [];
+  //     this.sharedService.errorHandling(data, (function(){
+  //       let arrayPPD = data['ppdList'];
+  //       let arrayTyepeS = data['schoolTypeList'];
 
-        let a = { id: "all", text: "Semua"};
-        this.listPPD.push(a);
-        this.listTypeS.push(a);
+  //       let a = { id: "all", text: "Semua"};
+  //       this.listPPD.push(a);
+  //       this.listTypeS.push(a);
 
-        for (let i = 0; i < arrayPPD.length; i++) {
-          let b = { id: arrayPPD[i], text: arrayPPD[i]};
-          this.listPPD.push(b); //new list for ppd;
-        }
+  //       for (let i = 0; i < arrayPPD.length; i++) {
+  //         let b = { id: arrayPPD[i], text: arrayPPD[i]};
+  //         this.listPPD.push(b); //new list for ppd;
+  //       }
 
-        for (let i = 0; i < arrayTyepeS.length; i++) {
-          let b = { id: arrayTyepeS[i], text: arrayTyepeS[i]};
-          this.listTypeS.push(b); // new list for school type;
-        }
+  //       for (let i = 0; i < arrayTyepeS.length; i++) {
+  //         let b = { id: arrayTyepeS[i], text: arrayTyepeS[i]};
+  //         this.listTypeS.push(b); // new list for school type;
+  //       }
 
-        this.searchForm.get('ppd').enable();
-        this.searchForm.get('speacialEd').enable();
-        this.searchForm.get('ppd').setValue('all');
-        this.searchForm.get('speacialEd').setValue('all');
-        this.searchForm.get('typeSchool').enable();
-        this.searchForm.get('typeSchool').setValue('all');
-        this.checkReqValues();
+  //       this.searchForm.get('ppd').enable();
+  //       this.searchForm.get('speacialEd').enable();
+  //       this.searchForm.get('ppd').setValue('all');
+  //       this.searchForm.get('speacialEd').setValue('all');
+  //       this.searchForm.get('typeSchool').enable();
+  //       this.searchForm.get('typeSchool').setValue('all');
+  //       this.checkReqValues();
 
-      }).bind(this));
-      this.loading = false;
-    },
-    error => {
-      this.loading = false;
-    });
-  }
+  //     }).bind(this));
+  //     this.loading = false;
+  //   },
+  //   error => {
+  //     this.loading = false;
+  //   });
+  // }
 
   convertPK(val){
-    if(val == true)
+    if(val == 'Y')
       val = "Ada";
     else
       val = "Tiada";
@@ -477,8 +632,50 @@ export class SchoolsearchComponent implements OnInit {
     return val;
   }
 
+  convertPeringkat(val){
+    for(let idx = 0; idx < this.listLevel.length; idx++){
+      if(this.listLevel[idx].peringkat == val){
+        return this.listLevel[idx]['level_'+this.lang];
+      }
+    }
+  }
+
+  convertAgent(level,val){
+    if(level != null || val != null){
+      for(let idx = 0; idx < this.listAgent2[level].length; idx++){
+        if(this.listAgent2[level][idx].ejenP == val){
+          return this.listAgent2[level][idx].ejenPelaksana;
+        }
+      }
+    }else{
+      return 'Tidak Berkenaan';
+    }
+    
+  }
+
+  convertSType(level, agent, val){
+    for(let idx = 0; idx < this.listAgent2[level].length; idx++){
+      if(this.listAgent2[level][idx].ejenP == agent){
+        
+        for(let idx2 = 0; idx2 < this.listAgent2[level][idx].stype.length; idx2++){
+          if(this.listAgent2[level][idx].stype[idx2].jenis_id == val){
+            return this.listAgent2[level][idx].stype[idx2].jenis_edu;
+          }
+        }
+      }
+    }
+  }
+
+  phoneFormat(val){
+    if(val != null){
+      return (!val.startsWith('0')) ? '0'+val : val;
+    }else{
+      return 'Tidak Berkenaan';
+    }
+  }
+
   getDefaultMap() {
-    //var esri = require('esri-leaflet'); 
+    // var esri = require('esri-leaflet'); 
     this.mymap = L.map('dirmap').setView([4.8142568, 108.5806004], 6);
     // L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
@@ -494,7 +691,7 @@ export class SchoolsearchComponent implements OnInit {
 
     // const esriLayer = L.esri.basemapLayer('Streets');
     // this.mymap.addLayer(esriLayer);
-    //L.esri.basemapLayer('Streets').addTo(this.mymap);
+    // L.esri.basemapLayer('Streets').addTo(this.mymap);
     // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     //   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     // }).addTo(this.mymap);
@@ -506,11 +703,15 @@ export class SchoolsearchComponent implements OnInit {
     let nullPointers:any = [];
     
     if(this.searchForm.controls.jenisCarian.value == 1){
-      if(this.valSchoolCat == 1){
-        reqVal =  ["optSelect","state","ppd","speacialEd"];
+      if(this.valSchoolCat == 4){
+        // reqVal =  ["optSelect","state","agent","speacialEd"];
+        reqVal =  ["optSelect","agent","speacialEd"];
       }
-      else{
-        reqVal =  ["optSelect","state","typeSchool", "ppd","speacialEd"];
+      else if(this.valSchoolCat == 5 || this.valSchoolCat == 1){
+        // reqVal =  ["optSelect","state","typeSchool", "agent","speacialEd"];
+        reqVal =  ["optSelect","typeSchool", "agent"];
+      }else{
+        reqVal =  ["optSelect","typeSchool", "agent","speacialEd"];
       }
     }
 
@@ -541,18 +742,33 @@ export class SchoolsearchComponent implements OnInit {
     } 
     this.mymap.setView([4.8142568, 108.5806004], 6.2);
     //this.searchForm.get('jenisCarian').setValue(1);
-    this.valSchoolCat = 1;
+    this.valSchoolCat = 4; //peringkat 4 : prasekolah
     this.searchForm.get('optSelect').setValue(1);
     this.searchForm.get('state').setValue(null);
     this.searchForm.get('typeSchool').setValue(null);
-    this.searchForm.get('ppd').setValue(null);
+    // this.searchForm.get('ppd').setValue(null); //to remove
+    this.searchForm.get('agent').setValue(null);
     this.searchForm.get('speacialEd').setValue(null);
     this.searchForm.get('schoolname').setValue('');
     this.showDetails = false;
   }
 
+  resetData(){
+    this.recordData2 = null;
+    this.prevLvl = [];
+    this.prevAgnt = [];
+    this.listAgent2 = {};
+    this.listTypeS2 = {};
+  }
+
   resetMethod(event) {
     this.resetSearch();
+  }
+
+  /** function to prevent special characters in input field - used in (keypress) */
+  preventSpecialChar(e){   
+    var k = e.charCode;
+    return((k > 64 && k < 91) || (k > 96 && k < 123) || k == 8 || k == 32 || (k >= 48 && k <= 57)); 
   }
 
   newRecord(value){
@@ -595,6 +811,7 @@ export class SchoolsearchComponent implements OnInit {
         array[i]['Bandar'],
         array[i]['Negeri']
       );
+
     }
   
     this.mymap.addLayer(this.markerGroup);
@@ -615,10 +832,22 @@ export class SchoolsearchComponent implements OnInit {
   }
 
   view(val){     
+    let selectedData = val;
+
+    selectedData['ejenp_desc'] = this.convertAgent(val.peringkat, val.ejenp);
+    selectedData['jenis_desc'] = this.convertSType(val.peringkat, val.ejenp, val.jenis);
+    selectedData['no_faks'] = this.phoneFormat(val.no_faks);
+    selectedData['no_telefon'] = this.phoneFormat(val.no_telefon);
+    selectedData['peringkat_desc'] = this.convertPeringkat(val.peringkat);
+    selectedData['prasekolah_desc'] = this.convertPK(val.prasekolah);
+    selectedData['pkhas'] = this.convertPK(val.pkhas);
   
     this.dialog.open(SchoolPopupDialog, {
+      // data: {
+      //   familyinfo: val
+      // }
       data: {
-        familyinfo: val
+        dataschool: val
       }
     });
   }
@@ -628,6 +857,7 @@ export class SchoolsearchComponent implements OnInit {
 @Component({
   selector: 'school-addinfo',
   templateUrl: './school-addinfo.html',
+  styleUrls: ['./school-addinfo.css']
 })
 
 export class SchoolPopupDialog {
