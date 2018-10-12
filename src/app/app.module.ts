@@ -36,7 +36,6 @@ import { ArchivesubcategoryComponent } from './archive/archivesubcategory/archiv
 import { ArchivecontentComponent } from './archive/archivecontent/archivecontent.component';
 import { PortalLoaderComponent } from './loader/portal-loader.component';
 import { HighlightboxComponent } from './highlightbox/highlightbox.component';
-import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 import { GareportsComponent } from './gareports/gareports.component';
 // import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule } from "@angular/material";
 
@@ -52,7 +51,6 @@ imports: [
     TextMaskModule,
     HttpModule,
     HttpClientModule,
-    Ng2GoogleChartsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

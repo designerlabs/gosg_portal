@@ -8,7 +8,7 @@ import { RouterModule, ActivatedRouteSnapshot } from '@angular/router';
 import { OwlModule } from "ng2-owl-carousel";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NguiAutoCompleteModule } from "@ngui/auto-complete/dist";
-// import { Ng2GoogleChartsModule } from 'ng2-google-charts';
+import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 import { TopnavService } from '../header/topnav/topnav.service';
 import { ContactComponent } from "../staticpage/contact.component";
 import { SliderComponent } from '../slider/slider.component';
@@ -140,7 +140,6 @@ import { SharedLoaderComponent } from '../loader/shared-loader.component';
 import { RssmainComponent } from '../article/rss/rssmain/rssmain.component';
 import { TruncatePipe } from '../pipe/truncate.pipe';
 import { StatisticService } from '../statistic/statistic.service';
-// import { GareportsComponent } from '../gareports/gareports.component';
 
 // import { LifeeventComponent } from '../lifeevent/lifeevent.component';
 //import { GalleryService } from '../gallery/gallery.service';
@@ -183,8 +182,8 @@ export function HttpLoaderFactory(http: Http) {
 	  NgxPaginationModule,
     ModalModule.forRoot(),
     // LoadingModule,
-    LeafletModule.forRoot()
-    // Ng2GoogleChartsModule
+    LeafletModule.forRoot(),
+    Ng2GoogleChartsModule
 
   ],
 
@@ -332,7 +331,8 @@ export function HttpLoaderFactory(http: Http) {
      SharedPipe,
      EventCalendarComponent,
      AgencydirectoryComponent,
-     SearchPipe
+     SearchPipe,
+     Ng2GoogleChartsModule
     //  SearchResultComponent
 
   ],

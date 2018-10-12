@@ -53,7 +53,6 @@ import { FamilyinfoComponent, FamilyPopupDialog } from './familyinfo/familyinfo.
 import { FamilyinfotblComponent } from './familyinfo/familyinfotbl/familyinfotbl.component';
 import { CheckexamresultComponent, ExamPopupDialog,ExamResult } from './checkexamresult/checkexamresult.component';
 import { HighlightboxProdComponent } from './highlightbox/highlightboxprod.component';
-import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 import { GareportsprodComponent } from './gareports/gareportsprod.component';
 export function HttpLoaderFactory(http: Http) {
    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -109,7 +108,6 @@ export function HttpLoaderFactory(http: Http) {
     TextMaskModule,
     FormsModule,
     HttpModule,
-    Ng2GoogleChartsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
