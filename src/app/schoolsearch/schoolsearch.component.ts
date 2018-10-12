@@ -22,7 +22,7 @@ import { ToastrService } from 'ngx-toastr';
 import { NavService } from '../header/nav/nav.service';
 
 export interface DialogData {
-  familyinfo;
+  dataschool;
 }
 
 @Component({
@@ -846,7 +846,9 @@ export class SchoolsearchComponent implements OnInit {
       // data: {
       //   familyinfo: val
       // }
-      data: val
+      data: {
+        dataschool: val
+      }
     });
   }
 
