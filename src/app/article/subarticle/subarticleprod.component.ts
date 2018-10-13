@@ -149,6 +149,14 @@ export class SubarticleprodComponent implements OnInit, OnDestroy {
     this.cansubmit = false;
   }
 
+  resetForm() {
+    this.scoreFormgrp.controls['score'].setValue('');
+    this.scoreFormgrp.controls['remarks'].setValue('');
+    this.scoreFormgrp.controls['score'].enable();
+    this.scoreFormgrp.controls['remarks'].enable();
+    this.cansubmit = true;
+  }
+
 
   submitForm(formValues:any){
     let body = {
@@ -193,6 +201,7 @@ export class SubarticleprodComponent implements OnInit, OnDestroy {
 
 
   clickTopMenu(e){
+    this.resetForm();
     this.articleService.leContent = "";
     this.router.navigate(['/category', e.categoryCode]);
     event.preventDefault();
@@ -200,6 +209,7 @@ export class SubarticleprodComponent implements OnInit, OnDestroy {
 
 
   clickSideMenu(e, status, event) {
+    this.resetForm();
     this.articleService.leContent = "";
     this.navService.loader = true;
     this.agencyActive = false;
@@ -211,6 +221,7 @@ export class SubarticleprodComponent implements OnInit, OnDestroy {
   }
 
   clickSideMenuByAgency(e, status, event) {
+    this.resetForm();
     this.articleService.leContent = "";
     this.navService.loader = true;
     this.agencyActive = true;
@@ -258,6 +269,7 @@ export class SubarticleprodComponent implements OnInit, OnDestroy {
   }
 
   clickContent(e, status, event){
+    this.resetForm();
     localStorage.setItem('leCode',e);
     event.preventDefault();
     this.articleService.leContent = "";
@@ -276,6 +288,7 @@ export class SubarticleprodComponent implements OnInit, OnDestroy {
 
 
   clickContentFromMenu(pId, aId, event) {
+    this.resetForm();
     this.navService.loader = true;
     // this.navService.triggerContent(aId, localStorage.getItem('langID'));
     // this.navService.getContentUrl(aId, localStorage.getItem('langID'));
