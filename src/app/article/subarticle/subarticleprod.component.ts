@@ -23,6 +23,7 @@ import { Observable } from 'rxjs/Observable';
   styleUrls: ['./subarticle.component.css']
 })
 export class SubarticleprodComponent implements OnInit, OnDestroy {
+  cansubmit:boolean = true;
   le_menu_code: any;
   le_code: any;
   agencyActive: boolean = false;
@@ -142,7 +143,10 @@ export class SubarticleprodComponent implements OnInit, OnDestroy {
   }
 
   getRateReset(){
-    this.scoreFormgrp.reset();
+    //this.scoreFormgrp.reset();
+    this.scoreFormgrp.controls['score'].disable();
+    this.scoreFormgrp.controls['remarks'].disable();
+    this.cansubmit = false;
   }
 
 
@@ -153,7 +157,7 @@ export class SubarticleprodComponent implements OnInit, OnDestroy {
         "remarks": null
     };
 
-    body.contentCode = this.subID;
+    body.contentCode = localStorage.getItem('leCode'); //this.subID;
     body.score = parseInt(formValues.score);
     body.remarks = formValues.remarks;
 
@@ -254,6 +258,7 @@ export class SubarticleprodComponent implements OnInit, OnDestroy {
   }
 
   clickContent(e, status, event){
+    localStorage.setItem('leCode',e);
     event.preventDefault();
     this.articleService.leContent = "";
     this.navService.loader = true;
