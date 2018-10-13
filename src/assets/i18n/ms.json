@@ -295,7 +295,7 @@
       "name": "Nama",
       "nameplh": "Nama penuh",
       "emel":"Emel",
-      "content":"Kandungan Pertanyaan",
+      "content":"Komen anda",
       "reset":"Set Semula",
       "submit":"Hantar",
       "words":" aksara yang tinggal.",
@@ -312,7 +312,7 @@
 
   },
   "rating":{
-    "title":"title",
+    "title":"Apakah pendapat anda mengenai artikel ini ?",
     "like":"Suka",
     "neutral":"Neutral",
     "dislike":"Tidak suka",
@@ -707,6 +707,67 @@
       "bumper":"Padat",
       "streetname":"Nama Jalan",
       "total":"Jumlah Keputusan"
+    }
+  },
+  "education":{
+    "schoolSearch":{
+      "topTitle":"KEMUDAHAN CARIAN SEKOLAH - SEKOLAH DI MALAYSIA",
+      "formTitle":"KEMUDAHAN CARIAN SENARAI SEKOLAH - SEKOLAH DI BAWAH KEMENTERIAN PENDIDIKAN MALAYSIA SEHINGGA 30 APRIL 2018",
+      "form":{
+        "category":"Jenis Carian",
+        "subMessage1":"Sila pilih kriteria atau kategori tertentu dan tekan butang Cari untuk memulakan carian.",
+        "subMessage2":"Sila nyatakan nama sekolah / institusi dan tekan butang Cari untuk memulakan carian",
+        "level":"Kategori Sekolah / Institusi",
+        "level_error":"Kategori Sekolah / Institusi diperlukan.",
+        "agent" : "Agensi Pelaksana",
+        "agent_error":"Agensi Pelaksana diperlukan.",
+        "schoolType":"Jenis Sekolah",
+        "schoolType_error":"Jenis Sekolah diperlukan.",
+        "specialEdu":"Pendidikan Khas",
+        "specialEdu_error":"Pendidikan Khas diperlukan.",
+        "schoolName" : "Nama Sekolah / Institusi",
+        "schoolName_error":"Nama Sekolah / ,Institusi diperlukan.",
+        "searchResult":"HASIL CARIAN",
+        "note":"Catatan: PPD - Pejabat Pendidikan Daerah, PK - Pendidikan Khas",
+        "searchKeyword":"Carian berdasarkan kata kunci",
+        "noData_error":"Data tidak dijumpai"
+      },
+      "resultTable":{
+        "code":"Kod Sekolah",
+        "name":"Nama Sekolah",
+        "type":"Jenis",
+        "address":"Alamat",
+        "phone": "No. Telefon",
+        "fax":"No. Faks",
+        "email":"Emel",
+        "detail": "Maklumat Lanjut",
+        "lat":"Latitude",
+        "long":"Longitude",
+        "town":"Bandar",
+        "state":"Negeri",
+        "location":"Lokasi",
+        "help":"Bantuan",
+        "student":"Murid",
+        "teacher":"Guru",
+        "agent":"Agensi Pelaksana",
+        "speacialType":"Jen_pprogkhas",
+        "disabledType":"Jen_Kecacatan",
+        "sndLang":"Bahasa Pengantar",
+        "url":"pautan",
+        "session":"Sesi Sekolah",
+        "cocuriculum":"Korikulum",
+        "hostel":"asrama",
+        "sex":"Jantina",
+        "form6":"Tingkatan 6",
+        "courseProgram":"Program Aliran",
+        "institusiCategory":"Kategory Institusi",
+        "statusProgram":"Program Status",
+        "pic":"PIC",
+        "pic_phone":"PIC_TEL",
+        "pic_email":"PIC_Email",
+        "year":"Tahun",
+        "status":"Status"
+      }
     }
   }
 }

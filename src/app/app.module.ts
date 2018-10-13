@@ -36,11 +36,10 @@ import { ArchivesubcategoryComponent } from './archive/archivesubcategory/archiv
 import { ArchivecontentComponent } from './archive/archivecontent/archivecontent.component';
 import { PortalLoaderComponent } from './loader/portal-loader.component';
 import { HighlightboxComponent } from './highlightbox/highlightbox.component';
-
 // import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule } from "@angular/material";
 
 export function HttpLoaderFactory(http: Http) {
-   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 @NgModule({

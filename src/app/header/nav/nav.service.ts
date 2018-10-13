@@ -99,7 +99,6 @@ export class NavService {
 
 
   getMenuData(lang): Observable<IMenu[]> {
-
     return this.http.get(this.config.urlPortal + 'cp/menu?language=' + lang)
       .map((response: Response) => response.json().corePortalMenuList)
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));

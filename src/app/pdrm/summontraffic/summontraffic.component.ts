@@ -41,6 +41,8 @@ export class SummontrafficComponent implements OnInit {
   pageSize = 5;
   pageNumber = 1;
   summonTraffic: any;
+  have:any ;
+  dontHave: any;
   noPrevData = true;
   noNextData = false;
   showNoData = false;
@@ -89,7 +91,9 @@ export class SummontrafficComponent implements OnInit {
 
         this.summonTraffic = 'Traffic Summon';
         this.indicator = 'Indicator';
-        this.carianPlaceholder = "Searching based on column provided";
+        this.carianPlaceholder = "Search";
+        this.have = "Havee";
+        this.dontHave = "Dont Havee";
 
         translate.get('HOME').subscribe((res: any) => {
           this.lang = 'en';
@@ -101,7 +105,9 @@ export class SummontrafficComponent implements OnInit {
 
         this.summonTraffic = 'Saman Traffik';
         this.indicator = 'Petunjuk';
-        this.carianPlaceholder = "Carian berdasarkan kolum yang sedia ada";
+        this.carianPlaceholder = "Cari";
+        this.have = "Adaa";
+        this.dontHave = "Tiadaa";
 
         translate.get('HOME').subscribe((res: any) => {
           this.lang = 'ms';
@@ -228,6 +234,8 @@ export class SummontrafficComponent implements OnInit {
         data => {
           this.sharedService.errorHandling(data, (function () {
 
+            console.log('data after service in browser: ', data);
+
             this.dataSummons = data.summonResource;
 
             // off kejap 
@@ -238,9 +246,12 @@ export class SummontrafficComponent implements OnInit {
             /////////////////////
             //farid tesst starts // nanti kena buang ni. currntly api error
 
-            // if(this.dataSummons.summonDetails == null && this.dataSummons.total_summons != null) {
-            //   this.showNoData = true;     
-            // }
+            this.showDetails = true;
+
+            // sekiranya nombor kereta yang dicari tidak ada pada ic dia sendiri...
+            if(this.dataSummons.summonDetails == null && this.dataSummons.total_summons == 0) {
+              this.showNoData = true;     
+            }
 
             if (this.dataSummons.summonDetails != null) {
               if (this.dataSummons.summonDetails.length == 0) {
@@ -252,21 +263,26 @@ export class SummontrafficComponent implements OnInit {
               this.noPrevData = true;
               this.noNextData = true;
             } else {
-              this.noPrevData = false;
-              this.noNextData = false;
+              // this.noPrevData = false;
+              // this.noNextData = false;
             }
 
             if (this.pageNumber == 1) {
               this.noPrevData = true;
             } else {
-              this.noPrevData = false;
+              // this.noPrevData = false;
+            }
+
+            if (this.dataSummons.totalPages == this.dataSummons.pageNumber) {
+              this.noNextData = true;
             }
 
              // sekiranya ic yg dicari bukan berdasarkan kereta sendiri
             if (this.dataSummons.totalElements == 0) {
-              this.showDetails = true;
               this.showNoData = true;
             }
+
+            // this.dataSummons.summonDetails[0].op   // template jer
 
             //farid tesst ends // nanti kena buang ni. currntly api error
             /////////////////////
@@ -274,14 +290,11 @@ export class SummontrafficComponent implements OnInit {
             //original
             // if (this.dataSummons.summonDetails.length > 0) {
 
-            //test
+            // try test // sekiranya ada data 
             if (this.dataSummons.summonDetails != null && this.dataSummons.summonDetails.length > 0) {
-
-              this.showDetails = true;
               this.showNoData = false;
-            } else {
-              this.showDetails = false;
-              this.showNoData = true;
+            } else { 
+              // this.showNoData = true;
             }
 
           }).bind(this));
@@ -304,10 +317,12 @@ export class SummontrafficComponent implements OnInit {
 
           "summonDetails": [
             {
+              "op":"N",
+              "sh":"Y",
               "compound_ind": "Y",
               "district_code": null,
               "enforcement_date": "20060330",
-              "imageUrl": "?",
+              "imageUrl": "https://sso.rmp.gov.my/SM/LOADIMAGE_E.aspx?id=FbhH6gFYja7sd0o9alLg/wgQHDc9AamOnJH1sj9lRvtlLYaR6HZcga8opFj4uXa03uxWb9Uz+uDB04XaFJhehA==",
               "summons_id_key": "1810000200002AB895306",
               "vehicle_registration_number": "ADM310",
               "offence_date": "20060329",
@@ -332,10 +347,12 @@ export class SummontrafficComponent implements OnInit {
               "offender_name": "MOHD RAMZI BIN IBRAHIM"
             },
             {
+              "op":"Y",
+              "sh":"N",
               "compound_ind": "Y",
               "district_code": null,
               "enforcement_date": "20131003",
-              "imageUrl": "?",
+              "imageUrl": "https://sso.rmp.gov.my/SM/LOADIMAGE_E.aspx?id=FbhH6gFYja7sd0o9alLg/wgQHDc9AamOnJH1sj9lRvtlLYaR6HZcga8opFj4uXa03uxWb9Uz+uDB04XaFJhehA==",
               "summons_id_key": "1812000200002AK469286",
               "vehicle_registration_number": "WPW7663",
               "offence_date": "20131001",
@@ -360,6 +377,8 @@ export class SummontrafficComponent implements OnInit {
               "offender_name": "MOHD RAMZI BIN IBRAHIM"
             },
             {
+              "op":"N",
+              "sh":"Y",
               "compound_ind": "Y",
               "district_code": null,
               "enforcement_date": "20161003",
@@ -388,6 +407,8 @@ export class SummontrafficComponent implements OnInit {
               "offender_name": "MOHD RAMZI BIN IBRAHIM"
             },
             {
+              "op":"N",
+              "sh":"Y",
               "compound_ind": "Y",
               "district_code": null,
               "enforcement_date": "20160912",
@@ -416,6 +437,8 @@ export class SummontrafficComponent implements OnInit {
               "offender_name": "MOHD RAMZI BIN IBRAHIM"
             },
             {
+              "op":"N",
+              "sh":"Y",
               "compound_ind": "Y",
               "district_code": null,
               "enforcement_date": "20180322",
@@ -460,14 +483,17 @@ export class SummontrafficComponent implements OnInit {
           "totalElements": 5
         };
       } else {
+
         this.loading = false;
         this.dataSummons = {
             "summonDetails": [
               {
+                "op":"Y",
+                "sh":"Y",
                 "compound_ind": "Y",
                 "district_code": null,
                 "enforcement_date": "20131003",
-                "imageUrl": "?",
+                "imageUrl": "https://sso.rmp.gov.my/SM/LOADIMAGE_E.aspx?id=FbhH6gFYja7sd0o9alLg/wgQHDc9AamOnJH1sj9lRvtlLYaR6HZcga8opFj4uXa03uxWb9Uz+uDB04XaFJhehA==",
                 "summons_id_key": "1812000200002AK469286",
                 "vehicle_registration_number": "WPW7663",
                 "offence_date": "20131001",
@@ -492,6 +518,8 @@ export class SummontrafficComponent implements OnInit {
                 "offender_name": "MOHD RAMZI BIN IBRAHIM"
               },
               {
+                "op":"Y",
+                "sh":"N",
                 "compound_ind": "Y",
                 "district_code": null,
                 "enforcement_date": "20150601",
@@ -520,6 +548,8 @@ export class SummontrafficComponent implements OnInit {
                 "offender_name": "DINESH AMEDEMBE"
               },
               {
+                "op":"N",
+                "sh":"Y",  
                 "compound_ind": "Y",
                 "district_code": null,
                 "enforcement_date": "20150420",
@@ -729,7 +759,7 @@ export class SummontrafficComponent implements OnInit {
     }
 
  
-    this.searchApp(null, this.pageNumber, this.pageSize); // to be open soon when api ready
+    this.searchApp(null, this.pageNumber, this.pageSize);
   }
   
   paginatorL(page){ 
@@ -754,7 +784,7 @@ export class SummontrafficComponent implements OnInit {
  
   }
 
-  paginatorR(page, totalPages){ 
+  paginatorR(page, totalPages){
 
     //original
     // this.noPrevData = page >= 1 ? false : true;
@@ -762,19 +792,22 @@ export class SummontrafficComponent implements OnInit {
     // this.noNextData = pageInc === totalPages;
     //original
 
-    //farid try test
+    //farid try test starts
       this.noPrevData = false;
       this.pageNumber = this.pageNumber + page;
       if (this.pageNumber == totalPages) {
         this.noNextData = true;
       }
 
-      if (this.dataSummons.totalPages == this.dataSummons.pageNumber) {
-            this.noNextData = true;
-      }
-
       this.searchApp(null, this.pageNumber, this.pageSize);
-    //farid try test 
+
+      //KAT SINI MACAM TAK BETUL LAGI. function ni mcm lambat nak baca sebelom search app settle.
+      // if (this.dataSummons.totalPages == this.dataSummons.pageNumber) {
+      //   this.noNextData = true;
+      // }
+
+    //farid try test end'
+
   }
 
   getStatusApp(lang){
@@ -788,6 +821,11 @@ export class SummontrafficComponent implements OnInit {
   ///////////////////
   //pagination ends
   ///////////////////
+
+  pageLink(param) {
+    window.open(param);
+    console.log('masok link param: ',param)
+  }
 
 
 }

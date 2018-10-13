@@ -103,7 +103,7 @@
                                 <i class="fa fa-refresh"></i> {{'feedback.label.reset' | translate }}</button>
                             <button mat-raised-button type="button" color="primary" id="searchbtn" 
                                 class="form-control btn btn-md btn-success font-size-s pull-right bttnCustom" [disabled]="!complete"
-                                (click)="searchApp(searchForm.value)">
+                                (click)="searchApp(null,1,5)">
                                 <i class="fa fa-search"></i> {{'appmngt.setSearch.search' | translate}}</button>
                         </div>
                         
@@ -252,9 +252,22 @@
                     <td class="mat-cell paddingR">{{data.offence_location}}</td>
                     <td class="mat-cell paddingR">{{data.offence_location}}</td>
                     <td class="mat-cell text-right paddingR">{{data.summons_amt}}</td>
-                    <td class="mat-cell text-center paddingR">-</td>
-                    <td class="mat-cell text-center paddingR">-</td>
-                    <td class="mat-cell text-center paddingR">-</td>
+                    <td class="mat-cell text-center paddingR"
+                        translate="{{ (data.sh == 'Y' ? '&#9989;' : '-') }}">
+                        {{data.sh}}
+                    </td>
+                    <td class="mat-cell text-center paddingR" 
+                        translate="{{ (data.op == 'Y' ? '&#9989;' : '-') }}">
+                        {{data.op}}
+                    </td>
+
+                    <td class="mat-cell text-center paddingR"
+                        (click)="pageLink(data.imageUrl)"
+                        translate="{{ (data.imageUrl != '' ? '&#10063;' : '-') }}"
+                        style="cursor: pointer; color:blue;"
+                        > {{data.imageUrl}} </td>                    
+
+
                 </tr>
                 <tr class="mat-row table_row table_row_height" *ngIf="showNoData">
                     <td colspan="10" class="mat-cell paddingR">
@@ -267,19 +280,16 @@
 <!-- farid testt should put here starts  --> 
 
 <div class="float-right ">
-        <mat-form-field class="table_footer_pagecount">
-
+        <mat-form-field class="table_footer_pagecount" style="width: 50px;">
+  
             <!-- original -->
-            <mat-select class="font-size-s" value="1" (change)="pageChange($event)">
-
-            <!-- farid try -->
-            <!-- <mat-select class="font-size-s" value="{{pageNumber}}" (change)="pageChange($event)"> -->
-                <mat-option value="1">1</mat-option>
-                <mat-option value="2">2</mat-option>
-                <mat-option value="3">3</mat-option>
-                <mat-option value="4">4</mat-option>
+            <mat-select class="font-size-s" value="5" (change)="pageChange($event)">
                 <mat-option value="5">5</mat-option>
-            </mat-select> 
+                <mat-option value="10">10</mat-option>
+                <mat-option value="20">20</mat-option>
+                <mat-option value="50">50</mat-option>
+            </mat-select>
+
         </mat-form-field>
 
         <!-- <span class="float-right"> -->

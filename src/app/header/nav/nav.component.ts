@@ -4,7 +4,7 @@ import { IMenu, IUrl } from './nav.model';
 import { Http, Response } from '@angular/http';
 import { APP_CONFIG, AppConfig } from '../../config/app.config.module';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
-import { RouterLinkActive, Router } from '@angular/router';
+import { RouterLinkActive, Router, NavigationEnd } from '@angular/router';
 import { NavService } from './nav.service';
 import * as $ from 'jquery';
 import { SearchService } from '../../search/search.service';
@@ -92,6 +92,12 @@ export class NavComponent implements OnInit, AfterViewInit, OnDestroy {
 
     ngOnInit() {
 
+        this.router.events.subscribe((evt) => {
+            if (!(evt instanceof NavigationEnd)) {
+                return;
+            }
+            window.scrollTo(0, 0);
+        });
 
 
         if (!this.languageId) {
@@ -148,6 +154,9 @@ export class NavComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     getMenu() {
+        if(!this.languageId) {
+            this.languageId = 1;
+        }
         this.navService.getMenuData(this.languageId)
             .subscribe(resMenuData => { this.menus = resMenuData });
     }

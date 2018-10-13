@@ -53,7 +53,6 @@ import { FamilyinfoComponent, FamilyPopupDialog } from './familyinfo/familyinfo.
 import { FamilyinfotblComponent } from './familyinfo/familyinfotbl/familyinfotbl.component';
 import { CheckexamresultComponent, ExamPopupDialog,ExamResult } from './checkexamresult/checkexamresult.component';
 import { HighlightboxProdComponent } from './highlightbox/highlightboxprod.component';
-
 export function HttpLoaderFactory(http: Http) {
    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -86,7 +85,7 @@ export function HttpLoaderFactory(http: Http) {
     LeftmenuProdComponent,
     ArchivecategoryProdComponent,
     ArchivesubcategoryProdComponent,
-    ArchivecontentProdComponent,    
+    ArchivecontentProdComponent,
     PerhilitanComponent,
     PerhilitanrenewComponent,
     PopupServiceDialog,

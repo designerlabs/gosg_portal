@@ -8,7 +8,6 @@ import { RouterModule, ActivatedRouteSnapshot } from '@angular/router';
 import { OwlModule } from "ng2-owl-carousel";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NguiAutoCompleteModule } from "@ngui/auto-complete/dist";
-
 import { TopnavService } from '../header/topnav/topnav.service';
 import { ContactComponent } from "../staticpage/contact.component";
 import { SliderComponent } from '../slider/slider.component';
@@ -183,7 +182,6 @@ export function HttpLoaderFactory(http: Http) {
     ModalModule.forRoot(),
     // LoadingModule,
     LeafletModule.forRoot()
-
   ],
 
   declarations: [
