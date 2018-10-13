@@ -107,6 +107,7 @@ export class PollProtectedComponent implements OnInit, OnDestroy {
           this.pollDataAnswer = resData.answer.filter(fData => fData.answer !== undefined);
           this.pollDataQuestionID = resData.questionId;
           this.pollReference = resData.pollReference;
+          console.log(this.pollDataAnswer);
           if (!this.latestResult) { // Check Latest Result Message while change lang
             this.showResult = ((localStorage.getItem('polldone') === resData.pollReference.toString()));
           }
@@ -157,21 +158,21 @@ export class PollProtectedComponent implements OnInit, OnDestroy {
             this.pollDataQuestionID = resData.questionId;
             this.pollReference = resData.pollReference;
 
+            if(this.flagSend == false){
+              this.toastr.success(
+                `<div><strong>${this.translate.instant('poll.respon')} :</strong> ${this.pollComment}</div>
+                <div><strong>${this.translate.instant('poll.answer')} :</strong> ${this.pollAnswer.answer}</div>`,'',{closeButton:true, timeOut:4000, progressBar:true, enableHtml:true}
+              )
+        
+              localStorage.setItem('getPollResult', JSON.stringify(this.pollDataAnswer));
+            }
+            this.flagSend = true;
+
           }).bind(this));
         }, Error => {
             this.toastr.error(this.translate.instant('common.err.servicedown'), '');
         }
-    );
-
-    if(this.flagSend == false){
-      this.toastr.success(
-        `<div><strong>${this.translate.instant('poll.respon')} :</strong> ${this.pollComment}</div>
-        <div><strong>${this.translate.instant('poll.answer')} :</strong> ${this.pollAnswer.answer}</div>`,'',{closeButton:true, timeOut:4000, progressBar:true, enableHtml:true}
-      )
-
-      localStorage.setItem('getPollResult', JSON.stringify(this.pollDataAnswer));
-    }
-    this.flagSend = true;
+    );    
 
     //this.toastr.success('Recommendation is : ' + this.pollComment + ', Answer is ' + this.pollAnswer.answer);
     this.showResult = true;
