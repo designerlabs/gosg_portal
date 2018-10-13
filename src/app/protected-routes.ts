@@ -61,6 +61,7 @@ import { FamilyinfoComponent } from './familyinfo/familyinfo.component';
 import { FamilyinfotblComponent } from './familyinfo/familyinfotbl/familyinfotbl.component';
 import { CheckexamresultComponent } from './checkexamresult/checkexamresult.component';
 
+
 //import { GalleryComponent } from './gallery/gallery.component';
 // import { NavRouterActivator } from './header/nav/nav-router-activator.service'
 

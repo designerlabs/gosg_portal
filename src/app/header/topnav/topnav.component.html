@@ -11,7 +11,8 @@
             <a routerLinkActive="topactive" [routerLink]="['contact']">{{ 'home.menu.contact' | translate }}</a> </li>
         <li>|</li>
         <li>
-          <a routerLinkActive="topactive" [routerLink]="['faq']">{{ 'home.menu.faq' | translate }}</a>
+          <!-- <a routerLinkActive="topactive" [routerLink]="['faq']">{{ 'home.menu.faq' | translate }}</a> -->
+          <a routerLinkActive="topactive" (click)="clickFaq()">{{ 'home.menu.faq' | translate }}</a>
         </li>
         <li>|</li>
         <li>

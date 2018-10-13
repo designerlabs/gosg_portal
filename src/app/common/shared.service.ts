@@ -208,24 +208,54 @@ export class SharedService {
     .catch(this.handleError);
   }
 
-  getSchoolApi(moduleName, id, lang): Observable<any[]> {
-    let readUrl = this.sharedDS + moduleName + id + '?language='+lang;
+  getSchoolLevel(moduleName, id): Observable<any[]> {
+    let readUrl = this.sharedDS + moduleName + id;
     return this.http.get(readUrl)
       .map((response: Response) => response.json())
       .retry(5)
       .catch(this.handleError);
   }
 
-  getListSchool(moduleName, school, state, ppd, khas, typeS?): Observable<any[]> {
+  getSchoolAgent(moduleName, level): Observable<any[]> {
+
+    let readUrl = this.sharedDS + moduleName + '?level='+level;
+    return this.http.get(readUrl)
+      .map((response: Response) => response.json())
+      .retry(5)
+      .catch(this.handleError);
+  }
+
+  getSchoolType(moduleName, level, agent): Observable<any[]> {
+    // http://10.1.70.148:8080/service/school/type?level=1&agent=18 (now)
+    let readUrl = this.sharedDS + moduleName + '?level='+level+'&agent='+agent;
+    return this.http.get(readUrl)
+      .map((response: Response) => response.json())
+      .retry(5)
+      .catch(this.handleError);
+  }
+
+  getSchoolApi(moduleName, id, lang): Observable<any[]> {
+    let readUrl = this.sharedDS + moduleName + id;
+    return this.http.get(readUrl)
+      .map((response: Response) => response.json())
+      .retry(5)
+      .catch(this.handleError);
+  }
+
+  getListSchool(moduleName, school, state, agent, khas, typeS?): Observable<any[]> {
 
     let readUrl: any;
 
-    if(typeS){
-      readUrl = this.sharedDS + moduleName + '/'+school+'/'+state+'?ppd='+ppd+ '&pendidikanKhas='+khas+'&type='+typeS;
+    if(typeS && typeS != 'all'){
+      readUrl = this.sharedDS + moduleName + '?level='+school+'&agent='+agent+'&type='+typeS+'&special='+khas;
     }
-
     else{
-      readUrl = this.sharedDS + moduleName + '/'+school+'/'+state+'?ppd='+ppd+ '&pendidikanKhas='+khas;
+      if(khas != 'all'){
+        readUrl = this.sharedDS + moduleName + '?level='+school+'&agent='+agent+'&special='+khas;
+      }else{
+        readUrl = this.sharedDS + moduleName + '?level='+school+'&agent='+agent;
+      }
+      
     }
 
     
