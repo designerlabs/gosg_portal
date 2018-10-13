@@ -162,27 +162,27 @@
       "fullname": "Full name"
     },
     "err": {
-      "ic": "IC Number is required",
-      "name": "Full name is required",
-      "email": "Email is required. IE: aaaa@bbb.com",
-      "tel": "Telephone No. is required. IE: 018xxxxxxx / +60-x-xxxx-xxxx",
-      "codetel": "Country code is required",
-      "country": "Country is required",
-      "passport": "Passport number is required. IE: AA12345678",
-      "fullname": "Full name is required",
-      "vercode": "Verification code is required"
+      "ic": "IC Number is required.",
+      "name": "Full name is required.",
+      "email": "Email is required.",
+      "tel": "Telephone No. is required.",
+      "codetel": "Country code is required.",
+      "country": "Country is required.",
+      "passport": "Passport number is required.",
+      "fullname": "Full name is required.",
+      "vercode": "Verification code is required."
     },
     "pattern":{
-      "ic":"IC Number only takes 12 digits",
-      "email":"Please enter a valid email",
-      "dob":"Please enter a valid date format. IE: XX-XX-XXXX",
-      "tel":"Telephone No must be valid",
-      "telr":"Telephone No must be valid",
-      "telb":"Telephone No must be valid",
-      "passport":"Passport number must be valid. IE: AA12345678",
-      "fullname":"Full name must be valid",
-      "name":"Full name must be valid",
-      "captcha":"Verification code must be valid"
+      "ic":"IC Number only takes 12 digits.",
+      "email":"Please enter a valid email. Example: aaaa@bbb.com",
+      "dob":"Please enter a valid date format. Example: XX-XX-XXXX",
+      "tel":"Telephone No must be valid.",
+      "telr":"Telephone No must be valid.",
+      "telb":"Telephone No must be valid.",
+      "passport":"Passport number must be valid. Example: AA12345678",
+      "fullname":"Full name must be valid.",
+      "name":"Full name must be valid.",
+      "captcha":"Verification code must be valid."
     },
     "popupmsg":{
       "success_content1":"Thank you for your registration. Check your ",
