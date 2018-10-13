@@ -61,6 +61,7 @@ export class PollComponent implements OnInit {
           if(this.topnavservice.flagLang){
             this.subscription = this.getData(this.languageId);
             //this.submitPoll('');
+            this.pollDataAnswer = JSON.parse(localStorage.getItem('getPollResult'))
             console.log(JSON.parse(localStorage.getItem('getPollResult')));
           }
       });

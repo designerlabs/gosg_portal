@@ -67,6 +67,8 @@ export class PollProtectedComponent implements OnInit, OnDestroy {
 
           if(this.topnavservice.flagLang){
             this.subscription = this.getData(this.languageId);
+            this.pollDataAnswer = JSON.parse(localStorage.getItem('getPollResult'))
+            console.log(JSON.parse(localStorage.getItem('getPollResult')));
           }
         // }).bind(this));
       });
