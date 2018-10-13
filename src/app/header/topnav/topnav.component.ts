@@ -10,6 +10,11 @@ import { debug } from 'util';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 let num = 0;
 
+export interface LangChangeEvent {
+  lang: string;
+  translations: any;
+}
+
 @Component({
   selector: 'app-topnav',
   templateUrl: './topnav.component.html',
@@ -106,6 +111,27 @@ export class TopnavComponent implements OnInit, AfterViewInit, OnDestroy {
     }else{
       this.isActive = false;
     }
+
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      //alert(this.translate.currentLang);
+      const myLang = this.translate.currentLang;
+      if (myLang === 'ms') {
+        this.isActive = true;
+        this.currlang = 'English';
+        this.currlangMOB = 'EN';
+        //this.translate.use('ms');
+        this.langId = 2;
+      } else {
+        this.isActive = false;
+        this.currlang = 'Bahasa Malaysia';
+        this.currlangMOB = 'BM';
+        this.langId = 1;
+        //this.translate.use('en');
+      }
+      localStorage.setItem('langID', this.langId);
+      this.topnavservice.getEventLang();
+    });
+      
   }
 
 
