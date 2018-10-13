@@ -294,7 +294,7 @@
       "name": "Nama",
       "nameplh": "Nama penuh",
       "emel":"Emel",
-      "content":"Kandungan Pertanyaan",
+      "content":"Komen anda",
       "reset":"Set Semula",
       "submit":"Hantar",
       "words":" aksara yang tinggal.",
@@ -311,7 +311,7 @@
 
   },
   "rating":{
-    "title":"title",
+    "title":"Apakah pendapat anda mengenai artikel ini ?",
     "like":"Suka",
     "neutral":"Neutral",
     "dislike":"Tidak suka",

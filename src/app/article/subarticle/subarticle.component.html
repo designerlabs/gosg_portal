@@ -296,31 +296,35 @@
 
                         <div class="row" *ngIf="articleService.leContent">
                           <div class="col-md-12 warna_font" style="text-align: left;">
+                            <h6 class="font-size-s" style="font-family: Roboto; color: #222; padding-top:20px;">{{ 'rating.title' | translate }}</h6>
                               <form [formGroup]="scoreFormgrp" #scoreForm="ngForm" id="score-form" role="form" novalidate="novalidate">
-                                <div class="form-group col-md-12">
+                                <div class="form-group col-md-12" style="padding-left:0px;">
                                   <div class="radio">
                                     <input type="radio" class="like"  formControlName="score" value=1 (click)="getRate(1)">
-                                    <label><i class="fa fa-smile-o"></i>
+                                    <label for="like">
+                                      <i class="icolike"></i>
+                                      <!--<img src='/assets/images/rating/Neutral.png'/>-->
                                       <span>{{ 'rating.like' | translate }}</span>
+
                                     </label>
                                   </div>
                                   <div class="radio">
                                     <input type="radio" class="neutral" formControlName="score" value=0 (click)="getRate(0)">
-                                    <label><i class="fa fa-meh-o"></i>
+                                    <label><i class="iconeutral"></i>
                                       <span>{{ 'rating.neutral' | translate }}</span>
                                     </label>
                                   </div>
                                   <div class="radio">
                                     <input type="radio" class="dislike" formControlName="score"  value=-1 (click)="getRate(-1)">
-                                    <label><i class="fa fa-frown-o"></i>
+                                    <label><i class="icodislike"></i>
                                       <span>{{ 'rating.dislike' | translate }}</span>
                                     </label>
 
                                   </div>
                                 </div>
-                                <div ng-app class="form-group col-md-12" style="padding: 0px 30px;">
+                                <div ng-app class="form-group col-md-12" style="padding-left: 0px; padding-top: 10px;">
                                   <mat-form-field class="example-full-width" style="width:100%">
-                                      <textarea matInput tabindex="5" matTextareaAutosize #fbmsg formControlName="remarks" maxLength="200" placeholder="{{'feedback.label.content' | translate }}"></textarea>
+                                      <textarea matInput tabindex="5" matTextareaAutosize #fbmsg formControlName="remarks" rows="2" maxLength="200" placeholder="{{'feedback.label.content' | translate }}"></textarea>
                                       <mat-hint align="end">{{fbmsg.value?.length || 0}}/200</mat-hint>
                                   </mat-form-field>
 
@@ -328,7 +332,7 @@
                               <div class="form-group col-md-12"  style="text-align: right;">
                                 <button tabindex="7" mat-raised-button type="button" color="primary" id="btnsubmit" class="form-control btn btn-md btn-success font-size-s"
                                 (click)="submitForm(scoreFormgrp.value)" style="width: 100px; font-family: Roboto; margin-left: 5px;"
-                                [disabled]="scoreFormgrp.invalid">
+                                [disabled]="scoreFormgrp.invalid||!cansubmit">
                                 <i class="fa fa-check"></i> {{'feedback.label.submit' | translate }}</button>
                               </div>
 

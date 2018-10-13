@@ -40,7 +40,6 @@ import { SetactiveComponent } from './subscription/setactive/setactive.component
 import { RssComponent } from './article/rss/rss.component';
 import { ContentProdComponent } from './article/content/contentprod.component';
 import { EparticipationComponent } from './eparticipation/eparticipation.component';
-import { GareportsComponent} from './gareports/gareports.component';
 import { StatisticComponent } from './statistic/statistic.component';
 import { SitemapComponent } from './sitemap/sitemap.component';
 import { ArchivecategoryProdComponent } from './archive/archivecategory/archivecategoryprod.component';
@@ -61,6 +60,7 @@ import { RssmainComponent } from './article/rss/rssmain/rssmain.component';
 import { FamilyinfoComponent } from './familyinfo/familyinfo.component';
 import { FamilyinfotblComponent } from './familyinfo/familyinfotbl/familyinfotbl.component';
 import { CheckexamresultComponent } from './checkexamresult/checkexamresult.component';
+
 
 //import { GalleryComponent } from './gallery/gallery.component';
 // import { NavRouterActivator } from './header/nav/nav-router-activator.service'
@@ -125,7 +125,6 @@ export const protectedRoutes: Routes = [
     {path: 'perhilitan/:id', component: PerhilitanComponent},
     {path: 'perhilitan_renew', component: PerhilitanrenewComponent},
     {path: 'perhilitan_renew/:id', component: PerhilitanrenewComponent},
-    {path: 'ga_reports', component: GareportsComponent},
     {path: 'familyinfo', component: FamilyinfotblComponent},
     {path: 'familyinfo/:id', component: FamilyinfoComponent},
     {path: 'familyinfo/add', component: FamilyinfoComponent},
