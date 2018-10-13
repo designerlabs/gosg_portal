@@ -135,6 +135,7 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
                 private validateService: ValidateService,
                 private http:  HttpClient,
                 private router: Router,
+                private route: ActivatedRoute,
                 private portalservice: PortalService,
                 textMask:TextMaskModule,
                 private dialogsService: DialogsService,
@@ -233,57 +234,79 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     ngOnInit() {
-        if(!this.languageId){
-            this.languageId = localStorage.getItem('langID');
-        }else{
-            this.languageId = 1;
-        }
-        // this.citizenFormGrp.get('telefon').disable();
-        this.refUrl =  location.search.split('forward_url=')[1];
 
+        this.route.params.subscribe(params => {
+            if (params['id']) {
+                console.log(params['id']);
+                this.languageId = params['id'];
+                if (this.languageId === '1') {
+                    this.translate.setDefaultLang('en');
+                    this.translate.use('en');
+                } else {
+                    this.translate.setDefaultLang('ms');
+                    this.translate.use('ms');
+                }
+               
+            } else if (localStorage.getItem('langID')) {
+                this.languageId = localStorage.getItem('langID');
+            } else {
+                this.languageId = 1;
+            }
 
-        this.getUserType(this.languageId);
-        this.maskCitizen = this.validateService.getMask().telephone;
-        this.maskForeigner = this.validateService.getMask().telephonef;
-        this.maskICNo = this.validateService.getMask().icno;
-        this.getCountry();
-        this.breadcrumb = this.breadcrumbService.getBreadcrumb();
-        this.breadcrumb = this.breadcrumb.name = '';
-        this.isValid = this.breadcrumbService.getValid();
-        this.isValid = this.isValid.value = true;
-        this.kad_pengenalan = new FormControl('', [Validators.required, Validators.pattern('^[0-9-]{14}$')]),
-        this.nama_penuh = new FormControl('', [Validators.required, Validators.pattern(this.validateService.getPattern(2,60).name)]),
-            this.emel = new FormControl('', [Validators.required, Validators.pattern(this.validateService.getPattern().email)]),
-            this.telefon = new FormControl('', [Validators.required]),
-            this.codeTelefon = new FormControl('', [Validators.required]),
-            this.country = new FormControl('', [Validators.required]),
-            this.passport = new FormControl('', [Validators.required, Validators.pattern(this.validateService.getPattern(6,10).passport)]), //A1234567 or AB123456
-            this.country_pr = new FormControl(''),
-            this.passport_pr = new FormControl('', [Validators.pattern(this.validateService.getPattern(6,10).passport)]), //A1234567 or AB123456
-            this.nama_penuhf = new FormControl('', [Validators.required, Validators.pattern(this.validateService.getPattern(2,60).name)]),
-            this.emelf = new FormControl('', [Validators.required, Validators.pattern(this.validateService.getPattern().email)]),
-            this.telefonf = new FormControl('', [Validators.required]),
-            this.codeTelefonf = new FormControl('', [Validators.required]),
-            this.captcha = new FormControl('', [Validators.required]),
-            this.citizenFormGrp = new FormGroup({
-                kad_pengenalan: this.kad_pengenalan,
-                nama_penuh: this.nama_penuh,
-                emel: this.emel,
-                telefon: this.telefon,
-                codeTelefon: this.codeTelefon,
-                country: this.country,
-                passport: this.passport,
-                country_pr: this.country_pr,
-                passport_pr: this.passport_pr,
-                nama_penuhf: this.nama_penuhf,
-                emelf: this.emelf,
-                telefonf: this.telefonf,
-                codeTelefonf: this.codeTelefonf,
-                captcha: this.captcha,
-            });
-        this.flagGetCaptcha = true;
+            //if(!this.languageId){
+                //this.languageId = localStorage.getItem('langID');
+            //}else{
+            //    this.languageId = 1;
+            //}
 
-        this.RemoveNonCitizenCtrl();
+            // this.citizenFormGrp.get('telefon').disable();
+            this.refUrl =  location.search.split('forward_url=')[1];
+    
+            this.getUserType(this.languageId);
+            this.maskCitizen = this.validateService.getMask().telephone;
+            this.maskForeigner = this.validateService.getMask().telephonef;
+            this.maskICNo = this.validateService.getMask().icno;
+            this.getCountry();
+            this.breadcrumb = this.breadcrumbService.getBreadcrumb();
+            this.breadcrumb = this.breadcrumb.name = '';
+            this.isValid = this.breadcrumbService.getValid();
+            this.isValid = this.isValid.value = true;
+            this.kad_pengenalan = new FormControl('', [Validators.required, Validators.pattern('^[0-9-]{14}$')]),
+            this.nama_penuh = new FormControl('', [Validators.required, Validators.pattern(this.validateService.getPattern(2,60).name)]),
+                this.emel = new FormControl('', [Validators.required, Validators.pattern(this.validateService.getPattern().email)]),
+                this.telefon = new FormControl('', [Validators.required]),
+                this.codeTelefon = new FormControl('', [Validators.required]),
+                this.country = new FormControl('', [Validators.required]),
+                this.passport = new FormControl('', [Validators.required, Validators.pattern(this.validateService.getPattern(6,10).passport)]), //A1234567 or AB123456
+                this.country_pr = new FormControl(''),
+                this.passport_pr = new FormControl('', [Validators.pattern(this.validateService.getPattern(6,10).passport)]), //A1234567 or AB123456
+                this.nama_penuhf = new FormControl('', [Validators.required, Validators.pattern(this.validateService.getPattern(2,60).name)]),
+                this.emelf = new FormControl('', [Validators.required, Validators.pattern(this.validateService.getPattern().email)]),
+                this.telefonf = new FormControl('', [Validators.required]),
+                this.codeTelefonf = new FormControl('', [Validators.required]),
+                this.captcha = new FormControl('', [Validators.required]),
+                this.citizenFormGrp = new FormGroup({
+                    kad_pengenalan: this.kad_pengenalan,
+                    nama_penuh: this.nama_penuh,
+                    emel: this.emel,
+                    telefon: this.telefon,
+                    codeTelefon: this.codeTelefon,
+                    country: this.country,
+                    passport: this.passport,
+                    country_pr: this.country_pr,
+                    passport_pr: this.passport_pr,
+                    nama_penuhf: this.nama_penuhf,
+                    emelf: this.emelf,
+                    telefonf: this.telefonf,
+                    codeTelefonf: this.codeTelefonf,
+                    captcha: this.captcha,
+                });
+            this.flagGetCaptcha = true;
+    
+            this.RemoveNonCitizenCtrl();
+
+        });
+
     }
 
     openDialog() {
