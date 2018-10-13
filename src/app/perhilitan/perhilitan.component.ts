@@ -335,7 +335,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
 
           if(data.user){
             
-            let phone = data.user.mobilePhoneNo;
+            let phone = (data.user.mobilePhoneNo).replace(/'*'/g,'');
             let getObjKeys = Object.keys(data.user);
             this.valObj = getObjKeys.filter(fmt => fmt === "address");
 
