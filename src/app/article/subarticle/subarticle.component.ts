@@ -22,6 +22,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./subarticle.component.css']
 })
 export class SubarticleComponent implements OnInit, OnDestroy {
+  cansubmit:boolean = true;
   le_menu_code: any;
   le_code: any;
   le_content: any;
@@ -39,6 +40,7 @@ export class SubarticleComponent implements OnInit, OnDestroy {
   articles: any[];
   moduleName: string;
   articleData: any;
+ 
   @Output() langChange = new EventEmitter();
   loading = false;
 
@@ -142,7 +144,10 @@ export class SubarticleComponent implements OnInit, OnDestroy {
 
 
   getRateReset(){
-    this.scoreFormgrp.reset();
+    //this.scoreFormgrp.reset();
+    this.scoreFormgrp.controls['score'].disable();
+    this.scoreFormgrp.controls['remarks'].disable();
+    this.cansubmit = false;
   }
 
 

@@ -294,7 +294,7 @@
       "name": "Name",
       "nameplh": "Full name",
       "emel": "Email",
-      "content": "Content",
+      "content": "Your comments",
       "reset": "Reset",
       "submit": "Send",
       "words": " characters left.",
@@ -311,7 +311,7 @@
     }
   },
   "rating":{
-    "title":"title",
+    "title":"What is your comment for this article ?",
     "like":"Like",
     "neutral":"Neutral",
     "dislike":"Dislike",
