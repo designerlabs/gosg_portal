@@ -8,8 +8,9 @@ declare var $ :any;
 @Component({
   selector: 'int-search',
     // template: '<div *ngFor="let int of intData"><h4>{{int.article_name}}</h4><span class="label primary">{{int.category_name}}</span><p>{{int.article_text_clean | slice:0:100}}</p></div>'
-    template: `<div *ngIf='tabInx==0' style='padding: 10px'><h4><span class="font-size-m">{{pageNo}}. </span>
-    <a routerLink='{{showdata.content_url}}' class="titleSer warna_title_color font-size-m">{{showdata.content_title}}</a></h4>
+    template: `
+    <div *ngIf='tabInx==0' style='padding: 10px'><h4><span class="font-size-m">{{pageNo}}. </span>
+    <a target="_blank" routerLink='{{showdata.content_url}}' class="titleSer warna_title_color font-size-m">{{showdata.content_title}}</a></h4>
     <span class="cat">{{showdata.parent_category[0].topic}}</span>
     <p style="padding-top:15px" class="font-size-s sertxt" id="{{showdata.content_id}}" [innerHtml]="dataHilight"> 
     </p><span class="font-size-s">{{showdata.publish_date | date:'dd/MM/yyyy hh:mm a'}} </span></div>
@@ -25,11 +26,12 @@ declare var $ :any;
     
     <div *ngIf='tabInx==2'><h4><span class="font-size-m">{{pageNo}}. </span>
     <a class="titleSer warna_title_color font-size-m" href='{{showdata.url }}' target='_blank'>{{showdata.title }}</a>
-  </h4>
-  <p style="padding-top:15px" class="font-size-s sertxt" [innerHtml]="dataHilight"> 
-  </p>
-  <span class="font-size-s">{{showdata.date}} </span>
-  </div>`,
+    </h4>
+    <p style="padding-top:15px" class="font-size-s sertxt" [innerHtml]="dataHilight"> 
+    </p>
+    
+    </div>
+  `,
     styleUrls: ['./search-result/search-result.component.css'],
 })
 export class SearchIntComponent implements OnInit {

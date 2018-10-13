@@ -197,16 +197,16 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
       "size": 10
     },
     {
-      "name": "filter_topic.category",
+      "name": "filter_topic.parent_category",
       "type": "filter",
-      "field": "category.is_active",
+      "field": "parent_category.is_active",
       "filter": {
-        "category.is_active": true
+        "parent_category.is_active": true
       },
       "subAggregation": {
         "name": "active_cat",
         "type": "terms",
-        "field": "category.topic.raw",
+        "field": "parent_category.topic.raw",
         "size": "10"
       }
     },
@@ -220,7 +220,7 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
       "subAggregation": {
         "name": "active_cat",
         "type": "terms",
-        "field": "category.sub_topic.raw",
+        "field": "category.topic.raw",
         "size": "10"
       }
     }
@@ -563,7 +563,7 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
 
 
   searchByKeyword(valkeyword, opt?) {
-
+    
     this.getSearchUrl();
 
     let arrKeyword: any = [];
@@ -595,6 +595,7 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
     let navKword = this.router.url.split("/")[2];
 
     if(decodeURI(navKword) != locStrgKword) {
+      this.btnFilterReset();
       localStorage.setItem('ser_word', decodeURI(navKword));
       this.loading = true;
       // location.href = './search/'+navKword;
@@ -603,6 +604,7 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
         }
 
     } else if(decodeURI(valkeyword) != locStrgKword) {
+      this.btnFilterReset();
       localStorage.setItem('ser_word', decodeURI(valkeyword));
       this.loading = true;
       // location.href = './search/'+valkeyword;
@@ -805,7 +807,7 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
               }
               
               //
-              rData.aggregations['filter_topic.category'][0].active_cat.forEach(item => {
+              rData.aggregations['filter_topic.parent_category'][0].active_cat.forEach(item => {
                 item = this.changeAryVal(item,'generic')
                 topic = { "name": item[0].name, "val": item[0].val }
                 this.ddtopics.push(topic)
@@ -880,8 +882,8 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
 
             // DEBUG MODE ONLY
             if(!rData.data) {
-              localStorage.setItem("currSearchTab", "0");
-              this.toastr.error(this.translate.instant('common.err.servicedown'), '');
+              // localStorage.setItem("currSearchTab", "0");
+              // this.toastr.error(this.translate.instant('common.err.servicedown'), '');
               this.loading = false;
               // location.href = './search/'+this.ser_word;
             } else {
@@ -1219,9 +1221,6 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
       this.mainObj.aggregations = this.osAggregations;
     }
 
-    //
-    //
-    this.searchByKeyword(this.ser_word);
   }
 
   valueChangeTopic(model,index, $event) {
