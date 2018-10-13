@@ -39,6 +39,7 @@ export class PollProtectedComponent implements OnInit, OnDestroy {
   progressbarVal;
   pollReference;
   lengthPoll = 0;
+  flagSend = false;
   private subscriptionLang: ISubscription;
   private subscription: ISubscription;
 
@@ -66,6 +67,8 @@ export class PollProtectedComponent implements OnInit, OnDestroy {
 
           if(this.topnavservice.flagLang){
             this.subscription = this.getData(this.languageId);
+            this.pollDataAnswer = JSON.parse(localStorage.getItem('getPollResult'))
+            console.log(JSON.parse(localStorage.getItem('getPollResult')));
           }
         // }).bind(this));
       });
@@ -104,8 +107,14 @@ export class PollProtectedComponent implements OnInit, OnDestroy {
           this.pollDataAnswer = resData.answer.filter(fData => fData.answer !== undefined);
           this.pollDataQuestionID = resData.questionId;
           this.pollReference = resData.pollReference;
+          console.log(this.pollDataAnswer);
           if (!this.latestResult) { // Check Latest Result Message while change lang
             this.showResult = ((localStorage.getItem('polldone') === resData.pollReference.toString()));
+          }
+
+          if(this.pollReference == localStorage.getItem('polldone')){ // bila poll dah buat
+              this.pollDataAnswer = JSON.parse(localStorage.getItem('getPollResult'))
+              this.closeResult();
           }
         }
        // }
@@ -149,16 +158,21 @@ export class PollProtectedComponent implements OnInit, OnDestroy {
             this.pollDataQuestionID = resData.questionId;
             this.pollReference = resData.pollReference;
 
+            if(this.flagSend == false){
+              this.toastr.success(
+                `<div><strong>${this.translate.instant('poll.respon')} :</strong> ${this.pollComment}</div>
+                <div><strong>${this.translate.instant('poll.answer')} :</strong> ${this.pollAnswer.answer}</div>`,'',{closeButton:true, timeOut:4000, progressBar:true, enableHtml:true}
+              )
+        
+              localStorage.setItem('getPollResult', JSON.stringify(this.pollDataAnswer));
+            }
+            this.flagSend = true;
+
           }).bind(this));
         }, Error => {
             this.toastr.error(this.translate.instant('common.err.servicedown'), '');
         }
-    );
-
-    this.toastr.success(
-      `<div><strong>${this.translate.instant('poll.respon')} :</strong> ${this.pollComment}</div>
-      <div><strong>${this.translate.instant('poll.answer')} :</strong> ${this.pollAnswer.answer}</div>`,'',{closeButton:true, timeOut:4000, progressBar:true, enableHtml:true}
-    )
+    );    
 
     //this.toastr.success('Recommendation is : ' + this.pollComment + ', Answer is ' + this.pollAnswer.answer);
     this.showResult = true;

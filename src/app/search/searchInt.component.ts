@@ -83,19 +83,38 @@ export class SearchIntComponent implements OnInit {
       }
        
     }
+    
     highlight_words(word, element) {
       if(word) {
-          var textNodes;
+          var oriWord;
           var resData;
-          word = word.replace(/\W/g, '');
+          word = word.replace(/\W/gi, '');
           var str = word.split(" ");
+          // console.log(str)
+
           $(str).each(function() {
               var term = word;
-              var textNodes = $(element).contents().filter(function() { return this.nodeType === 3 });
+              var textNodes = $(element).contents().filter(function() { 
+                return this.nodeType === 3 });
               textNodes.each(function() {
+
                 var content = $(this).text();
+                console.log(content)
+                // var cntn = content.split(' ');
+                var pattern = /\b[^\d\W]+\b/gi;
+
+                var oriWord = term.match(pattern);
+                console.log(oriWord)  
+
+
+
                 var regex = new RegExp(term, "gi");
+                // console.log(regex)
+                // content = '<span class="highlightWord">' + term + '</span>';
                 resData = content.replace(regex, '<span class="highlightWord">' + term + '</span>');
+
+
+
               });
           });
           return resData;

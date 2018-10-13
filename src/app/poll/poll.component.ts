@@ -39,6 +39,7 @@ export class PollComponent implements OnInit {
     progressbarVal;
     pollReference;
     lengthPoll = 0; 
+    flagSend = false;
     private subscriptionLang: ISubscription;
     private subscription: ISubscription;
     public browserLang: string;
@@ -59,6 +60,9 @@ export class PollComponent implements OnInit {
 
           if(this.topnavservice.flagLang){
             this.subscription = this.getData(this.languageId);
+            //this.submitPoll('');
+            this.pollDataAnswer = JSON.parse(localStorage.getItem('getPollResult'))
+            console.log(JSON.parse(localStorage.getItem('getPollResult')));
           }
       });
     }
@@ -72,7 +76,7 @@ export class PollComponent implements OnInit {
       }else{
         this.languageId = 1;
       }
-      this.subscription = this.getData(this.languageId);
+      this.subscription = this.getData(this.languageId);    
 
         // this.getUserIpAddr();
     }
@@ -101,6 +105,11 @@ export class PollComponent implements OnInit {
                     if (!this.latestResult) { // Check Latest Result Message while change lang
                         this.showResult = ((localStorage.getItem('polldone') === resData.pollReference.toString()));
                     }
+
+                    if(this.pollReference == localStorage.getItem('polldone')){ // bila poll dah buat
+                        this.pollDataAnswer = JSON.parse(localStorage.getItem('getPollResult'))
+                        this.closeResult();
+                    }
                 }
                 // this.pollDataComment = eventData[0].comment;
               }).bind(this));
@@ -125,6 +134,7 @@ export class PollComponent implements OnInit {
     }
 
     onSelectionChange(selItem) {
+        console.log(selItem);
         // this.toastr.success(selItem.answer);
         this.pollAnswer = selItem;
     }
@@ -144,14 +154,20 @@ export class PollComponent implements OnInit {
                 this.sharedService.errorHandling(resData, (function(){
                   this.resultData = resData;
                   this.pollDataAnswer = resData.answer;
+                  console.log("LEPAS SUBMIT: ")
+                  console.log(this.pollDataAnswer)
                   this.pollDataQuestion = resData.questionTitle;
                   this.pollDataQuestionID = resData.questionId;
                   this.pollReference = resData.pollReference;
+                  if(this.flagSend == false){
+                    this.toastr.success(
+                        `<div><strong>${this.translate.instant('poll.respon')} :</strong> ${this.pollComment}</div>
+                        <div><strong>${this.translate.instant('poll.answer')} :</strong> ${this.pollAnswer.answer}</div>`,'',{closeButton:true, timeOut:4000, progressBar:true, enableHtml:true}
+                    )
 
-                  this.toastr.success(
-                      `<div><strong>${this.translate.instant('poll.respon')} :</strong> ${this.pollComment}</div>
-                      <div><strong>${this.translate.instant('poll.answer')} :</strong> ${this.pollAnswer.answer}</div>`,'',{closeButton:true, timeOut:4000, progressBar:true, enableHtml:true}
-                  )
+                    localStorage.setItem('getPollResult', JSON.stringify(this.pollDataAnswer));
+                  }
+                  this.flagSend = true;
                   
                 }).bind(this));
             }, Error => {

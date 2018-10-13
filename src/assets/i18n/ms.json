@@ -163,27 +163,27 @@
       "fullname": "Nama penuh"
     },
     "err": {
-      "ic": "Nombor Kad Pengenalan wajib diisi",
-      "name": "Nama penuh wajib diisi",
+      "ic": "Nombor Kad Pengenalan wajib diisi.",
+      "name": "Nama penuh wajib diisi.",
       "email": "Emel wajib diisi.",
       "tel": "No. Telefon wajib diisi.",
       "codetel": "Kod negara wajib diisi.",
-      "country": "Negara wajib diisi",
+      "country": "Negara wajib diisi.",
       "passport": "Nombor Pasport wajib diisi.",
-      "fullname": "Nama penuh wajib diisi",
-      "vercode": "Kod Verifikasi wajib diisi"
+      "fullname": "Nama penuh wajib diisi.",
+      "vercode": "Kod Verifikasi wajib diisi."
     },
     "pattern":{
-      "ic":"Nombor Kad Pengenalan memerlukan 12 digit",
+      "ic":"Nombor Kad Pengenalan memerlukan 12 digit.",
       "email":"Sila Masukkan emel yang sah. Contoh: aaaa@bbb.com",
-      "dob":"Please enter a valid date format. IE: XX-XX-XXXX",
+      "dob":"Please enter a valid date format. Contoh: XX-XX-XXXX",
       "tel":"No. Telefon mestilah sah. Contoh: 018xxxxxxx / +60-x-xxxx-xxxx",
-      "telr":"Telephone No must be valid",
-      "telb":"Telephone No must be valid",
+      "telr":"Telephone No must be valid.",
+      "telb":"Telephone No must be valid.",
       "passport":"Nombor Pasport mestilah sah. Contoh: AA12345678",
-      "fullname":"Nama penuh mestilah sah",
-      "name":"Nama penuh mestilah sah",
-      "captcha":"Kod Verifikasi mestilah sah"
+      "fullname":"Nama penuh mestilah sah.",
+      "name":"Nama penuh mestilah sah.",
+      "captcha":"Kod Verifikasi mestilah sah."
     },
     "popupmsg":{
       "success_content1":"Thank you for your registration. Check your ",

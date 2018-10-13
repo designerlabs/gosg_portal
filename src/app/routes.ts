@@ -82,6 +82,7 @@ export const appRoutes: Routes = [
     {path: 'gallery/content/:id', component:GalleryComponent},
     {path: 'login', component: LoginComponent},
     {path: 'register', component: RegisterComponent },
+    {path: 'register/:id/:go?forward_url', component: RegisterComponent },
 
     {path: 'faq', component: FaqComponent},
     {path: 'aboutus', component: AboutusComponent},

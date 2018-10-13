@@ -335,7 +335,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
 
           if(data.user){
             
-            let phone = data.user.mobilePhoneNo;
+            let phone = (data.user.mobilePhoneNo).replace(/[*/]/g, '');
             let getObjKeys = Object.keys(data.user);
             this.valObj = getObjKeys.filter(fmt => fmt === "address");
 
@@ -459,7 +459,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
         }
       }
 
-      let phone = data.user.address.permanentAddressHomePhoneNo.split('*')[1];
+    let phone = data.user.address.permanentAddressHomePhoneNo.replace(/[*/]/g, '');
 
       this.firstFormGroup.get('namaPemohon').setValue(data.user.fullName);
       this.firstFormGroup.get('icPemohon').setValue(data.user.identificationNo);
@@ -876,6 +876,9 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
     else{
       this.resetForm23();      
       this.secondFormGroup.get('flagData').setValue(''); 
+      this.listdaerahTNo = undefined;
+      this.listdaerahCompanyNo = undefined;
+      this.listdaerahSuratNo = undefined;
     }
 
   }
@@ -1051,6 +1054,9 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
   }
 
   clearDaerahNegeri(form: any){
+
+    console.log("test");
+    console.log(form);
     
     let getObjKeys = Object.keys(form);
     let valObj = getObjKeys.filter(fmt => fmt === "poskodPemilik");
@@ -1060,17 +1066,26 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
     if(valObj.length == 1){
       this.secondFormGroup.get('daerahPemilik').setValue('');  
       this.secondFormGroup.get('negeriPemilik').setValue('');  
+      if(form.poskodPemilik == ''){
+        this.listdaerahTNo = undefined;
+      }
       this.checkReqValues2();
     }
     if(valObj2.length == 1){
       this.thirdFormGroup.get('mailingDaerah').setValue('');     
       this.thirdFormGroup.get('mailingNegeri').setValue('');  
+      if(form.mailingPoskod == ''){
+        this.listdaerahCompanyNo = undefined;
+      }
       this.checkReqValues3();
     }
 
     if (valObj3.length == 1){
       this.fourthFormGroup.get('companyDaerah').setValue('');     
       this.fourthFormGroup.get('companyNegeri').setValue(''); 
+      if(form.companyPoskod == ''){
+        this.listdaerahSuratNo = undefined;
+      }
       this.checkReqValues4();
     }
   }
@@ -1218,6 +1233,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       } 
 
       this.checkReqValues2();
+      this.secondFormGroup.get('negeriPemilik').disable();
     } 
     
     else if(val == 2){
@@ -1231,6 +1247,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       } 
 
       this.checkReqValues3();
+      this.thirdFormGroup.get('mailingNegeri').disable();
     }
 
     else{
@@ -1244,6 +1261,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       } 
 
       this.checkReqValues4();
+      this.thirdFormGroup.get('mailingNegeri').disable();
     }
     
   }
@@ -1262,7 +1280,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       let validNamaPemilik = (formValue.namaPemilik)?(formValue.namaPemilik).replace(/[`~!#$%^&*()_|+\-=÷¿?;:'",.<>\{\}\[\]\\0-9]/gi, "") : '';
       this.secondFormGroup.get('namaPemilik').setValue(validNamaPemilik);
     }
-    this.checkReqValues4();
+    this.checkReqValues2();
   }
 
   checkPassport(formValue: any){
@@ -1351,7 +1369,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
     this.secondFormGroup.get('addPemilik').enable();
     this.secondFormGroup.get('poskodPemilik').enable();
     this.secondFormGroup.get('daerahPemilik').enable();
-    this.secondFormGroup.get('negeriPemilik').enable();
+    //this.secondFormGroup.get('negeriPemilik').enable();
 
     this.checkReqValues2();
   }

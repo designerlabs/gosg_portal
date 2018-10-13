@@ -146,7 +146,7 @@ html, body{
 }
 
 p.font-size-s > strong {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 .panel-body {
