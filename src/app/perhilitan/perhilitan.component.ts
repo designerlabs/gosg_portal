@@ -335,7 +335,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
 
           if(data.user){
             
-            let phone = (data.user.mobilePhoneNo).replace(/'*'/g,'');
+            let phone = (data.user.mobilePhoneNo).replace(/[*/]/g, '');
             let getObjKeys = Object.keys(data.user);
             this.valObj = getObjKeys.filter(fmt => fmt === "address");
 
@@ -459,7 +459,7 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
         }
       }
 
-      let phone = data.user.address.permanentAddressHomePhoneNo.split('*')[1];
+    let phone = data.user.address.permanentAddressHomePhoneNo.replace(/[*/]/g, '');
 
       this.firstFormGroup.get('namaPemohon').setValue(data.user.fullName);
       this.firstFormGroup.get('icPemohon').setValue(data.user.identificationNo);
