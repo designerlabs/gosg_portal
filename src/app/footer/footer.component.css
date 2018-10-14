@@ -1,3 +1,7 @@
+.footer-left {
+  margin-left:-40px;
+  margin-right:-40px;
+}
 .footer-heading {
   color: #00bdbb;
   font-weight: 700;

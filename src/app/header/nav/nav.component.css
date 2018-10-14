@@ -78,7 +78,10 @@ li.active > a {
 
 .top-nav {
   padding-top: 0px;
-  border-top: 4px solid #e6436e; }
+  border-top: 4px solid #e6436e; 
+  margin-left: -26px; 
+  margin-right: -10px;
+}
 
 .navbar-default {
   background: #fff;

@@ -136,3 +136,8 @@ body {
 .colorPaletteActive{
   border:1px solid #fff !important;
 }
+
+.top-nav {
+  margin-left: -26px;
+  margin-right: -26px;
+}
