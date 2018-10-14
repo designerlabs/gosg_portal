@@ -1,8 +1,7 @@
-import { Component, OnInit, Input, Inject, AfterContentChecked, AfterContentInit, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, Input, Inject } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 import { ProtectedService } from '../services/protected.service';
-import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/skip';
 import { PortalService } from '../services/portal.service';
@@ -11,6 +10,7 @@ import * as $ from 'jquery';
 import { NavService } from '../header/nav/nav.service';
 import { timer } from 'rxjs/observable/timer';
 import { take, map } from 'rxjs/operators';
+import { AutologoutService} from '../services/autologout.service'
 @Component({
   selector: 'gosg-protected',
   templateUrl: './protected.component.html',
@@ -53,8 +53,8 @@ export class ProtectedComponent implements OnInit {
   msgInvalidUser: any;
   entryService;
   accountStatusId: any;
-  constructor(public navService: NavService, private activatedRoute:ActivatedRoute, @Inject(APP_CONFIG) private config: AppConfig, private protectedService:ProtectedService, router:Router, private portalService:PortalService) {
-
+  constructor(private autoLogout:AutologoutService, public navService: NavService, private activatedRoute:ActivatedRoute, @Inject(APP_CONFIG) public config: AppConfig, private protectedService:ProtectedService, router:Router, private portalService:PortalService) {
+      this.autoLogout.starts();
       this.countDown = timer(0,1000).pipe(
           take(this.count),
           map(()=> --this.count)

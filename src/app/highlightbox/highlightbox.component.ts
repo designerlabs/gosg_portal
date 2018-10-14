@@ -1,6 +1,6 @@
-import { Component, Output, Input, TemplateRef,EventEmitter, OnInit, AfterViewChecked, AfterViewInit,  ViewChild, ElementRef, Inject, AfterContentInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import {TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { Http } from '@angular/http';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
@@ -9,7 +9,6 @@ import { ToastrService } from '../../../node_modules/ngx-toastr';
 import 'rxjs/add/operator/switchMap';
 import { ISubscription } from 'rxjs/Subscription';
 import { NavService } from '../header/nav/nav.service';
-import { BreadcrumbService } from '../header/breadcrumb/breadcrumb.service';
 import { FormGroup, FormControl } from '../../../node_modules/@angular/forms';
 import { PortalService } from '../services/portal.service';
 import { MatDialog, MatDialogRef } from '@angular/material';
@@ -182,12 +181,23 @@ export class HighlightboxComponent implements OnInit, OnDestroy {
 })
 
 
-export class OnlineServiceDialog {
+export class OnlineServiceDialog implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<OnlineServiceDialog>,
     private translate: TranslateService,
-    private router: Router) {}
+    private router: Router) {
+    
+    }
+
+    ngOnInit() {
+      this.router.events.subscribe((evt) => {
+        if (!(evt instanceof NavigationEnd)) {
+            return;
+        }
+        window.scrollTo(0, 0);
+    });
+    }
 
     onNoClick() {
       this.dialogRef.close();
