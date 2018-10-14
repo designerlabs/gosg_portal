@@ -166,5 +166,7 @@ export class HighlightboxProdComponent implements OnInit, OnDestroy {
     getTheme(){
         return localStorage.getItem('themeColor');
     }
+    openDialog() {
+    }
 
 }

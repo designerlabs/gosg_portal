@@ -169,11 +169,6 @@ export class HighlightboxComponent implements OnInit, OnDestroy {
         return localStorage.getItem('themeColor');
     }
 
-    //openSvcModal() {
-    //  this.infoMsg = 'This portal is only for registered user, kindly sign in or register to access the benefits.';
-    //  this.onlineSvcModal.show();
-    //}
-
     openDialog() {
       this.dialog.open(OnlineServiceDialog, {
       });
