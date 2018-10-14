@@ -39,8 +39,8 @@
                             <p class="font-size-m align-top month event-title">{{item.month}}</p>
                         </div>
                         <div class="col-xs-8" *ngIf="calendarData.length != 0">
-                            <p *ngIf="item.title.length > 40" class="col-xs-12 font-size-s text-left" title="item.title" style="padding-top: 15px">{{ item.title | slice:0:40 }}...</p> <!-- style="margin-top: -10px" -->
-                            <p *ngIf="item.title.length <= 40" class="col-xs-12 font-size-s text-left" title="item.title" style="padding-top: 15px">{{ item.title }}</p> <!-- style="margin-top: -10px" -->
+                            <p *ngIf="item.title.length > 40" class="col-xs-12 font-size-s text-left" style="padding-top: 15px">{{ item.title | slice:0:40 }}...</p> <!-- style="margin-top: -10px" -->
+                            <p *ngIf="item.title.length <= 40" class="col-xs-12 font-size-s text-left" style="padding-top: 15px">{{ item.title }}</p> <!-- style="margin-top: -10px" -->
                         </div>
                     </div>
                     <div *ngIf="!calendarData">

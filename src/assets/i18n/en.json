@@ -90,7 +90,10 @@
     "send": "SUBMIT",
     "highlights": "Highlights",
     "currentHighlights": "Highlights",
-    "calendarTitle": "Activities for this month"
+    "calendarTitle": "Activities for this month",
+    "onlineServiceStart" : "REGISTER HERE FOR MORE",
+    "onlineServiceMiddle" : "ONLINE SERVICES",
+    "onlineServiceEnd" : ""
   },
   "pdrm":{
     "reportPolice":"Enter Police Report No.",

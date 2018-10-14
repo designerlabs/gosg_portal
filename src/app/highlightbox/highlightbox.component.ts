@@ -1,4 +1,4 @@
-import { Component, Output, Input, EventEmitter, OnInit, AfterViewChecked, AfterViewInit,  ViewChild, ElementRef, Inject, AfterContentInit, OnDestroy } from '@angular/core';
+import { Component, Output, Input, TemplateRef,EventEmitter, OnInit, AfterViewChecked, AfterViewInit,  ViewChild, ElementRef, Inject, AfterContentInit, OnDestroy } from '@angular/core';
 
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {TranslateService, LangChangeEvent } from '@ngx-translate/core';
@@ -12,6 +12,7 @@ import { NavService } from '../header/nav/nav.service';
 import { BreadcrumbService } from '../header/breadcrumb/breadcrumb.service';
 import { FormGroup, FormControl } from '../../../node_modules/@angular/forms';
 import { PortalService } from '../services/portal.service';
+import { MatDialog, MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-highlightbox',
@@ -19,6 +20,8 @@ import { PortalService } from '../services/portal.service';
   styleUrls: ['./highlightbox.component.css']
 })
 export class HighlightboxComponent implements OnInit, OnDestroy {
+ 
+    infoMsg: any;
     highlightData: any;
     hotTopic: string;
     hotTopicContent: any[];
@@ -44,7 +47,7 @@ export class HighlightboxComponent implements OnInit, OnDestroy {
     noPermohonanCarian: FormControl
     sbgcolor: boolean;
 
-    constructor(
+    constructor( public dialog: MatDialog,
       private toastr: ToastrService, private translate: TranslateService, private topnavservice: TopnavService, private portalService:PortalService, private navService: NavService, private http: Http, @Inject(APP_CONFIG) private config: AppConfig, private portalservice: PortalService){
         this.lang = translate.currentLang;
         this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
@@ -89,7 +92,6 @@ export class HighlightboxComponent implements OnInit, OnDestroy {
       this.subscription.unsubscribe();
       this.subscriptionHotTopic.unsubscribe();
     }
-
 
 
 
@@ -165,6 +167,46 @@ export class HighlightboxComponent implements OnInit, OnDestroy {
 
     getTheme(){
         return localStorage.getItem('themeColor');
+    }
+
+    //openSvcModal() {
+    //  this.infoMsg = 'This portal is only for registered user, kindly sign in or register to access the benefits.';
+    //  this.onlineSvcModal.show();
+    //}
+
+    openDialog() {
+      this.dialog.open(OnlineServiceDialog, {
+      });
+    }
+
+}
+
+@Component({
+  selector: 'online-service-popup',
+  templateUrl: './online-service-popup.html',
+})
+
+
+export class OnlineServiceDialog {
+
+  constructor(
+    public dialogRef: MatDialogRef<OnlineServiceDialog>,
+    private translate: TranslateService,
+    private router: Router) {}
+
+    onNoClick() {
+      this.dialogRef.close();
+    }
+
+    goToRegister() {
+      this.router.navigate(['/register']);
+      this.dialogRef.close();
+    }
+
+    goToLogin() {
+      // this.router.navigate(['./portal-protected/']);
+      window.location.href = "../portal-protected/";
+      this.dialogRef.close();
     }
 
 }

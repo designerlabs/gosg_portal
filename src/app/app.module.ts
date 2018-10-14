@@ -35,7 +35,7 @@ import { ArchivecategoryComponent } from './archive/archivecategory/archivecateg
 import { ArchivesubcategoryComponent } from './archive/archivesubcategory/archivesubcategory.component';
 import { ArchivecontentComponent } from './archive/archivecontent/archivecontent.component';
 import { PortalLoaderComponent } from './loader/portal-loader.component';
-import { HighlightboxComponent } from './highlightbox/highlightbox.component';
+import { HighlightboxComponent, OnlineServiceDialog } from './highlightbox/highlightbox.component';
 // import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule } from "@angular/material";
 
 export function HttpLoaderFactory(http: Http) {
@@ -85,6 +85,7 @@ imports: [
     HighlightboxComponent,
     FeedbackComponent,
     DigitalServiceDialog,
+    OnlineServiceDialog,
     ContentComponent,
     LeftmenuComponent,
     ArchivecategoryComponent,
@@ -99,7 +100,7 @@ imports: [
     CUSTOM_ELEMENTS_SCHEMA
   ],
   providers: [ConfirmComponent,FeedbackComponent, ContentComponent],
-  entryComponents: [DigitalServiceDialog],
+  entryComponents: [DigitalServiceDialog, OnlineServiceDialog],
   bootstrap: [AppComponent]
 })
 

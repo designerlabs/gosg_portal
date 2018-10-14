@@ -1,3 +1,7 @@
+.lifeEventCategory:hover  {
+    background-color: gray;
+    color: white;
+}
 .font-size-1{
                 text-align: center;
                 font-family: Roboto;
@@ -31,7 +35,11 @@
             }
 
             .lifeEventCategory:hover{
-              color: #333 !important;
+              /*color: #333 !important;*/
+              color:black !important;
+              background-color: lightslategray;
+              font-weight: bold;
+
             }
 
             .tabbing li{

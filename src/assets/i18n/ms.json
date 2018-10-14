@@ -90,7 +90,10 @@
     "send": "HANTAR",
     "highlights": "Sorotan",
     "currentHighlights": "Sorotan Terkini",
-    "calendarTitle": "Aktiviti Bulan Ini"
+    "calendarTitle": "Aktiviti Bulan Ini",
+    "onlineServiceStart" : "DAFTAR UNTUK MENIKMATI",
+    "onlineServiceMiddle" : "PERKHIDMATAN",
+    "onlineServiceEnd" : "DALAM TALIAN YANG LEBIH BAIK"
   },
   "pdrm":{
     "reportPolice":"Masukkan No. Repot Polis.",
