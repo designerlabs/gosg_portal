@@ -66,7 +66,6 @@ export class LeftmenuComponent {
   }
 
   clickContentFromMenu(pId, aId, status, event) {
-    debugger;
     this.navService.lfcontent = true;
     this.articleService.leContent = "";
     this.navService.loader = true;
