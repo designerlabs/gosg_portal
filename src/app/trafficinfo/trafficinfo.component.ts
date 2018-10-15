@@ -209,9 +209,6 @@ export class TrafficinfoComponent implements OnInit, OnDestroy {
                         latlng = null;
                       }
 
-                      if(el.street == "Jalan Bangsar")
-                        latlng = null;
-
                       this.streetNames.push({ 'name': el.street, 'latlng': latlng });
                     } 
                   });
