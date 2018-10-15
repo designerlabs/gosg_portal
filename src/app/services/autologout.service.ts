@@ -2,7 +2,6 @@ import { Injectable, Inject } from "@angular/core";
 import { Router } from '@angular/router'
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
 import { environment } from "../../environments/environment.prod";
-import { APP_BASE_HREF } from "@angular/common";
 
 const MINUTES_UNITL_AUTO_LOGOUT = 60 // in mins
 const CHECK_INTERVAL = 15000 // in ms

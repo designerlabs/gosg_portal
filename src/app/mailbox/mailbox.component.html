@@ -21,7 +21,7 @@
     </div>
   </div>
 
-  <div class="container">
+  <div class="container" >
       <div class="col-md-12">&nbsp;</div>
       <div class="col-md-3 padding-left-0">
           <gosg-sidenav-dashboard></gosg-sidenav-dashboard>
@@ -30,7 +30,7 @@
         <div class="deleteAllBtn">
           <button [disabled]="!(mailboxId.length > 0)" mat-raised-button color="warn" (click)="deleteAllModal.show()"><i class="fa fa-trash"></i> {{'common.buttons.delete' | translate}}</button>
         </div>
-        <div class="row"></div>
+        <!--<div class="row"></div>-->
         <div class="row mailContainer" *ngIf="mailContent?.object?.fromUser.email" [style.display]="isMailContainerShow">
           <span class="pull-right" (click)="isMailContainerShow='none'" style="cursor: pointer;"><i class="fa fa-times"></i></span>
               <p class="font-size-s">
@@ -90,12 +90,9 @@
                   <button mat-mini-fab color="basic" [disabled]="noPrevData" (click)="paginatorL(mailData?.pageNumber)"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
                   <button mat-mini-fab color="basic" [disabled]="noNextData"  (click)="paginatorR(mailData?.pageNumber, mailData?.totalPages)"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
               </div>
-
-
         </div>
   </div>
-
-
+  <div>&nbsp;</div>
   <app-confirm-dialog  #deleteAllModal
   [title]="'common.icon.warn'"
   [content]="'common.msg.delete'"
