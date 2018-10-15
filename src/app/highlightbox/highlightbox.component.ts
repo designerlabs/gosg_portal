@@ -47,7 +47,7 @@ export class HighlightboxComponent implements OnInit, OnDestroy {
     sbgcolor: boolean;
 
     constructor( public dialog: MatDialog,
-      private toastr: ToastrService, private translate: TranslateService, private topnavservice: TopnavService, private portalService:PortalService, private navService: NavService, private http: Http, @Inject(APP_CONFIG) private config: AppConfig, private portalservice: PortalService){
+      private toastr: ToastrService, private translate: TranslateService, private topnavservice: TopnavService, private portalService:PortalService, public navService: NavService, private http: Http, @Inject(APP_CONFIG) private config: AppConfig, private portalservice: PortalService){
         this.lang = translate.currentLang;
         this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
           const myLang = translate.currentLang;
