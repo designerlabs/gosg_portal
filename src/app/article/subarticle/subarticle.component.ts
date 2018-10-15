@@ -40,9 +40,10 @@ export class SubarticleComponent implements OnInit, OnDestroy {
   articles: any[];
   moduleName: string;
   articleData: any;
- 
+
   @Output() langChange = new EventEmitter();
   loading = false;
+  leAgency: any;
 
   handleClickMe(e) {
 
@@ -138,13 +139,13 @@ export class SubarticleComponent implements OnInit, OnDestroy {
       this.agencyActive = false;
       this.navService.triggerSubArticle(this.subID, localStorage.getItem('langID'));
     }
-    
+
   }
 
 
 
   getRateReset(){
-    
+
     this.scoreFormgrp.controls['score'].disable();
     this.scoreFormgrp.controls['remarks'].disable();
     this.cansubmit = false;
@@ -222,6 +223,7 @@ export class SubarticleComponent implements OnInit, OnDestroy {
   }
 
   clickContent(e, status, event){
+    this.navService.lfcontent = true;
     this.resetForm();
     localStorage.setItem('leCode',e);
     event.preventDefault();
@@ -232,6 +234,7 @@ export class SubarticleComponent implements OnInit, OnDestroy {
       this.le_menu_code = e;
       this.articleService.leContent = data['contentCategoryResource']['results'][0]['content']['contentText'];
       this.le_code = data['contentCategoryResource']['results'][0]['content']['contentCode'];
+      this.leAgency = data['contentCategoryResource']['results'][0]['content']['agency']['agencyApplications'];
     },
     error => {
       this.navService.loader = false;

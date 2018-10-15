@@ -35,6 +35,7 @@ export class LeftmenuComponent {
   }
 
   clickSideMenu(e, status, event) {
+    this.navService.lfcontent = false;
     this.articleService.leContent = "";
     this.navService.loader = true;
     this.statusID = status;
@@ -65,6 +66,8 @@ export class LeftmenuComponent {
   }
 
   clickContentFromMenu(pId, aId, status, event) {
+    debugger;
+    this.navService.lfcontent = true;
     this.articleService.leContent = "";
     this.navService.loader = true;
     this.statusID = status;

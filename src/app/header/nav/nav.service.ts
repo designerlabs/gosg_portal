@@ -25,6 +25,7 @@ export class NavService {
   galleries: any[];
   breadcrumb: any;
   isValid: any;
+  lfcontent: boolean;
   topicStatus: any;
   loader:boolean = false;
   dataT: any;
