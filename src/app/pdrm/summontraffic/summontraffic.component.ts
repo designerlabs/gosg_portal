@@ -38,11 +38,16 @@ export class SummontrafficComponent implements OnInit {
   param = "";
   dataApp: any;
   dataAppPage: any;
+  totSumAmnt:any ;
   pageSize = 5;
   pageNumber = 1;
   summonTraffic: any;
+  sumOfSaman: number;
   have:any ;
   dontHave: any;
+  tableTitle: any;
+  pdrmErrSummon: any;
+  pdrmtittlesummonno: any;
   noPrevData = true;
   noNextData = false;
   showNoData = false;
@@ -89,11 +94,15 @@ export class SummontrafficComponent implements OnInit {
 
       if (myLang == 'en') {
 
-        this.summonTraffic = 'Traffic Summon';
+        this.summonTraffic = 'Traffic Summons';
         this.indicator = 'Indicator';
         this.carianPlaceholder = "Search";
         this.have = "Havee";
         this.dontHave = "Dont Havee";
+        this.totSumAmnt = 'TOTAL AMOUNT (RM)';
+        this.tableTitle = 'PDRM TRAFFIC SUMMONS STATUS';
+        this.pdrmErrSummon = 'NO SUMMONS TRAFFIC';
+        this.pdrmtittlesummonno = 'Summons No.';
 
         translate.get('HOME').subscribe((res: any) => {
           this.lang = 'en';
@@ -103,11 +112,15 @@ export class SummontrafficComponent implements OnInit {
 
       if (myLang == 'ms') {
 
-        this.summonTraffic = 'Saman Traffik';
+        this.summonTraffic = 'Saman Trafik';
         this.indicator = 'Petunjuk';
         this.carianPlaceholder = "Cari";
         this.have = "Adaa";
         this.dontHave = "Tiadaa";
+        this.totSumAmnt = 'JUMLAH AMAUN (RM)';
+        this.tableTitle = 'PDRM STATUS TRAFIK SAMAN';
+        this.pdrmErrSummon = 'TIADA SAMAN TRAFIK';
+        this.pdrmtittlesummonno = 'No. Saman';
 
         translate.get('HOME').subscribe((res: any) => {
           this.lang = 'ms';
@@ -195,7 +208,7 @@ export class SummontrafficComponent implements OnInit {
     }
   }
 
-  //this is button carian.
+  //this is button carian/search.
   searchApp(formValues: any, paramPageNumber, paramPageSize) {
 
     this.showDetails = false;
@@ -207,6 +220,7 @@ export class SummontrafficComponent implements OnInit {
     let page;
     let size;
 
+    (plateNo == null) ? plateNo : plateNo = plateNo.toUpperCase() ;
     (paramPageNumber) ? page = paramPageNumber :  page = this.pageNumber;
     (paramPageSize)   ? size = paramPageSize   :  size = this.pageSize;
  
@@ -322,10 +336,13 @@ export class SummontrafficComponent implements OnInit {
               "compound_ind": "Y",
               "district_code": null,
               "enforcement_date": "20060330",
-              "imageUrl": "https://sso.rmp.gov.my/SM/LOADIMAGE_E.aspx?id=FbhH6gFYja7sd0o9alLg/wgQHDc9AamOnJH1sj9lRvtlLYaR6HZcga8opFj4uXa03uxWb9Uz+uDB04XaFJhehA==",
+              "imageUrl":"",
+              // "imageUrl": "https://sso.rmp.gov.my/SM/LOADIMAGE_E.aspx?id=FbhH6gFYja7sd0o9alLg/wgQHDc9AamOnJH1sj9lRvtlLYaR6HZcga8opFj4uXa03uxWb9Uz+uDB04XaFJhehA==",
               "summons_id_key": "1810000200002AB895306",
+              "summons_number":"AB895306",
               "vehicle_registration_number": "ADM310",
               "offence_date": "20060329",
+              "offence_desc":"Merbahayakan pemandu lain",
               "offence_time": "0815",
               "law_code": "APJ1987",
               "section_code": "026(1)",
@@ -341,7 +358,7 @@ export class SummontrafficComponent implements OnInit {
               "offence_amt3": "000",
               "offence_location": "JLN SUBANG",
               "summons_ori_amt": "60000",
-              "summons_amt": "60000",
+              "summons_amt": "600.00",
               "warrant_issue_date": "YNY",
               "offender_ic": "871222145031",
               "offender_name": "MOHD RAMZI BIN IBRAHIM"
@@ -352,10 +369,13 @@ export class SummontrafficComponent implements OnInit {
               "compound_ind": "Y",
               "district_code": null,
               "enforcement_date": "20131003",
+              // "imageUrl":"",
               "imageUrl": "https://sso.rmp.gov.my/SM/LOADIMAGE_E.aspx?id=FbhH6gFYja7sd0o9alLg/wgQHDc9AamOnJH1sj9lRvtlLYaR6HZcga8opFj4uXa03uxWb9Uz+uDB04XaFJhehA==",
               "summons_id_key": "1812000200002AK469286",
+              "summons_number":"AB895302",
               "vehicle_registration_number": "WPW7663",
               "offence_date": "20131001",
+              "offence_desc":"Laju",
               "offence_time": "2125",
               "law_code": "APJ1987",
               "section_code": "020(1)",
@@ -371,7 +391,7 @@ export class SummontrafficComponent implements OnInit {
               "offence_amt3": "000",
               "offence_location": "PERSIARAN KEWAJIPAN",
               "summons_ori_amt": "30000",
-              "summons_amt": "30000",
+              "summons_amt": "300.00",
               "warrant_issue_date": "YNY",
               "offender_ic": "871222145031",
               "offender_name": "MOHD RAMZI BIN IBRAHIM"
@@ -382,10 +402,13 @@ export class SummontrafficComponent implements OnInit {
               "compound_ind": "Y",
               "district_code": null,
               "enforcement_date": "20161003",
+              // "imageUrl":"",
               "imageUrl": "https://sso.rmp.gov.my/SM/LOADIMAGE_E.aspx?id=syTsQ+lvVo6ZOuuiZI66B9AZIsj+fmWcbvqOw7Caazsma31EKEh5DRXaXN598Hvsb78mtE5yfxW+lNI/4R0ljQ==",
               "summons_id_key": "181200010000116006C7733",
+              "summons_number":"AB895399",
               "vehicle_registration_number": "WRH465",
               "offence_date": "20161002",
+              "offence_desc":"Laju Sangat",
               "offence_time": "1448",
               "law_code": "APJ1987",
               "section_code": "079(2)M",
@@ -401,7 +424,7 @@ export class SummontrafficComponent implements OnInit {
               "offence_amt3": "000",
               "offence_location": "KM 5.5 L/RAYA ELITE",
               "summons_ori_amt": "15000",
-              "summons_amt": "15000",
+              "summons_amt": "150.00",
               "warrant_issue_date": "NNNP",
               "offender_ic": "871222145031",
               "offender_name": "MOHD RAMZI BIN IBRAHIM"
@@ -412,10 +435,13 @@ export class SummontrafficComponent implements OnInit {
               "compound_ind": "Y",
               "district_code": null,
               "enforcement_date": "20160912",
-              "imageUrl": "https://sso.rmp.gov.my/SM/LOADIMAGE_E.aspx?id=syTsQ+lvVo6ZOuuiZI66B9AZIsj+fmWcbvqOw7Caazsma31EKEh5DRXaXN598HvsrjgEo6+6cB4FGrTOUsE/ng==",
+              "imageUrl":"",
+              // "imageUrl": "https://sso.rmp.gov.my/SM/LOADIMAGE_E.aspx?id=syTsQ+lvVo6ZOuuiZI66B9AZIsj+fmWcbvqOw7Caazsma31EKEh5DRXaXN598HvsrjgEo6+6cB4FGrTOUsE/ng==",
               "summons_id_key": "18120001000011621016691",
+              "summons_number":"AB895308",
               "vehicle_registration_number": "WRH465",
-              "offence_date": "20160911",
+              "offence_date": "2016-09-11",
+              "offence_desc":"Laju",
               "offence_time": "1211",
               "law_code": "APJ1987",
               "section_code": "079(2)M",
@@ -431,7 +457,7 @@ export class SummontrafficComponent implements OnInit {
               "offence_amt3": "000",
               "offence_location": "KM 38.7 L/RAYA KESAS",
               "summons_ori_amt": "15000",
-              "summons_amt": "30000",
+              "summons_amt": "300.00",
               "warrant_issue_date": "NNNP",
               "offender_ic": "871222145031",
               "offender_name": "MOHD RAMZI BIN IBRAHIM"
@@ -442,10 +468,13 @@ export class SummontrafficComponent implements OnInit {
               "compound_ind": "Y",
               "district_code": null,
               "enforcement_date": "20180322",
-              "imageUrl": "https://sso.rmp.gov.my/SM/LOADIMAGE_E.aspx?id=syTsQ+lvVo6ZOuuiZI66B9AZIsj+fmWcbvqOw7CaaztRK4U3gyGDvcJbL9yGYkjZA9k7SkL9SR07cirgjPVC+g==",
+              "imageUrl":"",
+              // "imageUrl": "https://sso.rmp.gov.my/SM/LOADIMAGE_E.aspx?id=syTsQ+lvVo6ZOuuiZI66B9AZIsj+fmWcbvqOw7CaaztRK4U3gyGDvcJbL9yGYkjZA9k7SkL9SR07cirgjPVC+g==",
               "summons_id_key": "1805000200002C2317G000284",
+              "summons_number":"AB895306",
               "vehicle_registration_number": "BPK82",
-              "offence_date": "20180322",
+              "offence_date": "2018-03-22",
+              "offence_desc":"Laju",
               "offence_time": "0928",
               "law_code": "APJ1987",
               "section_code": "014(4)",
@@ -461,7 +490,7 @@ export class SummontrafficComponent implements OnInit {
               "offence_amt3": "000",
               "offence_location": "LRAYA PERSEKUTUAAN 28.3",
               "summons_ori_amt": "30000",
-              "summons_amt": "30000",
+              "summons_amt": "300.00",
               "warrant_issue_date": "NNNP",
               "offender_ic": "871222145031",
               "offender_name": "MOHD RAMZI BIN IBRAHIM"
@@ -482,7 +511,7 @@ export class SummontrafficComponent implements OnInit {
 
           "totalElements": 5
         };
-      } else {
+      } else { //THIS ELSE IS UTK CHECK NO IC BASED ON CAR NUMBER.
 
         this.loading = false;
         this.dataSummons = {
@@ -493,10 +522,13 @@ export class SummontrafficComponent implements OnInit {
                 "compound_ind": "Y",
                 "district_code": null,
                 "enforcement_date": "20131003",
-                "imageUrl": "https://sso.rmp.gov.my/SM/LOADIMAGE_E.aspx?id=FbhH6gFYja7sd0o9alLg/wgQHDc9AamOnJH1sj9lRvtlLYaR6HZcga8opFj4uXa03uxWb9Uz+uDB04XaFJhehA==",
+                "imageUrl":"",
+                // "imageUrl": "https://sso.rmp.gov.my/SM/LOADIMAGE_E.aspx?id=FbhH6gFYja7sd0o9alLg/wgQHDc9AamOnJH1sj9lRvtlLYaR6HZcga8opFj4uXa03uxWb9Uz+uDB04XaFJhehA==",
                 "summons_id_key": "1812000200002AK469286",
+                "summons_number":"AB895306",
                 "vehicle_registration_number": "WPW7663",
-                "offence_date": "20131001",
+                "offence_date": "2013-10-01",
+                "offence_desc":"Lain2",
                 "offence_time": "2125",
                 "law_code": "APJ1987",
                 "section_code": "020(1)",
@@ -512,7 +544,7 @@ export class SummontrafficComponent implements OnInit {
                 "offence_amt3": "000",
                 "offence_location": "PERSIARAN KEWAJIPAN",
                 "summons_ori_amt": "30000",
-                "summons_amt": "30000",
+                "summons_amt": "300.00",
                 "warrant_issue_date": "YNY",
                 "offender_ic": "871222145031",
                 "offender_name": "MOHD RAMZI BIN IBRAHIM"
@@ -525,8 +557,10 @@ export class SummontrafficComponent implements OnInit {
                 "enforcement_date": "20150601",
                 "imageUrl": "?",
                 "summons_id_key": "1812000200002AR594398",
+                "summons_number":"AB895300",
                 "vehicle_registration_number": "WPW7663",
-                "offence_date": "20150530",
+                "offence_date": "2015-05-30",
+                "offence_desc":"Tidak memakai Tali Keledar",
                 "offence_time": "2330",
                 "law_code": "APJ1987",
                 "section_code": "026(1)",
@@ -542,7 +576,7 @@ export class SummontrafficComponent implements OnInit {
                 "offence_amt3": "000",
                 "offence_location": "JLN SS 15/2A",
                 "summons_ori_amt": "60000",
-                "summons_amt": "60000",
+                "summons_amt": "600.00",
                 "warrant_issue_date": "NNY",
                 "offender_ic": "05500430",
                 "offender_name": "DINESH AMEDEMBE"
@@ -555,8 +589,10 @@ export class SummontrafficComponent implements OnInit {
                 "enforcement_date": "20150420",
                 "imageUrl": "?",
                 "summons_id_key": "1805000200002AR193569",
+                "summons_number":"AB895301",
                 "vehicle_registration_number": "WPW7663",
-                "offence_date": "20150416",
+                "offence_date": "2015-04-16",
+                "offence_desc":"Terlalu Perlahan",
                 "offence_time": "2255",
                 "law_code": "APJ1987",
                 "section_code": "015(1)A",
@@ -571,8 +607,8 @@ export class SummontrafficComponent implements OnInit {
                 "offence_ori_amt3": "000",
                 "offence_amt3": "000",
                 "offence_location": "JLN AIRPORT SUBANG",
-                "summons_ori_amt": "30000",
-                "summons_amt": "30000",
+                "summons_ori_amt": "300.00",
+                "summons_amt": "300.00",
                 "warrant_issue_date": "NNN",
                 "offender_ic": "940623146867",
                 "offender_name": "MOHD ZALFIZ B IBRAHIM"
@@ -587,9 +623,42 @@ export class SummontrafficComponent implements OnInit {
           "totalPages": 1,
           "totalElements": 3
         };
-      }
+      } 
+    }
+ 
+    let loop = this.dataSummons.summonDetails;
+    this.sumOfSaman = 0;
+    // 2018-03-22 09:28 // template formatt
+
+    for (var i=0; i<loop.length; i++) {        
+      debugger;
+
+      //sebelum tukar format di backend
+      // this.sumOfSaman += parseInt(loop[i].summons_amt.substr(0, loop[i].summons_amt.length - 2));
+      // loop[i].summons_amt = parseInt(loop[i].summons_amt.substr(0, loop[i].summons_amt.length - 2));
+
+      //sebelum tukar format
+      // let yy = loop[i].offence_date.substr(0,4) // 2018
+      // let mm = loop[i].offence_date.substr(4,2) // 03
+      // let dd = loop[i].offence_date.substr(6,2) // 22
+      // let date = yy +'-'+ mm +'-'+ dd;
+      // loop[i].offence_date = date;
+
+        //selepas tukar format di backend
+        this.sumOfSaman += parseInt(loop[i].summons_amt );
+        // loop[i].offence_date = loop[i].offence_date.substr(0,9); 
+
+
+      let hh = loop[i].offence_time.substr(0,2) // 09
+      let ss = loop[i].offence_time.substr(2,2) // 38
+      let time = hh + ':' + ss;
+      loop[i].offence_time = time; 
+
+      
 
     }
+    // FARID TRY ENDS TEST
+
   }
 
   triggerDserviceValidation(dsvcCode) {
@@ -823,7 +892,9 @@ export class SummontrafficComponent implements OnInit {
   ///////////////////
 
   pageLink(param) {
-    window.open(param);
+    if (param.charAt(0) == 'h' ) {
+      window.open(param);
+    }
     console.log('masok link param: ',param)
   }
 

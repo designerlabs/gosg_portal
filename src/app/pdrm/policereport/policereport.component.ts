@@ -298,6 +298,7 @@ export class PolicereportComponent implements OnInit, OnDestroy {
   resetSearch(){
     //this.appNumber.reset();
     //this.searchForm.get('ic').setValue(null);
+    this.complete = false;
     this.searchForm.get('noreport').setValue(null);
     this.searchForm.get('yearreport').setValue(null);
     this.showDetails = undefined;

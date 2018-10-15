@@ -3,7 +3,7 @@
     <div class="container">
          <div class="row">
             <div class="col-md-12">
-                <h1 style="margin-top: 10px;" class="font-size-l"> {{ 'home.menu.summonStatus' | translate }}</h1>
+                <h1 style="margin-top: 10px;" class="font-size-l"> {{ 'home.menu.digitalsvc' | translate }}</h1>
                 <hr class="hr-custom2"><br>
                 <ul class="list-inline" style="clear:both;">
                     <li>
@@ -103,7 +103,7 @@
                                 <i class="fa fa-refresh"></i> {{'feedback.label.reset' | translate }}</button>
                             <button mat-raised-button type="button" color="primary" id="searchbtn" 
                                 class="form-control btn btn-md btn-success font-size-s pull-right bttnCustom" [disabled]="!complete"
-                                (click)="searchApp(null,1,5)">
+                                (click)="searchApp(null,pageNumber,pageSize)">
                                 <i class="fa fa-search"></i> {{'appmngt.setSearch.search' | translate}}</button>
                         </div>
                         
@@ -181,7 +181,14 @@
         <div class="row container">
  
             <div class="col-md-12 boldInfo">
-                <span>{{ 'pdrm.titleSummon' | translate }}</span><br>
+                <span>
+
+                    <!-- off sebab xsama tajuk -->
+                    <!-- {{ 'pdrm.titleSummon' | translate }} -->
+                    {{tableTitle}}
+
+                </span><br>
+                
                 <hr class="lineHr" style="border-top: #9c9c9d 2px solid;">
             </div> 
 
@@ -193,7 +200,7 @@
             </div>
 
             <div class="col-md-9 boldInfo">
-                {{this.dataSummons.summonDetails[0]?.offender_ic}}
+                : {{this.dataSummons.summonDetails[0]?.offender_ic}}
             </div>
         </div>
         <div class="row container blackFont" *ngIf="dataSummons.summonDetails.length > 0">
@@ -202,7 +209,7 @@
             </div>
 
             <div class="col-md-9 boldInfo">
-                {{this.dataSummons.summonDetails[0]?.offender_name}}
+                    : {{this.dataSummons.summonDetails[0]?.offender_name}}
             </div>
         </div>
         <div class="row container blackFont" *ngIf="dataSummons.summonDetails.length > 0">
@@ -211,31 +218,41 @@
                 <!-- Jumlah Amaun (RM) -->
             </div>
 
-            <!-- original -->
-            <!-- <div class="col-md-9 boldInfo">
-                {{this.dataSummons.summonDetails?.length}}
-            </div> -->
-
-            <!-- farid test starts -->
+            <!-- <div class="col-md-9 boldInfo"> -->
             <div class="col-md-6 boldInfo">
-                    {{this.dataSummons.summonDetails?.length}}
+                : {{this.dataSummons.summonDetails?.length}}
             </div>
-            
-            <div class="col-md-3">
-                <mat-form-field class="example-full-width">
-                        <input matInput placeholder={{carianPlaceholder}} #myInput id="myInput" (keyup)="newRecord(myInput.value)" [(ngModel)]="query" style="color: black">
-                </mat-form-field>
-            </div>
-            <!-- farid test ends -->
 
-        </div><br>
+        </div>
+        
+        <div class="row container blackFont" *ngIf="dataSummons.summonDetails.length > 0">
+                <div class="col-md-3"> 
+                    {{totSumAmnt}}
+                </div>
+    
+                <div class="col-md-6 boldInfo">
+                    : {{sumOfSaman | number}}                    
+                </div>
+
+                <div class="col-md-3">
+                        <mat-form-field class="example-full-width">
+                                <input matInput placeholder={{carianPlaceholder}} #myInput id="myInput" (keyup)="newRecord(myInput.value)" [(ngModel)]="query" style="color: black">
+                        </mat-form-field>
+                </div>
+                    <!-- farid test ends -->
+        </div>
+
+        <br>
 
         <div class="row container paddingLR">
             <table class="mat-table tableWidth">
                 <tr class="mat-header-row tableHeader">
                     <th width="5%" class="mat-header-cell paddingR">&nbsp;&nbsp;{{'appmngt.tableHeader.num' | translate}}</th>
                     <th width="10%" class="mat-header-cell paddingR">{{'pdrm.title.car' | translate}}</th>
-                    <th width="20%" class="mat-header-cell paddingR">{{'pdrm.title.summon_no' | translate}}</th>
+                    <th width="20%" class="mat-header-cell paddingR">
+                        <!-- {{'pdrm.title.summon_no' | translate}} -->
+                        {{pdrmtittlesummonno}}
+                    </th>
                     <th width="15%" class="mat-header-cell paddingR">{{'pdrm.title.dateTime' | translate}}</th>
                     <th width="10%" class="mat-header-cell paddingR">{{'pdrm.title.location2' | translate}}</th>
                     <th width="10%" class="mat-header-cell paddingR">{{'pdrm.title.info' | translate}}</th>
@@ -247,31 +264,44 @@
                 <tr class="mat-row table_row table_row_height" *ngFor="let data of dataSummons.summonDetails | search : query; let i = index;" role="row">
                     <td class="mat-cell text-center paddingR">{{i+1}}</td>
                     <td class="mat-cell paddingR">{{data.vehicle_registration_number}}</td>
-                    <td class="mat-cell paddingR">{{data.summons_id_key}}</td>
-                    <td class="mat-cell paddingR">{{data.offence_date}} & {{data.offence_time}}</td>
+                    <td class="mat-cell paddingR">{{data.summons_number}}</td>
+                    <td class="mat-cell paddingR">{{data.offence_date}} <br> {{data.offence_time}}</td>
                     <td class="mat-cell paddingR">{{data.offence_location}}</td>
-                    <td class="mat-cell paddingR">{{data.offence_location}}</td>
-                    <td class="mat-cell text-right paddingR">{{data.summons_amt}}</td>
+                    <td class="mat-cell paddingR">{{data.offence_desc}}</td>
+                    <td class="mat-cell text-right paddingR">{{data.summons_amt | number}}</td>
                     <td class="mat-cell text-center paddingR"
                         translate="{{ (data.sh == 'Y' ? '&#9989;' : '-') }}">
                         {{data.sh}}
                     </td>
                     <td class="mat-cell text-center paddingR" 
                         translate="{{ (data.op == 'Y' ? '&#9989;' : '-') }}">
-                        {{data.op}}
+                        {{data.op}}                        
                     </td>
 
-                    <td class="mat-cell text-center paddingR"
+                    <!-- old original -->
+                    <!-- <td class="mat-cell text-center paddingR"
                         (click)="pageLink(data.imageUrl)"
                         translate="{{ (data.imageUrl != '' ? '&#10063;' : '-') }}"
                         style="cursor: pointer; color:blue;"
-                        > {{data.imageUrl}} </td>                    
+                        [class.button-grey]="hasUnsavedNotes()"
+                        > {{data.imageUrl}} </td> -->
+
+                        <!-- new -->
+                    <td class="mat-cell text-center paddingR"
+                        (click)="pageLink(data.imageUrl)"
+                        translate="{{ (data.imageUrl != '' ? '&#10063;' : '-') }}"
+                        style="cursor: pointer; color:blue;">
+                         {{data.imageUrl}} 
+                    </td>
 
 
                 </tr>
                 <tr class="mat-row table_row table_row_height" *ngIf="showNoData">
                     <td colspan="10" class="mat-cell paddingR">
-                    <span class="redFont">{{'pdrm.err.summon' | translate}}</span></td>
+                    <span class="redFont">
+                        <!-- {{'pdrm.err.summon' | translate}} -->
+                        {{pdrmErrSummon}}
+                    </span></td>
                 </tr>
             </table>                  
         </div><br>

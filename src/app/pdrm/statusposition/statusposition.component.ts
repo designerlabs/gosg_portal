@@ -243,6 +243,7 @@ export class StatuspositionComponent implements OnInit, OnDestroy {
     this.place = "PULAPOL DUNGUN";
     this.status = "PAPAR/CETAK";
     this.urlDoc = "http://sso.rmp.gov.my/AP_E/AP_LETTER_EXTENSION.aspx?id=Y1P0FzQmQC6C9/7nGjjnsK6RIY59dq2UUIUrQXJYzIiTm+45KsQfIQ==";
+    // https://sso.rmp.gov.my/AP_E/AP_LETTER_PHYSICAL_KONS.aspx?id=2AcmoFAGendMyHdqvsnPX8CStAuyTbSur6UG2S1Jf4NkY8FBGo0X4w==
     }
   }
 
@@ -271,6 +272,7 @@ export class StatuspositionComponent implements OnInit, OnDestroy {
   }
 
   openLink(varUrl){
+    
     if(varUrl != undefined){
       let httpStr = varUrl.substring(0, 4);
 
@@ -278,7 +280,7 @@ export class StatuspositionComponent implements OnInit, OnDestroy {
         window.open(varUrl,'_blank');
       } else {
         let newUrl = "http://";
-        window.open(newUrl+varUrl,'_blank');
+        window.open(newUrl + varUrl.substr(7),'_blank'); 
       }
 
     }
