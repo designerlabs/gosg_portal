@@ -209,6 +209,15 @@ export class ProtectedService {
     .catch(this.handleError);
   }
 
+  deleteServices(id,moduleName, lang?) {
+    
+    let deleteUrl = this.config.urlAgencyDservice  + moduleName + id+ '?language='+lang;
+
+    return this.http.delete(deleteUrl, null)
+    .map((response: Response) => response.json())
+    .catch(this.handleError);
+  }
+
   getListAgency(lang){
     return this.http
     .get(this.urlAgencyList + '?language='+lang).map((response: Response) => response.json())

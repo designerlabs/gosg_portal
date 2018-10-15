@@ -2114,6 +2114,11 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
     data => {
       this.sharedService.errorHandling(data, (function () {
         // this.translate.instant('Permohonan Baru Lesen Peniaga/Taksidermi berjaya dihantar')
+
+        if(this.getUrl != undefined){// delete draft bile dari dashboard
+          this.deleteDraft(this.getUrl);
+        }
+
         this.toastr.success(data.statusDesc, '');
         this.router.navigate(['appsmgmt']);
       }).bind(this));
@@ -2124,6 +2129,20 @@ export class PerhilitanComponent implements OnInit, OnDestroy {
       this.toastr.error(JSON.parse(error._body).statusDesc, '');
     });
     
+  }
+
+  deleteDraft(idDraft){
+    this.protectedService.deleteServices(idDraft,'/perhilitan/draft/delete/',this.langID).subscribe(
+      data => {
+        this.sharedService.errorHandling(data, (function () {
+          
+        }).bind(this));
+        this.loading = false;
+      },
+      error => {
+        this.loading = false;
+        this.toastr.error(JSON.parse(error._body).statusDesc, '');
+      });
   }
 
   triggerDserviceValidation(dsvcCode) {
