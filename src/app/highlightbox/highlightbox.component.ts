@@ -19,7 +19,7 @@ import { MatDialog, MatDialogRef } from '@angular/material';
   styleUrls: ['./highlightbox.component.css']
 })
 export class HighlightboxComponent implements OnInit, OnDestroy {
- 
+    public notLogin: boolean = true; 
     infoMsg: any;
     highlightData: any;
     hotTopic: string;
@@ -48,7 +48,7 @@ export class HighlightboxComponent implements OnInit, OnDestroy {
 
     constructor( public dialog: MatDialog,
       private toastr: ToastrService, private translate: TranslateService, private topnavservice: TopnavService, private portalService:PortalService, public navService: NavService, private http: Http, @Inject(APP_CONFIG) private config: AppConfig, private portalservice: PortalService){
-        this.navService.restricted = false;
+        
         this.lang = translate.currentLang;
         this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
           const myLang = translate.currentLang;
