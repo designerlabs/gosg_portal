@@ -70,6 +70,17 @@
     cursor: pointer;
 }
 
+.list-link-disabled{
+    display: block;
+    padding: 10px;
+    margin: 0px;
+    text-decoration: none;
+    color: #aaa;
+    background:#fff;
+    text-align: left;
+    cursor: pointer;
+}
+
 
 .list-link:hover{
     background:#797979;

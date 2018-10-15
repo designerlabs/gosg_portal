@@ -138,7 +138,7 @@ export class TrafficinfoComponent implements OnInit, OnDestroy {
 
     this.gotPrediction = false;
     this.getDefaultMap();
-    // this.getStreetNamesData();
+    this.getStreetNamesData(this.languageId);
     this.getTrafficFlowData(this.languageId);
     this.id = setInterval(() => {
       this.getTrafficFlowData(this.languageId);
@@ -163,7 +163,29 @@ export class TrafficinfoComponent implements OnInit, OnDestroy {
     }).addTo(this.mymap);
   }
 
+  getStreetNamesData(lng) {
+      this.loading = true;
+      this.portalservice.getStreetNames(lng).subscribe(
+        data => {
+          this.portalservice.errorHandling(data, (function () {
+
+            this.allStreetNames = data;
+            // console.log(this.streetNames)
+
+            // this.streetNames.push({ 'name': el.street, 'latlng': el.jam[0] });
+          }).bind(this));
+          this.loading = false;
+        },
+        error => {
+          this.toastr.error(JSON.parse(error._body).statusDesc, '');
+          this.loading = false;
+        });
+  }
+
   getTrafficFlowData(lng) {
+
+    this.streetNames = [];
+
       this.loading = true;
       this.portalservice.getTrafficFlows(lng).subscribe(
         data => {
@@ -177,7 +199,24 @@ export class TrafficinfoComponent implements OnInit, OnDestroy {
                 if(el.street) {
                   el.jam = this.str2arr(el.jam);
 
-                  this.streetNames.push({ 'name': el.street, 'latlng': el.jam[0] });
+                  this.allStreetNames.forEach(elSN => {
+                    let latlng
+                    if(elSN.Street == el.street) {
+
+                      if(el.jam[0]) {
+                        latlng = el.jam[0];
+                      } else {
+                        latlng = null;
+                      }
+
+                      if(el.street == "Jalan Bangsar")
+                        latlng = null;
+
+                      this.streetNames.push({ 'name': el.street, 'latlng': latlng });
+                    } 
+                  });
+
+                  // this.streetNames.push({ 'name': el.street, 'latlng': el.jam[0] });
 
                   this.rp = L.polyline(el.jam, {color: this.getLevelColor(el.level), weight: 5, opacity: 0.6 }).addTo(this.mymap);
 
@@ -191,6 +230,8 @@ export class TrafficinfoComponent implements OnInit, OnDestroy {
                   });
                 }
               });
+              // console.log("streetNames")
+              // console.log(this.streetNames)
 
               this.totalRec = this.streetFlows.params.recordsFound;
               this.showNoData = false;
@@ -254,7 +295,7 @@ export class TrafficinfoComponent implements OnInit, OnDestroy {
 
               trafficDetails.status = this.streetPrediction.current;
               trafficDetails.color = currClr;
-              console.log(this.streetPrediction);
+              // console.log(this.streetPrediction);
               this.predictionData.push(trafficDetails);
 
                 this.streetPrediction.traffic.forEach(el => {

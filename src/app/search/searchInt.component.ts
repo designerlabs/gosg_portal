@@ -99,14 +99,17 @@ export class SearchIntComponent implements OnInit {
               textNodes.each(function() {
 
                 var content = $(this).text();
-                console.log(content)
+                // var content = $(this).text();
+
+                // if(content = "Maklumat untuk pelawat masuk ke Malaysia") {
+                // console.log(content)
                 // var cntn = content.split(' ');
-                var pattern = /\b[^\d\W]+\b/gi;
+                // var pattern = /\b[^\d\W]+\b/gi;
 
-                var oriWord = term.match(pattern);
-                console.log(oriWord)  
+                // var oriWord = term.match(pattern);
+                // console.log(oriWord)  
 
-
+                // }
 
                 var regex = new RegExp(term, "gi");
                 // console.log(regex)

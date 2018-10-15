@@ -307,9 +307,9 @@ export class PortalService {
     .catch(this.handleError);
   }
 
-  getStreetNames(){
+  getStreetNames(lng){
 
-    return this.http.get(this.trafficUrl)
+    return this.http.get(this.trafficUrl+"?language="+lng)
     .map((response: Response) => response.json())
     .retry(5)
     .catch(this.handleError);

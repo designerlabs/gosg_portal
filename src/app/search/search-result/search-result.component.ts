@@ -807,7 +807,7 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
                   itemObj = { "name": item[0].name, "val": item[0].val }
                   this.ddmonthPub.push(itemObj);
                 });
-                this.addCheckedProperty(this.ddmonthPub);
+                // this.addCheckedProperty(this.ddmonthPub);
               }
               
               //
@@ -816,14 +816,14 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
                 itemObj = { "name": item[0].name, "val": item[0].val }
                 this.ddtopics.push(itemObj)
               });
-              this.addCheckedProperty(this.ddtopics);
+              // this.addCheckedProperty(this.ddtopics);
             
               rData.aggregations['filter_sub_topic.category'][0].active_cat.forEach(item => {
                 item = this.changeAryVal(item,'generic')
                 itemObj = { "name": item[0].name, "val": item[0].val }
                 this.ddsubTopics.push(itemObj)
               });
-              this.addCheckedProperty(this.ddsubTopics);
+              // this.addCheckedProperty(this.ddsubTopics);
 
             } else if (this.tabIndex == 1) { // ONLINE SERVICES
               let ministry: any = {};
@@ -835,7 +835,7 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
                 ministry = { "name": item[0].name, "val": item[0].val }
                 this.ddministry.push(ministry);
               });
-              this.addCheckedProperty(this.ddministry);
+              // this.addCheckedProperty(this.ddministry);
 
               rData.aggregations.agencyAgg.forEach(item => {
                 item = this.changeAryVal(item,'generic');
@@ -843,7 +843,7 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
                 agency = { "name": item[0].name, "val": item[0].val }
                 this.ddagency.push(agency);
               });
-              this.addCheckedProperty(this.ddagency);
+              // this.addCheckedProperty(this.ddagency);
 
             }
 

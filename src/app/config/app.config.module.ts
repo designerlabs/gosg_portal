@@ -196,7 +196,7 @@ export const APP_DI_CONFIG: AppConfig = {
     statusAppUrl: agencyURL + 'dservice/group',
     urlAgencyList: agencyURL + 'dservice/agencylist',
     dataAppUrl: agencyURL + 'dservice',
-    UrlStreetNameAPI: trafficInfoURL+"/street?rows=100",
+    UrlStreetNameAPI: trafficInfoURL+"/top/100",
     UrlTrafficPolylines: trafficInfoURL,
     UrlTrafficPredictionAPI: trafficInfoURL+"/street?streetName=",
     urlAgencyDservice: agencyURL,
