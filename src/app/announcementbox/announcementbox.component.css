@@ -25,7 +25,7 @@ h4{
 .annoucement {
     background-color: #666666;
     color: #fff;
-    padding: 50px 15px;
+    padding: 25px 15px;
     margin: auto;
     text-align: center;
 }
@@ -36,13 +36,14 @@ h4{
     padding: 10px 0px 0px!important;
     margin: auto;
     text-align: center;
-    min-height: 239px !important;
+    min-height: 180px !important;
 }
 
 .tender {
     background-color: #a6a394;
     color: #fff;
-    padding: 50px;
+    padding-top: 30px;
+    padding-bottom: 10px;
     margin: auto;
     text-align: center;
 }
@@ -62,7 +63,7 @@ h4{
   position: absolute;
 }
 .card__back{
-  margin-top: -240px;
+  margin-top: -180px;
 }
 
 .card__front,

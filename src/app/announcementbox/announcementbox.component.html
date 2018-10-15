@@ -4,11 +4,11 @@
         <!-- <div class="col-md-12 col-sm-12 articleBox">&nbsp;</div> -->
         <div class="col-md-4 col-sm-6 articleBox">
             <div class="card effect__hover">
-                <div class="annoucement card__front">
+                <div class="annoucement card__front" style="max-height:180px">
                     <img src="https://www.malaysia.gov.my/public/static/images/pengumuman-01.svg" alt="pengumuman">
                     <h4 class="font-size-m" style="text-align: center; font-family: Roboto;">{{'home.highlights'|translate|uppercase}}</h4>
                 </div>
-                <div class="annoucement card__back warna_bg" style="height: 240px; background-color: rgb(0, 189, 187);">
+                <div class="annoucement card__back warna_bg" style="max-height: 180px; background-color: rgb(0, 189, 187);">
                     <h4 class="mainCard font-size-m" style="font-family: Roboto;">{{'home.currentHighlights'|translate|uppercase}}</h4><br>
                     <ul class="" style="list-style:none; padding:0px;text-align:left">
                         <li style="padding:1px 0px 1px 0px;" *ngFor="let item of (announcementData ? announcementData.contentList.slice(0,3): []) ">
@@ -35,8 +35,8 @@
                     <!-- class="dynamicCalen" style="padding: 0px 10px;" -->
                     <div class="col-xs-12" style="cursor: pointer;" data-attr="497148400637395" *ngFor="let item of calendarData">
                         <div class="col-xs-4" *ngIf="calendarData">
-                            <p class="font-size-xxl">{{item.day}}</p>
-                            <p class="font-size-m align-top month event-title">{{item.month}}</p>
+                            <p class="font-size-xl">{{item.day}}</p>
+                            <p class="font-size-s align-top month event-title" style="padding-top:5px;">{{item.month}}</p>
                         </div>
                         <div class="col-xs-8" *ngIf="calendarData.length != 0">
                             <p *ngIf="item.title.length > 40" class="col-xs-12 font-size-s text-left" style="padding-top: 15px">{{ item.title | slice:0:40 }}...</p> <!-- style="margin-top: -10px" -->
@@ -48,11 +48,11 @@
                         <p>{{'calendar.err.noactivitydata'|translate|uppercase}}</p>
                     </div>
                     <!-- </div> -->
-                    <div class="col-xs-12">&nbsp;</div>
+                    <!--<div class="col-xs-12">&nbsp;</div>-->
                 </a>
             </div>
         </div>
-        <div class="col-md-4 col-sm-6 articleBox hidden-xs hidden-md hidden-lg" style="margin: -1%; padding: 0;">&nbsp;</div>
+        <div class="col-md-4 col-sm-6 articleBox hidden-xs hidden-md hidden-lg" style="margin: -1%; padding: 0;min-height:210px;">&nbsp;</div>
         <div class="col-md-4 col-sm-6 articleBox">
             <div class="tender">
                 <a href="./category/2"><img src="https://www.malaysia.gov.my/public/static/images/tender-01.svg" alt="tender"></a>
