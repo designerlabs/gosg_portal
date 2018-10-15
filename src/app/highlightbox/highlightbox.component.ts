@@ -1,6 +1,6 @@
-import { Component, Output, Input, EventEmitter, OnInit, AfterViewChecked, AfterViewInit,  ViewChild, ElementRef, Inject, AfterContentInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import {TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { Http } from '@angular/http';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
@@ -9,9 +9,9 @@ import { ToastrService } from '../../../node_modules/ngx-toastr';
 import 'rxjs/add/operator/switchMap';
 import { ISubscription } from 'rxjs/Subscription';
 import { NavService } from '../header/nav/nav.service';
-import { BreadcrumbService } from '../header/breadcrumb/breadcrumb.service';
 import { FormGroup, FormControl } from '../../../node_modules/@angular/forms';
 import { PortalService } from '../services/portal.service';
+import { MatDialog, MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-highlightbox',
@@ -19,6 +19,8 @@ import { PortalService } from '../services/portal.service';
   styleUrls: ['./highlightbox.component.css']
 })
 export class HighlightboxComponent implements OnInit, OnDestroy {
+    public notLogin: boolean = true; 
+    infoMsg: any;
     highlightData: any;
     hotTopic: string;
     hotTopicContent: any[];
@@ -44,8 +46,9 @@ export class HighlightboxComponent implements OnInit, OnDestroy {
     noPermohonanCarian: FormControl
     sbgcolor: boolean;
 
-    constructor(
-      private toastr: ToastrService, private translate: TranslateService, private topnavservice: TopnavService, private portalService:PortalService, private navService: NavService, private http: Http, @Inject(APP_CONFIG) private config: AppConfig, private portalservice: PortalService){
+    constructor( public dialog: MatDialog,
+      private toastr: ToastrService, private translate: TranslateService, private topnavservice: TopnavService, private portalService:PortalService, public navService: NavService, private http: Http, @Inject(APP_CONFIG) private config: AppConfig, private portalservice: PortalService){
+        
         this.lang = translate.currentLang;
         this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
           const myLang = translate.currentLang;
@@ -89,7 +92,6 @@ export class HighlightboxComponent implements OnInit, OnDestroy {
       this.subscription.unsubscribe();
       this.subscriptionHotTopic.unsubscribe();
     }
-
 
 
 
@@ -165,6 +167,52 @@ export class HighlightboxComponent implements OnInit, OnDestroy {
 
     getTheme(){
         return localStorage.getItem('themeColor');
+    }
+
+    openDialog() {
+      this.dialog.open(OnlineServiceDialog, {
+      });
+    }
+
+}
+
+@Component({
+  selector: 'online-service-popup',
+  templateUrl: './online-service-popup.html',
+})
+
+
+export class OnlineServiceDialog implements OnInit {
+
+  constructor(
+    public dialogRef: MatDialogRef<OnlineServiceDialog>,
+    private translate: TranslateService,
+    private router: Router) {
+    
+    }
+
+    ngOnInit() {
+      this.router.events.subscribe((evt) => {
+        if (!(evt instanceof NavigationEnd)) {
+            return;
+        }
+        window.scrollTo(0, 0);
+    });
+    }
+
+    onNoClick() {
+      this.dialogRef.close();
+    }
+
+    goToRegister() {
+      this.router.navigate(['/register']);
+      this.dialogRef.close();
+    }
+
+    goToLogin() {
+      // this.router.navigate(['./portal-protected/']);
+      window.location.href = "../portal-protected/";
+      this.dialogRef.close();
     }
 
 }

@@ -28,6 +28,7 @@
       <div style="background-color: #f5f5f5">
         <div *ngIf="tabIndex==0 || tabIndex==1">
           <ul class="side-menu-list">
+            <li class="font-size-l" style="padding: 10px; background: rgb(0, 189, 187); color: white">{{'home.search.advsearch' | translate}}</li>
             <li style="padding: 10px;">
               <header class="font-size-s;" style="cursor: pointer;" (click)="sKeyword = !sKeyword">
                 <span>
@@ -130,7 +131,7 @@
                 <li>
                     <mat-expansion-panel class="mat-elevation-z0">
                         <mat-expansion-panel-header>
-                            <mat-panel-title>
+                            <mat-panel-title style="margin-left: 10px; font-weight: bold; border-bottom: 0px solid #333">
                                     {{'home.search.filmonth' | translate}}
                             </mat-panel-title>
                         </mat-expansion-panel-header>
@@ -138,7 +139,7 @@
                             <mat-checkbox [(ngModel)]="ddmonthPub[i].checked" [checked]="ddmonthPub[i].checked"                                                                        
                             name="{{i}}-name"
                             (change)="valueChangeMonthPub(ddmonthPub, i, $event)" >
-                            {{unit.name | date:'MMMM yyyy'}}<span class="pull-right">&nbsp;({{unit.val}})</span>
+                            <label style="width: 190px">{{unit.name | date:'MMMM yyyy'}}</label><span class="pull-right text-right">&nbsp;({{unit.val}})</span>
                             </mat-checkbox> 
                         </div>
                     </mat-expansion-panel>
@@ -160,7 +161,7 @@
                 <li *ngIf="chktopic">
                     <mat-expansion-panel class="mat-elevation-z0">
                         <mat-expansion-panel-header>
-                            <mat-panel-title>
+                            <mat-panel-title style="margin-left: 10px; font-weight: bold; border-bottom: 0px solid #333">
                                     {{'home.search.filtop' | translate}}
                             </mat-panel-title>
                         </mat-expansion-panel-header>
@@ -168,7 +169,9 @@
                             <mat-checkbox [(ngModel)]="ddtopics[i].checked" [checked]="ddtopics[i].checked"                                                                        
                             name="{{i}}-name"
                             (change)="valueChangeTopic(ddtopics, i, $event)" >
-                                    {{unit.name}}<span class="pull-right">&nbsp;({{unit.val}})</span>
+                              <label title="unit.name" style="width: 200px" *ngIf="unit.name.length > 40">{{ unit.name | slice:0:40 }}...</label><span *ngIf="unit.name.length > 40" class="pull-right">&nbsp;({{unit.val}})</span>
+                              <label style="width: 200px" *ngIf="unit.name.length <= 40">{{ unit.name }}</label><span *ngIf="unit.name.length <= 40" class="pull-right">&nbsp;({{unit.val}})</span>
+                              
                             </mat-checkbox> 
                         </div>
                     </mat-expansion-panel>
@@ -189,8 +192,8 @@
                 </li>
                 <li *ngIf="chksubtopic">
                         <mat-expansion-panel class="mat-elevation-z0">
-                                <mat-expansion-panel-header class="mat-elevation-z0">
-                                    <mat-panel-title class="mat-elevation-z0">
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title style="margin-left: 10px; font-weight: bold; border-bottom: 0px solid #333">
                                             {{'home.search.filsubtopic' | translate}}
                                     </mat-panel-title>
                                 </mat-expansion-panel-header>
@@ -198,7 +201,8 @@
                                     <mat-checkbox [(ngModel)]="ddsubTopics[i].checked" [checked]="ddsubTopics[i].checked"                                                                        
                                     name="{{i}}-name"
                                     (change)="valueChangeSubTopic(ddsubTopics, i, $event)" >
-                                            {{unit.name}}<span class="pull-right">&nbsp;({{unit.val}})</span>
+                                      <label title="unit.name" style="width: 200px" *ngIf="unit.name.length > 40">{{ unit.name | slice:0:40 }}...</label><span *ngIf="unit.name.length > 40" class="pull-right">&nbsp;({{unit.val}})</span>
+                                      <label style="width: 200px" *ngIf="unit.name.length <= 40">{{ unit.name }}</label><span *ngIf="unit.name.length <= 40" class="pull-right">&nbsp;({{unit.val}})</span>
                                     </mat-checkbox> 
                 
                                 </div>
@@ -219,7 +223,7 @@
                     </mat-select>
                   </mat-form-field>-->
                 </li>
-                <hr>
+                <!-- <hr>
                 <li>
                   <mat-checkbox class="example-margin" (change)="chkSpeci($event,'citizen')" [(ngModel)]="chkcitizen">
                     <span class="font-size-s">
@@ -231,13 +235,13 @@
                     <span class="font-size-s">
                         {{'home.search.noncitizen' | translate}}</span>
                   </mat-checkbox>
-                </li>
+                </li> -->
               </ul>
               <ul class="side-menu-list" *ngIf="sFilter && tabIndex==1" style="margin-top: 10px;">
                 <li *ngIf="chkosminis">
                         <mat-expansion-panel class="mat-elevation-z0">
                                 <mat-expansion-panel-header>
-                                    <mat-panel-title>
+                                    <mat-panel-title style="margin-left: 10px; font-weight: bold; border-bottom: 0px solid #333">
                                             {{'home.search.specminis' | translate}}
                                     </mat-panel-title>
                                 </mat-expansion-panel-header>
@@ -246,7 +250,8 @@
                                                     [checked]="ddministry[i].checked"                                                                        
                                                     name="{{i}}-name"
                                                     (change)="valueChangeMinistry(ddministry, i, $event)" >
-                                        {{unit.name}}<span class="pull-right">&nbsp;({{unit.val}})</span>
+                                      <label title="unit.name" style="width: 200px" *ngIf="unit.name.length > 40">{{ unit.name | slice:0:40 }}...</label><span *ngIf="unit.name.length > 40" class="pull-right">&nbsp;({{unit.val}})</span>
+                                      <label style="width: 200px" *ngIf="unit.name.length <= 40">{{ unit.name }}</label><span *ngIf="unit.name.length <= 40" class="pull-right">&nbsp;({{unit.val}})</span>
                                     </mat-checkbox> 
                 
                                 </div>
@@ -270,7 +275,7 @@
                 <li *ngIf="chkosagency">
                     <mat-expansion-panel class="mat-elevation-z0">
                             <mat-expansion-panel-header>
-                                <mat-panel-title>
+                                <mat-panel-title style="margin-left: 10px; font-weight: bold; border-bottom: 0px solid #333">
                                         {{'home.search.specagen' | translate}}
                                 </mat-panel-title>
                             </mat-expansion-panel-header>
@@ -279,7 +284,8 @@
                                                 [checked]="ddagency[i].checked"                                                                        
                                                 name="{{i}}-name"
                                                 (change)="valueChangeAgency(ddagency, i, $event)" >
-                                    {{unit.name}}<span class="pull-right">&nbsp;({{unit.val}})</span>
+                                    <label title="unit.name" style="width: 200px" *ngIf="unit.name.length > 40">{{ unit.name | slice:0:40 }}...</label><span *ngIf="unit.name.length > 40" class="pull-right">&nbsp;({{unit.val}})</span>
+                                    <label style="width: 200px" *ngIf="unit.name.length <= 40">{{ unit.name }}</label><span *ngIf="unit.name.length <= 40" class="pull-right">&nbsp;({{unit.val}})</span>
                                 </mat-checkbox> 
             
                             </div>
@@ -307,7 +313,7 @@
                 <button [disabled]="locUnchecked >= 4 || osUnchecked >= 4?'true':'false'" class="btn btn-md" mat-raised-button color="primary"
                   (click)="btnSubmit()">
                   <i [class]="sharedService.icon.check"></i> {{'common.buttons.submit' | translate}}</button>
-                <button mat-raised-button color="warn" (click)="btnFilterReset()">
+                <button mat-raised-button color="warn" (click)="btnFilterReset(); btnSubmit()">
                   <i [class]="sharedService.icon.refresh"></i> {{'common.buttons.reset' | translate}}</button>
               </div>
             </li>

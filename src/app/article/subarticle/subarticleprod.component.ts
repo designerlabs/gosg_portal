@@ -54,7 +54,7 @@ export class SubarticleprodComponent implements OnInit, OnDestroy {
   private subscription: ISubscription;
   private subscriptionLang: ISubscription;
 
-  constructor(private http: HttpClient, private toastr: ToastrService,  private portalService:PortalService,  public articleService: ArticleService,private sharedservice: SharedService, @Inject(APP_CONFIG) private config: AppConfig, private topnavservice: TopnavService, private route: ActivatedRoute, private navService: NavService, private translate: TranslateService, private router: Router, private breadcrumbService: BreadcrumbService) {
+  constructor(private http: HttpClient, private toastr: ToastrService,  private portalService:PortalService,  public articleService: ArticleService,private sharedservice: SharedService, @Inject(APP_CONFIG) public config: AppConfig, private topnavservice: TopnavService, private route: ActivatedRoute, private navService: NavService, private translate: TranslateService, private router: Router, private breadcrumbService: BreadcrumbService) {
     this.lang = translate.currentLang;
     this.langId = 1;
 

@@ -18,6 +18,7 @@ import { OwlModule } from 'ng2-owl-carousel';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ProtectedService } from "./services/protected.service";
+
 import { SharedModule } from './shared/shared.module';
 import { ProtectedComponent } from "./protected/protected.component";
 import { TextMaskModule, conformToMask } from 'angular2-text-mask';
@@ -53,6 +54,9 @@ import { FamilyinfoComponent, FamilyPopupDialog } from './familyinfo/familyinfo.
 import { FamilyinfotblComponent } from './familyinfo/familyinfotbl/familyinfotbl.component';
 import { CheckexamresultComponent, ExamPopupDialog,ExamResult } from './checkexamresult/checkexamresult.component';
 import { HighlightboxProdComponent } from './highlightbox/highlightboxprod.component';
+
+import { AutologoutService} from "./services/autologout.service";
+
 export function HttpLoaderFactory(http: Http) {
    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -126,7 +130,7 @@ export function HttpLoaderFactory(http: Http) {
     CUSTOM_ELEMENTS_SCHEMA
   ],
 
-  providers: [ ProtectedService, ContentProdComponent],
+  providers: [ ProtectedService, ContentProdComponent, AutologoutService],
   entryComponents: [PopupServiceDialog, FamilyPopupDialog, ExamPopupDialog, ExamResult, PopupPerhilitan],
   bootstrap: [ProtectedComponent]
 })

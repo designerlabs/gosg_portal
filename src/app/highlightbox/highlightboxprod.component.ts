@@ -19,6 +19,7 @@ import { PortalService } from '../services/portal.service';
   styleUrls: ['./highlightbox.component.css']
 })
 export class HighlightboxProdComponent implements OnInit, OnDestroy {
+    notLogin: boolean = false;
     highlightData: any;
     hotTopic: string;
     hotTopicContent: any[];
@@ -45,7 +46,8 @@ export class HighlightboxProdComponent implements OnInit, OnDestroy {
     sbgcolor: boolean;
 
     constructor(
-      private toastr: ToastrService, private translate: TranslateService, private topnavservice: TopnavService, private portalService:PortalService, private navService: NavService, private http: Http, @Inject(APP_CONFIG) private config: AppConfig, private portalservice: PortalService){
+      private toastr: ToastrService, private translate: TranslateService, private topnavservice: TopnavService, private portalService:PortalService, public navService: NavService, private http: Http, @Inject(APP_CONFIG) private config: AppConfig, private portalservice: PortalService){
+        
         this.lang = translate.currentLang;
         this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
           const myLang = translate.currentLang;
@@ -90,7 +92,14 @@ export class HighlightboxProdComponent implements OnInit, OnDestroy {
       this.subscriptionHotTopic.unsubscribe();
     }
 
-
+    /*getUserProfile(){
+      let getUsrID = localStorage.getItem('usrID');
+      if(getUsrID){
+        this.isLogin = true;
+      }else{
+        this.isLogin = false;
+      }
+    } */
 
 
    private highlightUrl: string = this.config.urlHighlights;
@@ -165,6 +174,8 @@ export class HighlightboxProdComponent implements OnInit, OnDestroy {
 
     getTheme(){
         return localStorage.getItem('themeColor');
+    }
+    openDialog() {
     }
 
 }

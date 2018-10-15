@@ -194,20 +194,20 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
       "interval": "month",
       "time_zone": "+08:00",
       "minDocCount": 1,
-      "size": 10
+      "size": 100
     },
     {
-      "name": "filter_topic.category",
+      "name": "filter_topic.parent_category",
       "type": "filter",
-      "field": "category.is_active",
+      "field": "parent_category.is_active",
       "filter": {
-        "category.is_active": true
+        "parent_category.is_active": true
       },
       "subAggregation": {
         "name": "active_cat",
         "type": "terms",
-        "field": "category.topic.raw",
-        "size": "10"
+        "field": "parent_category.topic.raw",
+        "size": "100"
       }
     },
     {
@@ -220,8 +220,8 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
       "subAggregation": {
         "name": "active_cat",
         "type": "terms",
-        "field": "category.sub_topic.raw",
-        "size": "10"
+        "field": "category.topic.raw",
+        "size": "100"
       }
     }
   ];
@@ -238,13 +238,13 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
       "name": "ministryAgg",
       "type": "terms",
       "field": "ministry_name.raw",
-      "size": "10"
+      "size": "100"
     },
     {
       "name": "agencyAgg",
       "type": "terms",
       "field": "agency_name.raw",
-      "size": "10"
+      "size": "100"
     }
   ];
 
@@ -515,7 +515,7 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
       //In Global tab
       this.btnFilterReset();
       this.resetPage();
-      // this.searchByKeyword(k_word);
+      this.searchByKeyword(k_word);
     }
 
   }
@@ -564,6 +564,8 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
 
   searchByKeyword(valkeyword, opt?) {
 
+    if (valkeyword.trim().length > 0) {
+
     this.getSearchUrl();
 
     let arrKeyword: any = [];
@@ -580,6 +582,7 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
     let dataLength = 0;
     let dataUrl = '';
 
+    // CONTENT LANG CHANGE
     if(opt) {
       this.changeCurrDataLang();
     } else {
@@ -595,6 +598,7 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
     let navKword = this.router.url.split("/")[2];
 
     if(decodeURI(navKword) != locStrgKword) {
+      this.btnFilterReset();
       localStorage.setItem('ser_word', decodeURI(navKword));
       this.loading = true;
       // location.href = './search/'+navKword;
@@ -603,6 +607,7 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
         }
 
     } else if(decodeURI(valkeyword) != locStrgKword) {
+      this.btnFilterReset();
       localStorage.setItem('ser_word', decodeURI(valkeyword));
       this.loading = true;
       // location.href = './search/'+valkeyword;
@@ -616,8 +621,6 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
       localStorage.setItem('ser_word', valkeyword);
     }
 
-    if (valkeyword.trim().length > 0) {
-      // this.loading = true;
       if (this.tabIndex == 0 || this.tabIndex == 1) {
         this.mainObj.keyword = valkeyword;
         this.mainObj.from = this.pagefrom;
@@ -626,7 +629,6 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
       }
 
       // KEYWORD MAP AREA
-
       if (this.tabIndex == 0)
         this.keywordMap.fields = this.locFields;
       else if (this.tabIndex == 1)
@@ -752,8 +754,8 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
 
         payloadObj = this.mainObj;
       } else if (this.tabIndex == 2) { // GLOBAL SEARCH
-
-        dataUrl = this.globalUrl + "?keywords=" + this.ser_word + "&site=" + this.chkGlobValue + "&pagecount=" + this.pageNumber;
+        // malaysia%2Bsite%3Agov.my
+        dataUrl = this.globalUrl + "?keywords=" + this.ser_word + "%2Bsite%3A" + this.chkGlobValue + "&pagecount=" + this.pageNumber;
 
         payloadObj = nullObj;
       }
@@ -797,25 +799,29 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
           if (dataLength > 0) {
 
             if (this.tabIndex == 0) { // LOCAL
-              let topic: any = {};
-              let subtopic: any = {};
+              let itemObj: any = {};
 
               if (rData.aggregations.histogram) {
-                this.ddmonthPub = this.changeAryVal(rData.aggregations.histogram[0],'generic');
+                rData.aggregations['histogram'].forEach(item => {
+                  item = this.changeAryVal(item,'generic');
+                  itemObj = { "name": item[0].name, "val": item[0].val }
+                  this.ddmonthPub.push(itemObj);
+                });
+                this.addCheckedProperty(this.ddmonthPub);
               }
               
               //
-              rData.aggregations['filter_topic.category'][0].active_cat.forEach(item => {
+              rData.aggregations['filter_topic.parent_category'][0].active_cat.forEach(item => {
                 item = this.changeAryVal(item,'generic')
-                topic = { "name": item[0].name, "val": item[0].val }
-                this.ddtopics.push(topic)
+                itemObj = { "name": item[0].name, "val": item[0].val }
+                this.ddtopics.push(itemObj)
               });
               this.addCheckedProperty(this.ddtopics);
             
               rData.aggregations['filter_sub_topic.category'][0].active_cat.forEach(item => {
                 item = this.changeAryVal(item,'generic')
-                topic = { "name": item[0].name, "val": item[0].val }
-                this.ddsubTopics.push(topic)
+                itemObj = { "name": item[0].name, "val": item[0].val }
+                this.ddsubTopics.push(itemObj)
               });
               this.addCheckedProperty(this.ddsubTopics);
 
@@ -880,8 +886,8 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
 
             // DEBUG MODE ONLY
             if(!rData.data) {
-              localStorage.setItem("currSearchTab", "0");
-              this.toastr.error(this.translate.instant('common.err.servicedown'), '');
+              // localStorage.setItem("currSearchTab", "0");
+              // this.toastr.error(this.translate.instant('common.err.servicedown'), '');
               this.loading = false;
               // location.href = './search/'+this.ser_word;
             } else {
@@ -1219,9 +1225,6 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
       this.mainObj.aggregations = this.osAggregations;
     }
 
-    //
-    //
-    this.searchByKeyword(this.ser_word);
   }
 
   valueChangeTopic(model,index, $event) {
