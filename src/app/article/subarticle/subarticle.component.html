@@ -2,7 +2,7 @@
     <div class="container" *ngFor="let article of articleService.articles">
      <div class="row">
         <div class="col-md-12">
-            <h1 style="margin-top: 10px;" class="font-size-l">{{article.categoryName}}</h1>
+            <h1 style="margin-top: 10px;" class="font-size-l">{{article.topCategoryName}}</h1>
             <hr class="hr-custom2">
             <ul class="list-inline" style="clear:both;">
                 <li>
@@ -382,7 +382,16 @@
                   </div>
               </div>
           </div>
-          <div *ngIf="article.template === 'lifeevent' && article.menuRight.length != 0" class="col-sm-3 pl-1">
+
+          <div *ngIf="navService.lfcontent"  class="col-sm-3 pl-1">
+            <h4 class="sideBarMenu--title padding-bottom-l font-size-m warna_font">{{'common.onlineservice' | translate }}</h4>
+            <ul class="rightMenu" [style.background-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
+                <li *ngFor="let rightContent of leAgency;">
+                    <a [href]="rightContent.agencyApplicationUrl" (click)="appTracking(rightContent.agencyApplicationCode)" target="_blank">{{rightContent.agencyApplicationName}}</a>
+                </li>
+            </ul>
+          </div>
+          <div *ngIf="article.template === 'lifeevent' && article.menuRight.length != 0 && !navService.lfcontent" class="col-sm-3 pl-1">
               <h4 class="sideBarMenu--title padding-bottom-l font-size-m warna_font">{{'common.onlineservice' | translate }}</h4>
               <ul class="rightMenu" [style.background-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
                   <li *ngFor="let rightContent of article.menuRight;">

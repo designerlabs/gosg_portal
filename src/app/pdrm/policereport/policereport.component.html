@@ -3,8 +3,8 @@
   <div class="container">
        <div class="row">
           <div class="col-md-12">
-              <!-- <h1 style="margin-top: 10px;" class="font-size-l"> {{ 'home.menu.policeReport' | translate }}</h1> -->
-              <h1 style="margin-top: 10px;" class="font-size-l"> </h1>
+              <h1 style="margin-top: 10px;" class="font-size-l"> {{ 'home.menu.digitalsvc' | translate }}</h1>
+              <!-- <h1 style="margin-top: 10px;" class="font-size-l"> </h1> -->
               <hr class="hr-custom2"><br>
               <ul class="list-inline" style="clear:both;">
                   <li>
@@ -73,7 +73,7 @@
                             <span>/</span>
                             <mat-form-field class="sizeY">
                                 <mat-select formControlName="yearreport" placeholder="" (change)="checkReqValues()" required>
-                                    <mat-option [value]=null></mat-option>
+                                    <!-- <mat-option [value]=null></mat-option> -->
                                     <mat-option *ngFor="let year of listYear" [value]="year">{{year}}</mat-option>                      
                                 </mat-select>
                             </mat-form-field>
@@ -187,7 +187,7 @@
             </div>
             <div class="col-md-9 boldInfo">
                 <span *ngFor="let item of letter">
-                    <div (click)="openLink(item)">
+                    <div (click)="openLink(item)" style="cursor: pointer;">
                         <i class="fa fa-folder-o"></i>&nbsp;{{item}}<br>
                     </div>
                 </span>

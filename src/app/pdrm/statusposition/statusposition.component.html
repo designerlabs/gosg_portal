@@ -3,8 +3,8 @@
     <div class="container">
          <div class="row">
             <div class="col-md-12">
-                <h1 style="margin-top: 10px;" class="font-size-l"> {{ 'home.menu.statusposition' | translate }}</h1>
-                <hr class="hr-custom2"><br>
+                <h1 style="margin-top: 10px;" class="font-size-l"> {{ 'home.menu.digitalsvc' | translate }}</h1>
+                <hr class="hr-custom2"> <br>
                 <ul class="list-inline" style="clear:both;">
                     <li>
                         <a class="font-size-s" style="color: #fff;" routerLink="/index">
@@ -117,7 +117,7 @@
     <div *ngIf="showDetails">
         <div class="row container">
             <div class="col-md-12 boldInfo">
-                <span>{{ 'pdrm.titlerecruitment' | translate }}</span><br>
+                    <br> <br> <span>{{ 'pdrm.titlerecruitment' | translate }}</span><br>
                 <hr class="lineHr" style="border-top: #9c9c9d 2px solid;">
             </div>
         </div>
@@ -127,7 +127,7 @@
                 {{ 'pdrm.title.icno' | translate }}
             </div>
             <div class="col-md-9 boldInfo">
-                {{kp}}
+                : {{kp}}
             </div>
         </div>
         <div class="row container" *ngIf="kp">
@@ -135,7 +135,7 @@
                 {{ 'pdrm.title.applicantname' | translate }}
             </div>
             <div class="col-md-9 boldInfo">
-                {{name}}
+                : {{name}}
             </div>
         </div>
         <div class="row container" *ngIf="kp">
@@ -143,7 +143,7 @@
                 {{ 'pdrm.title.date' | translate }}
             </div>
             <div class="col-md-9" style="color: black; font-weight: bold;">
-                {{date}}
+                : {{date}}
             </div>
         </div>
         <div class="row container" *ngIf="kp">
@@ -151,7 +151,7 @@
                 {{ 'pdrm.title.location' | translate }}
             </div>
             <div class="col-md-9" style="color: black; font-weight: bold;">
-                {{place}}
+                : {{place}}
             </div>
         </div>
         <div class="row container" *ngIf="kp">
@@ -160,10 +160,10 @@
             </div>
             <div class="col-md-9" style="color: black; font-weight: bold;">
                 <div *ngIf="status != '-'" (click)="openLink(urlDoc)" style="cursor: pointer;">
-                    <i class="fa fa-folder-o"></i>&nbsp;{{status}}<br>
+                    :  <i class="fa fa-folder-o"></i>&nbsp;{{status}}<br>
                 </div>
                 <div *ngIf="status == '-'">
-                    {{status}}<br />
+                    : {{status}}<br />
                 </div>
             </div>
         </div>
