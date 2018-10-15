@@ -25,6 +25,7 @@ export class ReplacementmycardComponent implements OnInit {
   redirect_url: any;
   new_redirect_url: any;
   thankMsg = false;
+  autoVal: any;
   private subscriptionLang: ISubscription;
 
   constructor(
@@ -80,9 +81,38 @@ export class ReplacementmycardComponent implements OnInit {
     this.redirect_url = document.URL;
     this.redirect_url = this.redirect_url.replace(/%2F/g, "/");
     history.pushState(null, null, this.redirect_url);
-    this.new_redirect_url = this.redirect_url.split('?redirect_url=')[1];
-    
-    console.log(this.redirect_url);
+    this.new_redirect_url = this.redirect_url.split('&redirect_url=')[1];
+    let autoParam = this.redirect_url.split('?auto=')[1];
+    this.autoVal = autoParam.split("&redirect_url=")[0];
+
+    // console.log("URL REDIRECT: "+this.redirect_url.split('&redirect_url=')[1]);    
+    // console.log("auto: "+autoParam);
+    // console.log("auto: "+autoVal);
+    // console.log("new_redirect_url: "+this.new_redirect_url);
+
+    if(this.autoVal == 1){
+      this.autoRedirect();
+    }
+  }
+
+  autoRedirect(){
+    if(this.new_redirect_url){     
+      let newUrl = "http://";
+      
+      let httpStr = this.new_redirect_url.substring(0, 4);
+
+      if(httpStr.toLowerCase() == 'http' || httpStr.toLowerCase() == 'https'){
+        
+        this.new_redirect_url = this.new_redirect_url.replace(/%2F/g, "/");    
+        window.location.replace(this.new_redirect_url+"?status=ya");   
+        //window.open(this.new_redirect_url+"?status=ya","_parent");
+
+      } else {        
+        //window.open(newUrl+this.new_redirect_url+"?status=ya","_parent");   
+        window.location.replace(this.new_redirect_url+"?status=ya"); 
+      }
+
+    }
   }
 
   clickYes(){
