@@ -143,7 +143,7 @@
 
               <div class="col-md-4" *ngIf="selectedTypeIC == 1">
                 <mat-form-field  class="example-full-width displayInfo">
-                  <input matInput formControlName="icpassport" placeholder="No.IC/Passport" required [textMask]="{mask: maskIC}" 
+                  <input matInput formControlName="icpassport" placeholder="No.IC/Pasport" required [textMask]="{mask: maskIC}" 
                     (change)="getDetailIC(langID, secondFormGroup.value)" (keyup)="checkICLength(secondFormGroup.value)">                  
                   <mat-icon matPrefix *ngIf="checkIC != undefined" [ngClass]="(checkIC == true) ? 'iconRight' : 'iconWrong'">
                       <i  [ngClass]="(checkIC == true) ? 'fa fa-check' : 'fa fa-exclamation-circle'"></i></mat-icon>                      
@@ -185,7 +185,7 @@
 
               <div class="col-md-4" *ngIf="selectedTypeIC == 2">
                 <mat-form-field  class="example-full-width displayInfo">
-                  <input matInput formControlName="icpassport" placeholder="Passpot" required
+                  <input matInput formControlName="icpassport" placeholder="Pasport" required
                   (change)="getDetailIC(langID, secondFormGroup.value)" (keyup)="checkPassport(secondFormGroup.value)">
                 </mat-form-field>
                 <mat-error class="redErMsg" *ngIf="secondFormGroup.controls.icpassport.hasError('required')">
