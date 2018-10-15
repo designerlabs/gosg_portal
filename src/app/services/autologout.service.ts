@@ -21,7 +21,8 @@ export class AutologoutService {
   }
 
   starts() {
-    console.log('Timer Start.');
+    console.log('Timer Starts..');
+    console.log('Auto logout when idle is set to '+ MINUTES_UNITL_AUTO_LOGOUT + 'minutes'); 
     this.check();
     this.initListener();
     this.initInterval();
@@ -57,6 +58,7 @@ export class AutologoutService {
       localStorage.clear();
       if (environment.staging) {
         //this.router.navigateByUrl(port APP_BASE_HREF);
+        window.location.href ='/uapsso/Logout';
         console.log(window.location.origin);
       } else if (environment.production) {
         window.location.href = this.config.urlUAP +'uapsso/Logout?return='+this.config.urlUAP+'portal/index';
