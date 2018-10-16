@@ -570,6 +570,8 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
 
   searchByKeyword(valkeyword, opt?) {
 
+    valkeyword = valkeyword.replace(/<\/?[^>]+(>|$)/g, "");
+
     if (valkeyword.trim().length > 0) {
 
     this.getSearchUrl();
