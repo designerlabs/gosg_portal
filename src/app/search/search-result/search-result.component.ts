@@ -665,6 +665,9 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
         delete this.keywordMap.not;
         delete this.keywordMap.all;
       }
+
+      if(this.inpExcWord == this.ser_word)
+        delete this.keywordMap.notFields;
       // KEYWORD MAP AREA END
 
       if (this.tabIndex === 0) { // LOCAL SEARCH
