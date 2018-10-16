@@ -509,7 +509,14 @@
       "warn":"bg_header bg_warn_header",
       "info":"bg_header bg_info_header"
     },
-
+    "gallery":{      
+      "year": "Filter by year",
+      "month": "Filter by month",
+      "day": "Filter by day",
+      "bttnYear": "View all galleries",
+      "bttnMonth": "View all galleries for year",
+      "bttnDay": "View all galleries for month"
+    },
     "pagination":{
       "pages":"Pages",
       "of":"of",
