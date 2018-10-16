@@ -710,6 +710,9 @@
       "bumper":"Padat",
       "streetname":"Nama Jalan",
       "total":"Jumlah Keputusan"
+    },
+    "err": {
+      "na": "Data Tidak Wujud"
     }
   },
   "education":{
