@@ -48,6 +48,7 @@ export class GalleryComponent implements OnInit, OnDestroy {
   loading = false;
   agencyData: any;
   isActiveList: boolean = false;
+  getDay = '';
 
   galleryData: any;
   @Output() langChange = new EventEmitter();
@@ -151,22 +152,105 @@ export class GalleryComponent implements OnInit, OnDestroy {
     this.isAudio = false;
     this.isDocument = false;
     this.isVideo = false;
-
+    
     }
 
    getTheme(){
         return localStorage.getItem('themeColor');
     }
 
-    clickSideMenu(id){
-
+    clickSideMenu(id,val1,val2){
+      localStorage.setItem('yearGallery','');
+      localStorage.setItem('monthGallery','');
+      localStorage.setItem('dayGallery','');
       this.statusID = status;
       this.navService.triggerGalleries(localStorage.getItem('langID'), id, null);
       // this.router.navigate(['gallery']);
       event.preventDefault();
     }
 
+    clickY(val){
+      console.log(val);
+      localStorage.setItem('yearGallery',val);
+      this.navService.triggerGalleries(localStorage.getItem('langID'), localStorage.getItem('idmenuleft'), null, val);
+      event.preventDefault();
+    }
+
+    clickM(val){
+      console.log(val);
+      localStorage.setItem('monthGallery',val);
+      this.navService.triggerGalleries(localStorage.getItem('langID'), localStorage.getItem('idmenuleft'), null,  localStorage.getItem('yearGallery'), val);
+      this.getDay = localStorage.getItem('dayGallery');
+      event.preventDefault();
+    }
+
+    clickD(val){
+      console.log(val);
+      localStorage.setItem('dayGallery',val);
+      this.navService.triggerGalleries(localStorage.getItem('langID'), localStorage.getItem('idmenuleft'), null,  localStorage.getItem('yearGallery'), localStorage.getItem('monthGallery'), val);
+      this.getDay = localStorage.getItem('dayGallery');
+      event.preventDefault();
+    }
+
+    changeMonth(val){
+      if(val == '01'){
+        if(this.langId == 1) val = "January";
+        else val = "Januari";
+      } else if (val == '02'){
+        if(this.langId == 1) val = "February";
+        else val = "Februari";
+      } else if (val == '03'){
+        if(this.langId == 1) val = "March";
+        else val = "Mac";
+      } else if (val == '04'){val = "April";
+      } else if (val == '05'){
+        if(this.langId == 1) val = "May";
+        else val = "Mei";
+      } else if (val == '06'){
+        if(this.langId == 1) val = "June";
+        else val = "Jun";
+      } else if (val == '07'){
+        if(this.langId == 1) val = "July";
+        else val = "Julai";
+      } else if (val == '08'){
+        if(this.langId == 1) val = "August";
+        else val = "Ogos";
+      } else if (val == '09'){val = "September";
+      } else if (val == '10'){
+        if(this.langId == 1) val = "October";
+        else val = "Oktober";
+      } else if (val == '11'){ val = "November";
+      } else if (val == '12'){
+        if(this.langId == 1) val = "December";
+        else val = "Disember";
+      }
+
+      return val;
+    }
+
+    backToDefault(){
+      localStorage.setItem('yearGallery','');
+      this.navService.triggerGalleries(localStorage.getItem('langID'), localStorage.getItem('idmenuleft'), null);
+      // this.router.navigate(['gallery']);
+      event.preventDefault();
+    }
+    backToYear(){
+      localStorage.setItem('yearMonth','');
+      this.navService.triggerGalleries(localStorage.getItem('langID'), localStorage.getItem('idmenuleft'), null, localStorage.getItem('yearGallery'));
+      event.preventDefault();
+
+    }
+    backToMonth(){
+      localStorage.setItem('yearDay','');
+      this.navService.triggerGalleries(localStorage.getItem('langID'), localStorage.getItem('idmenuleft'), null, localStorage.getItem('yearGallery'),localStorage.getItem('monthGallery'));
+      event.preventDefault();
+    }
+
     clickSideMenuByAgency(e, status){
+      localStorage.setItem('yearGallery','');
+      localStorage.setItem('monthGallery','');
+      localStorage.setItem('dayGallery','');
+
       this.navService.getSubArticleUrlByAgency(localStorage.getItem('langID'));
       this.navService.triggerSubArticleAgency(localStorage.getItem('langID'));
       this.router.navigate(['/subcategory', 'agency']);

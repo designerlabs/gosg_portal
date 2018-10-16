@@ -35,6 +35,7 @@ export class GalleryService {
                     this.getContentUrl(subID, lang))
                 .subscribe(resSliderData => {
                     this.galleries = resSliderData;
+                    console.log(this.galleries);
                     this.breadcrumb = this.breadcrumbService.getBreadcrumb();
                     this.isValid = this.breadcrumbService.isValid = true;
                     this.breadcrumb = this.breadcrumb.name = '';

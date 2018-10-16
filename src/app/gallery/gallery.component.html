@@ -61,64 +61,11 @@
       </div>
     </div>
 
-    <div class="col-sm-9" style="color: #333; border: 0px solid #000">
+    <div class="col-sm-9" *ngIf="galleryService.galleries.mediaType == 'media by agency'" style="color: #333; border: 0px solid #000">
       <div class="row">
-        <!-- <div class="col-md-9">
-          <h2 class="titleWObg font-size-l capitalize">
-            <i *ngIf="galleryService.galleries.mediaType == 'documents' || galleryService.galleries.mediaType == 'dokumen'" class="fa fa-file-o"></i>
-            <i *ngIf="galleryService.galleries.mediaType == 'images' || galleryService.galleries.mediaType == 'imej'" class="fa fa-image"></i>
-            <i *ngIf="galleryService.galleries.mediaType == 'audios' || galleryService.galleries.mediaType == 'audio'" class="fa fa-file-audio-o"></i>
-            <i *ngIf="galleryService.galleries.mediaType == 'videos' || galleryService.galleries.mediaType == 'video'" class="fa fa-file-video-o"></i>
-            &nbsp;{{galleryService.galleries.mediaType}}
-          </h2>
-        </div>
-        <div class="col-md-9">&nbsp;</div> -->
-
-        <!-- <div class="container"> -->
-
-    
-        <div class="col-md-12 galleryTbl">
+       
+        <div class="col-md-12">
           <div *ngFor="let content of galleryService.galleries.list">
-            
-            <!-- IMAGES -->
-            <!-- <div class="col-md-4">
-              <li>2018</li>
-            </div> -->
-            
-            <div class="col-md-12" *ngIf="galleryService.galleries.mediaType == 'images'">
-              <!-- <mat-card class="example-card">
-                  <mat-card-header>
-                    <mat-card-title>{{ content.title }}</mat-card-title>
-                  </mat-card-header> -->
-              <img class="galImg" (click)="openDialog(config.externalMediaURL +content.name,galleryService.galleries.mediaType, content.title, content.description)"
-                src="{{ config.externalMediaURL }}/{{ content.name }}">
-              <!-- </mat-card> -->
-            </div>
-
-            <!-- AUDIOS -->
-            <div *ngIf="galleryService.galleries.mediaType == 'audios'" class="vContent">
-              <button mat-button color="primary" (click)="openDialog(config.externalMediaURL +content.name,galleryService.galleries.mediaType, content.title)"
-                title="{{ content.title }}"><i class="font-size-l fa fa-play-circle-o"></i>&nbsp;&nbsp;{{ content.title
-                | slice:0:20 }}...</button>
-            </div>
-
-            <!-- VIDEOS -->
-            <div *ngIf="galleryService.galleries.mediaType == 'videos'" class="vContent">
-              <button mat-button color="warn" (click)="openDialog(config.externalMediaURL +content.name,galleryService.galleries.mediaType, content.title)"><i
-                  class="font-size-l fa fa-play-circle-o"></i>&nbsp;&nbsp;{{ content.title }}</button>
-            </div>
-
-            <!-- DOCUMENTS -->
-            <div *ngIf="galleryService.galleries.mediaType == 'documents'" class="vContent">
-              <button class="galleryBtn" mat-button (click)="downloadFile(config.externalMediaURL +content.name)"><i
-                  class="font-size-l fa fa-download"></i>&nbsp;&nbsp;{{ content.title }}</button>
-              <!-- <span *ngIf="content.title.length > 25" class="font-size-s" title="{{ content.title }}">{{ content.title | slice:0:25 }}...</span>&nbsp;
-              <span *ngIf="content.title.length <= 25" class="font-size-s">{{ content.title }}</span>&nbsp;
-              <a *ngIf="content.name !== '-'" class="font-size-s" [href]="config.externalMediaURL +mediaUrl+'/'+content.name" title="{{ 'gallery.label.download' | translate }}: {{ content.title }}">
-                <i class="font-size-s defaultColor fa fa-download"></i>
-              </a> -->
-            </div>
-
             <!-- BY MEDIA -->
             <div *ngIf="galleryService.galleries.mediaType == 'media by agency'" class="vContent">
               <div class="glass text-center">
@@ -139,11 +86,180 @@
 
           </div>
         </div>
+
         <div class="col-md-9">&nbsp;</div>
       </div>
       <div class="col-md-9">&nbsp;</div>
 
-      <!-- </div> -->
+    </div>
+
+    <div class="col-sm-2" *ngIf="galleryService.galleries.mediaType != 'media by agency'" style="color: #333; border: 0px solid #000">
+        <div class="row">
+          <!-- Year -->
+          
+          <div class="col-md-12" *ngIf="galleryService.galleries?.year">
+            <span style="font-size: 20px;">{{'common.gallery.year' | translate}}</span>
+            <div *ngFor="let content of galleryService.galleries.year">
+              
+              <!-- IMAGES -->
+              <div *ngIf="galleryService.galleries.mediaType == 'images'" class="vContent">
+                <li><a href="" (click)="clickY(content)"> {{content}} </a></li>
+              </div>
+  
+              <!-- AUDIOS -->
+              <div *ngIf="galleryService.galleries.mediaType == 'audios'" class="vContent">
+                <li><a href="" (click)="clickY(content)"> {{content}} </a></li>
+              </div>
+  
+              <!-- VIDEOS -->
+              <div *ngIf="galleryService.galleries.mediaType == 'videos'" class="vContent">
+                <li><a href="" (click)="clickY(content)"> {{content}} </a></li>
+              </div>
+  
+              <!-- DOCUMENTS -->
+              <div *ngIf="galleryService.galleries.mediaType == 'documents'" class="vContent">
+                <li><a href="" (click)="clickY(content)"> {{content}} </a></li>
+              </div>  
+            </div><br>
+
+          </div>
+          <!-- Month -->          
+          <div class="col-md-12" *ngIf="galleryService.galleries?.month">
+              <span style="font-size: 20px;">{{'common.gallery.month' | translate}}</span>
+              <div *ngFor="let content of galleryService.galleries.month">
+                
+                <!-- IMAGES -->
+                <div *ngIf="galleryService.galleries.mediaType == 'images'" class="vContent">
+                  <li><a href="" (click)="clickM(content)"> {{changeMonth(content)}} </a></li>
+                </div>
+    
+                <!-- AUDIOS -->
+                <div *ngIf="galleryService.galleries.mediaType == 'audios'" class="vContent">
+                  <li><a href="" (click)="clickM(content)"> {{changeMonth(content)}}  </a></li>
+                </div>
+    
+                <!-- VIDEOS -->
+                <div *ngIf="galleryService.galleries.mediaType == 'videos'" class="vContent">
+                  <li><a href="" (click)="clickM(content)"> {{changeMonth(content)}}  </a></li>
+                </div>
+    
+                <!-- DOCUMENTS -->
+                <div *ngIf="galleryService.galleries.mediaType == 'documents'" class="vContent">
+                  <li><a href="" (click)="clickM(content)"> {{changeMonth(content)}}  </a></li>
+                </div>  
+              </div><br>
+  
+          </div>
+          <!-- Day -->          
+          <div class="col-md-12" *ngIf="galleryService.galleries?.day">
+              <span style="font-size: 20px;">{{'common.gallery.day' | translate}}</span>
+              <div *ngFor="let content of galleryService.galleries.day">
+                
+                <!-- IMAGES -->
+                <div *ngIf="galleryService.galleries.mediaType == 'images'" class="vContent">
+                  <li><a href="" (click)="clickD(content)"> {{content}} </a></li>
+                </div>
+    
+                <!-- AUDIOS -->
+                <div *ngIf="galleryService.galleries.mediaType == 'audios'" class="vContent">
+                  <li><a href="" (click)="clickD(content)"> {{content}} </a></li>
+                </div>
+    
+                <!-- VIDEOS -->
+                <div *ngIf="galleryService.galleries.mediaType == 'videos'" class="vContent">
+                  <li><a href="" (click)="clickD(content)"> {{content}} </a></li>
+                </div>
+    
+                <!-- DOCUMENTS -->
+                <div *ngIf="galleryService.galleries.mediaType == 'documents'" class="vContent">
+                  <li><a href="" (click)="clickD(content)"> {{content}} </a></li>
+                </div>  
+              </div><br>  
+          </div>
+  
+          <div class="col-md-9">&nbsp;</div>
+        </div>
+        <div class="col-md-9">&nbsp;</div>
+  
+        <!-- </div> -->
+    </div>
+
+    <div class="col-sm-7" *ngIf="galleryService.galleries.mediaType != 'media by agency'" style="color: #333; border: 0px solid #000">
+        <div class="row">
+          <!-- <div class="col-md-9">
+            <h2 class="titleWObg font-size-l capitalize">
+              <i *ngIf="galleryService.galleries.mediaType == 'documents' || galleryService.galleries.mediaType == 'dokumen'" class="fa fa-file-o"></i>
+              <i *ngIf="galleryService.galleries.mediaType == 'images' || galleryService.galleries.mediaType == 'imej'" class="fa fa-image"></i>
+              <i *ngIf="galleryService.galleries.mediaType == 'audios' || galleryService.galleries.mediaType == 'audio'" class="fa fa-file-audio-o"></i>
+              <i *ngIf="galleryService.galleries.mediaType == 'videos' || galleryService.galleries.mediaType == 'video'" class="fa fa-file-video-o"></i>
+              &nbsp;{{galleryService.galleries.mediaType}}
+            </h2>
+          </div>
+          <div class="col-md-9">&nbsp;</div> -->
+  
+          <!-- <div class="container"> -->
+  
+      
+          <div class="col-md-12 galleryTbl">
+            <div *ngFor="let content of galleryService.galleries.list">
+              
+              <!-- IMAGES -->
+              <div *ngIf="galleryService.galleries.mediaType == 'images'" >
+                <!-- <mat-card class="example-card">
+                    <mat-card-header>
+                      <mat-card-title>{{ content.title }}</mat-card-title>
+                    </mat-card-header> -->
+                <img class="galImg" (click)="openDialog(config.externalMediaURL +content.name,galleryService.galleries.mediaType, content.title, content.description)"
+                  src="{{ config.externalMediaURL }}/{{ content.name }}">
+                <!-- </mat-card> -->
+              </div>
+  
+              <!-- AUDIOS -->
+              <div *ngIf="galleryService.galleries.mediaType == 'audios'" class="vContent">
+                <button mat-button color="primary" (click)="openDialog(config.externalMediaURL +content.name,galleryService.galleries.mediaType, content.title)"
+                  title="{{ content.title }}"><i class="font-size-l fa fa-play-circle-o"></i>&nbsp;&nbsp;{{ content.title
+                  | slice:0:20 }}...</button>
+              </div>
+  
+              <!-- VIDEOS -->
+              <div *ngIf="galleryService.galleries.mediaType == 'videos'" class="vContent">
+                <button mat-button color="warn" (click)="openDialog(config.externalMediaURL +content.name,galleryService.galleries.mediaType, content.title)"><i
+                    class="font-size-l fa fa-play-circle-o"></i>&nbsp;&nbsp;{{ content.title }}</button>
+              </div>
+  
+              <!-- DOCUMENTS -->
+              <div *ngIf="galleryService.galleries.mediaType == 'documents'" class="vContent">
+                <button class="galleryBtn" mat-button (click)="downloadFile(config.externalMediaURL +content.name)"><i
+                    class="font-size-l fa fa-download"></i>&nbsp;&nbsp;{{ content.title }}</button>
+                <!-- <span *ngIf="content.title.length > 25" class="font-size-s" title="{{ content.title }}">{{ content.title | slice:0:25 }}...</span>&nbsp;
+                <span *ngIf="content.title.length <= 25" class="font-size-s">{{ content.title }}</span>&nbsp;
+                <a *ngIf="content.name !== '-'" class="font-size-s" [href]="config.externalMediaURL +mediaUrl+'/'+content.name" title="{{ 'gallery.label.download' | translate }}: {{ content.title }}">
+                  <i class="font-size-s defaultColor fa fa-download"></i>
+                </a> -->
+              </div>
+  
+            </div>
+
+          </div>
+  
+          <div class="col-md-9">&nbsp;</div>
+        </div>
+        <div>
+          <button class="btn btn-md btn-success" *ngIf="galleryService.galleries?.month" (click)="backToDefault()">
+              {{'common.gallery.bttnYear' | translate}}
+          </button>
+
+          <button class="btn btn-md btn-success" *ngIf="galleryService.galleries?.day && getDay == ''" (click)="backToYear()">
+              {{'common.gallery.bttnMonth' | translate}}
+          </button>
+
+          <button class="btn btn-md btn-success" *ngIf="galleryService.galleries?.day && getDay" (click)="backToMonth()">
+              {{'common.gallery.bttnDay' | translate}}
+          </button>
+        </div>
+        <div class="col-md-9">&nbsp;</div>
+  
+        <!-- </div> -->
     </div>
 
   </div>

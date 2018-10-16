@@ -408,7 +408,7 @@
     "header": "Galeri",
     "label": {
       "download": "Muat Turun"
-    }
+    }    
   },
   "mailbox":{
     "header":{
@@ -509,7 +509,14 @@
       "warn":"bg_header bg_warn_header",
       "info":"bg_header bg_info_header"
     },
-
+    "gallery":{      
+      "year": "Tapisan berasaskan tahun",
+      "month": "Carian mengikut bulan",
+      "day": "Carian mengikut hari",
+      "bttnYear": "Semua galeri",
+      "bttnMonth": "Semua galeri mengikut tahun",
+      "bttnDay": "Semua galeri mengikut bulan"
+    },
     "pagination":{
       "pages":"Halaman",
       "of":"daripada",

@@ -29,6 +29,7 @@ export class NavService {
   topicStatus: any;
   loader:boolean = false;
   dataT: any;
+  
   private myMethodSubject = new Subject<any>();
   announces: any[];
   private subscriptionLang: ISubscription;
@@ -148,16 +149,29 @@ export class NavService {
   }
 
 
-  getGalleryData(lang: string, ID?: number, keyword?: string): Observable<boolean[]> {
+  getGalleryData(lang: string, ID?: number, keyword?: string, year?: string, month?: string, day?: string): Observable<boolean[]> {
 
     let getApi;
 
     if(ID) {
       if(ID == 5 && keyword)
         getApi = this.config.urlGallery + '?language=' + lang+ '&id=' +ID+'&agency='+keyword;
+      else if (ID != 5 && (year || month || day))
+      {
+        if(ID != 5 && year){
+          getApi = this.config.urlGallery + '?language=' + lang+ '&id=' +ID+'&year='+year;
+        }
+        if(ID != 5 && year && month){
+          getApi = this.config.urlGallery + '?language=' + lang+ '&id=' +ID+'&year='+year+'&month='+month;
+        }
+        if(ID != 5 && year && month && day){
+          getApi = this.config.urlGallery + '?language=' + lang+ '&id=' +ID+'&year='+year+'&month='+month+'&day='+day;
+        }
+      }        
       else
-        getApi = this.config.urlGallery + '?language=' + lang+ '&id=' +ID;
-    } else {
+        getApi = this.config.urlGallery + '?language=' + lang+ '&id=' +ID;      
+    } 
+    else {
       getApi = this.config.urlGallery + '?language=' + lang;
     }
 
@@ -567,7 +581,7 @@ export class NavService {
     }
   }
 
-   triggerGalleries(lang, galleryID?, keyword?) {
+   triggerGalleries(lang, galleryID?, keyword?, year?, month?, day?) {
 
     // this.loader = true;
     if(galleryID == 5 && !keyword)
@@ -579,10 +593,15 @@ export class NavService {
 
        return this.route.paramMap
          .switchMap((params: ParamMap) =>
-           this.getGalleryData(lang, galleryID, keyword))
+           this.getGalleryData(lang, galleryID, keyword, year, month, day))
          .subscribe(resGalleryData => {
            this.galleryService.galleries = resGalleryData;
            this.galleries = resGalleryData;
+           for(let i = 0; i < this.galleries["leftMenu"].length; i++){
+              if(this.galleries["leftMenu"][i].active == true){
+                localStorage.setItem('idmenuleft',this.galleries["leftMenu"][i].id);
+              }
+           }
            this.breadcrumb = this.breadcrumbService.getBreadcrumb();
            this.isValid = this.breadcrumbService.isValid = true;
            this.breadcrumb = this.breadcrumb.name = '';
