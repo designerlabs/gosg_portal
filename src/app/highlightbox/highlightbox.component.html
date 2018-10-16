@@ -18,7 +18,7 @@
                     </div>
                     <div class="popular-article-box lifeEventBox-description">
                       <ul class="col-xs-12" *ngFor="let item of hotTopicData">
-                        <li style="border-bottom: 1px solid rgba(221, 221, 221, 0.58);">
+                        <li class="hottopicsli" style=" border-bottom: 1px solid rgba(221, 221, 221, 0.58);">
                           <a class="pboxa font-size-s warna_title_color" style="cursor: pointer; font-family: Roboto;" (click)="getUrl()" [routerLink]="['/'+getModule(item.trackModuleUrl), getID(item.trackModuleUrl)]" [style.color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
                           {{item.contentTitle | truncate:[30, '...']}}
                           </a>

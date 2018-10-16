@@ -66,9 +66,10 @@
         }
 
         .btn-secondary:hover {
-            color: #fff;
-            background-color: #666666;
-            border-color: #666666;
+            color: #fff !important;
+            font-weight: bold;
+            background-color: #666666 !important;
+            /*border-color: #e6436e !important;*/
         }
 
         .popular-article-box {
@@ -109,4 +110,10 @@
             padding: 2px;
             font-family: Roboto;
             background: rgba(0, 230, 88, 0.3);
+        }
+
+        .hottopicsli > a:hover {
+            color : white !important;
+            font-weight: bold;
+            background-color: lightslategray;
         }

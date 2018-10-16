@@ -67,6 +67,12 @@ em{
   height: 80px !important;
 }
 
+/*.lifeevent_tab .mat-tab-label:hover {
+  background-color: lightslategray;
+  color: white;
+  font-weight: bold;
+}*/
+
 .owl-stage-outer{
         height: 300px;
 }
