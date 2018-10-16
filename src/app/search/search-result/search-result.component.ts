@@ -132,10 +132,14 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
         if (myLang === 'en') {
            this.lang = 'en';
            this.languageId = 1;
-        }
-        if (myLang === 'ms') {
-          this.lang = 'ms';
-          this.languageId = 2;
+           this.mainObj.filters.ref_language_id = "1"
+           this.curr_data_lang = "Bahasa Malaysia";
+          }
+          if (myLang === 'ms') {
+            this.lang = 'ms';
+            this.languageId = 2;
+            this.mainObj.filters.ref_language_id = "2"
+            this.curr_data_lang = "English";
         }
 
         if(this.topnavservice.flagLang){
@@ -293,6 +297,8 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
       this.languageId = localStorage.getItem('langID');
     }else{
       this.languageId = 1;
+      this.mainObj.filters.ref_language_id = "1"
+      this.curr_data_lang = "Bahasa Malaysia";
     }
 
     //if(!this.currTab){
@@ -563,6 +569,8 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
 
 
   searchByKeyword(valkeyword, opt?) {
+
+    valkeyword = valkeyword.replace(/<\/?[^>]+(>|$)/g, "");
 
     if (valkeyword.trim().length > 0) {
 

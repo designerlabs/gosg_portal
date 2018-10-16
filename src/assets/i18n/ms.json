@@ -620,7 +620,10 @@
     "displayAnswer" : " YA, PAPARKAN KEPUTUSAN TERKINI ",
     "comment": "Komen",
     "respon": "Cadangan ialah",
-    "answer": "Jawapan ialah"
+    "answer": "Jawapan ialah",
+    "err" : {
+      "noanswer" : "Sila pilih jawapan daripada senarai pilihan"
+    }
   },
   "announcement":{
     "title":"Sorotan Terkini",
