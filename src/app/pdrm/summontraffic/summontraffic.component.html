@@ -87,10 +87,10 @@
                         <div class="col-md-8" *ngIf="varSelect==1">
                             <mat-form-field class="example-full-width">
  
-                                <input matInput placeholder="" formControlName="noCar" (keyup)="checkReqValues()" maxlength="9"
+                                <input matInput placeholder="" id="numCar" formControlName="noCar" (keyup)="checkReqValues()" maxlength="20"
                                 (keypress)="isNumberAndAlphabet(event)" required tabindex="3"  style="color: black">
 
-                                <mat-error *ngIf="searchForm.controls.noCar.hasError('required')">
+                                <mat-error *ngIf="searchForm.controls.noCar.hasError('required')" >
                                     {{ 'pdrm.placeholder.noCar' | translate }} {{ 'pdrm.err.needed' | translate }}
                                 </mat-error>
                             </mat-form-field>
@@ -101,7 +101,7 @@
                                 class="form-control btn btn-md btn-warning font-size-s pull-right bttnCustom"
                                 (click)="resetModal.show()" style="margin-left: 5px;">
                                 <i class="fa fa-refresh"></i> {{'feedback.label.reset' | translate }}</button>
-                            <button mat-raised-button type="button" color="primary" id="searchbtn" 
+                            <button mat-raised-button type="button" color="primary" id="searchbtn"
                                 class="form-control btn btn-md btn-success font-size-s pull-right bttnCustom" [disabled]="!complete"
                                 (click)="searchApp(null,pageNumber,pageSize)">
                                 <i class="fa fa-search"></i> {{'appmngt.setSearch.search' | translate}}</button>
@@ -234,12 +234,22 @@
                     : {{sumOfSaman | number}}                    
                 </div>
 
-                <div class="col-md-3">
-                        <mat-form-field class="example-full-width">
-                                <input matInput placeholder={{carianPlaceholder}} #myInput id="myInput" (keyup)="newRecord(myInput.value)" [(ngModel)]="query" style="color: black">
+                <div class="col-md-1 " style="text-align: right; padding-right: 1px;">
+                        {{carianPlaceholder}} :       
+                </div>
+                
+                <div class="col-md-2" style=" padding-left: 1px;" style="border-top: none !important;">
+                        <mat-form-field class="example-full-width" style="border-top: none !important;">
+
+                                <!-- old -->
+                                <!-- <input matInput placeholder={{carianPlaceholder}} #myInput id="myInput" (keyup)="newRecord(myInput.value)" [(ngModel)]="query" style="color: black"> -->
+
+                                <!-- new -->
+                                <input style="border-top: none !important;"
+                                 matInput #myInput id="myInput" (keyup)="newRecord(myInput.value)" [(ngModel)]="query" style="color: black">
+
                         </mat-form-field>
                 </div>
-                    <!-- farid test ends -->
         </div>
 
         <br>
@@ -249,13 +259,13 @@
                 <tr class="mat-header-row tableHeader">
                     <th width="5%" class="mat-header-cell paddingR">&nbsp;&nbsp;{{'appmngt.tableHeader.num' | translate}}</th>
                     <th width="10%" class="mat-header-cell paddingR">{{'pdrm.title.car' | translate}}</th>
-                    <th width="20%" class="mat-header-cell paddingR">
+                    <th width="10%" class="mat-header-cell paddingR">
                         <!-- {{'pdrm.title.summon_no' | translate}} -->
                         {{pdrmtittlesummonno}}
                     </th>
                     <th width="15%" class="mat-header-cell paddingR">{{'pdrm.title.dateTime' | translate}}</th>
-                    <th width="10%" class="mat-header-cell paddingR">{{'pdrm.title.location2' | translate}}</th>
-                    <th width="10%" class="mat-header-cell paddingR">{{'pdrm.title.info' | translate}}</th>
+                    <th width="18%" class="mat-header-cell paddingR">{{'pdrm.title.location2' | translate}}</th>
+                    <th width="12%" class="mat-header-cell paddingR">{{'pdrm.title.info' | translate}}</th>
                     <th width="10%" class="mat-header-cell text-right paddingR">{{'pdrm.title.amount' | translate}}</th>
                     <th width="5%" class="mat-header-cell text-center paddingR">SH</th>
                     <th width="5%" class="mat-header-cell text-center paddingR">OP</th>
@@ -287,12 +297,17 @@
                         > {{data.imageUrl}} </td> -->
 
                         <!-- new -->
-                    <td class="mat-cell text-center paddingR"
+                    <td *ngIf="data.imageUrl.charAt(0) == 'h' "
+                        class="mat-cell text-center paddingR fa fa-file"
                         (click)="pageLink(data.imageUrl)"
-                        translate="{{ (data.imageUrl != '' ? '&#10063;' : '-') }}"
-                        style="cursor: pointer; color:blue;">
-                         {{data.imageUrl}} 
+                        style="white-space: pre-line; cursor: pointer; color: #5FA0E7 ; font-size: 25px;"
+                         >
                     </td>
+
+                    <td *ngIf="data.imageUrl.charAt(0) != 'h' "  
+                        class="mat-cell text-center paddingR">
+                        -
+                    </td> 
 
 
                 </tr>

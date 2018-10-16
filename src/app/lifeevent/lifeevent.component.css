@@ -35,11 +35,8 @@
             }
 
             .lifeEventCategory:hover{
-              /*color: #333 !important;*/
-              color:black !important;
-              background-color: lightslategray;
-              font-weight: bold;
-
+                color : white !important;
+                background-color: lightslategray;
             }
 
             .tabbing li{

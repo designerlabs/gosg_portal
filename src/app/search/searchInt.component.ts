@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, } from '@angular/core';
 import { Router } from '@angular/router';
 import { SearchService } from '../search/search.service';
 import { HtmlParser } from '@angular/compiler';
+import { SafeHtml } from '@angular/platform-browser';
 declare var jquery:any;
 declare var $ :any;
 
@@ -44,6 +45,13 @@ export class SearchIntComponent implements OnInit {
     dataHilight;
     span = document.createElement("span");
 
+    /* use this for single match search */
+    static SINGLE_MATCH:string = "Single-Match";
+    /* use this for single match search with a restriction that target should start with search string */
+    static SINGLE_AND_STARTS_WITH_MATCH:string = "Single-And-StartsWith-Match";
+    /* use this for global search */
+    static MULTI_MATCH:string = "Multi-Match";
+
     constructor(private router: Router, private searchService:SearchService) { }
     
     getTheme(){
@@ -73,24 +81,38 @@ export class SearchIntComponent implements OnInit {
         let nameNode = document.createTextNode(maintxt); 
         span1.appendChild(nameNode);
         let resStr = this.highlight_words(keyword, span1);
-        if(resStr.trim().length > 300){
-          this.dataHilight = resStr.slice(0,300) + '...';
-        }else{
-          this.dataHilight = resStr;
-        } 
+        // if(resStr.trim().length > 300){
+        //   this.dataHilight = resStr.slice(0,300) + '...';
+        // }else{
+          // } 
+            this.dataHilight = resStr;
       }else{
         this.dataHilight = '';
       }
        
     }
+
+    // transform(value, args){
+    //   if (args && value) {
+    //       value = String(value); // make sure its a string
+    //       var startIndex = value.toLowerCase().indexOf(args.toLowerCase());
+    //       if (startIndex != -1) {
+    //           var endLength = args.length;
+    //           var matchingString = value.substr(startIndex, endLength);
+    //           return value.replace(matchingString, "<mark>" + matchingString + "</mark>");
+    //       }
+  
+    //   }
     
+    //   return value;
+    // }
+
     highlight_words(word, element) {
+      let regex: any = "";
       if(word) {
-          var oriWord;
           var resData;
           word = word.replace(/\W/gi, '');
           var str = word.split(" ");
-          // console.log(str)
 
           $(str).each(function() {
               var term = word;
@@ -99,25 +121,9 @@ export class SearchIntComponent implements OnInit {
               textNodes.each(function() {
 
                 var content = $(this).text();
-                // var content = $(this).text();
+                regex = new RegExp(term, "gi");
 
-                // if(content = "Maklumat untuk pelawat masuk ke Malaysia") {
-                // console.log(content)
-                // var cntn = content.split(' ');
-                // var pattern = /\b[^\d\W]+\b/gi;
-
-                // var oriWord = term.match(pattern);
-                // console.log(oriWord)  
-
-                // }
-
-                var regex = new RegExp(term, "gi");
-                // console.log(regex)
-                // content = '<span class="highlightWord">' + term + '</span>';
-                resData = content.replace(regex, '<span class="highlightWord">' + term + '</span>');
-
-
-
+                resData = content.replace(regex, (match) => `<span class="highlightWord">${match}</span>`);
               });
           });
           return resData;

@@ -73,7 +73,7 @@
                             </div>
                         </div>
 
-                        <span class="font-size-s defaultColor content_description" [innerHTML]="article.categoryDescription | truncate : [140, '...']"></span>
+                        <span class="font-size-s defaultColor content_description" [innerHTML]="article.categoryDescription"></span>
                     </div>
 
                     <div *ngFor="let rightContent of article.subCategoryList; let index=index; let odd=odd; let even=even;">
@@ -350,7 +350,7 @@
                                     </div>
                                 </div>
 
-                                <span class="font-size-s defaultColor content_description" [innerHTML]="article.categoryDescription | truncate : [140, '...']"></span>
+                                <span class="font-size-s defaultColor content_description" [innerHTML]="article.categoryDescription"></span>
                             </div>
                             <div *ngFor="let rightContent of article.subCategoryList; let index=index; let odd=odd; let even=even;">
                                 <div class="col-sm-4">
@@ -460,7 +460,7 @@
                                     </div>
                                 </div>
 
-                                <span class="font-size-s defaultColor content_description" [innerHTML]="article.categoryDescription | truncate : [140, '...']"></span>
+                                <span class="font-size-s defaultColor content_description" [innerHTML]="article.categoryDescription"></span>
                             </div>
                             <div *ngFor="let rightContent of article.subCategoryList; let index=index; let odd=odd; let even=even;">
                                 <div class="col-sm-6">

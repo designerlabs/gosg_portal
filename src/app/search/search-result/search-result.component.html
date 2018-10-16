@@ -69,13 +69,13 @@
               </header>
               <ul class="side-menu-list" *ngIf="sSpeci && tabIndex==0" style="margin-top: 10px;">
                 <li>
-                  <mat-checkbox class="example-margin" (change)="chkSpeci($event,'content_topic')" [(ngModel)]="chktopic">
+                  <mat-checkbox class="example-margin" (change)="chkSpeci($event,'category_topic')" [(ngModel)]="chktopic">
                     <span class="font-size-s">
                       {{'home.search.spectopic' | translate}}</span>
                   </mat-checkbox>
                 </li>
                 <li>
-                  <mat-checkbox class="example-margin" (change)="chkSpeci($event,'content_sub_topic')" [(ngModel)]="chksubtopic">
+                  <mat-checkbox class="example-margin" (change)="chkSpeci($event,'category_sub_topic')" [(ngModel)]="chksubtopic">
                     <span class="font-size-s">
                       {{'home.search.specsubtopic' | translate}}</span>
                   </mat-checkbox>
@@ -357,7 +357,7 @@
       <div class="example-full-width">
         <mat-form-field class="example-full-width" splwpk-search-function = "splwpk-search-function">
           <input type="text" class="inputser example-full-width" matInput placeholder="{{'home.search.searchkey' | translate }}" [(ngModel)]="ser_word" (keyup.enter)="resetPage();searchByKeyword(ser_word)">
-          <mat-icon matSuffix (click)="resetPage(); searchByKeyword(ser_word); btnFilterReset();" style="cursor:pointer;">
+          <mat-icon matSuffix (click)="resetPage(); btnFilterReset(); chkKeyValue = '1'; searchByKeyword(ser_word);" style="cursor:pointer;">
             <i class="fa fa-search"></i>
           </mat-icon>
           <!-- <mat-icon matSuffix *ngIf="ser_word.length>0" (click)="ser_word=''" style="cursor:pointer;"><i class="fa fa-times"></i></mat-icon> -->
