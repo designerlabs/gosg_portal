@@ -140,7 +140,10 @@ export class PollComponent implements OnInit {
     }
 
     submitPoll(event) {
-        // this.getAnsData(this.lang);
+        if (!this.pollAnswer)  {
+            this.toastr.error(this.translate.instant('poll.err.noanswer'), '');
+            return;
+        }
         
         const data = {
             'pollsComment': this.pollComment,

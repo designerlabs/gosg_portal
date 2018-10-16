@@ -611,7 +611,10 @@
     "displayAnswer" : " YES, DISPLAY THE LATEST RESULTS ",
     "comment": "Comment",
     "respon": "Recommendation is",
-    "answer": "Answer is"
+    "answer": "Answer is",
+    "err" : {
+      "noanswer" : "Please choose an answer from the options"
+    }
   },
   "announcement":{
     "title":"Highlights",
