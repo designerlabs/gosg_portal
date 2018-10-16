@@ -75,11 +75,17 @@
         <div class="col-md-9">&nbsp;</div> -->
 
         <!-- <div class="container"> -->
+
+    
         <div class="col-md-12 galleryTbl">
           <div *ngFor="let content of galleryService.galleries.list">
-
+            
             <!-- IMAGES -->
-            <div *ngIf="galleryService.galleries.mediaType == 'images'">
+            <!-- <div class="col-md-4">
+              <li>2018</li>
+            </div> -->
+            
+            <div class="col-md-12" *ngIf="galleryService.galleries.mediaType == 'images'">
               <!-- <mat-card class="example-card">
                   <mat-card-header>
                     <mat-card-title>{{ content.title }}</mat-card-title>
