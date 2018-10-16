@@ -16,7 +16,7 @@ import { TopnavService } from '../header/topnav/topnav.service';
   styleUrls: ['./poll.component.css']
 })
 export class PollComponent implements OnInit {
-
+    public idx;
     pollDataTitle: string;
     pollDataQuestion: string;
     pollDataQuestionID;
