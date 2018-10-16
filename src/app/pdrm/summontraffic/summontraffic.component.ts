@@ -812,6 +812,7 @@ export class SummontrafficComponent implements OnInit {
     // (<HTMLInputElement> document.getElementById("searchbtn")).disabled = true;
     this.searchForm.get('noCar').setValue(null);
     this.showDetails = false;
+    this.complete = false;
   }
 
   resetMethod(event) {
