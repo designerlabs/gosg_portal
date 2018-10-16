@@ -51,6 +51,7 @@ export class SummontrafficComponent implements OnInit {
   noPrevData = true;
   noNextData = false;
   showNoData = false;
+  showFile : boolean;
   dataSummons: any;
   loading = false;
   dateSubmission = [];
@@ -97,6 +98,7 @@ export class SummontrafficComponent implements OnInit {
         this.summonTraffic = 'Traffic Summons';
         this.indicator = 'Indicator';
         this.carianPlaceholder = "Search";
+        // this.carianPlaceholder = "";
         this.have = "Havee";
         this.dontHave = "Dont Havee";
         this.totSumAmnt = 'TOTAL AMOUNT (RM)';
@@ -115,10 +117,11 @@ export class SummontrafficComponent implements OnInit {
         this.summonTraffic = 'Saman Trafik';
         this.indicator = 'Petunjuk';
         this.carianPlaceholder = "Cari";
+        // this.carianPlaceholder = "";
         this.have = "Adaa";
         this.dontHave = "Tiadaa";
         this.totSumAmnt = 'JUMLAH AMAUN (RM)';
-        this.tableTitle = 'PDRM STATUS TRAFIK SAMAN';
+        this.tableTitle = 'STATUS SAMAN TRAFIK PDRM';
         this.pdrmErrSummon = 'TIADA SAMAN TRAFIK';
         this.pdrmtittlesummonno = 'No. Saman';
 
@@ -206,6 +209,48 @@ export class SummontrafficComponent implements OnInit {
     } else {
       this.dataAnnouncement = 'Kadar kompaun saman berdasarkan prinsip <i>“The More You Delay, The More You Pay”</i>. Sila buat bayaran saman secepat mungkin. Lesen memandu & lesen kenderaan motor tidak boleh diperbaharui setelah no kad pengenalan disenarai hitamkan dalam sistem mySIKAP, jabatan pengangkutan jalan.';
     }
+  }
+
+  gridFormat() {
+    let loop = this.dataSummons.summonDetails;
+    this.sumOfSaman = 0;
+    // 2018-03-22 09:28 // template formatt
+
+    for (var i=0; i<loop.length; i++) {       
+      debugger;
+
+      //sebelum tukar format di backend
+      // this.sumOfSaman += parseInt(loop[i].summons_amt.substr(0, loop[i].summons_amt.length - 2));
+      // loop[i].summons_amt = parseInt(loop[i].summons_amt.substr(0, loop[i].summons_amt.length - 2));
+
+      //sebelum tukar format
+      // let yy = loop[i].offence_date.substr(0,4) // 2018
+      // let mm = loop[i].offence_date.substr(4,2) // 03
+      // let dd = loop[i].offence_date.substr(6,2) // 22
+      // let date = yy +'-'+ mm +'-'+ dd;
+      // loop[i].offence_date = date;
+
+        //selepas tukar format di backend
+        this.sumOfSaman += parseInt(loop[i].summons_amt );
+        // loop[i].offence_date = loop[i].offence_date.substr(0,9); 
+
+
+      let hh = loop[i].offence_time.substr(0,2) // 09
+      let ss = loop[i].offence_time.substr(2,2) // 38
+      let time = hh + ':' + ss;
+      loop[i].offence_time = time;
+
+
+        if (loop[i].imageUrl.charAt(0) == 'h') {
+          loop[i].imageUrl = loop[i].imageUrl;
+        } else {
+          loop[i].imageUrl = '-';
+        }
+
+
+    }
+ 
+    // FARID TRY ENDS TEST
   }
 
   //this is button carian/search.
@@ -310,6 +355,8 @@ export class SummontrafficComponent implements OnInit {
             } else { 
               // this.showNoData = true;
             }
+
+            this.gridFormat();
 
           }).bind(this));
           this.loading = false;
@@ -623,41 +670,10 @@ export class SummontrafficComponent implements OnInit {
           "totalPages": 1,
           "totalElements": 3
         };
-      } 
-    }
+      }  //end else sekiranya carian berdasarkan num plate kereta.
+    } // end else kalau localhost.
  
-    let loop = this.dataSummons.summonDetails;
-    this.sumOfSaman = 0;
-    // 2018-03-22 09:28 // template formatt
-
-    for (var i=0; i<loop.length; i++) {        
-      debugger;
-
-      //sebelum tukar format di backend
-      // this.sumOfSaman += parseInt(loop[i].summons_amt.substr(0, loop[i].summons_amt.length - 2));
-      // loop[i].summons_amt = parseInt(loop[i].summons_amt.substr(0, loop[i].summons_amt.length - 2));
-
-      //sebelum tukar format
-      // let yy = loop[i].offence_date.substr(0,4) // 2018
-      // let mm = loop[i].offence_date.substr(4,2) // 03
-      // let dd = loop[i].offence_date.substr(6,2) // 22
-      // let date = yy +'-'+ mm +'-'+ dd;
-      // loop[i].offence_date = date;
-
-        //selepas tukar format di backend
-        this.sumOfSaman += parseInt(loop[i].summons_amt );
-        // loop[i].offence_date = loop[i].offence_date.substr(0,9); 
-
-
-      let hh = loop[i].offence_time.substr(0,2) // 09
-      let ss = loop[i].offence_time.substr(2,2) // 38
-      let time = hh + ':' + ss;
-      loop[i].offence_time = time; 
-
-      
-
-    }
-    // FARID TRY ENDS TEST
+    this.gridFormat();
 
   }
 
@@ -766,11 +782,15 @@ export class SummontrafficComponent implements OnInit {
 
     if (this.varSelect == 0) {
       reqVal = ["ic"];
+      // (<HTMLInputElement> document.getElementById("searchbtn")).disabled = false;
     }
 
     if (this.varSelect == 1) {
       reqVal = ["noCar"];
+      // (<HTMLInputElement> document.getElementById("searchbtn")).disabled = true;
     }
+
+    // numCar
 
     for (var reqData of reqVal) {
       let elem = this.searchForm.get(reqData);
@@ -789,8 +809,10 @@ export class SummontrafficComponent implements OnInit {
   }
 
   resetSearch() {
+    // (<HTMLInputElement> document.getElementById("searchbtn")).disabled = true;
     this.searchForm.get('noCar').setValue(null);
     this.showDetails = false;
+    this.complete = false;
   }
 
   resetMethod(event) {

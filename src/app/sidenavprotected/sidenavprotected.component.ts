@@ -15,6 +15,7 @@ let num = 0;
   ]
 })
 export class SidenavprotectedComponent implements OnInit {
+  public bgColor;
   getThemeFonts: any;
   defaultFonts: any;
   fontTy(arg0: any): any {

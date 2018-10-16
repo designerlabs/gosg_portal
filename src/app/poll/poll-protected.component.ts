@@ -17,6 +17,7 @@ import { TopnavService } from '../header/topnav/topnav.service';
   encapsulation: ViewEncapsulation.None
 })
 export class PollProtectedComponent implements OnInit, OnDestroy {
+  public idx;
   pollDataTitle: string;
   pollDataQuestion: string;
   pollDataQuestionID;

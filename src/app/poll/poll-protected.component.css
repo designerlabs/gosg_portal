@@ -5,20 +5,24 @@
 
  .poll_radio_btn {
      display: inline-block;
-     padding: 5px 30px;
-     background: #fff;
-     border: 1px solid #1ebebc;
+     padding-left: 10px;
+     padding-right: 10px;
+     padding-top: 0px;
+     padding-bottom: 0px;
+     /*background: #fff;
+     border: 1px solid #1ebebc; */
      width: 100%;
  }
 
  .padding {
-     padding: 20px;
+     padding: 5px;
  }
 
  .btn-secondary:hover {
-     color: #fff;
-     background-color: #666666;
-     border-color: #666666;
+     color: #fff !important;
+     font-weight: bold;
+     background-color: #666666 !important;
+     /*border-color: #e6436e !important; */
  }
 
  .customUnderLine {
