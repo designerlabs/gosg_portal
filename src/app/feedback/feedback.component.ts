@@ -2,7 +2,7 @@
 import { Component, OnInit,ElementRef, Input, ViewChild, Inject, ViewContainerRef, OnDestroy  } from '@angular/core';
 import { ISubscription } from "rxjs/Subscription";
 import { FormControl, FormGroup, Validators} from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import {TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { Http, Response} from '@angular/http';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
@@ -24,7 +24,7 @@ import { TopnavService } from '../header/topnav/topnav.service';
 
 export class FeedbackComponent implements OnInit, OnDestroy {
   submitMsg: any;
-  
+
   @Input() state:string;
   @Input() getEmail;
   @Input() getFullname;
@@ -61,6 +61,7 @@ export class FeedbackComponent implements OnInit, OnDestroy {
     private toastr: ToastrService,
     private sharedService :SharedService,
     private topnavservice: TopnavService,
+    private route: ActivatedRoute
   ) {
 
     this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
@@ -97,28 +98,48 @@ export class FeedbackComponent implements OnInit, OnDestroy {
     
     ngOnInit() {
       //this.languageId = 2;
-      if(!this.languageId){
+      /*if(!this.languageId){
         this.languageId = localStorage.getItem('langID');
       }else{
         this.languageId = 1;
-      }
+      } */
 
-      this.checkLog();
-      // this.getUserData();
-      this.getTypenSubject();
-      this.feedback_message = new FormControl('', [Validators.required]),
-      this.feedbacktype = new FormControl('', [Validators.required]),
-      this.feedbacksubject = new FormControl('', [Validators.required]),
-      this.formCtrl();
-      this.feedbackFormgrp = new FormGroup({
-        nama_penuh: this.nama_penuh,
-        feedback_message: this.feedback_message,
-        email: this.email,
-        feedbacktype: this.feedbacktype,
-        feedbacksubject: this.feedbacksubject,
-        
+      this.route.params.subscribe(params => {
+        if (params['id']) {
+            console.log(params['id']);
+            this.languageId = params['id'];
+            if (this.languageId === '1') {
+                this.translate.setDefaultLang('en');
+                this.translate.use('en');
+            } else {
+                this.translate.setDefaultLang('ms');
+                this.translate.use('ms');
+            }
+           
+        } else if (localStorage.getItem('langID')) {
+            this.languageId = localStorage.getItem('langID');
+        } else {
+            this.languageId = 1;
+        }
       });
-      // this.resetForm()
+
+        this.checkLog();
+      // this.getUserData();
+        this.getTypenSubject();
+        this.feedback_message = new FormControl('', [Validators.required]),
+        this.feedbacktype = new FormControl('', [Validators.required]),
+        this.feedbacksubject = new FormControl('', [Validators.required]),
+        this.formCtrl();
+        this.feedbackFormgrp = new FormGroup({
+            nama_penuh: this.nama_penuh,
+            feedback_message: this.feedback_message,
+            email: this.email,
+            feedbacktype: this.feedbacktype,
+            feedbacksubject: this.feedbacksubject,
+        
+        });
+         // this.resetForm()
+     
       
     }
     

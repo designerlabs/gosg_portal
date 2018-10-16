@@ -96,6 +96,7 @@ export const appRoutes: Routes = [
     {path: 'dataprotection', component: DataprotectionComponent},
     {path: 'contact', component: ContactComponent},
     {path: 'feedback', component: FeedbackComponent},
+    {path: 'feedback/:id', component: FeedbackComponent },
     {path: 'onlineservice', component: OnlineserviceComponent},
     {path: 'subscription/set_active/:id', component: SetactiveComponent},
     {path: 'subscription', component: SubscriptionComponent},
