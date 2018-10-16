@@ -21,7 +21,7 @@
         <li>
           <a routerLinkActive="topactive" class="font-size-s" href="" [routerLink]="['/contact']"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ 'home.menu.contact' | translate }}</a> </li>
         <li>
-          <a routerLinkActive="topactive" class="font-size-s" href="" [routerLink]="['/faq']"><i class="fa fa-question-circle" aria-hidden="true"></i> {{ 'home.menu.faq' | translate }}</a>
+          <a routerLinkActive="topactive" class="font-size-s" href="" style="cursor: pointer;" (click)="getUrl(29364)"><i class="fa fa-question-circle" aria-hidden="true"></i> {{ 'home.menu.faq' | translate }}</a>
         </li>
         <!-- <li>
           <a routerLinkActive="topactive" class="font-size-s" [routerLink]="['/content', 15021]"><i class="fa fa-book" aria-hidden="true"></i> {{ 'home.menu.manual' | translate }}</a>

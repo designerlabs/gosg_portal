@@ -357,10 +357,10 @@ export class TopnavComponent implements OnInit, AfterViewInit, OnDestroy {
     this.loading = result;
   }
 
-  clickFaq(){
-    this.navService.triggerContent(29360, localStorage.getItem('langID'));
-    this.navService.getContentUrl(29360, localStorage.getItem('langID'));
-    this.router.navigate(['/content', 29360]);
+  clickFaq(){//29360
+    this.navService.triggerContent(29364, localStorage.getItem('langID'));
+    this.navService.getContentUrl(29364, localStorage.getItem('langID'));
+    this.router.navigate(['/content', 29364]);
     event.preventDefault();
   }
 
