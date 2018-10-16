@@ -3,7 +3,7 @@ import { Component, OnInit,ElementRef, Input, ViewChild, Inject, ViewContainerRe
 import { ISubscription } from "rxjs/Subscription";
 import { TopnavService } from '../header/topnav/topnav.service';
 import { FormControl, FormGroup, Validators} from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import {TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { Http, Response} from '@angular/http';
 import { APP_CONFIG, AppConfig } from '../config/app.config.module';
@@ -65,6 +65,7 @@ export class FeedbackProtectedComponent implements OnInit, OnDestroy {
     private toastr: ToastrService,
     private sharedService :SharedService,
     private topnavservice: TopnavService,
+    private route: ActivatedRoute
   ) {
     this.subscriptionLang = translate.onLangChange.subscribe((event: LangChangeEvent) => {
       const myLang = translate.currentLang;
@@ -98,12 +99,31 @@ export class FeedbackProtectedComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     //this.languageId = 2;
-    if(!this.languageId){
-      this.languageId = localStorage.getItem('langID');
-    }else{
-      this.languageId = 1;
-    }
+    //if(!this.languageId){
+    //  this.languageId = localStorage.getItem('langID');
+    //}else{
+     // this.languageId = 1;
+    //}
     //this.checkLog();
+    this.route.params.subscribe(params => {
+      if (params['id']) {
+          console.log(params['id']);
+          this.languageId = params['id'];
+          if (this.languageId === '1') {
+              this.translate.setDefaultLang('en');
+              this.translate.use('en');
+          } else {
+              this.translate.setDefaultLang('ms');
+              this.translate.use('ms');
+          }
+         
+      } else if (localStorage.getItem('langID')) {
+          this.languageId = localStorage.getItem('langID');
+      } else {
+          this.languageId = 1;
+      }
+    });
+
     this.getUserData();
     this.getTypenSubject();
     this.feedback_message = new FormControl('', [Validators.required]),
