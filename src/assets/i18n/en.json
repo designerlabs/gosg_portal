@@ -515,7 +515,9 @@
       "day": "Filter by day",
       "bttnYear": "View all galleries",
       "bttnMonth": "View all galleries for year",
-      "bttnDay": "View all galleries for month"
+      "bttnDay": "View all galleries for month",
+      "displayAll": "Latest record",
+      "displayRecord": "Record"
     },
     "pagination":{
       "pages":"Pages",

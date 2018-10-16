@@ -515,7 +515,9 @@
       "day": "Carian mengikut hari",
       "bttnYear": "Semua galeri",
       "bttnMonth": "Semua galeri mengikut tahun",
-      "bttnDay": "Semua galeri mengikut bulan"
+      "bttnDay": "Semua galeri mengikut bulan",
+      "displayAll": "Rekod terkini",
+      "displayRecord": "Rekod"
     },
     "pagination":{
       "pages":"Halaman",

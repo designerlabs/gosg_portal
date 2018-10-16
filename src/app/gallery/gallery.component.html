@@ -185,6 +185,10 @@
     </div>
 
     <div class="col-sm-7" *ngIf="galleryService.galleries.mediaType != 'media by agency'" style="color: #333; border: 0px solid #000">
+        <span style="font-size: 20px;" *ngIf="galleryService.galleries?.year">{{'common.gallery.displayAll' | translate}}</span>
+        <span style="font-size: 20px;" *ngIf="galleryService.galleries?.month">{{'common.gallery.displayRecord' | translate}} {{valYear}}</span>
+        <span style="font-size: 20px;" *ngIf="galleryService.galleries?.day && !getDay">{{'common.gallery.displayRecord' | translate}} {{changeMonth(valMonth)}} {{valYear}}</span>
+        <span style="font-size: 20px;" *ngIf="galleryService.galleries?.day && getDay">{{'common.gallery.displayRecord' | translate}} {{valDay}} {{changeMonth(valMonth)}} {{valYear}}</span>
         <div class="row">
           <!-- <div class="col-md-9">
             <h2 class="titleWObg font-size-l capitalize">

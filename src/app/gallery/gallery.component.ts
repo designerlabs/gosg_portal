@@ -49,6 +49,9 @@ export class GalleryComponent implements OnInit, OnDestroy {
   agencyData: any;
   isActiveList: boolean = false;
   getDay = '';
+  valYear: any;
+  valMonth: any;
+  valDay: any;
 
   galleryData: any;
   @Output() langChange = new EventEmitter();
@@ -170,6 +173,7 @@ export class GalleryComponent implements OnInit, OnDestroy {
     }
 
     clickY(val){
+      this.valYear = val;
       console.log(val);
       localStorage.setItem('yearGallery',val);
       this.navService.triggerGalleries(localStorage.getItem('langID'), localStorage.getItem('idmenuleft'), null, val);
@@ -177,6 +181,7 @@ export class GalleryComponent implements OnInit, OnDestroy {
     }
 
     clickM(val){
+      this.valMonth = val;
       console.log(val);
       localStorage.setItem('monthGallery',val);
       this.navService.triggerGalleries(localStorage.getItem('langID'), localStorage.getItem('idmenuleft'), null,  localStorage.getItem('yearGallery'), val);
@@ -185,6 +190,7 @@ export class GalleryComponent implements OnInit, OnDestroy {
     }
 
     clickD(val){
+      this.valDay = val;
       console.log(val);
       localStorage.setItem('dayGallery',val);
       this.navService.triggerGalleries(localStorage.getItem('langID'), localStorage.getItem('idmenuleft'), null,  localStorage.getItem('yearGallery'), localStorage.getItem('monthGallery'), val);
@@ -235,13 +241,14 @@ export class GalleryComponent implements OnInit, OnDestroy {
       event.preventDefault();
     }
     backToYear(){
-      localStorage.setItem('yearMonth','');
+      localStorage.setItem('monthGallery','');
       this.navService.triggerGalleries(localStorage.getItem('langID'), localStorage.getItem('idmenuleft'), null, localStorage.getItem('yearGallery'));
       event.preventDefault();
 
     }
     backToMonth(){
-      localStorage.setItem('yearDay','');
+      this.getDay = '';
+      localStorage.setItem('dayGallery','');
       this.navService.triggerGalleries(localStorage.getItem('langID'), localStorage.getItem('idmenuleft'), null, localStorage.getItem('yearGallery'),localStorage.getItem('monthGallery'));
       event.preventDefault();
     }
