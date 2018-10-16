@@ -87,10 +87,10 @@
                         <div class="col-md-8" *ngIf="varSelect==1">
                             <mat-form-field class="example-full-width">
  
-                                <input matInput placeholder="" formControlName="noCar" (keyup)="checkReqValues()" maxlength="9"
+                                <input matInput placeholder="" id="numCar" formControlName="noCar" (keyup)="checkReqValues()" maxlength="9"
                                 (keypress)="isNumberAndAlphabet(event)" required tabindex="3"  style="color: black">
 
-                                <mat-error *ngIf="searchForm.controls.noCar.hasError('required')">
+                                <mat-error *ngIf="searchForm.controls.noCar.hasError('required')" >
                                     {{ 'pdrm.placeholder.noCar' | translate }} {{ 'pdrm.err.needed' | translate }}
                                 </mat-error>
                             </mat-form-field>
@@ -101,7 +101,7 @@
                                 class="form-control btn btn-md btn-warning font-size-s pull-right bttnCustom"
                                 (click)="resetModal.show()" style="margin-left: 5px;">
                                 <i class="fa fa-refresh"></i> {{'feedback.label.reset' | translate }}</button>
-                            <button mat-raised-button type="button" color="primary" id="searchbtn" 
+                            <button mat-raised-button type="button" color="primary" id="searchbtn"
                                 class="form-control btn btn-md btn-success font-size-s pull-right bttnCustom" [disabled]="!complete"
                                 (click)="searchApp(null,pageNumber,pageSize)">
                                 <i class="fa fa-search"></i> {{'appmngt.setSearch.search' | translate}}</button>
@@ -234,9 +234,14 @@
                     : {{sumOfSaman | number}}                    
                 </div>
 
-                <div class="col-md-3">
+                <div class="col-md-1 " style="text-align: right; padding-right: 1px;">
+                        {{carianPlaceholder}} :       
+                </div>
+                
+                <div class="col-md-2" style=" padding-left: 1px;">
                         <mat-form-field class="example-full-width">
-                                <input matInput placeholder={{carianPlaceholder}} #myInput id="myInput" (keyup)="newRecord(myInput.value)" [(ngModel)]="query" style="color: black">
+                                <!-- <input matInput placeholder={{carianPlaceholder}} #myInput id="myInput" (keyup)="newRecord(myInput.value)" [(ngModel)]="query" style="color: black"> -->
+                                <input matInput #myInput id="myInput" (keyup)="newRecord(myInput.value)" [(ngModel)]="query" style="color: black">
                         </mat-form-field>
                 </div>
                     <!-- farid test ends -->
@@ -287,12 +292,17 @@
                         > {{data.imageUrl}} </td> -->
 
                         <!-- new -->
-                    <td class="mat-cell text-center paddingR"
+                    <td *ngIf="data.imageUrl.charAt(0) == 'h' "
+                        class="mat-cell text-center paddingR fa fa-file"
                         (click)="pageLink(data.imageUrl)"
-                        translate="{{ (data.imageUrl != '' ? '&#10063;' : '-') }}"
-                        style="cursor: pointer; color:blue;">
-                         {{data.imageUrl}} 
+                        style="white-space: pre-line; cursor: pointer; color:black; font-size: 25px;"
+                         >
                     </td>
+
+                    <td *ngIf="data.imageUrl.charAt(0) != 'h' "  
+                        class="mat-cell text-center paddingR">
+                        -
+                    </td> 
 
 
                 </tr>
