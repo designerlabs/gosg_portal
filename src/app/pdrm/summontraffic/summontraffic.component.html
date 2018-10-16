@@ -87,7 +87,7 @@
                         <div class="col-md-8" *ngIf="varSelect==1">
                             <mat-form-field class="example-full-width">
  
-                                <input matInput placeholder="" id="numCar" formControlName="noCar" (keyup)="checkReqValues()" maxlength="9"
+                                <input matInput placeholder="" id="numCar" formControlName="noCar" (keyup)="checkReqValues()" maxlength="20"
                                 (keypress)="isNumberAndAlphabet(event)" required tabindex="3"  style="color: black">
 
                                 <mat-error *ngIf="searchForm.controls.noCar.hasError('required')" >
@@ -238,13 +238,18 @@
                         {{carianPlaceholder}} :       
                 </div>
                 
-                <div class="col-md-2" style=" padding-left: 1px;">
-                        <mat-form-field class="example-full-width">
+                <div class="col-md-2" style=" padding-left: 1px;" style="border-top: none !important;">
+                        <mat-form-field class="example-full-width" style="border-top: none !important;">
+
+                                <!-- old -->
                                 <!-- <input matInput placeholder={{carianPlaceholder}} #myInput id="myInput" (keyup)="newRecord(myInput.value)" [(ngModel)]="query" style="color: black"> -->
-                                <input matInput #myInput id="myInput" (keyup)="newRecord(myInput.value)" [(ngModel)]="query" style="color: black">
+
+                                <!-- new -->
+                                <input style="border-top: none !important;"
+                                 matInput #myInput id="myInput" (keyup)="newRecord(myInput.value)" [(ngModel)]="query" style="color: black">
+
                         </mat-form-field>
                 </div>
-                    <!-- farid test ends -->
         </div>
 
         <br>
@@ -254,13 +259,13 @@
                 <tr class="mat-header-row tableHeader">
                     <th width="5%" class="mat-header-cell paddingR">&nbsp;&nbsp;{{'appmngt.tableHeader.num' | translate}}</th>
                     <th width="10%" class="mat-header-cell paddingR">{{'pdrm.title.car' | translate}}</th>
-                    <th width="20%" class="mat-header-cell paddingR">
+                    <th width="10%" class="mat-header-cell paddingR">
                         <!-- {{'pdrm.title.summon_no' | translate}} -->
                         {{pdrmtittlesummonno}}
                     </th>
                     <th width="15%" class="mat-header-cell paddingR">{{'pdrm.title.dateTime' | translate}}</th>
-                    <th width="10%" class="mat-header-cell paddingR">{{'pdrm.title.location2' | translate}}</th>
-                    <th width="10%" class="mat-header-cell paddingR">{{'pdrm.title.info' | translate}}</th>
+                    <th width="18%" class="mat-header-cell paddingR">{{'pdrm.title.location2' | translate}}</th>
+                    <th width="12%" class="mat-header-cell paddingR">{{'pdrm.title.info' | translate}}</th>
                     <th width="10%" class="mat-header-cell text-right paddingR">{{'pdrm.title.amount' | translate}}</th>
                     <th width="5%" class="mat-header-cell text-center paddingR">SH</th>
                     <th width="5%" class="mat-header-cell text-center paddingR">OP</th>
@@ -295,7 +300,7 @@
                     <td *ngIf="data.imageUrl.charAt(0) == 'h' "
                         class="mat-cell text-center paddingR fa fa-file"
                         (click)="pageLink(data.imageUrl)"
-                        style="white-space: pre-line; cursor: pointer; color:black; font-size: 25px;"
+                        style="white-space: pre-line; cursor: pointer; color: #5FA0E7 ; font-size: 25px;"
                          >
                     </td>
 
