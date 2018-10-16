@@ -170,7 +170,7 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
 
   // KEYOWRD MAP
   public keywordMap: any = {
-    "fields": null,
+    "fields": ["content_title", "content_description","content_text","content_keywords","parent_category_topic","parent_category_sub_topic","category_topic","category_sub_topic"],
     "exact": null,
     "all": null,
     "any": null,
@@ -181,8 +181,8 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
   public locFields: any = [
     "content_description",
     "content_title",
-    "content_topic",
-    "content_sub_topic"
+    "category_topic",
+    "category_sub_topic"
   ];
 
   // LOCAL AGGREGATIONS OBJ
@@ -630,7 +630,7 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
 
       // KEYWORD MAP AREA
       if (this.tabIndex == 0)
-        this.keywordMap.fields = this.locFields;
+        this.keywordMap.notFields = this.locFields;
       else if (this.tabIndex == 1)
         this.keywordMap.fields = this.osFields;
 
@@ -660,8 +660,11 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
         delete this.keywordMap.exact;
         //
         this.mainObj.keywordMap = this.keywordMap;
+      } else {
+        delete this.keywordMap.any;
+        delete this.keywordMap.not;
+        delete this.keywordMap.all;
       }
-
       // KEYWORD MAP AREA END
 
       if (this.tabIndex === 0) { // LOCAL SEARCH
@@ -679,7 +682,7 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
 
         // Search Specification
         if ((this.valTopic && this.valTopic.length >= 1) && this.category_topic) {
-          //console.log(this.valTopic);
+          // console.log(this.valTopic);
           this.checkCurrObj(this.category_topic);
           this.addFilterAry(this.valTopic, this.category_topic);
         }
@@ -992,7 +995,7 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
 
     switch (type) {
 
-      case "content_topic":
+      case "category_topic":
         this.chktopic = e.checked
         if(e.checked == false) {
           this.selTopicDisp = "";
@@ -1003,7 +1006,7 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
         }
         break;
 
-      case "content_sub_topic":
+      case "category_sub_topic":
         this.chksubtopic = e.checked
         if(e.checked == false) {
           this.selSubTopicDisp = "";
@@ -1169,6 +1172,7 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   btnFilterReset() {
+
     this.locUnchecked = 0;
     this.osUnchecked = 0;
 
@@ -1209,8 +1213,9 @@ export class SearchResultComponent implements OnInit, OnDestroy, AfterViewInit {
     delete this.mainObj.filters;
     this.mainObj.filters = {};
 
-    if (this.mainObj.keywordMap)
-      delete this.mainObj.keywordMap
+    if (this.mainObj.keywordMap) {
+      delete this.mainObj.keywordMap;
+    }
 
     if (this.tabIndex == 0) {
       this.mainObj.filters = this.defaultFiltersObj;
