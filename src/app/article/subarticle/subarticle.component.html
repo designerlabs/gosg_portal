@@ -118,14 +118,12 @@
                           <div class="col-sm-12">
                               <div *ngIf="article.image">
                                   <div>
-                                      <img [src]="config.externalMediaURL + '/images/'+ article.image.mediaFile" style="width:100%;">
-                                      <div style="position:absolute; width:auto;">
-                                          <h2 class="topic_bg_title font-size-l">
-                                              <span style="padding-left:10px;">
-                                                  {{article.categoryName}}
-                                              </span>
-                                          </h2>
-                                      </div>
+                                      <h2 class="titleWObg font-size-l">
+                                              {{article.categoryName}}
+                                     </h2>
+                                </div>
+                                <div>
+                                      <img [src]="config.externalMediaURL + '/images/'+ article.image.mediaFile" style="width: 500px; margin: 0 auto; display: block;">
                                   </div>
                               </div>
 
@@ -194,14 +192,13 @@
                           <div>
                               <div *ngIf="article.image">
                                   <div>
-                                      <img [src]="config.externalMediaURL + '/images/'+ article.image.mediaFile" style="width:100%;">
-                                      <div style="position:absolute; width:auto;">
-                                          <h2 class="topic_bg_title font-size-l">
-                                              <span style="padding-left:10px;">
-                                                  {{article.content.contentTitle}}
-                                              </span>
-                                          </h2>
-                                      </div>
+                                      <h2 class="titleWObg font-size-l">
+                                          {{article.content.contentTitle}}
+                                      </h2>
+                                  </div>
+                                  <div>
+                                      <img [src]="config.externalMediaURL + '/images/'+ article.image.mediaFile" style="width: 500px; margin: 0 auto; display: block;">
+
                                   </div>
                               </div>
 
@@ -237,7 +234,19 @@
                   <div class="col-md-12 warna_font">
                       <div *ngIf="!article.content" class="row padding-top-xl">
                           <div class="col-sm-12">
-                              <div>
+
+                              <div *ngIf="article.image">
+                                  <div>
+                                      <h2 class="titleWObg font-size-l">
+                                              {{article.categoryName}}
+                                     </h2>
+                                </div>
+                                <div>
+                                      <img [src]="config.externalMediaURL + '/images/'+ article.image.mediaFile" style="width: 500px; margin: 0 auto; display: block;">
+                                  </div>
+                              </div>
+
+                              <div *ngIf="!article.image">
                                   <div>
                                       <h2 class="titleWObg font-size-l">
                                           {{article.categoryName}}
@@ -357,14 +366,12 @@
                           <div>
                               <div *ngIf="article.image">
                                   <div>
-                                      <img [src]="config.externalMediaURL + '/images/'+ article.image.mediaFile" style="width:100%;">
-                                      <div style="position:absolute; width:auto;">
-                                          <h2 class="topic_bg_title font-size-l">
-                                              <span style="padding-left:10px;">
-                                                  {{article.content.contentTitle}}
-                                              </span>
-                                          </h2>
-                                      </div>
+                                    <h2 class="titleWObg font-size-l">
+                                        {{article.content.contentTitle}}
+                                    </h2>
+                                </div>
+                                <div>
+                                      <img [src]="config.externalMediaURL + '/images/'+ article.image.mediaFile" style="width: 500px; margin: 0 auto; display: block;">
                                   </div>
                               </div>
 
