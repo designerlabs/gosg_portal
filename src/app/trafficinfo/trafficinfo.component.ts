@@ -170,8 +170,8 @@ export class TrafficinfoComponent implements OnInit, OnDestroy {
           this.portalservice.errorHandling(data, (function () {
 
             this.allStreetNames = data;
-            console.log(this.allStreetNames)
-            console.log(this.allStreetNames.length)
+            // console.log(this.allStreetNames)
+            // console.log(this.allStreetNames.length)
 
             // this.streetNames.push({ 'name': el.street, 'latlng': el.jam[0] });
           }).bind(this));
@@ -201,7 +201,7 @@ export class TrafficinfoComponent implements OnInit, OnDestroy {
 
                   this.allStreetNames.forEach(elSN => {
 
-                    let latlng
+                    let latlng;
                     if(el.street == elSN.Street) {
 
                       if(el.jam[0]) {
