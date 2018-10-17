@@ -225,7 +225,7 @@
 
         </div>
         
-        <div class="row container blackFont" *ngIf="dataSummons.summonDetails.length > 0">
+        <div class="row container blackFont" *ngIf="dataSummons.summonDetails.length > 0" style="border-top: none !important;">
                 <div class="col-md-3"> 
                     {{totSumAmnt}}
                 </div>
@@ -296,7 +296,7 @@
                         [class.button-grey]="hasUnsavedNotes()"
                         > {{data.imageUrl}} </td> -->
 
-                        <!-- new -->
+                    <!-- new -->
                     <td *ngIf="data.imageUrl.charAt(0) == 'h' "
                         class="mat-cell text-center paddingR fa fa-file"
                         (click)="pageLink(data.imageUrl)"
@@ -304,6 +304,7 @@
                          >
                     </td>
 
+                    <!-- new -->
                     <td *ngIf="data.imageUrl.charAt(0) != 'h' "  
                         class="mat-cell text-center paddingR">
                         -
