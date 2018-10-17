@@ -216,8 +216,7 @@ export class SummontrafficComponent implements OnInit {
     this.sumOfSaman = 0;
     // 2018-03-22 09:28 // template formatt
 
-    for (var i=0; i<loop.length; i++) {       
-      debugger;
+    for (var i=0; i<loop.length; i++) {
 
       //sebelum tukar format di backend
       // this.sumOfSaman += parseInt(loop[i].summons_amt.substr(0, loop[i].summons_amt.length - 2));
@@ -239,8 +238,7 @@ export class SummontrafficComponent implements OnInit {
       let ss = loop[i].offence_time.substr(2,2) // 38
       let time = hh + ':' + ss;
       loop[i].offence_time = time;
-
-
+ 
         if (loop[i].imageUrl.charAt(0) == 'h') {
           loop[i].imageUrl = loop[i].imageUrl;
         } else {

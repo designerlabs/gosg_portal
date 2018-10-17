@@ -185,13 +185,40 @@
             <div class="col-md-3">       
                 {{ 'pdrm.title.infoLetter' | translate }}
             </div>
-            <div class="col-md-9 boldInfo">
+
+            <!-- old -->
+            <!-- <div class="col-md-9 boldInfo">
                 <span *ngFor="let item of letter">
                     <div (click)="openLink(item)" style="cursor: pointer;">
                         <i class="fa fa-folder-o"></i>&nbsp;{{item}}<br>
                     </div>
                 </span>
+            </div> -->
+
+            <!-- new starts -->
+            <div class="col-md-9 boldInfo">
+                <span *ngFor="let item of letter">
+                    <div *ngIf="item.charAt(44) == '1'" 
+                    (click)="openLink(item)" style="cursor: pointer; color: #5FA0E7;">
+                        <i class="fa fa-folder-o"></i>&nbsp;
+                        <a style="color: #5FA0E7 ;" href={{item}}> PEM 1 DIHANTAR PADA {{pemDate1}} </a> 
+                        <br>
+                    </div>
+                    <div *ngIf="item.charAt(44) == '2'" 
+                    (click)="openLink(item)" style="cursor: pointer; color: #5FA0E7;">
+                        <i class="fa fa-folder-o"></i>&nbsp;
+                        <a style="color: #5FA0E7 ;" href={{item}}> PEM 2 DIHANTAR PADA {{pemDate2}}  </a>
+                        <br>
+                    </div>
+                    <div *ngIf="item.charAt(44) == '3'" 
+                    (click)="openLink(item)" style="cursor: pointer; color: #5FA0E7;">
+                        <i class="fa fa-folder-o"></i>&nbsp;
+                        <a style="color: #5FA0E7 ;" href={{item}}> PEM 3 DIHANTAR PADA {{pemDate3}}  </a>
+                        <br>
+                    </div>
+                </span>
             </div>
+            <!-- new ends -->
             
             <div class="col-md-12"> 
                 <hr class="lineHr" style="border-top: #9c9c9d 2px solid;">

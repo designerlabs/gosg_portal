@@ -56,13 +56,13 @@ input[type='radio'] + label > i{
   font-size: 60px;
 }
 
-input[type='radio'].like + label > i {
+input[type='radio'].like + label > i::before {
     content:url(assets/images/rating/Suka-Gray.png);
 }
-input[type='radio'].neutral + label > i {
+input[type='radio'].neutral + label > i::before {
     content:url(assets/images/rating/Neutral-Gray.png);
 }
-input[type='radio'].dislike + label > i {
+input[type='radio'].dislike + label > i::before {
     content:url(assets/images/rating/Tidak-Suka-Gray.png);
 }
 
@@ -73,13 +73,13 @@ input[type='radio'] + label > span{
   font-size:16px;
 }
 
-input[type='radio'].like:checked + label > i {
+input[type='radio'].like:checked + label > i::before {
     content:url(assets/images/rating/Suka.png);
 }
-input[type='radio'].neutral:checked + label > i {
+input[type='radio'].neutral:checked + label > i:before {
     content:url(assets/images/rating/Neutral.png);
 }
-input[type='radio'].dislike:checked + label > i {
+input[type='radio'].dislike:checked + label > i::before {
     content:url(assets/images/rating/Tidak-Suka.png);
 }
 

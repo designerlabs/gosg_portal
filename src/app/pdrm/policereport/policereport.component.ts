@@ -35,12 +35,16 @@ export class PolicereportComponent implements OnInit, OnDestroy {
   public seksyenSiasat: any;
   public statusSiasat: any;
   public pegawaiSiasat: any;
-  public letter = [];
+  public letter = []; 
   public listYear = [];
   public showDetails: any;
   public maskReportNo: any;
+  pemDate1: any;
+  pemDate2: any;
+  pemDate3: any; 
   dsvcCode:any;
   agcCode:any;
+  reportDetails: any;
 
   searchForm: FormGroup;  
   public ic: FormControl;  
@@ -70,7 +74,7 @@ export class PolicereportComponent implements OnInit, OnDestroy {
 
         const myLang = translate.currentLang;
 
-        if (myLang == 'en') {
+        if (myLang == 'en') { 
 
             translate.get('HOME').subscribe((res: any) => {
                 this.lang = 'en';
@@ -78,7 +82,7 @@ export class PolicereportComponent implements OnInit, OnDestroy {
             });
         }
 
-        if (myLang == 'ms') {
+        if (myLang == 'ms') { 
 
             translate.get('HOME').subscribe((res: any) => {
                 this.lang = 'ms';
@@ -156,39 +160,85 @@ export class PolicereportComponent implements OnInit, OnDestroy {
     arrObj.push(this.dsvcCode);
 
     this.loading = true;
-    this.protectedService.getPdrm('pdrm/checkPoliceReport',arrObj).subscribe(
-    data => {
-      this.sharedService.errorHandling(data, (function(){
 
-        let dataReport = data.reportDetails;
+    if (!environment.staging) {
 
-        if(dataReport.ipNo != null){
-          this.showDetails = true;
+      this.protectedService.getPdrm('pdrm/checkPoliceReport',arrObj).subscribe(
+      data => {
+        this.sharedService.errorHandling(data, (function(){
 
-          this.noRptPol = dataReport.reportNo;
-          this.dateRptPol = dataReport.reportDateTime;
-          this.statusRpt =  dataReport.reportStatus;
+          let dataReport = data.reportDetails;
 
-          this.noKertasSiasat = dataReport.ipNo;
-          this.seksyenSiasat = dataReport.lawSection;
-          this.statusSiasat = dataReport.caseStatus;
-          this.pegawaiSiasat = dataReport.investigationOfficer;
-          this.letter = [dataReport.pem1Url,dataReport.pem2Url,dataReport.pem3Url];              
-          
-        }
+          if(dataReport.ipNo != null) {
+            this.showDetails = true;
 
-        else{
-          this.showDetails = false;
-        }
-     
-      }).bind(this));
-      this.loading = false;
+            this.noRptPol = dataReport.reportNo;
+            this.dateRptPol = dataReport.reportDateTime;
+            this.statusRpt =  dataReport.reportStatus;
+
+            this.noKertasSiasat = dataReport.ipNo;
+            this.seksyenSiasat = dataReport.lawSection;
+            this.statusSiasat = dataReport.caseStatus;
+            this.pegawaiSiasat = dataReport.investigationOfficer;
+            this.letter = [dataReport.pem1Url,dataReport.pem2Url,dataReport.pem3Url]; 
+            this.pemDate1 = dataReport.pem1Date;
+            this.pemDate2 = dataReport.pem2Date;
+            this.pemDate3 = dataReport.pem3Date;
+            
+          }
+
+          else {
+            this.showDetails = false;
+          }
       
-    },
-    error => {
-      this.toastr.error(JSON.parse(error._body).statusDesc, '');
-      this.loading = false;
-    });
+        }).bind(this));
+        this.loading = false;
+        
+      },
+      error => {
+        this.toastr.error(JSON.parse(error._body).statusDesc, '');
+        this.loading = false;
+      });
+
+    } else {
+
+      this.reportDetails = {
+        "status": "1",
+        "statusMessage": "Success",
+        "caseStatus": "Dituduh",
+        "investigationOfficer": "C/INSP NURUL HAFIDZ BIN MOHD DERUS",
+        "ipNo": "DW/JSJ/KS/01114/11",
+        "lawSection": "29 (1) AKTA KESALAHAN KECIL 1955,25 (1) (n) PERATURAN-PERATURAN PENDAFTARAN NEGARA 1990",
+        "pem1Date": "2011-02-18",
+        "pem1Url": "https://sso.rmp.gov.my/RP_FORM_E/RP_FORM_PEM1.aspx?id=OcK4bk+nQwqmQ1seQ3+twg1k2lfPB7Z9Ucc3YhV2kPBk8kZXgsjuWA==",
+        "pem2Date": "2011-01-02",
+        "pem2Url": "https://sso.rmp.gov.my/RP_FORM_E/RP_FORM_PEM2.aspx?id=OcK4bk+nQwqmQ1seQ3+twg1k2lfPB7Z9Ucc3YhV2kPBk8kZXgsjuWA==",
+        "pem3Date": "2011-02-23",
+        "pem3Url": "https://sso.rmp.gov.my/RP_FORM_E/RP_FORM_PEM3.aspx?id=OcK4bk+nQwqmQ1seQ3+twg1k2lfPB7Z9Ucc3YhV2kPBk8kZXgsjuWA==",
+        "pem4Date": null,
+        "pem4Url": "",
+        "reportDateTime": "2011-02-18 17:44:40",
+        "reportNo": "THSL/006026/11",
+        "reportStatus": "Buka Kertas Siasatan Baru"
+      }
+
+            this.showDetails = true;
+    
+            let dataReport = this.reportDetails;
+
+            this.noRptPol = dataReport.reportNo;
+            this.dateRptPol = dataReport.reportDateTime;
+            this.statusRpt =  dataReport.reportStatus;
+            this.noKertasSiasat = dataReport.ipNo;
+            this.seksyenSiasat = dataReport.lawSection;
+            this.statusSiasat = dataReport.caseStatus;
+            this.pegawaiSiasat = dataReport.investigationOfficer;
+            this.letter     = [dataReport.pem1Url,  dataReport.pem2Url,   dataReport.pem3Url]; 
+            this.pemDate1 = dataReport.pem1Date;
+            this.pemDate2 = dataReport.pem2Date;
+            this.pemDate3 = dataReport.pem3Date;           
+            this.loading = false;
+    }
     
   }
 
@@ -201,7 +251,7 @@ export class PolicereportComponent implements OnInit, OnDestroy {
         this.sharedService.errorHandling(data, (function(){
 
           this.dataAnnouncement = data.announcementResource.content;
-          console.log(this.dataAnnouncement);
+          // console.log(this.dataAnnouncement);
       
         }).bind(this));
         this.loading = false;

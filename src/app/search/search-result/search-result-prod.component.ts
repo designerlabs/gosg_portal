@@ -131,10 +131,14 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
         if (myLang === 'en') {
            this.lang = 'en';
            this.languageId = 1;
-        }
-        if (myLang === 'ms') {
-          this.lang = 'ms';
-          this.languageId = 2;
+           this.mainObj.filters.ref_language_id = "1"
+           this.curr_data_lang = "Bahasa Malaysia";
+          }
+          if (myLang === 'ms') {
+            this.lang = 'ms';
+            this.languageId = 2;
+            this.mainObj.filters.ref_language_id = "2"
+            this.curr_data_lang = "English";
         }
 
         if(this.topnavservice.flagLang){
@@ -169,7 +173,7 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
 
   // KEYOWRD MAP
   public keywordMap: any = {
-    "fields": null,
+    "fields": ["content_title", "content_description","content_text","content_keywords","parent_category_topic","parent_category_sub_topic","category_topic","category_sub_topic"],
     "exact": null,
     "all": null,
     "any": null,
@@ -180,8 +184,8 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
   public locFields: any = [
     "content_description",
     "content_title",
-    "content_topic",
-    "content_sub_topic"
+    "category_topic",
+    "category_sub_topic"
   ];
 
   // LOCAL AGGREGATIONS OBJ
@@ -193,7 +197,7 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
       "interval": "month",
       "time_zone": "+08:00",
       "minDocCount": 1,
-      "size": 10
+      "size": 100
     },
     {
       "name": "filter_topic.parent_category",
@@ -206,7 +210,7 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
         "name": "active_cat",
         "type": "terms",
         "field": "parent_category.topic.raw",
-        "size": "10"
+        "size": "100"
       }
     },
     {
@@ -220,7 +224,7 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
         "name": "active_cat",
         "type": "terms",
         "field": "category.topic.raw",
-        "size": "10"
+        "size": "100"
       }
     }
   ];
@@ -237,13 +241,13 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
       "name": "ministryAgg",
       "type": "terms",
       "field": "ministry_name.raw",
-      "size": "10"
+      "size": "100"
     },
     {
       "name": "agencyAgg",
       "type": "terms",
       "field": "agency_name.raw",
-      "size": "10"
+      "size": "100"
     }
   ];
 
@@ -292,6 +296,8 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
       this.languageId = localStorage.getItem('langID');
     }else{
       this.languageId = 1;
+      this.mainObj.filters.ref_language_id = "1"
+      this.curr_data_lang = "Bahasa Malaysia";
     }
 
     //if(!this.currTab){
@@ -563,6 +569,8 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
 
   searchByKeyword(valkeyword, opt?) {
 
+    valkeyword = valkeyword.replace(/<\/?[^>]+(>|$)/g, "");
+
     if (valkeyword.trim().length > 0) {
 
     this.getSearchUrl();
@@ -629,7 +637,7 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
 
       // KEYWORD MAP AREA
       if (this.tabIndex == 0)
-        this.keywordMap.fields = this.locFields;
+        this.keywordMap.notFields = this.locFields;
       else if (this.tabIndex == 1)
         this.keywordMap.fields = this.osFields;
 
@@ -659,8 +667,14 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
         delete this.keywordMap.exact;
         //
         this.mainObj.keywordMap = this.keywordMap;
+      } else {
+        delete this.keywordMap.any;
+        delete this.keywordMap.not;
+        delete this.keywordMap.all;
       }
 
+      if(this.inpExcWord == this.ser_word)
+        delete this.keywordMap.notFields;
       // KEYWORD MAP AREA END
 
       if (this.tabIndex === 0) { // LOCAL SEARCH
@@ -678,7 +692,7 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
 
         // Search Specification
         if ((this.valTopic && this.valTopic.length >= 1) && this.category_topic) {
-          //console.log(this.valTopic);
+          // console.log(this.valTopic);
           this.checkCurrObj(this.category_topic);
           this.addFilterAry(this.valTopic, this.category_topic);
         }
@@ -806,7 +820,7 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
                   itemObj = { "name": item[0].name, "val": item[0].val }
                   this.ddmonthPub.push(itemObj);
                 });
-                this.addCheckedProperty(this.ddmonthPub);
+                // this.addCheckedProperty(this.ddmonthPub);
               }
               
               //
@@ -815,14 +829,14 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
                 itemObj = { "name": item[0].name, "val": item[0].val }
                 this.ddtopics.push(itemObj)
               });
-              this.addCheckedProperty(this.ddtopics);
+              // this.addCheckedProperty(this.ddtopics);
             
               rData.aggregations['filter_sub_topic.category'][0].active_cat.forEach(item => {
                 item = this.changeAryVal(item,'generic')
                 itemObj = { "name": item[0].name, "val": item[0].val }
                 this.ddsubTopics.push(itemObj)
               });
-              this.addCheckedProperty(this.ddsubTopics);
+              // this.addCheckedProperty(this.ddsubTopics);
 
             } else if (this.tabIndex == 1) { // ONLINE SERVICES
               let ministry: any = {};
@@ -834,7 +848,7 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
                 ministry = { "name": item[0].name, "val": item[0].val }
                 this.ddministry.push(ministry);
               });
-              this.addCheckedProperty(this.ddministry);
+              // this.addCheckedProperty(this.ddministry);
 
               rData.aggregations.agencyAgg.forEach(item => {
                 item = this.changeAryVal(item,'generic');
@@ -842,7 +856,7 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
                 agency = { "name": item[0].name, "val": item[0].val }
                 this.ddagency.push(agency);
               });
-              this.addCheckedProperty(this.ddagency);
+              // this.addCheckedProperty(this.ddagency);
 
             }
 
@@ -991,7 +1005,7 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
 
     switch (type) {
 
-      case "content_topic":
+      case "category_topic":
         this.chktopic = e.checked
         if(e.checked == false) {
           this.selTopicDisp = "";
@@ -1002,7 +1016,7 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
         }
         break;
 
-      case "content_sub_topic":
+      case "category_sub_topic":
         this.chksubtopic = e.checked
         if(e.checked == false) {
           this.selSubTopicDisp = "";
@@ -1168,6 +1182,7 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
   }
 
   btnFilterReset() {
+
     this.locUnchecked = 0;
     this.osUnchecked = 0;
 
@@ -1208,8 +1223,9 @@ export class SearchResultProdComponent implements OnInit, OnDestroy {
     delete this.mainObj.filters;
     this.mainObj.filters = {};
 
-    if (this.mainObj.keywordMap)
-      delete this.mainObj.keywordMap
+    if (this.mainObj.keywordMap) {
+      delete this.mainObj.keywordMap;
+    }
 
     if (this.tabIndex == 0) {
       this.mainObj.filters = this.defaultFiltersObj;

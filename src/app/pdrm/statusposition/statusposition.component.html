@@ -107,10 +107,17 @@
             <!-- <span class="boldInfo">PANGGILAN TEMUDUGA JAWATAN KONSTABEL SOKONGAN (LELAKI/WANITA) 
                     BAGI TAHUN 2017 (mulai 26/12/2017 sehingga 21/01/2018)</span><br><br> -->
                 
+            <!-- original -->
             <div class="row container">
                 <div class="col-md-12 boldInfo" innerHTML="{{dataAnnouncement}}">
                 </div>
-            </div>              
+            </div>
+
+            <!-- <div>
+                    <div class="col-md-12 " [innerHtml]="dataAnnouncement"> 
+                    </div>
+            </div>  -->
+
         </div>
     </div>
 
@@ -158,9 +165,11 @@
             <div class="col-md-3" style="color: black;">
                 {{ 'pdrm.title.status' | translate }}
             </div>
-            <div class="col-md-9" style="color: black; font-weight: bold;">
-                <div *ngIf="status != '-'" (click)="openLink(urlDoc)" style="cursor: pointer;">
-                    :  <i class="fa fa-folder-o"></i>&nbsp;{{status}}<br>
+            <div class="col-md-9" style=" font-weight: bold;">
+                <div *ngIf="status != '-'" (click)="openLink(urlDoc)" style="cursor: pointer; ">
+                    :  <i class="fa fa-folder-o" style="color: #5FA0E7 ;"></i>&nbsp; 
+                    <a style="color: #5FA0E7 ;" href={{urlDoc}}> {{status}} </a>
+                    <br>
                 </div>
                 <div *ngIf="status == '-'">
                     : {{status}}<br />

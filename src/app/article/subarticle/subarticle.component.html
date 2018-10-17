@@ -313,25 +313,25 @@
                                     <label for="like">
                                       <i class="icolike"></i>
                                       <!--<img src='/assets/images/rating/Neutral.png'/>-->
-                                      <span>{{ 'rating.like' | translate }}</span>
+                                      <!--<span>{{ 'rating.like' | translate }}</span>-->
 
                                     </label>
                                   </div>
                                   <div class="radio">
                                     <input type="radio" class="neutral" formControlName="score" value=0 (click)="getRate(0)">
                                     <label><i class="iconeutral"></i>
-                                      <span>{{ 'rating.neutral' | translate }}</span>
+                                      <!--<span>{{ 'rating.neutral' | translate }}</span>-->
                                     </label>
                                   </div>
                                   <div class="radio">
                                     <input type="radio" class="dislike" formControlName="score"  value=-1 (click)="getRate(-1)">
                                     <label><i class="icodislike"></i>
-                                      <span>{{ 'rating.dislike' | translate }}</span>
+                                      <!--<span>{{ 'rating.dislike' | translate }}</span>-->
                                     </label>
 
                                   </div>
                                 </div>
-                                <div ng-app class="form-group col-md-12" style="padding-left: 0px; padding-top: 10px;">
+                                <div ng-app class="form-group col-md-12" style="padding-left: 0px; padding-top: 0px;">
                                   <mat-form-field class="example-full-width" style="width:100%">
                                       <textarea matInput tabindex="5" matTextareaAutosize #fbmsg formControlName="remarks" rows="2" maxLength="200" placeholder="{{'feedback.label.content' | translate }}"></textarea>
                                       <mat-hint align="end">{{fbmsg.value?.length || 0}}/200</mat-hint>
