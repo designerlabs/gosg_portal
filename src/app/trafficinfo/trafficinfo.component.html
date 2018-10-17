@@ -41,7 +41,7 @@
           style="max-height: 300px; height: auto">
           <ul class="list-group pmd-z-depth pmd-list pmd-card-list pmd-list">
               <li class="list-group-item" *ngFor="let data of streetNames | search : streetName;">
-                  <a class="list-link" *ngIf="data.latlng" (click)="getTrafficPredictionData(data.name, data.latlng, '', languageId)">{{data.name}}</a>
+                  <a class="list-link" *ngIf="data.latlng" (click)="getTrafficPredictionData(data.name, data.latlng, data.color, languageId)">{{data.name}}</a>
                   <a title="{{ 'trafficinfo.err.na' | translate }}" class="list-link-disabled" *ngIf="!data.latlng">{{data.name}}</a>
               </li>
           </ul>

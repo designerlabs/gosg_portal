@@ -170,7 +170,8 @@ export class TrafficinfoComponent implements OnInit, OnDestroy {
           this.portalservice.errorHandling(data, (function () {
 
             this.allStreetNames = data;
-            // console.log(this.streetNames)
+            console.log(this.allStreetNames)
+            console.log(this.allStreetNames.length)
 
             // this.streetNames.push({ 'name': el.street, 'latlng': el.jam[0] });
           }).bind(this));
@@ -184,11 +185,10 @@ export class TrafficinfoComponent implements OnInit, OnDestroy {
 
   getTrafficFlowData(lng) {
 
-    this.streetNames = [];
-
       this.loading = true;
       this.portalservice.getTrafficFlows(lng).subscribe(
         data => {
+          this.streetNames = [];
           this.portalservice.errorHandling(data, (function () {
             this.streetFlows = data;
 
@@ -200,8 +200,9 @@ export class TrafficinfoComponent implements OnInit, OnDestroy {
                   el.jam = this.str2arr(el.jam);
 
                   this.allStreetNames.forEach(elSN => {
+
                     let latlng
-                    if(elSN.Street == el.street) {
+                    if(el.street == elSN.Street) {
 
                       if(el.jam[0]) {
                         latlng = el.jam[0];
@@ -209,9 +210,11 @@ export class TrafficinfoComponent implements OnInit, OnDestroy {
                         latlng = null;
                       }
 
-                      this.streetNames.push({ 'name': el.street, 'latlng': latlng });
+                      this.streetNames.push({ 'name': el.street, 'latlng': latlng, 'color': this.getLevelColor(el.level) });
                     } 
                   });
+
+                  
 
                   // this.streetNames.push({ 'name': el.street, 'latlng': el.jam[0] });
 
@@ -227,8 +230,10 @@ export class TrafficinfoComponent implements OnInit, OnDestroy {
                   });
                 }
               });
+
               // console.log("streetNames")
               // console.log(this.streetNames)
+              // console.log(this.streetNames.length)
 
               this.totalRec = this.streetFlows.params.recordsFound;
               this.showNoData = false;
@@ -246,8 +251,6 @@ export class TrafficinfoComponent implements OnInit, OnDestroy {
         });
   }
 
-  
-
   mapPopupClick(languageId) {
     const scopeOject = this;
     $("body").on('click','div.clickmap', function(e){
@@ -264,6 +267,7 @@ export class TrafficinfoComponent implements OnInit, OnDestroy {
     let sName = $(element).attr('d-street');
     let currColor = e.target.options.color;
     let sLatLng = [e.latlng.lat,e.latlng.lng ];
+    console.log(currColor)
     this.getTrafficPredictionData(sName, sLatLng, currColor, this.languageId);
   }
 
@@ -292,7 +296,7 @@ export class TrafficinfoComponent implements OnInit, OnDestroy {
 
               trafficDetails.status = this.streetPrediction.current;
               trafficDetails.color = currClr;
-              // console.log(this.streetPrediction);
+
               this.predictionData.push(trafficDetails);
 
                 this.streetPrediction.traffic.forEach(el => {
