@@ -90,6 +90,7 @@ export class AppConfig {
     urlAgencyList: string;
     dataAppUrl: string;
     urlStatistic: string;
+    urlDserviceRpt: string;
     registerationUrl: string;
 
 }
@@ -164,6 +165,7 @@ export const APP_DI_CONFIG: AppConfig = {
     urlDigitalServicesDetails: commonURL + 'digitalservice/details',
     urlSiteMap: commonURL + 'sitemapdetails',
     urlStatistic: commonURL + 'statistics?year=2018',
+    urlDserviceRpt: commonURL + 'dservice/report',
     // urlFaq: commonURL + 'faq',
     urlDashboardData: protectedBaseURL + 'dservice/dashboard',
     statusAppUrl: protectedBaseURL + 'dservice/group',

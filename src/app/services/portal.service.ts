@@ -64,6 +64,7 @@ export class PortalService {
   private digitalServicesDetailsUrl: string = this.config.urlDigitalServicesDetails;
   private siteMapUrl: string = this.config.urlSiteMap;
   private statisticUrl: string = this.config.urlStatistic;
+  private dserviceptUrl: string = this.config.urlDserviceRpt;
 
   private internalUrl: string = this.config.urlIntSearch;
 
@@ -179,6 +180,14 @@ export class PortalService {
   getStatisticData(type) {
     //
     return this.http.get(this.statisticUrl+ '&type=' + type)
+    .map((response: Response) => response.json())
+    .retry(5)
+    .catch(this.handleError);
+  }
+
+  getDserviceRptData(lng) {
+    //
+    return this.http.get(this.dserviceptUrl+ '?language=' + lng)
     .map((response: Response) => response.json())
     .retry(5)
     .catch(this.handleError);

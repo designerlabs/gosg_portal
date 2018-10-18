@@ -491,7 +491,8 @@
        "users": "Users",
        "allusers": "All Users",
        "newusers": "New Users",
-       "total": "Total"
+       "total": "Total",
+       "dservice": "Statistics of Online Services Transaction"
      },
       "months": {
         "short": {

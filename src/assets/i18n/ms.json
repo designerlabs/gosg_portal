@@ -491,7 +491,8 @@
        "users": "Pengguna",
        "allusers": "Semua Pengguna",
        "newusers": "Pengguna Baru",
-       "total": "Jumlah"
+       "total": "Jumlah",
+       "dservice": "Statistik Transaksi Perkhidmatan Dalam Talian"
      },
       "months": {
         "short": {

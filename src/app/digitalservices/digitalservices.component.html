@@ -21,8 +21,11 @@
 </div>
 <div class="container ds-style">
   <div class="row container">
-    <div class="col-md-12 textCenter">
+    <div *ngIf="!isLogin" class="col-md-12 textCenter">
       <h3 class="">{{ 'digitalservices.msg.beforeLogin' | translate }}</h3>
+    </div>
+    <div *ngIf="isLogin" class="col-md-12 textCenter">
+        <h3 class="">{{ 'digitalservices.msg.afterLogin' | translate }}</h3>
     </div>
     <div class="col-md-12">&nbsp;</div>
     <div class="col-md-12">

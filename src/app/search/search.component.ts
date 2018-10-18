@@ -38,6 +38,7 @@ export class SearchComponent implements OnInit {
     }
 
     mainSearch(key) {
+        console.log(key)
         if(key) {
             $('#searchDDown').css({ 'display': 'none' });
             localStorage.setItem('ser_word', key);
