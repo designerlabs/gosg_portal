@@ -107,6 +107,19 @@ html, body{
   color: #333;
 }
 
+
+.custom_list{
+  list-style: square;
+}
+
+.custom_list li{
+  padding:5px 0;
+}
+
+p.font-size-s > strong {
+  text-decoration: underline;
+}
+
 .panel-body {
   color: #fff; }
 

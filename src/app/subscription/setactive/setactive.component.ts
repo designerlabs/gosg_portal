@@ -18,7 +18,7 @@ export class SetactiveComponent implements OnInit {
   lang;
   chktoken = false;
   errormsg = '';
-  constructor( private route: ActivatedRoute, private router: Router, private translate: TranslateService, private sharedservice: SharedService, private http: Http, @Inject(APP_CONFIG) private config: AppConfig, private toastr: ToastrService,) { 
+  constructor( private route: ActivatedRoute, private router: Router, private translate: TranslateService, private sharedservice: SharedService, private http: Http, @Inject(APP_CONFIG) private config: AppConfig, private toastr: ToastrService,) {
     translate.onLangChange.subscribe((event: LangChangeEvent) => {
       translate.get('HOME').subscribe((res: any) => {
         this.sharedservice.readPortal('language/all').subscribe((data:any) => {
@@ -38,7 +38,7 @@ export class SetactiveComponent implements OnInit {
       }else{
         this.languageId = 1;
       }
-      
+
     }
   }
 
@@ -46,7 +46,7 @@ export class SetactiveComponent implements OnInit {
     this.languageId = localStorage.getItem('langID');
     let para = this.router.url.split('/')[3];
     this.val_token = para.split('?')[0];
-    
+
     this.setActive(this.val_token)
     .subscribe(rData => {
       if(rData.statusCode === 'SUCCESS'){
@@ -60,19 +60,18 @@ export class SetactiveComponent implements OnInit {
     error => {
       this.toastr.error(this.translate.instant('common.err.servicedown'), '');
     });
-    
+
   }
 
   setActive(token){
     return this.http.get(this.config.urlPortal + 'subscription/activate?code=' + token +'&language=' + this.languageId)
     .map((response: Response) => response.json())
     .retry(5)
-    .catch(this.handleError); 
+    .catch(this.handleError);
   }
 
   private handleError(error: Response) {
     let msg = `Status code ${error.status} on url ${error.url}`;
-    console.error(msg);
     return Observable.throw(msg);
   }
 

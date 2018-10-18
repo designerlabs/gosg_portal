@@ -19,15 +19,15 @@ export class PortalService {
   private toastr: ToastrService,) {
 
     translate.onLangChange.subscribe((event: LangChangeEvent) => {
-      
+
                   const myLang = translate.currentLang;
-      
+
                   if (myLang == 'en') {
                       translate.get('HOME').subscribe((res: any) => {
                           this.lang = 'en';
                           this.langId = 1;
                       });
-      
+
                   }
                   if (myLang == 'ms') {
                       translate.get('HOME').subscribe((res: any) => {
@@ -35,7 +35,7 @@ export class PortalService {
                           this.langId = 2;
                       });
                   }
-            
+
               });
 
               if(!this.langId){
@@ -44,10 +44,10 @@ export class PortalService {
                 }else{
                   this.langId = 1;
                 }
-                
+
               }
   }
-  
+
   private registerUrl: string = this.config.urlRegister;
   private feedbackUrl: string = this.config.urlFeedback;
   private feedbacktypeUrl: string = this.config.urlFeedbackType;
@@ -64,12 +64,12 @@ export class PortalService {
   private digitalServicesDetailsUrl: string = this.config.urlDigitalServicesDetails;
   private siteMapUrl: string = this.config.urlSiteMap;
   private statisticUrl: string = this.config.urlStatistic;
-  
+
   private internalUrl: string = this.config.urlIntSearch;
-  
+
   private portalUrl: string = this.config.urlPortal;
   private protected: string = this.config.urlProtected;
-  
+
   getAgencyApp(){
     return this.http.get(this.AgencyAppUrl + '.json')
         .map(res => res.json());
@@ -88,7 +88,7 @@ export class PortalService {
   // searchApp(){
   //   return this.http.post()
   // }
-  
+
   create(user) {
     if(!this.langId){
       this.langId = 1;
@@ -97,7 +97,7 @@ export class PortalService {
       .map((response: Response) => response.json())
       .retry(5)
       .catch(this.handleError);
-      
+
   }
 
   createForAgency(user, url) {
@@ -115,8 +115,8 @@ export class PortalService {
       .map((response: Response) => response.json())
       .retry(5)
       .catch(this.handleError);
-  } 
-  
+  }
+
   feedback(data){
     let headers = new Headers({ 'Content-Type': 'application/json', 'Accept':'application/json' });
     let options = new RequestOptions({ headers: headers });
@@ -140,7 +140,7 @@ export class PortalService {
       .catch(this.handleError);
   }
 
-  
+
   createProfile(user) {
     return this.http.post(this.profileUrl, user)
       .map((response: Response) => response.json())
@@ -149,8 +149,8 @@ export class PortalService {
   }
 
   getUserType(data){
-    
-    
+
+
     return this.http.get(this.usertypeUrl + data)
     .map((response: Response) => response.json())
     .retry(5)
@@ -159,7 +159,7 @@ export class PortalService {
 
   // DIGITAL SERVICES
   getDigitalServices(lang) {
-    // 
+    //
     return this.http.get(this.digitalServicesUrl + '?language='+lang)
     .map((response: Response) => response.json())
     .retry(5)
@@ -168,7 +168,7 @@ export class PortalService {
 
   // SITE MAP
   getSitemapData(lang) {
-    // 
+    //
     return this.http.get(this.siteMapUrl + '?language='+lang)
     .map((response: Response) => response.json())
     .retry(5)
@@ -177,7 +177,7 @@ export class PortalService {
 
   // STATISTIC
   getStatisticData(type) {
-    // 
+    //
     return this.http.get(this.statisticUrl+ '&type=' + type)
     .map((response: Response) => response.json())
     .retry(5)
@@ -187,7 +187,7 @@ export class PortalService {
   // CALENDAR
   getCalendarEvents(){
 
-    // 
+    //
     return this.http.get(this.calendarUrl + '?language='+this.langId)
     .map((response: Response) => response.json())
     .retry(5)
@@ -196,7 +196,7 @@ export class PortalService {
 
   getCalendarEventsByID(id){
 
-    
+
     return this.http.get(this.calendarUrl + '/'+id+'?language='+this.langId)
     .map((response: Response) => response.json())
     .retry(5)
@@ -205,7 +205,7 @@ export class PortalService {
 
   getCalendarEventsByAgencyID(id){
 
-    // 
+    //
     return this.http.get(this.calendarUrl + '?agencyId='+id+'&language='+this.langId)
     .map((response: Response) => response.json())
     .retry(5)
@@ -218,7 +218,7 @@ export class PortalService {
 
   // getAgencies(){
 
-  //   // 
+  //   //
   //   return this.http.get(this.agencyUrl+localStorage.getItem('langID')+'?keyword='+keyword)
   //   .map((response: Response) => response.json())
   //   .retry(5)
@@ -227,7 +227,7 @@ export class PortalService {
 
   getAgenciesByKeyword(keyword){
 
-    // 
+    //
     return this.http.get(this.agencyUrl+this.langId+'?keyword='+keyword)
     .map((response: Response) => response.json())
     .retry(5)
@@ -237,40 +237,40 @@ export class PortalService {
   // END AGENCIES DIRECTORY
 
   // NEW
-  
+
   readPortal(moduleName, page?, size?, keyword?, custom?): Observable<any[]> {
     let readUrl;
     let reqLang = localStorage.getItem('langID');
-    
+
     if(!keyword && page) {
-      // 
+      //
       readUrl = this.config.urlPortal + moduleName + '?page=' + page + '&size=' + size  + '&language='+this.langId;
     }else if(keyword && custom) {
-      
+
       readUrl = this.config.urlPortal + moduleName + '?keyword='+keyword+'&page=' + page + '&size=' + size  + '&language='+this.langId+'&'+custom;
-    } 
+    }
     else if(keyword) {
-      // 
+      //
       readUrl = this.config.urlPortal + moduleName + '?keyword='+keyword+'&page=' + page + '&size=' + size  + '&language='+this.langId;
     } else if(custom) {
-      
+
       readUrl = this.config.urlPortal + moduleName + '?'+custom+ '&language='+this.langId;
     } else {
-      
+
       readUrl = this.config.urlPortal + moduleName + '?language='+this.langId;
     }
-    
+
 
     return this.http.get(readUrl)
       .map((response: Response) => response.json())
       .retry(5)
       .catch(this.handleError);
   }
-  
+
   readProtected(moduleName, page?, size?, keyword?): Observable<any[]> {
     let readUrl;
     let reqLang = localStorage.getItem('langID');
-    
+
     if(!keyword && page) {
       readUrl = this.config.urlProtected + moduleName + '?page=' + page + '&size=' + size  + '&language='+this.langId;
     } else if(keyword) {
@@ -279,23 +279,23 @@ export class PortalService {
       readUrl = this.config.urlProtected + moduleName + '?language='+this.langId;
     }
 
-    
+
 
     return this.http.get(readUrl)
       .map((response: Response) => response.json())
       .retry(5)
       .catch(this.handleError);
   }
-  
+
   readPortalById(moduleName, id): Observable<any[]> {
     let readUrl = this.config.urlPortal + moduleName + id + '?language='+this.langId;
-    
+
     return this.http.get(readUrl)
       .map((response: Response) => response.json())
       .retry(5)
       .catch(this.handleError);
   }
-  
+
   readProtectedById(moduleName, id): Observable<any[]> {
     let readUrl = this.config.urlProtected + moduleName + id + '?language='+this.langId;
     return this.http.get(readUrl)
@@ -303,7 +303,7 @@ export class PortalService {
       .retry(5)
       .catch(this.handleError);
   }
-    
+
 
 // ONLINE SEARCH
 
@@ -319,7 +319,7 @@ export class PortalService {
 
   // create(data, moduleName) {
   //   let createUrl = this.config.urlProtected   + moduleName + '?language='+this.languageId;
-  
+
   //   return this.http.post(createUrl, data)
   //   .map((response: Response) => response.json())
   //   .catch(this.handleError);
@@ -335,7 +335,7 @@ export class PortalService {
 
   // delete(id,moduleName) {
   //   let deleteUrl = this.config.urlProtected  + moduleName + id+ '?language='+this.languageId;
-  //   
+  //
 
   //   return this.http.delete(deleteUrl, null)
   //   .map((response: Response) => response.json())
@@ -346,7 +346,6 @@ export class PortalService {
 
   private handleError(error:Response){
     let msg = `Status code ${error.status} on url ${error.url}`;
-    console.error(msg);
     return Observable.throw(msg);
 
   }

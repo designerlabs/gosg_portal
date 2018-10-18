@@ -150,7 +150,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
     const req = this.http.post(readUrl,'')
       .subscribe(
         res => {
-          console.log(res);
+
         },
         err => {
           console.log("Error occured");

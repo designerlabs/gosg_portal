@@ -81,10 +81,7 @@ export class SubscriptionComponent implements OnInit,OnDestroy {
       this.languageId = this.languageId;
     }
 
-    console.log("off");
-    console.log(this.languageId);
-
-    this.txtEmail = new FormControl('', [Validators.required, Validators.pattern(this.validateService.getPattern().email)]);    
+    this.txtEmail = new FormControl('', [Validators.required, Validators.pattern(this.validateService.getPattern().email)]);
     this.selCategory = new FormControl();
 
     this.subscriptionForm = new FormGroup({
@@ -134,7 +131,7 @@ export class SubscriptionComponent implements OnInit,OnDestroy {
           this.showerr = true;
           this.errormsg = data.statusDesc;
         }
-          
+
       },
       error => {
           this.toastr.error(this.translate.instant('common.err.servicedown'), '');
@@ -151,13 +148,13 @@ export class SubscriptionComponent implements OnInit,OnDestroy {
     this.categoryIds = '';
     subsval.forEach((item, index) => {
       this.categoryIds += '&categories='+item;
-      
-      
+
+
   });
     return this.http.get(this.config.urlPortal + 'subscription?email=' + emailval+this.categoryIds + '&language='+ this.languageId)
       .map((response: Response) => response.json())
       .retry(5)
-      .catch(this.handleError);      
+      .catch(this.handleError);
   }
 
   resetMethod(eve){
@@ -171,7 +168,6 @@ export class SubscriptionComponent implements OnInit,OnDestroy {
 
   private handleError(error: Response) {
     let msg = `Status code ${error.status} on url ${error.url}`;
-    console.error(msg);
     return Observable.throw(msg);
   }
 

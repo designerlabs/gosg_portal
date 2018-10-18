@@ -327,7 +327,7 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
           <p style='font-size: 1em'>${dEmail}</p>
         </div>
         <div class='col-md-12' style='text-align: center;'>
-          ${varWeb}&nbsp;${varfb}&nbsp;${vartw}      
+          ${varWeb}&nbsp;${varfb}&nbsp;${vartw}
         </div>
       </div>
         `)
@@ -342,7 +342,6 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
     // .setContent("You clicked the map at " + e.latlng.toString())
     // .openOn(this.mymap);
     // this.mymap.setView([agcLat, agcLong], 15);
-    console.log(e);
 
   }
 
@@ -405,7 +404,7 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
             <p style='font-size: 1em'>${mEmail}</p>
           </div>
           <div class='col-md-12' style='text-align: center;'>
-            ${varWeb}&nbsp;${varfb}&nbsp;${vartw}      
+            ${varWeb}&nbsp;${varfb}&nbsp;${vartw}
           </div>
         </div>
       `)
@@ -509,7 +508,7 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
   getSearchData(count, size, keyword?, filter?) {
     let searchUrl;
     let wPaging = '&page=' + count + '&size=' + size;
-   
+
     if (keyword != "" && keyword != null && keyword.length != null && keyword.length >= 3) {
 
       this.portalservice.readPortal('agency/language/' + this.languageId, count, size, keyword).subscribe(
@@ -581,7 +580,7 @@ export class AgencydirectoryComponent implements OnInit, AfterViewInit, OnDestro
         error => {
           this.toastr.error(JSON.parse(error._body).statusDesc, '');
           // this.loading = false;
-       
+
         });
     }
 

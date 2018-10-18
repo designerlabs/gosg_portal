@@ -173,7 +173,6 @@ export class ProtectedService {
 
   private handleError(error:Response){
     let msg = `Status code ${error.status} on url ${error.url}`;
-    console.error(msg);
     return Observable.throw(msg);
 
   }

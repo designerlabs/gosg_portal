@@ -79,14 +79,14 @@ export class DigitalservicesprodComponent implements OnInit, OnDestroy {
     this.portalservice.getDigitalServices(lang).subscribe(data => {
 
       this.dsData = data.list;
-      // 
+      //
       // for(var item of data.list) {
-      // 
+      //
       // if(data.list.details)
       //   this.dsData.push(data.list);
       // }
       // this.dsData = [''];
-      
+
     });
   }
 
@@ -94,7 +94,6 @@ export class DigitalservicesprodComponent implements OnInit, OnDestroy {
     if(!environment.staging){
     this.protectedService.getUser().subscribe(
       data => {
-        console.log(data)
         this.isLogin = true;
       });
   }

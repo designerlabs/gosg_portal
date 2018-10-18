@@ -1,5 +1,5 @@
 import { Component, OnInit, Injectable, Inject, OnDestroy } from '@angular/core';
-import { MatDialog, MatDialogRef, MatDialogConfig, MAT_DIALOG_DATA, MatPaginator, 
+import { MatDialog, MatDialogRef, MatDialogConfig, MAT_DIALOG_DATA, MatPaginator,
         MatSort } from '@angular/material';
 import { ISubscription } from "rxjs/Subscription";
 import { TopnavService } from '../header/topnav/topnav.service';
@@ -34,14 +34,14 @@ export class SchoolsearchComponent implements OnInit {
   noPrevData = true;
   noNextData = false;
   showNoData = false;
-  
+
   public showDetails = false;
 
-  searchForm: FormGroup;  
+  searchForm: FormGroup;
   public optSelect: FormControl;
-  public state: FormControl;  
+  public state: FormControl;
   public typeSchool: FormControl;
-  public ppd: FormControl;  
+  public ppd: FormControl;
   public speacialEd: FormControl;
   public schoolname: FormControl;
 
@@ -122,16 +122,16 @@ export class SchoolsearchComponent implements OnInit {
     this.speacialEd = new FormControl();
     this.schoolname = new FormControl();
 
-    this.searchForm = new FormGroup({   
+    this.searchForm = new FormGroup({
 
       optSelect: this.optSelect,
       state: this.state,
-      typeSchool: this.typeSchool,    
+      typeSchool: this.typeSchool,
       ppd: this.ppd,
       speacialEd: this.speacialEd,
       schoolname: this.schoolname
     });
-    
+
     this.getDefaultMap();
   }
 
@@ -203,9 +203,9 @@ export class SchoolsearchComponent implements OnInit {
 
     let reqVal = [];
     let nullPointers:any = [];
-   
+
     reqVal =  ["optSelect","state","ppd","speacialEd"];
-    
+
 
     for (var reqData of reqVal) {
       let elem = this.searchForm.get(reqData);
@@ -215,7 +215,7 @@ export class SchoolsearchComponent implements OnInit {
         nullPointers.push(null)
       }
     }
-      
+
     if(nullPointers.length > 0) {
       this.complete = false;
     } else {
@@ -224,7 +224,7 @@ export class SchoolsearchComponent implements OnInit {
   }
 
   resetSearch(){
-    
+
     this.mymap.setView([4.8142568, 108.5806004], 6.2);
     this.searchForm.get('optSelect').setValue(null);
     this.searchForm.get('state').setValue(null);
@@ -284,8 +284,9 @@ export class SchoolsearchComponent implements OnInit {
         `)
         .openOn(this.mymap);
 
-    } else
-      console.log('latlong are NULL')
+    } else{
+
+    }
   }
 
 }
