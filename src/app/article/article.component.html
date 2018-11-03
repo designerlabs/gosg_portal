@@ -475,7 +475,7 @@
                                 <div *ngFor="let rightContent of article.contentList; let index=index; let odd=odd; let even=even;">
                                   <div class="col-sm-6">
                                       <div>
-                                          <div style="width:100%; margin-right:10px; height:auto;" class="pointer"  (click)="clickContentFromMenu(article.categoryCode, rightContent.contentCode, ''. $event)">
+                                          <div style="width:100%; margin-right:10px; height:auto;" class="pointer"  (click)="clickContentFromMenu(article.categoryCode, rightContent.contentCode, '', $event)">
 
 
                                               <a class="intro-box-content warna_border_color" [style.border-color]="getTheme() ? getTheme() : 'rgb(0, 189, 187)'">
