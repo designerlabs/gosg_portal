@@ -223,7 +223,7 @@
             
             <div class="col-md-3">
                 <mat-form-field class="example-full-width">
-                        <input matInput placeholder="Carian berdasarkan kata kunci" #myInput id="myInput" (keyup)="newRecord(myInput.value)" [(ngModel)]="query" style="color: black">
+                        <input matInput placeholder="Carian berdasarkan no. kenderaan" #myInput id="myInput" (keyup)="newRecord(myInput.value)" [(ngModel)]="query" style="color: black">
                 </mat-form-field>
             </div>
             <!-- farid test ends -->
@@ -268,14 +268,12 @@
 
 <div class="float-right ">
         <mat-form-field class="table_footer_pagecount">
-                <!-- <mat-form-field > -->
-                        <mat-select class="font-size-s" value="1" (change)="pageChange($event)">
-                          <mat-option value="1">1</mat-option>
+                        <mat-select class="font-size-s" value="2" (change)="pageChange($event)">
                           <mat-option value="2">2</mat-option>
                           <mat-option value="3">3</mat-option>
                           <mat-option value="4">4</mat-option>
-                        </mat-select>
-                <!-- </mat-form-field> -->
+                          <mat-option value="5">5</mat-option>
+                        </mat-select> 
         </mat-form-field>
 
         <!-- <span class="float-right"> -->
@@ -284,12 +282,29 @@
                         <strong>{{dataSummons?.totalPages}}</strong> {{ 'appmngt.tablebottom.in' | translate }}
                         <strong>{{dataSummons?.totalElements}}</strong> {{summonTraffic}}
                 </span>
-                    <button mat-mini-fab color="basic" [disabled]="noPrevData" 
-                      (click)="paginatorL(dataSummons?.pageNumber)">
+
+                    <!-- original -->
+                    <!-- <button mat-mini-fab color="basic" [disabled]="noPrevData"  
+                      (click)="paginatorL(dataSummons?.pageNumber)"   
+                      > -->
+
+                    <!-- try testt farid -->
+                      <button mat-mini-fab color="basic" [disabled]="noPrevData"  
+                      (click)="paginatorL(1)"   
+                      >
+
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
                     </button>
+
+                    <!-- original -->
+                      <!-- <button mat-mini-fab color="basic" [disabled]="noNextData" 
+                      (click)="paginatorR(dataSummons?.pageNumber, dataSummons?.totalPages)"> -->
+
+                      <!-- farid try testt -->
                       <button mat-mini-fab color="basic" [disabled]="noNextData" 
-                      (click)="paginatorR(dataSummons?.pageNumber, dataSummons?.totalPages)">
+                      (click)="paginatorR(1, dataSummons?.totalPages)">
+
+
                         <i class="fa fa-angle-right" aria-hidden="true"></i>
                     </button>
         <!-- </span> -->

@@ -86,7 +86,7 @@ export class SummontrafficComponent implements OnInit {
 
       if (myLang == 'en') {
 
-        this.summonTraffic = 'Summon Traffic';
+        this.summonTraffic = 'Traffic Summon';
         this.indicator = 'Indicator';
 
         translate.get('HOME').subscribe((res: any) => {
@@ -234,23 +234,22 @@ export class SummontrafficComponent implements OnInit {
             /////////////////////
             //farid tesst starts // nanti kena buang ni. currntly api error
 
-            if(this.dataSummons.summonDetails == null || this.dataSummons.total_summons == null) {
-              this.showNoData = true;       
-              alert(' API is underconstruction ');       
+            if(this.dataSummons.summonDetails == null && this.dataSummons.total_summons != null) {
+              this.showNoData = true;     
             } 
 
             if (this.dataSummons.summonDetails != null) {
               if (this.dataSummons.summonDetails.length == 0) {
                 this.showNoData = true;
-                alert(' API is underconstruction ');   
               }
             }
 
             //farid tesst ends // nanti kena buang ni. currntly api error
             /////////////////////
 
-            if (this.dataSummons.summonDetails) {
+            if (this.dataSummons.summonDetails != null && this.dataSummons.summonDetails.length > 0) {
               this.showDetails = true;
+              this.showNoData = false;
             } else {
               this.showDetails = false;
               this.showNoData = true;
@@ -687,26 +686,64 @@ export class SummontrafficComponent implements OnInit {
   //pagination starts
   ///////////////////
 
-  pageChange(event){ 
+  pageChange(event){  
     this.pageSize = event.value;
+    this.pageNumber = 1;
+    console.log('pageChange this.pageSize: ',this.pageSize);
+    console.log('pageChange this.pageNumber: ',this.pageNumber);
+    this.searchApp(null, this.pageNumber, this.pageSize); // to be open soon when api ready
   }
   
-  paginatorL(page){
-    console.log('paginatorL: ',page); 
-    this.noPrevData = page <= 2 ? true : false;
+  paginatorL(page){ 
+
+    console.log('paginatorL this.pageSize: ',this.pageSize); 
+    console.log('paginatorL this.pageNumber: ',this.pageNumber); 
+
+     // original
+    // this.noPrevData = page <= 2 ? true : false;
     this.noNextData = false;
-    if (page > 1) {
-      // this.searchApp(null, page, this.pageSize); // to be open soon when api ready
-    }
+    // this.pageNumber = page;
+     // original
+ 
+      //farid try test
+      this.pageNumber = this.pageNumber - page;
+      if (this.pageNumber == 0) {
+       this.pageNumber = 1;
+       this.noPrevData = true ;
+      } else {
+        this.noPrevData = false; 
+      }
+
+      this.searchApp(null, this.pageNumber, this.pageSize);  
+      //farid try test
+
+    console.log('this.noPrevData: ',this.noPrevData);
+    console.log('this.noNextData: ',this.noNextData);
   }
 
   paginatorR(page, totalPages){
-    console.log('paginatorR page: ',page);
+    
     console.log('paginatorR totalPages: ',totalPages);
-    this.noPrevData = page >= 1 ? false : true;
-    let pageInc = page+1;
-    this.noNextData = pageInc === totalPages;
-    // this.searchApp(null, pageInc, this.pageSize); // to be open soon when api ready 
+    console.log('paginatorR this.pageSize: ',this.pageSize);
+    console.log('paginatorR this.pageNumber: ',this.pageNumber);
+
+    //original
+    // this.noPrevData = page >= 1 ? false : true;
+    // let pageInc = page+1;
+    // this.noNextData = pageInc === totalPages;
+    //original
+
+    //farid try test
+      this.noPrevData = false;
+      this.pageNumber = this.pageNumber + page;
+      if (this.pageNumber == totalPages) {
+        this.noNextData = true;
+      }
+      this.searchApp(null, this.pageNumber, this.pageSize);
+    //farid try test
+
+    console.log('this.noPrevData: ',this.noPrevData);
+    console.log('this.noNextData: ',this.noNextData);
   }
 
   getStatusApp(lang){
